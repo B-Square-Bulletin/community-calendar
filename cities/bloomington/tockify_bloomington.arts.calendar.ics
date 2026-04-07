@@ -62,7 +62,7 @@ X-TKF-PROMOTION-BUTTON;label=BC Art Guild New Exhibitions;skip_details=fa
 LOCATION:Brown County Art Guild\,48 South Van Buren Street\, Nashville\, 
  IN 47448\, USA
 CREATED:20251209T162044Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20251209T162044Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -92,7 +92,7 @@ X-TKF-CUSTOM-PREVIEW:Learn how to make a musical rain stick from a long-h
 LOCATION:Bloomington Fine Arts Supply\,702 South Rogers Street\, Blooming
  ton\, IN 47403\, USA
 CREATED:20251126T174123Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20251126T174123Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -142,7 +142,7 @@ X-TKF-PROMOTION-BUTTON;label=tri kappa 125th anniversary exhibition;skip_
 LOCATION:Brown County Art Guild\,48 South Van Buren Street\, Nashville\, 
  IN 47448\, USA
 CREATED:20260210T140325Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260210T140325Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -168,7 +168,7 @@ X-TKF-CUSTOM-PREVIEW:As a part of our 20th-Year celebration\, Bloom is pr
 LOCATION:Fountain Square Mall - Atrium\,101 W Kirkwood Ave\, Bloomington\
  , IN 47404
 CREATED:20260317T142645Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260317T142645Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -194,37 +194,8 @@ X-TKF-CUSTOM-PREVIEW:PILLAR ARTS BY HAND - Come visit us during the month
 LOCATION:Arts Alliance Center in College Mall\,2894 E 3rd St\, Bloomingto
  n\, IN 47401\, USA
 CREATED:20260304T214453Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260304T214453Z
-TRANSP:OPAQUE
-CLASS:PUBLIC
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:Pillar Arts Community Calendar
-UID:TKF/62fb9575b27fd5064283290f/1887/29545320/0/0
-DTSTART:20260305T140000Z
-DTEND:20260307T210000Z
-URL:https://tockify.com/bloomington.arts.calendar/detail/1887/17727192000
- 00
-SUMMARY: Indiana Heritage Quilt Show
-DESCRIPTION:Enjoy the 33rd Annual Indiana Heritage Quilt Show\, one of th
- e best quilt shows in the Midwest. Over 200 beautiful quilts on display. 
- Take a workshop from some of the top quilting instructors in the country\
- , browse through the vendor area with hundreds of fabrics and other sewin
- g notions and accessories\, enjoy special travelling quilt exhibits and q
- uilt-related exhibits at area museums. Food and drink sold onsite.
-CATEGORIES:Exhibition
-X-TKF-FEATURED-IMAGE:https://d3flpus5evl89n.cloudfront.net/62fb9509b27fd5
- 06428328ed/6954228d718d4413bd791033/scaled_1024.jpg
-X-TKF-CUSTOM-PREVIEW:Enjoy the 33rd Annual Indiana Heritage Quilt Show\, 
- one of the best quilt shows in the Midwest. Over 200 beautiful quilts on 
- display. Take a workshop from...
-X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:www.ihqs.org
-LOCATION:Bloomington Convention Center\,302 South College Avenue\, Bloomi
- ngton\, IN 47403\, USA
-CREATED:20251230T190552Z
-DTSTAMP:20260330T161350Z
-LAST-MODIFIED:20251230T190552Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
 END:VEVENT
@@ -261,7 +232,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:fourthwall.ludus.
 LOCATION:Waldron Arts Center (Firebay)\,122 South Walnut Street\, Bloomin
  gton\, IN 47404\, USA
 CREATED:20260216T195704Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260216T195704Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -299,144 +270,8 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:fourthwall.ludus.
 LOCATION:Waldron Arts Center (Firebay)\,122 South Walnut Street\, Bloomin
  gton\, IN 47404\, USA
 CREATED:20260216T195710Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260216T195710Z
-TRANSP:OPAQUE
-CLASS:PUBLIC
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:Pillar Arts Community Calendar
-UID:TKF/62fb9575b27fd5064283290f/2031/29548260/0/0
-DTSTART:20260307T150000Z
-DTEND:20260307T220000Z
-URL:https://tockify.com/bloomington.arts.calendar/detail/2031/17728956000
- 00
-SUMMARY: Animal Figures with Sara Torgison
-DESCRIPTION:This workshop will focus on hollow building strategies for re
- ndering animal subjects in clay. Beginner friendly\, some handbuilding ex
- perience is helpful. The fee includes all materials\, firings\, and lunch
- .
-CATEGORIES:
-X-TKF-FEATURED-IMAGE:https://d3flpus5evl89n.cloudfront.net/62fb9509b27fd5
- 06428328ed/69a342fa4d50ac5b2ceba24a/scaled_768.jpg
-X-TKF-CUSTOM-PREVIEW:This workshop will focus on hollow building strategi
- es for rendering animal subjects in clay. Beginner friendly\, some handbu
- ilding experience is helpful. The...
-LOCATION:The Pottery House Studio\,Suite #17 and #13\, 223 South Pete Ell
- is Drive\, Bloomington\, IN 47408\, USA
-CREATED:20260228T193316Z
-DTSTAMP:20260330T161350Z
-LAST-MODIFIED:20260228T193316Z
-TRANSP:OPAQUE
-CLASS:PUBLIC
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:Pillar Arts Community Calendar
-UID:TKF/62fb9575b27fd5064283290f/2032/29548440/0/0
-DTSTART:20260307T180000Z
-DTEND:20260307T220000Z
-URL:https://tockify.com/bloomington.arts.calendar/detail/2032/17729064000
- 00
-SUMMARY: Beginning Needle Felting with Yvonne Jones
-DESCRIPTION:Needle felting for the true beginner. We will begin with very
-  simple and basic tools learning to needle felt using cookie cutters and 
- simple designs printed on dissolving paper. This workshop would be great 
- for children\, as well as adults!\n\nAll supplies will be provided by the
-  instructor and are included in the workshop cost.\n\n$25 BSWG members\n\
- n$35 BSWG student non-members (Includes one-year membership)\n\n$55 BSWG 
- non-members (Includes one-year membership)
-CATEGORIES:Bloomington,Visual-Arts,Class
-X-TKF-FEATURED-IMAGE:https://d3flpus5evl89n.cloudfront.net/62fb9509b27fd5
- 06428328ed/69a343074d50ac5b2cebbb9e/scaled_256.jpg
-X-TKF-CUSTOM-PREVIEW:Needle felting for the true beginner. We will begin 
- with very simple and basic tools learning to needle felt using cookie cut
- ters and simple designs printed...
-LOCATION:College Mall\,3038 East 3rd Street\, Bloomington\, IN 47401\, US
- A
-CREATED:20260228T193328Z
-DTSTAMP:20260330T161350Z
-LAST-MODIFIED:20260228T193328Z
-TRANSP:OPAQUE
-CLASS:PUBLIC
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:Pillar Arts Community Calendar
-UID:TKF/62fb9575b27fd5064283290f/2043/29548500/0/0
-DTSTART:20260307T190000Z
-DTEND:20260307T210000Z
-URL:https://tockify.com/bloomington.arts.calendar/detail/2043/17729100000
- 00
-SUMMARY: AMERICA THE BEAUTIFUL BY BLOOMINGTON WATERCOLOR SOCIETY Receptio
- n
-DESCRIPTION:Come check out this fresh new exhibition during the month of 
- March\, and pay a visit on Saturday\, March 7 from 2-4 PM for the recepti
- on.\n\nIt's filled with captivating watercolor pieces that feature US lan
- dscapes. You won't want to miss it!\n\n\nBloomington Watercolor Society w
- ebsite https://www.bloomingtonwatercolor.org
-CATEGORIES:Alliance-Center,Bloomington,Exhibition,Free,Gallery,Reception
-X-TKF-FEATURED-IMAGE:https://d3flpus5evl89n.cloudfront.net/62fb9509b27fd5
- 06428328ed/69a8a28cff3ed3040ff72c33/scaled_1024.jpg
-X-TKF-CUSTOM-PREVIEW:Come check out this fresh new exhibition during the 
- month of March\, and pay a visit on Saturday\, March 7 from 2-4 PM for th
- e reception. It's filled with...
-LOCATION:Arts Alliance Center in College Mall\,2894 E 3rd St\, Bloomingto
- n\, IN 47401\, USA
-CREATED:20260304T212631Z
-DTSTAMP:20260330T161350Z
-LAST-MODIFIED:20260304T212631Z
-TRANSP:OPAQUE
-CLASS:PUBLIC
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:Pillar Arts Community Calendar
-UID:TKF/62fb9575b27fd5064283290f/1971/29548500/0/0
-DTSTART:20260307T190000Z
-DTEND:20260307T210000Z
-URL:https://tockify.com/bloomington.arts.calendar/detail/1971/17729100000
- 00
-SUMMARY: America The Beautiful- Bloomington Watercolor Society Benefit an
- d Membership Show
-DESCRIPTION:Come see the beautiful watercolor artworks of Bloomington Wat
- ercolor Society at Pillar Arts in the College Mall. Our works this year w
- ill be encompassing the theme "America the Beautiful". The artists will d
- isplay their interpretations of America's beauty over the last 250 years 
- in original watercolor paintings.\n\nA reception will be held on Saturday
-  March 7th from 2-4 PM\n\nRegular Gallery Hours are\n\nThursday-Saturday 
- from 12pm-8pm\n\nAnd Sunday 12pm-6pm\n\nLast day of the Exhibit is Sunday
- \, March 29th\n\nA portion of sales will benefit Teachers' Warehouse.
-CATEGORIES:
-X-TKF-FEATURED-IMAGE:https://d3flpus5evl89n.cloudfront.net/62fb9509b27fd5
- 06428328ed/698a22e5ab5ff9aff33237a6/scaled_1024.jpg
-X-TKF-CUSTOM-PREVIEW:Come see the beautiful watercolor artworks of Bloomi
- ngton Watercolor Society at Pillar Arts in the College Mall. Our works th
- is year will be encompassing the...
-LOCATION:Pillar Arts
-CREATED:20260209T180943Z
-DTSTAMP:20260330T161350Z
-LAST-MODIFIED:20260209T180943Z
-TRANSP:OPAQUE
-CLASS:PUBLIC
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:Pillar Arts Community Calendar
-UID:TKF/62fb9575b27fd5064283290f/2033/29548560/0/0
-DTSTART:20260307T200000Z
-DTEND:20260307T210000Z
-URL:https://tockify.com/bloomington.arts.calendar/detail/2033/17729136000
- 00
-SUMMARY: “Meet Me at the Metz” Spring Concert Series
-DESCRIPTION:The Jacobs School of Music presents the Meet Me at the Metz C
- arillon Series. Featuring Elijah Buerk.\n\n\n
-CATEGORIES:Music,Free,Live
-X-TKF-FEATURED-IMAGE:https://d3flpus5evl89n.cloudfront.net/62fb9509b27fd5
- 06428328ed/69a3431c4d50ac5b2cebde68/scaled_256.jpg
-X-TKF-CUSTOM-PREVIEW:The Jacobs School of Music presents the Meet Me at t
- he Metz Carillon Series. Featuring Elijah Buerk.
-LOCATION:Metz Bicentennial Grand Carillon\,Arboretum Gazebo\, Bloomington
- \, IN 47405\, USA
-CREATED:20260228T193348Z
-DTSTAMP:20260330T161350Z
-LAST-MODIFIED:20260228T193348Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
 END:VEVENT
@@ -466,7 +301,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-saturday-march-7-400pm
 LOCATION:IU Cinema\,East 7th Street\, Bloomington\, IN\, USA
 CREATED:20260212T212018Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260212T212018Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -500,7 +335,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-saturday-march-7-700pm
 LOCATION:IU Cinema\,East 7th Street\, Bloomington\, IN\, USA
 CREATED:20260212T212023Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260212T212023Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -531,7 +366,7 @@ X-TKF-CUSTOM-PREVIEW:Visit the French Lick Resort for an unforgettable ev
 LOCATION:The Exhibition Hall at French Lick Resort\,8670 W Indiana 56\, F
  rench Lick\, IN 47432\, USA
 CREATED:20260219T201349Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260219T201349Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -565,7 +400,7 @@ X-TKF-CUSTOM-PREVIEW:Join the Jacobs School of Music for an evening fille
 LOCATION:Musical Arts Center\,101 North Eagleson Avenue\, Bloomington\, I
  N 47406\, USA
 CREATED:20260219T201400Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260219T201400Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -591,7 +426,7 @@ X-TKF-CUSTOM-PREVIEW:From lively music to captivating dance performances\
 LOCATION:Arts Alliance Center in College Mall\,2894 E 3rd St\, Bloomingto
  n\, IN 47401\, USA
 CREATED:20260304T210929Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260304T210929Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -629,7 +464,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-sunday-march-8-1200pm
 LOCATION:IU Cinema\,East 7th Street\, Bloomington\, IN\, USA
 CREATED:20260212T212030Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260212T212030Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -668,7 +503,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-sunday-march-8-145pm
 LOCATION:IU Cinema\,East 7th Street\, Bloomington\, IN\, USA
 CREATED:20260212T212038Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260212T212038Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -704,7 +539,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-sunday-march-8-345pm
 LOCATION:IU Cinema\,East 7th Street\, Bloomington\, IN\, USA
 CREATED:20260212T212043Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260212T212043Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -743,7 +578,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-sunday-march-8-345pm
 LOCATION:IU Cinema\,East 7th Street\, Bloomington\, IN\, USA
 CREATED:20260212T212050Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260212T212050Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -783,7 +618,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-sunday-march-8-545pm
 LOCATION:IU Cinema\,East 7th Street\, Bloomington\, IN\, USA
 CREATED:20260212T212057Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260212T212057Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -817,7 +652,7 @@ X-TKF-CUSTOM-PREVIEW:Find inspiration in the museum and design tattoos! H
 LOCATION:Sidney and Lois Eskenazi Museum of Art\,Eskenazi Museum of Art\,
   1133 East 7th Street\, Bloomington\, IN 47405\, USA
 CREATED:20260228T160222Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260228T160222Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -851,7 +686,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-tuesday-march-10-700pm
 LOCATION:IU Cinema\,East 7th Street\, Bloomington\, IN\, USA
 CREATED:20260212T212102Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260212T212102Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -884,7 +719,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -925,7 +760,7 @@ X-TKF-PROMOTION-BUTTON;label=More info and rsvp here;skip_details=false:h
 LOCATION:Martin Commons\, Eskenazi Museum of Art\,1133 E 7th St\, Bloomin
  gton\, IN 47405
 CREATED:20260317T142653Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260317T142653Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -953,7 +788,7 @@ X-TKF-CUSTOM-PREVIEW:Learn the basics of this beautiful\, exciting dance
 LOCATION:Pillar Arts Alliance Center\,2894 East 3rd Street\, Bloomington\
  , IN 47401\, USA
 CREATED:20260115T141321Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260115T141321Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -987,7 +822,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-thursday-march-12-700pm
 LOCATION:IU Cinema\,East 7th Street\, Bloomington\, IN\, USA
 CREATED:20260212T212108Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260212T212108Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1026,7 +861,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260221T015901Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260221T015901Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1059,7 +894,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  m
 LOCATION:IU Cinema\,East 7th Street\, Bloomington\, IN\, USA
 CREATED:20260212T212115Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260212T212115Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1088,7 +923,7 @@ X-TKF-CUSTOM-PREVIEW:A Grand Night for Singing offers a collection of the
  able writing duo\, Richard...
 LOCATION:Waldron Firebay
 CREATED:20260119T154307Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260119T154307Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1117,7 +952,7 @@ X-TKF-CUSTOM-PREVIEW:A Grand Night for Singing offers a collection of the
  able writing duo\, Richard...
 LOCATION:Waldron Firebay
 CREATED:20260119T154313Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260119T154313Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1146,7 +981,7 @@ X-TKF-CUSTOM-PREVIEW:A Grand Night for Singing offers a collection of the
  able writing duo\, Richard...
 LOCATION:Waldron Firebay
 CREATED:20260119T154317Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260119T154317Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1172,7 +1007,7 @@ X-TKF-PROMOTION-BUTTON;label=Ticket Link;skip_details=false:https://event
 LOCATION:Monroe County History Center\,202 East 6th Street\, Bloomington\
  , IN 47408\, USA
 CREATED:20260317T142700Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260317T142700Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1205,7 +1040,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1251,7 +1086,7 @@ X-TKF-PROMOTION-BUTTON;label=BC Art Guild New Exhibitions;skip_details=fa
 LOCATION:Brown County Art Guild\,48 South Van Buren Street\, Nashville\, 
  IN 47448\, USA
 CREATED:20260325T181321Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T181321Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1285,7 +1120,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20251213T132238Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20251213T132238Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1318,7 +1153,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-tuesday-march-24-700pm
 LOCATION:IU Cinema\,East 7th Street\, Bloomington\, IN\, USA
 CREATED:20260212T212120Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260212T212120Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1352,7 +1187,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Monroe County Convention Center\,302 South College Avenue\, Bloo
  mington\, IN 47403\, USA
 CREATED:20260209T180950Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260209T180950Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1385,7 +1220,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1425,7 +1260,7 @@ X-TKF-CUSTOM-PREVIEW:Indiana University Jacobs School of Music\, partnere
 LOCATION:Moot Courtroom\, Baier Hall\,211 S Indiana Ave\, Bloomington\, I
  N 47405\, USA
 CREATED:20260225T192313Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260225T193840Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1456,7 +1291,7 @@ X-TKF-PROMOTION-BUTTON;label=Reserve your seat for free today!;skip_detai
 LOCATION:FAR Center for Contemporary Arts\,202 South Rogers Street\, Bloo
  mington\, IN 47404\, USA
 CREATED:20260210T140356Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260210T140356Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1494,7 +1329,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-thursday-march-26-700pm
 LOCATION:IU Cinema\,East 7th Street\, Bloomington\, IN\, USA
 CREATED:20260212T212127Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260212T212127Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1537,7 +1372,7 @@ X-TKF-PROMOTION-BUTTON;label=Event Page;skip_details=false:https://www.fa
 LOCATION:Serendipity Martini Bar\,201 South College Avenue\, Bloomington\
  , IN 47404\, USA
 CREATED:20260317T142706Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260317T142706Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1576,7 +1411,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,112 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250905T131719Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250905T131719Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1613,7 +1448,7 @@ X-TKF-CUSTOM-PREVIEW:Indiana University Jacobs School of Music\, partnere
  e AI+Digital Futures Team\,...
 LOCATION:IU Innovates\,517 E Kirkwood Ave\, Bloomington\, IN 47408\, USA
 CREATED:20260225T192831Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260225T192831Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1654,7 +1489,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-friday-march-27-600pm
 LOCATION:IU Cinema\,East 7th Street\, Bloomington\, IN\, USA
 CREATED:20260212T212132Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260212T212132Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1704,7 +1539,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260202T145310Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260202T145310Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1743,7 +1578,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,112 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250905T131725Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250905T131725Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1778,7 +1613,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-friday-march-27-1000pm
 LOCATION:IU Cinema\,East 7th Street\, Bloomington\, IN\, USA
 CREATED:20260212T212137Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260212T212137Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1807,7 +1642,7 @@ X-TKF-PROMOTION-BUTTON;label=Ticket Link;skip_details=false:https://am.ti
 LOCATION:Musical Arts Center (MAC)\,101 North Eagleson Avenue\, Bloomingt
  on\, IN 47406\, USA
 CREATED:20260221T160146Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260221T160146Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1852,7 +1687,7 @@ X-TKF-CUSTOM-PREVIEW:Indiana University Jacobs School of Music\, partnere
 LOCATION:Sweeney Hall\, IU Jacobs School of Music\,1201 E 3rd St\, Bloomi
  ngton\, IN 47405\, USA
 CREATED:20260225T193659Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260225T193659Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1899,7 +1734,7 @@ X-TKF-PROMOTION-BUTTON;label=BC Art Guild New Exhibitions Party;skip_deta
 LOCATION:Brown County Art Guild\,48 South Van Buren Street\, Nashville\, 
  IN 47448\, USA
 CREATED:20260325T181329Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T181329Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1938,7 +1773,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,112 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250905T131730Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250905T131730Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -1982,7 +1817,7 @@ X-TKF-CUSTOM-PREVIEW:Live experimental music series\, March features arti
  with craft beer\, wine\, gourmet...
 LOCATION:Orbit Room\,107 N. College Ave\, suite 001\, underground
 CREATED:20260317T142712Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260317T142712Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2034,7 +1869,7 @@ X-TKF-CUSTOM-PREVIEW:This is your chance to experience Saving the Hoosier
 LOCATION:Pillar Arts Alliance Center\,2894 E 3rd St\, Bloomington\, IN 47
  401\, USA
 CREATED:20260304T201618Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260304T214929Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2085,7 +1920,7 @@ X-TKF-CUSTOM-PREVIEW:Join us for SAVING THE HOOSIER: THE CONCERT and conn
 LOCATION:Pillar Arts Center in College Mall\,2894 East 3rd Street\, Bloom
  ington\, IN 47401\, USA
 CREATED:20260317T142745Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260317T142745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2124,7 +1959,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,112 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250905T131736Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250905T131736Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2164,7 +1999,7 @@ X-TKF-PROMOTION-BUTTON;label=Website;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260209T180956Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260209T180956Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2225,7 +2060,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-tuesday-march-31-700pm
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47405\, USA
 CREATED:20260212T212143Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260212T212143Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2259,7 +2094,7 @@ X-TKF-CUSTOM-PREVIEW:Join us at Pillar Arts By Hand this April as we feat
 LOCATION:Pillar Arts By Hand\,101 W Kirkwood Ave\, Bloomington\, IN 47404
  \, USA
 CREATED:20260326T190324Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260326T190324Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2292,7 +2127,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2338,7 +2173,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn more about it HERE;skip_details=false:
 LOCATION:Pillar Arts Alliance Center\,2894 E 3rd St\, Bloomington\, IN 47
  401
 CREATED:20260318T171044Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260318T171044Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2375,7 +2210,7 @@ X-TKF-PROMOTION-BUTTON;label=First Thursdays Webpage;skip_details=false:h
 LOCATION:IU Fine Arts Plaza\,1200 East 7th Street\, Bloomington\, IN 4740
  5\, USA
 CREATED:20260325T181336Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T181336Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2405,7 +2240,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-thursday-april-2-700pm
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T190740Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T190740Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2437,7 +2272,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260209T181003Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260209T181003Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2476,7 +2311,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,112 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250905T131741Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250905T131741Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2510,7 +2345,7 @@ X-TKF-CUSTOM-PREVIEW:Join us at Pillar Arts By Hand this April as we feat
 LOCATION:Pillar Arts By Hand\,101 W Kirkwood Ave\, Bloomington\, IN 47404
  \, USA
 CREATED:20260326T190615Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260326T190615Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2539,7 +2374,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2578,7 +2413,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-friday-april-3-700pm
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T190744Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T190744Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2617,7 +2452,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,112 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250905T131747Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250905T131747Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2644,7 +2479,7 @@ X-TKF-CUSTOM-PREVIEW:Ladies First presents their annual Spring Show at th
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260215T012743Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260215T012743Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2683,7 +2518,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,112 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250905T131752Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250905T131752Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2718,7 +2553,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260402T124911Z
-DTSTAMP:20260402T131342Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260402T124911Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2746,7 +2581,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-saturday-april-4-400pm
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T213758Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T213758Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2781,7 +2616,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260402T124915Z
-DTSTAMP:20260402T131343Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260402T124915Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2876,7 +2711,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-saturday-april-4-700pm
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T213804Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T213804Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2915,7 +2750,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,112 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250905T131758Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250905T131758Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -2955,7 +2790,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-tuesday-april-7-700pm
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T213810Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T213810Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3005,7 +2840,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn more;skip_details=false:https://cinema
 LOCATION:Fine Arts Building\, Room 102\,1201 East 7th Street\, Bloomingto
  n\, IN 47405\, USA
 CREATED:20260317T142803Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260317T142803Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3051,7 +2886,7 @@ X-TKF-PROMOTION-BUTTON;label=Website;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260223T170052Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260223T170052Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3087,7 +2922,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn more;skip_details=false:https://cinema
 LOCATION:Indiana University Cinema\,1213 East 7th Street\, Bloomington\, 
  IN 47406\, USA
 CREATED:20260317T142809Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260317T142809Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3125,7 +2960,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Arts Center\,122 South Walnut Street\, Bloomington\, IN 
  47404\, USA
 CREATED:20250916T134645Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250916T134645Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3158,7 +2993,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3201,7 +3036,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20251027T161258Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20251027T161258Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3234,7 +3069,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-thursday-april-9-700pm
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T213816Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T213816Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3273,7 +3108,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,112 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250905T131831Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250905T131831Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3304,7 +3139,7 @@ X-TKF-PROMOTION-BUTTON;label=Get Tickets;skip_details=false:https://impro
 LOCATION:Blockhouse Bar\,205 South College Avenue\, Bloomington\, IN 4740
  4\, USA
 CREATED:20260326T190336Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260326T190336Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3341,7 +3176,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-friday-april-10-700pm
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T214856Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T214856Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3380,7 +3215,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,112 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250905T131841Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250905T131841Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3413,7 +3248,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260209T181011Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260209T181011Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3454,7 +3289,7 @@ X-TKF-PROMOTION-BUTTON;label=BC Art Guild Demonstration Series;skip_detai
 LOCATION:Brown County Art Guild\,48 South Van Buren Street\, Nashville\, 
  IN 47448\, USA
 CREATED:20260325T181342Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T181342Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3493,7 +3328,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,112 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250905T131855Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250905T131855Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3527,7 +3362,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-saturday-april-11-400pm
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T215338Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T215338Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3569,7 +3404,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260209T181018Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260209T181018Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3604,7 +3439,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-saturday-april-11-700pm
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T215344Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T215344Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3643,7 +3478,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,112 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250905T131900Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250905T131900Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3688,7 +3523,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-sunday-april-12-100pm
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T215350Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T215350Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3729,7 +3564,7 @@ X-TKF-PROMOTION-BUTTON;label=BC Art Guild Demonstration Series;skip_detai
 LOCATION:Brown County Art Guild\,48 South Van Buren Street\, Nashville\, 
  IN 47448\, USA
 CREATED:20260325T181346Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T181346Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3771,7 +3606,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn more about the performance HERE;skip_d
 LOCATION:Pillar Arts Alliance Center\,2894 E 3rd St\, Bloomington\, IN 47
  401
 CREATED:20260318T171055Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260318T171055Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3810,7 +3645,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,112 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250905T131907Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250905T131907Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3856,7 +3691,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn more about it HERE;skip_details=false:
 LOCATION:Pillar Arts Alliance Center\,2894 E 3rd St\, Bloomington\, IN 47
  401
 CREATED:20260318T171102Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260318T171102Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3902,7 +3737,7 @@ X-TKF-PROMOTION-BUTTON;label=Trashion Refashion Show;skip_details=false:b
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260303T180715Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260303T180715Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3939,7 +3774,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260225T191252Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260225T191252Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3964,7 +3799,7 @@ X-TKF-PROMOTION-BUTTON;label=Website;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260214T161928Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260214T161928Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -3994,7 +3829,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-tuesday-april-14-700pm
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T215359Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T215359Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4030,7 +3865,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  m
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T215409Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T215409Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4063,7 +3898,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4097,7 +3932,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-thursday-april-16-700pm
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T215427Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T215427Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4129,7 +3964,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-friday-april-17-700pm
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T221324Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T221324Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4162,7 +3997,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-saturday-april-18-400pm
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T221329Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T221329Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4190,7 +4025,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-saturday-april-18-700pm
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T221339Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T221339Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4228,7 +4063,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260218T153433Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260218T153433Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4273,7 +4108,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn more about it HERE;skip_details=false:
 LOCATION:Pillar Arts Alliance Center\,2894 E 3rd St\, Bloomington\, IN 47
  401
 CREATED:20260318T171108Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260318T171108Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4320,7 +4155,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260124T164155Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260124T164155Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4353,7 +4188,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-tuesday-april-21-700pm
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T222755Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T222755Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4388,7 +4223,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260402T124920Z
-DTSTAMP:20260402T131343Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260402T124920Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4453,7 +4288,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  m
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T222817Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T222817Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4511,7 +4346,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  m
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T222821Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T222821Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4581,7 +4416,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  m
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T222839Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T222839Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4614,7 +4449,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4650,7 +4485,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-thursday-april-23-700pm
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T222916Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T222916Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4679,7 +4514,7 @@ X-TKF-CUSTOM-PREVIEW:This year Reimagining Opera for Kids is excited to p
 LOCATION:Pillar Arts Alliance Center\,2894 East 3rd Street suite l 10d\, 
  Bloomington\, IN 47401\, USA
 CREATED:20260318T171113Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260318T171113Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4717,7 +4552,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-saturday-april-25-400pm
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T222922Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T222922Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4747,7 +4582,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260228T193356Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260228T193356Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4776,7 +4611,7 @@ X-TKF-CUSTOM-PREVIEW:The Indiana Chapter of the National Society of Arts
 LOCATION:Wells -Metz Theatre\,275 North Eagleson Avenue\, Bloomington\, I
  ndiana
 CREATED:20260402T124621Z
-DTSTAMP:20260402T131343Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260402T124621Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4811,7 +4646,7 @@ X-TKF-PROMOTION-BUTTON;label=Information & Tickets;skip_details=false:htt
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260317T142817Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260317T142817Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4843,7 +4678,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-tuesday-april-28-700pm
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T222929Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T222929Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4876,7 +4711,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260202T145315Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260202T145315Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4909,7 +4744,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4943,7 +4778,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20251118T182953Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20251118T182953Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -4978,7 +4813,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://cinema
  .indiana.edu/upcoming-films/screening/2026-spring-thursday-april-30-700pm
 LOCATION:IU Cinema\,1213 East 7th Street\, Bloomington\, IN 47406\, USA
 CREATED:20260325T222934Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T222934Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5007,7 +4842,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5046,7 +4881,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,122 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250912T144906Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T144906Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5085,7 +4920,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,122 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250912T144913Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T144913Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5124,7 +4959,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,122 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250912T144919Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T144919Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5163,7 +4998,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,122 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250912T144924Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T144924Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5202,7 +5037,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,122 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250912T144929Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T144929Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5271,7 +5106,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260317T142824Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260317T142824Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5305,7 +5140,7 @@ X-TKF-PROMOTION-BUTTON;label=Information & Tickets;skip_details=false:htt
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260321T221812Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260321T221812Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5338,7 +5173,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5374,7 +5209,7 @@ X-TKF-PROMOTION-BUTTON;label=Dream Tickets;skip_details=false:https://www
 LOCATION:Waldron Rose Firebay\,122 South Walnut Street\, Bloomington\, IN
   47404\, USA
 CREATED:20260303T180708Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260303T180708Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5413,7 +5248,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,122 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250912T144935Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T144935Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5450,7 +5285,7 @@ X-TKF-CUSTOM-PREVIEW:Constellation Stage & Screen presents “Finn: A New M
 LOCATION:Waldron Auditorium\,122 S Walnut St\, Bloomington\, IN 47404\, U
  SA
 CREATED:20250916T135233Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250916T135233Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5486,7 +5321,7 @@ X-TKF-PROMOTION-BUTTON;label=Dream Tickets;skip_details=false:https://www
 LOCATION:Waldron Rose Firebay\,122 South Walnut Street\, Bloomington\, IN
   47404\, USA
 CREATED:20260303T180702Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260303T180702Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5525,7 +5360,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,122 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250912T144954Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T144954Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5564,7 +5399,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,122 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250912T144958Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T144958Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5597,7 +5432,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5633,7 +5468,7 @@ X-TKF-PROMOTION-BUTTON;label=Dream Tickets;skip_details=false:https://www
 LOCATION:Waldron Rose Firebay\,122 South Walnut Street\, Bloomington\, IN
   47404\, USA
 CREATED:20260303T180656Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260303T180656Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5672,7 +5507,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,122 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250912T145003Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T145003Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5706,7 +5541,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260317T142830Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260317T142830Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5745,7 +5580,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,122 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250912T145008Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T145008Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5781,7 +5616,7 @@ X-TKF-PROMOTION-BUTTON;label=creative journals;skip_details=false:https:/
 LOCATION:Pillar Arts Alliance Center\,2894 East 3rd Street\, Bloomington\
  , IN 47401\, USA
 CREATED:20260402T124926Z
-DTSTAMP:20260402T131343Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260402T124926Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5820,7 +5655,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,122 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250912T145014Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T145014Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5886,7 +5721,7 @@ X-TKF-PROMOTION-BUTTON;label=Information & Tickets;skip_details=false:htt
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260317T142841Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260317T142841Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5922,7 +5757,7 @@ X-TKF-PROMOTION-BUTTON;label=Dream Tickets;skip_details=false:https://www
 LOCATION:Waldron Rose Firebay\,122 South Walnut Street\, Bloomington\, IN
   47404\, USA
 CREATED:20260303T180646Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260303T180646Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5961,7 +5796,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,122 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250912T145019Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T145019Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -5997,7 +5832,7 @@ X-TKF-PROMOTION-BUTTON;label=Dream Tickets;skip_details=false:https://www
 LOCATION:Waldron Rose Firebay\,122 South Walnut Street\, Bloomington\, IN
   47404\, USA
 CREATED:20260303T180639Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260303T180639Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6045,7 +5880,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Waldron Auditorium\,122 South Walnut Street\, Bloomington\, IN 4
  7404\, USA
 CREATED:20250912T145024Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T145024Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6081,7 +5916,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20251118T183026Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20251118T183026Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6114,7 +5949,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6139,7 +5974,7 @@ X-TKF-PROMOTION-BUTTON;label=Buy Tickets Here!;skip_details=false:https:/
 LOCATION:John Waldron Art Center\,122 South Walnut Street\, Bloomington\,
   IN 47404\, USA
 CREATED:20260325T181355Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260325T181355Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6172,7 +6007,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6219,7 +6054,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260202T145321Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260202T145321Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6247,7 +6082,7 @@ X-TKF-PROMOTION-BUTTON;label=Information & Tickets;skip_details=false:htt
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260321T221819Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260321T221819Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6280,7 +6115,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6317,7 +6152,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Constellation Playhouse\,107 West 9th Street\, Bloomington\, IN 
  47404\, USA
 CREATED:20250912T145032Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T145032Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6346,7 +6181,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6383,7 +6218,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Constellation Playhouse\,107 West 9th Street\, Bloomington\, IN 
  47404\, USA
 CREATED:20250912T145037Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T145037Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6420,7 +6255,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Constellation Playhouse\,107 West 9th Street\, Bloomington\, IN 
  47404\, USA
 CREATED:20250912T145042Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T145042Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6457,7 +6292,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Constellation Playhouse\,107 West 9th Street\, Bloomington\, IN 
  47404\, USA
 CREATED:20250912T145049Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T145049Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6483,7 +6318,7 @@ X-TKF-CUSTOM-PREVIEW:Sharing the art of carving the local limestone\, now
  r. Carve just one day or up to 2...
 LOCATION:6311 North Matthews Drive\, Ellettsville\, IN 47429\, USA
 CREATED:20260127T142409Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260127T142409Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6520,7 +6355,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Constellation Playhouse\,107 West 9th Street\, Bloomington\, IN 
  47404\, USA
 CREATED:20250912T145054Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T145054Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6553,7 +6388,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6590,7 +6425,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Constellation Playhouse\,107 West 9th Street\, Bloomington\, IN 
  47404\, USA
 CREATED:20250912T145059Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T145059Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6627,7 +6462,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Constellation Playhouse\,107 West 9th Street\, Bloomington\, IN 
  47404\, USA
 CREATED:20250912T145104Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T145104Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6664,7 +6499,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Constellation Playhouse\,107 West 9th Street\, Bloomington\, IN 
  47404\, USA
 CREATED:20250912T145110Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T145110Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6701,7 +6536,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Constellation Playhouse\,107 West 9th Street\, Bloomington\, IN 
  47404\, USA
 CREATED:20250912T145114Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T145114Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6738,7 +6573,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Constellation Playhouse\,107 West 9th Street\, Bloomington\, IN 
  47404\, USA
 CREATED:20250912T145119Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T145119Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6771,7 +6606,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6808,7 +6643,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Constellation Playhouse\,107 West 9th Street\, Bloomington\, IN 
  47404\, USA
 CREATED:20250912T145123Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T145123Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6845,7 +6680,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Constellation Playhouse\,107 West 9th Street\, Bloomington\, IN 
  47404\, USA
 CREATED:20250912T145150Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T145150Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6882,7 +6717,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Constellation Playhouse\,107 West 9th Street\, Bloomington\, IN 
  47404\, USA
 CREATED:20250912T145159Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T145159Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6919,7 +6754,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Constellation Playhouse\,107 West 9th Street\, Bloomington\, IN 
  47404\, USA
 CREATED:20250912T145207Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T145207Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6956,7 +6791,7 @@ X-TKF-PROMOTION-BUTTON;label=Learn More;skip_details=false:https://seecon
 LOCATION:Constellation Playhouse\,107 West 9th Street\, Bloomington\, IN 
  47404\, USA
 CREATED:20250912T145222Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250912T145222Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -6989,7 +6824,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7020,7 +6855,7 @@ X-TKF-CUSTOM-PREVIEW:Making Midwest 2026 is the gathering that defends cr
 LOCATION:Columbus College of Art & Design Canzani Center\,60 Cleveland Av
  enue\, Columbus\, OH 43215\, USA
 CREATED:20260317T142846Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260317T142846Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7053,7 +6888,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7082,7 +6917,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7115,7 +6950,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7155,7 +6990,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20251216T172337Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20251216T172337Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7188,7 +7023,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7221,7 +7056,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7254,7 +7089,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7287,7 +7122,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7316,7 +7151,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7349,7 +7184,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7382,7 +7217,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7442,7 +7277,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20260202T145328Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20260202T145328Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7485,7 +7320,7 @@ X-TKF-PROMOTION-BUTTON;label=Tickets;skip_details=false:https://buskirkch
 LOCATION:Buskirk-Chumley Theater\,114 East Kirkwood Avenue\, Bloomington\
  , IN 47408\, USA
 CREATED:20251118T183045Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20251118T183045Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7518,7 +7353,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7551,7 +7386,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7580,7 +7415,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7613,7 +7448,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7646,7 +7481,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7679,7 +7514,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7712,7 +7547,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7741,7 +7576,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7774,7 +7609,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7807,7 +7642,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7840,7 +7675,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7873,7 +7708,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7906,7 +7741,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7935,7 +7770,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -7968,7 +7803,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8001,7 +7836,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8034,7 +7869,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8067,7 +7902,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8096,7 +7931,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8129,7 +7964,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8162,7 +7997,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8195,7 +8030,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8228,7 +8063,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8257,7 +8092,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8290,7 +8125,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8323,7 +8158,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8356,7 +8191,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8389,7 +8224,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8422,7 +8257,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8451,7 +8286,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8484,7 +8319,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8517,7 +8352,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8550,7 +8385,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8583,7 +8418,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8612,7 +8447,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8645,7 +8480,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8678,7 +8513,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8711,7 +8546,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8744,7 +8579,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8773,7 +8608,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8806,7 +8641,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8839,7 +8674,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8872,7 +8707,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8905,7 +8740,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8938,7 +8773,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -8967,7 +8802,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9000,7 +8835,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9033,7 +8868,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9066,7 +8901,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9099,7 +8934,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9128,7 +8963,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9161,7 +8996,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9194,7 +9029,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9227,7 +9062,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9260,7 +9095,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9289,7 +9124,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9322,7 +9157,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9355,7 +9190,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9388,7 +9223,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9421,7 +9256,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9454,7 +9289,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9483,7 +9318,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9516,7 +9351,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9549,7 +9384,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9582,7 +9417,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9615,7 +9450,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9644,7 +9479,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9677,7 +9512,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9710,7 +9545,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9743,7 +9578,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9776,7 +9611,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9805,7 +9640,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9838,7 +9673,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9871,7 +9706,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9904,7 +9739,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9937,7 +9772,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9970,7 +9805,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -9999,7 +9834,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10032,7 +9867,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10065,7 +9900,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10098,7 +9933,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10131,7 +9966,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10160,7 +9995,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10193,7 +10028,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10226,7 +10061,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10259,7 +10094,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10292,7 +10127,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10325,7 +10160,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10354,7 +10189,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10387,7 +10222,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10420,7 +10255,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10453,7 +10288,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10486,7 +10321,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10515,7 +10350,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10548,7 +10383,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10581,7 +10416,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10614,7 +10449,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10647,7 +10482,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10676,7 +10511,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10709,7 +10544,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10742,7 +10577,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10775,7 +10610,7 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10808,7 +10643,40 @@ X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
  nd it all starts with our open...
 LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
 CREATED:20250513T170759Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
+LAST-MODIFIED:20250513T170759Z
+TRANSP:OPAQUE
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Pillar Arts Community Calendar
+UID:TKF/62fb9575b27fd5064283290f/1437/30643200/0/0
+DTSTART:20280406T000000Z
+DTEND:20280406T020000Z
+URL:https://tockify.com/bloomington.arts.calendar/detail/1437/18385920000
+ 00
+SUMMARY: Open Mic Night at The Comedy Attic
+DESCRIPTION:Every Wednesday at 8PM is Comedy Attic Open Mic Night. Bloomi
+ ngton has one of the best local comedy scenes in the country\, and it all
+  starts with our open mic night!\n\nEach comedian is asked to do no more 
+ than five minutes of completely original material. While we do not care a
+ bout foul language in your set\, we do not allow racist\, homophobic\, tr
+ ansphobic or rape/female bashing jokes. If you have to ask if it's racist
+ \, homophobic\, transphobic or a rape joke\, it probably is.\n\nComedians
+  that wish to participate are asked to e-mail comedyattic@gmail.com mailt
+ o:comedyattic@gmail.com . Newcomers and any participants who are not paid
+  professionals will be required to bring audience members to see them. Th
+ is is non-negotiable. So if you plan on signing up\, be sure to invite as
+  many friends as you can. Good luck!
+CATEGORIES:In-Person,Bloomington,Live
+X-TKF-FEATURED-IMAGE:https://d3flpus5evl89n.cloudfront.net/62fb9509b27fd5
+ 06428328ed/682378a4df95bd7eeaa22809/scaled_512.jpg
+X-TKF-CUSTOM-PREVIEW:Every Wednesday at 8PM is Comedy Attic Open Mic Nigh
+ t. Bloomington has one of the best local comedy scenes in the country\, a
+ nd it all starts with our open...
+LOCATION:The Comedy Attic\,123 S Walnut St\, Bloomington\, IN 47408\, USA
+CREATED:20250513T170759Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20250513T170759Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10837,7 +10705,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10866,7 +10734,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10895,7 +10763,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10924,7 +10792,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10953,7 +10821,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -10982,7 +10850,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11011,7 +10879,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11040,7 +10908,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11069,7 +10937,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11098,7 +10966,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11127,7 +10995,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11156,7 +11024,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11185,7 +11053,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11214,7 +11082,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11243,7 +11111,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11272,7 +11140,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11301,7 +11169,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11330,7 +11198,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11359,7 +11227,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11388,7 +11256,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11417,7 +11285,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11446,7 +11314,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11475,7 +11343,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11504,7 +11372,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11533,7 +11401,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11562,7 +11430,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11591,7 +11459,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11620,7 +11488,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11649,7 +11517,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11678,7 +11546,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11707,7 +11575,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11736,7 +11604,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11765,7 +11633,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11794,7 +11662,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11823,7 +11691,7 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC
@@ -11852,7 +11720,36 @@ X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile
  as select galleries showcase evolving live and virtual exhibits. EVERY. F
  IRST. FRIDAY. Experience an...
 CREATED:20220902T211118Z
-DTSTAMP:20260330T161350Z
+DTSTAMP:20260407T173755Z
+LAST-MODIFIED:20220903T160745Z
+TRANSP:OPAQUE
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Pillar Arts Community Calendar
+UID:TKF/62fb9575b27fd5064283290f/4/32218380/0/0
+DTSTART:20310404T210000Z
+DTEND:20310405T000000Z
+URL:https://tockify.com/bloomington.arts.calendar/detail/4/1933102800000
+SUMMARY: Arts Mile
+DESCRIPTION:Experience downtown Bloomington’s vibrant Arts Mile as select
+  galleries showcase evolving live and virtual exhibits.\n\nEVERY. FIRST. 
+ FRIDAY. Experience an exciting night of the arts as fourteen distinct gal
+ leries stay open late to host special exhibits and serve refreshments fro
+ m 5-8pm.\n\nStroll the vibrant arts scene along the sensational art mile 
+ and experience amazing art by renowned local\, regional\, and internation
+ al artists. Discover delightful surprises\, inspiration\, festivities\, a
+ nd original works of art for purchase. Explore each distinctive gallery i
+ n-person or online all year long at your own pace.\n\nClick here to learn
+  more https://www.gallerywalkbloomington.com/
+CATEGORIES:Monthly,Friday,Weekend
+X-TKF-FEATURED-IMAGE:https://d3flpus5evl89n.cloudfront.net/62fb9509b27fd5
+ 06428328ed/63127134d0e3d62bd43c0b5c/scaled_1024.jpg
+X-TKF-CUSTOM-PREVIEW:Experience downtown Bloomington’s vibrant Arts Mile 
+ as select galleries showcase evolving live and virtual exhibits. EVERY. F
+ IRST. FRIDAY. Experience an...
+CREATED:20220902T211118Z
+DTSTAMP:20260407T173755Z
 LAST-MODIFIED:20220903T160745Z
 TRANSP:OPAQUE
 CLASS:PUBLIC

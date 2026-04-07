@@ -64,7 +64,7 @@ PRIORITY:5
 SEQUENCE:9
 TRANSP:OPAQUE
 SUMMARY:Salvation Army Light Parade
-DESCRIPTION:
+DESCRIPTION:Join us for a spectacular evening of twinkling lights and holiday magic at the annual Nashville Indiana Christmas Light Parade! Experience the enchanting sights and sounds of the holiday season as festive floats and vehicles adorned with dazzling Christmas lights glide through the heart of Nashville, Indiana.\nFestive Lighted Parade\nThe Nashville, Indiana, Christmas Light Parade is a cherished community tradition that brings together families, friends, and visitors from near and far. Be amazed by the creativity and holiday spirit as local businesses, organizations, and individuals showcase their beautifully decorated floats and vehicles. From whimsical displays to heartwarming scenes, every entry is a glowing testament to the season’s joy.\nSpreading Holiday Cheer\nAs the parade winds through the picturesque streets of Nashville, witness the town come alive with Christmas cheer. Spectators will be treated to delightful performances, live music, and appearances by beloved holiday characters. The spirit of the season will fill the air as families gather to share in the warmth and magic of this festive event.\nSupporting The Salvation Army Toy Shoppe\nAt the heart of the Nashville, Indiana, Christmas Light Parade is the spirit of giving. In the true holiday tradition, we encourage all participants and attendees to bring new, unwrapped toys to donate to The Salvation Army Toy Shoppe and spread joy to those less fortunate during this particular time of year.  Let’s unite as a community to make a difference and brighten the lives of children who deserve a magical Christmas.\nDon’t miss out on this joyous occasion that encapsulates the true spirit of Christmas. Gather your loved ones and come to witness the brilliance of the Nashville, Indiana, Christmas Light Parade! Together, we can create memories that will last a lifetime and bring joy to those in need.\nLet’s light up Nashville and make this holiday season one to remember!\n\n
 URL:https://browncounty.com/events/salvation-army-light-parade/
 ORGANIZER;CN=The Salvation Army:MAILTO:usc.ind.bco.corps@usc.salvationarmy.org
 CATEGORIES:Family Friendly,Happening,Holiday,Parade,Plan Your Visit,Special Events,Winter
@@ -228,28 +228,6 @@ BEGIN:VEVENT
 X-SOURCE:Brown County Events
 X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
-UID:MEC-e61bf0b7496de50a85ca1a91884a009d@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260411T160000
-DTEND;TZID=America/Indiana/Indianapolis:20260411T190000
-DTSTAMP:20260403T105016Z
-RRULE:FREQ=WEEKLY
-CREATED:20260403
-LAST-MODIFIED:20260406
-PRIORITY:5
-SEQUENCE:9
-TRANSP:OPAQUE
-SUMMARY:Saturday Night Music at Brown County Inn
-DESCRIPTION:Join us every week in the CornCrib Lounge at Brown County Inn for a night of live music from 8pm to 11pm. Enjoy a rotating lineup of bands covering a wide range of genres—from acoustic and folk to rock, blues, and beyond.\n
-URL:https://browncounty.com/events/saturday-night-music-at-brown-county-inn/
-ORGANIZER;CN=Brown County Inn:MAILTO:info@browncountyinn.com
-CATEGORIES:Entertainment,Free,Happening,Live Music
-LOCATION:51 IN-46, Nashville, IN
-ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/04/Untitled-1080-x-608-px.jpg
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
-CLASS:PUBLIC
 UID:MEC-7b51238bfa91df7f679922193468cc3f@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260409T150000
 DTEND;TZID=America/Indiana/Indianapolis:20260409T170000
@@ -267,6 +245,48 @@ ORGANIZER;CN=Brown County Inn:MAILTO:info@browncountyinn.com
 CATEGORIES:Entertainment,Free,Happening,Live Music
 LOCATION:51 IN-46, Nashville, IN
 ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/04/Untitled-1080-x-608-px.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Brown County Events
+X-SOURCE-URL:https://browncounty.com/events/
+CLASS:PUBLIC
+UID:MEC-49029e695aa57d4b80f084a0733e881b@browncounty.com
+DTSTART;TZID=America/Indiana/Indianapolis:20261024T040000
+DTEND;TZID=America/Indiana/Indianapolis:20261024T140000
+DTSTAMP:20260407T140822Z
+CREATED:20260407
+LAST-MODIFIED:20260407
+PRIORITY:5
+SEQUENCE:1
+TRANSP:OPAQUE
+SUMMARY:“Plein Air” Painting Sale and Reception
+DESCRIPTION:
+URL:https://browncounty.com/events/plein-air-painting-sale-and-reception/
+ORGANIZER;CN=Historic Brown County Art Gallery:MAILTO:
+CATEGORIES:Art Events &amp; Exhibits,Happening,Special Events
+LOCATION:One Artist Drive. Nashville, Indiana
+ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Art-Gallery-Exterior-Listing.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Brown County Events
+X-SOURCE-URL:https://browncounty.com/events/
+CLASS:PUBLIC
+UID:MEC-83f76ed461abcddf2ff548425f724975@browncounty.com
+DTSTART;TZID=America/Indiana/Indianapolis:20260627T060000
+DTEND;TZID=America/Indiana/Indianapolis:20260627T100000
+DTSTAMP:20260407T123041Z
+CREATED:20260407
+LAST-MODIFIED:20260407
+PRIORITY:5
+SEQUENCE:3
+TRANSP:OPAQUE
+SUMMARY:Brown County Touch-a-Truck
+DESCRIPTION:The Brown County Touch-A-Truck event is a FREE, hands-on event that provides kids with the opportunity to see, touch and explore their favorite big trucks, heavy equipment and emergency vehicles! Raffle for 50 NEW BICYCLES. Quiet hour from 10am to 11am. Bring the entire family to get up close with these vehicles, learn about what they do, how they work and how they benefit our community! For more information, go to https://bcweekendbackpacks.org/event/touch-a-truck/ ( https://bcweekendbackpacks.org/event/touch-a-truck/ )\n
+URL:https://browncounty.com/events/brown-county-touch-a-truck/
+ORGANIZER;CN=Brown County Weekend Backpacks:MAILTO:bctouchatruck@gmail.com
+CATEGORIES:Family Friendly,Free,Happening,Summer
+LOCATION:200 Maple Leaf Boulevard
+ATTACH;FMTTYPE=image/png:https://browncounty.com/wp-content/uploads/2025/04/Fire-Truck.png
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
@@ -309,6 +329,28 @@ ORGANIZER;CN=Brown County K9 LLC:MAILTO:
 CATEGORIES:Happening,Races,Tournaments &amp; Games
 LOCATION:2277 State Road 46, Nashville, IN
 ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/04/525018994_122143066862614377_6871241661672788281_n.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Brown County Events
+X-SOURCE-URL:https://browncounty.com/events/
+CLASS:PUBLIC
+UID:MEC-e61bf0b7496de50a85ca1a91884a009d@browncounty.com
+DTSTART;TZID=America/Indiana/Indianapolis:20260411T160000
+DTEND;TZID=America/Indiana/Indianapolis:20260411T190000
+DTSTAMP:20260403T105016Z
+RDATE;VALUE=PERIOD:20260405T000000Z/20260405T030000Z,20260412T000000Z/20260412T030000Z,20260419T000000Z/20260419T030000Z
+CREATED:20260403
+LAST-MODIFIED:20260407
+PRIORITY:5
+SEQUENCE:11
+TRANSP:OPAQUE
+SUMMARY:Saturday Night Music at Brown County Inn
+DESCRIPTION:Join us every week in the CornCrib Lounge at Brown County Inn for a night of live music from 8pm to 11pm. Enjoy a rotating lineup of bands covering a wide range of genres—from acoustic and folk to rock, blues, and beyond.\n
+URL:https://browncounty.com/events/saturday-night-music-at-brown-county-inn/
+ORGANIZER;CN=Brown County Inn:MAILTO:info@browncountyinn.com
+CATEGORIES:Entertainment,Free,Happening,Live Music
+LOCATION:51 IN-46, Nashville, IN
+ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/04/Untitled-1080-x-608-px.jpg
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
@@ -575,7 +617,7 @@ PRIORITY:5
 SEQUENCE:3
 TRANSP:OPAQUE
 SUMMARY:Gov’t Mule
-DESCRIPTION:
+DESCRIPTION:For three decades, Gov’t Mule has galvanized a global fan base with their honest, organic and daring music and improvisational virtuosity, leading them to be recognized as one of the most timeless, revered and active bands in the world whose spot amongst rock titans remains unshakable. Led by visionary GRAMMY Award-winning artist, guitar legend, songwriter and producer Warren Haynes – a cornerstone of the American music landscape – the enduring, globally revered GRAMMY-nominated group has showcased its intelligence and breadth over the course of 20+ studio and live albums, thousands of memorable performances, and millions of album and track sales. Gov’t Mule’s most recent studio album, 2023’s Peace…Like A River (Fantasy Records) is a timeless rock collection featuring guest appearances from Billy F Gibbons, Ivan Neville, Billy Bob Thornton, Ruthie Foster, and Celisse. Peace…Like A River – hailed as “perfection,” “captivating,” “riveting,” and among the band’s best – marked the follow-up to Mule’s GRAMMY-nominated blues album, Heavy Load Blues, with both albums recorded at The Power Station New England during the same sessions but created in different rooms with no shared gear or instruments. Gov’t Mule – Haynes [guitar, vocals], Matt Abts [drums], Danny Louis [keyboards, guitar, and backing vocals], and Kevin Scott [bass] – has become a human encyclopedia of great American music while adding to that canon with their signature sound. The band’s flexible interplay in the studio and on stage makes them a true living, breathing ensemble and Haynes is lauded as one of the most formidable guitarists and vocalists of the modern era and a prolific songwriter and producer.\n
 URL:https://browncounty.com/events/govt-mule/
 ORGANIZER;CN=Brown County Music Center:MAILTO:boxoffice@browncountymusiccenter.com
 CATEGORIES:Food &amp; Drink,Happening,Live Music,Spring,Theatre &amp; Entertainment
@@ -637,7 +679,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:T.C. Steele Centennial Reception
-DESCRIPTION:Saturday July 18th, 5:30-8pm\nBrown County Art Gallery\nFood, wine, and special catalogue $45 per person. Reservations required: (812) 988-4609 or brncagal@gmail.com\nExhibit opens to public July 19th with Free Admission and $25 Souvenir Catalogue.\nSponsored by Bob and Barbara Stevens.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/t-c-steele-centennial-reception/
 ORGANIZER;CN=Historic Brown County Art Gallery:MAILTO:
 CATEGORIES:Art Events &amp; Exhibits,Happening,Special Events
@@ -837,11 +879,11 @@ DTSTART;TZID=America/Indiana/Indianapolis:20260502T060000
 DTEND;TZID=America/Indiana/Indianapolis:20260502T180000
 DTSTAMP:20260319T131012Z
 CREATED:20260319
-LAST-MODIFIED:20260319
+LAST-MODIFIED:20260407
 PRIORITY:5
-SEQUENCE:1
+SEQUENCE:2
 TRANSP:OPAQUE
-SUMMARY:BroCon
+SUMMARY:BroCo Con
 DESCRIPTION:Brown County Game Conference (BroCoCon) is a family-friendly consumer game show hosted by The Toy Chest. It is designed to be fun to attend with the whole family or without kids. We will have games to learn and play (as well as purchase) in strategy, family, party, and preschool categories. There will also be special events, game tournaments, preschool game highlights, outdoor games, and strategy game instruction. General admission tickets allow admission to the general event from 10am-5pm as well as continued access to open-play spaces.\n*Children 5 and under are free\nAdult Game Night\nIn the evening we host an 18+ adult game night, which boasts speed gaming (play a game until the bell dings, them move to the next table) and a cash bar. The ticket for this event is sold separately and can be attended without attending the daytime event. Adult Game Night Tickets allow admission to the game night hosted from 7-10pm.\nWhy attend?\nBoard games bring people together. In our inaugural year,BroCoCon boasted 90 games from 20 vendors and saw over 200 attendees. One person noted, “I’ve never seen such a large group of people with nobody looking at a phone, ” and another attendee call it, “More fun than GenCon.” We fondly remember the kids who showed up disappointed that we didn’t have video games, then at end of the day couldn’t select just one board game to purchase. If you’re craving fun and connection, you won’t be disappointed.\n*Exact details of the event are subject to minor changes, but dates, times & locations will not change.\n
 URL:https://browncounty.com/events/brocon/
 ORGANIZER;CN=The Toy Chest:MAILTO:
@@ -883,7 +925,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Cody’s Ride
-DESCRIPTION:On June 1, 2009 Cody Hall was critically injured in a construction accident while at work. On June 10, 2009 at 20 years old Cody was removed from life support. He donated his organs and saved and changed countless people’s lives. We are so excited and honored to raise money and awareness for organ donation and to keep Cody’s remarkable memory alive. Live auction, live music, food trucks, bike-themed events, raffle bike and so much more. Get more information at Outsiderscharityclub.com Camping Reservations & Golf Cart\n
+DESCRIPTION:
 URL:https://browncounty.com/events/codys-ride/
 CATEGORIES:Food &amp; Drink,Happening,Live Music,Outdoor Concerts
 LOCATION:5163 North State Road 135, Morgantown, IN
@@ -1127,7 +1169,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:Phoenix: Saxophone Quartet
-DESCRIPTION:ChamberFest Brown County presents Phoenix: Saxophone Quartet\n​​The multi-award-winning Project Fusion Sax Quartet presents Phoenix: a program of saxophone chamber music depicting renewal, transformation, and flight. This theme, chosen in the auspicious year of the United States’ 250th anniversary, celebrates a nation founded on the “great experiment” of democratic reinvention and rebirth, whose mascot is fittingly the noble bald eagle: as such, it presents music exclusively of American composers.\nWorks by Gershwin, Maslanka, Kline, Frazier, Mettens, Washington, Ge, Love\nProject Fusion:\n\nDannel Espinoza, soprano sax\nDoug O’Connor, alto sax\nAiwen Zhang, tenor sax\nMatt Evans, baritone sax\n\nThis concert is sponsored by the Eads family in memory of Ralph S. (Tony) Eads.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/chamberfest-phoenix/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -1169,7 +1211,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:Letters from the Front: Honoring US Veterans: Voice and Piano
-DESCRIPTION:
+DESCRIPTION:ChamberFest Brown County presents Letters from the Front: Honoring US Veterans \nLetters From The Front is an evening of new music for four voices and piano by composer Patrick Zimmerli honoring the members of the United States Armed Forces, veterans, and their families.\nFeaturing artists Ian Gindes, David Govetsen, Tyler Lee, Angela Born, and Desirée Hassler, with narration written by Jeff Ernstoff, this performance is based on actual letters written during our nation’s most crucial wars, including the American Revolution, the Civil War, World War I, World War II, Vietnam, and the Gulf War. \nIn celebration of the 250th birthday of the USA, each song shares the real experiences of service members and their loved ones in recognition of the sacrifices that made our nation possible with classical music that touches on our artistic heritage of art song, classic Broadway, Americana, and more! \nArtists\n\nIan Gindes, piano\nTyler Lee, tenor\nDesirée Hassler, soprano\nAngela Born, mezzo-soprano\nDavid Govertsen, bass-baritone\n\n
 URL:https://browncounty.com/events/chamberfest-letters-from-the-front-honoring-us-veterans/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -1483,7 +1525,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Southern Indiana Blues Fest
-DESCRIPTION:\n LINEUP ANNOUNCED \n\nThe Southern Indiana Blues Festival is back at Bill Monroe Music Park August 27–29, 2026, and this year’s lineup is STACKED.\n\n\nFeaturing The Devon Allman Project, John Primer, Jonathan Ellison, Gordon Bonham, Rock Bottom w/ Charlie McCoy (Hall of Fame Induction), Gina & Johnny, Jason Wells, Jimmy Davis & The Mercury 7, Keith Beatty & The Bayonets, and many more!\n\n\n\n Live music\n Camping\n Workshops with festival musicians\n\n\n Tickets & info: billmonroemusicpark.com\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/southern-indiana-blues-fest/
 CATEGORIES:Entertainment,Festivals,Happening,Live Music,Outdoor Concerts
 LOCATION:5163 North State Road 135, Morgantown, IN
@@ -1544,7 +1586,7 @@ PRIORITY:5
 SEQUENCE:2
 TRANSP:OPAQUE
 SUMMARY:Songwriter Showdown
-DESCRIPTION:
+DESCRIPTION:Songwriter Showdown returns to Nashville, Indiana, for a multi-week live music competition featuring talented songwriters from across the region. Held in Brown County, this exciting series highlights original music, storytelling, and crowd-favorite performances as artists compete for top honors. Experience the creativity and rising talent that make Nashville, Indiana a hub for live music.\n
 URL:https://browncounty.com/events/songwriter-showdown/
 CATEGORIES:Entertainment,Family Friendly,Happening,Live Music
 LOCATION:Brown County Playhouse, South Van Buren Street, Nashville, IN
@@ -1584,7 +1626,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Brown County ChamberFest
-DESCRIPTION:We plan an outstanding lineup for the 2026 festival and can’t wait to share details. Ingredients include well-loved familiar faces, musical surprises, and ChamberFest’s guarantee of engagement, inspiration, connection, and community. Stay tuned.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/brown-county-chamberfest/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Entertainment,Happening,Live Music
@@ -1832,7 +1874,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Ready – Set – Camp!
-DESCRIPTION:For campers entering K – 2nd grade with an adult.\nReady-Set-Camp! is a session for our youngest campers who aren’t quite ready for a full week at camp on their own to get to experience the fun and adventure of camp with a parent or guardian.\n\n\nSession:\n\n\n3B: June 2-4, 2026\n\n\n\n\nRates:\n\n\nChild: $65\n\n\nAdult: $185\n\n\n\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/ready-set-camp/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Family Friendly,Happening,Plan Your Visit,Summer
@@ -2041,7 +2083,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Artists, Writers & Readers Retreat
-DESCRIPTION:
+DESCRIPTION:Come spend a weekend at Waycross to work on new or in-progress projects. Bring supplies and set up throughout our campus, spending the days working independently or with others, however is most fruitful for your creative process. In the evenings, there will be space for sharing, collaborating, and asking for feedback.\n\n\nNovember 13-15, 2026\n\n\nCheck-in: 4-6pm\n\n\nCheck-out: 10am\n\n\n\n\nAges 21+\n\n\nProgram Rates\n\n\nAttendance cost is calculated during online registration, depending on your lodging selection. Rates are per person and include program fees, lodging and meals.\n\n\nConference Center – Single Occupancy: $350 per person\n\n\nConference Center – Double Occupancy: $280 per person\n\n\n\n\n\n\n
 URL:https://browncounty.com/events/artists-writers-readers-retreat-2/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Art Events &amp; Exhibits,Happening,Plan Your Visit,Special Events
@@ -2104,7 +2146,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:All Y’all Come to Camp
-DESCRIPTION:Spend the weekend surrounded by nature, with classic camp activities like campfires, worship, games, and outdoor adventures – plus plenty of time to relax and unwind at your own pace. Whether you want to dive into all the action or simply enjoy the peaceful setting, this weekend is yours to enjoy.\nJoin us for a refreshing weekend filled with fun, adventure and community. Waycross staff will lead a variety of activities, and participants are encouraged to take part as much or as little as they like.\n\n\nSeptember 4-6, 2026\n\n\nCheck-in: 4-6pm\n\n\nCheck-out: 1pm\n\n\n\n\nAll ages welcome, minors must be accompanied by an adult.\n\n\nProgram Rates\n\n\nAttendance cost is calculated during online registration, depending on your lodging selection. Rates are per person and include program fees, lodging and meals.\n\n\nConference Center – Single Occupancy: $400 per person\n\n\nConference Center – Double Occupancy: $330 per person\n\n\nMain House/Sleeping Wing – Multi-Occupancy: $260 per person\n\n\nCabins – Multi-Occupancy (adult): $180 per person\n\n\nYouth 10-17: $200 per person\n\n\nChildren 4-9: $160 per person\n\n\n3 and under: $0\n\n\n\n\n\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/all-yall-come-to-camp-2/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Family Friendly,Happening,Outdoor Adventure,Special Events,Summer
@@ -2125,7 +2167,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Adult-ish Camp
-DESCRIPTION:
+DESCRIPTION:Adult-ish Camp is the perfect chance to relive the magic of summer camp – this time with the freedom of adulthood! Designed for young adults ages 18+, this long weekend at Waycross is all about fun, reflection, and connection. Spend your days canoeing, hiking, and enjoying campfires, or simply relax and soak in the peaceful surroundings. Whether you’re seeking adventure or just a break from the daily grind, you can participate as much or as little as you’d like.\nThis program will offer a space to reflect on the transitions of young adulthood. With a mix of classic camp activities and opportunities for reflection, it’s a chance to step away from routine and connect with like-minded people. If you’re ready for a weekend of fun, friendship, and nostalgia, this is the camp for you!\n\n\nJuly 31-August 3, 2026\n\n\nCheck-in: 4-6pm\n\n\nCheck-out: 10am\n\n\nThis program runs Friday – Monday. We encourage all participants to stay for the full experience, but we understand that some may need to leave early. If you need to depart early please select the Friday–Sunday afternoon option (departing before dinner on Sunday) during registration so we can plan accordingly.\n\n\n\n\n\n\nAge: Young Adults (18+)\n\n\nAccommodation Options:\n\n\nAttendance cost is calculated during online registration, depending on your lodging selection. Rates are per person and include program fees, lodging and meals\n\n\nCabin – Multi-Occupancy: $75 per person\n\n\nMain House/Sleeping Wing Multi-Occupancy: $75 per person\n\n\n\n\n\n\n
 URL:https://browncounty.com/events/adult-ish-camp-2/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Happening,Outdoor Adventure,Plan Your Visit,Special Events,Summer
