@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-08T13:34:52.775234",
+  "generated": "2026-04-08T20:14:46.109842",
   "cities": {
     "santarosa": {
       "feeds": {
@@ -10961,7 +10961,7 @@
             },
             {
               "date": "2026-04-08",
-              "count": 108
+              "count": 109
             }
           ]
         },
@@ -11345,7 +11345,7 @@
             },
             {
               "date": "2026-04-08",
-              "count": 644
+              "count": 671
             }
           ]
         },
@@ -11393,7 +11393,7 @@
             },
             {
               "date": "2026-04-08",
-              "count": 89
+              "count": 90
             }
           ]
         },
@@ -11489,7 +11489,7 @@
             },
             {
               "date": "2026-04-08",
-              "count": 59
+              "count": 57
             }
           ]
         },
@@ -11537,7 +11537,7 @@
             },
             {
               "date": "2026-04-08",
-              "count": 9
+              "count": 10
             }
           ]
         },
@@ -11633,7 +11633,7 @@
             },
             {
               "date": "2026-04-08",
-              "count": 60
+              "count": 62
             }
           ]
         },
@@ -11873,7 +11873,7 @@
             },
             {
               "date": "2026-04-08",
-              "count": 12
+              "count": 14
             }
           ]
         },
@@ -12017,7 +12017,7 @@
             },
             {
               "date": "2026-04-08",
-              "count": 324
+              "count": 325
             }
           ]
         },
@@ -12113,7 +12113,7 @@
             },
             {
               "date": "2026-04-08",
-              "count": 37
+              "count": 36
             }
           ]
         },
@@ -12161,7 +12161,7 @@
             },
             {
               "date": "2026-04-08",
-              "count": 27
+              "count": 26
             }
           ]
         },
@@ -12209,7 +12209,7 @@
             },
             {
               "date": "2026-04-08",
-              "count": 305
+              "count": 304
             }
           ]
         },
@@ -12545,7 +12545,7 @@
             },
             {
               "date": "2026-04-08",
-              "count": 2
+              "count": 4
             }
           ]
         },
@@ -12641,7 +12641,7 @@
             },
             {
               "date": "2026-04-08",
-              "count": 181
+              "count": 182
             }
           ]
         },
@@ -12737,7 +12737,7 @@
             },
             {
               "date": "2026-04-08",
-              "count": 177
+              "count": 180
             }
           ]
         },
@@ -12881,7 +12881,7 @@
             },
             {
               "date": "2026-04-08",
-              "count": 46
+              "count": 44
             }
           ]
         },
@@ -12929,7 +12929,7 @@
             },
             {
               "date": "2026-04-08",
-              "count": 40
+              "count": 39
             }
           ]
         },
@@ -13265,7 +13265,7 @@
             },
             {
               "date": "2026-04-08",
-              "count": 141
+              "count": 140
             }
           ]
         },
@@ -13457,7 +13457,7 @@
             },
             {
               "date": "2026-04-08",
-              "count": 263
+              "count": 272
             }
           ]
         },
@@ -13593,7 +13593,7 @@
             },
             {
               "date": "2026-04-08",
-              "count": 37
+              "count": 43
             }
           ]
         },
@@ -13633,7 +13633,7 @@
             },
             {
               "date": "2026-04-08",
-              "count": 17
+              "count": 18
             }
           ]
         },
@@ -13691,9 +13691,9 @@
         }
       },
       "url_quality": {
-        "total_with_url": 2718,
-        "total_events": 4057,
-        "unique_urls": 1927,
+        "total_with_url": 2746,
+        "total_events": 4088,
+        "unique_urls": 1956,
         "generic_count": 51,
         "generic_domains": [
           {
@@ -13707,8 +13707,8 @@
         "source_specificity": [
           {
             "source": "IU beINvolved Student Orgs",
-            "events": 522,
-            "unique_urls": 522,
+            "events": 542,
+            "unique_urls": 542,
             "specificity_pct": 100
           },
           {
@@ -13719,32 +13719,32 @@
           },
           {
             "source": "IU Jacobs School of Music",
-            "events": 315,
-            "unique_urls": 308,
+            "events": 316,
+            "unique_urls": 309,
             "specificity_pct": 98
           },
           {
             "source": "Indiana State Events",
-            "events": 295,
-            "unique_urls": 255,
+            "events": 294,
+            "unique_urls": 254,
             "specificity_pct": 86
           },
           {
             "source": "Pillar Arts Community Calendar",
-            "events": 235,
-            "unique_urls": 235,
+            "events": 239,
+            "unique_urls": 239,
             "specificity_pct": 100
           },
           {
             "source": "Brown County Events",
-            "events": 234,
-            "unique_urls": 49,
+            "events": 235,
+            "unique_urls": 50,
             "specificity_pct": 21
           },
           {
             "source": "Libcal Iub 5914",
-            "events": 141,
-            "unique_urls": 141,
+            "events": 140,
+            "unique_urls": 140,
             "specificity_pct": 100
           },
           {
@@ -13754,21 +13754,21 @@
             "specificity_pct": 1
           },
           {
-            "source": "IU Hamilton Lugar School",
-            "events": 53,
-            "unique_urls": 36,
-            "specificity_pct": 68
-          },
-          {
             "source": "Let's Go! Bloomington",
             "events": 51,
             "unique_urls": 1,
             "specificity_pct": 2
           },
           {
-            "source": "IU Maurer School of Law",
-            "events": 37,
+            "source": "IU Hamilton Lugar School",
+            "events": 50,
             "unique_urls": 34,
+            "specificity_pct": 68
+          },
+          {
+            "source": "IU Maurer School of Law",
+            "events": 36,
+            "unique_urls": 33,
             "specificity_pct": 92
           },
           {
@@ -13791,24 +13791,24 @@
           },
           {
             "source": "IU La Casa Latino Cultural Center",
-            "events": 28,
-            "unique_urls": 10,
-            "specificity_pct": 36
+            "events": 27,
+            "unique_urls": 9,
+            "specificity_pct": 33
           }
         ]
       },
       "categories": [
         {
           "category": "Arts / Culture",
-          "count": 592
+          "count": 594
         },
         {
           "category": "Government / Civic",
-          "count": 502
+          "count": 504
         },
         {
           "category": "Community / Social",
-          "count": 471
+          "count": 481
         },
         {
           "category": "Music / Concerts",
@@ -13816,7 +13816,7 @@
         },
         {
           "category": "Education / Workshops",
-          "count": 402
+          "count": 411
         },
         {
           "category": "Sports / Fitness",
@@ -13832,7 +13832,7 @@
         },
         {
           "category": "Food / Drink",
-          "count": 145
+          "count": 144
         },
         {
           "category": "Comedy / Improv",
@@ -13840,11 +13840,11 @@
         },
         {
           "category": "Film / Cinema",
-          "count": 137
+          "count": 138
         },
         {
           "category": "Health / Wellness",
-          "count": 130
+          "count": 135
         },
         {
           "category": "Games / Trivia",
@@ -13868,7 +13868,7 @@
         },
         {
           "category": "Technology / Careers",
-          "count": 57
+          "count": 59
         },
         {
           "category": "LGBTQ+ / Gender",
@@ -13876,12 +13876,12 @@
         },
         {
           "category": "(uncategorized)",
-          "count": 8
+          "count": 9
         }
       ],
       "images": {
-        "total": 4057,
-        "with_image": 1196,
+        "total": 4088,
+        "with_image": 1203,
         "by_source": [
           {
             "source": "IU Bloomington Libraries",
@@ -13890,13 +13890,13 @@
           },
           {
             "source": "Pillar Arts Community Calendar",
-            "total": 235,
-            "with_image": 235
+            "total": 239,
+            "with_image": 239
           },
           {
             "source": "Brown County Events",
-            "total": 234,
-            "with_image": 218
+            "total": 235,
+            "with_image": 219
           },
           {
             "source": "IU Arts & Humanities Institute, IU Bloomington Libraries",
@@ -13905,28 +13905,28 @@
           },
           {
             "source": "IU Hamilton Lugar School",
-            "total": 53,
-            "with_image": 40
+            "total": 50,
+            "with_image": 37
           },
           {
             "source": "IU Eskenazi School of Art, Architecture + Design",
             "total": 34,
-            "with_image": 31
+            "with_image": 32
+          },
+          {
+            "source": "IU Jacobs School of Music",
+            "total": 316,
+            "with_image": 27
           },
           {
             "source": "IU La Casa Latino Cultural Center",
-            "total": 28,
-            "with_image": 28
+            "total": 27,
+            "with_image": 27
           },
           {
             "source": "Brown County Playhouse",
             "total": 27,
             "with_image": 27
-          },
-          {
-            "source": "IU Jacobs School of Music",
-            "total": 315,
-            "with_image": 25
           },
           {
             "source": "IU Kelley School of Business",
@@ -13939,13 +13939,18 @@
             "with_image": 18
           },
           {
+            "source": "IU Media School",
+            "total": 26,
+            "with_image": 13
+          },
+          {
             "source": "Boys & Girls Club Bloomington",
             "total": 12,
             "with_image": 12
           },
           {
-            "source": "IU Media School",
-            "total": 19,
+            "source": "IU Cinema, Pillar Arts Community Calendar",
+            "total": 11,
             "with_image": 11
           },
           {
@@ -13954,24 +13959,14 @@
             "with_image": 9
           },
           {
-            "source": "Architecture + Design, Eskenazi Museum of Art, IU Eskenazi School of Art, IU First Nations Center, IU La Casa Latino Cultural Center",
+            "source": "Eskenazi Museum of Art",
             "total": 8,
             "with_image": 8
           },
           {
-            "source": "Eskenazi Museum of Art",
-            "total": 7,
-            "with_image": 7
-          },
-          {
-            "source": "Architecture + Design, Eskenazi Museum of Art, IU Eskenazi School of Art",
-            "total": 7,
-            "with_image": 7
-          },
-          {
-            "source": "IU Cinema",
-            "total": 7,
-            "with_image": 7
+            "source": "Architecture + Design, Eskenazi Museum of Art, IU Eskenazi School of Art, IU First Nations Center, IU La Casa Latino Cultural Center",
+            "total": 8,
+            "with_image": 8
           },
           {
             "source": "Architecture + Design, Eskenazi Museum of Art, IU Arts & Humanities Institute, IU Eskenazi School of Art, IU La Casa Latino Cultural Center",
@@ -13994,7 +13989,7 @@
             "with_image": 6
           },
           {
-            "source": "IU Cinema, Pillar Arts Community Calendar",
+            "source": "Architecture + Design, Eskenazi Museum of Art, IU Eskenazi School of Art",
             "total": 6,
             "with_image": 6
           },
@@ -14007,11 +14002,6 @@
             "source": "IU Auditorium",
             "total": 6,
             "with_image": 5
-          },
-          {
-            "source": "IU Cinema, IU Media School",
-            "total": 3,
-            "with_image": 3
           },
           {
             "source": "IU Hamilton Lugar School, IU La Casa Latino Cultural Center",
@@ -14029,7 +14019,7 @@
             "with_image": 3
           },
           {
-            "source": "Architecture + Design, Eskenazi Museum of Art, IU Eskenazi School of Art, IU La Casa Latino Cultural Center",
+            "source": "IU Cinema, IU Media School",
             "total": 2,
             "with_image": 2
           },
@@ -14039,7 +14029,17 @@
             "with_image": 2
           },
           {
+            "source": "IU Cinema",
+            "total": 2,
+            "with_image": 2
+          },
+          {
             "source": "Architecture + Design, IU Bloomington Libraries, IU Eskenazi School of Art",
+            "total": 2,
+            "with_image": 2
+          },
+          {
+            "source": "Architecture + Design, Eskenazi Museum of Art, IU Eskenazi School of Art, IU La Casa Latino Cultural Center",
             "total": 2,
             "with_image": 2
           },
@@ -14079,7 +14079,17 @@
             "with_image": 1
           },
           {
+            "source": "Architecture + Design, Eskenazi Museum of Art, IU Asian Culture Center, IU Eskenazi School of Art",
+            "total": 2,
+            "with_image": 1
+          },
+          {
             "source": "Eskenazi Museum of Art, IU Asian Culture Center",
+            "total": 1,
+            "with_image": 1
+          },
+          {
+            "source": "IU La Casa Latino Cultural Center, IU Theatre & Dance",
             "total": 1,
             "with_image": 1
           },
@@ -14141,8 +14151,8 @@
         "tzids": [
           {
             "tzid": "UTC (Z suffix)",
-            "count": 20973,
-            "files": 44,
+            "count": 21021,
+            "files": 45,
             "matches_city": false,
             "sample_files": [
               "calendar_feeds.ics",
@@ -14154,7 +14164,7 @@
           },
           {
             "tzid": "America/New_York",
-            "count": 10541,
+            "count": 10545,
             "files": 20,
             "matches_city": false,
             "sample_files": [
@@ -14238,11 +14248,22 @@
           "source": "Campuslabs Iub",
           "source_id": "campuslabs_iub",
           "location": "Global & International Studies, GA 1100",
-          "count": 13,
+          "count": 14,
           "titles": [
             "Summit Weekly Meeting",
             "SEP Initiation",
             "lecture session for techniques of takeing picture"
+          ]
+        },
+        {
+          "source": "Campuslabs Iub",
+          "source_id": "campuslabs_iub",
+          "location": "Global & International Studies, GA 2134",
+          "count": 9,
+          "titles": [
+            "Spoon University Trivia Night",
+            "Wednesday Bible Study",
+            "Beyond the Certificate: Applied AI Workshop"
           ]
         },
         {
@@ -14254,17 +14275,6 @@
             "A2F",
             "Research Slam 2026",
             "Leadership Team Meeting"
-          ]
-        },
-        {
-          "source": "Campuslabs Iub",
-          "source_id": "campuslabs_iub",
-          "location": "Global & International Studies, GA 2134",
-          "count": 8,
-          "titles": [
-            "Spoon University Trivia Night",
-            "Wednesday Bible Study",
-            "Wednesday Bible Study"
           ]
         },
         {
@@ -14389,6 +14399,26 @@
         {
           "source": "Campuslabs Iub",
           "source_id": "campuslabs_iub",
+          "location": "Global & International Studies, GA 1050 \u2013 Global Lounge",
+          "count": 2,
+          "titles": [
+            "Balance at Kelley w/ Exploration Club Meeting",
+            "DEI Community Thread"
+          ]
+        },
+        {
+          "source": "Campuslabs Iub",
+          "source_id": "campuslabs_iub",
+          "location": "Global & International Studies, GA 1099 - Atrium",
+          "count": 2,
+          "titles": [
+            "DEI Bracelet Making",
+            "Paso a Paso LatinXpo"
+          ]
+        },
+        {
+          "source": "Campuslabs Iub",
+          "source_id": "campuslabs_iub",
           "location": "Global & International Studies, GA 4067",
           "count": 2,
           "titles": [
@@ -14456,15 +14486,6 @@
         {
           "source": "Campuslabs Iub",
           "source_id": "campuslabs_iub",
-          "location": "Global & International Studies, GA 1050 \u2013 Global Lounge",
-          "count": 1,
-          "titles": [
-            "Balance at Kelley w/ Exploration Club Meeting"
-          ]
-        },
-        {
-          "source": "Campuslabs Iub",
-          "source_id": "campuslabs_iub",
           "location": "Global International Studies, GA 0003",
           "count": 1,
           "titles": [
@@ -14496,15 +14517,6 @@
           "count": 1,
           "titles": [
             "DEIA Workshop"
-          ]
-        },
-        {
-          "source": "Campuslabs Iub",
-          "source_id": "campuslabs_iub",
-          "location": "Global & International Studies, GA 1099 - Atrium",
-          "count": 1,
-          "titles": [
-            "Paso a Paso LatinXpo"
           ]
         },
         {
@@ -14591,15 +14603,6 @@
         {
           "source": "Gcal D1087E97D4Ace1C1Ca2Dd6336D417Bea870Ddac277Be6D1711Cbc0235Aa85228",
           "source_id": "gcal_d1087e97d4ace1c1ca2dd6336d417bea870ddac277be6d1711cbc0235aa85228",
-          "location": "Lawrence County Fairgrounds, 11265 US-50, Bedford, IN 47421, \rUSA\r",
-          "count": 1,
-          "titles": [
-            "Rocky Mountain Elk Foundation Indiana Chapter Banquet"
-          ]
-        },
-        {
-          "source": "Gcal D1087E97D4Ace1C1Ca2Dd6336D417Bea870Ddac277Be6D1711Cbc0235Aa85228",
-          "source_id": "gcal_d1087e97d4ace1c1ca2dd6336d417bea870ddac277be6d1711cbc0235aa85228",
           "location": "9975 N State Rd 67, Worthington, IN, United States, Indiana 4\r7471\r",
           "count": 1,
           "titles": [
@@ -14607,12 +14610,12 @@
           ]
         },
         {
-          "source": "Gcal E1Egkmmhjj98Nf0Rgd2Oa4U3Ng",
-          "source_id": "gcal_e1egkmmhjj98nf0rgd2oa4u3ng",
-          "location": "Monroe County Public Library - Downtown, 303 E Kirkwood Ave, Bl\roomington, IN 47408, \r",
+          "source": "Gcal D1087E97D4Ace1C1Ca2Dd6336D417Bea870Ddac277Be6D1711Cbc0235Aa85228",
+          "source_id": "gcal_d1087e97d4ace1c1ca2dd6336d417bea870ddac277be6d1711cbc0235aa85228",
+          "location": "Lawrence County Fairgrounds, 11265 US-50, Bedford, IN 47421, \rUSA\r",
           "count": 1,
           "titles": [
-            "Crankie Festival"
+            "Rocky Mountain Elk Foundation Indiana Chapter Banquet"
           ]
         },
         {
@@ -14622,6 +14625,15 @@
           "count": 1,
           "titles": [
             "World I Hate / See No Evil / Velocity / Sick of Talk"
+          ]
+        },
+        {
+          "source": "Gcal E1Egkmmhjj98Nf0Rgd2Oa4U3Ng",
+          "source_id": "gcal_e1egkmmhjj98nf0rgd2oa4u3ng",
+          "location": "Monroe County Public Library - Downtown, 303 E Kirkwood Ave, Bl\roomington, IN 47408, \r",
+          "count": 1,
+          "titles": [
+            "Crankie Festival"
           ]
         },
         {
@@ -14638,7 +14650,7 @@
         {
           "source": "Brown County Events",
           "count": 6,
-          "total": 234,
+          "total": 235,
           "offset": -4,
           "samples": [
             {

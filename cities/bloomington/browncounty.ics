@@ -239,6 +239,25 @@ END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
 CLASS:PUBLIC
+UID:MEC-8d3a3e568be7115eefb567d63e7f62c7@browncounty.com
+DTSTART;TZID=America/Indiana/Indianapolis:20260524T200000
+DTEND;TZID=America/Indiana/Indianapolis:20260525T110000
+DTSTAMP:20260408T143620Z
+CREATED:20260408
+LAST-MODIFIED:20260408
+PRIORITY:5
+SEQUENCE:1
+TRANSP:OPAQUE
+SUMMARY:YMCA 175 Community Celebration
+DESCRIPTION:Join us at the Brown Couty YMCA!\nFree hot dogs with celebrities\nTraditional art demos | Y Demos\nFree Health Screenings from IUH\n
+URL:https://browncounty.com/events/ymca-175-community-celebration/
+CATEGORIES:Family Friendly,Festivals,Food &amp; Drink,Free,Happening
+LOCATION:105 Willow Street, Nashville, IN
+ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2023/05/YMCA-Pool.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Brown County Events
+CLASS:PUBLIC
 UID:MEC-49029e695aa57d4b80f084a0733e881b@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20261024T040000
 DTEND;TZID=America/Indiana/Indianapolis:20261024T140000
@@ -309,7 +328,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Fast Cat K9 Fun Runs
-DESCRIPTION:
+DESCRIPTION:Get ready for a weekend full of speed, smiles, and wagging tails! Fast CAT is a 100-yard dash for dogs—pure fun and excitement for pups of all shapes and sizes.\n $10 per run (limit 2 runs per dog per day) Sign up in advance or day-of All dogs welcome — must be on leash when not running No dog? No problem—spectators welcome!\n Questions? Message us or call for details.\n
 URL:https://browncounty.com/events/fast-cat-k9-fun-runs/
 ORGANIZER;CN=Brown County K9 LLC:MAILTO:
 CATEGORIES:Happening,Races,Tournaments &amp; Games
@@ -648,7 +667,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:T.C. Steele Centennial Reception
-DESCRIPTION:
+DESCRIPTION:Saturday July 18th, 5:30-8pm\nBrown County Art Gallery\nFood, wine, and special catalogue $45 per person. Reservations required: (812) 988-4609 or brncagal@gmail.com\nExhibit opens to public July 19th with Free Admission and $25 Souvenir Catalogue.\nSponsored by Bob and Barbara Stevens.\n
 URL:https://browncounty.com/events/t-c-steele-centennial-reception/
 ORGANIZER;CN=Historic Brown County Art Gallery:MAILTO:
 CATEGORIES:Art Events &amp; Exhibits,Happening,Special Events
@@ -1094,7 +1113,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:(American) Pomp!: Trumpet, Piano, Winds, and Strings
-DESCRIPTION:ChamberFest Brown County presents (American) Pomp!\nA flamboyant end to festival week: a program of genre-bending and jazz-inspired classics, culminating in Gershwin’s iconic Rhapsody in Blue!\nSaint-Saëns: Septet for Trumpet, Piano and Strings, op. 65\nMartinů: La Revue de Cuisine\nGershwin: Rhapsody in Blue\nArtists:​​\n\n​​​​Spencer Myer, piano soloist\nAndreas Ioannides, piano\nQing Hou, violin\nLei Hou, violin\nLarry Neuman, viola\nCaleb Wong, cello\nJim Campbell, clarinet\nMark Ridenour, trumpet\nVince Karamanov, bassoon\nAlex Horton, bass\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/chamberfest-american-pomp-trumpet-piano-winds-and-strings/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -1628,7 +1647,7 @@ PRIORITY:5
 SEQUENCE:2
 TRANSP:OPAQUE
 SUMMARY:Alice in Wonderland Jr
-DESCRIPTION:
+DESCRIPTION:\n\nDisney’s Alice in Wonderland JR. is a vibrant, family-friendly musical adaptation of the classic Disney film and Lewis Carroll’s beloved stories. Follow young Alice as she falls down the rabbit hole into the whimsical world of Wonderland, where she meets iconic characters like the White Rabbit, Cheshire Cat, Mad Hatter, and Queen of Hearts. Filled with beloved songs like “The Unbirthday Song” and “Painting the Roses Red,” plus new music inspired by the 2010 film, this 60-minute stage show celebrates imagination, adventure, and fun for all ages.\n\n\n\n\nOur next summer camp is coming up in June 2026, registration is open!\n\n\nRegistration packets are available at the high school front desk.\n\n\n
 URL:https://browncounty.com/events/alice-in-wonderland-jr/
 CATEGORIES:Entertainment,Family Friendly,Happening,Live Music,Theatre &amp; Entertainment
 LOCATION:235 School House Lane, Nashville, IN
@@ -1687,7 +1706,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:War in the Woods
-DESCRIPTION: Get ready for one of the wildest, most adrenaline-charged drag-racing events in the country — War in the Woods No Prep, held at Brown County Dragway in Morgantown, Indiana. Twice each year, the speed-obsessed and the curious come together for a full throttle weekend of no-prep racing action and high-stakes competition. war-in-the-woods-no-prep.com+2Brown County Indiana+2\n📅 Upcoming Dates (2026):\n\n\nMay 29–30\n\n\nSeptember 18–19 war-in-the-woods-no-prep.com+1\n\n\n📍 Location:Brown County Dragway — 480 Gatesville Road, Morgantown, IN 46160 Brown County Indiana+1\nWhat to Expect:\n\n\n⚡ High-octane drag races across multiple classes like Small Tire, Big Tire, Hard Tire, Stick Shift, Nitroous Mayhem and more. war-in-the-woods-no-prep.com+1\n\n\n🔊 Drivers meetings, chip draws, and a track that goes “hot” at 3:00 p.m. both days — expect action and intensity from start to finish. war-in-the-woods-no-prep.com+1\n\n\n🚗 A raw “no prep” setup for daring street cars, where traction is minimal and every run is a gamble — it’s what makes War in the Woods the wildest in the sport. No Prep Racing+1\n\n\n🎟️ General admission tickets available at the gate (cash only): $25 for one-day or $40 for a two-day pass. VIP packages (when available) offer perks like premium parking, food/drink vouchers, and exclusive access. war-in-the-woods-no-prep.com+1\n\n\nImportant for Spectators:\n\n\nBring a chair — spectator seating is limited and mostly standing or informal. war-in-the-woods-no-prep.com+1\n\n\nNo overnight camping or motorized spectator vehicles allowed — plan accordingly. war-in-the-woods-no-prep.com+1\n\n\nParking is assigned on arrival; please follow staff directions — blocking driveways or track access will result in towing. war-in-the-woods-no-prep.com+1\n\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/warn-in-the-woods/
 CATEGORIES:Entertainment,Happening,Outdoor Adventure,Races
 LOCATION:480 Gatesville Road, Morgantown, IN 46160
@@ -1964,7 +1983,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Waycross Craft Show!
-DESCRIPTION:10am-4pm November 15, 2026\nAll ages!\nRent a booth and show your crafts, baked goods and other wares off at the Waycross Craft Fair! Folk are invited to come and shop before the holiday season, supporting local artists.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/waycross-craft-show-2/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Art Events &amp; Exhibits,Family Friendly,Festivals,Happening,Holiday,Plan Your Visit,Special Events
@@ -2004,7 +2023,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Fall Festival
-DESCRIPTION:
+DESCRIPTION:\n\n10am-3pm October 17th, 2026\n\n\nAll ages welcome, minors must be accompanied by an adult.\n\n\nThis is a day for families and individuals to come explore and enjoy Waycross at the beginning of the fall! We’ll have a pumpkin patch, face painting, chili stations, three-legged races, hayrides, and so much more! Folk of all ages are invited to come and join in on the fun!\n
 URL:https://browncounty.com/events/fall-festival-2/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Entertainment,Family Friendly,Festivals,Food &amp; Drink,Free,Happening,Special Events
@@ -2024,7 +2043,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Fall Nature Retreat: Nature Journaling
-DESCRIPTION:Immerse yourself in the beauty of fall at Waycross during our Fall Nature Journaling Retreat. The vibrant colors of the changing seasons will provide the perfect backdrop for deep observation and creativity. This weekend retreat will offer a peaceful space to connect with the natural world, using art and journaling as tools to deepen your awareness of nature in the season of fall. Guided prompts, outdoor sketching sessions, and time spent exploring the colorful fall foliage will foster a deeper connection with nature and creation.\n\n\nOctober 2-4, 2026\n\n\nCheck-in: 4-6pm\n\n\nCheck-out: 10am\n\n\n\n\nAll ages welcome, minors must be accompanied by an adult.\n\n\nProgram Rates\n\n\nAttendance cost is calculated during online registration, depending on your lodging selection. Rates are per person and include program fees, lodging and meals.\n\n\nConference Center – Single Occupancy: $350 per person\n\n\nConference Center – Double Occupancy: $280 per person\n\n\nYouth (10-17): $150 per person\n\n\nChildren (4-9): $110 per person\n\n\n3 and under: $0\n\n\n\n\n\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/fall-nature-retreat-nature-journaling/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Art Events &amp; Exhibits,Classes &amp; Workshops,Family Friendly,Happening,Outdoor Adventure,Special Events
@@ -2064,7 +2083,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Adult-ish Camp
-DESCRIPTION:Adult-ish Camp is the perfect chance to relive the magic of summer camp – this time with the freedom of adulthood! Designed for young adults ages 18+, this long weekend at Waycross is all about fun, reflection, and connection. Spend your days canoeing, hiking, and enjoying campfires, or simply relax and soak in the peaceful surroundings. Whether you’re seeking adventure or just a break from the daily grind, you can participate as much or as little as you’d like.\nThis program will offer a space to reflect on the transitions of young adulthood. With a mix of classic camp activities and opportunities for reflection, it’s a chance to step away from routine and connect with like-minded people. If you’re ready for a weekend of fun, friendship, and nostalgia, this is the camp for you!\n\n\nJuly 31-August 3, 2026\n\n\nCheck-in: 4-6pm\n\n\nCheck-out: 10am\n\n\nThis program runs Friday – Monday. We encourage all participants to stay for the full experience, but we understand that some may need to leave early. If you need to depart early please select the Friday–Sunday afternoon option (departing before dinner on Sunday) during registration so we can plan accordingly.\n\n\n\n\n\n\nAge: Young Adults (18+)\n\n\nAccommodation Options:\n\n\nAttendance cost is calculated during online registration, depending on your lodging selection. Rates are per person and include program fees, lodging and meals\n\n\nCabin – Multi-Occupancy: $75 per person\n\n\nMain House/Sleeping Wing Multi-Occupancy: $75 per person\n\n\n\n\n\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/adult-ish-camp-2/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Happening,Outdoor Adventure,Plan Your Visit,Special Events,Summer
