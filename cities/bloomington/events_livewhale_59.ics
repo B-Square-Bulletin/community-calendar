@@ -4,41 +4,6 @@ PRODID:-//Indiana University//NONSGML v1.0//EN
 X-WR-CALNAME:Indiana University Events
 BEGIN:VEVENT
 X-SOURCE:IU La Casa Latino Cultural Center
-DTSTART:20260407T230000Z
-DTEND:20260408T000000Z
-LOCATION:La Casa/Latino Cultural Center
-GEO:39.168732;-86.525021
-SUMMARY:La Casa Queer Initiative: Rooted and Thriving
-DESCRIPTION:Join La Casa's Queer Initiative for an evening of creativity\
- , connection\, and community. Together\, we'll decorate terracotta pots a
- nd plant succulents while creating space to reflect\, connect\, and just 
- be.La Casa Queer Initiative creates an inclusive and affirming space for 
- LGBTQ+ students to connect\, find support\, and build community.
-X-ALT-DESC;FMTTYPE=text/html:<p><span data-olk-copy-source="MessageBody">
- Join La Casa's Queer Initiative for an evening of creativity\, connection
- \, and community. Together\, we'll decorate terracotta pots and plant suc
- culents while creating space to reflect\, connect\, and just be.</span></
- p><p><span data-olk-copy-source="MessageBody">La Casa Queer Initiative cr
- eates an inclusive and affirming space for LGBTQ+ students to connect\, f
- ind support\, and build community.</span></p>
-UID:20260407T230000Z-2154764@events.iu.edu
-DTSTAMP:20251219T114321Z
-URL:https://events.iu.edu/lacasaiub/event/2154764-la-casa-queer-initiativ
- e-rooted-and-thriving
-CATEGORIES:Health and wellness
-LAST-MODIFIED:20260330T143424Z
-ATTACH:https://events.iu.edu/live/image/gid/59/width/168/height/168/crop/
- 1/src_region/0,0,927,1200/30704_LCQI_1.rev.1774881073.jpg
-X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2154764
-X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-IMAGE:https://events.iu.edu/live/image/gid/59/width/168/heigh
- t/168/crop/1/src_region/0\,0\,927\,1200/30704_LCQI_1.rev.1774881073.jpg
-X-LIVEWHALE-CONTACT-INFO:<p>\n  lacasa@iu.edu\n</p>
-X-LIVEWHALE-TAGS:La Casa' Queer Initiative LCQI
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU La Casa Latino Cultural Center
 DTSTART:20260408T170000Z
 DTEND:20260408T200000Z
 LOCATION:SIDNEY AND LOIS ESKENAZI MUSEUM OF ART - Room Number: Roehm Fami

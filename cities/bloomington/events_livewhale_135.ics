@@ -4,8 +4,8 @@ PRODID:-//Indiana University//NONSGML v1.0//EN
 X-WR-CALNAME:Indiana University Events
 BEGIN:VEVENT
 X-SOURCE:IU Hamilton Lugar School
-DTSTART;VALUE=DATE:20260407
-DTEND;VALUE=DATE:20260408
+DTSTART;VALUE=DATE:20260408
+DTEND;VALUE=DATE:20260409
 SUMMARY:Celebrate IU Day with Hamilton Lugar School
 DESCRIPTION:From April 1 to April 22\, celebrate your impact with the Ham
  ilton Lugar School by supporting what matters most to you. Explore inspir
@@ -66,7 +66,7 @@ DESCRIPTION:From April 1 to April 22\, celebrate your impact with the Ham
  es Lecture.Make a difference this IU Day! Support any of the 19 Hamilton 
  Lugar programs and priorities—from student opportunities to global init
  iatives: https://go.iu.edu/2026-hls-iuday (https://go.iu.edu/2026-hls-iud
- ay)
+ ay) Meeting URL: https://go.iu.edu/2026-hls-iuday
 X-ALT-DESC;FMTTYPE=text/html:<p><em>From April 1 to April 22\, celebrate 
  your impact with the Hamilton Lugar School by supporting what matters mos
  t to you. Explore inspiring stories and contribute to the causes that res
@@ -177,10 +177,11 @@ X-ALT-DESC;FMTTYPE=text/html:<p><em>From April 1 to April 22\, celebrate
  r></tbody></table><p class=""><strong>Make a difference this IU Day! Supp
  ort any of the 19 Hamilton Lugar programs and priorities—from student o
  pportunities to global initiatives: <a class="external" href="https://go.
- iu.edu/2026-hls-iuday">https://go.iu.edu/2026-hls-iuday</a></strong></p>
-UID:20260407T040000Z-2240049@events.iu.edu
+ iu.edu/2026-hls-iuday">https://go.iu.edu/2026-hls-iuday</a></strong></p> 
+ Meeting URL: https://go.iu.edu/2026-hls-iuday
+UID:20260408T040000Z-2240050@events.iu.edu
 DTSTAMP:20260316T133812Z
-URL:https://events.iu.edu/hls/event/2240049-celebrate-iu-day-with-hamilto
+URL:https://events.iu.edu/hls/event/2240050-celebrate-iu-day-with-hamilto
  n-lugar-school
 CATEGORIES:Volunteer and fundraising opportunities
 LAST-MODIFIED:20260402T203953Z
@@ -189,7 +190,7 @@ EXDATE:20260403T000000Z
 ATTACH:https://events.iu.edu/live/image/gid/135/width/168/height/168/crop
  /1/src_region/0,0,2250,2813/30547_PartyHat.rev.1773806828.png
 X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2240049
+X-LIVEWHALE-ID:2240050
 X-LIVEWHALE-TIMEZONE:America/New_York
 X-LIVEWHALE-IMAGE:https://events.iu.edu/live/image/gid/135/width/168/heig
  ht/168/crop/1/src_region/0\,0\,2250\,2813/30547_PartyHat.rev.1773806828.p
@@ -211,45 +212,6 @@ X-LIVEWHALE-ONLINE-INSTRUCTIONS:<p>\n  <strong>Reach 75% to unlock an ext
  10 first-time donors will win an extra $1\,000 for their fund. Give now b
  efore the $80\,000 match runs out!
 X-LIVEWHALE-REPEATS-UNTIL:2026-04-23 04:00:00
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU Hamilton Lugar School
-DTSTART:20260407T220000Z
-DTEND:20260408T000000Z
-LOCATION:WOODBURN HALL - Room Number: 104
-GEO:39.168107;-86.5201
-SUMMARY:2026 China Town Hall with the National Committee on U.S.-China Re
- lations
-DESCRIPTION:Join Former Deputy Secretary of State Stephen Biegun and Form
- er Deputy Chief of Mission\, U.S. Embassy in Beijing Sarah Beran along wi
- th an on-site discussion facilitated by the International Studies Departm
- ent's Hong Zhang and Rachel Hulvey. Livecast followed by discussion. Food
-  provided.
-X-ALT-DESC;FMTTYPE=text/html:<p>  Join Former Deputy Secretary of State S
- tephen Biegun and Former Deputy Chief of Mission\, U.S. Embassy in Beijin
- g Sarah Beran along with an on-site discussion facilitated by the Interna
- tional Studies Department's Hong Zhang and Rachel Hulvey. Livecast follow
- ed by discussion. Food provided.</p>
-UID:20260407T220000Z-2253227@events.iu.edu
-DTSTAMP:20260330T094302Z
-URL:https://events.iu.edu/live/events/2251209-2026-china-town-hall-with-t
- he-national-committee
-CATEGORIES:Lectures, talks, seminars, and conferences
-LAST-MODIFIED:20260330T154614Z
-ATTACH:https://events.iu.edu/live/image/gid/140/width/168/height/168/crop
- /1/src_region/0,0,1545,1999/30696_2026_China_Town_Hall_Flyer_4.rev.177465
- 0875.png
-X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2253227
-X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-IMAGE:https://events.iu.edu/live/image/gid/140/width/168/heig
- ht/168/crop/1/src_region/0\,0\,1545\,1999/30696_2026_China_Town_Hall_Flye
- r_4.rev.1774650875.png
-X-LIVEWHALE-IMAGE-CAPTION:Flyer for China Town Hall 2026.
-X-LIVEWHALE-COST:Free
-X-LIVEWHALE-SUMMARY:<p>\n  China Town Hall livetalk preceded by discussio
- n facilitated by IU faculty Dr. Hong Zhang and Dr. Rachel Hulvey.\n</p>
-X-LIVEWHALE-CUSTOM-ROOM-NUMBER:104
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:IU Hamilton Lugar School
@@ -330,7 +292,7 @@ DESCRIPTION:Bio  Adriana is an Amazonian environmental anthropologist foc
  ries  Learn about innovative research by Graduate Students and Visiting S
  cholars as they advance the mission of the Ostrom Workshop\, building upo
  n the theme of governance to understand and address major societal proble
- ms.
+ ms. Meeting URL: https://iu.zoom.us/j/86203252156
 X-ALT-DESC;FMTTYPE=text/html:<p><picture class="lw_image lw_image27417 lw
  _align_left lw_block"><source type="image/webp" srcset="https://events.iu
  .edu/live/image/scale/2x/gid/105/width/300/height/247/27417_2025_Adriana_
@@ -377,7 +339,7 @@ X-ALT-DESC;FMTTYPE=text/html:<p><picture class="lw_image lw_image27417 lw
  ><p>  Learn about innovative research by Graduate Students and Visiting S
  cholars as they advance the mission of the Ostrom Workshop\, building upo
  n the theme of governance to understand and address major societal proble
- ms.</p>
+ ms.</p> Meeting URL: https://iu.zoom.us/j/86203252156
 UID:20260408T160000Z-2009800@events.iu.edu
 DTSTAMP:20250806T162757Z
 URL:https://events.iu.edu/live/events/2009760-ostrom-workshop-research-se
@@ -456,7 +418,8 @@ DESCRIPTION:Bio  Paulo Ramos is born from the womb of his mother\, Terezi
   that connects them.About the Ostrom Workshop Research Series  Learn abou
  t innovative research by Graduate Students and Visiting Scholars as they 
  advance the mission of the Ostrom Workshop\, building upon the theme of g
- overnance to understand and address major societal problems.
+ overnance to understand and address major societal problems. Meeting URL:
+  https://iu.zoom.us/j/84133873606
 X-ALT-DESC;FMTTYPE=text/html:<picture class="lw_image lw_image30307  lw_a
  lign_left lw_block"><source type="image/webp" srcset="https://events.iu.e
  du/live/image/scale/2x/gid/105/width/300/height/399/30307_PauloRamosPhoto
@@ -516,7 +479,7 @@ X-ALT-DESC;FMTTYPE=text/html:<picture class="lw_image lw_image30307  lw_a
  g></p><p>  Learn about innovative research by Graduate Students and Visit
  ing Scholars as they advance the mission of the Ostrom Workshop\, buildin
  g upon the theme of governance to understand and address major societal p
- roblems.</p>
+ roblems.</p> Meeting URL: https://iu.zoom.us/j/84133873606
 UID:20260408T170000Z-2226198@events.iu.edu
 DTSTAMP:20260302T142024Z
 URL:https://events.iu.edu/live/events/2226174-ostrom-workshop-research-se
@@ -936,7 +899,8 @@ DESCRIPTION:Bio  Brandice Canes-Wrone is a professor in the political sci
  he environment\, political economy\, and sustainable food science. Presen
  ters are from IU and around the world. Join us at the workshop or over Zo
  om to learn how the Ostrom legacy is evolving today. For more information
- \, see ourwebsite (https://ostromworkshop.indiana.edu/index.html).
+ \, see ourwebsite (https://ostromworkshop.indiana.edu/index.html). Meetin
+ g URL: https://iu.zoom.us/j/86442029094
 X-ALT-DESC;FMTTYPE=text/html:<p><strong><span data-contrast="none"><pictu
  re class="lw_image lw_image30708  lw_align_left lw_block"><source type="i
  mage/webp" srcset="https://events.iu.edu/live/image/scale/2x/gid/105/width/300/height/200/3070
@@ -1000,7 +964,7 @@ X-ALT-DESC;FMTTYPE=text/html:<p><strong><span data-contrast="none"><pictu
  s evolving today. For more information\, see our</span><span data-contras
  t="none"><a href="https://ostromworkshop.indiana.edu/index.html" target="
  _blank" rel="noopener">website</a></span><span data-contrast="none">.</sp
- an></p>
+ an></p> Meeting URL: https://iu.zoom.us/j/86442029094
 UID:20260413T160000Z-2014304@events.iu.edu
 DTSTAMP:20250812T115629Z
 URL:https://events.iu.edu/live/events/2013243-ostrom-workshop-colloquium-
@@ -1810,7 +1774,7 @@ DESCRIPTION:IKS Spring 2026 Colloquium Series  Youngho Cho  Professor of
  ed? What implications does this crisis hold for Korean democracy and for 
  other new democracies? My talk will attempt to answer these questions.  &
  #160\;  Open to the public. A light lunch will be served for in-person at
- tendees.
+ tendees. Meeting URL: https://iu.zoom.us/j/81074675038
 X-ALT-DESC;FMTTYPE=text/html:<h5 style="text-align: center\;">  IKS Sprin
  g 2026 Colloquium Series</h5><h6 style="text-align: center\;">  Youngho C
  ho</h6><p style="text-align: center\;">  Professor of Political Science\,
@@ -1842,7 +1806,8 @@ X-ALT-DESC;FMTTYPE=text/html:<h5 style="text-align: center\;">  IKS Sprin
  hold for Korean democracy and for other new democracies? My talk will att
  empt to answer these questions.</span></p><p style="text-align: center\;"
  >  &#160\;</p><p style="text-align: center\;">  Open to the public. A lig
- ht lunch will be served for in-person attendees.</p>
+ ht lunch will be served for in-person attendees.</p> Meeting URL: https:/
+ /iu.zoom.us/j/81074675038
 UID:20260417T160000Z-2233158@events.iu.edu
 DTSTAMP:20260309T153705Z
 URL:https://events.iu.edu/live/events/2233047-iks-colloquium-youngho-cho
@@ -2291,7 +2256,7 @@ DESCRIPTION:This salon series at Indiana University features leading thin
  le Media Group\, she and her students designed innovative interfaces for 
  on-line communities\; their art projects examining the future of identity
  \, privacy and mediated life have been exhibited in museums and galleries
-  worldwide.&#160\;
+  worldwide.&#160\; Meeting URL: https://iu.zoom.us/j/86134171048
 X-ALT-DESC;FMTTYPE=text/html:<p>  This salon series at Indiana University
   features leading thinkers exploring how to build better digital and natu
  ral worlds.</p><p><img src="https://vivatropolis.com/judith/JSD.CroppedSm  all.png" alt="" loading="lazy"/></p><p><strong data-olk-copy-source="Mess
@@ -2328,7 +2293,7 @@ X-ALT-DESC;FMTTYPE=text/html:<p>  This salon series at Indiana University
  a Group\, she and her students designed innovative interfaces for on-line
   communities\; their art projects examining the future of identity\, priv
  acy and mediated life have been exhibited in museums and galleries worldw
- ide.&#160\;</p>
+ ide.&#160\;</p> Meeting URL: https://iu.zoom.us/j/86134171048
 UID:20260421T200000Z-2160889@events.iu.edu
 DTSTAMP:20260106T152437Z
 URL:https://events.iu.edu/hls/event/2160889-the-alchemy-of-confidence
@@ -2458,7 +2423,7 @@ DESCRIPTION:Bio  Mahdi Taraghi is a third-year Ph.D. student in Environme
  Workshop Research Series  Learn about innovative research by Graduate Stu
  dents and Visiting Scholars as they advance the mission of the Ostrom Wor
  kshop\, building upon the theme of governance to understand and address m
- ajor societal problems.
+ ajor societal problems. Meeting URL: https://iu.zoom.us/j/85198043963
 X-ALT-DESC;FMTTYPE=text/html:<p><picture class="lw_image lw_image27550 lw
  _align_left lw_block"><source type="image/webp" srcset="https://events.iu
  .edu/live/image/scale/2x/gid/105/width/300/height/283/crop/1/src_region/5
@@ -2490,7 +2455,8 @@ X-ALT-DESC;FMTTYPE=text/html:<p><picture class="lw_image lw_image27550 lw
  Ostrom Workshop Research Series</strong></p><p>  Learn about innovative r
  esearch by Graduate Students and Visiting Scholars as they advance the mi
  ssion of the Ostrom Workshop\, building upon the theme of governance to u
- nderstand and address major societal problems.</p>
+ nderstand and address major societal problems.</p> Meeting URL: https://i
+ u.zoom.us/j/85198043963
 UID:20260422T180000Z-2019364@events.iu.edu
 DTSTAMP:20250818T100447Z
 URL:https://events.iu.edu/live/events/2015812-ostrom-workshop-research-se
