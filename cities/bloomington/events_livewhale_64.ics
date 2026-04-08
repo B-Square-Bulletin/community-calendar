@@ -524,7 +524,7 @@ BEGIN:VEVENT
 X-SOURCE:IU Maurer School of Law
 DTSTART:20260411T130000Z
 DTEND:20260411T200000Z
-LOCATION:LOWELL E. BAIER HALL/IU MAURER SCHOOL OF LAW - Room Number: 213
+LOCATION:LOWELL E. BAIER HALL/IU MAURER SCHOOL OF LAW - Room Number: 335
 GEO:39.165074;-86.526424
 SUMMARY:Journal of Constitutional Design 2026 Symposium
 DESCRIPTION:2L CCD Fellows will be presenting their Editorials!&#160\;
@@ -535,15 +535,16 @@ DTSTAMP:20260406T103706Z
 URL:https://events.iu.edu/lawiub/event/2259775-journal-of-constitutional-
  design-2026-symposium
 CATEGORIES:Student-run
-LAST-MODIFIED:20260406T143706Z
+LAST-MODIFIED:20260408T123854Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2259775
 X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-CONTACT-INFO:<p>Noor Qureshi&#160\;<br />\nEditor-in-Chief fo
- r Indiana Journal of Constitutional Design&#160\;<br />\n<a href="mailto:
- naquresh@iu.edu">naquresh@iu.edu</a></p>
-X-LIVEWHALE-TAGS:Journal of Constitutional Design
-X-LIVEWHALE-CUSTOM-ROOM-NUMBER:213
+X-LIVEWHALE-CONTACT-INFO:<p>\n  Noor Qureshi&#160\;<br />\n  Editor-in-Ch
+ ief for Indiana Journal of Constitutional Design&#160\;<br />\n  <a href=
+ "mailto:naquresh@iu.edu">naquresh@iu.edu</a>\n</p>
+X-LIVEWHALE-TAGS:Center for Constitutional Democracy|Journal of Constitut
+ ional Design
+X-LIVEWHALE-CUSTOM-ROOM-NUMBER:335
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:IU Maurer School of Law

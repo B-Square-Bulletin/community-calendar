@@ -29,7 +29,6 @@ X-PUBLISHED-TTL:PT1H
 X-MS-OLK-FORCEINSPECTOROPEN:TRUE
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-2fa862c3b4ed1e3228c5ff470869b73d@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260411T080000
@@ -51,7 +50,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2023/11/DG-
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-de29a915ea34068c06d487aaf243487b@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20261206T133000
@@ -73,7 +71,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2024/11/134
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-54d7d1245947980141302894a0c14971@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260414T090000
@@ -95,7 +92,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Sto
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-0b46f404d27ab4efaa1aa184d787f6b5@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260408T130000
@@ -117,7 +113,6 @@ ATTACH;FMTTYPE=:https://browncounty.com/wp-content/uploads/2025/12/002bfd_236916
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-edb899d139bf0fddddbf9b3f4e8252f0@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260409T070000
@@ -139,7 +134,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/02/J5U
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-a6c740d0b4f63396fb10d25409486f7a@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260411T120000
@@ -160,7 +154,6 @@ ATTACH;FMTTYPE=image/png:https://browncounty.com/wp-content/uploads/2025/01/OurL
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-889949ac96d52db2138c0a0971aeb441@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260409T130000
@@ -182,7 +175,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/501
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-58b6c881818a0ccffef2185da2abd2dd@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260410T160000
@@ -204,7 +196,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/04/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-0516955e34eb4091c168439608b5aa9d@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260415T140000
@@ -226,7 +217,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/04/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-7b51238bfa91df7f679922193468cc3f@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260409T150000
@@ -248,7 +238,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/04/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-49029e695aa57d4b80f084a0733e881b@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20261024T040000
@@ -260,7 +249,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:“Plein Air” Painting Sale and Reception
-DESCRIPTION:
+DESCRIPTION:You’re invited to the “Plein Air” Painting Sale and Reception at the Brown County Art Gallery on Saturday, October 24th!\nPaintings inspired by historical Brown County Artist are available on our individual Artist Association member walls in our gallery.\nKeep your eyes open for our Association Artist members who are painting “plein air” in scenic Brown County throughout the year.\nPurchase small paintings donated by our Association members available in our gift shop to contribute to our initiative.\n
 URL:https://browncounty.com/events/plein-air-painting-sale-and-reception/
 ORGANIZER;CN=Historic Brown County Art Gallery:MAILTO:
 CATEGORIES:Art Events &amp; Exhibits,Happening,Special Events
@@ -269,7 +258,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Art
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-83f76ed461abcddf2ff548425f724975@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260627T060000
@@ -290,7 +278,6 @@ ATTACH;FMTTYPE=image/png:https://browncounty.com/wp-content/uploads/2025/04/Fire
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-30646b8af3040799068eab9f75f0efe4@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260702T170000
@@ -311,7 +298,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/04/IMG
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-6d5524717d063150809b7c5256ab1a4b@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260606T040000
@@ -323,7 +309,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Fast Cat K9 Fun Runs
-DESCRIPTION:Get ready for a weekend full of speed, smiles, and wagging tails! Fast CAT is a 100-yard dash for dogs—pure fun and excitement for pups of all shapes and sizes.\n $10 per run (limit 2 runs per dog per day) Sign up in advance or day-of All dogs welcome — must be on leash when not running No dog? No problem—spectators welcome!\n Questions? Message us or call for details.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/fast-cat-k9-fun-runs/
 ORGANIZER;CN=Brown County K9 LLC:MAILTO:
 CATEGORIES:Happening,Races,Tournaments &amp; Games
@@ -332,7 +318,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/04/525
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-e61bf0b7496de50a85ca1a91884a009d@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260411T160000
@@ -354,7 +339,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/04/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-7fb6a67a82205c2fff554b9115da75ec@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260530T080000
@@ -374,7 +358,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/BVB
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-6646331f6d0887f06a8d086496cdd2dd@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260516T090000
@@ -395,7 +378,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/BVB
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-82c105011fad74fd61433b9625b8d627@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260508T160000
@@ -416,7 +398,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/05/Mus
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-85feac317c419e5b015d1209f8882102@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260502T160000
@@ -437,7 +418,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/05/Mus
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-5b47bb34af7cc86d8390ea228bda8e3d@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260501T153000
@@ -458,7 +438,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/05/Mus
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-9e1a5c4f3b694702c0622d6f6e87b5c0@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260425T160000
@@ -479,7 +458,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/05/Mus
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-6e65ee81edaaebfba3677b10b5a2f970@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260422T153000
@@ -500,7 +478,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/05/Mus
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-48414083098bde68fd6925d2e37b5b9c@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260417T153000
@@ -521,7 +498,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/05/Mus
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-cbf7b1adaa6ccd7685f7487b4f6e8e11@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260415T153000
@@ -542,7 +518,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/05/Mus
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-eaaecdb1cbd4c1b88af3125a7d3635b4@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260411T160000
@@ -563,7 +538,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/05/Mus
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-b70795605a2bc976a2678aa2fd67927d@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260410T160000
@@ -584,7 +558,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/05/Mus
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-6baa270f7146fdbdfdcf6edd8c1684af@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260409T153000
@@ -605,7 +578,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/05/Mus
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-9ba1b6ef15677983e6d25593bb5b312a@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260408T153000
@@ -626,7 +598,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/05/Mus
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-2ea3641841b789a76267962c20a83720@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260425T040000
@@ -647,7 +618,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/04/Wom
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-904e1e9666108a5eecc34e4f6461b321@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260424T150000
@@ -667,7 +637,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/04/Ver
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-39688877516036f86d52efc29e967c76@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260718T133000
@@ -688,7 +657,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Art
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-601789ee65885377c18959f0ffc68b9f@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260419T100000
@@ -709,7 +677,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Art
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-0914a6e435552ec7483c5ded18e6d704@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260424T100000
@@ -730,7 +697,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/278
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-0943b1f5f527822f626795d465e7f3fa@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260411T090000
@@ -751,7 +717,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/02/Lar
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-400cfdfc88d288dbf92175876e9ec05c@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260501T040000
@@ -772,7 +737,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/bc6
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-b2d8b6bf3d50e04a36ebe689c09edd28@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260503T070000
@@ -792,7 +756,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-cb2f72a833cf89fcf18e6681254ab5bb@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260428T133000
@@ -812,7 +775,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-6d1a8a42e8a272c835c3fe718ee6fb58@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260523T090000
@@ -832,7 +794,6 @@ ATTACH;FMTTYPE=:https://browncounty.com/wp-content/uploads/2026/03/002bfd_a7b453
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-6d7c09222f66eccf3a1cbddb66271e26@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260425T100000
@@ -852,7 +813,6 @@ ATTACH;FMTTYPE=:https://browncounty.com/wp-content/uploads/2026/03/002bfd_2b2fe0
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-8a215d0bf8aa55257b732f4846516db9@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260412T090000
@@ -872,7 +832,6 @@ ATTACH;FMTTYPE=:https://browncounty.com/wp-content/uploads/2026/03/002bfd_170a7e
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-768638528d9f9045eae4ebba12ea4dfa@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260502T060000
@@ -893,7 +852,6 @@ ATTACH;FMTTYPE=image/webp:https://browncounty.com/wp-content/uploads/2026/03/343
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-44cf8dc8bd5c8c9635a703b26af93bc5@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260702T040000
@@ -913,7 +871,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2023/07/BVB
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-eece9c5468456c44d43cd6aec2474a4c@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260626T040000
@@ -925,7 +882,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Cody’s Ride
-DESCRIPTION:
+DESCRIPTION:On June 1, 2009 Cody Hall was critically injured in a construction accident while at work. On June 10, 2009 at 20 years old Cody was removed from life support. He donated his organs and saved and changed countless people’s lives. We are so excited and honored to raise money and awareness for organ donation and to keep Cody’s remarkable memory alive. Live auction, live music, food trucks, bike-themed events, raffle bike and so much more. Get more information at Outsiderscharityclub.com Camping Reservations & Golf Cart\n
 URL:https://browncounty.com/events/codys-ride/
 CATEGORIES:Food &amp; Drink,Happening,Live Music,Outdoor Concerts
 LOCATION:5163 North State Road 135, Morgantown, IN
@@ -933,7 +890,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2023/05/Bil
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-08bc1d2e9113a29640026fccf4d88d9a@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20261106T030000
@@ -953,7 +909,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2018/07/Bil
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-f59da5b52d6e11724f302e9ed5074290@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260924T040000
@@ -973,7 +928,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2023/07/BVB
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-94f911314bbc3166d0b10c2ee62affa2@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260827T040000
@@ -993,7 +947,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2023/07/BVB
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-b8b8024affbe1d02f4e72ecb4a769ddc@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260617T040000
@@ -1013,7 +966,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2023/07/BVB
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-68aa31e7a29e7bca10ced099b926e4cd@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260522T040000
@@ -1033,7 +985,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2023/07/BVB
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-07a6fc4a930698a72df3bd30e77ad76f@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260501T040000
@@ -1053,7 +1004,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2018/07/Bil
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-5975eb3c70817fb52a633ac9f543c296@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260509T080000
@@ -1074,7 +1024,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-77468b93f633859c47fafb32b1c5ed96@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260424T140000
@@ -1095,7 +1044,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-f6f0daa913e50d36c777fdaf4ba819dd@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260410T140000
@@ -1116,7 +1064,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-a50849e365dffc8dd27ea5c258b1398e@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260516T040000
@@ -1136,7 +1083,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-362c39c5e150a267f9de34c5d01a3b25@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260822T150000
@@ -1157,7 +1103,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/Ame
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-e00b99679594d82b23354765eb7d6fa3@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260821T150000
@@ -1169,7 +1114,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:Phoenix: Saxophone Quartet
-DESCRIPTION:
+DESCRIPTION:ChamberFest Brown County presents Phoenix: Saxophone Quartet\n​​The multi-award-winning Project Fusion Sax Quartet presents Phoenix: a program of saxophone chamber music depicting renewal, transformation, and flight. This theme, chosen in the auspicious year of the United States’ 250th anniversary, celebrates a nation founded on the “great experiment” of democratic reinvention and rebirth, whose mascot is fittingly the noble bald eagle: as such, it presents music exclusively of American composers.\nWorks by Gershwin, Maslanka, Kline, Frazier, Mettens, Washington, Ge, Love\nProject Fusion:\n\nDannel Espinoza, soprano sax\nDoug O’Connor, alto sax\nAiwen Zhang, tenor sax\nMatt Evans, baritone sax\n\nThis concert is sponsored by the Eads family in memory of Ralph S. (Tony) Eads.\n
 URL:https://browncounty.com/events/chamberfest-phoenix/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -1178,7 +1123,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/Pho
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-fb1a0ce1b4f359640629eb88291a53ee@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260820T150000
@@ -1199,7 +1143,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/Teu
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-383f78407a31d8e12e6af4889e742443@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260819T150000
@@ -1220,7 +1163,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/08/pla
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-bcf01859ff4292b0950d19d89ebd1ea8@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260818T150000
@@ -1241,7 +1183,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/Pas
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-4523bc863d033f2ffc71892fe67fda5c@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260817T150000
@@ -1262,7 +1203,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/Mus
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-315996484382b8d52f2c872e8b4bcf70@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260816T120000
@@ -1283,7 +1223,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/Eri
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-fa46eb672259c3a031baaab76155264e@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260522T060000
@@ -1304,7 +1243,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/060
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-5e50635ed7e7620b79cba357648489e6@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260502T070000
@@ -1324,7 +1262,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/mus
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-90371692de01699e22ec68dcd0b2fdc8@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260414T053000
@@ -1344,7 +1281,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/Squ
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-77104e319b6cf8ade9a957f7e772fe96@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260903T040000
@@ -1366,7 +1302,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/img
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-6f6af898ba7ba78ceb2a20208f07d654@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260502T070000
@@ -1387,7 +1322,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/645
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-0edc46e1b89d8a66b86662e4e1d0df57@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260910T000000
@@ -1408,7 +1342,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/544
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-fcf2b7edad52d3ed933ca75e8d4f0cc9@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260608T060000
@@ -1429,7 +1362,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/You
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-82adade4cc8610fb8512924a9d0244cf@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260917T000000
@@ -1450,7 +1382,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/Cam
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-1019cd2c412a10fa01265b8625776c35@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260508T000000
@@ -1471,7 +1402,6 @@ ATTACH;FMTTYPE=image/png:https://browncounty.com/wp-content/uploads/2026/03/Scre
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-42c72379e2905b47c29ee1234b399e34@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260419T070000
@@ -1492,7 +1422,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/202
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-4cd34eb27c098317994246f59c52ccd0@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260925T040000
@@ -1504,7 +1433,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Indiana Bigfoot Conference
-DESCRIPTION:
+DESCRIPTION:Indiana Bigfoot Conference 2026 gathers enthusiasts and researchers of two days of presentations and activities.\nSchedule Highlights\nIncludes Town Hall, Meet & Greet, full speaker sessions, and a Basket Donation auction supporting an immersive experience.\n \n
 URL:https://browncounty.com/events/indiana-bigfoot-conference/
 ORGANIZER;CN=Indiana Bigfoot Research Organization:MAILTO:
 CATEGORIES:Convention,Happening,Special Events
@@ -1513,7 +1442,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/02/Squ
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-318130e81a4889944c0e7635a18e7f7a@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260827T040000
@@ -1533,7 +1461,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2023/03/BVB
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-f265432ba096483195268b98978feba0@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260522T040000
@@ -1553,7 +1480,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/08/BVB
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-07cdb0c73d463dc6b8692fb156704ed5@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260819T000000
@@ -1573,7 +1499,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/02/scr
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-f72e9d1419252f875f3a7e0301e465f5@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260903T040000
@@ -1594,7 +1519,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/08/pla
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-97564b8d8c0e7c9ad7df68efa65ae2d7@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20261107T143000
@@ -1614,7 +1538,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/05/Mus
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-ebfa9c523600625835231e4346a4b6c1@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260816T040000
@@ -1626,7 +1549,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Brown County ChamberFest
-DESCRIPTION:
+DESCRIPTION:We plan an outstanding lineup for the 2026 festival and can’t wait to share details. Ingredients include well-loved familiar faces, musical surprises, and ChamberFest’s guarantee of engagement, inspiration, connection, and community. Stay tuned.\n
 URL:https://browncounty.com/events/brown-county-chamberfest/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Entertainment,Happening,Live Music
@@ -1635,7 +1558,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2022/07/cha
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-709846e548438086654199edf87d1f51@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260424T150000
@@ -1656,7 +1578,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/02/1d4
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-a8c30129a70e48ed3519e77683c0c66b@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260912T040000
@@ -1676,7 +1597,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/02/Squ
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-7a0cc0a8f2d86aa3ad21d0a371e86043@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260411T130000
@@ -1697,7 +1617,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/01/Squ
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-d3e56ee21b884d82f7a5ba6f8367c4cb@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260627T080000
@@ -1709,7 +1628,7 @@ PRIORITY:5
 SEQUENCE:2
 TRANSP:OPAQUE
 SUMMARY:Alice in Wonderland Jr
-DESCRIPTION:\n\nDisney’s Alice in Wonderland JR. is a vibrant, family-friendly musical adaptation of the classic Disney film and Lewis Carroll’s beloved stories. Follow young Alice as she falls down the rabbit hole into the whimsical world of Wonderland, where she meets iconic characters like the White Rabbit, Cheshire Cat, Mad Hatter, and Queen of Hearts. Filled with beloved songs like “The Unbirthday Song” and “Painting the Roses Red,” plus new music inspired by the 2010 film, this 60-minute stage show celebrates imagination, adventure, and fun for all ages.\n\n\n\n\nOur next summer camp is coming up in June 2026, registration is open!\n\n\nRegistration packets are available at the high school front desk.\n\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/alice-in-wonderland-jr/
 CATEGORIES:Entertainment,Family Friendly,Happening,Live Music,Theatre &amp; Entertainment
 LOCATION:235 School House Lane, Nashville, IN
@@ -1717,7 +1636,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/01/Squ
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-55738e1596ef7644af9ff9409e61452b@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260516T043000
@@ -1737,7 +1655,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/05/Mus
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-c16327d02fbf2b6a250340d9d71100a4@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260425T090000
@@ -1758,7 +1675,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/07/BVB
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-af355a8a4d1e8f26d4275cde117f5446@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260529T040000
@@ -1779,7 +1695,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/12/Squ
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-788a0ff4e5299851327cb70666137951@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260412T090000
@@ -1800,7 +1715,6 @@ ATTACH;FMTTYPE=image/webp:https://browncounty.com/wp-content/uploads/2025/09/ccf
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-3cb0860a1127333f6613c5b8fc158daf@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260705T110000
@@ -1821,7 +1735,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-40ffe3e9627053dc967f6f9091701ad4@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260621T110000
@@ -1842,7 +1755,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-efd39d936148c0c68bb56d01e7bab4c6@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260630T110000
@@ -1862,7 +1774,6 @@ LOCATION:4879 Richards Rd, Morgantown, IN
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-f9fbc3b12e8eabb3cad8e98d03af06a9@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260628T110000
@@ -1874,7 +1785,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Ready – Set – Camp!
-DESCRIPTION:
+DESCRIPTION:For campers entering K – 2nd grade with an adult.\nReady-Set-Camp! is a session for our youngest campers who aren’t quite ready for a full week at camp on their own to get to experience the fun and adventure of camp with a parent or guardian.\n\n\nSession:\n\n\n3B: June 2-4, 2026\n\n\n\n\nRates:\n\n\nChild: $65\n\n\nAdult: $185\n\n\n\n\n
 URL:https://browncounty.com/events/ready-set-camp/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Family Friendly,Happening,Plan Your Visit,Summer
@@ -1883,7 +1794,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-0489fb6e349231b112f4c3710ad3af17@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260628T110000
@@ -1904,7 +1814,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-ca98f08f70a0ec8f6fb5cc9372ef7a13@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260614T110000
@@ -1925,7 +1834,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-70064baef693d9c0b22cf197d73aec32@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260621T110000
@@ -1946,7 +1854,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-f11e3af0165661f460727de219f81743@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260712T110000
@@ -1967,7 +1874,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-989c57bd1bf8e2e4ba1f64313c886578@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260705T110000
@@ -1987,7 +1893,6 @@ LOCATION:4879 Richards Rd, Morgantown, IN
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-92fa25ba2304993395756955ba070bd7@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260614T110000
@@ -2008,7 +1913,6 @@ LOCATION:4879 Richards Rd, Morgantown, IN
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-86287143ecb3bfef7bee81e9ca971f36@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260925T120000
@@ -2029,7 +1933,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-9e17519b5eb07ac299292e242372d780@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20261204T080000
@@ -2050,7 +1953,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-8cb5df43707592c1330ddb02b7e3e3e0@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20261115T050000
@@ -2071,7 +1973,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-cf266bcb05d7a7e8249d9362e48e39b2@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20261113T110000
@@ -2092,7 +1993,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-fd565b4a112bbd01a6cb4625f79ce8f8@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20261017T060000
@@ -2113,7 +2013,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-32a0ef170b97d4c299f34d4ad2dc8b97@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20261002T120000
@@ -2134,7 +2033,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-64974b2750b80d7f9526943aab6b8baa@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260904T120000
@@ -2146,7 +2044,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:All Y’all Come to Camp
-DESCRIPTION:
+DESCRIPTION:Spend the weekend surrounded by nature, with classic camp activities like campfires, worship, games, and outdoor adventures – plus plenty of time to relax and unwind at your own pace. Whether you want to dive into all the action or simply enjoy the peaceful setting, this weekend is yours to enjoy.\nJoin us for a refreshing weekend filled with fun, adventure and community. Waycross staff will lead a variety of activities, and participants are encouraged to take part as much or as little as they like.\n\n\nSeptember 4-6, 2026\n\n\nCheck-in: 4-6pm\n\n\nCheck-out: 1pm\n\n\n\n\nAll ages welcome, minors must be accompanied by an adult.\n\n\nProgram Rates\n\n\nAttendance cost is calculated during online registration, depending on your lodging selection. Rates are per person and include program fees, lodging and meals.\n\n\nConference Center – Single Occupancy: $400 per person\n\n\nConference Center – Double Occupancy: $330 per person\n\n\nMain House/Sleeping Wing – Multi-Occupancy: $260 per person\n\n\nCabins – Multi-Occupancy (adult): $180 per person\n\n\nYouth 10-17: $200 per person\n\n\nChildren 4-9: $160 per person\n\n\n3 and under: $0\n\n\n\n\n\n\n
 URL:https://browncounty.com/events/all-yall-come-to-camp-2/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Family Friendly,Happening,Outdoor Adventure,Special Events,Summer
@@ -2155,7 +2053,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-21430a5ee84f60061d22cee655248652@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260731T120000
@@ -2176,7 +2073,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-9a436d30bb73d6d0a3f20f417e93a6f7@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260731T120000
@@ -2197,7 +2093,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-f9dfc46469235deed6f210129ebab8e7@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260529T120000
@@ -2218,7 +2113,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-058938425aec82e7186a2598e66db285@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260515T133000
@@ -2239,7 +2133,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-eebe5857a47a93ceb22cd1354072650f@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260510T093000
@@ -2260,7 +2153,6 @@ ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/09/Unt
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
-X-SOURCE-URL:https://browncounty.com/events/
 CLASS:PUBLIC
 UID:MEC-56f7f92fdcee405694375deb2ee579a3@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260424T120000
