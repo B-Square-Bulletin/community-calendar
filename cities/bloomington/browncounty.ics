@@ -94,8 +94,8 @@ BEGIN:VEVENT
 X-SOURCE:Brown County Events
 CLASS:PUBLIC
 UID:MEC-0b46f404d27ab4efaa1aa184d787f6b5@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260408T130000
-DTEND;TZID=America/Indiana/Indianapolis:20260408T150000
+DTSTART;TZID=America/Indiana/Indianapolis:20260415T130000
+DTEND;TZID=America/Indiana/Indianapolis:20260415T150000
 DTSTAMP:20251223T100350Z
 RRULE:FREQ=WEEKLY;BYDAY=WE
 CREATED:20251223
@@ -115,8 +115,8 @@ BEGIN:VEVENT
 X-SOURCE:Brown County Events
 CLASS:PUBLIC
 UID:MEC-edb899d139bf0fddddbf9b3f4e8252f0@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260409T070000
-DTEND;TZID=America/Indiana/Indianapolis:20260409T120000
+DTSTART;TZID=America/Indiana/Indianapolis:20260410T070000
+DTEND;TZID=America/Indiana/Indianapolis:20260410T120000
 DTSTAMP:20260212T100904Z
 RRULE:FREQ=DAILY;UNTIL=20260626T200000Z
 CREATED:20260212
@@ -156,8 +156,8 @@ BEGIN:VEVENT
 X-SOURCE:Brown County Events
 CLASS:PUBLIC
 UID:MEC-889949ac96d52db2138c0a0971aeb441@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260409T130000
-DTEND;TZID=America/Indiana/Indianapolis:20260409T140000
+DTSTART;TZID=America/Indiana/Indianapolis:20260416T130000
+DTEND;TZID=America/Indiana/Indianapolis:20260416T140000
 DTSTAMP:20260330T112621Z
 RRULE:FREQ=WEEKLY;UNTIL=20261119T050000Z
 CREATED:20260330
@@ -219,8 +219,8 @@ BEGIN:VEVENT
 X-SOURCE:Brown County Events
 CLASS:PUBLIC
 UID:MEC-7b51238bfa91df7f679922193468cc3f@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260409T150000
-DTEND;TZID=America/Indiana/Indianapolis:20260409T170000
+DTSTART;TZID=America/Indiana/Indianapolis:20260416T150000
+DTEND;TZID=America/Indiana/Indianapolis:20260416T170000
 DTSTAMP:20260402T164245Z
 RRULE:FREQ=WEEKLY
 CREATED:20260402
@@ -590,26 +590,6 @@ TRANSP:OPAQUE
 SUMMARY:The Orchestra featuring Former Members of ELO and ELO Part II
 DESCRIPTION:The Orchestra featuring former members of ELO and ELO Part II bring the Blue Skies Forever Tour to the Brown County Music Center in Nashville, Ind., on Thursday, April 9, 2026.\nThe story started in 1970 in Birmingham, England, where the Electric Light Orchestra began their journey as one of the world’s most popular rock bands. Their music was characterized by a  fusion of Beatlesque pop, classical arrangements, and futuristic iconography. ​An astonishing library of hit records that sold more than 50 million copies includes Eldorado, Face the Music, A New World Record, Out of the Blue, Discovery and Xanadu. ​\nThe band began touring as THE ORCHESTRA in 2000 emerging as a supergroup made up of former members of ELO and ELO Part II and other celebrated rock acts. Over the years the members of THE ORCHESTRA have played ELO’s greatest hits to millions of fans in over 50 countries.\n
 URL:https://browncounty.com/events/the-orchestra-featuring-former-members-of-elo-and-elo-part-ii/
-ORGANIZER;CN=Brown County Music Center:MAILTO:boxoffice@browncountymusiccenter.com
-CATEGORIES:Food &amp; Drink,Happening,Live Music,Spring,Theatre &amp; Entertainment
-LOCATION:200 Maple Leaf Boulevard
-ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/05/Music-Center.jpg
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:Brown County Events
-CLASS:PUBLIC
-UID:MEC-9ba1b6ef15677983e6d25593bb5b312a@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260408T153000
-DTEND;TZID=America/Indiana/Indianapolis:20260408T153000
-DTSTAMP:20260402T162504Z
-CREATED:20260402
-LAST-MODIFIED:20260402
-PRIORITY:5
-SEQUENCE:3
-TRANSP:OPAQUE
-SUMMARY:Gov’t Mule
-DESCRIPTION:For three decades, Gov’t Mule has galvanized a global fan base with their honest, organic and daring music and improvisational virtuosity, leading them to be recognized as one of the most timeless, revered and active bands in the world whose spot amongst rock titans remains unshakable. Led by visionary GRAMMY Award-winning artist, guitar legend, songwriter and producer Warren Haynes – a cornerstone of the American music landscape – the enduring, globally revered GRAMMY-nominated group has showcased its intelligence and breadth over the course of 20+ studio and live albums, thousands of memorable performances, and millions of album and track sales. Gov’t Mule’s most recent studio album, 2023’s Peace…Like A River (Fantasy Records) is a timeless rock collection featuring guest appearances from Billy F Gibbons, Ivan Neville, Billy Bob Thornton, Ruthie Foster, and Celisse. Peace…Like A River – hailed as “perfection,” “captivating,” “riveting,” and among the band’s best – marked the follow-up to Mule’s GRAMMY-nominated blues album, Heavy Load Blues, with both albums recorded at The Power Station New England during the same sessions but created in different rooms with no shared gear or instruments. Gov’t Mule – Haynes [guitar, vocals], Matt Abts [drums], Danny Louis [keyboards, guitar, and backing vocals], and Kevin Scott [bass] – has become a human encyclopedia of great American music while adding to that canon with their signature sound. The band’s flexible interplay in the studio and on stage makes them a true living, breathing ensemble and Haynes is lauded as one of the most formidable guitarists and vocalists of the modern era and a prolific songwriter and producer.\n
-URL:https://browncounty.com/events/govt-mule/
 ORGANIZER;CN=Brown County Music Center:MAILTO:boxoffice@browncountymusiccenter.com
 CATEGORIES:Food &amp; Drink,Happening,Live Music,Spring,Theatre &amp; Entertainment
 LOCATION:200 Maple Leaf Boulevard
