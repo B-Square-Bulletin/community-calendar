@@ -112,7 +112,12 @@ class RateLimitTracker:
         return min(5, conservative_delay)
 
     def record_request(self, tokens_used):
-        """Record that a request was made."""
+        """
+        Record that a request was made.
+
+        Note: tokens_used from API headers is cumulative (total used in window),
+        not incremental. Store it directly rather than adding.
+        """
         now = time.time()
         self.last_request_time = now
 
@@ -127,7 +132,8 @@ class RateLimitTracker:
             self.tokens_used_in_window = tokens_used
             self.window_start = now
         else:
-            self.tokens_used_in_window += tokens_used
+            # tokens_used is cumulative from API, replace (don't add)
+            self.tokens_used_in_window = tokens_used
 
     def get_status(self):
         """Get current rate limit status for logging."""
@@ -166,7 +172,8 @@ def anthropic_call(api_key, model, prompt, retry_count=0):
     try:
         with urllib.request.urlopen(req, timeout=120) as resp:
             result = json.loads(resp.read())
-            response_headers = dict(resp.headers)
+            # Keep resp.headers as-is (case-insensitive)
+            response_headers = resp.headers
             return result["content"][0]["text"].strip(), response_headers
     except urllib.error.HTTPError as e:
         error_body = e.read().decode("utf-8", errors="replace")
@@ -258,8 +265,7 @@ def classify_batch(events, few_shot, api_key, model):
         )
 
     example_json = (
-        '[{"index": 1, "category": "Music / Concerts"}, '
-        '{"index": 2, "category": null}]'
+        '[{"index": 1, "category": "Music / Concerts"}, {"index": 2, "category": null}]'
     )
 
     prompt = f"""Classify each event into exactly one category. Categories:
@@ -352,7 +358,7 @@ def process_file(  # noqa: PLR0915, PLR0912
     # Classify in batches (using representatives only)
     classified = 0
     cats = Counter()
-    rep_results = {}  # maps representative index to category
+    rep_results = {}  # maps normalized title_key to category
     total_batches = (len(representative_items) + BATCH_SIZE - 1) // BATCH_SIZE
     batch_start_time = time.time()
 
@@ -407,9 +413,12 @@ def process_file(  # noqa: PLR0915, PLR0912
                 rate_limiter.record_request(estimated_tokens)
                 msg = (
                     f"    Rate limit headers unavailable, "
-                    f"using estimated {estimated_tokens} tokens"
+                    f"using estimated {estimated_tokens} tokens "
+                    f"and fixed {FALLBACK_DELAY}s delay"
                 )
                 print(msg, flush=True)
+                # Apply fallback delay to avoid overwhelming API
+                time.sleep(FALLBACK_DELAY)
 
             for j, (_orig_idx, event) in enumerate(batch_items):
                 cat = result_map.get(j + 1)
