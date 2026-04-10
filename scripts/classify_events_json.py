@@ -405,7 +405,8 @@ def process_file(  # noqa: PLR0915, PLR0912
                 rate_limiter.record_request(tokens_used)
                 msg = (
                     f"    Tokens: {tokens_used} used, "
-                    f"{rate_info['tokens_remaining']} remaining"
+                    f"{rate_info['tokens_remaining']} remaining "
+                    f"({rate_limiter.get_status()})"
                 )
                 print(msg, flush=True)
             else:
@@ -426,8 +427,46 @@ def process_file(  # noqa: PLR0915, PLR0912
                     title_key = (event.get("title") or "").strip().lower()
                     rep_results[title_key] = cat
 
+        except urllib.error.HTTPError as e:
+            print(f"  ERROR in batch {batch_num}: {e}", file=sys.stderr)
+
+            # Parse rate limit headers from failed request if available
+            # to update tracker and avoid immediate retry hammering
+            try:
+                error_headers = e.headers
+                rate_info = rate_limiter.parse_headers(error_headers)
+                if rate_info:
+                    tokens_used = rate_info["tokens_used"]
+                    rate_limiter.record_request(tokens_used)
+                    msg = (
+                        f"    Updated rate limiter from error headers: "
+                        f"{tokens_used} tokens used, "
+                        f"{rate_info['tokens_remaining']} remaining"
+                    )
+                    print(msg, file=sys.stderr, flush=True)
+
+                    # Calculate smart delay based on current state
+                    cooldown = rate_limiter.calculate_delay(estimated_tokens)
+                    if cooldown > 0:
+                        msg = f"    Cooling down {cooldown:.1f}s before next batch..."
+                        print(msg, file=sys.stderr, flush=True)
+                        time.sleep(cooldown)
+            except Exception as header_err:
+                # If header parsing fails, use conservative fallback
+                msg = f"    Could not parse error headers: {header_err}"
+                print(msg, file=sys.stderr, flush=True)
+                msg = f"    Applying conservative {FALLBACK_DELAY}s cooldown..."
+                print(msg, file=sys.stderr, flush=True)
+                time.sleep(FALLBACK_DELAY)
+
+            # Continue with remaining batches even if one fails
+            continue
         except Exception as e:
             print(f"  ERROR in batch {batch_num}: {e}", file=sys.stderr)
+            # Apply conservative cooldown for non-HTTP errors
+            msg = f"    Applying conservative {FALLBACK_DELAY}s cooldown..."
+            print(msg, file=sys.stderr, flush=True)
+            time.sleep(FALLBACK_DELAY)
             # Continue with remaining batches even if one fails
             continue
 
