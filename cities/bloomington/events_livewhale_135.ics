@@ -39,8 +39,43 @@ X-LIVEWHALE-CUSTOM-REGISTRATION-LINK:https://indianauniv.ungerboeck.com/p
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:IU Hamilton Lugar School
-DTSTART;VALUE=DATE:20260409
-DTEND;VALUE=DATE:20260410
+DTSTART;VALUE=DATE:20260410
+DTEND;VALUE=DATE:20260411
+LOCATION:Hamilton Lugar School of Global and International Studies
+GEO:39.170011;-86.517418
+SUMMARY:America's Role in the World (ARW) Conference
+DESCRIPTION:Higher education's premiere nonpartisan foreign policy confer
+ ence.
+X-ALT-DESC;FMTTYPE=text/html:<p>  Higher education's premiere nonpartisan
+  foreign policy conference.</p>
+UID:20260410T040000Z-1929537@events.iu.edu
+DTSTAMP:20250429T141150Z
+URL:https://events.iu.edu/hls/event/1929537-americas-role-in-the-world-ar
+ w-conference
+LAST-MODIFIED:20260324T145110Z
+ATTACH:https://events.iu.edu/live/image/gid/135/width/168/height/168/crop
+ /1/src_region/0,0,1984,1984/30568_ARW_Marketing_cloud_preview_238x238.rev
+ .1774012071.png
+X-LIVEWHALE-TYPE:events
+X-LIVEWHALE-ID:1929537
+X-LIVEWHALE-TIMEZONE:America/New_York
+X-LIVEWHALE-IMAGE:https://events.iu.edu/live/image/gid/135/width/168/heig
+ ht/168/crop/1/src_region/0\,0\,1984\,1984/30568_ARW_Marketing_cloud_previ
+ ew_238x238.rev.1774012071.png
+X-LIVEWHALE-ALL-DAY:1
+X-LIVEWHALE-COST:Free
+X-LIVEWHALE-CONTACT-INFO:<p>\n  hls@iu.edu\n</p>
+X-LIVEWHALE-TAGS:diplomacy|Foreign Policy|Global|History|HLS|In Person|In
+ door|international affairs|international relations|international studies|
+ O'Neill|Social and Historical Sciences|space|Undergrad Events
+X-LIVEWHALE-CUSTOM-REGISTRATION-LINK:https://indianauniv.ungerboeck.com/p
+ rod/emc00/register.aspx?aat=6a7044672b556d4b3452704862634f41334346496a6d6
+ d792f646f48656f7348444d786b586c67676462303d
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:IU Hamilton Lugar School
+DTSTART;VALUE=DATE:20260410
+DTEND;VALUE=DATE:20260411
 SUMMARY:Celebrate IU Day with Hamilton Lugar School
 DESCRIPTION:From April 1 to April 22\, celebrate your impact with the Ham
  ilton Lugar School by supporting what matters most to you. Explore inspir
@@ -214,9 +249,9 @@ X-ALT-DESC;FMTTYPE=text/html:<p><em>From April 1 to April 22\, celebrate
  pportunities to global initiatives: <a class="external" href="https://go.
  iu.edu/2026-hls-iuday">https://go.iu.edu/2026-hls-iuday</a></strong></p> 
  Meeting URL: https://go.iu.edu/2026-hls-iuday
-UID:20260409T040000Z-2240051@events.iu.edu
+UID:20260410T040000Z-2240052@events.iu.edu
 DTSTAMP:20260316T133812Z
-URL:https://events.iu.edu/hls/event/2240051-celebrate-iu-day-with-hamilto
+URL:https://events.iu.edu/hls/event/2240052-celebrate-iu-day-with-hamilto
  n-lugar-school
 CATEGORIES:Volunteer and fundraising opportunities
 LAST-MODIFIED:20260402T203953Z
@@ -225,7 +260,7 @@ EXDATE:20260403T000000Z
 ATTACH:https://events.iu.edu/live/image/gid/135/width/168/height/168/crop
  /1/src_region/0,0,2250,2813/30547_PartyHat.rev.1773806828.png
 X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2240051
+X-LIVEWHALE-ID:2240052
 X-LIVEWHALE-TIMEZONE:America/New_York
 X-LIVEWHALE-IMAGE:https://events.iu.edu/live/image/gid/135/width/168/heig
  ht/168/crop/1/src_region/0\,0\,2250\,2813/30547_PartyHat.rev.1773806828.p
@@ -247,157 +282,6 @@ X-LIVEWHALE-ONLINE-INSTRUCTIONS:<p>\n  <strong>Reach 75% to unlock an ext
  10 first-time donors will win an extra $1\,000 for their fund. Give now b
  efore the $80\,000 match runs out!
 X-LIVEWHALE-REPEATS-UNTIL:2026-04-23 04:00:00
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU Hamilton Lugar School
-DTSTART:20260409T140000Z
-DTEND:20260409T190000Z
-LOCATION:GLOBAL &amp\; INTERNATIONAL STUDIES BUILDING - Room Number: outs
- ide of GA 0001
-GEO:39.170002;-86.517492
-SUMMARY:Debate Board: GenAI and Language Learning
-DESCRIPTION:Join us for an interactive Debate Board where students\, facu
- lty\, and staff are invited to share their perspectives on the role of ge
- nerative AI in language learning. This informal\, drop-in activity encour
- ages critical thinking and open dialogue about how emerging technologies 
- are shaping our academic and professional lives.  Participants will be pr
- ompted to respond to two guiding questions:How do you feel about using Ge
- nAI for language learning?How does GenAI work for you in your language le
- arning?  Using post-it notes\, you will be able to contribute brief writt
- en responses to these questions. You'll also have the opportunity to read
-  and reflect on others' viewpoints\, creating a collective snapshot of ou
- r community's perspectives. Stop by\, share your thoughts\, and join the 
- conversation!Time: April 9 (Thursday) 10 AM-3 pm. This activity will take
-  place concurrently with the event "America's Role in the World."Location
- : Find us in the hallway near Shreve Auditorium (GA 0001)\, next to the c
- offee table setup for the America's Role Conference. We will have some sw
- eet treats\, too.Organizer: Center for Language Technology
-X-ALT-DESC;FMTTYPE=text/html:<p data-start="44" data-end="104">  Join us 
- for an interactive Debate Board where students\, faculty\, and staff are 
- invited to share their perspectives on the role of generative AI in langu
- age learning. This informal\, drop-in activity encourages critical thinki
- ng and open dialogue about how emerging technologies are shaping our acad
- emic and professional lives.</p><p data-start="44" data-end="104">  Parti
- cipants will be prompted to respond to two guiding questions:</p><ul><li 
- data-start="44" data-end="104"><strong>How do you feel about using GenAI 
- for language learning?</strong></li><li data-start="44" data-end="104"><s
- trong>How does GenAI work for you in your language learning?</strong></li
- ></ul><p>  Using post-it notes\, you will be able to contribute brief wri
- tten responses to these questions. You'll also have the opportunity to re
- ad and reflect on others' viewpoints\, creating a collective snapshot of 
- our community's perspectives. Stop by\, share your thoughts\, and join th
- e conversation!</p><p><strong>Time:</strong> April 9 (Thursday) 10 AM-3 p
- m. This activity will take place concurrently with the event "<em>America
- 's Role in the World</em>."</p><p><strong>Location:</strong> Find us in t
- he hallway near <strong>Shreve Auditorium (GA 0001)</strong>\, next to th
- e coffee table setup for the America's Role Conference. We will have some
-  sweet treats\, too.</p><p><strong>Organizer:</strong> Center for Languag
- e Technology</p>
-UID:20260409T140000Z-2253228@events.iu.edu
-DTSTAMP:20260330T094414Z
-URL:https://events.iu.edu/live/events/2251327-debate-board-genai-and-lang
- uage-learning
-LAST-MODIFIED:20260401T210604Z
-X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2253228
-X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-COST:Free
-X-LIVEWHALE-CONTACT-INFO:<p>\n  celt@iu.edu\n</p>
-X-LIVEWHALE-SUMMARY:<p>\n  <strong>Will GenAI change how we learn languag
- es and cultures?</strong> Stop by our interactive Debate Board to share y
- our thoughts\, read others' perspectives\, and explore how AI is shaping 
- language learning.\n</p>
-X-LIVEWHALE-TAGS:arw-student-events
-X-LIVEWHALE-CUSTOM-ROOM-NUMBER:outside of GA 0001
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU Hamilton Lugar School
-DTSTART:20260409T154500Z
-DTEND:20260409T163000Z
-LOCATION:WENDELL W. WRIGHT EDUCATION BUILDING / EDUCATION\, SCHOOL OF - R
- oom Number: Atrium
-GEO:39.167137;-86.512539
-SUMMARY:Violet Duncan: Lotus Blossoms Concert
-DESCRIPTION:Violet Duncan is Plains Cree and Taino from Kehewin Cree Nati
- on.  An accomplished author\, educator\, dancer\, and storyteller\, she h
- as shared her talents across the US\, Canada\, and Europe. She has writte
- n three picture books: I Am Native\, When We Dance\, and Let's Hoop Dance
- !\, with her next book\, Where The Wind Blows\, set for Spring 2027. Her 
- middle school novel\, BUFFALO DREAMER\, published by Penguin Random House
- \, is a finalist for the 2024 National Book Award for Young People's Lite
- rature and an American Indian Youth Literature Award WINNER.  As Creative
-  Director at Young Warriors\, Violet focuses on Indigenous performance an
- d cultural practices and is experienced in mental health and community en
- gagement. She is also a featured storyteller at various festivals nationa
- lly and internationally.
-X-ALT-DESC;FMTTYPE=text/html:<p>  Violet Duncan is Plains Cree and Taino 
- from Kehewin Cree Nation.</p><p>  An accomplished author\, educator\, dan
- cer\, and storyteller\, she has shared her talents across the US\, Canada
- \, and Europe. She has written three picture books: I Am Native\, When We
-  Dance\, and Let's Hoop Dance!\, with her next book\, Where The Wind Blow
- s\, set for Spring 2027. Her middle school novel\, BUFFALO DREAMER\, publ
- ished by Penguin Random House\, is a finalist for the 2024 National Book 
- Award for Young People's Literature and an American Indian Youth Literatu
- re Award WINNER.</p><p>  As Creative Director at Young Warriors\, Violet 
- focuses on Indigenous performance and cultural practices and is experienc
- ed in mental health and community engagement. She is also a featured stor
- yteller at various festivals nationally and internationally.</p>
-UID:20260409T154500Z-2246134@events.iu.edu
-DTSTAMP:20260323T161229Z
-URL:https://events.iu.edu/live/events/2245993-violet-duncan-lotus-blossom
- s-concert
-CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260323T201229Z
-ATTACH:https://events.iu.edu/live/image/gid/28/width/168/height/168/crop/
- 1/src_region/0,0,0,0/30584_da99a2_8b80faefadb0404590082f3c4204b325mv2.avi
- f
-X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2246134
-X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-IMAGE:https://events.iu.edu/live/image/gid/28/width/168/heigh
- t/168/crop/1/src_region/0\,0\,0\,0/30584_da99a2_8b80faefadb0404590082f3c4
- 204b325mv2.avif
-X-LIVEWHALE-IMAGE-CAPTION:Violet Duncan
-X-LIVEWHALE-COST:Free
-X-LIVEWHALE-SUMMARY:<p>\n  In partnership with Lotus Blossoms\, The Schoo
- l of Education is proud to present Violet Duncan in performance.<br />\n 
-  <br />\n</p>
-X-LIVEWHALE-CUSTOM-ROOM-NUMBER:Atrium
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU Hamilton Lugar School
-DTSTART;VALUE=DATE:20260410
-DTEND;VALUE=DATE:20260411
-LOCATION:Hamilton Lugar School of Global and International Studies
-GEO:39.170011;-86.517418
-SUMMARY:America's Role in the World (ARW) Conference
-DESCRIPTION:Higher education's premiere nonpartisan foreign policy confer
- ence.
-X-ALT-DESC;FMTTYPE=text/html:<p>  Higher education's premiere nonpartisan
-  foreign policy conference.</p>
-UID:20260410T040000Z-1929537@events.iu.edu
-DTSTAMP:20250429T141150Z
-URL:https://events.iu.edu/hls/event/1929537-americas-role-in-the-world-ar
- w-conference
-LAST-MODIFIED:20260324T145110Z
-ATTACH:https://events.iu.edu/live/image/gid/135/width/168/height/168/crop
- /1/src_region/0,0,1984,1984/30568_ARW_Marketing_cloud_preview_238x238.rev
- .1774012071.png
-X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:1929537
-X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-IMAGE:https://events.iu.edu/live/image/gid/135/width/168/heig
- ht/168/crop/1/src_region/0\,0\,1984\,1984/30568_ARW_Marketing_cloud_previ
- ew_238x238.rev.1774012071.png
-X-LIVEWHALE-ALL-DAY:1
-X-LIVEWHALE-COST:Free
-X-LIVEWHALE-CONTACT-INFO:<p>\n  hls@iu.edu\n</p>
-X-LIVEWHALE-TAGS:diplomacy|Foreign Policy|Global|History|HLS|In Person|In
- door|international affairs|international relations|international studies|
- O'Neill|Social and Historical Sciences|space|Undergrad Events
-X-LIVEWHALE-CUSTOM-REGISTRATION-LINK:https://indianauniv.ungerboeck.com/p
- rod/emc00/register.aspx?aat=6a7044672b556d4b3452704862634f41334346496a6d6
- d792f646f48656f7348444d786b586c67676462303d
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:IU Hamilton Lugar School
@@ -2628,37 +2512,74 @@ X-SOURCE:IU Hamilton Lugar School
 DTSTART;VALUE=DATE:20260430
 DTEND;VALUE=DATE:20260501
 SUMMARY:Application Deadline: Law and Legal Writing Global Summer Workshop
-DESCRIPTION:Build law-school level skillslike legal research\, case analy
- sis and legal writing and writingHave a cross-cultural and global experie
- ncecollaborating with international students from PeruGet ahead for law s
- choolby showing law schools your commitment and readiness!More informatio
- n and apply here (https://www.law.indiana.edu/academics/summer-programs/i
- ndex.html)
-X-ALT-DESC;FMTTYPE=text/html:<ul><li><span class="a_GcMg font-feature-lig
- a-off font-feature-clig-off font-feature-calt-off text-decoration-none te
- xt-strikethrough-none">Build law-school level skills</span><span class="a
- _GcMg font-feature-liga-off font-feature-clig-off font-feature-calt-off t
- ext-decoration-none text-strikethrough-none">like legal research\, case a
- nalysis and legal writing and writing</span></li><li><span class="a_GcMg 
- font-feature-liga-off font-feature-clig-off font-feature-calt-off text-de
- coration-none text-strikethrough-none">Have a cross-cultural and global e
- xperience</span><span class="a_GcMg font-feature-liga-off font-feature-cl
- ig-off font-feature-calt-off text-decoration-none text-strikethrough-none
- ">collaborating with international students from Peru</span></li><li><spa
- n class="a_GcMg font-feature-liga-off font-feature-clig-off font-feature-
- calt-off text-decoration-none text-strikethrough-none">Get ahead for law 
- school</span><span class="a_GcMg font-feature-liga-off font-feature-clig-
- off font-feature-calt-off text-decoration-none text-strikethrough-none">b
- y showing law schools your commitment and readiness!</span></li></ul><p><
- span class="a_GcMg font-feature-liga-off font-feature-clig-off font-featu
- re-calt-off text-decoration-none text-strikethrough-none">More informatio
- n and apply <a href="https://www.law.indiana.edu/academics/summer-program
- s/index.html">here</a></span></p>
+DESCRIPTION:Program OverviewDates: July 13-31\, 2026 (3 weeks)  Format: I
+ n-person at IU Bloomington Maurer School of Law  Time: Monday-Friday\, 9:
+ 30 AM - 2:00 PM    This workshop covers:Legal Research - Master Westlaw/L
+ exisNexis and legal search strategies  Legal Writing - Learn IRAC methodo
+ logy and legal memo drafting  Case Analysis - Develop case briefing and s
+ ynthesis skills  Professional Skills - Presentation training and cross-cu
+ ltural legal discourse    Why This Program?Build law-school level skillsl
+ ike legal research\, case analysis and legal writing and writingHave a cr
+ oss-cultural and global experiencecollaborating with international studen
+ ts from PeruGet ahead for law schoolby showing law schools your commitmen
+ t and readiness!  Enrollment OptionsOption 1: For CreditCourse: B504 Intr
+ oduction to Law: Legal Writing (3 credits)  Tuition: Standard undergradua
+ te rate ($1\,229.64 in-state\; $4\,018.56 out-of-state) + $300 programmin
+ g/activities fee ($1\,529.64 in-state\; $4\,318.56 out-of-state)  Benefit
+ : Official transcript credit\, potential application toward MLS program  
+ Option 2: Non-CreditFee: $1\,500 flat rate  Benefit: Certificate of compl
+ etion\, full program access without transcript credit    Added Bonus for 
+ Hamilton Lugar StudentsThe first 5 Hamilton Lugar students to enroll will
+  get a one-year subscription to LawHub Advantage (https://www.lawhub.org/
+ LawHubAdvantage)More information and apply here (https://www.law.indiana.
+ edu/academics/summer-programs/index.html)
+X-ALT-DESC;FMTTYPE=text/html:<h2>  Program Overview</h2><ul><li><strong>D
+ ates:</strong> July 13-31\, 2026 (3 weeks)  </li><li><strong>Format:</str
+ ong> In-person at IU Bloomington Maurer School of Law  </li><li><strong>T
+ ime:</strong> Monday-Friday\, 9:30 AM - 2:00 PM  </li></ul><p>  This work
+ shop covers:</p><ul><li><strong>Legal Research</strong> - Master Westlaw/
+ LexisNexis and legal search strategies  </li><li><strong>Legal Writing</s
+ trong> - Learn IRAC methodology and legal memo drafting  </li><li><strong
+ >Case Analysis</strong> - Develop case briefing and synthesis skills  </l
+ i><li><strong>Professional Skills</strong> - Presentation training and cr
+ oss-cultural legal discourse  </li></ul><h2>  Why This Program?</h2><ul><
+ li><span class="a_GcMg font-feature-liga-off font-feature-clig-off font-f
+ eature-calt-off text-decoration-none text-strikethrough-none">Build law-s
+ chool level skills</span><span class="a_GcMg font-feature-liga-off font-f
+ eature-clig-off font-feature-calt-off text-decoration-none text-strikethr
+ ough-none">like legal research\, case analysis and legal writing and writ
+ ing</span></li><li><span class="a_GcMg font-feature-liga-off font-feature
+ -clig-off font-feature-calt-off text-decoration-none text-strikethrough-n
+ one">Have a cross-cultural and global experience</span><span class="a_GcM
+ g font-feature-liga-off font-feature-clig-off font-feature-calt-off text-
+ decoration-none text-strikethrough-none">collaborating with international
+  students from Peru</span></li><li><span class="a_GcMg font-feature-liga-
+ off font-feature-clig-off font-feature-calt-off text-decoration-none text
+ -strikethrough-none">Get ahead for law school</span><span class="a_GcMg f
+ ont-feature-liga-off font-feature-clig-off font-feature-calt-off text-dec
+ oration-none text-strikethrough-none">by showing law schools your commitm
+ ent and readiness!</span></li></ul><h2>  Enrollment Options</h2><p><stron
+ g>Option 1: For Credit</strong></p><ul><li><strong>Course:</strong> B504 
+ Introduction to Law: Legal Writing (3 credits)  </li><li><strong>Tuition:
+ </strong> Standard undergraduate rate ($1\,229.64 in-state\; $4\,018.56 o
+ ut-of-state) + $300 programming/activities fee ($1\,529.64 in-state\; $4\
+ ,318.56 out-of-state)  </li><li><strong>Benefit:</strong> Official transc
+ ript credit\, potential application toward MLS program  </li></ul><p><str
+ ong>Option 2: Non-Credit</strong></p><ul><li><strong>Fee:</strong> $1\,50
+ 0 flat rate  </li><li><strong>Benefit:</strong> Certificate of completion
+ \, full program access without transcript credit  </li></ul><h2>  Added B
+ onus for Hamilton Lugar Students</h2><ul><li>The first 5 Hamilton Lugar s
+ tudents to enroll will get a one-year subscription to <a href="https://ww
+ w.lawhub.org/LawHubAdvantage">LawHub Advantage</a></li></ul><p><span clas
+ s="a_GcMg font-feature-liga-off font-feature-clig-off font-feature-calt-o
+ ff text-decoration-none text-strikethrough-none">More information and app
+ ly <a href="https://www.law.indiana.edu/academics/summer-programs/index.h
+ tml">here</a></span></p>
 UID:20260430T040000Z-2254626@events.iu.edu
 DTSTAMP:20260331T112608Z
 URL:https://events.iu.edu/hls/event/2254626-application-deadline-law-and-
  legal-writing-global
-LAST-MODIFIED:20260331T152608Z
+LAST-MODIFIED:20260409T143824Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2254626
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -2671,124 +2592,6 @@ X-LIVEWHALE-SUMMARY:<p class="cvGsUA direction-ltr align-center para-styl
  font-feature-clig-off font-feature-calt-off text-decoration-none text-str
  ikethrough-none">Build your competitive application now with this excitin
  g summer program!</span>\n</p>
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU Hamilton Lugar School
-DTSTART;VALUE=DATE:20260430
-DTEND;VALUE=DATE:20260501
-SUMMARY:US Law and Legal Writing Summer Workshop Application Due
-DESCRIPTION:Program OverviewDates: July 13-31\, 2026 (3 weeks)Format: In-
- person at IU Bloomington Maurer School of LawTime: Monday-Friday\, 9:30 A
- M - 2:00 PM  This workshop covers:Legal Research - Master Westlaw/LexisNe
- xis and legal search strategies  Legal Writing - Learn IRAC methodology a
- nd legal memo drafting  Case Analysis - Develop case briefing and synthes
- is skills  Professional Skills - Presentation training and cross-cultural
-  legal discourse    Why This Program?International Collaboration  Work al
- ongside undergraduate law students from Pontificia Universidad Católica 
- del Perú (PUCP)\, gaining exposure to comparative legal systems and buil
- ding your international network.Practical Skills  Gain hands-on experienc
- e with the same research and writing techniques used in law school and le
- gal practice.Pathway to Graduate Study  Credits earned may be applied tow
- ard the Master of Legal Studies (MLS) program if you choose to pursue tha
- t degree.  Enrollment OptionsOption 1: For CreditCourse: B504 Introductio
- n to Law: Legal Writing (3 credits)  Tuition: Standard undergraduate rate
-  ($1\,229.64 in-state\; $4\,018.56 out-of-state) + $300 programming/activ
- ities fee ($1\,529.64 in-state\; $4\,318.56 out-of-state)  Benefit: Offic
- ial transcript credit\, potential application toward MLS program  Option 
- 2: Non-CreditFee: $1\,500 flat rate  Benefit: Certificate of completion\,
-  full program access without transcript credit    What You'll LearnWeek 1
- : FoundationsU.S. court structure and jurisdiction  Common Law vs. Civil 
- Law systems  Legal research databases and strategies  Case briefing metho
- dology  Week 2: Legal WritingIRAC analysis framework  Legal memorandum st
- ructure  Citation skills (Bluebook basics)  Peer review and revision stra
- tegies  Week 3: Advanced SkillsInternational and comparative legal resear
- ch  Legal ethics and professional responsibility  Capstone research proje
- ct and presentation    Daily Schedule9:30 AM - 12:00 PM: Main curriculum 
- instruction  12:00 PM - 1:00 PM: Lunch break  1:00 PM - 2:00 PM: Legal En
- glish support  Evenings: Optional cultural and professional activities   
-  How to RegisterRegistration Opens: March 1Registration Deadline: Priorit
- y registration: April 30\; Final deadline: June 19Steps to Register:Decid
- e whether you want to enroll for credit (B504) or non-credit  For Credit:
-  Complete the pre-registration form\; once permission received\, register
-  through standard IU course registration system  Non-Credit: [TBD]  Quest
- ions? Contact: Dr Elisheva Cohen\, ellcohen@iu.edu (mailto:ellcohen@iu.ed
- u)  Who Should Apply?  This program is ideal for Hamilton Lugar School un
- dergraduates who are:Considering law school or legal careers  Interested 
- in policy\, international relations\, or governance  Seeking to build res
- earch and analytical writing skills  Curious about comparative legal syst
- ems  Looking for meaningful international collaboration experience  No pr
- ior legal background required - just curiosity and commitment to intensiv
- e summer learning!
-X-ALT-DESC;FMTTYPE=text/html:<h2>  Program Overview</h2><p><strong>Dates:
- </strong> July 13-31\, 2026 (3 weeks)</p><p><strong>Format:</strong> In-p
- erson at IU Bloomington Maurer School of Law</p><p><strong>Time:</strong>
-  Monday-Friday\, 9:30 AM - 2:00 PM</p><p>  This workshop covers:</p><ul><
- li><strong>Legal Research</strong> - Master Westlaw/LexisNexis and legal 
- search strategies  </li><li><strong>Legal Writing</strong> - Learn IRAC m
- ethodology and legal memo drafting  </li><li><strong>Case Analysis</stron
- g> - Develop case briefing and synthesis skills  </li><li><strong>Profess
- ional Skills</strong> - Presentation training and cross-cultural legal di
- scourse  </li></ul><h2>  Why This Program?</h2><p><strong>International C
- ollaboration</strong></p><p>  Work alongside undergraduate law students f
- rom Pontificia Universidad Católica del Perú (PUCP)\, gaining exposure 
- to comparative legal systems and building your international network.</p>
- <p><strong>Practical Skills</strong></p><p>  Gain hands-on experience wit
- h the same research and writing techniques used in law school and legal p
- ractice.</p><p><strong>Pathway to Graduate Study</strong></p><p>  Credits
-  earned may be applied toward the Master of Legal Studies (MLS) program i
- f you choose to pursue that degree.</p><h2>  Enrollment Options</h2><p><s
- trong>Option 1: For Credit</strong></p><ul><li><strong>Course:</strong> B
- 504 Introduction to Law: Legal Writing (3 credits)  </li><li><strong>Tuit
- ion:</strong> Standard undergraduate rate ($1\,229.64 in-state\; $4\,018.
- 56 out-of-state) + $300 programming/activities fee ($1\,529.64 in-state\;
-  $4\,318.56 out-of-state)  </li><li><strong>Benefit:</strong> Official tr
- anscript credit\, potential application toward MLS program  </li></ul><p>
- <strong>Option 2: Non-Credit</strong></p><ul><li><strong>Fee:</strong> $1
- \,500 flat rate  </li><li><strong>Benefit:</strong> Certificate of comple
- tion\, full program access without transcript credit  </li></ul><h2>  Wha
- t You'll Learn</h2><p><strong>Week 1: Foundations</strong></p><ul><li>U.S
- . court structure and jurisdiction  </li><li>Common Law vs. Civil Law sys
- tems  </li><li>Legal research databases and strategies  </li><li>Case bri
- efing methodology  </li></ul><p><strong>Week 2: Legal Writing</strong></p
- ><ul><li>IRAC analysis framework  </li><li>Legal memorandum structure  </
- li><li>Citation skills (Bluebook basics)  </li><li>Peer review and revisi
- on strategies  </li></ul><p><strong>Week 3: Advanced Skills</strong></p><
- ul><li>International and comparative legal research  </li><li>Legal ethic
- s and professional responsibility  </li><li>Capstone research project and
-  presentation  </li></ul><h2>  Daily Schedule</h2><ul><li><strong>9:30 AM
-  - 12:00 PM:</strong> Main curriculum instruction  </li><li><strong>12:00
-  PM - 1:00 PM:</strong> Lunch break  </li><li><strong>1:00 PM - 2:00 PM:<
- /strong> Legal English support  </li><li><strong>Evenings:</strong> Optio
- nal cultural and professional activities  </li></ul><h2>  How to Register
- </h2><p><strong>Registration Opens:</strong> March 1</p><p><strong>Regist
- ration Deadline:</strong> Priority registration: April 30\; Final deadlin
- e: June 19</p><p><strong>Steps to Register:</strong></p><ol><li>Decide wh
- ether you want to enroll for credit (B504) or non-credit  </li><li><stron
- g>For Credit:</strong> Complete the pre-registration form\; once permissi
- on received\, register through standard IU course registration system  </
- li><li><strong>Non-Credit:</strong> [TBD]  </li></ol><p><strong>Questions
- ?</strong> Contact: Dr Elisheva Cohen\, <a href="mailto:ellcohen@iu.edu">
- ellcohen@iu.edu</a></p><h2>  Who Should Apply?</h2><p>  This program is i
- deal for Hamilton Lugar School undergraduates who are:</p><ul><li>Conside
- ring law school or legal careers  </li><li>Interested in policy\, interna
- tional relations\, or governance  </li><li>Seeking to build research and 
- analytical writing skills  </li><li>Curious about comparative legal syste
- ms  </li><li>Looking for meaningful international collaboration experienc
- e  </li></ul><p><strong>No prior legal background required</strong> - jus
- t curiosity and commitment to intensive summer learning!</p>
-UID:20260430T040000Z-2233049@events.iu.edu
-DTSTAMP:20260309T094245Z
-URL:https://events.iu.edu/hls/event/2233049-us-law-and-legal-writing-summ
- er-workshop
-LAST-MODIFIED:20260309T135806Z
-X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2233049
-X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-ALL-DAY:1
-X-LIVEWHALE-SUMMARY:<h3>\n  Build Your Legal Skills This Summer\n</h3>\n<
- p>\n  Join an intensive 3-week program introducing U.S. legal analysis\, 
- research\, and writing—essential skills for law school\, pursuing a car
- eer in policy\, or exploring legal studies.\n</p>
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:IU Hamilton Lugar School
@@ -3368,9 +3171,23 @@ DESCRIPTION:Global Health Scholars Day\, on Friday\, May 8\, showcases th
  ersity to network and share information will follow grand rounds.  Global
   Health Scholars Day is open to anyone at IU with an interest in global h
  ealth.  12-1 pm&#160\; Global Health Grand Rounds&#160\;  1-2 pm&#160\; &
- #160\; &#160\;Poster viewing and networking  Abstract deadline is April 3
- . Learn more and submit an abstract. (http://redcap.uits.iu.edu/surveys/?
- s=37J3DKYM9XCTXXDD)&#160\;
+ #160\; &#160\;Poster viewing and networkingLocation:  The event will take
+  place in the new Medical Education and Research Building (MERB) Tiered C
+ lassroom 1019.  Boxed lunches will be provided to those who RSVP to atten
+ d in person.Parking  Nearby surface lots are for IUSM students and requir
+ e pre-authorized CrimsonCards for access.  Please plan other parking and/
+ or transportation arrangements for this event\, possibly utilizing the IU
+  Health Shuttle (https://click.e.iu.edu/?qs=7cf4b6f07ce0b5f1edeb45109e259
+ 44e6f181125b3188d230923be775bc6b017fe9afa84a2e5bd20bda40e330f8175da8fbbee
+ c5f0c3af09) or parking in the IU Health Garage #4 (https://nam12.safelink
+ s.protection.outlook.com/?url=https%3A%2F%2Fdenisonparking.com%2Findiana-
+ university-health-garage-4%2F&amp\;data=05%7C02%7Cdebungar%40iu.edu%7Cdb3
+ 00896c56245271f0808de967a8c4e%7C1113be34aed14d00ab4bcdd02510be91%7C1%7C0%
+ 7C639113650271213226%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYi
+ OiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7
+ C%7C&amp\;sdata=T4f44jZQePNw03U59sHEkuMshQ3Zx0isJUYa7%2BFavLg%3D&amp\;res
+ erved=0) across 16th street. (NOTE: Carpooling is encouraged since Garage
+  #4 has limited capacity.)&#160\;
 X-ALT-DESC;FMTTYPE=text/html:<p>  Global Health Scholars Day\, on Friday\
  , May 8\, showcases the excellent work being done by the IU community to 
  improve the care of patients worldwide\, research the complexities of glo
@@ -3388,17 +3205,31 @@ X-ALT-DESC;FMTTYPE=text/html:<p>  Global Health Scholars Day\, on Friday\
  l follow grand rounds.</p><p>  Global Health Scholars Day is open to anyo
  ne at IU with an interest in global health.</p><p>  12-1 pm&#160\; Global
   Health Grand Rounds&#160\;</p><p>  1-2 pm&#160\; &#160\; &#160\;Poster v
- iewing and networking</p><p>  Abstract deadline is April 3. <strong><a hr
- ef="http://redcap.uits.iu.edu/surveys/?s=37J3DKYM9XCTXXDD" target="_blank
- " rel="noopener">Learn more and submit an abstract.</a>&#160\;</strong></
- p>
+ iewing and networking</p><p><strong>Location:</strong></p><p>  The event 
+ will take place in the new Medical Education and Research Building (MERB)
+  Tiered Classroom 1019.<br /><br />  Boxed lunches will be provided to th
+ ose who RSVP to attend in person.</p><p><strong>Parking</strong></p><p>  
+ Nearby surface lots are for IUSM students and require pre-authorized Crim
+ sonCards for access.</p><p>  Please plan other parking and/or transportat
+ ion arrangements for this event\, possibly utilizing the <a href="https:/
+ /click.e.iu.edu/?qs=7cf4b6f07ce0b5f1edeb45109e25944e6f181125b3188d230923b
+ e775bc6b017fe9afa84a2e5bd20bda40e330f8175da8fbbeec5f0c3af09">IU Health Sh
+ uttle</a> or parking in the <a href="https://nam12.safelinks.protection.o
+ utlook.com/?url=https%3A%2F%2Fdenisonparking.com%2Findiana-university-hea
+ lth-garage-4%2F&amp\;data=05%7C02%7Cdebungar%40iu.edu%7Cdb300896c56245271
+ f0808de967a8c4e%7C1113be34aed14d00ab4bcdd02510be91%7C1%7C0%7C639113650271
+ 213226%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMC
+ IsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&amp\;sdat
+ a=T4f44jZQePNw03U59sHEkuMshQ3Zx0isJUYa7%2BFavLg%3D&amp\;reserved=0">IU He
+ alth Garage #4</a> across 16th street. (NOTE: Carpooling is encouraged si
+ nce Garage #4 has limited capacity.)</p><p><strong>&#160\;</strong></p>
 UID:20260508T160000Z-2251210@events.iu.edu
 DTSTAMP:20260327T123524Z
 URL:https://events.iu.edu/live/events/2160812-global-health-scholars-day-
  featuring-dr-chandy-john
 CATEGORIES:Health and wellness,Lectures, talks, seminars, and conferences
  ,Training, non-credit classes, and learning opportunities
-LAST-MODIFIED:20260327T163524Z
+LAST-MODIFIED:20260409T211900Z
 ATTACH:https://events.iu.edu/live/image/gid/87/width/168/height/168/crop/
  1/src_region/0,0,1734,1734/6469_AVATAR_cropped_LinkedIn.rev.1610569242.jp
  g
@@ -3417,6 +3248,7 @@ X-LIVEWHALE-SUMMARY:<p>\n  Global Health Scholars Day brings together fac
  ulty\, staff &amp\; trainees engaged in global health work from across th
  e research\, service and education missions.&#160\;\n</p>
 X-LIVEWHALE-TAGS:Global health|In Person|Research
+X-LIVEWHALE-RSVP:1
 X-LIVEWHALE-CUSTOM-ROOM-NUMBER:Tiered Classroom 1019
 END:VEVENT
 BEGIN:VEVENT

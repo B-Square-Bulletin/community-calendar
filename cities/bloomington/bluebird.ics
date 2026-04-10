@@ -1,0 +1,114 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//The Bluebird//thebluebird.ws//
+X-WR-CALNAME:The Bluebird
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:SCUBA
+DTSTART;TZID=America/Indiana/Indianapolis:20260409T220000
+DTEND;TZID=America/Indiana/Indianapolis:20260410T010000
+UID:seetickets-20260409-scuba@thebluebird.ws
+DESCRIPTION:Classic Rock | $10.00 | 21+
+LOCATION:Bluebird Nightclub
+URL:https://wl.seetickets.us/event/SCUBA/687166?afflky=BluebirdNightclub
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Rod Tuffcurls & The Benchpress
+DTSTART;TZID=America/Indiana/Indianapolis:20260410T210000
+DTEND;TZID=America/Indiana/Indianapolis:20260411T000000
+UID:seetickets-20260410-rod-tuffcurls-the-benchpress@thebluebird.ws
+DESCRIPTION:Classic Rock | $15.00 | 21+
+LOCATION:Bluebird Nightclub
+URL:https://wl.seetickets.us/event/Rod-Tuffcurls-and-The-Benchpress/682400
+ ?afflky=BluebirdNightclub
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Hank Ruff
+DTSTART;TZID=America/Indiana/Indianapolis:20260411T210000
+DTEND;TZID=America/Indiana/Indianapolis:20260412T000000
+UID:seetickets-20260411-hank-ruff@thebluebird.ws
+DESCRIPTION:Country | $10.00 | 21+
+LOCATION:Bluebird Nightclub
+URL:https://wl.seetickets.us/event/Hank-Ruff/686608?afflky=BluebirdNightcl
+ ub
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Opal
+DTSTART;TZID=America/Indiana/Indianapolis:20260415T220000
+DTEND;TZID=America/Indiana/Indianapolis:20260416T010000
+UID:seetickets-20260415-opal@thebluebird.ws
+DESCRIPTION:Classic Rock | $10.00 | 21+
+LOCATION:Bluebird Nightclub
+URL:https://wl.seetickets.us/event/Opal/687315?afflky=BluebirdNightclub
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Johnny Socko
+DTSTART;TZID=America/Indiana/Indianapolis:20260417T200000
+DTEND;TZID=America/Indiana/Indianapolis:20260417T230000
+UID:seetickets-20260417-johnny-socko@thebluebird.ws
+DESCRIPTION:Ska | $20.00 | 21+
+LOCATION:Bluebird Nightclub
+URL:https://wl.seetickets.us/event/Johnny-Socko/680961?afflky=BluebirdNigh
+ tclub
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Molly Tuttle
+DTSTART;TZID=America/Indiana/Indianapolis:20260418T200000
+DTEND;TZID=America/Indiana/Indianapolis:20260418T230000
+UID:seetickets-20260418-molly-tuttle@thebluebird.ws
+DESCRIPTION:Bluegrass | $25.00-$30.00 | 21+
+LOCATION:Bluebird Nightclub
+URL:https://wl.seetickets.us/event/Molly-Tuttle/679226?afflky=BluebirdNigh
+ tclub
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Rich Hardesty
+DTSTART;TZID=America/Indiana/Indianapolis:20260420T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260420T220000
+UID:seetickets-20260420-rich-hardesty@thebluebird.ws
+DESCRIPTION:Classic Rock | $10.00 | 21+
+LOCATION:Bluebird Nightclub
+URL:https://wl.seetickets.us/event/Rich-Hardesty/687317?afflky=BluebirdNig
+ htclub
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Welcome to the Neighborhood
+DTSTART;TZID=America/Indiana/Indianapolis:20260424T210000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T000000
+UID:seetickets-20260424-welcome-to-the-neighborhood@thebluebird.ws
+DESCRIPTION:Rock | $10.00 | 21+
+LOCATION:Bluebird Nightclub
+URL:https://wl.seetickets.us/event/Welcome-to-the-Neighborhood/687024?affl
+ ky=BluebirdNightclub
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Jukebox Luke
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T220000
+UID:seetickets-20260425-jukebox-luke@thebluebird.ws
+DESCRIPTION:Rock | $10.00 | 21+
+LOCATION:Bluebird Nightclub
+URL:https://wl.seetickets.us/event/Jukebox-Luke/687022?afflky=BluebirdNigh
+ tclub
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:6 Foot Blonde
+DTSTART;TZID=America/Indiana/Indianapolis:20260502T210000
+DTEND;TZID=America/Indiana/Indianapolis:20260503T000000
+UID:seetickets-20260502-6-foot-blonde@thebluebird.ws
+DESCRIPTION:Alternative | $10.00 | 21+
+LOCATION:Bluebird Nightclub
+URL:https://wl.seetickets.us/event/6-Foot-Blonde/687491?afflky=BluebirdNig
+ htclub
+X-SOURCE:The Bluebird
+END:VEVENT
+END:VCALENDAR

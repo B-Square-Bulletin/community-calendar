@@ -62,7 +62,7 @@ PRIORITY:5
 SEQUENCE:9
 TRANSP:OPAQUE
 SUMMARY:Salvation Army Light Parade
-DESCRIPTION:Join us for a spectacular evening of twinkling lights and holiday magic at the annual Nashville Indiana Christmas Light Parade! Experience the enchanting sights and sounds of the holiday season as festive floats and vehicles adorned with dazzling Christmas lights glide through the heart of Nashville, Indiana.\nFestive Lighted Parade\nThe Nashville, Indiana, Christmas Light Parade is a cherished community tradition that brings together families, friends, and visitors from near and far. Be amazed by the creativity and holiday spirit as local businesses, organizations, and individuals showcase their beautifully decorated floats and vehicles. From whimsical displays to heartwarming scenes, every entry is a glowing testament to the season’s joy.\nSpreading Holiday Cheer\nAs the parade winds through the picturesque streets of Nashville, witness the town come alive with Christmas cheer. Spectators will be treated to delightful performances, live music, and appearances by beloved holiday characters. The spirit of the season will fill the air as families gather to share in the warmth and magic of this festive event.\nSupporting The Salvation Army Toy Shoppe\nAt the heart of the Nashville, Indiana, Christmas Light Parade is the spirit of giving. In the true holiday tradition, we encourage all participants and attendees to bring new, unwrapped toys to donate to The Salvation Army Toy Shoppe and spread joy to those less fortunate during this particular time of year.  Let’s unite as a community to make a difference and brighten the lives of children who deserve a magical Christmas.\nDon’t miss out on this joyous occasion that encapsulates the true spirit of Christmas. Gather your loved ones and come to witness the brilliance of the Nashville, Indiana, Christmas Light Parade! Together, we can create memories that will last a lifetime and bring joy to those in need.\nLet’s light up Nashville and make this holiday season one to remember!\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/salvation-army-light-parade/
 ORGANIZER;CN=The Salvation Army:MAILTO:usc.ind.bco.corps@usc.salvationarmy.org
 CATEGORIES:Family Friendly,Happening,Holiday,Parade,Plan Your Visit,Special Events,Winter
@@ -115,8 +115,8 @@ BEGIN:VEVENT
 X-SOURCE:Brown County Events
 CLASS:PUBLIC
 UID:MEC-edb899d139bf0fddddbf9b3f4e8252f0@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260410T070000
-DTEND;TZID=America/Indiana/Indianapolis:20260410T120000
+DTSTART;TZID=America/Indiana/Indianapolis:20260411T070000
+DTEND;TZID=America/Indiana/Indianapolis:20260411T120000
 DTSTAMP:20260212T100904Z
 RRULE:FREQ=DAILY;UNTIL=20260626T200000Z
 CREATED:20260212
@@ -177,8 +177,8 @@ BEGIN:VEVENT
 X-SOURCE:Brown County Events
 CLASS:PUBLIC
 UID:MEC-58b6c881818a0ccffef2185da2abd2dd@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260410T160000
-DTEND;TZID=America/Indiana/Indianapolis:20260410T190000
+DTSTART;TZID=America/Indiana/Indianapolis:20260417T160000
+DTEND;TZID=America/Indiana/Indianapolis:20260417T190000
 DTSTAMP:20260403T104207Z
 RRULE:FREQ=WEEKLY
 CREATED:20260403
@@ -235,6 +235,46 @@ ORGANIZER;CN=Brown County Inn:MAILTO:info@browncountyinn.com
 CATEGORIES:Entertainment,Free,Happening,Live Music
 LOCATION:51 IN-46, Nashville, IN
 ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/04/Untitled-1080-x-608-px.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Brown County Events
+CLASS:PUBLIC
+UID:MEC-2ba887fc7d11e7af78d14ea79d059888@browncounty.com
+DTSTART;TZID=America/Indiana/Indianapolis:20260502T080000
+DTEND;TZID=America/Indiana/Indianapolis:20260502T160000
+DTSTAMP:20260409T131541Z
+CREATED:20260409
+LAST-MODIFIED:20260409
+PRIORITY:5
+SEQUENCE:1
+TRANSP:OPAQUE
+SUMMARY:The Spring Blossom Art Show
+DESCRIPTION:Join us immediately following the Spring Blossom Parade for an afternoon (and evening!) celebration as we unveil brand new works from all of your favorite artists. This is our biggest gallery refresh of the year! Also explore the exciting updates we’ve made to our gallery and studio space, browse our brand new art menu, and find something you love to take home (we’ve got something for everyone.) Music and refreshments all afternoon long well into the evening. Can’t wait to see you there!\n
+URL:https://browncounty.com/events/the-spring-blossom-art-show/
+ORGANIZER;CN=Second Story Studio:MAILTO:secondstorystudio.art@gmail.com
+CATEGORIES:Art Events &amp; Exhibits,Family Friendly,Free,Happening,Spring
+LOCATION:61 West Main Street, Nashville, IN
+ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/04/GetAttachmentThumbnail.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Brown County Events
+CLASS:PUBLIC
+UID:MEC-638dcc14ad21a11cebcd88d37d5712b7@browncounty.com
+DTSTART;TZID=America/Indiana/Indianapolis:20260424T060000
+DTEND;TZID=America/Indiana/Indianapolis:20260426T130000
+DTSTAMP:20260409T123351Z
+CREATED:20260409
+LAST-MODIFIED:20260409
+PRIORITY:5
+SEQUENCE:1
+TRANSP:OPAQUE
+SUMMARY:41st Wildflower Foray
+DESCRIPTION:Families can celebrate the arrival of spring and experience nature through several special events taking place at the T.C. Steele State Historic Site. Featuring guided hikes, special tours, family activities and more, all scheduled from 10 a.m.-5 p.m. April 24-26, the festivities are part of the 41st annual Brown and Monroe’s Spring Wildflower Foray. This three-day community showcase offers visitors a chance to explore the outdoors and discover the area’s diverse flora and fauna through a variety of events at 10 participating locations, many of which are free.\nArts of the Earth Day will be the highlight of the historic site’s activities during the Wildflower Foray. Happening from 11 a.m.-4 p.m. on April 25, this free event spotlights the natural beauty that inspired renowned Hoosier impressionist T.C. Steele. Visitors can watch a live limestone-carving demonstration by local artist Sidney Bolam from noon-2 p.m. and take self-guided walks through the gardens, where the vibrant daffodils and other spring flowers are in full bloom.\nScheduled at the site throughout the weekend, outdoor enthusiasts of all abilities can explore the Selma Steele Nature Preserve during free guided hikes, focusing on topics like finding and identifying flowers, plants in poetry, and foraging wild edibles.\nThe site’s beloved Teddy Bears’ Picnic returns at 1 p.m. on April 25. Children are invited to bring their teddy bears and dolls dressed in their springtime best to enjoy a reading of “The Teddy Bears’ Picnic” along with cookies and lemonade. The event is $4 for children and advance registration is encouraged.\nThe Wildflower Foray also offers a perfect opportunity to see the historic site’s centennial exhibition that commemorates the 100th anniversary of Steele’s death. During scheduled tours throughout the weekend, visitors can browse the large studio that showcases nearly 30 works spanning Steele’s career, including rarely seen paintings and newly acquired pieces to the Indiana State Museum and Historic Sites’ collection. The site will also offer a special tour at 11:15 a.m. on April 25 focusing on Libbie Steele, T.C.’s first wife who the artist said taught him how to “see beautifully.” All tours are included with site admission, which is free for members, $12 for adults and $7 for youth.\nHappening elsewhere for the Wildflower Foray, visitors can enjoy guided hikes, nature walks and workshops highlighting plants, birds and other native wildlife. Attendees can participate in a spring wildflower census, contributing valuable data to conservation efforts by documenting plant species found in the region. Events will take place at Allens Creek State Recreation Area, Brown County State Park, Flatwoods Park, Kent Farm Preserve, Morgan-Monroe State Forest, Paynetown State Recreation Area, Porter West Nature Preserve, Stone Head Nature Preserve and Yellowwood Lake.\nAll hikes are free and will take place rain or shine, though some locations may have gate fees. A complete schedule of events for the Wildflower Foray is available from the Indiana Department of Natural Resources.\nThe Wildflower Foray is supported by the T.C. Steele State Historic Site, Brown County State Park, Hoosier National Forest, Indiana Division of Nature Preserves, IU Research & Teaching Preserves, Monroe County Parks and Recreation and Monroe Lake, and sponsored by Friends of Brown County State Park, Friends of T.C. Steele, Images Botanical, Indiana Native Plant Society, Sassafras Audubon Society and Sycamore Land Trust.\n
+URL:https://browncounty.com/events/41st-wildflower-foray/
+ORGANIZER;CN=T.C.Steele State Historic Site:MAILTO:tcsteeleshs@indianamuseum.org
+CATEGORIES:Art Events &amp; Exhibits,Family Friendly,Food &amp; Drink,Happening,Outdoor Adventure,Special Events,Spring,Tours
+LOCATION:T.C. Steele State Historic Site, T C Steele Road, Nashville, IN
+ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/02/Large-Studio-at-TC-Steele-e1739382928892.jpg
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
@@ -308,7 +348,7 @@ PRIORITY:5
 SEQUENCE:3
 TRANSP:OPAQUE
 SUMMARY:Brown County Lions Club Independence Day Fireworks Display
-DESCRIPTION:The Brown County Lions Club announced America’s best Small Town Fireworks is moving locations in 2026. The show has traditionally been held over the Brown County High School football field, but is moving to its new home at Eagle Park, just west of the north entrance to Brown County State Park. This year’s show is set for Thursday, July 2, 2026. Mapping apps will recognize “Eagle Park Nashville Indiana.” \nFor more than 50 years, the Brown County Lions Club has proudly presented this annual Independence Day tradition, honoring the nation with a spectacular fireworks show that has become a highlight of summer in Brown County. \nThe fireworks will begin at dark and there will be plenty of parking available at Eagle Park. Attendees are encouraged to bring lawn chairs or blankets.   \nAdding to the community spirit of the evening, Scouts from Troop 190 will be on site selling food and glow bracelets, with proceeds helping scouts earn money for summer camp.  \nThe Independence Day fireworks are made possible entirely through the generosity of the community. The show is funded by donations from local small businesses and contributions collected by The Bucket Brigade, Lions Club members who circulate through the crowd before the show. \n
+DESCRIPTION:
 URL:https://browncounty.com/events/brown-county-lions-club-independence-day-fireworks-display/
 ORGANIZER;CN=Brown County Lions Club:MAILTO:
 CATEGORIES:Entertainment,Family Friendly,Festivals,Free,Happening,Holiday,Outdoor Concerts,Special Events,Summer
@@ -568,30 +608,10 @@ PRIORITY:5
 SEQUENCE:3
 TRANSP:OPAQUE
 SUMMARY:The Man in Black: A Tribute to Johnny Cash
-DESCRIPTION:With his strikingly similar looks, baritone voice, and spot-on mannerisms, Shawn Barker’s uncanny resemblance to the original “Man In Black” revitalizes the true character and spirit of Mr. Cash himself, one of America’s greatest musical icons, for a truly one-of-a-kind show. The Man In Black: A Tribute to Johnny Cash will make a stop at the Brown County Music Center in Nashville, Ind., on Friday, April 10, 2026.\nThe energetic show features Barker in character throughout the entire evening, walking the audience through each era of Cash’s life and music, including hits like “Folsom Prison Blues,” “I Walk The Line,” “A Boy Named Sue,” “Hurt” and “Ring of Fire,” complete with a full backing band. Shawn Barker’s first Man In Black show was held in 2004 at a casino in Niagara Falls and has since performed over 1,000 shows in 12 countries, selling more than half a million tickets over the course of his career. Born and raised in a working-class suburb of St. Louis, Barker took a schoolboy love for singing in church with his family and turned it into a career. The path to his current success wasn’t a straight line from gospel choir to Johnny Cash tribute act. After serving his country in the Army, Barker returned home to Missouri, took a job as a carpenter, and spent all of his free time learning how to play the guitar. He developed strength and versatility in his voice by modeling his crooning on a cast of legends – Johnny Cash, Elvis Presley, Roy Orbison, Buddy Holly and Gene Vincent. His performances quickly turned from hobby to profession, but oddly enough, Barker’s first touring gigs were portraying Elvis, not Johnny Cash. Everything changed, however, when Barker was asked to audition for the part of Cash in a Hollywood production, as it became evident to the director and Barker himself that Johnny Cash was his true calling. From that point there was no turning back.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/the-man-in-black-a-tribute-to-johnny-cash/
 ORGANIZER;CN=Brown County Music Center:MAILTO:boxoffice@browncountymusiccenter.com
 CATEGORIES:Happening,Live Music,Spring,Theatre &amp; Entertainment
-LOCATION:200 Maple Leaf Boulevard
-ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/05/Music-Center.jpg
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:Brown County Events
-CLASS:PUBLIC
-UID:MEC-6baa270f7146fdbdfdcf6edd8c1684af@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260409T153000
-DTEND;TZID=America/Indiana/Indianapolis:20260409T153000
-DTSTAMP:20260402T163234Z
-CREATED:20260402
-LAST-MODIFIED:20260402
-PRIORITY:5
-SEQUENCE:3
-TRANSP:OPAQUE
-SUMMARY:The Orchestra featuring Former Members of ELO and ELO Part II
-DESCRIPTION:The Orchestra featuring former members of ELO and ELO Part II bring the Blue Skies Forever Tour to the Brown County Music Center in Nashville, Ind., on Thursday, April 9, 2026.\nThe story started in 1970 in Birmingham, England, where the Electric Light Orchestra began their journey as one of the world’s most popular rock bands. Their music was characterized by a  fusion of Beatlesque pop, classical arrangements, and futuristic iconography. ​An astonishing library of hit records that sold more than 50 million copies includes Eldorado, Face the Music, A New World Record, Out of the Blue, Discovery and Xanadu. ​\nThe band began touring as THE ORCHESTRA in 2000 emerging as a supergroup made up of former members of ELO and ELO Part II and other celebrated rock acts. Over the years the members of THE ORCHESTRA have played ELO’s greatest hits to millions of fans in over 50 countries.\n
-URL:https://browncounty.com/events/the-orchestra-featuring-former-members-of-elo-and-elo-part-ii/
-ORGANIZER;CN=Brown County Music Center:MAILTO:boxoffice@browncountymusiccenter.com
-CATEGORIES:Food &amp; Drink,Happening,Live Music,Spring,Theatre &amp; Entertainment
 LOCATION:200 Maple Leaf Boulevard
 ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/05/Music-Center.jpg
 END:VEVENT
@@ -881,7 +901,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Cody’s Ride
-DESCRIPTION:On June 1, 2009 Cody Hall was critically injured in a construction accident while at work. On June 10, 2009 at 20 years old Cody was removed from life support. He donated his organs and saved and changed countless people’s lives. We are so excited and honored to raise money and awareness for organ donation and to keep Cody’s remarkable memory alive. Live auction, live music, food trucks, bike-themed events, raffle bike and so much more. Get more information at Outsiderscharityclub.com Camping Reservations & Golf Cart\n
+DESCRIPTION:
 URL:https://browncounty.com/events/codys-ride/
 CATEGORIES:Food &amp; Drink,Happening,Live Music,Outdoor Concerts
 LOCATION:5163 North State Road 135, Morgantown, IN
@@ -1093,7 +1113,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:(American) Pomp!: Trumpet, Piano, Winds, and Strings
-DESCRIPTION:
+DESCRIPTION:ChamberFest Brown County presents (American) Pomp!\nA flamboyant end to festival week: a program of genre-bending and jazz-inspired classics, culminating in Gershwin’s iconic Rhapsody in Blue!\nSaint-Saëns: Septet for Trumpet, Piano and Strings, op. 65\nMartinů: La Revue de Cuisine\nGershwin: Rhapsody in Blue\nArtists:​​\n\n​​​​Spencer Myer, piano soloist\nAndreas Ioannides, piano\nQing Hou, violin\nLei Hou, violin\nLarry Neuman, viola\nCaleb Wong, cello\nJim Campbell, clarinet\nMark Ridenour, trumpet\nVince Karamanov, bassoon\nAlex Horton, bass\n\n
 URL:https://browncounty.com/events/chamberfest-american-pomp-trumpet-piano-winds-and-strings/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -1113,7 +1133,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:Phoenix: Saxophone Quartet
-DESCRIPTION:ChamberFest Brown County presents Phoenix: Saxophone Quartet\n​​The multi-award-winning Project Fusion Sax Quartet presents Phoenix: a program of saxophone chamber music depicting renewal, transformation, and flight. This theme, chosen in the auspicious year of the United States’ 250th anniversary, celebrates a nation founded on the “great experiment” of democratic reinvention and rebirth, whose mascot is fittingly the noble bald eagle: as such, it presents music exclusively of American composers.\nWorks by Gershwin, Maslanka, Kline, Frazier, Mettens, Washington, Ge, Love\nProject Fusion:\n\nDannel Espinoza, soprano sax\nDoug O’Connor, alto sax\nAiwen Zhang, tenor sax\nMatt Evans, baritone sax\n\nThis concert is sponsored by the Eads family in memory of Ralph S. (Tony) Eads.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/chamberfest-phoenix/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -1173,7 +1193,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:Pastorale: Strings and Winds
-DESCRIPTION:ChamberFest Brown County presents a star-studded lineup featuring Chicago Symphony Orchestra musicians present an uplifting program of music for the outdoors: radiant, folksy, uplifting.\n​​​​​Beethoven: Sextet for 2 horns and string quartet, op. 81bSpohr: Octet, op. 32Dvorak: String Quintet, op. 97\n​Artists\n\n​Qing Hou, violin\nLei Hou, violin\nLarry Neuman, viola\nAurlien Pederzoli, viola\nBrandon Vamos, cello\nJim Campbell, clarinet\nJim Smelser, horn\nOto Carrilla, horn\nAlex Horton, bass\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/chamberfest-pastorale/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -1292,7 +1312,7 @@ PRIORITY:5
 SEQUENCE:3
 TRANSP:OPAQUE
 SUMMARY:Nashville to Nashville: A Concert Series
-DESCRIPTION:Nashville to Nashville Concert Series brings live country and Americana music to The Old Barn at Brown County. Join us for an evening of great music, beautiful scenery, and laid-back late summer vibes as talented artists take the stage in an intimate barn setting near Nashville, Indiana. Food trucks, drinks, and unforgettable performances make this a perfect night out.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/nashville-to-nashville-a-concert-series/
 ORGANIZER;CN=The Old Barn:MAILTO:oldbarnatbrowncounty@gmail.com
 CATEGORIES:Entertainment,Family Friendly,Happening,Live Music,Outdoor Concerts,Special Events
@@ -1432,7 +1452,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Indiana Bigfoot Conference
-DESCRIPTION:Indiana Bigfoot Conference 2026 gathers enthusiasts and researchers of two days of presentations and activities.\nSchedule Highlights\nIncludes Town Hall, Meet & Greet, full speaker sessions, and a Basket Donation auction supporting an immersive experience.\n \n
+DESCRIPTION:
 URL:https://browncounty.com/events/indiana-bigfoot-conference/
 ORGANIZER;CN=Indiana Bigfoot Research Organization:MAILTO:
 CATEGORIES:Convention,Happening,Special Events
@@ -1686,7 +1706,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:War in the Woods
-DESCRIPTION:
+DESCRIPTION: Get ready for one of the wildest, most adrenaline-charged drag-racing events in the country — War in the Woods No Prep, held at Brown County Dragway in Morgantown, Indiana. Twice each year, the speed-obsessed and the curious come together for a full throttle weekend of no-prep racing action and high-stakes competition. war-in-the-woods-no-prep.com+2Brown County Indiana+2\n📅 Upcoming Dates (2026):\n\n\nMay 29–30\n\n\nSeptember 18–19 war-in-the-woods-no-prep.com+1\n\n\n📍 Location:Brown County Dragway — 480 Gatesville Road, Morgantown, IN 46160 Brown County Indiana+1\nWhat to Expect:\n\n\n⚡ High-octane drag races across multiple classes like Small Tire, Big Tire, Hard Tire, Stick Shift, Nitroous Mayhem and more. war-in-the-woods-no-prep.com+1\n\n\n🔊 Drivers meetings, chip draws, and a track that goes “hot” at 3:00 p.m. both days — expect action and intensity from start to finish. war-in-the-woods-no-prep.com+1\n\n\n🚗 A raw “no prep” setup for daring street cars, where traction is minimal and every run is a gamble — it’s what makes War in the Woods the wildest in the sport. No Prep Racing+1\n\n\n🎟️ General admission tickets available at the gate (cash only): $25 for one-day or $40 for a two-day pass. VIP packages (when available) offer perks like premium parking, food/drink vouchers, and exclusive access. war-in-the-woods-no-prep.com+1\n\n\nImportant for Spectators:\n\n\nBring a chair — spectator seating is limited and mostly standing or informal. war-in-the-woods-no-prep.com+1\n\n\nNo overnight camping or motorized spectator vehicles allowed — plan accordingly. war-in-the-woods-no-prep.com+1\n\n\nParking is assigned on arrival; please follow staff directions — blocking driveways or track access will result in towing. war-in-the-woods-no-prep.com+1\n\n\n
 URL:https://browncounty.com/events/warn-in-the-woods/
 CATEGORIES:Entertainment,Happening,Outdoor Adventure,Races
 LOCATION:480 Gatesville Road, Morgantown, IN 46160
@@ -1963,7 +1983,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Waycross Craft Show!
-DESCRIPTION:
+DESCRIPTION:10am-4pm November 15, 2026\nAll ages!\nRent a booth and show your crafts, baked goods and other wares off at the Waycross Craft Fair! Folk are invited to come and shop before the holiday season, supporting local artists.\n
 URL:https://browncounty.com/events/waycross-craft-show-2/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Art Events &amp; Exhibits,Family Friendly,Festivals,Happening,Holiday,Plan Your Visit,Special Events
@@ -2023,7 +2043,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Fall Nature Retreat: Nature Journaling
-DESCRIPTION:
+DESCRIPTION:Immerse yourself in the beauty of fall at Waycross during our Fall Nature Journaling Retreat. The vibrant colors of the changing seasons will provide the perfect backdrop for deep observation and creativity. This weekend retreat will offer a peaceful space to connect with the natural world, using art and journaling as tools to deepen your awareness of nature in the season of fall. Guided prompts, outdoor sketching sessions, and time spent exploring the colorful fall foliage will foster a deeper connection with nature and creation.\n\n\nOctober 2-4, 2026\n\n\nCheck-in: 4-6pm\n\n\nCheck-out: 10am\n\n\n\n\nAll ages welcome, minors must be accompanied by an adult.\n\n\nProgram Rates\n\n\nAttendance cost is calculated during online registration, depending on your lodging selection. Rates are per person and include program fees, lodging and meals.\n\n\nConference Center – Single Occupancy: $350 per person\n\n\nConference Center – Double Occupancy: $280 per person\n\n\nYouth (10-17): $150 per person\n\n\nChildren (4-9): $110 per person\n\n\n3 and under: $0\n\n\n\n\n\n\n
 URL:https://browncounty.com/events/fall-nature-retreat-nature-journaling/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Art Events &amp; Exhibits,Classes &amp; Workshops,Family Friendly,Happening,Outdoor Adventure,Special Events
@@ -2083,7 +2103,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Classic Camp
-DESCRIPTION:Relive (or experience for the first time) the magic of summer camp! Designed for adults 50+, this experience is a mix of all the classic camp fun, including campfires, s’mores, canoeing, hiking, arts & crafts, and swimming and a chaplain led program.\nAfter a full day at camp, relax in comfort! You’ll stay in hotel-style rooms at the Conference Center, complete with real beds, private bathrooms, and air conditioning.\n\n\nJuly 31-August 3, 2026\n\n\nCheck-in: 4-6pm\n\n\nCheck-out: 10am\n\n\nThis program runs Friday – Monday. We encourage all participants to stay for the full experience, but we understand that some may need to leave early. If you need to depart early please select the Friday–Sunday afternoon option (departing before dinner on Sunday) during registration so we can plan accordingly.\n\n\n\n\n\n\n\n\nAges 45+\n\n\nProgram Rates\n\n\nAttendance cost is calculated during online registration, depending on your lodging selection. Rates are per person and include program fees, lodging and meals.\n\n\nConference Center – Single Occupancy: $75 per person\n\n\nConference Center – Double Occupancy: $75 per person\n\n\n\n\n\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/classic-camp/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Happening,Outdoor Adventure,Plan Your Visit,Special Events,Summer
