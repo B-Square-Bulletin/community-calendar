@@ -67,6 +67,9 @@ class RateLimitTracker:
             reset_time = headers.get("x-ratelimit-tokens-reset", "")
 
             if tokens_limit > 0:
+                # Update tokens_per_minute from API if limit differs
+                if tokens_limit != self.tokens_per_minute:
+                    self.tokens_per_minute = tokens_limit
                 tokens_used = tokens_limit - tokens_remaining
                 return {
                     "tokens_used": tokens_used,
@@ -410,12 +413,18 @@ def process_file(  # noqa: PLR0915, PLR0912
                 )
                 print(msg, flush=True)
             else:
-                # Fallback: estimate tokens and use fixed delay
-                rate_limiter.record_request(estimated_tokens)
+                # Fallback: estimate tokens and accumulate for current window
+                # record_request() treats its argument as cumulative, so add
+                # to existing window total rather than passing incremental value
+                cumulative_estimated = (
+                    rate_limiter.tokens_used_in_window + estimated_tokens
+                )
+                rate_limiter.record_request(cumulative_estimated)
                 msg = (
                     f"    Rate limit headers unavailable, "
                     f"using estimated {estimated_tokens} tokens "
-                    f"and fixed {FALLBACK_DELAY}s delay"
+                    f"(cumulative {cumulative_estimated} this window), "
+                    f"fixed {FALLBACK_DELAY}s delay"
                 )
                 print(msg, flush=True)
                 # Apply fallback delay to avoid overwhelming API
