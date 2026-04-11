@@ -4,216 +4,6 @@ PRODID:-//WFHB Community Calendar//wfhb.org//
 X-WR-CALNAME:WFHB Community Calendar
 X-WR-TIMEZONE:America/Indiana/Indianapolis
 BEGIN:VEVENT
-SUMMARY:Design & Donuts
-DTSTART;TZID=America/Indiana/Indianapolis:20260410T090000
-DTEND;TZID=America/Indiana/Indianapolis:20260410T100000
-UID:ai1ec-148247-94840@wfhb.org
-DESCRIPTION:A friendly environment to discuss any design-related challenge
- s\, questions\, and ideas. Learn from others as we talk about tools\, stra
- tegies\, and handy resources. And of course donuts! (Along with fruit\, te
- a & coffee.)Whether you’re a design pro or simply dabble in Canva — if
-  you have any interest in design or just want to learn more\, you’re wel
- come!Facilitated by Catherine Pearce & Dave Martin.Free & open to the comm
- unity. No registration required.Repeats the second Friday of every month\,
-  9:00–10:00 AM.Hosted at The Mill — dimensionmill.org
-LOCATION:The Mill\, 642 N Madison St\, Bloomington
-URL:https://wfhb.org/event/design-donuts/?instance_id=94840
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Discovery Time
-DTSTART;TZID=America/Indiana/Indianapolis:20260410T110000
-DTEND;TZID=America/Indiana/Indianapolis:20260410T113000
-UID:ai1ec-148048-94749@wfhb.org
-DESCRIPTION:Discovery Time activities are designed by early childhood spec
- ialists specifically to nurture and challenge the rapid development of pre
- school-aged children in a fun\, safe\, and collaborative learning environm
- ent. Activities vary monthly.More info herehttps://wonderlab.org
-LOCATION:WonderLab\, 308 West 4th Street\, Bloomington
-URL:https://wfhb.org/event/discovery-time-8/?instance_id=94749
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Food Truck Friday\, with entertainment from Paul Bertsch (5-6pm)\,
-  also Bigger is Better Band (6-8pm)
-DTSTART;TZID=America/Indiana/Indianapolis:20260410T110000
-DTEND;TZID=America/Indiana/Indianapolis:20260410T200000
-UID:ai1ec-148167-94803@wfhb.org
-DESCRIPTION:
-LOCATION:Switchyard Park\, 1601 South Rogers St.\, Blomington
-URL:https://wfhb.org/event/food-truck-friday-with-entertainment-from-paul-
- bertsch-5-6pm-also-bigger-is-better-band-6-8pm/?instance_id=94803
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Friday Musicale sponsored Program:  Cello and Piano Recital\, clas
- sical music
-DTSTART;TZID=America/Indiana/Indianapolis:20260410T131500
-DTEND;TZID=America/Indiana/Indianapolis:20260410T151500
-UID:ai1ec-148082-94776@wfhb.org
-DESCRIPTION:
-LOCATION:Meadowood Health Pavilion Activities Lounge\, 2455 N. Tamarack Tr
- ail\, Bloomington
-URL:https://wfhb.org/event/friday-musicale-sponsored-program-cello-and-pia
- no-recital-classical-music/?instance_id=94776
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Animal Hour and Dive Deeper
-DTSTART;TZID=America/Indiana/Indianapolis:20260410T150000
-DTEND;TZID=America/Indiana/Indianapolis:20260410T160000
-UID:ai1ec-148051-94758@wfhb.org
-DESCRIPTION:We invite you to get closer to the wild side with Animal Hour 
- and Dive Deeper! These weekly programs let you chat with WonderLab’s ani
- mal experts\, discover what it takes to care for creatures from around the
-  globe\, and meet snakes\, lizards\, insects\, arachnids\, and more—up c
- lose and out of their habitats.Animal Hour takes place on most Fridays\, w
- hile Dive Deeper happens on the last Friday of each month at WonderLab’s
-  stunning coral reef aquarium.
-LOCATION:WonderLab\, 308 West 4th Street\, Bloomington
-URL:https://wfhb.org/event/animal-hour-and-dive-deeper-2/?instance_id=9475
- 8
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:2nd Friday Open Studios Night
-DTSTART;TZID=America/Indiana/Indianapolis:20260410T180000
-DTEND;TZID=America/Indiana/Indianapolis:20260410T210000
-UID:ai1ec-146009-93675@wfhb.org
-DESCRIPTION:Join the resident artists of the Art Sanctuary of Indiana as t
- hey host monthly Open Studios Nights on the second Friday of each month\, 
- from 6 to 9 pm. Artists will be on hand to answer questions about their wo
- rk. Be sure to head down to the lower gallery as well to enjoy live music 
- from local musicians!It’s the perfect excuse to enjoy dinner at a downto
- wn eatery\, then tour working artist studios!
-LOCATION:Art Sanctuary of Indiana\, 190 N. Sycamore Street\, Martinsville
-URL:https://wfhb.org/event/2nd-friday-open-studios-night/?instance_id=9367
- 5
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:A performance by Tortilla Jackson
-DTSTART;TZID=America/Indiana/Indianapolis:20260410T180000
-DTEND;TZID=America/Indiana/Indianapolis:20260410T190000
-UID:ai1ec-148037-94735@wfhb.org
-DESCRIPTION:Tortilla Jackson is a high-energy Latin jazz and funk ensemble
-  known for their playful improvisation and genre-blending sound. With root
- s in Bloomington’s vibrant music scene\, the group brings a fresh take t
- o the music of Willie Bobo\, Mongo Santamaría\, James Brown\, and others.
-  Hosted by WFIU’s David Brent Johnson\, this event is co-sponsored by Th
- e Media School and Indiana Public Media.Contact:Connor Andrei\,[email pro
- tected]\, (812) 856-0736…
-LOCATION:Franklin Hall\, Indiana University\, 601 E Kirkwood Ave\, Bloomin
- gton
-URL:https://wfhb.org/event/franklin-jazz-hall-a-performance-by-tortilla-ja
- ckson/?instance_id=94735
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Music’s Marionette: An Immersive Evening Of Live Classical Music
-  And Animation
-DTSTART;TZID=America/Indiana/Indianapolis:20260410T180000
-DTEND;TZID=America/Indiana/Indianapolis:20260410T190000
-UID:ai1ec-148055-94766@wfhb.org
-DESCRIPTION:We invite you to join clarinetist and multimedia artist Nikki 
- Pet for a one-of-a-kind performance blending live classical music with res
- ponsive animation.​
-LOCATION:Pillar Arts Alliance Center\, @ College Mall\, 2894 East 3rd Stre
- et\, Suite L-10D\, Bloomington
-URL:https://wfhb.org/event/musics-marionette-an-immersive-evening-of-live-
- classical-music-and-animation/?instance_id=94766
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:A Dinner Theater with Maya Angelou (excerpts from A Letter to My D
- aughter by Maya Angelou\, performed by eight VIP Bloomington women)\, a be
- nefit for My Sister’s Closet
-DTSTART;TZID=America/Indiana/Indianapolis:20260410T183000
-DTEND;TZID=America/Indiana/Indianapolis:20260410T210000
-UID:ai1ec-147326-94354@wfhb.org
-DESCRIPTION:Admission information:http://sisterscloset.org/dinnerYou are w
- elcome to join us for an inspiring evening of dinner\, storytelling\, andc
- ommunity at this special Dinner Theater benefiting My Sister’sCloset. Gu
- ests will enjoy a delicious buffet dinner at the BloomingtonCountry Club w
- hile experiencing powerful excerpts from A Letter to MyDaughter by Maya An
- gelou\,  excerpts from A Letter to MyDaughter by Maya Angelou\, performed 
- by eight VIP Bloomington women..Throughout the evening\, attendees will he
- ar inspiring client storiesthat highlight the impact of My Sister’s Clos
- et and its mission toempower women in our community. The event will also f
- eature excitinglive and silent auctions\, offering guests the opportunity 
- to furthersupport this important work while enjoying a memorable night ofm
- eaningful storytelling\, connection\, and generosity as we cometogether to
-  support women and families in need.
-LOCATION:Bloomington Country Club\, 3000 S Rogers St\, Bloomington
-URL:https://wfhb.org/event/a-dinner-theater-with-maya-angelou-a-benefit-fo
- r-my-sisters-closet/?instance_id=94354
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Omen Killer / Inward Heal / The Devil Let Us
-DTSTART;TZID=America/Indiana/Indianapolis:20260410T183000
-DTEND;TZID=America/Indiana/Indianapolis:20260410T203000
-UID:ai1ec-148239-94837@wfhb.org
-DESCRIPTION:Doors at 6pm
-LOCATION:118 S. Jefferson St\, Bloomington
-URL:https://wfhb.org/event/omen-killer-inward-heal-the-devil-let-us/?insta
- nce_id=94837
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Are You Garbage “Back on the Block” Tour\, shows at 7:00 & 9:3
- 0
-DTSTART;TZID=America/Indiana/Indianapolis:20260410T190000
-DTEND;TZID=America/Indiana/Indianapolis:20260410T210000
-UID:ai1ec-147323-94350@wfhb.org
-DESCRIPTION:Kevin Ryan and H. Foley bring you a night of Are You Garbage? 
- featuring stand-up comedy and a chance for you to ask your Garbage questio
- ns! Come join us and find out if you’re trash!
-LOCATION:The Comedy Attic\, 123 South Walnut\, corner of 4th and Walnut\,B
- loomington
-URL:https://wfhb.org/event/are-you-garbage-back-on-the-block-tour-shows-at
- -700-930/?instance_id=94350
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Author Event with Marabai Rose
-DTSTART;TZID=America/Indiana/Indianapolis:20260410T190000
-DTEND;TZID=America/Indiana/Indianapolis:20260410T210000
-UID:ai1ec-148067-94770@wfhb.org
-DESCRIPTION:At an event hosted by Women Writing For a Change\, local autho
- r Marabai Rose willdiscuss her memoir\,Holding Hope: One Family’s Odysse
- y Through Lyme Disease and Psychosis\, and her writing process. There will
-  be a Q&A facilitated by Rebekah Spivey. The event is part of the Indiana 
- Author Award Speaker’s series\, and is open to the public.
-LOCATION:Women Writing For a Change\, 318 S. Washington St.\, Bloomington
-URL:https://wfhb.org/event/author-event-with-marabai-rose/?instance_id=947
- 70
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:In Lights Human Rights Documentary Film Festival: Below the Clouds
-  w/Q&A
-DTSTART;TZID=America/Indiana/Indianapolis:20260410T190000
-DTEND;TZID=America/Indiana/Indianapolis:20260410T213000
-UID:ai1ec-148246-94839@wfhb.org
-DESCRIPTION:In Below the Clouds\, Gianfranco Rosi’s monumental black-and
- -white documentary captures Naples’ hidden\, unglamorous side—focusing
-  on everyday lives\, municipal routines\, and subterranean historical laye
- rs shadowed by Vesuvius and the simmering Phlegraean Fields. Amid quakes a
- nd fumaroles\, archaeologists excavate ancient ruins\, firefighters calm f
- ears\, law enforcement hunts tomb robbers\, and locals—from worshippers 
- at Madonna dell’Arco to Japanese diggers at Villa Augustea—navigate da
- ily life. Blending past and present\, the film evokes a volatile time mach
- ine of history\, anxiety\, and resilience. Winner of the Special Jury Priz
- e at the Venice Film Festival. [115 min\; documentary\; Italian with Engli
- sh subtitles]A Q&A will follow the screening.
-LOCATION:IU Cinema\, 1213 E. 7th Street\, Bloomington (on the North end of
-  the IU Auditorium)
-URL:https://wfhb.org/event/in-lights-human-rights-documentary-film-festiva
- l-below-the-clouds-w-qa/?instance_id=94839
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Producing a Kind Generation/Garden Cinema/Lucky 7’s
 DTSTART;TZID=America/Indiana/Indianapolis:20260410T190000
 DTEND;TZID=America/Indiana/Indianapolis:20260410T223000
@@ -226,80 +16,6 @@ URL:https://wfhb.org/event/producing-a-kind-generation-garden-cinema-lucky
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:1984 – Radio Play
-DTSTART;TZID=America/Indiana/Indianapolis:20260410T193000
-DTEND;TZID=America/Indiana/Indianapolis:20260410T213000
-UID:ai1ec-147312-94338@wfhb.org
-DESCRIPTION:You are invited to experience1984 – Radio Play\,a haunting a
- daptation of George Orwell’s classic dystopian novel brought to life on 
- stage.In a world where every thought is monitored and the Party controls t
- ruth itself\, Winston Smith dares to question the system. When forbidden l
- ove awakens him to the possibility of freedom\, he risks everything in a c
- hilling battle against a regime where even thinking differently is a crime
- .// What is a radio play? //A radio play is performed live on stage using 
- voice actors\, vintage-style microphones\, live sound effects\, and music 
- to create the entire world through sound. You’ll see the actors and Fole
- y artists at work as they transport you into Orwell’s dystopian future 
- — just like the golden age of radio.* Disclaimer: This is a fictional st
- ory about control and freedom\, meant to entertain and provoke thought. It
- ’s not intended as commentary on current events\, political parties\, or
-  today’s social climate.
-LOCATION:Historic Brown County Playhouse\, 70 South Van Buren Street\, Nas
- hville
-URL:https://wfhb.org/event/1984-radio-play/?instance_id=94338
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:The DaVinci Code presented by Constellation Stage & Screen
-DTSTART;TZID=America/Indiana/Indianapolis:20260410T193000
-DTEND;TZID=America/Indiana/Indianapolis:20260410T213000
-UID:ai1ec-140045-90435@wfhb.org
-DESCRIPTION:Dan Brown’s international best-seller comes to life on stage
-  in this thrilling\, high-stakes adventure! When the curator of the Louvre
-  is found murdered under mysterious circumstances\, symbologist Robert Lan
- gdon and cryptologist Sophie Neveu are thrust into an investigation that q
- uickly unravels into a deadly conspiracy. As they follow a trail of crypti
- c puzzles and ancient codes\, they discover a secret that could change the
-  course of history. Packed with pulse-pounding suspense and stunning visua
- ls\,The Da Vinci Codeis an exhilarating journey into the unknown.Recommend
- ed for ages 13+.See Constellation’s website for more information\, inclu
- ding a detailed performance schedule. Learn more and find tickets athttps:
- //seeconstellation.org/mainstage/da-vinci-code/
-LOCATION:Waldron Arts Center. 122 S. Walnut Street\, Bloomington
-URL:https://wfhb.org/event/the-davinci-code-presented-by-constellation-sta
- ge-screen-2/?instance_id=90435
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Another Round 30th Anniversary Spring Concert
-DTSTART;TZID=America/Indiana/Indianapolis:20260410T200000
-DTEND;TZID=America/Indiana/Indianapolis:20260410T220000
-UID:ai1ec-145922-93632@wfhb.org
-DESCRIPTION:
-LOCATION:Buskirk-Chumley Theater\, 114 E. Kirkwood Ave\, Bloomington
-URL:https://wfhb.org/event/another-round-30th-anniversary-spring-concert/?
- instance_id=93632
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Beetlejuice The Musical. The Musical. The Musical.
-DTSTART;TZID=America/Indiana/Indianapolis:20260410T200000
-DTEND;TZID=America/Indiana/Indianapolis:20260410T220000
-UID:ai1ec-148184-94819@wfhb.org
-DESCRIPTION:It’s SHOWTIME! Based on Tim Burton’s dearly beloved film\,
-  this hilarious musical tells the story of Lydia Deetz\, a strange and unu
- sual teenager whose whole life changes when she meets a recently deceased 
- couple and a demon with a thing for stripes. With an irreverent book\, an 
- astonishing set\, and a score that’s out of this Netherworld\, Beetlejui
- ce is “screamingly good fun” (Variety). And under its uproarious surfa
- ce (six feet under\, to be exact)\, it’s a remarkably touching show abou
- t family\, love\, and making the most of every Day-O!
-LOCATION:IU Auditorium\, 1211 East 7th St.\, Bloomington
-URL:https://wfhb.org/event/beetlejuice-the-musical-the-musical-the-musical
- /?instance_id=94819
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:The Duvenky Code
 DTSTART;TZID=America/Indiana/Indianapolis:20260410T200000
 DTEND;TZID=America/Indiana/Indianapolis:20260410T230000
@@ -307,30 +23,6 @@ UID:ai1ec-147951-94673@wfhb.org
 DESCRIPTION:
 LOCATION:Brown County Inn\, 51 State Road 46 East\, Nashville
 URL:https://wfhb.org/event/the-duvenky-code-3/?instance_id=94673
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Bloomington Poetry Slam
-DTSTART;TZID=America/Indiana/Indianapolis:20260410T210000
-DTEND;TZID=America/Indiana/Indianapolis:20260410T230000
-UID:ai1ec-148080-94774@wfhb.org
-DESCRIPTION:Doors 8:30pm | Show 9pm18+ | Wheelchair accessibleHosted by An
- drea M Sterling & Dan “Sully”–Featured Poet for April is BPS Founder
- : THE Ciara Miller!Grooves by DJ Good PeoplesSign up link for open mic/sla
- m:https://forms.gle/HBbnHTuutaJVDJxM9
-LOCATION:The Bishop\, 123 South Walnut\, Bloomington
-URL:https://wfhb.org/event/bloomington-poetry-slam/?instance_id=94774
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Rod Tuffcurls and the Benchpress
-DTSTART;TZID=America/Indiana/Indianapolis:20260410T210000
-DTEND;TZID=America/Indiana/Indianapolis:20260410T230000
-UID:ai1ec-148177-94812@wfhb.org
-DESCRIPTION:
-LOCATION:Bluebird Nightclub\, 216 North Walnut St.\, Bloomington
-URL:https://wfhb.org/event/rod-tuffcurls-and-the-benchpress-8/?instance_id
- =94812
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -5046,6 +4738,57 @@ DESCRIPTION:fun + original trivia hosted by Josh Johnson of Bloomington Pu
  b Quiz\, the longest-running local trivia.
 LOCATION:Cardinal Spirits\, 922 South Morton Street\, Bloomington
 URL:https://wfhb.org/event/trivia-wednesdays-21/?instance_id=92620
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Martinsville Cruise-in on the Square
+DTSTART;TZID=America/Indiana/Indianapolis:20260611T170000
+DTEND;TZID=America/Indiana/Indianapolis:20260611T210000
+UID:ai1ec-147886-94638@wfhb.org
+DESCRIPTION:Head for downtown Martinsville on Thursdays\, April through Oc
+ tober for the weekly Cruise-in on the Square! Vehicles of all kinds are we
+ lcome – antiques\, classics\, hot rods\, trucks\, motorcycles\, tractors
+ \, etc. The weekly cruise-in will be held on Thursdays from 5 to 9 pm each
+  week. Come out for a fun evening in downtown Martinsville as you view the
+  participating vehicles and enjoy dinner and shopping on the square. The c
+ ruise-in will be located on the east side of the square along Jefferson St
+ reet\, from Pike to Jackson Streets.
+LOCATION:Morgan County Courthouse Square\, 180 Main Street\, Martinsville
+URL:https://wfhb.org/event/martinsville-cruise-in-on-the-square/?instance_
+ id=94638
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Tree Walk – Downtown Bloomington
+DTSTART;TZID=America/Indiana/Indianapolis:20260611T173000
+DTEND;TZID=America/Indiana/Indianapolis:20260611T190000
+UID:ai1ec-146229-93807@wfhb.org
+DESCRIPTION:We invite you to join Canopy and a Department of Natural Resou
+ rces entomologist as we learn more about bugs and how they interact with o
+ ur trees. Learn more and sign up athttps://www.canopybloomington.org/tree-
+ walks
+LOCATION:Waldron Hill Buskirk Park\, 331 S Washington St. Bloomington
+URL:https://wfhb.org/event/tree-walk-downtown-bloomington/?instance_id=938
+ 07
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Another Revolution  presented by Constellation Stage & Screen
+DTSTART;TZID=America/Indiana/Indianapolis:20260611T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260611T213000
+UID:ai1ec-140559-90754@wfhb.org
+DESCRIPTION:Some revolutions happen in the streets. Others in the lab.Kat 
+ and Henry\, two graduate students from opposing scientific disciplines\, a
+ re forced to share a lab at Columbia University in 1968. Amidst interperso
+ nal differences\, a campus devolving into political chaos\, and the uncert
+ ainty and turmoil of the outside world\, they each discover what it’s li
+ ke to be thrown into someone else’s orbit. By Jacqueline Bircher\, playw
+ right of Constellation’s hit production of Webster’s B!+@#. Recommende
+ d for ages 13+.Event Website:https://seeconstellation.org/mainstage/anothe
+ r-revolution/
+LOCATION:Constellation Playhouse\,107 W 9th St\, Bloomington
+URL:https://wfhb.org/event/another-revolution-presented-by-constellation-s
+ tage-screen/?instance_id=90754
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 END:VCALENDAR
