@@ -209,6 +209,7 @@
           <IncludeMarkup when="{!window.embed}" url="components/IconRow.xmlui" />
           <HStack when="{window.embed}" gap="$space-1" verticalAlignment="center">
             <Icon name="l-rss" tooltip="Sources" width="20px" height="20px" color="$color-surface-500" onClick="sourcesDialog.open()" />
+            <Inspector src="{'xmlui/xs-diff.html?v=' + window.APP_VERSION}" />
           </HStack>
         </HStack>
       </H1>
@@ -308,6 +309,7 @@
         <IncludeMarkup when="{!window.embed}" url="components/IconRow.xmlui" />
         <HStack when="{window.embed}" gap="$space-1" verticalAlignment="center">
           <Icon name="l-rss" tooltip="Sources" width="20px" height="20px" color="$color-surface-500" onClick="sourcesDialog.open()" />
+          <Inspector src="{'xmlui/xs-diff.html?v=' + window.APP_VERSION}" />
         </HStack>
       </HStack>
     </H1>

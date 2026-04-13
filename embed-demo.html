@@ -82,10 +82,15 @@
   <div class="frame-wrap">
     <iframe
       id="cc-frame"
-      src="xmlui/index.html?city=bloomington&embed=true&autoheight=true"
       title="Community Calendar embed"
       scrolling="no"
     ></iframe>
+    <script>
+      // Cache-bust: set iframe src with a timestamp so Cmd-Shift-R on the
+      // parent page also forces the iframe content to reload.
+      document.getElementById('cc-frame').src =
+        'xmlui/index.html?city=bloomington&embed=true&autoheight=true&_=' + Date.now();
+    </script>
   </div>
 
   <p>
