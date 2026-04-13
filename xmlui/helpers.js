@@ -1304,6 +1304,45 @@ if (typeof window !== 'undefined') {
     var stored = localStorage.getItem('hidden_sources');
     if (stored) { window._localHiddenSources = JSON.parse(stored); }
   } catch(e) {}
+  // Date range slider helpers
+  window._dateRangeBase = new Date();
+  window._dateRangeBase.setHours(0, 0, 0, 0);
+
+  window.dayOffsetToISO = function(dayOffset) {
+    var d = new Date(window._dateRangeBase.getTime() + dayOffset * 24 * 60 * 60 * 1000);
+    return d.toISOString();
+  };
+
+  window.formatDayOffset = function(dayOffset) {
+    var d = new Date(window._dateRangeBase.getTime() + dayOffset * 24 * 60 * 60 * 1000);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return months[d.getMonth()] + ' ' + d.getDate();
+  };
+
+  window.getEventDayRange = function(events) {
+    if (!events || !events.length) return [0, 90];
+    var base = window._dateRangeBase.getTime();
+    var msPerDay = 24 * 60 * 60 * 1000;
+    var minOffset = Infinity, maxOffset = -Infinity;
+    for (var i = 0; i < events.length; i++) {
+      var d = new Date(events[i].start_time);
+      d.setHours(0, 0, 0, 0);
+      var offset = Math.round((d.getTime() - base) / msPerDay);
+      if (offset < minOffset) minOffset = offset;
+      if (offset > maxOffset) maxOffset = offset;
+    }
+    return [minOffset, maxOffset];
+  };
+
+  window.filterByDayRange = function(events, range) {
+    if (!range || !events) return events;
+    var fromISO = window.dayOffsetToISO(range[0]);
+    var toISO = window.dayOffsetToISO(range[1] + 1);
+    return events.filter(function(e) {
+      return e.start_time >= fromISO && e.start_time < toISO;
+    });
+  };
+
   window.filterExternalExclusions = function(events) {
     var exc = window.externalExclusions;
     if (!exc) return events;

@@ -12,7 +12,9 @@
   global.authUser="{authUser}"
   global.authSession="{authSession}"
   var.city="{window.cityFilter || null}"
-  global.isAdmin="{false}">
+  global.isAdmin="{false}"
+  var.eventDayRange="{null}"
+  var.sliderRange="{null}">
 
   <!-- DataSources -->
   <DataSource
@@ -134,6 +136,12 @@
   <variable name="expandedEnrichments" value="{window.expandEnrichments(enrichments.value, window.getFromDate(), window.getToDate()) || []}" />
   <variable name="combinedEvents" value="{[...(Array.isArray(events.value) ? events.value : []), ...(Array.isArray(expandedEnrichments) ? expandedEnrichments : [])]}" />
   <variable name="processedEvents" value="{window.buildSearchIndex(window.filterHiddenSources(window.dedupeEvents(window.filterExternalExclusions(combinedEvents)), hiddenSources))}" />
+  <variable name="displayEvents" value="{window.filterByDayRange(processedEvents, sliderRange)}" />
+
+  <ChangeListener
+    listenTo="{processedEvents}"
+    onDidChange="() => { if (!sliderRange && processedEvents && processedEvents.length > 100) { eventDayRange = window.getEventDayRange(processedEvents) } }"
+  />
 
   <!-- Dialogs -->
   <SignInDialog id="signInDialog" />
@@ -256,6 +264,22 @@
         <Option value="picks" label="my picks" />
       </HStack>
     </RadioGroup>
+    <VStack when="{eventDayRange && events.loaded && viewMode === 'all'}" gap="$space-0">
+      <HStack>
+        <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{window.formatDayOffset(sliderRange ? sliderRange[0] : eventDayRange[0])}" />
+        <SpaceFiller />
+        <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{window.formatDayOffset(sliderRange ? sliderRange[1] : eventDayRange[1])}" />
+      </HStack>
+      <Slider
+        id="dateSlider"
+        initialValue="{eventDayRange}"
+        minValue="{eventDayRange[0]}"
+        maxValue="{eventDayRange[1]}"
+        step="{1}"
+        showValues="false"
+        onDidChange="(val) => debounce(200, (v) => { sliderRange = Array.isArray(v) ? [v[0], v[1]] : v }, val)"
+      />
+    </VStack>
     </VStack>
     </VStack>
     <Spinner when="{!events.loaded && viewMode === 'all'}" />
@@ -267,10 +291,10 @@
       marginBottom="$space-2"
       onClick="const prevIndex = window._morePrevIndex ?? 0; displayStartIndex = prevIndex; browseStartIndex = prevIndex; scrollRequest = scrollRequest + 1;"
     />
-    <Masonry when="{events.loaded && viewMode === 'all' && layoutMode === 'multicol'}" data="{window.getPagedEvents(processedEvents, filterTerm, displayStartIndex, filterTerm ? 10 : 50, categoryFilter)}" columns="3" gap="$space-3" rowGap="0" minColumnWidth="300px">
+    <Masonry when="{events.loaded && viewMode === 'all' && layoutMode === 'multicol'}" data="{window.getPagedEvents(displayEvents, filterTerm, displayStartIndex, filterTerm ? 10 : 50, categoryFilter)}" columns="3" gap="$space-3" rowGap="0" minColumnWidth="300px">
       <EventCard event="{$item}" filterTerm="{filterTerm}" categoryColorMap="{window.categoryColorMap}" categoryList="{window.categoryList}" />
     </Masonry>
-    <List when="{events.loaded && viewMode === 'all' && layoutMode !== 'multicol'}" data="{window.getPagedEvents(processedEvents, filterTerm, displayStartIndex, filterTerm ? 10 : 50, categoryFilter)}" fixedItemSize="true" limit="{filterTerm ? 10 : 50}">
+    <List when="{events.loaded && viewMode === 'all' && layoutMode !== 'multicol'}" data="{window.getPagedEvents(displayEvents, filterTerm, displayStartIndex, filterTerm ? 10 : 50, categoryFilter)}" fixedItemSize="true" limit="{filterTerm ? 10 : 50}">
       <EventCard event="{$item}" filterTerm="{filterTerm}" categoryColorMap="{window.categoryColorMap}" categoryList="{window.categoryList}" />
     </List>
     <Button
