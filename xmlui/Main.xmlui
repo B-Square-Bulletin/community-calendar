@@ -266,7 +266,7 @@
         <Option value="picks" label="my picks" />
       </HStack>
     </RadioGroup>
-    <VStack when="{eventDayRange && events.loaded && viewMode === 'all'}" gap="$space-0">
+    <VStack when="{eventDayRange && events.loaded && viewMode === 'all' && !window.embed}" gap="$space-0">
       <HStack>
         <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{window.formatDayOffset(sliderRange ? sliderRange[0] : eventDayRange[0])}" />
         <SpaceFiller />
