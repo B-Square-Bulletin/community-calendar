@@ -4,42 +4,6 @@ PRODID:-//WFHB Community Calendar//wfhb.org//
 X-WR-CALNAME:WFHB Community Calendar
 X-WR-TIMEZONE:America/Indiana/Indianapolis
 BEGIN:VEVENT
-SUMMARY:Country Line Dancing
-DTSTART;TZID=America/Indiana/Indianapolis:20260413T183000
-DTEND;TZID=America/Indiana/Indianapolis:20260413T210000
-UID:ai1ec-138460-92664@wfhb.org
-DESCRIPTION:
-LOCATION:Mike's Music and Dance Barn\, 2341 State Road 46 West\, Nashville
-URL:https://wfhb.org/event/country-line-dancing-all-ages/?instance_id=9266
- 4
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Trivia Night w/Bloomington Pub Quiz  (21+)
-DTSTART;TZID=America/Indiana/Indianapolis:20260413T203000
-DTEND;TZID=America/Indiana/Indianapolis:20260413T223000
-UID:ai1ec-144411-92772@wfhb.org
-DESCRIPTION:Hey smart people!! Trivia Nights are now your favorite thing t
- o do on Mondays! We promise to keep the sports to a minimum!
-LOCATION:The Back Door\, 207 South College Ave.\, in the alley behind the 
- Atlas Ballroom\, Bloomington
-URL:https://wfhb.org/event/trivia-night-w-bloomington-pub-quiz-21-3/?insta
- nce_id=92772
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Rainbow Elders Second Monday Social Hour
-DTSTART;TZID=America/Indiana/Indianapolis:20260413T210600
-DTEND;TZID=America/Indiana/Indianapolis:20260413T220600
-UID:ai1ec-146820-94137@wfhb.org
-DESCRIPTION:
-LOCATION:Mother Bear's West\, 2980 West Whitehall Crossing Boulevard\, Blo
- omington
-URL:https://wfhb.org/event/rainbow-elders-second-monday-social-hour-7/?ins
- tance_id=94137
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Baby Brilliance
 DTSTART;TZID=America/Indiana/Indianapolis:20260414T100000
 DTEND;TZID=America/Indiana/Indianapolis:20260414T103000
