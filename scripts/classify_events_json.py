@@ -62,9 +62,11 @@ class RateLimitTracker:
     def parse_headers(self, headers):
         """Parse rate limit info from API response headers."""
         try:
-            tokens_limit = int(headers.get("x-ratelimit-tokens-limit", 0))
-            tokens_remaining = int(headers.get("x-ratelimit-tokens-remaining", 0))
-            reset_time = headers.get("x-ratelimit-tokens-reset", "")
+            tokens_limit = int(headers.get("anthropic-ratelimit-tokens-limit", 0))
+            tokens_remaining = int(
+                headers.get("anthropic-ratelimit-tokens-remaining", 0)
+            )
+            reset_time = headers.get("anthropic-ratelimit-tokens-reset", "")
 
             if tokens_limit > 0:
                 # Update tokens_per_minute from API if limit differs
