@@ -100,7 +100,7 @@
   </p>
 
   <footer>
-    <p><strong>How it works</strong> (once productized):</p>
+    <p><strong>How to embed it</strong>:</p>
     <pre>&lt;iframe id="cc"
         src="https://judell.github.io/community-calendar/xmlui/index.html?city=CITY&amp;embed=true&amp;autoheight=true"
         style="display:block;width:100%;height:0;border:0;visibility:hidden;"
@@ -108,8 +108,8 @@
 &lt;script&gt;
 addEventListener('message', function (e) {
   if (e.origin !== 'https://judell.github.io') return;
+  var f = document.getElementById('cc');
   if (e.data &amp;&amp; e.data.type === 'cc-embed-resize') {
-    var f = document.getElementById('cc');
     f.style.height = e.data.height + 'px';
     f.style.visibility = 'visible';
   }
