@@ -179,6 +179,11 @@ The simple path is:
 
 If that works, he is done.
 
+As of April 15, 2026, the Sources panel no longer depends on a
+`get_source_counts` RPC. It computes source counts from the already-loaded
+event list in the client, so that specific function is not part of the minimum
+catch-up path.
+
 ### Only if something breaks
 
 Only drop to object-level checking if the app still fails after the normal
@@ -186,7 +191,7 @@ catch-up path.
 
 The first things to inspect then are:
 
-- feed-management objects such as `feeds`, `get_source_counts`, and `remove_feed`
+- feed-management objects such as `feeds` and `remove_feed`
 - the `deduplicated_events` object and `refresh_deduplicated_events()`
 - supporting indexes if event loading is unexpectedly slow
 
