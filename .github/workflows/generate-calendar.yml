@@ -597,6 +597,19 @@ jobs:
           echo " done"
         done
 
+    - name: Refresh deduplicated events
+      env:
+        SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+        SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+      run: |
+        echo "Refreshing materialized view deduplicated_events..."
+        curl -sL -X POST "${SUPABASE_URL}/rest/v1/rpc/refresh_deduplicated_events" \
+          -H "apikey: ${SUPABASE_SERVICE_KEY}" \
+          -H "Authorization: Bearer ${SUPABASE_SERVICE_KEY}" \
+          -H "Content-Type: application/json" \
+          -d '{}'
+        echo " done"
+
     - name: Generate instance config files
       env:
         SUPABASE_URL: ${{ vars.SUPABASE_URL }}
