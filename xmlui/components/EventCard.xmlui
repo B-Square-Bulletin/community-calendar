@@ -1,4 +1,4 @@
-<Component name="EventCard">
+<Component name="EventCard" var.detailsOpen="{false}">
 
   <Card
     padding="0"
@@ -38,17 +38,71 @@
         margin="0"
         content="{window.getDescriptionSnippet($props.event.description, $props.filterTerm)}"
       />
-      <Text
+      <HStack
         when="{$props.event.description || $props.event.image_url}"
-        fontSize="$fontSize-sm"
-        lineHeight="1.3"
-        color="$color-text-secondary"
-        overflowMode="flow"
-        cursor="pointer"
+        gap="$space-2"
+        verticalAlignment="end"
         marginTop="$space-1"
-        onClick="detailDialog.open($props.event)"
-        value="{(window.getSnippet($props.event.description, $props.event.title) || '') + ' \u24d8'}"
-      />
+      >
+        <Text
+          fontSize="$fontSize-sm"
+          lineHeight="1.3"
+          color="$color-text-secondary"
+          overflowMode="flow"
+          value="{window.getSnippet($props.event.description, $props.event.title) || 'More details'}"
+        />
+        <Text
+          fontSize="$fontSize-xs"
+          fontWeight="600"
+          lineHeight="1"
+          padding="4px 7px"
+          borderRadius="999px"
+          backgroundColor="{detailsOpen ? '$color-primary-100' : '$color-surface-100'}"
+          color="{detailsOpen ? '$color-primary-600' : '$color-text-secondary'}"
+          cursor="pointer"
+          onClick="detailsOpen = !detailsOpen"
+          value="ⓘ"
+        />
+      </HStack>
+      <VStack
+        when="{detailsOpen}"
+        gap="$space-2"
+        marginTop="$space-1"
+        marginHorizontal="$space-2"
+        padding="$space-1_5 $space-2"
+        borderTop="1px solid $color-surface-200"
+        backgroundColor="$color-surface-50"
+        borderRadius="$borderRadius"
+      >
+        <HStack verticalAlignment="start" gap="$space-2">
+          <Markdown
+            when="{$props.event.source}"
+            width="*"
+            fontSize="$fontSize-sm"
+            fontStyle="italic"
+            color="$color-text-tertiary"
+            overflowMode="flow"
+            breakMode="word"
+            openLinkInNewTab="true"
+            content="{window.formatSourceLinks($props.event.source, $props.event.source_urls, (userSettingsData && userSettingsData[0] && userSettingsData[0].hidden_sources) || [])}"
+          />
+          <SpaceFiller />
+          <Icon
+            name="close"
+            width="16px"
+            height="16px"
+            color="$color-text-tertiary"
+            cursor="pointer"
+            tooltip="Hide details"
+            onClick="detailsOpen = false"
+          />
+        </HStack>
+        <Image when="{!showListImages && $props.event.image_url}" src="{$props.event.image_url}" width="100%" fit="contain" />
+        <Markdown when="{$props.event.description}" fontSize="$fontSize-sm" content="{$props.event.description}" />
+        <Link when="{$props.event.url}" to="{$props.event.url}" target="_blank">
+          <Text fontSize="$fontSize-sm" value="Event link" />
+        </Link>
+      </VStack>
       <Image when="{showListImages && $props.event.image_url}" src="{$props.event.image_url}" width="100%" maxHeight="160px" fit="cover" marginTop="$space-1" />
       <HStack verticalAlignment="center" gap="$space-1" marginTop="$space-1_5" paddingTop="$space-1" marginBottom="$space-1">
         <Badge
@@ -111,30 +165,4 @@
     </VStack>
   </ModalDialog>
 
-  <ModalDialog id="detailDialog">
-    <VStack gap="$space-0">
-      <Text fontWeight="600" fontSize="$fontSize-lg" value="{$param.title}" />
-      <Text
-        fontSize="$fontSize-sm"
-        color="$color-text-secondary"
-        value="{window.formatDayOfWeek($param.start_time) + ' ' + window.formatMonthDay($param.start_time) + ($param.all_day ? ', All Day' : (window.formatTime($param.start_time) ? ', ' + window.formatTime($param.start_time) : ''))}"
-      />
-      <Text when="{$param.location}" fontSize="$fontSize-sm" value="{$param.location}" />
-      <Markdown
-        when="{$param.source}"
-        fontSize="$fontSize-sm"
-        fontStyle="italic"
-        color="$color-text-tertiary"
-        overflowMode="flow"
-        breakMode="word"
-        openLinkInNewTab="true"
-        content="{window.formatSourceLinks($param.source, $param.source_urls, (userSettingsData && userSettingsData[0] && userSettingsData[0].hidden_sources) || [])}"
-      />
-      <Image when="{$param.image_url}" src="{$param.image_url}" width="100%" fit="contain" />
-      <Markdown when="{$param.description}" fontSize="$fontSize-sm" content="{$param.description}" />
-      <Link when="{$param.url}" to="{$param.url}" target="_blank">
-        <Text fontSize="$fontSize-sm" value="Event link" />
-      </Link>
-    </VStack>
-  </ModalDialog>
 </Component>

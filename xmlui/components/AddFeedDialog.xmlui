@@ -1,6 +1,8 @@
 <Component
   name="AddFeedDialog"
-  method.open="() => { feedUrl = ''; feedName = ''; previewEvents = null; validating = false; validationError = ''; submitted = false; deleteError = ''; feedsList.invalidate(); dialog.open(); }"
+  method.open="() => { feedUrl = ''; feedName = ''; previewEvents = null; validating = false; validationError = ''; submitted = false; deleteError = ''; activePanel = 'feeds'; feedsList.refetch(); }"
+  method.close="() => { if (activePanel === 'feeds') activePanel = ''; }"
+  method.toggle="() => { if (activePanel === 'feeds') { activePanel = ''; } else { feedUrl = ''; feedName = ''; previewEvents = null; validating = false; validationError = ''; submitted = false; deleteError = ''; activePanel = 'feeds'; feedsList.refetch(); } }"
   var.feedUrl=""
   var.feedName=""
   var.previewEvents="{null}"
@@ -13,6 +15,7 @@
 
   <DataSource
     id="feedsList"
+    when="{activePanel === 'feeds'}"
     url="{appGlobals.supabaseUrl + '/rest/v1/feeds?select=id,name,url,feed_type,status&city=eq.' + (window.cityFilter || 'bloomington') + '&status=eq.active&feed_type=in.(ics_url,curator)&order=name.asc'}"
     headers="{{
       apikey: appGlobals.supabasePublishableKey
@@ -56,7 +59,7 @@
       'Prefer': 'return=minimal'
     }}"
     body="{$param}"
-    onSuccess="() => { submitted = true; feedsList.invalidate(); }"
+    onSuccess="() => { submitted = true; feedsList.refetch(); }"
     onError="(err) => { validationError = 'Failed to save feed: ' + err; }" />
 
   <APICall
@@ -82,11 +85,27 @@
       'Authorization': 'Bearer ' + window.authSession?.access_token
     }}"
     body="{$param}"
-    onSuccess="() => { deleteError = ''; feedsList.invalidate(); }"
+    onSuccess="() => { deleteError = ''; feedsList.refetch(); }"
     onError="(err) => { deleteError = 'Failed to mark feed as removed: ' + (err.message || err); }" />
 
-  <Theme maxWidth-ModalDialog="90%">
-  <ModalDialog id="dialog" title="Manage Feeds" size="lg">
+  <Theme>
+  <Card
+    when="{activePanel === 'feeds'}"
+    width="100%"
+    marginTop="$space-3"
+    marginBottom="$space-3"
+    padding="$space-3"
+    gap="$space-4">
+    <HStack verticalAlignment="start" gap="$space-2">
+      <H3 width="*">Manage Feeds</H3>
+      <Icon
+        name="close"
+        tooltip="Hide feed manager"
+        width="20px"
+        height="20px"
+        color="$color-text-secondary"
+        onClick="activePanel = ''" />
+    </HStack>
     <VStack gap="$space-4">
 
       <!-- Add feed form (hidden after preview loads) -->
@@ -186,6 +205,6 @@
       </VStack>
 
     </VStack>
-  </ModalDialog>
+  </Card>
   </Theme>
 </Component>

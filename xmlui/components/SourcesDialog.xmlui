@@ -1,6 +1,8 @@
 <Component
   name="SourcesDialog"
-  method.open="() => { suggestName = ''; suggestUrl = ''; suggestFeedType = ''; suggestNotes = ''; suggestSuccess = false; suggestError = ''; showSuggestForm = false; localHidden = ($props.hiddenSources || []).slice(); dirty = false; dialog.open(); }"
+  method.open="() => { suggestName = ''; suggestUrl = ''; suggestFeedType = ''; suggestNotes = ''; suggestSuccess = false; suggestError = ''; showSuggestForm = false; localHidden = ($props.hiddenSources || []).slice(); activePanel = 'sources'; }"
+  method.close="() => { if (activePanel === 'sources') activePanel = ''; }"
+  method.toggle="() => { if (activePanel === 'sources') { activePanel = ''; } else { suggestName = ''; suggestUrl = ''; suggestFeedType = ''; suggestNotes = ''; suggestSuccess = false; suggestError = ''; showSuggestForm = false; localHidden = ($props.hiddenSources || []).slice(); activePanel = 'sources'; } }"
   var.showSuggestForm="{false}"
   var.suggestName=""
   var.suggestUrl=""
@@ -9,8 +11,7 @@
   var.isSubmitting="{false}"
   var.suggestSuccess="{false}"
   var.suggestError=""
-  var.localHidden="{[]}"
-  var.dirty="{false}">
+  var.localHidden="{[]}">
 
   <APICall
     id="suggestApi"
@@ -34,6 +35,7 @@
   <DataSource
     id="sourceNames"
     url="{appGlobals.supabaseUrl + '/rest/v1/rpc/get_source_counts'}"
+    when="{activePanel === 'sources'}"
     method="post"
     headers="{{
       'Content-Type': 'application/json',
@@ -42,13 +44,47 @@
     body="{{'target_city': window.cityFilter || 'bloomington'}}"
   />
 
-  <Theme maxWidth-ModalDialog="90%">
-  <ModalDialog id="dialog" title="Sources"
-    onClose="() => { if (dirty) { applyHiddenSources(localHidden); } }">
+  <Theme>
+  <Card
+    when="{activePanel === 'sources'}"
+    width="100%"
+    marginTop="$space-3"
+    marginBottom="$space-3"
+    padding="$space-3"
+    gap="$space-3">
+    <HStack verticalAlignment="start" gap="$space-2">
+      <VStack width="*" gap="$space-1">
+        <H3>Sources</H3>
+        <Text
+          value="{$props.events ? window.dedupeEvents($props.events).length + ' events for the next ' + window.getQueryMonths() + ' months' : 'Loading...'}" />
+      </VStack>
+      <Icon
+        name="close"
+        tooltip="Hide sources"
+        width="20px"
+        height="20px"
+        color="$color-text-secondary"
+        onClick="activePanel = ''" />
+    </HStack>
+
     <VStack gap="$space-3">
       <Text
-        value="{$props.events ? window.dedupeEvents($props.events).length + ' events for the next ' + window.getQueryMonths() + ' months' : 'Loading...'}" />
+        fontSize="$fontSize-sm"
+        color="$color-text-secondary">
+        Uncheck sources to hide them from this view.
+      </Text>
+      <Spinner when="{sourceNames.inProgress}" />
+      <VStack when="{sourceNames.error}" gap="$space-2">
+        <Text color="$color-danger-500">
+          Source counts did not load.
+        </Text>
+        <Button
+          label="Retry"
+          variant="ghost"
+          onClick="sourceNames.refetch()" />
+      </VStack>
       <Table
+        when="{sourceNames.loaded && !sourceNames.error}"
         data="{sourceNames.value || []}"
         idKey="name"
         sortBy="event_count"
@@ -61,7 +97,7 @@
             width="fit-content"
             aria-label="{$item.name}"
             value="{!window.isSourceHidden($item.name, localHidden)}"
-            onClick="() => { localHidden = localHidden.indexOf($item.name) >= 0 ? localHidden.filter(function(s) { return s !== $item.name; }) : localHidden.concat([$item.name]); dirty = true; }"
+            onClick="() => { const next = localHidden.indexOf($item.name) >= 0 ? localHidden.filter(function(s) { return s !== $item.name; }) : localHidden.concat([$item.name]); localHidden = next; applyHiddenSources(next); }"
           />
         </Column>
         <Column bindTo="name" header="Source" width="*" minWidth="160px">
@@ -200,6 +236,6 @@
       </VStack>
 
     </VStack>
-  </ModalDialog>
+  </Card>
   </Theme>
 </Component>

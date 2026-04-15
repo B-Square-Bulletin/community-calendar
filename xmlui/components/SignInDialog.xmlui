@@ -1,5 +1,27 @@
-<Component name="SignInDialog" method.open="() => dialog.open()" var.magicEmail="" var.magicSent="{false}">
-  <ModalDialog id="dialog" title="Sign In">
+<Component
+  name="SignInDialog"
+  method.open="() => { magicEmail = ''; magicSent = false; activePanel = 'signIn'; }"
+  method.close="() => { if (activePanel === 'signIn') activePanel = ''; }"
+  method.toggle="() => { if (activePanel === 'signIn') { activePanel = ''; } else { magicEmail = ''; magicSent = false; activePanel = 'signIn'; } }"
+  var.magicEmail=""
+  var.magicSent="{false}">
+  <Card
+    when="{activePanel === 'signIn'}"
+    width="100%"
+    marginTop="$space-3"
+    marginBottom="$space-3"
+    padding="$space-3"
+    gap="$space-3">
+    <HStack verticalAlignment="start" gap="$space-2">
+      <H3 width="*">Sign In</H3>
+      <Icon
+        name="close"
+        tooltip="Hide sign in"
+        width="20px"
+        height="20px"
+        color="$color-text-secondary"
+        onClick="activePanel = ''" />
+    </HStack>
     <VStack gap="$space-3">
       <Button label="Sign in with GitHub" onClick="window.signIn('github')" />
       <Button label="Sign in with Google" onClick="window.signIn('google')" />
@@ -21,5 +43,5 @@
         Check your email for a sign-in link!
       </Text>
     </VStack>
-  </ModalDialog>
+  </Card>
 </Component>

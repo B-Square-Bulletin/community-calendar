@@ -13,6 +13,7 @@ var pickEvent = null;
 var enrichmentsData = null;
 var picksCounter = 0;
 var eventsCounter = 0;
+var activePanel = '';
 var moreHasMore = false;
 var moreNextIndex = null;
 var moreHasPrev = false;
@@ -69,6 +70,20 @@ var dashboardGridLayout = null;
 function setCategoryFilter(category) {
   categoryFilter = category || '';
   window.syncCategoryParam(categoryFilter);
+}
+
+function openPanel(name) {
+  activePanel = name || '';
+}
+
+function closePanel(name) {
+  if (!name || activePanel === name) {
+    activePanel = '';
+  }
+}
+
+function togglePanel(name) {
+  activePanel = activePanel === name ? '' : name;
 }
 
 function togglePick(event) {

@@ -13,6 +13,7 @@
   global.authSession="{authSession}"
   var.city="{window.cityFilter || null}"
   global.isAdmin="{false}"
+  global.activePanel="{''}"
   var.eventDayRange="{null}"
   var.sliderRange="{false}"
   var.sliderStart="{null}"
@@ -21,7 +22,8 @@
   <!-- DataSources -->
   <DataSource
     id="events"
-    url="{appGlobals.supabaseUrl + '/rest/v1/deduplicated_events?select=*&order=start_time.asc&limit=5000&start_time=gte.' + window.getFromDate() + '&start_time=lte.' + window.getToDate() + (city ? '&city=eq.' + city : '')}"
+    when="{city}"
+    url="{appGlobals.supabaseUrl + '/rest/v1/deduplicated_events?select=id,title,start_time,end_time,url,location,description,source,transcript,cluster_id,source_urls,category,image_url,all_day,merged_ids&order=start_time.asc&limit=5000&start_time=gte.' + window.getFromDate() + '&start_time=lte.' + window.getToDate() + (city ? '&city=eq.' + city : '')}"
     headers="{{
       apikey: appGlobals.supabasePublishableKey,
       'Cache-Control': 'no-cache, no-store, must-revalidate'
@@ -41,7 +43,7 @@
 
   <DataSource
     id="userSettings"
-    when="{authSession}"
+    when="{authSession && city}"
     url="{appGlobals.supabaseUrl + '/rest/v1/user_settings?select=*&city=eq.' + city + '&limit=1'}"
     headers="{{
       apikey: appGlobals.supabasePublishableKey,
@@ -122,6 +124,7 @@
 
   <DataSource
     id="enrichments"
+    when="{city}"
     url="{appGlobals.supabaseUrl + '/rest/v1/event_enrichments?select=*&rrule=not.is.null' + (city ? '&city=eq.' + city : '')}"
     headers="{{
       apikey: appGlobals.supabasePublishableKey,
@@ -145,45 +148,8 @@
     onDidChange="() => { if (!sliderRange && processedEvents && processedEvents.length > 100) { eventDayRange = window.getEventDayRange(processedEvents) } }"
   />
 
-  <!-- Dialogs -->
-  <SignInDialog id="signInDialog" />
-  <SourcesDialog id="sourcesDialog" events="{events.value}" hiddenSources="{hiddenSources}" />
-  <CaptureDialog id="captureDialog" />
-  <AudioCaptureDialog id="audioCaptureDialog" />
-  <AddFeedDialog id="addFeedDialog" />
+  <!-- Overlays -->
   <PickEditor when="{!!pickEvent}" event="{pickEvent}" onClose="pickEvent = null" onSaved="picksCounter = picksCounter + 1" />
-
-  <ModalDialog id="settingsDialog" title="Display Settings" maxWidth="400px">
-    <HStack verticalAlignment="start" gap="$space-6">
-      <VStack gap="$space-1">
-        <Text fontWeight="$fontWeight-bold" fontSize="$fontSize-sm">Layout</Text>
-        <RadioGroup initialValue="{layoutMode}" onDidChange="(val) => { window.setLayoutMode(val); layoutMode = val; if (authSession) { userSettingsData = window.saveUserSetting({ layout_mode: val }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey) } }">
-          <VStack>
-            <Option value="list" label="Single column" fontSize="$fontSize-sm" />
-            <Option value="multicol" label="Multi column" fontSize="$fontSize-sm" />
-            <Option when="{!!authSession}" value="dashboard" label="Dashboard" fontSize="$fontSize-sm" />
-          </VStack>
-        </RadioGroup>
-      </VStack>
-      <VStack gap="$space-1">
-        <Text fontWeight="$fontWeight-bold" fontSize="$fontSize-sm">Images</Text>
-        <RadioGroup initialValue="{showListImages ? 'list' : 'preview'}" onDidChange="(val) => { window.setShowListImages(val); showListImages = (val !== 'preview'); if (authSession) { userSettingsData = window.saveUserSetting({ image_mode: val === 'preview' ? 'preview' : 'everywhere' }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey) } }">
-          <VStack>
-            <Option value="list" label="Everywhere" fontSize="$fontSize-sm" />
-            <Option value="preview" label="Only in previews" fontSize="$fontSize-sm" />
-          </VStack>
-        </RadioGroup>
-      </VStack>
-    </HStack>
-    <VStack when="{!!authSession}" gap="$space-1" marginTop="$space-4">
-      <Text fontWeight="$fontWeight-bold" fontSize="$fontSize-sm">Picks</Text>
-      <Checkbox
-        label="One-click pick (skip editor)"
-        initialValue="{oneClickPick}"
-        onClick="oneClickPick = !oneClickPick; window.saveUserSetting({ one_click_pick: oneClickPick }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey)"
-      />
-    </VStack>
-  </ModalDialog>
 
   <!-- City list from Supabase (distinct cities with events) -->
   <DataSource
@@ -216,14 +182,75 @@
       <H1>
         <HStack width="100%" verticalAlignment="center">
           <Text overflowMode="ellipsis" maxLines="1" width="*">{window.toDisplayName(city)}</Text>
-          <IncludeMarkup when="{!window.embed}" url="components/IconRow.xmlui" />
+          <IncludeMarkup when="{!window.embed}" url="{'components/IconRow.xmlui?v=' + window.APP_VERSION}" />
           <HStack when="{window.embed}" gap="$space-1" verticalAlignment="center">
-            <Icon name="l-rss" tooltip="Sources" width="20px" height="20px" color="$color-surface-500" onClick="sourcesDialog.open()" />
+            <Icon
+              name="l-rss"
+              tooltip="Sources"
+              width="20px"
+              height="20px"
+              color="{activePanel === 'sources' ? '$color-primary-600' : '$color-surface-500'}"
+              backgroundColor="{activePanel === 'sources' ? '$color-surface-200' : 'transparent'}"
+              borderRadius="999px"
+              padding="$space-0_5"
+              onClick="sourcesDialog.toggle()" />
             <Inspector src="{'xmlui/xs-diff.html?v=' + window.APP_VERSION}" />
           </HStack>
         </HStack>
       </H1>
     </Bookmark>
+    <SignInDialog id="signInDialog" />
+    <CaptureDialog id="captureDialog" />
+    <AudioCaptureDialog id="audioCaptureDialog" />
+    <SourcesDialog id="sourcesDialog" events="{events.value}" hiddenSources="{hiddenSources}" />
+    <Card
+      when="{activePanel === 'settings'}"
+      width="100%"
+      marginTop="$space-3"
+      marginBottom="$space-3"
+      padding="$space-3"
+      gap="$space-3">
+      <HStack verticalAlignment="start" gap="$space-2">
+        <H3 width="*">Display Settings</H3>
+        <Icon
+          name="close"
+          tooltip="Hide settings"
+          width="20px"
+          height="20px"
+          color="$color-text-secondary"
+          onClick="activePanel = ''" />
+      </HStack>
+      <HStack verticalAlignment="start" gap="$space-6">
+        <VStack gap="$space-1">
+          <Text fontWeight="$fontWeight-bold" fontSize="$fontSize-sm">Layout</Text>
+          <RadioGroup initialValue="{layoutMode}" onDidChange="(val) => { window.setLayoutMode(val); layoutMode = val; if (authSession) { userSettingsData = window.saveUserSetting({ layout_mode: val }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey) } }">
+            <VStack>
+              <Option value="list" label="Single column" fontSize="$fontSize-sm" />
+              <Option value="multicol" label="Multi column" fontSize="$fontSize-sm" />
+              <Option when="{!!authSession}" value="dashboard" label="Dashboard" fontSize="$fontSize-sm" />
+            </VStack>
+          </RadioGroup>
+        </VStack>
+        <VStack gap="$space-1">
+          <Text fontWeight="$fontWeight-bold" fontSize="$fontSize-sm">Images</Text>
+          <RadioGroup initialValue="{showListImages ? 'list' : 'preview'}" onDidChange="(val) => { window.setShowListImages(val); showListImages = (val !== 'preview'); if (authSession) { userSettingsData = window.saveUserSetting({ image_mode: val === 'preview' ? 'preview' : 'everywhere' }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey) } }">
+            <VStack>
+              <Option value="list" label="Everywhere" fontSize="$fontSize-sm" />
+              <Option value="preview" label="Only in previews" fontSize="$fontSize-sm" />
+            </VStack>
+          </RadioGroup>
+        </VStack>
+      </HStack>
+      <VStack when="{!!authSession}" gap="$space-1">
+        <Text fontWeight="$fontWeight-bold" fontSize="$fontSize-sm">Picks</Text>
+        <Checkbox
+          label="One-click pick (skip editor)"
+          initialValue="{oneClickPick}"
+          onClick="oneClickPick = !oneClickPick; window.saveUserSetting({ one_click_pick: oneClickPick }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey)"
+        />
+      </VStack>
+    </Card>
+    <AddFeedDialog id="addFeedDialog" />
     <HStack verticalAlignment="center" marginBottom="$space-2" gap="$space-2">
       <HStack verticalAlignment="center" gap="$space-1" width="*">
         <TextBox
@@ -235,18 +262,20 @@
           onDidChange="(val) => { filterTerm = val; displayStartIndex = browseStartIndex; window.syncSearchParam(val); }"
           width="*"
         />
-        <Icon
-          name="close"
-          width="20px"
-          height="20px"
-          cursor="pointer"
-          color="$color-text-tertiary"
-          opacity="{filterTerm ? 1 : 0}"
+          <Icon
+            name="close"
+            tooltip="Clear search"
+            width="20px"
+            height="20px"
+            cursor="pointer"
+            color="$color-text-tertiary"
+            opacity="{filterTerm ? 1 : 0}"
           onClick="searchBox.setValue(''); setCategoryFilter(''); window.syncSearchParam(''); displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1"
         />
       </HStack>
       <Select
         id="categorySelect"
+        aria-label="Event category"
         placeholder="All categories"
         clearable="true"
         fontSize="$fontSize-sm"
@@ -332,13 +361,74 @@
     <H1>
       <HStack width="100%" verticalAlignment="center">
         <Text overflowMode="ellipsis" maxLines="1" width="*">{window.cityName || 'Community Calendar'}</Text>
-        <IncludeMarkup when="{!window.embed}" url="components/IconRow.xmlui" />
+        <IncludeMarkup when="{!window.embed}" url="{'components/IconRow.xmlui?v=' + window.APP_VERSION}" />
         <HStack when="{window.embed}" gap="$space-1" verticalAlignment="center">
-          <Icon name="l-rss" tooltip="Sources" width="20px" height="20px" color="$color-surface-500" onClick="sourcesDialog.open()" />
+          <Icon
+            name="l-rss"
+            tooltip="Sources"
+            width="20px"
+            height="20px"
+            color="{activePanel === 'sources' ? '$color-primary-600' : '$color-surface-500'}"
+            backgroundColor="{activePanel === 'sources' ? '$color-surface-200' : 'transparent'}"
+            borderRadius="999px"
+            padding="$space-0_5"
+            onClick="sourcesDialog.toggle()" />
           <Inspector src="{'xmlui/xs-diff.html?v=' + window.APP_VERSION}" />
         </HStack>
       </HStack>
     </H1>
+    <SignInDialog id="signInDialog" />
+    <CaptureDialog id="captureDialog" />
+    <AudioCaptureDialog id="audioCaptureDialog" />
+    <SourcesDialog id="sourcesDialog" events="{events.value}" hiddenSources="{hiddenSources}" />
+    <Card
+      when="{activePanel === 'settings'}"
+      width="100%"
+      marginTop="$space-3"
+      marginBottom="$space-3"
+      padding="$space-3"
+      gap="$space-3">
+      <HStack verticalAlignment="start" gap="$space-2">
+        <H3 width="*">Display Settings</H3>
+        <Icon
+          name="close"
+          tooltip="Hide settings"
+          width="20px"
+          height="20px"
+          color="$color-text-secondary"
+          onClick="activePanel = ''" />
+      </HStack>
+      <HStack verticalAlignment="start" gap="$space-6">
+        <VStack gap="$space-1">
+          <Text fontWeight="$fontWeight-bold" fontSize="$fontSize-sm">Layout</Text>
+          <RadioGroup initialValue="{layoutMode}" onDidChange="(val) => { window.setLayoutMode(val); layoutMode = val; if (authSession) { userSettingsData = window.saveUserSetting({ layout_mode: val }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey) } }">
+            <VStack>
+              <Option value="list" label="Single column" fontSize="$fontSize-sm" />
+              <Option value="multicol" label="Multi column" fontSize="$fontSize-sm" />
+              <Option when="{!!authSession}" value="dashboard" label="Dashboard" fontSize="$fontSize-sm" />
+            </VStack>
+          </RadioGroup>
+        </VStack>
+        <VStack gap="$space-1">
+          <Text fontWeight="$fontWeight-bold" fontSize="$fontSize-sm">Images</Text>
+          <RadioGroup initialValue="{showListImages ? 'list' : 'preview'}" onDidChange="(val) => { window.setShowListImages(val); showListImages = (val !== 'preview'); if (authSession) { userSettingsData = window.saveUserSetting({ image_mode: val === 'preview' ? 'preview' : 'everywhere' }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey) } }">
+            <VStack>
+              <Option value="list" label="Everywhere" fontSize="$fontSize-sm" />
+              <Option value="preview" label="Only in previews" fontSize="$fontSize-sm" />
+            </VStack>
+          </RadioGroup>
+        </VStack>
+      </HStack>
+      <VStack when="{!!authSession}" gap="$space-1">
+        <Text fontWeight="$fontWeight-bold" fontSize="$fontSize-sm">Picks</Text>
+        <Checkbox
+          label="One-click pick (skip editor)"
+          initialValue="{oneClickPick}"
+          onClick="oneClickPick = !oneClickPick; window.saveUserSetting({ one_click_pick: oneClickPick }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey)"
+        />
+      </VStack>
+    </Card>
+    <AddFeedDialog id="addFeedDialog" />
     <DashboardView />
   </VStack>
 </App>

@@ -1,11 +1,29 @@
 <Component
   name="CaptureDialog"
-  method.open="() => { isExtracting = false; errorMessage = ''; dialog.open(); }"
+  method.open="() => { isExtracting = false; errorMessage = ''; activePanel = 'capture'; }"
+  method.close="() => { if (activePanel === 'capture') activePanel = ''; }"
+  method.toggle="() => { if (activePanel === 'capture') { activePanel = ''; } else { isExtracting = false; errorMessage = ''; activePanel = 'capture'; } }"
   var.isExtracting="{false}"
   var.errorMessage=""
 >
 
-  <ModalDialog id="dialog" title="Capture Event from Poster" minWidth="400px">
+  <Card
+    when="{activePanel === 'capture'}"
+    width="100%"
+    marginTop="$space-3"
+    marginBottom="$space-3"
+    padding="$space-3"
+    gap="$space-3">
+    <HStack verticalAlignment="start" gap="$space-2">
+      <H3 width="*">Capture Event from Poster</H3>
+      <Icon
+        name="close"
+        tooltip="Hide poster capture"
+        width="20px"
+        height="20px"
+        color="$color-text-secondary"
+        onClick="activePanel = ''" />
+    </HStack>
     <VStack gap="$space-3" padding="$space-2">
 
       <!-- Select image -->
@@ -32,7 +50,7 @@
                 url: result.event.url || '',
                 recurrence_until: result.event.recurrence_until || ''
               };
-              dialog.close();
+              activePanel = '';
             } else {
               errorMessage = result?.error || 'Failed to extract event';
             }
@@ -54,5 +72,5 @@
       />
 
     </VStack>
-  </ModalDialog>
+  </Card>
 </Component>

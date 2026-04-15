@@ -1,13 +1,31 @@
 <Component
   name="AudioCaptureDialog"
-  method.open="() => { isExtracting = false; isRecording = false; captureMode = ''; errorMessage = ''; dialog.open(); }"
+  method.open="() => { isExtracting = false; isRecording = false; captureMode = ''; errorMessage = ''; activePanel = 'audio'; }"
+  method.close="() => { if (activePanel === 'audio') activePanel = ''; }"
+  method.toggle="() => { if (activePanel === 'audio') { activePanel = ''; } else { isExtracting = false; isRecording = false; captureMode = ''; errorMessage = ''; activePanel = 'audio'; } }"
   var.isExtracting="{false}"
   var.isRecording="{false}"
   var.captureMode=""
   var.errorMessage=""
 >
 
-  <ModalDialog id="dialog" title="Capture Event from Audio" minWidth="400px">
+  <Card
+    when="{activePanel === 'audio'}"
+    width="100%"
+    marginTop="$space-3"
+    marginBottom="$space-3"
+    padding="$space-3"
+    gap="$space-3">
+    <HStack verticalAlignment="start" gap="$space-2">
+      <H3 width="*">Capture Event from Audio</H3>
+      <Icon
+        name="close"
+        tooltip="Hide audio capture"
+        width="20px"
+        height="20px"
+        color="$color-text-secondary"
+        onClick="activePanel = ''" />
+    </HStack>
     <VStack gap="$space-3" padding="$space-2">
 
       <!-- Mode selection -->
@@ -49,7 +67,7 @@
                 transcript: result.transcript || '',
                 recurrence_until: result.event.recurrence_until || ''
               };
-              dialog.close();
+              activePanel = '';
             } else {
               errorMessage = result?.error || 'Failed to extract event from audio';
             }
@@ -109,7 +127,7 @@
                 transcript: result.transcript || '',
                 recurrence_until: result.event.recurrence_until || ''
               };
-              dialog.close();
+              activePanel = '';
             } else {
               errorMessage = result?.error || 'Failed to extract event from audio';
               captureMode = 'record';
@@ -132,5 +150,5 @@
       />
 
     </VStack>
-  </ModalDialog>
+  </Card>
 </Component>

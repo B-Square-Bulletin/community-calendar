@@ -1,50 +1,94 @@
 <Fragment>
   <HStack gap="$space-1" verticalAlignment="center">
-    <Icon
+    <Stack
       when="{!authUser}"
-      name="l-user"
-      tooltip="Sign In"
-      width="20px"
-      height="20px"
-      color="$color-surface-500"
-      onClick="signInDialog.open()"
-    />
+      backgroundColor="{activePanel === 'signIn' ? '$color-surface-200' : 'transparent'}"
+      borderRadius="999px"
+      padding="$space-0_5">
+      <Icon
+        name="l-user"
+        tooltip="Sign In"
+        width="20px"
+        height="20px"
+        color="{activePanel === 'signIn' ? '$color-primary-600' : '$color-surface-500'}"
+        onClick="signInDialog.toggle()"
+      />
+    </Stack>
     <Icon
       when="{authUser}"
       name="l-user"
       tooltip="{'Sign Out (' + (authUser?.user_metadata?.user_name || authUser?.email || 'user') + ')'}"
-      width="20px"
-      height="20px"
+      width="24px"
+      height="24px"
       color="$color-surface-500"
       onClick="window.signOut()"
     />
-    <Icon
-      name="l-camera"
-      tooltip="{authUser ? 'Capture Event from Poster' : 'Sign in to capture events from posters'}"
-      width="20px"
-      height="20px"
-      color="{authUser ? '$color-surface-500' : '$color-surface-300'}"
-      onClick="{ if (authUser) { captureDialog.open() } else { signInDialog.open() } }"
-    />
-    <Icon
-      name="mic"
-      tooltip="{authUser ? 'Capture Event from Audio' : 'Sign in to capture events with voice'}"
-      width="20px"
-      height="20px"
-      color="{authUser ? '$color-surface-500' : '$color-surface-300'}"
-      onClick="{ if (authUser) { audioCaptureDialog.open() } else { signInDialog.open() } }"
-    />
-    <Icon name="l-rss" tooltip="Sources" width="20px" height="20px" color="$color-surface-500" onClick="sourcesDialog.open()" />
-    <Icon name="l-settings" tooltip="Display settings" width="20px" height="20px" color="$color-surface-500" onClick="settingsDialog.open()" />
-    <Icon
+    <Stack
+      backgroundColor="{activePanel === 'capture' ? '$color-surface-200' : 'transparent'}"
+      borderRadius="999px"
+      padding="$space-0_5">
+      <Icon
+        name="l-camera"
+        tooltip="{authUser ? 'Capture Event from Poster' : 'Sign in to capture events from posters'}"
+        width="20px"
+        height="20px"
+        color="{activePanel === 'capture' ? '$color-primary-600' : (authUser ? '$color-surface-500' : '$color-surface-300')}"
+        onClick="{ if (authUser) { captureDialog.toggle() } else { signInDialog.open() } }"
+      />
+    </Stack>
+    <Stack
+      backgroundColor="{activePanel === 'audio' ? '$color-surface-200' : 'transparent'}"
+      borderRadius="999px"
+      padding="$space-0_5">
+      <Icon
+        name="mic"
+        tooltip="{authUser ? 'Capture Event from Audio' : 'Sign in to capture events with voice'}"
+        width="20px"
+        height="20px"
+        color="{activePanel === 'audio' ? '$color-primary-600' : (authUser ? '$color-surface-500' : '$color-surface-300')}"
+        onClick="{ if (authUser) { audioCaptureDialog.toggle() } else { signInDialog.open() } }"
+      />
+    </Stack>
+    <Stack
+      backgroundColor="{activePanel === 'sources' ? '$color-surface-200' : 'transparent'}"
+      borderRadius="999px"
+      padding="$space-0_5">
+      <Icon
+        name="l-rss"
+        tooltip="Sources"
+        width="20px"
+        height="20px"
+        color="{activePanel === 'sources' ? '$color-primary-600' : '$color-surface-500'}"
+        onClick="sourcesDialog.toggle()"
+      />
+    </Stack>
+    <Stack
+      backgroundColor="{activePanel === 'settings' ? '$color-surface-200' : 'transparent'}"
+      borderRadius="999px"
+      padding="$space-0_5">
+      <Icon
+        name="l-settings"
+        tooltip="Display settings"
+        width="20px"
+        height="20px"
+        color="{activePanel === 'settings' ? '$color-primary-600' : '$color-surface-500'}"
+        onClick="togglePanel('settings')"
+      />
+    </Stack>
+    <Stack
       when="{isAdmin}"
-      name="l-calendar-plus-2"
-      tooltip="Manage Feeds"
-      width="20px"
-      height="20px"
-      color="$color-surface-500"
-      onClick="addFeedDialog.open()"
-    />
+      backgroundColor="{activePanel === 'feeds' ? '$color-surface-200' : 'transparent'}"
+      borderRadius="999px"
+      padding="$space-0_5">
+      <Icon
+        name="l-calendar-plus-2"
+        tooltip="Manage Feeds"
+        width="20px"
+        height="20px"
+        color="{activePanel === 'feeds' ? '$color-primary-600' : '$color-surface-500'}"
+        onClick="addFeedDialog.toggle()"
+      />
+    </Stack>
     <Inspector src="{'xmlui/xs-diff.html?v=' + window.APP_VERSION}" />
     <Stack transform="scale(0.5)" marginRight="-18px" marginLeft="-12px" height="20px" verticalAlignment="center">
       <ToneSwitch />
