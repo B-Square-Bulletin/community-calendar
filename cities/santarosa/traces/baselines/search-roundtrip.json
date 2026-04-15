@@ -16,32 +16,7 @@
         "api": [
           {
             "method": "GET",
-            "endpoint": "https://dzpdualvwspgqghrysyz.supabase.co/rest/v1/events",
-            "apiResult": {
-              "type": "rowcount",
-              "count": 4291,
-              "keys": [
-                "all_day",
-                "category",
-                "city",
-                "cluster_id",
-                "created_at",
-                "description",
-                "end_time",
-                "ics_categories",
-                "id",
-                "image_url",
-                "location",
-                "source",
-                "source_id",
-                "source_uid",
-                "source_urls",
-                "start_time",
-                "title",
-                "transcript",
-                "url"
-              ]
-            }
+            "endpoint": "https://dzpdualvwspgqghrysyz.supabase.co/rest/v1/deduplicated_events"
           },
           {
             "method": "GET",
@@ -77,33 +52,6 @@
           {
             "method": "GET",
             "endpoint": "https://dzpdualvwspgqghrysyz.supabase.co/rest/v1/event_enrichments"
-          },
-          {
-            "method": "POST",
-            "endpoint": "https://dzpdualvwspgqghrysyz.supabase.co/rest/v1/rpc/get_source_counts",
-            "apiResult": {
-              "type": "rowcount",
-              "count": 55,
-              "keys": [
-                "event_count",
-                "name"
-              ]
-            }
-          },
-          {
-            "method": "GET",
-            "endpoint": "https://dzpdualvwspgqghrysyz.supabase.co/rest/v1/feeds",
-            "apiResult": {
-              "type": "rowcount",
-              "count": 26,
-              "keys": [
-                "feed_type",
-                "id",
-                "name",
-                "status",
-                "url"
-              ]
-            }
           }
         ]
       },

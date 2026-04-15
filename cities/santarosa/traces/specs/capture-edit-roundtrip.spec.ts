@@ -10,7 +10,7 @@ test('capture-edit-roundtrip', async ({ page }) => {
     const santaRosaBtn = page.getByText('Santa Rosa Now', { exact: true });
     await expect(santaRosaBtn).toBeVisible({ timeout: 10000 });
     await Promise.all([
-      page.waitForResponse(r => r.url().includes('/rest/v1/events') && !r.url().includes('event_enrichments')),
+      page.waitForResponse(r => r.url().includes('/rest/v1/deduplicated_events')),
       santaRosaBtn.click(),
     ]);
 
@@ -40,7 +40,7 @@ test('capture-edit-roundtrip', async ({ page }) => {
     // --- Edit the form fields before submitting (regression test for #edit-bug) ---
 
     // Edit the title
-    const titleInput = page.getByLabel('Title');
+    const titleInput = page.getByRole('textbox', { name: 'Title' });
     await titleInput.click();
     await titleInput.fill('Edited: Test Capture Event');
 
@@ -55,7 +55,7 @@ test('capture-edit-roundtrip', async ({ page }) => {
     await minuteInput.press('Tab');
 
     // Edit the description
-    const descriptionInput = page.getByLabel('Description');
+    const descriptionInput = page.getByRole('textbox', { name: 'Description' });
     await descriptionInput.click();
     await descriptionInput.fill('Edited description for regression test');
 

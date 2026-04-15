@@ -10,7 +10,7 @@ test('pick-roundtrip', async ({ page }) => {
     const santaRosaBtn = page.getByText('Santa Rosa Now', { exact: true });
     await expect(santaRosaBtn).toBeVisible({ timeout: 10000 });
     await Promise.all([
-      page.waitForResponse(r => r.url().includes('/rest/v1/events') && !r.url().includes('event_enrichments')),
+      page.waitForResponse(r => r.url().includes('/rest/v1/deduplicated_events')),
       santaRosaBtn.click(),
     ]);
 
