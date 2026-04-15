@@ -38,7 +38,6 @@ def export_feeds_txt(city, supabase_url, service_key):
     feeds_file = os.path.join("cities", city, "feeds.txt")
     os.makedirs(os.path.dirname(feeds_file), exist_ok=True)
 
-    scrapers = [f for f in feeds if f["feed_type"] == "scraper"]
     ics_urls = [f for f in feeds if f["feed_type"] == "ics_url"]
     curators = [f for f in feeds if f["feed_type"] == "curator"]
 
@@ -46,7 +45,6 @@ def export_feeds_txt(city, supabase_url, service_key):
         out.write(f"# {city.title()} - source inventory\n")
         out.write(f"# Generated from feeds table. Do not edit manually.\n")
         out.write(f"# To add feeds, use pending_feeds.txt in this directory.\n\n")
-            out.write("\n")
 
         if ics_urls:
             out.write("# --- Live feeds ---\n")
