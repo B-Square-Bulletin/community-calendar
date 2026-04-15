@@ -10,6 +10,7 @@
   var.rruleMonthDay="{'MO'}"
   var.rruleUntil="{$props.event?.recurrence_until || ''}"
   var.lastFormData="{null}"
+  var.showRecurrence="{false}"
 >
 
   <!-- API for picking an existing event -->
@@ -101,13 +102,27 @@
     body="{$param}"
   />
 
-  <ModalDialog
-    id="dialog"
-    title="{$props.event?.id ? 'Add to My Picks' : 'Save Captured Event'}"
-    minWidth="400px"
+  <Card
     when="{!!$props.event}"
-    onClose="emitEvent('close')"
+    width="100%"
+    marginTop="{$props.embedded ? '0px' : '$space-3'}"
+    marginBottom="{$props.embedded ? '0px' : '$space-3'}"
+    padding="{$props.embedded ? '0px' : '$space-3'}"
+    gap="{$props.embedded ? '$space-2' : '$space-3'}"
+    border="{$props.embedded ? 'none' : undefined}"
+    boxShadow="{$props.embedded ? 'none' : undefined}"
+    backgroundColor="{$props.embedded ? 'transparent' : undefined}"
   >
+    <HStack when="{!$props.embedded}" verticalAlignment="start" gap="$space-2">
+      <H3 width="*">{$props.event?.id ? 'Add to My Picks' : 'Save Captured Event'}</H3>
+      <Icon
+        name="close"
+        tooltip="Hide pick editor"
+        width="20px"
+        height="20px"
+        color="$color-text-secondary"
+        onClick="emitEvent('close')" />
+    </HStack>
 
     <Form
       id="pickForm"
@@ -126,7 +141,6 @@
           url: $props.event?.url || ''
         };
       })()}"
-      keepModalOpenOnSubmit="true"
       hideButtonRow="{!!savedPickId}"
       saveLabel="{isSaving ? 'Saving...' : 'Add to My Picks'}"
       enableSubmit="{!isSaving}"
@@ -186,64 +200,37 @@
       }"
     >
       <Fragment when="{!savedPickId}">
-        <FormItem
-          bindTo="title"
-          label="Title"
-          required="{!$props.event?.id}"
-          requiredInvalidMessage="Title is required — what is this event called?"
-        />
-        <FormItem
-          bindTo="date"
-          label="Date"
-          type="datePicker"
-          dateFormat="yyyy-MM-dd"
-          required="{!$props.event?.id}"
-          requiredInvalidMessage="Date is required"
-        />
-        <HStack gap="$space-2">
-          <FormItem
-            bindTo="time"
-            label="Start"
-            type="custom"
-            width="50%"
-          >
-            <TimeInput
-              id="startTimeInput"
-              aria-label="Start time"
-              initialValue="{$value}"
-              hour24="false"
-              onDidChange="() => $setValue(startTimeInput.isoValue())"
-            />
-          </FormItem>
-          <FormItem
-            bindTo="endTime"
-            label="End"
-            type="custom"
-            width="50%"
-          >
-            <TimeInput
-              id="endTimeInput"
-              aria-label="End time"
-              initialValue="{$value}"
-              hour24="false"
-              onDidChange="() => $setValue(endTimeInput.isoValue())"
-            />
-          </FormItem>
-        </HStack>
-        <FormItem bindTo="location" label="Location" />
-        <FormItem bindTo="url" label="URL" placeholder="https://" />
-        <FormItem bindTo="description" label="Description" type="textarea" />
-
-        <!-- Recurrence section -->
-        <ExpandableItem
-          id="recurrenceExpander"
-          summary="Recurrence"
-          initiallyExpanded="{!!window.detectRecurrence($props.event?.description, $props.event?.title)}"
-        >
-          <VStack gap="$space-2" padding="$space-2">
+        <VStack when="{$props.event?.id}" gap="$space-2">
+          <Text fontWeight="600" fontSize="$fontSize-sm" value="{$props.event.title}" />
+          <Text
+            fontSize="$fontSize-sm"
+            color="$color-text-secondary"
+            value="{window.formatDayOfWeek($props.event.start_time) + ' ' + window.formatMonthDay($props.event.start_time) + ($props.event.all_day ? ', All Day' : (window.formatTime($props.event.start_time) ? ', ' + window.formatTime($props.event.start_time) : ''))}"
+          />
+          <Text when="{$props.event.location}" fontSize="$fontSize-sm" color="$color-text-secondary" value="{$props.event.location}" />
+          <Markdown
+            when="{$props.event.source}"
+            fontSize="$fontSize-sm"
+            fontStyle="italic"
+            color="$color-text-tertiary"
+            overflowMode="flow"
+            breakMode="word"
+            openLinkInNewTab="true"
+            content="{window.formatSourceLinks($props.event.source, $props.event.source_urls, (userSettingsData && userSettingsData[0] && userSettingsData[0].hidden_sources) || [])}"
+          />
+          <Text when="{!showRecurrence}" fontSize="$fontSize-sm" color="$color-text-secondary">
+            Add this event to your picks. Recurrence is optional.
+          </Text>
+          <Button
+            label="{showRecurrence ? 'Hide recurrence options' : 'Recurrence'}"
+            variant="ghost"
+            icon="{showRecurrence ? 'chevron-down' : 'chevron-right'}"
+            onClick="showRecurrence = !showRecurrence"
+          />
+          <VStack when="{showRecurrence}" gap="$space-2" padding="$space-2" backgroundColor="$color-surface-50" borderRadius="$borderRadius">
             <Select
               id="freqSelect"
-              initialValue="{window.detectRecurrence($props.event?.description, $props.event?.title)?.frequency || 'none'}"
+              initialValue="{rruleFrequency}"
               onDidChange="(val) => rruleFrequency = val"
             >
               <Option value="none" label="No recurrence" />
@@ -252,7 +239,7 @@
             </Select>
             <VStack when="{rruleFrequency === 'WEEKLY'}" gap="$space-1">
               <Text fontSize="$fontSize-xs" color="$color-text-secondary">Repeat on:</Text>
-              <HStack gap="$space-1">
+              <HStack gap="$space-1" wrapContent="true">
                 <Button size="xs" label="Su" variant="{rruleDays.includes('SU') ? 'solid' : 'outlined'}" onClick="rruleDays = window.toggleDay(rruleDays, 'SU')" />
                 <Button size="xs" label="Mo" variant="{rruleDays.includes('MO') ? 'solid' : 'outlined'}" onClick="rruleDays = window.toggleDay(rruleDays, 'MO')" />
                 <Button size="xs" label="Tu" variant="{rruleDays.includes('TU') ? 'solid' : 'outlined'}" onClick="rruleDays = window.toggleDay(rruleDays, 'TU')" />
@@ -262,44 +249,82 @@
                 <Button size="xs" label="Sa" variant="{rruleDays.includes('SA') ? 'solid' : 'outlined'}" onClick="rruleDays = window.toggleDay(rruleDays, 'SA')" />
               </HStack>
             </VStack>
-            <VStack when="{rruleFrequency === 'MONTHLY'}" gap="$space-1">
-              <Text fontSize="$fontSize-xs" color="$color-text-secondary">Repeat on:</Text>
-              <HStack gap="$space-2" wrapContent="true">
-                <Select initialValue="{String(window.detectRecurrence($props.event?.description, $props.event?.title)?.ordinal || window.getOrdinalWeekday(($props.event?.start_time || '').substring(0, 10))?.ordinal || 1)}" onDidChange="(val) => rruleOrdinal = parseInt(val)">
-                  <Option value="1" label="1st" />
-                  <Option value="2" label="2nd" />
-                  <Option value="3" label="3rd" />
-                  <Option value="4" label="4th" />
-                </Select>
-                <Select initialValue="{window.detectRecurrence($props.event?.description, $props.event?.title)?.monthDay || window.getOrdinalWeekday(($props.event?.start_time || '').substring(0, 10))?.day || 'MO'}" onDidChange="(val) => rruleMonthDay = val">
-                  <Option value="SU" label="Sunday" />
-                  <Option value="MO" label="Monday" />
-                  <Option value="TU" label="Tuesday" />
-                  <Option value="WE" label="Wednesday" />
-                  <Option value="TH" label="Thursday" />
-                  <Option value="FR" label="Friday" />
-                  <Option value="SA" label="Saturday" />
-                </Select>
-              </HStack>
-            </VStack>
-            <HStack when="{rruleFrequency !== 'none'}" gap="$space-1" verticalAlignment="center">
-              <DatePicker
-                id="untilPicker"
-                label="Until (optional)"
-                dateFormat="yyyy-MM-dd"
-                initialValue="{$props.event?.recurrence_until || ''}"
-                onDidChange="(val) => rruleUntil = val"
-              />
-              <Button
-                when="{rruleUntil}"
-                size="xs"
-                variant="ghost"
-                icon="l-close"
-                onClick="untilPicker.setValue(''); rruleUntil = ''"
-              />
+            <HStack when="{rruleFrequency === 'MONTHLY'}" gap="$space-2" wrapContent="true">
+              <Select initialValue="{String(rruleOrdinal)}" onDidChange="(val) => rruleOrdinal = parseInt(val)">
+                <Option value="1" label="1st" />
+                <Option value="2" label="2nd" />
+                <Option value="3" label="3rd" />
+                <Option value="4" label="4th" />
+              </Select>
+              <Select initialValue="{rruleMonthDay}" onDidChange="(val) => rruleMonthDay = val">
+                <Option value="SU" label="Sunday" />
+                <Option value="MO" label="Monday" />
+                <Option value="TU" label="Tuesday" />
+                <Option value="WE" label="Wednesday" />
+                <Option value="TH" label="Thursday" />
+                <Option value="FR" label="Friday" />
+                <Option value="SA" label="Saturday" />
+              </Select>
             </HStack>
+            <TextBox
+              when="{rruleFrequency !== 'none'}"
+              aria-label="Until"
+              placeholder="Until (YYYY-MM-DD)"
+              initialValue="{rruleUntil}"
+              onDidChange="(val) => rruleUntil = val"
+            />
           </VStack>
-        </ExpandableItem>
+        </VStack>
+
+        <Fragment when="{!$props.event?.id}">
+          <FormItem
+            bindTo="title"
+            label="Title"
+            required="{true}"
+            requiredInvalidMessage="Title is required — what is this event called?"
+          />
+          <FormItem
+            bindTo="date"
+            label="Date"
+            type="datePicker"
+            dateFormat="yyyy-MM-dd"
+            required="{true}"
+            requiredInvalidMessage="Date is required"
+          />
+          <HStack gap="$space-2">
+            <FormItem
+              bindTo="time"
+              label="Start"
+              type="custom"
+              width="50%"
+            >
+              <TimeInput
+                id="startTimeInput"
+                aria-label="Start time"
+                initialValue="{$value}"
+                hour24="false"
+                onDidChange="() => $setValue(startTimeInput.isoValue())"
+              />
+            </FormItem>
+            <FormItem
+              bindTo="endTime"
+              label="End"
+              type="custom"
+              width="50%"
+            >
+              <TimeInput
+                id="endTimeInput"
+                aria-label="End time"
+                initialValue="{$value}"
+                hour24="false"
+                onDidChange="() => $setValue(endTimeInput.isoValue())"
+              />
+            </FormItem>
+          </HStack>
+          <FormItem bindTo="location" label="Location" />
+          <FormItem bindTo="url" label="URL" placeholder="https://" />
+          <FormItem bindTo="description" label="Description" type="textarea" />
+        </Fragment>
       </Fragment>
     </Form>
 
@@ -329,5 +354,5 @@
     <Text when="{errorMessage}" value="{errorMessage}" color="$color-danger-500" />
 
 
-  </ModalDialog>
+  </Card>
 </Component>

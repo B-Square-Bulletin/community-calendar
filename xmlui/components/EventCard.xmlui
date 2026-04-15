@@ -1,4 +1,8 @@
-<Component name="EventCard" var.detailsOpen="{false}">
+<Component
+  name="EventCard"
+  var.detailsOpen="{false}"
+  var.categoryEditorOpen="{false}"
+  var.selectedCategory="{''}">
 
   <Card
     padding="0"
@@ -122,7 +126,7 @@
           color="$color-surface-400"
           cursor="pointer"
           tooltip="Override category"
-          onClick="categoryDialog.open($props.event)"
+          onClick="selectedCategory = $props.event.category || ''; categoryEditorOpen = true"
         />
         <Badge
           when="{!$props.event.category && isAdmin}"
@@ -130,7 +134,7 @@
           variant="pill"
           fontSize="0.65em"
           cursor="pointer"
-          onClick="categoryDialog.open($props.event)"
+          onClick="selectedCategory = $props.event.category || ''; categoryEditorOpen = true"
         />
         <SpaceFiller />
         <AddToCalendar event="{$props.event}" />
@@ -145,24 +149,41 @@
           onClick="togglePick($props.event)"
         />
       </HStack>
+      <Card
+        when="{categoryEditorOpen}"
+        marginTop="$space-2"
+        padding="$space-2"
+        gap="$space-3"
+        backgroundColor="$color-surface-50"
+        border="1px solid $color-surface-200"
+      >
+        <HStack verticalAlignment="start" gap="$space-2">
+          <VStack width="*" gap="$space-1">
+            <Text fontWeight="600" fontSize="$fontSize-sm" value="Set Category" />
+            <Text fontSize="$fontSize-sm" color="$color-text-secondary" value="{$props.event.title}" />
+          </VStack>
+          <Icon
+            name="close"
+            width="16px"
+            height="16px"
+            color="$color-text-tertiary"
+            cursor="pointer"
+            tooltip="Hide category editor"
+            onClick="categoryEditorOpen = false"
+          />
+        </HStack>
+        <RadioGroup initialValue="{$props.event.category || ''}" onDidChange="(val) => selectedCategory = val">
+          <VStack gap="$space-1">
+            <Items data="{$props.categoryList}">
+              <Option value="{$item}" label="{$item}" />
+            </Items>
+          </VStack>
+        </RadioGroup>
+        <HStack gap="$space-2">
+          <Button label="Save" onClick="saveCategoryOverride($props.event.id, selectedCategory); categoryEditorOpen = false" />
+          <Button label="Cancel" variant="outlined" onClick="categoryEditorOpen = false" />
+        </HStack>
+      </Card>
     </VStack>
   </Card>
-
-  <ModalDialog id="categoryDialog" title="Set Category" var.selectedCategory="{$param.category || ''}">
-    <VStack gap="$space-3">
-      <Text fontSize="$fontSize-sm" fontWeight="bold" value="{$param.title}" />
-      <RadioGroup initialValue="{$param.category || ''}" onDidChange="(val) => selectedCategory = val">
-        <VStack gap="$space-1">
-          <Items data="{$props.categoryList}">
-            <Option value="{$item}" label="{$item}" />
-          </Items>
-        </VStack>
-      </RadioGroup>
-      <HStack gap="$space-2">
-        <Button label="Save" onClick="saveCategoryOverride($param.id, selectedCategory); categoryDialog.close()" />
-        <Button label="Cancel" variant="outlined" onClick="categoryDialog.close()" />
-      </HStack>
-    </VStack>
-  </ModalDialog>
-
 </Component>

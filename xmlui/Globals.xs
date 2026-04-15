@@ -86,6 +86,55 @@ function togglePanel(name) {
   activePanel = activePanel === name ? '' : name;
 }
 
+function openPickEditor(event) {
+  pickEvent = event;
+  activePanel = 'pick';
+  scrollRequest = scrollRequest + 1;
+}
+
+function closePickEditor() {
+  pickEvent = null;
+  if (activePanel === 'pick') {
+    activePanel = '';
+  }
+}
+
+function getInlinePanelHostMinHeight(name) {
+  if (!window.ccAutoHeight || !name) {
+    return '0px';
+  }
+  if (name === 'pick' || name === 'capture' || name === 'audio') {
+    return '760px';
+  }
+  if (name === 'sources') {
+    return '520px';
+  }
+  if (name === 'feeds') {
+    return '560px';
+  }
+  if (name === 'settings') {
+    return '260px';
+  }
+  if (name === 'signIn') {
+    return '220px';
+  }
+  return '0px';
+}
+
+function getInlinePanelHostHeight(name) {
+  if (!window.ccAutoHeight || !name) {
+    return undefined;
+  }
+  return getInlinePanelHostMinHeight(name);
+}
+
+function getInlinePanelHostOverflow(name) {
+  if (!window.ccAutoHeight || !name) {
+    return 'visible';
+  }
+  return 'auto';
+}
+
 function togglePick(event) {
   if (!authSession) {
     alert('Please sign in to pick events');
@@ -138,7 +187,7 @@ function togglePick(event) {
     picksCounter = picksCounter + 1;
   } else {
     // Picking: set pickEvent to trigger PickEditor via when
-    pickEvent = event;
+    openPickEditor(event);
   }
 }
 

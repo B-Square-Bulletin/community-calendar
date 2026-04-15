@@ -1,12 +1,13 @@
 <Component
   name="AudioCaptureDialog"
-  method.open="() => { isExtracting = false; isRecording = false; captureMode = ''; errorMessage = ''; activePanel = 'audio'; }"
-  method.close="() => { if (activePanel === 'audio') activePanel = ''; }"
-  method.toggle="() => { if (activePanel === 'audio') { activePanel = ''; } else { isExtracting = false; isRecording = false; captureMode = ''; errorMessage = ''; activePanel = 'audio'; } }"
+  method.open="() => { isExtracting = false; isRecording = false; captureMode = ''; errorMessage = ''; extractedEvent = null; activePanel = 'audio'; }"
+  method.close="() => { extractedEvent = null; if (activePanel === 'audio') activePanel = ''; }"
+  method.toggle="() => { if (activePanel === 'audio') { extractedEvent = null; activePanel = ''; } else { isExtracting = false; isRecording = false; captureMode = ''; errorMessage = ''; extractedEvent = null; activePanel = 'audio'; } }"
   var.isExtracting="{false}"
   var.isRecording="{false}"
   var.captureMode=""
   var.errorMessage=""
+  var.extractedEvent="{null}"
 >
 
   <Card
@@ -17,26 +18,26 @@
     padding="$space-3"
     gap="$space-3">
     <HStack verticalAlignment="start" gap="$space-2">
-      <H3 width="*">Capture Event from Audio</H3>
+      <H3 width="*">{extractedEvent ? 'Save Captured Event' : 'Capture Event from Audio'}</H3>
       <Icon
         name="close"
         tooltip="Hide audio capture"
         width="20px"
         height="20px"
         color="$color-text-secondary"
-        onClick="activePanel = ''" />
+        onClick="extractedEvent = null; activePanel = ''" />
     </HStack>
     <VStack gap="$space-3" padding="$space-2">
 
       <!-- Mode selection -->
-      <VStack when="{!captureMode && !isExtracting}" gap="$space-2">
+      <VStack when="{!captureMode && !isExtracting && !extractedEvent}" gap="$space-2">
         <Text>How would you like to capture audio?</Text>
         <Button label="Record from Microphone" icon="l-mic" onClick="captureMode = 'record'" />
         <Button label="Select Audio File" icon="l-file-up" onClick="captureMode = 'file'" />
       </VStack>
 
       <!-- File upload mode -->
-      <VStack when="{captureMode === 'file' && !isExtracting}" gap="$space-2">
+      <VStack when="{captureMode === 'file' && !isExtracting && !extractedEvent}" gap="$space-2">
         <Text>Select an audio recording of event info:</Text>
         <FileInput
           id="audioInput"
@@ -57,7 +58,7 @@
             });
             isExtracting = false;
             if (result && result.event) {
-              pickEvent = {
+              extractedEvent = {
                 title: result.event.title || '',
                 start_time: result.event.start_time || '',
                 end_time: result.event.end_time || '',
@@ -67,7 +68,6 @@
                 transcript: result.transcript || '',
                 recurrence_until: result.event.recurrence_until || ''
               };
-              activePanel = '';
             } else {
               errorMessage = result?.error || 'Failed to extract event from audio';
             }
@@ -77,7 +77,7 @@
       </VStack>
 
       <!-- Record mode: ready to record -->
-      <VStack when="{captureMode === 'record' && !isRecording && !isExtracting}" gap="$space-2">
+      <VStack when="{captureMode === 'record' && !isRecording && !isExtracting && !extractedEvent}" gap="$space-2">
         <Text>Tap Start, describe the event, then tap Stop.</Text>
         <Button
           label="Start Recording"
@@ -117,7 +117,7 @@
             });
             isExtracting = false;
             if (result && result.event) {
-              pickEvent = {
+              extractedEvent = {
                 title: result.event.title || '',
                 start_time: result.event.start_time || '',
                 end_time: result.event.end_time || '',
@@ -127,7 +127,6 @@
                 transcript: result.transcript || '',
                 recurrence_until: result.event.recurrence_until || ''
               };
-              activePanel = '';
             } else {
               errorMessage = result?.error || 'Failed to extract event from audio';
               captureMode = 'record';
@@ -147,6 +146,13 @@
         when="{errorMessage}"
         value="{errorMessage}"
         color="$color-danger-500"
+      />
+
+      <CaptureEventEditor
+        when="{!!extractedEvent}"
+        event="{extractedEvent}"
+        onClose="extractedEvent = null; activePanel = ''"
+        onSaved="picksCounter = picksCounter + 1; extractedEvent = null; activePanel = ''"
       />
 
     </VStack>

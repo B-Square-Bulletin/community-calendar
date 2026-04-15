@@ -1,10 +1,11 @@
 <Component
   name="CaptureDialog"
-  method.open="() => { isExtracting = false; errorMessage = ''; activePanel = 'capture'; }"
-  method.close="() => { if (activePanel === 'capture') activePanel = ''; }"
-  method.toggle="() => { if (activePanel === 'capture') { activePanel = ''; } else { isExtracting = false; errorMessage = ''; activePanel = 'capture'; } }"
+  method.open="() => { isExtracting = false; errorMessage = ''; extractedEvent = null; activePanel = 'capture'; }"
+  method.close="() => { extractedEvent = null; if (activePanel === 'capture') activePanel = ''; }"
+  method.toggle="() => { if (activePanel === 'capture') { extractedEvent = null; activePanel = ''; } else { isExtracting = false; errorMessage = ''; extractedEvent = null; activePanel = 'capture'; } }"
   var.isExtracting="{false}"
   var.errorMessage=""
+  var.extractedEvent="{null}"
 >
 
   <Card
@@ -15,19 +16,19 @@
     padding="$space-3"
     gap="$space-3">
     <HStack verticalAlignment="start" gap="$space-2">
-      <H3 width="*">Capture Event from Poster</H3>
+      <H3 width="*">{extractedEvent ? 'Save Captured Event' : 'Capture Event from Poster'}</H3>
       <Icon
         name="close"
         tooltip="Hide poster capture"
         width="20px"
         height="20px"
         color="$color-text-secondary"
-        onClick="activePanel = ''" />
+        onClick="extractedEvent = null; activePanel = ''" />
     </HStack>
     <VStack gap="$space-3" padding="$space-2">
 
       <!-- Select image -->
-      <VStack when="{!isExtracting}" gap="$space-2">
+      <VStack when="{!isExtracting && !extractedEvent}" gap="$space-2">
         <Text>Take a photo of an event poster, or select one from your library.</Text>
         <Button label="Choose Image" icon="l-file-up" onClick="imageInput.open()" />
         <FileInput
@@ -41,7 +42,7 @@
             const result = window.resizeAndUpload(files[0], appGlobals.supabaseUrl, appGlobals.supabasePublishableKey);
             isExtracting = false;
             if (result && result.event) {
-              pickEvent = {
+              extractedEvent = {
                 title: result.event.title || '',
                 start_time: result.event.start_time || '',
                 end_time: result.event.end_time || '',
@@ -50,7 +51,6 @@
                 url: result.event.url || '',
                 recurrence_until: result.event.recurrence_until || ''
               };
-              activePanel = '';
             } else {
               errorMessage = result?.error || 'Failed to extract event';
             }
@@ -69,6 +69,13 @@
         when="{errorMessage}"
         value="{errorMessage}"
         color="$color-danger-500"
+      />
+
+      <CaptureEventEditor
+        when="{!!extractedEvent}"
+        event="{extractedEvent}"
+        onClose="extractedEvent = null; activePanel = ''"
+        onSaved="picksCounter = picksCounter + 1; extractedEvent = null; activePanel = ''"
       />
 
     </VStack>

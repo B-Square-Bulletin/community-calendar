@@ -27,15 +27,13 @@ The app uses [XMLUI](https://xmlui.org) — a declarative UI framework — with 
 
 ```
 components/
-├── EventCard.xmlui                   # Event display card with snippet + detail modal
+├── EventCard.xmlui                   # Event display card with inline detail/admin panels
 ├── PickItem.xmlui                    # Pick item in My Picks view
-├── PickEditor.xmlui                  # Modal for confirming picks + optional recurrence enrichment
+├── PickEditor.xmlui                  # Inline editor for confirming picks + optional recurrence enrichment
 ├── AddToCalendar.xmlui               # ICS download button (includes RRULE when available)
 ├── CaptureDialog.xmlui               # Poster capture: image → Claude API → PickEditor
 ├── AudioCaptureDialog.xmlui          # Audio capture: mic/file → Whisper → Claude → PickEditor
-├── EnrichmentDialog.xmlui            # Enrichment management dialog
-├── MyPicksDialog.xmlui               # My Picks view dialog
-└── SourcesDialog.xmlui               # Sources modal
+└── SourcesDialog.xmlui               # Sources inline panel
 ```
 
 ## Local Development

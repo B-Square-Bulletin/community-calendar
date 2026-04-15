@@ -25,7 +25,7 @@ test('pick-roundtrip', async ({ page }) => {
     await page.waitForTimeout(500);
 
     // Submit the PickEditor form
-    const submitBtn = page.getByRole('button', { name: 'Add to My Picks' });
+    const submitBtn = page.getByTestId('pickForm').getByRole('button', { name: 'Add to My Picks' });
     await expect(submitBtn).toBeVisible({ timeout: 5000 });
     await Promise.all([
       page.waitForResponse(r => r.url().includes('/rest/v1/picks') && r.request().method() === 'POST'),

@@ -33,7 +33,7 @@ test('capture-edit-roundtrip', async ({ page }) => {
     await fileInput.setInputFiles('../traces/fixtures/stewarts-point.m4a');
     await traceFileUpload(page, ['stewarts-point.m4a']);
 
-    // Wait for Whisper transcription + extraction — PickEditor opens with "Save Captured Event"
+    // Wait for Whisper transcription + extraction — capture editor opens with "Save Captured Event"
     await expect(page.getByText('Save Captured Event')).toBeVisible({ timeout: 45000 });
     await page.waitForTimeout(1000);
 
@@ -44,15 +44,10 @@ test('capture-edit-roundtrip', async ({ page }) => {
     await titleInput.click();
     await titleInput.fill('Edited: Test Capture Event');
 
-    // Edit the start time — this is the key regression: TimeInput.isoValue()
-    // returns a different format after editing, which caused double-:00 in start_time
-    const hourInput = page.getByLabel('Start time hour');
-    await hourInput.click();
-    await hourInput.fill('7');
-    await hourInput.press('Tab');
-    const minuteInput = page.getByLabel('Start time minute');
-    await minuteInput.fill('30');
-    await minuteInput.press('Tab');
+    // Edit the start time in the lightweight HH:MM capture editor
+    const startTimeInput = page.getByRole('textbox', { name: 'Start' });
+    await startTimeInput.click();
+    await startTimeInput.fill('07:30');
 
     // Edit the description
     const descriptionInput = page.getByRole('textbox', { name: 'Description' });
