@@ -1,17 +1,13 @@
 #!/usr/bin/env python3
-"""Process pending_feeds.txt for a city: insert into the feeds table, then clear the file.
+"""Process pending_feeds.txt for a city: insert into the feeds table, then reset to template.
 
-Contributors add feeds to cities/<city>/pending_feeds.txt in their PRs.
-After merging, the maintainer runs this script to move them into the database.
+Contributors add ICS feed URLs to cities/<city>/pending_feeds.txt in their PRs.
+After merging, the build runs this script to move them into the database.
 
-Format of pending_feeds.txt (same as feeds.txt):
+Format of pending_feeds.txt:
 
     # Display Name
     https://example.com/events/?ical=1
-
-    # Scraper Display Name
-    # cmd: python scrapers/songkick.py --url "..." --name "..."
-    cities/asheville/output.ics
 
 Usage:
     SUPABASE_URL=... SUPABASE_SERVICE_KEY=... python scripts/process_pending_feeds.py <city>
@@ -124,17 +120,15 @@ def insert_feeds(city, feeds, supabase_url, service_key):
 
 
 TEMPLATE = """\
-# Add feeds here, one per block. The build will process them into the
+# Add ICS feed URLs here. The build will process them into the
 # database automatically and reset this file to the template below.
 #
-# ICS feed:
+# Format:
 #   # Source Name
 #   https://example.com/events/?ical=1
 #
-# Scraper:
-#   # Venue Name
-#   # cmd: python scrapers/songkick.py --url "https://..." --name "Venue Name"
-#   cities/{city}/venue_name.ics
+# Test before adding:
+#   python scripts/add_feed.py URL {city} "Source Name" --test
 #
 # See CONTRIBUTING.md for details.
 """

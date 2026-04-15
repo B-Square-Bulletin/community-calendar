@@ -39,17 +39,15 @@ def main():
 
     # pending_feeds.txt
     (city_dir / "pending_feeds.txt").write_text(f"""\
-# Add feeds here, one per block. The build will process them into the
+# Add ICS feed URLs here. The build will process them into the
 # database automatically and reset this file to the template below.
 #
-# ICS feed:
+# Format:
 #   # Source Name
 #   https://example.com/events/?ical=1
 #
-# Scraper:
-#   # Venue Name
-#   # cmd: python scrapers/songkick.py --url "https://..." --name "Venue Name"
-#   cities/{city}/venue_name.ics
+# Test before adding:
+#   python scripts/add_feed.py URL {city} "Source Name" --test
 #
 # See CONTRIBUTING.md for details.
 """)

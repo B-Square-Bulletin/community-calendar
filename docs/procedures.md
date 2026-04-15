@@ -225,18 +225,10 @@ python scripts/add_feed.py URL city "Source Name" --test
 
 ### Scrapers
 
-Use `add_scraper.py` to add a scraper invocation to the workflow and `feeds.txt`:
+Scrapers are invoked by the GitHub Actions workflow, not by the feeds system. Use `add_scraper.py` to add a scraper invocation:
 
 ```bash
 python scripts/add_scraper.py <scraper_name> <city> "<Display Name>"
-```
-
-Also add an entry to `pending_feeds.txt` so the scraper gets registered in the database (the build processes this automatically):
-
-```
-# Display Name
-# cmd: python scrapers/songkick.py --url "https://..." --name "Display Name"
-cities/<city>/output.ics
 ```
 
 ### Forks without a feeds table

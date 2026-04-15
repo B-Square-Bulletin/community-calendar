@@ -2,7 +2,7 @@
 
 ## How to Add Calendar Sources
 
-The Supabase `feeds` table is the source of truth for all calendar sources. The file `cities/<city>/feeds.txt` is auto-generated from the database during each build — do not edit it by hand.
+The Supabase `feeds` table is the source of truth for all ICS feed sources. The file `cities/<city>/feeds.txt` is auto-generated from the database during each build — do not edit it by hand.
 
 ### Adding ICS feeds
 
@@ -22,23 +22,17 @@ Each feed is a comment line with the display name, followed by the URL. You can 
 python scripts/add_feed.py URL city "Source Name" --test
 ```
 
-After your PR is merged, the next build automatically processes `pending_feeds.txt` — inserting the feeds into the database and deleting the file.
+After your PR is merged, the next build automatically processes `pending_feeds.txt` — inserting the feeds into the database and resetting the file to its template.
 
 ### Adding scrapers
 
-Use `add_scraper.py` to add a scraper invocation to the workflow:
+Scrapers are invoked by the GitHub Actions workflow, not by the feeds system. Use `add_scraper.py` to add a scraper invocation to the workflow:
 
 ```bash
 python scripts/add_scraper.py <scraper_name> <city> "<Display Name>"
 ```
 
-Also add an entry to `pending_feeds.txt` so the feed gets registered in the database:
-
-```
-# Display Name
-# cmd: python scrapers/songkick.py --url "https://..." --name "Display Name"
-cities/<city>/output.ics
-```
+See `scrapers/README.md` for available scrapers and their options.
 
 ### What NOT to edit
 
@@ -52,7 +46,7 @@ Update `cities/<city>/SOURCES_CHECKLIST.md` with what you found — working feed
 ### PR checklist
 
 - [ ] Added ICS feeds to `pending_feeds.txt` (not `feeds.txt`)
-- [ ] For scrapers: used `add_scraper.py` (not hand-edited workflow YAML)
+- [ ] For scrapers: used `add_scraper.py`
 - [ ] Updated `SOURCES_CHECKLIST.md` with findings
 - [ ] Tested feed URLs with `add_feed.py --test`
 
