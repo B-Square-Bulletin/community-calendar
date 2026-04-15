@@ -1,9 +1,11 @@
--- View: deduplicated_events
--- Server-side deduplication of events by normalized title + start_time
--- Groups events with the same (lowercased, trimmed) title and start_time,
--- merging sources and picking the first non-null value for other columns.
+-- Materialized view: deduplicated_events
+-- Server-side deduplication of events by normalized title + start_time.
+-- Refreshed after load-events runs so the app can query pre-deduplicated rows.
 
-CREATE OR REPLACE VIEW deduplicated_events AS
+DROP VIEW IF EXISTS deduplicated_events;
+DROP MATERIALIZED VIEW IF EXISTS deduplicated_events;
+
+CREATE MATERIALIZED VIEW deduplicated_events AS
 SELECT
     min(id) AS id,
     (array_agg(title ORDER BY e.id))[1] AS title,
@@ -31,3 +33,23 @@ FROM events e
 WHERE source <> 'poster_capture'
 GROUP BY lower(TRIM(BOTH FROM title)), start_time
 ORDER BY start_time;
+
+CREATE UNIQUE INDEX deduplicated_events_id_idx ON deduplicated_events (id);
+CREATE INDEX deduplicated_events_city_idx ON deduplicated_events (city);
+CREATE INDEX deduplicated_events_start_time_idx ON deduplicated_events (start_time);
+
+GRANT SELECT ON deduplicated_events TO anon, authenticated, service_role;
+
+-- RPC used by the nightly build after load-events completes.
+CREATE OR REPLACE FUNCTION public.refresh_deduplicated_events()
+RETURNS void
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET statement_timeout TO '120s'
+AS $function$
+BEGIN
+  REFRESH MATERIALIZED VIEW deduplicated_events;
+END;
+$function$;
+
+GRANT EXECUTE ON FUNCTION public.refresh_deduplicated_events() TO anon, authenticated, service_role;
