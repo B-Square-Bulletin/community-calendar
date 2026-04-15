@@ -330,7 +330,7 @@
     <Masonry when="{events.loaded && viewMode === 'all' && layoutMode === 'multicol'}" data="{getPagedEvents(processedEvents, filterTerm, displayStartIndex, filterTerm ? 10 : 50, categoryFilter, sliderStart, sliderEnd)}" columns="3" gap="$space-3" rowGap="0" minColumnWidth="300px">
       <EventCard event="{$item}" filterTerm="{filterTerm}" categoryColorMap="{window.categoryColorMap}" categoryList="{window.categoryList}" />
     </Masonry>
-    <List when="{events.loaded && viewMode === 'all' && layoutMode !== 'multicol'}" data="{getPagedEvents(processedEvents, filterTerm, displayStartIndex, filterTerm ? 10 : 50, categoryFilter, sliderStart, sliderEnd)}" fixedItemSize="true" limit="{filterTerm ? 10 : 50}">
+    <List when="{events.loaded && viewMode === 'all' && layoutMode !== 'multicol'}" data="{getPagedEvents(processedEvents, filterTerm, displayStartIndex, filterTerm ? 10 : 50, categoryFilter, sliderStart, sliderEnd)}" limit="{filterTerm ? 10 : 50}">
       <EventCard event="{$item}" filterTerm="{filterTerm}" categoryColorMap="{window.categoryColorMap}" categoryList="{window.categoryList}" />
     </List>
     <Button
