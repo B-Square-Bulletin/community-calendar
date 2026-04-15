@@ -411,6 +411,25 @@ jobs:
     # ==========================================
     # Download feeds + Combine ICS (all cities)
     # ==========================================
+    - name: Process pending feeds into DB
+      env:
+        SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+        SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+      run: |
+        python scripts/process_pending_feeds.py --all
+
+    - name: Commit cleared pending_feeds.txt
+      run: |
+        if git status --porcelain | grep -q pending_feeds.txt; then
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -u cities/*/pending_feeds.txt
+          git commit -m "Process pending feeds into DB"
+          git push || true
+        else
+          echo "No pending feeds to clear"
+        fi
+
     - name: Fetch pending feeds from DB
       env:
         SUPABASE_URL: ${{ vars.SUPABASE_URL }}

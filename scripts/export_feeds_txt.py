@@ -44,7 +44,21 @@ def export_feeds_txt(city, supabase_url, service_key):
 
     with open(feeds_file, "w") as out:
         out.write(f"# {city.title()} - source inventory\n")
-        out.write(f"# Generated from feeds table. Do not edit manually.\n\n")
+        out.write(f"# Generated from feeds table. Do not edit manually.\n")
+        out.write(f"#\n")
+        out.write(f"# To add feeds, create pending_feeds.txt in this directory.\n")
+        out.write(f"# The build will process it into the database automatically.\n")
+        out.write(f"#\n")
+        out.write(f"# ICS feed:\n")
+        out.write(f"#   # Source Name\n")
+        out.write(f"#   https://example.com/events/?ical=1\n")
+        out.write(f"#\n")
+        out.write(f"# Scraper:\n")
+        out.write(f"#   # Venue Name\n")
+        out.write(f"#   # cmd: python scrapers/songkick.py --url \"https://...\" --name \"Venue Name\"\n")
+        out.write(f"#   cities/{city}/venue_name.ics\n")
+        out.write(f"#\n")
+        out.write(f"# See CONTRIBUTING.md for details.\n\n")
 
         if scrapers:
             out.write("# --- Scrapers ---\n")
