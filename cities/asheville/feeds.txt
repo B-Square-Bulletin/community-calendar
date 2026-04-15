@@ -1,3 +1,29 @@
 # Asheville - source inventory
 # Generated from feeds table. Do not edit manually.
+#
+# To add feeds, create pending_feeds.txt in this directory.
+# The build will process it into the database automatically.
+#
+# ICS feed:
+#   # Source Name
+#   https://example.com/events/?ical=1
+#
+# Scraper:
+#   # Venue Name
+#   # cmd: python scrapers/songkick.py --url "https://..." --name "Venue Name"
+#   cities/asheville/venue_name.ics
+#
+# See CONTRIBUTING.md for details.
+
+# --- Live feeds ---
+# Buncombe County Community Engagement
+https://www.buncombenc.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar
+# Buncombe County Main Calendar
+https://www.buncombenc.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar
+# Buncombe County Parks & Recreation
+https://www.buncombenc.gov/common/modules/iCalendar/iCalendar.aspx?catID=40&feed=calendar
+# Buncombe County Planning
+https://www.buncombenc.gov/common/modules/iCalendar/iCalendar.aspx?catID=37&feed=calendar
+# Buncombe County Public Health Mobile Team
+https://www.buncombenc.gov/common/modules/iCalendar/iCalendar.aspx?catID=35&feed=calendar
 
