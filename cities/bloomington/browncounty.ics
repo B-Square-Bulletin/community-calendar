@@ -73,8 +73,8 @@ BEGIN:VEVENT
 X-SOURCE:Brown County Events
 CLASS:PUBLIC
 UID:MEC-54d7d1245947980141302894a0c14971@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260414T090000
-DTEND;TZID=America/Indiana/Indianapolis:20260414T120000
+DTSTART;TZID=America/Indiana/Indianapolis:20260421T090000
+DTEND;TZID=America/Indiana/Indianapolis:20260421T120000
 DTSTAMP:20250918T101923Z
 RRULE:FREQ=WEEKLY;BYDAY=TU
 CREATED:20250918
@@ -83,7 +83,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Brown County Boat Cruise
-DESCRIPTION:Our Small Craft Cruises are in 20′ long Fishing Style Boats with 115 HP motors and Seating Capacity for up to 6 people, plus a boat driver. Half-Day (up to 4 hours) and Full-Day (4-8 hours) trips are available.\n \n
+DESCRIPTION:
 URL:https://browncounty.com/events/brown-county-boat-cruise/
 ORGANIZER;CN=Pathfinder Outfitters:MAILTO:stevechafin@gmail.com
 CATEGORIES:Outdoor Adventure,Plan Your Visit,Tours
@@ -115,8 +115,8 @@ BEGIN:VEVENT
 X-SOURCE:Brown County Events
 CLASS:PUBLIC
 UID:MEC-edb899d139bf0fddddbf9b3f4e8252f0@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260415T070000
-DTEND;TZID=America/Indiana/Indianapolis:20260415T120000
+DTSTART;TZID=America/Indiana/Indianapolis:20260416T070000
+DTEND;TZID=America/Indiana/Indianapolis:20260416T120000
 DTSTAMP:20260212T100904Z
 RRULE:FREQ=DAILY;UNTIL=20260626T200000Z
 CREATED:20260212
@@ -198,8 +198,8 @@ BEGIN:VEVENT
 X-SOURCE:Brown County Events
 CLASS:PUBLIC
 UID:MEC-0516955e34eb4091c168439608b5aa9d@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260415T140000
-DTEND;TZID=America/Indiana/Indianapolis:20260415T170000
+DTSTART;TZID=America/Indiana/Indianapolis:20260422T140000
+DTEND;TZID=America/Indiana/Indianapolis:20260422T170000
 DTSTAMP:20260402T163103Z
 RRULE:FREQ=WEEKLY
 CREATED:20260402
@@ -367,7 +367,7 @@ PRIORITY:5
 SEQUENCE:3
 TRANSP:OPAQUE
 SUMMARY:Brown County Lions Club Independence Day Fireworks Display
-DESCRIPTION:The Brown County Lions Club announced America’s best Small Town Fireworks is moving locations in 2026. The show has traditionally been held over the Brown County High School football field, but is moving to its new home at Eagle Park, just west of the north entrance to Brown County State Park. This year’s show is set for Thursday, July 2, 2026. Mapping apps will recognize “Eagle Park Nashville Indiana.” \nFor more than 50 years, the Brown County Lions Club has proudly presented this annual Independence Day tradition, honoring the nation with a spectacular fireworks show that has become a highlight of summer in Brown County. \nThe fireworks will begin at dark and there will be plenty of parking available at Eagle Park. Attendees are encouraged to bring lawn chairs or blankets.   \nAdding to the community spirit of the evening, Scouts from Troop 190 will be on site selling food and glow bracelets, with proceeds helping scouts earn money for summer camp.  \nThe Independence Day fireworks are made possible entirely through the generosity of the community. The show is funded by donations from local small businesses and contributions collected by The Bucket Brigade, Lions Club members who circulate through the crowd before the show. \n
+DESCRIPTION:
 URL:https://browncounty.com/events/brown-county-lions-club-independence-day-fireworks-display/
 ORGANIZER;CN=Brown County Lions Club:MAILTO:
 CATEGORIES:Entertainment,Family Friendly,Festivals,Free,Happening,Holiday,Outdoor Concerts,Special Events,Summer
@@ -1033,7 +1033,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:(American) Pomp!: Trumpet, Piano, Winds, and Strings
-DESCRIPTION:ChamberFest Brown County presents (American) Pomp!\nA flamboyant end to festival week: a program of genre-bending and jazz-inspired classics, culminating in Gershwin’s iconic Rhapsody in Blue!\nSaint-Saëns: Septet for Trumpet, Piano and Strings, op. 65\nMartinů: La Revue de Cuisine\nGershwin: Rhapsody in Blue\nArtists:​​\n\n​​​​Spencer Myer, piano soloist\nAndreas Ioannides, piano\nQing Hou, violin\nLei Hou, violin\nLarry Neuman, viola\nCaleb Wong, cello\nJim Campbell, clarinet\nMark Ridenour, trumpet\nVince Karamanov, bassoon\nAlex Horton, bass\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/chamberfest-american-pomp-trumpet-piano-winds-and-strings/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -1053,7 +1053,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:Phoenix: Saxophone Quartet
-DESCRIPTION:ChamberFest Brown County presents Phoenix: Saxophone Quartet\n​​The multi-award-winning Project Fusion Sax Quartet presents Phoenix: a program of saxophone chamber music depicting renewal, transformation, and flight. This theme, chosen in the auspicious year of the United States’ 250th anniversary, celebrates a nation founded on the “great experiment” of democratic reinvention and rebirth, whose mascot is fittingly the noble bald eagle: as such, it presents music exclusively of American composers.\nWorks by Gershwin, Maslanka, Kline, Frazier, Mettens, Washington, Ge, Love\nProject Fusion:\n\nDannel Espinoza, soprano sax\nDoug O’Connor, alto sax\nAiwen Zhang, tenor sax\nMatt Evans, baritone sax\n\nThis concert is sponsored by the Eads family in memory of Ralph S. (Tony) Eads.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/chamberfest-phoenix/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -1113,7 +1113,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:Pastorale: Strings and Winds
-DESCRIPTION:ChamberFest Brown County presents a star-studded lineup featuring Chicago Symphony Orchestra musicians present an uplifting program of music for the outdoors: radiant, folksy, uplifting.\n​​​​​Beethoven: Sextet for 2 horns and string quartet, op. 81bSpohr: Octet, op. 32Dvorak: String Quintet, op. 97\n​Artists\n\n​Qing Hou, violin\nLei Hou, violin\nLarry Neuman, viola\nAurlien Pederzoli, viola\nBrandon Vamos, cello\nJim Campbell, clarinet\nJim Smelser, horn\nOto Carrilla, horn\nAlex Horton, bass\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/chamberfest-pastorale/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -1153,7 +1153,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:Young Artist Spotlight: Erinys Quartet​​
-DESCRIPTION:
+DESCRIPTION:The Erinys Quartet was awarded the First Prize at the 2025 Trondheim International Chamber Music Competition in Norway. Graduates of Curtis, they are currently graduate-quartet-in-residence at IU Jacobs. Don’t miss their dark and evocative program!\n​Repertoire\nBeecher: Juniper and Birch\nMozart: String Quartet No. 15 in D minor, K. 421/417b\nSchubert: String Quartet No. 14 in D minor, D 810 (“Death and the Maiden”)\n​​​​​​​​​​Erinys Quartet:\nElizabeth Stewart, violin\nJoosep Reimaa, violin\nMarija Räisänen, viola\nStergios Theodoridis, cello\n
 URL:https://browncounty.com/events/chamberfest-erinys-quartet/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -1198,25 +1198,6 @@ URL:https://browncounty.com/events/the-gathering/
 CATEGORIES:Family Friendly,Happening,Special Events,Tours
 LOCATION:Museum Lane, Nashville, IN
 ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/museumboardwalk_orig.jpg
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:Brown County Events
-CLASS:PUBLIC
-UID:MEC-90371692de01699e22ec68dcd0b2fdc8@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260414T053000
-DTEND;TZID=America/Indiana/Indianapolis:20260414T103000
-DTSTAMP:20260309T133127Z
-CREATED:20260309
-LAST-MODIFIED:20260309
-PRIORITY:5
-SEQUENCE:3
-TRANSP:OPAQUE
-SUMMARY:Happy Hollow Children’s Camp Homeschool Day
-DESCRIPTION:Families can take part in organized experiences such as the Zap Line, slingshot range, archery, arts and crafts, and more. Lunch is provided for all participants. Homeschool Day offers a meaningful opportunity for children to socialize with peers, engage in experiential learning, and enjoy the outdoors—while parents connect, share ideas, and build community.\n
-URL:https://browncounty.com/events/happy-hollow-childrens-camp-homeschool-day/
-CATEGORIES:Family Friendly,Happening,Outdoor Adventure,Special Events,Spring
-LOCATION:3049 Happy Hollow Road, Nashville, IN
-ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2026/03/Square-Images-20.jpg
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
@@ -1392,7 +1373,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Southern Indiana Blues Fest
-DESCRIPTION:
+DESCRIPTION:\n LINEUP ANNOUNCED \n\nThe Southern Indiana Blues Festival is back at Bill Monroe Music Park August 27–29, 2026, and this year’s lineup is STACKED.\n\n\nFeaturing The Devon Allman Project, John Primer, Jonathan Ellison, Gordon Bonham, Rock Bottom w/ Charlie McCoy (Hall of Fame Induction), Gina & Johnny, Jason Wells, Jimmy Davis & The Mercury 7, Keith Beatty & The Bayonets, and many more!\n\n\n\n Live music\n Camping\n Workshops with festival musicians\n\n\n Tickets & info: billmonroemusicpark.com\n\n
 URL:https://browncounty.com/events/southern-indiana-blues-fest/
 CATEGORIES:Entertainment,Festivals,Happening,Live Music,Outdoor Concerts
 LOCATION:5163 North State Road 135, Morgantown, IN
@@ -1430,7 +1411,7 @@ PRIORITY:5
 SEQUENCE:3
 TRANSP:OPAQUE
 SUMMARY:Pickin’ in the Backwoods
-DESCRIPTION:Pickin’ in the Backwoods Music Festival, presented by The Coyote Radio Show and Podcast and Duke’s Indy, is an event you won’t want to miss! Immerse yourself in the scenic backwoods of Brown County, Indiana, for an unforgettable two-and-a-half-day experience like no other.\nCrafted with real music fans in mind, this festival is all about fostering a close-knit atmosphere. With tickets highly limited, attendees are guaranteed an exceptionally intimate live show.\n-BYOB – Campfire Jams – Dance Lessons – Camping – Free Parking – Vendors – Food Trucks-\nWe want this festival to be interactive so BRING A INSTRUMENT TO JAM AROUND THE CAMPS AT NIGHT!\n
+DESCRIPTION:
 URL:https://browncounty.com/events/pickin-in-the-backwoods/
 CATEGORIES:Entertainment,Family Friendly,Festivals,Food &amp; Drink,Live Music,Outdoor Concerts,Summer
 LOCATION:2620 Valley Branch Road, Nashville, IN
@@ -1450,7 +1431,7 @@ PRIORITY:5
 SEQUENCE:2
 TRANSP:OPAQUE
 SUMMARY:Songwriter Showdown
-DESCRIPTION:
+DESCRIPTION:Songwriter Showdown returns to Nashville, Indiana, for a multi-week live music competition featuring talented songwriters from across the region. Held in Brown County, this exciting series highlights original music, storytelling, and crowd-favorite performances as artists compete for top honors. Experience the creativity and rising talent that make Nashville, Indiana a hub for live music.\n
 URL:https://browncounty.com/events/songwriter-showdown/
 CATEGORIES:Entertainment,Family Friendly,Happening,Live Music
 LOCATION:Brown County Playhouse, South Van Buren Street, Nashville, IN
@@ -1724,7 +1705,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Leaders-in-Training I
-DESCRIPTION:Leaders in the Community (LIT I)\nThis program is designed to help older campers transition from being campers to leaders within their local community. Through hands-on service projects and engaging with community organizations, LITs will develop essential servant leadership skills while enhancing their communication and relational ministry abilities.\n\n\nSession:\n\n\n1B: June 14-20, 2026\n\n\n\n\nRates:\n\n\n$515 per camper\n\n\n\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/leaders-in-training-i/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Happening,Plan Your Visit,Summer
@@ -1863,7 +1844,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Waycross Craft Show!
-DESCRIPTION:
+DESCRIPTION:10am-4pm November 15, 2026\nAll ages!\nRent a booth and show your crafts, baked goods and other wares off at the Waycross Craft Fair! Folk are invited to come and shop before the holiday season, supporting local artists.\n
 URL:https://browncounty.com/events/waycross-craft-show-2/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Art Events &amp; Exhibits,Family Friendly,Festivals,Happening,Holiday,Plan Your Visit,Special Events
@@ -1883,7 +1864,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Artists, Writers & Readers Retreat
-DESCRIPTION:Come spend a weekend at Waycross to work on new or in-progress projects. Bring supplies and set up throughout our campus, spending the days working independently or with others, however is most fruitful for your creative process. In the evenings, there will be space for sharing, collaborating, and asking for feedback.\n\n\nNovember 13-15, 2026\n\n\nCheck-in: 4-6pm\n\n\nCheck-out: 10am\n\n\n\n\nAges 21+\n\n\nProgram Rates\n\n\nAttendance cost is calculated during online registration, depending on your lodging selection. Rates are per person and include program fees, lodging and meals.\n\n\nConference Center – Single Occupancy: $350 per person\n\n\nConference Center – Double Occupancy: $280 per person\n\n\n\n\n\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/artists-writers-readers-retreat-2/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Art Events &amp; Exhibits,Happening,Plan Your Visit,Special Events
@@ -1943,7 +1924,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:All Y’all Come to Camp
-DESCRIPTION:
+DESCRIPTION:Spend the weekend surrounded by nature, with classic camp activities like campfires, worship, games, and outdoor adventures – plus plenty of time to relax and unwind at your own pace. Whether you want to dive into all the action or simply enjoy the peaceful setting, this weekend is yours to enjoy.\nJoin us for a refreshing weekend filled with fun, adventure and community. Waycross staff will lead a variety of activities, and participants are encouraged to take part as much or as little as they like.\n\n\nSeptember 4-6, 2026\n\n\nCheck-in: 4-6pm\n\n\nCheck-out: 1pm\n\n\n\n\nAll ages welcome, minors must be accompanied by an adult.\n\n\nProgram Rates\n\n\nAttendance cost is calculated during online registration, depending on your lodging selection. Rates are per person and include program fees, lodging and meals.\n\n\nConference Center – Single Occupancy: $400 per person\n\n\nConference Center – Double Occupancy: $330 per person\n\n\nMain House/Sleeping Wing – Multi-Occupancy: $260 per person\n\n\nCabins – Multi-Occupancy (adult): $180 per person\n\n\nYouth 10-17: $200 per person\n\n\nChildren 4-9: $160 per person\n\n\n3 and under: $0\n\n\n\n\n\n\n
 URL:https://browncounty.com/events/all-yall-come-to-camp-2/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Family Friendly,Happening,Outdoor Adventure,Special Events,Summer
@@ -1963,7 +1944,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Adult-ish Camp
-DESCRIPTION:Adult-ish Camp is the perfect chance to relive the magic of summer camp – this time with the freedom of adulthood! Designed for young adults ages 18+, this long weekend at Waycross is all about fun, reflection, and connection. Spend your days canoeing, hiking, and enjoying campfires, or simply relax and soak in the peaceful surroundings. Whether you’re seeking adventure or just a break from the daily grind, you can participate as much or as little as you’d like.\nThis program will offer a space to reflect on the transitions of young adulthood. With a mix of classic camp activities and opportunities for reflection, it’s a chance to step away from routine and connect with like-minded people. If you’re ready for a weekend of fun, friendship, and nostalgia, this is the camp for you!\n\n\nJuly 31-August 3, 2026\n\n\nCheck-in: 4-6pm\n\n\nCheck-out: 10am\n\n\nThis program runs Friday – Monday. We encourage all participants to stay for the full experience, but we understand that some may need to leave early. If you need to depart early please select the Friday–Sunday afternoon option (departing before dinner on Sunday) during registration so we can plan accordingly.\n\n\n\n\n\n\nAge: Young Adults (18+)\n\n\nAccommodation Options:\n\n\nAttendance cost is calculated during online registration, depending on your lodging selection. Rates are per person and include program fees, lodging and meals\n\n\nCabin – Multi-Occupancy: $75 per person\n\n\nMain House/Sleeping Wing Multi-Occupancy: $75 per person\n\n\n\n\n\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/adult-ish-camp-2/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Happening,Outdoor Adventure,Plan Your Visit,Special Events,Summer
