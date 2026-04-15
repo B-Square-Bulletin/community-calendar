@@ -32,18 +32,6 @@
       suggestError = 'Failed to submit suggestion. Please try again.';
     }" />
 
-  <DataSource
-    id="sourceNames"
-    url="{appGlobals.supabaseUrl + '/rest/v1/rpc/get_source_counts'}"
-    when="{activePanel === 'sources'}"
-    method="post"
-    headers="{{
-      'Content-Type': 'application/json',
-      apikey: appGlobals.supabasePublishableKey
-    }}"
-    body="{{'target_city': window.cityFilter || 'bloomington'}}"
-  />
-
   <Theme>
   <Card
     when="{activePanel === 'sources'}"
@@ -73,19 +61,10 @@
         color="$color-text-secondary">
         Uncheck sources to hide them from this view.
       </Text>
-      <Spinner when="{sourceNames.inProgress}" />
-      <VStack when="{sourceNames.error}" gap="$space-2">
-        <Text color="$color-danger-500">
-          Source counts did not load.
-        </Text>
-        <Button
-          label="Retry"
-          variant="ghost"
-          onClick="sourceNames.refetch()" />
-      </VStack>
+      <Spinner when="{!$props.events}" />
       <Table
-        when="{sourceNames.loaded && !sourceNames.error}"
-        data="{sourceNames.value || []}"
+        when="{!!$props.events}"
+        data="{window.getSourceCounts(window.dedupeEvents($props.events || [])).map(function(item) { return { name: item.source, event_count: item.count }; })}"
         idKey="name"
         sortBy="event_count"
         sortDirection="descending"
