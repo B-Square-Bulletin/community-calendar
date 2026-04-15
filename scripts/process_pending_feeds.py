@@ -123,6 +123,29 @@ def insert_feeds(city, feeds, supabase_url, service_key):
     return inserted, skipped, errors
 
 
+TEMPLATE = """\
+# Add feeds here, one per block. The build will process them into the
+# database automatically and reset this file to the template below.
+#
+# ICS feed:
+#   # Source Name
+#   https://example.com/events/?ical=1
+#
+# Scraper:
+#   # Venue Name
+#   # cmd: python scrapers/songkick.py --url "https://..." --name "Venue Name"
+#   cities/{city}/venue_name.ics
+#
+# See CONTRIBUTING.md for details.
+"""
+
+
+def write_template(path, city):
+    """Reset pending_feeds.txt to the template."""
+    with open(path, "w") as f:
+        f.write(TEMPLATE.replace("{city}", city))
+
+
 def process_city(city, supabase_url, service_key):
     """Process pending_feeds.txt for one city. Returns True if any were processed."""
     pending_path = ROOT / "cities" / city / "pending_feeds.txt"
@@ -131,8 +154,7 @@ def process_city(city, supabase_url, service_key):
 
     feeds = parse_pending_feeds(pending_path)
     if not feeds:
-        print(f"{city}: pending_feeds.txt is empty, removing")
-        pending_path.unlink()
+        print(f"{city}: pending_feeds.txt has no feeds")
         return False
 
     print(f"{city}: {len(feeds)} pending feed(s)")
@@ -140,8 +162,8 @@ def process_city(city, supabase_url, service_key):
     print(f"  {inserted} inserted, {skipped} skipped, {errors} errors")
 
     if errors == 0:
-        pending_path.unlink()
-        print(f"  cleared pending_feeds.txt")
+        write_template(pending_path, city)
+        print(f"  reset pending_feeds.txt to template")
     else:
         print(f"  pending_feeds.txt NOT cleared (errors occurred)")
 

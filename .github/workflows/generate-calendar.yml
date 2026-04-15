@@ -418,16 +418,16 @@ jobs:
       run: |
         python scripts/process_pending_feeds.py --all
 
-    - name: Commit cleared pending_feeds.txt
+    - name: Commit processed pending_feeds.txt
       run: |
         if git status --porcelain | grep -q pending_feeds.txt; then
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -u cities/*/pending_feeds.txt
+          git add cities/*/pending_feeds.txt
           git commit -m "Process pending feeds into DB"
           git push || true
         else
-          echo "No pending feeds to clear"
+          echo "No pending feeds to process"
         fi
 
     - name: Fetch pending feeds from DB
