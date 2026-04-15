@@ -14,7 +14,6 @@
   var.city="{window.cityFilter || null}"
   global.isAdmin="{false}"
   global.activePanel="{''}"
-  var.eventDayRange="{null}"
   var.sliderRange="{false}"
   var.sliderStart="{null}"
   var.sliderEnd="{null}">
@@ -64,7 +63,7 @@
 
   <ChangeListener
     listenTo="{userSettings.value}"
-    onDidChange="() => { if (userSettings.value && userSettings.value.length) { userSettingsData = userSettings.value; const s = userSettingsData[0]; if (s) { if (s.layout_mode && !window.embed) { window.setLayoutMode(s.layout_mode); layoutMode = s.layout_mode } if (s.image_mode) { window.setShowListImages(s.image_mode === 'everywhere' ? 'list' : 'preview'); showListImages = (s.image_mode !== 'preview') } oneClickPick = !!s.one_click_pick } } }"
+    onDidChange="() => { if (userSettings.value && userSettings.value.length) { userSettingsData = userSettings.value; const s = userSettingsData[0]; if (s) { if (s.layout_mode && !window.embed && !window.hasLayoutModeParam) { window.setLayoutMode(s.layout_mode); layoutMode = s.layout_mode } if (s.image_mode && !window.hasImagesParam) { window.setShowListImages(s.image_mode === 'everywhere' ? 'list' : 'preview'); showListImages = (s.image_mode !== 'preview') } oneClickPick = !!s.one_click_pick } } }"
   />
 
   <DataSource
@@ -141,12 +140,8 @@
   <variable name="expandedEnrichments" value="{window.expandEnrichments(enrichments.value, window.getFromDate(), window.getToDate()) || []}" />
   <variable name="combinedEvents" value="{[...(Array.isArray(events.value) ? events.value : []), ...(Array.isArray(expandedEnrichments) ? expandedEnrichments : [])]}" />
   <variable name="processedEvents" value="{window.buildSearchIndex(window.filterHiddenSources(window.collapseLongRunningEvents(window.sortSourcesForDisplay(window.filterExternalExclusions(combinedEvents))), hiddenSources))}" />
+  <variable name="eventDayRange" value="{processedEvents && processedEvents.length > 100 ? window.getEventDayRange(processedEvents) : null}" />
   <variable name="displayEvents" value="{sliderStart !== null ? processedEvents.filter(e => { const t = new Date(e.start_time).getTime(); const base = window._dateRangeBase.getTime(); return t >= base + sliderStart * 86400000 && t < base + (sliderEnd + 1) * 86400000 }) : processedEvents}" />
-
-  <ChangeListener
-    listenTo="{processedEvents}"
-    onDidChange="() => { if (!sliderRange && processedEvents && processedEvents.length > 100) { eventDayRange = window.getEventDayRange(processedEvents) } }"
-  />
 
   <!-- City list from Supabase (distinct cities with events) -->
   <DataSource
@@ -330,9 +325,11 @@
     <Masonry when="{events.loaded && viewMode === 'all' && layoutMode === 'multicol'}" data="{getPagedEvents(processedEvents, filterTerm, displayStartIndex, filterTerm ? 10 : 50, categoryFilter, sliderStart, sliderEnd)}" columns="3" gap="$space-3" rowGap="0" minColumnWidth="300px">
       <EventCard event="{$item}" filterTerm="{filterTerm}" categoryColorMap="{window.categoryColorMap}" categoryList="{window.categoryList}" />
     </Masonry>
-    <List when="{events.loaded && viewMode === 'all' && layoutMode !== 'multicol'}" data="{getPagedEvents(processedEvents, filterTerm, displayStartIndex, filterTerm ? 10 : 50, categoryFilter, sliderStart, sliderEnd)}" limit="{filterTerm ? 10 : 50}">
-      <EventCard event="{$item}" filterTerm="{filterTerm}" categoryColorMap="{window.categoryColorMap}" categoryList="{window.categoryList}" />
-    </List>
+    <VStack when="{events.loaded && viewMode === 'all' && layoutMode !== 'multicol'}" gap="$space-0">
+      <Items data="{getPagedEvents(processedEvents, filterTerm, displayStartIndex, filterTerm ? 10 : 50, categoryFilter, sliderStart, sliderEnd)}">
+        <EventCard event="{$item}" filterTerm="{filterTerm}" categoryColorMap="{window.categoryColorMap}" categoryList="{window.categoryList}" />
+      </Items>
+    </VStack>
     <Button
       when="{events.loaded && viewMode === 'all' && !filterTerm && moreHasMore}"
       label="Later"
