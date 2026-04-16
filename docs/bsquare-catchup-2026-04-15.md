@@ -179,6 +179,27 @@ The simple path is:
 
 If that works, he is done.
 
+For this repo as of April 15, 2026, the edge-function picture is:
+
+- `load-events`
+  Required for the scheduled/event-ingest path
+- `my-picks`
+  Required if B-Square wants shareable/exportable picks feeds
+- `capture-event`
+  Required if B-Square wants poster/image/audio capture
+- `validate-feed`
+  Required for the feed-management UI
+- `chat-events`
+  Optional unless B-Square is using the chat/event-assistant feature
+
+So the practical default is:
+
+1. Redeploy `load-events`, `my-picks`, `capture-event`, and `validate-feed`
+2. Redeploy `chat-events` only if that feature is in use
+
+For these functions, Josh should also preserve B-Square-specific secrets and env
+vars rather than copying upstream values.
+
 As of April 15, 2026, the Sources panel no longer depends on a
 `get_source_counts` RPC. It computes source counts from the already-loaded
 event list in the client, so that specific function is not part of the minimum
