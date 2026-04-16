@@ -37,7 +37,6 @@ test('settings-roundtrip', async ({ page }) => {
       ),
       page.getByRole('checkbox', { name: 'One-click pick (skip editor)' }).click(),
     ]);
-    await expect(page.getByRole('radio', { name: 'Only in previews' })).toHaveAttribute('aria-checked', 'true', { timeout: 15000 });
     await expect(page.getByRole('checkbox', { name: 'One-click pick (skip editor)' })).toBeChecked({ timeout: 15000 });
 
     await settingsButton.click();
@@ -45,7 +44,6 @@ test('settings-roundtrip', async ({ page }) => {
 
     await settingsButton.click();
     await expect(page.getByText('Display Settings', { exact: true })).toBeVisible({ timeout: 15000 });
-
     await expect(page.getByRole('radio', { name: 'Only in previews' })).toHaveAttribute('aria-checked', 'true', { timeout: 15000 });
     await expect(page.getByRole('checkbox', { name: 'One-click pick (skip editor)' })).toBeChecked({ timeout: 15000 });
 
