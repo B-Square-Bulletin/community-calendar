@@ -263,6 +263,7 @@ jobs:
         python scrapers/toronto_festivals.py -o cities/toronto/toronto_festivals.ics || true
         python scrapers/volunteer_toronto.py -o cities/toronto/volunteer_toronto.ics || true
         python scrapers/toronto_public_library.py -o cities/toronto/tpl_events.ics || true
+        python scrapers/toronto_bicycling_network.py -o cities/toronto/toronto_bicycling_network.ics || true
         python scrapers/ticketmaster.py --venue-id KovZpZAFFE1A --name "Scotiabank Arena" --timezone America/Toronto -o cities/toronto/scotiabank_arena.ics || true
         python scrapers/ticketmaster.py --venue-id KovZ917AJ4f --name "History" --timezone America/Toronto -o cities/toronto/history.ics || true
         python scrapers/ticketmaster.py --venue-id KovZpa3yBe --name "Danforth Music Hall" --timezone America/Toronto -o cities/toronto/danforth_music_hall.ics || true
@@ -277,6 +278,15 @@ jobs:
         python scrapers/bookmanager.py --san 7600763 --domain shop.benmcnallybooks.com --name "Ben McNally Books" -o cities/toronto/ben_mcnally_bm.ics || true
         python scrapers/bookmanager.py --san 8100306 --domain shop.queenbooks.ca --name "Queen Books" -o cities/toronto/queen_books_bm.ics || true
         python scrapers/bookmanager.py --san 1188585 --domain adifferentbooklist.com --name "A Different Booklist" -o cities/toronto/a_different_booklist.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/lula-lounge-19825205758" --name "Lula Lounge" -o cities/toronto/eventbrite_lula_lounge.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/the-rosedale-centre-83757475743" --name "The Rosedale Centre" -o cities/toronto/eventbrite_rosedale_centre.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/hand-eye-society-15539055266" --name "Hand Eye Society" -o cities/toronto/eventbrite_hand_eye_society.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/forest-bathing-club-68086018103" --name "Forest Bathing Club" -o cities/toronto/eventbrite_forest_bathing_club.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/book-club-toronto-113996803611" --name "Book Club Toronto" -o cities/toronto/eventbrite_book_club_toronto.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/another-story-bookshop-32458688399" --name "Another Story Bookshop" -o cities/toronto/eventbrite_another_story.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/glad-day-bookshop-12026081388" --name "Glad Day Bookshop" -o cities/toronto/eventbrite_glad_day.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/torontos-first-post-office-7903835251" --name "Toronto's First Post Office" -o cities/toronto/eventbrite_first_post_office.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/fuzzy-lab-toronto-102501807981" --name "Fuzzy Lab Toronto" -o cities/toronto/eventbrite_fuzzy_lab.ics || true
         python scrapers/eventbrite_filtered.py --organizer 13112142972 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Penguin Random House Canada" -o cities/toronto/prh_canada.ics || true
         python scrapers/eventbrite_filtered.py --organizer 17669573222 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "HarperCollins Canada" -o cities/toronto/harpercollins_canada.ics || true
         python scrapers/eventbrite_filtered.py --organizer 57010055313 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Simon & Schuster Canada" -o cities/toronto/simon_schuster_canada.ics || true
@@ -704,4 +714,3 @@ jobs:
 
         # Return to main
         git checkout main
-

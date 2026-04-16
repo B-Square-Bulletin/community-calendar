@@ -1,11 +1,57 @@
-# Add ICS feed URLs here. The build will process them into the
+# Add feed URLs or scraper outputs here. The build will process them into the
 # database automatically and reset this file to the template below.
 #
 # Format:
 #   # Source Name
 #   https://example.com/events/?ical=1
 #
+# Or for scrapers:
+#   # Source Name
+#   # cmd: python scrapers/example.py --name "Source Name"
+#   cities/toronto/example.ics
+#
 # Test before adding:
 #   python scripts/add_feed.py URL toronto "Source Name" --test
+#   python scripts/add_scraper.py example toronto "Source Name" --test
 #
 # See CONTRIBUTING.md for details.
+
+# Toronto Bicycling Network
+# cmd: python scrapers/toronto_bicycling_network.py
+cities/toronto/toronto_bicycling_network.ics
+
+# Lula Lounge
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/lula-lounge-19825205758" --name "Lula Lounge"
+cities/toronto/eventbrite_lula_lounge.ics
+
+# The Rosedale Centre
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/the-rosedale-centre-83757475743" --name "The Rosedale Centre"
+cities/toronto/eventbrite_rosedale_centre.ics
+
+# Hand Eye Society
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/hand-eye-society-15539055266" --name "Hand Eye Society"
+cities/toronto/eventbrite_hand_eye_society.ics
+
+# Forest Bathing Club
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/forest-bathing-club-68086018103" --name "Forest Bathing Club"
+cities/toronto/eventbrite_forest_bathing_club.ics
+
+# Book Club Toronto
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/book-club-toronto-113996803611" --name "Book Club Toronto"
+cities/toronto/eventbrite_book_club_toronto.ics
+
+# Another Story Bookshop
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/another-story-bookshop-32458688399" --name "Another Story Bookshop"
+cities/toronto/eventbrite_another_story.ics
+
+# Glad Day Bookshop
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/glad-day-bookshop-12026081388" --name "Glad Day Bookshop"
+cities/toronto/eventbrite_glad_day.ics
+
+# Toronto's First Post Office
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/torontos-first-post-office-7903835251" --name "Toronto's First Post Office"
+cities/toronto/eventbrite_first_post_office.ics
+
+# Fuzzy Lab Toronto
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/fuzzy-lab-toronto-102501807981" --name "Fuzzy Lab Toronto"
+cities/toronto/eventbrite_fuzzy_lab.ics

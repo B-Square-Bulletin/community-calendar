@@ -88,9 +88,9 @@
 ### Literary & Bookstores
 | Source | Type | Events | Notes |
 |--------|------|--------|-------|
-| Another Story Bookshop | Eventbrite organizer (eb-to-ical) | 16 upcoming | Roncesvalles social-justice/diversity focus; very active |
+| Another Story Bookshop | Eventbrite organizer scraper | 16 upcoming at sweep time | Roncesvalles social-justice/diversity focus; migrating off eb-to-ical |
 | Ben McNally Books | Eventbrite organizer (eb-to-ical) | active | Downtown indie; Fresh Off The Press book club + open mic + launches |
-| Glad Day Bookshop | Eventbrite organizer (eb-to-ical) | active | World's oldest LGBTQ+ bookstore; drag brunches, readings, fundraisers |
+| Glad Day Bookshop | Eventbrite organizer scraper | active | World's oldest LGBTQ+ bookstore; drag brunches, readings, fundraisers; migrating off eb-to-ical |
 | Hopeless Romantic Books | Eventbrite organizer (eb-to-ical) | active | Romance specialty; monthly hybrid book club |
 | Queen Books | Eventbrite organizer (eb-to-ical) | currently dormant | Leslieville general indie; live source is Bookmanager scraper below |
 | Book*hug Press | Eventbrite (filtered) | 7 | Literary press; launches across Toronto venues |
@@ -106,6 +106,11 @@
 | Ben McNally Books (Bookmanager) | Bookmanager scraper | 9 | Complements Eventbrite feed: BMB Book Club + publisher launches |
 | Queen Books (Bookmanager) | Bookmanager scraper | 8 | Currently the live source for Queen Books events |
 | A Different Booklist | Bookmanager scraper | 4 | Black-owned, Annex; covers events not on a Bookstore organizer page |
+
+### Outdoor Recreation Clubs
+| Source | Type | Events | Notes |
+|--------|------|--------|-------|
+| Toronto Bicycling Network | Wild Apricot RSS scraper | ~143 in-range | Hiking, cycling, walks, skating, skiing via `scrapers/toronto_bicycling_network.py` |
 
 ### Meetup Groups (49 groups)
 | Group | Events | Category |
@@ -165,7 +170,15 @@
 - **Toronto Public Library** — now implemented as kids/family-scoped scraper (`scrapers/toronto_public_library.py`) on reusable Bibliocommons base (`scrapers/lib/bibliocommons.py`). Monitor ongoing signal/noise and adjust filters if needed.
 - ~~**BlogTO**~~ — Implemented as `scrapers/blogto.py`. Uses public `/api/v2/events/?date=YYYY-MM-DD&bundle_type=medium` listing endpoint (no per-event fetch). Walks day-by-day, dedupes by event id, stops after 7 empty days.
 - **Explore Kids Ontario Adventures** — Tockify feed (`ekoad`) has 822 events but covers broader GTA/Ontario, not just Toronto. May need geo-filtering.
-- **Toronto Bicycling Network** — Wild Apricot RSS at `tbn.ca/events/RSS` has 55 events (hiking, cycling, walks, skating, skiing). Richest outdoor recreation club. Needs RSS-to-ICS conversion.
+- ~~**Toronto Bicycling Network**~~ — Implemented as `scrapers/toronto_bicycling_network.py`. Wild Apricot RSS source with strong outdoor recreation coverage.
+- **Cecil Community Centre** — AI1EC export feed confirmed live (`?plugin=all-in-one-event-calendar&controller=ai1ec_exporter_controller&action=export_events`), added to `feeds` table as pending on 2026-04-15.
+- **Lula Lounge** — Eventbrite organizer `19825205758`; staged as `scrapers/eventbrite.py` entry in workflow + `pending_feeds.txt` on 2026-04-15.
+- **The Rosedale Centre** — Eventbrite organizer `83757475743`; staged as `scrapers/eventbrite.py` entry in workflow + `pending_feeds.txt` on 2026-04-15.
+- **Hand Eye Society** — Eventbrite organizer `15539055266`; staged as `scrapers/eventbrite.py` entry in workflow + `pending_feeds.txt` on 2026-04-15.
+- **Forest Bathing Club** — Eventbrite organizer `68086018103`; staged as `scrapers/eventbrite.py` entry in workflow + `pending_feeds.txt` on 2026-04-15.
+- **Book Club Toronto** — Eventbrite organizer `113996803611`; staged as `scrapers/eventbrite.py` entry in workflow + `pending_feeds.txt` on 2026-04-15.
+- **Toronto's First Post Office** — Eventbrite organizer `7903835251`; public-history lectures/tours, staged as `scrapers/eventbrite.py` entry in workflow + `pending_feeds.txt` on 2026-04-15.
+- **Fuzzy Lab Toronto** — Eventbrite organizer `102501807981`; tufting/craft workshop source, staged as `scrapers/eventbrite.py` entry in workflow + `pending_feeds.txt` on 2026-04-15.
 
 ---
 
@@ -204,7 +217,7 @@
 | Power Plant Gallery | No WordPress Tribe ICS |
 | MOCA Toronto | No WordPress Tribe ICS |
 | The 519 | WordPress but no Tribe Events plugin |
-| Lula Lounge | No feed |
+| ~~Lula Lounge~~ | ~~No feed~~ **Eventbrite organizer found; staged as `scrapers/eventbrite.py` source** |
 | Tranzac | No feed |
 | 918 Bathurst | No feed |
 | Luminato Festival | No feed |

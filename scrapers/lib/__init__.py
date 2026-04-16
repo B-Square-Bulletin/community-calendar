@@ -4,6 +4,7 @@ from .elfsight import ElfsightCalendarScraper, fetch_elfsight_data, expand_recur
 from .ics import IcsScraper, GoogleCalendarScraper
 from .jsonld import JsonLdScraper, extract_jsonld_blocks, extract_events_from_blocks, parse_location
 from .rss import RssScraper
+from .wild_apricot_rss import WildApricotRssScraper
 from .utils import (
     fetch_with_retry,
     generate_uid,
@@ -28,6 +29,7 @@ __all__ = [
     'extract_events_from_blocks',
     'parse_location',
     'RssScraper',
+    'WildApricotRssScraper',
     'fetch_with_retry',
     'generate_uid',
     'append_source',
