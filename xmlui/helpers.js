@@ -379,11 +379,21 @@ function formatTime(isoString) {
   return h + ':' + m + ' ' + ampm;
 }
 
+function uniqueSourceNames(source) {
+  if (!source) return [];
+  var seen = new Set();
+  return source.split(',').map(function(s) { return s.trim(); }).filter(function(s) {
+    if (!s || seen.has(s)) return false;
+    seen.add(s);
+    return true;
+  });
+}
+
 // Extract a short readable snippet from an event description (for always-visible preview)
 // Junk line patterns are hardcoded here; see docs/admin-interface.md for plan to make configurable
 function formatSourceLinks(source, sourceUrls, hiddenSources) {
   if (!source) return '';
-  var sources = source.split(',').map(function(s) { return s.trim(); }).filter(Boolean);
+  var sources = uniqueSourceNames(source);
   // Filter out hidden sources, but keep all if all would be removed
   if (hiddenSources && hiddenSources.length) {
     var visible = sources.filter(function(s) { return hiddenSources.indexOf(s) < 0; });
@@ -588,7 +598,7 @@ function getSourceCounts(events) {
   if (!events || !events.length) return [];
   const counts = {};
   events.forEach(e => {
-    const sources = (e.source || 'Unknown').split(', ');
+    const sources = uniqueSourceNames(e.source || 'Unknown');
     sources.forEach(src => {
       counts[src] = (counts[src] || 0) + 1;
     });
@@ -809,7 +819,7 @@ function sortSourcesForDisplay(events) {
   if (!events) return [];
   return events.map(function(e) {
     if (!e.source) return e;
-    var sourcesArr = e.source.split(', ').filter(Boolean);
+    var sourcesArr = uniqueSourceNames(e.source);
     if (sourcesArr.length <= 1) return e;
     sourcesArr.sort(function(a, b) {
       var aAgg = AGGREGATORS.has(a) ? 1 : 0;
