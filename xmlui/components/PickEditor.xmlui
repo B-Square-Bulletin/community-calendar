@@ -129,8 +129,8 @@
       data="{(() => {
         const tz = (window._cities && window.cityFilter && window._cities[window.cityFilter]?.timezone) || null;
         const useLocal = !!$props.event?.id;
-        const st = useLocal ? window.utcToLocal($props.event?.start_time, tz) : { date: ($props.event?.start_time || '').substring(0, 10), time: ($props.event?.start_time || '').substring(11, 16) };
-        const et = useLocal && $props.event?.end_time ? window.utcToLocal($props.event.end_time, tz) : { time: $props.event?.end_time ? $props.event.end_time.substring(11, 16) : '' };
+        const st = useLocal ? window.utcToLocal($props.event?.start_time, tz) : { date: window.extractIsoDateValue($props.event?.start_time), time: window.extractHmTimeValue($props.event?.start_time, '19:00') };
+        const et = useLocal && $props.event?.end_time ? window.utcToLocal($props.event.end_time, tz) : { time: window.extractHmTimeValue($props.event?.end_time, '') };
         return {
           title: $props.event?.title || '',
           date: st.date,
@@ -144,6 +144,7 @@
       hideButtonRow="{!!savedPickId}"
       saveLabel="{isSaving ? 'Saving...' : 'Add to My Picks'}"
       enableSubmit="{!isSaving}"
+      onCancel="emitEvent('close')"
       onSubmit="(data) => {
         if (!window.authUser?.id) {
           errorMessage = 'Please sign in to pick events';
@@ -160,8 +161,8 @@
           if (rruleFrequency !== 'none') {
             const rruleStr = window.buildRRule(rruleFrequency, rruleDays, rruleOrdinal, rruleMonthDay, rruleUntil);
             const cityTz2 = (window._cities && window.cityFilter && window._cities[window.cityFilter]?.timezone) || null;
-            const startTime = window.applyTimezoneOffset((formData.date || '').substring(0, 10) + 'T' + (formData.time || '00:00').substring(0, 5) + ':00', cityTz2);
-            const endTime = formData.endTime ? window.applyTimezoneOffset((formData.date || '').substring(0, 10) + 'T' + formData.endTime.substring(0, 5) + ':00', cityTz2) : null;
+            const startTime = window.applyTimezoneOffset((formData.date || '').substring(0, 10) + 'T' + window.normalizeTimeValue(formData.time || '00:00') + ':00', cityTz2);
+            const endTime = formData.endTime ? window.applyTimezoneOffset((formData.date || '').substring(0, 10) + 'T' + window.normalizeTimeValue(formData.endTime) + ':00', cityTz2) : null;
             enrichmentApi.execute({
               event_id: $props.event.id,
               curator_id: window.authUser.id,
@@ -177,9 +178,9 @@
           }
         } else {
           const dateStr = (formData.date || '').substring(0, 10);
-          const rawStart = (formData.time || '00:00').substring(0, 5);
+          const rawStart = window.normalizeTimeValue(formData.time || '00:00');
           const startTime = dateStr + 'T' + rawStart + ':00';
-          const rawEnd = formData.endTime ? formData.endTime.substring(0, 5) : null;
+          const rawEnd = formData.endTime ? window.normalizeTimeValue(formData.endTime) : null;
           const endTime = rawEnd ? dateStr + 'T' + rawEnd + ':00' : null;
           captureApi.execute({
             mode: 'commit',
@@ -303,7 +304,7 @@
                 aria-label="Start time"
                 initialValue="{$value}"
                 hour24="false"
-                onDidChange="() => $setValue(startTimeInput.isoValue())"
+                onDidChange="() => $setValue(window.normalizeTimeValue(startTimeInput.isoValue()))"
               />
             </FormItem>
             <FormItem
@@ -317,7 +318,7 @@
                 aria-label="End time"
                 initialValue="{$value}"
                 hour24="false"
-                onDidChange="() => $setValue(endTimeInput.isoValue())"
+                onDidChange="() => $setValue(window.normalizeTimeValue(endTimeInput.isoValue()))"
               />
             </FormItem>
           </HStack>
@@ -338,8 +339,8 @@
         <AddToCalendar event="{{
           id: $props.event?.id || savedPickId,
           title: submittedData?.title || $props.event?.title,
-          start_time: (submittedData?.date || '') + 'T' + (submittedData?.time || '00:00') + ':00',
-          end_time: submittedData?.endTime ? (submittedData?.date || '') + 'T' + submittedData.endTime + ':00' : null,
+          start_time: (submittedData?.date || '') + 'T' + window.normalizeTimeValue(submittedData?.time || '00:00') + ':00',
+          end_time: submittedData?.endTime ? (submittedData?.date || '') + 'T' + window.normalizeTimeValue(submittedData.endTime) + ':00' : null,
           location: submittedData?.location,
           description: $props.event?.transcript ? (submittedData?.description || '') + '\n\nTranscribed audio:\n' + $props.event.transcript : submittedData?.description,
           url: $props.event?.url || null,
