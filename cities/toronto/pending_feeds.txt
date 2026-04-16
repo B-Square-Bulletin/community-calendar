@@ -66,3 +66,20 @@ cities/toronto/eventbrite_studio_mooi.ics
 # Open Studio
 # cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/open-studio-19932715092" --name "Open Studio"
 cities/toronto/eventbrite_open_studio.ics
+
+# Green Neighbours Network of Toronto
+https://gnntoronto.ca/events/?ical=1
+
+# GardenOntario (Ontario Horticultural Association)
+https://gardenontario.org/events/?ical=1
+
+# Etobicoke Horticultural Society
+# cmd: python scrapers/etobicoke_hort.py
+cities/toronto/etobicoke_hort.ics
+
+# Toronto Master Gardeners
+https://www.torontomastergardeners.ca/events/?ical=1
+
+# Anga's Farm & Nursery
+# cmd: python scrapers/angas_farm.py
+cities/toronto/angas_farm.ics

@@ -309,6 +309,8 @@ jobs:
         python scrapers/waterfront_bia.py --output cities/toronto/waterfront_bia.ics || true
         python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/studio-mooi-59841950783" --name "Studio Mooi" --output cities/toronto/eventbrite_studio_mooi.ics || true
         python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/open-studio-19932715092" --name "Open Studio" --output cities/toronto/eventbrite_open_studio.ics || true
+        python scrapers/etobicoke_hort.py --output cities/toronto/etobicoke_hort.ics || true
+        python scrapers/angas_farm.py --output cities/toronto/angas_farm.ics || true
       continue-on-error: true
 
 

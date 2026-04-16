@@ -1,6 +1,6 @@
 # Toronto Calendar Source Checklist
 
-## Currently Implemented (124 sources)
+## Currently Implemented (129 sources)
 
 ### Aggregators
 | Source | Type | Events | Notes |
@@ -75,6 +75,15 @@
 | Queen City Stitch and Bitch | Meetup ICS | 10 | Fibre arts — knit, crochet, spin, weave, sew |
 | Studio Mooi | Eventbrite organizer scraper | 2 | Pottery/craft workshops (Wix site, no own feed) |
 | Open Studio (Printmaking Centre) | Eventbrite organizer scraper | 8 | Toronto's only artist-run printmaking centre (WP but no calendar plugin) |
+
+### Gardening & Horticulture
+| Source | Type | Events | Notes |
+|--------|------|--------|-------|
+| Green Neighbours Network of Toronto | WordPress Tribe ICS | 50 | Native plant walks, tree stewardship, community garden events |
+| GardenOntario (OHA) | WordPress Tribe ICS | 30 | Province-wide hort society events; geo-filter trims to Toronto |
+| Etobicoke Horticultural Society | Squarespace per-event ICS scraper | 4 future | Monthly meetings, garden tours, plant sales |
+| Toronto Master Gardeners | WordPress Tribe ICS | 15 | Demos at libraries, advice clinics, TBG presentations |
+| Anga's Farm & Nursery | Squarespace per-event ICS scraper | 11 | Workshops: kokedama, pruning, floral design at 89 Bankfield Dr |
 
 ### Government & Public Affairs
 | Source | Type | Events | Notes |
@@ -324,16 +333,16 @@ Track progress on topical searches to find long-tail community sources.
 | History/heritage | 2025-02-15 | Ontario Historical Society, Toronto History Walks, Medieval SCA | 25 events |
 | Science/education | 2026-02-15 | CITA Local Events, CITA Seminars, CITA Special Events | 3 public Google ICS feeds from CITA calendar page |
 | Literary / bookstores | 2026-04-11 | 5 store organizers (Another Story, Ben McNally, Glad Day, Hopeless Romantic, Queen Books) + 4 publisher organizers (Coach House, Cormorant, Book*hug, Penguin Random House Canada) | Deep-dive into Toronto's indie bookstore scene; see dedicated section below |
+| Gardening / horticulture | 2026-04-16 | GNN, GardenOntario, Etobicoke Hort Society | See dedicated section below |
+| Comedy / improv | 2026-04-16 | (assessed, not wired) | Venues inventoried; mostly Eventbrite-only. See dedicated section below |
+| Food / drink | 2026-04-16 | (assessed, low yield) | Farmers markets + cooking studios inventoried; mostly Shopify/custom. See dedicated section below |
 
 ### Not Yet Done
 
-- Food & drink (cooking classes, tastings, farmers markets)
 - Faith / spiritual
 - Seniors
 - LGBTQ+ community
-- Comedy (standup, open mics)
 - Music participation (choirs, jam sessions, open mics)
-- Gardening / urban farming
 
 ---
 
@@ -725,3 +734,105 @@ Second pass on craft/maker sources. Strategy: Meetup topical search + Eventbrite
 ### Key Pattern Observed
 
 Most Toronto craft studios sell classes through **Shopify** — they treat workshops as products, not calendar events. This means no ICS feeds are possible. The authoritative wins (Devil's Workshop, Jewel Envy) are WordPress sites with calendar plugins. HackLab.TO uses an embedded Google Calendar. For Shopify-based studios, the only route is Eventbrite (if they cross-post) or a custom Shopify product scraper (already built for Bistitchual, Parkdale Pottery, Toronto Tool Library).
+
+---
+
+## Topical Search: Gardening / Horticulture (2026-04-16)
+
+### Added
+
+| Source | Type | Events | Notes |
+|--------|------|--------|-------|
+| Green Neighbours Network of Toronto | WordPress Tribe ICS | 50 | `gnntoronto.ca/events/?ical=1` — native plant walks, tree plantings, stewardship events |
+| GardenOntario (OHA) | WordPress Tribe ICS | 30 | `gardenontario.org/events/?ical=1` — province-wide hort society events; geo-filter trims to Toronto |
+| Etobicoke Horticultural Society | Squarespace per-event ICS scraper | 4 future | `etobicokehort.ca/monthly-meetings-1` — 47 events in collection, 36 per-event ICS links, 4 future after date filter |
+| Toronto Master Gardeners | WordPress Tribe ICS | 15 | `torontomastergardeners.ca/events/?ical=1` — demos at libraries, advice clinics, TBG presentations |
+| Anga's Farm & Nursery | Squarespace per-event ICS scraper | 11 | `angasfarm.ca/events-2` — workshops (kokedama, pruning, floral) at 89 Bankfield Dr, Toronto |
+
+### Organizations Assessed — No Feed Available
+
+| Organization | Platform | Notes |
+|-------------|----------|-------|
+| Toronto Community Garden Network (TCGN) | WordPress (BuddyPress) | Member network, no calendar plugin |
+| Toronto Urban Agriculture Week | WordPress.com | Annual event, blog-format posts |
+| Garden Club of Toronto | ClubExpress | Member org, no public feed |
+| gardeningcalendar.ca | WordPress | Tribe API headers present but events route 404s; ICS returns HTML |
+| Parkdale & Toronto Horticultural Society | gardentoronto.ca down (ECONNREFUSED) | Meets last Monday of month at Bonar-Parkdale Presbyterian Church |
+| FoodShare Toronto | WordPress | Tribe API 404; ICS returns HTML. Community gardens program but no events feed |
+| NANPS (North American Native Plant Society) | WordPress | `google-calendar-events` plugin but no public embed found; `simple_events` CPT, no ICS. Has EB organizer `14961310163` (1 event). HQ'd in Toronto |
+| Seeds of Diversity | WordPress | Seedy Saturday aggregator; no Tribe/MEC. Events page has no calendar plugin |
+| Etobicoke Master Gardeners | Weebly | No feed; static events page |
+| MGOI (Master Gardeners of Ontario) | WordPress | No calendar plugin |
+| Sheridan Nurseries | Custom/unknown | Events page exists but no detectable platform |
+| Black Creek Community Farm | WordPress | `?ical=1` returns HTML; no Tribe plugin |
+| Toronto Seed Library | WordPress | No calendar plugin |
+| Toronto Bonsai Society | WordPress | `?ical=1` returns HTML; no Tribe. Monthly meetings 2nd Monday at 7pm |
+
+### Meetup Groups Assessed
+
+| Group | Events | Status |
+|-------|--------|--------|
+| Toronto Permaculture | 0 | No upcoming events |
+| Gardening with Indigenous Plants | 0 | No upcoming events |
+| Forage & Feast | 0 | Burlington area; no upcoming events |
+
+### Notes
+
+- Toronto Botanical Garden is already in feeds (WordPress Tribe ICS)
+- Ontario Nature is already in feeds (WordPress Tribe ICS)
+- High Park Nature Centre is already in feeds (WordPress Tribe ICS)
+- GardenOntario events are province-wide (Batawa, Gananoque, Cambridge, etc.) — pipeline geo-filter will trim to Toronto-area events
+- Anga's Farm is in Rexdale (89 Bankfield Dr, M9V) — confirmed Toronto
+
+---
+
+## Topical Search: Comedy / Improv (2026-04-16)
+
+Assessed but not wired. Inventoried for future triangulation.
+
+### Venues Assessed
+
+| Venue | Platform | Eventbrite Organizer | Events | Notes |
+|-------|----------|---------------------|--------|-------|
+| Keys Toronto Comedy Club | Unknown | `29571417999` | 21 | Biggest EB comedy organizer |
+| Backroom Comedy Club | Unknown | `37924243333` | 23 EB + 10 Meetup | Both platforms active |
+| Bad Dog Theatre | Squarespace | `38696894293` | Unknown | Improv since 1982; per-event ICS possible (pagination quirk) |
+| Social Capital Theatre (SoCap) | Next.js | `34755939373` | 4 | Improv/sketch/standup on Danforth |
+| Second City Toronto | Wix | `106289245751` | 1 | Iconic improv; low EB presence |
+| Comedy Bar | Shopify | Not found | n/a | 2 locations (Bloor + Danforth); sells tix as products |
+| Yuk Yuk's | Custom | No organizer page | n/a | Legacy club; individual show listings only |
+| The Comedy Lab | Unknown | Collection page | Unknown | Black/Queer-owned; newer venue |
+
+### Action Items (parked)
+
+- Wire Keys (21 events), Backroom (23 events), Bad Dog, SoCap as Eventbrite scrapers
+- Add Backroom Comedy Club Meetup ICS feed (10 events)
+- Bad Dog: try Squarespace per-event ICS aggregation pattern
+
+---
+
+## Topical Search: Food / Drink (2026-04-16)
+
+Assessed; low yield for machine-readable feeds. The community food space is dominated by Shopify (classes as products) and custom sites.
+
+### Venues Assessed — No Feed Available
+
+| Venue / Org | Platform | Notes |
+|-------------|----------|-------|
+| St. Lawrence Market | Custom | Events page exists but no calendar plugin |
+| Evergreen Brick Works | WordPress | `?ical=1` returns HTML; no Tribe/MEC |
+| Friends of Allan Gardens | Squarespace | Saturday Farmers Market; `?format=json` returns 0 |
+| Dish Cooking Studio | Squarespace | Calendar managed via FareHarbor (external booking) |
+| The Depanneur | Shopify | Community kitchen; events as products |
+| The Stop Community Food Centre | WordPress | No Tribe plugin; runs Saturday farmers market at Wychwood Barns |
+| Wychwood Barns | Duda | Monthly calendar as blog posts |
+| TFMN (Toronto Farmers Market Network) | WordPress | Articles not events |
+| Farmers' Markets Ontario | WordPress | Provincial org, no calendar plugin |
+| To Do Canada | WordPress | Festival aggregator; `?ical=1` returns HTML |
+
+### Notes
+
+- Green Neighbours Network (added under Gardening) overlaps: community food growing, food forests
+- Farmers markets are largely seasonal and don't publish machine-readable calendars
+- Cooking studios universally use booking platforms (FareHarbor, Shopify) rather than event calendars
+- Food festivals are one-off events mostly on Eventbrite; no persistent organizer pages worth wiring
