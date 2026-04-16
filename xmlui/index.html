@@ -73,6 +73,7 @@
           }
         } catch(e) {}
       }
+      window.hasLayoutModeParam = params.has('mode');
       window.layoutMode = params.get('mode') || 'list';
       window.setLayoutMode = function(val) {
         window.layoutMode = val;
@@ -81,6 +82,7 @@
         else { url.searchParams.delete('mode'); }
         window.history.replaceState({}, '', url);
       };
+      window.hasImagesParam = params.has('images');
       window.showListImages = params.get('images') !== 'preview';
       window.setShowListImages = function(val) {
         window.showListImages = val !== 'preview';
