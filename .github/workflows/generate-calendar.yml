@@ -296,6 +296,9 @@ jobs:
         python scrapers/eventbrite_filtered.py --organizer 31280011011 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Cormorant Books" -o cities/toronto/cormorant_books.ics || true
         python scrapers/eventbrite_filtered.py --organizer 30975200167 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Book*hug Press" -o cities/toronto/bookhug_press.ics || true
         python scrapers/blogto.py --output cities/toronto/blogto.ics || true
+        python scrapers/toronto_tool_library.py --output cities/toronto/toronto_tool_library.ics || true
+        python scrapers/bistitchual.py --output cities/toronto/bistitchual.ics || true
+        python scrapers/parkdale_pottery.py --output cities/toronto/parkdale_pottery.ics || true
       continue-on-error: true
 
 

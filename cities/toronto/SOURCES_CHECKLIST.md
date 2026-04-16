@@ -1,6 +1,6 @@
 # Toronto Calendar Source Checklist
 
-## Currently Implemented (115 sources)
+## Currently Implemented (118 sources)
 
 ### Aggregators
 | Source | Type | Events | Notes |
@@ -65,6 +65,9 @@
 |--------|------|--------|-------|
 | Repair Cafe Toronto | WordPress ICS | 82 | Community repair workshops across GTA |
 | Toronto Knitters Guild | WordPress Tribe ICS | 9 | Guild meetings, knit nights, workshops |
+| Toronto Tool Library | Shopify product scraper | 22 at sweep time | TTLMakerspace workshops at 192 Spadina; woodworking, sewing, leathercraft, CNC |
+| Bistitchual | Shopify product scraper | 3 at sweep time | Yarn shop classes at 266 Jane St; knitting + crochet courses |
+| Parkdale Pottery | Shopify product scraper | 2 at sweep time | Pottery workshops at Queen/Campbell studios |
 | Site 3 CoLaboratory | WordPress Tribe ICS | 1 | Art/tech makerspace workshops |
 
 ### Government & Public Affairs
@@ -179,6 +182,10 @@
 - **Book Club Toronto** — Eventbrite organizer `113996803611`; staged as `scrapers/eventbrite.py` entry in workflow + `pending_feeds.txt` on 2026-04-15.
 - **Toronto's First Post Office** — Eventbrite organizer `7903835251`; public-history lectures/tours, staged as `scrapers/eventbrite.py` entry in workflow + `pending_feeds.txt` on 2026-04-15.
 - **Fuzzy Lab Toronto** — Eventbrite organizer `102501807981`; tufting/craft workshop source, staged as `scrapers/eventbrite.py` entry in workflow + `pending_feeds.txt` on 2026-04-15.
+- **Ghost Rocket** — promising makerspace/community workshops; needs direct site/platform assessment.
+- **Mischief Makers** — promising family maker/craft programming; likely Amilia-backed and worth a separate pass.
+- **The Pottery** — promising pottery-workshop schedule pages at `thepottery.ca`; likely scrapeable but not yet wired.
+- **Clay Design** — promising pottery classes/workshops at `claydesign.ca`; schedule exists, needs site-level inspection.
 
 ---
 
