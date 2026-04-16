@@ -225,10 +225,14 @@ https://torontounion.ca/toronto-union-events/?ical=1
 https://www.engineering.utoronto.ca/engineering-events/?ical=1
 # UofT Indigenous Studies
 https://indigenous.utoronto.ca/events/?ical=1&tribe-bar-date=2024-01-01
+# UofT Knox College
+https://knox.utoronto.ca/?post_type=tribe_events&ical=1&eventDisplay=list
 # UofT Philosophy
 https://philosophy.utoronto.ca/events/?ical=1
 # UofT Social Work
 https://socialwork.utoronto.ca/events/?ical=1
+# UofT St. Michael's College
+https://stmikes.utoronto.ca/?post_type=tribe_events&ical=1&eventDisplay=list
 # York University
 https://events.yorku.ca/events/?mec-ical-feed=1
 
@@ -305,6 +309,9 @@ cities/toronto/eventbrite_lula_lounge.ics
 # Metrolinx Board
 # cmd: python scrapers/metrolinx_board.py
 cities/toronto/metrolinx_board.ics
+# OCAD University
+# cmd: python scrapers/ocad_u.py
+cities/toronto/ocad_u.ics
 # Open Studio
 # cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/open-studio-19932715092" --name "Open Studio"
 cities/toronto/eventbrite_open_studio.ics
@@ -338,6 +345,24 @@ cities/toronto/tcdsb_meetings.ics
 # Toronto Community Housing
 # cmd: python scrapers/toronto_community_housing.py
 cities/toronto/toronto_community_housing.ics
+# Toronto Public Library — Adults
+# cmd: python scrapers/toronto_public_library_adults.py
+cities/toronto/tpl_adults.ics
+# Toronto Public Library — Older Adults
+# cmd: python scrapers/toronto_public_library_older_adults.py
+cities/toronto/tpl_older_adults.ics
+# Toronto Public Library — Preschool
+# cmd: python scrapers/toronto_public_library_preschool.py
+cities/toronto/tpl_preschool.ics
+# Toronto Public Library — School Age
+# cmd: python scrapers/toronto_public_library_school_age.py
+cities/toronto/tpl_school_age.ics
+# Toronto Public Library — Teens
+# cmd: python scrapers/toronto_public_library_teens.py
+cities/toronto/tpl_teens.ics
+# Toronto Public Library — Young Adults
+# cmd: python scrapers/toronto_public_library_young_adults.py
+cities/toronto/tpl_young_adults.ics
 # Toronto Tool Library
 # cmd: python scrapers/toronto_tool_library.py
 cities/toronto/toronto_tool_library.ics
@@ -350,4 +375,7 @@ cities/toronto/waterfront_bia.ics
 # Waterfront Toronto
 # cmd: python scrapers/waterfront_toronto.py
 cities/toronto/waterfront_toronto.ics
+# YOHOMO
+# cmd: python scrapers/yohomo.py
+cities/toronto/yohomo.ics
 
