@@ -158,7 +158,7 @@
             user_id: window.authUser.id,
             event_id: $props.event.id
           });
-          if (rruleFrequency !== 'none') {
+          if (showRecurrence && rruleFrequency !== 'none') {
             const rruleStr = window.buildRRule(rruleFrequency, rruleDays, rruleOrdinal, rruleMonthDay, rruleUntil);
             const cityTz2 = (window._cities && window.cityFilter && window._cities[window.cityFilter]?.timezone) || null;
             const startTime = window.applyTimezoneOffset((formData.date || '').substring(0, 10) + 'T' + window.normalizeTimeValue(formData.time || '00:00') + ':00', cityTz2);
@@ -339,12 +339,12 @@
         <AddToCalendar event="{{
           id: $props.event?.id || savedPickId,
           title: submittedData?.title || $props.event?.title,
-          start_time: (submittedData?.date || '') + 'T' + window.normalizeTimeValue(submittedData?.time || '00:00') + ':00',
-          end_time: submittedData?.endTime ? (submittedData?.date || '') + 'T' + window.normalizeTimeValue(submittedData.endTime) + ':00' : null,
-          location: submittedData?.location,
+          start_time: submittedData?.date ? (submittedData.date + 'T' + window.normalizeTimeValue(submittedData?.time || '00:00') + ':00') : ($props.event?.start_time || null),
+          end_time: submittedData?.date && submittedData?.endTime ? (submittedData.date + 'T' + window.normalizeTimeValue(submittedData.endTime) + ':00') : ($props.event?.end_time || null),
+          location: submittedData?.location || $props.event?.location || null,
           description: $props.event?.transcript ? (submittedData?.description || '') + '\n\nTranscribed audio:\n' + $props.event.transcript : submittedData?.description,
-          url: $props.event?.url || null,
-          rrule: rruleFrequency !== 'none' ? window.buildRRule(rruleFrequency, rruleDays, rruleOrdinal, rruleMonthDay, rruleUntil) : null
+          url: submittedData?.url || $props.event?.url || null,
+          rrule: showRecurrence && rruleFrequency !== 'none' ? window.buildRRule(rruleFrequency, rruleDays, rruleOrdinal, rruleMonthDay, rruleUntil) : null
         }}" />
         <Text fontSize="$fontSize-xs" color="$color-text-tertiary" textAlignment="center">For Apple Calendar: download .ics, then open the file.</Text>
       </VStack>

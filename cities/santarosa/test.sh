@@ -23,6 +23,8 @@ REPO_ROOT="$APP_DIR/../.."
 # Keep repo copies in sync with trace-tools
 cp "$TRACE_TOOLS/xs-trace.js" "$REPO_ROOT/xmlui/xs-trace.js"
 cp "$TRACE_TOOLS/xs-diff.html" "$REPO_ROOT/xmlui/xmlui/xs-diff.html"
+mkdir -p "$TRACE_TOOLS/capture-scripts"
+cp "$APP_DIR/traces/specs/test-helpers.ts" "$TRACE_TOOLS/capture-scripts/test-helpers.ts"
 
 SUPABASE_URL="https://dzpdualvwspgqghrysyz.supabase.co"
 TEST_USER_EMAIL="ci-test@community-calendar.test"

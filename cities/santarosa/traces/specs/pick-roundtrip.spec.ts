@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './test-helpers';
 import { captureTrace } from './trace-capture';
 
 test('pick-roundtrip', async ({ page }) => {
