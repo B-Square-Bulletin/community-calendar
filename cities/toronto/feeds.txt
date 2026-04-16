@@ -33,10 +33,14 @@ https://www.gardinermuseum.on.ca/events/?ical=1
 https://golatindance.com/events/?ical=1
 # Grossman's Tavern
 https://grossmanstavern.com/events/?ical=1
+# HackLab.TO
+https://calendar.google.com/calendar/ical/3oo6s709gu7d31cg1419cfrbuc%40group.calendar.google.com/public/basic.ics
 # High Park Nature Centre
 https://highparknaturecentre.com/events/?ical=1
 # Jazz Bistro
 https://jazzbistro.ca/events/?ical=1
+# Jewel Envy
+https://www.jewelenvy.ca/events/?ical=1
 # Meetup: 20s 30s Toronto Social
 https://www.meetup.com/20s-30s-toronto-social-activities/events/ical/
 # Meetup: A Book Club Downtown
@@ -77,6 +81,8 @@ https://www.meetup.com/mini-me-meetups/events/ical/
 https://www.meetup.com/post-apocalyptic-book-club-toronto-chapter/events/ical/
 # Meetup: Python Toronto
 https://www.meetup.com/python-toronto/events/ical/
+# Meetup: Queen City Stitch and Bitch
+https://www.meetup.com/queen-city-stitch-and-bitch/events/ical/
 # Meetup: SAI Dham Canada Toronto Volunteer Group
 https://www.meetup.com/sai-dham-canada-toronto-volunteer-group/events/ical/
 # Meetup: Salsa/Bachata/Kizomba GTA
@@ -161,6 +167,8 @@ https://tockify.com/api/feeds/ics/st.lawrence.na
 https://sunshinecentres.com/events/?ical=1
 # Textile Museum of Canada
 https://www.textilemuseum.ca/events/?ical=1
+# The Devil's Workshop
+https://thedevilsworkshop.ca/events/?ical=1
 # Toronto Botanical Garden
 https://www.torontobotanicalgarden.ca/events/?ical=1
 # Toronto Dance
@@ -207,6 +215,9 @@ cities/toronto/eventbrite_book_club_toronto.ics
 # Book*hug Press
 # cmd: python scrapers/eventbrite_filtered.py --organizer 30975200167 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Book*hug Press"
 https://www.eventbrite.com/o/bookhug-press-30975200167
+# City Planning Consultations
+# cmd: python scrapers/toronto_planning_consultations.py
+cities/toronto/toronto_planning_consultations.ics
 # Coach House Books
 # cmd: python scrapers/eventbrite_filtered.py --organizer 6007837525 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Coach House Books"
 https://www.eventbrite.ca/o/coach-house-books-6007837525
@@ -240,6 +251,12 @@ https://www.eventbrite.ca/o/house-of-anansi-21689379263
 # Lula Lounge
 # cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/lula-lounge-19825205758" --name "Lula Lounge"
 cities/toronto/eventbrite_lula_lounge.ics
+# Metrolinx Board
+# cmd: python scrapers/metrolinx_board.py
+cities/toronto/metrolinx_board.ics
+# Open Studio
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/open-studio-19932715092" --name "Open Studio"
+cities/toronto/eventbrite_open_studio.ics
 # Parkdale Pottery
 # cmd: python scrapers/parkdale_pottery.py
 cities/toronto/parkdale_pottery.ics
@@ -252,16 +269,25 @@ https://shop.queenbooks.ca/events
 # Simon & Schuster Canada
 # cmd: python scrapers/eventbrite_filtered.py --organizer 57010055313 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Simon & Schuster Canada"
 https://www.eventbrite.ca/o/simon-schuster-canada-57010055313
+# Studio Mooi
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/studio-mooi-59841950783" --name "Studio Mooi"
+cities/toronto/eventbrite_studio_mooi.ics
 # The Rosedale Centre
 # cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/the-rosedale-centre-83757475743" --name "The Rosedale Centre"
 cities/toronto/eventbrite_rosedale_centre.ics
 # Toronto Bicycling Network
 # cmd: python scrapers/toronto_bicycling_network.py
 cities/toronto/toronto_bicycling_network.ics
+# Toronto Catholic District School Board Meetings
+# cmd: python scrapers/tcdsb_meetings.py
+cities/toronto/tcdsb_meetings.ics
 # Toronto Tool Library
 # cmd: python scrapers/toronto_tool_library.py
 cities/toronto/toronto_tool_library.ics
 # Toronto's First Post Office
 # cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/torontos-first-post-office-7903835251" --name "Toronto's First Post Office"
 cities/toronto/eventbrite_first_post_office.ics
+# Waterfront Toronto
+# cmd: python scrapers/waterfront_toronto.py
+cities/toronto/waterfront_toronto.ics
 
