@@ -27,10 +27,14 @@ https://www.culturelink.ca/events/?ical=1
 https://tockify.com/api/feeds/ics/distilleryevents
 # Factory Theatre
 https://www.factorytheatre.ca/events/?ical=1
+# GardenOntario (Ontario Horticultural Association)
+https://gardenontario.org/events/?ical=1
 # Gardiner Museum
 https://www.gardinermuseum.on.ca/events/?ical=1
 # Go Latin Dance
 https://golatindance.com/events/?ical=1
+# Green Neighbours Network of Toronto
+https://gnntoronto.ca/events/?ical=1
 # Grossman's Tavern
 https://grossmanstavern.com/events/?ical=1
 # HackLab.TO
@@ -177,6 +181,8 @@ https://www.torontodance.com/events/?ical=1
 https://tockify.com/api/feeds/ics/torevent
 # Toronto Knitters Guild
 https://torontoknittersguild.ca/events/?ical=1
+# Toronto Master Gardeners
+https://www.torontomastergardeners.ca/events/?ical=1
 # Union Station Toronto
 https://torontounion.ca/toronto-union-events/?ical=1
 # UofT Engineering
@@ -194,6 +200,9 @@ https://events.yorku.ca/events/?mec-ical-feed=1
 # A Different Booklist
 # cmd: python scrapers/bookmanager.py --san 1188585 --domain adifferentbooklist.com --name "A Different Booklist"
 https://adifferentbooklist.com/events
+# Anga's Farm & Nursery
+# cmd: python scrapers/angas_farm.py
+cities/toronto/angas_farm.ics
 # Another Story Bookshop
 # cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/another-story-bookshop-32458688399" --name "Another Story Bookshop"
 cities/toronto/eventbrite_another_story.ics
@@ -227,6 +236,9 @@ https://www.eventbrite.ca/o/cormorant-books-inc-31280011011
 # Diaspora Dialogues
 # cmd: python scrapers/eventbrite_filtered.py --organizer 1330302385 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Diaspora Dialogues"
 https://www.eventbrite.ca/o/diaspora-dialogues-1330302385
+# Etobicoke Horticultural Society
+# cmd: python scrapers/etobicoke_hort.py
+cities/toronto/etobicoke_hort.ics
 # Flying Books
 # cmd: python scrapers/bookmanager.py --san 8102716 --domain flyingbooks.ca --name "Flying Books"
 https://flyingbooks.ca/events
@@ -242,6 +254,9 @@ cities/toronto/eventbrite_glad_day.ics
 # Hand Eye Society
 # cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/hand-eye-society-15539055266" --name "Hand Eye Society"
 cities/toronto/eventbrite_hand_eye_society.ics
+# Harbord Village Residents' Association
+# cmd: python scrapers/harbord_village.py
+cities/toronto/harbord_village.ics
 # HarperCollins Canada
 # cmd: python scrapers/eventbrite_filtered.py --organizer 17669573222 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "HarperCollins Canada"
 https://www.eventbrite.ca/o/harpercollins-canada-17669573222
@@ -272,6 +287,9 @@ https://www.eventbrite.ca/o/simon-schuster-canada-57010055313
 # Studio Mooi
 # cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/studio-mooi-59841950783" --name "Studio Mooi"
 cities/toronto/eventbrite_studio_mooi.ics
+# The Annex Residents' Association
+# cmd: python scrapers/the_annex_residents_association.py
+cities/toronto/the_annex_residents_association.ics
 # The Rosedale Centre
 # cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/the-rosedale-centre-83757475743" --name "The Rosedale Centre"
 cities/toronto/eventbrite_rosedale_centre.ics
@@ -281,12 +299,18 @@ cities/toronto/toronto_bicycling_network.ics
 # Toronto Catholic District School Board Meetings
 # cmd: python scrapers/tcdsb_meetings.py
 cities/toronto/tcdsb_meetings.ics
+# Toronto Community Housing
+# cmd: python scrapers/toronto_community_housing.py
+cities/toronto/toronto_community_housing.ics
 # Toronto Tool Library
 # cmd: python scrapers/toronto_tool_library.py
 cities/toronto/toronto_tool_library.ics
 # Toronto's First Post Office
 # cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/torontos-first-post-office-7903835251" --name "Toronto's First Post Office"
 cities/toronto/eventbrite_first_post_office.ics
+# Waterfront BIA
+# cmd: python scrapers/waterfront_bia.py
+cities/toronto/waterfront_bia.ics
 # Waterfront Toronto
 # cmd: python scrapers/waterfront_toronto.py
 cities/toronto/waterfront_toronto.ics
