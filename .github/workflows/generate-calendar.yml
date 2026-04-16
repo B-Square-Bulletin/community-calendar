@@ -262,7 +262,12 @@ jobs:
         python scrapers/toronto_meetings.py -o cities/toronto/toronto_meetings.ics || true
         python scrapers/toronto_festivals.py -o cities/toronto/toronto_festivals.ics || true
         python scrapers/volunteer_toronto.py -o cities/toronto/volunteer_toronto.ics || true
-        python scrapers/toronto_public_library.py -o cities/toronto/tpl_events.ics || true
+        python scrapers/toronto_public_library_preschool.py -o cities/toronto/tpl_preschool.ics || true
+        python scrapers/toronto_public_library_school_age.py -o cities/toronto/tpl_school_age.ics || true
+        python scrapers/toronto_public_library_teens.py -o cities/toronto/tpl_teens.ics || true
+        python scrapers/toronto_public_library_young_adults.py -o cities/toronto/tpl_young_adults.ics || true
+        python scrapers/toronto_public_library_adults.py -o cities/toronto/tpl_adults.ics || true
+        python scrapers/toronto_public_library_older_adults.py -o cities/toronto/tpl_older_adults.ics || true
         python scrapers/toronto_bicycling_network.py -o cities/toronto/toronto_bicycling_network.ics || true
         python scrapers/ticketmaster.py --venue-id KovZpZAFFE1A --name "Scotiabank Arena" --timezone America/Toronto -o cities/toronto/scotiabank_arena.ics || true
         python scrapers/ticketmaster.py --venue-id KovZ917AJ4f --name "History" --timezone America/Toronto -o cities/toronto/history.ics || true

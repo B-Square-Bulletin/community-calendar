@@ -58,7 +58,12 @@
 | Councillor Jamaal Myers | Tockify ICS | 27 | Scarborough community, city council |
 | Show Up Toronto | iCal feed | TBD | Volunteering, mutual aid, civic organizing |
 | Volunteer Toronto | HTML scraper | TBD | Volunteering opportunities and events |
-| Toronto Public Library | Bibliocommons scraper | 2,438 | Kids/family scoped (school-age + teens), reusable base |
+| Toronto Public Library — Preschool | Bibliocommons scraper | 578 at split time | Exclusive audience feed on reusable TPL base |
+| Toronto Public Library — School Age | Bibliocommons scraper | 602 at split time | Includes school-age-only plus mixed preschool/school-age events |
+| Toronto Public Library — Teens | Bibliocommons scraper | 241 at split time | Exclusive audience feed on reusable TPL base |
+| Toronto Public Library — Young Adults | Bibliocommons scraper | 159 at split time | Preferred over broad adult tags when both are present |
+| Toronto Public Library — Adults | Bibliocommons scraper | 439 at split time | Adult-only events after young/older-adult routing |
+| Toronto Public Library — Older Adults | Bibliocommons scraper | 539 at split time | Includes older-adult + adult combos |
 
 ### Crafts & Makers
 | Source | Type | Events | Notes |
@@ -185,7 +190,7 @@
 
 ## Needs Further Assessment
 
-- **Toronto Public Library** — now implemented as kids/family-scoped scraper (`scrapers/toronto_public_library.py`) on reusable Bibliocommons base (`scrapers/lib/bibliocommons.py`). Monitor ongoing signal/noise and adjust filters if needed.
+- ~~**Toronto Public Library**~~ — split into six audience-specific scrapers on 2026-04-16 so library events stay findable by audience without duplicating multi-tagged programs across feeds.
 - ~~**BlogTO**~~ — Implemented as `scrapers/blogto.py`. Uses public `/api/v2/events/?date=YYYY-MM-DD&bundle_type=medium` listing endpoint (no per-event fetch). Walks day-by-day, dedupes by event id, stops after 7 empty days.
 - **Explore Kids Ontario Adventures** — Tockify feed (`ekoad`) has 822 events but covers broader GTA/Ontario, not just Toronto. May need geo-filtering.
 - ~~**Toronto Bicycling Network**~~ — Implemented as `scrapers/toronto_bicycling_network.py`. Wild Apricot RSS source with strong outdoor recreation coverage.
@@ -308,11 +313,12 @@
 **Infrastructure built:**
 - `scrapers/lib/ckan.py` — reusable CKAN datastore API base scraper (pagination, filters)
 - `scrapers/lib/bibliocommons.py` — reusable Bibliocommons events API base scraper (entity mapping + filter hooks)
+- `scrapers/lib/tpl_audiences.py` — TPL audience router on top of Bibliocommons so six audience feeds stay exclusive
 - `scrapers/toronto_meetings.py` — City of Toronto meetings via CKAN
 - `scrapers/toronto_festivals.py` — City of Toronto festivals via CKAN JSON
 - `scrapers/uoft_events.py` — UofT aggregate page + 32 department deep-links
-- `scrapers/toronto_public_library.py` — TPL kids/family scraper on Bibliocommons base
-- `scrapers/toronto_public_library.py` — TPL kids/family scraper on Bibliocommons base
+- `scrapers/toronto_public_library.py` — aggregate TPL scraper kept for ad hoc checks
+- `scrapers/toronto_public_library_{preschool,school_age,teens,young_adults,adults,older_adults}.py` — audience-specific TPL wrappers
 
 ---
 
@@ -329,7 +335,7 @@ Track progress on topical searches to find long-tail community sources.
 | Crafts/makers | 2025-02-14 | Repair Cafe, Knitters Guild, Site 3, 3D printing | Initial sweep |
 | Crafts/makers (expansion) | 2026-04-16 | Devil's Workshop, Jewel Envy, HackLab.TO, Queen City Stitch & Bitch, Studio Mooi, Open Studio | Meetup + Eventbrite + venue probe; see dedicated section below |
 | Volunteering/mutual aid | 2025-02-15 | Show Up Toronto, SAI Dham Volunteer, Volunteer Toronto scraper | |
-| Kids/family | 2025-02-15 | Toronto Dads, Little Sunbeams, Mini+Me Meetups, TPL scraper | Bibliocommons base |
+| Kids/family | 2025-02-15 | Toronto Dads, Little Sunbeams, Mini+Me Meetups, TPL preschool/school-age/teens feeds | Bibliocommons base |
 | History/heritage | 2025-02-15 | Ontario Historical Society, Toronto History Walks, Medieval SCA | 25 events |
 | Science/education | 2026-02-15 | CITA Local Events, CITA Seminars, CITA Special Events | 3 public Google ICS feeds from CITA calendar page |
 | Literary / bookstores | 2026-04-11 | 5 store organizers (Another Story, Ben McNally, Glad Day, Hopeless Romantic, Queen Books) + 4 publisher organizers (Coach House, Cormorant, Book*hug, Penguin Random House Canada) | Deep-dive into Toronto's indie bookstore scene; see dedicated section below |
@@ -374,7 +380,12 @@ Track progress on topical searches to find long-tail community sources.
 | Toronto Dads Group | Meetup ICS | `meetup.com/torontodadsgroup/events/ical/` |
 | Little Sunbeams | Meetup ICS | Parents + Tots meetup |
 | Mini + Me Meetups | Meetup ICS | `meetup.com/mini-me-meetups/events/ical/` |
-| Toronto Public Library | Scraper | `scrapers/toronto_public_library.py` on Bibliocommons base |
+| Toronto Public Library — Preschool | Scraper | `scrapers/toronto_public_library_preschool.py` on TPL audience base |
+| Toronto Public Library — School Age | Scraper | `scrapers/toronto_public_library_school_age.py` on TPL audience base |
+| Toronto Public Library — Teens | Scraper | `scrapers/toronto_public_library_teens.py` on TPL audience base |
+| Toronto Public Library — Young Adults | Scraper | `scrapers/toronto_public_library_young_adults.py` on TPL audience base |
+| Toronto Public Library — Adults | Scraper | `scrapers/toronto_public_library_adults.py` on TPL audience base |
+| Toronto Public Library — Older Adults | Scraper | `scrapers/toronto_public_library_older_adults.py` on TPL audience base |
 
 ### Promising (Needs Work)
 
