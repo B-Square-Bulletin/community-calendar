@@ -1,2 +1,2 @@
-window.SUPABASE_URL = 'https://dzpdualvwspgqghrysyz.supabase.co';
-window.SUPABASE_KEY = 'sb_publishable_NnzobdoFNU39fjs84UNq8Q_X45oiMG5';
+window.SUPABASE_URL = 'https://qatykxdvbpojxnvpicyi.supabase.co';
+window.SUPABASE_KEY = 'sb_publishable_xXwJNayt4zT37TqqvMUD2g_BLeAUdfW';

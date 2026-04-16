@@ -3,8 +3,8 @@
     "themes/community-calendar.json"
   ],
   "appGlobals": {
-    "supabaseUrl": "https://dzpdualvwspgqghrysyz.supabase.co",
-    "supabasePublishableKey": "sb_publishable_NnzobdoFNU39fjs84UNq8Q_X45oiMG5",
+    "supabaseUrl": "https://qatykxdvbpojxnvpicyi.supabase.co",
+    "supabasePublishableKey": "sb_publishable_xXwJNayt4zT37TqqvMUD2g_BLeAUdfW",
     "xsVerbose": true,
     "xsVerboseLogMax": 200
   },
