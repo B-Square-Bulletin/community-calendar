@@ -26,13 +26,13 @@ After your PR is merged, the next build automatically processes `pending_feeds.t
 
 ### Adding scrapers
 
-Scrapers are invoked by the GitHub Actions workflow, not by the feeds system. Use `add_scraper.py` to add a scraper invocation to the workflow:
+Scrapers are invoked by the GitHub Actions workflow. Use `add_scraper.py` to add the workflow invocation and stage the scraper metadata in `pending_feeds.txt`:
 
 ```bash
 python scripts/add_scraper.py <scraper_name> <city> "<Display Name>"
 ```
 
-See `scrapers/README.md` for available scrapers and their options.
+See `scrapers/README.md` for available scrapers and their options. The workflow will move the pending scraper entry into the `feeds` table and regenerate `feeds.txt` before combine time.
 
 ### What NOT to edit
 

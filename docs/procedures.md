@@ -225,10 +225,12 @@ python scripts/add_feed.py URL city "Source Name" --test
 
 ### Scrapers
 
-Scrapers are invoked by the GitHub Actions workflow, not by the feeds system. Use `add_scraper.py` to add a scraper invocation:
+Scrapers are invoked by the GitHub Actions workflow. Use `add_scraper.py` to add the workflow invocation and stage the scraper in `pending_feeds.txt`:
 
 ```bash
 python scripts/add_scraper.py <scraper_name> <city> "<Display Name>"
+
+The workflow will move the pending scraper entry into the `feeds` table and regenerate `feeds.txt` before `combine_ics.py` runs.
 ```
 
 ### Forks without a feeds table

@@ -56,7 +56,7 @@
    - Add city to the locations list (line with `echo "list=..."`)
    - Add a city section with curl commands for all feeds + `combine_ics.py` call
    - Add city to the backup/restore lists in the commit step (`for city in ...`)
-4. **Source metadata** — for feeds, `add_feed.py` writes structured comments to `feeds.txt` (friendly name + fallback URL); for scrapers, `add_scraper.py` adds `SOURCE_NAMES` entries to `combine_ics.py`. No manual dict editing needed.
+4. **Source metadata** — for feeds, the Supabase `feeds` table is the source of truth in the main repo. `feeds.txt` is exported from the DB during builds. For scrapers, `add_scraper.py` adds the workflow invocation and a generated `feeds.txt` entry/metadata path is preserved via the export step. No manual dict editing needed.
 5. **Add city to UI** — TWO places must be updated:
    - `index.html`: add entry to `cityNames` map (e.g., `toronto: 'Toronto'`)
    - `Main.xmlui`: add a Button in the city picker VStack (search for "Choose your city")
@@ -98,11 +98,11 @@ Scraper/Feed ICS  →  combine_ics.py  →  ics_to_json.py  →  Supabase DB  �
 
 **How X-SOURCE gets set — two paths:**
 
-1. **Feeds** (ICS URLs in `feeds.txt`): `download_feeds.py` reads the structured comment above each URL (e.g., `# Friendly Name | https://fallback-url/`) and injects `X-SOURCE` and `X-SOURCE-URL` headers into every VEVENT at download time. No dict entry needed.
+1. **Feeds** (ICS URLs in the Supabase `feeds` table): `download_feeds.py` queries active feed rows, then injects `X-SOURCE` and `X-SOURCE-URL` headers into every VEVENT at download time. `feeds.txt` is generated from the DB for compatibility/documentation.
 
-2. **Scrapers** (Python scripts in the workflow): `BaseScraper.create_event()` sets `X-SOURCE` from the `--name` argument. `add_scraper.py` also adds a `SOURCE_NAMES` entry in `combine_ics.py` as a fallback.
+2. **Scrapers** (Python scripts in the workflow): `BaseScraper.create_event()` sets `X-SOURCE` from the `--name` argument. For scrapers that do not set `X-SOURCE`, `combine_ics.py` falls back to the generated `feeds.txt` metadata (`# cmd:` plus `cities/...ics` entry).
 
-**`SOURCE_NAMES`/`SOURCE_URLS`** dicts in `combine_ics.py` are a **legacy fallback** for ICS files that lack `X-SOURCE`. New feeds should never need entries there — the structured comment in `feeds.txt` is the source of truth. Do NOT add new feed entries to these dicts.
+**`SOURCE_NAMES`/`SOURCE_URLS`** dicts in `combine_ics.py` are a **legacy fallback** for ICS files that lack `X-SOURCE`. New feeds should never need entries there — the `feeds` table is the source of truth in the main repo. Do NOT add new feed entries to these dicts.
 
 ### SOURCES_CHECKLIST.md
 
@@ -144,7 +144,7 @@ When creating a new scraper for an existing city, **all steps are required**:
 4. **Update SOURCES_CHECKLIST.md** - document what was added
 5. **Commit and push** - include the ICS file
 
-`add_scraper.py` handles steps 3 and also adds a `SOURCE_NAMES` entry in `combine_ics.py` as fallback. You do NOT need to edit `feeds.txt` for scrapers.
+`add_scraper.py` handles step 3 and appends the scraper metadata to `pending_feeds.txt`. You do NOT need to edit generated `feeds.txt` for scrapers.
 
 ### Verification Checklist
 
@@ -164,7 +164,7 @@ After creating the scraper in `scrapers/`, use `add_scraper.py` to wire it into 
 
 1. **Finds the scraper** in `scrapers/` (including subdirectories)
 2. **Adds it to the workflow** — inserts a `python scrapers/<name>.py --output cities/<city>/<name>.ics || true` line into the city's "Scrape" section in `.github/workflows/generate-calendar.yml`
-3. **Adds the source name** — adds an entry to `SOURCE_NAMES` in `scripts/combine_ics.py`
+3. **Stages scraper metadata** — appends a `# cmd:` entry to `cities/<city>/pending_feeds.txt`, which the workflow moves into the `feeds` table and re-exports into `feeds.txt`
 
 With `--test`, it also runs the scraper first and checks that it produces a valid .ics file with events.
 
@@ -186,37 +186,37 @@ You still need to manually update `SOURCES_CHECKLIST.md` and commit/push.
 
 **If you skip any step, events won't appear in the calendar!**
 
-### feeds.txt is the source of truth for live feeds
+### feeds.txt is auto-generated
 
-`feeds.txt` is where live feed URLs and their metadata live. Each URL should have a structured comment above it:
+In the main repo, the Supabase `feeds` table is the source of truth for feeds and scrapers. `feeds.txt` is exported from the database during builds as a human-readable record and compatibility layer. Typical generated entries look like:
 
 ```
 # Friendly Source Name | https://fallback-url/
 https://actual-feed-url/events/?ical=1
 
-# Friendly Source Name
-https://another-feed-url/events/ical/
+# Friendly Scraper Name
+# cmd: python scrapers/example.py --name "Friendly Scraper Name"
+cities/examplecity/example.ics
 ```
 
-The `|`-separated fallback URL is optional — only needed when the ICS feed's events lack per-event URLs. `download_feeds.py` reads these comments and injects `X-SOURCE` (and `X-SOURCE-URL`) headers into every VEVENT at download time. This is how friendly source names get into the pipeline for feeds — no `SOURCE_NAMES` dict entry needed.
+The `|`-separated fallback URL is optional — only needed when the ICS feed's events lack per-event URLs. `download_feeds.py` gets feed metadata from the DB and injects `X-SOURCE` (and `X-SOURCE-URL`) headers into every VEVENT at download time. `export_feeds_txt.py` then regenerates `feeds.txt`, including scraper entries used by `combine_ics.py` as a fallback display-name map.
 
 ---
 
 ## Quick Reference: Adding a New ICS Feed
 
-For ICS feeds that don't need a scraper (direct curl), use `add_feed.py`:
+For ICS feeds that don't need a scraper (direct curl), the path depends on access:
 
 ```bash
-python scripts/add_feed.py "https://example.com/events/?ical=1" toronto "Example Events"
-python scripts/add_feed.py URL city "Source Name" --test      # test first
-python scripts/add_feed.py URL city "Source Name" --dry-run   # preview
+python scripts/add_feed.py URL city "Source Name" --test      # test only
 ```
 
-This will:
-1. Test the feed URL returns valid ICS
-2. Add a structured comment + URL to `cities/{city}/feeds.txt`
+For the main repo:
+1. **Admins**: add feeds through the app's **Manage Feeds** dialog, which validates and inserts into the Supabase `feeds` table.
+2. **Contributors without admin access**: add entries to `cities/{city}/pending_feeds.txt`.
+3. Use `add_feed.py --test` only as a validator unless you are working in a fork that still uses `feeds.txt` directly.
 
-At build time, `download_feeds.py` reads the comment, downloads the ICS, and injects `X-SOURCE` headers. You do **not** need to edit `combine_ics.py` — the friendly name flows from the `feeds.txt` comment.
+At build time, `download_feeds.py` reads the `feeds` table, downloads the ICS, and injects `X-SOURCE` headers. `feeds.txt` is regenerated from the DB. You do **not** need to edit `combine_ics.py`.
 
 You still need to manually update `SOURCES_CHECKLIST.md`.
 
