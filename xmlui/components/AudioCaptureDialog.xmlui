@@ -39,11 +39,11 @@
       <!-- File upload mode -->
       <VStack when="{captureMode === 'file' && !isExtracting && !extractedEvent}" gap="$space-2">
         <Text>Select an audio recording of event info:</Text>
+        <Button label="Select Audio File" icon="l-file-up" onClick="audioInput.open()" />
         <FileInput
           id="audioInput"
           acceptsFileType="{['audio/*']}"
-          buttonLabel="Select Audio File"
-          buttonIcon="l-file-up"
+          displayWhen="{false}"
           onDidChange="(files) => {
             if (!files || files.length === 0) return;
             isExtracting = true;
@@ -58,10 +58,15 @@
             });
             isExtracting = false;
             if (result && result.event) {
+              const start = String(result.event.start_time || '');
+              const end = String(result.event.end_time || '');
               extractedEvent = {
                 title: result.event.title || '',
                 start_time: result.event.start_time || '',
                 end_time: result.event.end_time || '',
+                date: start.slice(0, 10) || '',
+                time: start.slice(11, 16) || '19:00',
+                endTime: end.slice(11, 16) || '',
                 location: result.event.location || '',
                 description: result.event.description || '',
                 url: result.event.url || '',
@@ -117,10 +122,15 @@
             });
             isExtracting = false;
             if (result && result.event) {
+              const start = String(result.event.start_time || '');
+              const end = String(result.event.end_time || '');
               extractedEvent = {
                 title: result.event.title || '',
                 start_time: result.event.start_time || '',
                 end_time: result.event.end_time || '',
+                date: start.slice(0, 10) || '',
+                time: start.slice(11, 16) || '19:00',
+                endTime: end.slice(11, 16) || '',
                 location: result.event.location || '',
                 description: result.event.description || '',
                 url: result.event.url || '',

@@ -32,9 +32,10 @@
       savedPickId = result.event_id;
       if (rruleFrequency !== 'none') {
         const formData = lastFormData || {};
+        const datePart = (formData.date || ($props.event?.start_time || '')).substring(0, 10);
         const cityTz = (window._cities && window.cityFilter && window._cities[window.cityFilter]?.timezone) || null;
-        const startTime = window.applyTimezoneOffset((formData.date || '').substring(0, 10) + 'T' + (formData.time || '00:00').substring(0, 5) + ':00', cityTz);
-        const endTime = formData.endTime ? window.applyTimezoneOffset((formData.date || '').substring(0, 10) + 'T' + formData.endTime.substring(0, 5) + ':00', cityTz) : null;
+        const startTime = window.applyTimezoneOffset(datePart + 'T' + window.normalizeTimeValue(formData.time || '00:00') + ':00', cityTz);
+        const endTime = formData.endTime ? window.applyTimezoneOffset(datePart + 'T' + window.normalizeTimeValue(formData.endTime) + ':00', cityTz) : null;
         enrichmentApi.execute({
           event_id: result.event_id,
           curator_id: window.authUser.id,
@@ -73,15 +74,16 @@
     id="captureEventForm"
     data="{{
       title: $props.event?.title || '',
-      date: ($props.event?.start_time || '').substring(0, 10),
-      time: ($props.event?.start_time || '').substring(11, 16),
-      endTime: $props.event?.end_time ? $props.event.end_time.substring(11, 16) : '',
+      date: $props.event?.date || window.extractIsoDateValue($props.event?.start_time),
+      time: $props.event?.time || window.extractHmTimeValue($props.event?.start_time, '19:00'),
+      endTime: $props.event?.endTime || window.extractHmTimeValue($props.event?.end_time, ''),
       location: $props.event?.location || '',
       description: $props.event?.description || '',
       url: $props.event?.url || ''
     }}"
     saveLabel="{isSaving ? 'Saving...' : 'Add to My Picks'}"
     enableSubmit="{!isSaving}"
+    onCancel="emitEvent('close')"
     onSubmit="(data) => {
       if (!window.authUser?.id) {
         errorMessage = 'Please sign in to pick events';
@@ -89,10 +91,10 @@
       }
       errorMessage = '';
       lastFormData = data;
-      const dateStr = (data.date || '').substring(0, 10);
-      const rawStart = (data.time || '00:00').substring(0, 5);
+      const dateStr = (data.date || ($props.event?.start_time || '')).substring(0, 10);
+      const rawStart = window.normalizeTimeValue(data.time || '00:00');
       const startTime = dateStr + 'T' + rawStart + ':00';
-      const rawEnd = data.endTime ? data.endTime.substring(0, 5) : null;
+      const rawEnd = data.endTime ? window.normalizeTimeValue(data.endTime) : null;
       const endTime = rawEnd ? dateStr + 'T' + rawEnd + ':00' : null;
       captureApi.execute({
         mode: 'commit',
@@ -117,10 +119,37 @@
       required="{true}"
       requiredInvalidMessage="Title is required — what is this event called?"
     />
-    <FormItem bindTo="date" label="Date" placeholder="YYYY-MM-DD" />
+    <TextBox
+      bindTo="date"
+      label="Date"
+      placeholder="YYYY-MM-DD"
+      initialValue="{$props.event?.date || window.extractIsoDateValue($props.event?.start_time)}"
+      required="{true}"
+      requiredInvalidMessage="Date is required"
+      regex="^\d\d\d\d-\d\d-\d\d$"
+      regexInvalidMessage="Use YYYY-MM-DD"
+    />
     <HStack gap="$space-2">
-      <FormItem bindTo="time" label="Start" placeholder="HH:MM" width="50%" />
-      <FormItem bindTo="endTime" label="End" placeholder="HH:MM" width="50%" />
+      <TextBox
+        bindTo="time"
+        label="Start"
+        placeholder="HH:MM"
+        width="120px"
+        initialValue="{$props.event?.time || window.extractHmTimeValue($props.event?.start_time, '19:00')}"
+        required="{true}"
+        requiredInvalidMessage="Start time is required"
+        regex="^\d\d?:\d\d$"
+        regexInvalidMessage="Use HH:MM"
+      />
+      <TextBox
+        bindTo="endTime"
+        label="End"
+        placeholder="HH:MM"
+        width="120px"
+        initialValue="{$props.event?.endTime || window.extractHmTimeValue($props.event?.end_time, '')}"
+        regex="^\d\d?:\d\d$"
+        regexInvalidMessage="Use HH:MM"
+      />
     </HStack>
     <FormItem bindTo="location" label="Location" />
     <FormItem bindTo="url" label="URL" placeholder="https://" />
@@ -195,8 +224,8 @@
       <AddToCalendar event="{{
         id: savedPickId,
         title: submittedData?.title || $props.event?.title,
-        start_time: (submittedData?.date || '') + 'T' + (submittedData?.time || '00:00') + ':00',
-        end_time: submittedData?.endTime ? (submittedData?.date || '') + 'T' + submittedData.endTime + ':00' : null,
+        start_time: ((submittedData?.date || ($props.event?.start_time || '')).substring(0, 10)) + 'T' + window.normalizeTimeValue(submittedData?.time || '00:00') + ':00',
+        end_time: submittedData?.endTime ? ((submittedData?.date || ($props.event?.start_time || '')).substring(0, 10)) + 'T' + window.normalizeTimeValue(submittedData.endTime) + ':00' : null,
         location: submittedData?.location,
         description: $props.event?.transcript ? (submittedData?.description || '') + '\n\nTranscribed audio:\n' + $props.event.transcript : submittedData?.description,
         url: submittedData?.url || null,

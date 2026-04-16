@@ -1318,6 +1318,42 @@ function parseLocalTime(ts) {
   return new Date(ts.replace(' ', 'T'));
 }
 
+function normalizeTimeValue(value) {
+  if (!value) return '';
+  var s = String(value).trim();
+  var m = s.match(/^(\d{1,2}):(\d{2})/);
+  if (!m) return s.substring(0, 5);
+  return m[1].padStart(2, '0') + ':' + m[2];
+}
+
+function extractIsoDateValue(value) {
+  if (!value) return '';
+  var s = String(value).trim();
+  var m = s.match(/^(\d{4}-\d{2}-\d{2})/);
+  return m ? m[1] : '';
+}
+
+function extractHmTimeValue(value, fallback) {
+  if (!value) return fallback || '';
+  var s = String(value).trim();
+  var m = s.match(/[T ](\d{1,2}:\d{2})(?::\d{2})?(?:Z|[+-]\d{2}:\d{2})?$/);
+  if (m) return normalizeTimeValue(m[1]);
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return fallback || '';
+  return normalizeTimeValue(s);
+}
+
+function validateIsoDateInput(value) {
+  return /^\d{4}-\d{2}-\d{2}$/.test(String(value || '').trim())
+    ? null
+    : 'Use YYYY-MM-DD';
+}
+
+function validateHmTimeInput(value) {
+  return /^\d{1,2}:\d{2}$/.test(String(value || '').trim())
+    ? null
+    : 'Use HH:MM';
+}
+
 function toBigCalendarEvents(events, term, category) {
   var filtered = filterEvents(events, term, category) || [];
   return filtered.map(function(e) {
@@ -1354,6 +1390,11 @@ if (typeof window !== 'undefined') {
   window.formatMonthDay = formatMonthDay;
   window.formatDate = formatDate;
   window.formatTime = formatTime;
+  window.normalizeTimeValue = normalizeTimeValue;
+  window.extractIsoDateValue = extractIsoDateValue;
+  window.extractHmTimeValue = extractHmTimeValue;
+  window.validateIsoDateInput = validateIsoDateInput;
+  window.validateHmTimeInput = validateHmTimeInput;
   window.getSnippet = getSnippet;
   window.truncate = truncate;
   window.formatSourceLinks = formatSourceLinks;

@@ -42,10 +42,15 @@
             const result = window.resizeAndUpload(files[0], appGlobals.supabaseUrl, appGlobals.supabasePublishableKey);
             isExtracting = false;
             if (result && result.event) {
+              const start = String(result.event.start_time || '');
+              const end = String(result.event.end_time || '');
               extractedEvent = {
                 title: result.event.title || '',
                 start_time: result.event.start_time || '',
                 end_time: result.event.end_time || '',
+                date: start.slice(0, 10) || '',
+                time: start.slice(11, 16) || '19:00',
+                endTime: end.slice(11, 16) || '',
                 location: result.event.location || '',
                 description: result.event.description || '',
                 url: result.event.url || '',
