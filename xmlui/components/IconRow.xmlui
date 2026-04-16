@@ -1,5 +1,5 @@
 <Fragment>
-  <HStack gap="$space-1" verticalAlignment="center">
+  <HStack gap="0" verticalAlignment="center">
     <Stack
       when="{!authUser}"
       backgroundColor="{activePanel === 'signIn' ? '$color-surface-200' : 'transparent'}"
