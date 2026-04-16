@@ -158,7 +158,7 @@
     <VStack gap="$space-2" marginTop="$space-1">
       <Button
         label="{showRecurrence ? 'Hide recurrence options' : 'Recurrence'}"
-        variant="ghost"
+        variant="outlined"
         icon="{showRecurrence ? 'chevron-down' : 'chevron-right'}"
         onClick="showRecurrence = !showRecurrence"
       />
