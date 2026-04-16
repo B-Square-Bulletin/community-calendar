@@ -211,6 +211,23 @@ As of April 15, 2026, the Sources panel no longer depends on a
 event list in the client, so that specific function is not part of the minimum
 catch-up path.
 
+One other pipeline detail has been simplified since the old feed-management
+rollout:
+
+- `cities/<city>/pending_feeds.txt` is a repo-side intake file only
+- the build processes that file directly into the `feeds` table
+- `cities/<city>/feeds.txt` is then regenerated from the `feeds` table
+- there is no separate `pending_feeds` database table in the current model
+
+So Josh should think in terms of:
+
+- `pending_feeds.txt` for repo submissions
+- `feeds` as the database source of truth
+- generated `feeds.txt` as an export / compatibility file
+
+He should **not** spend time recreating or debugging a `pending_feeds` table or
+an old `fetch_pending_feeds` path.
+
 ### Only if something breaks
 
 Only drop to object-level checking if the app still fails after the normal
