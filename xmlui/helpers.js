@@ -200,11 +200,18 @@ function buildSearchIndex(events) {
   if (!events) return events || [];
   for (var i = 0; i < events.length; i++) {
     var e = events[i];
-    if (!e._search) {
-      e._search = ((e.title || '') + ' ' + (e.location || '') + ' ' + (e.source || '') + ' ' + (e.description || '')).toLowerCase();
-    }
+    e._search = getEventSearchText(e);
   }
   return events;
+}
+
+function getEventSearchText(event) {
+  return (
+    (event.title || '') + ' ' +
+    (event.location || '') + ' ' +
+    (event.source || '') + ' ' +
+    (event.description || '')
+  ).toLowerCase();
 }
 
 // Filter events by search term with progressive narrowing
@@ -226,7 +233,11 @@ function filterEvents(events, term, category) {
   var source = narrowing ? _prevFiltered : base;
   _prevEventsLen = events.length;
   _prevEventsFirst = events[0];
-  var result = source.filter(function(e) { return e._search && e._search.includes(lower); });
+  var result = source.filter(function(e) {
+    var searchText = getEventSearchText(e);
+    e._search = searchText;
+    return searchText.includes(lower);
+  });
   var t1 = performance.now();
   if (!window._filterLog) window._filterLog = [];
   window._filterLog.push('filterEvents: ' + (t1 - t0).toFixed(1) + 'ms, source=' + source.length + (narrowing ? ' (narrowed)' : ' (full)') + ', results=' + result.length + ', term="' + term + '"');

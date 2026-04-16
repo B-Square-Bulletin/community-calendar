@@ -20,7 +20,10 @@
       var vxhr = new XMLHttpRequest();
       vxhr.open('GET', 'version.txt', false);
       vxhr.send();
-      window.APP_VERSION = (vxhr.responseText || '').trim() || String(Date.now());
+      var baseVersion = (vxhr.responseText || '').trim() || String(Date.now());
+      var isLocalDevHost = /^(localhost|127(?:\.\d+){3}|0\.0\.0\.0)$/.test(window.location.hostname);
+      var assetVersionSuffix = isLocalDevHost ? '-dev-' + Date.now() : '';
+      window.APP_VERSION = baseVersion + assetVersionSuffix;
       var v = window.APP_VERSION;
       document.write('<script src="xmlui/xmlui-standalone.umd.js?v=' + v + '"><\/script>');
       document.write('<script src="xmlui/xmlui-masonry.js?v=' + v + '"><\/script>');
