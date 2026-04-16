@@ -169,3 +169,9 @@ https://calendar.google.com/calendar/ical/f172f44a97b6df445f08029f216bd25da9a8d2
 # YOHOMO
 # cmd: python scrapers/yohomo.py
 cities/toronto/yohomo.ics
+
+# UofT St. Michael's College
+https://stmikes.utoronto.ca/?post_type=tribe_events&ical=1&eventDisplay=list
+
+# UofT Knox College
+https://knox.utoronto.ca/?post_type=tribe_events&ical=1&eventDisplay=list
