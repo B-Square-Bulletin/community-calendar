@@ -1,5 +1,6 @@
 # Toronto - source inventory
-# Generated from feeds table. Do not edit manually.
+# Generated from feeds table (active + pending). Do not edit manually.
+# To add feeds, use pending_feeds.txt in this directory.
 
 # --- Live feeds ---
 # Another Story Bookshop
@@ -12,6 +13,8 @@ https://www.bloorwestvillagebia.com/events/?ical=1
 https://boulderzclimbing.com/events/?ical=1
 # Buddies in Bad Times Theatre
 https://www.buddiesinbadtimes.com/events/?ical=1
+# Cecil Community Centre
+https://cecilcentre.ca/?plugin=all-in-one-event-calendar&controller=ai1ec_exporter_controller&action=export_events
 # CITA Local Events
 https://calendar.google.com/calendar/ical/qfg129sn6k25ah00ioakus0gds%40group.calendar.google.com/public/basic.ics
 # CITA Seminars
@@ -182,4 +185,78 @@ https://philosophy.utoronto.ca/events/?ical=1
 https://socialwork.utoronto.ca/events/?ical=1
 # York University
 https://events.yorku.ca/events/?mec-ical-feed=1
+
+# --- Scrapers ---
+# A Different Booklist
+# cmd: python scrapers/bookmanager.py --san 1188585 --domain adifferentbooklist.com --name "A Different Booklist"
+https://adifferentbooklist.com/events
+# Another Story Bookshop
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/another-story-bookshop-32458688399" --name "Another Story Bookshop"
+cities/toronto/eventbrite_another_story.ics
+# Bakka Phoenix Books
+# cmd: python scrapers/bookmanager.py --san 1684035 --domain bakkaphoenixbooks.com --name "Bakka Phoenix Books"
+https://bakkaphoenixbooks.com/events
+# Ben McNally Books (Bookmanager)
+# cmd: python scrapers/bookmanager.py --san 7600763 --domain shop.benmcnallybooks.com --name "Ben McNally Books"
+https://shop.benmcnallybooks.com/events
+# blogTO
+# cmd: python scrapers/blogto.py
+https://www.blogto.com/events/
+# Book Club Toronto
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/book-club-toronto-113996803611" --name "Book Club Toronto"
+cities/toronto/eventbrite_book_club_toronto.ics
+# Book*hug Press
+# cmd: python scrapers/eventbrite_filtered.py --organizer 30975200167 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Book*hug Press"
+https://www.eventbrite.com/o/bookhug-press-30975200167
+# Coach House Books
+# cmd: python scrapers/eventbrite_filtered.py --organizer 6007837525 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Coach House Books"
+https://www.eventbrite.ca/o/coach-house-books-6007837525
+# Cormorant Books
+# cmd: python scrapers/eventbrite_filtered.py --organizer 31280011011 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Cormorant Books"
+https://www.eventbrite.ca/o/cormorant-books-inc-31280011011
+# Diaspora Dialogues
+# cmd: python scrapers/eventbrite_filtered.py --organizer 1330302385 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Diaspora Dialogues"
+https://www.eventbrite.ca/o/diaspora-dialogues-1330302385
+# Flying Books
+# cmd: python scrapers/bookmanager.py --san 8102716 --domain flyingbooks.ca --name "Flying Books"
+https://flyingbooks.ca/events
+# Forest Bathing Club
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/forest-bathing-club-68086018103" --name "Forest Bathing Club"
+cities/toronto/eventbrite_forest_bathing_club.ics
+# Fuzzy Lab Toronto
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/fuzzy-lab-toronto-102501807981" --name "Fuzzy Lab Toronto"
+cities/toronto/eventbrite_fuzzy_lab.ics
+# Glad Day Bookshop
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/glad-day-bookshop-12026081388" --name "Glad Day Bookshop"
+cities/toronto/eventbrite_glad_day.ics
+# Hand Eye Society
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/hand-eye-society-15539055266" --name "Hand Eye Society"
+cities/toronto/eventbrite_hand_eye_society.ics
+# HarperCollins Canada
+# cmd: python scrapers/eventbrite_filtered.py --organizer 17669573222 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "HarperCollins Canada"
+https://www.eventbrite.ca/o/harpercollins-canada-17669573222
+# House of Anansi
+# cmd: python scrapers/eventbrite_filtered.py --organizer 21689379263 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "House of Anansi"
+https://www.eventbrite.ca/o/house-of-anansi-21689379263
+# Lula Lounge
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/lula-lounge-19825205758" --name "Lula Lounge"
+cities/toronto/eventbrite_lula_lounge.ics
+# Penguin Random House Canada
+# cmd: python scrapers/eventbrite_filtered.py --organizer 13112142972 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Penguin Random House Canada"
+https://www.eventbrite.ca/o/penguin-random-house-canada-13112142972
+# Queen Books (Bookmanager)
+# cmd: python scrapers/bookmanager.py --san 8100306 --domain shop.queenbooks.ca --name "Queen Books"
+https://shop.queenbooks.ca/events
+# Simon & Schuster Canada
+# cmd: python scrapers/eventbrite_filtered.py --organizer 57010055313 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Simon & Schuster Canada"
+https://www.eventbrite.ca/o/simon-schuster-canada-57010055313
+# The Rosedale Centre
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/the-rosedale-centre-83757475743" --name "The Rosedale Centre"
+cities/toronto/eventbrite_rosedale_centre.ics
+# Toronto Bicycling Network
+# cmd: python scrapers/toronto_bicycling_network.py
+cities/toronto/toronto_bicycling_network.ics
+# Toronto's First Post Office
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/torontos-first-post-office-7903835251" --name "Toronto's First Post Office"
+cities/toronto/eventbrite_first_post_office.ics
 
