@@ -311,6 +311,7 @@ jobs:
         python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/open-studio-19932715092" --name "Open Studio" --output cities/toronto/eventbrite_open_studio.ics || true
         python scrapers/etobicoke_hort.py --output cities/toronto/etobicoke_hort.ics || true
         python scrapers/angas_farm.py --output cities/toronto/angas_farm.ics || true
+        python scrapers/yohomo.py --output cities/toronto/yohomo.ics || true
       continue-on-error: true
 
 

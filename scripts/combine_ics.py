@@ -534,6 +534,7 @@ AGGREGATORS = {
     'GoLocal Cooperative',
     'NOW Toronto',
     'Toronto Events (Tockify)',
+    'YOHOMO',
     'Montclair Local News',
     'LancasterPA.com',
     'Let\'s Go! Bloomington',
