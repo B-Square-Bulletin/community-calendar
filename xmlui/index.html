@@ -17,10 +17,25 @@
     <script src="https://cdn.jsdelivr.net/npm/rrule@2.8.1/dist/es5/rrule.min.js"></script>
     <!-- <script>console.log = function(){};</script> -->
     <script>
+      var versionProbe = Date.now();
       var vxhr = new XMLHttpRequest();
-      vxhr.open('GET', 'version.txt', false);
+      vxhr.open('GET', 'version.txt?_=' + versionProbe, false);
       vxhr.send();
       var baseVersion = (vxhr.responseText || '').trim() || String(Date.now());
+      try {
+        var lastSeenVersion = localStorage.getItem('cc-shell-version');
+        var hasReloadedForVersion = sessionStorage.getItem('cc-version-reload') === baseVersion;
+        if (lastSeenVersion && lastSeenVersion !== baseVersion && !hasReloadedForVersion) {
+          sessionStorage.setItem('cc-version-reload', baseVersion);
+          localStorage.setItem('cc-shell-version', baseVersion);
+          window.location.replace(window.location.pathname + window.location.search);
+        } else {
+          localStorage.setItem('cc-shell-version', baseVersion);
+          if (hasReloadedForVersion) {
+            sessionStorage.removeItem('cc-version-reload');
+          }
+        }
+      } catch (e) {}
       var isLocalDevHost = /^(localhost|127(?:\.\d+){3}|0\.0\.0\.0)$/.test(window.location.hostname);
       var assetVersionSuffix = isLocalDevHost ? '-dev-' + Date.now() : '';
       window.APP_VERSION = baseVersion + assetVersionSuffix;
