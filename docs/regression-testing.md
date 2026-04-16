@@ -4,7 +4,10 @@ Community-calendar uses [trace-tools](https://github.com/xmlui-org/trace-tools) 
 
 ## Test user
 
-Tests run as `ci-test@community-calendar.test`, a Supabase auth user with an entry in `admin_google_users` so it has admin access (needed for features like the capture icon). This user was created via `mint-session.js` on first run.
+Tests run as `ci-test@community-calendar.test`, a Supabase auth user that
+`mint-session.js` also grants admin access by ensuring a row in `admin_users`.
+That admin grant is needed for admin-gated UI such as capture and feed
+management.
 
 ## Session minting
 
@@ -14,7 +17,8 @@ The script at `cities/santarosa/traces/mint-session.js`:
 
 1. Ensures the test user exists (creates via Supabase admin API if not)
 2. Generates a magic link and verifies it server-side to get a session
-3. Writes `.auth-state.json` in Playwright's `storageState` format, with the access token in localStorage under the `sb-<project-ref>-auth-token` key
+3. Ensures the user has an `admin_users` row
+4. Writes `.auth-state.json` in Playwright's `storageState` format, with the access token in localStorage under the `sb-<project-ref>-auth-token` key
 
 Required environment variables:
 

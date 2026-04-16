@@ -55,6 +55,22 @@ async function ensureUser() {
   process.exit(1);
 }
 
+async function ensureAdmin(userId) {
+  const adminRes = await fetch(`${SUPABASE_URL}/rest/v1/admin_users?on_conflict=user_id`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Prefer': 'resolution=merge-duplicates,return=minimal',
+    },
+    body: JSON.stringify([{ user_id: userId }]),
+  });
+
+  if (!adminRes.ok) {
+    console.error('Failed to ensure admin access:', adminRes.status, await adminRes.text());
+    process.exit(1);
+  }
+}
+
 async function mintSession() {
   await ensureUser();
 
@@ -106,6 +122,8 @@ async function mintSession() {
     process.exit(1);
   }
 
+  await ensureAdmin(session.user.id);
+
   // Extract the Supabase project ref from the URL for the localStorage key
   const projectRef = new URL(SUPABASE_URL).hostname.split('.')[0];
   const storageKey = `sb-${projectRef}-auth-token`;
@@ -136,6 +154,7 @@ async function mintSession() {
   fs.writeFileSync(outputPath, JSON.stringify(storageState, null, 2));
   console.log(`Auth state written to ${outputPath}`);
   console.log(`User: ${session.user.email} (${session.user.id})`);
+  console.log(`Admin access ensured for ${session.user.id}`);
 }
 
 mintSession().catch(err => {
