@@ -171,35 +171,42 @@
         window.authUser = session?.user || null;
         console.log('Auth state changed:', event, window.authUser?.email);
 
-
-        // Create feed token on first sign-in if it doesn't exist
-        // Uses fetch directly since Supabase JS client has issues
+        // Create feed token on first sign-in if it doesn't exist.
+        // Keep auth recovery resilient: network hiccups here should not break app startup.
         if (session?.user) {
-          const headers = {
-            'apikey': SUPABASE_KEY,
-            'Authorization': 'Bearer ' + session.access_token,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=minimal'
-          };
+          try {
+            const headers = {
+              'apikey': SUPABASE_KEY,
+              'Authorization': 'Bearer ' + session.access_token,
+              'Content-Type': 'application/json',
+              'Prefer': 'return=minimal'
+            };
 
-          const checkUrl = `${SUPABASE_URL}/rest/v1/feed_tokens?select=token&user_id=eq.${session.user.id}`;
-          const checkRes = await fetch(checkUrl, { headers });
-          const existing = await checkRes.json();
-          console.log('Feed token check:', existing);
-
-          if (!existing || existing.length === 0) {
-            const insertUrl = `${SUPABASE_URL}/rest/v1/feed_tokens`;
-            const insertRes = await fetch(insertUrl, {
-              method: 'POST',
-              headers,
-              body: JSON.stringify({ user_id: session.user.id })
-            });
-            if (insertRes.ok) {
-              console.log('Created feed token for new user, reloading...');
-              window.location.reload();
-            } else {
-              console.error('Error creating feed token:', insertRes.status);
+            const checkUrl = `${SUPABASE_URL}/rest/v1/feed_tokens?select=token&user_id=eq.${session.user.id}`;
+            const checkRes = await fetch(checkUrl, { headers });
+            if (!checkRes.ok) {
+              console.warn('Feed token check failed:', checkRes.status);
+              return;
             }
+            const existing = await checkRes.json();
+            console.log('Feed token check:', existing);
+
+            if (!existing || existing.length === 0) {
+              const insertUrl = `${SUPABASE_URL}/rest/v1/feed_tokens`;
+              const insertRes = await fetch(insertUrl, {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({ user_id: session.user.id })
+              });
+              if (insertRes.ok) {
+                console.log('Created feed token for new user, reloading...');
+                window.location.reload();
+              } else {
+                console.error('Error creating feed token:', insertRes.status);
+              }
+            }
+          } catch (err) {
+            console.warn('Feed token bootstrap skipped:', err?.message || err);
           }
         }
       });
