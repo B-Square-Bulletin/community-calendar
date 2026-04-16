@@ -4,37 +4,6 @@ PRODID:-//Indiana University//NONSGML v1.0//EN
 X-WR-CALNAME:Indiana University Events
 BEGIN:VEVENT
 X-SOURCE:IU Maurer School of Law
-DTSTART:20260415T160000Z
-DTEND:20260415T170000Z
-LOCATION:LOWELL E. BAIER HALL/IU MAURER SCHOOL OF LAW - Room Number: 123
-GEO:39.165074;-86.526424
-SUMMARY:Journal Write-On Info Session
-DESCRIPTION:Join the Executive Notes Editors of the Indiana Law Journal\,
-  the Indiana Journal of Law and Social Equality\, and the Indiana Journal
-  of Global Legal Studies to learn about the 2026 Journal Write-On Process
- .&#160\;
-X-ALT-DESC;FMTTYPE=text/html:<p>  Join the Executive Notes Editors of the
-  Indiana Law Journal\, the Indiana Journal of Law and Social Equality\, a
- nd the Indiana Journal of Global Legal Studies to learn about the 2026 Jo
- urnal Write-On Process.&#160\;</p>
-UID:20260415T160000Z-2113796@events.iu.edu
-DTSTAMP:20251110T104237Z
-URL:https://events.iu.edu/lawiub/event/2113796-journal-write-on-info-sess
- ion
-CATEGORIES:Training, non-credit classes, and learning opportunities
-LAST-MODIFIED:20251110T154237Z
-X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2113796
-X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-CONTACT-INFO:<p>Jamil Ghazal&#160\;<br />\nAssociate Director
-  for Student Life&#160\;<br />\n&#160\;<a href="mailto:jghazal@iu.edu">jg
- hazal@iu.edu</a></p>
-X-LIVEWHALE-TAGS:Office for Community\, Impact\, and Engagement|Student A
- ffairs
-X-LIVEWHALE-CUSTOM-ROOM-NUMBER:123
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU Maurer School of Law
 DTSTART:20260416T160000Z
 DTEND:20260416T170000Z
 LOCATION:LOWELL E. BAIER HALL/IU MAURER SCHOOL OF LAW
@@ -621,6 +590,35 @@ X-LIVEWHALE-TIMEZONE:America/New_York
 X-LIVEWHALE-CONTACT-INFO:<p>Sophia Adams&#160\;<br />\nPlaintiffs' Law As
  sociation</p>
 X-LIVEWHALE-TAGS:Plaintiffs' Law Association
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:IU Maurer School of Law
+DTSTART:20260422T223000Z
+DTEND:20260423T003000Z
+LOCATION:Nick's English Hut
+GEO:39.166834;-86.528726
+SUMMARY:Affinity Groups Present: End of the Year Hangout at Nick's
+DESCRIPTION:Join the Maurer Affinity Groups at Nick's English Hut for one
+  last hangout before finals! Snacks will be provided. Hosted by APALSA\, 
+ BLSA\, LLSA\, &amp\; MELSA.
+X-ALT-DESC;FMTTYPE=text/html:<p>  Join the Maurer Affinity Groups at Nick
+ 's English Hut for one last hangout before finals! Snacks will be provide
+ d. Hosted by APALSA\, BLSA\, LLSA\, &amp\; MELSA.</p>
+UID:20260422T223000Z-2269645@events.iu.edu
+DTSTAMP:20260415T152342Z
+URL:https://events.iu.edu/lawiub/event/2269645-affinity-groups-present-en
+ d-of-the-year-hangout-at
+LAST-MODIFIED:20260415T192541Z
+X-LIVEWHALE-TYPE:events
+X-LIVEWHALE-ID:2269645
+X-LIVEWHALE-TIMEZONE:America/New_York
+X-LIVEWHALE-CONTACT-INFO:<p>\n  Zohra Saeedi&#160\;<br />\n  Middle Easte
+ rn Law Students Association\n</p>
+X-LIVEWHALE-TAGS:Asian Pacific American Law Student Association|Black Law
+  Students Association|Latino Law Students Assocation|Middle Eastern Law S
+ tudents Association
+X-LIVEWHALE-RSVP:1
+X-LIVEWHALE-CUSTOM-CUSTOM-RSVP-FIELDS:a:0:{}
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:IU Maurer School of Law

@@ -4,18 +4,6 @@ PRODID:-//IU Athletics//iuhoosiers.com//
 X-WR-CALNAME:IU Athletics
 X-WR-TIMEZONE:America/Indiana/Indianapolis
 BEGIN:VEVENT
-SUMMARY:Baseball vs Evansville
-DTSTART;TZID=America/Indiana/Indianapolis:20260415T180000
-DTEND;TZID=America/Indiana/Indianapolis:20260415T180000
-UID:5d32da2c8d89af0dc147505d9cff2261@iuhoosiers.com
-ATTACH;FMTTYPE=image/jpeg:https://iuhoosiers.com/images/2025/8/8/20250520_
- BA_Rutgers_0805.JPG
-DESCRIPTION:
-LOCATION:Bloomington\, Ind.
-URL:http://www.gopurpleaces.com
-X-SOURCE:IU Athletics
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Women's Golf vs Therese Hession Buckeye Invitational
 DTSTART;TZID=America/Indiana/Indianapolis:20260417T000000
 DTEND;TZID=America/Indiana/Indianapolis:20260417T000000
