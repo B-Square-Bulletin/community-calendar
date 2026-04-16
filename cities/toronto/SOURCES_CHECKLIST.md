@@ -1,6 +1,6 @@
 # Toronto Calendar Source Checklist
 
-## Currently Implemented (129 sources)
+## Currently Implemented (130 sources)
 
 ### Aggregators
 | Source | Type | Events | Notes |
@@ -40,6 +40,7 @@
 | UofT Engineering | WordPress Tribe ICS | 17 | |
 | UofT Philosophy | WordPress Tribe ICS | 7 | |
 | UofT Social Work | WordPress Tribe ICS | 4 | |
+| OCAD University | Listing/detail scraper | 12 at add time | Exhibitions, talks, senate meetings, creative entrepreneurship |
 | York University | WordPress MEC ICS | 6,558 | Huge feed, pipeline filters by date |
 
 ### Music Venues
@@ -264,7 +265,7 @@
 | Music Gallery | No feed |
 | Small World Music | No feed |
 | Scarborough Arts | No feed |
-| TMU / OCAD | No ICS feeds (TMU custom CMS, OCAD Drupal) |
+| TMU | No ICS feed (custom CMS, likely scrapeable but needs a scoped source decision) |
 | TRCA | Events on Eventbrite only; no ICS/RSS for events |
 | Tommy Thompson Park | Links to TRCA calendar; no own event feed |
 | Rouge National Urban Park | No calendar; page says "check back soon" |

@@ -262,6 +262,7 @@ jobs:
         python scrapers/toronto_meetings.py -o cities/toronto/toronto_meetings.ics || true
         python scrapers/toronto_festivals.py -o cities/toronto/toronto_festivals.ics || true
         python scrapers/volunteer_toronto.py -o cities/toronto/volunteer_toronto.ics || true
+        python scrapers/ocad_u.py -o cities/toronto/ocad_u.ics || true
         python scrapers/toronto_public_library_preschool.py -o cities/toronto/tpl_preschool.ics || true
         python scrapers/toronto_public_library_school_age.py -o cities/toronto/tpl_school_age.ics || true
         python scrapers/toronto_public_library_teens.py -o cities/toronto/tpl_teens.ics || true

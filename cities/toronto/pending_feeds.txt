@@ -18,6 +18,10 @@
 # Beach Metro Community News
 https://beachmetro.com/events/?ical=1
 
+# OCAD University
+# cmd: python scrapers/ocad_u.py
+cities/toronto/ocad_u.ics
+
 # Toronto Public Library — Preschool
 # cmd: python scrapers/toronto_public_library_preschool.py
 cities/toronto/tpl_preschool.ics
