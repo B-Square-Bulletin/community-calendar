@@ -1,5 +1,5 @@
 -- Materialized view: deduplicated_events
--- Server-side deduplication of events by normalized title + start_time.
+-- Server-side deduplication of events by city + normalized title + start_time.
 -- Refreshed after load-events runs so the app can query pre-deduplicated rows.
 
 DROP VIEW IF EXISTS deduplicated_events;
@@ -31,7 +31,7 @@ SELECT
     array_agg(id ORDER BY e.id) AS merged_ids
 FROM events e
 WHERE source <> 'poster_capture'
-GROUP BY lower(TRIM(BOTH FROM title)), start_time
+GROUP BY city, lower(TRIM(BOTH FROM title)), start_time
 ORDER BY start_time;
 
 CREATE UNIQUE INDEX deduplicated_events_id_idx ON deduplicated_events (id);

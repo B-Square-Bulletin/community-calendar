@@ -166,6 +166,12 @@ If upstream production ever diverges from the checked-in DDL, that should be
 treated as upstream drift to fix in this repo, not as a downstream burden for
 B-Square to work around.
 
+One specific point worth preserving: `deduplicated_events` must dedupe by
+`city` as well as normalized `title` + `start_time`. Otherwise same-name,
+same-time events from different cities can merge together and pollute source
+attribution. Josh only runs one city today, but the checked-in DDL should keep
+the stronger city-scoped contract.
+
 ### Minimum Supabase path
 
 Josh should not have to think in terms of individual tables, RPCs, and indexes.

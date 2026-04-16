@@ -11,7 +11,8 @@
   var.isSubmitting="{false}"
   var.suggestSuccess="{false}"
   var.suggestError=""
-  var.localHidden="{[]}">
+  var.localHidden="{[]}"
+  var.currentEvents="{($props.events || []).filter(function(e) { return !e || !$props.city || e.city === $props.city; })}">
 
   <APICall
     id="suggestApi"
@@ -44,7 +45,7 @@
       <VStack width="*" gap="$space-1">
         <H3>Sources</H3>
         <Text
-          value="{$props.events ? window.dedupeEvents($props.events).length + ' events for the next ' + window.getQueryMonths() + ' months' : 'Loading...'}" />
+          value="{$props.events ? window.dedupeEvents(currentEvents).length + ' events for the next ' + window.getQueryMonths() + ' months' : 'Loading...'}" />
       </VStack>
       <Icon
         name="close"
@@ -64,7 +65,7 @@
       <Spinner when="{!$props.events}" />
       <Table
         when="{!!$props.events}"
-        data="{window.getSourceCounts(window.dedupeEvents($props.events || [])).map(function(item) { return { name: item.source, event_count: item.count }; })}"
+        data="{window.getSourceCounts(window.dedupeEvents(currentEvents)).map(function(item) { return { name: item.source, event_count: item.count }; })}"
         idKey="name"
         sortBy="event_count"
         sortDirection="descending"
