@@ -47,6 +47,19 @@ This avoids dragging along:
 - an old merge commit
 - a very large delete-heavy commit based on an older tree
 
+## Short version
+
+If Josh wants the shortest practical path, it is:
+
+1. Start a fresh branch from `upstream/main`
+2. Cherry-pick only the 3 substantive B-Square commits
+3. Keep B-Square's own Supabase URL, keys, secrets, and env vars
+4. Apply the repo's checked-in DDL/function definitions
+5. Redeploy `load-events`, `my-picks`, `capture-event`, and `validate-feed`
+6. Redeploy `chat-events` only if B-Square uses it
+7. Smoke test the app
+8. Do Bloomington-only pruning later, in a separate PR if still needed
+
 ## Suggested commands
 
 Assuming Josh is in a clone where:
