@@ -299,6 +299,12 @@ jobs:
         python scrapers/toronto_tool_library.py --output cities/toronto/toronto_tool_library.ics || true
         python scrapers/bistitchual.py --output cities/toronto/bistitchual.ics || true
         python scrapers/parkdale_pottery.py --output cities/toronto/parkdale_pottery.ics || true
+        python scrapers/toronto_planning_consultations.py --output cities/toronto/toronto_planning_consultations.ics || true
+        python scrapers/tcdsb_meetings.py --output cities/toronto/tcdsb_meetings.ics || true
+        python scrapers/waterfront_toronto.py --output cities/toronto/waterfront_toronto.ics || true
+        python scrapers/metrolinx_board.py --output cities/toronto/metrolinx_board.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/studio-mooi-59841950783" --name "Studio Mooi" --output cities/toronto/eventbrite_studio_mooi.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/open-studio-19932715092" --name "Open Studio" --output cities/toronto/eventbrite_open_studio.ics || true
       continue-on-error: true
 
 

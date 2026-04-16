@@ -1,6 +1,6 @@
 # Toronto Calendar Source Checklist
 
-## Currently Implemented (118 sources)
+## Currently Implemented (124 sources)
 
 ### Aggregators
 | Source | Type | Events | Notes |
@@ -69,6 +69,12 @@
 | Bistitchual | Shopify product scraper | 3 at sweep time | Yarn shop classes at 266 Jane St; knitting + crochet courses |
 | Parkdale Pottery | Shopify product scraper | 2 at sweep time | Pottery workshops at Queen/Campbell studios |
 | Site 3 CoLaboratory | WordPress Tribe ICS | 1 | Art/tech makerspace workshops |
+| The Devil's Workshop | WordPress Events Manager ICS | 50 | Jewellery, glass fusing, silversmithing, lost wax casting, metal printmaking |
+| Jewel Envy | WordPress Tribe ICS | 5 | Jewellery, enamel, metalwork, kids polymer clay |
+| HackLab.TO | Public Google Calendar ICS | 1,104 (pipeline date-filters) | Toronto's hackerspace; open house Tuesdays, workshops, maker events |
+| Queen City Stitch and Bitch | Meetup ICS | 10 | Fibre arts — knit, crochet, spin, weave, sew |
+| Studio Mooi | Eventbrite organizer scraper | 2 | Pottery/craft workshops (Wix site, no own feed) |
+| Open Studio (Printmaking Centre) | Eventbrite organizer scraper | 8 | Toronto's only artist-run printmaking centre (WP but no calendar plugin) |
 
 ### Government & Public Affairs
 | Source | Type | Events | Notes |
@@ -186,6 +192,12 @@
 - **Mischief Makers** — promising family maker/craft programming; likely Amilia-backed and worth a separate pass.
 - **The Pottery** — promising pottery-workshop schedule pages at `thepottery.ca`; likely scrapeable but not yet wired.
 - **Clay Design** — promising pottery classes/workshops at `claydesign.ca`; schedule exists, needs site-level inspection.
+- **City Planning Consultations** — implemented locally as `scrapers/toronto_planning_consultations.py` on reusable `scrapers/lib/social_pinpoint.py`. Validated at 13 future meetings and staged in workflow + `pending_feeds.txt` on 2026-04-16.
+- **City of Toronto Public Consultations** — wrapper implemented locally as `scrapers/toronto_public_consultations.py`, but not staged because the current `/events` page is a 1:1 duplicate of the planning feed (same 13 upcoming titles/times) and would create redundant raw events.
+- **Toronto Catholic District School Board Meetings** — implemented locally as `scrapers/tcdsb_meetings.py` on reusable `scrapers/lib/escribe.py`. Validated at 1 future meeting and staged in workflow + `pending_feeds.txt` on 2026-04-16.
+- **Toronto District School Board Meetings** — implemented locally as `scrapers/tdsb_meetings.py` on reusable `scrapers/lib/escribe.py`, but not staged because the public calendar currently returns 0 future meetings while regular Board meetings are paused.
+- **Metrolinx Board** — implemented locally as `scrapers/metrolinx_board.py`. Uses the published upcoming meeting dates on the official board page and stages them as all-day board meetings. Validated at 2 in-range future meetings with the default six-month horizon and staged in workflow + `pending_feeds.txt` on 2026-04-16.
+- **Waterfront Toronto** — implemented locally as `scrapers/waterfront_toronto.py`. Parses the embedded Drupal calendar payload on `/events` and captures future board meetings and public consultations. Validated at 13 in-range future events and staged in workflow + `pending_feeds.txt` on 2026-04-16.
 
 ---
 
@@ -246,10 +258,10 @@
 | City of Toronto (toronto.ca) | No Legistar; TMMIS behind Akamai WAF (403). Meeting data available via CKAN instead |
 | Ontario Legislature | 403 on calendar page; no ICS/RSS |
 | Toronto Police Services Board | Joomla, no feeds (~9 meetings/year) |
-| TTC Board | Moved to TMMIS; meetings included in CKAN dataset |
-| Metrolinx Board | Static HTML listing (~6 meetings/year) |
-| TDSB / TCDSB | eScribe platform, no API or feeds; email subscription only |
-| Waterfront Toronto | Drupal/FullCalendar, no feeds (~15 meetings/year) |
+| TTC Board | Moved to TMMIS; likely scrapeable via TTC index + `report.do` pages, but not yet implemented |
+| ~~Metrolinx Board~~ | ~~No feed, but official board page is a viable static HTML scrape candidate~~ **Implemented** as `scrapers/metrolinx_board.py` |
+| TDSB | Public eScribe JSON exists, but current future calendar is effectively empty while regular Board meetings are paused |
+| ~~Waterfront Toronto~~ | ~~No feed, but `/events` is a viable HTML scrape candidate~~ **Implemented** as `scrapers/waterfront_toronto.py` |
 
 ---
 
@@ -298,7 +310,8 @@ Track progress on topical searches to find long-tail community sources.
 |-------|------|---------------|-------|
 | Outdoor activities | 2025-02-14 | (included in initial Meetup sweep) | Hiking, cycling, water sports |
 | Government/public affairs | 2025-02-14 | toronto_meetings.py, toronto_festivals.py | CKAN open data |
-| Crafts/makers | 2025-02-14 | Repair Cafe, Knitters Guild, Site 3, 3D printing | |
+| Crafts/makers | 2025-02-14 | Repair Cafe, Knitters Guild, Site 3, 3D printing | Initial sweep |
+| Crafts/makers (expansion) | 2026-04-16 | Devil's Workshop, Jewel Envy, HackLab.TO, Queen City Stitch & Bitch, Studio Mooi, Open Studio | Meetup + Eventbrite + venue probe; see dedicated section below |
 | Volunteering/mutual aid | 2025-02-15 | Show Up Toronto, SAI Dham Volunteer, Volunteer Toronto scraper | |
 | Kids/family | 2025-02-15 | Toronto Dads, Little Sunbeams, Mini+Me Meetups, TPL scraper | Bibliocommons base |
 | History/heritage | 2025-02-15 | Ontario Historical Society, Toronto History Walks, Medieval SCA | 25 events |
@@ -660,3 +673,48 @@ FormData: store_id, session_id, webstore_name=<san>, ...
 ### eb-to-ical infrastructure note
 
 All 9 wired feeds use the third-party `eb-to-ical.daylightpirates.org` service to convert Eventbrite organizer pages to ICS. **Single point of failure** — if it goes dark, all 9 feeds break simultaneously. Documented in `discovery-lessons.md:467`. Fallback: scrape Eventbrite JSON-LD via existing `scrapers/lib/jsonld.py`.
+
+---
+
+## Topical Search: Crafts / Makers Expansion (2026-04-16)
+
+Second pass on craft/maker sources. Strategy: Meetup topical search + Eventbrite organizer discovery + venue website probing for authoritative ICS feeds.
+
+### Added
+
+| Source | Type | Events | Notes |
+|--------|------|--------|-------|
+| The Devil's Workshop | WordPress Events Manager ICS | 50 | `thedevilsworkshop.ca/events/?ical=1` — jewellery, glass fusing, silversmithing, lost wax casting |
+| Jewel Envy | WordPress Tribe ICS | 5 | `jewelenvy.ca/events/?ical=1` — jewellery, enamel, metalwork, kids polymer clay |
+| HackLab.TO | Public Google Calendar ICS | 1,104 | Calendar ID `3oo6s709gu7d31cg1419cfrbuc@group.calendar.google.com` — hackerspace open house Tuesdays + workshops |
+| Queen City Stitch and Bitch | Meetup ICS | 10 | Fibre arts — knit, crochet, spin, weave, sew |
+| Studio Mooi | Eventbrite organizer scraper | 2 | Organizer `59841950783` — pottery/craft workshops at 926 Kingston Rd |
+| Open Studio (Printmaking Centre) | Eventbrite organizer scraper | 8 | Organizer `19932715092` — printmaking at 401 Richmond St W |
+
+### Venues Assessed — No Feed Available
+
+| Venue | Platform | Notes |
+|-------|----------|-------|
+| Harbourfront Centre | WordPress (custom, no calendar plugin) | Major craft/design workshop program but no ICS; scraper opportunity |
+| Craft Ontario | Shopify | Event listings page is static HTML; provincial craft org |
+| The Knit Cafe | Shopify | Classes sold as products, no calendar |
+| The Maker Bean | Shopify | Makerspace cafe; camps + workshops as products |
+| The Potter's Studio | Shopify | Pottery classes as products |
+| TTL Makerspace | Shopify | Training sold as products (sibling of Toronto Tool Library, already captured) |
+| DesignTO | WordPress/Elementor | No calendar plugin; annual festival org |
+| Knit Social | Squarespace | 64 events in collection but `?format=json` returns 0 (pagination quirk); per-event ICS possible |
+| Studio Mooi (own site) | Wix | No feed; Eventbrite organizer used instead |
+
+### Meetup Groups Assessed
+
+| Group | Events | Status |
+|-------|--------|--------|
+| Queen City Stitch and Bitch | 10 | ✅ Added |
+| Toronto Makers Society | 0 | Valid feed, no upcoming events |
+| Stitches 'n Steins | 0 | Valid feed, no upcoming events |
+| Stitch and Bitch Downtown Toronto | 0 | Valid feed, no upcoming events |
+| Orkid Gallery | n/a | WordPress but no calendar plugin; ?ical=1 returns HTML |
+
+### Key Pattern Observed
+
+Most Toronto craft studios sell classes through **Shopify** — they treat workshops as products, not calendar events. This means no ICS feeds are possible. The authoritative wins (Devil's Workshop, Jewel Envy) are WordPress sites with calendar plugins. HackLab.TO uses an embedded Google Calendar. For Shopify-based studios, the only route is Eventbrite (if they cross-post) or a custom Shopify product scraper (already built for Bistitchual, Parkdale Pottery, Toronto Tool Library).

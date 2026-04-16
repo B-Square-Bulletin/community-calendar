@@ -3,6 +3,7 @@
   { "name": "Books / Literature / Poetry", "label": "#7a6a4a", "background": "#eee8dc" },
   { "name": "Comedy / Improv", "label": "#8a7a3a", "background": "#f2eee0" },
   { "name": "Community / Social", "label": "#9a5a5a", "background": "#f4e8e8" },
+  { "name": "Craft / Maker", "label": "#8a6a3a", "background": "#f2eade" },
   { "name": "Dance / Performance", "label": "#8a4a6a", "background": "#f2e4ec" },
   { "name": "Education / Workshops", "label": "#4a6a9a", "background": "#e4ecf4" },
   { "name": "Family / Kids", "label": "#9a4a7d", "background": "#f4e4f0" },
