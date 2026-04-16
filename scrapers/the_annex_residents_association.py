@@ -5,7 +5,6 @@ from __future__ import annotations
 
 from calendar import monthcalendar, THURSDAY
 from datetime import date, datetime
-from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 from lib.base import BaseScraper
@@ -21,15 +20,13 @@ class TheAnnexResidentsAssociationScraper(BaseScraper):
         "The ARA Board of Directors meets on the second Thursday of every month, "
         "excluding July and August, at 7:00 p.m. Meetings are open to the public."
     )
-    headers = {
-        "User-Agent": "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
-        "Accept": "text/html,application/xhtml+xml",
-    }
-
     def fetch_html(self) -> str:
-        req = Request(self.contact_url, headers=self.headers)
-        with urlopen(req, timeout=20) as resp:
-            return resp.read().decode("utf-8")
+        return self.fetch_text_with_curl(
+            self.contact_url,
+            accept="text/html,application/xhtml+xml",
+            referer="https://www.theara.org/",
+            timeout=20,
+        )
 
     def second_thursday(self, year: int, month: int) -> date:
         weeks = monthcalendar(year, month)

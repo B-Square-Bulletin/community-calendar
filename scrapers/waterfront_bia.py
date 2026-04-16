@@ -7,7 +7,6 @@ import re
 import xml.etree.ElementTree as ET
 from datetime import date, datetime, timedelta
 from html import unescape
-from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
@@ -43,15 +42,13 @@ class WaterfrontBIAScraper(BaseScraper):
     timezone = "America/Toronto"
     sitemap_url = "https://waterfrontbia.com/sitemap.xml"
     default_url = "https://waterfrontbia.com/events/"
-    headers = {
-        "User-Agent": "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
-        "Accept": "text/html,application/xhtml+xml,application/xml",
-    }
-
     def fetch_url(self, url: str) -> str:
-        req = Request(url, headers=self.headers)
-        with urlopen(req, timeout=20) as resp:
-            return resp.read().decode("utf-8", "ignore")
+        return self.fetch_text_with_curl(
+            url,
+            accept="text/html,application/xhtml+xml,application/xml",
+            referer=self.default_url,
+            timeout=20,
+        )
 
     def fetch_event_urls(self) -> list[str]:
         xml_text = self.fetch_url(self.sitemap_url)
