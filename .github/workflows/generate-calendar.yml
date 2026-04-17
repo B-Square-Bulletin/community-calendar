@@ -60,13 +60,19 @@ jobs:
       id: locations
       run: |
         INPUT="${{ github.event.inputs.locations }}"
+        ENABLED="${{ vars.ENABLED_CITIES }}"
+        ALL=$(ls -d cities/*/feeds.txt 2>/dev/null | sed 's|cities/||;s|/feeds.txt||' | paste -sd, -)
+        MANIFEST="$ALL"
+        if [ -n "$ENABLED" ]; then
+          MANIFEST="$ENABLED"
+        fi
         if [ -z "$INPUT" ] || [ "$INPUT" = "all" ]; then
-          # Derive city list from cities/ directory (any subdir with a feeds.txt)
-          ALL=$(ls -d cities/*/feeds.txt 2>/dev/null | sed 's|cities/||;s|/feeds.txt||' | paste -sd, -)
-          echo "list=$ALL" >> $GITHUB_OUTPUT
+          # If ENABLED_CITIES is set for this repo/fork, use it as the default build scope.
+          echo "list=$MANIFEST" >> $GITHUB_OUTPUT
         else
           echo "list=$INPUT" >> $GITHUB_OUTPUT
         fi
+        echo "manifest_list=$MANIFEST" >> $GITHUB_OUTPUT
 
     # ==========================================
     # Santa Rosa
@@ -511,7 +517,7 @@ jobs:
     # Post-processing (all cities)
     # ==========================================
     - name: Generate cities.json
-      run: python scripts/generate_cities_json.py
+      run: python scripts/generate_cities_json.py --cities "${{ steps.locations.outputs.manifest_list }}"
 
     - name: Convert ICS to JSON for Supabase
       run: |

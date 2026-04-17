@@ -90,6 +90,28 @@ You'll likely get a merge conflict in `.github/workflows/generate-calendar.yml` 
 
 For conflicts in `config.json` or `index.html`, keep **your** values (your Supabase URL and anon key).
 
+### Optional: limit a fork to specific cities
+
+If your fork only serves a subset of cities, set a repository variable instead of carrying a fork-only workflow edit.
+
+In GitHub, go to **Settings > Secrets and variables > Actions > Variables** and add:
+
+```text
+ENABLED_CITIES=bloomington
+```
+
+Or multiple cities:
+
+```text
+ENABLED_CITIES=bloomington,bedford
+```
+
+What this does:
+
+- Scheduled builds default to only those cities.
+- `cities.json` is generated only for those cities.
+- Upstream workflow changes remain easy to merge because the scope lives in repo settings, not in a fork-only YAML fork.
+
 ### Optional: keep your generated files during merges
 
 If your fork builds its own `report.json`, `xmlui/version.txt`, `cities.json`, and `cities/*/feeds.txt`, you probably do **not** want upstream's generated copies during sync. A custom merge driver lets Git keep your fork's versions automatically.
