@@ -1,49 +1,6 @@
 # Petaluma - source inventory
-# Generated from feeds table. Do not edit manually.
-
-# --- Scrapers ---
-# Adobe Road Winery
-# cmd: python scrapers/adobe_road.py
-cities/petaluma/adobe_road.ics
-# Blue Zones Project Petaluma
-# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/78957912343" --name "Blue Zones Project Petaluma"
-cities/petaluma/bluezones_petaluma.ics
-# Brewsters Beer Garden
-# cmd: python scrapers/brewsters.py
-cities/petaluma/brewsters.ics
-# Casa Grande High School Athletics
-# cmd: python scrapers/maxpreps.py --school casa-grande-gauchos
-cities/petaluma/maxpreps_casa_grande.ics
-# Cool Petaluma
-# cmd: python scrapers/cool_petaluma.py
-cities/petaluma/cool_petaluma.ics
-# HenHouse Brewing
-# cmd: python scrapers/henhouse.py
-cities/petaluma/henhouse.ics
-# Mercury Theater
-# cmd: python scrapers/mercury_theater.py
-cities/petaluma/mercury_theater.ics
-# Mystic Theatre
-# cmd: python scrapers/mystic_theatre.py
-cities/petaluma/mystic_theatre.ics
-# Petaluma Arts Center
-# cmd: python scrapers/petaluma_arts_center.py
-cities/petaluma/petaluma_arts_center.ics
-# Petaluma Chamber of Commerce
-# cmd: python scrapers/growthzone.py --site petalumachamber
-cities/petaluma/petaluma_chamber.ics
-# Petaluma High School Athletics
-# cmd: python scrapers/maxpreps.py --school petaluma-trojans
-cities/petaluma/maxpreps_petaluma_high.ics
-# Petaluma River Park Foundation
-# cmd: python scrapers/petaluma_river_park.py
-cities/petaluma/petaluma_river_park.ics
-# Sonoma County Library
-# cmd: python scripts/library_intercept.py --location petaluma
-cities/petaluma/library_intercept.ics
-# SRJC Petaluma Campus
-# cmd: python scrapers/srjc_petaluma.py
-cities/petaluma/srjc_petaluma.ics
+# Generated from feeds table (active + pending). Do not edit manually.
+# To add feeds, use pending_feeds.txt in this directory.
 
 # --- Live feeds ---
 # Aqus Community
@@ -110,4 +67,48 @@ https://calendar.santarosa.edu/live/ical/events
 https://bigeasypetaluma.com/events/?ical=1
 # Tockify: tom.l
 https://tockify.com/api/feeds/ics/tom.l
+
+# --- Scrapers ---
+# Adobe Road Winery
+# cmd: python scrapers/adobe_road.py
+cities/petaluma/adobe_road.ics
+# Blue Zones Project Petaluma
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/78957912343" --name "Blue Zones Project Petaluma"
+cities/petaluma/bluezones_petaluma.ics
+# Brewsters Beer Garden
+# cmd: python scrapers/brewsters.py
+cities/petaluma/brewsters.ics
+# Casa Grande High School Athletics
+# cmd: python scrapers/maxpreps.py --school casa-grande-gauchos
+cities/petaluma/maxpreps_casa_grande.ics
+# Cool Petaluma
+# cmd: python scrapers/cool_petaluma.py
+cities/petaluma/cool_petaluma.ics
+# HenHouse Brewing
+# cmd: python scrapers/henhouse.py
+cities/petaluma/henhouse.ics
+# Mercury Theater
+# cmd: python scrapers/mercury_theater.py
+cities/petaluma/mercury_theater.ics
+# Mystic Theatre
+# cmd: python scrapers/mystic_theatre.py
+cities/petaluma/mystic_theatre.ics
+# Petaluma Arts Center
+# cmd: python scrapers/petaluma_arts_center.py
+cities/petaluma/petaluma_arts_center.ics
+# Petaluma Chamber of Commerce
+# cmd: python scrapers/growthzone.py --site petalumachamber
+cities/petaluma/petaluma_chamber.ics
+# Petaluma High School Athletics
+# cmd: python scrapers/maxpreps.py --school petaluma-trojans
+cities/petaluma/maxpreps_petaluma_high.ics
+# Petaluma River Park Foundation
+# cmd: python scrapers/petaluma_river_park.py
+cities/petaluma/petaluma_river_park.ics
+# Sonoma County Library
+# cmd: python scripts/library_intercept.py --location petaluma
+cities/petaluma/library_intercept.ics
+# SRJC Petaluma Campus
+# cmd: python scrapers/srjc_petaluma.py
+cities/petaluma/srjc_petaluma.ics
 

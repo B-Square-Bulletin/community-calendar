@@ -1,5 +1,58 @@
 # Santarosa - source inventory
-# Generated from feeds table. Do not edit manually.
+# Generated from feeds table (active + pending). Do not edit manually.
+# To add feeds, use pending_feeds.txt in this directory.
+
+# --- Live feeds ---
+# AMORC Santa Rosa Pronaos
+https://www.meetup.com/amorc-santa-rosa-pronaos/events/ical/
+# Arlene Francis Center
+https://calendar.google.com/calendar/ical/eventsatarlenefransictheater@gmail.com/public/basic.ics
+# Charles M. Schulz Museum
+https://schulzmuseum.org/events/?ical=1
+# GoLocal Cooperative
+https://golocal.coop/?post_type=tribe_events&ical=1&eventDisplay=list
+# Luther Burbank Center
+https://lutherburbankcenter.org/events/?ical=1
+# Meetup: Go Wild Hikers
+https://www.meetup.com/sonoma-county-go-wild-hikers/events/ical/
+# Meetup: Nataraja Yoga
+https://www.meetup.com/nataraja-school-of-traditional-yoga/events/ical/
+# Meetup: Santa Rosa Toastmasters
+https://www.meetup.com/santa-rosa-toastmasters-public-speaking-meetup-group/events/ical/
+# Meetup: Scottish Country Dancing
+https://www.meetup.com/scottish-country-dancing/events/ical/
+# Meetup: Shut Up & Write Wine Country
+https://www.meetup.com/shutupandwritewinecountry/events/ical/
+# Meetup: Sonoma County Boomers
+https://www.meetup.com/sonoma-county-boomers/events/ical/
+# Meetup: Women's Creativity Collective
+https://www.meetup.com/santa-rosa-womens-creativity-collective/events/ical/
+# Meetup: Women's Wine Club
+https://www.meetup.com/sonoma-county-womens-wine-club/events/ical/
+# Rancho Nicasio
+https://ranchonicasio.com/?post_type=tribe_events&ical=1&eventDisplay=list
+# Riley Street Art Supply
+https://tockify.com/api/feeds/ics/rileystreet.art.com
+# Robert Ferguson Observatory
+https://calendar.google.com/calendar/ical/c_rilc5rtgatnr4oln08fo9p5k30%40group.calendar.google.com/public/basic.ics
+# Santa Rosa Junior College
+https://calendar.santarosa.edu/live/ical/events
+# Santa Rosa Symphony
+https://www.srsymphony.org/events/?ical=1
+# SAROGN
+https://www.meetup.com/sarogn/events/ical/
+# Sonoma Community Center
+https://sonomacommunitycenter.org/events/?ical=1
+# Sonoma County AA
+https://sonomacountyaa.org/events/?ical=1
+# Sonoma County DSA
+https://calendar.google.com/calendar/ical/dsasonomacounty%40gmail.com/public/basic.ics
+# Sonoma.com
+https://www.sonoma.com/events/?ical=1
+# The Big Easy
+https://bigeasypetaluma.com/?post_type=tribe_events&ical=1&eventDisplay=list
+# Uptown Theatre Napa
+https://uptowntheatrenapa.com/events/?ical=1
 
 # --- Scrapers ---
 # Barrel Proof Lounge
@@ -145,58 +198,6 @@ cities/santarosa/songkick_will_call.ics
 # Twin Oaks Roadhouse
 # cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/3239334-twin-oaks-roadhouse" --name "Twin Oaks Roadhouse"
 cities/santarosa/songkick_twin_oaks.ics
-
-# --- Live feeds ---
-# AMORC Santa Rosa Pronaos
-https://www.meetup.com/amorc-santa-rosa-pronaos/events/ical/
-# Arlene Francis Center
-https://calendar.google.com/calendar/ical/eventsatarlenefransictheater@gmail.com/public/basic.ics
-# Charles M. Schulz Museum
-https://schulzmuseum.org/events/?ical=1
-# GoLocal Cooperative
-https://golocal.coop/?post_type=tribe_events&ical=1&eventDisplay=list
-# Luther Burbank Center
-https://lutherburbankcenter.org/events/?ical=1
-# Meetup: Go Wild Hikers
-https://www.meetup.com/sonoma-county-go-wild-hikers/events/ical/
-# Meetup: Nataraja Yoga
-https://www.meetup.com/nataraja-school-of-traditional-yoga/events/ical/
-# Meetup: Santa Rosa Toastmasters
-https://www.meetup.com/santa-rosa-toastmasters-public-speaking-meetup-group/events/ical/
-# Meetup: Scottish Country Dancing
-https://www.meetup.com/scottish-country-dancing/events/ical/
-# Meetup: Shut Up & Write Wine Country
-https://www.meetup.com/shutupandwritewinecountry/events/ical/
-# Meetup: Sonoma County Boomers
-https://www.meetup.com/sonoma-county-boomers/events/ical/
-# Meetup: Women's Creativity Collective
-https://www.meetup.com/santa-rosa-womens-creativity-collective/events/ical/
-# Meetup: Women's Wine Club
-https://www.meetup.com/sonoma-county-womens-wine-club/events/ical/
-# Rancho Nicasio
-https://ranchonicasio.com/?post_type=tribe_events&ical=1&eventDisplay=list
-# Riley Street Art Supply
-https://tockify.com/api/feeds/ics/rileystreet.art.com
-# Robert Ferguson Observatory
-https://calendar.google.com/calendar/ical/c_rilc5rtgatnr4oln08fo9p5k30%40group.calendar.google.com/public/basic.ics
-# Santa Rosa Junior College
-https://calendar.santarosa.edu/live/ical/events
-# Santa Rosa Symphony
-https://www.srsymphony.org/events/?ical=1
-# SAROGN
-https://www.meetup.com/sarogn/events/ical/
-# Sonoma Community Center
-https://sonomacommunitycenter.org/events/?ical=1
-# Sonoma County AA
-https://sonomacountyaa.org/events/?ical=1
-# Sonoma County DSA
-https://calendar.google.com/calendar/ical/dsasonomacounty%40gmail.com/public/basic.ics
-# Sonoma.com
-https://www.sonoma.com/events/?ical=1
-# The Big Easy
-https://bigeasypetaluma.com/?post_type=tribe_events&ical=1&eventDisplay=list
-# Uptown Theatre Napa
-https://uptowntheatrenapa.com/events/?ical=1
 
 # --- Curator feeds ---
 # judell picks

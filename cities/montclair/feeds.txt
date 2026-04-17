@@ -1,49 +1,6 @@
 # Montclair - source inventory
-# Generated from feeds table. Do not edit manually.
-
-# --- Scrapers ---
-# Essex County Parks
-# cmd: python scrapers/essex_county_parks.py
-cities/montclair/essex_county_parks.ics
-# Lackawanna Station
-# cmd: python scrapers/squarespace.py --url "https://www.lackawanna.com/events" --name "Lackawanna Station"
-cities/montclair/lackawanna.ics
-# Loopwell
-# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/loopwell-wellness-in-montclair-nj-71213568773" --name "Loopwell"
-cities/montclair/eventbrite_loopwell.ics
-# Montclair Book Center
-# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/montclair-book-center-76893048773" --name "Montclair Book Center"
-cities/montclair/eventbrite_montclair_book_center.ics
-# Montclair Brewery
-# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/montclair-brewery-17088451648" --name "Montclair Brewery"
-cities/montclair/eventbrite_montclair_brewery.ics
-# Montclair Film
-# cmd: python scrapers/montclair_film.py
-cities/montclair/montclair_film.ics
-# Montclair High School Athletics
-# cmd: python scrapers/maxpreps.py --url "https://www.maxpreps.com/nj/montclair/montclair-mounties/events/" --name "Montclair High School Athletics"
-cities/montclair/maxpreps_montclair_high.ics
-# Montclair Kimberley Academy Athletics
-# cmd: python scrapers/maxpreps.py --url "https://www.maxpreps.com/nj/montclair/montclair-kimberley-academy-cougars/events/" --name "Montclair Kimberley Academy Athletics"
-cities/montclair/maxpreps_mka.ics
-# North Essex Chamber of Commerce
-# cmd: python scrapers/growthzone.py --url "https://business.northessexchamber.com/api/events" --name "North Essex Chamber of Commerce"
-cities/montclair/north_essex_chamber.ics
-# Studio Montclair
-# cmd: python scrapers/studio_montclair.py
-cities/montclair/studio_montclair.ics
-# The Raptor Trust
-# cmd: python scrapers/raptor_trust.py
-cities/montclair/raptor_trust.ics
-# Turtle Back Zoo
-# cmd: python scrapers/turtle_back_zoo.py
-cities/montclair/turtle_back_zoo.ics
-# Watchung Booksellers
-# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/watchung-booksellers-32491987875" --name "Watchung Booksellers"
-cities/montclair/eventbrite_watchung_booksellers.ics
-# Wellmont Theater
-# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/32209-wellmont-theater" --name "Wellmont Theater"
-cities/montclair/songkick_wellmont.ics
+# Generated from feeds table (active + pending). Do not edit manually.
+# To add feeds, use pending_feeds.txt in this directory.
 
 # --- Live feeds ---
 # Congregation Shomrei Emunah
@@ -108,4 +65,48 @@ https://www.unioncong.org/events/list/?ical=1
 https://calendar.google.com/calendar/ical/uumontclair.org_9kptanknnvqcom49ks44nnaaak%40group.calendar.google.com/public/basic.ics
 # Wharton Arts
 https://whartonarts.org/events/?ical=1
+
+# --- Scrapers ---
+# Essex County Parks
+# cmd: python scrapers/essex_county_parks.py
+cities/montclair/essex_county_parks.ics
+# Lackawanna Station
+# cmd: python scrapers/squarespace.py --url "https://www.lackawanna.com/events" --name "Lackawanna Station"
+cities/montclair/lackawanna.ics
+# Loopwell
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/loopwell-wellness-in-montclair-nj-71213568773" --name "Loopwell"
+cities/montclair/eventbrite_loopwell.ics
+# Montclair Book Center
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/montclair-book-center-76893048773" --name "Montclair Book Center"
+cities/montclair/eventbrite_montclair_book_center.ics
+# Montclair Brewery
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/montclair-brewery-17088451648" --name "Montclair Brewery"
+cities/montclair/eventbrite_montclair_brewery.ics
+# Montclair Film
+# cmd: python scrapers/montclair_film.py
+cities/montclair/montclair_film.ics
+# Montclair High School Athletics
+# cmd: python scrapers/maxpreps.py --url "https://www.maxpreps.com/nj/montclair/montclair-mounties/events/" --name "Montclair High School Athletics"
+cities/montclair/maxpreps_montclair_high.ics
+# Montclair Kimberley Academy Athletics
+# cmd: python scrapers/maxpreps.py --url "https://www.maxpreps.com/nj/montclair/montclair-kimberley-academy-cougars/events/" --name "Montclair Kimberley Academy Athletics"
+cities/montclair/maxpreps_mka.ics
+# North Essex Chamber of Commerce
+# cmd: python scrapers/growthzone.py --url "https://business.northessexchamber.com/api/events" --name "North Essex Chamber of Commerce"
+cities/montclair/north_essex_chamber.ics
+# Studio Montclair
+# cmd: python scrapers/studio_montclair.py
+cities/montclair/studio_montclair.ics
+# The Raptor Trust
+# cmd: python scrapers/raptor_trust.py
+cities/montclair/raptor_trust.ics
+# Turtle Back Zoo
+# cmd: python scrapers/turtle_back_zoo.py
+cities/montclair/turtle_back_zoo.ics
+# Watchung Booksellers
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/watchung-booksellers-32491987875" --name "Watchung Booksellers"
+cities/montclair/eventbrite_watchung_booksellers.ics
+# Wellmont Theater
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/32209-wellmont-theater" --name "Wellmont Theater"
+cities/montclair/songkick_wellmont.ics
 

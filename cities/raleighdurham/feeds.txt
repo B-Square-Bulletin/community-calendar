@@ -1,61 +1,6 @@
 # Raleighdurham - source inventory
-# Generated from feeds table. Do not edit manually.
-
-# --- Scrapers ---
-# Apex Chamber of Commerce
-# cmd: python scrapers/growthzone.py --site apexchamber
-cities/raleighdurham/apex_chamber.ics
-# Carolina Performing Arts
-# cmd: python scrapers/carolina_performing_arts.py
-cities/raleighdurham/carolina_performing_arts.ics
-# Carolina Theatre
-# cmd: python scrapers/carolina_theatre.py
-cities/raleighdurham/carolina_theatre.ics
-# Cat's Cradle
-# cmd: python scrapers/catscradle.py
-cities/raleighdurham/catscradle.ics
-# DPAC
-# cmd: python scrapers/ticketmaster.py --venue-id KovZpa2X8e --name "DPAC"
-cities/raleighdurham/dpac.ics
-# Duke Arts
-# cmd: python scrapers/duke_arts.py
-cities/raleighdurham/duke_arts.ics
-# Durham Chamber of Commerce
-# cmd: python scrapers/growthzone.py --site durhamchamber
-cities/raleighdurham/durham_chamber.ics
-# Durham County
-# cmd: python scrapers/legistar.py --client durhamcounty --source "Durham County"
-cities/raleighdurham/durhamcounty_legistar.ics
-# Haw River Assembly
-# cmd: python scrapers/squarespace.py --url "https://hawriver.org/events" --name "Haw River Assembly"
-cities/raleighdurham/haw_river_assembly.ics
-# Keep Durham Beautiful
-# cmd: python scrapers/squarespace.py --url "https://keepdurhambeautiful.org/events" --name "Keep Durham Beautiful"
-cities/raleighdurham/keep_durham_beautiful.ics
-# Martin Marietta Center
-# cmd: python scrapers/ticketmaster.py --venue-id KovZpZAFF1nA --name "Martin Marietta Center"
-cities/raleighdurham/martin_marietta.ics
-# Motorco Music Hall
-# cmd: python scrapers/motorco.py
-cities/raleighdurham/motorco.ics
-# Ponysaurus Brewing
-# cmd: python scrapers/squarespace.py --url "https://ponysaurusbrewing.com/events" --name "Ponysaurus Brewing"
-cities/raleighdurham/ponysaurus.ics
-# Raleigh Little Theatre
-# cmd: python scrapers/raleigh_little_theatre.py
-cities/raleighdurham/raleigh_little_theatre.ics
-# The Scrap Exchange
-# cmd: python scrapers/squarespace.py --url "https://scrapexchange.org/tsecalendar" --name "The Scrap Exchange"
-cities/raleighdurham/scrap_exchange.ics
-# Town of Chapel Hill
-# cmd: python scrapers/legistar.py --client chapelhill --source "Town of Chapel Hill"
-cities/raleighdurham/chapelhill_legistar.ics
-# Wake County
-# cmd: python scrapers/legistar.py --client wake --source "Wake County"
-cities/raleighdurham/wake_county_legistar.ics
-# Wake Forest Chamber of Commerce
-# cmd: python scrapers/growthzone.py --site wakeforestchamber
-cities/raleighdurham/wakeforest_chamber.ics
+# Generated from feeds table (active + pending). Do not edit manually.
+# To add feeds, use pending_feeds.txt in this directory.
 
 # --- Live feeds ---
 # Ackland Art Museum
@@ -220,4 +165,60 @@ https://calendar.unc.edu/calendar/1.ics
 https://unitedarts.org/events/?ical=1
 # Wake Audubon
 https://calendar.google.com/calendar/ical/wakeaudubon%40signalinc.com/public/basic.ics
+
+# --- Scrapers ---
+# Apex Chamber of Commerce
+# cmd: python scrapers/growthzone.py --site apexchamber
+cities/raleighdurham/apex_chamber.ics
+# Carolina Performing Arts
+# cmd: python scrapers/carolina_performing_arts.py
+cities/raleighdurham/carolina_performing_arts.ics
+# Carolina Theatre
+# cmd: python scrapers/carolina_theatre.py
+cities/raleighdurham/carolina_theatre.ics
+# Cat's Cradle
+# cmd: python scrapers/catscradle.py
+cities/raleighdurham/catscradle.ics
+# DPAC
+# cmd: python scrapers/ticketmaster.py --venue-id KovZpa2X8e --name "DPAC"
+cities/raleighdurham/dpac.ics
+# Duke Arts
+# cmd: python scrapers/duke_arts.py
+cities/raleighdurham/duke_arts.ics
+# Durham Chamber of Commerce
+# cmd: python scrapers/growthzone.py --site durhamchamber
+cities/raleighdurham/durham_chamber.ics
+# Durham County
+# cmd: python scrapers/legistar.py --client durhamcounty --source "Durham County"
+cities/raleighdurham/durhamcounty_legistar.ics
+# Haw River Assembly
+# cmd: python scrapers/squarespace.py --url "https://hawriver.org/events" --name "Haw River Assembly"
+cities/raleighdurham/haw_river_assembly.ics
+# Keep Durham Beautiful
+# cmd: python scrapers/squarespace.py --url "https://keepdurhambeautiful.org/events" --name "Keep Durham Beautiful"
+cities/raleighdurham/keep_durham_beautiful.ics
+# Martin Marietta Center
+# cmd: python scrapers/ticketmaster.py --venue-id KovZpZAFF1nA --name "Martin Marietta Center"
+cities/raleighdurham/martin_marietta.ics
+# Motorco Music Hall
+# cmd: python scrapers/motorco.py
+cities/raleighdurham/motorco.ics
+# Ponysaurus Brewing
+# cmd: python scrapers/squarespace.py --url "https://ponysaurusbrewing.com/events" --name "Ponysaurus Brewing"
+cities/raleighdurham/ponysaurus.ics
+# Raleigh Little Theatre
+# cmd: python scrapers/raleigh_little_theatre.py
+cities/raleighdurham/raleigh_little_theatre.ics
+# The Scrap Exchange
+# cmd: python scrapers/squarespace.py --url "https://scrapexchange.org/tsecalendar" --name "The Scrap Exchange"
+cities/raleighdurham/scrap_exchange.ics
+# Town of Chapel Hill
+# cmd: python scrapers/legistar.py --client chapelhill --source "Town of Chapel Hill"
+cities/raleighdurham/chapelhill_legistar.ics
+# Wake County
+# cmd: python scrapers/legistar.py --client wake --source "Wake County"
+cities/raleighdurham/wake_county_legistar.ics
+# Wake Forest Chamber of Commerce
+# cmd: python scrapers/growthzone.py --site wakeforestchamber
+cities/raleighdurham/wakeforest_chamber.ics
 

@@ -1,5 +1,5 @@
 # Asheville - source inventory
-# Generated from feeds table. Do not edit manually.
+# Generated from feeds table (active + pending). Do not edit manually.
 # To add feeds, use pending_feeds.txt in this directory.
 
 # --- Live feeds ---
@@ -91,4 +91,21 @@ https://www.meetup.com/shutupandwriteasheville/events/ical/
 https://www.meetup.com/skinny-beats-sound-meditation/events/ical/
 # UNC Asheville
 https://www.unca.edu/events/?ical=1
+
+# --- Scrapers ---
+# Eulogy
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/4519500-eulogy" --name "Eulogy"
+cities/asheville/eulogy_songkick.ics
+# Harrahs Cherokee Center
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/4371507-harrahs-cherokee-center" --name "Harrahs Cherokee Center"
+cities/asheville/harrahs_cherokee_songkick.ics
+# Revival
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/4617227-revival" --name "Revival"
+cities/asheville/revival_songkick.ics
+# The One Stop
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/1333371-one-stop" --name "The One Stop"
+cities/asheville/one_stop_songkick.ics
+# The Orange Peel
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/289-orange-peel" --name "The Orange Peel"
+cities/asheville/orange_peel_songkick.ics
 
