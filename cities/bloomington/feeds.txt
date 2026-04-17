@@ -1,79 +1,6 @@
 # Bloomington - source inventory
-# Generated from feeds table. Do not edit manually.
-
-# --- Scrapers ---
-# Bill Armstrong Stadium
-# python scrapers/ticketmaster.py --venue-id KovZpaoDQe --name "Bill Armstrong Stadium" --default-url "https://iuhoosiers.com/"
-cities/bloomington/tm_bill_armstrong.ics
-# Blockhouse Bar
-# python scrapers/songkick.py --url "https://www.songkick.com/venues/3607354-blockhouse-bar" --name "Blockhouse Bar"
-cities/bloomington/songkick_blockhouse.ics
-# Bloomington Rotary Club
-# python scrapers/ismyrotaryclub.py --club-id 3430 --account-id 6580 --name "Bloomington Rotary Club"
-cities/bloomington/bloomington_rotary.ics
-# Bloomington Sunrise Rotary
-# python scrapers/ismyrotaryclub.py --club-id 52230 --account-id 6580 --name "Bloomington Sunrise Rotary"
-cities/bloomington/bloomington_sunrise_rotary.ics
-# Brown County Music Center
-# python scrapers/ticketmaster.py --venue-id KovZ917AOr1 --name "Brown County Music Center"
-cities/bloomington/tm_brown_county_music.ics
-# Buskirk-Chumley Theater
-# python scrapers/buskirk_chumley.py
-cities/bloomington/buskirk_chumley.ics
-# Cardinal Spirits
-# python scrapers/squarespace.py --url "https://www.cardinalspirits.com/events" --name "Cardinal Spirits"
-cities/bloomington/cardinal_spirits.ics
-# Cicada Cinema
-# python scrapers/shopify_events.py --url "https://cicadacinema.com" --name "Cicada Cinema"
-cities/bloomington/cicada_cinema.ics
-# Comedy Attic
-# python scrapers/comedy_attic.py
-cities/bloomington/comedy_attic.ics
-# Constellation Stage & Screen
-# python scrapers/spektrix.py --base-url "https://tickets.seeconstellation.org/constellation" --name "Constellation Stage & Screen" --default-url "https://seeconstellation.org/"
-cities/bloomington/constellation.ics
-# IU Cinema
-# python scrapers/ticketmaster.py --venue-id KovZpZAI11nA --name "IU Cinema" --default-url "https://cinema.indiana.edu/upcoming-films/"
-cities/bloomington/tm_iu_cinema.ics
-# IU Memorial Stadium
-# python scrapers/ticketmaster.py --venue-id KovZpZAFdInA --name "IU Memorial Stadium" --default-url "https://iuhoosiers.com/"
-cities/bloomington/tm_memorial_stadium.ics
-# Limestone Post
-# python scrapers/limestone_post.py
-cities/bloomington/limestone_post.ics
-# Monroe County Master Gardeners
-# python scrapers/squarespace.py --url "https://www.mcmga.net/events" --name "Monroe County Master Gardeners"
-cities/bloomington/master_gardeners.ics
-# People's Market
-# python scrapers/squarespace.py --url "https://www.peoplesmarketbtown.org/gatherings" --name "People's Market"
-cities/bloomington/peoples_market.ics
-# Pottery House Studio
-# python scrapers/squarespace.py --url "https://www.potteryhousestudio.com/workshops" --name "Pottery House Studio"
-cities/bloomington/pottery_house_studio.ics
-# Ruth N Halls Theatre
-# python scrapers/ticketmaster.py --venue-id KovZpZAdE6aA --name "Ruth N Halls Theatre" --default-url "https://events.iu.edu/theatre/"
-cities/bloomington/tm_ruth_halls.ics
-# Sassafras Audubon Society
-# python scrapers/squarespace.py --url "https://www.sassafrasaudubon.org/upcomingevents" --name "Sassafras Audubon Society"
-cities/bloomington/sassafras_audubon.ics
-# Simon Skjodt Assembly Hall
-# python scrapers/ticketmaster.py --venue-id KovZpZAFdItA --name "Simon Skjodt Assembly Hall" --default-url "https://iuhoosiers.com/"
-cities/bloomington/tm_assembly_hall.ics
-# Sycamore Land Trust
-# python scrapers/sycamore_land_trust.py
-cities/bloomington/sycamore_land_trust.ics
-# The Bishop
-# python scrapers/the_bishop.py
-cities/bloomington/the_bishop.ics
-# The Bluebird
-# python scrapers/songkick.py --url "https://www.songkick.com/venues/78904-bluebird" --name "The Bluebird"
-cities/bloomington/songkick_bluebird.ics
-# Ticketmaster venues
-# python scrapers/ticketmaster.py --venue-id KovZpaoDke --name "IU Musical Arts Center" --default-url "https://events.iu.edu/musiciub/"
-cities/bloomington/tm_musical_arts_center.ics
-# Wells Metz Theatre
-# python scrapers/ticketmaster.py --venue-id KovZpZAF7JFA --name "Wells Metz Theatre" --default-url "https://events.iu.edu/theatre/"
-cities/bloomington/tm_wells_metz.ics
+# Generated from feeds table (active + pending). Do not edit manually.
+# To add feeds, use pending_feeds.txt in this directory.
 
 # --- Live feeds ---
 # Art Sanctuary of Indiana
@@ -198,4 +125,78 @@ https://calendar.google.com/calendar/ical/bloomington.in.gov_1b95au4d2ueudldosb0
 https://wonderlab.org/events/?ical=1
 # Writers Guild at Bloomington
 https://writersguildbloomington.com/?plugin=all-in-one-event-calendar&controller=ai1ec_exporter_controller&action=export_events&no_html=true
+
+# --- Scrapers ---
+# Bill Armstrong Stadium
+# cmd: python scrapers/ticketmaster.py --venue-id KovZpaoDQe --name "Bill Armstrong Stadium" --default-url "https://iuhoosiers.com/"
+cities/bloomington/tm_bill_armstrong.ics
+# Blockhouse Bar
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/3607354-blockhouse-bar" --name "Blockhouse Bar"
+cities/bloomington/songkick_blockhouse.ics
+# Bloomington Rotary Club
+# cmd: python scrapers/ismyrotaryclub.py --club-id 3430 --account-id 6580 --name "Bloomington Rotary Club"
+cities/bloomington/bloomington_rotary.ics
+# Bloomington Sunrise Rotary
+# cmd: python scrapers/ismyrotaryclub.py --club-id 52230 --account-id 6580 --name "Bloomington Sunrise Rotary"
+cities/bloomington/bloomington_sunrise_rotary.ics
+# Brown County Music Center
+# cmd: python scrapers/ticketmaster.py --venue-id KovZ917AOr1 --name "Brown County Music Center"
+cities/bloomington/tm_brown_county_music.ics
+# Buskirk-Chumley Theater
+# cmd: python scrapers/buskirk_chumley.py
+cities/bloomington/buskirk_chumley.ics
+# Cardinal Spirits
+# cmd: python scrapers/squarespace.py --url "https://www.cardinalspirits.com/events" --name "Cardinal Spirits"
+cities/bloomington/cardinal_spirits.ics
+# Cicada Cinema
+# cmd: python scrapers/shopify_events.py --url "https://cicadacinema.com" --name "Cicada Cinema"
+cities/bloomington/cicada_cinema.ics
+# Comedy Attic
+# cmd: python scrapers/comedy_attic.py
+cities/bloomington/comedy_attic.ics
+# Constellation Stage & Screen
+# cmd: python scrapers/spektrix.py --base-url "https://tickets.seeconstellation.org/constellation" --name "Constellation Stage & Screen" --default-url "https://seeconstellation.org/"
+cities/bloomington/constellation.ics
+# IU Cinema
+# cmd: python scrapers/ticketmaster.py --venue-id KovZpZAI11nA --name "IU Cinema" --default-url "https://cinema.indiana.edu/upcoming-films/"
+cities/bloomington/tm_iu_cinema.ics
+# IU Memorial Stadium
+# cmd: python scrapers/ticketmaster.py --venue-id KovZpZAFdInA --name "IU Memorial Stadium" --default-url "https://iuhoosiers.com/"
+cities/bloomington/tm_memorial_stadium.ics
+# Limestone Post
+# cmd: python scrapers/limestone_post.py
+cities/bloomington/limestone_post.ics
+# Monroe County Master Gardeners
+# cmd: python scrapers/squarespace.py --url "https://www.mcmga.net/events" --name "Monroe County Master Gardeners"
+cities/bloomington/master_gardeners.ics
+# People's Market
+# cmd: python scrapers/squarespace.py --url "https://www.peoplesmarketbtown.org/gatherings" --name "People's Market"
+cities/bloomington/peoples_market.ics
+# Pottery House Studio
+# cmd: python scrapers/squarespace.py --url "https://www.potteryhousestudio.com/workshops" --name "Pottery House Studio"
+cities/bloomington/pottery_house_studio.ics
+# Ruth N Halls Theatre
+# cmd: python scrapers/ticketmaster.py --venue-id KovZpZAdE6aA --name "Ruth N Halls Theatre" --default-url "https://events.iu.edu/theatre/"
+cities/bloomington/tm_ruth_halls.ics
+# Sassafras Audubon Society
+# cmd: python scrapers/squarespace.py --url "https://www.sassafrasaudubon.org/upcomingevents" --name "Sassafras Audubon Society"
+cities/bloomington/sassafras_audubon.ics
+# Simon Skjodt Assembly Hall
+# cmd: python scrapers/ticketmaster.py --venue-id KovZpZAFdItA --name "Simon Skjodt Assembly Hall" --default-url "https://iuhoosiers.com/"
+cities/bloomington/tm_assembly_hall.ics
+# Sycamore Land Trust
+# cmd: python scrapers/sycamore_land_trust.py
+cities/bloomington/sycamore_land_trust.ics
+# The Bishop
+# cmd: python scrapers/the_bishop.py
+cities/bloomington/the_bishop.ics
+# The Bluebird
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/78904-bluebird" --name "The Bluebird"
+cities/bloomington/songkick_bluebird.ics
+# Ticketmaster venues
+# cmd: python scrapers/ticketmaster.py --venue-id KovZpaoDke --name "IU Musical Arts Center" --default-url "https://events.iu.edu/musiciub/"
+cities/bloomington/tm_musical_arts_center.ics
+# Wells Metz Theatre
+# cmd: python scrapers/ticketmaster.py --venue-id KovZpZAF7JFA --name "Wells Metz Theatre" --default-url "https://events.iu.edu/theatre/"
+cities/bloomington/tm_wells_metz.ics
 
