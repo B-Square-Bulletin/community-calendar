@@ -25,6 +25,7 @@ The build pipeline no longer depends on `feeds.txt` as its primary input. Instea
 
 - **`download_feeds.py`** now queries the `feeds` table for active ICS URLs and curator feeds. It falls back to reading `feeds.txt` if `SUPABASE_URL` isn't set (so forks without a feeds table still work).
 - A new **`export_feeds_txt.py`** script runs during the build and regenerates `feeds.txt` from the database. This keeps `feeds.txt` in sync as a human-readable record and ensures `combine_ics.py` (which parses feeds.txt for display names) works correctly.
+- Repo-side submissions now flow through **`cities/<city>/pending_feeds.txt`**. The build processes that file into the `feeds` table, then resets it back to its template.
 - The workflow gained an **"Export feeds.txt from DB"** step that runs after downloading feeds and before combining ICS files.
 
 ### 3. Other improvements

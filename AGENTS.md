@@ -477,6 +477,32 @@ Many event platforms have predictable feed URLs:
 | **LiveWhale** | University sites: `{domain}/live/ical/events` |
 | **WordPress Tribe** | `{domain}/events/?ical=1` |
 | **Legistar** | `curl -s "https://webapi.legistar.com/v1/{client}/events"` — try city/county slugs |
+| **Google Sites** | `site:sites.google.com {city} events calendar` — extract `@group.calendar.google.com` IDs from HTML |
+
+### Strategy 6: Google Sites with Embedded Google Calendars
+
+Google Sites is used by small businesses, community groups, churches, and hobby organizations. When they embed a Google Calendar, the calendar ID(s) appear in the static HTML — no browser rendering needed.
+
+**Discovery:**
+```bash
+# Search for Google Sites pages in your city
+site:sites.google.com {city} events calendar
+site:sites.google.com {city} {topic} calendar
+```
+
+**Extraction:**
+```bash
+curl -sL "https://sites.google.com/view/{page}/" | \
+  grep -o '[a-zA-Z0-9._-]*@group.calendar.google.com' | sort -u
+```
+
+Each ID becomes `https://calendar.google.com/calendar/ical/{ID}/public/basic.ics`.
+
+**Caveat:** The calendar must have public sharing enabled. If the ICS URL returns 404, it's private.
+
+**Why this matters:** Google Sites pages are invisible to WordPress plugin searches, Meetup, and Eventbrite. Yet they often host the only machine-readable calendar for niche community groups. A single Google Sites aggregator page can surface an entire community's event infrastructure — the Toronto Tango Calendar page embeds 16 separate public Google Calendars from different organizers, yielding 691 events total.
+
+See [discovery-lessons.md](docs/discovery-lessons.md#google-sites-pages-with-embedded-google-calendars) for the full write-up.
 
 ---
 

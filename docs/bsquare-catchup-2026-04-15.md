@@ -47,6 +47,19 @@ This avoids dragging along:
 - an old merge commit
 - a very large delete-heavy commit based on an older tree
 
+## Short version
+
+If Josh wants the shortest practical path, it is:
+
+1. Start a fresh branch from `upstream/main`
+2. Cherry-pick only the 3 substantive B-Square commits
+3. Keep B-Square's own Supabase URL, keys, secrets, and env vars
+4. Apply the repo's checked-in DDL/function definitions
+5. Redeploy `load-events`, `my-picks`, `capture-event`, and `validate-feed`
+6. Redeploy `chat-events` only if B-Square uses it
+7. Smoke test the app
+8. Do Bloomington-only pruning later, in a separate PR if still needed
+
 ## Suggested commands
 
 Assuming Josh is in a clone where:
@@ -166,6 +179,12 @@ If upstream production ever diverges from the checked-in DDL, that should be
 treated as upstream drift to fix in this repo, not as a downstream burden for
 B-Square to work around.
 
+One specific point worth preserving: `deduplicated_events` must dedupe by
+`city` as well as normalized `title` + `start_time`. Otherwise same-name,
+same-time events from different cities can merge together and pollute source
+attribution. Josh only runs one city today, but the checked-in DDL should keep
+the stronger city-scoped contract.
+
 ### Minimum Supabase path
 
 Josh should not have to think in terms of individual tables, RPCs, and indexes.
@@ -204,6 +223,23 @@ As of April 15, 2026, the Sources panel no longer depends on a
 `get_source_counts` RPC. It computes source counts from the already-loaded
 event list in the client, so that specific function is not part of the minimum
 catch-up path.
+
+One other pipeline detail has been simplified since the old feed-management
+rollout:
+
+- `cities/<city>/pending_feeds.txt` is a repo-side intake file only
+- the build processes that file directly into the `feeds` table
+- `cities/<city>/feeds.txt` is then regenerated from the `feeds` table
+- there is no separate `pending_feeds` database table in the current model
+
+So Josh should think in terms of:
+
+- `pending_feeds.txt` for repo submissions
+- `feeds` as the database source of truth
+- generated `feeds.txt` as an export / compatibility file
+
+He should **not** spend time recreating or debugging a `pending_feeds` table or
+an old `fetch_pending_feeds` path.
 
 ### Only if something breaks
 

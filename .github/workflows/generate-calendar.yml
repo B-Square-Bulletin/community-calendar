@@ -262,7 +262,13 @@ jobs:
         python scrapers/toronto_meetings.py -o cities/toronto/toronto_meetings.ics || true
         python scrapers/toronto_festivals.py -o cities/toronto/toronto_festivals.ics || true
         python scrapers/volunteer_toronto.py -o cities/toronto/volunteer_toronto.ics || true
-        python scrapers/toronto_public_library.py -o cities/toronto/tpl_events.ics || true
+        python scrapers/ocad_u.py -o cities/toronto/ocad_u.ics || true
+        python scrapers/toronto_public_library_preschool.py -o cities/toronto/tpl_preschool.ics || true
+        python scrapers/toronto_public_library_school_age.py -o cities/toronto/tpl_school_age.ics || true
+        python scrapers/toronto_public_library_teens.py -o cities/toronto/tpl_teens.ics || true
+        python scrapers/toronto_public_library_young_adults.py -o cities/toronto/tpl_young_adults.ics || true
+        python scrapers/toronto_public_library_adults.py -o cities/toronto/tpl_adults.ics || true
+        python scrapers/toronto_public_library_older_adults.py -o cities/toronto/tpl_older_adults.ics || true
         python scrapers/toronto_bicycling_network.py -o cities/toronto/toronto_bicycling_network.ics || true
         python scrapers/ticketmaster.py --venue-id KovZpZAFFE1A --name "Scotiabank Arena" --timezone America/Toronto -o cities/toronto/scotiabank_arena.ics || true
         python scrapers/ticketmaster.py --venue-id KovZ917AJ4f --name "History" --timezone America/Toronto -o cities/toronto/history.ics || true
@@ -296,6 +302,22 @@ jobs:
         python scrapers/eventbrite_filtered.py --organizer 31280011011 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Cormorant Books" -o cities/toronto/cormorant_books.ics || true
         python scrapers/eventbrite_filtered.py --organizer 30975200167 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Book*hug Press" -o cities/toronto/bookhug_press.ics || true
         python scrapers/blogto.py --output cities/toronto/blogto.ics || true
+        python scrapers/toronto_tool_library.py --output cities/toronto/toronto_tool_library.ics || true
+        python scrapers/bistitchual.py --output cities/toronto/bistitchual.ics || true
+        python scrapers/parkdale_pottery.py --output cities/toronto/parkdale_pottery.ics || true
+        python scrapers/toronto_planning_consultations.py --output cities/toronto/toronto_planning_consultations.ics || true
+        python scrapers/tcdsb_meetings.py --output cities/toronto/tcdsb_meetings.ics || true
+        python scrapers/waterfront_toronto.py --output cities/toronto/waterfront_toronto.ics || true
+        python scrapers/metrolinx_board.py --output cities/toronto/metrolinx_board.ics || true
+        python scrapers/toronto_community_housing.py --output cities/toronto/toronto_community_housing.ics || true
+        python scrapers/the_annex_residents_association.py --output cities/toronto/the_annex_residents_association.ics || true
+        python scrapers/harbord_village.py --output cities/toronto/harbord_village.ics || true
+        python scrapers/waterfront_bia.py --output cities/toronto/waterfront_bia.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/studio-mooi-59841950783" --name "Studio Mooi" --output cities/toronto/eventbrite_studio_mooi.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/open-studio-19932715092" --name "Open Studio" --output cities/toronto/eventbrite_open_studio.ics || true
+        python scrapers/etobicoke_hort.py --output cities/toronto/etobicoke_hort.ics || true
+        python scrapers/angas_farm.py --output cities/toronto/angas_farm.ics || true
+        python scrapers/yohomo.py --output cities/toronto/yohomo.ics || true
       continue-on-error: true
 
 
@@ -444,19 +466,6 @@ jobs:
         else
           echo "No pending feeds to process"
         fi
-
-    - name: Fetch pending feeds from DB
-      env:
-        SUPABASE_URL: ${{ vars.SUPABASE_URL }}
-        SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
-      run: |
-        IFS=',' read -ra CITIES <<< "${{ steps.locations.outputs.list }}"
-        for city in "${CITIES[@]}"; do
-          city=$(echo "$city" | xargs)
-          if [ -f "cities/$city/feeds.txt" ]; then
-            python scripts/fetch_pending_feeds.py "$city"
-          fi
-        done
 
     - name: Download live feeds
       env:

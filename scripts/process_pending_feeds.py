@@ -77,12 +77,13 @@ def insert_feeds(city, feeds, supabase_url, service_key):
     errors = 0
 
     for feed in feeds:
+        status = "active" if feed["feed_type"] == "scraper" else "pending"
         row = {
             "city": city,
             "url": feed["url"],
             "name": feed["name"],
             "feed_type": feed["feed_type"],
-            "status": "pending",
+            "status": status,
         }
         if feed["scraper_cmd"]:
             row["scraper_cmd"] = feed["scraper_cmd"]

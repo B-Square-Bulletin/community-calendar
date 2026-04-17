@@ -221,7 +221,7 @@ After the PR is merged, the next build automatically runs `scripts/process_pendi
 python scripts/add_feed.py URL city "Source Name" --test
 ```
 
-> **Note:** `add_feed.py --test` is useful for validation, but its `--add` mode only writes to the local `feeds.txt` file, which is overwritten each build. For the main repo, use `pending_feeds.txt` or the Manage Feeds UI instead.
+> **Note:** `add_feed.py --test` is useful for validation. In the main repo its normal add mode now writes to `pending_feeds.txt`, not `feeds.txt`.
 
 ### Scrapers
 

@@ -185,7 +185,16 @@ def anthropic_call(api_key, model, prompt, retry_count=0):
 
         # Handle rate limit errors (429) with exponential backoff
         if e.code == HTTP_RATE_LIMIT and retry_count < MAX_RETRIES:
-            retry_delay = RETRY_BASE_DELAY * (2**retry_count)
+            # Prefer retry-after header when present
+            retry_after = e.headers.get("retry-after")
+            if retry_after:
+                try:
+                    retry_delay = int(retry_after)
+                except (ValueError, TypeError):
+                    retry_delay = RETRY_BASE_DELAY * (2**retry_count)
+            else:
+                retry_delay = RETRY_BASE_DELAY * (2**retry_count)
+
             msg = (
                 f"  Rate limit hit ({HTTP_RATE_LIMIT}), retrying in "
                 f"{retry_delay}s (attempt {retry_count + 1}/{MAX_RETRIES})..."
@@ -315,9 +324,19 @@ Example: {example_json}"""
 
 
 def process_file(  # noqa: PLR0915, PLR0912
-    filepath, api_key, model, few_shot, dry_run=False
+    filepath, config, few_shot, dry_run=False, rate_limiter=None
 ):
-    """Classify events in a single events.json file."""
+    """Classify events in a single events.json file.
+
+    Args:
+        filepath: Path to events.json file
+        config: Dict with 'api_key' and 'model' keys
+        few_shot: Few-shot examples string
+        dry_run: If True, don't write changes
+        rate_limiter: Optional RateLimitTracker instance
+    """
+    api_key = config["api_key"]
+    model = config["model"]
     path = Path(filepath)
     if not path.exists():
         print(f"  Skipping {filepath}: not found")
@@ -340,6 +359,10 @@ def process_file(  # noqa: PLR0915, PLR0912
     if not to_classify:
         return
 
+    # Initialize rate limiter (shared across files or create new for testing)
+    if rate_limiter is None:
+        rate_limiter = RateLimitTracker()
+
     # Group by title to avoid re-classifying recurring event instances
     title_groups = defaultdict(list)
     for idx, event in to_classify:
@@ -356,9 +379,6 @@ def process_file(  # noqa: PLR0915, PLR0912
             f"(deduplicated from {len(to_classify)} events)"
         )
         print(msg)
-
-    # Initialize rate limiter
-    rate_limiter = RateLimitTracker()
 
     # Classify in batches (using representatives only)
     classified = 0
@@ -527,8 +547,12 @@ def main():
     if overrides:
         print(f"Using {len(overrides)} curator overrides as few-shot examples")
 
+    # Create shared rate limiter for all files in this run
+    rate_limiter = RateLimitTracker()
+
+    config = {"api_key": api_key, "model": args.model}
     for filepath in args.files:
-        process_file(filepath, api_key, args.model, few_shot, args.dry_run)
+        process_file(filepath, config, few_shot, args.dry_run, rate_limiter)
 
 
 if __name__ == "__main__":

@@ -3,10 +3,10 @@
 
 This script automates the steps for integrating an ICS feed:
 1. Test the feed URL to verify it returns valid ICS with events
-2. Add the URL to cities/<city>/feeds.txt
+2. Add the URL to cities/<city>/pending_feeds.txt
 
-The workflow's download_feeds.py step reads feeds.txt and downloads all URLs
-automatically — no workflow YAML editing needed for ICS feeds.
+In the main repo, the workflow processes pending_feeds.txt into the feeds
+table, then regenerates feeds.txt from the database.
 
 Usage:
     python scripts/add_feed.py "https://example.com/events/?ical=1" toronto "Example Events"
@@ -21,33 +21,8 @@ import sys
 from pathlib import Path
 from urllib.parse import urlparse
 
-import shutil
-
 # Repository root
 ROOT = Path(__file__).parent.parent
-WORKFLOW_PATH = ROOT / ".github/workflows/generate-calendar.yml"
-
-
-def count_actionlint_errors(path: Path) -> int | None:
-    """Count actionlint errors on a workflow file. Returns None if actionlint not available."""
-    actionlint = shutil.which('actionlint')
-    if not actionlint:
-        return None
-    result = subprocess.run([actionlint, str(path)], capture_output=True, text=True)
-    return result.stdout.count('\n') if result.stdout else 0
-
-
-def validate_workflow(path: Path, prev_error_count: int | None) -> bool:
-    """Validate that editing the workflow didn't introduce new actionlint errors."""
-    if prev_error_count is None:
-        print("⚠️  actionlint not available, skipping validation")
-        return True
-    new_count = count_actionlint_errors(path)
-    if new_count > prev_error_count:
-        print(f"❌ actionlint: edit introduced new errors ({prev_error_count} → {new_count})")
-        return False
-    print(f"✅ actionlint: no new errors ({new_count} pre-existing)")
-    return True
 
 
 def slugify(url: str) -> str:
@@ -138,77 +113,21 @@ def needs_user_agent(url: str) -> bool:
     return any(x in url for x in ['meetup.com', 'site3.ca', 'ontarionature.org'])
 
 
-def add_to_workflow(url: str, city: str, slug: str) -> bool:
-    """Add the curl command to the GitHub Actions workflow."""
-    print(f"\n📝 Adding to workflow for city: {city}")
-    
-    workflow_content = WORKFLOW_PATH.read_text()
-    
-    # Check if URL already in workflow
-    if url in workflow_content:
-        print(f"✅ Already in workflow: {url}")
-        return True
-    
-    # Build the curl command
-    ua_flag = '-A "Mozilla/5.0" ' if needs_user_agent(url) else ''
-    curl_cmd = f'        curl -sL {ua_flag}"{url}" -o {slug}.ics || true'
-    
-    # Find the Toronto section (or other city)
-    # Look for the combine_ics.py line for this city which marks the end of curl commands
-    combine_pattern = f'python scripts/combine_ics.py --input-dir cities/{city}'
-    
-    if combine_pattern not in workflow_content:
-        print(f"❌ Could not find combine_ics.py section for {city}")
-        print(f"   Looking for: {combine_pattern}")
-        return False
-    
-    # Find position and insert before combine_ics.py
-    # We need to find the "cd ../.." line that precedes combine_ics.py for this city
-    lines = workflow_content.split('\n')
-    insert_idx = None
-    
-    for i, line in enumerate(lines):
-        if combine_pattern in line:
-            # Walk back to find "cd ../.." 
-            for j in range(i-1, max(0, i-5), -1):
-                if 'cd ../..' in lines[j]:
-                    insert_idx = j
-                    break
-            break
-    
-    if insert_idx is None:
-        print(f"❌ Could not find insertion point for {city}")
-        return False
-    
-    # Insert the curl command before "cd ../.."
-    prev_errors = count_actionlint_errors(WORKFLOW_PATH)
-    lines.insert(insert_idx, curl_cmd)
-    WORKFLOW_PATH.write_text('\n'.join(lines))
-
-    if not validate_workflow(WORKFLOW_PATH, prev_errors):
-        print("   Restoring original workflow")
-        WORKFLOW_PATH.write_text(workflow_content)
-        return False
-
-    print(f"✅ Added to workflow: curl ... -o {slug}.ics")
-    return True
-
-
-def add_to_feeds_txt(url: str, city: str, display_name: str) -> bool:
-    """Add the feed URL to cities/{city}/feeds.txt."""
-    feeds_path = ROOT / f"cities/{city}/feeds.txt"
+def add_to_pending_feeds(url: str, city: str, display_name: str) -> bool:
+    """Add the feed URL to cities/{city}/pending_feeds.txt."""
+    feeds_path = ROOT / f"cities/{city}/pending_feeds.txt"
     
     print(f"\n📝 Adding to {feeds_path.relative_to(ROOT)}")
     
     if not feeds_path.exists():
-        print(f"❌ feeds.txt not found: {feeds_path}")
+        print(f"❌ pending_feeds.txt not found: {feeds_path}")
         return False
     
     content = feeds_path.read_text()
     
     # Check if URL already present
     if url in content:
-        print(f"✅ Already in feeds.txt")
+        print(f"✅ Already in pending_feeds.txt")
         return True
     
     # Append the new feed with structured comment
@@ -217,7 +136,7 @@ def add_to_feeds_txt(url: str, city: str, display_name: str) -> bool:
     with open(feeds_path, 'a') as f:
         f.write(entry)
     
-    print(f"✅ Added to feeds.txt: {display_name}")
+    print(f"✅ Added to pending_feeds.txt: {display_name}")
     return True
 
 
@@ -260,14 +179,15 @@ Examples:
     
     if args.dry_run:
         print("\n[DRY RUN] Would perform the following:")
-        print(f"  1. Add to cities/{args.city}/feeds.txt: {args.url}")
-        print(f"  2. download_feeds.py will save as: {slug}.ics")
+        print(f"  1. Add to cities/{args.city}/pending_feeds.txt: {args.url}")
+        print("  2. Next build will move it into the feeds table")
+        print(f"  3. download_feeds.py will save as: {slug}.ics")
         return
 
-    # Add to feeds.txt
-    if not add_to_feeds_txt(args.url, args.city, args.display_name):
-        print("\n⚠️  Failed to add to feeds.txt automatically")
-        print(f"   Manually add to cities/{args.city}/feeds.txt:")
+    # Add to pending_feeds.txt
+    if not add_to_pending_feeds(args.url, args.city, args.display_name):
+        print("\n⚠️  Failed to add to pending_feeds.txt automatically")
+        print(f"   Manually add to cities/{args.city}/pending_feeds.txt:")
         print(f"   # {args.display_name}")
         print(f"   {args.url}")
 
@@ -277,7 +197,7 @@ Examples:
     print(f"  2. Update SOURCES_CHECKLIST.md if needed")
     print(f"  3. Commit: git add -A && git commit -m 'Add {args.display_name} feed'")
     print("  4. Push: git push")
-    print(f"\n  download_feeds.py will save as: {slug}.ics")
+    print(f"\n  The build will insert it into the feeds table and save as: {slug}.ics")
     print("="*60)
 
 

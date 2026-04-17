@@ -22,7 +22,7 @@
   <DataSource
     id="events"
     when="{city}"
-    url="{appGlobals.supabaseUrl + '/rest/v1/deduplicated_events?select=id,title,start_time,end_time,url,location,description,source,transcript,cluster_id,source_urls,category,image_url,all_day,merged_ids&order=start_time.asc&limit=5000&start_time=gte.' + window.getFromDate() + '&start_time=lte.' + window.getToDate() + (city ? '&city=eq.' + city : '')}"
+    url="{appGlobals.supabaseUrl + '/rest/v1/deduplicated_events?select=id,title,start_time,end_time,url,location,description,source,transcript,cluster_id,source_urls,category,image_url,all_day,merged_ids,city&order=start_time.asc&limit=5000&start_time=gte.' + window.getFromDate() + '&start_time=lte.' + window.getToDate() + (city ? '&city=eq.' + city : '')}"
     headers="{{
       apikey: appGlobals.supabasePublishableKey,
       'Cache-Control': 'no-cache, no-store, must-revalidate'
@@ -143,22 +143,14 @@
   <variable name="eventDayRange" value="{processedEvents && processedEvents.length > 100 ? window.getEventDayRange(processedEvents) : null}" />
   <variable name="displayEvents" value="{sliderStart !== null ? processedEvents.filter(e => { const t = new Date(e.start_time).getTime(); const base = window._dateRangeBase.getTime(); return t >= base + sliderStart * 86400000 && t < base + (sliderEnd + 1) * 86400000 }) : processedEvents}" />
 
-  <!-- City list from Supabase (distinct cities with events) -->
-  <DataSource
-    id="cityList"
-    url="{appGlobals.supabaseUrl + '/rest/v1/distinct_cities?select=city'}"
-    headers="{{
-      apikey: appGlobals.supabasePublishableKey
-    }}"
-  />
+  <variable name="availableCities" value="{Object.keys(window._cities || {}).sort().map(city => ({ city }))}" />
 
   <!-- City picker (shown when no city selected and not in dashboard mode) -->
   <VStack when="{!city && layoutMode !== 'dashboard'}" horizontalAlignment="center" width="100%" padding="$space-8">
     <H1>Community Calendar</H1>
-    <Spinner when="{!cityList.loaded}" />
-    <VStack when="{cityList.loaded}" gap="$space-4" maxWidth="300px" width="100%">
+    <VStack gap="$space-4" maxWidth="300px" width="100%">
       <VStack gap="$space-2">
-        <Items data="{cityList.value}">
+        <Items data="{availableCities}">
           <Button variant="outlined" width="100%" onClick="window.selectCity($item.city); city = $item.city">{window.toDisplayName($item.city)}</Button>
         </Items>
       </VStack>
@@ -200,7 +192,7 @@
       <SignInDialog id="signInDialog" />
       <CaptureDialog id="captureDialog" />
       <AudioCaptureDialog id="audioCaptureDialog" />
-      <SourcesDialog id="sourcesDialog" events="{events.value}" hiddenSources="{hiddenSources}" />
+      <SourcesDialog id="sourcesDialog" events="{events.value}" city="{city}" hiddenSources="{hiddenSources}" />
       <Card
         when="{activePanel === 'settings'}"
         width="100%"
@@ -388,7 +380,7 @@
       <SignInDialog id="signInDialog" />
       <CaptureDialog id="captureDialog" />
       <AudioCaptureDialog id="audioCaptureDialog" />
-      <SourcesDialog id="sourcesDialog" events="{events.value}" hiddenSources="{hiddenSources}" />
+      <SourcesDialog id="sourcesDialog" events="{events.value}" city="{city}" hiddenSources="{hiddenSources}" />
       <Card
         when="{activePanel === 'settings'}"
         width="100%"
