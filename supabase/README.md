@@ -2,6 +2,36 @@
 
 This directory contains all Supabase-related code and configuration.
 
+## Schema Change Policy
+
+This repo is now **migration-first** for database changes.
+
+- `supabase/migrations/` is the operational history of schema changes.
+- Every future schema change should be captured as a migration file.
+- `supabase/ddl/` remains useful, but only as a snapshot of the current expected database state.
+- Do not make production-only SQL changes unless the same change also lands in `supabase/migrations/`.
+
+Use this distinction:
+
+- `migrations/` answers: "How does an older instance get to the current schema?"
+- `ddl/` answers: "What should the schema look like now?"
+
+### Rules for future schema work
+
+1. Add a migration for every schema change.
+2. Apply migrations to the main instance and to forks.
+3. Update the corresponding `ddl/` file(s) after the migration is finalized.
+4. Prefer additive migrations first, then backfill, then cleanup/removal in a later migration.
+5. Avoid destructive one-step changes when forks may be behind.
+
+### Recommended pattern for risky changes
+
+For renames, type changes, and removals, use an expand/migrate/contract pattern:
+
+1. Expand: add new columns, tables, policies, functions, or views alongside the old ones.
+2. Migrate: backfill data and update code to use the new shape.
+3. Contract: remove the old structure in a later migration.
+
 ## Directory Structure
 
 ```
@@ -17,7 +47,7 @@ supabase/
 │   ├── 08_admin_users.sql         # Server-side admin allowlist (UUID-based)
 │   └── 09_admin_github_users.sql  # Server-side admin allowlist (preapproval by GitHub username)
 │
-├── migrations/                    # One-off migrations (already applied)
+├── migrations/                    # Ordered schema changes for existing instances
 │   └── 001_add_city_column.sql
 │
 └── functions/                     # Edge Functions (Deno/TypeScript)
@@ -26,7 +56,7 @@ supabase/
     └── capture-event/             # Extracts event from poster image or audio via Claude API
 ```
 
-**Note:** DDL files document the live database state. They are not migration scripts — keep them in sync with what actually exists in Supabase.
+**Note:** DDL files document the live database state. They are not migration scripts — keep them in sync with what actually exists in Supabase. Migration files are the upgrade path for existing instances.
 
 ## API Keys and Security Model
 
