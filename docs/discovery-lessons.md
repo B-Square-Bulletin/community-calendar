@@ -53,6 +53,7 @@ Real-world lessons from source discovery across cities. These complement the str
 - [Yelp and Business Directories as Discovery Tools](#yelp-and-business-directories-as-discovery-tools)
 - [Community Radio Stations as Aggregators](#community-radio-stations-as-aggregators)
 - [The Events Calendar (Tribe): ICS Blocked, Tribe API Works](#the-events-calendar-tribe-ics-blocked-tribe-api-works)
+- [Google Sites Pages with Embedded Google Calendars](#google-sites-pages-with-embedded-google-calendars)
 
 ## "Curl-and-Done" Sources: No Scraper Needed
 
@@ -627,3 +628,32 @@ Community radio stations often maintain volunteer-curated community calendars th
 **How to find:** Search `"{city name}" community radio calendar` or check local radio station websites for event listing pages.
 
 **Watch for:** Community radio calendars are **aggregators**, not first-party sources. Classify them as such. Events may overlap with other sources you already have — deduplication handles this.
+
+## Google Sites Pages with Embedded Google Calendars
+
+Google Sites is a free website builder used by small businesses, community groups, churches, and hobby organizations. When a Google Sites page embeds a Google Calendar, the calendar ID(s) are exposed in the static HTML — no browser rendering needed. You can extract them with a simple grep and construct ICS feeds.
+
+**Discovery search:**
+```
+site:sites.google.com {city} events calendar
+site:sites.google.com {city} {topic} calendar
+```
+
+Also check custom-domain sites that are backed by Google Sites (identifiable by `googleusercontent.com` in page assets and `google.com/calendar/embed` in the HTML).
+
+**Extracting calendar IDs:**
+```bash
+curl -sL "https://sites.google.com/view/{page-name}/" | \
+  grep -o '[a-zA-Z0-9._-]*@group.calendar.google.com' | sort -u
+```
+
+Each ID becomes an ICS feed:
+```
+https://calendar.google.com/calendar/ical/{ID}/public/basic.ics
+```
+
+**Caveat:** The calendar must have public sharing enabled by its owner. If the ICS URL returns 404, the calendar is private — the Google Sites embed works because it uses the site owner's authenticated context, but external ICS access won't.
+
+**Example:** The Toronto Tango Calendar (`sites.google.com/view/torontotangocalendar/calendar`) embeds 16 separate Google Calendars from different tango organizers — milongas, classes, practicas, workshops. All 16 calendar IDs are in the static HTML. Together they yield 691 events, all from authoritative first-party sources (each organizer maintains their own calendar). A single Google Sites page surfaced an entire community's event infrastructure.
+
+**Why this matters:** Google Sites pages are often invisible to standard discovery methods (they don't show up in WordPress plugin searches, Meetup, or Eventbrite). Yet they frequently host the only machine-readable calendar for small community groups. The `site:sites.google.com` search is a distinct discovery pass worth running for every city.

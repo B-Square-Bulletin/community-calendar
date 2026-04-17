@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """Add a new scraper to the pipeline.
 
-This script automates the three required steps for integrating a scraper:
-1. Verify the scraper exists and test it
+This script automates the required steps for integrating a scraper:
+1. Verify the scraper exists and optionally test it
 2. Add it to the GitHub Actions workflow
-3. Add the source name to combine_ics.py
+3. Add a scraper entry to cities/<city>/pending_feeds.txt
+
+The workflow moves pending entries into the feeds table, then regenerates
+feeds.txt from the database before combine_ics.py runs.
 
 Usage:
     python scripts/add_scraper.py sportsbasement santarosa "Sports Basement"
@@ -200,15 +203,15 @@ def add_to_workflow(scraper_name: str, city: str, scraper_path: Path,
     return True
 
 
-def add_to_feeds_txt(city: str, scraper_path: Path, extra_args: str,
-                     output_name: str, display_name: str) -> bool:
-    """Append the scraper entry to cities/{city}/feeds.txt."""
-    feeds_path = ROOT / f"cities/{city}/feeds.txt"
+def add_to_pending_feeds(city: str, scraper_path: Path, extra_args: str,
+                         output_name: str, display_name: str) -> bool:
+    """Append the scraper entry to cities/{city}/pending_feeds.txt."""
+    feeds_path = ROOT / f"cities/{city}/pending_feeds.txt"
 
     print(f"\n📝 Adding to {feeds_path.relative_to(ROOT)}")
 
     if not feeds_path.exists():
-        print(f"❌ feeds.txt not found: {feeds_path}")
+        print(f"❌ pending_feeds.txt not found: {feeds_path}")
         return False
 
     content = feeds_path.read_text()
@@ -225,7 +228,7 @@ def add_to_feeds_txt(city: str, scraper_path: Path, extra_args: str,
     with open(feeds_path, 'a') as f:
         f.write(entry)
 
-    print(f"✅ Added to feeds.txt: {display_name}")
+    print(f"✅ Added to pending_feeds.txt: {display_name}")
     return True
 
 
@@ -271,7 +274,7 @@ Examples:
     if args.dry_run:
         print("\n[DRY RUN] Would perform the following:")
         print(f"  1. Add to workflow: python {scraper_path.relative_to(ROOT)}{extra} --output cities/{args.city}/{ics_name}.ics")
-        print(f"  2. Add to feeds.txt: cities/{args.city}/{ics_name}.ics")
+        print(f"  2. Add to pending_feeds.txt: cities/{args.city}/{ics_name}.ics")
         return
     
     # Step 2: Test if requested
@@ -288,8 +291,8 @@ Examples:
                                extra_args=args.extra_args, output_name=args.output_name):
             print("\n⚠️  Failed to add to workflow automatically")
     
-    # Step 4: Add to feeds.txt
-    add_to_feeds_txt(args.city, scraper_path, args.extra_args, ics_name, args.display_name)
+    # Step 4: Add to pending_feeds.txt
+    add_to_pending_feeds(args.city, scraper_path, args.extra_args, ics_name, args.display_name)
 
     print("\n" + "="*60)
     print("✅ Done! Next steps:")
@@ -297,6 +300,7 @@ Examples:
     print("  2. Commit: git add -A && git commit -m 'Add {scraper} scraper'")
     print("  3. Push: git push")
     print("  4. Trigger workflow or wait for daily run")
+    print("  5. The workflow will move the pending scraper into the feeds table")
     print("="*60)
 
 

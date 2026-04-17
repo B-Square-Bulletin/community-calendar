@@ -262,7 +262,14 @@ jobs:
         python scrapers/toronto_meetings.py -o cities/toronto/toronto_meetings.ics || true
         python scrapers/toronto_festivals.py -o cities/toronto/toronto_festivals.ics || true
         python scrapers/volunteer_toronto.py -o cities/toronto/volunteer_toronto.ics || true
-        python scrapers/toronto_public_library.py -o cities/toronto/tpl_events.ics || true
+        python scrapers/ocad_u.py -o cities/toronto/ocad_u.ics || true
+        python scrapers/toronto_public_library_preschool.py -o cities/toronto/tpl_preschool.ics || true
+        python scrapers/toronto_public_library_school_age.py -o cities/toronto/tpl_school_age.ics || true
+        python scrapers/toronto_public_library_teens.py -o cities/toronto/tpl_teens.ics || true
+        python scrapers/toronto_public_library_young_adults.py -o cities/toronto/tpl_young_adults.ics || true
+        python scrapers/toronto_public_library_adults.py -o cities/toronto/tpl_adults.ics || true
+        python scrapers/toronto_public_library_older_adults.py -o cities/toronto/tpl_older_adults.ics || true
+        python scrapers/toronto_bicycling_network.py -o cities/toronto/toronto_bicycling_network.ics || true
         python scrapers/ticketmaster.py --venue-id KovZpZAFFE1A --name "Scotiabank Arena" --timezone America/Toronto -o cities/toronto/scotiabank_arena.ics || true
         python scrapers/ticketmaster.py --venue-id KovZ917AJ4f --name "History" --timezone America/Toronto -o cities/toronto/history.ics || true
         python scrapers/ticketmaster.py --venue-id KovZpa3yBe --name "Danforth Music Hall" --timezone America/Toronto -o cities/toronto/danforth_music_hall.ics || true
@@ -272,6 +279,45 @@ jobs:
         python scrapers/ticketmaster.py --venue-id KovZpZAdIFtA --name "Queen Elizabeth Theatre" --timezone America/Toronto -o cities/toronto/queen_elizabeth_theatre.ics || true
         python scrapers/ticketmaster.py --venue-id KovZpZAFl6JA --name "Roy Thomson Hall" --timezone America/Toronto -o cities/toronto/roy_thomson_hall.ics || true
         python scrapers/guildhost.py --group civic-tech-toronto --name "Civic Tech Toronto" --output cities/toronto/guildhost_civic_tech.ics || true
+        python scrapers/bookmanager.py --san 1684035 --domain bakkaphoenixbooks.com --name "Bakka Phoenix Books" -o cities/toronto/bakka_phoenix.ics || true
+        python scrapers/bookmanager.py --san 8102716 --domain flyingbooks.ca --name "Flying Books" -o cities/toronto/flying_books.ics || true
+        python scrapers/bookmanager.py --san 7600763 --domain shop.benmcnallybooks.com --name "Ben McNally Books" -o cities/toronto/ben_mcnally_bm.ics || true
+        python scrapers/bookmanager.py --san 8100306 --domain shop.queenbooks.ca --name "Queen Books" -o cities/toronto/queen_books_bm.ics || true
+        python scrapers/bookmanager.py --san 1188585 --domain adifferentbooklist.com --name "A Different Booklist" -o cities/toronto/a_different_booklist.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/lula-lounge-19825205758" --name "Lula Lounge" -o cities/toronto/eventbrite_lula_lounge.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/the-rosedale-centre-83757475743" --name "The Rosedale Centre" -o cities/toronto/eventbrite_rosedale_centre.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/hand-eye-society-15539055266" --name "Hand Eye Society" -o cities/toronto/eventbrite_hand_eye_society.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/forest-bathing-club-68086018103" --name "Forest Bathing Club" -o cities/toronto/eventbrite_forest_bathing_club.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/book-club-toronto-113996803611" --name "Book Club Toronto" -o cities/toronto/eventbrite_book_club_toronto.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/another-story-bookshop-32458688399" --name "Another Story Bookshop" -o cities/toronto/eventbrite_another_story.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/glad-day-bookshop-12026081388" --name "Glad Day Bookshop" -o cities/toronto/eventbrite_glad_day.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/torontos-first-post-office-7903835251" --name "Toronto's First Post Office" -o cities/toronto/eventbrite_first_post_office.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/fuzzy-lab-toronto-102501807981" --name "Fuzzy Lab Toronto" -o cities/toronto/eventbrite_fuzzy_lab.ics || true
+        python scrapers/eventbrite_filtered.py --organizer 13112142972 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Penguin Random House Canada" -o cities/toronto/prh_canada.ics || true
+        python scrapers/eventbrite_filtered.py --organizer 17669573222 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "HarperCollins Canada" -o cities/toronto/harpercollins_canada.ics || true
+        python scrapers/eventbrite_filtered.py --organizer 57010055313 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Simon & Schuster Canada" -o cities/toronto/simon_schuster_canada.ics || true
+        python scrapers/eventbrite_filtered.py --organizer 1330302385 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Diaspora Dialogues" -o cities/toronto/diaspora_dialogues.ics || true
+        python scrapers/eventbrite_filtered.py --organizer 21689379263 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "House of Anansi" -o cities/toronto/house_of_anansi.ics || true
+        python scrapers/eventbrite_filtered.py --organizer 6007837525 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Coach House Books" -o cities/toronto/coach_house.ics || true
+        python scrapers/eventbrite_filtered.py --organizer 31280011011 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Cormorant Books" -o cities/toronto/cormorant_books.ics || true
+        python scrapers/eventbrite_filtered.py --organizer 30975200167 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Book*hug Press" -o cities/toronto/bookhug_press.ics || true
+        python scrapers/blogto.py --output cities/toronto/blogto.ics || true
+        python scrapers/toronto_tool_library.py --output cities/toronto/toronto_tool_library.ics || true
+        python scrapers/bistitchual.py --output cities/toronto/bistitchual.ics || true
+        python scrapers/parkdale_pottery.py --output cities/toronto/parkdale_pottery.ics || true
+        python scrapers/toronto_planning_consultations.py --output cities/toronto/toronto_planning_consultations.ics || true
+        python scrapers/tcdsb_meetings.py --output cities/toronto/tcdsb_meetings.ics || true
+        python scrapers/waterfront_toronto.py --output cities/toronto/waterfront_toronto.ics || true
+        python scrapers/metrolinx_board.py --output cities/toronto/metrolinx_board.ics || true
+        python scrapers/toronto_community_housing.py --output cities/toronto/toronto_community_housing.ics || true
+        python scrapers/the_annex_residents_association.py --output cities/toronto/the_annex_residents_association.ics || true
+        python scrapers/harbord_village.py --output cities/toronto/harbord_village.ics || true
+        python scrapers/waterfront_bia.py --output cities/toronto/waterfront_bia.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/studio-mooi-59841950783" --name "Studio Mooi" --output cities/toronto/eventbrite_studio_mooi.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/open-studio-19932715092" --name "Open Studio" --output cities/toronto/eventbrite_open_studio.ics || true
+        python scrapers/etobicoke_hort.py --output cities/toronto/etobicoke_hort.ics || true
+        python scrapers/angas_farm.py --output cities/toronto/angas_farm.ics || true
+        python scrapers/yohomo.py --output cities/toronto/yohomo.ics || true
       continue-on-error: true
 
 
@@ -381,20 +427,45 @@ jobs:
 
 
     # ==========================================
+    # Asheville
+    # ==========================================
+    - name: Scrape Asheville sources
+      if: contains(steps.locations.outputs.list, 'asheville') && github.event.inputs.regenerate_only != 'true'
+      run: |
+        echo "Scraping Asheville..."
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/107138-asheville-music-hall" --name "Asheville Music Hall" --output cities/asheville/asheville_music_hall.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/4591672-asheville-yards" --name "Asheville Yards" --output cities/asheville/asheville_yards.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/832601-static-age-records" --name "Static Age Records" --output cities/asheville/static_age_records.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/39035-grey-eagle" --name "The Grey Eagle" --output cities/asheville/grey_eagle_songkick.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/289-orange-peel" --name "The Orange Peel" --output cities/asheville/orange_peel_songkick.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/4371507-harrahs-cherokee-center" --name "Harrahs Cherokee Center" --output cities/asheville/harrahs_cherokee_songkick.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/1333371-one-stop" --name "The One Stop" --output cities/asheville/one_stop_songkick.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/4617227-revival" --name "Revival" --output cities/asheville/revival_songkick.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/4519500-eulogy" --name "Eulogy" --output cities/asheville/eulogy_songkick.ics || true
+      continue-on-error: true
+
+
+    # ==========================================
     # Download feeds + Combine ICS (all cities)
     # ==========================================
-    - name: Fetch pending feeds from DB
+    - name: Process pending feeds into DB
       env:
         SUPABASE_URL: ${{ vars.SUPABASE_URL }}
         SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
       run: |
-        IFS=',' read -ra CITIES <<< "${{ steps.locations.outputs.list }}"
-        for city in "${CITIES[@]}"; do
-          city=$(echo "$city" | xargs)
-          if [ -f "cities/$city/feeds.txt" ]; then
-            python scripts/fetch_pending_feeds.py "$city"
-          fi
-        done
+        python scripts/process_pending_feeds.py --all
+
+    - name: Commit processed pending_feeds.txt
+      run: |
+        if git status --porcelain | grep -q pending_feeds.txt; then
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add cities/*/pending_feeds.txt
+          git commit -m "Process pending feeds into DB"
+          git push || true
+        else
+          echo "No pending feeds to process"
+        fi
 
     - name: Download live feeds
       env:
@@ -550,6 +621,19 @@ jobs:
           echo " done"
         done
 
+    - name: Refresh deduplicated events
+      env:
+        SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+        SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+      run: |
+        echo "Refreshing materialized view deduplicated_events..."
+        curl -sL -X POST "${SUPABASE_URL}/rest/v1/rpc/refresh_deduplicated_events" \
+          -H "apikey: ${SUPABASE_SERVICE_KEY}" \
+          -H "Authorization: Bearer ${SUPABASE_SERVICE_KEY}" \
+          -H "Content-Type: application/json" \
+          -d '{}'
+        echo " done"
+
     - name: Generate instance config files
       env:
         SUPABASE_URL: ${{ vars.SUPABASE_URL }}
@@ -639,4 +723,3 @@ jobs:
 
         # Return to main
         git checkout main
-

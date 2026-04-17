@@ -268,9 +268,11 @@ US_STATES = (
     'MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|'
     'SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|DC'
 )
-_STATE_RE = re.compile(rf', (?:{US_STATES})\b')                   # ", CA" (case-sensitive)
-_CITY_STATE_RE = re.compile(rf', [A-Z][a-z]+ (?:{US_STATES})\b')  # ", Santa Rosa CA"
+CA_PROVINCES = 'AB|BC|MB|NB|NL|NS|NT|NU|ON|PE|QC|SK|YT'
+_STATE_RE = re.compile(rf', (?:{US_STATES}|{CA_PROVINCES})\b')     # ", CA" or ", ON"
+_CITY_STATE_RE = re.compile(rf', [A-Z][a-z]+ (?:{US_STATES}|{CA_PROVINCES})\b')
 _ZIP_RE = re.compile(r'\b\d{5}\b')
+_CA_POSTAL_RE = re.compile(r'[A-Z]\d[A-Z]\s?\d[A-Z]\d')            # "M5V 3A8" or "K0K1E0"
 _STREET_RE = re.compile(
     r'\d+\s+\w+\s+(?:street|st|avenue|ave|road|rd|drive|dr|boulevard|blvd|lane|ln|way|court|ct)\b',
     re.IGNORECASE
@@ -279,6 +281,7 @@ _STREET_RE = re.compile(
 def _has_address_indicator(location):
     """Check if a location string looks like a real address."""
     return bool(_STATE_RE.search(location) or _ZIP_RE.search(location) or
+                _CA_POSTAL_RE.search(location) or
                 _CITY_STATE_RE.search(location) or _STREET_RE.search(location))
 
 
@@ -531,6 +534,7 @@ AGGREGATORS = {
     'GoLocal Cooperative',
     'NOW Toronto',
     'Toronto Events (Tockify)',
+    'YOHOMO',
     'Montclair Local News',
     'LancasterPA.com',
     'Let\'s Go! Bloomington',

@@ -3,6 +3,7 @@
 import argparse
 import logging
 import os
+import subprocess
 from abc import ABC, abstractmethod
 from datetime import datetime, timedelta
 from typing import Any, Optional
@@ -133,6 +134,27 @@ class BaseScraper(ABC):
         # Convert name to snake_case
         name_slug = self.name.lower().replace(' ', '_').replace("'", '')
         return f"{name_slug}.ics"
+
+    def fetch_text_with_curl(
+        self,
+        url: str,
+        *,
+        accept: Optional[str] = None,
+        referer: Optional[str] = None,
+        timeout: int = 30,
+    ) -> str:
+        """Fetch text content via curl for sites that block urllib in CI."""
+        cmd = ["curl", "-sL", "-A", "Mozilla/5.0", "--max-time", str(timeout)]
+        if accept:
+            cmd.extend(["-H", f"Accept: {accept}"])
+        if referer:
+            cmd.extend(["-e", referer])
+        cmd.append(url)
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout + 5)
+        if result.returncode != 0 or not result.stdout:
+            stderr = (result.stderr or "").strip()
+            raise RuntimeError(f"curl fetch failed for {url}: {stderr or result.returncode}")
+        return result.stdout
 
     def run(self, output: Optional[str] = None) -> str:
         """Main entry point: fetch events and write calendar."""

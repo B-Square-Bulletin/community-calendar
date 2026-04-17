@@ -31,9 +31,11 @@
 All sources are stored in the Supabase `feeds` table — the single source of truth. Columns:
 - `city`, `url`, `name`, `status` (active/pending/removed), `feed_type` (ics_url/scraper/curator), `scraper_cmd`
 
-The Manage Feeds dialog (admin-only) reads and writes this table for ICS URL feeds. Scrapers are added via `add_scraper.py` and the workflow YAML.
+The Manage Feeds dialog (admin-only) reads and writes this table for ICS URL feeds. Scrapers are added via `add_scraper.py`, which updates the workflow YAML and stages a scraper entry in `pending_feeds.txt`.
 
 `feeds.txt` files are **generated** from the `feeds` table during each build (by `export_feeds_txt.py`) for fork compatibility. Do not edit feeds.txt manually.
+
+`pending_feeds.txt` is a git-side intake file only. It is processed at the start of the build into the `feeds` table, then reset back to its template. The old `pending_feeds` database table path is obsolete.
 
 ## Adding a Feed (ICS URL)
 
@@ -62,7 +64,7 @@ Use the `add_scraper.py` script:
 python scripts/add_scraper.py myscraper santarosa "My Source Name"
 ```
 
-This adds the scraper to the workflow YAML, adds a display name comment to `feeds.txt`, and adds an entry to the `feeds` table. The `feeds.txt` entry provides the display name that `combine_ics.py` uses for the `X-SOURCE` header.
+This adds the scraper to the workflow YAML and appends a scraper entry to `pending_feeds.txt`. The workflow moves that pending entry into the `feeds` table and regenerates `feeds.txt` before `combine_ics.py` runs.
 
 ## Build Pipeline
 
@@ -71,14 +73,15 @@ The workflow in `.github/workflows/generate-calendar.yml` runs daily or on manua
 **Per-city steps:**
 
 1. **Run scrapers** — hardcoded commands in the workflow YAML
-2. **Download live feeds** — `download_feeds.py` queries the `feeds` table for active+pending `ics_url`/`curator` feeds, downloads each, injects `X-SOURCE` headers. Falls back to `feeds.txt` if DB not available (forks). Marks pending feeds as `active` after download.
-3. **Export feeds.txt** — `export_feeds_txt.py` regenerates `feeds.txt` from the `feeds` table for fork compatibility
-4. **Combine ICS** — `combine_ics.py` merges all `.ics` files, deduplicates, applies geo filtering. Display names come from `feeds.txt` (parsed at runtime) for scrapers, and from `X-SOURCE` headers (injected by `download_feeds.py`) for live feeds.
-5. **Convert to JSON** — `ics_to_json.py` converts combined ICS to JSON with fuzzy title clustering
-6. **Classify events** — `classify_events_anthropic.py` categorizes uncategorized events via Claude Haiku
-7. **Upload to Supabase** — `load-events` edge function upserts events
-8. **Refresh source names** — `refresh_source_names()` RPC updates the `source_names` cache (legacy, being replaced by `get_source_counts()` RPC)
-9. **Commit metadata** — auto-commits `feeds.txt`, `cities.json`, version info
+2. **Process `pending_feeds.txt`** — `process_pending_feeds.py` inserts staged entries into the `feeds` table and resets the file to its template
+3. **Download live feeds** — `download_feeds.py` queries the `feeds` table for active+pending `ics_url`/`curator` feeds, downloads each, injects `X-SOURCE` headers. Falls back to `feeds.txt` if DB not available (forks). Marks pending feeds as `active` after download.
+4. **Export feeds.txt** — `export_feeds_txt.py` regenerates `feeds.txt` from the `feeds` table for fork compatibility. It exports active+pending rows so newly added scrapers participate in the same build.
+5. **Combine ICS** — `combine_ics.py` merges all `.ics` files, deduplicates, applies geo filtering. Display names come from `feeds.txt` (parsed at runtime) for scrapers, and from `X-SOURCE` headers (injected by `download_feeds.py`) for live feeds.
+6. **Convert to JSON** — `ics_to_json.py` converts combined ICS to JSON with fuzzy title clustering
+7. **Classify events** — `classify_events_anthropic.py` categorizes uncategorized events via Claude Haiku
+8. **Upload to Supabase** — `load-events` edge function upserts events
+9. **Refresh source names** — `refresh_source_names()` RPC updates the `source_names` cache (legacy, being replaced by `get_source_counts()` RPC)
+10. **Commit metadata** — auto-commits `feeds.txt`, `cities.json`, version info
 
 ## Source Attribution
 

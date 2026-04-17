@@ -32,3 +32,6 @@ xmlui/config.local.js
 
 .env
 .envrc
+
+# Local DB Backups
+backups/

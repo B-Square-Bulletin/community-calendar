@@ -13,6 +13,13 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 
+def strip_html_tags(text):
+    """Remove HTML tags from text, preserving the text content."""
+    if not text or '<' not in text:
+        return text
+    return re.sub(r'<[^>]+>', '', text)
+
+
 # Default timezone when city.conf is missing or has no timezone
 DEFAULT_TIMEZONE = 'America/Los_Angeles'
 
@@ -299,13 +306,13 @@ def ics_to_json(ics_file, output_file=None, future_only=True, city=None):
 
     for event_content in matches:
         # Extract fields
-        title = html_unescape(extract_field(event_content, 'SUMMARY') or '')
+        title = strip_html_tags(html_unescape(extract_field(event_content, 'SUMMARY') or ''))
         raw_dtstart = extract_raw_datetime(event_content, 'DTSTART')
         start_time = parse_ics_datetime(raw_dtstart, local_tz)
         end_time = parse_ics_datetime(extract_raw_datetime(event_content, 'DTEND'), local_tz)
         all_day = is_all_day_event(raw_dtstart)
-        location = html_unescape(extract_field(event_content, 'LOCATION') or '')
-        description = html_unescape(extract_field(event_content, 'DESCRIPTION') or '')
+        location = strip_html_tags(html_unescape(extract_field(event_content, 'LOCATION') or ''))
+        description = strip_html_tags(html_unescape(extract_field(event_content, 'DESCRIPTION') or ''))
         url = extract_field(event_content, 'URL')
         if not url:
             url = extract_field(event_content, 'X-SOURCE-URL')

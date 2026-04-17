@@ -3,7 +3,8 @@
 
 Usage: SUPABASE_URL=... SUPABASE_SERVICE_KEY=... python scripts/export_feeds_txt.py [city]
 
-Queries the feeds table for active feeds and writes cities/<city>/feeds.txt.
+Queries the feeds table for active and pending feeds and writes
+cities/<city>/feeds.txt.
 If no city is given, exports all cities.
 """
 
@@ -20,7 +21,7 @@ def export_feeds_txt(city, supabase_url, service_key):
         f"{supabase_url}/rest/v1/feeds"
         f"?select=name,url,feed_type,scraper_cmd"
         f"&city=eq.{city}"
-        f"&status=eq.active"
+        f"&status=in.(active,pending)"
         f"&order=feed_type.asc,name.asc"
     )
     headers = {
@@ -38,27 +39,31 @@ def export_feeds_txt(city, supabase_url, service_key):
     feeds_file = os.path.join("cities", city, "feeds.txt")
     os.makedirs(os.path.dirname(feeds_file), exist_ok=True)
 
-    scrapers = [f for f in feeds if f["feed_type"] == "scraper"]
     ics_urls = [f for f in feeds if f["feed_type"] == "ics_url"]
+    scrapers = [f for f in feeds if f["feed_type"] == "scraper"]
     curators = [f for f in feeds if f["feed_type"] == "curator"]
 
     with open(feeds_file, "w") as out:
         out.write(f"# {city.title()} - source inventory\n")
-        out.write(f"# Generated from feeds table. Do not edit manually.\n\n")
+        out.write("# Generated from feeds table (active + pending). Do not edit manually.\n")
+        out.write("# To add feeds, use pending_feeds.txt in this directory.\n\n")
+
+        if ics_urls:
+            out.write("# --- Live feeds ---\n")
+            for f in ics_urls:
+                out.write(f"# {f['name']}\n")
+                out.write(f"{f['url']}\n")
+            out.write("\n")
 
         if scrapers:
             out.write("# --- Scrapers ---\n")
             for f in scrapers:
                 out.write(f"# {f['name']}\n")
                 if f.get("scraper_cmd"):
-                    out.write(f"# {f['scraper_cmd']}\n")
-                out.write(f"{f['url']}\n")
-            out.write("\n")
-
-        if ics_urls:
-            out.write("# --- Live feeds ---\n")
-            for f in ics_urls:
-                out.write(f"# {f['name']}\n")
+                    cmd = f["scraper_cmd"]
+                    if not cmd.startswith("cmd:"):
+                        cmd = f"cmd: {cmd}"
+                    out.write(f"# {cmd}\n")
                 out.write(f"{f['url']}\n")
             out.write("\n")
 
@@ -86,7 +91,7 @@ def main():
         query_url = (
             f"{supabase_url}/rest/v1/feeds"
             f"?select=city"
-            f"&status=eq.active"
+            f"&status=in.(active,pending)"
         )
         headers = {
             "apikey": service_key,

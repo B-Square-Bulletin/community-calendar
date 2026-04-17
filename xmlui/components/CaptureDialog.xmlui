@@ -1,21 +1,40 @@
 <Component
   name="CaptureDialog"
-  method.open="() => { isExtracting = false; errorMessage = ''; dialog.open(); }"
+  method.open="() => { isExtracting = false; errorMessage = ''; extractedEvent = null; activePanel = 'capture'; }"
+  method.close="() => { extractedEvent = null; if (activePanel === 'capture') activePanel = ''; }"
+  method.toggle="() => { if (activePanel === 'capture') { extractedEvent = null; activePanel = ''; } else { isExtracting = false; errorMessage = ''; extractedEvent = null; activePanel = 'capture'; } }"
   var.isExtracting="{false}"
   var.errorMessage=""
+  var.extractedEvent="{null}"
 >
 
-  <ModalDialog id="dialog" title="Capture Event from Poster" minWidth="400px">
+  <Card
+    when="{activePanel === 'capture'}"
+    width="100%"
+    marginTop="$space-3"
+    marginBottom="$space-3"
+    padding="$space-3"
+    gap="$space-3">
+    <HStack verticalAlignment="start" gap="$space-2">
+      <H3 width="*">{extractedEvent ? 'Save Captured Event' : 'Capture Event from Poster'}</H3>
+      <Icon
+        name="close"
+        tooltip="Hide poster capture"
+        width="20px"
+        height="20px"
+        color="$color-text-secondary"
+        onClick="extractedEvent = null; activePanel = ''" />
+    </HStack>
     <VStack gap="$space-3" padding="$space-2">
 
       <!-- Select image -->
-      <VStack when="{!isExtracting}" gap="$space-2">
+      <VStack when="{!isExtracting && !extractedEvent}" gap="$space-2">
         <Text>Take a photo of an event poster, or select one from your library.</Text>
+        <Button label="Choose Image" icon="l-file-up" onClick="imageInput.open()" />
         <FileInput
           id="imageInput"
           acceptsFileType="{['image/*']}"
-          buttonLabel="Choose Image"
-          buttonIcon="l-file-up"
+          displayWhen="{false}"
           onDidChange="(files) => {
             if (!files || files.length === 0) return;
             isExtracting = true;
@@ -23,16 +42,20 @@
             const result = window.resizeAndUpload(files[0], appGlobals.supabaseUrl, appGlobals.supabasePublishableKey);
             isExtracting = false;
             if (result && result.event) {
-              pickEvent = {
+              const start = String(result.event.start_time || '');
+              const end = String(result.event.end_time || '');
+              extractedEvent = {
                 title: result.event.title || '',
                 start_time: result.event.start_time || '',
                 end_time: result.event.end_time || '',
+                date: start.slice(0, 10) || '',
+                time: start.slice(11, 16) || '19:00',
+                endTime: end.slice(11, 16) || '',
                 location: result.event.location || '',
                 description: result.event.description || '',
                 url: result.event.url || '',
                 recurrence_until: result.event.recurrence_until || ''
               };
-              dialog.close();
             } else {
               errorMessage = result?.error || 'Failed to extract event';
             }
@@ -53,6 +76,13 @@
         color="$color-danger-500"
       />
 
+      <CaptureEventEditor
+        when="{!!extractedEvent}"
+        event="{extractedEvent}"
+        onClose="extractedEvent = null; activePanel = ''"
+        onSaved="picksCounter = picksCounter + 1; extractedEvent = null; activePanel = ''"
+      />
+
     </VStack>
-  </ModalDialog>
+  </Card>
 </Component>

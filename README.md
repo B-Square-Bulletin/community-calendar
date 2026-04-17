@@ -53,6 +53,7 @@ Know of a local calendar that should be included? [Open an issue](https://github
 - **App architecture**: [docs/app-architecture.md](docs/app-architecture.md) — XMLUI components, local dev setup, resources
 - **Tests**: Browser-based unit tests in `test.html`; regression tests via [trace-tools](https://github.com/xmlui-org/trace-tools). [docs/regression-testing.md](docs/regression-testing.md)
 - **Adding a city**: [docs/curator-guide.md](docs/curator-guide.md) (discovery) and [AGENTS.md](AGENTS.md) (technical steps)
+- **Contributing**: [CONTRIBUTING.md](CONTRIBUTING.md) — how to add feeds and submit PRs
 - **Adding sources**: [docs/procedures.md](docs/procedures.md) — feed discovery, testing, geo-filtering
 - **Supabase**: [supabase/README.md](supabase/README.md) — schema, edge functions, auth, RLS
 - **Scrapers**: [scrapers/README.md](scrapers/README.md) — scraper library and per-site docs

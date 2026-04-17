@@ -1,6 +1,8 @@
 <Component
   name="SourcesDialog"
-  method.open="() => { suggestName = ''; suggestUrl = ''; suggestFeedType = ''; suggestNotes = ''; suggestSuccess = false; suggestError = ''; showSuggestForm = false; localHidden = ($props.hiddenSources || []).slice(); dirty = false; dialog.open(); }"
+  method.open="() => { suggestName = ''; suggestUrl = ''; suggestFeedType = ''; suggestNotes = ''; suggestSuccess = false; suggestError = ''; showSuggestForm = false; localHidden = ($props.hiddenSources || []).slice(); activePanel = 'sources'; }"
+  method.close="() => { if (activePanel === 'sources') activePanel = ''; }"
+  method.toggle="() => { if (activePanel === 'sources') { activePanel = ''; } else { suggestName = ''; suggestUrl = ''; suggestFeedType = ''; suggestNotes = ''; suggestSuccess = false; suggestError = ''; showSuggestForm = false; localHidden = ($props.hiddenSources || []).slice(); activePanel = 'sources'; } }"
   var.showSuggestForm="{false}"
   var.suggestName=""
   var.suggestUrl=""
@@ -10,7 +12,7 @@
   var.suggestSuccess="{false}"
   var.suggestError=""
   var.localHidden="{[]}"
-  var.dirty="{false}">
+  var.currentEvents="{($props.events || []).filter(function(e) { return !e || !$props.city || e.city === $props.city; })}">
 
   <APICall
     id="suggestApi"
@@ -31,34 +33,60 @@
       suggestError = 'Failed to submit suggestion. Please try again.';
     }" />
 
-  <DataSource
-    id="sourceNames"
-    url="{appGlobals.supabaseUrl + '/rest/v1/rpc/get_source_counts'}"
-    method="post"
-    headers="{{
-      'Content-Type': 'application/json',
-      apikey: appGlobals.supabasePublishableKey
-    }}"
-    body="{{'target_city': window.cityFilter || 'bloomington'}}"
-  />
+  <Theme>
+  <Card
+    when="{activePanel === 'sources'}"
+    width="100%"
+    marginTop="$space-3"
+    marginBottom="$space-3"
+    padding="$space-3"
+    gap="$space-3">
+    <HStack verticalAlignment="start" gap="$space-2">
+      <VStack width="*" gap="$space-1">
+        <H3>Sources</H3>
+        <Text
+          value="{$props.events ? window.dedupeEvents(currentEvents).length + ' events for the next ' + window.getQueryMonths() + ' months' : 'Loading...'}" />
+      </VStack>
+      <Icon
+        name="close"
+        tooltip="Hide sources"
+        width="20px"
+        height="20px"
+        color="$color-text-secondary"
+        onClick="activePanel = ''" />
+    </HStack>
 
-  <Theme maxWidth-ModalDialog="90%">
-  <ModalDialog id="dialog" title="Sources"
-    onClose="() => { if (dirty) { applyHiddenSources(localHidden); } }">
     <VStack gap="$space-3">
       <Text
-        value="{$props.events ? window.dedupeEvents($props.events).length + ' events for the next ' + window.getQueryMonths() + ' months' : 'Loading...'}" />
-      <Items data="{sourceNames.value || []}">
-        <HStack gap="$space-2" paddingVertical="$space-1" verticalAlignment="center">
+        fontSize="$fontSize-sm"
+        color="$color-text-secondary">
+        Uncheck sources to hide them from this view.
+      </Text>
+      <Spinner when="{!$props.events}" />
+      <Table
+        when="{!!$props.events}"
+        data="{window.getSourceCounts(window.dedupeEvents(currentEvents)).map(function(item) { return { name: item.source, event_count: item.count }; })}"
+        idKey="name"
+        sortBy="event_count"
+        sortDirection="descending"
+        alwaysShowSortingIndicator="{true}"
+        cellUserSelect="text"
+        width="100%">
+        <Column header="" width="48px" canSort="{false}" canResize="{false}" horizontalAlignment="center">
           <Checkbox
             width="fit-content"
             aria-label="{$item.name}"
-            initialValue="{!window.isSourceHidden($item.name, localHidden)}"
-            onClick="() => { localHidden = localHidden.indexOf($item.name) >= 0 ? localHidden.filter(function(s) { return s !== $item.name; }) : localHidden.concat([$item.name]); dirty = true; }"
+            value="{!window.isSourceHidden($item.name, localHidden)}"
+            onClick="() => { const next = localHidden.indexOf($item.name) >= 0 ? localHidden.filter(function(s) { return s !== $item.name; }) : localHidden.concat([$item.name]); localHidden = next; applyHiddenSources(next); }"
           />
-          <Text value="{$item.name + ' (' + $item.event_count + ')'}" breakMode="word" />
-        </HStack>
-      </Items>
+        </Column>
+        <Column bindTo="name" header="Source" width="*" minWidth="160px">
+          <Text value="{$cell}" breakMode="word" />
+        </Column>
+        <Column bindTo="event_count" header="Events" width="110px" horizontalAlignment="right">
+          <Text value="{$cell}" />
+        </Column>
+      </Table>
 
       <!-- Suggest a source button -->
       <Button
@@ -188,6 +216,6 @@
       </VStack>
 
     </VStack>
-  </ModalDialog>
+  </Card>
   </Theme>
 </Component>

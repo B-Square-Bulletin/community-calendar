@@ -13,6 +13,54 @@ var pickEvent = null;
 var enrichmentsData = null;
 var picksCounter = 0;
 var eventsCounter = 0;
+var activePanel = '';
+var moreHasMore = false;
+var moreNextIndex = null;
+var moreHasPrev = false;
+var morePrevIndex = null;
+
+function getPagedEvents(events, term, startIndex, pageSize, category, dateStart, dateEnd) {
+  let source = events;
+  if (dateStart !== null && dateEnd !== null && window._dateRangeBase && eventDayRange && (dateStart !== eventDayRange[0] || dateEnd !== eventDayRange[1])) {
+    const baseMs = window._dateRangeBase.getTime();
+    const fromMs = baseMs + dateStart * 86400000;
+    const toMs = baseMs + (dateEnd + 1) * 86400000;
+    source = (events || []).filter((e) => {
+      const t = new Date(e.start_time).getTime();
+      return t >= fromMs && t < toMs;
+    });
+  }
+  const filtered = window.filterEvents(source, term, category) || [];
+  const size = pageSize || 50;
+  const index = Number.isFinite(startIndex) ? Math.max(0, startIndex) : 0;
+  const step = Math.max(1, size - 1);
+
+  if (!filtered.length) {
+    moreHasMore = false;
+    moreNextIndex = null;
+    moreHasPrev = false;
+    morePrevIndex = null;
+    return [];
+  }
+
+  if (term) {
+    const clampedIndex = Math.max(0, Math.min(index, Math.max(0, filtered.length - 1)));
+    const page = filtered.slice(clampedIndex, clampedIndex + size);
+    moreHasMore = false;
+    moreNextIndex = null;
+    moreHasPrev = false;
+    morePrevIndex = null;
+    return page;
+  }
+
+  const page = filtered.slice(index, index + size);
+  moreHasMore = (index + size) < filtered.length;
+  moreNextIndex = moreHasMore ? (index + step) : null;
+  moreHasPrev = index > 0;
+  morePrevIndex = moreHasPrev ? Math.max(0, index - step) : null;
+
+  return page;
+}
 
 // Dashboard state — null means "use server data", non-null means "user has modified"
 var dashboardTiles = null;
@@ -22,6 +70,69 @@ var dashboardGridLayout = null;
 function setCategoryFilter(category) {
   categoryFilter = category || '';
   window.syncCategoryParam(categoryFilter);
+}
+
+function openPanel(name) {
+  activePanel = name || '';
+}
+
+function closePanel(name) {
+  if (!name || activePanel === name) {
+    activePanel = '';
+  }
+}
+
+function togglePanel(name) {
+  activePanel = activePanel === name ? '' : name;
+}
+
+function openPickEditor(event) {
+  pickEvent = event;
+  activePanel = 'pick';
+  scrollRequest = scrollRequest + 1;
+}
+
+function closePickEditor() {
+  pickEvent = null;
+  if (activePanel === 'pick') {
+    activePanel = '';
+  }
+}
+
+function getInlinePanelHostMinHeight(name) {
+  if (!window.ccAutoHeight || !name) {
+    return '0px';
+  }
+  if (name === 'pick' || name === 'capture' || name === 'audio') {
+    return '760px';
+  }
+  if (name === 'sources') {
+    return '520px';
+  }
+  if (name === 'feeds') {
+    return '560px';
+  }
+  if (name === 'settings') {
+    return '260px';
+  }
+  if (name === 'signIn') {
+    return '220px';
+  }
+  return '0px';
+}
+
+function getInlinePanelHostHeight(name) {
+  if (!window.ccAutoHeight || !name) {
+    return undefined;
+  }
+  return getInlinePanelHostMinHeight(name);
+}
+
+function getInlinePanelHostOverflow(name) {
+  if (!window.ccAutoHeight || !name) {
+    return 'visible';
+  }
+  return 'auto';
 }
 
 function togglePick(event) {
@@ -76,7 +187,7 @@ function togglePick(event) {
     picksCounter = picksCounter + 1;
   } else {
     // Picking: set pickEvent to trigger PickEditor via when
-    pickEvent = event;
+    openPickEditor(event);
   }
 }
 

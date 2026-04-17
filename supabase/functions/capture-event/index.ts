@@ -81,6 +81,50 @@ function applyTimezoneOffset(naiveDatetime: string, timezone: string): string {
   return `${naiveDatetime}${sign}${h}:${m}`;
 }
 
+function normalizeExtractedDateTime(value: any, fallbackTime = "19:00:00"): string | null {
+  if (!value) return null;
+  const s = String(value).trim();
+  if (!s) return null;
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) {
+    return `${s}T${fallbackTime}`;
+  }
+  if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(s)) {
+    return `${s}:00`;
+  }
+  if (/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/.test(s)) {
+    return s.replace(" ", "T") + ":00";
+  }
+  if (/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/.test(s)) {
+    return s.replace(" ", "T");
+  }
+  if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/.test(s)) {
+    return s;
+  }
+
+  return s;
+}
+
+function normalizeExtractedEvent(event: any): any {
+  if (!event || typeof event !== "object") return event;
+
+  event.start_time = normalizeExtractedDateTime(event.start_time);
+
+  if (event.end_time) {
+    const rawEnd = String(event.end_time).trim();
+    if (/^\d{2}:\d{2}(:\d{2})?$/.test(rawEnd) && typeof event.start_time === "string" && /^\d{4}-\d{2}-\d{2}T/.test(event.start_time)) {
+      const datePart = event.start_time.substring(0, 10);
+      event.end_time = normalizeExtractedDateTime(`${datePart}T${rawEnd}`);
+    } else {
+      event.end_time = normalizeExtractedDateTime(event.end_time);
+    }
+  } else {
+    event.end_time = null;
+  }
+
+  return event;
+}
+
 // Apply timezone offset to start_time and end_time on an extracted event object
 function applyEventTimezone(event: any): void {
   const tz = event.timezone;
@@ -326,12 +370,14 @@ Deno.serve(async (req) => {
 
         if (isAudio) {
           const { event: extractedEvent, transcript } = await extractEventFromAudio(fileBytes, mediaType, defaultTimezone || undefined);
+          normalizeExtractedEvent(extractedEvent);
           applyEventTimezone(extractedEvent);
           return new Response(JSON.stringify({ event: extractedEvent, transcript }), {
             headers: { ...corsHeaders, "Content-Type": "application/json" },
           });
         } else {
           const extractedEvent = await extractEventFromImage(fileBytes, mediaType, defaultTimezone || undefined);
+          normalizeExtractedEvent(extractedEvent);
           applyEventTimezone(extractedEvent);
           return new Response(JSON.stringify({ event: extractedEvent }), {
             headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -362,6 +408,7 @@ Deno.serve(async (req) => {
           imageBytes[i] = binaryString.charCodeAt(i);
         }
         const extractedEvent = await extractEventFromImage(imageBytes, mediaType, bodyTimezone);
+        normalizeExtractedEvent(extractedEvent);
         applyEventTimezone(extractedEvent);
 
         return new Response(JSON.stringify({ event: extractedEvent }), {

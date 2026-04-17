@@ -1,0 +1,238 @@
+<Component
+  name="CaptureEventEditor"
+  var.savedPickId="{null}"
+  var.errorMessage=""
+  var.isSaving="{false}"
+  var.submittedData="{null}"
+  var.lastFormData="{null}"
+  var.showRecurrence="{false}"
+  var.rruleFrequency="{'none'}"
+  var.rruleDays="{[]}"
+  var.rruleOrdinal="{1}"
+  var.rruleMonthDay="{'MO'}"
+  var.rruleUntil="{$props.event?.recurrence_until || ''}"
+>
+
+  <APICall
+    id="captureApi"
+    method="post"
+    url="{appGlobals.supabaseUrl + '/functions/v1/capture-event'}"
+    headers="{{
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + window.authSession?.access_token
+    }}"
+    body="{$param}"
+    onSuccess="(result) => {
+      isSaving = false;
+      if (!result.event_id) {
+        errorMessage = result.error || 'Event was not saved — please check the form and try again';
+        return;
+      }
+      submittedData = lastFormData;
+      savedPickId = result.event_id;
+      if (rruleFrequency !== 'none') {
+        const formData = lastFormData || {};
+        const datePart = (formData.date || ($props.event?.start_time || '')).substring(0, 10);
+        const cityTz = (window._cities && window.cityFilter && window._cities[window.cityFilter]?.timezone) || null;
+        const startTime = window.applyTimezoneOffset(datePart + 'T' + window.normalizeTimeValue(formData.time || '00:00') + ':00', cityTz);
+        const endTime = formData.endTime ? window.applyTimezoneOffset(datePart + 'T' + window.normalizeTimeValue(formData.endTime) + ':00', cityTz) : null;
+        enrichmentApi.execute({
+          event_id: result.event_id,
+          curator_id: window.authUser.id,
+          rrule: window.buildRRule(rruleFrequency, rruleDays, rruleOrdinal, rruleMonthDay, rruleUntil),
+          title: formData.title,
+          start_time: startTime,
+          end_time: endTime,
+          location: formData.location || null,
+          description: formData.description || null,
+          city: window.cityFilter || null,
+          curator_name: window.authUser.user_metadata?.user_name || window.authUser.email || 'curator'
+        });
+      }
+    }"
+    onError="(err) => {
+      isSaving = false;
+      errorMessage = err?.message || 'Failed to save event';
+    }"
+  />
+
+  <APICall
+    id="enrichmentApi"
+    method="post"
+    url="{appGlobals.supabaseUrl + '/rest/v1/event_enrichments?on_conflict=event_id,curator_id'}"
+    headers="{{
+      apikey: appGlobals.supabasePublishableKey,
+      Authorization: 'Bearer ' + window.authSession?.access_token,
+      'Content-Type': 'application/json',
+      Prefer: 'return=minimal,resolution=merge-duplicates'
+    }}"
+    body="{$param}"
+  />
+
+  <Form
+    when="{!!$props.event && !savedPickId}"
+    id="captureEventForm"
+    data="{{
+      title: $props.event?.title || '',
+      date: $props.event?.date || window.extractIsoDateValue($props.event?.start_time),
+      time: $props.event?.time || window.extractHmTimeValue($props.event?.start_time, '19:00'),
+      endTime: $props.event?.endTime || window.extractHmTimeValue($props.event?.end_time, ''),
+      location: $props.event?.location || '',
+      description: $props.event?.description || '',
+      url: $props.event?.url || ''
+    }}"
+    saveLabel="{isSaving ? 'Saving...' : 'Add to My Picks'}"
+    enableSubmit="{!isSaving}"
+    onCancel="emitEvent('close')"
+    onSubmit="(data) => {
+      if (!window.authUser?.id) {
+        errorMessage = 'Please sign in to pick events';
+        return;
+      }
+      errorMessage = '';
+      lastFormData = data;
+      const dateStr = (data.date || ($props.event?.start_time || '')).substring(0, 10);
+      const rawStart = window.normalizeTimeValue(data.time || '00:00');
+      const startTime = dateStr + 'T' + rawStart + ':00';
+      const rawEnd = data.endTime ? window.normalizeTimeValue(data.endTime) : null;
+      const endTime = rawEnd ? dateStr + 'T' + rawEnd + ':00' : null;
+      captureApi.execute({
+        mode: 'commit',
+        event: {
+          title: data.title,
+          start_time: startTime,
+          end_time: endTime,
+          location: data.location || null,
+          description: data.description || null,
+          url: data.url || null,
+          city: window.cityFilter || null,
+          timezone: (window._cities && window.cityFilter && window._cities[window.cityFilter]?.timezone) || null
+        },
+        transcript: $props.event?.transcript || null
+      });
+      isSaving = true;
+    }"
+  >
+    <FormItem
+      bindTo="title"
+      label="Title"
+      required="{true}"
+      requiredInvalidMessage="Title is required — what is this event called?"
+    />
+    <TextBox
+      bindTo="date"
+      label="Date"
+      placeholder="YYYY-MM-DD"
+      initialValue="{$props.event?.date || window.extractIsoDateValue($props.event?.start_time)}"
+      required="{true}"
+      requiredInvalidMessage="Date is required"
+      regex="^\d\d\d\d-\d\d-\d\d$"
+      regexInvalidMessage="Use YYYY-MM-DD"
+    />
+    <HStack gap="$space-2">
+      <TextBox
+        bindTo="time"
+        label="Start"
+        placeholder="HH:MM"
+        width="120px"
+        initialValue="{$props.event?.time || window.extractHmTimeValue($props.event?.start_time, '19:00')}"
+        required="{true}"
+        requiredInvalidMessage="Start time is required"
+        regex="^\d\d?:\d\d$"
+        regexInvalidMessage="Use HH:MM"
+      />
+      <TextBox
+        bindTo="endTime"
+        label="End"
+        placeholder="HH:MM"
+        width="120px"
+        initialValue="{$props.event?.endTime || window.extractHmTimeValue($props.event?.end_time, '')}"
+        regex="^\d\d?:\d\d$"
+        regexInvalidMessage="Use HH:MM"
+      />
+    </HStack>
+    <FormItem bindTo="location" label="Location" />
+    <FormItem bindTo="url" label="URL" placeholder="https://" />
+    <FormItem bindTo="description" label="Description" type="textarea" />
+
+    <VStack gap="$space-2" marginTop="$space-1">
+      <Button
+        label="{showRecurrence ? 'Hide recurrence options' : 'Recurrence'}"
+        variant="outlined"
+        icon="{showRecurrence ? 'chevron-down' : 'chevron-right'}"
+        onClick="showRecurrence = !showRecurrence"
+      />
+      <VStack when="{showRecurrence}" gap="$space-2" padding="$space-2" backgroundColor="$color-surface-50" borderRadius="$borderRadius">
+        <Select
+          id="captureFreqSelect"
+          initialValue="{rruleFrequency}"
+          onDidChange="(val) => rruleFrequency = val"
+        >
+          <Option value="none" label="No recurrence" />
+          <Option value="WEEKLY" label="Weekly" />
+          <Option value="MONTHLY" label="Monthly" />
+        </Select>
+        <VStack when="{rruleFrequency === 'WEEKLY'}" gap="$space-1">
+          <Text fontSize="$fontSize-xs" color="$color-text-secondary">Repeat on:</Text>
+          <HStack gap="$space-1" wrapContent="true">
+            <Button size="xs" label="Su" variant="{rruleDays.includes('SU') ? 'solid' : 'outlined'}" onClick="rruleDays = window.toggleDay(rruleDays, 'SU')" />
+            <Button size="xs" label="Mo" variant="{rruleDays.includes('MO') ? 'solid' : 'outlined'}" onClick="rruleDays = window.toggleDay(rruleDays, 'MO')" />
+            <Button size="xs" label="Tu" variant="{rruleDays.includes('TU') ? 'solid' : 'outlined'}" onClick="rruleDays = window.toggleDay(rruleDays, 'TU')" />
+            <Button size="xs" label="We" variant="{rruleDays.includes('WE') ? 'solid' : 'outlined'}" onClick="rruleDays = window.toggleDay(rruleDays, 'WE')" />
+            <Button size="xs" label="Th" variant="{rruleDays.includes('TH') ? 'solid' : 'outlined'}" onClick="rruleDays = window.toggleDay(rruleDays, 'TH')" />
+            <Button size="xs" label="Fr" variant="{rruleDays.includes('FR') ? 'solid' : 'outlined'}" onClick="rruleDays = window.toggleDay(rruleDays, 'FR')" />
+            <Button size="xs" label="Sa" variant="{rruleDays.includes('SA') ? 'solid' : 'outlined'}" onClick="rruleDays = window.toggleDay(rruleDays, 'SA')" />
+          </HStack>
+        </VStack>
+        <HStack when="{rruleFrequency === 'MONTHLY'}" gap="$space-2" wrapContent="true">
+          <Select initialValue="{String(rruleOrdinal)}" onDidChange="(val) => rruleOrdinal = parseInt(val)">
+            <Option value="1" label="1st" />
+            <Option value="2" label="2nd" />
+            <Option value="3" label="3rd" />
+            <Option value="4" label="4th" />
+          </Select>
+          <Select initialValue="{rruleMonthDay}" onDidChange="(val) => rruleMonthDay = val">
+            <Option value="SU" label="Sunday" />
+            <Option value="MO" label="Monday" />
+            <Option value="TU" label="Tuesday" />
+            <Option value="WE" label="Wednesday" />
+            <Option value="TH" label="Thursday" />
+            <Option value="FR" label="Friday" />
+            <Option value="SA" label="Saturday" />
+          </Select>
+        </HStack>
+        <FormItem when="{rruleFrequency !== 'none'}" bindTo="recurrence_until_unused" label="Until" type="custom">
+          <TextBox
+            aria-label="Until"
+            initialValue="{rruleUntil}"
+            placeholder="YYYY-MM-DD"
+            onDidChange="(val) => rruleUntil = val"
+          />
+        </FormItem>
+      </VStack>
+    </VStack>
+
+    <Text when="{errorMessage}" value="{errorMessage}" color="$color-danger-500" />
+  </Form>
+
+  <VStack when="{savedPickId}" gap="$space-4" horizontalAlignment="center" padding="$space-4">
+    <Icon name="circle-check" size="lg" color="$color-success-500" />
+    <Text fontWeight="bold" fontSize="$fontSize-lg">Event picked!</Text>
+    <Text color="$color-text-secondary" textAlignment="center">"{submittedData?.title || $props.event?.title}" has been added to your picks.</Text>
+    <VStack gap="$space-2" width="100%">
+      <Text fontWeight="bold" fontSize="$fontSize-sm">Add to your calendar:</Text>
+      <AddToCalendar event="{{
+        id: savedPickId,
+        title: submittedData?.title || $props.event?.title,
+        start_time: ((submittedData?.date || ($props.event?.start_time || '')).substring(0, 10)) + 'T' + window.normalizeTimeValue(submittedData?.time || '00:00') + ':00',
+        end_time: submittedData?.endTime ? ((submittedData?.date || ($props.event?.start_time || '')).substring(0, 10)) + 'T' + window.normalizeTimeValue(submittedData.endTime) + ':00' : null,
+        location: submittedData?.location,
+        description: $props.event?.transcript ? (submittedData?.description || '') + '\n\nTranscribed audio:\n' + $props.event.transcript : submittedData?.description,
+        url: submittedData?.url || null,
+        rrule: rruleFrequency !== 'none' ? window.buildRRule(rruleFrequency, rruleDays, rruleOrdinal, rruleMonthDay, rruleUntil) : null
+      }}" />
+      <Text fontSize="$fontSize-xs" color="$color-text-tertiary" textAlignment="center">For Apple Calendar: download .ics, then open the file.</Text>
+    </VStack>
+    <Button label="Done" variant="ghost" onClick="emitEvent('saved'); emitEvent('close')" />
+  </VStack>
+</Component>

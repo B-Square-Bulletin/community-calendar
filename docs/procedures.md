@@ -199,15 +199,43 @@ Create/update `cities/{cityname}/SOURCES_CHECKLIST.md`:
 
 ## 4. Add Working Feeds
 
-Use `scripts/add_feed.py` to add a new ICS feed. It tests the feed and adds the curl command to the GitHub Actions workflow:
+The Supabase **`feeds` table** is the source of truth for all calendar sources. The file `feeds.txt` is auto-generated from the database during each build by `export_feeds_txt.py` — do not edit it by hand.
+
+### ICS feeds (the common case)
+
+**With admin access:** Use the **Manage Feeds** dialog in the app (RSS icon in the header). It validates the URL, shows a preview of upcoming events, and inserts directly into the `feeds` table. The next build picks it up automatically.
+
+**Without admin access (contributors):** Add entries to `cities/<city>/pending_feeds.txt`:
 
 ```
-python scripts/add_feed.py "https://example.com/events/?ical=1" toronto "Example Events"
-python scripts/add_feed.py URL city "Source Name" --dry-run  # preview without changes
-python scripts/add_feed.py URL city "Source Name" --test     # test only, don't add
+# Display Name
+https://example.com/events/?ical=1
 ```
 
-`feeds.txt` is both documentation and a runtime input (`download_feeds.py` reads it). It is maintained by `add_scraper.py` and `add_feed.py` — do not edit it by hand or regenerate it.
+After the PR is merged, the next build automatically runs `scripts/process_pending_feeds.py` to insert them into the database and clear the file. See `CONTRIBUTING.md` for the full workflow.
+
+**Testing a feed before submitting:**
+
+```bash
+# Quick test — does the URL return valid ICS with events?
+python scripts/add_feed.py URL city "Source Name" --test
+```
+
+> **Note:** `add_feed.py --test` is useful for validation. In the main repo its normal add mode now writes to `pending_feeds.txt`, not `feeds.txt`.
+
+### Scrapers
+
+Scrapers are invoked by the GitHub Actions workflow. Use `add_scraper.py` to add the workflow invocation and stage the scraper in `pending_feeds.txt`:
+
+```bash
+python scripts/add_scraper.py <scraper_name> <city> "<Display Name>"
+
+The workflow will move the pending scraper entry into the `feeds` table and regenerate `feeds.txt` before `combine_ics.py` runs.
+```
+
+### Forks without a feeds table
+
+If `SUPABASE_URL` is not set, `download_feeds.py` falls back to reading `feeds.txt` directly. Forks can continue using `add_feed.py` to manage feeds.txt as the primary input. See `docs/syncing-your-fork.md` for details on setting up the feeds table.
 
 ---
 

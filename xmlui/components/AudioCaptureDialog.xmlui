@@ -1,30 +1,49 @@
 <Component
   name="AudioCaptureDialog"
-  method.open="() => { isExtracting = false; isRecording = false; captureMode = ''; errorMessage = ''; dialog.open(); }"
+  method.open="() => { isExtracting = false; isRecording = false; captureMode = ''; errorMessage = ''; extractedEvent = null; activePanel = 'audio'; }"
+  method.close="() => { extractedEvent = null; if (activePanel === 'audio') activePanel = ''; }"
+  method.toggle="() => { if (activePanel === 'audio') { extractedEvent = null; activePanel = ''; } else { isExtracting = false; isRecording = false; captureMode = ''; errorMessage = ''; extractedEvent = null; activePanel = 'audio'; } }"
   var.isExtracting="{false}"
   var.isRecording="{false}"
   var.captureMode=""
   var.errorMessage=""
+  var.extractedEvent="{null}"
 >
 
-  <ModalDialog id="dialog" title="Capture Event from Audio" minWidth="400px">
+  <Card
+    when="{activePanel === 'audio'}"
+    width="100%"
+    marginTop="$space-3"
+    marginBottom="$space-3"
+    padding="$space-3"
+    gap="$space-3">
+    <HStack verticalAlignment="start" gap="$space-2">
+      <H3 width="*">{extractedEvent ? 'Save Captured Event' : 'Capture Event from Audio'}</H3>
+      <Icon
+        name="close"
+        tooltip="Hide audio capture"
+        width="20px"
+        height="20px"
+        color="$color-text-secondary"
+        onClick="extractedEvent = null; activePanel = ''" />
+    </HStack>
     <VStack gap="$space-3" padding="$space-2">
 
       <!-- Mode selection -->
-      <VStack when="{!captureMode && !isExtracting}" gap="$space-2">
+      <VStack when="{!captureMode && !isExtracting && !extractedEvent}" gap="$space-2">
         <Text>How would you like to capture audio?</Text>
         <Button label="Record from Microphone" icon="l-mic" onClick="captureMode = 'record'" />
         <Button label="Select Audio File" icon="l-file-up" onClick="captureMode = 'file'" />
       </VStack>
 
       <!-- File upload mode -->
-      <VStack when="{captureMode === 'file' && !isExtracting}" gap="$space-2">
+      <VStack when="{captureMode === 'file' && !isExtracting && !extractedEvent}" gap="$space-2">
         <Text>Select an audio recording of event info:</Text>
+        <Button label="Select Audio File" icon="l-file-up" onClick="audioInput.open()" />
         <FileInput
           id="audioInput"
           acceptsFileType="{['audio/*']}"
-          buttonLabel="Select Audio File"
-          buttonIcon="l-file-up"
+          displayWhen="{false}"
           onDidChange="(files) => {
             if (!files || files.length === 0) return;
             isExtracting = true;
@@ -39,17 +58,21 @@
             });
             isExtracting = false;
             if (result && result.event) {
-              pickEvent = {
+              const start = String(result.event.start_time || '');
+              const end = String(result.event.end_time || '');
+              extractedEvent = {
                 title: result.event.title || '',
                 start_time: result.event.start_time || '',
                 end_time: result.event.end_time || '',
+                date: start.slice(0, 10) || '',
+                time: start.slice(11, 16) || '19:00',
+                endTime: end.slice(11, 16) || '',
                 location: result.event.location || '',
                 description: result.event.description || '',
                 url: result.event.url || '',
                 transcript: result.transcript || '',
                 recurrence_until: result.event.recurrence_until || ''
               };
-              dialog.close();
             } else {
               errorMessage = result?.error || 'Failed to extract event from audio';
             }
@@ -59,7 +82,7 @@
       </VStack>
 
       <!-- Record mode: ready to record -->
-      <VStack when="{captureMode === 'record' && !isRecording && !isExtracting}" gap="$space-2">
+      <VStack when="{captureMode === 'record' && !isRecording && !isExtracting && !extractedEvent}" gap="$space-2">
         <Text>Tap Start, describe the event, then tap Stop.</Text>
         <Button
           label="Start Recording"
@@ -99,17 +122,21 @@
             });
             isExtracting = false;
             if (result && result.event) {
-              pickEvent = {
+              const start = String(result.event.start_time || '');
+              const end = String(result.event.end_time || '');
+              extractedEvent = {
                 title: result.event.title || '',
                 start_time: result.event.start_time || '',
                 end_time: result.event.end_time || '',
+                date: start.slice(0, 10) || '',
+                time: start.slice(11, 16) || '19:00',
+                endTime: end.slice(11, 16) || '',
                 location: result.event.location || '',
                 description: result.event.description || '',
                 url: result.event.url || '',
                 transcript: result.transcript || '',
                 recurrence_until: result.event.recurrence_until || ''
               };
-              dialog.close();
             } else {
               errorMessage = result?.error || 'Failed to extract event from audio';
               captureMode = 'record';
@@ -131,6 +158,13 @@
         color="$color-danger-500"
       />
 
+      <CaptureEventEditor
+        when="{!!extractedEvent}"
+        event="{extractedEvent}"
+        onClose="extractedEvent = null; activePanel = ''"
+        onSaved="picksCounter = picksCounter + 1; extractedEvent = null; activePanel = ''"
+      />
+
     </VStack>
-  </ModalDialog>
+  </Card>
 </Component>

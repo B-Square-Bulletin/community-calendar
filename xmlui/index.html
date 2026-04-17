@@ -11,15 +11,34 @@
       }
 
     </style>
+    <script>window._xsLogs = [];</script>
     <script src="config.local.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/rrule@2.8.1/dist/es5/rrule.min.js"></script>
-    <script>console.log = function(){};</script>
+    <!-- <script>console.log = function(){};</script> -->
     <script>
+      var versionProbe = Date.now();
       var vxhr = new XMLHttpRequest();
-      vxhr.open('GET', 'version.txt', false);
+      vxhr.open('GET', 'version.txt?_=' + versionProbe, false);
       vxhr.send();
-      window.APP_VERSION = (vxhr.responseText || '').trim() || String(Date.now());
+      var baseVersion = (vxhr.responseText || '').trim() || String(Date.now());
+      try {
+        var lastSeenVersion = localStorage.getItem('cc-shell-version');
+        var hasReloadedForVersion = sessionStorage.getItem('cc-version-reload') === baseVersion;
+        if (lastSeenVersion && lastSeenVersion !== baseVersion && !hasReloadedForVersion) {
+          sessionStorage.setItem('cc-version-reload', baseVersion);
+          localStorage.setItem('cc-shell-version', baseVersion);
+          window.location.replace(window.location.pathname + window.location.search);
+        } else {
+          localStorage.setItem('cc-shell-version', baseVersion);
+          if (hasReloadedForVersion) {
+            sessionStorage.removeItem('cc-version-reload');
+          }
+        }
+      } catch (e) {}
+      var isLocalDevHost = /^(localhost|127(?:\.\d+){3}|0\.0\.0\.0)$/.test(window.location.hostname);
+      var assetVersionSuffix = isLocalDevHost ? '-dev-' + Date.now() : '';
+      window.APP_VERSION = baseVersion + assetVersionSuffix;
       var v = window.APP_VERSION;
       document.write('<script src="xmlui/xmlui-standalone.umd.js?v=' + v + '"><\/script>');
       document.write('<script src="xmlui/xmlui-masonry.js?v=' + v + '"><\/script>');
@@ -69,6 +88,7 @@
           }
         } catch(e) {}
       }
+      window.hasLayoutModeParam = params.has('mode');
       window.layoutMode = params.get('mode') || 'list';
       window.setLayoutMode = function(val) {
         window.layoutMode = val;
@@ -77,6 +97,7 @@
         else { url.searchParams.delete('mode'); }
         window.history.replaceState({}, '', url);
       };
+      window.hasImagesParam = params.has('images');
       window.showListImages = params.get('images') !== 'preview';
       window.setShowListImages = function(val) {
         window.showListImages = val !== 'preview';
@@ -165,35 +186,42 @@
         window.authUser = session?.user || null;
         console.log('Auth state changed:', event, window.authUser?.email);
 
-
-        // Create feed token on first sign-in if it doesn't exist
-        // Uses fetch directly since Supabase JS client has issues
+        // Create feed token on first sign-in if it doesn't exist.
+        // Keep auth recovery resilient: network hiccups here should not break app startup.
         if (session?.user) {
-          const headers = {
-            'apikey': SUPABASE_KEY,
-            'Authorization': 'Bearer ' + session.access_token,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=minimal'
-          };
+          try {
+            const headers = {
+              'apikey': SUPABASE_KEY,
+              'Authorization': 'Bearer ' + session.access_token,
+              'Content-Type': 'application/json',
+              'Prefer': 'return=minimal'
+            };
 
-          const checkUrl = `${SUPABASE_URL}/rest/v1/feed_tokens?select=token&user_id=eq.${session.user.id}`;
-          const checkRes = await fetch(checkUrl, { headers });
-          const existing = await checkRes.json();
-          console.log('Feed token check:', existing);
-
-          if (!existing || existing.length === 0) {
-            const insertUrl = `${SUPABASE_URL}/rest/v1/feed_tokens`;
-            const insertRes = await fetch(insertUrl, {
-              method: 'POST',
-              headers,
-              body: JSON.stringify({ user_id: session.user.id })
-            });
-            if (insertRes.ok) {
-              console.log('Created feed token for new user, reloading...');
-              window.location.reload();
-            } else {
-              console.error('Error creating feed token:', insertRes.status);
+            const checkUrl = `${SUPABASE_URL}/rest/v1/feed_tokens?select=token&user_id=eq.${session.user.id}`;
+            const checkRes = await fetch(checkUrl, { headers });
+            if (!checkRes.ok) {
+              console.warn('Feed token check failed:', checkRes.status);
+              return;
             }
+            const existing = await checkRes.json();
+            console.log('Feed token check:', existing);
+
+            if (!existing || existing.length === 0) {
+              const insertUrl = `${SUPABASE_URL}/rest/v1/feed_tokens`;
+              const insertRes = await fetch(insertUrl, {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({ user_id: session.user.id })
+              });
+              if (insertRes.ok) {
+                console.log('Created feed token for new user, reloading...');
+                window.location.reload();
+              } else {
+                console.error('Error creating feed token:', insertRes.status);
+              }
+            }
+          } catch (err) {
+            console.warn('Feed token bootstrap skipped:', err?.message || err);
           }
         }
       });
@@ -269,6 +297,48 @@
         var to = new Date(window.toDate);
         return Math.round((to - from) / (30 * 24 * 60 * 60 * 1000));
       };
+    </script>
+    <script>
+      // Iframe auto-height support. Opt-in via ?autoheight=true.
+      // - Sets window.ccAutoHeight so Main.xmlui can gate <App fitContent=".."/>
+      //   which makes XMLUI size to content instead of filling its viewport.
+      // - Posts document scrollHeight to the parent on resize so the parent
+      //   can resize the iframe to match. Non-embedded usage is unaffected.
+      window.ccAutoHeight = new URLSearchParams(location.search).get('autoheight') === 'true';
+      if (window.ccAutoHeight && window.parent !== window) {
+        (function () {
+          // Measure the actual XMLUI App container (which becomes height:auto
+          // under fitContent), not document.documentElement. documentElement's
+          // scrollHeight is bounded below by the iframe viewport, so it can't
+          // shrink when content shrinks (e.g. after a search filter). The
+          // appContainer with fitContent IS the content's natural height, in
+          // either direction.
+          var lastH = 0;
+          var observer = null;
+          function report(el) {
+            var h = Math.ceil(el.getBoundingClientRect().height);
+            if (h === lastH || h === 0) return;
+            lastH = h;
+            window.parent.postMessage({ type: 'cc-embed-resize', height: h }, '*');
+          }
+          function findAndObserve() {
+            var el = document.querySelector('[data-xmlui-app-fit-content]');
+            if (!el) return false;
+            if ('ResizeObserver' in window) {
+              observer = new ResizeObserver(function () { report(el); });
+              observer.observe(el);
+            }
+            report(el);
+            return true;
+          }
+          // XMLUI mounts asynchronously; poll briefly until the appContainer
+          // appears, then hand off to ResizeObserver for continuous tracking.
+          var tries = 0;
+          var findIv = setInterval(function () {
+            if (findAndObserve() || ++tries > 80) clearInterval(findIv);
+          }, 50);
+        })();
+      }
     </script>
   </head>
   <body>

@@ -1,22 +1,28 @@
 <App
   name="Community Calendar"
   defaultTheme="community-calendar"
+  fitContent="{window.ccAutoHeight}"
   var.filterTerm="{window.initialSearch || ''}"
   var.viewMode="{'all'}"
   var.displayStartIndex="{0}"
   var.browseStartIndex="{0}"
-  var.scrollRequest="{0}"
+  global.scrollRequest="{0}"
   global.picksData="{null}"
   global.userSettingsData="{window._localHiddenSources ? [{ hidden_sources: window._localHiddenSources }] : null}"
   global.authUser="{authUser}"
   global.authSession="{authSession}"
   var.city="{window.cityFilter || null}"
-  global.isAdmin="{false}">
+  global.isAdmin="{false}"
+  global.activePanel="{''}"
+  var.sliderRange="{false}"
+  var.sliderStart="{null}"
+  var.sliderEnd="{null}">
 
   <!-- DataSources -->
   <DataSource
     id="events"
-    url="{appGlobals.supabaseUrl + '/rest/v1/events?select=*&order=start_time.asc&limit=5000&source=neq.poster_capture&start_time=gte.' + window.getFromDate() + '&start_time=lte.' + window.getToDate() + (city ? '&city=eq.' + city : '')}"
+    when="{city}"
+    url="{appGlobals.supabaseUrl + '/rest/v1/deduplicated_events?select=id,title,start_time,end_time,url,location,description,source,transcript,cluster_id,source_urls,category,image_url,all_day,merged_ids,city&order=start_time.asc&limit=5000&start_time=gte.' + window.getFromDate() + '&start_time=lte.' + window.getToDate() + (city ? '&city=eq.' + city : '')}"
     headers="{{
       apikey: appGlobals.supabasePublishableKey,
       'Cache-Control': 'no-cache, no-store, must-revalidate'
@@ -36,7 +42,7 @@
 
   <DataSource
     id="userSettings"
-    when="{authSession}"
+    when="{authSession && city}"
     url="{appGlobals.supabaseUrl + '/rest/v1/user_settings?select=*&city=eq.' + city + '&limit=1'}"
     headers="{{
       apikey: appGlobals.supabasePublishableKey,
@@ -57,7 +63,7 @@
 
   <ChangeListener
     listenTo="{userSettings.value}"
-    onDidChange="() => { if (userSettings.value && userSettings.value.length) { userSettingsData = userSettings.value; const s = userSettingsData[0]; if (s) { if (s.layout_mode && !window.embed) { window.setLayoutMode(s.layout_mode); layoutMode = s.layout_mode } if (s.image_mode) { window.setShowListImages(s.image_mode === 'everywhere' ? 'list' : 'preview'); showListImages = (s.image_mode !== 'preview') } oneClickPick = !!s.one_click_pick } } }"
+    onDidChange="() => { if (userSettings.value && userSettings.value.length) { userSettingsData = userSettings.value; const s = userSettingsData[0]; if (s) { if (s.layout_mode && !window.embed && !window.hasLayoutModeParam) { window.setLayoutMode(s.layout_mode); layoutMode = s.layout_mode } if (s.image_mode && !window.hasImagesParam) { window.setShowListImages(s.image_mode === 'everywhere' ? 'list' : 'preview'); showListImages = (s.image_mode !== 'preview') } oneClickPick = !!s.one_click_pick } } }"
   />
 
   <DataSource
@@ -117,6 +123,7 @@
 
   <DataSource
     id="enrichments"
+    when="{city}"
     url="{appGlobals.supabaseUrl + '/rest/v1/event_enrichments?select=*&rrule=not.is.null' + (city ? '&city=eq.' + city : '')}"
     headers="{{
       apikey: appGlobals.supabasePublishableKey,
@@ -132,64 +139,18 @@
   <variable name="hiddenSources" value="{(userSettingsData && userSettingsData[0] && userSettingsData[0].hidden_sources) || window._localHiddenSources || []}" />
   <variable name="expandedEnrichments" value="{window.expandEnrichments(enrichments.value, window.getFromDate(), window.getToDate()) || []}" />
   <variable name="combinedEvents" value="{[...(Array.isArray(events.value) ? events.value : []), ...(Array.isArray(expandedEnrichments) ? expandedEnrichments : [])]}" />
-  <variable name="processedEvents" value="{window.buildSearchIndex(window.filterHiddenSources(window.dedupeEvents(window.filterExternalExclusions(combinedEvents)), hiddenSources))}" />
+  <variable name="processedEvents" value="{window.buildSearchIndex(window.filterHiddenSources(window.collapseLongRunningEvents(window.sortSourcesForDisplay(window.filterExternalExclusions(combinedEvents))), hiddenSources))}" />
+  <variable name="eventDayRange" value="{processedEvents && processedEvents.length > 100 ? window.getEventDayRange(processedEvents) : null}" />
+  <variable name="displayEvents" value="{sliderStart !== null ? processedEvents.filter(e => { const t = new Date(e.start_time).getTime(); const base = window._dateRangeBase.getTime(); return t >= base + sliderStart * 86400000 && t < base + (sliderEnd + 1) * 86400000 }) : processedEvents}" />
 
-  <!-- Dialogs -->
-  <SignInDialog id="signInDialog" />
-  <SourcesDialog id="sourcesDialog" events="{events.value}" hiddenSources="{hiddenSources}" />
-  <CaptureDialog id="captureDialog" />
-  <AudioCaptureDialog id="audioCaptureDialog" />
-  <AddFeedDialog id="addFeedDialog" />
-  <PickEditor when="{!!pickEvent}" event="{pickEvent}" onClose="pickEvent = null" onSaved="picksCounter = picksCounter + 1" />
-
-  <ModalDialog id="settingsDialog" title="Display Settings" maxWidth="400px">
-    <HStack verticalAlignment="start" gap="$space-6">
-      <VStack gap="$space-1">
-        <Text fontWeight="$fontWeight-bold" fontSize="$fontSize-sm">Layout</Text>
-        <RadioGroup initialValue="{layoutMode}" onDidChange="(val) => { window.setLayoutMode(val); layoutMode = val; if (authSession) { userSettingsData = window.saveUserSetting({ layout_mode: val }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey) } }">
-          <VStack>
-            <Option value="list" label="Single column" fontSize="$fontSize-sm" />
-            <Option value="multicol" label="Multi column" fontSize="$fontSize-sm" />
-            <Option when="{!!authSession}" value="dashboard" label="Dashboard" fontSize="$fontSize-sm" />
-          </VStack>
-        </RadioGroup>
-      </VStack>
-      <VStack gap="$space-1">
-        <Text fontWeight="$fontWeight-bold" fontSize="$fontSize-sm">Images</Text>
-        <RadioGroup initialValue="{showListImages ? 'list' : 'preview'}" onDidChange="(val) => { window.setShowListImages(val); showListImages = (val !== 'preview'); if (authSession) { userSettingsData = window.saveUserSetting({ image_mode: val === 'preview' ? 'preview' : 'everywhere' }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey) } }">
-          <VStack>
-            <Option value="list" label="Everywhere" fontSize="$fontSize-sm" />
-            <Option value="preview" label="Only in previews" fontSize="$fontSize-sm" />
-          </VStack>
-        </RadioGroup>
-      </VStack>
-    </HStack>
-    <VStack when="{!!authSession}" gap="$space-1" marginTop="$space-4">
-      <Text fontWeight="$fontWeight-bold" fontSize="$fontSize-sm">Picks</Text>
-      <Checkbox
-        label="One-click pick (skip editor)"
-        initialValue="{oneClickPick}"
-        onClick="oneClickPick = !oneClickPick; window.saveUserSetting({ one_click_pick: oneClickPick }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey)"
-      />
-    </VStack>
-  </ModalDialog>
-
-  <!-- City list from Supabase (distinct cities with events) -->
-  <DataSource
-    id="cityList"
-    url="{appGlobals.supabaseUrl + '/rest/v1/distinct_cities?select=city'}"
-    headers="{{
-      apikey: appGlobals.supabasePublishableKey
-    }}"
-  />
+  <variable name="availableCities" value="{Object.keys(window._cities || {}).sort().map(city => ({ city }))}" />
 
   <!-- City picker (shown when no city selected and not in dashboard mode) -->
   <VStack when="{!city && layoutMode !== 'dashboard'}" horizontalAlignment="center" width="100%" padding="$space-8">
     <H1>Community Calendar</H1>
-    <Spinner when="{!cityList.loaded}" />
-    <VStack when="{cityList.loaded}" gap="$space-4" maxWidth="300px" width="100%">
+    <VStack gap="$space-4" maxWidth="300px" width="100%">
       <VStack gap="$space-2">
-        <Items data="{cityList.value}">
+        <Items data="{availableCities}">
           <Button variant="outlined" width="100%" onClick="window.selectCity($item.city); city = $item.city">{window.toDisplayName($item.city)}</Button>
         </Items>
       </VStack>
@@ -205,13 +166,83 @@
       <H1>
         <HStack width="100%" verticalAlignment="center">
           <Text overflowMode="ellipsis" maxLines="1" width="*">{window.toDisplayName(city)}</Text>
-          <IncludeMarkup when="{!window.embed}" url="components/IconRow.xmlui" />
+          <IncludeMarkup when="{!window.embed}" url="{'components/IconRow.xmlui?v=' + window.APP_VERSION}" />
           <HStack when="{window.embed}" gap="$space-1" verticalAlignment="center">
-            <Icon name="l-rss" tooltip="Sources" width="20px" height="20px" color="$color-surface-500" onClick="sourcesDialog.open()" />
+            <Icon
+              name="l-rss"
+              tooltip="Sources"
+              width="20px"
+              height="20px"
+              color="{activePanel === 'sources' ? '$color-primary-600' : '$color-surface-500'}"
+              backgroundColor="{activePanel === 'sources' ? '$color-surface-200' : 'transparent'}"
+              borderRadius="999px"
+              padding="$space-0_5"
+              onClick="sourcesDialog.toggle()" />
+            <Inspector src="{'xmlui/xs-diff.html?v=' + window.APP_VERSION}" />
           </HStack>
         </HStack>
       </H1>
     </Bookmark>
+    <VStack
+      width="100%"
+      minHeight="{getInlinePanelHostMinHeight(activePanel)}"
+      height="{getInlinePanelHostHeight(activePanel)}"
+      overflowY="{getInlinePanelHostOverflow(activePanel)}"
+      overflowX="hidden">
+      <SignInDialog id="signInDialog" />
+      <CaptureDialog id="captureDialog" />
+      <AudioCaptureDialog id="audioCaptureDialog" />
+      <SourcesDialog id="sourcesDialog" events="{events.value}" city="{city}" hiddenSources="{hiddenSources}" />
+      <Card
+        when="{activePanel === 'settings'}"
+        width="100%"
+        marginTop="$space-3"
+        marginBottom="$space-3"
+        padding="$space-3"
+        gap="$space-3">
+        <HStack verticalAlignment="start" gap="$space-2">
+          <H3 width="*">Display Settings</H3>
+          <Icon
+            name="close"
+            tooltip="Hide settings"
+            width="20px"
+            height="20px"
+            color="$color-text-secondary"
+            onClick="activePanel = ''" />
+        </HStack>
+        <HStack verticalAlignment="start" gap="$space-6">
+          <VStack gap="$space-1">
+            <Text fontWeight="$fontWeight-bold" fontSize="$fontSize-sm">Layout</Text>
+            <RadioGroup initialValue="{layoutMode}" onDidChange="(val) => { window.setLayoutMode(val); layoutMode = val; if (authSession) { userSettingsData = window.saveUserSetting({ layout_mode: val }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey) } }">
+              <VStack>
+                <Option value="list" label="Single column" fontSize="$fontSize-sm" />
+                <Option value="multicol" label="Multi column" fontSize="$fontSize-sm" />
+                <Option when="{!!authSession}" value="dashboard" label="Dashboard" fontSize="$fontSize-sm" />
+              </VStack>
+            </RadioGroup>
+          </VStack>
+          <VStack gap="$space-1">
+            <Text fontWeight="$fontWeight-bold" fontSize="$fontSize-sm">Images</Text>
+            <RadioGroup initialValue="{showListImages ? 'list' : 'preview'}" onDidChange="(val) => { window.setShowListImages(val); showListImages = (val !== 'preview'); if (authSession) { userSettingsData = window.saveUserSetting({ image_mode: val === 'preview' ? 'preview' : 'everywhere' }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey) } }">
+              <VStack>
+                <Option value="list" label="Everywhere" fontSize="$fontSize-sm" />
+                <Option value="preview" label="Only in previews" fontSize="$fontSize-sm" />
+              </VStack>
+            </RadioGroup>
+          </VStack>
+        </HStack>
+        <VStack when="{!!authSession}" gap="$space-1">
+          <Text fontWeight="$fontWeight-bold" fontSize="$fontSize-sm">Picks</Text>
+          <Checkbox
+            label="One-click pick (skip editor)"
+            initialValue="{oneClickPick}"
+            onClick="oneClickPick = !oneClickPick; window.saveUserSetting({ one_click_pick: oneClickPick }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey)"
+          />
+        </VStack>
+      </Card>
+      <AddFeedDialog id="addFeedDialog" />
+      <PickEditor when="{!!pickEvent && activePanel === 'pick'}" event="{pickEvent}" onClose="closePickEditor()" onSaved="picksCounter = picksCounter + 1" />
+    </VStack>
     <HStack verticalAlignment="center" marginBottom="$space-2" gap="$space-2">
       <HStack verticalAlignment="center" gap="$space-1" width="*">
         <TextBox
@@ -223,18 +254,20 @@
           onDidChange="(val) => { filterTerm = val; displayStartIndex = browseStartIndex; window.syncSearchParam(val); }"
           width="*"
         />
-        <Icon
-          name="close"
-          width="20px"
-          height="20px"
-          cursor="pointer"
-          color="$color-text-tertiary"
-          opacity="{filterTerm ? 1 : 0}"
-          onClick="searchBox.setValue(''); setCategoryFilter(''); window.syncSearchParam('')"
+          <Icon
+            name="close"
+            tooltip="Clear search"
+            width="20px"
+            height="20px"
+            cursor="pointer"
+            color="$color-text-tertiary"
+            opacity="{filterTerm ? 1 : 0}"
+          onClick="searchBox.setValue(''); setCategoryFilter(''); window.syncSearchParam(''); displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1"
         />
       </HStack>
       <Select
         id="categorySelect"
+        aria-label="Event category"
         placeholder="All categories"
         clearable="true"
         fontSize="$fontSize-sm"
@@ -254,30 +287,48 @@
         <Option value="picks" label="my picks" />
       </HStack>
     </RadioGroup>
+    <VStack when="{eventDayRange && events.loaded && viewMode === 'all'}" gap="$space-0">
+      <HStack>
+        <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{window.formatDayOffset(sliderRange ? sliderRange[0] : eventDayRange[0])}" />
+        <SpaceFiller />
+        <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{window.formatDayOffset(sliderRange ? sliderRange[1] : eventDayRange[1])}" />
+      </HStack>
+      <Slider
+        id="dateSlider"
+        initialValue="{eventDayRange}"
+        minValue="{eventDayRange[0]}"
+        maxValue="{eventDayRange[1]}"
+        step="{1}"
+        showValues="false"
+        onDidChange="(val) => { sliderRange = Array.isArray(val) ? [val[0], val[1]] : val; sliderStart = val[0]; sliderEnd = val[1]; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1 }"
+      />
+    </VStack>
     </VStack>
     </VStack>
     <Spinner when="{!events.loaded && viewMode === 'all'}" />
     <Button
-      when="{events.loaded && viewMode === 'all' && !filterTerm && window._moreHasPrev}"
+      when="{events.loaded && viewMode === 'all' && !filterTerm && moreHasPrev}"
       label="Earlier"
       variant="outlined"
       width="100%"
       marginBottom="$space-2"
-      onClick="const prevIndex = window._morePrevIndex ?? 0; displayStartIndex = prevIndex; browseStartIndex = prevIndex; scrollRequest = scrollRequest + 1;"
+      onClick="const prevIndex = morePrevIndex ?? 0; displayStartIndex = prevIndex; browseStartIndex = prevIndex; scrollRequest = scrollRequest + 1;"
     />
-    <Masonry when="{events.loaded && viewMode === 'all' && layoutMode === 'multicol'}" data="{window.getPagedEvents(processedEvents, filterTerm, displayStartIndex, filterTerm ? 10 : 50, categoryFilter)}" columns="3" gap="$space-3" rowGap="0" minColumnWidth="300px">
+    <Masonry when="{events.loaded && viewMode === 'all' && layoutMode === 'multicol'}" data="{getPagedEvents(processedEvents, filterTerm, displayStartIndex, filterTerm ? 10 : 50, categoryFilter, sliderStart, sliderEnd)}" columns="3" gap="$space-3" rowGap="0" minColumnWidth="300px">
       <EventCard event="{$item}" filterTerm="{filterTerm}" categoryColorMap="{window.categoryColorMap}" categoryList="{window.categoryList}" />
     </Masonry>
-    <List when="{events.loaded && viewMode === 'all' && layoutMode !== 'multicol'}" data="{window.getPagedEvents(processedEvents, filterTerm, displayStartIndex, filterTerm ? 10 : 50, categoryFilter)}" fixedItemSize="true" limit="{filterTerm ? 10 : 50}">
-      <EventCard event="{$item}" filterTerm="{filterTerm}" categoryColorMap="{window.categoryColorMap}" categoryList="{window.categoryList}" />
-    </List>
+    <VStack when="{events.loaded && viewMode === 'all' && layoutMode !== 'multicol'}" gap="$space-0">
+      <Items data="{getPagedEvents(processedEvents, filterTerm, displayStartIndex, filterTerm ? 10 : 50, categoryFilter, sliderStart, sliderEnd)}">
+        <EventCard event="{$item}" filterTerm="{filterTerm}" categoryColorMap="{window.categoryColorMap}" categoryList="{window.categoryList}" />
+      </Items>
+    </VStack>
     <Button
-      when="{events.loaded && viewMode === 'all' && !filterTerm && window._moreHasMore}"
+      when="{events.loaded && viewMode === 'all' && !filterTerm && moreHasMore}"
       label="Later"
       variant="outlined"
       width="100%"
       marginTop="$space-2"
-      onClick="const nextIndex = window._moreNextIndex || displayStartIndex; displayStartIndex = nextIndex; browseStartIndex = nextIndex; scrollRequest = scrollRequest + 1;"
+      onClick="const nextIndex = moreNextIndex || displayStartIndex; displayStartIndex = nextIndex; browseStartIndex = nextIndex; scrollRequest = scrollRequest + 1;"
     />
     <VStack when="{viewMode === 'picks'}" gap="$space-2">
       <Text fontSize="$fontSize-sm" value="{(picks.value || []).length + ' events'}" />
@@ -304,12 +355,82 @@
     <H1>
       <HStack width="100%" verticalAlignment="center">
         <Text overflowMode="ellipsis" maxLines="1" width="*">{window.cityName || 'Community Calendar'}</Text>
-        <IncludeMarkup when="{!window.embed}" url="components/IconRow.xmlui" />
+        <IncludeMarkup when="{!window.embed}" url="{'components/IconRow.xmlui?v=' + window.APP_VERSION}" />
         <HStack when="{window.embed}" gap="$space-1" verticalAlignment="center">
-          <Icon name="l-rss" tooltip="Sources" width="20px" height="20px" color="$color-surface-500" onClick="sourcesDialog.open()" />
+          <Icon
+            name="l-rss"
+            tooltip="Sources"
+            width="20px"
+            height="20px"
+            color="{activePanel === 'sources' ? '$color-primary-600' : '$color-surface-500'}"
+            backgroundColor="{activePanel === 'sources' ? '$color-surface-200' : 'transparent'}"
+            borderRadius="999px"
+            padding="$space-0_5"
+            onClick="sourcesDialog.toggle()" />
+          <Inspector src="{'xmlui/xs-diff.html?v=' + window.APP_VERSION}" />
         </HStack>
       </HStack>
     </H1>
+    <VStack
+      width="100%"
+      minHeight="{getInlinePanelHostMinHeight(activePanel)}"
+      height="{getInlinePanelHostHeight(activePanel)}"
+      overflowY="{getInlinePanelHostOverflow(activePanel)}"
+      overflowX="hidden">
+      <SignInDialog id="signInDialog" />
+      <CaptureDialog id="captureDialog" />
+      <AudioCaptureDialog id="audioCaptureDialog" />
+      <SourcesDialog id="sourcesDialog" events="{events.value}" city="{city}" hiddenSources="{hiddenSources}" />
+      <Card
+        when="{activePanel === 'settings'}"
+        width="100%"
+        marginTop="$space-3"
+        marginBottom="$space-3"
+        padding="$space-3"
+        gap="$space-3">
+        <HStack verticalAlignment="start" gap="$space-2">
+          <H3 width="*">Display Settings</H3>
+          <Icon
+            name="close"
+            tooltip="Hide settings"
+            width="20px"
+            height="20px"
+            color="$color-text-secondary"
+            onClick="activePanel = ''" />
+        </HStack>
+        <HStack verticalAlignment="start" gap="$space-6">
+          <VStack gap="$space-1">
+            <Text fontWeight="$fontWeight-bold" fontSize="$fontSize-sm">Layout</Text>
+            <RadioGroup initialValue="{layoutMode}" onDidChange="(val) => { window.setLayoutMode(val); layoutMode = val; if (authSession) { userSettingsData = window.saveUserSetting({ layout_mode: val }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey) } }">
+              <VStack>
+                <Option value="list" label="Single column" fontSize="$fontSize-sm" />
+                <Option value="multicol" label="Multi column" fontSize="$fontSize-sm" />
+                <Option when="{!!authSession}" value="dashboard" label="Dashboard" fontSize="$fontSize-sm" />
+              </VStack>
+            </RadioGroup>
+          </VStack>
+          <VStack gap="$space-1">
+            <Text fontWeight="$fontWeight-bold" fontSize="$fontSize-sm">Images</Text>
+            <RadioGroup initialValue="{showListImages ? 'list' : 'preview'}" onDidChange="(val) => { window.setShowListImages(val); showListImages = (val !== 'preview'); if (authSession) { userSettingsData = window.saveUserSetting({ image_mode: val === 'preview' ? 'preview' : 'everywhere' }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey) } }">
+              <VStack>
+                <Option value="list" label="Everywhere" fontSize="$fontSize-sm" />
+                <Option value="preview" label="Only in previews" fontSize="$fontSize-sm" />
+              </VStack>
+            </RadioGroup>
+          </VStack>
+        </HStack>
+        <VStack when="{!!authSession}" gap="$space-1">
+          <Text fontWeight="$fontWeight-bold" fontSize="$fontSize-sm">Picks</Text>
+          <Checkbox
+            label="One-click pick (skip editor)"
+            initialValue="{oneClickPick}"
+            onClick="oneClickPick = !oneClickPick; window.saveUserSetting({ one_click_pick: oneClickPick }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey)"
+          />
+        </VStack>
+      </Card>
+      <AddFeedDialog id="addFeedDialog" />
+      <PickEditor when="{!!pickEvent && activePanel === 'pick'}" event="{pickEvent}" onClose="closePickEditor()" onSaved="picksCounter = picksCounter + 1" />
+    </VStack>
     <DashboardView />
   </VStack>
 </App>
