@@ -4,54 +4,6 @@ PRODID:-//Indiana University//NONSGML v1.0//EN
 X-WR-CALNAME:Indiana University Events
 BEGIN:VEVENT
 X-SOURCE:IU Cinema
-DTSTART:20260416T230000Z
-DTEND:20260417T000000Z
-LOCATION:IU CINEMA
-GEO:39.168613;-86.517376
-SUMMARY:Mamma Mia! | Pop Music(als)!
-DESCRIPTION:Bride-to-be Sophie (Amanda Seyfried) has just one wish to mak
- e her wedding perfect: to have her father walk her down the aisle. Now sh
- e just has to figure out who he is! Join the laughter and fun of this irr
- esistibly charming musical celebration of mothers\, daughters\, fathers\,
-  true loves lost\, and the romantic possibilities of what can happen on a
-  magical Greek island when you throw a little (a lotta) ABBA in the mix! 
- Academy Award-winner Meryl Streep leads an all-star cast\, including Pier
- ce Brosnan\, Colin Firth\, Stellan Skarsgård\, and Dominic Cooper. Based
-  on the Broadway smash-hit and brimming with all the infectious ABBA song
- s we know and love. [108 min\; comedy\, musical\; English and Greek with 
- English subtitles]
-X-ALT-DESC;FMTTYPE=text/html:<p>  Bride-to-be Sophie (Amanda Seyfried) ha
- s just one wish to make her wedding perfect: to have her father walk her 
- down the aisle. Now she just has to figure out who he is! Join the laught
- er and fun of this irresistibly charming musical celebration of mothers\,
-  daughters\, fathers\, true loves lost\, and the romantic possibilities o
- f what can happen on a magical Greek island when you throw a little (a lo
- tta) ABBA in the mix! Academy Award-winner Meryl Streep leads an all-star
-  cast\, including Pierce Brosnan\, Colin Firth\, Stellan Skarsgård\, and
-  Dominic Cooper. Based on the Broadway smash-hit and brimming with all th
- e infectious ABBA songs we know and love. [108 min\; comedy\, musical\; E
- nglish and Greek with English subtitles]</p>
-UID:20260416T230000Z-2228637@events.iu.edu
-DTSTAMP:20260304T150222Z
-URL:https://events.iu.edu/cinemaiub/event/2228637-mamma-mia-pop-musicals
-CATEGORIES:Culture and languages,Performances, shows, and films
-LAST-MODIFIED:20260323T193626Z
-ATTACH:https://events.iu.edu/live/image/gid/81/width/168/height/168/crop/
- 1/src_region/0,0,1920,1080/30366_Mamma_Mia_1920x1080.rev.1772654364.jpg
-X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2228637
-X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-IMAGE:https://events.iu.edu/live/image/gid/81/width/168/heigh
- t/168/crop/1/src_region/0\,0\,1920\,1080/30366_Mamma_Mia_1920x1080.rev.17
- 72654364.jpg
-X-LIVEWHALE-CONTACT-INFO:<p>\n  <a href="mailto:iucinema@iu.edu">iucinema
- @iu.edu</a> // 812-856-CINE\n</p>
-X-LIVEWHALE-TAGS:Hoosier experience
-X-LIVEWHALE-CUSTOM-REGISTRATION-LINK:https://cinema.indiana.edu/upcoming-
- films/screening/2026-spring-thursday-april-16-700pm
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU Cinema
 DTSTART:20260417T230000Z
 DTEND:20260418T000000Z
 LOCATION:IU CINEMA

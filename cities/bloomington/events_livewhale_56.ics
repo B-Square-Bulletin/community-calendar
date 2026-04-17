@@ -4,189 +4,6 @@ PRODID:-//Indiana University//NONSGML v1.0//EN
 X-WR-CALNAME:Indiana University Events
 BEGIN:VEVENT
 X-SOURCE:IU Jacobs School of Music
-DTSTART:20260416T020000Z
-DTEND:20260416T030000Z
-LOCATION:Recital Hall
-SUMMARY:Senior Recital – Yabing Lyu\, piano
-DESCRIPTION:
-X-ALT-DESC;FMTTYPE=text/html:<p></p>
-UID:20260416T020000Z-2246104@events.iu.edu
-DTSTAMP:20260323T154554Z
-URL:https://events.iu.edu/musiciub/event/2246104-senior-recital-yabing-ly
- u-piano
-CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260414T172110Z
-X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2246104
-X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-TAGS:Jacobs School of Music|Piano|Recitals|Student Recital
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU Jacobs School of Music
-DTSTART:20260416T160000Z
-DTEND:20260416T170000Z
-LOCATION:MERRILL HALL (MUSIC) / MUSIC\, JACOBS SCHOOL OF - Room Number: M
- U011
-GEO:39.164792;-86.518299
-SUMMARY:A Well-Advised Lunch with Stephen Belans
-DESCRIPTION:Students\, Sign up here &gt\;Belans has contributed "playback
- " work on tour with artists including Elvis Costello and Julian Lennon\, 
- and he currently performs as drummer for TheBoDeans. Before launching his
-  professional career\, he studied classical percussion at IU and performe
- d in local Bloomington rock bands. This session offers students a chance 
- to gain insight into navigating diverse musical paths and building a sust
- ainable career.
-X-ALT-DESC;FMTTYPE=text/html:<p><a class="Hyperlink SCXW247686013 BCX0" h
- ref="https://app.joinhandshake.com/edu/events/1941602" target="_blank" re
- l="noreferrer noopener"><span class="TextRun Underlined SCXW247686013 BCX
- 0" lang="EN-US" xml:lang="EN-US" data-contrast="none"><span class="Normal
- TextRun SCXW247686013 BCX0" data-ccp-charstyle="Hyperlink">Students\, Sig
- n up here &gt\;</span></span></a></p><p><span class="TextRun Underlined S
- CXW247686013 BCX0" lang="EN-US" xml:lang="EN-US" data-contrast="none"><sp
- an class="NormalTextRun SCXW247686013 BCX0" data-ccp-charstyle="Hyperlink
- "><span class="TextRun SCXW248430345 BCX0" lang="EN-US" xml:lang="EN-US" 
- data-contrast="auto"><span class="NormalTextRun SCXW248430345 BCX0">Belan
- s has contributed "playback" work on tour with artists including Elvis Co
- stello and Julian Lennon\, and he currently performs as drummer for The</
- span><span class="NormalTextRun SpellingErrorV2Themed SCXW248430345 BCX0"
- >BoDeans</span><span class="NormalTextRun SCXW248430345 BCX0">. Before la
- unching his professional career\, he studied classical percussion at IU a
- nd performed in local Bloomington rock bands. This session offers student
- s a chance to gain insight into navigating diverse musical paths and buil
- ding a sustainable career.</span></span><span class="EOP SCXW248430345 BC
- X0" data-ccp-props="{&quot\;201341983&quot\;:0\,&quot\;335559740&quot\;:2
- 40}"></span></span></span></p>
-UID:20260416T160000Z-2265026@events.iu.edu
-DTSTAMP:20260410T141822Z
-URL:https://events.iu.edu/musiciub/event/2265026-a-well-advised-lunch-wit
- h-stephen-belans
-CATEGORIES:Career development,Lectures, talks, seminars, and conferences
-LAST-MODIFIED:20260410T181822Z
-ATTACH:https://events.iu.edu/live/image/gid/56/width/168/height/168/crop/
- 1/src_region/0,0,500,500/30879_1555907729185.rev.1775844980.jpg
-X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2265026
-X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-IMAGE:https://events.iu.edu/live/image/gid/56/width/168/heigh
- t/168/crop/1/src_region/0\,0\,500\,500/30879_1555907729185.rev.1775844980
- .jpg
-X-LIVEWHALE-COST:Free
-X-LIVEWHALE-CONTACT-INFO:<p>\n  <a href="https://blogs.iu.edu/jsomoecd/">
- <span data-contrast="none">Jacobs School of Music Office of Entrepreneurs
- hip and Career Development</span></a><span data-ccp-props="{}"></span>\n<
- /p>\n<p>\n  <a href="mailto:jsomoecd@indiana.edu"><span data-contrast="no
- ne">jsomoecd@iu.edu</span></a><span data-ccp-props="{}"></span>\n</p>
-X-LIVEWHALE-SUMMARY:<p><span class="NormalTextRun SCXW247686013 BCX0">Joi
- n IU</span> <span class="NormalTextRun SCXW247686013 BCX0">alumnus</span>
-  <span class="NormalTextRun SCXW247686013 BCX0">Stephen Belan</span><span
-  class="NormalTextRun SCXW247686013 BCX0">s</span> <span class="NormalTex
- tRun SCXW247686013 BCX0">–</span> <span class="NormalTextRun SCXW247686
- 013 BCX0">West</span><span class="NormalTextRun SCXW247686013 BCX0"></spa
- n><span class="NormalTextRun SCXW247686013 BCX0">Coast–based drummer\, 
- producer\, songwriter\, and recording engineer</span> <span class="Normal
- TextRun SCXW247686013 BCX0">–</span> <span class="NormalTextRun SCXW247
- 686013 BCX0">for</span><span class="NormalTextRun SCXW247686013 BCX0"></s
- pan><span class="NormalTextRun SCXW247686013 BCX0">a conversation about h
- is multifaceted career in the music industry.</span></p>
-X-LIVEWHALE-TAGS:Music Business|OECD|Office of Entrepreneurship and Caree
- r Development|Percussion
-X-LIVEWHALE-CUSTOM-REGISTRATION-LINK:https://app.joinhandshake.com/edu/ev
- ents/1941602
-X-LIVEWHALE-CUSTOM-ROOM-NUMBER:MU011
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU Jacobs School of Music
-DTSTART:20260416T230000Z
-DTEND:20260417T000000Z
-LOCATION:Recital Hall
-SUMMARY:Senior Recital – Addi Antibus\, soprano
-DESCRIPTION:
-X-ALT-DESC;FMTTYPE=text/html:<p></p>
-UID:20260416T230000Z-2144591@events.iu.edu
-DTSTAMP:20251210T121628Z
-URL:https://events.iu.edu/musiciub/event/2144591-senior-recital-addi-anti
- bus-soprano
-CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260413T194049Z
-X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2144591
-X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-TAGS:Jacobs School of Music|Recitals|Student Recital|Voice
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU Jacobs School of Music
-DTSTART:20260417T000000Z
-DTEND:20260417T020000Z
-LOCATION:Auer Hall &amp\; LIVE@jacobs
-SUMMARY:Salón Latino Chamber Music Series
-DESCRIPTION:Enjoy this performance from almost anywhere in the world viaL
- IVE@jacobs! Meeting URL: https://liveatjacobs.music.indiana.edu/
-X-ALT-DESC;FMTTYPE=text/html:<p><strong>Enjoy this performance from almos
- t anywhere in the world via</strong><a href="https://liveatjacobs.music.i
- ndiana.edu/"><strong>LIVE@jacobs</strong></a><strong>!<br /></strong></p>
-  Meeting URL: https://liveatjacobs.music.indiana.edu/
-UID:20260417T000000Z-1973734@events.iu.edu
-DTSTAMP:20250626T154223Z
-URL:https://events.iu.edu/musiciub/event/1973734-salon-latino-chamber-mus
- ic-series
-CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260415T184728Z
-X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:1973734
-X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-SUMMARY:<p>Presented by the Latin American Music Center</p>
-X-LIVEWHALE-TAGS:Chamber and Collaborative Music|Chamber Music|Jacobs Sch
- ool of Music|JSOM Event|Latin American Music Center|LIVE at jacobs|Live S
- treaming|Recitals
-X-LIVEWHALE-IS-ONLINE:1
-X-LIVEWHALE-ONLINE-TYPE:Hybrid
-X-LIVEWHALE-ONLINE-URL:https://liveatjacobs.music.indiana.edu/
-X-LIVEWHALE-ONLINE-BUTTON-LABEL:Visit LIVE@jacobs!
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU Jacobs School of Music
-DTSTART:20260417T003000Z
-DTEND:20260417T013000Z
-LOCATION:Recital Hall
-SUMMARY:Doctoral Recital – Min Ji Kim\, violin
-DESCRIPTION:
-X-ALT-DESC;FMTTYPE=text/html:<p></p>
-UID:20260417T003000Z-2152227@events.iu.edu
-DTSTAMP:20251217T123313Z
-URL:https://events.iu.edu/musiciub/event/2152227-doctoral-recital-min-ji-
- kim-violin
-CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260413T194107Z
-X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2152227
-X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-TAGS:Jacobs School of Music|Recitals|String|Student Recital
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU Jacobs School of Music
-DTSTART:20260417T003000Z
-DTEND:20260417T020000Z
-LOCATION:Ford-Crawford Hall
-GEO:39.165516;-86.51774
-SUMMARY:**EVENT CANCELLED** Jacobs Composition Academy – Spring Recital
-  II
-DESCRIPTION:
-X-ALT-DESC;FMTTYPE=text/html:<p></p>
-UID:20260417T003000Z-2078733@events.iu.edu
-DTSTAMP:20251007T150610Z
-URL:https://events.iu.edu/musiciub/event/2078733-jacobs-composition-acade
- my-spring-recital-ii
-CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260415T184728Z
-X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2078733
-X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-SUMMARY:<p>Jacobs Academy</p>
-X-LIVEWHALE-TAGS:Composition|Jacobs Academy|Jacobs School of Music|JSOM E
- vent|New Music|Recitals
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU Jacobs School of Music
 DTSTART:20260417T020000Z
 DTEND:20260417T030000Z
 LOCATION:Recital Hall
@@ -700,7 +517,7 @@ UID:20260418T000000Z-1973733@events.iu.edu
 DTSTAMP:20250626T154223Z
 URL:https://events.iu.edu/musiciub/event/1973733-symphonic-band
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 ATTACH:https://events.iu.edu/live/image/gid/56/width/168/height/168/crop/
  1/src_region/0,0,240,180/8375_Smedley_Eric.2021FA.webcal.js.rev.162811411
  2.jpg
@@ -999,7 +816,7 @@ DTSTAMP:20260324T123603Z
 URL:https://events.iu.edu/musiciub/event/2247319-masters-recital-sofia-ge
  elhood-flute
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260325T191820Z
+LAST-MODIFIED:20260416T213535Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2247319
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -1263,7 +1080,7 @@ UID:20260419T000000Z-1973731@events.iu.edu
 DTSTAMP:20250626T154223Z
 URL:https://events.iu.edu/musiciub/event/1973731-concentus
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 ATTACH:https://events.iu.edu/live/image/gid/56/width/168/height/168/crop/
  1/src_region/0,0,240,180/5496_Blendulf_Joanna.2018SP.webcal.js.rev.160149
  1263.jpg
@@ -1368,7 +1185,7 @@ DTSTAMP:20260326T123029Z
 URL:https://events.iu.edu/musiciub/event/2249806-masters-recital-catherin
  e-digrazia-soprano
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260331T162852Z
+LAST-MODIFIED:20260416T213628Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2249806
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -1397,7 +1214,7 @@ DTSTAMP:20251201T142254Z
 URL:https://events.iu.edu/musiciub/event/2134395-senior-recital-logan-cro
  cker-flute
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260414T143720Z
+LAST-MODIFIED:20260416T213559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2134395
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -1421,7 +1238,7 @@ DTSTAMP:20260327T135747Z
 URL:https://events.iu.edu/musiciub/event/2251236-masters-recital-theo-har
  rah-bass
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260401T201310Z
+LAST-MODIFIED:20260416T213648Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2251236
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -1445,7 +1262,7 @@ DTSTAMP:20260325T150831Z
 URL:https://events.iu.edu/musiciub/event/2248672-masters-recital-alice-fr
  isch-baroque-oboe
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260407T165200Z
+LAST-MODIFIED:20260416T213740Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2248672
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -1469,7 +1286,7 @@ DTSTAMP:20250807T122532Z
 URL:https://events.iu.edu/musiciub/event/2010937-student-chamber-music-re
  cital
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260319T163653Z
+LAST-MODIFIED:20260416T213757Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2010937
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -1489,7 +1306,7 @@ DTSTAMP:20260327T135747Z
 URL:https://events.iu.edu/musiciub/event/2251235-performer-diploma-recita
  l-brittany-weinstock
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260401T201316Z
+LAST-MODIFIED:20260416T213837Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2251235
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -1508,7 +1325,7 @@ DTSTAMP:20260325T150831Z
 URL:https://events.iu.edu/musiciub/event/2248671-masters-recital-peter-go
  ggin-saxophone
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260414T192717Z
+LAST-MODIFIED:20260416T213819Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2248671
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -1528,7 +1345,7 @@ DTSTAMP:20251219T124118Z
 URL:https://events.iu.edu/musiciub/event/2154826-musicolability-project-c
  ommunity-day-of-music
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2154826
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -1552,7 +1369,7 @@ DTSTAMP:20260325T150831Z
 URL:https://events.iu.edu/musiciub/event/2248670-masters-recital-alan-wem
  hoff-trumpet
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260327T180247Z
+LAST-MODIFIED:20260416T213855Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2248670
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -1572,7 +1389,7 @@ DTSTAMP:20260223T153710Z
 URL:https://events.iu.edu/musiciub/event/2218839-senior-recital-jia-yin-l
  in-viola
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260225T210131Z
+LAST-MODIFIED:20260416T213914Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2218839
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -2388,7 +2205,7 @@ URL:https://events.iu.edu/musiciub/event/2268143-fourth-annual-celebratio
  n-of-math-and-music-
 CATEGORIES:Community events,Culture and diversity,Performances, shows, an
  d films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2268143
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -2567,7 +2384,7 @@ URL:https://events.iu.edu/musiciub/event/2253427-piano-studio-recital-stu
  dents-of-emile-naoumoff
 CATEGORIES:Community events,Culture and diversity,Performances, shows, an
  d films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2253427
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -2612,6 +2429,98 @@ X-LIVEWHALE-ID:2065862
 X-LIVEWHALE-TIMEZONE:America/New_York
 X-LIVEWHALE-TAGS:America 250|Jacobs School of Music|JSOM Event|Jubilee Fe
  stival on African American Music|Lectures
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:IU Jacobs School of Music
+DTSTART:20260422T170000Z
+DTEND:20260422T180000Z
+LOCATION:Conrad Prebys Amphitheater
+SUMMARY:Tom Walsh Jazz Ensemble
+DESCRIPTION:About the DirectorTom Walsh is Robert J. Waller Sr. and Rober
+ t J. Waller Jr. Professor of Music (saxophone) and chair of the Jazz Stud
+ ies Department at the Indiana University Jacobs School of Music. An activ
+ e performer of jazz and classical music\, he has presented concerts and w
+ orkshops in South Africa\, China\, Brazil\, Japan\, Germany\, Austria\, I
+ taly\, Croatia\, Slovenia\, Azerbaijan\, Costa Rica\, and across the Unit
+ ed States. In 2019\, his beginning improvisation book Jazz Master Teaches
+  You to Improvise was published by Shanghai Music Publishing House. Recen
+ t recordings include The Pandemic Sessions by the IU jazz faculty\, Luke 
+ Gillespie's Moving Mists\, Basically Baker\, Vol. 2\, with the Buselli-Wa
+ llarab Jazz Orchestra (Patois)\, Mike Hackett's New Point of View (Summit
+ ) and two CDs released on the IUMusic label: Holiday Celebration and Sylv
+ ia McNair's Romance. Premiere performances include Scott Jones's concert 
+ band arrangement of Russell Peck's The Upward Stream\, Chris Rutkowski's 
+ Concerto for Alto Saxophone and Wind Ensemble\, and David Baker's Concert
+ o for Alto Saxophone and Orchestra. His latest solo CD release is Interse
+ ctions (Arizona University Recordings)\, featuring Luke Gillespie on pian
+ o. Earlier solo CDs include New Life (RIAX) and Shaking the Pumpkin (RIAX
+ ). Other releases include the David Baker Concerto with the Czech Nationa
+ l Symphony Orchestra on Paul Freeman Introduces David Baker\, Vol. XII (A
+ lbany)\, Basically Baker with the Buselli/Wallarab Jazz Orchestra (Patois
+ )\, and Sky Scrapings: Saxophone Music of Don Freund (AUR). Walsh has app
+ eared at conferences of the International Association for Jazz Education\
+ , Jazz Education Network\, North American Saxophone Alliance\, and World 
+ Saxophone Congress. He is a Yamaha Performing Artist and a Vandoren Artis
+ t. He has taught at the Jamey Aebersold Summer Jazz Workshops since 1991.
+  He co-leads the IU Summer Saxophone Academy with Otis Murphy and is co-d
+ irector of the College Audition Preparation Workshop. Walsh earned degree
+ s in Saxophone Performance and Jazz Studies from Indiana University\, whe
+ re his principal teachers were distinguished classical saxophonist Eugene
+  Rousseau and renowned jazz educator David Baker. His other influential t
+ eachers include Mike Tracy\, Pat LaBarbera\, Jerry Coker\, and David Lieb
+ man.
+X-ALT-DESC;FMTTYPE=text/html:<p><strong>About the Director</strong><br />
+ <br /><strong>Tom Walsh</strong> is Robert J. Waller Sr. and Robert J. Wa
+ ller Jr. Professor of Music (saxophone) and chair of the Jazz Studies Dep
+ artment at the Indiana University Jacobs School of Music. An active perfo
+ rmer of jazz and classical music\, he has presented concerts and workshop
+ s in South Africa\, China\, Brazil\, Japan\, Germany\, Austria\, Italy\, 
+ Croatia\, Slovenia\, Azerbaijan\, Costa Rica\, and across the United Stat
+ es. In 2019\, his beginning improvisation book <em>Jazz Master Teaches Yo
+ u to Improvise</em> was published by Shanghai Music Publishing House. Rec
+ ent recordings include <em>The Pandemic Sessions</em> by the IU jazz facu
+ lty\, Luke Gillespie's <em>Moving Mists</em>\, <em>Basically Baker\, Vol.
+  2</em>\, with the Buselli-Wallarab Jazz Orchestra (Patois)\, Mike Hacket
+ t's <em>New Point of View</em> (Summit) and two CDs released on the IUMus
+ ic label: <em>Holiday Celebration</em> and Sylvia McNair's <em>Romance</e
+ m>. Premiere performances include Scott Jones's concert band arrangement 
+ of Russell Peck's <em>The Upward Stream</em>\, Chris Rutkowski's Concerto
+  for Alto Saxophone and Wind Ensemble\, and David Baker's Concerto for Al
+ to Saxophone and Orchestra. His latest solo CD release is <em>Intersectio
+ ns</em> (Arizona University Recordings)\, featuring Luke Gillespie on pia
+ no. Earlier solo CDs include <em>New Life</em> (RIAX) and <em>Shaking the
+  Pumpkin</em> (RIAX). Other releases include the David Baker Concerto wit
+ h the Czech National Symphony Orchestra on <em>Paul Freeman Introduces Da
+ vid Baker\, Vol. XII</em> (Albany)\, <em>Basically Baker</em> with the Bu
+ selli/Wallarab Jazz Orchestra (Patois)\, and <em>Sky Scrapings: Saxophone
+  Music of Don Freund</em> (AUR). Walsh has appeared at conferences of the
+  International Association for Jazz Education\, Jazz Education Network\, 
+ North American Saxophone Alliance\, and World Saxophone Congress. He is a
+  Yamaha Performing Artist and a Vandoren Artist. He has taught at the Jam
+ ey Aebersold Summer Jazz Workshops since 1991. He co-leads the IU Summer 
+ Saxophone Academy with Otis Murphy and is co-director of the College Audi
+ tion Preparation Workshop. Walsh earned degrees in Saxophone Performance 
+ and Jazz Studies from Indiana University\, where his principal teachers w
+ ere distinguished classical saxophonist Eugene Rousseau and renowned jazz
+  educator David Baker. His other influential teachers include Mike Tracy\
+ , Pat LaBarbera\, Jerry Coker\, and David Liebman.</p>
+UID:20260422T170000Z-2270797@events.iu.edu
+DTSTAMP:20260416T223559Z
+URL:https://events.iu.edu/musiciub/event/2270797-tom-walsh-jazz-ensemble
+CATEGORIES:Performances, shows, and films
+LAST-MODIFIED:20260417T023759Z
+ATTACH:https://events.iu.edu/live/image/gid/56/width/168/height/168/crop/
+ 1/src_region/0,0,240,180/7706_Walsh_Tom.2016FA.webcal.js.rev.1617933423.j
+ pg
+X-LIVEWHALE-TYPE:events
+X-LIVEWHALE-ID:2270797
+X-LIVEWHALE-TIMEZONE:America/New_York
+X-LIVEWHALE-IMAGE:https://events.iu.edu/live/image/gid/56/width/168/heigh
+ t/168/crop/1/src_region/0\,0\,240\,180/7706_Walsh_Tom.2016FA.webcal.js.re
+ v.1617933423.jpg
+X-LIVEWHALE-IMAGE-CAPTION:<strong>Tom Walsh</strong>
+X-LIVEWHALE-SUMMARY:<p>\n  IU Day Concert\n</p>
+X-LIVEWHALE-TAGS:IU Day|Jacobs School of Music|Jazz|JSOM Event
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:IU Jacobs School of Music
@@ -2732,21 +2641,29 @@ BEGIN:VEVENT
 X-SOURCE:IU Jacobs School of Music
 DTSTART:20260423T000000Z
 DTEND:20260423T010000Z
-LOCATION:Auer Hall
+LOCATION:Auer Hall &amp\; LIVE@jacobs
 SUMMARY:Master's Recital – Corinne Foley\, oboe
-DESCRIPTION:
-X-ALT-DESC;FMTTYPE=text/html:<p></p>
+DESCRIPTION:Enjoy this performance from almost anywhere in the world viaL
+ IVE@jacobs! Meeting URL: https://liveatjacobs.music.indiana.edu/
+X-ALT-DESC;FMTTYPE=text/html:<p><strong>Enjoy this performance from almos
+ t anywhere in the world via</strong><a href="https://liveatjacobs.music.i
+ ndiana.edu/"><strong>LIVE@jacobs</strong></a><strong>!<br /></strong></p>
+  Meeting URL: https://liveatjacobs.music.indiana.edu/
 UID:20260423T000000Z-2257047@events.iu.edu
 DTSTAMP:20260402T131933Z
 URL:https://events.iu.edu/musiciub/event/2257047-masters-recital-corinne-
  foley-oboe
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260402T203523Z
+LAST-MODIFIED:20260416T162919Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2257047
 X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-TAGS:Jacobs School of Music|Oboe|Recitals|Student Recital|Woo
- dwind
+X-LIVEWHALE-TAGS:Jacobs School of Music|LIVE at jacobs|Live Streaming|Obo
+ e|Recitals|Student Recital|Woodwind
+X-LIVEWHALE-IS-ONLINE:1
+X-LIVEWHALE-ONLINE-TYPE:Hybrid
+X-LIVEWHALE-ONLINE-URL:https://liveatjacobs.music.indiana.edu/
+X-LIVEWHALE-ONLINE-BUTTON-LABEL:Visit LIVE@jacobs!
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:IU Jacobs School of Music
@@ -3007,7 +2924,7 @@ UID:20260424T000000Z-1973726@events.iu.edu
 DTSTAMP:20250626T154223Z
 URL:https://events.iu.edu/musiciub/event/1973726-concert-orchestra
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 ATTACH:https://events.iu.edu/live/image/gid/56/width/168/height/168/crop/
  1/src_region/0,0,240,180/8393_Wilkins_Thomas.2016SU.webcal.js.rev.1628180
  476.jpg
@@ -3363,7 +3280,7 @@ UID:20260425T000000Z-1973724@events.iu.edu
 DTSTAMP:20250626T154223Z
 URL:https://events.iu.edu/musiciub/event/1973724-wind-ensemble
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 ATTACH:https://events.iu.edu/live/image/gid/56/width/168/height/168/crop/
  1/src_region/0,0,240,180/22284_McKinney_Donald.2024FA.webcal.js_2.rev.172
  2289047.jpg
@@ -4023,7 +3940,7 @@ URL:https://events.iu.edu/musiciub/event/2170753-latin-american-ensemble-
  and-brazilian-percussion
 CATEGORIES:Community events,Culture and diversity,Performances, shows, an
  d films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2170753
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -4538,7 +4455,7 @@ DTSTAMP:20250626T154223Z
 URL:https://events.iu.edu/musiciub/event/1973721-computer-music-recital-j
  ohn-gibson-chi-wang
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 ATTACH:https://events.iu.edu/live/image/gid/56/width/168/height/168/crop/
  1/src_region/0,0,450,300/6557_CECM_E-mu-Modular.2021SP.webcal.js.rev.1611
  087373.jpg
@@ -4929,7 +4846,7 @@ DTSTAMP:20250626T154223Z
 URL:https://events.iu.edu/musiciub/event/1973719-the-choreography-project
  -presented-by-the-ballet
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:1973719
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -4955,7 +4872,7 @@ DTSTAMP:20250626T154223Z
 URL:https://events.iu.edu/musiciub/event/1973718-graduate-string-quartet-
  in-residence
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:1973718
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -5135,7 +5052,7 @@ DTSTAMP:20251209T154957Z
 URL:https://events.iu.edu/musiciub/event/2143126-opera-workshop-michael-s
  hell-director
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2143126
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -5157,7 +5074,7 @@ DTSTAMP:20250626T154223Z
 URL:https://events.iu.edu/musiciub/event/1973717-the-choreography-project
  -presented-by-the-ballet
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:1973717
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -5875,7 +5792,7 @@ UID:20260502T133000Z-2100016@events.iu.edu
 DTSTAMP:20251027T202318Z
 URL:https://events.iu.edu/musiciub/event/2100016-young-winds-spring-concert
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2100016
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -6002,7 +5919,7 @@ DTSTAMP:20250815T111840Z
 URL:https://events.iu.edu/musiciub/event/2018170-iu-childrens-choir-brent
  -gault-director
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2018170
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -6228,7 +6145,7 @@ BEGIN:VEVENT
 X-SOURCE:IU Jacobs School of Music
 DTSTART:20260502T233000Z
 DTEND:20260503T003000Z
-LOCATION:MUSICAL ARTS CENTER (MAC) &amp\; LIVE@jacobs
+LOCATION:MUSICAL ARTS CENTER (MAC)
 GEO:39.166571;-86.517459
 SUMMARY:Jazz Celebration – Featuring alumni guest artists John Clayton\
  , bass\, and Jeff Hamilton\, drums
@@ -6236,18 +6153,13 @@ UID:20260502T233000Z-1993857@events.iu.edu
 DTSTAMP:20250722T101539Z
 URL:https://operaballet.indiana.edu/events/jazz-celebration.html
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260327T164929Z
+LAST-MODIFIED:20260416T181006Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:1993857
 X-LIVEWHALE-TIMEZONE:America/New_York
 X-LIVEWHALE-SUMMARY:<p>\n  Jacobs Mainstage Season\n</p>
 X-LIVEWHALE-TAGS:Guest Artist|Instrumental Ensembles|Jacobs Mainstage Sea
- son|Jacobs School of Music|Jazz Bass|Jazz Percussion|Jazz|JSOM Event|LIVE
-  at jacobs|Live Streaming
-X-LIVEWHALE-IS-ONLINE:1
-X-LIVEWHALE-ONLINE-TYPE:Hybrid
-X-LIVEWHALE-ONLINE-URL:https://liveatjacobs.music.indiana.edu/
-X-LIVEWHALE-ONLINE-BUTTON-LABEL:Visit LIVE@jacobs!
+ son|Jacobs School of Music|Jazz Bass|Jazz Percussion|Jazz|JSOM Event
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:IU Jacobs School of Music
@@ -6489,7 +6401,7 @@ DTSTAMP:20260120T182223Z
 URL:https://events.iu.edu/musiciub/event/2178896-jacobs-harp-academy-spri
  ng-concert
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2178896
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -6531,7 +6443,7 @@ DTSTAMP:20250807T122532Z
 URL:https://events.iu.edu/musiciub/event/2010929-young-pianists-spring-re
  cital-i
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2010929
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -6572,7 +6484,7 @@ DTSTAMP:20250807T122532Z
 URL:https://events.iu.edu/musiciub/event/2010928-young-pianists-spring-re
  cital-ii
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2010928
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -6594,7 +6506,7 @@ DTSTAMP:20250807T122532Z
 URL:https://events.iu.edu/musiciub/event/2010927-young-pianists-spring-re
  cital-iii
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2010927
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -6616,7 +6528,7 @@ DTSTAMP:20250807T122532Z
 URL:https://events.iu.edu/musiciub/event/2010926-young-pianists-spring-re
  cital-iv
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2010926
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -6638,7 +6550,7 @@ DTSTAMP:20250807T122532Z
 URL:https://events.iu.edu/musiciub/event/2010925-young-pianists-spring-re
  cital-v
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2010925
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -6660,7 +6572,7 @@ DTSTAMP:20250807T122532Z
 URL:https://events.iu.edu/musiciub/event/2010924-young-pianists-spring-re
  cital-vi
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2010924
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -6701,7 +6613,7 @@ DTSTAMP:20250807T122532Z
 URL:https://events.iu.edu/musiciub/event/2010922-pre-college-strings-viol
  ins-spring-gala-concert
 CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2010922
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -6724,7 +6636,7 @@ URL:https://events.iu.edu/musiciub/event/2213235-10th-anniversary-histori
  cal-performance-conference
 CATEGORIES:Community events,Culture and diversity,Performances, shows, an
  d films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2213235
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -6748,7 +6660,7 @@ URL:https://events.iu.edu/musiciub/event/2213236-10th-anniversary-histori
  cal-performance-conference
 CATEGORIES:Community events,Culture and diversity,Performances, shows, an
  d films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2213236
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -6772,7 +6684,7 @@ URL:https://events.iu.edu/musiciub/event/2213233-10th-anniversary-histori
  cal-performance-conference
 CATEGORIES:Community events,Culture and diversity,Performances, shows, an
  d films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2213233
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -6795,7 +6707,7 @@ URL:https://events.iu.edu/musiciub/event/2213234-10th-anniversary-histori
  cal-performance-conference
 CATEGORIES:Community events,Culture and diversity,Performances, shows, an
  d films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2213234
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -6818,7 +6730,7 @@ URL:https://events.iu.edu/musiciub/event/2213231-10th-anniversary-histori
  cal-performance-conference
 CATEGORIES:Community events,Culture and diversity,Performances, shows, an
  d films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2213231
 X-LIVEWHALE-TIMEZONE:America/New_York
@@ -6842,7 +6754,7 @@ URL:https://events.iu.edu/musiciub/event/2213232-10th-anniversary-histori
  cal-performance-conference
 CATEGORIES:Community events,Culture and diversity,Performances, shows, an
  d films
-LAST-MODIFIED:20260415T184728Z
+LAST-MODIFIED:20260417T023559Z
 X-LIVEWHALE-TYPE:events
 X-LIVEWHALE-ID:2213232
 X-LIVEWHALE-TIMEZONE:America/New_York
