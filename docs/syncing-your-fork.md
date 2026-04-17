@@ -90,6 +90,40 @@ You'll likely get a merge conflict in `.github/workflows/generate-calendar.yml` 
 
 For conflicts in `config.json` or `index.html`, keep **your** values (your Supabase URL and anon key).
 
+### Optional: keep your generated files during merges
+
+If your fork builds its own `report.json`, `xmlui/version.txt`, `cities.json`, and `cities/*/feeds.txt`, you probably do **not** want upstream's generated copies during sync. A custom merge driver lets Git keep your fork's versions automatically.
+
+Add this to your fork's `.gitattributes`:
+
+```gitattributes
+report.json merge=keepours
+xmlui/version.txt merge=keepours
+cities.json merge=keepours
+cities/*/feeds.txt merge=keepours
+```
+
+Then run this once in the fork:
+
+```bash
+git config merge.keepours.name "keep our generated files"
+git config merge.keepours.driver true
+```
+
+What this does:
+
+- During `git merge upstream/main`, Git keeps the fork's current version of those generated files.
+- Upstream code and workflow changes still merge normally.
+- The next fork build regenerates those files from the fork's own data and git state.
+
+If you do not want to set up a merge driver, the manual equivalent after a merge is:
+
+```bash
+git checkout --ours report.json xmlui/version.txt cities.json cities/*/feeds.txt
+git add report.json xmlui/version.txt cities.json cities/*/feeds.txt
+git commit
+```
+
 ### Step 2: Create the feeds table
 
 Run this in your Supabase SQL Editor (Dashboard > SQL Editor > New query):
