@@ -1,8 +1,8 @@
 <Component
   name="AddFeedDialog"
-  method.open="() => { feedUrl = ''; feedName = ''; previewEvents = null; validating = false; validationError = ''; submitted = false; deleteError = ''; activePanel = 'feeds'; feedsList.refetch(); }"
+  method.open="() => { feedUrl = ''; feedName = ''; previewEvents = null; validating = false; validationError = ''; submitted = false; deleteError = ''; showInfo = false; activePanel = 'feeds'; feedsList.refetch(); }"
   method.close="() => { if (activePanel === 'feeds') activePanel = ''; }"
-  method.toggle="() => { if (activePanel === 'feeds') { activePanel = ''; } else { feedUrl = ''; feedName = ''; previewEvents = null; validating = false; validationError = ''; submitted = false; deleteError = ''; activePanel = 'feeds'; feedsList.refetch(); } }"
+  method.toggle="() => { if (activePanel === 'feeds') { activePanel = ''; } else { feedUrl = ''; feedName = ''; previewEvents = null; validating = false; validationError = ''; submitted = false; deleteError = ''; showInfo = false; activePanel = 'feeds'; feedsList.refetch(); } }"
   var.feedUrl=""
   var.feedName=""
   var.previewEvents="{null}"
@@ -10,6 +10,7 @@
   var.validationError=""
   var.submitted="{false}"
   var.hasRecurrence="{false}"
+  var.showInfo="{false}"
   var.deleteError=""
   var.deletingId="">
 
@@ -99,6 +100,13 @@
     <HStack verticalAlignment="start" gap="$space-2">
       <H3 width="*">Manage Feeds</H3>
       <Icon
+        name="l-info"
+        tooltip="How feed intake works"
+        width="20px"
+        height="20px"
+        color="{showInfo ? '$color-primary-600' : '$color-text-secondary'}"
+        onClick="showInfo = !showInfo" />
+      <Icon
         name="close"
         tooltip="Hide feed manager"
         width="20px"
@@ -107,6 +115,28 @@
         onClick="activePanel = ''" />
     </HStack>
     <VStack gap="$space-4">
+
+      <Card when="{showInfo}" padding="$space-3" gap="$space-2" backgroundColor="$color-surface-50">
+        <HStack verticalAlignment="start" gap="$space-2">
+          <Text fontWeight="bold" width="*">How Manage Feeds Works</Text>
+          <Icon
+            name="close"
+            tooltip="Hide explanation"
+            width="16px"
+            height="16px"
+            color="$color-text-secondary"
+            onClick="showInfo = false" />
+        </HStack>
+        <Text fontSize="$fontSize-sm" color="$color-text-secondary">
+          Manage Feeds adds ICS feeds directly to the database. New feeds added here enter the build queue first, then flip to active after a successful build downloads and processes them.
+        </Text>
+        <Text fontSize="$fontSize-sm" color="$color-text-secondary">
+          This panel shows database-backed feed status. Queued means the feed is already in the database but has not yet been picked up by a build. Active means a build has processed it successfully.
+        </Text>
+        <Text fontSize="$fontSize-sm" color="$color-text-secondary">
+          Git-side intake still exists in <Text variant="code">pending_feeds.txt</Text>. That complementary path is used for contributor-submitted ICS feeds and for scraper staging. The build moves those entries into the database before normal feed processing continues.
+        </Text>
+      </Card>
 
       <!-- Add feed form (hidden after preview loads) -->
       <VStack gap="$space-2" when="{!previewEvents && !submitted}">
@@ -183,7 +213,7 @@
       <!-- Existing feeds -->
       <VStack gap="$space-2">
         <variable name="pendingCount" value="{(feedsList.value || []).filter(function(f) { return f.status === 'pending'; }).length}" />
-        <Text fontWeight="bold" value="{feedsList.value ? ('Feeds (' + feedsList.value.length + (pendingCount ? ', ' + pendingCount + ' pending' : '') + ')') : 'Feeds (...)'}" />
+        <Text fontWeight="bold" value="{feedsList.value ? ('Feeds (' + feedsList.value.length + (pendingCount ? ', ' + pendingCount + ' queued' : '') + ')') : 'Feeds (...)'}" />
         <Text
           when="{pendingCount > 0}"
           fontSize="$fontSize-sm"
@@ -196,9 +226,9 @@
                 <HStack gap="$space-2" verticalAlignment="center">
                   <Text value="{$item.name}" flexGrow="1" />
                   <Badge
-                    value="{$item.status}"
+                    value="{$item.status === 'pending' ? 'queued' : $item.status}"
                     variant="pill"
-                    colorMap="{{ pending: { background: '$color-warn-500', label: '$const-color-surface-0' }, active: { background: '$color-success-500', label: '$const-color-surface-0' } }}" />
+                    colorMap="{{ queued: { background: '$color-warn-500', label: '$const-color-surface-0' }, active: { background: '$color-success-500', label: '$const-color-surface-0' } }}" />
                   <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{$item.feed_type}" />
                   <Button
                     label="Delete"
