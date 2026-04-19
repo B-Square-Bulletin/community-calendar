@@ -5,11 +5,7 @@ test('manage-feeds-roundtrip', async ({ page }) => {
   test.setTimeout(30000);
 
   try {
-    await page.goto('./');
-
-    const santaRosaBtn = page.getByText('Santa Rosa Now', { exact: true });
-    await expect(santaRosaBtn).toBeVisible({ timeout: 15000 });
-    await santaRosaBtn.click();
+    await page.goto('./?city=santarosa');
 
     await expect(page.getByPlaceholder('Search events...')).toBeVisible({ timeout: 15000 });
 
@@ -38,6 +34,31 @@ test('manage-feeds-roundtrip', async ({ page }) => {
     ]);
 
     await expect(page.getByText(/^Preview:/)).toBeVisible({ timeout: 15000 });
+
+    await page.route('**/rest/v1/feeds', async (route) => {
+      if (route.request().method() === 'POST') {
+        await route.fulfill({
+          status: 201,
+          contentType: 'application/json',
+          body: '',
+        });
+        return;
+      }
+      await route.continue();
+    });
+
+    const addFeedButton = page.getByRole('button', { name: 'Add Feed' });
+    await expect(addFeedButton).toBeVisible({ timeout: 15000 });
+
+    await Promise.all([
+      page.waitForResponse((r) =>
+        r.url().includes('/rest/v1/feeds') &&
+        r.request().method() === 'POST'
+      ),
+      addFeedButton.click(),
+    ]);
+
+    await expect(page.getByText(/^Feed saved\./)).toBeVisible({ timeout: 15000 });
 
     await manageFeedsButton.click();
     await expect(page.getByText(/^Preview:/)).toHaveCount(0, { timeout: 15000 });

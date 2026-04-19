@@ -16,7 +16,7 @@
   <DataSource
     id="feedsList"
     when="{activePanel === 'feeds'}"
-    url="{appGlobals.supabaseUrl + '/rest/v1/feeds?select=id,name,url,feed_type,status&city=eq.' + (window.cityFilter || 'bloomington') + '&status=eq.active&feed_type=in.(ics_url,curator)&order=name.asc'}"
+    url="{appGlobals.supabaseUrl + '/rest/v1/feeds?select=id,name,url,feed_type,status&city=eq.' + (window.cityFilter || 'bloomington') + '&status=in.(active,pending)&feed_type=in.(ics_url,curator)&order=status.desc&order=name.asc'}"
     headers="{{
       apikey: appGlobals.supabasePublishableKey
     }}"
@@ -140,7 +140,7 @@
       </VStack>
 
       <!-- Preview -->
-      <VStack when="{previewEvents && !submitted}" gap="$space-2">
+      <VStack when="{previewEvents && !submitted}" gap="$space-2" paddingBottom="$space-3">
         <Text fontWeight="bold" value="{'Preview: ' + previewEvents.length + ' upcoming events from ' + feedName}" />
         <Text when="{hasRecurrence}" fontSize="$fontSize-sm" color="$color-text-secondary" value="This feed has recurring events. The build will expand them — expect more events than shown here." />
         <ScrollViewer height="300px">
@@ -149,18 +149,25 @@
               <EventCard event="{$item}" filterTerm="" />
             </List>
           </VStack>
+          <property name="footerTemplate">
+            <HStack
+              gap="$space-2"
+              horizontalAlignment="end"
+              padding="$space-2"
+              backgroundColor="$color-surface-0"
+              borderTop="1px solid $color-surface-200">
+              <Button
+                label="Back"
+                variant="ghost"
+                onClick="() => { previewEvents = null; validationError = ''; }"
+              />
+              <Button
+                label="Add Feed"
+                onClick="() => saveFeedApi.execute({ city: window.cityFilter || 'bloomington', url: feedUrl, name: feedName, feed_type: 'ics_url', status: 'pending' })"
+              />
+            </HStack>
+          </property>
         </ScrollViewer>
-        <HStack gap="$space-2" horizontalAlignment="end">
-          <Button
-            label="Back"
-            variant="ghost"
-            onClick="() => { previewEvents = null; validationError = ''; }"
-          />
-          <Button
-            label="Add Feed"
-            onClick="() => saveFeedApi.execute({ city: window.cityFilter || 'bloomington', url: feedUrl, name: feedName, feed_type: 'ics_url', status: 'pending' })"
-          />
-        </HStack>
       </VStack>
 
       <!-- Confirmation -->
@@ -175,13 +182,23 @@
 
       <!-- Existing feeds -->
       <VStack gap="$space-2">
-        <Text fontWeight="bold" value="{'Feeds (' + (feedsList.value ? feedsList.value.length : '...') + ')'}" />
+        <variable name="pendingCount" value="{(feedsList.value || []).filter(function(f) { return f.status === 'pending'; }).length}" />
+        <Text fontWeight="bold" value="{feedsList.value ? ('Feeds (' + feedsList.value.length + (pendingCount ? ', ' + pendingCount + ' pending' : '') + ')') : 'Feeds (...)'}" />
+        <Text
+          when="{pendingCount > 0}"
+          fontSize="$fontSize-sm"
+          color="$color-text-secondary"
+          value="{pendingCount + ' feed' + (pendingCount === 1 ? '' : 's') + ' queued for the next build.'}" />
         <ScrollViewer height="50vh">
           <VStack gap="$space-1">
             <Items data="{feedsList.value || []}">
               <VStack paddingVertical="$space-1">
                 <HStack gap="$space-2" verticalAlignment="center">
                   <Text value="{$item.name}" flexGrow="1" />
+                  <Badge
+                    value="{$item.status}"
+                    variant="pill"
+                    colorMap="{{ pending: { background: '$color-warn-500', label: '$const-color-surface-0' }, active: { background: '$color-success-500', label: '$const-color-surface-0' } }}" />
                   <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{$item.feed_type}" />
                   <Button
                     label="Delete"
