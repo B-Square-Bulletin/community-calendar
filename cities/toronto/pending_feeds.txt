@@ -15,6 +15,3 @@
 #   python scripts/add_scraper.py example toronto "Source Name" --test
 #
 # See CONTRIBUTING.md for details.
-# Luma Toronto Discover
-# cmd: python scrapers/luma.py --url "https://api2.luma.com/ics/get?entity=discover&id=discplace-Cx3JMS6vXKAbhV5" --name "Luma Toronto Discover" --timezone "America/Toronto"
-cities/toronto/luma_toronto_discover.ics
