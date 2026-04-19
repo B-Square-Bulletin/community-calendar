@@ -15,31 +15,3 @@
 #   python scripts/add_scraper.py example toronto "Source Name" --test
 #
 # See CONTRIBUTING.md for details.
-
-# Pluto Toronto
-# cmd: python scrapers/luma_collection.py --url "https://luma.com/plutotoronto" --name "Pluto Toronto" --timezone "America/Toronto"
-cities/toronto/luma_pluto_toronto.ics
-
-# Toronto Social Mixer
-# cmd: python scrapers/luma_collection.py --url "https://luma.com/TorontoSocialMixer" --name "Toronto Social Mixer" --timezone "America/Toronto"
-cities/toronto/luma_toronto_social_mixer.ics
-
-# TechTO Events
-# cmd: python scrapers/luma_collection.py --url "https://luma.com/TechTO-Events" --name "TechTO Events" --timezone "America/Toronto"
-cities/toronto/luma_techto_events.ics
-
-# Uplift Collective
-# cmd: python scrapers/luma_collection.py --url "https://luma.com/upliftcollective" --name "Uplift Collective" --timezone "America/Toronto"
-cities/toronto/luma_uplift_collective.ics
-
-# again again
-# cmd: python scrapers/luma_collection.py --url "https://luma.com/againagain" --name "again again" --timezone "America/Toronto"
-cities/toronto/luma_again_again.ics
-
-# airess
-# cmd: python scrapers/luma_collection.py --url "https://luma.com/airess" --name "airess" --timezone "America/Toronto"
-cities/toronto/luma_airess.ics
-
-# UTE
-# cmd: python scrapers/luma_collection.py --url "https://luma.com/ute" --name "UTE" --timezone "America/Toronto"
-cities/toronto/luma_ute.ics
