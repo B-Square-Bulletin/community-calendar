@@ -15,3 +15,6 @@
 #   python scripts/add_scraper.py example toronto "Source Name" --test
 #
 # See CONTRIBUTING.md for details.
+
+# Luma Toronto Discover
+https://api2.luma.com/ics/get?entity=discover&id=discplace-Cx3JMS6vXKAbhV5
