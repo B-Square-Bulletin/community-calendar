@@ -324,6 +324,7 @@ jobs:
         python scrapers/etobicoke_hort.py --output cities/toronto/etobicoke_hort.ics || true
         python scrapers/angas_farm.py --output cities/toronto/angas_farm.ics || true
         python scrapers/yohomo.py --output cities/toronto/yohomo.ics || true
+        python scrapers/luma.py --url "https://api2.luma.com/ics/get?entity=discover&id=discplace-Cx3JMS6vXKAbhV5" --name "Luma Toronto Discover" --timezone "America/Toronto" --output cities/toronto/luma_toronto_discover.ics || true
       continue-on-error: true
 
 
