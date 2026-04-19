@@ -4,18 +4,6 @@ PRODID:-//Pottery House Studio//potteryhousestudio.com//
 X-WR-CALNAME:Pottery House Studio
 X-WR-TIMEZONE:America/Los_Angeles
 BEGIN:VEVENT
-SUMMARY:Ceramic Rose Bouquet with Eva
-DTSTART;TZID=America/Los_Angeles:20260129T150000
-DTEND;TZID=America/Los_Angeles:20260129T160000
-UID:695a8d7d4df46f48fb116357@squarespace.com
-DESCRIPTION:
-LOCATION:The Pottery House Studio\, Suite #17\,  Williamsburg Center\, 223
-  South Pete Ellis Drive\, Bloomington\, IN\, 47408\, United States
-URL:https://www.potteryhousestudio.com/workshops/2026/1/29/ceramic-rose-bo
- uquet-with-eva
-X-SOURCE:Pottery House Studio
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:All Ages Pottery Pizza Night
 DTSTART;TZID=America/Los_Angeles:20260130T150000
 DTEND;TZID=America/Los_Angeles:20260130T180000

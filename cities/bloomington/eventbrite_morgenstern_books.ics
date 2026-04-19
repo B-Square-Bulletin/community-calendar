@@ -4,46 +4,6 @@ PRODID:-//Morgenstern Books//eventbrite.com//
 X-WR-CALNAME:Morgenstern Books
 X-WR-TIMEZONE:America/New_York
 BEGIN:VEVENT
-SUMMARY:Jenn Cristy performs LIVE for Independent Bookstore Day!
-DTSTART;TZID=America/New_York:20260425T150000
-DTEND;TZID=America/New_York:20260425T160000
-UID:630c76804bd921eadedcba5fc1cb513e@eventbrite.com
-DESCRIPTION:It's Independent Bookstore Day! To celebrate\, we'll be hostin
- g our very own Jenn Cristy for a live musical performance at 3 pm.
-LOCATION:Morgenstern Books & Café\, 849 South Auto Mall Road\, Bloomingto
- n\, IN 47401\, Bloomington\, IN
-URL:https://www.eventbrite.com/e/jenn-cristy-performs-live-for-independent
- -bookstore-day-tickets-1987338281297
-X-SOURCE:Morgenstern Books
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Katie Simon on "Tell Me What You Like"
-DTSTART;TZID=America/New_York:20260421T180000
-DTEND;TZID=America/New_York:20260421T190000
-UID:02cbbac7f2fc70af9e1d878b7e95aaf0@eventbrite.com
-DESCRIPTION:With the Kinsey Institute\, presenting Katie Simon on "Tell Me
-  What You Like: An Honest Discussion of Sex and Intimacy After Sexual Assa
- ult"
-LOCATION:Morgenstern Books & Café\, 849 South Auto Mall Road\, Bloomingto
- n\, IN 47401\, Bloomington\, IN
-URL:https://www.eventbrite.com/e/katie-simon-on-tell-me-what-you-like-tick
- ets-1985238099597
-X-SOURCE:Morgenstern Books
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Alka Joshi on "Six Days in Bombay"
-DTSTART;TZID=America/New_York:20260428T180000
-DTEND;TZID=America/New_York:20260428T190000
-UID:1dc2a97ebea2f1006b7cb469360d3c8b@eventbrite.com
-DESCRIPTION:Join us for an evening with bestselling author Alka Joshi to c
- elebrate the paperback release of "Six Days in Bombay"
-LOCATION:Morgenstern Books & Café\, 849 South Auto Mall Road\, Bloomingto
- n\, IN 47401\, Bloomington\, IN
-URL:https://www.eventbrite.com/e/alka-joshi-on-six-days-in-bombay-tickets-
- 1985238187861
-X-SOURCE:Morgenstern Books
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Ira J. Allen on "Panic Now?: Tools for Humanizing"
 DTSTART;TZID=America/New_York:20260430T180000
 DTEND;TZID=America/New_York:20260430T190000
@@ -70,16 +30,43 @@ URL:https://www.eventbrite.com/e/nick-bruel-on-bad-kitty-gets-a-job-ticket
 X-SOURCE:Morgenstern Books
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:David George Haskell on "How Flowers Made Our World"
-DTSTART;TZID=America/New_York:20260424T180000
-DTEND;TZID=America/New_York:20260424T190000
-UID:a4a2f5275bd4272e5e64286e4a58de98@eventbrite.com
-DESCRIPTION:Join us to hear biologist and author David George Haskell disc
- ussing "How Flowers Made Our World: The Story of Nature's Revolutionaries"
+SUMMARY:S.A. Barnes on "Death's Daughter"
+DTSTART;TZID=America/New_York:20260508T180000
+DTEND;TZID=America/New_York:20260508T190000
+UID:f87a96fef4625844542bb6aa39af7764@eventbrite.com
+DESCRIPTION:Join us for an evening with bestselling author S.A. Barnes\, w
+ ho will be celebrating the release of her latest novel\, "Death's Daughter
+ "
 LOCATION:Morgenstern Books & Café\, 849 South Auto Mall Road\, Bloomingto
  n\, IN 47401\, Bloomington\, IN
-URL:https://www.eventbrite.com/e/david-george-haskell-on-how-flowers-made-
- our-world-tickets-1983206437842
+URL:https://www.eventbrite.com/e/sa-barnes-on-deaths-daughter-tickets-1985
+ 381047157
+X-SOURCE:Morgenstern Books
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Ellery Adams on "Invasive Species"
+DTSTART;TZID=America/New_York:20260419T150000
+DTEND;TZID=America/New_York:20260419T160000
+UID:67c74923fe095d95f6d9f117fdb588e0@eventbrite.com
+DESCRIPTION:Join us for an afternoon with bestselling author Ellery Adams 
+ in celebration of her new book\, Invasive Species!
+LOCATION:Morgenstern Books & Café\, 849 South Auto Mall Road\, Bloomingto
+ n\, IN 47401\, Bloomington\, IN
+URL:https://www.eventbrite.com/e/ellery-adams-on-invasive-species-tickets-
+ 1983206056702
+X-SOURCE:Morgenstern Books
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Kim Howard on "The Naked Streak"
+DTSTART;TZID=America/New_York:20260503T150000
+DTEND;TZID=America/New_York:20260503T160000
+UID:dc6d60b876bc124be840f63782645473@eventbrite.com
+DESCRIPTION:Join us in the children's department for an afternoon with aut
+ hor Kim Howard celebrating the release of her new book\, The Naked Streak!
+LOCATION:Morgenstern Books & Café\, 849 South Auto Mall Road\, Bloomingto
+ n\, IN 47401\, Bloomington\, IN
+URL:https://www.eventbrite.com/e/kim-howard-on-the-naked-streak-tickets-19
+ 85238474719
 X-SOURCE:Morgenstern Books
 END:VEVENT
 BEGIN:VEVENT
@@ -97,16 +84,45 @@ URL:https://www.eventbrite.com/e/matt-browning-on-gilmore-girls-pop-cultur
 X-SOURCE:Morgenstern Books
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Ellery Adams on "Invasive Species"
-DTSTART;TZID=America/New_York:20260419T150000
-DTEND;TZID=America/New_York:20260419T160000
-UID:67c74923fe095d95f6d9f117fdb588e0@eventbrite.com
-DESCRIPTION:Join us for an afternoon with bestselling author Ellery Adams 
- in celebration of her new book\, Invasive Species!
+SUMMARY:Katie Simon on "Tell Me What You Like"
+DTSTART;TZID=America/New_York:20260421T180000
+DTEND;TZID=America/New_York:20260421T190000
+UID:02cbbac7f2fc70af9e1d878b7e95aaf0@eventbrite.com
+DESCRIPTION:With the Kinsey Institute\, presenting Katie Simon on "Tell Me
+  What You Like: An Honest Discussion of Sex and Intimacy After Sexual Assa
+ ult"
 LOCATION:Morgenstern Books & Café\, 849 South Auto Mall Road\, Bloomingto
  n\, IN 47401\, Bloomington\, IN
-URL:https://www.eventbrite.com/e/ellery-adams-on-invasive-species-tickets-
- 1983206056702
+URL:https://www.eventbrite.com/e/katie-simon-on-tell-me-what-you-like-tick
+ ets-1985238099597
+X-SOURCE:Morgenstern Books
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Jenn Cristy performs LIVE for Independent Bookstore Day!
+DTSTART;TZID=America/New_York:20260425T150000
+DTEND;TZID=America/New_York:20260425T160000
+UID:630c76804bd921eadedcba5fc1cb513e@eventbrite.com
+DESCRIPTION:It's Independent Bookstore Day! To celebrate\, we'll be hostin
+ g our very own Jenn Cristy for a live musical performance at 3 pm.
+LOCATION:Morgenstern Books & Café\, 849 South Auto Mall Road\, Bloomingto
+ n\, IN 47401\, Bloomington\, IN
+URL:https://www.eventbrite.com/e/jenn-cristy-performs-live-for-independent
+ -bookstore-day-tickets-1987338281297
+X-SOURCE:Morgenstern Books
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bobbie Lancaster on "We Are All Connected" (plus a children's conc
+ ert!)
+DTSTART;TZID=America/New_York:20260517T150000
+DTEND;TZID=America/New_York:20260517T160000
+UID:f8d00eb459a73f0995c61e7702a02e9f@eventbrite.com
+DESCRIPTION:Join us for an afternoon author event and children's concert w
+ ith Bobbie Lancaster\, who will be sharing her new book "We Are All Connec
+ ted"
+LOCATION:Morgenstern Books & Café\, 849 South Auto Mall Road\, Bloomingto
+ n\, IN 47401\, Bloomington\, IN
+URL:https://www.eventbrite.com/e/bobbie-lancaster-on-we-are-all-connected-
+ plus-a-childrens-concert-tickets-1986855048936
 X-SOURCE:Morgenstern Books
 END:VEVENT
 BEGIN:VEVENT
@@ -123,30 +139,29 @@ URL:https://www.eventbrite.com/e/rea-frey-on-dear-mother-tickets-198300985
 X-SOURCE:Morgenstern Books
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:S.A. Barnes on "Death's Daughter"
-DTSTART;TZID=America/New_York:20260508T180000
-DTEND;TZID=America/New_York:20260508T190000
-UID:f87a96fef4625844542bb6aa39af7764@eventbrite.com
-DESCRIPTION:Join us for an evening with bestselling author S.A. Barnes\, w
- ho will be celebrating the release of her latest novel\, "Death's Daughter
- "
+SUMMARY:Alka Joshi on "Six Days in Bombay"
+DTSTART;TZID=America/New_York:20260428T180000
+DTEND;TZID=America/New_York:20260428T190000
+UID:1dc2a97ebea2f1006b7cb469360d3c8b@eventbrite.com
+DESCRIPTION:Join us for an evening with bestselling author Alka Joshi to c
+ elebrate the paperback release of "Six Days in Bombay"
 LOCATION:Morgenstern Books & Café\, 849 South Auto Mall Road\, Bloomingto
  n\, IN 47401\, Bloomington\, IN
-URL:https://www.eventbrite.com/e/sa-barnes-on-deaths-daughter-tickets-1985
- 381047157
+URL:https://www.eventbrite.com/e/alka-joshi-on-six-days-in-bombay-tickets-
+ 1985238187861
 X-SOURCE:Morgenstern Books
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Kim Howard on "The Naked Streak"
-DTSTART;TZID=America/New_York:20260503T150000
-DTEND;TZID=America/New_York:20260503T160000
-UID:dc6d60b876bc124be840f63782645473@eventbrite.com
-DESCRIPTION:Join us in the children's department for an afternoon with aut
- hor Kim Howard celebrating the release of her new book\, The Naked Streak!
+SUMMARY:David George Haskell on "How Flowers Made Our World"
+DTSTART;TZID=America/New_York:20260424T180000
+DTEND;TZID=America/New_York:20260424T190000
+UID:a4a2f5275bd4272e5e64286e4a58de98@eventbrite.com
+DESCRIPTION:Join us to hear biologist and author David George Haskell disc
+ ussing "How Flowers Made Our World: The Story of Nature's Revolutionaries"
 LOCATION:Morgenstern Books & Café\, 849 South Auto Mall Road\, Bloomingto
  n\, IN 47401\, Bloomington\, IN
-URL:https://www.eventbrite.com/e/kim-howard-on-the-naked-streak-tickets-19
- 85238474719
+URL:https://www.eventbrite.com/e/david-george-haskell-on-how-flowers-made-
+ our-world-tickets-1983206437842
 X-SOURCE:Morgenstern Books
 END:VEVENT
 END:VCALENDAR
