@@ -11,6 +11,8 @@ https://calendar.google.com/calendar/ical/eventsatarlenefransictheater@gmail.com
 https://schulzmuseum.org/events/?ical=1
 # GoLocal Cooperative
 https://golocal.coop/?post_type=tribe_events&ical=1&eventDisplay=list
+# Jon
+https://dzpdualvwspgqghrysyz.supabase.co/functions/v1/my-picks?token=e5399692-5282-450b-8900-8ac2cb9fb18b
 # Luther Burbank Center
 https://lutherburbankcenter.org/events/?ical=1
 # Meetup: Go Wild Hikers
@@ -199,6 +201,3 @@ cities/santarosa/songkick_will_call.ics
 # cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/3239334-twin-oaks-roadhouse" --name "Twin Oaks Roadhouse"
 cities/santarosa/songkick_twin_oaks.ics
 
-# --- Curator feeds ---
-# judell picks
-https://dzpdualvwspgqghrysyz.supabase.co/functions/v1/my-picks?token=79e9c9a4-ccb1-4797-ad6c-6052a16e6cde
