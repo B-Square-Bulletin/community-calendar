@@ -64,7 +64,7 @@ def fix_malformed_description(raw: str) -> str:
 
 def extract_jsonld_blocks(html: str) -> list[dict]:
     """Extract all JSON-LD blocks from HTML, with malformed-JSON recovery."""
-    pattern = r'<script\s+type="application/ld\+json"[^>]*>(.*?)</script>'
+    pattern = r'<script[^>]*type="application/ld\+json"[^>]*>(.*?)</script>'
     matches = re.findall(pattern, html, re.DOTALL)
 
     blocks = []

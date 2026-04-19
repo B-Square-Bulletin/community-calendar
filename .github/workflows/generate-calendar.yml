@@ -325,6 +325,13 @@ jobs:
         python scrapers/angas_farm.py --output cities/toronto/angas_farm.ics || true
         python scrapers/yohomo.py --output cities/toronto/yohomo.ics || true
         python scrapers/luma.py --url "https://api2.luma.com/ics/get?entity=discover&id=discplace-Cx3JMS6vXKAbhV5" --name "Luma Toronto Discover" --timezone "America/Toronto" --output cities/toronto/luma_toronto_discover.ics || true
+        python scrapers/luma_collection.py --url "https://luma.com/plutotoronto" --name "Pluto Toronto" --timezone "America/Toronto" --output cities/toronto/luma_pluto_toronto.ics || true
+        python scrapers/luma_collection.py --url "https://luma.com/TorontoSocialMixer" --name "Toronto Social Mixer" --timezone "America/Toronto" --output cities/toronto/luma_toronto_social_mixer.ics || true
+        python scrapers/luma_collection.py --url "https://luma.com/TechTO-Events" --name "TechTO Events" --timezone "America/Toronto" --output cities/toronto/luma_techto_events.ics || true
+        python scrapers/luma_collection.py --url "https://luma.com/upliftcollective" --name "Uplift Collective" --timezone "America/Toronto" --output cities/toronto/luma_uplift_collective.ics || true
+        python scrapers/luma_collection.py --url "https://luma.com/againagain" --name "again again" --timezone "America/Toronto" --output cities/toronto/luma_again_again.ics || true
+        python scrapers/luma_collection.py --url "https://luma.com/airess" --name "airess" --timezone "America/Toronto" --output cities/toronto/luma_airess.ics || true
+        python scrapers/luma_collection.py --url "https://luma.com/ute" --name "UTE" --timezone "America/Toronto" --output cities/toronto/luma_ute.ics || true
       continue-on-error: true
 
 
