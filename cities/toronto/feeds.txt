@@ -47,8 +47,6 @@ https://highparknaturecentre.com/events/?ical=1
 https://jazzbistro.ca/events/?ical=1
 # Jewel Envy
 https://www.jewelenvy.ca/events/?ical=1
-# Luma Toronto Discover
-https://api2.luma.com/ics/get?entity=discover&id=discplace-Cx3JMS6vXKAbhV5
 # Meetup: 20s 30s Toronto Social
 https://www.meetup.com/20s-30s-toronto-social-activities/events/ical/
 # Meetup: A Book Club Downtown
@@ -308,6 +306,9 @@ https://www.eventbrite.ca/o/house-of-anansi-21689379263
 # Lula Lounge
 # cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/lula-lounge-19825205758" --name "Lula Lounge"
 cities/toronto/eventbrite_lula_lounge.ics
+# Luma Toronto Discover
+# cmd: python scrapers/luma.py --url "https://api2.luma.com/ics/get?entity=discover&id=discplace-Cx3JMS6vXKAbhV5" --name "Luma Toronto Discover" --timezone "America/Toronto"
+cities/toronto/luma_toronto_discover.ics
 # Metrolinx Board
 # cmd: python scrapers/metrolinx_board.py
 cities/toronto/metrolinx_board.ics
