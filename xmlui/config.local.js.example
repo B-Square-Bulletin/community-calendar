@@ -1,0 +1,12 @@
+// Copy this file to config.local.js and fill in your Supabase credentials.
+// config.local.js is gitignored — it won't conflict on upstream syncs.
+//
+// Find your values in the Supabase dashboard:
+//   Settings > API > Project URL (for SUPABASE_URL)
+//   Settings > API > Project API keys > anon public (for SUPABASE_KEY)
+//
+// Note: if your project uses publishable keys (sb_publishable_...),
+// use that instead of the anon JWT. Both work the same way.
+
+window.SUPABASE_URL = 'https://YOUR_PROJECT_REF.supabase.co';
+window.SUPABASE_KEY = 'your-anon-or-publishable-key';
