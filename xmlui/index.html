@@ -12,21 +12,35 @@
 
     </style>
     <script>window._xsLogs = [];</script>
-    <script src="config.local.js"></script>
     <script>
-      if (!window.SUPABASE_URL || !window.SUPABASE_KEY) {
+      (function() {
+        function loadJsonFallback() {
+          try {
+            var cfgXhr = new XMLHttpRequest();
+            cfgXhr.open('GET', 'config.json?_=' + Date.now(), false);
+            cfgXhr.send();
+            if (cfgXhr.status === 200) {
+              var cfg = JSON.parse(cfgXhr.responseText);
+              var globals = (cfg && cfg.appGlobals) || {};
+              window.SUPABASE_URL = window.SUPABASE_URL || globals.supabaseUrl;
+              window.SUPABASE_KEY = window.SUPABASE_KEY || globals.supabasePublishableKey;
+            }
+          } catch (e) {}
+        }
+
         try {
-          var cfgXhr = new XMLHttpRequest();
-          cfgXhr.open('GET', 'config.json?_=' + Date.now(), false);
-          cfgXhr.send();
-          if (cfgXhr.status === 200) {
-            var cfg = JSON.parse(cfgXhr.responseText);
-            var globals = (cfg && cfg.appGlobals) || {};
-            window.SUPABASE_URL = window.SUPABASE_URL || globals.supabaseUrl;
-            window.SUPABASE_KEY = window.SUPABASE_KEY || globals.supabasePublishableKey;
+          var localXhr = new XMLHttpRequest();
+          localXhr.open('GET', 'config.local.js?_=' + Date.now(), false);
+          localXhr.send();
+          if (localXhr.status === 200 && localXhr.responseText) {
+            new Function(localXhr.responseText)();
           }
         } catch (e) {}
-      }
+
+        if (!window.SUPABASE_URL || !window.SUPABASE_KEY) {
+          loadJsonFallback();
+        }
+      })();
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/rrule@2.8.1/dist/es5/rrule.min.js"></script>
