@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-20T01:00:24.946963",
+  "generated": "2026-04-20T02:50:53.917861",
   "cities": {
     "santarosa": {
       "feeds": {
@@ -16058,7 +16058,7 @@
             },
             {
               "date": "2026-04-20",
-              "count": 283
+              "count": 308
             }
           ]
         },
@@ -17622,7 +17622,7 @@
             },
             {
               "date": "2026-04-20",
-              "count": 370
+              "count": 368
             }
           ]
         },
@@ -18910,7 +18910,7 @@
             },
             {
               "date": "2026-04-20",
-              "count": 192
+              "count": 189
             }
           ]
         },
@@ -20750,7 +20750,7 @@
             },
             {
               "date": "2026-04-20",
-              "count": 12
+              "count": 11
             }
           ]
         },
@@ -23630,7 +23630,7 @@
             },
             {
               "date": "2026-04-20",
-              "count": 247
+              "count": 248
             }
           ]
         },
@@ -23814,62 +23814,6 @@
             }
           ]
         },
-        "bloomingtoncommunityband": {
-          "history": [
-            {
-              "date": "2026-04-07",
-              "count": 0
-            },
-            {
-              "date": "2026-04-08",
-              "count": 0
-            },
-            {
-              "date": "2026-04-09",
-              "count": 0
-            },
-            {
-              "date": "2026-04-10",
-              "count": 0
-            },
-            {
-              "date": "2026-04-11",
-              "count": 0
-            },
-            {
-              "date": "2026-04-12",
-              "count": 0
-            },
-            {
-              "date": "2026-04-13",
-              "count": 0
-            },
-            {
-              "date": "2026-04-14",
-              "count": 0
-            },
-            {
-              "date": "2026-04-15",
-              "count": 0
-            },
-            {
-              "date": "2026-04-17",
-              "count": 0
-            },
-            {
-              "date": "2026-04-18",
-              "count": 0
-            },
-            {
-              "date": "2026-04-19",
-              "count": 0
-            },
-            {
-              "date": "2026-04-20",
-              "count": 0
-            }
-          ]
-        },
         "habitat": {
           "history": [
             {
@@ -23923,118 +23867,6 @@
             {
               "date": "2026-04-20",
               "count": 3
-            }
-          ]
-        },
-        "writers_guild": {
-          "history": [
-            {
-              "date": "2026-04-07",
-              "count": 5
-            },
-            {
-              "date": "2026-04-08",
-              "count": 5
-            },
-            {
-              "date": "2026-04-09",
-              "count": 5
-            },
-            {
-              "date": "2026-04-10",
-              "count": 4
-            },
-            {
-              "date": "2026-04-11",
-              "count": 4
-            },
-            {
-              "date": "2026-04-12",
-              "count": 4
-            },
-            {
-              "date": "2026-04-13",
-              "count": 4
-            },
-            {
-              "date": "2026-04-14",
-              "count": 4
-            },
-            {
-              "date": "2026-04-15",
-              "count": 4
-            },
-            {
-              "date": "2026-04-17",
-              "count": 4
-            },
-            {
-              "date": "2026-04-18",
-              "count": 4
-            },
-            {
-              "date": "2026-04-19",
-              "count": 4
-            },
-            {
-              "date": "2026-04-20",
-              "count": 4
-            }
-          ]
-        },
-        "writersguildbloomington": {
-          "history": [
-            {
-              "date": "2026-04-07",
-              "count": 0
-            },
-            {
-              "date": "2026-04-08",
-              "count": 0
-            },
-            {
-              "date": "2026-04-09",
-              "count": 0
-            },
-            {
-              "date": "2026-04-10",
-              "count": 0
-            },
-            {
-              "date": "2026-04-11",
-              "count": 0
-            },
-            {
-              "date": "2026-04-12",
-              "count": 0
-            },
-            {
-              "date": "2026-04-13",
-              "count": 0
-            },
-            {
-              "date": "2026-04-14",
-              "count": 0
-            },
-            {
-              "date": "2026-04-15",
-              "count": 0
-            },
-            {
-              "date": "2026-04-17",
-              "count": 0
-            },
-            {
-              "date": "2026-04-18",
-              "count": 0
-            },
-            {
-              "date": "2026-04-19",
-              "count": 0
-            },
-            {
-              "date": "2026-04-20",
-              "count": 0
             }
           ]
         },
@@ -24104,9 +23936,9 @@
         }
       },
       "url_quality": {
-        "total_with_url": 2784,
-        "total_events": 4254,
-        "unique_urls": 1849,
+        "total_with_url": 2793,
+        "total_events": 4263,
+        "unique_urls": 1858,
         "generic_count": 147,
         "generic_domains": [
           {
@@ -24145,8 +23977,8 @@
         "source_specificity": [
           {
             "source": "IU beINvolved Student Orgs",
-            "events": 306,
-            "unique_urls": 306,
+            "events": 304,
+            "unique_urls": 304,
             "specificity_pct": 100
           },
           {
@@ -24162,16 +23994,16 @@
             "specificity_pct": 5
           },
           {
+            "source": "WFHB Community Calendar",
+            "events": 216,
+            "unique_urls": 216,
+            "specificity_pct": 100
+          },
+          {
             "source": "Brown County Events",
             "events": 215,
             "unique_urls": 41,
             "specificity_pct": 19
-          },
-          {
-            "source": "WFHB Community Calendar",
-            "events": 198,
-            "unique_urls": 198,
-            "specificity_pct": 100
           },
           {
             "source": "Pillar Arts Community Calendar",
@@ -24181,8 +24013,8 @@
           },
           {
             "source": "IU Jacobs School of Music",
-            "events": 185,
-            "unique_urls": 182,
+            "events": 182,
+            "unique_urls": 179,
             "specificity_pct": 98
           },
           {
@@ -24217,9 +24049,9 @@
           },
           {
             "source": "BloomingtonArts.Today",
-            "events": 37,
-            "unique_urls": 26,
-            "specificity_pct": 70
+            "events": 34,
+            "unique_urls": 23,
+            "specificity_pct": 68
           },
           {
             "source": "Bloomington Spinners & Weavers Guild",
@@ -24238,7 +24070,7 @@
       "categories": [
         {
           "category": "Arts / Culture",
-          "count": 548
+          "count": 549
         },
         {
           "category": "Government / Civic",
@@ -24246,7 +24078,7 @@
         },
         {
           "category": "Music / Concerts",
-          "count": 416
+          "count": 423
         },
         {
           "category": "Community / Social",
@@ -24254,7 +24086,7 @@
         },
         {
           "category": "Sports / Fitness",
-          "count": 394
+          "count": 395
         },
         {
           "category": "Education / Workshops",
@@ -24266,11 +24098,11 @@
         },
         {
           "category": "Books / Literature / Poetry",
-          "count": 181
+          "count": 177
         },
         {
           "category": "Comedy / Improv",
-          "count": 171
+          "count": 172
         },
         {
           "category": "Nature / Outdoors / Recreation",
@@ -24290,7 +24122,7 @@
         },
         {
           "category": "Film / Cinema",
-          "count": 128
+          "count": 131
         },
         {
           "category": "History / Heritage",
@@ -24302,7 +24134,7 @@
         },
         {
           "category": "Religion / Spirituality",
-          "count": 50
+          "count": 49
         },
         {
           "category": "Technology / Careers",
@@ -24314,7 +24146,7 @@
         },
         {
           "category": "LGBTQ+ / Gender",
-          "count": 14
+          "count": 15
         },
         {
           "category": "Craft / Maker",
@@ -24326,7 +24158,7 @@
         }
       ],
       "images": {
-        "total": 4254,
+        "total": 4263,
         "with_image": 1040,
         "by_source": [
           {
@@ -24401,7 +24233,7 @@
           },
           {
             "source": "IU Jacobs School of Music",
-            "total": 185,
+            "total": 182,
             "with_image": 8
           },
           {
@@ -24587,7 +24419,7 @@
         "tzids": [
           {
             "tzid": "UTC (Z suffix)",
-            "count": 20532,
+            "count": 20525,
             "files": 45,
             "matches_city": false,
             "sample_files": [
@@ -24613,8 +24445,8 @@
           },
           {
             "tzid": "America/Indiana/Indianapolis",
-            "count": 2347,
-            "files": 39,
+            "count": 2199,
+            "files": 37,
             "matches_city": true,
             "sample_files": [
               "bgcbloomington.ics",
@@ -24626,8 +24458,8 @@
           },
           {
             "tzid": "(bare \u2014 assumes city tz)",
-            "count": 201,
-            "files": 34,
+            "count": 199,
+            "files": 33,
             "matches_city": false,
             "sample_files": [
               "bgcbloomington.ics",
@@ -24851,8 +24683,8 @@
           "location": "Gallery at the VAULT, 68 Main St., Springfield, Springfield, VT 05156, Springfield, VT",
           "count": 2,
           "titles": [
-            "Watercolor Painting Techniques for Realistic Animal Features w/ Jo",
-            "Make Raku Pottery with Andrew Berends (Two part class\\, May 2 and "
+            "Make Raku Pottery with Andrew Berends (Two part class\\, May 2 and ",
+            "Watercolor Painting Techniques for Realistic Animal Features w/ Jo"
           ]
         },
         {
@@ -24868,21 +24700,21 @@
         {
           "source": "Mobilize Indivisible Central Indiana",
           "source_id": "mobilize_indivisible_central_indiana",
-          "location": "Cafe Patachou, 8697 River Crossing Blvd, Indianapolis, IN, 46240",
-          "count": 2,
-          "titles": [
-            "Common Grounds - Sunday Coffee and Conversation",
-            "Common Grounds - Sunday Coffee and Conversation"
-          ]
-        },
-        {
-          "source": "Mobilize Indivisible Central Indiana",
-          "source_id": "mobilize_indivisible_central_indiana",
           "location": "Starbucks Coffee, 1234 N Capitol Ave, Indianapolis, IN, 46202",
           "count": 2,
           "titles": [
             "Common Grounds - Saturday Coffee and Conversation",
             "Common Grounds - Saturday Coffee and Conversation"
+          ]
+        },
+        {
+          "source": "Mobilize Indivisible Central Indiana",
+          "source_id": "mobilize_indivisible_central_indiana",
+          "location": "Cafe Patachou, 8697 River Crossing Blvd, Indianapolis, IN, 46240",
+          "count": 2,
+          "titles": [
+            "Common Grounds - Sunday Coffee and Conversation",
+            "Common Grounds - Sunday Coffee and Conversation"
           ]
         },
         {
@@ -24989,10 +24821,10 @@
         {
           "source": "Mobilize Indivisible Central Indiana",
           "source_id": "mobilize_indivisible_central_indiana",
-          "location": "Allen County Court Administration, 715 S Calhoun St, Fort Wayne, IN, 46802",
+          "location": "Indianapolis, IN",
           "count": 1,
           "titles": [
-            "End Ice Detention at Miami Correctional Facility- Rally & March"
+            "ACLU-IN Volunteer Social"
           ]
         },
         {
@@ -25007,10 +24839,10 @@
         {
           "source": "Mobilize Indivisible Central Indiana",
           "source_id": "mobilize_indivisible_central_indiana",
-          "location": "Indianapolis, IN",
+          "location": "Allen County Court Administration, 715 S Calhoun St, Fort Wayne, IN, 46802",
           "count": 1,
           "titles": [
-            "ACLU-IN Volunteer Social"
+            "End Ice Detention at Miami Correctional Facility- Rally & March"
           ]
         },
         {
@@ -99018,7 +98850,27 @@
     },
     {
       "date": "2026-04-20",
-      "line": "2026-04-20 00:57:18,037 - NAMIScraper - WARNING - Error fetching page 1: 403 Client Error: Forbidden for url: https://namigreaterbloomingtonarea.org/wp-json/tribe/events/v1/events/?per_page=50&page=1",
+      "line": "TimeoutError: timed out",
+      "source": "connection"
+    },
+    {
+      "date": "2026-04-20",
+      "line": "urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7f082566f5b0>, 'Connection to writersguildbloomington.com timed out. (connect timeout=30)')",
+      "source": "connection"
+    },
+    {
+      "date": "2026-04-20",
+      "line": "urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='writersguildbloomington.com', port=443): Max retries exceeded with url: /events/ (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f082566f5b0>, 'Connection to writersguildbloomington.com timed out. (connect timeout=30)'))",
+      "source": "retry"
+    },
+    {
+      "date": "2026-04-20",
+      "line": "requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='writersguildbloomington.com', port=443): Max retries exceeded with url: /events/ (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f082566f5b0>, 'Connection to writersguildbloomington.com timed out. (connect timeout=30)'))",
+      "source": "adapters"
+    },
+    {
+      "date": "2026-04-20",
+      "line": "2026-04-20 02:43:27,625 - NAMIScraper - WARNING - Error fetching page 1: 403 Client Error: Forbidden for url: https://namigreaterbloomingtonarea.org/wp-json/tribe/events/v1/events/?per_page=50&page=1",
       "source": null
     }
   ]

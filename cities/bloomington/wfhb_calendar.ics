@@ -336,6 +336,26 @@ URL:https://wfhb.org/event/pinball-league-trivia-with-bloomington-pub-quiz
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Film: CRASH
+DTSTART;TZID=America/Indiana/Indianapolis:20260421T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260421T210000
+UID:ai1ec-148606-95022@wfhb.org
+DESCRIPTION:About CrashBased on the equally infamous J.G. Ballard novel\, 
+ David Cronenberg’s 1996 film Crash is built to rattle cultural cages\, s
+ park heated debated and discussion\, and draw you into a cinematic world l
+ ike no other. Aestheticizing the erotic allure of auto collisions and prod
+ ding at the human fascination with death and danger\, Cronenberg crafts a 
+ utterly singular film that—at the time of its release—addressed head-o
+ n the social fears of the swiftly approaching millennium. 30 years later\,
+  the film takes an a different\, but still immediate\, resonance in a worl
+ d living through one “unprecedented” event after another. [100 min\; d
+ rama\, thriller\; English]
+LOCATION:IU Cinema\, 1213 E. 7th Street\, Bloomington (on the North end of
+  the IU Auditorium)
+URL:https://wfhb.org/event/film-crash/?instance_id=95022
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Irish Music Session
 DTSTART;TZID=America/Indiana/Indianapolis:20260421T190000
 DTEND;TZID=America/Indiana/Indianapolis:20260421T213000
@@ -376,19 +396,6 @@ URL:https://wfhb.org/event/muddy-boots-dart-club-music-jam-2/?instance_id=
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Country Line Dancing with the Wall-to-Wall Line Dance Club
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T193000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T230000
-UID:ai1ec-145831-93556@wfhb.org
-DESCRIPTION:Every Tuesday we host Line Dancing with Wall to Wall Line Danc
- e Club! Old timers and new timers welcome.
-LOCATION:The Back Door\, 207 South College Ave.\, in the alley behind the 
- Atlas Ballroom\, Bloomington
-URL:https://wfhb.org/event/country-line-dancing-with-the-wall-to-wall-line
- -dance-club/?instance_id=93556
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Mooch the Magnificent
 DTSTART;TZID=America/Indiana/Indianapolis:20260421T193000
 DTEND;TZID=America/Indiana/Indianapolis:20260421T213000
@@ -410,6 +417,18 @@ DESCRIPTION:Bridges MAYO\, Reimagining Opera for Kids\, and Stages Bloomin
  gly wild.”
 LOCATION:Fairview Elementary 500 W 7th St\, Bloomington
 URL:https://wfhb.org/event/mooch-the-magnificent/?instance_id=94937
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Y’allternative: All emo and rock music for line dancing
+DTSTART;TZID=America/Indiana/Indianapolis:20260421T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260421T230000
+UID:ai1ec-148591-95009@wfhb.org
+DESCRIPTION:
+LOCATION:The Back Door\, 207 S. College Ave\, Bloomington (around back\, i
+ n the alley)
+URL:https://wfhb.org/event/yallternative-all-emo-and-rock-music-for-line-d
+ ancing/?instance_id=95009
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -461,6 +480,17 @@ URL:https://wfhb.org/event/honky-tonk-8/?instance_id=92819
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Just Penelope (Acoustic)/ Sophia Corinne / Lyle de Vitry
+DTSTART;TZID=America/Indiana/Indianapolis:20260421T203000
+DTEND;TZID=America/Indiana/Indianapolis:20260421T223000
+UID:ai1ec-148599-95016@wfhb.org
+DESCRIPTION:Doors at 8pm
+LOCATION:Orbit Room\, 107 North College Avenue\, Suite 001\, Bloomington
+URL:https://wfhb.org/event/just-penelope-acoustic-sophia-corinne-lyle-de-v
+ itry/?instance_id=95016
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Storytime – All children and their caregivers are welcome
 DTSTART;TZID=America/Indiana/Indianapolis:20260422T100000
 DTEND;TZID=America/Indiana/Indianapolis:20260422T104500
@@ -509,6 +539,37 @@ URL:https://wfhb.org/event/symposium-for-the-jubilee-festival-on-african-a
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Earth Connection Film Festival: Responsibility
+DTSTART;TZID=America/Indiana/Indianapolis:20260422T130000
+DTEND;TZID=America/Indiana/Indianapolis:20260422T150000
+UID:ai1ec-148607-95023@wfhb.org
+DESCRIPTION:How do we instill a sense of responsibility to our environment
+ ? This program dives into guiding philosophies of stewardship\, moral obli
+ gation\, and ecological knowledge. [78 min. total runtime]There will be a 
+ post-film Q&A with Earth Connection Film Festival directors Dr. Jessica Ei
+ se (Indiana University) and Prof. Sarah Lasley (California State Polytechn
+ ic University\, Humboldt). Following the screening\, there will be a plant
+  propagation party in the lower lobby from 3-3:45pm.
+LOCATION:IU Cinema\, 1213 E. 7th Street\, Bloomington (on the North end of
+  the IU Auditorium)
+URL:https://wfhb.org/event/earth-connection-film-festival-responsibility/?
+ instance_id=95023
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Tom Walsh Jazz Ensemble – IU Day Concert: Featuring special gues
+ t Robert Cozma\, trombone
+DTSTART;TZID=America/Indiana/Indianapolis:20260422T130000
+DTEND;TZID=America/Indiana/Indianapolis:20260422T140000
+UID:ai1ec-148581-95000@wfhb.org
+DESCRIPTION:
+LOCATION:Conrad Prebys Amphitheater\, 100 South Ballantine Road\, Blooming
+ ton
+URL:https://wfhb.org/event/tom-walsh-jazz-ensemble-iu-day-concert-featurin
+ g-special-guest-robert-cozma-trombone/?instance_id=95000
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Public Forum “Media Effects & Mental Health: Changing the Conver
  sation”
 DTSTART;TZID=America/Indiana/Indianapolis:20260422T150000
@@ -535,6 +596,25 @@ LOCATION:Teraching Kitchen\, Southwest Branch of the Monroe County Public
  Library\, 890 W. Gordon Pike\, Bloomington
 URL:https://wfhb.org/event/cooking-basics-hummus-ages-12-19/?instance_id=9
  4984
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Earth Connection Film Festival: Interdependence
+DTSTART;TZID=America/Indiana/Indianapolis:20260422T160000
+DTEND;TZID=America/Indiana/Indianapolis:20260422T180000
+UID:ai1ec-148608-95024@wfhb.org
+DESCRIPTION:Embracing the earth as our home\, these films compassionately 
+ and painstakingly capture the depth and nuance of human interdependence wi
+ th our planet\, from the lessons we learn to the dirt under our feet. Q&A 
+ with one of the filmmakers to follow.About Earth Connection Film Festival:
+  InterdependenceHow do we view our interdependent relationship to Earth? T
+ his program zooms in on our reliance on Earth and its resources for our li
+ ves and well-being. [76 min. total runtime]There will be a Q&A with The Ol
+ d Bear filmmaker Julie Busse following this screening.
+LOCATION:IU Cinema\, 1213 E. 7th Street\, Bloomington (on the North end of
+  the IU Auditorium)
+URL:https://wfhb.org/event/earth-connection-film-festival-interdependence/
+ ?instance_id=95024
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -657,6 +737,16 @@ URL:https://wfhb.org/event/open-mic-52/?instance_id=93360
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:IU Culture Nights
+DTSTART;TZID=America/Indiana/Indianapolis:20260422T183000
+DTEND;TZID=America/Indiana/Indianapolis:20260422T203000
+UID:ai1ec-148582-95001@wfhb.org
+DESCRIPTION:
+LOCATION:The Bishop Bar\, 123 S. Walnut St\, Bloomington
+URL:https://wfhb.org/event/iu-culture-nights/?instance_id=95001
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Trivia Wednesdays (21+)
 DTSTART;TZID=America/Indiana/Indianapolis:20260422T183000
 DTEND;TZID=America/Indiana/Indianapolis:20260422T200000
@@ -678,6 +768,24 @@ DESCRIPTION:The Bloomington Iran Solidarity Committee will continue its me
 LOCATION:Redbud Books\, 408 West Kirkwood Ave.\, Bloomington
 URL:https://wfhb.org/event/bloomington-iran-solidarity-committee/?instance
  _id=94834
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Earth Connection Film Festival: Hope
+DTSTART;TZID=America/Indiana/Indianapolis:20260422T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260422T210000
+UID:ai1ec-148609-95025@wfhb.org
+DESCRIPTION:This shorts program highlights the radical acts of kindness\, 
+ generosity\, and giving found across humanity\, both little and small\, in
+  the face of environmental challenges that feel insurmountable when viewed
+  alone.How can we foster hope in the shadow of environmental crises? This 
+ program illustrates our collective concern for future generations and the 
+ choice to be a positive force on Earth. [73 min. total runtime]There will 
+ be an awards ceremony following the films.
+LOCATION:IU Cinema\, 1213 E. 7th Street\, Bloomington (on the North end of
+  the IU Auditorium)
+URL:https://wfhb.org/event/earth-connection-film-festival-hope/?instance_i
+ d=95025
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -703,6 +811,17 @@ URL:https://wfhb.org/event/open-mic-night-hosted-by-travers-marks-3/?insta
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:The Glass Hours / Sara Jean Stevens / Hopedaddy
+DTSTART;TZID=America/Indiana/Indianapolis:20260422T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260422T220000
+UID:ai1ec-148600-95017@wfhb.org
+DESCRIPTION:Doors at6:30pm
+LOCATION:Orbit Room\, 107 North College Avenue\, Suite 001\, Bloomington
+URL:https://wfhb.org/event/the-glass-hours-sara-jean-stevens-hopedaddy/?in
+ stance_id=95017
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Trivia Time
 DTSTART;TZID=America/Indiana/Indianapolis:20260422T190000
 DTEND;TZID=America/Indiana/Indianapolis:20260422T210000
@@ -710,6 +829,72 @@ UID:ai1ec-145119-93215@wfhb.org
 DESCRIPTION:
 LOCATION:Bloomington Poindexter\, 210 E. Kirkwood Ave\, Bloomington
 URL:https://wfhb.org/event/trivia-wednesday-2/?instance_id=93215
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Weekly Wednesday Contra Dance\, w/Music from Sturbaumination and c
+ alling by Rich Goss.  Beginners lesson at 7pm
+DTSTART;TZID=America/Indiana/Indianapolis:20260422T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260422T213000
+UID:ai1ec-148605-95021@wfhb.org
+DESCRIPTION:Beginner lesson7-7:30pmFeature dance 7:30-9:30pm
+LOCATION:Harmony School Gym\, 909 E. Second St\, Bloomington
+URL:https://wfhb.org/event/weekly-wednesday-contra-dance-w-music-from-stur
+ baumination-and-calling-by-rich-goss-beginners-lesson-at-7pm/?instance_id=
+ 95021
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Little 500 Concert:  Magdalena Bay With special guest Six Foot Blo
+ nde
+DTSTART;TZID=America/Indiana/Indianapolis:20260422T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260422T213000
+UID:ai1ec-148594-95012@wfhb.org
+DESCRIPTION:Magdalena Bay is bringing their kaleidoscopic pop universe to 
+ IU Auditorium as part of Little 500 week with special guests Six Foot Blon
+ de.The Los Angeles–based duo of Mica Tenenbaum and Matthew Lewin is know
+ n for infectious hooks\, synth-driven beats\, and an immersive sound that 
+ blends futuristic pop with nostalgic flair. Their high-energy live shows p
+ air bold visuals with meticulously crafted songs that hit hard and stick w
+ ith you.
+LOCATION:IU Auditorium\, 1211 East 7th Street\, Bloomington
+URL:https://wfhb.org/event/little-500-concert-magdalena-bay-with-special-g
+ uest-six-foot-blonde/?instance_id=95012
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Cicada Cinema: Pillion
+DTSTART;TZID=America/Indiana/Indianapolis:20260422T200000
+DTEND;TZID=America/Indiana/Indianapolis:20260422T220000
+UID:ai1ec-148592-95010@wfhb.org
+DESCRIPTION:Synopsis: In his unorthodox queer romance\, first-time feature
+  director Harry Lighton has fashioned something highly improbable: a film 
+ about a sadomasochistic relationship that is both transgressive and disarm
+ ing. Harry Melling plays the mild Colin\, whose gayness is happily accepte
+ d by his parents (Lesley Sharp and Douglas Hodge) and who is most extrover
+ ted when singing in a barbershop quartet. When this sweet-natured square c
+ atches the eye of strapping\, leather-clad biker Ray (Alexander Skarsgård
+ ) at the local pub\, he finds himself entering a submissive role—both do
+ mestic and erotic—for the inscrutable beauty who brings him both satisfa
+ ction and confusion\, pain and pleasure. As their affair continues\, Colin
+  must decide what he wants and needs—and who he really is. Comic without
+  ever descending into judgment of its characters\, Pillion is a beguiling 
+ inquiry into the social and sexual performances of masculinity\, featuring
+  fearless work from Melling and Skarsgård.
+LOCATION:The Back Door\, 207 S. College Ave\, Bloomington (around back\, i
+ n the alley)
+URL:https://wfhb.org/event/cicada-cinema-pillion/?instance_id=95010
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Rod Tuffcurls & The Benchpress
+DTSTART;TZID=America/Indiana/Indianapolis:20260422T220000
+DTEND;TZID=America/Indiana/Indianapolis:20260423T000000
+UID:ai1ec-148586-95005@wfhb.org
+DESCRIPTION:
+LOCATION:The Bluebird Nightclub\, 216 N. Walnut St\, Bloomington
+URL:https://wfhb.org/event/rod-tuffcurls-the-benchpress-11/?instance_id=95
+ 005
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -824,6 +1009,16 @@ URL:https://wfhb.org/event/bloomington-blues-jam-hosted-by-russ-bucy-4/?in
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Catalpa // Monon Troubadours
+DTSTART;TZID=America/Indiana/Indianapolis:20260423T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260423T223000
+UID:ai1ec-148601-95018@wfhb.org
+DESCRIPTION:Doors at 6:30pm
+LOCATION:Orbit Room\, 107 North College Avenue\, Suite 001\, Bloomington
+URL:https://wfhb.org/event/catalpa-monon-troubadours/?instance_id=95018
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Sleeper’s Open Mic\, hosted by Drew
 DTSTART;TZID=America/Indiana/Indianapolis:20260423T190000
 DTEND;TZID=America/Indiana/Indianapolis:20260423T210000
@@ -832,6 +1027,37 @@ DESCRIPTION:
 LOCATION:Sleeper's Bar\, 2601 North Walnut St.\, Bloomington
 URL:https://wfhb.org/event/sleepers-open-mic-hosted-by-drew/?instance_id=9
  3652
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:IU Spring Football Game
+DTSTART;TZID=America/Indiana/Indianapolis:20260423T200000
+DTEND;TZID=America/Indiana/Indianapolis:20260423T220000
+UID:ai1ec-148580-94999@wfhb.org
+DESCRIPTION:Gates Open at 6:30pm
+LOCATION:Memorial Stadium Football Complex\, 1001 E. 17th Street\, Bloomin
+ gton
+URL:https://wfhb.org/event/iu-spring-football-game/?instance_id=94999
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Minor Revision / Lame Excuse
+DTSTART;TZID=America/Indiana/Indianapolis:20260423T200000
+DTEND;TZID=America/Indiana/Indianapolis:20260423T220000
+UID:ai1ec-148596-95013@wfhb.org
+DESCRIPTION:
+LOCATION:Blockhouse Bar\, in the alley at 205 S. College Ave\, Bloomington
+URL:https://wfhb.org/event/minor-revision-lame-excuse/?instance_id=95013
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:SCUBA & Sunnyside Down
+DTSTART;TZID=America/Indiana/Indianapolis:20260423T210000
+DTEND;TZID=America/Indiana/Indianapolis:20260423T230000
+UID:ai1ec-148587-95006@wfhb.org
+DESCRIPTION:
+LOCATION:The Bluebird Nightclub\, 216 N. Walnut St\, Bloomington
+URL:https://wfhb.org/event/scuba-sunnyside-down/?instance_id=95006
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -1019,13 +1245,47 @@ X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Technicolor Band + Luke Schneider
-DTSTART;TZID=America/Indiana/Indianapolis:20260424T203000
-DTEND;TZID=America/Indiana/Indianapolis:20260424T223000
-UID:ai1ec-148021-94721@wfhb.org
-DESCRIPTION:doors at 8pm // 21+
+DTSTART;TZID=America/Indiana/Indianapolis:20260424T200000
+DTEND;TZID=America/Indiana/Indianapolis:20260424T220000
+UID:ai1ec-148021-95014@wfhb.org
+DESCRIPTION:
 LOCATION:The Blockhouse Bar\, 205 South College Avenue\, Bloomington
-URL:https://wfhb.org/event/technicolor-band-luke-schneider/?instance_id=94
- 721
+URL:https://wfhb.org/event/technicolor-band-luke-schneider/?instance_id=95
+ 014
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:The Matriarch w/ Slug Rug & Good Eve
+DTSTART;TZID=America/Indiana/Indianapolis:20260424T210000
+DTEND;TZID=America/Indiana/Indianapolis:20260424T230000
+UID:ai1ec-148583-95002@wfhb.org
+DESCRIPTION:
+LOCATION:The Bishop Bar\, 123 S. Walnut St\, Bloomington
+URL:https://wfhb.org/event/the-matriarch-w-slug-rug-good-eve/?instance_id=
+ 95002
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Welcome to the Neighborhood
+DTSTART;TZID=America/Indiana/Indianapolis:20260424T210000
+DTEND;TZID=America/Indiana/Indianapolis:20260424T230000
+UID:ai1ec-148588-95007@wfhb.org
+DESCRIPTION:
+LOCATION:The Bluebird Nightclub\, 216 N. Walnut St\, Bloomington
+URL:https://wfhb.org/event/welcome-to-the-neighborhood-47/?instance_id=950
+ 07
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:DooLittle 5 by The Shack Ups  (Set One–The Shack Ups~7:30pm\, Se
+ t Two–Doolittle~9 PM)
+DTSTART;TZID=America/Indiana/Indianapolis:20260424T230000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T010000
+UID:ai1ec-148602-95019@wfhb.org
+DESCRIPTION:Doors at 7pm
+LOCATION:Orbit Room\, 107 North College Avenue\, Suite 001\, Bloomington
+URL:https://wfhb.org/event/doolittle-5-by-the-shack-ups-set-one-the-shack-
+ ups730pm-set-two-doolittle9-pm/?instance_id=95019
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -1225,6 +1485,16 @@ URL:https://wfhb.org/event/solace-an-interactive-art-experience/?instance_
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Jukebox Luke
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T210000
+UID:ai1ec-148589-95008@wfhb.org
+DESCRIPTION:
+LOCATION:The Bluebird Nightclub\, 216 N. Walnut St\, Bloomington
+URL:https://wfhb.org/event/jukebox-luke-89/?instance_id=95008
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:By the Numbers – Quarryland’s Spring Concert
 DTSTART;TZID=America/Indiana/Indianapolis:20260425T193000
 DTEND;TZID=America/Indiana/Indianapolis:20260425T213000
@@ -1264,6 +1534,62 @@ DESCRIPTION:Songs of the South a tribute to Alabama formed in 2019. Compri
 LOCATION:Brown County Playhouse: 70 S. Van Buren St\, Nashville\, IN
 URL:https://wfhb.org/event/songs-of-the-south-a-tribute-to-alabama-2/?inst
  ance_id=94910
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Sounds From the Black Hole: DRM & Scotchamo
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T230000
+UID:ai1ec-148604-95020@wfhb.org
+DESCRIPTION:DRM is a local electroacoustic/jazz adjacent trio comprising D
+ avid Miller\, Richard Jermain and Marty Belcher. For decades\, David ran t
+ he weekly Jazz Fables series and brought artists like Sun Ra to perform in
+  Bloomington. Marty organized improvised music nights\, and more recently 
+ helped form the group Ortet. Richard is a relative newcomer to Bloomington
+ \, exploring electronics\, modular synthesizers\, and instrument building.
+ https://drmtrio.bandcamp.com/\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_
+ \\_\\_\\_\\_\\_\\_\\_\\_\\_Scotchamo is artist/musician Scott Scarboro who
+  resides in Kentuckiana. He is formally from the junkabilly band\, Monkey 
+ Boy. He performs experimental improvisational music with found objects\, r
+ eal time sampling\, amp hiss\, circuit bent devices\, handmade effects box
+ es and mostly homemade instruments.https://junkabillystudios.bandcamp.com/
+LOCATION:Orbit Room\, 107 North College Avenue\, Suite 001\, Bloomington
+URL:https://wfhb.org/event/sounds-from-the-black-hole-drm-scotchamo/?insta
+ nce_id=95020
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:DOOM GONG with Moon Goons  (age 18 and up)
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T210000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T230000
+UID:ai1ec-148584-95003@wfhb.org
+DESCRIPTION:
+LOCATION:The Bishop Bar\, 123 S. Walnut St\, Bloomington
+URL:https://wfhb.org/event/doom-gong-with-moon-goons-age-18-and-up/?instan
+ ce_id=95003
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Kinker\, hosted by Beezbabe and starring Ida Kay\, Izzi Blu\, Stra
+ wberry Panic\, Fairy Fawcett
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T210000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T230000
+UID:ai1ec-148593-95011@wfhb.org
+DESCRIPTION:
+LOCATION:The Back Door\, 207 S. College Ave\, Bloomington (around back\, i
+ n the alley)
+URL:https://wfhb.org/event/kinker-hosted-by-beezbabe-and-starring-ida-kay-
+ izzi-blu-strawberry-panic-fairy-fawcett/?instance_id=95011
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Karaoke
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T213000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T233000
+UID:ai1ec-148598-95015@wfhb.org
+DESCRIPTION:
+LOCATION:Blockhouse Bar\, in the alley at 205 S. College Ave\, Bloomington
+URL:https://wfhb.org/event/karaoke-99/?instance_id=95015
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -1376,6 +1702,17 @@ LOCATION:Morgenstern Books & Cafe\, 849 South Auto Mall Drive\, Bloomingto
  n
 URL:https://wfhb.org/event/the-writers-guild-last-sunday-poetry-reading-an
  d-open-mic-at-morgenstern-books/?instance_id=94730
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Wormbent / Rearview Rhonda / Midnight Butcher
+DTSTART;TZID=America/Indiana/Indianapolis:20260426T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260426T210000
+UID:ai1ec-148585-95004@wfhb.org
+DESCRIPTION:Doors at 6pm
+LOCATION:The Bishop Bar\, 123 S. Walnut St\, Bloomington
+URL:https://wfhb.org/event/wormbent-rearview-rhonda-midnight-butcher/?inst
+ ance_id=95004
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
