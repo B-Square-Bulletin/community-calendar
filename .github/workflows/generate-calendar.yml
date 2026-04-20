@@ -680,8 +680,8 @@ jobs:
 
         git describe --tags --always > xmlui/version.txt
 
-        git add -f xmlui/config.local.js xmlui/config.json
-        git add cities.json xmlui/version.txt report.json report.html cities/*/feeds.txt
+        git add -f xmlui/config.json
+        git add cities.json report.html cities/*/feeds.txt
         git diff --staged --quiet || (
           git commit -m "Auto-generate calendar metadata"
           # On conflict, our regenerated files always win
