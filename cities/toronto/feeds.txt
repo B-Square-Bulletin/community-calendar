@@ -240,6 +240,9 @@ https://events.yorku.ca/events/?mec-ical-feed=1
 # A Different Booklist
 # cmd: python scrapers/bookmanager.py --san 1188585 --domain adifferentbooklist.com --name "A Different Booklist"
 https://adifferentbooklist.com/events
+# Aga Khan Museum
+# cmd: python scrapers/agakhan_museum.py
+cities/toronto/agakhan_museum.ics
 # again again
 # cmd: python scrapers/luma_collection.py --url "https://luma.com/againagain" --name "again again" --timezone "America/Toronto"
 cities/toronto/luma_again_again.ics
@@ -309,6 +312,9 @@ https://www.eventbrite.ca/o/harpercollins-canada-17669573222
 # House of Anansi
 # cmd: python scrapers/eventbrite_filtered.py --organizer 21689379263 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "House of Anansi"
 https://www.eventbrite.ca/o/house-of-anansi-21689379263
+# Japanese Canadian Cultural Centre
+# cmd: python scrapers/jccc.py
+cities/toronto/jccc.ics
 # Lula Lounge
 # cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/lula-lounge-19825205758" --name "Lula Lounge"
 cities/toronto/eventbrite_lula_lounge.ics
