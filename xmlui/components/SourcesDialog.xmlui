@@ -81,7 +81,13 @@
           />
         </Column>
         <Column bindTo="name" header="Source" width="*" minWidth="160px">
-          <Text value="{$cell}" breakMode="word" />
+          <Text
+            value="{$cell}"
+            breakMode="word"
+            cursor="pointer"
+            color="$color-primary-600"
+            onClick="{() => { window.location.assign(window.location.pathname + '?city=' + encodeURIComponent($props.city || window.cityFilter || '') + '&images=preview&search=' + encodeURIComponent($cell)); }}"
+          />
         </Column>
         <Column bindTo="event_count" header="Events" width="110px" horizontalAlignment="right">
           <Text value="{$cell}" />

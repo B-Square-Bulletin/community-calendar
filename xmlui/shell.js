@@ -38,7 +38,7 @@ window._xsLogs = [];
   var vxhr = new XMLHttpRequest();
   vxhr.open('GET', 'version.txt?_=' + versionProbe, false);
   var isLocalDevHost = /^(localhost|127(?:\.\d+){3}|0\.0\.0\.0)$/.test(window.location.hostname);
-  var baseVersion = isLocalDevHost ? String(Date.now()) : 'missing-version';
+  var baseVersion = isLocalDevHost ? 'local-dev' : 'missing-version';
   try {
     vxhr.send();
     if (vxhr.status >= 200 && vxhr.status < 300) {
