@@ -37,8 +37,16 @@ window._xsLogs = [];
   var versionProbe = Date.now();
   var vxhr = new XMLHttpRequest();
   vxhr.open('GET', 'version.txt?_=' + versionProbe, false);
-  vxhr.send();
-  var baseVersion = (vxhr.responseText || '').trim() || String(Date.now());
+  var baseVersion = String(Date.now());
+  try {
+    vxhr.send();
+    if (vxhr.status >= 200 && vxhr.status < 300) {
+      var fetchedVersion = (vxhr.responseText || '').trim();
+      if (fetchedVersion) {
+        baseVersion = fetchedVersion;
+      }
+    }
+  } catch (e) {}
   try {
     var lastSeenVersion = localStorage.getItem('cc-shell-version');
     var hasReloadedForVersion = sessionStorage.getItem('cc-version-reload') === baseVersion;
