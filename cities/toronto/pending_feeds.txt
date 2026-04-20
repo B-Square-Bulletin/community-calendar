@@ -15,11 +15,3 @@
 #   python scripts/add_scraper.py example toronto "Source Name" --test
 #
 # See CONTRIBUTING.md for details.
-
-# Aga Khan Museum
-# cmd: python scrapers/agakhan_museum.py
-cities/toronto/agakhan_museum.ics
-
-# Japanese Canadian Cultural Centre
-# cmd: python scrapers/jccc.py
-cities/toronto/jccc.ics
