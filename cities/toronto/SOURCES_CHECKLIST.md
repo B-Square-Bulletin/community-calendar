@@ -1,6 +1,6 @@
 # Toronto Calendar Source Checklist
 
-## Currently Implemented (131 sources)
+## Currently Implemented (132 sources)
 
 ### Aggregators
 | Source | Type | Events | Notes |
@@ -18,6 +18,7 @@
 | Textile Museum of Canada | WordPress Tribe ICS | 9 | |
 | Bata Shoe Museum | WordPress Tribe ICS | 5 | |
 | Aga Khan Museum | HTML scraper | 63 at add time | Homepage upcoming cards + detail pages; includes recurring BMO Wednesdays and announced TD Pop-Up performances |
+| Japanese Canadian Cultural Centre | HTML scraper | 18 at add time | Drupal event listing + detail pages; expands multi-date programs like SakuraFest workshops into separate instances |
 | Buddies in Bad Times Theatre | WordPress Tribe ICS | 4 | LGBTQ+ theatre |
 | Factory Theatre | WordPress Tribe ICS | 9 | Canadian theatre |
 | High Park Nature Centre | WordPress Tribe ICS | 10 | Outdoor/nature programs |
@@ -224,6 +225,7 @@
 - **Luma Toronto Discover** — public citywide ICS feed confirmed from [luma.com/toronto](https://luma.com/toronto) via `https://api2.luma.com/ics/get?entity=discover&id=discplace-Cx3JMS6vXKAbhV5`. Switched from raw-feed staging to a dedicated `scrapers/luma.py` adapter on 2026-04-18 so the pipeline can lift per-event Luma links out of `DESCRIPTION` and write them into the ICS `URL` field before generic ingestion. Validated at 49 current VEVENTs and staged in workflow + `pending_feeds.txt`.
 - **Pluto Toronto** — implemented on 2026-04-19 as the first Luma collection-page source via `scrapers/luma_collection.py` against `https://luma.com/plutotoronto`. The initial JSON-LD teaser only exposed 4 near-term events, but the scraper now derives Luma's public `calendar_api_id` from the collection page and walks the paginated `calendar/get-items` endpoint instead. Current validation yields 24 future events with explicit per-event `URL` fields, including `Celestial Night Prom`, and 0 URL overlap with the current Toronto Discover feed.
 - **Toronto Social Mixer** — staged on 2026-04-19 as the second Luma collection-page source via `scrapers/luma_collection.py` against `https://luma.com/TorontoSocialMixer`. Current validation yields 1 future event with an explicit per-event `URL` field and 0 URL overlap with both Toronto Discover and Pluto Toronto.
+- **Japanese Canadian Cultural Centre** — implemented on 2026-04-19 as `scrapers/jccc.py`. The public Drupal listing at `/visit/events` already exposes date blocks for each occurrence, while detail pages provide descriptions, taxonomy labels, and an embedded iCal data URI for location. Current validation yields 18 current/future event instances, including both dates for the two-part SakuraFest field-recording workshop, and stages cleanly in workflow + `pending_feeds.txt`.
 - **TechTO Events** — staged on 2026-04-19 as the third Luma collection-page source via `scrapers/luma_collection.py` against `https://luma.com/TechTO-Events`. Current validation yields 10 future events, 6 net-new URLs versus Toronto Discover + Pluto + Toronto Social Mixer, and 8 Toronto-local-looking locations. This source still carries some Vancouver spillover and overlaps the existing TechTO Meetup source, so it is useful but not as clean as Pluto.
 - **Uplift Collective** — staged on 2026-04-19 from the Yelp/venue discovery pass via `scrapers/luma_collection.py` against `https://luma.com/upliftcollective`. Current validation yields 7 future events after the six-month cutoff, all 7 net new versus Toronto Discover + Pluto + Toronto Social Mixer + TechTO Events, with all current locations Toronto-local-looking.
 - **again again** — staged on 2026-04-19 via `scrapers/luma_collection.py` against `https://luma.com/againagain`. Current validation yields 3 future events, 1 net-new URL versus the staged Toronto Luma set, and all current locations Toronto-local-looking.

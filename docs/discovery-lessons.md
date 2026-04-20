@@ -269,13 +269,33 @@ The aggregate page may cap events per department (UofT shows 5 each). Following 
 
 Unlike WordPress (where Tribe = `?ical=1` and MEC = `?mec-ical-feed=1`), Drupal sites vary wildly. Every Drupal installation has its own theme, views configuration, and CSS class names. Don't expect to build a reusable "Drupal scraper" — each site needs its own parser.
 
+**Use this probe order instead of guessing:**
+1. Try direct machine-readable feeds first:
+   - `/events/feed/json`
+   - `?_format=json`
+   - obvious JSON calendar endpoints attached to the page's view
+2. Check for embedded Drupal payloads in the HTML:
+   - `drupal-settings-json`
+   - `fullCalendarView`
+   - `calendar_options`
+3. Only then fall back to visible HTML scraping.
+
 **What to look for in Drupal event pages:**
 - `node-events-*` classes (common in university Drupal themes)
 - `views-row` with event links (generic Drupal Views)
 - `listing-item--events` (BEM-style custom themes)
+- `node--type-event` articles on listing or detail pages
+- `field--name-field-dates` / `field__item` date blocks
 - `field-event` or `field--name-title` (Drupal field formatters)
 
 **What to try first:** Always check `?_format=json` on Drupal URLs — some sites have REST exports enabled (returns JSON). If you get `"A route that returns a rendered array..."`, REST is not configured for that view.
+
+**Three recurring Drupal patterns in this repo:**
+- **JSON feed works** — use `scrapers/drupal_events.py` for `/events/feed/json` style feeds.
+- **HTML page contains embedded calendar JSON** — parse `drupal-settings-json` like `scrapers/waterfront_toronto.py`.
+- **Only the visible listing is usable** — scrape cards and, when needed, detail pages like `scrapers/toronto_community_housing.py`, `scrapers/uoft_events.py`, and `scrapers/jccc.py`.
+
+**New JCCC-specific lesson:** detail pages may expose better structured data than the listing, but not as a normal downloadable `.ics` file. JCCC's event pages include `Add to iCal` links whose `href` is a `data:text/calendar` payload. That was enough to confirm exact DTSTART/DTEND and location formatting. When you see "Add to iCal" on a Drupal site, inspect the actual `href` before assuming there is or is not a reusable feed.
 
 ## Classify WordPress Sites at Scale with Plugin Detection
 

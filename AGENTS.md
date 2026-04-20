@@ -22,6 +22,7 @@
   - [GoDaddy Calendar](#godaddy-calendar-scraperslibgodaddypy---godaddy-website-builder)
   - [Mobilize.us](#mobilizeus-scrapersmobilizepy---civic-and-political-organizing)
 - [Platform-Specific Techniques](#platform-specific-techniques)
+  - [Drupal](#drupal)
   - [SeeTickets Widgets](#seetickets-widgets)
   - [Wix Events](#wix-events)
 - [Source Discovery](#source-discovery)
@@ -346,12 +347,40 @@ Events often have multiple timeslots (recurring phone banks, weekly protests, et
 | **LiveWhale** | `https://{domain}/live/ical/events` |
 | **Localist** | `https://{domain}/api/2/events` |
 | **GoDaddy Calendar** | Check DevTools for `calendar.apps.secureserver.net` requests (use scraper) |
+| **Drupal** | Try `/events/feed/json`, `?_format=json`, `drupal-settings-json`, then site-specific HTML scraping |
 | **WordPress Tribe** | `https://example.com/events/?ical=1` |
 | **WordPress MEC** | `https://example.com/events/?mec-ical-feed=1` |
 | **Legistar** | `https://webapi.legistar.com/v1/{client}/events` (WebAPI, use scraper) |
 | **CivicPlus** | `https://www.{city}.org/common/modules/iCalendar/iCalendar.aspx?feed=calendar&catID={N}` |
 | **Songkick** | `https://www.songkick.com/venues/{ID}-{slug}` (JSON-LD MusicEvent, use `scrapers/songkick.py`) |
 | **Guild.host** | No ICS feeds. JSON-LD Event on individual pages. Tech-focused platform. Use `scrapers/guildhost.py` |
+
+### Drupal
+Drupal does not have a single standard event-feed pattern. Treat it as a short decision tree, not a generic platform:
+
+1. Try a machine-readable feed first:
+   - `/events/feed/json`
+   - `?_format=json`
+   - any obvious view-specific JSON endpoint exposed by the site
+2. Check for embedded data:
+   - `<script data-drupal-selector="drupal-settings-json">`
+   - JSON payloads attached to calendar views
+3. Fall back to HTML scraping:
+   - listing cards in `views-row`
+   - event nodes like `article.node--type-event`
+   - date fields like `field--name-field-dates`
+   - theme-specific wrappers like `node-events-*` or `listing-item--events`
+4. On detail pages, look for structured clues before hand-parsing:
+   - taxonomy labels
+   - visible location/date blocks
+   - `Add to iCal` links, including embedded `data:text/calendar` payloads
+
+Repo examples:
+- `scrapers/drupal_events.py` — reusable JSON feed pattern
+- `scrapers/waterfront_toronto.py` — embedded `drupal-settings-json`
+- `scrapers/toronto_community_housing.py` — listing-card HTML scraper
+- `scrapers/uoft_events.py` — mixed-theme Drupal parser
+- `scrapers/jccc.py` — Drupal listing + detail pages, including multi-date expansion
 
 ### SeeTickets Widgets
 HTML classes: `.title a`, `.date`, `.see-showtime`, `.see-doortime`, `.genre`, `.ages`, `.price`
