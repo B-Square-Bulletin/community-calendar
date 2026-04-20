@@ -16,9 +16,9 @@ on:
         type: boolean
         default: false
       months:
-        description: 'Number of months ahead to scrape (default: 2)'
+        description: 'Number of months ahead to scrape (default: 3)'
         required: false
-        default: '2'
+        default: '3'
   schedule:
     - cron: '0 0 * * *'
 
@@ -26,7 +26,7 @@ jobs:
   generate-calendar:
     runs-on: ubuntu-latest
     env:
-      SCRAPE_MONTHS: ${{ github.event.inputs.months || '2' }}
+      SCRAPE_MONTHS: ${{ github.event.inputs.months || '3' }}
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       TICKETMASTER_API_KEY: ${{ secrets.TICKETMASTER_API_KEY }}
       #ENABLE_FUZZY_DEDUP: ${{ secrets.ANTHROPIC_API_KEY && 'true' || '' }}
