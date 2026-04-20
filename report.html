@@ -211,6 +211,11 @@
     </div>
 
     <script>
+        const REPORT_URLS = [
+            'report.json',
+            'https://raw.githubusercontent.com/judell/community-calendar/archive/report.json'
+        ];
+
         async function loadConfig() {
             try {
                 const localResp = await fetch('xmlui/config.local.js?_=' + Date.now(), { cache: 'no-store' });
@@ -238,9 +243,15 @@
 
         async function loadReport() {
             try {
-                const response = await fetch('report.json');
-                if (!response.ok) throw new Error('Failed to load report');
-                renderReport(await response.json());
+                let data = null;
+                for (const url of REPORT_URLS) {
+                    const response = await fetch(url, { cache: 'no-store' });
+                    if (!response.ok) continue;
+                    data = await response.json();
+                    break;
+                }
+                if (!data) throw new Error('Failed to load report');
+                renderReport(data);
             } catch (e) {
                 document.getElementById('generated').textContent = 'Error: ' + e.message;
             }
