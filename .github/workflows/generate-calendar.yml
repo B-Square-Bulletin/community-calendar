@@ -333,6 +333,7 @@ jobs:
         python scrapers/luma_collection.py --url "https://luma.com/againagain" --name "again again" --timezone "America/Toronto" --output cities/toronto/luma_again_again.ics || true
         python scrapers/luma_collection.py --url "https://luma.com/airess" --name "airess" --timezone "America/Toronto" --output cities/toronto/luma_airess.ics || true
         python scrapers/luma_collection.py --url "https://luma.com/ute" --name "UTE" --timezone "America/Toronto" --output cities/toronto/luma_ute.ics || true
+        python scrapers/agakhan_museum.py --output cities/toronto/agakhan_museum.ics || true
       continue-on-error: true
 
 

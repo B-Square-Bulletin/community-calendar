@@ -1,6 +1,6 @@
 # Toronto Calendar Source Checklist
 
-## Currently Implemented (130 sources)
+## Currently Implemented (131 sources)
 
 ### Aggregators
 | Source | Type | Events | Notes |
@@ -17,6 +17,7 @@
 | Toronto Botanical Garden | WordPress Tribe ICS | 30 | Garden/nature programs |
 | Textile Museum of Canada | WordPress Tribe ICS | 9 | |
 | Bata Shoe Museum | WordPress Tribe ICS | 5 | |
+| Aga Khan Museum | HTML scraper | 63 at add time | Homepage upcoming cards + detail pages; includes recurring BMO Wednesdays and announced TD Pop-Up performances |
 | Buddies in Bad Times Theatre | WordPress Tribe ICS | 4 | LGBTQ+ theatre |
 | Factory Theatre | WordPress Tribe ICS | 9 | Canadian theatre |
 | High Park Nature Centre | WordPress Tribe ICS | 10 | Outdoor/nature programs |
@@ -265,7 +266,7 @@
 | Canadian Stage | No WordPress Tribe ICS |
 | Tarragon Theatre | No WordPress Tribe ICS |
 | Hot Docs | No WordPress Tribe ICS |
-| Aga Khan Museum | No WordPress Tribe ICS |
+| ~~Aga Khan Museum~~ | ~~No WordPress Tribe ICS~~ **Implemented** via `scrapers/agakhan_museum.py` |
 | Power Plant Gallery | No WordPress Tribe ICS |
 | MOCA Toronto | No WordPress Tribe ICS |
 | The 519 | WordPress but no Tribe Events plugin |
