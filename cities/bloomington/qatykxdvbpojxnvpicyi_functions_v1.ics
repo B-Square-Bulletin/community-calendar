@@ -1,0 +1,39 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Community Calendar//My Picks//EN
+X-WR-CALNAME:My Picks - Community Calendar
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+X-SOURCE:Chronically Dave
+UID:pick-12202@community-calendar
+DTSTAMP:20260420T005853Z
+DTSTART:20260411T180000Z
+DTEND:20260411T200000Z
+SUMMARY:Voices in Motion
+LOCATION:Wonderlab Science Museum
+DESCRIPTION:A Community Impact Grant program featuring vocal technique\, voice visualization\, hearing sciences\, and vocal production labs.\n\nChanging the world together through song and STEM. This innovative collaboration between students and faculty at IU and Bloomington’s WonderLab Science Museum brings together the arts and sciences to inspire young learners. Through interactive lessons in Vocal Performance\, Vocology\, and Hearing Sciences\, children explore how sound\, voice\, and hearing connect to both creativity and science. Using real clinical tools and games\, the program promotes vocal health\, curiosity\, and confidence. By integrating music and STEM learning into WonderLab’s spring exhibition\, this community partnership broadens access to engaging\, hands-on education—empowering children to see themselves as future scientists\, artists\, and innovators within their own community.
+URL:https://www.facebook.com/events/s/voices-in-motion-exploring-sou/940522035378059/
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Chronically Dave
+UID:pick-70965@community-calendar
+DTSTAMP:20260420T005853Z
+DTSTART:20260418T160000Z
+DTEND:20260418T170000Z
+SUMMARY:Molly Tuttle @ Landlocked Records
+LOCATION:Landlocked Records
+DESCRIPTION:Mini-set as a preview to her show at the Bluebird later at 8 p.m.
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Chronically Dave
+UID:pick-75262@community-calendar
+DTSTAMP:20260420T005853Z
+DTSTART:20260503T010000Z
+DTEND:20260502T040000Z
+SUMMARY:6 Foot Blonde
+LOCATION:Bluebird Nightclub
+DESCRIPTION:Live music performance at Bluebird Nightclub\, 21+ event.
+URL:https://thebluebird.ws/
+END:VEVENT
+END:VCALENDAR
