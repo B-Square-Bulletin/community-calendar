@@ -18,6 +18,7 @@
 ### Scraped Sources
 | Source | Scraper | Notes |
 |--------|---------|-------|
+| North Bay Derby | `squarespace.py` | Roller derby — Squarespace events page |
 | Monroe County Library (Sonoma) | `library_intercept.py` | Library events |
 | North Bay Bohemian | `cityspark/bohemian.py` | Alt-weekly events calendar |
 | Press Democrat | `cityspark/pressdemocrat.py` | Newspaper events |
