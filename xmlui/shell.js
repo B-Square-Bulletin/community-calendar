@@ -37,7 +37,8 @@ window._xsLogs = [];
   var versionProbe = Date.now();
   var vxhr = new XMLHttpRequest();
   vxhr.open('GET', 'version.txt?_=' + versionProbe, false);
-  var baseVersion = String(Date.now());
+  var isLocalDevHost = /^(localhost|127(?:\.\d+){3}|0\.0\.0\.0)$/.test(window.location.hostname);
+  var baseVersion = isLocalDevHost ? String(Date.now()) : 'missing-version';
   try {
     vxhr.send();
     if (vxhr.status >= 200 && vxhr.status < 300) {
@@ -62,7 +63,6 @@ window._xsLogs = [];
     }
   } catch (e) {}
 
-  var isLocalDevHost = /^(localhost|127(?:\.\d+){3}|0\.0\.0\.0)$/.test(window.location.hostname);
   var assetVersionSuffix = isLocalDevHost ? '-dev-' + Date.now() : '';
   window.APP_VERSION = baseVersion + assetVersionSuffix;
   var v = window.APP_VERSION;
