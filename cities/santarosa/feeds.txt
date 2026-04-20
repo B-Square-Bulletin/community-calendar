@@ -125,6 +125,9 @@ cities/santarosa/new_world_ballet.ics
 # North Bay Bohemian
 # cmd: python scrapers/bohemian.py
 cities/santarosa/bohemian.ics
+# North Bay Derby
+# cmd: python scrapers/squarespace.py --url "https://www.northbayderby.org/events" --name "North Bay Derby"
+https://www.northbayderby.org/events
 # Phoenix Theater
 # cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/4320-phoenix-theater" --name "Phoenix Theater"
 cities/santarosa/songkick_phoenix.ics
