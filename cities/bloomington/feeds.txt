@@ -41,6 +41,8 @@ https://bgcbloomington.org/events/list/?ical=1
 https://browncounty.com/events/?mec-ical-feed=1
 # Brown County Playhouse
 https://browncountyplayhouse.org/events/?ical=1
+# Chronically Dave
+https://qatykxdvbpojxnvpicyi.supabase.co/functions/v1/my-picks?token=583379a8-1003-4093-bb0b-ca4639766df2
 # City Boards & Commissions
 https://calendar.google.com/calendar/ical/bloomington.in.gov_r7b1mkrme1r8uhl3b5amhb50bc@group.calendar.google.com/public/basic.ics
 # City Department Events
@@ -115,6 +117,8 @@ https://tockify.com/api/feeds/ics/bloomington.arts.calendar
 https://calendar.google.com/calendar/ical/90204180d86dfba4a7c6fcd85e2082b5f9414f751c9a42d840016d3333a115f2%40group.calendar.google.com/public/basic.ics
 # Redbud Books
 https://calendar.google.com/calendar/ical/c_25e52423b2d0772255c59d0e398b655d5c121833814b7b9fc11f4ddd9cff195c@group.calendar.google.com/public/basic.ics
+# The Night
+https://dzpdualvwspgqghrysyz.supabase.co/functions/v1/my-picks?token=60a1563c-c271-4cca-b662-c79e1c651ca2
 # Upland Brewing
 https://uplandbeer.com/events/?ical=1
 # Utilities Service Board
@@ -198,6 +202,3 @@ cities/bloomington/tm_musical_arts_center.ics
 # cmd: python scrapers/ticketmaster.py --venue-id KovZpZAF7JFA --name "Wells Metz Theatre" --default-url "https://events.iu.edu/theatre/"
 cities/bloomington/tm_wells_metz.ics
 
-# --- Curator feeds ---
-# The Night
-https://dzpdualvwspgqghrysyz.supabase.co/functions/v1/my-picks?token=60a1563c-c271-4cca-b662-c79e1c651ca2
