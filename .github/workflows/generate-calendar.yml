@@ -578,6 +578,10 @@ jobs:
           python scripts/classify_events_json.py $FILES
         fi
 
+    - name: Restore prior report history
+      run: |
+        curl -sfL "https://raw.githubusercontent.com/${{ github.repository }}/archive/report.json" -o report.json || true
+
     - name: Generate feed health report
       run: |
         python scripts/report.py --cities ${{ steps.locations.outputs.list }} --build-log build.log
