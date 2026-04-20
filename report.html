@@ -210,8 +210,32 @@
         </div>
     </div>
 
-    <script src="xmlui/config.local.js"></script>
     <script>
+        async function loadConfig() {
+            try {
+                const localResp = await fetch('xmlui/config.local.js?_=' + Date.now(), { cache: 'no-store' });
+                if (localResp.ok) {
+                    const localText = await localResp.text();
+                    (0, eval)(localText);
+                }
+            } catch (e) {}
+
+            if (window.SUPABASE_URL && window.SUPABASE_KEY) return;
+
+            try {
+                const configResp = await fetch('xmlui/config.json?_=' + Date.now(), { cache: 'no-store' });
+                if (!configResp.ok) return;
+                const config = await configResp.json();
+                const globals = config.appGlobals || {};
+                if (!window.SUPABASE_URL && globals.supabaseUrl) {
+                    window.SUPABASE_URL = globals.supabaseUrl;
+                }
+                if (!window.SUPABASE_KEY && globals.supabasePublishableKey) {
+                    window.SUPABASE_KEY = globals.supabasePublishableKey;
+                }
+            } catch (e) {}
+        }
+
         async function loadReport() {
             try {
                 const response = await fetch('report.json');
@@ -602,6 +626,7 @@
         }
 
         async function loadOverrides() {
+            if (!window.SUPABASE_URL || !window.SUPABASE_KEY) return;
             try {
                 var [ovResp, viewResp] = await Promise.all([
                     fetch(
@@ -645,6 +670,7 @@
         }
 
         async function loadSuggestions() {
+            if (!window.SUPABASE_URL || !window.SUPABASE_KEY) return;
             try {
                 var resp = await fetch(
                     window.SUPABASE_URL + '/rest/v1/source_suggestions?select=*&order=created_at.desc',
@@ -673,14 +699,10 @@
             } catch (e) { /* silently skip if unavailable */ }
         }
 
-        loadReport();
-        loadOverrides();
-        loadSuggestions();
-
         async function loadFooter() {
             try {
                 var versionResp = await fetch('xmlui/version.txt');
-                var appCommit = (await versionResp.text()).trim();
+                var appCommit = versionResp.ok ? (await versionResp.text()).trim() : 'local-dev';
                 var xmluiVersion = window.XMLUI_VERSION || '0.12.6';
                 try {
                     var script = await fetch('xmlui/xmlui/xmlui-standalone.umd.js');
@@ -694,7 +716,16 @@
                     ' &bull; <a href="https://github.com/xmlui-org/xmlui">XMLUI engine ' + xmluiVersion + '</a>';
             } catch(e) {}
         }
-        loadFooter();
+
+        async function initPage() {
+            await loadConfig();
+            loadReport();
+            loadOverrides();
+            loadSuggestions();
+            loadFooter();
+        }
+
+        initPage();
     </script>
 
     <div id="build-footer" style="margin-top:40px;padding:16px 0;border-top:1px solid #eee;font-size:0.8em;color:#999;text-align:center">
