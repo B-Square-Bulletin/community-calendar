@@ -1,6 +1,7 @@
 *.sh
 !cities/*/test.sh
 !scripts/local_regression_test.sh
+!scripts/align-fork.sh
 .jsonsupabase/.temp/
 supabase/.temp/
 xmlui/supabase.min.js
