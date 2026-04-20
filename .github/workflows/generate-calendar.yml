@@ -60,13 +60,19 @@ jobs:
       id: locations
       run: |
         INPUT="${{ github.event.inputs.locations }}"
+        ENABLED="${{ vars.ENABLED_CITIES }}"
+        ALL=$(ls -d cities/*/feeds.txt 2>/dev/null | sed 's|cities/||;s|/feeds.txt||' | paste -sd, -)
+        MANIFEST="$ALL"
+        if [ -n "$ENABLED" ]; then
+          MANIFEST="$ENABLED"
+        fi
         if [ -z "$INPUT" ] || [ "$INPUT" = "all" ]; then
-          # Derive city list from cities/ directory (any subdir with a feeds.txt)
-          ALL=$(ls -d cities/*/feeds.txt 2>/dev/null | sed 's|cities/||;s|/feeds.txt||' | paste -sd, -)
-          echo "list=$ALL" >> $GITHUB_OUTPUT
+          # If ENABLED_CITIES is set for this repo/fork, use it as the default build scope.
+          echo "list=$MANIFEST" >> $GITHUB_OUTPUT
         else
           echo "list=$INPUT" >> $GITHUB_OUTPUT
         fi
+        echo "manifest_list=$MANIFEST" >> $GITHUB_OUTPUT
 
     # ==========================================
     # Santa Rosa
@@ -318,6 +324,14 @@ jobs:
         python scrapers/etobicoke_hort.py --output cities/toronto/etobicoke_hort.ics || true
         python scrapers/angas_farm.py --output cities/toronto/angas_farm.ics || true
         python scrapers/yohomo.py --output cities/toronto/yohomo.ics || true
+        python scrapers/luma.py --url "https://api2.luma.com/ics/get?entity=discover&id=discplace-Cx3JMS6vXKAbhV5" --name "Luma Toronto Discover" --timezone "America/Toronto" --output cities/toronto/luma_toronto_discover.ics || true
+        python scrapers/luma_collection.py --url "https://luma.com/plutotoronto" --name "Pluto Toronto" --timezone "America/Toronto" --output cities/toronto/luma_pluto_toronto.ics || true
+        python scrapers/luma_collection.py --url "https://luma.com/TorontoSocialMixer" --name "Toronto Social Mixer" --timezone "America/Toronto" --output cities/toronto/luma_toronto_social_mixer.ics || true
+        python scrapers/luma_collection.py --url "https://luma.com/TechTO-Events" --name "TechTO Events" --timezone "America/Toronto" --output cities/toronto/luma_techto_events.ics || true
+        python scrapers/luma_collection.py --url "https://luma.com/upliftcollective" --name "Uplift Collective" --timezone "America/Toronto" --output cities/toronto/luma_uplift_collective.ics || true
+        python scrapers/luma_collection.py --url "https://luma.com/againagain" --name "again again" --timezone "America/Toronto" --output cities/toronto/luma_again_again.ics || true
+        python scrapers/luma_collection.py --url "https://luma.com/airess" --name "airess" --timezone "America/Toronto" --output cities/toronto/luma_airess.ics || true
+        python scrapers/luma_collection.py --url "https://luma.com/ute" --name "UTE" --timezone "America/Toronto" --output cities/toronto/luma_ute.ics || true
       continue-on-error: true
 
 
@@ -511,7 +525,7 @@ jobs:
     # Post-processing (all cities)
     # ==========================================
     - name: Generate cities.json
-      run: python scripts/generate_cities_json.py
+      run: python scripts/generate_cities_json.py --cities "${{ steps.locations.outputs.manifest_list }}"
 
     - name: Convert ICS to JSON for Supabase
       run: |

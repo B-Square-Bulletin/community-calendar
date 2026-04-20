@@ -15,6 +15,56 @@ window.getActiveCategories = function(events) {
   return window.categoryList.filter(function(c) { return counts[c]; }).map(function(c) { return { name: c, label: c + ' (' + counts[c] + ')' }; });
 };
 
+// Keep browser-side source ordering aligned with scripts/combine_ics.py.
+var AGGREGATOR_SOURCES = new Set([
+  'North Bay Bohemian',
+  'Press Democrat',
+  'Creative Sonoma',
+  'GoLocal Cooperative',
+  'NOW Toronto',
+  'Toronto Events (Tockify)',
+  'YOHOMO',
+  'Montclair Local News',
+  'LancasterPA.com',
+  "Let's Go! Bloomington",
+  'BloomingtonOnline Events',
+  'BloomingtonOnline Food & Drink',
+  'BloomingtonOnline Shopping',
+  'BloomingtonArts.Today',
+  'Bloomington Arts',
+  'WFHB Community Calendar',
+  'Limestone Post',
+  'B-Square: Government',
+  'B-Square: Misc Civic Events',
+  'B-Square: Critical Mass',
+  'B-Square: BPTC Public Meetings',
+  'Brown County Events',
+  'Show Up Toronto'
+]);
+
+function normalizeVenueToken(value) {
+  return (value || '')
+    .toLowerCase()
+    .replace(/[^\w\s]/g, ' ')
+    .replace(/\b(the|a|an)\b/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function sourceMatchesLocation(source, location) {
+  if (!source || !location) return false;
+  var normalizedLocation = normalizeVenueToken(location);
+  if (!normalizedLocation) return false;
+  var candidates = [];
+  var raw = (source || '').toLowerCase().trim();
+  var normalized = normalizeVenueToken(source);
+  if (raw) candidates.push(raw);
+  if (normalized && candidates.indexOf(normalized) < 0) candidates.push(normalized);
+  return candidates.some(function(candidate) {
+    return candidate && normalizedLocation.includes(candidate);
+  });
+}
+
 // --- URL sync for category filter ---
 window.syncCategoryParam = function(category) {
   var url = new URL(window.location);
@@ -658,24 +708,16 @@ function dedupeEvents(events) {
   // Known aggregators sort to the end; among non-aggregators, a source whose name
   // appears in the event location is promoted to the front.
   // Filter mergedIds to only include numeric IDs (exclude synthetic enrichment IDs)
-  var AGGREGATORS = new Set([
-    'North Bay Bohemian', 'Press Democrat', 'Creative Sonoma', 'GoLocal Cooperative',
-    'NOW Toronto', 'Toronto Events (Tockify)', 'Montclair Local News',
-    'LancasterPA.com', "Let's Go! Bloomington", 'BloomingtonOnline Events',
-    'BloomingtonOnline Food & Drink', 'BloomingtonOnline Shopping',
-    'Show Up Toronto'
-  ]);
   let result = Object.values(groups).map(e => {
     const sourcesArr = Array.from(e.sources).sort((a, b) => {
-      var aAgg = AGGREGATORS.has(a) ? 1 : 0;
-      var bAgg = AGGREGATORS.has(b) ? 1 : 0;
+      var aAgg = AGGREGATOR_SOURCES.has(a) ? 1 : 0;
+      var bAgg = AGGREGATOR_SOURCES.has(b) ? 1 : 0;
       if (aAgg !== bAgg) return aAgg - bAgg;
       return a.localeCompare(b);
     });
-    const loc = (e.location || '').toLowerCase();
-    if (loc) {
+    if (e.location) {
       // Among non-aggregators, promote a source whose name appears in the location
-      const authIdx = sourcesArr.findIndex(s => !AGGREGATORS.has(s) && loc.includes(s.toLowerCase()));
+      const authIdx = sourcesArr.findIndex(s => !AGGREGATOR_SOURCES.has(s) && sourceMatchesLocation(s, e.location));
       if (authIdx > 0) {
         const [auth] = sourcesArr.splice(authIdx, 1);
         sourcesArr.unshift(auth);
@@ -807,14 +849,6 @@ function collapseLongRunningEvents(events) {
   return _collapseCache;
 }
 
-var AGGREGATORS = new Set([
-  'North Bay Bohemian', 'Press Democrat', 'Creative Sonoma', 'GoLocal Cooperative',
-  'NOW Toronto', 'Toronto Events (Tockify)', 'Montclair Local News',
-  'LancasterPA.com', "Let's Go! Bloomington", 'BloomingtonOnline Events',
-  'BloomingtonOnline Food & Drink', 'BloomingtonOnline Shopping',
-  'Show Up Toronto'
-]);
-
 function sortSourcesForDisplay(events) {
   if (!events) return [];
   return events.map(function(e) {
@@ -822,14 +856,15 @@ function sortSourcesForDisplay(events) {
     var sourcesArr = uniqueSourceNames(e.source);
     if (sourcesArr.length <= 1) return e;
     sourcesArr.sort(function(a, b) {
-      var aAgg = AGGREGATORS.has(a) ? 1 : 0;
-      var bAgg = AGGREGATORS.has(b) ? 1 : 0;
+      var aAgg = AGGREGATOR_SOURCES.has(a) ? 1 : 0;
+      var bAgg = AGGREGATOR_SOURCES.has(b) ? 1 : 0;
       if (aAgg !== bAgg) return aAgg - bAgg;
       return a.localeCompare(b);
     });
-    var loc = (e.location || '').toLowerCase();
-    if (loc) {
-      var authIdx = sourcesArr.findIndex(function(s) { return !AGGREGATORS.has(s) && loc.includes(s.toLowerCase()); });
+    if (e.location) {
+      var authIdx = sourcesArr.findIndex(function(s) {
+        return !AGGREGATOR_SOURCES.has(s) && sourceMatchesLocation(s, e.location);
+      });
       if (authIdx > 0) {
         var auth = sourcesArr.splice(authIdx, 1)[0];
         sourcesArr.unshift(auth);
