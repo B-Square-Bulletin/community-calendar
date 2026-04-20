@@ -12,12 +12,15 @@
   var.hasRecurrence="{false}"
   var.showInfo="{false}"
   var.deleteError=""
-  var.deletingId="">
+  var.deletingId=""
+  var.sortedFeeds="{(feedsList.value || []).slice().sort(function(a, b) { return (a.name || '').localeCompare(b.name || ''); })}"
+  var.pendingFeeds="{sortedFeeds.filter(function(f) { return f.status === 'pending'; })}"
+  var.activeFeeds="{sortedFeeds.filter(function(f) { return f.status === 'active'; })}">
 
   <DataSource
     id="feedsList"
     when="{activePanel === 'feeds'}"
-    url="{appGlobals.supabaseUrl + '/rest/v1/feeds?select=id,name,url,feed_type,status&city=eq.' + (window.cityFilter || 'bloomington') + '&status=in.(active,pending)&feed_type=in.(ics_url,curator)&order=status.desc&order=name.asc'}"
+    url="{appGlobals.supabaseUrl + '/rest/v1/feeds?select=id,name,url,status&city=eq.' + (window.cityFilter || 'bloomington') + '&status=in.(active,pending)&feed_type=in.(ics_url,curator)&order=name.asc'}"
     headers="{{
       apikey: appGlobals.supabasePublishableKey
     }}"
@@ -212,7 +215,7 @@
 
       <!-- Existing feeds -->
       <VStack gap="$space-2">
-        <variable name="pendingCount" value="{(feedsList.value || []).filter(function(f) { return f.status === 'pending'; }).length}" />
+        <variable name="pendingCount" value="{pendingFeeds.length}" />
         <Text fontWeight="bold" value="{feedsList.value ? ('Feeds (' + feedsList.value.length + (pendingCount ? ', ' + pendingCount + ' queued' : '') + ')') : 'Feeds (...)'}" />
         <Text
           when="{pendingCount > 0}"
@@ -221,31 +224,52 @@
           value="{pendingCount + ' feed' + (pendingCount === 1 ? '' : 's') + ' queued for the next build.'}" />
         <ScrollViewer height="50vh">
           <VStack gap="$space-1">
-            <Items data="{feedsList.value || []}">
-              <VStack paddingVertical="$space-1">
-                <HStack gap="$space-2" verticalAlignment="center">
-                  <Text value="{$item.name}" flexGrow="1" />
-                  <Badge
-                    value="{$item.status === 'pending' ? 'queued' : $item.status}"
-                    variant="pill"
-                    colorMap="{{ queued: { background: '$color-warn-500', label: '$const-color-surface-0' }, active: { background: '$color-success-500', label: '$const-color-surface-0' } }}" />
-                  <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{$item.feed_type}" />
-                  <Button
-                    label="Delete"
-                    variant="outlined"
-                    themeColor="attention"
-                    size="xs"
-                    onClick="() => {
-                      if (!confirm('Delete ' + $item.name + ' and all its events?')) return;
-                      deletingId = $item.id;
-                      deleteError = '';
-                      deleteEventsApi.execute({ name: $item.name });
-                    }"
-                  />
-                </HStack>
-                <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{$item.url}" breakMode="word" />
-              </VStack>
-            </Items>
+            <VStack when="{pendingFeeds.length > 0}" gap="$space-1" paddingBottom="$space-2">
+              <Text fontSize="$fontSize-sm" fontWeight="bold" color="$color-text-secondary" value="Queued" />
+              <Items data="{pendingFeeds}">
+                <VStack paddingVertical="$space-1">
+                  <HStack gap="$space-2" verticalAlignment="center">
+                    <Text value="{$item.name}" flexGrow="1" />
+                    <Button
+                      label="Delete"
+                      variant="outlined"
+                      themeColor="attention"
+                      size="xs"
+                      onClick="() => {
+                        if (!confirm('Delete ' + $item.name + ' and all its events?')) return;
+                        deletingId = $item.id;
+                        deleteError = '';
+                        deleteEventsApi.execute({ name: $item.name });
+                      }"
+                    />
+                  </HStack>
+                  <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{$item.url}" breakMode="word" />
+                </VStack>
+              </Items>
+            </VStack>
+            <VStack when="{activeFeeds.length > 0}" gap="$space-1">
+              <Text fontSize="$fontSize-sm" fontWeight="bold" color="$color-text-secondary" value="Active" />
+              <Items data="{activeFeeds}">
+                <VStack paddingVertical="$space-1">
+                  <HStack gap="$space-2" verticalAlignment="center">
+                    <Text value="{$item.name}" flexGrow="1" />
+                    <Button
+                      label="Delete"
+                      variant="outlined"
+                      themeColor="attention"
+                      size="xs"
+                      onClick="() => {
+                        if (!confirm('Delete ' + $item.name + ' and all its events?')) return;
+                        deletingId = $item.id;
+                        deleteError = '';
+                        deleteEventsApi.execute({ name: $item.name });
+                      }"
+                    />
+                  </HStack>
+                  <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{$item.url}" breakMode="word" />
+                </VStack>
+              </Items>
+            </VStack>
           </VStack>
         </ScrollViewer>
         <Text when="{deleteError}" color="$color-danger-500" value="{deleteError}" />
