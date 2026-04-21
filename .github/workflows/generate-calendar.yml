@@ -342,6 +342,8 @@ jobs:
         python scrapers/eventbrite.py --url "https://www.eventbrite.ca/o/head-out-toronto-86621424023" --name "Head Out Toronto" --output cities/toronto/eventbrite_head_out_toronto.ics || true
         python scrapers/eventbrite.py --url "https://www.eventbrite.ca/o/all-about-intimacy-86037364023" --name "All About Intimacy" --output cities/toronto/eventbrite_all_about_intimacy.ics || true
         python scrapers/luma_collection.py --url "https://luma.com/genai-collective" --name "The AI Collective" --timezone "America/Toronto" --output cities/toronto/luma_genai_collective.ics || true
+        python scrapers/luma_collection.py --url "https://luma.com/devtoolsTO" --name "Devtools Toronto" --timezone "America/Toronto" --output cities/toronto/luma_devtools_toronto.ics || true
+        python scrapers/luma_collection.py --url "https://luma.com/intuit-open-source-meetup" --name "Intuit Open Source Meetup" --timezone "America/Toronto" --output cities/toronto/luma_intuit_open_source.ics || true
       continue-on-error: true
 
 
