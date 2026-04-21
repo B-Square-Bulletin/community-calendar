@@ -597,7 +597,7 @@ jobs:
     - name: Upload events to Supabase
       env:
         SUPABASE_URL: ${{ vars.SUPABASE_URL }}
-        SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        SUPABASE_ANON_KEY: ${{ vars.SUPABASE_KEY }}
       run: |
         TOTAL_INSERTED=0
         IFS=',' read -ra UPLOAD_CITIES <<< "${{ steps.locations.outputs.list }}"
@@ -629,18 +629,24 @@ jobs:
     - name: Refresh source names
       env:
         SUPABASE_URL: ${{ vars.SUPABASE_URL }}
-        SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        SUPABASE_ANON_KEY: ${{ vars.SUPABASE_KEY }}
       run: |
         IFS=',' read -ra UPLOAD_CITIES <<< "${{ steps.locations.outputs.list }}"
         for city in "${UPLOAD_CITIES[@]}"; do
           city=$(echo "$city" | xargs)
           echo "Refreshing source names for $city..."
-          curl -sL -X POST "${SUPABASE_URL}/rest/v1/rpc/refresh_source_names" \
+          RESPONSE=$(curl -sL -w "\n%{http_code}" -X POST "${SUPABASE_URL}/rest/v1/rpc/refresh_source_names" \
             -H "apikey: ${SUPABASE_ANON_KEY}" \
             -H "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
             -H "Content-Type: application/json" \
-            -d "{\"target_city\": \"$city\"}"
-          echo " done"
+            -d "{\"target_city\": \"$city\"}")
+          HTTP_CODE=$(echo "$RESPONSE" | tail -1)
+          BODY=$(echo "$RESPONSE" | sed '$d')
+          if [ "$HTTP_CODE" -ge 400 ]; then
+            echo "ERROR: refresh_source_names for $city failed (HTTP $HTTP_CODE): $BODY"
+            exit 1
+          fi
+          echo " done (HTTP $HTTP_CODE)"
         done
 
     - name: Refresh deduplicated events
