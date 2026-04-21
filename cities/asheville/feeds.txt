@@ -59,6 +59,8 @@ https://www.buncombenc.gov/common/modules/iCalendar/iCalendar.aspx?catID=40&feed
 https://www.buncombenc.gov/common/modules/iCalendar/iCalendar.aspx?catID=37&feed=calendar
 # Buncombe County Public Health Mobile Team
 https://www.buncombenc.gov/common/modules/iCalendar/iCalendar.aspx?catID=35&feed=calendar
+# Buncombe County Public Libraries
+https://www.trumba.com/calendars/public-libraries.ics
 # City of Asheville
 https://www.ashevillenc.gov/events/?ical=1
 # Dodgeball AVL
@@ -93,6 +95,9 @@ https://www.meetup.com/skinny-beats-sound-meditation/events/ical/
 https://www.unca.edu/events/?ical=1
 
 # --- Scrapers ---
+# Asheville Area Chamber of Commerce
+# cmd: python scrapers/asheville_chamber.py
+cities/asheville/asheville_chamber.ics
 # Eulogy
 # cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/4519500-eulogy" --name "Eulogy"
 cities/asheville/eulogy_songkick.ics
