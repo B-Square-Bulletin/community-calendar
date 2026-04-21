@@ -28,3 +28,27 @@
 #   python scripts/add_scraper.py example toronto "Source Name" --test
 #
 # See CONTRIBUTING.md for details.
+
+# Being and Becoming
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.ca/o/being-and-becoming-73656188253" --name "Being and Becoming"
+cities/toronto/eventbrite_being_and_becoming.ics
+
+# Brains and Barstools
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.ca/o/brains-and-barstools-114602262361" --name "Brains and Barstools"
+cities/toronto/eventbrite_brains_and_barstools.ics
+
+# Radical Aliveness Toronto
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.ca/o/radical-aliveness-toronto-64308358303" --name "Radical Aliveness Toronto"
+cities/toronto/eventbrite_radical_aliveness.ics
+
+# Head Out Toronto
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.ca/o/head-out-toronto-86621424023" --name "Head Out Toronto"
+cities/toronto/eventbrite_head_out_toronto.ics
+
+# All About Intimacy
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.ca/o/all-about-intimacy-86037364023" --name "All About Intimacy"
+cities/toronto/eventbrite_all_about_intimacy.ics
+
+# The AI Collective
+# cmd: python scrapers/luma_collection.py --url "https://luma.com/genai-collective" --name "The AI Collective" --timezone "America/Toronto"
+cities/toronto/luma_genai_collective.ics
