@@ -124,8 +124,8 @@ Resolution strategy:
   - Very large Toronto event surface
 - Limitation:
   - Seasonal and extremely noisy
-- Recommendation:
-  - Treat as special-case seasonal expansion, not baseline coverage
+- Status:
+  - Staged on 2026-04-21 via `scrapers/luma_collection.py`. 186 future events at time of staging. Users can filter or disable the feed.
 
 ## Broad / Likely Noisy
 
