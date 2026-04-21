@@ -35,8 +35,7 @@ GROUP BY city, lower(TRIM(BOTH FROM title)), start_time
 ORDER BY start_time;
 
 CREATE UNIQUE INDEX deduplicated_events_id_idx ON deduplicated_events (id);
-CREATE INDEX deduplicated_events_city_idx ON deduplicated_events (city);
-CREATE INDEX deduplicated_events_start_time_idx ON deduplicated_events (start_time);
+CREATE INDEX deduplicated_events_city_start_time_idx ON deduplicated_events (city, start_time);
 
 GRANT SELECT ON deduplicated_events TO anon, authenticated, service_role;
 
