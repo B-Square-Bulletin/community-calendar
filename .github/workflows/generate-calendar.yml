@@ -489,7 +489,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add cities/*/pending_feeds.txt
           git commit -m "Process pending feeds into DB"
-          git pull --rebase && git push || true
+          git pull --rebase --autostash && git push || true
         else
           echo "No pending feeds to process"
         fi
