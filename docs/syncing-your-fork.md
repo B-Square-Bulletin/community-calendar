@@ -65,6 +65,70 @@ const SUPABASE_KEY = 'eyJ...your-anon-key...';
 
 ## Syncing with upstream
 
+### One-Time Setup: Automated Merge Drivers (Optional but Recommended)
+
+To avoid manual conflict resolution during upstream syncs, configure merge drivers once:
+
+#### 1. Set ENABLED_CITIES in .envrc
+
+```bash
+# Add to .envrc in the repo root (create if it doesn't exist)
+echo 'export ENABLED_CITIES="bloomington"' >> .envrc
+
+# For multiple cities: echo 'export ENABLED_CITIES="city1,city2"' >> .envrc
+```
+
+If using direnv, allow the directory:
+```bash
+direnv allow .
+```
+
+If not using direnv, source manually before merging:
+```bash
+source .envrc
+```
+
+#### 2. Configure Git merge drivers
+
+```bash
+# Configure the city filter driver
+git config merge.city-filter.name "Filter cities to fork's enabled cities"
+git config merge.city-filter.driver "bash scripts/merge-cities-filter.sh %O %A %B %P"
+
+# Configure the keepours driver for generated files
+git config merge.keepours.name "Keep our generated files"
+git config merge.keepours.driver true
+```
+
+#### 3. Set ENABLED_CITIES in GitHub Actions
+
+In GitHub: **Settings > Secrets and variables > Actions > Variables**
+
+Add variable:
+```
+Name: ENABLED_CITIES
+Value: bloomington
+```
+
+(Or `city1,city2` for multiple cities - must match your .envrc)
+
+#### 4. Verify setup
+
+```bash
+echo $ENABLED_CITIES  # Should show your cities
+git config --get merge.city-filter.driver
+git config --get merge.keepours.driver
+```
+
+**After this setup**, `git merge upstream/main` will automatically:
+- Keep only your enabled cities in `cities/` and `cities.json`
+- Preserve your generated files (`report.json`, `xmlui/version.txt`)
+- Accept all other upstream changes without conflicts
+
+If you skip this setup, you can still merge manually as described below.
+
+---
+
 ### Step 1: Pull upstream changes
 
 ```bash
@@ -251,3 +315,64 @@ After the build completes:
 2. Click the RSS icon (Manage Feeds) in the header — you should see your feeds listed
 3. Try adding a test feed: paste any public ICS URL, give it a name, click Validate, then Add Feed
 4. The feed will appear in the next build
+
+## Troubleshooting Merge Drivers
+
+If automated merging fails:
+
+**ENABLED_CITIES not set:**
+```bash
+# Add to .envrc and reload
+echo 'export ENABLED_CITIES="bloomington"' >> .envrc
+source .envrc
+```
+
+**Script not executable:**
+```bash
+chmod +x scripts/merge-cities-filter.sh
+```
+
+**jq not found:**
+```bash
+# macOS
+brew install jq
+
+# Linux
+sudo apt-get install jq
+```
+
+**Wrong cities kept after merge:**
+```bash
+# Check variable value
+echo $ENABLED_CITIES
+
+# May need to source again
+source .envrc
+```
+
+**Build processes wrong cities:**
+Check that ENABLED_CITIES GitHub Actions variable matches your local .envrc value.
+
+**Merge driver not activating:**
+```bash
+# Verify git config
+git config --get merge.city-filter.driver
+git config --get merge.keepours.driver
+
+# If empty, rerun the git config commands from setup
+```
+
+**To disable merge drivers temporarily:**
+```bash
+git config merge.city-filter.driver false
+git config merge.keepours.driver false
+```
+
+**To revert a bad merge:**
+```bash
+# Before committing
+git merge --abort
+
+# After committing
+git reset --hard HEAD^
+```
