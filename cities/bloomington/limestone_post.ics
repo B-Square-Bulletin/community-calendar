@@ -4,40 +4,6 @@ PRODID:-//Limestone Post//limestonepost.org//
 X-WR-CALNAME:Limestone Post
 X-WR-TIMEZONE:America/Indiana/Indianapolis
 BEGIN:VEVENT
-SUMMARY:Friends of the Library Big Book Sale April 16-20
-DTSTART;TZID=America/Indiana/Indianapolis:20260420T090000
-DTEND;TZID=America/Indiana/Indianapolis:20260420T140000
-UID:2603286ANfq3EMvkSHDYVip0fJ3Q
-DESCRIPTION:The Friends of Monroe County Public Library present the Big Sp
- ring Book Sale. All books are just 50¢ to $2.00. The sale reflects the br
- eadth of our community’s interests – add to your choices for cooking\,
-  delve into a new area in history\, or find good books for (grand)children
- . Fiction\, biography\, politics\, DVDs\, music\, and much more are in goo
- d supply\, with new material added every day.\n\nThursday\, April 16: 4:00
- –7:00 PM (Early bird sale for Friends members only: you can join at the 
- door or online at mcpl.info.friends).\n\nOpen to the public:\n\nFriday\, A
- pril 17: 10 AM–6 PM (all books 50¢ to $2.00)\n\nSaturday\, April 18: 10
-  AM–6 PM (all books 50¢ to $2.00)\n\nSunday\, April 19: Noon–6 PM (fi
- ll a Friends tote bag for $12\; fill a box for $18)\n\nMonday\, April 20: 
- 9 AM–2 PM (all remaining items are free)\n\nThe sale is in Meeting Rooms
-  1B/1C on the ground floor of the Monroe County Public Library at 303 E. K
- irkwood Avenue\, Bloomington IN 47408. All proceeds support the programs a
- nd services of the Library.
-LOCATION:Monroe County Public Library- Downtown Branch
-URL:http://mcpl.info/bigsale
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Tennis (Girls V) - Indian Creek
-DTSTART;TZID=America/Indiana/Indianapolis:20260420T170000
-DTEND;TZID=America/Indiana/Indianapolis:20260420T230000
-UID:251007Sd2_2gw9ukKagFQz-W5AWA
-DESCRIPTION:
-LOCATION:Edgewood High School
-URL:https://www.rbbschools.net/calendar1
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:The Rock Orchestra By Candlelight
 DTSTART;TZID=America/Indiana/Indianapolis:20260421T200000
 DTEND;TZID=America/Indiana/Indianapolis:20260421T200000
@@ -1186,6 +1152,16 @@ URL:https://limestonepost.org/calendar/#/details/rea-frey-on-dear-mother/1
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Raanan Hershberg's Comedy Attic Debut!
+DTSTART;TZID=America/Indiana/Indianapolis:20260501T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260501T211500
+UID:260420NZ9UoavxG0Ct90TT9vCneQ
+DESCRIPTION:Biography   Website
+LOCATION:The Comedy Attic
+URL:https://www.comedyattic.com/events/135512
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:The Steeldrivers
 DTSTART;TZID=America/Indiana/Indianapolis:20260502T200000
 DTEND;TZID=America/Indiana/Indianapolis:20260502T200000
@@ -1266,6 +1242,16 @@ DESCRIPTION:Get ready to kick off your day with some epic shredding and de
 LOCATION:Hurlow Wealth Management Group\, Inc.
 URL:https://limestonepost.org/calendar/#/details/shredding-breakfast-party
  -2026/18270614/2026-05-02T09
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Raanan Hershberg's Comedy Attic Debut!
+DTSTART;TZID=America/Indiana/Indianapolis:20260502T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260502T211500
+UID:2604207yGr166AOkq4XLPjlUa9vQ
+DESCRIPTION:Biography   Website
+LOCATION:The Comedy Attic
+URL:https://www.comedyattic.com/events/135512
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
@@ -2741,16 +2727,6 @@ URL:https://www.visitbloomington.com/event/wednesday-triva/57838/
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Golf (Boys V) - Brown County
-DTSTART;TZID=America/Indiana/Indianapolis:20260528T163000
-DTEND;TZID=America/Indiana/Indianapolis:20260528T223000
-UID:251007r0qXsrTcMECvk62yLJovKw
-DESCRIPTION:
-LOCATION:Edgewood High School
-URL:https://www.rbbschools.net/calendar1
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:No Dishes Patio Party @ Woolery Mill
 DTSTART;TZID=America/Indiana/Indianapolis:20260528T173000
 DTEND;TZID=America/Indiana/Indianapolis:20260528T203000
@@ -2761,6 +2737,16 @@ DESCRIPTION:Come enjoy an outdoor BBQ Buffet with live music and other fun
 LOCATION:The Woolery Mill
 URL:https://limestonepost.org/calendar/#/details/no-dishes-patio-party-woo
  lery-mill/18671404/2026-05-28T17
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Golf (Boys V) - Brown County
+DTSTART;TZID=America/Indiana/Indianapolis:20260528T163000
+DTEND;TZID=America/Indiana/Indianapolis:20260528T223000
+UID:251007r0qXsrTcMECvk62yLJovKw
+DESCRIPTION:
+LOCATION:Edgewood High School
+URL:https://www.rbbschools.net/calendar1
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
@@ -3123,6 +3109,16 @@ URL:https://indyrunners.org/view-race-details/momofo-100k-20-mile-fun-run-
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Mike Finoia Returns to
+DTSTART;TZID=America/Indiana/Indianapolis:20260605T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260605T211500
+UID:260420v6LiJCNJd0aPWGXsCmM4GQ
+DESCRIPTION:Biography
+LOCATION:The Comedy Attic
+URL:https://www.comedyattic.com/events/135462
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Another Revolution
 DTSTART;TZID=America/Indiana/Indianapolis:20260605T193000
 DTEND;TZID=America/Indiana/Indianapolis:20260605T193000
@@ -3141,6 +3137,16 @@ DESCRIPTION:Constellation Stage & Screen presents “Another Revolution\,
  stellation.org/mainstage/another-revolution/
 LOCATION:Constellation Playhouse
 URL:https://seeconstellation.org/mainstage/another-revolution/
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Mike Finoia Returns to
+DTSTART;TZID=America/Indiana/Indianapolis:20260606T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260606T211500
+UID:260420MsjNtrMhekSubjRQ0v-nkQ
+DESCRIPTION:Biography
+LOCATION:The Comedy Attic
+URL:https://www.comedyattic.com/events/135462
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
@@ -3911,6 +3917,27 @@ SUMMARY:Another Revolution
 DTSTART;TZID=America/Indiana/Indianapolis:20260620T140000
 DTEND;TZID=America/Indiana/Indianapolis:20260620T140000
 UID:250915MAR9sSWMb0WN-Fd8S8eHvg
+DESCRIPTION:Constellation Stage & Screen presents “Another Revolution\,
+ ” on stage June 4-21 at the Constellation Playhouse. \n\n***Some revolu
+ tions happen in the streets. Others in the lab.***\n\nKat and Henry\, two 
+ graduate students from opposing scientific disciplines\, are forced to sha
+ re a lab at Columbia University in 1968. Amidst interpersonal differences\
+ , a campus devolving into political chaos\, and the uncertainty and turmoi
+ l of the outside world\, they each discover what it’s like to be thrown 
+ into someone else’s orbit. *By Jacqueline Bircher\, playwright of Conste
+ llation’s hit production of* Webster’s B!+@#. *Recommended for ages 13
+ +.*\n\nSee Constellation’s website for more information\, including a de
+ tailed performance schedule. Learn more and find tickets at https://seecon
+ stellation.org/mainstage/another-revolution/
+LOCATION:Constellation Playhouse
+URL:https://seeconstellation.org/mainstage/another-revolution/
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Another Revolution
+DTSTART;TZID=America/Indiana/Indianapolis:20260621T140000
+DTEND;TZID=America/Indiana/Indianapolis:20260621T140000
+UID:250915WeXccBxqK0G1c8LbhrOdsA
 DESCRIPTION:Constellation Stage & Screen presents “Another Revolution\,
  ” on stage June 4-21 at the Constellation Playhouse. \n\n***Some revolu
  tions happen in the streets. Others in the lab.***\n\nKat and Henry\, two 

@@ -135,4 +135,16 @@ URL:https://www.ticketmaster.com/blackhawk-nashville-indiana-06-13-2026/ev
  ent/05006452A611A346
 X-SOURCE:Brown County Music Center
 END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Psychics vs Science Tour
+DTSTART;TZID=America/New_York:20260621T170000
+DTEND;TZID=America/New_York:20260621T170000
+UID:66cca0251cb69f14dbd4e8e12dd3a9e1@ticketmaster.com
+DESCRIPTION:
+LOCATION:Brown County Music Center\, 200 Maple Leaf Boulevard\, Nashville\
+ , IN
+URL:https://www.ticketmaster.com/psychics-vs-science-tour-nashville-indian
+ a-06-21-2026/event/05006489D260BE17
+X-SOURCE:Brown County Music Center
+END:VEVENT
 END:VCALENDAR

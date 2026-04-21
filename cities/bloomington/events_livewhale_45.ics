@@ -4,80 +4,6 @@ PRODID:-//Indiana University//NONSGML v1.0//EN
 X-WR-CALNAME:Indiana University Events
 BEGIN:VEVENT
 X-SOURCE:IU Media School
-DTSTART:20260420T180000Z
-DTEND:20260420T190000Z
-LOCATION:ERNIE PYLE HALL
-GEO:39.168188;-86.523031
-SUMMARY:Media School tour and information session
-DESCRIPTION:Reserve your spot (https://process.indiana.edu/portal/discove
- r-iu-days?tab=in-person) now or view a list of other session dates (https
- ://mediaschool.indiana.edu/admissions/visit.html).  To see availability f
- or Media School information sessions\, select a date (https://process.ind
- iana.edu/portal/discover-iu-days?tab=in-person)\, followed by "Discover I
- U Day." Any available Media School sessions on that day will then be visi
- ble.
-X-ALT-DESC;FMTTYPE=text/html:<p>  Reserve your <a href="https://process.i
- ndiana.edu/portal/discover-iu-days?tab=in-person">spot</a> now or view a 
- <a href="https://mediaschool.indiana.edu/admissions/visit.html">list of o
- ther session dates</a>.</p><p>  To see availability for Media School info
- rmation sessions\, <a href="https://process.indiana.edu/portal/discover-i
- u-days?tab=in-person">select a date</a>\, followed by "Discover IU Day." 
- Any available Media School sessions on that day will then be visible.</p>
-UID:20260420T180000Z-2173998@events.iu.edu
-DTSTAMP:20260116T134411Z
-URL:https://events.iu.edu/mediaiub/event/2173998-media-school-tour-and-in
- formation-session
-CATEGORIES:Training, non-credit classes, and learning opportunities
-LAST-MODIFIED:20260116T192129Z
-X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2173998
-X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-SUMMARY:<p>\n  Join us for an information session about The M
- edia School and a tour of Franklin Hall\, starting at Ernie Pyle Hall.\n<
- /p>
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU Media School
-DTSTART:20260420T220000Z
-DTEND:20260420T230000Z
-LOCATION:FRANKLIN HALL - Room Number: 310
-GEO:39.167025;-86.526406
-SUMMARY:Bridging the Gap
-DESCRIPTION:Join us for a workshop aimed at seniors who don't have a job 
- yet and are feeling stressed about the job search process. We'll have a 3
- 0-minute guest panel with recent Media School alumni\, and a 30 minute wo
- rkshop covering common questions regarding job searches.  Guest speakers 
- include:Meg Banich\, BA'22\, PR specialist with Rock Paper Scissors\, Inc
- .  Lindsey Jackson\, BAJ'19\, MS'23\, communications generalist with the 
- IU School of Medicine
-X-ALT-DESC;FMTTYPE=text/html:<p data-pm-slice="1 1 []">  Join us for a wo
- rkshop aimed at seniors who don't have a job yet and are feeling stressed
-  about the job search process. We'll have a 30-minute guest panel with re
- cent Media School alumni\, and a 30 minute workshop covering common quest
- ions regarding job searches.</p><p>  Guest speakers include:</p><ul><li>M
- eg Banich\, BA'22\, PR specialist with Rock Paper Scissors\, Inc.  </li><
- li>Lindsey Jackson\, BAJ'19\, MS'23\, communications generalist with the 
- IU School of Medicine  </li></ul>
-UID:20260420T220000Z-2262172@events.iu.edu
-DTSTAMP:20260408T115005Z
-URL:https://events.iu.edu/mediaiub/event/2262172-bridging-the-gap
-CATEGORIES:Career development,Lectures, talks, seminars, and conferences
-LAST-MODIFIED:20260414T153007Z
-X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2262172
-X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-COST:Free
-X-LIVEWHALE-CONTACT-INFO:<p>\n  Questions? Contact:&#160\;<strong><br />\
- n  <br />\n  Ian Fournie</strong><br />\n  <em>ifournie@iu.edu</em><br />
- \n  <strong>Jill Romack</strong><br />\n  <em>jrromack@iu.edu</em>\n</p>
-X-LIVEWHALE-SUMMARY:<p>\n  Are you a senior wanting guidance for job sear
- ching post-grad?\n</p>
-X-LIVEWHALE-CUSTOM-REGISTRATION-LINK:https://iubloomington.joinhandshake.
- com/stu/events/1940993
-X-LIVEWHALE-CUSTOM-ROOM-NUMBER:310
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU Media School
 DTSTART:20260421T223000Z
 DTEND:20260422T000000Z
 LOCATION:Buskirk-Chumley Theater
@@ -1212,6 +1138,42 @@ X-LIVEWHALE-CONTACT-INFO:<p>\n  <a href="mailto:iucinema@iu.edu">iucinema
 X-LIVEWHALE-TAGS:Hoosier experience
 X-LIVEWHALE-CUSTOM-REGISTRATION-LINK:https://cinema.indiana.edu/upcoming-
  films/screening/2026-spring-saturday-may-2-700pm
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:IU Media School
+DTSTART:20260508T140000Z
+DTEND:20260508T160000Z
+LOCATION:FRANKLIN HALL - Room Number: commons
+GEO:39.167025;-86.526406
+SUMMARY:Media School graduate student recognition reception
+DESCRIPTION:Morning refreshments and coffee will be served. Graduating st
+ udents\, please RSVP by April 30 (https://iubmsch-fireform.eas.iu.edu/onl
+ ine/form/index/mschgradrsvp).  This event is for students completing grad
+ uate degrees (M.A.\, M.S.\, Ph.D.).
+X-ALT-DESC;FMTTYPE=text/html:<p>  Morning refreshments and coffee will be
+  served. Graduating students\, <a href="https://iubmsch-fireform.eas.iu.e
+ du/online/form/index/mschgradrsvp" target="_blank" rel="noopener">please 
+ RSVP by April 30</a>.</p><p>  This event is for students completing gradu
+ ate degrees (M.A.\, M.S.\, Ph.D.).</p>
+UID:20260508T140000Z-2273683@events.iu.edu
+DTSTAMP:20260420T104916Z
+URL:https://events.iu.edu/mediaiub/event/2273683-media-school-graduate-st
+ udent-recognition-reception
+CATEGORIES:Functions, festivals, and celebrations
+LAST-MODIFIED:20260420T145153Z
+ATTACH:https://events.iu.edu/live/image/gid/45/width/168/height/168/crop/
+ 1/src_region/0,0,3200,2133/26444_2Z7A9511.rev.1744401176.jpg
+X-LIVEWHALE-TYPE:events
+X-LIVEWHALE-ID:2273683
+X-LIVEWHALE-TIMEZONE:America/New_York
+X-LIVEWHALE-IMAGE:https://events.iu.edu/live/image/gid/45/width/168/heigh
+ t/168/crop/1/src_region/0\,0\,3200\,2133/26444_2Z7A9511.rev.1744401176.jp
+ g
+X-LIVEWHALE-SUMMARY:<p>\n  Join us as we celebrate grad students who are 
+ graduating in the spring and summer.\n</p>
+X-LIVEWHALE-CUSTOM-REGISTRATION-LINK:https://iubmsch-fireform.eas.iu.edu/
+ online/form/index/mschgradrsvp
+X-LIVEWHALE-CUSTOM-ROOM-NUMBER:commons
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:IU Media School

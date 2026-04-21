@@ -4,156 +4,6 @@ PRODID:-//WFHB Community Calendar//wfhb.org//
 X-WR-CALNAME:WFHB Community Calendar
 X-WR-TIMEZONE:America/Indiana/Indianapolis
 BEGIN:VEVENT
-SUMMARY:Friends of the Library Big Book Sale
-DTSTART;TZID=America/Indiana/Indianapolis:20260420T090000
-DTEND;TZID=America/Indiana/Indianapolis:20260420T140000
-UID:ai1ec-147818-94566@wfhb.org
-DESCRIPTION:
-LOCATION:Monroe County Public Library\, 303 E Kirkwood Ave\, Meeting Rooms
-  1B/1C on the ground floor\, Bloomington
-URL:https://wfhb.org/event/friends-of-the-library-big-book-sale-3/?instanc
- e_id=94566
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Community Bible Study
-DTSTART;TZID=America/Indiana/Indianapolis:20260420T103000
-DTEND;TZID=America/Indiana/Indianapolis:20260420T113000
-UID:ai1ec-148555-94976@wfhb.org
-DESCRIPTION:
-LOCATION:Meeting Room A\, Ellettsville Branch of the Monroe County Public 
- Library\, 600 W. Temperance Street\, Ellettsville
-URL:https://wfhb.org/event/community-bible-study-17/?instance_id=94976
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:50501 Bloomington
-DTSTART;TZID=America/Indiana/Indianapolis:20260420T110000
-DTEND;TZID=America/Indiana/Indianapolis:20260420T130000
-UID:ai1ec-148556-94977@wfhb.org
-DESCRIPTION:
-LOCATION:Meeting Room 2C\, Monroe County Public Library\, 303 E. Kirkwood 
- Ave\, Bloomington
-URL:https://wfhb.org/event/50501-bloomington/?instance_id=94977
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Earth Day Craft: Mosaic Earth  (for kids grade K-5)
-DTSTART;TZID=America/Indiana/Indianapolis:20260420T163000
-DTEND;TZID=America/Indiana/Indianapolis:20260420T180000
-UID:ai1ec-148566-94987@wfhb.org
-DESCRIPTION:Elementary aged kids can create an Earth Day craft in the upst
- airs play areas today anytime between 4:30-6pm. This is a self-directed ac
- tivity where tidying up afterwards is much appreciated!
-LOCATION:Brown County Public Library\, 205 Locust Lane\, Nashville
-URL:https://wfhb.org/event/earth-day-craft-mosaic-earth-for-kids-grade-k-5
- /?instance_id=94987
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Monroe County Health Department -Preparedness University
-DTSTART;TZID=America/Indiana/Indianapolis:20260420T170000
-DTEND;TZID=America/Indiana/Indianapolis:20260420T184500
-UID:ai1ec-148557-94978@wfhb.org
-DESCRIPTION:
-LOCATION:Meeting Room B\, Southwest Branch of the Monroe County Public Lib
- rary\, 890 W. Gordon Pike\, Bloomington
-URL:https://wfhb.org/event/monroe-county-health-department-preparedness-un
- iversity/?instance_id=94978
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Country Line Dancing
-DTSTART;TZID=America/Indiana/Indianapolis:20260420T183000
-DTEND;TZID=America/Indiana/Indianapolis:20260420T210000
-UID:ai1ec-138460-92665@wfhb.org
-DESCRIPTION:
-LOCATION:Mike's Music and Dance Barn\, 2341 State Road 46 West\, Nashville
-URL:https://wfhb.org/event/country-line-dancing-all-ages/?instance_id=9266
- 5
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Ewan / Smith / Walter + Quass / Belcher
-DTSTART;TZID=America/Indiana/Indianapolis:20260420T190000
-DTEND;TZID=America/Indiana/Indianapolis:20260420T210000
-UID:ai1ec-147802-94546@wfhb.org
-DESCRIPTION:A rare and high-intensity evening featuring Sandy Ewan\, Damo
- n Smith\, and Weasel Walter.
-LOCATION:Backspace Gallery\, 112 West 6th Street\, Bloomington
-URL:https://wfhb.org/event/ewan-smith-walter-quass-belcher/?instance_id=94
- 546
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Rich Hardesty (solo show to kick-off the Little 500 week)
-DTSTART;TZID=America/Indiana/Indianapolis:20260420T190000
-DTEND;TZID=America/Indiana/Indianapolis:20260420T210000
-UID:ai1ec-148305-94875@wfhb.org
-DESCRIPTION:Hardesty’s words about this show\, via a social media post o
- f his:“I can’t wait to sing and tell stories at The BlueBird Nightclub
-  the kick-off Little 500 week on 4/20 from 7 to 9 pm.  Stories like……I
-  used to take my guitar out to rooftop at the quarry off of Fairfax by the
-  school during Little 500 week with friends.  Or the time my blue escort r
- olled down the driveway at Pi Phi and bounced over curb at Balentine.  See
- ing Jay Edwards walk in the apt at our kegger Walnut Knolls B11.  Headlini
- ng IU Auditorium Little 500….Thursday nights playing Peanut Barrel…..C
- ome hear the stories and the songs for the early intimate show at The Bird
-  on 4/20!”
-LOCATION:The Bluebird Nightclub\, 216 N. Walnut St\, Bloomington
-URL:https://wfhb.org/event/rich-hardesty-solo-show-to-kick-off-the-little-
- 500-week/?instance_id=94875
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Latin Jazz Ensemble – Wayne Wallace\, director\; Andy Miller\, r
- hythm section coach
-DTSTART;TZID=America/Indiana/Indianapolis:20260420T200000
-DTEND;TZID=America/Indiana/Indianapolis:20260420T220000
-UID:ai1ec-148156-94792@wfhb.org
-DESCRIPTION:Enjoy this performance from almost anywhere in the world viaLI
- VE@jacobs!
-LOCATION:Musical Arts Center\, 101 N. Eagleson Ave\, Bloomington
-URL:https://wfhb.org/event/latin-jazz-ensemble-wayne-wallace-director-andy
- -miller-rhythm-section-coach-5/?instance_id=94792
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Trombone Choir – Brittany Lasch\, director/conductor
-DTSTART;TZID=America/Indiana/Indianapolis:20260420T200000
-DTEND;TZID=America/Indiana/Indianapolis:20260420T210000
-UID:ai1ec-148576-94997@wfhb.org
-DESCRIPTION:
-LOCATION:Auer Hall\, on the second floor of the Simon Music Center\, 200 S
- . Eagleson Avenue\, Bloomington
-URL:https://wfhb.org/event/trombone-choir-brittany-lasch-director-conducto
- r/?instance_id=94997
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Trivia Night w/Bloomington Pub Quiz  (21+)
-DTSTART;TZID=America/Indiana/Indianapolis:20260420T203000
-DTEND;TZID=America/Indiana/Indianapolis:20260420T223000
-UID:ai1ec-144411-92773@wfhb.org
-DESCRIPTION:Hey smart people!! Trivia Nights are now your favorite thing t
- o do on Mondays! We promise to keep the sports to a minimum!
-LOCATION:The Back Door\, 207 South College Ave.\, in the alley behind the 
- Atlas Ballroom\, Bloomington
-URL:https://wfhb.org/event/trivia-night-w-bloomington-pub-quiz-21-3/?insta
- nce_id=92773
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Opal
-DTSTART;TZID=America/Indiana/Indianapolis:20260420T220000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T000000
-UID:ai1ec-148302-94872@wfhb.org
-DESCRIPTION:
-LOCATION:The Bluebird Nightclub\, 216 N. Walnut St\, Bloomington
-URL:https://wfhb.org/event/opal-21/?instance_id=94872
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Dine Out for the Friends of the Library at Uptown Cafe
 DTSTART;TZID=America/Indiana/Indianapolis:20260421T080000
 DTEND;TZID=America/Indiana/Indianapolis:20260421T210000
@@ -168,6 +18,17 @@ DESCRIPTION:Dine out for theFriends of the LibraryatUptown Café. Enjoy br
 LOCATION:Uptown Café\, 102 E. Kirkwood Ave\, Bloomington
 URL:https://wfhb.org/event/dine-out-for-the-friends-of-the-library-at-upto
  wn-cafe/?instance_id=94920
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Early Voting Hours
+DTSTART;TZID=America/Indiana/Indianapolis:20260421T080000
+DTEND;TZID=America/Indiana/Indianapolis:20260421T180000
+UID:ai1ec-148638-95054@wfhb.org
+DESCRIPTION:Free parking in the North Showers lot.
+LOCATION:North Showers Complex\, 501 N. Morton Street\, (enter through the
+  West Entrance off Morton Street)
+URL:https://wfhb.org/event/early-voting-hours/?instance_id=95054
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -488,6 +349,31 @@ DESCRIPTION:Doors at 8pm
 LOCATION:Orbit Room\, 107 North College Avenue\, Suite 001\, Bloomington
 URL:https://wfhb.org/event/just-penelope-acoustic-sophia-corinne-lyle-de-v
  itry/?instance_id=95016
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Early Voting Hours
+DTSTART;TZID=America/Indiana/Indianapolis:20260422T080000
+DTEND;TZID=America/Indiana/Indianapolis:20260422T180000
+UID:ai1ec-148638-95055@wfhb.org
+DESCRIPTION:Free parking in the North Showers lot.
+LOCATION:North Showers Complex\, 501 N. Morton Street\, (enter through the
+  West Entrance off Morton Street)
+URL:https://wfhb.org/event/early-voting-hours/?instance_id=95055
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:A Great Awakening (2026)\, showings at 10 am\, 2pm\, and 7pm
+DTSTART;TZID=America/Indiana/Indianapolis:20260422T100000
+DTEND;TZID=America/Indiana/Indianapolis:20260422T120000
+UID:ai1ec-148624-95038@wfhb.org
+DESCRIPTION:One of the most defining moments in American history is the st
+ ory of an unlikely friendship between the Reverend George Whitefield and B
+ enjamin Franklin.
+LOCATION:Historic Tivoli Theatre\, 24 North Washington Street\, Spencer\, 
+ IN
+URL:https://wfhb.org/event/a-great-awakening-2026-showings-at-10-am-2pm-an
+ d-7pm/?instance_id=95038
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -845,6 +731,28 @@ URL:https://wfhb.org/event/weekly-wednesday-contra-dance-w-music-from-stur
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Kenny Wayne Shepherd Band
+DTSTART;TZID=America/Indiana/Indianapolis:20260422T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260422T213000
+UID:ai1ec-148614-95029@wfhb.org
+DESCRIPTION:Thirty years ago\, a Fender Strat-wielding teenager from Shrev
+ eport\, Louisiana by the name of Kenny Wayne Shepherd brought the blues ba
+ ck to the mainstream. It was 1995\, the era of furrow-browed grungesters\,
+  when a sandy-haired guitar prodigy unapologetically celebrated a genre of
+ ten pushed to the margins. With his fiery fretwork\, pop-rock hooks\, and 
+ reverence for the blues\, Shepherd’s arrival was a much-needed palette-c
+ leanser from the existential dread of the times.Now\, three decades later\
+ , Shepherd is as vital as ever. No longer the child prodigy\, he has ascen
+ ded to master.  Still touring\, recording\, collaborating\, and evolving\,
+  he’s returned to where it all began\, Ledbetter Heights. Shepherd’s l
+ atest is a re-recording of his landmark first album\, in honor of its 30th
+  anniversary. In early 2026\, he and his band will launch a national tour 
+ celebrating the milestone’s anniversary.
+LOCATION:Brown County Music Center\, 200 Maple Leaf Boulevard\, Nashville
+URL:https://wfhb.org/event/kenny-wayne-shepherd-band-2/?instance_id=95029
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Little 500 Concert:  Magdalena Bay With special guest Six Foot Blo
  nde
 DTSTART;TZID=America/Indiana/Indianapolis:20260422T193000
@@ -898,6 +806,17 @@ URL:https://wfhb.org/event/rod-tuffcurls-the-benchpress-11/?instance_id=95
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Early Voting Hours
+DTSTART;TZID=America/Indiana/Indianapolis:20260423T080000
+DTEND;TZID=America/Indiana/Indianapolis:20260423T180000
+UID:ai1ec-148638-95056@wfhb.org
+DESCRIPTION:Free parking in the North Showers lot.
+LOCATION:North Showers Complex\, 501 N. Morton Street\, (enter through the
+  West Entrance off Morton Street)
+URL:https://wfhb.org/event/early-voting-hours/?instance_id=95056
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Science Story Time
 DTSTART;TZID=America/Indiana/Indianapolis:20260423T100000
 DTEND;TZID=America/Indiana/Indianapolis:20260423T104500
@@ -911,6 +830,19 @@ DESCRIPTION:Science Story Time is geared toward listeners toddler through
  org
 LOCATION:WonderLab\, 308 West 4th Street\, Bloomington
 URL:https://wfhb.org/event/science-story-time-2/?instance_id=94754
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Zeigfeld Follies (1945)\, showings at 10 am and 6:30 pm
+DTSTART;TZID=America/Indiana/Indianapolis:20260423T100000
+DTEND;TZID=America/Indiana/Indianapolis:20260423T120000
+UID:ai1ec-148625-95039@wfhb.org
+DESCRIPTION:The late\, great impresario Florenz Ziegfeld Jr. looks down fr
+ om Heaven and ordains a new revue in his grand old style.
+LOCATION:Historic Tivoli Theatre\, 24 North Washington Street\, Spencer\, 
+ IN
+URL:https://wfhb.org/event/zeigfeld-follies-1945-showings-at-10-am-and-630
+ -pm/?instance_id=95039
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -998,6 +930,17 @@ URL:https://wfhb.org/event/energy-navigator-show-and-tell-open-house/?inst
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Marrowood the Musical
+DTSTART;TZID=America/Indiana/Indianapolis:20260423T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260423T200000
+UID:ai1ec-148636-95050@wfhb.org
+DESCRIPTION:
+LOCATION:Jackson Creek Middle School Auditorium\, 3980 S. Sare Road Bloomi
+ ngton
+URL:https://wfhb.org/event/marrowood-the-musical/?instance_id=95050
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Bloomington Blues Jam\, hosted by Russ Bucy
 DTSTART;TZID=America/Indiana/Indianapolis:20260423T190000
 DTEND;TZID=America/Indiana/Indianapolis:20260423T220000
@@ -1019,6 +962,44 @@ URL:https://wfhb.org/event/catalpa-monon-troubadours/?instance_id=95018
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Hill Folk Music Series: Nick Dittmeier
+DTSTART;TZID=America/Indiana/Indianapolis:20260423T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260423T210000
+UID:ai1ec-148618-95033@wfhb.org
+DESCRIPTION:
+LOCATION:Brown County Inn\, 51 State Road 46 E\, Nashville
+URL:https://wfhb.org/event/hill-folk-music-series-nick-dittmeier-6/?instan
+ ce_id=95033
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Pop Music(als) Film Series: ACROSS THE UNIVERSE
+DTSTART;TZID=America/Indiana/Indianapolis:20260423T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260423T210000
+UID:ai1ec-148610-95026@wfhb.org
+DESCRIPTION:You say want a revolution? Julie Taymor delivers an onscreen o
+ ne! A gorgeous staging of the classic tale of star-crossed lovers\, set ag
+ ainst a backdrop of the 1960s\, and all set to a Beatles soundtrack? Dig i
+ t.About Across the UniverseAcross the Universe\, from director Julie Taymo
+ r\, is a revolutionary rock musical that re-imagines America in the turbul
+ ent late 1960s\, a time when battle lines were being drawn at home and abr
+ oad. When young dockworker Jude (Jim Sturgess) leaves Liverpool to find hi
+ s estranged father in America\, he is swept up by the waves of change that
+  are re-shaping the nation. Jude falls in love with Lucy (Evan Rachel Wood
+ )\, a rich but sheltered American girl\, who joins the growing anti-war mo
+ vement in New York’s Greenwich Village. As the body count in Vietnam ris
+ es\, political tensions at home spiral out of control and the star-crossed
+  lovers find themselves in a psychedelic world gone mad. Featuring musical
+  performances by rock icons Joe Cocker and Bono\, Across the Universe incl
+ udes 33 of the Fab Four’s compositions. [133 min\; musical\, drama\, rom
+ ance\; English]
+LOCATION:IU Cinema\, 1213 E. 7th Street\, Bloomington (on the North end of
+  the IU Auditorium)
+URL:https://wfhb.org/event/pop-musicals-film-series-across-the-universe/?i
+ nstance_id=95026
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Sleeper’s Open Mic\, hosted by Drew
 DTSTART;TZID=America/Indiana/Indianapolis:20260423T190000
 DTEND;TZID=America/Indiana/Indianapolis:20260423T210000
@@ -1027,6 +1008,17 @@ DESCRIPTION:
 LOCATION:Sleeper's Bar\, 2601 North Walnut St.\, Bloomington
 URL:https://wfhb.org/event/sleepers-open-mic-hosted-by-drew/?instance_id=9
  3652
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Trace Adkins 30th Anniversary Tour
+DTSTART;TZID=America/Indiana/Indianapolis:20260423T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260423T213000
+UID:ai1ec-148616-95031@wfhb.org
+DESCRIPTION:
+LOCATION:Brown County Music Center\, 200 Maple Leaf Boulevard\, Nashville
+URL:https://wfhb.org/event/trace-adkins-30th-anniversary-tour/?instance_id
+ =95031
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -1058,6 +1050,17 @@ UID:ai1ec-148587-95006@wfhb.org
 DESCRIPTION:
 LOCATION:The Bluebird Nightclub\, 216 N. Walnut St\, Bloomington
 URL:https://wfhb.org/event/scuba-sunnyside-down/?instance_id=95006
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Early Voting Hours
+DTSTART;TZID=America/Indiana/Indianapolis:20260424T080000
+DTEND;TZID=America/Indiana/Indianapolis:20260424T180000
+UID:ai1ec-148638-95057@wfhb.org
+DESCRIPTION:Free parking in the North Showers lot.
+LOCATION:North Showers Complex\, 501 N. Morton Street\, (enter through the
+  West Entrance off Morton Street)
+URL:https://wfhb.org/event/early-voting-hours/?instance_id=95057
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -1140,6 +1143,35 @@ URL:https://wfhb.org/event/animal-hour-and-dive-deeper-2/?instance_id=9476
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:How Flowers Made the World Reading and Talk
+DTSTART;TZID=America/Indiana/Indianapolis:20260424T150000
+DTEND;TZID=America/Indiana/Indianapolis:20260424T170000
+UID:ai1ec-148623-95037@wfhb.org
+DESCRIPTION:Author David George Haskell will explore the ecological and cu
+ ltural significance of flowering plants and their profound influence on li
+ fe on Earth.
+LOCATION:IU Museum of Archaeology and Anthropology\, 416 North Indiana Ave
+ nue
+URL:https://wfhb.org/event/how-flowers-made-the-world-reading-and-talk/?in
+ stance_id=95037
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Artemis play session and Q&A with Thom Robertson
+DTSTART;TZID=America/Indiana/Indianapolis:20260424T160000
+DTEND;TZID=America/Indiana/Indianapolis:20260424T190000
+UID:ai1ec-148632-95046@wfhb.org
+DESCRIPTION:Thom Robertson will run two multiplayer sessions of his game A
+ rtemis. The bridge-simulator game has persistently been praised at conven
+ tions since its release about 10 years ago. The two game sessions kick off
+  at 4 p.m.\, with pizza and a Q&A expected to start 6 p.m.
+LOCATION:Franklin Hall Commons\, Indiana University\, 601 E Kirkwood Ave\,
+  Bloomington
+URL:https://wfhb.org/event/artemis-play-session-and-qa-with-thom-robertson
+ /?instance_id=95046
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Solace: An Interactive Art Experience
 DTSTART;TZID=America/Indiana/Indianapolis:20260424T160000
 DTEND;TZID=America/Indiana/Indianapolis:20260424T180000
@@ -1210,6 +1242,17 @@ URL:https://wfhb.org/event/little-500-weekend-iu-themed-crafts/?instance_i
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Marrowood the Musical
+DTSTART;TZID=America/Indiana/Indianapolis:20260424T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260424T200000
+UID:ai1ec-148636-95051@wfhb.org
+DESCRIPTION:
+LOCATION:Jackson Creek Middle School Auditorium\, 3980 S. Sare Road Bloomi
+ ngton
+URL:https://wfhb.org/event/marrowood-the-musical/?instance_id=95051
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:4 Gone Conclusion (new England\, Irish & Applachian Fiddle Tunes)
 DTSTART;TZID=America/Indiana/Indianapolis:20260424T183000
 DTEND;TZID=America/Indiana/Indianapolis:20260424T203000
@@ -1218,6 +1261,20 @@ DESCRIPTION:
 LOCATION:Trailhead Pizzeria\, 430 State Rd 446\, Bloomington
 URL:https://wfhb.org/event/4-gone-conclusion-new-england-irish-applachian-
  fiddle-tunes/?instance_id=94967
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Michael (2026)
+DTSTART;TZID=America/Indiana/Indianapolis:20260424T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260424T210000
+UID:ai1ec-148626-95040@wfhb.org
+DESCRIPTION:Michaeltells the story of “King of Pop\,” Michael Jackson\
+ , from his childhood as the star of the Jackson 5\, through times of abuse
+  by his father Joe Jackson\, to his hitThriller\, and the purchase of Neve
+ rland Valley\, to his tragic death on June 25\, 2009.
+LOCATION:Historic Tivoli Theatre\, 24 North Washington Street\, Spencer\, 
+ IN
+URL:https://wfhb.org/event/michael-2026/?instance_id=95040
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -1244,6 +1301,39 @@ URL:https://wfhb.org/event/shrek-the-musical-jr/?instance_id=94911
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:John Primer & the Real Deal Blues Band\, with special guests Paul 
+ Holdman and Gordon Bonham.
+DTSTART;TZID=America/Indiana/Indianapolis:20260424T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260424T213000
+UID:ai1ec-148613-95028@wfhb.org
+DESCRIPTION:As a young man\, guitarist\, vocalist\, and bandleader John Pr
+ imer learned Chicago blues with the masters. Primer performed regularly wi
+ th legends such as Muddy Waters\, Willie Dixon\, and was a long-term band 
+ leader for Magic Slim & The Teardrops. Primer is one of the few truly-auth
+ entic Chicago bluesmen touring and recording today. He was inducted into t
+ he Blues Hall of Fame in 2023.Primer’s long list of honors and accolades
+  speak to his experience and reputation for engaging a live audience\, inc
+ luding: Three-time Grammy® Award nominee\; Blues Artist of the Year — L
+ iving Blues critic’s poll award\; Traditional Blues Artist of the Year 
+ — Blues Music Award\; Lifetime Achievement Award\, Live Album of the Yea
+ r\, and Traditional Blues Album of the Year — Blues Blast Awards
+LOCATION:Brown County Playhouse\, 70 S. Van Buren St\, Nashville
+URL:https://wfhb.org/event/john-primer-the-real-deal-blues-band-with-speci
+ al-guests-paul-holdman-and-gordon-bonham/?instance_id=95028
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Sawyer Brown–The Boys & Me Live 2026 Tour
+DTSTART;TZID=America/Indiana/Indianapolis:20260424T200000
+DTEND;TZID=America/Indiana/Indianapolis:20260424T220000
+UID:ai1ec-148617-95032@wfhb.org
+DESCRIPTION:
+LOCATION:Brown County Music Center\, 200 Maple Leaf Boulevard\, Nashville
+URL:https://wfhb.org/event/sawyer-brown-the-boys-me-live-2026-tour/?instan
+ ce_id=95032
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Technicolor Band + Luke Schneider
 DTSTART;TZID=America/Indiana/Indianapolis:20260424T200000
 DTEND;TZID=America/Indiana/Indianapolis:20260424T220000
@@ -1252,6 +1342,17 @@ DESCRIPTION:
 LOCATION:The Blockhouse Bar\, 205 South College Avenue\, Bloomington
 URL:https://wfhb.org/event/technicolor-band-luke-schneider/?instance_id=95
  014
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Tom Harold & the Fallin’ Angels
+DTSTART;TZID=America/Indiana/Indianapolis:20260424T200000
+DTEND;TZID=America/Indiana/Indianapolis:20260424T230000
+UID:ai1ec-148619-95034@wfhb.org
+DESCRIPTION:
+LOCATION:Brown County Inn\, 51 State Road 46 E\, Nashville
+URL:https://wfhb.org/event/tom-harold-the-fallin-angels-2/?instance_id=950
+ 34
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -1306,6 +1407,17 @@ URL:https://wfhb.org/event/bloomington-community-farmers-market-10/?instan
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Early Voting Hours
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T090000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T160000
+UID:ai1ec-148639-95058@wfhb.org
+DESCRIPTION:Free parking in the North Showers lot.
+LOCATION:North Showers Complex\, 501 N. Morton Street\, (enter through the
+  West Entrance off Morton Street)
+URL:https://wfhb.org/event/early-voting-hours-2/?instance_id=95058
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Friends of the Library Plant Sale
 DTSTART;TZID=America/Indiana/Indianapolis:20260425T090000
 DTEND;TZID=America/Indiana/Indianapolis:20260425T140000
@@ -1322,6 +1434,19 @@ LOCATION:Brown County Public Library (lower parking lot\, under the solar
  panels)\, 205 Locust Lane\, Nashville
 URL:https://wfhb.org/event/friends-of-the-library-plant-sale-2/?instance_i
  d=94989
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington Music Expo
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T100000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T160000
+UID:ai1ec-148629-95043@wfhb.org
+DESCRIPTION:More than25 vendors from five stateswill fill57 tableswith tho
+ usands of music-related items\, including pre-loved LPs\, new vinyl releas
+ es\, 45s\, CDs\, cassettes\, posters\, T-shirts\, record supplies\, and mo
+ re.
+LOCATION:Switchyard Park Pavilion\, 1601 S. Rogers St.\, Bloomington
+URL:https://wfhb.org/event/bloomington-music-expo-5/?instance_id=95043
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -1391,6 +1516,21 @@ URL:https://wfhb.org/event/cardboard-build-days/?instance_id=94740
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Daisy Days Native Plant Sale
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T110000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T160000
+UID:ai1ec-148634-95048@wfhb.org
+DESCRIPTION:Plants are grown from seed\, harvested onsite\, or sourced fro
+ m Spence Restoration Nursery\, since1998 Indiana’s premier native plant 
+ supplier. Experts are on-hand during the sale to answerquestions and guide
+  selections.Maple syrup\, cream\, and candy will also be available for pur
+ chase. The proceeds from the salewill benefit ongoing gardening efforts at
+  the site.
+LOCATION:Hinkle-Garton Farmstead\, 2920 E. 10th Street\, Bloomington
+URL:https://wfhb.org/event/daisy-days-native-plant-sale/?instance_id=95048
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Saturday Crafternoon at the Wylie House
 DTSTART;TZID=America/Indiana/Indianapolis:20260425T110000
 DTEND;TZID=America/Indiana/Indianapolis:20260425T140000
@@ -1410,6 +1550,20 @@ URL:https://wfhb.org/event/saturday-crafternoon-at-the-wylie-house-8/?inst
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:All-Ages Day at the Ellettsville Teen Space
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T120000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T180000
+UID:ai1ec-148631-95045@wfhb.org
+DESCRIPTION:Are you curious about the Ellettsville Teen Space\, but you ar
+ en’t a teen? Patrons of all ages are invited to check it out on the four
+ th Saturday of the month.
+LOCATION:Monroe County Library\, Elletsville Branch\, 600 West Temperance 
+ Street\, Ellettsville
+URL:https://wfhb.org/event/all-ages-day-at-the-ellettsville-teen-space-18/
+ ?instance_id=95045
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:The Lunchbox Project
 DTSTART;TZID=America/Indiana/Indianapolis:20260425T120000
 DTEND;TZID=America/Indiana/Indianapolis:20260425T123000
@@ -1423,6 +1577,26 @@ URL:https://wfhb.org/event/the-lunchbox-project/?instance_id=94767
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Energy Navigator! Show & Tell Open House\, Programs at 2:00 & 3:30
+  pm
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T140000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T160000
+UID:ai1ec-148644-95068@wfhb.org
+DESCRIPTION:Curious how electrification can lower your energy bills and ma
+ ke your home more comfortable? Join us for a hands-on open house hosted by
+  local homeowners who’ve already made the switch.See the Tech:Such as he
+ at pump appliances\, solar\, and weatherization improvements.Get the Cash:
+ Learn about massive rebates and financial incentives available now.Real Ad
+ vice:Ask neighbors about their experience and energy savings.Hosted by: El
+ ectrify Indiana\, a local volunteer-driven nonprofit\, in partnership with
+  the City of Bloomington.Space is limitedso please sign up in advance atSi
+ gn Up Genius
+LOCATION:400 Rebecca St. Bloomington
+URL:https://wfhb.org/event/energy-navigator-show-tell-open-house-programs-
+ at-200-330-pm/?instance_id=95068
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Lexi Ryan Meet and Greet
 DTSTART;TZID=America/Indiana/Indianapolis:20260425T140000
 DTEND;TZID=America/Indiana/Indianapolis:20260425T150000
@@ -1432,6 +1606,21 @@ DESCRIPTION:Meet & Greet event with Author Lexi Ryan to celebrate Independ
  rchase. RSVP via website is requested.
 LOCATION:Fables and Fairy Tales\, 38 N Main St\, Martinsville\, IN
 URL:https://wfhb.org/event/lexi-ryan-meet-greet/?instance_id=94927
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Michael (2026)\, showings at 2 and 7pm
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T140000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T160000
+UID:ai1ec-148627-95041@wfhb.org
+DESCRIPTION:Michaeltells the story of “King of Pop\,” Michael Jackson\
+ , from his childhood as the star of the Jackson 5\, through times of abuse
+  by his father Joe Jackson\, to his hitThriller\, and the purchase of Neve
+ rland Valley\, to his tragic death on June 25\, 2009.
+LOCATION:Historic Tivoli Theatre\, 24 North Washington Street\, Spencer\, 
+ IN
+URL:https://wfhb.org/event/michael-2026-showings-at-2-and-7pm/?instance_id
+ =95041
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -1471,6 +1660,32 @@ URL:https://wfhb.org/event/stem-saturday-2/?instance_id=94763
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Film: SNEAKERS
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T160000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T180000
+UID:ai1ec-148611-95027@wfhb.org
+DESCRIPTION:Yes\, we could tell you what Sneakers is about\, but then\, of
+  course\, we would have to… well\, you know.About SneakersRobert Redford
+  leads an all-star cast in one of the most satisfying suspense films! Comp
+ uter expert Martin Bishop (Redford) heads a team of renegade hackers—inc
+ luding a former CIA employee (Sidney Poitier)\, a gadgets wizard (Dan Aykr
+ oyd)\, a young genius (River Phoenix)\, and a blind soundman (David Strath
+ airn)—who are routinely hired to test security systems. But Bishop’s p
+ ast comes back to haunt him when government agents blackmail the “sneake
+ rs” into carrying out a covert operation: tracking down an elusive black
+  box. Along with his former girlfriend (Mary McDonnell)\, Bishop’s team 
+ retrieves the box and makes a stunning discovery: the device can break int
+ o any computer system in the world. With factions from all sides willing t
+ o kill for the powerful box\, Bishop and his team embark on their most dan
+ gerous assignment ever in this exhilarating high-tech caper from Phil Alde
+ n Robinson (Field of Dreams). [126 min\; drama\, comedy\, thriller\; Engli
+ sh\, Russian\, and Chinese with English subtitles]
+LOCATION:IU Cinema\, 1213 E. 7th Street\, Bloomington (on the North end of
+  the IU Auditorium)
+URL:https://wfhb.org/event/film-sneakers/?instance_id=95027
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Solace: An Interactive Art Experience
 DTSTART;TZID=America/Indiana/Indianapolis:20260425T160000
 DTEND;TZID=America/Indiana/Indianapolis:20260425T180000
@@ -1492,6 +1707,20 @@ UID:ai1ec-148589-95008@wfhb.org
 DESCRIPTION:
 LOCATION:The Bluebird Nightclub\, 216 N. Walnut St\, Bloomington
 URL:https://wfhb.org/event/jukebox-luke-89/?instance_id=95008
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Katie May
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T210000
+UID:ai1ec-148643-95067@wfhb.org
+DESCRIPTION:Doors open at 6:15pm. Seats are first come\, first served.Sing
+ er-songwriter Katie May blends elements of honky-tonk\, classic country tw
+ ang\, rock\, swing\, Top 40\, easy listening\, and grunge. Recent singles\
+ , “Domino\,” “My First Kiss\,” and “Toy Horses” showcase her b
+ lend of moderncountry with classic influences.
+LOCATION:Mitchell Opera House\, 217 N 7th Street\, Mitchelll
+URL:https://wfhb.org/event/katie-may/?instance_id=95067
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -1556,6 +1785,28 @@ DESCRIPTION:DRM is a local electroacoustic/jazz adjacent trio comprising D
 LOCATION:Orbit Room\, 107 North College Avenue\, Suite 001\, Bloomington
 URL:https://wfhb.org/event/sounds-from-the-black-hole-drm-scotchamo/?insta
  nce_id=95020
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Big Daddy Caddy
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T200000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T230000
+UID:ai1ec-148620-95035@wfhb.org
+DESCRIPTION:
+LOCATION:Brown County Inn\, 51 State Road 46 E\, Nashville
+URL:https://wfhb.org/event/big-daddy-caddy-12/?instance_id=95035
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Grand Funk Railroad “Still Shinin’ On Tour” w/special guests
+  WT Feaster Band
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T200000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T220000
+UID:ai1ec-148615-95030@wfhb.org
+DESCRIPTION:
+LOCATION:Brown County Music Center\, 200 Maple Leaf Boulevard\, Nashville
+URL:https://wfhb.org/event/apr-25-2026saturday-grand-funk-railroad-still-s
+ hinin-on-tour-special-guests-wt-feaster-band/?instance_id=95030
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -1628,6 +1879,22 @@ URL:https://wfhb.org/event/shrek-the-musical-jr-3/?instance_id=94918
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Daisy Days Native Plant Sale
+DTSTART;TZID=America/Indiana/Indianapolis:20260426T130000
+DTEND;TZID=America/Indiana/Indianapolis:20260426T160000
+UID:ai1ec-148635-95049@wfhb.org
+DESCRIPTION:Plants are grown from seed\, harvested onsite\, or sourced fro
+ m Spence Restoration Nursery\, since1998 Indiana’s premier native plant 
+ supplier. Experts are on-hand during the sale to answerquestions and guide
+  selections.Maple syrup\, cream\, and candy will also be available for pur
+ chase. The proceeds from the salewill benefit ongoing gardening efforts at
+  the site.
+LOCATION:Hinkle-Garton Farmstead\, 2920 E. 10th Street\, Bloomington
+URL:https://wfhb.org/event/daisy-days-native-plant-sale-2/?instance_id=950
+ 49
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Lesbian Tea Dance (Smut Swap)
 DTSTART;TZID=America/Indiana/Indianapolis:20260426T130000
 DTEND;TZID=America/Indiana/Indianapolis:20260426T170000
@@ -1677,6 +1944,20 @@ URL:https://wfhb.org/event/cardboard-build-days-2/?instance_id=94741
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Michael (2026)
+DTSTART;TZID=America/Indiana/Indianapolis:20260426T140000
+DTEND;TZID=America/Indiana/Indianapolis:20260426T160000
+UID:ai1ec-148628-95042@wfhb.org
+DESCRIPTION:Michaeltells the story of “King of Pop\,” Michael Jackson\
+ , from his childhood as the star of the Jackson 5\, through times of abuse
+  by his father Joe Jackson\, to his hitThriller\, and the purchase of Neve
+ rland Valley\, to his tragic death on June 25\, 2009.
+LOCATION:Historic Tivoli Theatre\, 24 North Washington Street\, Spencer\, 
+ IN
+URL:https://wfhb.org/event/michael-2026-2/?instance_id=95042
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:By the Numbers – Quarryland’s Spring Concert
 DTSTART;TZID=America/Indiana/Indianapolis:20260426T150000
 DTEND;TZID=America/Indiana/Indianapolis:20260426T170000
@@ -1716,6 +1997,17 @@ URL:https://wfhb.org/event/wormbent-rearview-rhonda-midnight-butcher/?inst
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Early Voting Hours
+DTSTART;TZID=America/Indiana/Indianapolis:20260427T080000
+DTEND;TZID=America/Indiana/Indianapolis:20260427T180000
+UID:ai1ec-148640-95060@wfhb.org
+DESCRIPTION:Free parking in the North Showers lot.
+LOCATION:North Showers Complex\, 501 N. Morton Street\, (enter through the
+  West Entrance off Morton Street)
+URL:https://wfhb.org/event/early-voting-hours-3/?instance_id=95060
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Country Line Dancing
 DTSTART;TZID=America/Indiana/Indianapolis:20260427T183000
 DTEND;TZID=America/Indiana/Indianapolis:20260427T210000
@@ -1748,6 +2040,17 @@ LOCATION:The Back Door\, 207 South College Ave.\, in the alley behind the
  Atlas Ballroom\, Bloomington
 URL:https://wfhb.org/event/trivia-night-w-bloomington-pub-quiz-21-3/?insta
  nce_id=92774
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Early Voting Hours
+DTSTART;TZID=America/Indiana/Indianapolis:20260428T080000
+DTEND;TZID=America/Indiana/Indianapolis:20260428T180000
+UID:ai1ec-148640-95061@wfhb.org
+DESCRIPTION:Free parking in the North Showers lot.
+LOCATION:North Showers Complex\, 501 N. Morton Street\, (enter through the
+  West Entrance off Morton Street)
+URL:https://wfhb.org/event/early-voting-hours-3/?instance_id=95061
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -1924,6 +2227,17 @@ URL:https://wfhb.org/event/honky-tonk-8/?instance_id=92820
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Early Voting Hours
+DTSTART;TZID=America/Indiana/Indianapolis:20260429T080000
+DTEND;TZID=America/Indiana/Indianapolis:20260429T180000
+UID:ai1ec-148640-95062@wfhb.org
+DESCRIPTION:Free parking in the North Showers lot.
+LOCATION:North Showers Complex\, 501 N. Morton Street\, (enter through the
+  West Entrance off Morton Street)
+URL:https://wfhb.org/event/early-voting-hours-3/?instance_id=95062
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Storytime – All children and their caregivers are welcome
 DTSTART;TZID=America/Indiana/Indianapolis:20260429T100000
 DTEND;TZID=America/Indiana/Indianapolis:20260429T104500
@@ -2009,6 +2323,17 @@ UID:ai1ec-145119-93216@wfhb.org
 DESCRIPTION:
 LOCATION:Bloomington Poindexter\, 210 E. Kirkwood Ave\, Bloomington
 URL:https://wfhb.org/event/trivia-wednesday-2/?instance_id=93216
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Early Voting Hours
+DTSTART;TZID=America/Indiana/Indianapolis:20260430T080000
+DTEND;TZID=America/Indiana/Indianapolis:20260430T180000
+UID:ai1ec-148640-95063@wfhb.org
+DESCRIPTION:Free parking in the North Showers lot.
+LOCATION:North Showers Complex\, 501 N. Morton Street\, (enter through the
+  West Entrance off Morton Street)
+URL:https://wfhb.org/event/early-voting-hours-3/?instance_id=95063
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -2141,6 +2466,32 @@ URL:https://wfhb.org/event/updating-presented-by-outback/?instance_id=9197
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Bloomington Comedy Showcase!
+DTSTART;TZID=America/Indiana/Indianapolis:20260430T200000
+DTEND;TZID=America/Indiana/Indianapolis:20260430T220000
+UID:ai1ec-148646-95070@wfhb.org
+DESCRIPTION:Featuring both professional comedians from the midwest’s bes
+ t comedy scene right here in Bloomington as well as brand new folks trying
+  out their 5 minutes for the first time- you never know what you’re goin
+ g to get or who you’ll see!
+LOCATION:The Comedy Attic\, 123 South Walnut (corner of 4th and Walnut Str
+ eets)\, Bloomington
+URL:https://wfhb.org/event/bloomington-comedy-showcase-3/?instance_id=9507
+ 0
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Early Voting Hours
+DTSTART;TZID=America/Indiana/Indianapolis:20260501T080000
+DTEND;TZID=America/Indiana/Indianapolis:20260501T180000
+UID:ai1ec-148640-95064@wfhb.org
+DESCRIPTION:Free parking in the North Showers lot.
+LOCATION:North Showers Complex\, 501 N. Morton Street\, (enter through the
+  West Entrance off Morton Street)
+URL:https://wfhb.org/event/early-voting-hours-3/?instance_id=95064
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Hoosier Hills FFA Annual Plant Sale
 DTSTART;TZID=America/Indiana/Indianapolis:20260501T090000
 DTEND;TZID=America/Indiana/Indianapolis:20260501T170000
@@ -2182,6 +2533,37 @@ URL:https://wfhb.org/event/louisas-garden-exhibition-opening/?instance_id=
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Hamilton Lugar Music Festival
+DTSTART;TZID=America/Indiana/Indianapolis:20260501T170000
+DTEND;TZID=America/Indiana/Indianapolis:20260501T210000
+UID:ai1ec-148633-95047@wfhb.org
+DESCRIPTION:You’re invited to celebrate local music from global genres a
+ t the 5th Annual Hamilton Lugar Music Festival!Featuring:La SalsotecaIndia
+ na Slavic ChoirDan Kusayaand DJ Kulow
+LOCATION:Global and International Studies Building\, 355 North Eagleson Av
+ enue\, Bloomington
+URL:https://wfhb.org/event/hamilton-lugar-music-festival/?instance_id=9504
+ 7
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Copper Fish Printmaking Guild Art Opening
+DTSTART;TZID=America/Indiana/Indianapolis:20260501T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260501T210000
+UID:ai1ec-148642-95066@wfhb.org
+DESCRIPTION:We invite you to join us at Gather for an evening of art\, mus
+ ic\, and hands-on creativity.We’re celebrating the launch of the Copper 
+ Fish Printmaking Guild\, a new collective featuring Danielle Urshell and f
+ ellow printmakers. Explore a fresh body of work\, meet the artists\, and g
+ et a glimpse into the world of printmaking.Throughout the evening\, jump i
+ nto our DIY craft night. Create your own screen prints!. No experience nee
+ ded\, just come ready to make something.
+LOCATION:Gather\, 116 N Walnut Street\, Bloomington
+URL:https://wfhb.org/event/copper-fish-printmaking-guild-art-opening/?inst
+ ance_id=95066
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Finn: A New Musical- At the PB&J Cafe
 DTSTART;TZID=America/Indiana/Indianapolis:20260501T183000
 DTEND;TZID=America/Indiana/Indianapolis:20260501T193000
@@ -2201,6 +2583,21 @@ DESCRIPTION:Constellation Stage & Screen presents “Finn: A New Musical-
 LOCATION:Waldron Arts Center (122 S Walnut St)
 URL:https://wfhb.org/event/finn-a-new-musical-at-the-pbj-cafe/?instance_id
  =90562
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Raanan Hershberg\, shows at 7:00 & 9:15 pm
+DTSTART;TZID=America/Indiana/Indianapolis:20260501T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260501T210000
+UID:ai1ec-148647-95072@wfhb.org
+DESCRIPTION:Raanan Hershberg is a loud\, neurotic Jew from Louisville\, KY
+ . He has performed his high-energy\, joke-packed comedy onThe Tonight Show
+  with Jimmy Fallon\,The Late\, Late Show with James Corden\, andComedy Cen
+ tral.
+LOCATION:The Comedy Attic\, 123 South Walnut (corner of 4th and Walnut Str
+ eets)\, Bloomington
+URL:https://wfhb.org/event/raanan-hershberg-shows-at-700-915-pm/?instance_
+ id=95072
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -2230,6 +2627,17 @@ DESCRIPTION:
 LOCATION:459 W Morgan St (SR 46)\, Spencer
 URL:https://wfhb.org/event/owen-county-farmers-market-with-entertainment-f
  rom-michael-norris/?instance_id=94408
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Early Voting Hours
+DTSTART;TZID=America/Indiana/Indianapolis:20260502T090000
+DTEND;TZID=America/Indiana/Indianapolis:20260502T160000
+UID:ai1ec-148639-95059@wfhb.org
+DESCRIPTION:Free parking in the North Showers lot.
+LOCATION:North Showers Complex\, 501 N. Morton Street\, (enter through the
+  West Entrance off Morton Street)
+URL:https://wfhb.org/event/early-voting-hours-2/?instance_id=95059
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -2327,6 +2735,38 @@ URL:https://wfhb.org/event/finn-a-new-musical-at-the-pbj-cafe-2/?instance_
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Raanan Hershberg\, shows at 7:00 & 9:15 pm
+DTSTART;TZID=America/Indiana/Indianapolis:20260502T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260502T210000
+UID:ai1ec-148647-95073@wfhb.org
+DESCRIPTION:Raanan Hershberg is a loud\, neurotic Jew from Louisville\, KY
+ . He has performed his high-energy\, joke-packed comedy onThe Tonight Show
+  with Jimmy Fallon\,The Late\, Late Show with James Corden\, andComedy Cen
+ tral.
+LOCATION:The Comedy Attic\, 123 South Walnut (corner of 4th and Walnut Str
+ eets)\, Bloomington
+URL:https://wfhb.org/event/raanan-hershberg-shows-at-700-915-pm/?instance_
+ id=95073
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Variety Show
+DTSTART;TZID=America/Indiana/Indianapolis:20260502T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260502T213000
+UID:ai1ec-148630-95044@wfhb.org
+DESCRIPTION:Headliner Lloyd Wood leads a star-studded lineup that includ
+ es the mind-bending illusions of The Amazing Dennis\, laughs from comedia
+ ns Brian Smiley and Cole Peterson\, and a dazzling performance from So
+ ngwriter Showdown 2025 winner Sami Riggs. The talented cast ofMoon Over 
+ Buffalotakes the stage alongside the hilarious ventriloquist duo Jeff Gol
+ tz and Tony Bronchitis. Keeping the night rolling is your emcee Hondo\, w
+ ith Mary Ann Soll rounding out the fun as Card Girl.
+LOCATION:Historic Brown County Playhouse\, 70 South Van Buren Street\, Nas
+ hville
+URL:https://wfhb.org/event/variety-show/?instance_id=95044
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Finn: A New Musical- At the PB&J Cafe
 DTSTART;TZID=America/Indiana/Indianapolis:20260503T130000
 DTEND;TZID=America/Indiana/Indianapolis:20260503T140000
@@ -2408,6 +2848,17 @@ UID:ai1ec-147070-94250@wfhb.org
 DESCRIPTION:
 LOCATION:Buskirk-Chumley Theater\, 114 E. Kirkwood Ave\, Bloomington
 URL:https://wfhb.org/event/the-sam-grisman-project/?instance_id=94250
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Early Voting Hours
+DTSTART;TZID=America/Indiana/Indianapolis:20260504T080000
+DTEND;TZID=America/Indiana/Indianapolis:20260504T120000
+UID:ai1ec-148641-95065@wfhb.org
+DESCRIPTION:Free parking in the North Showers lot.
+LOCATION:North Showers Complex\, 501 N. Morton Street\, (enter through the
+  West Entrance off Morton Street)
+URL:https://wfhb.org/event/early-voting-hours-4/?instance_id=95065
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -2647,6 +3098,21 @@ URL:https://wfhb.org/event/sleepers-open-mic-hosted-by-drew/?instance_id=9
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Bloomington Comedy Showcase!
+DTSTART;TZID=America/Indiana/Indianapolis:20260507T200000
+DTEND;TZID=America/Indiana/Indianapolis:20260507T220000
+UID:ai1ec-148646-95071@wfhb.org
+DESCRIPTION:Featuring both professional comedians from the midwest’s bes
+ t comedy scene right here in Bloomington as well as brand new folks trying
+  out their 5 minutes for the first time- you never know what you’re goin
+ g to get or who you’ll see!
+LOCATION:The Comedy Attic\, 123 South Walnut (corner of 4th and Walnut Str
+ eets)\, Bloomington
+URL:https://wfhb.org/event/bloomington-comedy-showcase-3/?instance_id=9507
+ 1
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Design & Donuts
 DTSTART;TZID=America/Indiana/Indianapolis:20260508T090000
 DTEND;TZID=America/Indiana/Indianapolis:20260508T100000
@@ -2764,6 +3230,17 @@ DESCRIPTION:Constellation Stage & Screen presents “Finn: A New Musical-
 LOCATION:Waldron Arts Center (122 S Walnut St)
 URL:https://wfhb.org/event/finn-a-new-musical-at-the-pbj-cafe-2/?instance_
  id=90569
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Opening Reception for Femina Natura by Grace Gonso
+DTSTART;TZID=America/Indiana/Indianapolis:20260509T150000
+DTEND;TZID=America/Indiana/Indianapolis:20260509T170000
+UID:ai1ec-148645-95069@wfhb.org
+DESCRIPTION:
+LOCATION:Pillar Arts Alliance Center\, College Mall\, 2894 East 3rd Street
+ \, Bloomington\, Suite L-10D
+URL:https://wfhb.org/event/femina-natura-by-grace-gonso/?instance_id=95069
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -3571,6 +4048,18 @@ URL:https://wfhb.org/event/open-mic-52/?instance_id=93365
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:The Divorce Release Party
+DTSTART;TZID=America/Indiana/Indianapolis:20260527T183000
+DTEND;TZID=America/Indiana/Indianapolis:20260527T193000
+UID:ai1ec-148637-95052@wfhb.org
+DESCRIPTION:Ticketed event: https://www.fablesandfairytale.com/events?utm_
+ campaign=7babcefb-bac3-47e1-9c96-a8d9b24e4a2c&utm_source=so&utm_medium=mai
+ l&cid=d554a4fe-4115-4921-a854-2e592e1f57d4
+LOCATION:Fables and Fairy Tales\, 38 North Main Street\, Martinsville
+URL:https://wfhb.org/event/the-divorce-release-party/?instance_id=95052
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Trivia Wednesdays (21+)
 DTSTART;TZID=America/Indiana/Indianapolis:20260527T183000
 DTEND;TZID=America/Indiana/Indianapolis:20260527T200000
@@ -3635,6 +4124,18 @@ DESCRIPTION:Speaker Clinton Roeth-McKay will give us a clear\, non-technic
 LOCATION:Noodles in Eastland Plaza\, 2560 E. Third St\, Bloomington
 URL:https://wfhb.org/event/ai-is-everywhere-but-what-is-it-really-a-rainbo
  w-elders-educational-event/?instance_id=94720
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:The Divorce Release Party
+DTSTART;TZID=America/Indiana/Indianapolis:20260528T183000
+DTEND;TZID=America/Indiana/Indianapolis:20260528T193000
+UID:ai1ec-148637-95053@wfhb.org
+DESCRIPTION:Ticketed event: https://www.fablesandfairytale.com/events?utm_
+ campaign=7babcefb-bac3-47e1-9c96-a8d9b24e4a2c&utm_source=so&utm_medium=mai
+ l&cid=d554a4fe-4115-4921-a854-2e592e1f57d4
+LOCATION:Fables and Fairy Tales\, 38 North Main Street\, Martinsville
+URL:https://wfhb.org/event/the-divorce-release-party/?instance_id=95053
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -4487,6 +4988,25 @@ DESCRIPTION:Some revolutions happen in the streets. Others in the lab.Kat
 LOCATION:Constellation Playhouse\, 109 W 9th St.\, Bloomington
 URL:https://wfhb.org/event/another-revolution-presented-by-constellation-s
  tage-screen-shows-at-200-730/?instance_id=90760
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Another Revolution presented by Constellation Stage & Screen
+DTSTART;TZID=America/Indiana/Indianapolis:20260621T140000
+DTEND;TZID=America/Indiana/Indianapolis:20260621T160000
+UID:ai1ec-140564-90763@wfhb.org
+DESCRIPTION:Some revolutions happen in the streets. Others in the lab.Kat 
+ and Henry\, two graduate students from opposing scientific disciplines\, a
+ re forced to share a lab at Columbia University in 1968. Amidst interperso
+ nal differences\, a campus devolving into political chaos\, and the uncert
+ ainty and turmoil of the outside world\, they each discover what it’s li
+ ke to be thrown into someone else’s orbit. By Jacqueline Bircher\, playw
+ right of Constellation’s hit production of Webster’s B!+@#. Recommende
+ d for ages 13+.Event Website:https://seeconstellation.org/mainstage/anothe
+ r-revolution/
+LOCATION:Constellation Playhouse\,107 W 9th St\, Bloomington\,
+URL:https://wfhb.org/event/another-revolution-presented-by-constellation-s
+ tage-screen-2/?instance_id=90763
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 END:VCALENDAR

@@ -4,8 +4,8 @@ PRODID:-//Indiana University//NONSGML v1.0//EN
 X-WR-CALNAME:Indiana University Events
 BEGIN:VEVENT
 X-SOURCE:IU Hamilton Lugar School
-DTSTART;VALUE=DATE:20260420
-DTEND;VALUE=DATE:20260421
+DTSTART;VALUE=DATE:20260421
+DTEND;VALUE=DATE:20260422
 SUMMARY:Celebrate IU Day with Hamilton Lugar School
 DESCRIPTION:From April 1 to April 22\, celebrate your impact with the Ham
  ilton Lugar School by supporting what matters most to you. Explore inspir
@@ -66,7 +66,7 @@ DESCRIPTION:From April 1 to April 22\, celebrate your impact with the Ham
  es Lecture.Make a difference this IU Day! Support any of the 19 Hamilton 
  Lugar programs and priorities—from student opportunities to global init
  iatives: https://go.iu.edu/2026-hls-iuday (https://go.iu.edu/2026-hls-iud
- ay) Meeting URL: https://go.iu.edu/2026-hls-iuday
+ ay)
 X-ALT-DESC;FMTTYPE=text/html:<p><em>From April 1 to April 22\, celebrate 
  your impact with the Hamilton Lugar School by supporting what matters mos
  t to you. Explore inspiring stories and contribute to the causes that res
@@ -177,11 +177,10 @@ X-ALT-DESC;FMTTYPE=text/html:<p><em>From April 1 to April 22\, celebrate
  r></tbody></table><p class=""><strong>Make a difference this IU Day! Supp
  ort any of the 19 Hamilton Lugar programs and priorities—from student o
  pportunities to global initiatives: <a class="external" href="https://go.
- iu.edu/2026-hls-iuday">https://go.iu.edu/2026-hls-iuday</a></strong></p> 
- Meeting URL: https://go.iu.edu/2026-hls-iuday
-UID:20260420T040000Z-2240062@events.iu.edu
+ iu.edu/2026-hls-iuday">https://go.iu.edu/2026-hls-iuday</a></strong></p>
+UID:20260421T040000Z-2240063@events.iu.edu
 DTSTAMP:20260316T133812Z
-URL:https://events.iu.edu/hls/event/2240062-celebrate-iu-day-with-hamilto
+URL:https://events.iu.edu/hls/event/2240063-celebrate-iu-day-with-hamilto
  n-lugar-school
 CATEGORIES:Volunteer and fundraising opportunities
 LAST-MODIFIED:20260413T135248Z
@@ -190,7 +189,7 @@ EXDATE:20260403T000000Z
 ATTACH:https://events.iu.edu/live/image/gid/135/width/168/height/168/crop
  /1/src_region/0,0,2250,2813/30547_PartyHat.rev.1773806828.png
 X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2240062
+X-LIVEWHALE-ID:2240063
 X-LIVEWHALE-TIMEZONE:America/New_York
 X-LIVEWHALE-IMAGE:https://events.iu.edu/live/image/gid/135/width/168/heig
  ht/168/crop/1/src_region/0\,0\,2250\,2813/30547_PartyHat.rev.1773806828.p
@@ -217,192 +216,6 @@ X-LIVEWHALE-ONLINE-INSTRUCTIONS:<p>\n  <strong>First-Time Donor? Your gif
  iginal crowdfunding goal by April 22 to unlock an additional $250 for the
   impacts you care about most.\n</p>
 X-LIVEWHALE-REPEATS-UNTIL:2026-04-23 04:00:00
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU Hamilton Lugar School
-DTSTART:20260420T182000Z
-DTEND:20260420T192000Z
-LOCATION:SYCAMORE HALL - Room Number: 4067
-GEO:39.165281;-86.519031
-SUMMARY:Book Talk: "The Permanence of anti-Roma Racism: (Un)uttered Sente
- nces" With Margareta Matache
-DESCRIPTION:This talk draws on Margareta Matache's new book\,The Permanen
- ce of anti-Roma Racism: (Un)uttered Sentences\, to examine anti-Roma raci
- sm\, which she frames in Romani as ofitsialo telćhudipen (structural or 
- top-down oppression). The focus will include the origins\, protectors\, l
- egacies\, and continuities of anti-Roma racism\, as well as its place wit
- hin global frameworks and theories related to oppression\, racism\, racia
- lization\, and slavery.Margareta Matache\, PhD\, is a Harvard Lecturer\, 
- co-founder\, and Director of the Roma Program at Harvard University. Mata
- che is the co-editor of Time for Reparations: A Global Perspective (2021)
-  and Realizing Roma Rights (2017). Her most recent book\,The Permanence o
- f Anti-Roma Racism: (Un)uttered Sentences (Routledge)\, examines anti-Rom
- a racism and links to other oppressions.&#160\;  This event is cosponsore
- d by The Byrnes Institute\, the Institute for European Studies\, and the 
- Department of Anthropology
-X-ALT-DESC;FMTTYPE=text/html:<p><span data-olk-copy-source="MessageBody">
- This talk draws on Margareta Matache's new book\,<i></i></span><i>The Per
- manence of anti-Roma Racism: (Un)uttered Sentences</i>\, to examine anti-
- Roma racism\, which she frames in Romani as <i>ofitsialo telćhudipen</i>
-  (structural or top-down oppression). The focus will include the origins\
- , protectors\, legacies\, and continuities of anti-Roma racism\, as well 
- as its place within global frameworks and theories related to oppression\
- , racism\, racialization\, and slavery.</p><p><span data-olk-copy-source=
- "MessageBody">Margareta Matache\, PhD\, is a Harvard Lecturer\, co-founde
- r\, and Director of the Roma Program at Harvard University. Matache is th
- e co-editor of Time for Reparations: A Global Perspective (2021) and Real
- izing Roma Rights (2017). Her most recent book\,</span><i>The Permanence 
- of Anti-Roma Racism: (Un)uttered Sentences (Routledge)\,</i> examines ant
- i-Roma racism and links to other oppressions.&#160\;</p><p>  This event i
- s cosponsored by The Byrnes Institute\, the Institute for European Studie
- s\, and the Department of Anthropology</p>
-UID:20260420T182000Z-2170575@events.iu.edu
-DTSTAMP:20260114T113318Z
-URL:https://events.iu.edu/live/events/2169244-book-talk-the-permanence-of
- -anti-roma-racism
-CATEGORIES:Lectures, talks, seminars, and conferences
-LAST-MODIFIED:20260327T152614Z
-ATTACH:https://events.iu.edu/live/image/gid/182/width/168/height/168/crop
- /1/src_region/0,0,314,312/29499_image001_3_3.rev.1768336307.jpg
-X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2170575
-X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-IMAGE:https://events.iu.edu/live/image/gid/182/width/168/heig
- ht/168/crop/1/src_region/0\,0\,314\,312/29499_image001_3_3.rev.1768336307
- .jpg
-X-LIVEWHALE-IMAGE-CAPTION:<div class="x_elementToProof">\n  <span data-ol
- k-copy-source="MessageBody">Margareta Matache</span>\n</div>
-X-LIVEWHALE-CUSTOM-ROOM-NUMBER:4067
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU Hamilton Lugar School
-DTSTART:20260420T200000Z
-DTEND:20260420T210000Z
-LOCATION:355 N. Eagleson Avenue - Room Number: 1060
-SUMMARY:Spring 2026 Colloquium Series with Eduardo Herrera
-DESCRIPTION:The Center for Latin American and Caribbean Studies is proud 
- to present the continuation of its Colloquium Series for Spring 2026.  We
-  welcome Dr. Eduardo Herrera&#160\;as he presents Argentina's Soccer Chan
- ting Tradition\, from Neighborhood Stadiums to Global Stages.Abstract:&#1
- 60\;  At the 2022 FIFA World Cup in Qatar\, Argentine fans adopted "Mucha
- chos\," adapted from a song by La Mosca Tse Tse\, as an unofficial anthem
- . As Argentina advanced under Lionel Messi and ultimately won the tournam
- ent\, the song drew global attention for its role in animating collective
-  fandom. Yet such national-team chanting is exceptional\, since these squ
- ads convene only intermittently. The sustained intensity of Argentine soc
- cer chanting is rooted instead in local club culture\, where weekly match
- es enable ritualized gatherings and the accumulation of shared repertoire
- s. Chanting traditions date to the 1910s\, when carnival murga music info
- rmed early participatory singing. In the 1940s and 1950s\, fans expanded 
- melodic borrowing and lyrical complexity. From the 1970s onward\, chants 
- became more confrontational\, a shift that coincided with the 1976–1983
-  military dictatorship. By the 1990s\, clubs maintained extensive reperto
- ires\, drawing on diverse popular genres. The late twentieth century saw 
- global television networks amplify Argentina's influence\, establishing i
- t as a major exporter of chants. In the twenty-first century\, digital pl
- atforms such as YouTube and WhatsApp have accelerated their transnational
-  circulation.  This presentation traces Argentina's emergence as a global
-  hub for soccer chanting\, emphasizing its cultural history\, expressive 
- force\, and role in shaping collective identity at the intersection of sp
- ort\, music\, and globalization.  &#160\;Eduardo Herrera is an associate 
- professor in the department of Folklore and Ethnomusicology and the direc
- tor of the Ethnomusicology Institute at Indiana University Bloomington. W
- ith a PhD from University of Illinois Urbana-Champaign\, His research com
- prises topics from sound studies to Latinx cultural practices and colonia
- lity/postcoloniality/decoloniality.  The CLACS Spring 2026 Colloquium mee
- ts Mondays from February through April\, with faculty and guest speakers 
- engaging Latin America and the Caribbean through research on history\, cu
- lture\, language\, politics\, and the arts. Check the CLACS Calendar (htt
- ps://events.iu.edu/clacs/) for details.
-X-ALT-DESC;FMTTYPE=text/html:<p>  The Center for Latin American and Carib
- bean Studies is proud to present the continuation of its <strong>Colloqui
- um Series for Spring 2026</strong>.</p><p>  We welcome <strong>Dr. Eduard
- o Herrera</strong>&#160\;as he presents <strong><em>Argentina's Soccer Ch
- anting Tradition\, from Neighborhood Stadiums to Global Stages.</em></str
- ong></p><p><strong>Abstract:&#160\;</strong></p><div data-olk-copy-source
- ="MessageBody">  At the 2022 FIFA World Cup in Qatar\, Argentine fans ado
- pted "Muchachos\," adapted from a song by La Mosca Tse Tse\, as an unoffi
- cial anthem. As Argentina advanced under Lionel Messi and ultimately won 
- the tournament\, the song drew global attention for its role in animating
-  collective fandom. Yet such national-team chanting is exceptional\, sinc
- e these squads convene only intermittently. The sustained intensity of Ar
- gentine soccer chanting is rooted instead in local club culture\, where w
- eekly matches enable ritualized gatherings and the accumulation of shared
-  repertoires. Chanting traditions date to the 1910s\, when carnival murga
-  music informed early participatory singing. In the 1940s and 1950s\, fan
- s expanded melodic borrowing and lyrical complexity. From the 1970s onwar
- d\, chants became more confrontational\, a shift that coincided with the 
- 1976–1983 military dictatorship. By the 1990s\, clubs maintained extens
- ive repertoires\, drawing on diverse popular genres. The late twentieth c
- entury saw global television networks amplify Argentina's influence\, est
- ablishing it as a major exporter of chants. In the twenty-first century\,
-  digital platforms such as YouTube and WhatsApp have accelerated their tr
- ansnational circulation.</div><div>  This presentation traces Argentina's
-  emergence as a global hub for soccer chanting\, emphasizing its cultural
-  history\, expressive force\, and role in shaping collective identity at 
- the intersection of sport\, music\, and globalization.</div><p>  &#160\;<
- /p><p><strong>Eduardo Herrera</strong> is an associate professor in the d
- epartment of Folklore and Ethnomusicology and the director of the Ethnomu
- sicology Institute at Indiana University Bloomington. With a PhD from Uni
- versity of Illinois Urbana-Champaign\, His research comprises topics from
-  sound studies to Latinx cultural practices and coloniality/postcoloniali
- ty/decoloniality.</p><p>  The CLACS Spring 2026 Colloquium meets Mondays 
- from February through April\, with faculty and guest speakers engaging La
- tin America and the Caribbean through research on history\, culture\, lan
- guage\, politics\, and the arts. Check the <a href="https://events.iu.edu
- /clacs/">CLACS Calendar</a> for details.</p><p><picture class="lw_image l
- w_image30144  lw_align_left"><source media="(max-width: 500px)" type="ima
- ge/webp" srcset="https://events.iu.edu/live/image/scale/2x/gid/137/width/
- 500/height/354/30144_CLACS_Spring_Colloquium_-_Presenter_Flyer_Update_Feb
- _18.webp 2x\, https://events.iu.edu/live/image/scale/3x/gid/137/width/500
- /height/354/30144_CLACS_Spring_Colloquium_-_Presenter_Flyer_Update_Feb_18
- .webp 3x" data-origin="responsive"/><source media="(max-width: 500px)" ty
- pe="image/jpeg" srcset="https://events.iu.edu/live/image/scale/2x/gid/137
- /width/500/height/354/30144_CLACS_Spring_Colloquium_-_Presenter_Flyer_Upd
- ate_Feb_18.rev.1771437267.jpg 2x\, https://events.iu.edu/live/image/scale
- /3x/gid/137/width/500/height/354/30144_CLACS_Spring_Colloquium_-_Presente
- r_Flyer_Update_Feb_18.rev.1771437267.jpg 3x" data-origin="responsive"/><s
- ource media="(min-width: 501px)" type="image/webp" srcset="https://events
- .iu.edu/live/image/scale/2x/gid/137/width/609/height/431/30144_CLACS_Spri
- ng_Colloquium_-_Presenter_Flyer_Update_Feb_18.webp 2x\, https://events.iu
- .edu/live/image/scale/3x/gid/137/width/609/height/431/30144_CLACS_Spring_
- Colloquium_-_Presenter_Flyer_Update_Feb_18.webp 3x" data-origin="responsi
- ve"/><source media="(min-width: 501px)" type="image/jpeg" srcset="https:/
- /events.iu.edu/live/image/scale/2x/gid/137/width/609/height/431/30144_CLA
- CS_Spring_Colloquium_-_Presenter_Flyer_Update_Feb_18.rev.1771437267.jpg 2
- x\, https://events.iu.edu/live/image/scale/3x/gid/137/width/609/height/43
- 1/30144_CLACS_Spring_Colloquium_-_Presenter_Flyer_Update_Feb_18.rev.17714
- 37267.jpg 3x" data-origin="responsive"/><img width="609" height="431" alt
- ="" data-alt="" data-caption="Flyer" src="https://events.iu.edu/live/imag
- e/gid/137/width/609/height/431/30144_CLACS_Spring_Colloquium_-_Presenter_
- Flyer_Update_Feb_18.rev.1771437267.jpg" title="CLACS Spring Colloquium - 
- Presenter Flyer - 1" srcset="https://events.iu.edu/live/image/scale/2x/gi
- d/137/width/609/height/431/30144_CLACS_Spring_Colloquium_-_Presenter_Flye
- r_Update_Feb_18.rev.1771437267.jpg 2x\, https://events.iu.edu/live/image/
- scale/3x/gid/137/width/609/height/431/30144_CLACS_Spring_Colloquium_-_Pre
- senter_Flyer_Update_Feb_18.rev.1771437267.jpg 3x" data-max-w="2000" data-
- max-h="1414" loading="lazy" data-optimized="true"/></picture></p>
-UID:20260420T200000Z-2200550@events.iu.edu
-DTSTAMP:20260205T093803Z
-URL:https://events.iu.edu/live/events/2199395-spring-2026-colloquium-seri
- es-with-eduardo-herrera
-CATEGORIES:Culture and languages,Lectures, talks, seminars, and conferences
-LAST-MODIFIED:20260414T162316Z
-ATTACH:https://events.iu.edu/live/image/gid/137/width/168/height/168/crop
- /1/src_region/0,0,768,768/30044_herrera-eduardo.rev.1770923326.jpg
-X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2200550
-X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-IMAGE:https://events.iu.edu/live/image/gid/137/width/168/heig
- ht/168/crop/1/src_region/0\,0\,768\,768/30044_herrera-eduardo.rev.1770923
- 326.jpg
-X-LIVEWHALE-CONTACT-INFO:<p>\n  clacs@iu.edu\n</p>
-X-LIVEWHALE-SUMMARY:<p>\n  <strong>Dr. Eduardo Herrera (Department of Fol
- klore and Ethnomusicology)</strong><br />\n  <br />\n  <em><strong>Argent
- ina's Soccer Chanting Tradition\, from Neighborhood Stadiums to Global St
- ages<br /></strong><br /></em><strong>Monday\, April 20th</strong><br />\
- n  <strong>4-5PM Hamilton Lugar School\, GA1060</strong>\n</p>
-X-LIVEWHALE-CUSTOM-ROOM-NUMBER:1060
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:IU Hamilton Lugar School
@@ -435,7 +248,7 @@ DESCRIPTION:This salon series at Indiana University features leading thin
  le Media Group\, she and her students designed innovative interfaces for 
  on-line communities\; their art projects examining the future of identity
  \, privacy and mediated life have been exhibited in museums and galleries
-  worldwide.&#160\; Meeting URL: https://iu.zoom.us/j/86134171048
+  worldwide.&#160\;
 X-ALT-DESC;FMTTYPE=text/html:<p>  This salon series at Indiana University
   features leading thinkers exploring how to build better digital and natu
  ral worlds.</p><p><img src="https://vivatropolis.com/judith/JSD.CroppedSm  all.png" alt="" loading="lazy"/></p><p><strong data-olk-copy-source="Mess
@@ -472,7 +285,7 @@ X-ALT-DESC;FMTTYPE=text/html:<p>  This salon series at Indiana University
  a Group\, she and her students designed innovative interfaces for on-line
   communities\; their art projects examining the future of identity\, priv
  acy and mediated life have been exhibited in museums and galleries worldw
- ide.&#160\;</p> Meeting URL: https://iu.zoom.us/j/86134171048
+ ide.&#160\;</p>
 UID:20260421T200000Z-2160889@events.iu.edu
 DTSTAMP:20260106T152437Z
 URL:https://events.iu.edu/hls/event/2160889-the-alchemy-of-confidence
@@ -646,7 +459,7 @@ DESCRIPTION:Bio  Mahdi Taraghi is a third-year Ph.D. student in Environme
  Workshop Research Series  Learn about innovative research by Graduate Stu
  dents and Visiting Scholars as they advance the mission of the Ostrom Wor
  kshop\, building upon the theme of governance to understand and address m
- ajor societal problems. Meeting URL: https://iu.zoom.us/j/85198043963
+ ajor societal problems.
 X-ALT-DESC;FMTTYPE=text/html:<p><picture class="lw_image lw_image27550 lw
  _align_left lw_block"><source type="image/webp" srcset="https://events.iu
  .edu/live/image/scale/2x/gid/105/width/300/height/283/crop/1/src_region/5
@@ -678,8 +491,7 @@ X-ALT-DESC;FMTTYPE=text/html:<p><picture class="lw_image lw_image27550 lw
  Ostrom Workshop Research Series</strong></p><p>  Learn about innovative r
  esearch by Graduate Students and Visiting Scholars as they advance the mi
  ssion of the Ostrom Workshop\, building upon the theme of governance to u
- nderstand and address major societal problems.</p> Meeting URL: https://i
- u.zoom.us/j/85198043963
+ nderstand and address major societal problems.</p>
 UID:20260422T180000Z-2019364@events.iu.edu
 DTSTAMP:20250818T100447Z
 URL:https://events.iu.edu/live/events/2015812-ostrom-workshop-research-se
@@ -2384,8 +2196,7 @@ DESCRIPTION:Come learn about HLS's short-term study abroad programs:Bruss
    Jordan: Introduction to Refugee Studies (8 week class on campus + 10 da
  ys abroad)  Uzbekistan: Central Asia in Soviet Times (spring semester on 
  campus + 10 days abroad)    For more information about our programs abroa
- d and to apply\, click here. Meeting URL: https://iu.zoom.us/meeting/regi
- ster/IDQnLQ8ETemRB3PlMu0V9Q
+ d and to apply\, click here.
 X-ALT-DESC;FMTTYPE=text/html:<p>  Come learn about HLS's short-term study
   abroad programs:</p><ul><li>Brussels: European Union in Action (spring s
  emester on campus + 10 days abroad)  </li><li>Costa Rica: Global Perspect
@@ -2393,8 +2204,7 @@ X-ALT-DESC;FMTTYPE=text/html:<p>  Come learn about HLS's short-term study
  n to Refugee Studies (8 week class on campus + 10 days abroad)  </li><li>
  Uzbekistan: Central Asia in Soviet Times (spring semester on campus + 10 
  days abroad)  </li></ul><p>  For more information about our programs abro
- ad and to apply\, click here.</p> Meeting URL: https://iu.zoom.us/meeting
- /register/IDQnLQ8ETemRB3PlMu0V9Q
+ ad and to apply\, click here.</p>
 UID:20261009T230000Z-2019658@events.iu.edu
 DTSTAMP:20250818T160945Z
 URL:https://events.iu.edu/hls/event/2019658-call-out-meeting-short-term-s
