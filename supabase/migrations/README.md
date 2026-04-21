@@ -15,11 +15,37 @@ Do not treat `supabase/ddl/` as the way to upgrade an existing database. Those f
 
 ## Naming
 
-Use ordered, descriptive filenames, for example:
+Use timestamp-prefixed, descriptive filenames matching the Supabase CLI convention:
 
-- `002_create_feeds_table.sql`
-- `003_add_source_names_rpc.sql`
-- `004_make_event_enrichments_private.sql`
+- `20260330191500_add_city_column.sql`
+- `20260421182300_optimize_deduplicated_events_index.sql`
+
+The timestamp format is `YYYYMMDDHHMMSS`. This allows `supabase db push` to apply them in order and track which have been applied.
+
+## Applying migrations
+
+### Option A: SQL Editor (simplest)
+
+Paste the contents of the migration file into the Supabase SQL Editor and run it. All migrations use `IF EXISTS` / `IF NOT EXISTS` guards so they're safe to re-run.
+
+### Option B: Supabase CLI
+
+The CLI tracks applied migrations in a `supabase_migrations.schema_migrations` table and only runs new ones.
+
+```bash
+# One-time setup (from the repo root)
+supabase login
+supabase link --project-ref <your-project-ref>
+
+# If your instance already has earlier migrations applied manually,
+# mark them as applied so the CLI doesn't try to re-run them:
+supabase migration repair 20260330191500 --status applied
+
+# Apply all unapplied migrations
+supabase db push
+```
+
+The CLI looks for migration files in `supabase/migrations/` relative to the current working directory. Run commands from the repo root, or use `--workdir` to point elsewhere.
 
 ## Workflow
 
