@@ -249,6 +249,9 @@ cities/toronto/luma_again_again.ics
 # airess
 # cmd: python scrapers/luma_collection.py --url "https://luma.com/airess" --name "airess" --timezone "America/Toronto"
 cities/toronto/luma_airess.ics
+# All About Intimacy
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.ca/o/all-about-intimacy-86037364023" --name "All About Intimacy"
+cities/toronto/eventbrite_all_about_intimacy.ics
 # Anga's Farm & Nursery
 # cmd: python scrapers/angas_farm.py
 cities/toronto/angas_farm.ics
@@ -258,6 +261,9 @@ cities/toronto/eventbrite_another_story.ics
 # Bakka Phoenix Books
 # cmd: python scrapers/bookmanager.py --san 1684035 --domain bakkaphoenixbooks.com --name "Bakka Phoenix Books"
 https://bakkaphoenixbooks.com/events
+# Being and Becoming
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.ca/o/being-and-becoming-73656188253" --name "Being and Becoming"
+cities/toronto/eventbrite_being_and_becoming.ics
 # Ben McNally Books (Bookmanager)
 # cmd: python scrapers/bookmanager.py --san 7600763 --domain shop.benmcnallybooks.com --name "Ben McNally Books"
 https://shop.benmcnallybooks.com/events
@@ -273,6 +279,9 @@ cities/toronto/eventbrite_book_club_toronto.ics
 # Book*hug Press
 # cmd: python scrapers/eventbrite_filtered.py --organizer 30975200167 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Book*hug Press"
 https://www.eventbrite.com/o/bookhug-press-30975200167
+# Brains and Barstools
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.ca/o/brains-and-barstools-114602262361" --name "Brains and Barstools"
+cities/toronto/eventbrite_brains_and_barstools.ics
 # City Planning Consultations
 # cmd: python scrapers/toronto_planning_consultations.py
 cities/toronto/toronto_planning_consultations.ics
@@ -282,6 +291,9 @@ https://www.eventbrite.ca/o/coach-house-books-6007837525
 # Cormorant Books
 # cmd: python scrapers/eventbrite_filtered.py --organizer 31280011011 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Cormorant Books"
 https://www.eventbrite.ca/o/cormorant-books-inc-31280011011
+# Devtools Toronto
+# cmd: python scrapers/luma_collection.py --url "https://luma.com/devtoolsTO" --name "Devtools Toronto" --timezone "America/Toronto"
+cities/toronto/luma_devtools_toronto.ics
 # Diaspora Dialogues
 # cmd: python scrapers/eventbrite_filtered.py --organizer 1330302385 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Diaspora Dialogues"
 https://www.eventbrite.ca/o/diaspora-dialogues-1330302385
@@ -309,9 +321,15 @@ cities/toronto/harbord_village.ics
 # HarperCollins Canada
 # cmd: python scrapers/eventbrite_filtered.py --organizer 17669573222 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "HarperCollins Canada"
 https://www.eventbrite.ca/o/harpercollins-canada-17669573222
+# Head Out Toronto
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.ca/o/head-out-toronto-86621424023" --name "Head Out Toronto"
+cities/toronto/eventbrite_head_out_toronto.ics
 # House of Anansi
 # cmd: python scrapers/eventbrite_filtered.py --organizer 21689379263 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "House of Anansi"
 https://www.eventbrite.ca/o/house-of-anansi-21689379263
+# Intuit Open Source Meetup
+# cmd: python scrapers/luma_collection.py --url "https://luma.com/intuit-open-source-meetup" --name "Intuit Open Source Meetup" --timezone "America/Toronto"
+cities/toronto/luma_intuit_open_source.ics
 # Japanese Canadian Cultural Centre
 # cmd: python scrapers/jccc.py
 cities/toronto/jccc.ics
@@ -342,6 +360,9 @@ cities/toronto/luma_pluto_toronto.ics
 # Queen Books (Bookmanager)
 # cmd: python scrapers/bookmanager.py --san 8100306 --domain shop.queenbooks.ca --name "Queen Books"
 https://shop.queenbooks.ca/events
+# Radical Aliveness Toronto
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.ca/o/radical-aliveness-toronto-64308358303" --name "Radical Aliveness Toronto"
+cities/toronto/eventbrite_radical_aliveness.ics
 # Simon & Schuster Canada
 # cmd: python scrapers/eventbrite_filtered.py --organizer 57010055313 --denylist cities/toronto/bookstore_venue_denylist.txt --geo-allowlist cities/toronto/geo_allowlist.txt --name "Simon & Schuster Canada"
 https://www.eventbrite.ca/o/simon-schuster-canada-57010055313
@@ -351,6 +372,9 @@ cities/toronto/eventbrite_studio_mooi.ics
 # TechTO Events
 # cmd: python scrapers/luma_collection.py --url "https://luma.com/TechTO-Events" --name "TechTO Events" --timezone "America/Toronto"
 cities/toronto/luma_techto_events.ics
+# The AI Collective
+# cmd: python scrapers/luma_collection.py --url "https://luma.com/genai-collective" --name "The AI Collective" --timezone "America/Toronto"
+cities/toronto/luma_genai_collective.ics
 # The Annex Residents' Association
 # cmd: python scrapers/the_annex_residents_association.py
 cities/toronto/the_annex_residents_association.ics
