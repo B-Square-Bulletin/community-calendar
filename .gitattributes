@@ -1,1 +1,10 @@
 *.xmlui linguist-language=xml
+
+# Git merge driver rules for fork sync automation
+# City-specific content - keep fork's enabled cities only
+cities/** merge=city-filter
+cities.json merge=city-filter
+
+# Generated files - keep fork's versions during upstream sync
+report.json merge=keepours
+xmlui/version.txt merge=keepours
