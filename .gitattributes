@@ -1,9 +1,16 @@
 *.xmlui linguist-language=xml
 
-# Automated merge drivers for fork sync
-# For setup instructions, see docs/syncing-your-fork.md
+# Keep fork's versions of generated/config files during upstream merges.
+# Forks: run this once to activate the merge driver:
+#   git config merge.keepours.name "keep fork versions of generated files"
+#   git config merge.keepours.driver true
+#
+# Forks that want city filtering: also run this:
+#   git config merge.city-filter.name "Filter cities to fork's enabled cities"
+#   git config merge.city-filter.driver "bash scripts/merge-cities-filter.sh %O %A %B %P"
 
 # City-specific content (dynamically filter to enabled cities only)
+# Comment these out if you want to track all cities from upstream
 cities/** merge=city-filter
 cities.json merge=city-filter
 
