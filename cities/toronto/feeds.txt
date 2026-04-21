@@ -387,6 +387,9 @@ cities/toronto/tpl_young_adults.ics
 # Toronto Social Mixer
 # cmd: python scrapers/luma_collection.py --url "https://luma.com/TorontoSocialMixer" --name "Toronto Social Mixer" --timezone "America/Toronto"
 cities/toronto/luma_toronto_social_mixer.ics
+# Toronto Tech Week
+# cmd: python scrapers/luma_collection.py --url "https://luma.com/torontotechweek" --name "Toronto Tech Week" --timezone "America/Toronto"
+cities/toronto/luma_toronto_tech_week.ics
 # Toronto Tool Library
 # cmd: python scrapers/toronto_tool_library.py
 cities/toronto/toronto_tool_library.ics
