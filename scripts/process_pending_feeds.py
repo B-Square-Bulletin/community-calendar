@@ -121,14 +121,27 @@ def insert_feeds(city, feeds, supabase_url, service_key):
 
 
 TEMPLATE = """\
-# Add feed URLs or scraper outputs here. The build will process them into the
-# database automatically and reset this file to the template below.
+# Add feed URLs or scraper outputs here.
 #
-# Format:
+# Pipeline: On each build, process_pending_feeds.py reads this file,
+# inserts rows into the Supabase `feeds` table, then resets this file
+# to the template below. export_feeds_txt.py then regenerates feeds.txt
+# from the DB. Do not edit feeds.txt manually.
+#
+# The "# Source Name" comment becomes the display name in the calendar.
+#
+# --- ICS feed URLs ---
+# Just add the name and URL. The build handles everything else.
+#
 #   # Source Name
 #   https://example.com/events/?ical=1
 #
-# Or for scrapers:
+# --- Scrapers ---
+# Add the name, cmd, and output path here. But scrapers ALSO need a
+# line added to .github/workflows/generate-calendar.yml (in the city's
+# scrape step). This file only handles the DB insert; the workflow
+# entry is what actually runs the scraper.
+#
 #   # Source Name
 #   # cmd: python scrapers/example.py --name "Source Name"
 #   cities/{city}/example.ics
