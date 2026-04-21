@@ -649,12 +649,18 @@ jobs:
         SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
       run: |
         echo "Refreshing materialized view deduplicated_events..."
-        curl -sL -X POST "${SUPABASE_URL}/rest/v1/rpc/refresh_deduplicated_events" \
+        RESPONSE=$(curl -sL -w "\n%{http_code}" -X POST "${SUPABASE_URL}/rest/v1/rpc/refresh_deduplicated_events" \
           -H "apikey: ${SUPABASE_SERVICE_KEY}" \
           -H "Authorization: Bearer ${SUPABASE_SERVICE_KEY}" \
           -H "Content-Type: application/json" \
-          -d '{}'
-        echo " done"
+          -d '{}')
+        HTTP_CODE=$(echo "$RESPONSE" | tail -1)
+        BODY=$(echo "$RESPONSE" | sed '$d')
+        if [ "$HTTP_CODE" -ge 400 ]; then
+          echo "ERROR: refresh failed (HTTP $HTTP_CODE): $BODY"
+          exit 1
+        fi
+        echo "done (HTTP $HTTP_CODE)"
 
     - name: Generate instance config files
       env:

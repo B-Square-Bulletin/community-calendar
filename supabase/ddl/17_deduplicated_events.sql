@@ -45,10 +45,10 @@ CREATE OR REPLACE FUNCTION public.refresh_deduplicated_events()
 RETURNS void
 LANGUAGE plpgsql
 SECURITY DEFINER
-SET statement_timeout TO '120s'
+SET statement_timeout TO '0'
 AS $function$
 BEGIN
-  REFRESH MATERIALIZED VIEW deduplicated_events;
+  REFRESH MATERIALIZED VIEW CONCURRENTLY deduplicated_events;
 END;
 $function$;
 
