@@ -14,5 +14,5 @@
 # cmd: python scrapers/asheville_chamber.py
 cities/asheville/asheville_chamber.ics
 
-# Buncombe County Public Libraries (all 9 branches via Trumba)
+# Buncombe County Public Libraries
 https://www.trumba.com/calendars/public-libraries.ics
