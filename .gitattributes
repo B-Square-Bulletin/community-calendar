@@ -15,5 +15,6 @@ cities/** merge=city-filter
 cities.json merge=city-filter
 
 # Fork-specific config and generated files (keep fork's versions)
+.gitattributes merge=keepours
 xmlui/config.json merge=keepours
 cities/*/feeds.txt merge=keepours
