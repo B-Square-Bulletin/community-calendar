@@ -335,6 +335,7 @@ jobs:
         python scrapers/luma_collection.py --url "https://luma.com/ute" --name "UTE" --timezone "America/Toronto" --output cities/toronto/luma_ute.ics || true
         python scrapers/agakhan_museum.py --output cities/toronto/agakhan_museum.ics || true
         python scrapers/jccc.py --output cities/toronto/jccc.ics || true
+        python scrapers/luma_collection.py --url "https://luma.com/torontotechweek" --name "Toronto Tech Week" --timezone "America/Toronto" --output cities/toronto/luma_toronto_tech_week.ics || true
       continue-on-error: true
 
 
