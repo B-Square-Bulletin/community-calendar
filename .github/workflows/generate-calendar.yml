@@ -628,6 +628,7 @@ jobs:
         echo "Successfully loaded $TOTAL_INSERTED total events into Supabase"
 
     - name: Refresh source names
+      continue-on-error: true
       env:
         SUPABASE_URL: ${{ vars.SUPABASE_URL }}
         SUPABASE_ANON_KEY: ${{ vars.SUPABASE_KEY }}
