@@ -18,7 +18,11 @@ The gold standard is **iCalendar (ICS) feeds** — a format that machines can re
 
 **[Interactive architecture explainer](https://judell.github.io/cc-architecture/)** — click through the 7 pipeline phases to see how data flows from sources to the frontend.
 
-<!-- Drag cc-architecture.mp4 into the GitHub editor to embed the video here -->
+
+
+https://github.com/user-attachments/assets/c6d1f2e4-7fe4-451d-91f4-bf5a9e08c419
+
+
 
 ICS feeds, web scrapers, and curator picks are collected daily by GitHub Actions, combined and deduplicated per city, converted to JSON, classified by Claude AI, and loaded into Supabase. The XMLUI frontend queries the deduplicated materialized view and renders events. See [docs/pipeline.md](docs/pipeline.md) for the full pipeline details.
 
