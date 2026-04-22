@@ -20,7 +20,9 @@ The gold standard is **iCalendar (ICS) feeds** — a format that machines can re
 
 
 
-https://github.com/user-attachments/assets/c6d1f2e4-7fe4-451d-91f4-bf5a9e08c419
+https://github.com/user-attachments/assets/1010b793-a078-4983-a470-91221476373d
+
+
 
 
 
