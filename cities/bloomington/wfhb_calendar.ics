@@ -4,283 +4,6 @@ PRODID:-//WFHB Community Calendar//wfhb.org//
 X-WR-CALNAME:WFHB Community Calendar
 X-WR-TIMEZONE:America/Indiana/Indianapolis
 BEGIN:VEVENT
-SUMMARY:Dine Out for the Friends of the Library at Uptown Cafe
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T080000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T210000
-UID:ai1ec-148352-94920@wfhb.org
-DESCRIPTION:Dine out for theFriends of the LibraryatUptown Café. Enjoy br
- eakfast\, lunch\, or dinner from 8 AM–9 PM.Show your flyerand Uptown Caf
- é will donate 20% of your bill to the Friends of the Library to help make
-  amazing Library programs possible.Uptown Caféhas been a Bloomington lan
- dmark since 1976\, offering a diverse selection of breakfast\, lunch\, an
- d dinner items centered around Cajun and Creole cuisine. Reservations are
-  suggested.
-LOCATION:Uptown Café\, 102 E. Kirkwood Ave\, Bloomington
-URL:https://wfhb.org/event/dine-out-for-the-friends-of-the-library-at-upto
- wn-cafe/?instance_id=94920
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Early Voting Hours
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T080000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T180000
-UID:ai1ec-148638-95054@wfhb.org
-DESCRIPTION:Free parking in the North Showers lot.
-LOCATION:North Showers Complex\, 501 N. Morton Street\, (enter through the
-  West Entrance off Morton Street)
-URL:https://wfhb.org/event/early-voting-hours/?instance_id=95054
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Hoosier Stitchers
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T091500
-DTEND;TZID=America/Indiana/Indianapolis:20260421T141500
-UID:ai1ec-148558-94979@wfhb.org
-DESCRIPTION:
-LOCATION:Meeting Room A\, Ellettsville Branch of the Monroe County Public 
- Library\, 600 W. Temperance Street\, Ellettsville
-URL:https://wfhb.org/event/hoosier-stitchers-45/?instance_id=94979
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Baby Brilliance
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T100000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T103000
-UID:ai1ec-148047-94747@wfhb.org
-DESCRIPTION:Baby Brilliance is a weekly program for infants / pre-walkers 
- and their caregivers. Each week participants will explore themes related t
- o infant development. Inspired by the book\, “Experimenting with Babies\
- ,” by Shaun Gallagher.More info herehttps://wonderlab.org
-LOCATION:WonderLab\, 308 West 4th Street\, Bloomington
-URL:https://wfhb.org/event/baby-brilliance-5/?instance_id=94747
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:The Art of Aging Group
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T110000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T130000
-UID:ai1ec-148559-94980@wfhb.org
-DESCRIPTION:
-LOCATION:Meeting Room A\, Southwest Branch of the Monroe County Public Lib
- rary\, 890 W. Gordon Pike\, Bloomington
-URL:https://wfhb.org/event/the-art-of-aging-group/?instance_id=94980
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:HIV/HEP-C Testing
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T120000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T140000
-UID:ai1ec-148571-94992@wfhb.org
-DESCRIPTION:Get tested for HIV and HEP-C today
-LOCATION:Mother Hubbard's Cupboard\, 1100 W. Allen St\, Bloomington
-URL:https://wfhb.org/event/hiv-hep-c-testing-2/?instance_id=94992
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Drop-in Tech Help  (age 18 and up)
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T130000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T150000
-UID:ai1ec-148560-94981@wfhb.org
-DESCRIPTION:Need help using or setting up a new device? Trying to access t
- he Library’s eBooks or eAudiobooks? Learning how to use Zoom? Drop in fo
- r individual help and learn new digital skills.
-LOCATION:Meeting Room 2C\, Monroe County Public Library\, 303 E. Kirkwood 
- Ave\, Bloomington
-URL:https://wfhb.org/event/drop-in-tech-help-age-18-and-up-6/?instance_id=
- 94981
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:VITAL English Language Group – Conversation with Donna B.  (age 
- 18 and up)
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T133000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T150000
-UID:ai1ec-148562-94983@wfhb.org
-DESCRIPTION:
-LOCATION:VITAL Classroom\, Monroe County Public Library\, 303 East Kirkwoo
- d Ave\, Bloomington
-URL:https://wfhb.org/event/vital-english-language-group-conversation-with-
- donna-b-age-18-and-up-2/?instance_id=94983
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Haiku Craft
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T150000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T170000
-UID:ai1ec-148569-94990@wfhb.org
-DESCRIPTION:
-LOCATION:Eastern Branch Greene County Public Library\, 11453 E. State Road
-  54\, Bloomfield
-URL:https://wfhb.org/event/haiku-craft/?instance_id=94990
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Monroe County National Organization for Women
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T170000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T184500
-UID:ai1ec-148561-94982@wfhb.org
-DESCRIPTION:
-LOCATION:Meeting Room B\, Southwest Branch of the Monroe County Public Lib
- rary\, 890 W. Gordon Pike\, Bloomington
-URL:https://wfhb.org/event/monroe-county-national-organization-for-women-2
- /?instance_id=94982
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Yogurt Workshop
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T170000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T190000
-UID:ai1ec-148572-94993@wfhb.org
-DESCRIPTION:Join Kyla to explore the simple steps of making your own yogur
- t at home with no fancy equipment required. (Bring a jar to carry her home
-  in!)
-LOCATION:Mother Hubbard's Cupboard\, 1100 W. Allen St\, Bloomington
-URL:https://wfhb.org/event/yogurt-workshop-2/?instance_id=94993
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Author event with Katie Simon
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T180000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T190000
-UID:ai1ec-148026-94728@wfhb.org
-DESCRIPTION:In partnership with the Kinsey Institute\,we present a convers
- ation with Katie Simon\, author ofTell Me What You Like: An Honest Discuss
- ion of Sex and Intimacy After Sexual Assault.ABOUT THE BOOK:Hopeful\, grou
- ndbreaking\, and anchored in true stories\, this much-needed book from sex
- uality journalist and fellow sexual assault survivor Katie Simon delves in
- to the challenges of moving from trauma to healing.Tell Me What You Likewi
- ll guide sexual assault survivors toward the sex and relationships they wa
- nt\, and speaks to the shift in sexual culture we all need.
-LOCATION:Morgenstern Books & Cafe\, 849 South Auto Mall Drive\, Bloomingto
- n
-URL:https://wfhb.org/event/author-event-with-the-kinsey-institute-katie-si
- mon/?instance_id=94728
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Community Kundalini Yoga
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T180000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T193000
-UID:ai1ec-147048-94235@wfhb.org
-DESCRIPTION:We’ll follow Jai Dev in a pre-recorded class projected on a 
- large-screen in our studio. There is occasionally some lecture at the star
- t of class. Then we get into the movements and meditations to feel the tea
- chings.
-LOCATION:The Bodyworks Studio\, Suite 122 in Fountain Square Mall\, 101 W 
- Kirkwood Ave\, Bloomington
-URL:https://wfhb.org/event/community-kundalini-yoga-4/?instance_id=94235
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Open Mic
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T183000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T203000
-UID:ai1ec-144415-92797@wfhb.org
-DESCRIPTION:
-LOCATION:Blockhouse Bar\, located in the alley at 205 South College Avenue
- \, Bloomington
-URL:https://wfhb.org/event/open-mic-51/?instance_id=92797
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Pinball League // Trivia with Bloomington Pub Quiz
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T183000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T203000
-UID:ai1ec-144421-92845@wfhb.org
-DESCRIPTION:IFPA Sanctioned Pinball Tourney 5 Game Match Play\, Top 3 in F
- inals PlayoffSign Ups 6PM FLIPS 6:38 PMTrivia with Bloomington Pub Quiz6:3
- 0 PM
-LOCATION:Orbit Room\, 107 North College Ave.\, Suite 001 (downstairs)\, Bl
- oomington
-URL:https://wfhb.org/event/pinball-league-trivia-with-bloomington-pub-quiz
- /?instance_id=92845
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Film: CRASH
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T190000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T210000
-UID:ai1ec-148606-95022@wfhb.org
-DESCRIPTION:About CrashBased on the equally infamous J.G. Ballard novel\, 
- David Cronenberg’s 1996 film Crash is built to rattle cultural cages\, s
- park heated debated and discussion\, and draw you into a cinematic world l
- ike no other. Aestheticizing the erotic allure of auto collisions and prod
- ding at the human fascination with death and danger\, Cronenberg crafts a 
- utterly singular film that—at the time of its release—addressed head-o
- n the social fears of the swiftly approaching millennium. 30 years later\,
-  the film takes an a different\, but still immediate\, resonance in a worl
- d living through one “unprecedented” event after another. [100 min\; d
- rama\, thriller\; English]
-LOCATION:IU Cinema\, 1213 E. 7th Street\, Bloomington (on the North end of
-  the IU Auditorium)
-URL:https://wfhb.org/event/film-crash/?instance_id=95022
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Irish Music Session
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T190000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T213000
-UID:ai1ec-143982-92442@wfhb.org
-DESCRIPTION:
-LOCATION:Runcible Spoon\, 412 East 6th St.\, Bloomington
-URL:https://wfhb.org/event/irish-music-session/?instance_id=92442
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Little 500: Triumph\, Tradition\, Today
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T190000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T210000
-UID:ai1ec-147906-94665@wfhb.org
-DESCRIPTION:In anticipation of the upcoming 75th Anniversary of the Little
-  500 races\, the Indiana University Student Foundation is excited to work 
- with Blueline to present the following documentary\, as well as the IU Med
- ia School and their production of the docuseries “Two Days in April.”S
- eating will be available on a first-come\, first-served basis\, regardless
-  of an RSVP submission\, and entry will continue until the theater reaches
-  capacity.
-LOCATION:Buskirk-Chumley Theater\, 114 E. Kirkwood Ave\, Bloomington
-URL:https://wfhb.org/event/little-500-triumph-tradition-today/?instance_id
- =94665
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Muddy Boots Dart Club & Acoustic Pickin’ Circle
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T190000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T210000
-UID:ai1ec-147994-94680@wfhb.org
-DESCRIPTION:Doors open at 6pm.Need to be signed up by 7pm to play.Blind dr
- aw for partners.The Pickin’ Circle is an open jam with mostly acoustic p
- layers.  Anyone is welcome to join in!
-LOCATION:Mike's Music and Dance Barn\, 2277 West State Road 46\, Nashville
-URL:https://wfhb.org/event/muddy-boots-dart-club-music-jam-2/?instance_id=
- 94680
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Mooch the Magnificent
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T193000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T213000
-UID:ai1ec-148418-94937@wfhb.org
-DESCRIPTION:Bridges MAYO\, Reimagining Opera for Kids\, and Stages Bloomin
- gton have teamed up to produce Lauren Bernofsky’s “Mooch the Magnifice
- nt\,” with stage director Andrew Keeler and musical director Dr. Lauren 
- Bernofsky. Youth singers and instrumentalists\, ages 8-18\, have been rehe
- arsing alongside professional Reimagining Opera for Kids opera singers\, I
- U Jacobs and community musicians to share a tale about a zookeeper\, Orlan
- do\, and his assistant\, Mooch. Scored for full orchestra and singers\, se
- e what happens when Mooch helps the mechanical animals to disconnect on Tu
- esday\, April 21 at 7:30PM at Fairview Elementary School gym!“When the c
- leverest person in the room is … the girl. MOOCH THE MAGNIFICENT is a 40
- -minute opera on a libretto by Scott Russell Sanders. The setting is a zoo
-  of the future\, populated not by animals but by robots in animal form. Mo
- och\, an orphan girl\, convinces the zookeeper to hire her to fix the robo
- ts when they break down\, but she secretly reprograms them to be increasin
- gly wild.”
-LOCATION:Fairview Elementary 500 W 7th St\, Bloomington
-URL:https://wfhb.org/event/mooch-the-magnificent/?instance_id=94937
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Y’allternative: All emo and rock music for line dancing
 DTSTART;TZID=America/Indiana/Indianapolis:20260421T193000
 DTEND;TZID=America/Indiana/Indianapolis:20260421T230000
@@ -290,65 +13,6 @@ LOCATION:The Back Door\, 207 S. College Ave\, Bloomington (around back\, i
  n the alley)
 URL:https://wfhb.org/event/yallternative-all-emo-and-rock-music-for-line-d
  ancing/?instance_id=95009
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:All-Campus Band & Brass Band – Ally Capone\, Rebecca Mulligan\, 
- and Nick Hinman\, conductors
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T200000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T220000
-UID:ai1ec-148158-94793@wfhb.org
-DESCRIPTION:All-Campus Band RepertoireGoldman:On the Mall (1923)Randall St
- andridge:Havana Nights (2018)Katahj Copley:Halcyon Hearts (2021)Alex Shapi
- ro:Tight Squeeze (2013)Price/Williams:Adoration (1951)Reed:The Hounds of S
- pring (1980)Brass Band RepertoireBall:Journey into Freedom (1967)Ring/Hume
- :Clorinda (1906)Jan Van der Roost:Canterbury Chorale (1991)Rimmer:The Aust
- ralasian (c.1906)Sparke:Year of the Dragon (1984)
-LOCATION:Musical Arts Center\, 101 N. Eagleson Ave\, Bloomington
-URL:https://wfhb.org/event/all-campus-band-brass-band-ally-capone-rebecca-
- mulligan-and-nick-hinman-conductors/?instance_id=94793
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:The Rock Orchestra by Candlelight
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T200000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T220000
-UID:ai1ec-148577-94998@wfhb.org
-DESCRIPTION:After mesmerizing audiences across Europe and the UK\, The Roc
- k Orchestra by Candlelight is set to electrify the USA once again. Prepare
-  for a spellbinding spectacle that infuses iconic rock and metal anthems w
- ith a hauntingly beautiful energy. In ethereal candlelit settings\, this b
- and of 14 classical musicians unleash effortlessly enchanting melodies alo
- ngside powerful walls of distortion. Witness the unexpected union of class
- ical music and metal.Performing the music of iconic bands including: Metal
- lica\, AC/DC\, Rolling Stones\, Rage Against The Machine\, My Chemical Rom
- ance\, Linkin’ Park\, SOAD\, Guns N Roses\, Evanescence\, Papa Roach\, T
- he Cranberries and more!
-LOCATION:IU Auditorium\, 1211 East 7th Street\, Bloomington
-URL:https://wfhb.org/event/the-rock-orchestra-by-candlelight/?instance_id=
- 94998
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Honky Tonk
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T203000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T223000
-UID:ai1ec-144416-92819@wfhb.org
-DESCRIPTION:
-LOCATION:Blockhouse Bar\, located in the alley at 205 South College Avenue
- \, Bloomington
-URL:https://wfhb.org/event/honky-tonk-8/?instance_id=92819
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Just Penelope (Acoustic)/ Sophia Corinne / Lyle de Vitry
-DTSTART;TZID=America/Indiana/Indianapolis:20260421T203000
-DTEND;TZID=America/Indiana/Indianapolis:20260421T223000
-UID:ai1ec-148599-95016@wfhb.org
-DESCRIPTION:Doors at 8pm
-LOCATION:Orbit Room\, 107 North College Avenue\, Suite 001\, Bloomington
-URL:https://wfhb.org/event/just-penelope-acoustic-sophia-corinne-lyle-de-v
- itry/?instance_id=95016
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -1437,6 +1101,17 @@ URL:https://wfhb.org/event/friends-of-the-library-plant-sale-2/?instance_i
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Local Yarn Store Day/Independent Bookstore Day
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T090000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T160000
+UID:ai1ec-148739-95102@wfhb.org
+DESCRIPTION:
+LOCATION:Knitting Romance\, 123 N. Sale Street\, Ellettsville
+URL:https://wfhb.org/event/local-yarn-store-day-independent-bookstore-day/
+ ?instance_id=95102
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Bloomington Music Expo
 DTSTART;TZID=America/Indiana/Indianapolis:20260425T100000
 DTEND;TZID=America/Indiana/Indianapolis:20260425T160000
@@ -1967,6 +1642,24 @@ DESCRIPTION:Tickets available at the door\, from members\, or online athtt
 LOCATION:First United Church\, 2420 E 3rd St\, Bloomington
 URL:https://wfhb.org/event/by-the-numbers-quarrylands-spring-concert-2/?in
  stance_id=94734
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Energy Navigator! Presentation
+DTSTART;TZID=America/Indiana/Indianapolis:20260426T170000
+DTEND;TZID=America/Indiana/Indianapolis:20260426T183000
+UID:ai1ec-148759-95108@wfhb.org
+DESCRIPTION:Family Friendly event.Dinner and Childcare provided.Curious ho
+ w electrification can lower your energy bills and make your home more comf
+ ortable? Join us for a presentation to learn moreHear about the Tech:Such 
+ as heat pump appliances\, solar\, and weatherization improvements.Get the 
+ Cash:Learn about massive rebates and financial incentives available now.Re
+ al Advice:Ask neighbors about their experience and energy savings.Hosted b
+ y: Electrify Indiana\, a local volunteer-driven nonprofit\, in partnership
+  with the City of Bloomington.Please sign up in advance atSign Up Genius
+LOCATION:Harmony School Gymnasium\, 909 E. 2nd Street\, Bloomington
+URL:https://wfhb.org/event/energy-navigator-presentation-3/?instance_id=95
+ 108
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -2547,6 +2240,19 @@ URL:https://wfhb.org/event/hamilton-lugar-music-festival/?instance_id=9504
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Opening Reception for Collab: A Show of Cute Lil’ Prints Made in
+  Collaboration
+DTSTART;TZID=America/Indiana/Indianapolis:20260501T170000
+DTEND;TZID=America/Indiana/Indianapolis:20260501T200000
+UID:ai1ec-148748-95105@wfhb.org
+DESCRIPTION:The show features around 150 different prints by Alexander Lee
+  Landerman.
+LOCATION:The I Fell Gallery & Studios\, 415 West 4th Street\, Bloomington
+URL:https://wfhb.org/event/opening-reception-for-collab-a-show-of-cute-lil
+ -prints-made-in-collaboration/?instance_id=95105
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Copper Fish Printmaking Guild Art Opening
 DTSTART;TZID=America/Indiana/Indianapolis:20260501T180000
 DTEND;TZID=America/Indiana/Indianapolis:20260501T210000
@@ -2583,6 +2289,16 @@ DESCRIPTION:Constellation Stage & Screen presents “Finn: A New Musical-
 LOCATION:Waldron Arts Center (122 S Walnut St)
 URL:https://wfhb.org/event/finn-a-new-musical-at-the-pbj-cafe/?instance_id
  =90562
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gregory’s Xit
+DTSTART;TZID=America/Indiana/Indianapolis:20260501T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260501T210000
+UID:ai1ec-148746-95104@wfhb.org
+DESCRIPTION:Presented by Gregory Washel.
+LOCATION:Buskirk-Chumley Theater\, 114 East Kirkwood Avenue\, Bloomington
+URL:https://wfhb.org/event/gregorys-xit/?instance_id=95104
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -2713,6 +2429,24 @@ URL:https://wfhb.org/event/peoples-market/?instance_id=93865
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Saturday Crafternoon
+DTSTART;TZID=America/Indiana/Indianapolis:20260502T110000
+DTEND;TZID=America/Indiana/Indianapolis:20260502T140000
+UID:ai1ec-148767-95109@wfhb.org
+DESCRIPTION:Saturday Crafternoons in May celebrate the Wylie House Museum
+ ’s newest exhibition\, Louisa’s Garden\, opening May 1st. The exhibiti
+ on highlights Louisa Wylie Boisen\, eldest daughter of IU professor Theoph
+ ilus Wylie\, and her accomplishments as a brave\, complex\, and cherished 
+ woman. Her horticultural impact can still be seen at the Wylie House today
+ \, over 70 years later! You’re invited to come to the Wylie House Museum
+  every Saturday in May and make your own mini Wylie House Museum garden to
+  cherish\, in memory of Louise Boisen Wylie.
+LOCATION:Wylie House Museum\, 307 E 2nd St\, Bloomington
+URL:https://wfhb.org/event/saturday-crafternoon-at-the-wylie-house-9/?inst
+ ance_id=95109
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Finn: A New Musical- At the PB&J Cafe
 DTSTART;TZID=America/Indiana/Indianapolis:20260502T130000
 DTEND;TZID=America/Indiana/Indianapolis:20260502T140000
@@ -2764,6 +2498,23 @@ DESCRIPTION:Headliner Lloyd Wood leads a star-studded lineup that includ
 LOCATION:Historic Brown County Playhouse\, 70 South Van Buren Street\, Nas
  hville
 URL:https://wfhb.org/event/variety-show/?instance_id=95044
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Nashville Indiana Farmers Market
+DTSTART;TZID=America/Indiana/Indianapolis:20260503T110000
+DTEND;TZID=America/Indiana/Indianapolis:20260503T140000
+UID:ai1ec-148738-95076@wfhb.org
+DESCRIPTION:Celebrate a Decade of Community at the Nashville Indiana Farme
+ rs Market!For ten years\, farmers and shoppers have come together every Su
+ nday to create something special — a vibrant\, welcoming marketplace ful
+ l of fresh flavors\, handmade goods\, and community spirit.Join us as we c
+ elebrate —Locally grown.Community loved.A decade strong.Come experience 
+ the traditionevery Sunday\, May thru Oct\, from 11a-2pShop fresh. Support 
+ local. Celebrate community.
+LOCATION:The Brown County Inn Parking lot (Corner of HWY 46 and 135N)
+URL:https://wfhb.org/event/nashville-indiana-farmers-market-5/?instance_id
+ =95076
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -3146,6 +2897,22 @@ URL:https://wfhb.org/event/2nd-friday-open-studios-night/?instance_id=9367
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Gather Social – Make it for the Patio Edition
+DTSTART;TZID=America/Indiana/Indianapolis:20260508T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260508T210000
+UID:ai1ec-148736-95074@wfhb.org
+DESCRIPTION:It is Townie Summer at Gather and we are kicking it off by get
+ ting your patio ready. Choose your project and create something for your s
+ pace\, from simple painted pots to bold statement planters.Mini Makes: pai
+ nt a pot and take home a quick winCreative Kits: choose from string art or
+  leather projectsStatement Planters: paint a one of a kind piece for your 
+ patioSettle in\, take your time\, and leave with something you made.
+LOCATION:Gather\, 116 N Walnut Street\, Bloomington
+URL:https://wfhb.org/event/gather-social-make-it-for-the-patio-edition/?in
+ stance_id=95074
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Finn: A New Musical- At the PB&J Cafe
 DTSTART;TZID=America/Indiana/Indianapolis:20260508T183000
 DTEND;TZID=America/Indiana/Indianapolis:20260508T193000
@@ -3211,6 +2978,24 @@ URL:https://wfhb.org/event/peoples-market/?instance_id=93866
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Saturday Crafternoon
+DTSTART;TZID=America/Indiana/Indianapolis:20260509T110000
+DTEND;TZID=America/Indiana/Indianapolis:20260509T140000
+UID:ai1ec-148767-95110@wfhb.org
+DESCRIPTION:Saturday Crafternoons in May celebrate the Wylie House Museum
+ ’s newest exhibition\, Louisa’s Garden\, opening May 1st. The exhibiti
+ on highlights Louisa Wylie Boisen\, eldest daughter of IU professor Theoph
+ ilus Wylie\, and her accomplishments as a brave\, complex\, and cherished 
+ woman. Her horticultural impact can still be seen at the Wylie House today
+ \, over 70 years later! You’re invited to come to the Wylie House Museum
+  every Saturday in May and make your own mini Wylie House Museum garden to
+  cherish\, in memory of Louise Boisen Wylie.
+LOCATION:Wylie House Museum\, 307 E 2nd St\, Bloomington
+URL:https://wfhb.org/event/saturday-crafternoon-at-the-wylie-house-9/?inst
+ ance_id=95110
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Finn: A New Musical- At the PB&J Cafe
 DTSTART;TZID=America/Indiana/Indianapolis:20260509T130000
 DTEND;TZID=America/Indiana/Indianapolis:20260509T140000
@@ -3244,6 +3029,23 @@ URL:https://wfhb.org/event/femina-natura-by-grace-gonso/?instance_id=95069
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Nashville Indiana Farmers Market
+DTSTART;TZID=America/Indiana/Indianapolis:20260510T110000
+DTEND;TZID=America/Indiana/Indianapolis:20260510T140000
+UID:ai1ec-148738-95077@wfhb.org
+DESCRIPTION:Celebrate a Decade of Community at the Nashville Indiana Farme
+ rs Market!For ten years\, farmers and shoppers have come together every Su
+ nday to create something special — a vibrant\, welcoming marketplace ful
+ l of fresh flavors\, handmade goods\, and community spirit.Join us as we c
+ elebrate —Locally grown.Community loved.A decade strong.Come experience 
+ the traditionevery Sunday\, May thru Oct\, from 11a-2pShop fresh. Support 
+ local. Celebrate community.
+LOCATION:The Brown County Inn Parking lot (Corner of HWY 46 and 135N)
+URL:https://wfhb.org/event/nashville-indiana-farmers-market-5/?instance_id
+ =95077
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Finn: A New Musical- At the PB&J Cafe
 DTSTART;TZID=America/Indiana/Indianapolis:20260510T130000
 DTEND;TZID=America/Indiana/Indianapolis:20260510T140000
@@ -3263,6 +3065,21 @@ DESCRIPTION:Constellation Stage & Screen presents “Finn: A New Musical-
 LOCATION:Waldron Arts Center (122 S Walnut St)
 URL:https://wfhb.org/event/finn-a-new-musical-at-the-pbj-cafe-2/?instance_
  id=90580
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Forrest and Margaret McCurren Sweet as Pie Show
+DTSTART;TZID=America/Indiana/Indianapolis:20260510T160000
+DTEND;TZID=America/Indiana/Indianapolis:20260510T190000
+UID:ai1ec-148770-95113@wfhb.org
+DESCRIPTION:We invite you to celebrate Mother’s Day and the beginning of
+  Townie Summer with this couple from Missouri who will share their music a
+ nd stories. Homemade pie and light refreshments will be provided.Admission
+  Info: https://events.ticketleap.com/tickets/just-a-re/forrest-and-margare
+ t-mccurren-sweet-as-pie-show
+LOCATION:Monroe County History Center\, 202 E 6th Street\, Bloomington
+URL:https://wfhb.org/event/forrest-and-margaret-mccurren-sweet-as-pie-show
+ /?instance_id=95113
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -3484,6 +3301,19 @@ URL:https://wfhb.org/event/rainbow-elders-third-friday-breakfast-6/?instan
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Play Night – Trivia (Female Icons) Edition
+DTSTART;TZID=America/Indiana/Indianapolis:20260515T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260515T210000
+UID:ai1ec-148737-95075@wfhb.org
+DESCRIPTION:Play Night is a relaxed evening of creativity\, connection\, a
+ nd a little friendly competition. This round features Trivia Night celebra
+ ting iconic women across culture\, history\, and pop moments.
+LOCATION:Gather\, 116 N Walnut Street\, Bloomington
+URL:https://wfhb.org/event/play-night-trivia-female-icons-edition/?instanc
+ e_id=95075
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Finn: A New Musical- At the PB&J Cafe
 DTSTART;TZID=America/Indiana/Indianapolis:20260515T183000
 DTEND;TZID=America/Indiana/Indianapolis:20260515T193000
@@ -3650,6 +3480,43 @@ LOCATION:Buskirk-Chumley Theater\, 114 E. Kirkwood Ave\, Bloomington
 URL:https://wfhb.org/event/cosmic-songwriter-festival-featuring-clayton-an
  derson-with-special-guests-liv-lafluv-and-cara-jean-wahlers/?instance_id=9
  4337
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Resounding Joy: Beethoven 9
+DTSTART;TZID=America/Indiana/Indianapolis:20260516T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260516T210000
+UID:ai1ec-148752-95106@wfhb.org
+DESCRIPTION:Admission Info: https://www.bloomingtonsymphony.com/joyFor the
+  first time in our history\, the Bloomington Symphony Orchestra will perfo
+ rm Beethoven’s iconic 9th Symphony joined by a 100+ member community cho
+ rus on the stage of Indiana University’s Musical Arts Center (MAC). This
+  concert will also feature a world premiere piece by Daixuan Ai.Participat
+ ing choirs include the Bloomington Chamber Singers (Caio Lopes\, director)
+ \, Voces Novae (Sue Swaney\, director) and the choir of the Unitarian Univ
+ ersalist Church (Sue Swaney\, director)\, as well as individuals from many
+  other local choirs. The choirs are all coming together under the directio
+ n of Dr. Betsy Burleigh.NB: Pre-concert talk at 6:15 in the lobby of the M
+ usical Arts Center.
+LOCATION:IU Musical Arts Center\, 101 North Eagleson Avenue\, Bloomington
+URL:https://wfhb.org/event/resounding-joy-beethoven-9/?instance_id=95106
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Nashville Indiana Farmers Market
+DTSTART;TZID=America/Indiana/Indianapolis:20260517T110000
+DTEND;TZID=America/Indiana/Indianapolis:20260517T140000
+UID:ai1ec-148738-95078@wfhb.org
+DESCRIPTION:Celebrate a Decade of Community at the Nashville Indiana Farme
+ rs Market!For ten years\, farmers and shoppers have come together every Su
+ nday to create something special — a vibrant\, welcoming marketplace ful
+ l of fresh flavors\, handmade goods\, and community spirit.Join us as we c
+ elebrate —Locally grown.Community loved.A decade strong.Come experience 
+ the traditionevery Sunday\, May thru Oct\, from 11a-2pShop fresh. Support 
+ local. Celebrate community.
+LOCATION:The Brown County Inn Parking lot (Corner of HWY 46 and 135N)
+URL:https://wfhb.org/event/nashville-indiana-farmers-market-5/?instance_id
+ =95078
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -3913,6 +3780,24 @@ URL:https://wfhb.org/event/peoples-market/?instance_id=93868
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Saturday Crafternoon
+DTSTART;TZID=America/Indiana/Indianapolis:20260523T110000
+DTEND;TZID=America/Indiana/Indianapolis:20260523T140000
+UID:ai1ec-148767-95111@wfhb.org
+DESCRIPTION:Saturday Crafternoons in May celebrate the Wylie House Museum
+ ’s newest exhibition\, Louisa’s Garden\, opening May 1st. The exhibiti
+ on highlights Louisa Wylie Boisen\, eldest daughter of IU professor Theoph
+ ilus Wylie\, and her accomplishments as a brave\, complex\, and cherished 
+ woman. Her horticultural impact can still be seen at the Wylie House today
+ \, over 70 years later! You’re invited to come to the Wylie House Museum
+  every Saturday in May and make your own mini Wylie House Museum garden to
+  cherish\, in memory of Louise Boisen Wylie.
+LOCATION:Wylie House Museum\, 307 E 2nd St\, Bloomington
+URL:https://wfhb.org/event/saturday-crafternoon-at-the-wylie-house-9/?inst
+ ance_id=95111
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Come Together!
 DTSTART;TZID=America/Indiana/Indianapolis:20260523T163000
 DTEND;TZID=America/Indiana/Indianapolis:20260523T183000
@@ -3923,6 +3808,23 @@ DESCRIPTION:We invite you to join members of the Windfall Dance Company an
  ogether-5
 LOCATION:John Waldron Arts Center\, 122 S Walnut St Bloomington
 URL:https://wfhb.org/event/come-together/?instance_id=94557
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Nashville Indiana Farmers Market
+DTSTART;TZID=America/Indiana/Indianapolis:20260524T110000
+DTEND;TZID=America/Indiana/Indianapolis:20260524T140000
+UID:ai1ec-148738-95079@wfhb.org
+DESCRIPTION:Celebrate a Decade of Community at the Nashville Indiana Farme
+ rs Market!For ten years\, farmers and shoppers have come together every Su
+ nday to create something special — a vibrant\, welcoming marketplace ful
+ l of fresh flavors\, handmade goods\, and community spirit.Join us as we c
+ elebrate —Locally grown.Community loved.A decade strong.Come experience 
+ the traditionevery Sunday\, May thru Oct\, from 11a-2pShop fresh. Support 
+ local. Celebrate community.
+LOCATION:The Brown County Inn Parking lot (Corner of HWY 46 and 135N)
+URL:https://wfhb.org/event/nashville-indiana-farmers-market-5/?instance_id
+ =95079
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -4167,6 +4069,17 @@ URL:https://wfhb.org/event/fifth-friday-game-night/?instance_id=93399
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:A Love Letter to Handsome John (2026)
+DTSTART;TZID=America/Indiana/Indianapolis:20260529T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260529T210000
+UID:ai1ec-148756-95107@wfhb.org
+DESCRIPTION:
+LOCATION:Buskirk-Chumley Theater\, 114 East Kirkwood Avenue\, Bloomington
+URL:https://wfhb.org/event/a-love-letter-to-handsome-john-2026/?instance_i
+ d=95107
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Bloomington Community Farmers’ Market
 DTSTART;TZID=America/Indiana/Indianapolis:20260530T080000
 DTEND;TZID=America/Indiana/Indianapolis:20260530T123000
@@ -4229,6 +4142,24 @@ URL:https://wfhb.org/event/peoples-market/?instance_id=93869
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Saturday Crafternoon
+DTSTART;TZID=America/Indiana/Indianapolis:20260530T110000
+DTEND;TZID=America/Indiana/Indianapolis:20260530T140000
+UID:ai1ec-148767-95112@wfhb.org
+DESCRIPTION:Saturday Crafternoons in May celebrate the Wylie House Museum
+ ’s newest exhibition\, Louisa’s Garden\, opening May 1st. The exhibiti
+ on highlights Louisa Wylie Boisen\, eldest daughter of IU professor Theoph
+ ilus Wylie\, and her accomplishments as a brave\, complex\, and cherished 
+ woman. Her horticultural impact can still be seen at the Wylie House today
+ \, over 70 years later! You’re invited to come to the Wylie House Museum
+  every Saturday in May and make your own mini Wylie House Museum garden to
+  cherish\, in memory of Louise Boisen Wylie.
+LOCATION:Wylie House Museum\, 307 E 2nd St\, Bloomington
+URL:https://wfhb.org/event/saturday-crafternoon-at-the-wylie-house-9/?inst
+ ance_id=95112
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Belt Out Loud! – Featuring Cody Ikerd and the Sidewinders
 DTSTART;TZID=America/Indiana/Indianapolis:20260530T190000
 DTEND;TZID=America/Indiana/Indianapolis:20260530T210000
@@ -4237,6 +4168,23 @@ DESCRIPTION:Presented by Stone Belt Arc.
 LOCATION:Buskirk-Chumley Theater\, 114 E. Kirkwood Ave\, Bloomington
 URL:https://wfhb.org/event/stone-belt-arc-presents-belt-out-loud-featuring
  -cody-ikerd-and-the-sidewinders/?instance_id=93588
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Nashville Indiana Farmers Market
+DTSTART;TZID=America/Indiana/Indianapolis:20260531T110000
+DTEND;TZID=America/Indiana/Indianapolis:20260531T140000
+UID:ai1ec-148738-95080@wfhb.org
+DESCRIPTION:Celebrate a Decade of Community at the Nashville Indiana Farme
+ rs Market!For ten years\, farmers and shoppers have come together every Su
+ nday to create something special — a vibrant\, welcoming marketplace ful
+ l of fresh flavors\, handmade goods\, and community spirit.Join us as we c
+ elebrate —Locally grown.Community loved.A decade strong.Come experience 
+ the traditionevery Sunday\, May thru Oct\, from 11a-2pShop fresh. Support 
+ local. Celebrate community.
+LOCATION:The Brown County Inn Parking lot (Corner of HWY 46 and 135N)
+URL:https://wfhb.org/event/nashville-indiana-farmers-market-5/?instance_id
+ =95080
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -4458,6 +4406,23 @@ DESCRIPTION:Some revolutions happen in the streets. Others in the lab.Kat
 LOCATION:Constellation Playhouse\, 109 W 9th St.\, Bloomington
 URL:https://wfhb.org/event/another-revolution-presented-by-constellation-s
  tage-screen-shows-at-200-730/?instance_id=90758
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Nashville Indiana Farmers Market
+DTSTART;TZID=America/Indiana/Indianapolis:20260607T110000
+DTEND;TZID=America/Indiana/Indianapolis:20260607T140000
+UID:ai1ec-148738-95081@wfhb.org
+DESCRIPTION:Celebrate a Decade of Community at the Nashville Indiana Farme
+ rs Market!For ten years\, farmers and shoppers have come together every Su
+ nday to create something special — a vibrant\, welcoming marketplace ful
+ l of fresh flavors\, handmade goods\, and community spirit.Join us as we c
+ elebrate —Locally grown.Community loved.A decade strong.Come experience 
+ the traditionevery Sunday\, May thru Oct\, from 11a-2pShop fresh. Support 
+ local. Celebrate community.
+LOCATION:The Brown County Inn Parking lot (Corner of HWY 46 and 135N)
+URL:https://wfhb.org/event/nashville-indiana-farmers-market-5/?instance_id
+ =95081
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -4755,6 +4720,23 @@ URL:https://wfhb.org/event/another-revolution-presented-by-constellation-s
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Nashville Indiana Farmers Market
+DTSTART;TZID=America/Indiana/Indianapolis:20260614T110000
+DTEND;TZID=America/Indiana/Indianapolis:20260614T140000
+UID:ai1ec-148738-95082@wfhb.org
+DESCRIPTION:Celebrate a Decade of Community at the Nashville Indiana Farme
+ rs Market!For ten years\, farmers and shoppers have come together every Su
+ nday to create something special — a vibrant\, welcoming marketplace ful
+ l of fresh flavors\, handmade goods\, and community spirit.Join us as we c
+ elebrate —Locally grown.Community loved.A decade strong.Come experience 
+ the traditionevery Sunday\, May thru Oct\, from 11a-2pShop fresh. Support 
+ local. Celebrate community.
+LOCATION:The Brown County Inn Parking lot (Corner of HWY 46 and 135N)
+URL:https://wfhb.org/event/nashville-indiana-farmers-market-5/?instance_id
+ =95082
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Another Revolution presented by Constellation Stage & Screen
 DTSTART;TZID=America/Indiana/Indianapolis:20260614T140000
 DTEND;TZID=America/Indiana/Indianapolis:20260614T160000
@@ -4988,6 +4970,23 @@ DESCRIPTION:Some revolutions happen in the streets. Others in the lab.Kat
 LOCATION:Constellation Playhouse\, 109 W 9th St.\, Bloomington
 URL:https://wfhb.org/event/another-revolution-presented-by-constellation-s
  tage-screen-shows-at-200-730/?instance_id=90760
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Nashville Indiana Farmers Market
+DTSTART;TZID=America/Indiana/Indianapolis:20260621T110000
+DTEND;TZID=America/Indiana/Indianapolis:20260621T140000
+UID:ai1ec-148738-95083@wfhb.org
+DESCRIPTION:Celebrate a Decade of Community at the Nashville Indiana Farme
+ rs Market!For ten years\, farmers and shoppers have come together every Su
+ nday to create something special — a vibrant\, welcoming marketplace ful
+ l of fresh flavors\, handmade goods\, and community spirit.Join us as we c
+ elebrate —Locally grown.Community loved.A decade strong.Come experience 
+ the traditionevery Sunday\, May thru Oct\, from 11a-2pShop fresh. Support 
+ local. Celebrate community.
+LOCATION:The Brown County Inn Parking lot (Corner of HWY 46 and 135N)
+URL:https://wfhb.org/event/nashville-indiana-farmers-market-5/?instance_id
+ =95083
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
