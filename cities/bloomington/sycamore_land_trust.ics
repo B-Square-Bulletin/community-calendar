@@ -308,17 +308,6 @@ URL:https://sycamorelandtrust.org/2025/03/arbor-day-tree-giveaway-4/
 X-SOURCE:Sycamore Land Trust
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Weed Wrangle at the Laura Hare Nature Preserve at Downey Hill
-DTSTART:20260422T100000
-DTEND:20260422T120000
-UID:580554fc4fea5d0aa3a6e2ff00bc35d4@sycamorelandtrust.org
-DESCRIPTION:
-LOCATION:The Laura Hare Nature Preserve at Downey Hill
-URL:https://sycamorelandtrust.org/2025/03/weed-wrangle-at-the-laura-hare-n
- ature-preserve-at-downey-hill/
-X-SOURCE:Sycamore Land Trust
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Late Spring Birding Walk with David Rupp
 DTSTART:20260608T080000
 DTEND:20260608T100000
@@ -432,23 +421,6 @@ URL:https://sycamorelandtrust.org/2024/03/arbor-day-tree-giveaway-3/
 X-SOURCE:Sycamore Land Trust
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Earth Day Preserve-a-Preserve Weed Wrangle
-DTSTART:20260422T100000
-DTEND:20260422T120000
-UID:a293c19d42c9d5de665818b5523bd666@sycamorelandtrust.org
-DESCRIPTION:Volunteers are invited to join Sycamore in celebration of Eart
- h Day by helping maintain habitat at our preserves! Weed Wrangle events ar
- e fun and educational opportunities to learn how to identify and control t
- he invasive plants that are negatively impacting our natural areas and oth
- er green spaces. The focus for this work day will be the identification an
- d control of garlic mustard at Laura Hare Nature Preserve\, in Brown Count
- y.
-LOCATION:The Laura Hare Nature Preserve at Downey Hill
-URL:https://sycamorelandtrust.org/2024/02/earth-day-preserve-a-preserve-we
- ed-wrangle/
-X-SOURCE:Sycamore Land Trust
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Sycamore Land Trust&#8217\;s Spring Native Plant Sale
 DTSTART:20260520T090000
 DTEND:20260520T140000
@@ -544,6 +516,24 @@ DESCRIPTION:On Friday\, April 28\, 2023\, come visit Sycamore Land Trust&#
  learn more.
 URL:https://sycamorelandtrust.org/2023/02/arbor-day-tree-giveaway-evansvil
  le-2/
+X-SOURCE:Sycamore Land Trust
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Conservation Conversation: Carroll Ritter\, author of Magnificent 
+ Trees of Indiana
+DTSTART:20260623T190000
+DTEND:20260623T210000
+UID:d983e3d4422ced6cc03923d2085cdab4@sycamorelandtrust.org
+DESCRIPTION:On June 23\, 2022 at 7pm\, Carroll D. Ritter will join our Con
+ servation Conversation virtual lecture series to discuss his new book Magn
+ ificent Trees of Indiana and how it can be an inspiration to appreciate ou
+ r grand forest heritage. Featuring the fascinating history of Indiana&#821
+ 7\;s trees\, remaining old-growth forest pieces and the state champions\, 
+ along with trees of stunning beauty and unique forms stimulated the creati
+ on of this book. The objective was to create not another field guide\, but
+  an enjoyable\, educational read\, complimented by beautiful photography.
+URL:https://sycamorelandtrust.org/2022/06/conservation-conversation-carrol
+ l-ritter-author-of-the-magnificent-trees-of-indiana/
 X-SOURCE:Sycamore Land Trust
 END:VEVENT
 BEGIN:VEVENT

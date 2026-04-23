@@ -147,4 +147,16 @@ URL:https://www.ticketmaster.com/psychics-vs-science-tour-nashville-indian
  a-06-21-2026/event/05006489D260BE17
 X-SOURCE:Brown County Music Center
 END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Alison Krauss and Union Station
+DTSTART;TZID=America/New_York:20260623T193000
+DTEND;TZID=America/New_York:20260623T193000
+UID:5c5bf7330cccf3782d6589aed849f926@ticketmaster.com
+DESCRIPTION:
+LOCATION:Brown County Music Center\, 200 Maple Leaf Boulevard\, Nashville\
+ , IN
+URL:https://www.ticketmaster.com/alison-krauss-and-union-station-nashville
+ -indiana-06-23-2026/event/05006379AECC841D
+X-SOURCE:Brown County Music Center
+END:VEVENT
 END:VCALENDAR
