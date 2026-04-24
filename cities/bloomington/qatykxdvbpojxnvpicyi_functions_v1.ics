@@ -7,7 +7,7 @@ METHOD:PUBLISH
 BEGIN:VEVENT
 X-SOURCE:Chronically Dave
 UID:pick-12202@community-calendar
-DTSTAMP:20260423T024134Z
+DTSTAMP:20260424T024157Z
 DTSTART:20260411T180000Z
 DTEND:20260411T200000Z
 SUMMARY:Voices in Motion
@@ -18,7 +18,7 @@ END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Chronically Dave
 UID:pick-70965@community-calendar
-DTSTAMP:20260423T024134Z
+DTSTAMP:20260424T024157Z
 DTSTART:20260418T160000Z
 DTEND:20260418T170000Z
 SUMMARY:Molly Tuttle @ Landlocked Records
@@ -27,8 +27,51 @@ DESCRIPTION:Mini-set as a preview to her show at the Bluebird later at 8 p.m.
 END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Chronically Dave
+UID:pick-1439@community-calendar
+DTSTAMP:20260424T024157Z
+DTSTART:20260423T131500Z
+DTEND:20260423T144500Z
+SUMMARY:B Town Tai Chi
+LOCATION:Downtown Library -
+DESCRIPTION:This event is not in affiliation with or sponsored by the Monroe County Public Library.
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Chronically Dave
+UID:pick-35686@community-calendar
+DTSTAMP:20260424T024157Z
+DTSTART:20260423T133000Z
+DTEND:20260423T153000Z
+SUMMARY:MCCSC Community Transitions
+LOCATION:Large Kitchen
+URL:https://firstuc.org/events/mccsc-community-transitions-2/2026-04-23/
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Chronically Dave
+UID:pick-1440@community-calendar
+DTSTAMP:20260424T024157Z
+DTSTART:20260423T140000Z
+DTEND:20260423T150000Z
+SUMMARY:Canceled: Board of Commissioners - Hybrid cancelled
+LOCATION:Monroe County Courthouse\, Nat U. Hill Meeting Room
+DESCRIPTION:Monroe County: Commissioners Agendas & Packets\n\nMicrosoft Teams Need help? \n\nJoin the meeting now \n\nMeeting ID: 247 848 276 620 75 \n\nPasscode: cK6oW9L3
+URL:https://events.in.gov/event/copy-of-board-of-commissioners-hybrid-5055
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Chronically Dave
+UID:pick-1441@community-calendar
+DTSTAMP:20260424T024157Z
+DTSTART:20260423T140000Z
+DTEND:20260423T170000Z
+SUMMARY:Graduate Student Writing Group
+LOCATION:La Casa/Latino Cultural Center - Room Number: Conference Room
+DESCRIPTION:Looking for accountability and a supportive environment to encourage scholarly writing? All IU graduate students welcome!
+URL:https://events.iu.edu/lacasaiub/event/2181421-graduate-student-writing-group
+ATTACH;FMTTYPE=image/jpeg:https://events.iu.edu/live/image/gid/59/width/400/height/300/crop/1/src_region/0,0,1545,2000/29665_S26_GMC_Writing_Group.rev.1769092264.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Chronically Dave
 UID:pick-75262@community-calendar
-DTSTAMP:20260423T024134Z
+DTSTAMP:20260424T024157Z
 DTSTART:20260503T010000Z
 DTEND:20260502T040000Z
 SUMMARY:6 Foot Blonde
