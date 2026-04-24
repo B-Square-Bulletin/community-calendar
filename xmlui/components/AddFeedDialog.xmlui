@@ -176,31 +176,32 @@
       <VStack when="{previewEvents && !submitted}" gap="$space-2" paddingBottom="$space-3">
         <Text fontWeight="bold" value="{'Preview: ' + previewEvents.length + ' upcoming events from ' + feedName}" />
         <Text when="{hasRecurrence}" fontSize="$fontSize-sm" color="$color-text-secondary" value="This feed has recurring events. The build will expand them — expect more events than shown here." />
-        <ScrollViewer height="300px">
-          <VStack gap="$space-1">
-            <List data="{previewEvents}" itemKey="start_time">
-              <EventCard event="{$item}" filterTerm="" />
-            </List>
-          </VStack>
-          <property name="footerTemplate">
-            <HStack
-              gap="$space-2"
-              horizontalAlignment="end"
-              padding="$space-2"
-              backgroundColor="$color-surface-0"
-              borderTop="1px solid $color-surface-200">
-              <Button
-                label="Back"
-                variant="ghost"
-                onClick="() => { previewEvents = null; validationError = ''; }"
-              />
-              <Button
-                label="Add Feed"
-                onClick="() => saveFeedApi.execute({ city: window.cityFilter || 'bloomington', url: feedUrl, name: feedName, feed_type: 'ics_url', status: 'pending' })"
-              />
-            </HStack>
-          </property>
-        </ScrollViewer>
+        <Stack height="356px" gap="0" border="1px solid $color-surface-200">
+          <ScrollViewer dock="stretch" showScrollerFade="{false}">
+            <VStack gap="$space-1">
+              <Items data="{previewEvents}">
+                <EventCard event="{$item}" filterTerm="" />
+              </Items>
+            </VStack>
+          </ScrollViewer>
+          <HStack
+            dock="bottom"
+            gap="$space-2"
+            horizontalAlignment="end"
+            padding="$space-2"
+            backgroundColor="$color-surface-0"
+            borderTop="1px solid $color-surface-200">
+            <Button
+              label="Back"
+              variant="ghost"
+              onClick="() => { previewEvents = null; validationError = ''; }"
+            />
+            <Button
+              label="Add Feed"
+              onClick="() => saveFeedApi.execute({ city: window.cityFilter || 'bloomington', url: feedUrl, name: feedName, feed_type: 'ics_url', status: 'pending' })"
+            />
+          </HStack>
+        </Stack>
       </VStack>
 
       <!-- Confirmation -->
