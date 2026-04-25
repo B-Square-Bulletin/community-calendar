@@ -48,7 +48,8 @@ supabase/
 │   └── 09_admin_github_users.sql  # Server-side admin allowlist (preapproval by GitHub username)
 │
 ├── migrations/                    # Ordered schema changes for existing instances
-│   └── 001_add_city_column.sql
+│   ├── 20260330191500_add_city_column.sql
+│   └── 20260421182300_optimize_deduplicated_events_index.sql
 │
 └── functions/                     # Edge Functions (Deno/TypeScript)
     ├── load-events/               # Fetches events.json and upserts to database

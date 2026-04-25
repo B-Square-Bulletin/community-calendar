@@ -16,9 +16,9 @@ on:
         type: boolean
         default: false
       months:
-        description: 'Number of months ahead to scrape (default: 2)'
+        description: 'Number of months ahead to scrape (default: 3)'
         required: false
-        default: '2'
+        default: '3'
   schedule:
     - cron: '0 0 * * *'
 
@@ -26,7 +26,7 @@ jobs:
   generate-calendar:
     runs-on: ubuntu-latest
     env:
-      SCRAPE_MONTHS: ${{ github.event.inputs.months || '2' }}
+      SCRAPE_MONTHS: ${{ github.event.inputs.months || '3' }}
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       TICKETMASTER_API_KEY: ${{ secrets.TICKETMASTER_API_KEY }}
       #ENABLE_FUZZY_DEDUP: ${{ secrets.ANTHROPIC_API_KEY && 'true' || '' }}
@@ -130,6 +130,7 @@ jobs:
         python scrapers/songkick.py --url "https://www.songkick.com/venues/4617123-henhouse-brewing" --name "HenHouse Brewing" --output cities/santarosa/songkick_henhouse.ics || true
         python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/phoenix-theater-26319831111" --name "Phoenix Theater (Eventbrite)" --output cities/santarosa/eventbrite_phoenix.ics || true
         python scrapers/mobilize.py --url "https://www.mobilize.us/indivisiblesonomacounty/" --name "Indivisible Sonoma County (Mobilize)" --output cities/santarosa/mobilize_indivisible_sonoma.ics || true
+        python scrapers/squarespace.py --url "https://www.northbayderby.org/events" --name "North Bay Derby" --output cities/santarosa/squarespace_northbayderby.ics || true
 
         echo "\n=== Santa Rosa Scraper Results ==="
         for f in cities/santarosa/*.ics; do
@@ -332,6 +333,17 @@ jobs:
         python scrapers/luma_collection.py --url "https://luma.com/againagain" --name "again again" --timezone "America/Toronto" --output cities/toronto/luma_again_again.ics || true
         python scrapers/luma_collection.py --url "https://luma.com/airess" --name "airess" --timezone "America/Toronto" --output cities/toronto/luma_airess.ics || true
         python scrapers/luma_collection.py --url "https://luma.com/ute" --name "UTE" --timezone "America/Toronto" --output cities/toronto/luma_ute.ics || true
+        python scrapers/agakhan_museum.py --output cities/toronto/agakhan_museum.ics || true
+        python scrapers/jccc.py --output cities/toronto/jccc.ics || true
+        python scrapers/luma_collection.py --url "https://luma.com/torontotechweek" --name "Toronto Tech Week" --timezone "America/Toronto" --output cities/toronto/luma_toronto_tech_week.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.ca/o/being-and-becoming-73656188253" --name "Being and Becoming" --output cities/toronto/eventbrite_being_and_becoming.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.ca/o/brains-and-barstools-114602262361" --name "Brains and Barstools" --output cities/toronto/eventbrite_brains_and_barstools.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.ca/o/radical-aliveness-toronto-64308358303" --name "Radical Aliveness Toronto" --output cities/toronto/eventbrite_radical_aliveness.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.ca/o/head-out-toronto-86621424023" --name "Head Out Toronto" --output cities/toronto/eventbrite_head_out_toronto.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.ca/o/all-about-intimacy-86037364023" --name "All About Intimacy" --output cities/toronto/eventbrite_all_about_intimacy.ics || true
+        python scrapers/luma_collection.py --url "https://luma.com/genai-collective" --name "The AI Collective" --timezone "America/Toronto" --output cities/toronto/luma_genai_collective.ics || true
+        python scrapers/luma_collection.py --url "https://luma.com/devtoolsTO" --name "Devtools Toronto" --timezone "America/Toronto" --output cities/toronto/luma_devtools_toronto.ics || true
+        python scrapers/luma_collection.py --url "https://luma.com/intuit-open-source-meetup" --name "Intuit Open Source Meetup" --timezone "America/Toronto" --output cities/toronto/luma_intuit_open_source.ics || true
       continue-on-error: true
 
 
@@ -456,6 +468,7 @@ jobs:
         python scrapers/songkick.py --url "https://www.songkick.com/venues/1333371-one-stop" --name "The One Stop" --output cities/asheville/one_stop_songkick.ics || true
         python scrapers/songkick.py --url "https://www.songkick.com/venues/4617227-revival" --name "Revival" --output cities/asheville/revival_songkick.ics || true
         python scrapers/songkick.py --url "https://www.songkick.com/venues/4519500-eulogy" --name "Eulogy" --output cities/asheville/eulogy_songkick.ics || true
+        python scrapers/asheville_chamber.py --output cities/asheville/asheville_chamber.ics || true
       continue-on-error: true
 
 
@@ -476,7 +489,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add cities/*/pending_feeds.txt
           git commit -m "Process pending feeds into DB"
-          git push || true
+          git pull --rebase --autostash && git push || true
         else
           echo "No pending feeds to process"
         fi
@@ -575,6 +588,10 @@ jobs:
           python scripts/classify_events_json.py $FILES
         fi
 
+    - name: Restore prior report history
+      run: |
+        curl -sfL "https://raw.githubusercontent.com/${{ github.repository }}/archive/report.json" -o report.json || true
+
     - name: Generate feed health report
       run: |
         python scripts/report.py --cities ${{ steps.locations.outputs.list }} --build-log build.log
@@ -589,7 +606,7 @@ jobs:
     - name: Upload events to Supabase
       env:
         SUPABASE_URL: ${{ vars.SUPABASE_URL }}
-        SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        SUPABASE_ANON_KEY: ${{ vars.SUPABASE_KEY }}
       run: |
         TOTAL_INSERTED=0
         IFS=',' read -ra UPLOAD_CITIES <<< "${{ steps.locations.outputs.list }}"
@@ -619,20 +636,27 @@ jobs:
         echo "Successfully loaded $TOTAL_INSERTED total events into Supabase"
 
     - name: Refresh source names
+      continue-on-error: true
       env:
         SUPABASE_URL: ${{ vars.SUPABASE_URL }}
-        SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        SUPABASE_ANON_KEY: ${{ vars.SUPABASE_KEY }}
       run: |
         IFS=',' read -ra UPLOAD_CITIES <<< "${{ steps.locations.outputs.list }}"
         for city in "${UPLOAD_CITIES[@]}"; do
           city=$(echo "$city" | xargs)
           echo "Refreshing source names for $city..."
-          curl -sL -X POST "${SUPABASE_URL}/rest/v1/rpc/refresh_source_names" \
+          RESPONSE=$(curl -sL -w "\n%{http_code}" -X POST "${SUPABASE_URL}/rest/v1/rpc/refresh_source_names" \
             -H "apikey: ${SUPABASE_ANON_KEY}" \
             -H "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
             -H "Content-Type: application/json" \
-            -d "{\"target_city\": \"$city\"}"
-          echo " done"
+            -d "{\"target_city\": \"$city\"}")
+          HTTP_CODE=$(echo "$RESPONSE" | tail -1)
+          BODY=$(echo "$RESPONSE" | sed '$d')
+          if [ "$HTTP_CODE" -ge 400 ]; then
+            echo "ERROR: refresh_source_names for $city failed (HTTP $HTTP_CODE): $BODY"
+            exit 1
+          fi
+          echo " done (HTTP $HTTP_CODE)"
         done
 
     - name: Refresh deduplicated events
@@ -641,12 +665,18 @@ jobs:
         SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
       run: |
         echo "Refreshing materialized view deduplicated_events..."
-        curl -sL -X POST "${SUPABASE_URL}/rest/v1/rpc/refresh_deduplicated_events" \
+        RESPONSE=$(curl -sL -w "\n%{http_code}" -X POST "${SUPABASE_URL}/rest/v1/rpc/refresh_deduplicated_events" \
           -H "apikey: ${SUPABASE_SERVICE_KEY}" \
           -H "Authorization: Bearer ${SUPABASE_SERVICE_KEY}" \
           -H "Content-Type: application/json" \
-          -d '{}'
-        echo " done"
+          -d '{}')
+        HTTP_CODE=$(echo "$RESPONSE" | tail -1)
+        BODY=$(echo "$RESPONSE" | sed '$d')
+        if [ "$HTTP_CODE" -ge 400 ]; then
+          echo "ERROR: refresh failed (HTTP $HTTP_CODE): $BODY"
+          exit 1
+        fi
+        echo "done (HTTP $HTTP_CODE)"
 
     - name: Generate instance config files
       env:
@@ -680,8 +710,8 @@ jobs:
 
         git describe --tags --always > xmlui/version.txt
 
-        git add -f xmlui/config.local.js xmlui/config.json
-        git add cities.json xmlui/version.txt report.json report.html cities/*/feeds.txt
+        git add -f xmlui/config.json
+        git add cities.json report.html cities/*/feeds.txt
         git diff --staged --quiet || (
           git commit -m "Auto-generate calendar metadata"
           # On conflict, our regenerated files always win

@@ -22,6 +22,7 @@
   - [GoDaddy Calendar](#godaddy-calendar-scraperslibgodaddypy---godaddy-website-builder)
   - [Mobilize.us](#mobilizeus-scrapersmobilizepy---civic-and-political-organizing)
 - [Platform-Specific Techniques](#platform-specific-techniques)
+  - [Drupal](#drupal)
   - [SeeTickets Widgets](#seetickets-widgets)
   - [Wix Events](#wix-events)
 - [Source Discovery](#source-discovery)
@@ -117,34 +118,29 @@ Each city should have a `SOURCES_CHECKLIST.md` to track ongoing discovery:
 
 ## Editing the Workflow YAML
 
-The workflow file (`.github/workflows/generate-calendar.yml`) looks intimidating but every source is just one of two patterns. Each city has two steps that group these, but a given source uses one or the other:
+The workflow file (`.github/workflows/generate-calendar.yml`) only contains **scraper** invocations. Live ICS feeds are **not** in the workflow — they're downloaded automatically by `download_feeds.py` from the Supabase `feeds` table.
 
-**Pattern 1: Live feed** — the site provides an ICS URL, just curl it:
-```yaml
-        curl -sL "https://example.com/events/?ical=1" -o example.ics || true
-```
-(For Meetup feeds, add `-A "Mozilla/5.0"` after `curl -sL`.)
-
-**Pattern 2: Scraper** — no ICS feed, so a Python script extracts events:
+Each city has a "Scrape" step with lines like:
 ```yaml
         python scrapers/myscraper.py --output cities/{city}/myscraper.ics || true
 ```
 
-That's it. Everything else in the workflow (setup, combine, commit, deploy) is boilerplate you don't touch. Just append your line to the right city section.
+You should not need to edit the workflow manually. `add_scraper.py` adds the workflow line for you. Everything else in the workflow (setup, combine, commit, deploy) is boilerplate you don't touch.
 
 ---
 
 ## Quick Reference: Adding a New Scraper
 
-When creating a new scraper for an existing city, **all steps are required**:
+When creating a new scraper for an existing city:
 
 1. **Create the scraper** in `scrapers/` directory
-2. **Run the scraper** to generate initial ICS file in `cities/{city}/`
-3. **Add scraper to workflow** (`.github/workflows/generate-calendar.yml`)
-4. **Update SOURCES_CHECKLIST.md** - document what was added
-5. **Commit and push** - include the ICS file
+2. **Run `add_scraper.py`** — this does two things:
+   - Adds the scraper command to the workflow (`.github/workflows/generate-calendar.yml`)
+   - Adds an entry to `pending_feeds.txt` (which the build processes into the `feeds` table)
+3. **Update SOURCES_CHECKLIST.md** — document what was added
+4. **Commit and push**
 
-`add_scraper.py` handles step 3 and appends the scraper metadata to `pending_feeds.txt`. You do NOT need to edit generated `feeds.txt` for scrapers.
+**Always use `add_scraper.py`.** If you skip it and add the workflow line manually, the scraper will run but have no display name in the database. If you only add to `pending_feeds.txt`, the metadata will be in the DB but the scraper will never execute. Both pieces are required.
 
 ### Verification Checklist
 
@@ -155,12 +151,12 @@ Before considering a scraper "done", verify:
 | Scraper runs | `python scrapers/myscraper.py -o cities/{city}/myscraper.ics` |
 | ICS has events | `grep -c 'BEGIN:VEVENT' cities/{city}/myscraper.ics` |
 | In workflow | `grep myscraper .github/workflows/generate-calendar.yml` |
-| In combine_ics.py | `grep myscraper scripts/combine_ics.py` |
+| In pending_feeds.txt | `grep myscraper cities/{city}/pending_feeds.txt` |
 | Committed | `git status` shows no uncommitted scraper files |
 
-### Recommended: Use the add_scraper script
+### The add_scraper script
 
-After creating the scraper in `scrapers/`, use `add_scraper.py` to wire it into the pipeline. The script automates two of the manual steps above:
+After creating the scraper in `scrapers/`, use `add_scraper.py` to wire it into the pipeline. The script handles the two integration steps:
 
 1. **Finds the scraper** in `scrapers/` (including subdirectories)
 2. **Adds it to the workflow** — inserts a `python scrapers/<name>.py --output cities/<city>/<name>.ics || true` line into the city's "Scrape" section in `.github/workflows/generate-calendar.yml`
@@ -183,8 +179,6 @@ python scripts/add_scraper.py eventbrite petaluma "Blue Zones Project Petaluma" 
 `--extra-args` inserts flags before `--output` in the workflow command. `--output-name` overrides the .ics filename (default: scraper name). The script is idempotent — safe to run again on an already-added scraper.
 
 You still need to manually update `SOURCES_CHECKLIST.md` and commit/push.
-
-**If you skip any step, events won't appear in the calendar!**
 
 ### feeds.txt is auto-generated
 
@@ -346,12 +340,40 @@ Events often have multiple timeslots (recurring phone banks, weekly protests, et
 | **LiveWhale** | `https://{domain}/live/ical/events` |
 | **Localist** | `https://{domain}/api/2/events` |
 | **GoDaddy Calendar** | Check DevTools for `calendar.apps.secureserver.net` requests (use scraper) |
+| **Drupal** | Try `/events/feed/json`, `?_format=json`, `drupal-settings-json`, then site-specific HTML scraping |
 | **WordPress Tribe** | `https://example.com/events/?ical=1` |
 | **WordPress MEC** | `https://example.com/events/?mec-ical-feed=1` |
 | **Legistar** | `https://webapi.legistar.com/v1/{client}/events` (WebAPI, use scraper) |
 | **CivicPlus** | `https://www.{city}.org/common/modules/iCalendar/iCalendar.aspx?feed=calendar&catID={N}` |
 | **Songkick** | `https://www.songkick.com/venues/{ID}-{slug}` (JSON-LD MusicEvent, use `scrapers/songkick.py`) |
 | **Guild.host** | No ICS feeds. JSON-LD Event on individual pages. Tech-focused platform. Use `scrapers/guildhost.py` |
+
+### Drupal
+Drupal does not have a single standard event-feed pattern. Treat it as a short decision tree, not a generic platform:
+
+1. Try a machine-readable feed first:
+   - `/events/feed/json`
+   - `?_format=json`
+   - any obvious view-specific JSON endpoint exposed by the site
+2. Check for embedded data:
+   - `<script data-drupal-selector="drupal-settings-json">`
+   - JSON payloads attached to calendar views
+3. Fall back to HTML scraping:
+   - listing cards in `views-row`
+   - event nodes like `article.node--type-event`
+   - date fields like `field--name-field-dates`
+   - theme-specific wrappers like `node-events-*` or `listing-item--events`
+4. On detail pages, look for structured clues before hand-parsing:
+   - taxonomy labels
+   - visible location/date blocks
+   - `Add to iCal` links, including embedded `data:text/calendar` payloads
+
+Repo examples:
+- `scrapers/drupal_events.py` — reusable JSON feed pattern
+- `scrapers/waterfront_toronto.py` — embedded `drupal-settings-json`
+- `scrapers/toronto_community_housing.py` — listing-card HTML scraper
+- `scrapers/uoft_events.py` — mixed-theme Drupal parser
+- `scrapers/jccc.py` — Drupal listing + detail pages, including multi-date expansion
 
 ### SeeTickets Widgets
 HTML classes: `.title a`, `.date`, `.see-showtime`, `.see-doortime`, `.genre`, `.ages`, `.price`

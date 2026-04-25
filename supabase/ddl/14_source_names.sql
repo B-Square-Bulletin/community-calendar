@@ -16,7 +16,9 @@ CREATE POLICY "source_names_read" ON source_names FOR SELECT USING (true);
 
 -- RPC to refresh source names and counts for a city (called after load-events)
 CREATE OR REPLACE FUNCTION refresh_source_names(target_city text)
-RETURNS void AS $$
+RETURNS void
+SET statement_timeout TO '0'
+AS $$
 BEGIN
   -- Upsert distinct non-comma sources for this city
   INSERT INTO source_names (city, name, event_count)

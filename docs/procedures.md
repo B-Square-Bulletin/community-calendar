@@ -358,6 +358,7 @@ The city key must match the directory name under `cities/` and the `?city=` URL 
 | **Meetup** | `https://www.meetup.com/{group}/events/ical/` |
 | **LiveWhale** | `https://{domain}/live/ical/events` |
 | **MembershipWorks** | `https://api.membershipworks.com/v2/events?_op=ics&org={ID}` |
+| **Drupal** | Try `/events/feed/json`, `?_format=json`, `drupal-settings-json`, then HTML patterns like `views-row` / `node--type-event` |
 | **WordPress Tribe** | `https://example.com/events/?ical=1` |
 | **WordPress MEC** | `https://example.com/events/?mec-ical-feed=1` |
 | **Google Calendar** | Extract calendar ID from embed code |
@@ -405,6 +406,34 @@ https://www.{city}.org/common/modules/iCalendar/iCalendar.aspx?feed=calendar&cat
 ---
 
 ## Additional Platform Techniques
+
+### Drupal
+Drupal sites vary enough that discovery should be done in a fixed order:
+
+1. Try direct feeds or REST-like endpoints:
+```bash
+curl -sL "https://example.org/events/feed/json" | head -50
+curl -sL "https://example.org/events?_format=json" | head -50
+```
+2. If the page is HTML-only, inspect for embedded Drupal payloads:
+```bash
+curl -sL "https://example.org/events" | rg "drupal-settings-json|fullCalendarView|calendar_options"
+```
+3. If there is no embedded payload, inspect the visible listing structure:
+```bash
+curl -sL "https://example.org/events" | rg "views-row|node--type-event|field--name-field-dates|node-events-"
+```
+
+Common Drupal event patterns in this repo:
+- JSON feed: `scrapers/drupal_events.py`
+- Embedded calendar payload: `scrapers/waterfront_toronto.py`
+- HTML listing cards: `scrapers/toronto_community_housing.py`
+- Mixed-theme university pages: `scrapers/uoft_events.py`
+- Listing + detail pages with embedded iCal data: `scrapers/jccc.py`
+
+Two practical notes:
+- `?_format=json` often fails even on real Drupal sites; that does not mean the site is hopeless.
+- Detail pages sometimes hide the best structured data in `Add to iCal` links or `data:text/calendar` payloads rather than a public `.ics` URL.
 
 ### Squarespace Sites
 Squarespace sites expose event data via `?format=json`:

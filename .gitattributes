@@ -1,1 +1,9 @@
 *.xmlui linguist-language=xml
+
+# Keep fork's versions of generated/config files during upstream merges.
+# Forks: run this once to activate the merge driver:
+#   git config merge.keepours.name "keep fork versions of generated files"
+#   git config merge.keepours.driver true
+xmlui/config.json merge=keepours
+cities.json merge=keepours
+cities/*/feeds.txt merge=keepours
