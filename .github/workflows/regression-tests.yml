@@ -46,6 +46,8 @@ jobs:
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
+        with:
+          node-version: '24'
 
       - name: Start app server
         run: python3 -m http.server 8080 &
