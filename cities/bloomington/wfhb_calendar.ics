@@ -4,26 +4,6 @@ PRODID:-//WFHB Community Calendar//wfhb.org//
 X-WR-CALNAME:WFHB Community Calendar
 X-WR-TIMEZONE:America/Indiana/Indianapolis
 BEGIN:VEVENT
-SUMMARY:Music Bingo
-DTSTART;TZID=America/Indiana/Indianapolis:20260424T183000
-DTEND;TZID=America/Indiana/Indianapolis:20260424T220000
-UID:ai1ec-148829-95181@wfhb.org
-DESCRIPTION:
-LOCATION:Cedar Creek Winery\, 3820 Leonard Road\, Martinsville
-URL:https://wfhb.org/event/music-bingo-9/?instance_id=95181
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Amanda Webb
-DTSTART;TZID=America/Indiana/Indianapolis:20260424T190000
-DTEND;TZID=America/Indiana/Indianapolis:20260424T220000
-UID:ai1ec-148771-95114@wfhb.org
-DESCRIPTION:
-LOCATION:19th Hole Sports Bar\, 2359 State Road 46 E\, Nashville
-URL:https://wfhb.org/event/amanda-webb-14/?instance_id=95114
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Tom Harold & the Fallin’ Angels
 DTSTART;TZID=America/Indiana/Indianapolis:20260424T200000
 DTEND;TZID=America/Indiana/Indianapolis:20260424T230000
