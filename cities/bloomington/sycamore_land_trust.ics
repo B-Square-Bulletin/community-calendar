@@ -217,24 +217,59 @@ URL:https://sycamorelandtrust.org/2026/03/arbor-day-tree-giveaway-5/
 X-SOURCE:Sycamore Land Trust
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Preserve-a-Preserve: Weed Wrangle at Beanblossom Bottoms Nature Pr
- eserve
-DTSTART:20260424T100000
-DTEND:20260424T120000
-UID:ef90a29be22ef407407b7d80f15a02dd@sycamorelandtrust.org
-DESCRIPTION:Spend a day tromping through wetlands during our Beanblossom B
- ottoms Nature Preserve Weed Wrangle as we work together to remove invasive
-  cattails. Over the past couple of years\, storms and tornado damage have 
- opened the canopy in parts of the preserve\, allowing more sunlight to rea
- ch the wetlands\, which causes aggressive species like cattails to spread.
-  Participants will work off-trail in shallow water\, using cut-stump techn
- iques to target cattails to help restore native wetland vegetation. By red
- ucing cattail dominance\, we can improve habitat for birds\, amphibians\, 
- and aquatic invertebrates while supporting the wetland’s natural recover
- y after these landscape altering events.
+SUMMARY:Little Hikers: Mysterious Moths Night
+DTSTART:20260726T203000
+DTEND:20260726T223000
+UID:6dec40a1b23b2c92e86923d8bdc63681@sycamorelandtrust.org
+DESCRIPTION:
 LOCATION:Beanblossom Bottoms Nature Preserve
-URL:https://sycamorelandtrust.org/2026/03/preserve-a-preserve-weed-wrangle
- -at-beanblossom-bottoms-nature-preserve-2/
+URL:https://sycamorelandtrust.org/2025/06/little-hikers-mini-mysterious-mo
+ ths-night/
+X-SOURCE:Sycamore Land Trust
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Mysterious Moths Night with Jeanette Jaskula
+DTSTART:20260718T203000
+DTEND:20260718T233000
+UID:ab0bf8f5bd10902cd9df667c2acca585@sycamorelandtrust.org
+DESCRIPTION:
+LOCATION:Touch the Earth Natural Area
+URL:https://sycamorelandtrust.org/2025/06/mysterious-moths-night-with-jean
+ ette-jaskula/
+X-SOURCE:Sycamore Land Trust
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Beanblossom Bottoms 30th Anniversary: Advanced Wetland Botany with
+  Kevin Tungesvick
+DTSTART:20260712T100000
+DTEND:20260712T120000
+UID:ac2c98ead15e6fe11060895c2ba69e96@sycamorelandtrust.org
+DESCRIPTION:Dive deep into the diverse plant life of Beanblossom Bottoms w
+ ith this advanced botany class. Explore wetland ecosystems\, identify key 
+ species\, and discuss their ecological roles with Kevin\, a lifelong botan
+ ist and current ecologist with Eco Logic LLC. Perfect for seasoned plant e
+ nthusiasts and professionals. Bring a field notebook and waterproof boots!
+  Kevin is a Restoration Ecologist with Eco Logic\, and worked as a botanis
+ t for Spence Restoration Nursery. This event was rescheduled from June 14 
+ due to spring flooding. If this hike is full\, sign up for the wait list h
+ ere.
+LOCATION:Beanblossom Bottoms Nature Preserve
+URL:https://sycamorelandtrust.org/2025/04/beanblossom-bottoms-30th-anniver
+ sary-advanced-wetland-botany-with-kevin-tungesvick/
+X-SOURCE:Sycamore Land Trust
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Prairie Forb Identification at Powell Preserve
+DTSTART:20260708T080000
+DTEND:20260708T100000
+UID:1e84fc1cf47279191f3df9e4ffb28458@sycamorelandtrust.org
+DESCRIPTION:Join Education Director Saige Sentell to discover the diverse 
+ mix of habitats Powell Preserve provides: forested hills\, bottomland wood
+ s\, and a prairie planting with native wildflowers and grasses. We’ll me
+ ander the trail identifying native grasses and forbs\, studying plant part
+ s and their ecological role. Powell Preserve is not open to the public.
+LOCATION:Powell Preserve
+URL:https://sycamorelandtrust.org/2025/06/prairie-forb-identification/
 X-SOURCE:Sycamore Land Trust
 END:VEVENT
 BEGIN:VEVENT
@@ -345,6 +380,53 @@ DESCRIPTION:
 LOCATION:Bloomingfoods East (3220 E 3rd St.) and Near West (316 W 6th St.)
   in Bloomington
 URL:https://sycamorelandtrust.org/2025/03/arbor-day-tree-giveaway-4/
+X-SOURCE:Sycamore Land Trust
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Mysterious Moths Night
+DTSTART:20260726T203000
+DTEND:20260726T223000
+UID:aed0ed77c7552812170739f7b43c68f3@sycamorelandtrust.org
+DESCRIPTION:
+LOCATION:Touch the Earth Natural Area
+URL:https://sycamorelandtrust.org/2024/06/mysterious-moths-night/
+X-SOURCE:Sycamore Land Trust
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Reading the Landscape
+DTSTART:20260721T100000
+DTEND:20260721T120000
+UID:67b2a60c7bf05def430066ff6079d10e@sycamorelandtrust.org
+DESCRIPTION:
+LOCATION:The Laura Hare Nature Preserve at Downey Hill
+URL:https://sycamorelandtrust.org/2024/06/reading-the-landscape/
+X-SOURCE:Sycamore Land Trust
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Preserve-a-Preserve Weed Wrangle at Tangeman Woods
+DTSTART:20260719T100000
+DTEND:20260719T120000
+UID:f47f49539dfc2217fb7602851409648b@sycamorelandtrust.org
+DESCRIPTION:Aid in the long term success of this preserve by cut stumping 
+ woody invasives along Old Nashville Road!
+LOCATION:Tangeman Woods and the Outdoor Lab Trail
+URL:https://sycamorelandtrust.org/2024/06/preserve-a-preserve-weed-wrangle
+ -at-tangeman-woods-2/
+X-SOURCE:Sycamore Land Trust
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Preserve-a-Preserve Weed Wrangle at Tangeman Woods
+DTSTART:20260702T100000
+DTEND:20260702T120000
+UID:53a6abcc1e20d6fa23f01fab5713c517@sycamorelandtrust.org
+DESCRIPTION:Join Saige Sentell\, Sycamore Land Trust&#8217\;s new Educatio
+ n Director\, on her first Preserve-a-Preserve Weed Wrangle at Tangeman Woo
+ ds in Bartholomew County! Volunteers will have the opportunity to learn in
+ vasive plant identification and management\, basic herbicide safety\, and 
+ proper tool handling! Attendance is limited\, please RSVP.
+LOCATION:Tangeman Woods and the Outdoor Lab Trail
+URL:https://sycamorelandtrust.org/2024/06/preserve-a-preserve-weed-wrangle
+ -at-tangeman-woods/
 X-SOURCE:Sycamore Land Trust
 END:VEVENT
 BEGIN:VEVENT
@@ -461,6 +543,53 @@ URL:https://sycamorelandtrust.org/2024/03/arbor-day-tree-giveaway-3/
 X-SOURCE:Sycamore Land Trust
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Preserve-a-Preserve Volunteer Weed Wrangle at Downey Hill
+DTSTART:20260721T090000
+DTEND:20260721T113000
+UID:d6dde0dc6adc78937c097718f0f0e7c4@sycamorelandtrust.org
+DESCRIPTION:Volunteers are invited to help Sycamore preserve native biodiv
+ ersity\, gain hands-on experience in land stewardship\, and help maintain 
+ natural areas at our preserves! Weed Wrangle events are fun and educationa
+ l opportunities to learn how to identify and control the invasive plants t
+ hat are negatively impacting our preserves and other green spaces in our c
+ ommunity. The focus for this work day will be the identification and contr
+ ol of woody invasive plants.
+LOCATION:The Laura Hare Nature Preserve at Downey Hill
+URL:https://sycamorelandtrust.org/2023/07/preserve-a-preserve-volunteer-we
+ ed-wrangle-at-downey-hill/
+X-SOURCE:Sycamore Land Trust
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Wetland Flora Exploration Walk
+DTSTART:20260630T160000
+DTEND:20260630T180000
+UID:4b5ce2d5483844aea54119898d1c15d7@sycamorelandtrust.org
+DESCRIPTION:Join hike leader Daniel Layton\, Land Steward at Sycamore Land
+  Trust\, for this botanically inclined visit to Beanblossom Bottoms Nature
+  Preserve\, with an introduction to basic botany and wetland flora identif
+ ication.
+LOCATION:Beanblossom Bottoms Nature Preserve
+URL:https://sycamorelandtrust.org/2023/06/wetland-flora-exploration-walk/
+X-SOURCE:Sycamore Land Trust
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Preserve-a-Preserve Volunteer Weed Wrangle
+DTSTART:20260628T090000
+DTEND:20260628T113000
+UID:87c1bcfe0cf930826399b61f5fd59c9c@sycamorelandtrust.org
+DESCRIPTION:Volunteers are invited to help Sycamore preserve native biodiv
+ ersity\, gain hands-on experience in land stewardship\, and help maintain 
+ natural areas on our preserves! Weed Wrangle events are fun and educationa
+ l opportunities to learn how to identify and control the invasive plants t
+ hat are negatively impacting our preserves and other green spaces in our c
+ ommunity. The focus for this work day will be the identification and contr
+ ol of woody invasive plants.
+LOCATION:Canyon Forest Nature Preserve
+URL:https://sycamorelandtrust.org/2023/06/preserve-a-preserve-volunteer-we
+ ed-wrangle/
+X-SOURCE:Sycamore Land Trust
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Sycamore Land Trust&#8217\;s Spring Native Plant Sale
 DTSTART:20260520T090000
 DTEND:20260520T140000
@@ -559,6 +688,60 @@ URL:https://sycamorelandtrust.org/2023/02/arbor-day-tree-giveaway-evansvil
 X-SOURCE:Sycamore Land Trust
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Preserve-a-Preserve Third Thursday
+DTSTART:20260721T000000
+DTEND:20260721T000000
+UID:2960a017205e22f3e7bbadeaa2bed647@sycamorelandtrust.org
+DESCRIPTION:Help Sycamore’s Land Stewardship staff and fellow volunteers
+  take care of the land by pitching in during our monthly Land Stewardship 
+ workdays!  This event will begin around 9-10am\, contact us for details.
+LOCATION:Tangeman Woods and the Outdoor Lab Trail
+URL:https://sycamorelandtrust.org/2022/04/preserve-a-preserve-third-thursd
+ ay-3/
+X-SOURCE:Sycamore Land Trust
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Wild Birds Unlimited (Bloomington) Grand Opening Party
+DTSTART:20260709T100000
+DTEND:20260709T100000
+UID:c5c239b5a4cf830419257f284dff47c7@sycamorelandtrust.org
+DESCRIPTION:Sycamore will help kick off the grand opening of the new Wild 
+ Birds Unlimited store in Bloomington (1301 S. College Mall Rd). Come celeb
+ rate the new store and hear Education Director\, Mary Welz\, talk about ad
+ ding native plants to our home landscapes to support birds and other wildl
+ ife. Learn more at https://bloomington.wbu.com/grand-opening-events
+URL:https://sycamorelandtrust.org/2022/06/wild-birds-unlimited-bloomington
+ -grand-opening-party/
+X-SOURCE:Sycamore Land Trust
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Conservation Conversation with John C. Robinson: &#8220\;Discover 
+ the Awe of Birdwatching&#8221\;
+DTSTART:20260707T190000
+DTEND:20260707T190000
+UID:610baec5c816a5d4034d499aa11ef738@sycamorelandtrust.org
+DESCRIPTION:A virtual lecture and Q&amp\;A with John C. Robinson\, author 
+ of Birding for Everyone: Encouraging People of Color to Become Birdwatcher
+ s.
+URL:https://sycamorelandtrust.org/2022/06/conservation-conversation-with-j
+ ohn-c-robinson-discover-the-awe-of-birdwatching/
+X-SOURCE:Sycamore Land Trust
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Weed Wrangle Wednesday: Woody Vegetation Control at Canyon Forest 
+ Nature Preserve
+DTSTART:20260706T090000
+DTEND:20260706T090000
+UID:6687fc03af18354e153e51133d6204bd@sycamorelandtrust.org
+DESCRIPTION:Weed Wrangle events are fun and educational opportunities to l
+ earn how to identify and control the invasive plants that are negatively i
+ mpacting our preserves.
+LOCATION:Canyon Forest Nature Preserve
+URL:https://sycamorelandtrust.org/2022/04/join-us-for-a-weed-wrangle-at-ca
+ nyon-forest/
+X-SOURCE:Sycamore Land Trust
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Conservation Conversation: Carroll Ritter\, author of Magnificent 
  Trees of Indiana
 DTSTART:20260623T190000
@@ -620,6 +803,28 @@ UID:18544f75090c0fae83c97bcf9a979a70@sycamorelandtrust.org
 DESCRIPTION:
 URL:https://sycamorelandtrust.org/2021/04/arbor-day-2021-virtual-nature-id
  entification-hike-with-john-lawrence/
+X-SOURCE:Sycamore Land Trust
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:CANCELED: Native Plants Hike with Michael Homoya
+DTSTART:20260725T090000
+DTEND:20260725T110000
+UID:e759c2affebec3acb910b3c70364088d@sycamorelandtrust.org
+DESCRIPTION:
+LOCATION:The Laura Hare Nature Preserve at Downey Hill
+URL:https://sycamorelandtrust.org/2020/06/native-plants/
+X-SOURCE:Sycamore Land Trust
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Third Thursday Volunteer Stewardship Day
+DTSTART:20260716T083000
+DTEND:20260716T130000
+UID:bd64db00481c393e44b77605f9fe5ffc@sycamorelandtrust.org
+DESCRIPTION:Join us for a volunteer workday! No experience necessary. Just
+  be prepared to work hard and enjoy the great outdoors with other voluntee
+ rs and Sycamore staff.
+LOCATION:Tangeman Woods and the Outdoor Lab Trail
+URL:https://sycamorelandtrust.org/2020/06/july/
 X-SOURCE:Sycamore Land Trust
 END:VEVENT
 BEGIN:VEVENT
@@ -691,22 +896,24 @@ URL:https://sycamorelandtrust.org/2020/01/sky-dance-twilight-hike/
 X-SOURCE:Sycamore Land Trust
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:CANCELED: Arbor Day Tree Giveaway
-DTSTART:20260424T120000
-DTEND:20260424T170000
-UID:6dfd011daff31d4135053490eb134a41@sycamorelandtrust.org
+SUMMARY:Member Mixer at Upland
+DTSTART:20260717T160000
+DTEND:20260717T190000
+UID:3c2ebf42a0a5538a1fe83796bef2311f@sycamorelandtrust.org
 DESCRIPTION:
-LOCATION:Bloomingfoods East
-URL:https://sycamorelandtrust.org/2020/01/arbor-day-tree-giveaway-2/
+URL:https://sycamorelandtrust.org/2019/07/member-mixer-at-upland/
 X-SOURCE:Sycamore Land Trust
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Arbor Day 2020: Long-Distance Celebration
-DTSTART:20260424T080000
-DTEND:20260424T170000
-UID:7845aa3d0f85a5daaf68af8485c75e5f@sycamorelandtrust.org
-DESCRIPTION:
-URL:https://sycamorelandtrust.org/2020/04/arbor-day-2020/
+SUMMARY:Little Hikers: Insects Galore
+DTSTART:20260710T100000
+DTEND:20260710T110000
+UID:6c6598445420905d1cbd2d3d45a93753@sycamorelandtrust.org
+DESCRIPTION:Explore this meadow habitat for butterflies\, beetles\, spider
+ s\, and more. We’ll use sweep nets to help us find what is hiding where 
+ our eyes can&#8217\;t see. Meeting time and carpool time TBA. The Powell P
+ reserve is a Sycamore Land Trust nature preserve in Monroe County.
+URL:https://sycamorelandtrust.org/2019/05/071019-little-hikers/
 X-SOURCE:Sycamore Land Trust
 END:VEVENT
 BEGIN:VEVENT

@@ -4,18 +4,6 @@ PRODID:-//Brown County Music Center//ticketmaster.com//
 X-WR-CALNAME:Brown County Music Center
 X-WR-TIMEZONE:America/New_York
 BEGIN:VEVENT
-SUMMARY:Trace Adkins: 30th Anniversary Tour
-DTSTART;TZID=America/New_York:20260423T193000
-DTEND;TZID=America/New_York:20260423T193000
-UID:e1ae6a27d97d49f8df02718e4d010a46@ticketmaster.com
-DESCRIPTION:
-LOCATION:Brown County Music Center\, 200 Maple Leaf Boulevard\, Nashville\
- , IN
-URL:https://www.ticketmaster.com/trace-adkins-30th-anniversary-tour-nashvi
- lle-indiana-04-23-2026/event/0500638ADD09BA33
-X-SOURCE:Brown County Music Center
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Sawyer Brown
 DTSTART;TZID=America/New_York:20260424T200000
 DTEND;TZID=America/New_York:20260424T200000
@@ -145,6 +133,42 @@ LOCATION:Brown County Music Center\, 200 Maple Leaf Boulevard\, Nashville\
  , IN
 URL:https://www.ticketmaster.com/alison-krauss-and-union-station-nashville
  -indiana-06-23-2026/event/05006379AECC841D
+X-SOURCE:Brown County Music Center
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Killer Queen- A Tribute to Queen
+DTSTART;TZID=America/New_York:20260710T200000
+DTEND;TZID=America/New_York:20260710T200000
+UID:3358113e94ca9d6d3daade9925ed92f8@ticketmaster.com
+DESCRIPTION:
+LOCATION:Brown County Music Center\, 200 Maple Leaf Boulevard\, Nashville\
+ , IN
+URL:https://www.ticketmaster.com/killer-queen-a-tribute-to-queen-nashville
+ -indiana-07-10-2026/event/05006382D7BCB652
+X-SOURCE:Brown County Music Center
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Mike Campbell & The Dirty Knobs
+DTSTART;TZID=America/New_York:20260715T190000
+DTEND;TZID=America/New_York:20260715T190000
+UID:4e2c58fdbad82c89607a6f496c7b9010@ticketmaster.com
+DESCRIPTION:
+LOCATION:Brown County Music Center\, 200 Maple Leaf Boulevard\, Nashville\
+ , IN
+URL:https://www.ticketmaster.com/mike-campbell-the-dirty-knobs-nashville-i
+ ndiana-07-15-2026/event/05006466AFF0BF42
+X-SOURCE:Brown County Music Center
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Lyle Lovett and his Small Large Band
+DTSTART;TZID=America/New_York:20260717T200000
+DTEND;TZID=America/New_York:20260717T200000
+UID:1dd6f8a766832b97522230980cbdea35@ticketmaster.com
+DESCRIPTION:
+LOCATION:Brown County Music Center\, 200 Maple Leaf Boulevard\, Nashville\
+ , IN
+URL:https://www.ticketmaster.com/lyle-lovett-and-his-small-large-nashville
+ -indiana-07-17-2026/event/05006481D331DC0A
 X-SOURCE:Brown County Music Center
 END:VEVENT
 END:VCALENDAR
