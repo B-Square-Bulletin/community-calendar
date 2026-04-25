@@ -26,13 +26,20 @@ After your PR is merged, the next build automatically processes `pending_feeds.t
 
 ### Adding scrapers
 
-Scrapers are invoked by the GitHub Actions workflow. Use `add_scraper.py` to add the workflow invocation and stage the scraper metadata in `pending_feeds.txt`:
+Scrapers require two things that ICS feeds don't:
+
+1. **A workflow entry** in `.github/workflows/generate-calendar.yml` to actually run the scraper
+2. **A pending_feeds.txt entry** so the build inserts the scraper's metadata (display name, command) into the `feeds` table
+
+`add_scraper.py` handles both in one step:
 
 ```bash
 python scripts/add_scraper.py <scraper_name> <city> "<Display Name>"
 ```
 
-See `scrapers/README.md` for available scrapers and their options. The workflow will move the pending scraper entry into the `feeds` table and regenerate `feeds.txt` before combine time.
+If you add a scraper manually without using this script, you'll likely miss one of the two pieces — the scraper will either run but have no display name, or be in the database but never execute.
+
+See `scrapers/README.md` for available base scrapers and their options.
 
 ### What NOT to edit
 
