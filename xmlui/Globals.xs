@@ -14,10 +14,22 @@ var enrichmentsData = null;
 var picksCounter = 0;
 var eventsCounter = 0;
 var activePanel = '';
-var moreHasMore = false;
-var moreNextIndex = null;
-var moreHasPrev = false;
-var morePrevIndex = null;
+
+function moreHasMore(events, startIndex, pageSize) {
+  return Array.isArray(events) && (startIndex + pageSize) < events.length;
+}
+
+function moreHasPrev(startIndex) {
+  return startIndex > 0;
+}
+
+function moreNextIndex(startIndex, pageSize) {
+  return startIndex + Math.max(1, pageSize - 1);
+}
+
+function morePrevIndex(startIndex, pageSize) {
+  return Math.max(0, startIndex - Math.max(1, pageSize - 1));
+}
 
 function getPagedEvents(events, term, startIndex, pageSize, category, dateStart, dateEnd) {
   let source = events;
@@ -33,33 +45,15 @@ function getPagedEvents(events, term, startIndex, pageSize, category, dateStart,
   const filtered = window.filterEvents(source, term, category) || [];
   const size = pageSize || 50;
   const index = Number.isFinite(startIndex) ? Math.max(0, startIndex) : 0;
-  const step = Math.max(1, size - 1);
 
-  if (!filtered.length) {
-    moreHasMore = false;
-    moreNextIndex = null;
-    moreHasPrev = false;
-    morePrevIndex = null;
-    return [];
-  }
+  if (!filtered.length) return [];
 
   if (term) {
     const clampedIndex = Math.max(0, Math.min(index, Math.max(0, filtered.length - 1)));
-    const page = filtered.slice(clampedIndex, clampedIndex + size);
-    moreHasMore = false;
-    moreNextIndex = null;
-    moreHasPrev = false;
-    morePrevIndex = null;
-    return page;
+    return filtered.slice(clampedIndex, clampedIndex + size);
   }
 
-  const page = filtered.slice(index, index + size);
-  moreHasMore = (index + size) < filtered.length;
-  moreNextIndex = moreHasMore ? (index + step) : null;
-  moreHasPrev = index > 0;
-  morePrevIndex = moreHasPrev ? Math.max(0, index - step) : null;
-
-  return page;
+  return filtered.slice(index, index + size);
 }
 
 // Dashboard state — null means "use server data", non-null means "user has modified"
