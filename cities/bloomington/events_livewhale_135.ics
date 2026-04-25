@@ -1936,4 +1936,35 @@ X-LIVEWHALE-ONLINE-URL:https://iu.zoom.us/meeting/register/IDQnLQ8ETemRB3
  PlMu0V9Q
 X-LIVEWHALE-CUSTOM-ROOM-NUMBER:ZOOM
 END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:IU Hamilton Lugar School
+DTSTART:20261024T213000Z
+DTEND:20261024T223000Z
+LOCATION:Biltwell Event Center
+SUMMARY:AMPATH Global Gala
+DESCRIPTION:Save the date for the 2026 AMPATH Global Gala. More details c
+ oming in early 2026\, but mark your calendar now.&#160\;
+X-ALT-DESC;FMTTYPE=text/html:<p>  Save the date for the 2026 AMPATH Globa
+ l Gala. More details coming in early 2026\, but mark your calendar now.&#
+ 160\;</p>
+UID:20261024T213000Z-2126886@events.iu.edu
+DTSTAMP:20251121T113249Z
+URL:https://events.iu.edu/live/events/2123885-ampath-global-gala
+CATEGORIES:Functions, festivals, and celebrations,Health and wellness,Lec
+ tures, talks, seminars, and conferences,Performances, shows, and films,Vo
+ lunteer and fundraising opportunities
+LAST-MODIFIED:20251121T163249Z
+ATTACH:https://events.iu.edu/live/image/gid/87/width/168/height/168/crop/
+ 1/src_region/0,0,3200,2133/29058_IMG_9622.JPG
+X-LIVEWHALE-TYPE:events
+X-LIVEWHALE-ID:2126886
+X-LIVEWHALE-TIMEZONE:America/New_York
+X-LIVEWHALE-IMAGE:https://events.iu.edu/live/image/gid/87/width/168/heigh
+ t/168/crop/1/src_region/0\,0\,3200\,2133/29058_IMG_9622.JPG
+X-LIVEWHALE-IMAGE-CAPTION:Large group at 2022 Global Gala
+X-LIVEWHALE-CONTACT-INFO:<p>\n  Deb Neary<br />\n  debneary@iu.edu\n</p>
+X-LIVEWHALE-SUMMARY:<p>\n  Join the AMPATH Global family for the 2026 Gal
+ a in Indianapolis.&#160\;\n</p>
+X-LIVEWHALE-TAGS:Awards and ceremonies|Global health
+END:VEVENT
 END:VCALENDAR

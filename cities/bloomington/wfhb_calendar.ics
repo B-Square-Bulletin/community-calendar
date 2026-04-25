@@ -4,17 +4,6 @@ PRODID:-//WFHB Community Calendar//wfhb.org//
 X-WR-CALNAME:WFHB Community Calendar
 X-WR-TIMEZONE:America/Indiana/Indianapolis
 BEGIN:VEVENT
-SUMMARY:Tom Harold & the Fallin’ Angels
-DTSTART;TZID=America/Indiana/Indianapolis:20260424T200000
-DTEND;TZID=America/Indiana/Indianapolis:20260424T230000
-UID:ai1ec-148619-95034@wfhb.org
-DESCRIPTION:
-LOCATION:Brown County Inn\, 51 State Road 46 E\, Nashville
-URL:https://wfhb.org/event/tom-harold-the-fallin-angels-2/?instance_id=950
- 34
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Bloomington Community Farmers’ Market
 DTSTART;TZID=America/Indiana/Indianapolis:20260425T080000
 DTEND;TZID=America/Indiana/Indianapolis:20260425T123000

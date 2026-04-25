@@ -89,71 +89,6 @@ URL:https://buskirkchumley.org/events/iu-soul-revue-spring-concert-april-2
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Jenn Cristy performs LIVE for Independent Bookstore Day!
-DTSTART;TZID=America/Indiana/Indianapolis:20260425T150000
-DTEND;TZID=America/Indiana/Indianapolis:20260425T160000
-UID:260418EviFBrqypUqdL-fjLL8avQ
-DESCRIPTION:It's Independent Bookstore Day! To celebrate\, we'll be hostin
- g our very own Jenn Cristy for a live musical performance at 3 pm.
-LOCATION:Morgenstern Books
-URL:https://limestonepost.org/calendar/#/details/jenn-cristy-performs-live
- -for-independent-bookstore-day/18638033/2026-04-25T15
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:God's Gracious Girls Revival Night
-DTSTART;TZID=America/Indiana/Indianapolis:20260425T180000
-DTEND;TZID=America/Indiana/Indianapolis:20260425T210000
-UID:2604185O77GKu1DEOOVNFnb4Ek7g
-DESCRIPTION:Gods Gracious Girls Events invites you to a night of prayer an
- d worship\, refreshing hearts and bringing us closer to God together.
-LOCATION:Fine Arts Building | Eskenazi School of Art\, Architecture + Desi
- gn
-URL:https://limestonepost.org/calendar/#/details/god-s-gracious-girls-revi
- val-night/18638037/2026-04-25T18
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Track & Field Girls - Mustang Invitational
-DTSTART;TZID=America/Indiana/Indianapolis:20260425T100000
-DTEND;TZID=America/Indiana/Indianapolis:20260425T160000
-UID:251007zbExQipbFECQEXLMQhbNQg
-DESCRIPTION:
-LOCATION:Edgewood High School
-URL:https://www.rbbschools.net/calendar1
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Indiana Hoosiers vs. Iowa Hawkeyes
-DTSTART;TZID=America/Indiana/Indianapolis:20260425T000000
-DTEND;TZID=America/Indiana/Indianapolis:20260425T000000
-UID:250903Q-JEi3OUk0u6mIYEjbOaGQ
-DESCRIPTION:
-LOCATION:Bart Kaufman Field
-URL:https://limestonepost.org/calendar/#/details/indiana-hoosiers-vs-iowa-
- hawkeyes/16743029/2026-04-25T00
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Toddler Sports Classes
-DTSTART;TZID=America/Indiana/Indianapolis:20260425T090000
-DTEND;TZID=America/Indiana/Indianapolis:20260425T120000
-UID:2603240Lz0HxEHF0-T13pWo1invw
-DESCRIPTION:Playpen Sports Academy is a wonderful way to introduce your ch
- ild to the world of sport and physical activity in a non-intimidating envi
- ronment with a small group of other toddlers and parents. The Playpen Spor
- ts Academy Curriculum is focused on a number of different goals including 
- teaching children how to move and use their bodies\, sharing with other ch
- ildren\, interact in social settings\, follow directions\, and most import
- antly how to have fun in a physically active environment. At Playpen Sport
- s Academy\, we are focused as much on the individual development of your c
- hild as we are on sport specific skills that we teach. Because while we ex
- pect some of your children to go on to be great athletes\, we expect all o
- f your children to go on to be great people!
-URL:https://www.playpensports.com/
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Art as Inquiry: A Show of Climate Art
 DTSTART;TZID=America/Indiana/Indianapolis:20260425T120000
 DTEND;TZID=America/Indiana/Indianapolis:20260425T120000
@@ -304,6 +239,102 @@ URL:https://guides.idsnews.com/happenings/event/outdoor-clean-up-lincoln-s
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Jenn Cristy performs LIVE for Independent Bookstore Day!
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T150000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T160000
+UID:260418EviFBrqypUqdL-fjLL8avQ
+DESCRIPTION:It's Independent Bookstore Day! To celebrate\, we'll be hostin
+ g our very own Jenn Cristy for a live musical performance at 3 pm.
+LOCATION:Morgenstern Books
+URL:https://limestonepost.org/calendar/#/details/jenn-cristy-performs-live
+ -for-independent-bookstore-day/18638033/2026-04-25T15
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:God's Gracious Girls Revival Night
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T210000
+UID:2604185O77GKu1DEOOVNFnb4Ek7g
+DESCRIPTION:Gods Gracious Girls Events invites you to a night of prayer an
+ d worship\, refreshing hearts and bringing us closer to God together.
+LOCATION:Fine Arts Building | Eskenazi School of Art\, Architecture + Desi
+ gn
+URL:https://limestonepost.org/calendar/#/details/god-s-gracious-girls-revi
+ val-night/18638037/2026-04-25T18
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Track & Field Girls - Mustang Invitational
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T100000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T160000
+UID:251007zbExQipbFECQEXLMQhbNQg
+DESCRIPTION:
+LOCATION:Edgewood High School
+URL:https://www.rbbschools.net/calendar1
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Indiana Hoosiers vs. Iowa Hawkeyes
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T000000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T000000
+UID:250903Q-JEi3OUk0u6mIYEjbOaGQ
+DESCRIPTION:
+LOCATION:Bart Kaufman Field
+URL:https://limestonepost.org/calendar/#/details/indiana-hoosiers-vs-iowa-
+ hawkeyes/16743029/2026-04-25T00
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Toddler Sports Classes
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T090000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T120000
+UID:2603240Lz0HxEHF0-T13pWo1invw
+DESCRIPTION:Playpen Sports Academy is a wonderful way to introduce your ch
+ ild to the world of sport and physical activity in a non-intimidating envi
+ ronment with a small group of other toddlers and parents. The Playpen Spor
+ ts Academy Curriculum is focused on a number of different goals including 
+ teaching children how to move and use their bodies\, sharing with other ch
+ ildren\, interact in social settings\, follow directions\, and most import
+ antly how to have fun in a physically active environment. At Playpen Sport
+ s Academy\, we are focused as much on the individual development of your c
+ hild as we are on sport specific skills that we teach. Because while we ex
+ pect some of your children to go on to be great athletes\, we expect all o
+ f your children to go on to be great people!
+URL:https://www.playpensports.com/
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Casual Video Gamers Club: "NAIAD"
+DTSTART;TZID=America/Indiana/Indianapolis:20260425T120000
+DTEND;TZID=America/Indiana/Indianapolis:20260425T140000
+UID:260425xNNYE9MWv0qFB7Lp1fXcFw
+DESCRIPTION:Please register here: calendar.mcpl.info/event/15658449 Lookin
+ g for a video game that isn't time-consuming or technically complicated? J
+ oin The Club! This ongoing series will offer a new\, short video game expe
+ rience each month. Drop in to play\, watch\, or just hang out and chat. We
+ ’ll have thought-provoking narrative games\, unique walking sims\, adora
+ ble adventure games\, and some interesting presentations each season. Age 
+ 16 and up Downtown Library Meeting Room 2B Please register here: calendar.
+ mcpl.info/event/15658449 This month\, we'll be playing and discussing "NAI
+ AD". "NAIAD" is available to play at the Video Game Station at the Downtow
+ n Library leading up to\, and during\, our meeting. To enhance our experie
+ nce\, we'll begin our session with a presentation from the Lake Monroe Wat
+ ershed Coordinator\, Maggie Sullivan. Maggie will discuss our local waters
+ hed and use a model to show how pollution gets washed into nearby streams 
+ and lakes. When you register\, you can also request a Library copy of "Is 
+ A River Alive?" by Robert Macfarlane to check out from your selected locat
+ ion\, which pairs nicely with this video game. Video game summary: "Immers
+ e yourself in a relaxing\, minimalist and colorful adventure. Flow with Na
+ iad across a mysterious river and interact with its fauna and flora to dis
+ cover little secrets. Enjoy a wholesome experience with an original and dr
+ eamy visual style." Book summary: "Is a River Alive? is a joyful\, mind-ex
+ panding exploration of an ancient\, urgent idea: that rivers are living be
+ ings who should be recognized as such in imagination and law."
+LOCATION:Monroe County Public Library- Downtown Branch
+URL:https://www.facebook.com/events/2134306580688004/
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Community Hike and Chat
 DTSTART;TZID=America/Indiana/Indianapolis:20260426T140000
 DTEND;TZID=America/Indiana/Indianapolis:20260426T170000
@@ -376,17 +407,6 @@ DESCRIPTION:**Artists for Climate Awareness invites people of all ages to
   Free admission.
 LOCATION:Pillar Arts Alliance Center
 URL:https://artistsforclimateawareness.org/event/climate-co-lab/
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Indiana Hoosiers vs. Iowa Hawkeyes
-DTSTART;TZID=America/Indiana/Indianapolis:20260426T000000
-DTEND;TZID=America/Indiana/Indianapolis:20260426T000000
-UID:2509036HAZ_67QqESIdOVwH-NIRg
-DESCRIPTION:
-LOCATION:Bart Kaufman Field
-URL:https://limestonepost.org/calendar/#/details/indiana-hoosiers-vs-iowa-
- hawkeyes/16743031/2026-04-26T00
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
@@ -467,6 +487,44 @@ URL:https://guides.idsnews.com/happenings/event/science-story-time-978b
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Indiana Hoosiers vs. Iowa Hawkeyes
+DTSTART;TZID=America/Indiana/Indianapolis:20260426T000000
+DTEND;TZID=America/Indiana/Indianapolis:20260426T000000
+UID:2509036HAZ_67QqESIdOVwH-NIRg
+DESCRIPTION:
+LOCATION:Bart Kaufman Field
+URL:https://limestonepost.org/calendar/#/details/indiana-hoosiers-vs-iowa-
+ hawkeyes/16743031/2026-04-26T00
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Read to a Dog
+DTSTART;TZID=America/Indiana/Indianapolis:20260426T160000
+DTEND;TZID=America/Indiana/Indianapolis:20260426T173000
+UID:260425mjsQ_ElExk2zVEsDU8DN4Q
+DESCRIPTION:Practice reading aloud to a specially-trained therapy dog thro
+ ugh the Hoosierland Bloomington chapter of Love On A Leash. Time slots for
+  reading will be assigned upon your arrival.  Ages 5-10 Downtown Library C
+ hildren's Program Room
+LOCATION:Monroe County Public Library (Indiana)
+URL:https://www.facebook.com/events/1912927282946669/
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Read to a Dog
+DTSTART;TZID=America/Indiana/Indianapolis:20260426T160000
+DTEND;TZID=America/Indiana/Indianapolis:20260426T173000
+UID:260425BeMNzpetUkqt9GuAoHj0Zw
+DESCRIPTION:Practice reading aloud to a specially-trained therapy dog thro
+ ugh the Hoosierland Bloomington chapter of Love On A Leash. Time slots for
+  reading will be assigned upon your arrival.  Ages 5-10 Downtown Library C
+ hildren's Program Room
+LOCATION:Monroe County Public Library- Downtown Branch
+URL:https://www.facebook.com/events/1912927282946669/1912928869613177/?act
+ ive_tab=about
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:BEAT Spring Show
 DTSTART;TZID=America/Indiana/Indianapolis:20260427T190000
 DTEND;TZID=America/Indiana/Indianapolis:20260427T190000
@@ -484,27 +542,6 @@ DESCRIPTION:**Bloomington Expressive Arts Training: BEAT** will present t
  15 minute intermission.
 LOCATION:Buskirk Chumley Theater
 URL:https://buskirkchumley.org/events/beat-spring-show-april-27-2026/
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Financial Workshop
-DTSTART;TZID=America/Indiana/Indianapolis:20260427T183000
-DTEND;TZID=America/Indiana/Indianapolis:20260427T000000
-UID:260302garp4syaz0u1mwn5YR9vuQ
-DESCRIPTION:\\[1\\]Administration Building\n\n   1. https://morgancounty.i
- n.gov /egov/apps/locations/facilities.egov?view=detail&id=6
-URL:https://morgancounty.in.gov/egov/apps/events/calendar.egov?view=detail
- / ;id=581
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Baseball (Boys JV) - Barr-Reeve Jr-Sr High School
-DTSTART;TZID=America/Indiana/Indianapolis:20260427T180000
-DTEND;TZID=America/Indiana/Indianapolis:20260427T180000
-UID:260117FWn402L9G0muMAohvFVKDw
-DESCRIPTION:
-LOCATION:Edgewood High School
-URL:https://www.rbbschools.net/calendar1
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
@@ -550,6 +587,27 @@ URL:https://guides.idsnews.com/happenings/event/science-story-time-978b
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Financial Workshop
+DTSTART;TZID=America/Indiana/Indianapolis:20260427T183000
+DTEND;TZID=America/Indiana/Indianapolis:20260427T000000
+UID:260302garp4syaz0u1mwn5YR9vuQ
+DESCRIPTION:\\[1\\]Administration Building\n\n   1. https://morgancounty.i
+ n.gov /egov/apps/locations/facilities.egov?view=detail&id=6
+URL:https://morgancounty.in.gov/egov/apps/events/calendar.egov?view=detail
+ / ;id=581
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Baseball (Boys JV) - Barr-Reeve Jr-Sr High School
+DTSTART;TZID=America/Indiana/Indianapolis:20260427T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260427T180000
+UID:260117FWn402L9G0muMAohvFVKDw
+DESCRIPTION:
+LOCATION:Edgewood High School
+URL:https://www.rbbschools.net/calendar1
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:2026 Be More Awards
 DTSTART;TZID=America/Indiana/Indianapolis:20260428T180000
 DTEND;TZID=America/Indiana/Indianapolis:20260428T193000
@@ -570,6 +628,48 @@ DESCRIPTION:Join the City of Bloomington in celebrating volunteerism at th
   free!** No tickets are needed for entry.
 LOCATION:Buskirk Chumley Theater
 URL:https://buskirkchumley.org/events/2026-be-more-awards-april-28-2026/
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Art as Inquiry: A Show of Climate Art
+DTSTART;TZID=America/Indiana/Indianapolis:20260428T120000
+DTEND;TZID=America/Indiana/Indianapolis:20260428T120000
+UID:260424fMVdC8QZyUarFQJxKp6TOA
+DESCRIPTION:All ages are invited to view and explore "Art as Inquiry"\, a 
+ juried climate art exhibition at the Pillar Arts Alliance Center\, Bloomin
+ gton\, IN from Apr 2-29. Featuring 2 D and 3 D artworks from 25 Artists fo
+ r Climate Awareness members across several states\, "Art as Inquiry" invit
+ es visitors to encounter climate research\, climate unease\, ecological ch
+ ange\, and environmental justice through the lens of artistic imagination.
+  Related events:April 12\, 2-3 pm - Nature Walk\, a pre-reception musical 
+ and narrative performance led by IU Jacobs School of Music student Thejas 
+ Mirle and four composers\, with narration by Distinguished IU Biology Prof
+ essor Roger Hangarter. April 12\, 3-5 pm - Reception for this member clima
+ te art exhibition\; refreshments\; prizes awarded. All welcome. April 19\,
+  3-6 pm - Climate Co lab Reception \\+ Nature Walk performance\; brief int
+ roductions of artists and partners. Beginning April 19\, six more artworks
+  from the Climate Co lab \\(organized by Brushes for a Better Planet\\) jo
+ in the exhibition\, displayed alongside the Art as Inquiry works. Refreshm
+ ents\; all welcome. Gallery Hours: Thu-Sat: 2-8 pmSun: 12-6 pmPillar Arts 
+ Alliance Center2894 E 3rd St\, Bloomington\, IN 47401Bloomington College M
+ all\, South Entrance from Buick Cadillac Blvd
+URL:https://guides.idsnews.com/happenings/event/art-as-inquiry-a-show-of-c
+ limate-art
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Science Story Time
+DTSTART;TZID=America/Indiana/Indianapolis:20260428T100000
+DTEND;TZID=America/Indiana/Indianapolis:20260428T100000
+UID:260424VZAIh1_YOkeGbRzEqiGDkg
+DESCRIPTION:Science Story Time is geared toward listeners toddler through 
+ early elementary ages. This program uses children's picture books to engag
+ e as well as support scientific concepts and experiments. Young scientists
+  develop literacy and STEM skills as well as build vocabulary by actively 
+ participating in the hands-on program. Activities designed for ages 2-6. A
+ ll are welcome. Activities vary monthly.
+LOCATION:Wonderlab
+URL:https://guides.idsnews.com/happenings/event/science-story-time-978b
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
@@ -617,45 +717,16 @@ URL:https://www.rbbschools.net/calendar1
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Art as Inquiry: A Show of Climate Art
-DTSTART;TZID=America/Indiana/Indianapolis:20260428T120000
-DTEND;TZID=America/Indiana/Indianapolis:20260428T120000
-UID:260424fMVdC8QZyUarFQJxKp6TOA
-DESCRIPTION:All ages are invited to view and explore "Art as Inquiry"\, a 
- juried climate art exhibition at the Pillar Arts Alliance Center\, Bloomin
- gton\, IN from Apr 2-29. Featuring 2 D and 3 D artworks from 25 Artists fo
- r Climate Awareness members across several states\, "Art as Inquiry" invit
- es visitors to encounter climate research\, climate unease\, ecological ch
- ange\, and environmental justice through the lens of artistic imagination.
-  Related events:April 12\, 2-3 pm - Nature Walk\, a pre-reception musical 
- and narrative performance led by IU Jacobs School of Music student Thejas 
- Mirle and four composers\, with narration by Distinguished IU Biology Prof
- essor Roger Hangarter. April 12\, 3-5 pm - Reception for this member clima
- te art exhibition\; refreshments\; prizes awarded. All welcome. April 19\,
-  3-6 pm - Climate Co lab Reception \\+ Nature Walk performance\; brief int
- roductions of artists and partners. Beginning April 19\, six more artworks
-  from the Climate Co lab \\(organized by Brushes for a Better Planet\\) jo
- in the exhibition\, displayed alongside the Art as Inquiry works. Refreshm
- ents\; all welcome. Gallery Hours: Thu-Sat: 2-8 pmSun: 12-6 pmPillar Arts 
- Alliance Center2894 E 3rd St\, Bloomington\, IN 47401Bloomington College M
- all\, South Entrance from Buick Cadillac Blvd
-URL:https://guides.idsnews.com/happenings/event/art-as-inquiry-a-show-of-c
- limate-art
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Science Story Time
-DTSTART;TZID=America/Indiana/Indianapolis:20260428T100000
-DTEND;TZID=America/Indiana/Indianapolis:20260428T100000
-UID:260424VZAIh1_YOkeGbRzEqiGDkg
-DESCRIPTION:Science Story Time is geared toward listeners toddler through 
- early elementary ages. This program uses children's picture books to engag
- e as well as support scientific concepts and experiments. Young scientists
-  develop literacy and STEM skills as well as build vocabulary by actively 
- participating in the hands-on program. Activities designed for ages 2-6. A
- ll are welcome. Activities vary monthly.
-LOCATION:Wonderlab
-URL:https://guides.idsnews.com/happenings/event/science-story-time-978b
+SUMMARY:Tween Craft Club
+DTSTART;TZID=America/Indiana/Indianapolis:20260428T170000
+DTEND;TZID=America/Indiana/Indianapolis:20260428T180000
+UID:260425i4LmRUsGskiuYPWfSNNafw
+DESCRIPTION:Come hang out and try new hands-on DIY projects as you learn n
+ ew crafting skills each month. Supplies will be provided. Expect a mess\; 
+ please dress accordingly.  Ages 7-12 Southwest Branch Southwest Children's
+  Program Room
+LOCATION:Monroe County Public Library--Southwest Branch
+URL:https://www.facebook.com/events/2368083346938285/
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
@@ -859,6 +930,21 @@ URL:https://buskirkchumley.org/events/updating-april-30-2026/
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Science Story Time
+DTSTART;TZID=America/Indiana/Indianapolis:20260430T100000
+DTEND;TZID=America/Indiana/Indianapolis:20260430T100000
+UID:260424KbhfWBOJa066oLR7hZe0Gg
+DESCRIPTION:Science Story Time is geared toward listeners toddler through 
+ early elementary ages. This program uses children's picture books to engag
+ e as well as support scientific concepts and experiments. Young scientists
+  develop literacy and STEM skills as well as build vocabulary by actively 
+ participating in the hands-on program. Activities designed for ages 2-6. A
+ ll are welcome. Activities vary monthly.
+LOCATION:Wonderlab
+URL:https://guides.idsnews.com/happenings/event/science-story-time-978b
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Ira J. Allen on "Panic Now?: Tools for Humanizing"
 DTSTART;TZID=America/Indiana/Indianapolis:20260430T180000
 DTEND;TZID=America/Indiana/Indianapolis:20260430T190000
@@ -878,21 +964,6 @@ UID:251007EgrSzbCsDU61M27URkCzOA
 DESCRIPTION:
 LOCATION:Edgewood High School
 URL:https://www.rbbschools.net/calendar1
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Science Story Time
-DTSTART;TZID=America/Indiana/Indianapolis:20260430T100000
-DTEND;TZID=America/Indiana/Indianapolis:20260430T100000
-UID:260424KbhfWBOJa066oLR7hZe0Gg
-DESCRIPTION:Science Story Time is geared toward listeners toddler through 
- early elementary ages. This program uses children's picture books to engag
- e as well as support scientific concepts and experiments. Young scientists
-  develop literacy and STEM skills as well as build vocabulary by actively 
- participating in the hands-on program. Activities designed for ages 2-6. A
- ll are welcome. Activities vary monthly.
-LOCATION:Wonderlab
-URL:https://guides.idsnews.com/happenings/event/science-story-time-978b
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
@@ -1307,6 +1378,19 @@ UID:251007-JzWFkbvJUicy1dET3AgTw
 DESCRIPTION:
 LOCATION:Edgewood High School
 URL:https://www.rbbschools.net/calendar1
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:May the 4th Be With You
+DTSTART;TZID=America/Indiana/Indianapolis:20260504T163000
+DTEND;TZID=America/Indiana/Indianapolis:20260504T183000
+UID:260425xBffOuMbQUCwtv-86S0AdQ
+DESCRIPTION:Drop in to build Star Wars LEGO®\, fold origami\, do a craft\
+ , or have a snack. We'll have "Star Wars: A New Hope" \\(1977\\) playing. 
+  All ages\; children under age 9 should participate with an adult. Southwe
+ st Branch Meeting Room A/B Combo
+LOCATION:Monroe County Public Library--Southwest Branch
+URL:https://www.facebook.com/events/953651440604746/
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
@@ -2039,6 +2123,19 @@ DESCRIPTION:Constellation Stage & Screen presents “Finn: A New Musical-
  nd tickets at https://seeconstellation.org/kids/finn/
 LOCATION:Waldron Auditorium
 URL:https://seeconstellation.org/kids/finn/
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Mairzy Doats  (Bloomington\,IN) Hosting Silhouettes by Chris
+DTSTART;TZID=America/Indiana/Indianapolis:20260515T130000
+DTEND;TZID=America/Indiana/Indianapolis:20260515T160000
+UID:260425xbCxwCt_kEOGYtX2HQQcPQ
+DESCRIPTION:Internationally known silhouette artist Chris Casey hand-cuts 
+ heirloom quality portraits using only surgical scissors and fine quality p
+ aper
+LOCATION:Mairzy Doats
+URL:https://limestonepost.org/calendar/#/details/mairzy-doats-bloomington-
+ in-hosting-silhouettes-by-chris/18715461/2026-05-15T13
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
@@ -4439,6 +4536,24 @@ DESCRIPTION:Playpen Sports Academy is a wonderful way to introduce your ch
  pect some of your children to go on to be great athletes\, we expect all o
  f your children to go on to be great people!
 URL:https://www.playpensports.com/
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Battle of the Books
+DTSTART;TZID=America/Indiana/Indianapolis:20260718T133000
+DTEND;TZID=America/Indiana/Indianapolis:20260718T160000
+UID:260425nEBkP5x2OUGAH01yr59Thg
+DESCRIPTION:Please register here: calendar.mcpl.info/event/16005953 Partic
+ ipate in a reading challenge and trivia competition rolled into one. Get r
+ eady to compete as a team and win fabulous prizes!  Battle of the Books \\
+ (BOTB\\) is a reading challenge and trivia competition rolled into one! Yo
+ u’ll have until the day of the competition to read as many of the books 
+ on the BOTB booklist as you can. Then\, compete as a team to answer questi
+ ons about the books you read. Ages 8-12 Downtown Library Auditorium \\+ Me
+ eting Room 1B/C Combo Please register here: calendar.mcpl.info/event/16005
+ 953
+LOCATION:Monroe County Public Library (Indiana)
+URL:https://www.facebook.com/events/3278067982365516/
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
