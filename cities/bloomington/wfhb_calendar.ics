@@ -4,31 +4,6 @@ PRODID:-//WFHB Community Calendar//wfhb.org//
 X-WR-CALNAME:WFHB Community Calendar
 X-WR-TIMEZONE:America/Indiana/Indianapolis
 BEGIN:VEVENT
-SUMMARY:Duvenky Code
-DTSTART;TZID=America/Indiana/Indianapolis:20260424T180000
-DTEND;TZID=America/Indiana/Indianapolis:20260424T210000
-UID:ai1ec-148773-95116@wfhb.org
-DESCRIPTION:
-LOCATION:Country Heritage Winery\, 225 South Van Buren Street\, Nashville
-URL:https://wfhb.org/event/duvenky-code/?instance_id=95116
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Little 500 Weekend – IU Themed Crafts
-DTSTART;TZID=America/Indiana/Indianapolis:20260424T180000
-DTEND;TZID=America/Indiana/Indianapolis:20260424T210000
-UID:ai1ec-147564-94458@wfhb.org
-DESCRIPTION:April 22 is BYO Night + Little 500 Crafts:Bring your own craft
-  projects or dive into our themed kits. Share ideas\, make something speci
- al\, and connect with fellow makers.April 24 is Game Night + Little 500 Cr
- afts:Keep the creativity rolling with IU-themed crafts and fun games. Comp
- ete\, collaborate\, and celebrate the Little 500 spirit together.
-LOCATION:The DIY Bar at Gather\, 116 N Walnut\, Bloomington
-URL:https://wfhb.org/event/little-500-weekend-iu-themed-crafts/?instance_i
- d=94458
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Music Bingo
 DTSTART;TZID=America/Indiana/Indianapolis:20260424T183000
 DTEND;TZID=America/Indiana/Indianapolis:20260424T220000
@@ -49,28 +24,6 @@ URL:https://wfhb.org/event/amanda-webb-14/?instance_id=95114
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:John Primer & the Real Deal Blues Band\, with special guests Paul 
- Holdman and Gordon Bonham.
-DTSTART;TZID=America/Indiana/Indianapolis:20260424T193000
-DTEND;TZID=America/Indiana/Indianapolis:20260424T213000
-UID:ai1ec-148613-95028@wfhb.org
-DESCRIPTION:As a young man\, guitarist\, vocalist\, and bandleader John Pr
- imer learned Chicago blues with the masters. Primer performed regularly wi
- th legends such as Muddy Waters\, Willie Dixon\, and was a long-term band 
- leader for Magic Slim & The Teardrops. Primer is one of the few truly-auth
- entic Chicago bluesmen touring and recording today. He was inducted into t
- he Blues Hall of Fame in 2023.Primer’s long list of honors and accolades
-  speak to his experience and reputation for engaging a live audience\, inc
- luding: Three-time Grammy® Award nominee\; Blues Artist of the Year — L
- iving Blues critic’s poll award\; Traditional Blues Artist of the Year 
- — Blues Music Award\; Lifetime Achievement Award\, Live Album of the Yea
- r\, and Traditional Blues Album of the Year — Blues Blast Awards
-LOCATION:Brown County Playhouse\, 70 S. Van Buren St\, Nashville
-URL:https://wfhb.org/event/john-primer-the-real-deal-blues-band-with-speci
- al-guests-paul-holdman-and-gordon-bonham/?instance_id=95028
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Tom Harold & the Fallin’ Angels
 DTSTART;TZID=America/Indiana/Indianapolis:20260424T200000
 DTEND;TZID=America/Indiana/Indianapolis:20260424T230000
@@ -79,28 +32,6 @@ DESCRIPTION:
 LOCATION:Brown County Inn\, 51 State Road 46 E\, Nashville
 URL:https://wfhb.org/event/tom-harold-the-fallin-angels-2/?instance_id=950
  34
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:The Matriarch w/ Slug Rug & Good Eve
-DTSTART;TZID=America/Indiana/Indianapolis:20260424T210000
-DTEND;TZID=America/Indiana/Indianapolis:20260424T230000
-UID:ai1ec-148583-95002@wfhb.org
-DESCRIPTION:
-LOCATION:The Bishop Bar\, 123 S. Walnut St\, Bloomington
-URL:https://wfhb.org/event/the-matriarch-w-slug-rug-good-eve/?instance_id=
- 95002
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Welcome to the Neighborhood
-DTSTART;TZID=America/Indiana/Indianapolis:20260424T210000
-DTEND;TZID=America/Indiana/Indianapolis:20260424T230000
-UID:ai1ec-148588-95007@wfhb.org
-DESCRIPTION:
-LOCATION:The Bluebird Nightclub\, 216 N. Walnut St\, Bloomington
-URL:https://wfhb.org/event/welcome-to-the-neighborhood-47/?instance_id=950
- 07
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
