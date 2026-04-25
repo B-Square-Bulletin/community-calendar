@@ -5,15 +5,20 @@ Parses supabase/ddl/*.sql to discover tables, columns, functions, indexes,
 views, materialized views, and extensions, then emits a single SQL query
 that checks whether each object exists in the target database.
 
-Usage:
+How to use:
+    1. Generate the SQL:
+           python scripts/generate_verify_sql.py > verify.sql
+    2. Open your Supabase project's SQL Editor (Dashboard > SQL Editor)
+    3. Paste the contents of verify.sql and click Run
+    4. Each row shows '✅ OK' or '❌ MISSING' with a pointer to the fix
+
+Other options:
     python scripts/generate_verify_sql.py              # print to stdout
     python scripts/generate_verify_sql.py -o verify.sql  # write to file
-    python scripts/generate_verify_sql.py --gist       # update the gist
 """
 
 import argparse
 import re
-import subprocess
 import sys
 from pathlib import Path
 
@@ -22,9 +27,6 @@ DDL_DIR = ROOT / "supabase" / "ddl"
 MIGRATIONS_DIR = ROOT / "supabase" / "migrations"
 
 # Gist ID for the published verifier
-GIST_ID = "2ce3efae1499637c5e44728cb4e3ef22"
-
-
 def parse_ddl_files():
     """Extract database objects from DDL files."""
     tables = {}        # name -> ddl_file
@@ -226,8 +228,6 @@ def generate_sql(tables, columns, functions, indexes, views, matviews, extension
 def main():
     parser = argparse.ArgumentParser(description="Generate DB verification SQL from DDL files")
     parser.add_argument("-o", "--output", help="Write to file instead of stdout")
-    parser.add_argument("--gist", action="store_true",
-                        help=f"Update gist {GIST_ID}")
     args = parser.parse_args()
 
     tables, columns, functions, indexes, views, matviews, extensions = parse_ddl_files()
@@ -247,19 +247,6 @@ def main():
     if args.output:
         Path(args.output).write_text(sql)
         print(f"Wrote {args.output}", file=sys.stderr)
-    elif args.gist:
-        # Write to temp file and update gist
-        tmp = Path("/tmp/verify_migrations.sql")
-        tmp.write_text(sql)
-        result = subprocess.run(
-            ["gh", "gist", "edit", GIST_ID, "-f", "verify_migrations.sql", str(tmp)],
-            capture_output=True, text=True
-        )
-        if result.returncode == 0:
-            print(f"Updated gist: https://gist.github.com/judell/{GIST_ID}", file=sys.stderr)
-        else:
-            print(f"Failed to update gist: {result.stderr}", file=sys.stderr)
-            sys.exit(1)
     else:
         print(sql)
 
