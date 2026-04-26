@@ -16,18 +16,6 @@ URL:http://www.bigten.org/
 X-SOURCE:IU Athletics
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Baseball vs Iowa
-DTSTART;TZID=America/Indiana/Indianapolis:20260425T140000
-DTEND;TZID=America/Indiana/Indianapolis:20260425T140000
-UID:575bd9627066b051bc9c319d119f10e7@iuhoosiers.com
-ATTACH;FMTTYPE=image/jpeg:https://iuhoosiers.com/images/2025/8/8/20250520_
- BA_Rutgers_0805.JPG
-DESCRIPTION:
-LOCATION:Bloomington\, Ind.
-URL:http://www.hawkeyesports.com/
-X-SOURCE:IU Athletics
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Women's Golf vs Big Ten Championships
 DTSTART;TZID=America/Indiana/Indianapolis:20260426T000000
 DTEND;TZID=America/Indiana/Indianapolis:20260426T000000

@@ -31,8 +31,8 @@ BEGIN:VEVENT
 X-SOURCE:Brown County Events
 CLASS:PUBLIC
 UID:MEC-2fa862c3b4ed1e3228c5ff470869b73d@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260425T120000
-DTEND;TZID=America/Indiana/Indianapolis:20260426T140000
+DTSTART;TZID=America/Indiana/Indianapolis:20260426T120000
+DTEND;TZID=America/Indiana/Indianapolis:20260427T140000
 DTSTAMP:20250903T162347Z
 RRULE:FREQ=WEEKLY;BYDAY=SU,SA
 CREATED:20250903
@@ -115,8 +115,8 @@ BEGIN:VEVENT
 X-SOURCE:Brown County Events
 CLASS:PUBLIC
 UID:MEC-edb899d139bf0fddddbf9b3f4e8252f0@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260426T110000
-DTEND;TZID=America/Indiana/Indianapolis:20260426T160000
+DTSTART;TZID=America/Indiana/Indianapolis:20260427T110000
+DTEND;TZID=America/Indiana/Indianapolis:20260427T160000
 DTSTAMP:20260212T100904Z
 RRULE:FREQ=DAILY;UNTIL=20260626T200000Z
 CREATED:20260212
@@ -136,8 +136,8 @@ BEGIN:VEVENT
 X-SOURCE:Brown County Events
 CLASS:PUBLIC
 UID:MEC-a6c740d0b4f63396fb10d25409486f7a@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260425T160000
-DTEND;TZID=America/Indiana/Indianapolis:20260425T180000
+DTSTART;TZID=America/Indiana/Indianapolis:20260502T160000
+DTEND;TZID=America/Indiana/Indianapolis:20260502T180000
 DTSTAMP:20260318T122355Z
 RRULE:FREQ=WEEKLY;BYDAY=SA
 CREATED:20260318
@@ -240,8 +240,8 @@ BEGIN:VEVENT
 X-SOURCE:Brown County Events
 CLASS:PUBLIC
 UID:MEC-e61bf0b7496de50a85ca1a91884a009d@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260425T200000
-DTEND;TZID=America/Indiana/Indianapolis:20260425T230000
+DTSTART;TZID=America/Indiana/Indianapolis:20260502T200000
+DTEND;TZID=America/Indiana/Indianapolis:20260502T230000
 DTSTAMP:20260403T105016Z
 RRULE:FREQ=WEEKLY;BYDAY=SA
 CREATED:20260403
@@ -368,7 +368,7 @@ PRIORITY:5
 SEQUENCE:2
 TRANSP:OPAQUE
 SUMMARY:Music Under the Stars
-DESCRIPTION:
+DESCRIPTION:Nashville, Indiana — Families, friends, and music lovers are invited to gather under the summer sky for Music Under the Stars, a free outdoor concert event taking place on Saturday, June 20 from 6:30–9:30 PM at Deer Run Park. A rain date is scheduled for June 21.\nThis family-friendly evening will feature live performances by regional favorites Noah Wotherspoon Band and Homemade Jam, delivering a mix of high-energy jazz, blues, rock, and crowd-pleasing classics. Attendees are encouraged to bring lawn chairs or blankets and enjoy an evening of music in one of Brown County’s scenic park settings. Tent covering and lawn chairs will also be provided.\nFood trucks will be on site offering a variety of local food options, making this a perfect night out for the whole family.\nMusic Under the Stars is presented through a partnership between Brown County Parks & Recreation, Arts Village Brown County, and supported by the Indiana Arts Commission. The event reflects a shared commitment to expanding access to arts and cultural experiences for residents and visitors alike.\n“Events like Music Under the Stars create opportunities for the community to come together, enjoy our parks, and experience high-quality live music at no cost,” organizers said. “It’s about celebrating summer, supporting the arts, and strengthening community connections.”\nAdmission is free and open to the public.\nEvent Details: Location: Deer Run Park, Nashville, IN Date: Saturday, June 20 (Rain date: June 21) Time: 6:30–9:30 PM Live Music • Food Trucks • Family Friendly\n
 URL:https://browncounty.com/events/music-under-the-stars/
 CATEGORIES:Entertainment,Family Friendly,Food &amp; Drink,Free,Happening,Outdoor Concerts,Summer
 LOCATION:1001 Deer Run Lane, Nashville, IN
@@ -614,26 +614,6 @@ END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
 CLASS:PUBLIC
-UID:MEC-9e1a5c4f3b694702c0622d6f6e87b5c0@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260425T200000
-DTEND;TZID=America/Indiana/Indianapolis:20260425T200000
-DTSTAMP:20260402T163955Z
-CREATED:20260402
-LAST-MODIFIED:20260402
-PRIORITY:5
-SEQUENCE:3
-TRANSP:OPAQUE
-SUMMARY:Grand Funk Railroad
-DESCRIPTION:Born in the industrial heart of Flint, Michigan, Grand Funk Railroad formed in 1969 and quickly cemented their place in rock history as one of America’s most powerful live acts. Now, more than five decades later, this legendary band is still comin’ to your town to help you party it down, bringing the same explosive energy and crowd-shaking sound to 2026 tour dates across the nation for their Still Shinin’ On Tour.\nAffectionately known as The American Band, Grand Funk Railroad continues to pack venues across the country, connecting generations of fans with their unmistakable mix of hard-driving rock, soulful vocals, and anthemic hits. Founding members Don Brewer (vocals and drums, and writer/singer of the iconic “We’re an American Band”) and Mel Schacher (bass, the thunder behind the groove) are joined by a lineup of all-star talent: soulful lead vocalist and writer of 38 Special’s smash “Second Chance,” Max Carl; guitar slinger and veteran of Bob Seger’s Silver Bullet Band Mark Chatfield; and the ever-versatile Tim Cashion (affectionately known as “Dr. Tim”), who – in the past – has hit the road with Robert Palmer and Bob Seger, on keys.\nTheir influence can still be heard in the DNA of rock icons like Van Halen, Bon Jovi, Foreigner, and Journey. Grand Funk’s music endures not only on the airwaves—thanks to mega-hits like We’re an American Band, I’m Your Captain/Closer to Home, The Loco-Motion, and Some Kind of Wonderful—but also on big screens and TV campaigns. From Disney’s The Country Bears to General Motors commercials, and blockbuster films like Radio and Sahara, their songs remain a cultural touchstone.\nWith more than 25 million albums sold, 19 charting singles, 8 Top 40 hits, and two No. 1 smashes, Grand Funk has earned 7 gold and 10 platinum certifications—including 2022 platinum awards for both We’re an American Band and Some Kind of Wonderful.\nFollowing the success of last year’s AMERICAN BAND TOUR 2025, the STILL SHININ’ ON TOUR 2026 keeps the train rolling. Whether you’re a lifelong fan or discovering Grand Funk for the first time, there’s no better time to experience one of rock’s most enduring bands.\n
-URL:https://browncounty.com/events/grand-funk-railroad/
-ORGANIZER;CN=Brown County Music Center:MAILTO:boxoffice@browncountymusiccenter.com
-CATEGORIES:Food &amp; Drink,Happening,Live Music,Spring,Theatre &amp; Entertainment
-LOCATION:200 Maple Leaf Boulevard
-ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/05/Music-Center.jpg
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:Brown County Events
-CLASS:PUBLIC
 UID:MEC-39688877516036f86d52efc29e967c76@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260718T173000
 DTEND;TZID=America/Indiana/Indianapolis:20260718T200000
@@ -731,25 +711,6 @@ END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
 CLASS:PUBLIC
-UID:MEC-6d7c09222f66eccf3a1cbddb66271e26@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260425T140000
-DTEND;TZID=America/Indiana/Indianapolis:20260425T160000
-DTSTAMP:20260319T154448Z
-CREATED:20260319
-LAST-MODIFIED:20260319
-PRIORITY:5
-SEQUENCE:2
-TRANSP:OPAQUE
-SUMMARY:Journal Cover Collage Workshop
-DESCRIPTION:Dive into this low-stakes, high-reward workshop and create your own expressive collage with the guidance of local artist Abby Moses. Design your own sketchbook or journal cover with our selection of memerobilia including old magazines, photography books, stickers, and paint markers and learn some helpful techniques to craft your own personalized collage. Feel free to bring your own scraps to include if you’d like, as well! \nThis approachable workshop is good for anyone, regardless of skill level– even the most timid creatives can channel their inner artst and create a unique and impactful work of art. Abby will walk you through techniques and approaches to help you create a fun and expressive collage while you enjoy Second Story Studio’s cozy studio space.\n
-URL:https://browncounty.com/events/journal-cover-collage-workshop/
-CATEGORIES:Art Events &amp; Exhibits,Classes &amp; Workshops,Happening
-LOCATION:61 West Main Street, Nashville, IN
-ATTACH;FMTTYPE=:https://browncounty.com/wp-content/uploads/2026/03/002bfd_2b2fe02471324f55b9582258ba1113f7mv2.avif
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:Brown County Events
-CLASS:PUBLIC
 UID:MEC-768638528d9f9045eae4ebba12ea4dfa@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260502T100000
 DTEND;TZID=America/Indiana/Indianapolis:20260502T220000
@@ -799,7 +760,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Cody’s Ride
-DESCRIPTION:
+DESCRIPTION:On June 1, 2009 Cody Hall was critically injured in a construction accident while at work. On June 10, 2009 at 20 years old Cody was removed from life support. He donated his organs and saved and changed countless people’s lives. We are so excited and honored to raise money and awareness for organ donation and to keep Cody’s remarkable memory alive. Live auction, live music, food trucks, bike-themed events, raffle bike and so much more. Get more information at Outsiderscharityclub.com Camping Reservations & Golf Cart\n
 URL:https://browncounty.com/events/codys-ride/
 CATEGORIES:Food &amp; Drink,Happening,Live Music,Outdoor Concerts
 LOCATION:5163 North State Road 135, Morgantown, IN
@@ -837,7 +798,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Uncle Pen Fest
-DESCRIPTION:
+DESCRIPTION:Various bluegrass performers, workshops, and jams plus the Bluegrass Hall of Fame Induction.\nFounded in 1974, Uncle Pen Days began as a tribute to Bill Monroe’s maternal uncle, James Pendleton Vandiver. “Uncle Pen” played the fiddle and Monroe later said that he was the “fellow that I learned to play from.” Bill Monroe’s parents had both died by the time he was 16, and Monroe lived part of the time this his uncle, where he would play mandolin while his uncle played fiddle at local square dances and social events.\nGreatly influenced by Vandiver, Bill Monroe wrote a song about him, Uncle Pen, in 1950 — a song that went on to be a hit for Porter Wagoner (1954) and Ricky Skaggs (1984).\n
 URL:https://browncounty.com/events/uncle-pen-fest/
 CATEGORIES:Classes &amp; Workshops,Entertainment,Festivals,Happening,Live Music,Outdoor Concerts
 LOCATION:5163 North State Road 135, Morgantown, IN
@@ -875,7 +836,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Bill Monroe’s Bluegrass Festival 2026
-DESCRIPTION:SAVE THE DATE! PERFORMANCES BY: DOYLE LAWSON & QUICKSILVER RALPH STANLEY II & THE CLINCH MOUNTAIN BOYS DARIN & BROOKE ALDRIDGE WYATT ELLIS AUTHENTIC UNLIMITED DOWNRIVER COLLECTIVE THE BURNETT SISTERS BAND AND MANY MORE! (CAMPING RESERVATIONS AVAILABLE/FESTIVAL TICKETS SOLD SEPARATELY)\n
+DESCRIPTION:
 URL:https://browncounty.com/events/bill-monroes-bluegrass-festival-2026/
 CATEGORIES:Entertainment,Festivals,Happening,Live Music,Outdoor Concerts
 LOCATION:5163 North State Road 135, Morgantown, IN
@@ -991,7 +952,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:Phoenix: Saxophone Quartet
-DESCRIPTION:ChamberFest Brown County presents Phoenix: Saxophone Quartet\n​​The multi-award-winning Project Fusion Sax Quartet presents Phoenix: a program of saxophone chamber music depicting renewal, transformation, and flight. This theme, chosen in the auspicious year of the United States’ 250th anniversary, celebrates a nation founded on the “great experiment” of democratic reinvention and rebirth, whose mascot is fittingly the noble bald eagle: as such, it presents music exclusively of American composers.\nWorks by Gershwin, Maslanka, Kline, Frazier, Mettens, Washington, Ge, Love\nProject Fusion:\n\nDannel Espinoza, soprano sax\nDoug O’Connor, alto sax\nAiwen Zhang, tenor sax\nMatt Evans, baritone sax\n\nThis concert is sponsored by the Eads family in memory of Ralph S. (Tony) Eads.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/chamberfest-phoenix/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -1071,7 +1032,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:Astros, Luces, Rayos: Stars, Lights, Lighting
-DESCRIPTION:
+DESCRIPTION:ChamberFest Brown County presents a captivating performance of voice, percussion, baroque guitar, theorbo, and harpsichord​​​.\nArias and art songs by Sebastián Durón (1660-1716), arguably the most important Spanish composer of his day. Specialist ensemble Música Ficta brings to life the contrasting vitality, charm and poignancy of Spanish art music.\nThis program features recently published secular and sacred songs found in Latin American archives- which have never been recorded- as well as instrumental pieces by Durón and his contemporaries.\nMúsica Ficta:\n\nJairo Serrano, tenor\nAndrés Silva, tenor\nCarlos Serrano, recorders, pipe and tabor\nJulián Navarro, baroque guitar\nEdwin García, baroque guitar, theorbo\nElisabeth Wright, harpsichord\n\n
 URL:https://browncounty.com/events/chamberfest-astros-luces-rayos/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -1151,7 +1112,7 @@ PRIORITY:5
 SEQUENCE:3
 TRANSP:OPAQUE
 SUMMARY:Nashville to Nashville: A Concert Series
-DESCRIPTION:Nashville to Nashville Concert Series brings live country and Americana music to The Old Barn at Brown County. Join us for an evening of great music, beautiful scenery, and laid-back late summer vibes as talented artists take the stage in an intimate barn setting near Nashville, Indiana. Food trucks, drinks, and unforgettable performances make this a perfect night out.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/nashville-to-nashville-a-concert-series/
 ORGANIZER;CN=The Old Barn:MAILTO:oldbarnatbrowncounty@gmail.com
 CATEGORIES:Entertainment,Family Friendly,Happening,Live Music,Outdoor Concerts,Special Events
@@ -1271,7 +1232,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Indiana Bigfoot Conference
-DESCRIPTION:
+DESCRIPTION:Indiana Bigfoot Conference 2026 gathers enthusiasts and researchers of two days of presentations and activities.\nSchedule Highlights\nIncludes Town Hall, Meet & Greet, full speaker sessions, and a Basket Donation auction supporting an immersive experience.\n \n
 URL:https://browncounty.com/events/indiana-bigfoot-conference/
 ORGANIZER;CN=Indiana Bigfoot Research Organization:MAILTO:
 CATEGORIES:Convention,Happening,Special Events
@@ -1454,26 +1415,6 @@ END:VEVENT
 BEGIN:VEVENT
 X-SOURCE:Brown County Events
 CLASS:PUBLIC
-UID:MEC-c16327d02fbf2b6a250340d9d71100a4@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260425T130000
-DTEND;TZID=America/Indiana/Indianapolis:20260425T140000
-DTSTAMP:20260105T110109Z
-CREATED:20260105
-LAST-MODIFIED:20260206
-PRIORITY:5
-SEQUENCE:1
-TRANSP:OPAQUE
-SUMMARY:Teddy Bears’ Picnic
-DESCRIPTION:Dress up your teddy bears and dolls and join us from 1–2 p.m. for a cozy picnic with story time, cookies, and lemonade.\n
-URL:https://browncounty.com/events/teddy-bears-picnic/
-ORGANIZER;CN=T.C.Steele State Historic Site:MAILTO:tcsteeleshs@indianamuseum.org
-CATEGORIES:Family Friendly,Food &amp; Drink,Happening,Special Events,Spring
-LOCATION:T.C. Steele State Historic Site, T C Steele Road, Nashville, IN
-ATTACH;FMTTYPE=image/jpeg:https://browncounty.com/wp-content/uploads/2025/07/BVB-Image-Venue-tc-steele_header_large-studio-1000x670-1.jpg
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:Brown County Events
-CLASS:PUBLIC
 UID:MEC-af355a8a4d1e8f26d4275cde117f5446@browncounty.com
 DTSTART;TZID=America/Indiana/Indianapolis:20260529T080000
 DTEND;TZID=America/Indiana/Indianapolis:20260530T180000
@@ -1504,7 +1445,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:High School Canoe Camp
-DESCRIPTION:
+DESCRIPTION:High School Canoe Camp: For campers who have completed 9th-12th grade.\nThis program is designed to offer older campers a more active, challenging and nature-oriented experience than our traditional adventure camp. Learn canoeing and wilderness skills by immersing in an intensive, extended outdoor living/canoeing experience while also developing leadership skills. Canoe/wilderness campers participate in a variety of activities that include camp “classics” (swimming, arts and crafts, and tackling the ropes course, among others), teambuilding, an off-site canoe trip, multiple overnight campouts, outdoor cooking, day hikes, and more!\n\n\nHigh School Canoe Camp: Session 4B: July 5-11, 2026\n\n\n
 URL:https://browncounty.com/events/high-school-canoe-camp/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Happening,Outdoor Adventure,Plan Your Visit,Summer
@@ -1524,7 +1465,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Middle School Kayak Camp
-DESCRIPTION:
+DESCRIPTION:For campers who have completed 6th-8th grade.\nThis program is designed to offer older campers a more active, challenging and nature-oriented experience than our traditional adventure camp. Learn canoeing and wilderness skills by immersing in an intensive, extended outdoor living/canoeing experience while also developing leadership skills. Canoe/wilderness campers participate in a variety of activities that include camp “classics” (swimming, arts and crafts, and tackling the ropes course, among others), teambuilding, an off-site canoe trip, multiple overnight campouts, outdoor cooking, day hikes, and more!\n\n\nMiddle School Kayak Camp: Session 2B: June 21-27, 2026\n\n\n
 URL:https://browncounty.com/events/middle-school-kayak-camp/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Happening,Outdoor Adventure,Plan Your Visit,Summer
@@ -1564,7 +1505,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Ready – Set – Camp!
-DESCRIPTION:
+DESCRIPTION:For campers entering K – 2nd grade with an adult.\nReady-Set-Camp! is a session for our youngest campers who aren’t quite ready for a full week at camp on their own to get to experience the fun and adventure of camp with a parent or guardian.\n\n\nSession:\n\n\n3B: June 2-4, 2026\n\n\n\n\nRates:\n\n\nChild: $65\n\n\nAdult: $185\n\n\n\n\n
 URL:https://browncounty.com/events/ready-set-camp/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Family Friendly,Happening,Plan Your Visit,Summer
@@ -1584,7 +1525,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Leaders-in-Training II
-DESCRIPTION:
+DESCRIPTION:For campers who have completed 9th-11th grade.\nLeaders at Camp (LIT II)\nThis program is designed to help older campers transition from being campers to serving as leaders in the camp community. Learn about servant leadership and build communication and relational ministry skills. LITs participate in a variety of activities that include camp “classics” (swimming, arts and crafts, and tackling the ropes course, among others), teambuilding, shadowing camp staff, overnight campouts, and more.\n\n\nSession:\n\n\n3A: June 28-July 4, 2026\n\n\n\n\nRates:\n\n\n$515 per camper\n\n\n\n\n
 URL:https://browncounty.com/events/leaders-in-training-ii/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Happening,Plan Your Visit,Summer
@@ -1704,7 +1645,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Fall Volunteer Weekend
-DESCRIPTION:Join us for a weekend at Waycross helping to start new projects as well as with ongoing efforts around our facility! We’ll offer a variety of work for all skill levels. Bring your passion and talent for a fun, active, community filled weekend.\nVolunteer Weekends are free and include meals and lodging. Registration is required so that we can make enough food to feed everyone!!\n\n\nSeptember 25-27, 2026\n\n\nCheck-in: 4-6pm\n\n\nCheck-out: 11:30am\n\n\n\n\nAll ages welcome, minors must be accompanied by an adult.\n\n\nAccommodation options:\n\n\nMain House/Sleeping Wing – Multi-Occupancy\n\n\nCabins – Multi-Occupancy\n\n\nCommuter – Come work with the crew on Saturday only (lunch provided)\n\n\n\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/fall-volunteer-weekend/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Family Friendly,Free,Happening
@@ -1784,7 +1725,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Fall Festival
-DESCRIPTION:
+DESCRIPTION:\n\n10am-3pm October 17th, 2026\n\n\nAll ages welcome, minors must be accompanied by an adult.\n\n\nThis is a day for families and individuals to come explore and enjoy Waycross at the beginning of the fall! We’ll have a pumpkin patch, face painting, chili stations, three-legged races, hayrides, and so much more! Folk of all ages are invited to come and join in on the fun!\n
 URL:https://browncounty.com/events/fall-festival-2/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Entertainment,Family Friendly,Festivals,Food &amp; Drink,Free,Happening,Special Events
@@ -1804,7 +1745,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Fall Nature Retreat: Nature Journaling
-DESCRIPTION:
+DESCRIPTION:Immerse yourself in the beauty of fall at Waycross during our Fall Nature Journaling Retreat. The vibrant colors of the changing seasons will provide the perfect backdrop for deep observation and creativity. This weekend retreat will offer a peaceful space to connect with the natural world, using art and journaling as tools to deepen your awareness of nature in the season of fall. Guided prompts, outdoor sketching sessions, and time spent exploring the colorful fall foliage will foster a deeper connection with nature and creation.\n\n\nOctober 2-4, 2026\n\n\nCheck-in: 4-6pm\n\n\nCheck-out: 10am\n\n\n\n\nAll ages welcome, minors must be accompanied by an adult.\n\n\nProgram Rates\n\n\nAttendance cost is calculated during online registration, depending on your lodging selection. Rates are per person and include program fees, lodging and meals.\n\n\nConference Center – Single Occupancy: $350 per person\n\n\nConference Center – Double Occupancy: $280 per person\n\n\nYouth (10-17): $150 per person\n\n\nChildren (4-9): $110 per person\n\n\n3 and under: $0\n\n\n\n\n\n\n
 URL:https://browncounty.com/events/fall-nature-retreat-nature-journaling/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Art Events &amp; Exhibits,Classes &amp; Workshops,Family Friendly,Happening,Outdoor Adventure,Special Events
@@ -1844,7 +1785,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Adult-ish Camp
-DESCRIPTION:
+DESCRIPTION:Adult-ish Camp is the perfect chance to relive the magic of summer camp – this time with the freedom of adulthood! Designed for young adults ages 18+, this long weekend at Waycross is all about fun, reflection, and connection. Spend your days canoeing, hiking, and enjoying campfires, or simply relax and soak in the peaceful surroundings. Whether you’re seeking adventure or just a break from the daily grind, you can participate as much or as little as you’d like.\nThis program will offer a space to reflect on the transitions of young adulthood. With a mix of classic camp activities and opportunities for reflection, it’s a chance to step away from routine and connect with like-minded people. If you’re ready for a weekend of fun, friendship, and nostalgia, this is the camp for you!\n\n\nJuly 31-August 3, 2026\n\n\nCheck-in: 4-6pm\n\n\nCheck-out: 10am\n\n\nThis program runs Friday – Monday. We encourage all participants to stay for the full experience, but we understand that some may need to leave early. If you need to depart early please select the Friday–Sunday afternoon option (departing before dinner on Sunday) during registration so we can plan accordingly.\n\n\n\n\n\n\nAge: Young Adults (18+)\n\n\nAccommodation Options:\n\n\nAttendance cost is calculated during online registration, depending on your lodging selection. Rates are per person and include program fees, lodging and meals\n\n\nCabin – Multi-Occupancy: $75 per person\n\n\nMain House/Sleeping Wing Multi-Occupancy: $75 per person\n\n\n\n\n\n\n
 URL:https://browncounty.com/events/adult-ish-camp-2/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Happening,Outdoor Adventure,Plan Your Visit,Special Events,Summer
