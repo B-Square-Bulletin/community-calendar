@@ -20,3 +20,13 @@ CREATE POLICY "Anyone can read feeds" ON feeds FOR SELECT USING (true);
 
 CREATE POLICY "Admin users can manage feeds" ON feeds FOR ALL
   USING (auth.uid() IN (SELECT user_id FROM admin_users));
+
+-- Used by the Manage Feeds delete button (SECURITY DEFINER bypasses RLS)
+CREATE OR REPLACE FUNCTION remove_feed(feed_id bigint)
+RETURNS void
+LANGUAGE plpgsql SECURITY DEFINER
+AS $$
+BEGIN
+  DELETE FROM feeds WHERE id = feed_id;
+END;
+$$;

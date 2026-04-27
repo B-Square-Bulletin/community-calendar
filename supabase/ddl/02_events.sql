@@ -22,8 +22,28 @@ CREATE TABLE IF NOT EXISTS events (
   created_at timestamptz DEFAULT now()
 );
 
--- Compound unique index for deduplication by source
-CREATE UNIQUE INDEX IF NOT EXISTS events_source_source_uid_key ON events (source, source_uid);
+-- RPC for stale event cleanup (used by load-events edge function;
+-- replaces URL-based NOT IN filter that exceeded PostgREST URL length limits)
+CREATE OR REPLACE FUNCTION delete_stale_events(p_city text, p_source_uids text[])
+RETURNS bigint
+LANGUAGE plpgsql
+SECURITY DEFINER
+AS $$
+DECLARE
+  deleted_count bigint;
+BEGIN
+  DELETE FROM events
+  WHERE city = p_city
+    AND source_uid IS NOT NULL
+    AND source_uid != ALL(p_source_uids)
+  ;
+  GET DIAGNOSTICS deleted_count = ROW_COUNT;
+  RETURN deleted_count;
+END;
+$$;
+
+-- Unique index on source_uid for deduplication
+CREATE UNIQUE INDEX IF NOT EXISTS events_source_uid_unique ON events (source_uid);
 
 -- Index for city filtering
 CREATE INDEX IF NOT EXISTS events_city_idx ON events (city);

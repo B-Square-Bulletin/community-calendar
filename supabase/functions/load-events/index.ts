@@ -39,41 +39,57 @@ Deno.serve(async (req) => {
       const eventsArray = Array.from(uniqueEvents.values());
       let inserted = 0;
       let errors = 0;
+      const errorDetails: string[] = [];
 
       for (let i = 0; i < eventsArray.length; i += batchSize) {
+        const batchNum = i / batchSize;
         const batch = eventsArray.slice(i, i + batchSize);
-        const { error } = await supabase
-          .from("events")
-          .upsert(batch, { onConflict: "source_uid", ignoreDuplicates: false });
-        if (error) {
-          console.error(`Batch ${i / batchSize} error:`, error);
+        let lastError: any = null;
+
+        // Retry each batch up to 3 times for transient failures
+        for (let attempt = 0; attempt < 3; attempt++) {
+          const { error } = await supabase
+            .from("events")
+            .upsert(batch, { onConflict: "source_uid", ignoreDuplicates: false });
+          if (!error) {
+            inserted += batch.length;
+            lastError = null;
+            break;
+          }
+          lastError = error;
+          console.error(`Batch ${batchNum} attempt ${attempt + 1} error:`, JSON.stringify(error));
+          if (attempt < 2) {
+            await new Promise(r => setTimeout(r, 1000 * (attempt + 1)));
+          }
+        }
+        if (lastError) {
           errors += batch.length;
-        } else {
-          inserted += batch.length;
+          errorDetails.push(`batch ${batchNum}: ${lastError.message || JSON.stringify(lastError)}`);
         }
       }
 
       // Remove stale events for this city that are no longer in the feed
-      // Use RPC to avoid URL length limits with large IN lists
+      // Uses RPC to avoid URL length limits with large IN lists
       const newSourceUids = Array.from(uniqueEvents.keys());
       let deleted = 0;
       if (newSourceUids.length > 0) {
-        const { count, error: delError } = await supabase
-          .from("events")
-          .delete({ count: "exact" })
-          .eq("city", city)
-          .not("source_uid", "in", `(${newSourceUids.join(",")})`);
+        const { data: delCount, error: delError } = await supabase
+          .rpc("delete_stale_events", { p_city: city, p_source_uids: newSourceUids });
         if (delError) {
           console.error(`Cleanup ${city} error:`, delError);
+          errorDetails.push(`cleanup: ${delError.message}`);
         } else {
-          deleted = count || 0;
+          deleted = delCount || 0;
         }
       }
       if (deleted > 0) {
         console.log(`Cleaned up ${deleted} stale events for ${city}`);
       }
 
-      const result = { success: errors === 0, city, fetched: events.length, unique: uniqueEvents.size, deleted, inserted, errors };
+      const result: any = { success: errors === 0, city, fetched: events.length, unique: uniqueEvents.size, deleted, inserted, errors };
+      if (errorDetails.length > 0) {
+        result.errorDetails = errorDetails;
+      }
       console.log("Result:", result);
       return new Response(JSON.stringify(result), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -150,33 +166,44 @@ Deno.serve(async (req) => {
     const eventsArray = Array.from(uniqueEvents.values());
     let inserted = 0;
     let errors = 0;
+    const errorDetails: string[] = [];
 
     for (let i = 0; i < eventsArray.length; i += batchSize) {
+      const batchNum = i / batchSize;
       const batch = eventsArray.slice(i, i + batchSize);
-      const { error } = await supabase
-        .from("events")
-        .upsert(batch, { onConflict: "source_uid", ignoreDuplicates: false });
-      if (error) {
-        console.error(`Batch ${i / batchSize} error:`, error);
+      let lastError: any = null;
+
+      for (let attempt = 0; attempt < 3; attempt++) {
+        const { error } = await supabase
+          .from("events")
+          .upsert(batch, { onConflict: "source_uid", ignoreDuplicates: false });
+        if (!error) {
+          inserted += batch.length;
+          lastError = null;
+          break;
+        }
+        lastError = error;
+        console.error(`Batch ${batchNum} attempt ${attempt + 1} error:`, JSON.stringify(error));
+        if (attempt < 2) {
+          await new Promise(r => setTimeout(r, 1000 * (attempt + 1)));
+        }
+      }
+      if (lastError) {
         errors += batch.length;
-      } else {
-        inserted += batch.length;
+        errorDetails.push(`batch ${batchNum}: ${lastError.message || JSON.stringify(lastError)}`);
       }
     }
 
-    // Remove stale events per city that are no longer in the feed
+    // Remove stale events per city using RPC to avoid URL length limits
     let deleted = 0;
     for (const [city, uids] of eventsByCity) {
       if (uids.length > 0) {
-        const { count, error: delError } = await supabase
-          .from("events")
-          .delete({ count: "exact" })
-          .eq("city", city)
-          .not("source_uid", "in", `(${uids.join(",")})`);
+        const { data: delCount, error: delError } = await supabase
+          .rpc("delete_stale_events", { p_city: city, p_source_uids: uids });
         if (delError) {
           console.error(`Cleanup ${city} error:`, delError);
         } else {
-          deleted += count || 0;
+          deleted += delCount || 0;
         }
       }
     }
@@ -184,7 +211,10 @@ Deno.serve(async (req) => {
       console.log(`Cleaned up ${deleted} stale events`);
     }
 
-    const result = { success: errors === 0, fetched: allEvents.length, unique: uniqueEvents.size, deleted, inserted, errors };
+    const result: any = { success: errors === 0, fetched: allEvents.length, unique: uniqueEvents.size, deleted, inserted, errors };
+    if (errorDetails.length > 0) {
+      result.errorDetails = errorDetails;
+    }
     console.log("Result:", result);
     return new Response(JSON.stringify(result), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },

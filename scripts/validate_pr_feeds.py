@@ -155,13 +155,16 @@ def validate(base_ref: str) -> list[str]:
                                 f"'{cmd_match.group(1)}' but that file doesn't exist."
                             )
 
-    # Check new scraper files have corresponding pending_feeds.txt entries
+    # Check new scraper files have corresponding feeds entries
     new_scrapers = get_new_scraper_files(changed_files)
     if new_scrapers:
-        # Collect all scraper cmds from all pending_feeds.txt files
-        all_pending_cmds = ""
+        # Collect content from both pending_feeds.txt and feeds.txt
+        # (pending entries move to feeds.txt once the build processes them)
+        all_feed_content = ""
         for pending in ROOT.glob("cities/*/pending_feeds.txt"):
-            all_pending_cmds += pending.read_text()
+            all_feed_content += pending.read_text()
+        for feeds in ROOT.glob("cities/*/feeds.txt"):
+            all_feed_content += feeds.read_text()
 
         for scraper_file in new_scrapers:
             scraper_basename = Path(scraper_file).stem
@@ -171,11 +174,12 @@ def validate(base_ref: str) -> list[str]:
                     f"New scraper '{scraper_file}' is not referenced in the "
                     f"workflow. Did you forget to run add_scraper.py?"
                 )
-            # Check if referenced in any pending_feeds.txt
-            if scraper_basename not in all_pending_cmds:
+            # Check if referenced in any pending_feeds.txt or feeds.txt
+            if scraper_basename not in all_feed_content:
                 errors.append(
                     f"New scraper '{scraper_file}' has no entry in any "
-                    f"pending_feeds.txt. Did you forget to run add_scraper.py?"
+                    f"feeds.txt or pending_feeds.txt. "
+                    f"Did you forget to run add_scraper.py?"
                 )
 
     return errors
@@ -194,7 +198,7 @@ def main():
         print(f"FAILED: {len(errors)} issue(s) found\n")
         for i, err in enumerate(errors, 1):
             print(f"  {i}. {err}\n")
-        print("Scrapers need both a workflow entry AND a pending_feeds.txt entry.")
+        print("Scrapers need both a workflow entry AND a feeds.txt/pending_feeds.txt entry.")
         print("Use: python scripts/add_scraper.py <name> <city> \"Display Name\"")
         print(f"{'='*60}")
         sys.exit(1)

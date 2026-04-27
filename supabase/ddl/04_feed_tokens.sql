@@ -7,8 +7,8 @@ CREATE TABLE IF NOT EXISTS feed_tokens (
   created_at timestamptz DEFAULT now()
 );
 
--- Index for token lookups (used by my-picks edge function)
-CREATE INDEX IF NOT EXISTS feed_tokens_token_idx ON feed_tokens (token);
+-- Note: token column is UNIQUE, which auto-creates feed_tokens_token_key index.
+-- No additional index needed for token lookups.
 
 -- Enable Row Level Security
 ALTER TABLE feed_tokens ENABLE ROW LEVEL SECURITY;
