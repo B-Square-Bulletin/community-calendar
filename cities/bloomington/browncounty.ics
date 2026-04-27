@@ -31,8 +31,8 @@ BEGIN:VEVENT
 X-SOURCE:Brown County Events
 CLASS:PUBLIC
 UID:MEC-2fa862c3b4ed1e3228c5ff470869b73d@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260426T120000
-DTEND;TZID=America/Indiana/Indianapolis:20260427T140000
+DTSTART;TZID=America/Indiana/Indianapolis:20260502T120000
+DTEND;TZID=America/Indiana/Indianapolis:20260503T140000
 DTSTAMP:20250903T162347Z
 RRULE:FREQ=WEEKLY;BYDAY=SU,SA
 CREATED:20250903
@@ -115,8 +115,8 @@ BEGIN:VEVENT
 X-SOURCE:Brown County Events
 CLASS:PUBLIC
 UID:MEC-edb899d139bf0fddddbf9b3f4e8252f0@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260427T110000
-DTEND;TZID=America/Indiana/Indianapolis:20260427T160000
+DTSTART;TZID=America/Indiana/Indianapolis:20260428T110000
+DTEND;TZID=America/Indiana/Indianapolis:20260428T160000
 DTSTAMP:20260212T100904Z
 RRULE:FREQ=DAILY;UNTIL=20260626T200000Z
 CREATED:20260212
@@ -624,7 +624,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:T.C. Steele Centennial Reception
-DESCRIPTION:
+DESCRIPTION:Saturday July 18th, 5:30-8pm\nBrown County Art Gallery\nFood, wine, and special catalogue $45 per person. Reservations required: (812) 988-4609 or brncagal@gmail.com\nExhibit opens to public July 19th with Free Admission and $25 Souvenir Catalogue.\nSponsored by Bob and Barbara Stevens.\n
 URL:https://browncounty.com/events/t-c-steele-centennial-reception/
 ORGANIZER;CN=Historic Brown County Art Gallery:MAILTO:
 CATEGORIES:Art Events &amp; Exhibits,Happening,Special Events
@@ -798,7 +798,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Uncle Pen Fest
-DESCRIPTION:
+DESCRIPTION:Various bluegrass performers, workshops, and jams plus the Bluegrass Hall of Fame Induction.\nFounded in 1974, Uncle Pen Days began as a tribute to Bill Monroe’s maternal uncle, James Pendleton Vandiver. “Uncle Pen” played the fiddle and Monroe later said that he was the “fellow that I learned to play from.” Bill Monroe’s parents had both died by the time he was 16, and Monroe lived part of the time this his uncle, where he would play mandolin while his uncle played fiddle at local square dances and social events.\nGreatly influenced by Vandiver, Bill Monroe wrote a song about him, Uncle Pen, in 1950 — a song that went on to be a hit for Porter Wagoner (1954) and Ricky Skaggs (1984).\n
 URL:https://browncounty.com/events/uncle-pen-fest/
 CATEGORIES:Classes &amp; Workshops,Entertainment,Festivals,Happening,Live Music,Outdoor Concerts
 LOCATION:5163 North State Road 135, Morgantown, IN
@@ -952,7 +952,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:Phoenix: Saxophone Quartet
-DESCRIPTION:
+DESCRIPTION:ChamberFest Brown County presents Phoenix: Saxophone Quartet\n​​The multi-award-winning Project Fusion Sax Quartet presents Phoenix: a program of saxophone chamber music depicting renewal, transformation, and flight. This theme, chosen in the auspicious year of the United States’ 250th anniversary, celebrates a nation founded on the “great experiment” of democratic reinvention and rebirth, whose mascot is fittingly the noble bald eagle: as such, it presents music exclusively of American composers.\nWorks by Gershwin, Maslanka, Kline, Frazier, Mettens, Washington, Ge, Love\nProject Fusion:\n\nDannel Espinoza, soprano sax\nDoug O’Connor, alto sax\nAiwen Zhang, tenor sax\nMatt Evans, baritone sax\n\nThis concert is sponsored by the Eads family in memory of Ralph S. (Tony) Eads.\n
 URL:https://browncounty.com/events/chamberfest-phoenix/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -972,7 +972,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:Teutonic: The Brahms Piano Trios
-DESCRIPTION:
+DESCRIPTION:\nChamberFest Brown County presents Teutonic: The Brahms Piano Trios.\nA rare opportunity to hear Brahms’ three magnificent piano trios in one concert: music of unmatched emotional range and complexity. Not for the faint-hearted!\nBrahms: Piano Trio no. 1, op. 8Brahms: Piano Trio no. 2, op. 87Brahms: Piano Trio no. 3, op. 101\nArtists\n\n​Andreas Ioannides, piano\nMadalyn Parnas Möller, violin\nMaurice Neuman, cello\n\n\n\nThis concert is sponsored by the Eads family in memory of Ralph S. (Tony) Eads.\n\n
 URL:https://browncounty.com/events/chamberfest-teutonic-the-brahms-piano-trios/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -992,7 +992,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:Letters from the Front: Honoring US Veterans: Voice and Piano
-DESCRIPTION:
+DESCRIPTION:ChamberFest Brown County presents Letters from the Front: Honoring US Veterans \nLetters From The Front is an evening of new music for four voices and piano by composer Patrick Zimmerli honoring the members of the United States Armed Forces, veterans, and their families.\nFeaturing artists Ian Gindes, David Govetsen, Tyler Lee, Angela Born, and Desirée Hassler, with narration written by Jeff Ernstoff, this performance is based on actual letters written during our nation’s most crucial wars, including the American Revolution, the Civil War, World War I, World War II, Vietnam, and the Gulf War. \nIn celebration of the 250th birthday of the USA, each song shares the real experiences of service members and their loved ones in recognition of the sacrifices that made our nation possible with classical music that touches on our artistic heritage of art song, classic Broadway, Americana, and more! \nArtists\n\nIan Gindes, piano\nTyler Lee, tenor\nDesirée Hassler, soprano\nAngela Born, mezzo-soprano\nDavid Govertsen, bass-baritone\n\n
 URL:https://browncounty.com/events/chamberfest-letters-from-the-front-honoring-us-veterans/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -1012,7 +1012,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:Pastorale: Strings and Winds
-DESCRIPTION:
+DESCRIPTION:ChamberFest Brown County presents a star-studded lineup featuring Chicago Symphony Orchestra musicians present an uplifting program of music for the outdoors: radiant, folksy, uplifting.\n​​​​​Beethoven: Sextet for 2 horns and string quartet, op. 81bSpohr: Octet, op. 32Dvorak: String Quintet, op. 97\n​Artists\n\n​Qing Hou, violin\nLei Hou, violin\nLarry Neuman, viola\nAurlien Pederzoli, viola\nBrandon Vamos, cello\nJim Campbell, clarinet\nJim Smelser, horn\nOto Carrilla, horn\nAlex Horton, bass\n\n
 URL:https://browncounty.com/events/chamberfest-pastorale/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -1032,7 +1032,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:Astros, Luces, Rayos: Stars, Lights, Lighting
-DESCRIPTION:
+DESCRIPTION:ChamberFest Brown County presents a captivating performance of voice, percussion, baroque guitar, theorbo, and harpsichord​​​.\nArias and art songs by Sebastián Durón (1660-1716), arguably the most important Spanish composer of his day. Specialist ensemble Música Ficta brings to life the contrasting vitality, charm and poignancy of Spanish art music.\nThis program features recently published secular and sacred songs found in Latin American archives- which have never been recorded- as well as instrumental pieces by Durón and his contemporaries.\nMúsica Ficta:\n\nJairo Serrano, tenor\nAndrés Silva, tenor\nCarlos Serrano, recorders, pipe and tabor\nJulián Navarro, baroque guitar\nEdwin García, baroque guitar, theorbo\nElisabeth Wright, harpsichord\n\n
 URL:https://browncounty.com/events/chamberfest-astros-luces-rayos/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -1052,7 +1052,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:Young Artist Spotlight: Erinys Quartet​​
-DESCRIPTION:
+DESCRIPTION:The Erinys Quartet was awarded the First Prize at the 2025 Trondheim International Chamber Music Competition in Norway. Graduates of Curtis, they are currently graduate-quartet-in-residence at IU Jacobs. Don’t miss their dark and evocative program!\n​Repertoire\nBeecher: Juniper and Birch\nMozart: String Quartet No. 15 in D minor, K. 421/417b\nSchubert: String Quartet No. 14 in D minor, D 810 (“Death and the Maiden”)\n​​​​​​​​​​Erinys Quartet:\nElizabeth Stewart, violin\nJoosep Reimaa, violin\nMarija Räisänen, viola\nStergios Theodoridis, cello\n
 URL:https://browncounty.com/events/chamberfest-erinys-quartet/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -1310,7 +1310,7 @@ PRIORITY:5
 SEQUENCE:2
 TRANSP:OPAQUE
 SUMMARY:Songwriter Showdown
-DESCRIPTION:Songwriter Showdown returns to Nashville, Indiana, for a multi-week live music competition featuring talented songwriters from across the region. Held in Brown County, this exciting series highlights original music, storytelling, and crowd-favorite performances as artists compete for top honors. Experience the creativity and rising talent that make Nashville, Indiana a hub for live music.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/songwriter-showdown/
 CATEGORIES:Entertainment,Family Friendly,Happening,Live Music
 LOCATION:Brown County Playhouse, South Van Buren Street, Nashville, IN
@@ -1348,7 +1348,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Brown County ChamberFest
-DESCRIPTION:
+DESCRIPTION:We plan an outstanding lineup for the 2026 festival and can’t wait to share details. Ingredients include well-loved familiar faces, musical surprises, and ChamberFest’s guarantee of engagement, inspiration, connection, and community. Stay tuned.\n
 URL:https://browncounty.com/events/brown-county-chamberfest/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Entertainment,Happening,Live Music
@@ -1445,7 +1445,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:High School Canoe Camp
-DESCRIPTION:
+DESCRIPTION:High School Canoe Camp: For campers who have completed 9th-12th grade.\nThis program is designed to offer older campers a more active, challenging and nature-oriented experience than our traditional adventure camp. Learn canoeing and wilderness skills by immersing in an intensive, extended outdoor living/canoeing experience while also developing leadership skills. Canoe/wilderness campers participate in a variety of activities that include camp “classics” (swimming, arts and crafts, and tackling the ropes course, among others), teambuilding, an off-site canoe trip, multiple overnight campouts, outdoor cooking, day hikes, and more!\n\n\nHigh School Canoe Camp: Session 4B: July 5-11, 2026\n\n\n
 URL:https://browncounty.com/events/high-school-canoe-camp/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Happening,Outdoor Adventure,Plan Your Visit,Summer
@@ -1505,7 +1505,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Ready – Set – Camp!
-DESCRIPTION:
+DESCRIPTION:For campers entering K – 2nd grade with an adult.\nReady-Set-Camp! is a session for our youngest campers who aren’t quite ready for a full week at camp on their own to get to experience the fun and adventure of camp with a parent or guardian.\n\n\nSession:\n\n\n3B: June 2-4, 2026\n\n\n\n\nRates:\n\n\nChild: $65\n\n\nAdult: $185\n\n\n\n\n
 URL:https://browncounty.com/events/ready-set-camp/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Family Friendly,Happening,Plan Your Visit,Summer
@@ -1626,7 +1626,7 @@ PRIORITY:5
 SEQUENCE:9
 TRANSP:OPAQUE
 SUMMARY:Adventure Camp
-DESCRIPTION:
+DESCRIPTION:For campers who have completed 2nd -8th grade.\nThis is our classic summer camp program. Participate in a variety of adventure activities that build friendships and encourage personal and spiritual growth.  Program options include: archery, canoeing, arts and crafts, games, hiking, swimming, tackling the ropes course, Christian formation programming, and more. Campers also participate in an outdoor overnight that includes sleeping under the stars, learning outdoor skills, and cooking over a fire.\n\n\nSessions:\n\n\n1A: June 14, 2026\n\n\n4A: July 5-11, 2026\n\n\n5A: July 12-18, 2026\n\n\n\n\nRates:\n\n\n$495 per camper\n\n\n\n\n
 URL:https://browncounty.com/events/adventure-camp/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Happening,Outdoor Adventure,Plan Your Visit,Summer
@@ -1765,7 +1765,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:All Y’all Come to Camp
-DESCRIPTION:
+DESCRIPTION:Spend the weekend surrounded by nature, with classic camp activities like campfires, worship, games, and outdoor adventures – plus plenty of time to relax and unwind at your own pace. Whether you want to dive into all the action or simply enjoy the peaceful setting, this weekend is yours to enjoy.\nJoin us for a refreshing weekend filled with fun, adventure and community. Waycross staff will lead a variety of activities, and participants are encouraged to take part as much or as little as they like.\n\n\nSeptember 4-6, 2026\n\n\nCheck-in: 4-6pm\n\n\nCheck-out: 1pm\n\n\n\n\nAll ages welcome, minors must be accompanied by an adult.\n\n\nProgram Rates\n\n\nAttendance cost is calculated during online registration, depending on your lodging selection. Rates are per person and include program fees, lodging and meals.\n\n\nConference Center – Single Occupancy: $400 per person\n\n\nConference Center – Double Occupancy: $330 per person\n\n\nMain House/Sleeping Wing – Multi-Occupancy: $260 per person\n\n\nCabins – Multi-Occupancy (adult): $180 per person\n\n\nYouth 10-17: $200 per person\n\n\nChildren 4-9: $160 per person\n\n\n3 and under: $0\n\n\n\n\n\n\n
 URL:https://browncounty.com/events/all-yall-come-to-camp-2/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Family Friendly,Happening,Outdoor Adventure,Special Events,Summer
@@ -1785,7 +1785,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Adult-ish Camp
-DESCRIPTION:Adult-ish Camp is the perfect chance to relive the magic of summer camp – this time with the freedom of adulthood! Designed for young adults ages 18+, this long weekend at Waycross is all about fun, reflection, and connection. Spend your days canoeing, hiking, and enjoying campfires, or simply relax and soak in the peaceful surroundings. Whether you’re seeking adventure or just a break from the daily grind, you can participate as much or as little as you’d like.\nThis program will offer a space to reflect on the transitions of young adulthood. With a mix of classic camp activities and opportunities for reflection, it’s a chance to step away from routine and connect with like-minded people. If you’re ready for a weekend of fun, friendship, and nostalgia, this is the camp for you!\n\n\nJuly 31-August 3, 2026\n\n\nCheck-in: 4-6pm\n\n\nCheck-out: 10am\n\n\nThis program runs Friday – Monday. We encourage all participants to stay for the full experience, but we understand that some may need to leave early. If you need to depart early please select the Friday–Sunday afternoon option (departing before dinner on Sunday) during registration so we can plan accordingly.\n\n\n\n\n\n\nAge: Young Adults (18+)\n\n\nAccommodation Options:\n\n\nAttendance cost is calculated during online registration, depending on your lodging selection. Rates are per person and include program fees, lodging and meals\n\n\nCabin – Multi-Occupancy: $75 per person\n\n\nMain House/Sleeping Wing Multi-Occupancy: $75 per person\n\n\n\n\n\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/adult-ish-camp-2/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Happening,Outdoor Adventure,Plan Your Visit,Special Events,Summer

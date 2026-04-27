@@ -427,6 +427,16 @@ URL:https://www.mcmga.net/events/steps-to-a-low-maintenance-vegetable-gard
 X-SOURCE:Monroe County Master Gardeners
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Hydroponics: Gen215
+DTSTART;TZID=America/Los_Angeles:20260728T150000
+DTEND;TZID=America/Los_Angeles:20260728T170000
+UID:696a68e0f50642363ff3fca5@squarespace.com
+DESCRIPTION:
+URL:https://www.mcmga.net/events/steps-to-a-low-maintenance-vegetable-gard
+ en-epjbc-spjct-rt3nd-khpec
+X-SOURCE:Monroe County Master Gardeners
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Beyond Morels: Natural History\, Identification\, and Foraging Tip
  s for Mushrooms Around the Garden
 DTSTART;TZID=America/Los_Angeles:20260526T150000
