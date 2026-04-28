@@ -20,6 +20,42 @@ URL:https://www.mobilize.us/acluin/event/896878/
 X-SOURCE:Indivisible Central Indiana (Mobilize)
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Bring-Your-Own-Book Meetup!
+DTSTART;TZID=America/Los_Angeles:20260501T140000
+DTEND;TZID=America/Los_Angeles:20260501T160000
+UID:aafdd9e085595e49de3e01ed8ea58378@mobilize.us
+ATTACH;FMTTYPE=image/jpeg:https://mobilize-uploads-prod.s3.amazonaws.com/u
+ ploads/event/high-angle-people-reading-together_20260427045924500012.jpg
+DESCRIPTION:Don't want the stress of an assigned book you may not even lik
+ e? This is the bookish event for you! At a Bring-Your-Own-Book event\, we 
+ all get together to discuss books we've read or are currently reading that
+  we can't wait to talk about. Any genre\, any length\, any date of publica
+ tion - let's get together and gush about our best recent reads! Stick arou
+ nd after the event to learn more about Indivisible Central Indiana and how
+  to get involved. Let's get reading!
+LOCATION:Union Campus\, 525 S Meridian St\, Indianapolis\, IN\, 46225
+URL:https://www.mobilize.us/indivisiblecentralindiana/event/946006/
+X-SOURCE:Indivisible Central Indiana (Mobilize)
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bring-Your-Own-Book Meetup!
+DTSTART;TZID=America/Los_Angeles:20260510T120000
+DTEND;TZID=America/Los_Angeles:20260510T140000
+UID:7c514d7a4552e9763fe332e7c97be4c1@mobilize.us
+ATTACH;FMTTYPE=image/jpeg:https://mobilize-uploads-prod.s3.amazonaws.com/u
+ ploads/event/high-angle-people-reading-together_20260427045924500012.jpg
+DESCRIPTION:Don't want the stress of an assigned book you may not even lik
+ e? This is the bookish event for you! At a Bring-Your-Own-Book event\, we 
+ all get together to discuss books we've read or are currently reading that
+  we can't wait to talk about. Any genre\, any length\, any date of publica
+ tion - let's get together and gush about our best recent reads! Stick arou
+ nd after the event to learn more about Indivisible Central Indiana and how
+  to get involved. Let's get reading!
+LOCATION:Union Campus\, 525 S Meridian St\, Indianapolis\, IN\, 46225
+URL:https://www.mobilize.us/indivisiblecentralindiana/event/946006/
+X-SOURCE:Indivisible Central Indiana (Mobilize)
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Empty Chair Town Hall
 DTSTART;TZID=America/Los_Angeles:20260506T150000
 DTEND;TZID=America/Los_Angeles:20260506T170000
@@ -111,20 +147,6 @@ URL:https://www.mobilize.us/indivisiblecentralindiana/event/922239/
 X-SOURCE:Indivisible Central Indiana (Mobilize)
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Common Grounds - Sunday Coffee and Conversation
-DTSTART;TZID=America/Los_Angeles:20260628T070000
-DTEND;TZID=America/Los_Angeles:20260628T080000
-UID:27a1c360b17d7d52dc2e725efc148944@mobilize.us
-ATTACH;FMTTYPE=image/jpeg:https://mobilize-uploads-prod.s3.amazonaws.com/u
- ploads/event/Common%20Grounds_20260316203417509053.png
-DESCRIPTION:Join us for a chill morning of coffee and conversation! Get in
- fo about plugging into your community. Bring a friend and get involved!
-LOCATION:Cafe Patachou\, 8697 River Crossing Blvd\, Indianapolis\, IN\, 46
- 240
-URL:https://www.mobilize.us/indivisiblecentralindiana/event/922239/
-X-SOURCE:Indivisible Central Indiana (Mobilize)
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Indivisible Northeast Indiana Members' Meetup
 DTSTART;TZID=America/Los_Angeles:20260512T150000
 DTEND;TZID=America/Los_Angeles:20260512T173000
@@ -142,6 +164,25 @@ DESCRIPTION:Are you a Hoosier who feels unseen\, unheard\, and undervalued
 LOCATION:2Toms Brewing Company\, 3676 N Wells St\, Barrel Room\, Fort Wayn
  e\, IN\, 46808
 URL:https://www.mobilize.us/indivisiblenortheastindiana/event/942278/
+X-SOURCE:Indivisible Central Indiana (Mobilize)
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:New Volunteer Welcome Event
+DTSTART;TZID=America/Los_Angeles:20260502T110000
+DTEND;TZID=America/Los_Angeles:20260502T113000
+UID:a1772d838d12c3b4199cf0c51a0f0e9b@mobilize.us
+ATTACH;FMTTYPE=image/jpeg:https://mobilize-uploads-prod.s3.amazonaws.com/u
+ ploads/event/Indivisible%20Central%20Indiana_darkblue_20250203195646711668
+ _20260411023000170217.jpg
+DESCRIPTION:Welcome to Indivisible Central Indiana! Interested in plugging
+  into the local activist scene and getting more involved? Now's your chanc
+ e! Join this Zoom meeting to: 1. Learn about the new leadership structure 
+ of Indivisible Central Indiana 2. Find out what actions and events we'll b
+ e hosting and promoting over the next few weeks 3. Identify which area of 
+ interest is right for you 4. Get plugged in with the team you want to volu
+ nteer with This meeting is for activists at all levels - from beginn
+LOCATION:Virtual event
+URL:https://www.mobilize.us/indivisiblecentralindiana/event/946000/
 X-SOURCE:Indivisible Central Indiana (Mobilize)
 END:VEVENT
 BEGIN:VEVENT

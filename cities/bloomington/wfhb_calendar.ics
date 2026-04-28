@@ -5,106 +5,6 @@ X-WR-CALNAME:WFHB Community Calendar
 X-WR-TIMEZONE:America/Indiana/Indianapolis
 BEGIN:VEVENT
 SUMMARY:Early Voting Hours
-DTSTART;TZID=America/Indiana/Indianapolis:20260427T080000
-DTEND;TZID=America/Indiana/Indianapolis:20260427T180000
-UID:ai1ec-148640-95060@wfhb.org
-DESCRIPTION:Free parking in the North Showers lot.
-LOCATION:North Showers Complex\, 501 N. Morton Street\, (enter through the
-  West Entrance off Morton Street)
-URL:https://wfhb.org/event/early-voting-hours-3/?instance_id=95060
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:VITAL English Language Group – Conversation About Food with Neil
-  K.  (age 18 and up)
-DTSTART;TZID=America/Indiana/Indianapolis:20260427T100000
-DTEND;TZID=America/Indiana/Indianapolis:20260427T113000
-UID:ai1ec-148897-95195@wfhb.org
-DESCRIPTION:New English speakers will practice food-related language skill
- s in a relaxed\, informal atmosphere.
-LOCATION:VITAL Classroom\, Monroe County Public Library\, 303 East Kirkwoo
- d Ave\, Bloomington
-URL:https://wfhb.org/event/vital-english-language-group-conversation-about
- -food-with-neil-k-age-18-and-up-2/?instance_id=95195
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Heading Home of South Central Indiana
-DTSTART;TZID=America/Indiana/Indianapolis:20260427T110000
-DTEND;TZID=America/Indiana/Indianapolis:20260427T141500
-UID:ai1ec-148898-95196@wfhb.org
-DESCRIPTION:
-LOCATION:Meeting Room 1C\, Monroe County Public Library\, 303 E. Kirkwood 
- Ave\, Bloomington
-URL:https://wfhb.org/event/heading-home-of-south-central-indiana-4/?instan
- ce_id=95196
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Death Cafe   (ages 12-19)
-DTSTART;TZID=America/Indiana/Indianapolis:20260427T160000
-DTEND;TZID=America/Indiana/Indianapolis:20260427T170000
-UID:ai1ec-148899-95197@wfhb.org
-DESCRIPTION:Join us for MCPL’s Death Café! Enjoy some snacks while havi
- ng a lighthearted chat about all things death and dying\, and how to make 
- the most of our lives.
-LOCATION:Downtown Teen Space A\, Monroe County Public Library\, 303 East K
- irkwood Ave\, Bloomington
-URL:https://wfhb.org/event/death-cafe-ages-12-19-2/?instance_id=95197
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Country Line Dancing
-DTSTART;TZID=America/Indiana/Indianapolis:20260427T183000
-DTEND;TZID=America/Indiana/Indianapolis:20260427T210000
-UID:ai1ec-138460-92666@wfhb.org
-DESCRIPTION:
-LOCATION:Mike's Music and Dance Barn\, 2341 State Road 46 West\, Nashville
-URL:https://wfhb.org/event/country-line-dancing-all-ages/?instance_id=9266
- 6
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Puffs or Seven Increasingly Eventful Years at a Certain School of 
- Magic and Magic
-DTSTART;TZID=America/Indiana/Indianapolis:20260427T190000
-DTEND;TZID=America/Indiana/Indianapolis:20260427T210000
-UID:ai1ec-148830-95184@wfhb.org
-DESCRIPTION:Forget Harry Potter – this is the story you really want to h
- ear! If you’ve read the HP books – great. If you’ve seen the movies 
- – terrific. Now\, get ready for the play that spoofs them all – Puffs!
-LOCATION:Martinsville High School Auditorium\, 1360 East Gray Street\, Mar
- tinsville
-URL:https://wfhb.org/event/puffs-or-seven-increasingly-eventful-years-at-a
- -certain-school-of-magic-and-magic/?instance_id=95184
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:The BEAT Spring Show
-DTSTART;TZID=America/Indiana/Indianapolis:20260427T190000
-DTEND;TZID=America/Indiana/Indianapolis:20260427T210000
-UID:ai1ec-147063-94243@wfhb.org
-DESCRIPTION:Presented byThe Buskirk-Chumley Theater and Bloomington Expres
- sive Arts Training.
-LOCATION:Buskirk-Chumley Theater\, 114 E. Kirkwood Ave\, Bloomington
-URL:https://wfhb.org/event/the-beat-spring-show/?instance_id=94243
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Trivia Night w/Bloomington Pub Quiz  (21+)
-DTSTART;TZID=America/Indiana/Indianapolis:20260427T203000
-DTEND;TZID=America/Indiana/Indianapolis:20260427T223000
-UID:ai1ec-144411-92774@wfhb.org
-DESCRIPTION:Hey smart people!! Trivia Nights are now your favorite thing t
- o do on Mondays! We promise to keep the sports to a minimum!
-LOCATION:The Back Door\, 207 South College Ave.\, in the alley behind the 
- Atlas Ballroom\, Bloomington
-URL:https://wfhb.org/event/trivia-night-w-bloomington-pub-quiz-21-3/?insta
- nce_id=92774
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Early Voting Hours
 DTSTART;TZID=America/Indiana/Indianapolis:20260428T080000
 DTEND;TZID=America/Indiana/Indianapolis:20260428T180000
 UID:ai1ec-148640-95061@wfhb.org
@@ -311,6 +211,29 @@ DESCRIPTION:Doors open at 6pm.Need to be signed up by 7pm to play.Blind dr
 LOCATION:Mike's Music and Dance Barn\, 2277 West State Road 46\, Nashville
 URL:https://wfhb.org/event/muddy-boots-dart-club-music-jam-2/?instance_id=
  94681
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:New Americas Cinema: When Everybody Swims
+DTSTART;TZID=America/Indiana/Indianapolis:20260428T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260428T210000
+UID:ai1ec-148914-95206@wfhb.org
+DESCRIPTION:Through the voices of Olympic athletes\, water safety experts\
+ , and families who have experienced both triumph and loss\, When Everyone 
+ Swims explores the essential role of swimming in our lives.About When Ever
+ yone SwimsWhen Everyone Swimsis a compilation of inspirational and insight
+ ful stories about how everyone deserves access to pools and safe places to
+  swim. Through powerful\, personal narratives\, the film celebrates resili
+ ence and highlights how water literacy can help individuals from all backg
+ rounds build healthy\, life-affirming relationships with the water. [90 mi
+ n\; documentary\; English]A Q&A with director Jerald Harkness\, Olympic me
+ dalist Lilly King\, and production consultant Dr. Tiffany Monique Quash\, 
+ moderated by Bill Ramos of the School of Public Health\, will follow the s
+ creening.
+LOCATION:IU Cinema\, 1213 E. 7th Street\, Bloomington (on the North end of
+  the IU Auditorium)
+URL:https://wfhb.org/event/new-americas-cinema-when-everybody-swims/?insta
+ nce_id=95206
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -613,8 +536,8 @@ DESCRIPTION:Live auction\, dinner\, and empowering conversation with emcee
  ing the business-casual event\, it will focuses on the importance of posit
  ive female-imagery to young girls in today’s world. The event also inclu
  des a buffet-style dinner with dessert.
-LOCATION:Scott & Connie Ferguson Crestmont Boys & Girls Club: 1111 w 12th 
- St.
+LOCATION:Scott & Connie Ferguson Crestmont Boys & Girls Club\, 1111 w 12th
+  St\, Bloomington
 URL:https://wfhb.org/event/smart-girls-strong-women-2/?instance_id=94901
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
@@ -628,6 +551,28 @@ LOCATION:The Cabin Restaurant and Lounge\, 4015 South State Hwy 446\, Bloo
  mington
 URL:https://wfhb.org/event/bloomington-blues-jam-hosted-by-ladies-sing-the
  -blues/?instance_id=94540
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Film: MOULIN ROUGE!
+DTSTART;TZID=America/Indiana/Indianapolis:20260430T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260430T210000
+UID:ai1ec-148915-95207@wfhb.org
+DESCRIPTION:Set against the Parisian backdrop of a spectacular Moulin Roug
+ e show\, an idealistic young writer (Ewan McGregor) is drafted into a bohe
+ mian entourage and falls in love with an ambitious\, stunning\, and ultima
+ tely doomed courtesan (Nicole Kidman)\, who is caught between the hero she
+ ’s falling for\, too\, and a ruthless duke\, whose fortune could help sa
+ ve her and the Moulin Rouge. McGregor and Kidman lead an internationally r
+ enowned cast in this swooningly romantic and pop-music-inspired dancing an
+ d singing extravaganza with musical inspiration from the likes of David Bo
+ wie\, Beck\, Labelle\, Madonna\, and Fatboy Slim. The film would go on to 
+ inspire the Broadway stage production ofMoulin Rouge! The Musical. [127 mi
+ n\; musical\, drama\, romance\; English\, French\, and Spanish with Englis
+ h subtitles]
+LOCATION:IU Cinema\, 1213 E. 7th Street\, Bloomington (on the North end of
+  the IU Auditorium)
+URL:https://wfhb.org/event/film-moulin-rouge/?instance_id=95207
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -820,6 +765,25 @@ LOCATION:The Comedy Attic\, 123 South Walnut (corner of 4th and Walnut Str
  eets)\, Bloomington
 URL:https://wfhb.org/event/raanan-hershberg-shows-at-700-915-pm/?instance_
  id=95072
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Screening the Semiquincentennial Film Series: 1776
+DTSTART;TZID=America/Indiana/Indianapolis:20260501T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260501T210000
+UID:ai1ec-148916-95208@wfhb.org
+DESCRIPTION:The award-winning Broadway smash that retells the Continental 
+ Congress’ political struggle to declare independence hits the IU Cinema 
+ big screen for the first time!About 1776Adapted from the Tony-award winnin
+ g smash hit\,1776follows colonial representatives as they gather in Philad
+ elphia with the aim of establishing a set of governmental rules for the bu
+ rgeoning United States. With members of the Broadway cast reprising their 
+ roles in the film\,1776is a testament to the spirit of the country’s fou
+ nders. [164 min\; musical\; English]
+LOCATION:IU Cinema\, 1213 E. 7th Street\, Bloomington (on the North end of
+  the IU Auditorium)
+URL:https://wfhb.org/event/screening-the-semiquincentennial-film-series-17
+ 76/?instance_id=95208
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -1377,6 +1341,17 @@ UID:ai1ec-148782-95126@wfhb.org
 DESCRIPTION:
 LOCATION:Ferguson House Beer Garden\, 78 W Franklin St\, Nashville
 URL:https://wfhb.org/event/open-mic-night-27/?instance_id=95126
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington Blues Jam\, hosted by High Street Jack
+DTSTART;TZID=America/Indiana/Indianapolis:20260507T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260507T220000
+UID:ai1ec-148918-95210@wfhb.org
+DESCRIPTION:Host band plays 7-8pm / Jam runs 8-10pm
+LOCATION:Mike's Music and Dance Barn\, 2277 W. St. Rd 46\, Nashville
+URL:https://wfhb.org/event/bloomington-blues-jam-hosted-by-high-street-jac
+ k-7/?instance_id=95210
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT

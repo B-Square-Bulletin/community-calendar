@@ -464,22 +464,6 @@ URL:https://sycamorelandtrust.org/2024/04/preserve-a-preserve-weed-wrangle
 X-SOURCE:Sycamore Land Trust
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Arbor Day Tree Giveaway
-DTSTART:20260427T100000
-DTEND:20260427T130000
-UID:f8352be28de499aa1b73c4ef1f7ca871@sycamorelandtrust.org
-DESCRIPTION:For more than a decade\, Sycamore Land Trust’s annual “Arb
- or Day Tree Giveaway” has distributed hundreds of free tree seedlings ea
- ch Arbor Day to help our community create beneficial native habitat at hom
- e. Planting trees creates food and shelter for wildlife\, absorbs carbon d
- ioxide\, and stores carbon in the soil. This year\, Sycamore will distribu
- te over 600 tree seedlings at Bloomingfoods East &amp\; Near West. For mor
- e information about tree species and planting information\, visit sycamore
- landtrust.org/free-trees.
-URL:https://sycamorelandtrust.org/2024/03/arbor-day-tree-giveaway-3/
-X-SOURCE:Sycamore Land Trust
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Preserve-a-Preserve Volunteer Weed Wrangle at Downey Hill
 DTSTART:20260721T090000
 DTEND:20260721T113000
@@ -833,6 +817,16 @@ URL:https://sycamorelandtrust.org/2020/01/sky-dance-twilight-hike/
 X-SOURCE:Sycamore Land Trust
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Nature Lovers Night
+DTSTART:20260729T180000
+DTEND:20260729T200000
+UID:c3c0c93eb4e817e932dfa5b70d323ccc@sycamorelandtrust.org
+DESCRIPTION:Monday\, July 30 from 6-8pm at Switchyard Brewing Company (419
+  N Walnut St\, Bloomington)
+URL:https://sycamorelandtrust.org/2019/07/nature-lovers-night/
+X-SOURCE:Sycamore Land Trust
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Member Mixer at Upland
 DTSTART:20260717T160000
 DTEND:20260717T190000
@@ -887,15 +881,6 @@ DESCRIPTION:Get your family out in the great outdoors and learn from Sycam
  \, and listen closely to the sounds of nature as we traverse the beautiful
   Beanblossom Bottoms Nature Preserves.
 URL:https://sycamorelandtrust.org/2019/03/0519-little-hikers/
-X-SOURCE:Sycamore Land Trust
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Pollinator Day &#8211\; Purdue Extension Floyd County
-DTSTART:20260427T100000
-DTEND:20260427T150000
-UID:303a8ce8c4ca7aeb87e9eb04c1197aa5@sycamorelandtrust.org
-DESCRIPTION:
-URL:https://sycamorelandtrust.org/2019/03/0419-purdue-pollinator/
 X-SOURCE:Sycamore Land Trust
 END:VEVENT
 END:VCALENDAR
