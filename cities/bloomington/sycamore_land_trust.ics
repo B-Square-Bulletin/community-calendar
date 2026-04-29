@@ -160,22 +160,6 @@ URL:https://sycamorelandtrust.org/2026/04/trekkin-for-trillium-with-tom-sw
 X-SOURCE:Sycamore Land Trust
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Wildflowers at the Water&#8217\;s Edge: A Spring Ephemeral Hike
-DTSTART:20260428T170000
-DTEND:20260428T200000
-UID:64e75aa37c3ddef0662ab4d348e6634c@sycamorelandtrust.org
-DESCRIPTION:Celebrate spring at Amy Weingartner Branigin Peninsula Preserv
- e\, where limestone bluffs meet the shores of Lake Monroe. This unique pen
- insula rises from the water on ancient limestone bedrock\, creating calciu
- m-rich soils and varied slopes that nurture an exceptional diversity of sp
- ring wildflowers. Come see Virginia Bluebells\, Pussytoes\, Columbine\, an
- d more!
-LOCATION:Amy Weingartner Branigin Peninsula Preserve
-URL:https://sycamorelandtrust.org/2026/04/wildflowers-at-the-waters-edge-a
- -spring-ephemeral-hike/
-X-SOURCE:Sycamore Land Trust
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Little Hikers: Mysterious Moths Night
 DTSTART:20260726T203000
 DTEND:20260726T223000
@@ -591,21 +575,17 @@ URL:https://sycamorelandtrust.org/2023/02/arbor-day-tree-giveaway-blooming
 X-SOURCE:Sycamore Land Trust
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Arbor Day Tree Giveaway &#8211\; Evansville
-DTSTART:20260428T110000
-DTEND:20260428T140000
-UID:159ddc2875f6af1cf2413a8f973e91b4@sycamorelandtrust.org
-DESCRIPTION:On Friday\, April 28\, 2023\, come visit Sycamore Land Trust&#
- 8217\;s Arbor Day Tree Giveaway at Old National Bank atrium and celebrate 
- everything that makes trees amazing! Every visitor gets a free native tree
-  seedling from Indiana DNR&#8217\;s Vallonia Nursery. Wild Birds Unlimited
-  and Ancient Roots Native Nursery will also be present with free giveaways
- . Information will be available from Evansville Audubon Society and Patoka
-  River National Wildlife Refuge. The event will begin at 11am Central time
-  and end when supplies run out. Visit sycamorelandtrust.org/free-trees to 
- learn more.
-URL:https://sycamorelandtrust.org/2023/02/arbor-day-tree-giveaway-evansvil
- le-2/
+SUMMARY:Sycamore Saturdays: Japanese Stiltgrass Control at Trevlac Bluffs 
+ Nature Preserve
+DTSTART:20260730T090000
+DTEND:20260730T090000
+UID:df0ffa70f0284ee21868db4f2d612072@sycamorelandtrust.org
+DESCRIPTION:Join us for a land stewardship volunteer activity to control i
+ nvasive Japanese stiltgrass with Mary Welz\, Sycamore&#8217\;s Education D
+ irector.
+LOCATION:Trevlac Bluffs Nature Preserve
+URL:https://sycamorelandtrust.org/2022/06/sycamore-saturdays-japanese-stil
+ tgrass-control-at-trevlac-bluffs-nature-preserve/
 X-SOURCE:Sycamore Land Trust
 END:VEVENT
 BEGIN:VEVENT
