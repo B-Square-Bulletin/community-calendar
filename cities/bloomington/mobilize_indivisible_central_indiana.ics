@@ -61,6 +61,20 @@ URL:https://www.mobilize.us/indivisiblecentralindiana/event/922258/
 X-SOURCE:Indivisible Central Indiana (Mobilize)
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:End ICE Detention Candlelight Vigil
+DTSTART;TZID=America/Los_Angeles:20260516T173000
+DTEND;TZID=America/Los_Angeles:20260516T183000
+UID:437c6fdc5c37145cf84b6e953b76c6a0@mobilize.us
+ATTACH;FMTTYPE=image/jpeg:https://mobilize-uploads-prod.s3.amazonaws.com/u
+ ploads/event/mass%20ave%20mobilize_20260429165902445191.png
+DESCRIPTION:As part of a statewide day of action. We are gathering to prot
+ est ICE detention at Miami Correctional Facility. Join us for a candleligh
+ t vigil.
+LOCATION:Dancing Ann\, 401 Massachusetts Ave\, Indianapolis\, IN\, 46204
+URL:https://www.mobilize.us/indivisiblecentralindiana/event/947600/
+X-SOURCE:Indivisible Central Indiana (Mobilize)
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:End ICE Detention Day of Action - Fountain Square
 DTSTART;TZID=America/Los_Angeles:20260516T090000
 DTEND;TZID=America/Los_Angeles:20260516T103000
@@ -106,6 +120,22 @@ DESCRIPTION:Join us in Indianapolis for a special ACLU of Indiana Voluntee
   Dinner and N/A drinks provided! Please register to see the event details.
 LOCATION:Indianapolis\, IN
 URL:https://www.mobilize.us/acluin/event/896878/
+X-SOURCE:Indivisible Central Indiana (Mobilize)
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:End ICE Detention Day of Action - Carmel
+DTSTART;TZID=America/Los_Angeles:20260516T070000
+DTEND;TZID=America/Los_Angeles:20260516T093000
+UID:fb007b99166b755446acda3c598a6c62@mobilize.us
+ATTACH;FMTTYPE=image/jpeg:https://mobilize-uploads-prod.s3.amazonaws.com/u
+ ploads/event/Statewide%20End%20ICE%20campaign%20carmel%20vets%20memorial_2
+ 0260429181619311280.png
+DESCRIPTION:Join us for a rally to End ICE detention in Indiana. This even
+ t is part of a statewide day of action. Gather at Carmel Clay Veterans Mem
+ orial (400-498 American Way\, across from the Farmers' Market)
+LOCATION:Carmel Clay Veterans Memorial (across from farmers' market)\, 400
+  American Way N\, Carmel\, IN\, 46032
+URL:https://www.mobilize.us/indivisiblecentralindiana/event/947680/
 X-SOURCE:Indivisible Central Indiana (Mobilize)
 END:VEVENT
 BEGIN:VEVENT
