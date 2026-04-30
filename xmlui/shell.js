@@ -142,6 +142,7 @@ window._xsLogs = [];
   var cityNameOverrides = {
     santarosa: 'Santa Rosa',
     raleighdurham: 'Raleigh-Durham',
+    tetonvalley: 'Teton Valley',
   };
 
   window.toDisplayName = function (slug) {

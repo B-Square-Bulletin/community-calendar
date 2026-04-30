@@ -473,6 +473,19 @@ jobs:
 
 
     # ==========================================
+    # Teton Valley
+    # ==========================================
+    - name: Scrape Teton Valley sources
+      if: contains(steps.locations.outputs.list, 'tetonvalley') && github.event.inputs.regenerate_only != 'true'
+      run: |
+        echo "Scraping Teton Valley..."
+        python scrapers/knotty_pine.py --output cities/tetonvalley/knotty_pine.ics || true
+        python scrapers/church_in_tetons.py --output cities/tetonvalley/church_in_tetons.ics || true
+        python scrapers/tvtap.py --output cities/tetonvalley/tvtap.ics || true
+      continue-on-error: true
+
+
+    # ==========================================
     # Download feeds + Combine ICS (all cities)
     # ==========================================
     - name: Process pending feeds into DB

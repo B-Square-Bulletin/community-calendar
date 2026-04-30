@@ -23,6 +23,9 @@
   "santarosa": {
     "timezone": "America/Los_Angeles"
   },
+  "tetonvalley": {
+    "timezone": "America/Denver"
+  },
   "toronto": {
     "timezone": "America/Toronto"
   }
