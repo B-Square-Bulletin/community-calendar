@@ -1,0 +1,20 @@
+# Add feed URLs or scraper outputs here. The build will process them into the
+# database automatically and reset this file to the template below.
+#
+# Format:
+#   # Source Name
+#   https://example.com/events/?ical=1
+#
+# Or for scrapers:
+#   # Source Name
+#   # cmd: python scrapers/example.py --name "Source Name"
+#   cities/newcastleva/example.ics
+#
+# Test before adding:
+#   python scripts/add_feed.py URL newcastleva "Source Name" --test
+#   python scripts/add_scraper.py example newcastleva "Source Name" --test
+#
+# See CONTRIBUTING.md for details.
+
+# Craig County Government (CivicPlus "Main Calendar" — superset includes Board of Supervisors, Events, Meetings)
+https://www.craigcountyva.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar
