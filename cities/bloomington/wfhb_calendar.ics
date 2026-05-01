@@ -4,28 +4,6 @@ PRODID:-//WFHB Community Calendar//wfhb.org//
 X-WR-CALNAME:WFHB Community Calendar
 X-WR-TIMEZONE:America/Indiana/Indianapolis
 BEGIN:VEVENT
-SUMMARY:Bloomington Blues Jam\, hosted by Ladies Sing the Blues
-DTSTART;TZID=America/Indiana/Indianapolis:20260430T190000
-DTEND;TZID=America/Indiana/Indianapolis:20260430T220000
-UID:ai1ec-147792-94540@wfhb.org
-DESCRIPTION:7-8pm Host Band plays8-10pm Blues Jam happens
-LOCATION:The Cabin Restaurant and Lounge\, 4015 South State Hwy 446\, Bloo
- mington
-URL:https://wfhb.org/event/bloomington-blues-jam-hosted-by-ladies-sing-the
- -blues/?instance_id=94540
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Free Riders
-DTSTART;TZID=America/Indiana/Indianapolis:20260430T220000
-DTEND;TZID=America/Indiana/Indianapolis:20260501T000000
-UID:ai1ec-149043-95257@wfhb.org
-DESCRIPTION:
-LOCATION:The Bluebird Nightclub\, 216 N. Walnut St\, Bloomington
-URL:https://wfhb.org/event/free-riders/?instance_id=95257
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Early Voting Hours
 DTSTART;TZID=America/Indiana/Indianapolis:20260501T080000
 DTEND;TZID=America/Indiana/Indianapolis:20260501T180000
@@ -49,6 +27,18 @@ DESCRIPTION:Locally produced plants grown and cared for by agriculture stu
 LOCATION:Hoosier Hills Career Center: 3070 N. Prow Rd. Bloomington
 URL:https://wfhb.org/event/hoosier-hills-ffa-annual-plant-sale/?instance_i
  d=94933
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Food Truck Friday\, with entertainment from Coda Canyon (5-7pm) an
+ d The Lost Keys (7-9pm)
+DTSTART;TZID=America/Indiana/Indianapolis:20260501T110000
+DTEND;TZID=America/Indiana/Indianapolis:20260501T210000
+UID:ai1ec-149102-95300@wfhb.org
+DESCRIPTION:
+LOCATION:Switchyard Park\, 1601 S. Rogers St\, Bloomington
+URL:https://wfhb.org/event/food-truck-friday-with-entertainment-from-coda-
+ canyon-5-7pm-and-the-lost-keys-7-9pm/?instance_id=95300
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -114,6 +104,16 @@ LOCATION:Wylie House Museum and Morton C. Bradley Jr. Education Center: 30
  7/317 E 2nd Street\, Bloomington\, IN
 URL:https://wfhb.org/event/louisas-garden-exhibition-opening/?instance_id=
  94949
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Dave Sisson
+DTSTART;TZID=America/Indiana/Indianapolis:20260501T170000
+DTEND;TZID=America/Indiana/Indianapolis:20260501T200000
+UID:ai1ec-149103-95301@wfhb.org
+DESCRIPTION:
+LOCATION:Ferguson House Beer Garden\, 78 W Franklin St\, Nashville
+URL:https://wfhb.org/event/dave-sisson-24/?instance_id=95301
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -186,6 +186,16 @@ URL:https://wfhb.org/event/dubs-in-the-woods-vw-bus-campout/?instance_id=9
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Michael McCartney
+DTSTART;TZID=America/Indiana/Indianapolis:20260501T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260501T200000
+UID:ai1ec-149111-95307@wfhb.org
+DESCRIPTION:
+LOCATION:1915 Steakhouse & Bar\, 290 East Morgan Street\, Martinsville
+URL:https://wfhb.org/event/michael-mccartney-10/?instance_id=95307
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Finn: A New Musical- At the PB&J Cafe
 DTSTART;TZID=America/Indiana/Indianapolis:20260501T183000
 DTEND;TZID=America/Indiana/Indianapolis:20260501T193000
@@ -231,6 +241,25 @@ UID:ai1ec-148746-95104@wfhb.org
 DESCRIPTION:Presented by Gregory Washel.
 LOCATION:Buskirk-Chumley Theater\, 114 East Kirkwood Avenue\, Bloomington
 URL:https://wfhb.org/event/gregorys-xit/?instance_id=95104
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Guys and Dolls Jr.
+DTSTART;TZID=America/Indiana/Indianapolis:20260501T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260501T210000
+UID:ai1ec-149112-95308@wfhb.org
+DESCRIPTION:John R. Wooden Middle School presents Guys and Dolls Jr. on Ma
+ y 1 and 2\, at 7 pm.Set in Damon Runyon’s New York City\, Guys and Dolls
+  JR. follows gambler\, Nathan Detroit\, as he tries to find the cash to se
+ t up the biggest crap game in town while the authorities breathe down his 
+ neck. Meanwhile\, his girlfriend and nightclub performer\, Adelaide\, lame
+ nts that they’ve been engaged for fourteen years without ever getting ma
+ rried. Nathan turns to fellow gambler\, Sky Masterson\, for the dough\, bu
+ t Sky ends up chasing the straight-laced missionary\, Sarah Brown. Guys an
+ d Dolls JR. takes us from the heart of Times Square to the cafes of Havana
+ \, but everyone eventually ends up right where they belong.
+LOCATION:JRW Gymnasium \, 109 East Garfield Avenue\, Martinsville
+URL:https://wfhb.org/event/guys-and-dolls-jr/?instance_id=95308
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -406,6 +435,24 @@ URL:https://wfhb.org/event/hoosier-hills-ffa-annual-plant-sale-2/?instance
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Pioneer Days – A 250th Anniversary Celebration
+DTSTART;TZID=America/Indiana/Indianapolis:20260502T090000
+DTEND;TZID=America/Indiana/Indianapolis:20260502T150000
+UID:ai1ec-149116-95313@wfhb.org
+DESCRIPTION:Join Morgan County Parks & Recreation for a walk back in time 
+ at the Historic Old Wilbur School House as we celebrate our Country’s 25
+ 0 Anniversary.Enjoy learning about the trades of our pioneers\, with live 
+ and hands on demonstrations. Hear stories about their way of life as our s
+ tory tellers share their hardships and joys of trekking across the wildern
+ ess and prairies. See how our schools have evolved from the pioneer days t
+ o the present.Experience some original recipes from the day while you sit 
+ a spell and enjoy the music.
+LOCATION:Old Wilbur Schoolhouse\, 6025 Wilbur Road\, Martinsville
+URL:https://wfhb.org/event/pioneer-days-a-250th-anniversary-celebration/?i
+ nstance_id=95313
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Sycamore Land Trust Spring Plant Sale\, to benefit their Native Pl
  ant Nursery
 DTSTART;TZID=America/Indiana/Indianapolis:20260502T090000
@@ -493,6 +540,17 @@ URL:https://wfhb.org/event/finn-a-new-musical-at-the-pbj-cafe-2/?instance_
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Movie at the MET: The Muppets
+DTSTART;TZID=America/Indiana/Indianapolis:20260502T140000
+DTEND;TZID=America/Indiana/Indianapolis:20260502T160000
+UID:ai1ec-149115-95312@wfhb.org
+DESCRIPTION:
+LOCATION:Martinsville Entertainment Theatre\, 36 E Morgan St\, Martinsvill
+ e
+URL:https://wfhb.org/event/movie-at-the-met-the-muppets/?instance_id=95312
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Nicholas Graham Hall
 DTSTART;TZID=America/Indiana/Indianapolis:20260502T160000
 DTEND;TZID=America/Indiana/Indianapolis:20260502T180000
@@ -504,6 +562,27 @@ URL:https://wfhb.org/event/nicholas-graham-hall-6/?instance_id=95217
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Buck Knawe
+DTSTART;TZID=America/Indiana/Indianapolis:20260502T170000
+DTEND;TZID=America/Indiana/Indianapolis:20260502T200000
+UID:ai1ec-149104-95302@wfhb.org
+DESCRIPTION:
+LOCATION:Ferguson House Beer Garden\, 78 W Franklin St\, Nashville
+URL:https://wfhb.org/event/buck-knawe-10/?instance_id=95302
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Sharianne “Sweet Pea” Whetstine
+DTSTART;TZID=America/Indiana/Indianapolis:20260502T170000
+DTEND;TZID=America/Indiana/Indianapolis:20260502T200000
+UID:ai1ec-149106-95304@wfhb.org
+DESCRIPTION:
+LOCATION:The Nashville House\, 15 S Van Buren Street\, Nashville
+URL:https://wfhb.org/event/sharianne-sweet-pea-whetstine/?instance_id=9530
+ 4
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Jefferson Street Music Presents: Pasha & the Poms / curry
 DTSTART;TZID=America/Indiana/Indianapolis:20260502T180000
 DTEND;TZID=America/Indiana/Indianapolis:20260502T200000
@@ -512,6 +591,46 @@ DESCRIPTION:Doors at 5:30pm
 LOCATION:Orbit Room\, 107 North College Avenue\, Suite 001\, Bloomington
 URL:https://wfhb.org/event/jefferson-street-music-presents-pasha-the-poms-
  curry/?instance_id=95213
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Jon Shoulders
+DTSTART;TZID=America/Indiana/Indianapolis:20260502T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260502T200000
+UID:ai1ec-149114-95311@wfhb.org
+DESCRIPTION:
+LOCATION:1915 Steakhouse & Bar\, 290 East Morgan Street\, Martinsville
+URL:https://wfhb.org/event/jon-shoulders/?instance_id=95311
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:John Kogge and David Sharp
+DTSTART;TZID=America/Indiana/Indianapolis:20260502T183000
+DTEND;TZID=America/Indiana/Indianapolis:20260502T210000
+UID:ai1ec-149110-95306@wfhb.org
+DESCRIPTION:Acoustic Rock\, Folk and Blues
+LOCATION:Trailhead Pizzeria\, 4303 State Hwy 446\, Bloomington
+URL:https://wfhb.org/event/john-kogge-and-david-sharp-13/?instance_id=9530
+ 6
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Guys and Dolls Jr.
+DTSTART;TZID=America/Indiana/Indianapolis:20260502T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260502T210000
+UID:ai1ec-149112-95309@wfhb.org
+DESCRIPTION:John R. Wooden Middle School presents Guys and Dolls Jr. on Ma
+ y 1 and 2\, at 7 pm.Set in Damon Runyon’s New York City\, Guys and Dolls
+  JR. follows gambler\, Nathan Detroit\, as he tries to find the cash to se
+ t up the biggest crap game in town while the authorities breathe down his 
+ neck. Meanwhile\, his girlfriend and nightclub performer\, Adelaide\, lame
+ nts that they’ve been engaged for fourteen years without ever getting ma
+ rried. Nathan turns to fellow gambler\, Sky Masterson\, for the dough\, bu
+ t Sky ends up chasing the straight-laced missionary\, Sarah Brown. Guys an
+ d Dolls JR. takes us from the heart of Times Square to the cafes of Havana
+ \, but everyone eventually ends up right where they belong.
+LOCATION:JRW Gymnasium \, 109 East Garfield Avenue\, Martinsville
+URL:https://wfhb.org/event/guys-and-dolls-jr/?instance_id=95309
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -602,6 +721,19 @@ URL:https://wfhb.org/event/the-steeldrivers/?instance_id=95266
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:3rd Annual Jimmy Nash Spring Craft Fair
+DTSTART;TZID=America/Indiana/Indianapolis:20260502T210000
+DTEND;TZID=America/Indiana/Indianapolis:20260503T150000
+UID:ai1ec-149113-95310@wfhb.org
+DESCRIPTION:Come enjoy browsing local craft and artisan booths featuring a
+  variety of handmade items including art\, jewelry\, decor\, fiber arts\, 
+ and more!
+LOCATION:Jimmy Nash City Park\, 360 N. Home Avenue\, Martinsville\,
+URL:https://wfhb.org/event/3rd-annual-jimmy-nash-spring-craft-fair/?instan
+ ce_id=95310
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:6 Foot Blonde
 DTSTART;TZID=America/Indiana/Indianapolis:20260502T210000
 DTEND;TZID=America/Indiana/Indianapolis:20260502T230000
@@ -654,6 +786,16 @@ URL:https://wfhb.org/event/bloomington-sandlot-baseball-scrimmage/?instanc
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Burning Daylights
+DTSTART;TZID=America/Indiana/Indianapolis:20260503T130000
+DTEND;TZID=America/Indiana/Indianapolis:20260503T160000
+UID:ai1ec-149107-95305@wfhb.org
+DESCRIPTION:
+LOCATION:The Nashville House\, 15 S Van Buren Street\, Nashville
+URL:https://wfhb.org/event/burning-daylights/?instance_id=95305
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Finn: A New Musical- At the PB&J Cafe
 DTSTART;TZID=America/Indiana/Indianapolis:20260503T130000
 DTEND;TZID=America/Indiana/Indianapolis:20260503T140000
@@ -673,6 +815,16 @@ DESCRIPTION:Constellation Stage & Screen presents “Finn: A New Musical-
 LOCATION:Waldron Arts Center (122 S Walnut St)
 URL:https://wfhb.org/event/finn-a-new-musical-at-the-pbj-cafe-2/?instance_
  id=90582
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gene Fugate
+DTSTART;TZID=America/Indiana/Indianapolis:20260503T130000
+DTEND;TZID=America/Indiana/Indianapolis:20260503T160000
+UID:ai1ec-149105-95303@wfhb.org
+DESCRIPTION:
+LOCATION:Ferguson House Beer Garden\, 78 W Franklin St\, Nashville
+URL:https://wfhb.org/event/gene-fugate-56/?instance_id=95303
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -821,6 +973,17 @@ DESCRIPTION:Free parking in the North Showers lot.
 LOCATION:North Showers Complex\, 501 N. Morton Street\, (enter through the
   West Entrance off Morton Street)
 URL:https://wfhb.org/event/early-voting-hours-4/?instance_id=95065
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Light or Dark side (‘May the 4th be with you’ shindig)
+DTSTART;TZID=America/Indiana/Indianapolis:20260504T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260504T220000
+UID:ai1ec-149100-95291@wfhb.org
+DESCRIPTION:Whole buncha music!
+LOCATION:Max's Place\, 1280 N. College Ave. Suite 3\, Bloomington
+URL:https://wfhb.org/event/light-or-dark-side-may-the-4th-be-with-you-shin
+ dig/?instance_id=95291
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
@@ -2376,6 +2539,16 @@ URL:https://wfhb.org/event/sleepers-open-mic-hosted-by-drew/?instance_id=9
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Sarah and Mark Menefee
+DTSTART;TZID=America/Indiana/Indianapolis:20260521T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260521T213000
+UID:ai1ec-149101-95292@wfhb.org
+DESCRIPTION:
+LOCATION:Max's Place\, 1280 N. College Ave. Suite 3\, Bloomington
+URL:https://wfhb.org/event/sarah-and-mark-menefee/?instance_id=95292
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Bloomington Community Farmers’ Market
 DTSTART;TZID=America/Indiana/Indianapolis:20260523T080000
 DTEND;TZID=America/Indiana/Indianapolis:20260523T123000
@@ -3685,6 +3858,16 @@ URL:https://wfhb.org/event/another-revolution-presented-by-constellation-s
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Sarah and Mark Menefee
+DTSTART;TZID=America/Indiana/Indianapolis:20260618T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260618T213000
+UID:ai1ec-149101-95293@wfhb.org
+DESCRIPTION:
+LOCATION:Max's Place\, 1280 N. College Ave. Suite 3\, Bloomington
+URL:https://wfhb.org/event/sarah-and-mark-menefee/?instance_id=95293
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Bill Monroe’s Bluegrass Festival 2026
 DTSTART;TZID=America/Indiana/Indianapolis:20260619T100000
 DTEND;TZID=America/Indiana/Indianapolis:20260619T220000
@@ -4223,6 +4406,16 @@ DESCRIPTION:Enjoy a relaxed evening of creative pursuits and lively entert
 LOCATION:The Pottery House Studio\, 223 South Pete Ellis Drive\, #17 Bloom
  ington
 URL:https://wfhb.org/event/karaoke-97/?instance_id=94306
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Sarah and Mark Menefee
+DTSTART;TZID=America/Indiana/Indianapolis:20260716T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260716T213000
+UID:ai1ec-149101-95294@wfhb.org
+DESCRIPTION:
+LOCATION:Max's Place\, 1280 N. College Ave. Suite 3\, Bloomington
+URL:https://wfhb.org/event/sarah-and-mark-menefee/?instance_id=95294
 X-SOURCE:WFHB Community Calendar
 END:VEVENT
 BEGIN:VEVENT

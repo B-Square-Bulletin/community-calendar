@@ -1,5 +1,5 @@
 {
-  "generated": "2026-05-01T01:16:29.370396",
+  "generated": "2026-05-01T03:27:36.262893",
   "cities": {
     "santarosa": {
       "feeds": {
@@ -16406,142 +16406,6 @@
             }
           ]
         },
-        "far_center": {
-          "history": [
-            {
-              "date": "2026-03-29",
-              "count": 4
-            },
-            {
-              "date": "2026-03-30",
-              "count": 4
-            },
-            {
-              "date": "2026-03-31",
-              "count": 4
-            },
-            {
-              "date": "2026-04-01",
-              "count": 4
-            },
-            {
-              "date": "2026-04-02",
-              "count": 3
-            },
-            {
-              "date": "2026-04-03",
-              "count": 3
-            },
-            {
-              "date": "2026-04-04",
-              "count": 2
-            },
-            {
-              "date": "2026-04-05",
-              "count": 2
-            },
-            {
-              "date": "2026-04-06",
-              "count": 2
-            },
-            {
-              "date": "2026-04-07",
-              "count": 3
-            },
-            {
-              "date": "2026-04-08",
-              "count": 3
-            },
-            {
-              "date": "2026-04-09",
-              "count": 3
-            },
-            {
-              "date": "2026-04-10",
-              "count": 4
-            },
-            {
-              "date": "2026-04-11",
-              "count": 2
-            },
-            {
-              "date": "2026-04-12",
-              "count": 2
-            },
-            {
-              "date": "2026-04-13",
-              "count": 2
-            },
-            {
-              "date": "2026-04-14",
-              "count": 2
-            },
-            {
-              "date": "2026-04-15",
-              "count": 2
-            },
-            {
-              "date": "2026-04-17",
-              "count": 2
-            },
-            {
-              "date": "2026-04-18",
-              "count": 2
-            },
-            {
-              "date": "2026-04-19",
-              "count": 2
-            },
-            {
-              "date": "2026-04-20",
-              "count": 1
-            },
-            {
-              "date": "2026-04-21",
-              "count": 1
-            },
-            {
-              "date": "2026-04-22",
-              "count": 1
-            },
-            {
-              "date": "2026-04-23",
-              "count": 1
-            },
-            {
-              "date": "2026-04-24",
-              "count": 1
-            },
-            {
-              "date": "2026-04-25",
-              "count": 1
-            },
-            {
-              "date": "2026-04-26",
-              "count": 1
-            },
-            {
-              "date": "2026-04-27",
-              "count": 1
-            },
-            {
-              "date": "2026-04-28",
-              "count": 1
-            },
-            {
-              "date": "2026-04-29",
-              "count": 1
-            },
-            {
-              "date": "2026-04-30",
-              "count": 1
-            },
-            {
-              "date": "2026-05-01",
-              "count": 1
-            }
-          ]
-        },
         "wfhb_calendar": {
           "history": [
             {
@@ -16674,7 +16538,7 @@
             },
             {
               "date": "2026-05-01",
-              "count": 306
+              "count": 322
             }
           ]
         },
@@ -18986,7 +18850,7 @@
             },
             {
               "date": "2026-05-01",
-              "count": 103
+              "count": 98
             }
           ]
         },
@@ -20890,7 +20754,7 @@
             },
             {
               "date": "2026-05-01",
-              "count": 61
+              "count": 57
             }
           ]
         },
@@ -21298,7 +21162,7 @@
             },
             {
               "date": "2026-05-01",
-              "count": 6
+              "count": 21
             }
           ]
         },
@@ -25102,7 +24966,7 @@
             },
             {
               "date": "2026-05-01",
-              "count": 42
+              "count": 40
             }
           ]
         },
@@ -28416,9 +28280,9 @@
         }
       },
       "url_quality": {
-        "total_with_url": 2213,
-        "total_events": 3708,
-        "unique_urls": 1349,
+        "total_with_url": 2239,
+        "total_events": 3734,
+        "unique_urls": 1372,
         "generic_count": 150,
         "generic_domains": [
           {
@@ -28468,8 +28332,8 @@
           },
           {
             "source": "WFHB Community Calendar",
-            "events": 218,
-            "unique_urls": 218,
+            "events": 235,
+            "unique_urls": 235,
             "specificity_pct": 100
           },
           {
@@ -28510,8 +28374,8 @@
           },
           {
             "source": "IU beINvolved Student Orgs",
-            "events": 84,
-            "unique_urls": 84,
+            "events": 81,
+            "unique_urls": 81,
             "specificity_pct": 100
           },
           {
@@ -28522,8 +28386,8 @@
           },
           {
             "source": "IU Jacobs School of Music",
-            "events": 55,
-            "unique_urls": 55,
+            "events": 51,
+            "unique_urls": 51,
             "specificity_pct": 100
           },
           {
@@ -28559,7 +28423,7 @@
         },
         {
           "category": "Arts / Culture",
-          "count": 448
+          "count": 447
         },
         {
           "category": "Sports / Fitness",
@@ -28571,11 +28435,11 @@
         },
         {
           "category": "Music / Concerts",
-          "count": 279
+          "count": 287
         },
         {
           "category": "Education / Workshops",
-          "count": 247
+          "count": 254
         },
         {
           "category": "Family / Kids",
@@ -28587,7 +28451,7 @@
         },
         {
           "category": "Comedy / Improv",
-          "count": 168
+          "count": 166
         },
         {
           "category": "Games / Trivia",
@@ -28603,7 +28467,7 @@
         },
         {
           "category": "Film / Cinema",
-          "count": 108
+          "count": 124
         },
         {
           "category": "Health / Wellness",
@@ -28611,19 +28475,19 @@
         },
         {
           "category": "Dance / Performance",
-          "count": 89
+          "count": 90
         },
         {
           "category": "History / Heritage",
-          "count": 85
+          "count": 86
         },
         {
           "category": "Craft / Maker",
-          "count": 65
+          "count": 66
         },
         {
           "category": "Religion / Spirituality",
-          "count": 30
+          "count": 29
         },
         {
           "category": "(uncategorized)",
@@ -28631,7 +28495,7 @@
         },
         {
           "category": "Technology / Careers",
-          "count": 25
+          "count": 21
         },
         {
           "category": "LGBTQ+ / Gender",
@@ -28643,8 +28507,8 @@
         }
       ],
       "images": {
-        "total": 3708,
-        "with_image": 944,
+        "total": 3734,
+        "with_image": 963,
         "by_source": [
           {
             "source": "IU Bloomington Libraries",
@@ -28677,6 +28541,16 @@
             "with_image": 22
           },
           {
+            "source": "IU Cinema",
+            "total": 15,
+            "with_image": 15
+          },
+          {
+            "source": "IU Kelley School of Business",
+            "total": 16,
+            "with_image": 15
+          },
+          {
             "source": "Pillar Arts Community Calendar, WFHB Community Calendar",
             "total": 14,
             "with_image": 14
@@ -28689,11 +28563,6 @@
           {
             "source": "Boys & Girls Club Bloomington",
             "total": 11,
-            "with_image": 11
-          },
-          {
-            "source": "IU Kelley School of Business",
-            "total": 12,
             "with_image": 11
           },
           {
@@ -28889,7 +28758,7 @@
         "tzids": [
           {
             "tzid": "UTC (Z suffix)",
-            "count": 19840,
+            "count": 19846,
             "files": 44,
             "matches_city": false,
             "sample_files": [
@@ -28915,8 +28784,8 @@
           },
           {
             "tzid": "America/Indiana/Indianapolis",
-            "count": 2327,
-            "files": 35,
+            "count": 2340,
+            "files": 34,
             "matches_city": true,
             "sample_files": [
               "bgcbloomington.ics",
@@ -28998,17 +28867,6 @@
           ]
         },
         {
-          "source": "Campuslabs Iub",
-          "source_id": "campuslabs_iub",
-          "location": "Global & International Studies, GA 1128",
-          "count": 3,
-          "titles": [
-            "A2F",
-            "Arabic Calligraphy Club at IU Initial Meeting",
-            "Movie Night with TWSA"
-          ]
-        },
-        {
           "source": "Gcal Artsanctuaryindiana",
           "source_id": "gcal_artsanctuaryindiana",
           "location": "Art Sanctuary of Indiana, 190 N Sycamore St, Reception Area, M\rartinsville, IN  46151\r",
@@ -29050,6 +28908,16 @@
             "Common Grounds - Saturday Coffee and Conversation",
             "Common Grounds - Saturday Coffee and Conversation",
             "Common Grounds - Saturday Coffee and Conversation"
+          ]
+        },
+        {
+          "source": "Campuslabs Iub",
+          "source_id": "campuslabs_iub",
+          "location": "Global & International Studies, GA 1128",
+          "count": 2,
+          "titles": [
+            "Arabic Calligraphy Club at IU Initial Meeting",
+            "Movie Night with TWSA"
           ]
         },
         {
@@ -29169,15 +29037,6 @@
           "count": 1,
           "titles": [
             "War in the Woods"
-          ]
-        },
-        {
-          "source": "Campuslabs Iub",
-          "source_id": "campuslabs_iub",
-          "location": "Global & International Studies, GA 0001 \u2013 Shreve Auditorium",
-          "count": 1,
-          "titles": [
-            "Navnight"
           ]
         },
         {
@@ -103509,7 +103368,12 @@
     },
     {
       "date": "2026-05-01",
-      "line": "2026-05-01 01:14:05,747 - NAMIScraper - WARNING - Error fetching page 1: 403 Client Error: Forbidden for url: https://namigreaterbloomingtonarea.org/wp-json/tribe/events/v1/events/?per_page=50&page=1",
+      "line": "requests.exceptions.HTTPError: 500 Server Error: Internal Server Error for url: https://www.thefar.org/events/list",
+      "source": "models"
+    },
+    {
+      "date": "2026-05-01",
+      "line": "2026-05-01 03:25:34,825 - NAMIScraper - WARNING - Error fetching page 1: 403 Client Error: Forbidden for url: https://namigreaterbloomingtonarea.org/wp-json/tribe/events/v1/events/?per_page=50&page=1",
       "source": null
     }
   ]

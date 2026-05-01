@@ -4,94 +4,6 @@ PRODID:-//Indiana University//NONSGML v1.0//EN
 X-WR-CALNAME:Indiana University Events
 BEGIN:VEVENT
 X-SOURCE:IU Jacobs School of Music
-DTSTART:20260501T003000Z
-DTEND:20260501T013000Z
-LOCATION:Ford-Crawford Hall
-GEO:39.165516;-86.51774
-SUMMARY:Master's Recital – Mario Garay Barrera\, tuba
-DESCRIPTION:
-X-ALT-DESC;FMTTYPE=text/html:<p></p>
-UID:20260501T003000Z-2262286@events.iu.edu
-DTSTAMP:20260408T162410Z
-URL:https://events.iu.edu/musiciub/event/2262286-masters-recital-mario-ga
- ray-barrera-tuba
-CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260427T233021Z
-X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2262286
-X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-TAGS:Brass|Jacobs School of Music|Recitals|Student Recital|Tuba
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU Jacobs School of Music
-DTSTART:20260501T003000Z
-DTEND:20260501T013000Z
-LOCATION:Recital Hall &amp\; LIVE@jacobs
-SUMMARY:Senior Recital – Isaac An\, viola
-DESCRIPTION:Enjoy this performance from almost anywhere in the world viaL
- IVE@jacobs! Meeting URL: https://liveatjacobs.music.indiana.edu/
-X-ALT-DESC;FMTTYPE=text/html:<p><strong>Enjoy this performance from almos
- t anywhere in the world via</strong><a href="https://liveatjacobs.music.i
- ndiana.edu/"><strong>LIVE@jacobs</strong></a><strong>!<br /></strong></p>
-  Meeting URL: https://liveatjacobs.music.indiana.edu/
-UID:20260501T003000Z-2134377@events.iu.edu
-DTSTAMP:20251201T142254Z
-URL:https://events.iu.edu/musiciub/event/2134377-senior-recital-isaac-an-
- viola
-CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260427T233036Z
-X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2134377
-X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-TAGS:Jacobs School of Music|LIVE at jacobs|Live Streaming|Rec
- itals|String|Student Recital
-X-LIVEWHALE-IS-ONLINE:1
-X-LIVEWHALE-ONLINE-TYPE:Hybrid
-X-LIVEWHALE-ONLINE-URL:https://liveatjacobs.music.indiana.edu/
-X-LIVEWHALE-ONLINE-BUTTON-LABEL:Visit LIVE@jacobs!
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU Jacobs School of Music
-DTSTART:20260501T020000Z
-DTEND:20260501T030000Z
-LOCATION:Recital Hall
-SUMMARY:Junior Recital – Joseph Sanchez\, trumpet
-DESCRIPTION:
-X-ALT-DESC;FMTTYPE=text/html:<p></p>
-UID:20260501T020000Z-2262284@events.iu.edu
-DTSTAMP:20260408T162410Z
-URL:https://events.iu.edu/musiciub/event/2262284-junior-recital-joseph-sa
- nchez-trumpet
-CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260428T194046Z
-X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2262284
-X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-TAGS:Brass|Jacobs School of Music|Recitals|Student Recital|Tr
- umpet
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU Jacobs School of Music
-DTSTART:20260501T020000Z
-DTEND:20260501T030000Z
-LOCATION:Ford-Crawford Hall
-GEO:39.165516;-86.51774
-SUMMARY:Senior Recital – Savanah Antwine\, piano
-DESCRIPTION:
-X-ALT-DESC;FMTTYPE=text/html:<p></p>
-UID:20260501T020000Z-2167608@events.iu.edu
-DTSTAMP:20260112T152423Z
-URL:https://events.iu.edu/musiciub/event/2167608-senior-recital-savanah-a
- ntwine-piano
-CATEGORIES:Performances, shows, and films
-LAST-MODIFIED:20260428T194027Z
-X-LIVEWHALE-TYPE:events
-X-LIVEWHALE-ID:2167608
-X-LIVEWHALE-TIMEZONE:America/New_York
-X-LIVEWHALE-TAGS:Jacobs School of Music|Piano|Recitals|Student Recital
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU Jacobs School of Music
 DTSTART:20260501T210000Z
 DTEND:20260501T220000Z
 LOCATION:Auer Hall
@@ -155,11 +67,10 @@ DTEND:20260502T000000Z
 LOCATION:Recital Hall &amp\; LIVE@jacobs
 SUMMARY:Performer Diploma Recital – Leah Gray\, mezzo-soprano
 DESCRIPTION:Enjoy this performance from almost anywhere in the world viaL
- IVE@jacobs! Meeting URL: https://liveatjacobs.music.indiana.edu/
+ IVE@jacobs!
 X-ALT-DESC;FMTTYPE=text/html:<p><strong>Enjoy this performance from almos
  t anywhere in the world via</strong><a href="https://liveatjacobs.music.i
  ndiana.edu/"><strong>LIVE@jacobs</strong></a><strong>!<br /></strong></p>
-  Meeting URL: https://liveatjacobs.music.indiana.edu/
 UID:20260501T230000Z-2235441@events.iu.edu
 DTSTAMP:20260311T161321Z
 URL:https://events.iu.edu/musiciub/event/2235441-performer-diploma-recita
@@ -223,11 +134,10 @@ DTEND:20260502T010000Z
 LOCATION:Auer Hall &amp\; LIVE@jacobs
 SUMMARY:Master's Recital – Suro Kim\, tenor
 DESCRIPTION:Enjoy this performance from almost anywhere in the world viaL
- IVE@jacobs! Meeting URL: https://liveatjacobs.music.indiana.edu/
+ IVE@jacobs!
 X-ALT-DESC;FMTTYPE=text/html:<p><strong>Enjoy this performance from almos
  t anywhere in the world via</strong><a href="https://liveatjacobs.music.i
  ndiana.edu/"><strong>LIVE@jacobs</strong></a><strong>!<br /></strong></p>
-  Meeting URL: https://liveatjacobs.music.indiana.edu/
 UID:20260502T000000Z-2246100@events.iu.edu
 DTSTAMP:20260323T154554Z
 URL:https://events.iu.edu/musiciub/event/2246100-masters-recital-suro-kim
@@ -252,13 +162,10 @@ LOCATION:Ford-Crawford Hall &amp\; LIVE@jacobs
 GEO:39.165516;-86.51774
 SUMMARY:Master's Recital – Normandy Leach\, oboe
 DESCRIPTION:Enjoy this performance from almost anywhere in the world viaL
- IVE@jacobs! Meeting URL: https://events.iu.edu/musiciub/event/2246099-mas
- ters-recital-normandy-leach-oboe
+ IVE@jacobs!
 X-ALT-DESC;FMTTYPE=text/html:<p><strong>Enjoy this performance from almos
  t anywhere in the world via</strong><a href="https://liveatjacobs.music.i
  ndiana.edu/"><strong>LIVE@jacobs</strong></a><strong>!<br /></strong></p>
-  Meeting URL: https://events.iu.edu/musiciub/event/2246099-masters-recita
- l-normandy-leach-oboe
 UID:20260502T003000Z-2246099@events.iu.edu
 DTSTAMP:20260323T154554Z
 URL:https://events.iu.edu/musiciub/event/2246099-masters-recital-normandy
@@ -302,11 +209,10 @@ DTEND:20260502T030000Z
 LOCATION:Recital Hall &amp\; LIVE@jacobs
 SUMMARY:Master's Recital – Amelia Unger\, soprano
 DESCRIPTION:Enjoy this performance from almost anywhere in the world viaL
- IVE@jacobs! Meeting URL: https://liveatjacobs.music.indiana.edu/
+ IVE@jacobs!
 X-ALT-DESC;FMTTYPE=text/html:<p><strong>Enjoy this performance from almos
  t anywhere in the world via</strong><a href="https://liveatjacobs.music.i
  ndiana.edu/"><strong>LIVE@jacobs</strong></a><strong>!<br /></strong></p>
-  Meeting URL: https://liveatjacobs.music.indiana.edu/
 UID:20260502T020000Z-2260966@events.iu.edu
 DTSTAMP:20260407T120622Z
 URL:https://events.iu.edu/musiciub/event/2260966-masters-recital-amelia-u
@@ -331,11 +237,10 @@ LOCATION:Ford-Crawford Hall &amp\; LIVE@jacobs
 GEO:39.165516;-86.51774
 SUMMARY:Senior Recital – Annabelle Heun\, soprano
 DESCRIPTION:Enjoy this performance from almost anywhere in the world viaL
- IVE@jacobs! Meeting URL: https://liveatjacobs.music.indiana.edu/
+ IVE@jacobs!
 X-ALT-DESC;FMTTYPE=text/html:<p><strong>Enjoy this performance from almos
  t anywhere in the world via</strong><a href="https://liveatjacobs.music.i
  ndiana.edu/"><strong>LIVE@jacobs</strong></a><strong>!<br /></strong></p>
-  Meeting URL: https://liveatjacobs.music.indiana.edu/
 UID:20260502T020000Z-2227403@events.iu.edu
 DTSTAMP:20260303T111015Z
 URL:https://events.iu.edu/musiciub/event/2227403-senior-recital-annabelle
@@ -458,11 +363,10 @@ LOCATION:Ford-Crawford Hall &amp\; LIVE@jacobs
 GEO:39.165516;-86.51774
 SUMMARY:Master's Recital – Brynn Jacobs\, soprano
 DESCRIPTION:Enjoy this performance from almost anywhere in the world viaL
- IVE@jacobs! Meeting URL: https://liveatjacobs.music.indiana.edu/
+ IVE@jacobs!
 X-ALT-DESC;FMTTYPE=text/html:<p><strong>Enjoy this performance from almos
  t anywhere in the world via</strong><a href="https://liveatjacobs.music.i
  ndiana.edu/"><strong>LIVE@jacobs</strong></a><strong>!<br /></strong></p>
-  Meeting URL: https://liveatjacobs.music.indiana.edu/
 UID:20260502T170000Z-2227402@events.iu.edu
 DTSTAMP:20260303T111015Z
 URL:https://events.iu.edu/musiciub/event/2227402-masters-recital-brynn-ja
@@ -526,11 +430,10 @@ DTEND:20260502T190000Z
 LOCATION:Auer Hall &amp\; LIVE@jacobs
 SUMMARY:Master's Recital – Hung-Hsuan Tang\, bassoon
 DESCRIPTION:Enjoy this performance from almost anywhere in the world viaL
- IVE@jacobs! Meeting URL: https://liveatjacobs.music.indiana.edu/
+ IVE@jacobs!
 X-ALT-DESC;FMTTYPE=text/html:<p><strong>Enjoy this performance from almos
  t anywhere in the world via</strong><a href="https://liveatjacobs.music.i
  ndiana.edu/"><strong>LIVE@jacobs</strong></a><strong>!<br /></strong></p>
-  Meeting URL: https://liveatjacobs.music.indiana.edu/
 UID:20260502T180000Z-2260963@events.iu.edu
 DTSTAMP:20260407T120622Z
 URL:https://events.iu.edu/musiciub/event/2260963-masters-recital-hung-hsu
@@ -609,11 +512,10 @@ DTEND:20260502T210000Z
 LOCATION:Auer Hall &amp\; LIVE@jacobs
 SUMMARY:Performer Diploma Recital – Soomin Kim\, soprano
 DESCRIPTION:Enjoy this performance from almost anywhere in the world viaL
- IVE@jacobs! Meeting URL: https://liveatjacobs.music.indiana.edu/
+ IVE@jacobs!
 X-ALT-DESC;FMTTYPE=text/html:<p><strong>Enjoy this performance from almos
  t anywhere in the world via</strong><a href="https://liveatjacobs.music.i
  ndiana.edu/"><strong>LIVE@jacobs</strong></a><strong>!<br /></strong></p>
-  Meeting URL: https://liveatjacobs.music.indiana.edu/
 UID:20260502T200000Z-2260962@events.iu.edu
 DTSTAMP:20260407T120622Z
 URL:https://events.iu.edu/musiciub/event/2260962-performer-diploma-recita
@@ -658,11 +560,10 @@ DTEND:20260502T220000Z
 LOCATION:Recital Hall &amp\; LIVE@jacobs
 SUMMARY:Master's Recital – Erica Skinner\, soprano
 DESCRIPTION:Enjoy this performance from almost anywhere in the world viaL
- IVE@jacobs! Meeting URL: https://liveatjacobs.music.indiana.edu/
+ IVE@jacobs!
 X-ALT-DESC;FMTTYPE=text/html:<p><strong>Enjoy this performance from almos
  t anywhere in the world via</strong><a href="https://liveatjacobs.music.i
  ndiana.edu/"><strong>LIVE@jacobs</strong></a><strong>!<br /></strong></p>
-  Meeting URL: https://liveatjacobs.music.indiana.edu/
 UID:20260502T210000Z-2229838@events.iu.edu
 DTSTAMP:20260305T130135Z
 URL:https://events.iu.edu/musiciub/event/2229838-masters-recital-erica-sk
@@ -686,11 +587,10 @@ DTEND:20260502T230000Z
 LOCATION:Auer Hall &amp\; LIVE@jacobs
 SUMMARY:Master's Recital – Andy Boggs\, tenor
 DESCRIPTION:Enjoy this performance from almost anywhere in the world viaL
- IVE@jacobs! Meeting URL: https://liveatjacobs.music.indiana.edu/
+ IVE@jacobs!
 X-ALT-DESC;FMTTYPE=text/html:<p><strong>Enjoy this performance from almos
  t anywhere in the world via</strong><a href="https://liveatjacobs.music.i
  ndiana.edu/"><strong>LIVE@jacobs</strong></a><strong>!<br /></strong></p>
-  Meeting URL: https://liveatjacobs.music.indiana.edu/
 UID:20260502T220000Z-2260961@events.iu.edu
 DTSTAMP:20260407T120622Z
 URL:https://events.iu.edu/musiciub/event/2260961-masters-recital-andy-bog
@@ -836,11 +736,10 @@ LOCATION:Ford-Crawford Hall &amp\; LIVE@jacobs
 GEO:39.165516;-86.51774
 SUMMARY:Master's Recital – Tatiana Morales\, soprano
 DESCRIPTION:Enjoy this performance from almost anywhere in the world viaL
- IVE@jacobs! Meeting URL: https://liveatjacobs.music.indiana.edu/
+ IVE@jacobs!
 X-ALT-DESC;FMTTYPE=text/html:<p><strong>Enjoy this performance from almos
  t anywhere in the world via</strong><a href="https://liveatjacobs.music.i
  ndiana.edu/"><strong>LIVE@jacobs</strong></a><strong>!<br /></strong></p>
-  Meeting URL: https://liveatjacobs.music.indiana.edu/
 UID:20260503T003000Z-2265035@events.iu.edu
 DTSTAMP:20260410T152832Z
 URL:https://events.iu.edu/musiciub/event/2265035-masters-recital-tatiana-
@@ -1044,11 +943,10 @@ DTEND:20260504T000000Z
 LOCATION:Auer Hall &amp\; LIVE@jacobs
 SUMMARY:Master's Recital – Kai Bryngelson\, violin
 DESCRIPTION:Enjoy this performance from almost anywhere in the world viaL
- IVE@jacobs! Meeting URL: https://liveatjacobs.music.indiana.edu/
+ IVE@jacobs!
 X-ALT-DESC;FMTTYPE=text/html:<p><strong>Enjoy this performance from almos
  t anywhere in the world via</strong><a href="https://liveatjacobs.music.i
  ndiana.edu/"><strong>LIVE@jacobs</strong></a><strong>!<br /></strong></p>
-  Meeting URL: https://liveatjacobs.music.indiana.edu/
 UID:20260503T230000Z-2229835@events.iu.edu
 DTSTAMP:20260305T130135Z
 URL:https://events.iu.edu/musiciub/event/2229835-masters-recital-kai-bryn
