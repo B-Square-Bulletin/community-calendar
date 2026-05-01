@@ -4,29 +4,6 @@ PRODID:-//BloomingtonArts.Today//bloomingtonarts.today//
 X-WR-CALNAME:BloomingtonArts.Today
 X-WR-TIMEZONE:America/Indiana/Indianapolis
 BEGIN:VEVENT
-SUMMARY:UpDating -  CANCELED
-DTSTART;TZID=America/Indiana/Indianapolis:20260430T190000
-DTEND;TZID=America/Indiana/Indianapolis:20260430T210000
-UID:bat-202604301900-updating-canceled@bloomingtonarts.today
-DESCRIPTION:$. Live dating & comedy show that places two single participan
- ts on blindfolded first dates in front of a live audience.
-LOCATION:Buskirk-Chumley Theater
-URL:https://buskirkchumley.org/events/updating-april-30-2026
-X-SOURCE:BloomingtonArts.Today
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Moulin Rouge! (2001)
-DTSTART;TZID=America/Indiana/Indianapolis:20260430T190000
-DTEND;TZID=America/Indiana/Indianapolis:20260430T210000
-UID:bat-202604301900-moulin-rouge-2001-@bloomingtonarts.today
-DESCRIPTION:$. Baz Luhrmann’s extravagantly sparkly remake of the classi
- c love‑and‑money story\; 25th‑anniversary screening.
-LOCATION:IU Cinema
-URL:https://cinema.indiana.edu/upcoming-films/screening/2026-spring-thursd
- ay-april-30-700pm
-X-SOURCE:BloomingtonArts.Today
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:2026 Senior Dance B.F.A. Capstone Projects
 DTSTART;TZID=America/Indiana/Indianapolis:20260430T193000
 DTEND;TZID=America/Indiana/Indianapolis:20260430T213000
