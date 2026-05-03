@@ -143,6 +143,7 @@ window._xsLogs = [];
     santarosa: 'Santa Rosa',
     raleighdurham: 'Raleigh-Durham',
     tetonvalley: 'Teton Valley',
+    'dc-music': 'DC Music',
   };
 
   window.toDisplayName = function (slug) {
