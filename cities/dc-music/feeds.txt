@@ -1,3 +1,76 @@
-# Dc-music - source inventory
-# Generated from feeds table. Do not edit manually.
+# Dc-Music - source inventory
+# Generated from feeds table (active + pending). Do not edit manually.
 # To add feeds, use pending_feeds.txt in this directory.
+
+# --- Live feeds ---
+# 6th & I Historic Synagogue
+https://www.sixthandi.org/?ical=1
+
+# --- Scrapers ---
+# 9:30 Club
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/922-930-club" --name "9:30 Club"
+cities/dc-music/songkick_930club.ics
+# Black Cat
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/1038-black-cat" --name "Black Cat"
+cities/dc-music/songkick_blackcat.ics
+# Blues Alley
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/10881-blues-alley" --name "Blues Alley"
+cities/dc-music/songkick_bluesalley.ics
+# Capital One Arena
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/3640349-capital-one-arena" --name "Capital One Arena"
+cities/dc-music/songkick_capitalonearena.ics
+# Comet Ping Pong
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/148048-comet-ping-pong" --name "Comet Ping Pong"
+cities/dc-music/songkick_comet.ics
+# DAR Constitution Hall
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/1095-dar-constitution-hall" --name "DAR Constitution Hall"
+cities/dc-music/songkick_darhall.ics
+# dc.events Concerts
+# cmd: python scrapers/dc_events_concerts.py --output cities/dc-music/dc_events_concerts.ics
+cities/dc-music/dc_events_concerts.ics
+# DC9
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/20843-dc9-nightclub" --name "DC9"
+cities/dc-music/songkick_dc9.ics
+# Echostage
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/1864683-echostage" --name "Echostage"
+cities/dc-music/songkick_echostage.ics
+# Eventbrite DC Music
+# cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/d/dc--washington/music--events/" --name "Eventbrite DC Music"
+cities/dc-music/eventbrite_dc_music.ics
+# Howard Theatre
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/74872-howard-theatre" --name "Howard Theatre"
+cities/dc-music/songkick_howard.ics
+# Kennedy Center
+# cmd: python scrapers/ticketmaster.py --venue-id ZFr9jZak17 --name "Kennedy Center"
+cities/dc-music/ticketmaster_kennedy.ics
+# Lincoln Theatre
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/2826-lincoln-theatre" --name "Lincoln Theatre"
+cities/dc-music/songkick_lincoln.ics
+# Pearl Street Warehouse
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/3637839-pearl-street-warehouse" --name "Pearl Street Warehouse"
+cities/dc-music/songkick_pearlst.ics
+# Pie Shop
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/3998914-pie-shop" --name "Pie Shop"
+cities/dc-music/songkick_pieshop.ics
+# Rhizome DC
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/3342239-rhizome-dc" --name "Rhizome DC"
+cities/dc-music/songkick_rhizome.ics
+# Songbyrd Music House
+# cmd: python scrapers/songbyrd.py --output cities/dc-music/songbyrd.ics
+cities/dc-music/songbyrd.ics
+# The Anthem
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/3552789-anthem" --name "The Anthem"
+cities/dc-music/songkick_anthem.ics
+# The Atlantis
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/4498657-atlantis" --name "The Atlantis"
+cities/dc-music/songkick_atlantis.ics
+# The Hamilton
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/1611908-hamilton-live" --name "The Hamilton"
+cities/dc-music/songkick_hamilton.ics
+# Union Stage
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/3623159-union-stage" --name "Union Stage"
+cities/dc-music/songkick_unionstage.ics
+# Warner Theatre
+# cmd: python scrapers/songkick.py --url "https://www.songkick.com/venues/647-warner-theatre" --name "Warner Theatre"
+cities/dc-music/songkick_warner.ics
+
