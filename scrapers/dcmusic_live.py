@@ -49,9 +49,19 @@ TIME_RE = re.compile(r'(\d{1,2})(?::(\d{2}))?\s*(am|pm)', re.I)
 
 
 class DcMusicLiveScraper(BaseScraper):
-    """Scrape a single venue's events from dcmusic.live."""
+    """Scrape a single venue's events from dcmusic.live.
 
-    name = "DC Music Live (venue)"
+    Classified as an aggregator: emits X-SOURCE "dcmusic.live" rather than
+    the venue name, so cross-source dedup in combine_ics.py orders this after
+    any authoritative venue source for the same event. The venue name is
+    still carried in LOCATION (and used in feeds.name for the Manage Feeds
+    dialog), so per-venue distinction is preserved everywhere except the
+    event-card source attribution line.
+
+    See `AGGREGATORS` in scripts/combine_ics.py.
+    """
+
+    name = "dcmusic.live"
     domain = "dcmusic.live"
     timezone = "America/New_York"
 
