@@ -522,6 +522,7 @@ jobs:
         python scrapers/songkick.py --url "https://www.songkick.com/venues/148048-comet-ping-pong" --name "Comet Ping Pong" --output cities/dc-music/songkick_comet.ics || true
         python scrapers/songkick.py --url "https://www.songkick.com/venues/3342239-rhizome-dc" --name "Rhizome DC" --output cities/dc-music/songkick_rhizome.ics || true
         python scrapers/songkick.py --url "https://www.songkick.com/venues/1095-dar-constitution-hall" --name "DAR Constitution Hall" --output cities/dc-music/songkick_darhall.ics || true
+        python scrapers/the_pocket.py --output cities/dc-music/the_pocket.ics || true
       continue-on-error: true
 
 

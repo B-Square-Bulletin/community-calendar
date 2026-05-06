@@ -46,3 +46,7 @@ https://www.sidgolds.com/?ical=1
 # DC Jazz Jam
 # cmd: python scrapers/dc_jazz_jam.py
 cities/dc-music/dc_jazz_jam.ics
+
+# The Pocket
+# cmd: python scrapers/the_pocket.py
+cities/dc-music/the_pocket.ics
