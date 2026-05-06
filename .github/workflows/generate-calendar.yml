@@ -525,6 +525,7 @@ jobs:
         python scrapers/the_pocket.py --output cities/dc-music/the_pocket.ics || true
         python scrapers/dcmusic_live.py --slug jojo --name "Jojo's Restaurant and Bar" --address "1518 U Street NW, Washington, DC 20009" --output cities/dc-music/dcmusic_jojo.ics || true
         python scrapers/dcmusic_live.py --slug madamsorgan --name "Madam's Organ" --address "2461 18th St NW, Washington, DC 20009" --output cities/dc-music/dcmusic_madamsorgan.ics || true
+        python scrapers/bossa.py --output cities/dc-music/bossa.ics || true
         python scrapers/dcmusic_live.py --slug atlasarts --name "Atlas Performing Arts Center" --address "1333 H St NE, Washington, DC 20002" --output cities/dc-music/dcmusic_atlasarts.ics || true
         python scrapers/dcmusic_live.py --slug hillcenter --name "Hill Center" --address "921 Pennsylvania Ave SE, Washington, DC 20003" --output cities/dc-music/dcmusic_hillcenter.ics || true
         python scrapers/dcmusic_live.py --slug mrhenrys --name "Mr. Henry's" --address "601 Pennsylvania Ave SE, Washington, DC 20003" --output cities/dc-music/dcmusic_mrhenrys.ics || true
@@ -539,6 +540,7 @@ jobs:
         python scrapers/dcmusic_live.py --slug dumbartonconcerts --name "Dumbarton Concerts" --address "3133 Dumbarton St NW, Washington, DC 20007" --output cities/dc-music/dcmusic_dumbartonconcerts.ics || true
         python scrapers/dcmusic_live.py --slug citychurch --name "National City Christian Church" --address "5 Thomas Circle NW, Washington, DC 20005" --output cities/dc-music/dcmusic_citychurch.ics || true
         python scrapers/dcmusic_live.py --slug esl --name "ESL Shaw" --address "1015 7th St NW, Washington, DC 20001" --output cities/dc-music/dcmusic_esl.ics || true
+        python scrapers/flash.py --output cities/dc-music/flash.ics || true
       continue-on-error: true
 
 
