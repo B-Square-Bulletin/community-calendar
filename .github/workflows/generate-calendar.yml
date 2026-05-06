@@ -497,6 +497,8 @@ jobs:
         python scrapers/eventbrite.py --url "https://www.eventbrite.com/d/dc--washington/music--events/" --name "Eventbrite DC Music" --output cities/dc-music/eventbrite_dc_music.ics || true
         # DICE-link harvest
         python scrapers/songbyrd.py --output cities/dc-music/songbyrd.ics || true
+        # DC Jazz Jam (RSS)
+        python scrapers/dc_jazz_jam.py --output cities/dc-music/dc_jazz_jam.ics || true
         # Ticketmaster city-level music aggregator
         python scrapers/ticketmaster.py --city Washington --state DC --classification Music --name "Ticketmaster DC Music" --output cities/dc-music/ticketmaster_dc_music.ics || true
         # Ticketmaster (per-venue)

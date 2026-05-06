@@ -39,3 +39,10 @@ cities/dc-music/ticketmaster_dc_music.ics
 
 # Church of the Epiphany Tuesday Concerts
 https://epiphanydc.org/events/category/epiphany-tuesday-concert-series/?ical=1
+
+# Sid Gold's Request Room
+https://www.sidgolds.com/?ical=1
+
+# DC Jazz Jam
+# cmd: python scrapers/dc_jazz_jam.py
+cities/dc-music/dc_jazz_jam.ics
