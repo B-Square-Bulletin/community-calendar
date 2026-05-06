@@ -523,6 +523,8 @@ jobs:
         python scrapers/songkick.py --url "https://www.songkick.com/venues/3342239-rhizome-dc" --name "Rhizome DC" --output cities/dc-music/songkick_rhizome.ics || true
         python scrapers/songkick.py --url "https://www.songkick.com/venues/1095-dar-constitution-hall" --name "DAR Constitution Hall" --output cities/dc-music/songkick_darhall.ics || true
         python scrapers/the_pocket.py --output cities/dc-music/the_pocket.ics || true
+        python scrapers/dcmusic_live.py --slug jojo --name "Jojo's Restaurant and Bar" --address "1518 U Street NW, Washington, DC 20009" --output cities/dc-music/dcmusic_jojo.ics || true
+        python scrapers/dcmusic_live.py --slug madamsorgan --name "Madam's Organ" --address "2461 18th St NW, Washington, DC 20009" --output cities/dc-music/dcmusic_madamsorgan.ics || true
       continue-on-error: true
 
 

@@ -50,3 +50,11 @@ cities/dc-music/dc_jazz_jam.ics
 # The Pocket
 # cmd: python scrapers/the_pocket.py
 cities/dc-music/the_pocket.ics
+
+# Jojo's Restaurant and Bar
+# cmd: python scrapers/dcmusic_live.py --slug jojo --name "Jojo's Restaurant and Bar" --address "1518 U Street NW, Washington, DC 20009"
+cities/dc-music/dcmusic_jojo.ics
+
+# Madam's Organ
+# cmd: python scrapers/dcmusic_live.py --slug madamsorgan --name "Madam's Organ" --address "2461 18th St NW, Washington, DC 20009"
+cities/dc-music/dcmusic_madamsorgan.ics
