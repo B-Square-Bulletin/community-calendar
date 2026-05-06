@@ -36,3 +36,6 @@
 # Ticketmaster DC Music
 # cmd: python scrapers/ticketmaster.py --city Washington --state DC --classification Music --name "Ticketmaster DC Music"
 cities/dc-music/ticketmaster_dc_music.ics
+
+# Church of the Epiphany Tuesday Concerts
+https://epiphanydc.org/events/category/epiphany-tuesday-concert-series/?ical=1
