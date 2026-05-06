@@ -134,3 +134,7 @@ cities/dc-music/madams_organ.ics
 # Dumbarton Concerts
 # cmd: python scrapers/dumbarton_concerts.py
 cities/dc-music/dumbarton_concerts.ics
+
+# openmikes.org DC
+# cmd: python scrapers/openmikes.py --city-slug Washington-DC --name "openmikes.org DC"
+cities/dc-music/openmikes_dc.ics

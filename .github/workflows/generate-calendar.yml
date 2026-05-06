@@ -543,6 +543,7 @@ jobs:
         python scrapers/holy_trinity_concerts.py --output cities/dc-music/holy_trinity_concerts.ics || true
         python scrapers/dumbarton_concerts.py --output cities/dc-music/dumbarton_concerts.ics || true
         python scrapers/madams_organ.py --output cities/dc-music/madams_organ.ics || true
+        python scrapers/openmikes.py --city-slug Washington-DC --name "openmikes.org DC" --output cities/dc-music/openmikes_dc.ics || true
       continue-on-error: true
 
 
