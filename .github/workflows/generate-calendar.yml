@@ -516,7 +516,6 @@ jobs:
         python scrapers/songkick.py --url "https://www.songkick.com/venues/74872-howard-theatre" --name "Howard Theatre" --output cities/dc-music/songkick_howard.ics || true
         python scrapers/songkick.py --url "https://www.songkick.com/venues/1864683-echostage" --name "Echostage" --output cities/dc-music/songkick_echostage.ics || true
         python scrapers/songkick.py --url "https://www.songkick.com/venues/647-warner-theatre" --name "Warner Theatre" --output cities/dc-music/songkick_warner.ics || true
-        python scrapers/songkick.py --url "https://www.songkick.com/venues/3640349-capital-one-arena" --name "Capital One Arena" --output cities/dc-music/songkick_capitalonearena.ics || true
         python scrapers/songkick.py --url "https://www.songkick.com/venues/3998914-pie-shop" --name "Pie Shop" --output cities/dc-music/songkick_pieshop.ics || true
         python scrapers/songkick.py --url "https://www.songkick.com/venues/10881-blues-alley" --name "Blues Alley" --output cities/dc-music/songkick_bluesalley.ics || true
         python scrapers/songkick.py --url "https://www.songkick.com/venues/148048-comet-ping-pong" --name "Comet Ping Pong" --output cities/dc-music/songkick_comet.ics || true
