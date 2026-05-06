@@ -4,19 +4,6 @@ PRODID:-//Buskirk-Chumley Theater//buskirkchumley.org//
 X-WR-CALNAME:Buskirk-Chumley Theater
 X-WR-TIMEZONE:America/Indiana/Indianapolis
 BEGIN:VEVENT
-SUMMARY:Spaceballs (1987)
-DTSTART;TZID=America/Indiana/Indianapolis:20260504T190000
-DTEND;TZID=America/Indiana/Indianapolis:20260504T210000
-UID:20260504-spaceballs-1987-@buskirkchumley.org
-DESCRIPTION:Spaceballs (1987)\nDoors: 6:30 PM / Show: 7:00 PM@ Buskirk-Chu
- mley Theater\n\nMore info: https://buskirkchumley.org/events/spaceballs-19
- 87-may-4-2026
-LOCATION:Buskirk-Chumley Theater\, 114 E Kirkwood Ave\, Bloomington\, IN 4
- 7408
-URL:https://buskirkchumley.org/events/spaceballs-1987-may-4-2026
-X-SOURCE:Buskirk-Chumley Theater
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:MotionArts Spring Gala 2026
 DTSTART;TZID=America/Indiana/Indianapolis:20260509T140000
 DTEND;TZID=America/Indiana/Indianapolis:20260509T160000
@@ -180,10 +167,10 @@ DTSTART;TZID=America/Indiana/Indianapolis:20260612T190000
 DTEND;TZID=America/Indiana/Indianapolis:20260612T210000
 UID:20260612-godzilla-weekend-mothra-madnes@buskirkchumley.org
 DESCRIPTION:Godzilla Weekend:  Mothra Madness - Mothra (1961)\nPresented b
- y: East Asian Studies\, The Media School\, Tattoo Kaiju\, Pizza X\, BCT\nD
- oors: 6:30 PM / Show: 7:00 PM@ Buskirk-Chumley Theater\n\nMore info: https
- ://buskirkchumley.org/events/godzilla-weekend-mothra-madness-mothra-1961-j
- une-12-2026
+ y: East Asian Studies Center\, The Media School\, Pillar Arts\, Tattoo Kai
+ ju\, Pizza X\, BCT\nDoors: 6:30 PM / Show: 7:00 PM@ Buskirk-Chumley Theate
+ r\n\nMore info: https://buskirkchumley.org/events/godzilla-weekend-mothra-
+ madness-mothra-1961-june-12-2026
 LOCATION:Buskirk-Chumley Theater\, 114 E Kirkwood Ave\, Bloomington\, IN 4
  7408
 URL:https://buskirkchumley.org/events/godzilla-weekend-mothra-madness-moth
