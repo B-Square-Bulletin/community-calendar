@@ -497,6 +497,8 @@ jobs:
         python scrapers/eventbrite.py --url "https://www.eventbrite.com/d/dc--washington/music--events/" --name "Eventbrite DC Music" --output cities/dc-music/eventbrite_dc_music.ics || true
         # DICE-link harvest
         python scrapers/songbyrd.py --output cities/dc-music/songbyrd.ics || true
+        # Ticketmaster city-level music aggregator
+        python scrapers/ticketmaster.py --city Washington --state DC --classification Music --name "Ticketmaster DC Music" --output cities/dc-music/ticketmaster_dc_music.ics || true
         # Ticketmaster (per-venue)
         python scrapers/ticketmaster.py --venue-id ZFr9jZak17 --name "Kennedy Center" --output cities/dc-music/ticketmaster_kennedy.ics || true
         # Songkick venues

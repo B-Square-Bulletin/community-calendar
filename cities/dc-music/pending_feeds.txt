@@ -32,3 +32,7 @@
 #   python scripts/add_scraper.py example dc-music "Source Name" --test
 #
 # See CONTRIBUTING.md for details.
+
+# Ticketmaster DC Music
+# cmd: python scrapers/ticketmaster.py --city Washington --state DC --classification Music --name "Ticketmaster DC Music"
+cities/dc-music/ticketmaster_dc_music.ics
