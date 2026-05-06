@@ -540,6 +540,9 @@ jobs:
         python scrapers/dcmusic_live.py --slug citychurch --name "National City Christian Church" --address "5 Thomas Circle NW, Washington, DC 20005" --output cities/dc-music/dcmusic_citychurch.ics || true
         python scrapers/dcmusic_live.py --slug esl --name "ESL Shaw" --address "1015 7th St NW, Washington, DC 20001" --output cities/dc-music/dcmusic_esl.ics || true
         python scrapers/flash.py --output cities/dc-music/flash.ics || true
+        python scrapers/holy_trinity_concerts.py --output cities/dc-music/holy_trinity_concerts.ics || true
+        python scrapers/dumbarton_concerts.py --output cities/dc-music/dumbarton_concerts.ics || true
+        python scrapers/madams_organ.py --output cities/dc-music/madams_organ.ics || true
       continue-on-error: true
 
 

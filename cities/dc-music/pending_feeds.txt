@@ -122,3 +122,15 @@ cities/dc-music/dcmusic_citychurch.ics
 # ESL Shaw
 # cmd: python scrapers/dcmusic_live.py --slug esl --name "ESL Shaw" --address "1015 7th St NW, Washington, DC 20001"
 cities/dc-music/dcmusic_esl.ics
+
+# Holy Trinity Concerts
+# cmd: python scrapers/holy_trinity_concerts.py
+cities/dc-music/holy_trinity_concerts.ics
+
+# Madam's Organ
+# cmd: python scrapers/madams_organ.py
+cities/dc-music/madams_organ.ics
+
+# Dumbarton Concerts
+# cmd: python scrapers/dumbarton_concerts.py
+cities/dc-music/dumbarton_concerts.ics
