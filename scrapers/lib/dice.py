@@ -33,8 +33,6 @@ import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from typing import Any, Optional
-from urllib.request import urlopen, Request
-from urllib.error import HTTPError, URLError
 
 from .base import BaseScraper
 from .jsonld import (
@@ -71,11 +69,13 @@ class DiceVenueScraper(BaseScraper):
 
     def _fetch(self, url: str) -> Optional[str]:
         """Fetch a URL; return decoded body or None on error."""
-        req = Request(url, headers=self.headers)
         try:
-            with urlopen(req, timeout=20) as resp:
-                return resp.read().decode('utf-8', errors='replace')
-        except (HTTPError, URLError) as e:
+            return self.fetch_text_with_curl(
+                url,
+                accept=self.headers.get('Accept'),
+                timeout=20,
+            )
+        except RuntimeError as e:
             self.logger.warning(f"Failed to fetch {url}: {e}")
             return None
 
