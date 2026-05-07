@@ -207,6 +207,12 @@ window._xsLogs = [];
     else if (onSuccess) onSuccess();
   };
 
+  window.verifyEmailOtp = async function (email, token, onSuccess) {
+    var result = await sb.auth.verifyOtp({ email: email, token: token, type: 'email' });
+    if (result.error) alert('Error: ' + result.error.message);
+    else if (onSuccess) onSuccess();
+  };
+
   window.signOut = function () {
     console.log('signOut called');
     localStorage.removeItem('sb-dzpdualvwspgqghrysyz-auth-token');
