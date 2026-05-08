@@ -280,6 +280,9 @@ These curate or aggregate events from multiple venues:
 - **The Bishop** — SSL fix (`verify=False`)
 - **Oblique strategy**: WFHB covers Bishop Orbit Room events, library-hosted events, and venues with no own calendar
 
+### 2026-05-08: URL Fix
+- **Sassafras Audubon Society** — Fixed broken scraper URL. Site moved events calendar from `/upcomingevents` (404) to `/calendar`. Updated workflow and feeds.txt metadata. Fixes [#8](https://github.com/B-Square-Bulletin/community-calendar/issues/8).
+
 ---
 
 ## Notes
