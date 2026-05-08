@@ -550,6 +550,11 @@ AGGREGATORS = {
     'B-Square: Critical Mass',
     'B-Square: BPTC Public Meetings',
     'Brown County Events',
+    # DC music aggregators (multi-venue at the X-SOURCE level).
+    'dcmusic.live',
+    'openmikes.org DC',
+    'Ticketmaster DC Music',
+    'dc.events Concerts',
 }
 
 

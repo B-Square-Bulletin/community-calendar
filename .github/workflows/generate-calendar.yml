@@ -473,6 +473,81 @@ jobs:
 
 
     # ==========================================
+    # Teton Valley
+    # ==========================================
+    - name: Scrape Teton Valley sources
+      if: contains(steps.locations.outputs.list, 'tetonvalley') && github.event.inputs.regenerate_only != 'true'
+      run: |
+        echo "Scraping Teton Valley..."
+        python scrapers/knotty_pine.py --output cities/tetonvalley/knotty_pine.ics || true
+        python scrapers/church_in_tetons.py --output cities/tetonvalley/church_in_tetons.ics || true
+        python scrapers/tvtap.py --output cities/tetonvalley/tvtap.ics || true
+      continue-on-error: true
+
+
+    # ==========================================
+    # DC Music
+    # ==========================================
+    - name: Scrape DC Music sources
+      if: contains(steps.locations.outputs.list, 'dc-music') && github.event.inputs.regenerate_only != 'true'
+      run: |
+        echo "Scraping DC Music..."
+        # City-level aggregators
+        python scrapers/dc_events_concerts.py --output cities/dc-music/dc_events_concerts.ics || true
+        python scrapers/eventbrite.py --url "https://www.eventbrite.com/d/dc--washington/music--events/" --name "Eventbrite DC Music" --output cities/dc-music/eventbrite_dc_music.ics || true
+        # DICE-link harvest
+        python scrapers/songbyrd.py --output cities/dc-music/songbyrd.ics || true
+        # DC Jazz Jam (RSS)
+        python scrapers/dc_jazz_jam.py --output cities/dc-music/dc_jazz_jam.ics || true
+        # Ticketmaster city-level music aggregator
+        python scrapers/ticketmaster.py --city Washington --state DC --classification Music --name "Ticketmaster DC Music" --output cities/dc-music/ticketmaster_dc_music.ics || true
+        # Ticketmaster (per-venue)
+        python scrapers/ticketmaster.py --venue-id ZFr9jZak17 --name "Kennedy Center" --output cities/dc-music/ticketmaster_kennedy.ics || true
+        # Songkick venues
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/922-930-club" --name "9:30 Club" --output cities/dc-music/songkick_930club.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/3552789-anthem" --name "The Anthem" --output cities/dc-music/songkick_anthem.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/2826-lincoln-theatre" --name "Lincoln Theatre" --output cities/dc-music/songkick_lincoln.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/1038-black-cat" --name "Black Cat" --output cities/dc-music/songkick_blackcat.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/20843-dc9-nightclub" --name "DC9" --output cities/dc-music/songkick_dc9.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/3637839-pearl-street-warehouse" --name "Pearl Street Warehouse" --output cities/dc-music/songkick_pearlst.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/3623159-union-stage" --name "Union Stage" --output cities/dc-music/songkick_unionstage.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/4498657-atlantis" --name "The Atlantis" --output cities/dc-music/songkick_atlantis.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/1611908-hamilton-live" --name "The Hamilton" --output cities/dc-music/songkick_hamilton.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/74872-howard-theatre" --name "Howard Theatre" --output cities/dc-music/songkick_howard.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/1864683-echostage" --name "Echostage" --output cities/dc-music/songkick_echostage.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/647-warner-theatre" --name "Warner Theatre" --output cities/dc-music/songkick_warner.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/3998914-pie-shop" --name "Pie Shop" --output cities/dc-music/songkick_pieshop.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/10881-blues-alley" --name "Blues Alley" --output cities/dc-music/songkick_bluesalley.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/148048-comet-ping-pong" --name "Comet Ping Pong" --output cities/dc-music/songkick_comet.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/3342239-rhizome-dc" --name "Rhizome DC" --output cities/dc-music/songkick_rhizome.ics || true
+        python scrapers/songkick.py --url "https://www.songkick.com/venues/1095-dar-constitution-hall" --name "DAR Constitution Hall" --output cities/dc-music/songkick_darhall.ics || true
+        python scrapers/the_pocket.py --output cities/dc-music/the_pocket.ics || true
+        python scrapers/dcmusic_live.py --slug jojo --name "dcmusic.live" --address "1518 U Street NW, Washington, DC 20009" --output cities/dc-music/dcmusic_jojo.ics || true
+        python scrapers/dcmusic_live.py --slug madamsorgan --name "dcmusic.live" --address "2461 18th St NW, Washington, DC 20009" --output cities/dc-music/dcmusic_madamsorgan.ics || true
+        python scrapers/bossa.py --output cities/dc-music/bossa.ics || true
+        python scrapers/dcmusic_live.py --slug atlasarts --name "dcmusic.live" --address "1333 H St NE, Washington, DC 20002" --output cities/dc-music/dcmusic_atlasarts.ics || true
+        python scrapers/dcmusic_live.py --slug hillcenter --name "dcmusic.live" --address "921 Pennsylvania Ave SE, Washington, DC 20003" --output cities/dc-music/dcmusic_hillcenter.ics || true
+        python scrapers/dcmusic_live.py --slug mrhenrys --name "dcmusic.live" --address "601 Pennsylvania Ave SE, Washington, DC 20003" --output cities/dc-music/dcmusic_mrhenrys.ics || true
+        python scrapers/dcmusic_live.py --slug nga --name "dcmusic.live" --address "6th St & Constitution Ave NW, Washington, DC 20565" --output cities/dc-music/dcmusic_nga.ics || true
+        python scrapers/dcmusic_live.py --slug takomastation --name "dcmusic.live" --address "6914 4th St NW, Washington, DC 20012" --output cities/dc-music/dcmusic_takomastation.ics || true
+        python scrapers/dcmusic_live.py --slug libraryofcongress --name "dcmusic.live" --address "101 Independence Ave SE, Washington, DC 20540" --output cities/dc-music/dcmusic_libraryofcongress.ics || true
+        python scrapers/dcmusic_live.py --slug americanartmuseum --name "dcmusic.live" --address "8th & G St NW, Washington, DC 20004" --output cities/dc-music/dcmusic_americanartmuseum.ics || true
+        python scrapers/dcmusic_live.py --slug phillipscollection --name "dcmusic.live" --address "1600 21st St NW, Washington, DC 20009" --output cities/dc-music/dcmusic_phillipscollection.ics || true
+        python scrapers/dcmusic_live.py --slug flash --name "dcmusic.live" --address "645 Florida Ave NW, Washington, DC 20001" --output cities/dc-music/dcmusic_flash.ics || true
+        python scrapers/dcmusic_live.py --slug roofers --name "dcmusic.live" --address "2438 18th St NW, Washington, DC 20009" --output cities/dc-music/dcmusic_roofers.ics || true
+        python scrapers/dcmusic_live.py --slug miracletheatre --name "dcmusic.live" --address "535 8th St SE, Washington, DC 20003" --output cities/dc-music/dcmusic_miracletheatre.ics || true
+        python scrapers/dcmusic_live.py --slug dumbartonconcerts --name "dcmusic.live" --address "3133 Dumbarton St NW, Washington, DC 20007" --output cities/dc-music/dcmusic_dumbartonconcerts.ics || true
+        python scrapers/dcmusic_live.py --slug citychurch --name "dcmusic.live" --address "5 Thomas Circle NW, Washington, DC 20005" --output cities/dc-music/dcmusic_citychurch.ics || true
+        python scrapers/dcmusic_live.py --slug esl --name "dcmusic.live" --address "1015 7th St NW, Washington, DC 20001" --output cities/dc-music/dcmusic_esl.ics || true
+        python scrapers/flash.py --output cities/dc-music/flash.ics || true
+        python scrapers/holy_trinity_concerts.py --output cities/dc-music/holy_trinity_concerts.ics || true
+        python scrapers/dumbarton_concerts.py --output cities/dc-music/dumbarton_concerts.ics || true
+        python scrapers/madams_organ.py --output cities/dc-music/madams_organ.ics || true
+        python scrapers/openmikes.py --city-slug Washington-DC --name "openmikes.org DC" --output cities/dc-music/openmikes_dc.ics || true
+      continue-on-error: true
+
+
+    # ==========================================
     # Download feeds + Combine ICS (all cities)
     # ==========================================
     - name: Process pending feeds into DB

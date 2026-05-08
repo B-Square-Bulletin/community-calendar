@@ -1,10 +1,11 @@
 <Component
   name="SignInDialog"
-  method.open="() => { magicEmail = ''; magicSent = false; activePanel = 'signIn'; }"
+  method.open="() => { magicEmail = ''; magicSent = false; magicCode = ''; activePanel = 'signIn'; }"
   method.close="() => { if (activePanel === 'signIn') activePanel = ''; }"
-  method.toggle="() => { if (activePanel === 'signIn') { activePanel = ''; } else { magicEmail = ''; magicSent = false; activePanel = 'signIn'; } }"
+  method.toggle="() => { if (activePanel === 'signIn') { activePanel = ''; } else { magicEmail = ''; magicSent = false; magicCode = ''; activePanel = 'signIn'; } }"
   var.magicEmail=""
-  var.magicSent="{false}">
+  var.magicSent="{false}"
+  var.magicCode="">
   <Card
     when="{activePanel === 'signIn'}"
     width="100%"
@@ -39,9 +40,24 @@
           onClick="window.signInWithEmail(magicEmail, () => magicSent = true)"
         />
       </HStack>
-      <Text when="{magicSent}" textAlign="center" color="$color-primary-500">
-        Check your email for a sign-in link!
-      </Text>
+      <VStack when="{magicSent}" gap="$space-2">
+        <Text textAlign="center" color="$color-primary-500">
+          Check your email for a sign-in link or code.
+        </Text>
+        <HStack gap="$space-2" verticalAlignment="center">
+          <TextBox
+            placeholder="Enter code from email"
+            value="{magicCode}"
+            onDidChange="(val) => magicCode = val"
+            width="*"
+          />
+          <Button
+            label="Verify"
+            enabled="{magicCode.length >= 6}"
+            onClick="window.verifyEmailOtp(magicEmail, magicCode.trim(), () => activePanel = '')"
+          />
+        </HStack>
+      </VStack>
     </VStack>
   </Card>
 </Component>
