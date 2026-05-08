@@ -142,6 +142,8 @@ window._xsLogs = [];
   var cityNameOverrides = {
     santarosa: 'Santa Rosa',
     raleighdurham: 'Raleigh-Durham',
+    tetonvalley: 'Teton Valley',
+    'dc-music': 'DC Music',
   };
 
   window.toDisplayName = function (slug) {
@@ -201,6 +203,12 @@ window._xsLogs = [];
       email: email,
       options: { emailRedirectTo: window.location.origin + window.location.pathname + window.location.search },
     });
+    if (result.error) alert('Error: ' + result.error.message);
+    else if (onSuccess) onSuccess();
+  };
+
+  window.verifyEmailOtp = async function (email, token, onSuccess) {
+    var result = await sb.auth.verifyOtp({ email: email, token: token, type: 'email' });
     if (result.error) alert('Error: ' + result.error.message);
     else if (onSuccess) onSuccess();
   };

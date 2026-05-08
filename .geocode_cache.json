@@ -530,5 +530,17 @@
   "Hendersonville, NC, asheville": {
     "lat": 35.3187279,
     "lng": -82.4609528
+  },
+  "Driggs, ID, tetonvalley": {
+    "lat": 43.7231753,
+    "lng": -111.110887
+  },
+  "Victor, ID, tetonvalley": {
+    "lat": 43.6025939,
+    "lng": -111.111309
+  },
+  "Tetonia, ID, tetonvalley": {
+    "lat": 43.8144799,
+    "lng": -111.160207
   }
 }
