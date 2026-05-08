@@ -32,6 +32,9 @@ cli/cc-cli
 # Instance-specific credentials (each fork has its own)
 xmlui/config.local.js
 
+# Personal agentic files (fork-specific, not for upstream)
+.pi/
+
 .env
 .envrc
 
