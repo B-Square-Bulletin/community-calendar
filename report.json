@@ -1,5 +1,5 @@
 {
-  "generated": "2026-05-08T02:39:41.270381",
+  "generated": "2026-05-08T02:57:51.315757",
   "cities": {
     "santarosa": {
       "feeds": {
@@ -14266,7 +14266,7 @@
             },
             {
               "date": "2026-05-08",
-              "count": 20
+              "count": 0
             }
           ]
         },
@@ -16134,7 +16134,7 @@
             },
             {
               "date": "2026-05-08",
-              "count": 58
+              "count": 0
             }
           ]
         },
@@ -18378,7 +18378,7 @@
             },
             {
               "date": "2026-05-08",
-              "count": 15
+              "count": 0
             }
           ]
         },
@@ -18870,7 +18870,7 @@
             },
             {
               "date": "2026-05-08",
-              "count": 13
+              "count": 0
             }
           ]
         },
@@ -19854,7 +19854,7 @@
             },
             {
               "date": "2026-05-08",
-              "count": 271
+              "count": 268
             }
           ]
         },
@@ -21986,7 +21986,7 @@
             },
             {
               "date": "2026-05-08",
-              "count": 73
+              "count": 72
             }
           ]
         },
@@ -31232,9 +31232,9 @@
         }
       },
       "url_quality": {
-        "total_with_url": 2533,
-        "total_events": 4018,
-        "unique_urls": 1371,
+        "total_with_url": 2512,
+        "total_events": 3999,
+        "unique_urls": 1348,
         "generic_count": 164,
         "generic_domains": [
           {
@@ -31288,9 +31288,9 @@
         "source_specificity": [
           {
             "source": "Brown County Events",
-            "events": 340,
-            "unique_urls": 55,
-            "specificity_pct": 16
+            "events": 348,
+            "unique_urls": 63,
+            "specificity_pct": 18
           },
           {
             "source": "Indiana State Events",
@@ -31324,8 +31324,8 @@
           },
           {
             "source": "Limestone Post",
-            "events": 150,
-            "unique_urls": 45,
+            "events": 152,
+            "unique_urls": 46,
             "specificity_pct": 30
           },
           {
@@ -31381,7 +31381,7 @@
       "categories": [
         {
           "category": "Arts / Culture",
-          "count": 583
+          "count": 581
         },
         {
           "category": "Government / Civic",
@@ -31393,11 +31393,11 @@
         },
         {
           "category": "Sports / Fitness",
-          "count": 378
+          "count": 377
         },
         {
           "category": "Community / Social",
-          "count": 272
+          "count": 271
         },
         {
           "category": "Family / Kids",
@@ -31405,7 +31405,7 @@
         },
         {
           "category": "Education / Workshops",
-          "count": 228
+          "count": 227
         },
         {
           "category": "Nature / Outdoors / Recreation",
@@ -31413,7 +31413,7 @@
         },
         {
           "category": "Food / Drink",
-          "count": 191
+          "count": 185
         },
         {
           "category": "Comedy / Improv",
@@ -31425,27 +31425,27 @@
         },
         {
           "category": "Books / Literature / Poetry",
-          "count": 139
+          "count": 136
         },
         {
           "category": "Craft / Maker",
-          "count": 120
+          "count": 119
         },
         {
           "category": "Film / Cinema",
-          "count": 115
-        },
-        {
-          "category": "History / Heritage",
-          "count": 101
+          "count": 117
         },
         {
           "category": "Health / Wellness",
           "count": 100
         },
         {
+          "category": "History / Heritage",
+          "count": 97
+        },
+        {
           "category": "Dance / Performance",
-          "count": 93
+          "count": 92
         },
         {
           "category": "Religion / Spirituality",
@@ -31457,7 +31457,7 @@
         },
         {
           "category": "LGBTQ+ / Gender",
-          "count": 9
+          "count": 8
         },
         {
           "category": "Gardening / Horticulture",
@@ -31469,13 +31469,13 @@
         }
       ],
       "images": {
-        "total": 4018,
-        "with_image": 1199,
+        "total": 3999,
+        "with_image": 1220,
         "by_source": [
           {
             "source": "Brown County Events",
-            "total": 340,
-            "with_image": 326
+            "total": 348,
+            "with_image": 334
           },
           {
             "source": "IU Bloomington Libraries",
@@ -31524,8 +31524,8 @@
           },
           {
             "source": "Eskenazi Museum of Art",
-            "total": 10,
-            "with_image": 10
+            "total": 11,
+            "with_image": 11
           },
           {
             "source": "Boys & Girls Club Bloomington",
@@ -31545,6 +31545,11 @@
           {
             "source": "IU Hamilton Lugar School",
             "total": 10,
+            "with_image": 8
+          },
+          {
+            "source": "Pillar Arts Community Calendar, BloomingtonArts.Today, Limestone Post, WFHB Community Calendar",
+            "total": 8,
             "with_image": 8
           },
           {
@@ -31583,6 +31588,11 @@
             "with_image": 4
           },
           {
+            "source": "Pillar Arts Community Calendar, Limestone Post, WFHB Community Calendar",
+            "total": 4,
+            "with_image": 4
+          },
+          {
             "source": "Bloomington Spinners & Weavers Guild",
             "total": 30,
             "with_image": 3
@@ -31599,6 +31609,11 @@
           },
           {
             "source": "Eskenazi Museum of Art, IU Arts & Humanities Institute",
+            "total": 2,
+            "with_image": 2
+          },
+          {
+            "source": "Pillar Arts Community Calendar, BloomingtonArts.Today, Limestone Post",
             "total": 2,
             "with_image": 2
           },
@@ -31638,11 +31653,6 @@
             "with_image": 1
           },
           {
-            "source": "Pillar Arts Community Calendar, Limestone Post, WFHB Community Calendar",
-            "total": 1,
-            "with_image": 1
-          },
-          {
             "source": "Pillar Arts Community Calendar, Brown County Events",
             "total": 1,
             "with_image": 1
@@ -31653,12 +31663,7 @@
             "with_image": 1
           },
           {
-            "source": "Pillar Arts Community Calendar, BloomingtonArts.Today, Limestone Post, WFHB Community Calendar",
-            "total": 1,
-            "with_image": 1
-          },
-          {
-            "source": "Architecture + Design, Eskenazi Museum of Art, IU Eskenazi School of Art, IU Jacobs School of Music",
+            "source": "IU Media School, Pillar Arts Community Calendar, WFHB Community Calendar",
             "total": 1,
             "with_image": 1
           },
@@ -31671,12 +31676,12 @@
       },
       "tzid_inventory": {
         "city_timezone": "America/Indiana/Indianapolis",
-        "distinct_tzids": 7,
+        "distinct_tzids": 6,
         "tzids": [
           {
             "tzid": "UTC (Z suffix)",
-            "count": 19763,
-            "files": 42,
+            "count": 19760,
+            "files": 43,
             "matches_city": false,
             "sample_files": [
               "calendar_feeds.ics",
@@ -31701,8 +31706,8 @@
           },
           {
             "tzid": "America/Indiana/Indianapolis",
-            "count": 2476,
-            "files": 38,
+            "count": 2443,
+            "files": 36,
             "matches_city": true,
             "sample_files": [
               "bgcbloomington.ics",
@@ -31714,8 +31719,8 @@
           },
           {
             "tzid": "(bare \u2014 assumes city tz)",
-            "count": 207,
-            "files": 34,
+            "count": 143,
+            "files": 32,
             "matches_city": false,
             "sample_files": [
               "bgcbloomington.ics",
@@ -31736,15 +31741,6 @@
               "mobilize_indivisible_central_indiana.ics",
               "peoples_market.ics",
               "pottery_house_studio.ics"
-            ]
-          },
-          {
-            "tzid": "America/Halifax",
-            "count": 14,
-            "files": 1,
-            "matches_city": false,
-            "sample_files": [
-              "hardtruth.ics"
             ]
           },
           {
@@ -31828,23 +31824,23 @@
         {
           "source": "Gcal D1087E97D4Ace1C1Ca2Dd6336D417Bea870Ddac277Be6D1711Cbc0235Aa85228",
           "source_id": "gcal_d1087e97d4ace1c1ca2dd6336d417bea870ddac277be6d1711cbc0235aa85228",
-          "location": "Monroe County Humane Association, 791 S Fieldstone Blvd, Bloomi\rngton, IN 47403, USA\r",
-          "count": 3,
-          "titles": [
-            "Monthly Dog Walking Club",
-            "Monthly Dog Walking Club",
-            "Monthly Dog Walking Club"
-          ]
-        },
-        {
-          "source": "Gcal D1087E97D4Ace1C1Ca2Dd6336D417Bea870Ddac277Be6D1711Cbc0235Aa85228",
-          "source_id": "gcal_d1087e97d4ace1c1ca2dd6336d417bea870ddac277be6d1711cbc0235aa85228",
           "location": "Monroe County Public Library - Downtown, 303 E Kirkwood Ave, Bl\roomington, IN 47408, USA\r",
           "count": 3,
           "titles": [
             "Discardia Mending Day",
             "Discardia Mending Day",
             "Discardia Mending Day"
+          ]
+        },
+        {
+          "source": "Gcal D1087E97D4Ace1C1Ca2Dd6336D417Bea870Ddac277Be6D1711Cbc0235Aa85228",
+          "source_id": "gcal_d1087e97d4ace1c1ca2dd6336d417bea870ddac277be6d1711cbc0235aa85228",
+          "location": "Monroe County Humane Association, 791 S Fieldstone Blvd, Bloomi\rngton, IN 47403, USA\r",
+          "count": 3,
+          "titles": [
+            "Monthly Dog Walking Club",
+            "Monthly Dog Walking Club",
+            "Monthly Dog Walking Club"
           ]
         },
         {
@@ -32023,10 +32019,46 @@
         {
           "source": "Mobilize Indivisible Central Indiana",
           "source_id": "mobilize_indivisible_central_indiana",
-          "location": "4904 W 16th St, Indianapolis, IN, 46224",
+          "location": "Pierceton - along Highway 30, Pierceton, IN, 46562",
           "count": 1,
           "titles": [
-            "End ICE Detention Day of Action - Speedway (Indy)"
+            "End ICE Detention Day of Action - Pierceton\\, IN"
+          ]
+        },
+        {
+          "source": "Mobilize Indivisible Central Indiana",
+          "source_id": "mobilize_indivisible_central_indiana",
+          "location": "Intersection of Hwys 24 & 13 in Wabash County, Wabash, IN, 46992",
+          "count": 1,
+          "titles": [
+            "End ICE Detention Day of Action - Wabash County\\, IN"
+          ]
+        },
+        {
+          "source": "Mobilize Indivisible Central Indiana",
+          "source_id": "mobilize_indivisible_central_indiana",
+          "location": "2Toms Brewing Company, 3676 N Wells St, Barrel Room, Fort Wayne, IN, 46808",
+          "count": 1,
+          "titles": [
+            "Indivisible Northeast Indiana Members' Meetup"
+          ]
+        },
+        {
+          "source": "Mobilize Indivisible Central Indiana",
+          "source_id": "mobilize_indivisible_central_indiana",
+          "location": "Fort Wayne, IN, 46825",
+          "count": 1,
+          "titles": [
+            "Ft. Wayne - Community Town Hall: Maternal Health and Reproductive "
+          ]
+        },
+        {
+          "source": "Mobilize Indivisible Central Indiana",
+          "source_id": "mobilize_indivisible_central_indiana",
+          "location": "Allen County Court Administration, 715 S Calhoun St, Fort Wayne, IN, 46802",
+          "count": 1,
+          "titles": [
+            "End Ice Detention at Miami Correctional Facility- Rally & March"
           ]
         },
         {
@@ -32068,10 +32100,19 @@
         {
           "source": "Mobilize Indivisible Central Indiana",
           "source_id": "mobilize_indivisible_central_indiana",
-          "location": "Intersection of Hwys 24 & 13 in Wabash County, Wabash, IN, 46992",
+          "location": "4904 W 16th St, Indianapolis, IN, 46224",
           "count": 1,
           "titles": [
-            "End ICE Detention Day of Action - Wabash County\\, IN"
+            "End ICE Detention Day of Action - Speedway (Indy)"
+          ]
+        },
+        {
+          "source": "Mobilize Indivisible Central Indiana",
+          "source_id": "mobilize_indivisible_central_indiana",
+          "location": "Massachusetts Ave, Indianapolis, IN, 46202",
+          "count": 1,
+          "titles": [
+            "Indy Pride with the ACLU"
           ]
         },
         {
@@ -32095,24 +32136,6 @@
         {
           "source": "Mobilize Indivisible Central Indiana",
           "source_id": "mobilize_indivisible_central_indiana",
-          "location": "Massachusetts Ave, Indianapolis, IN, 46202",
-          "count": 1,
-          "titles": [
-            "Indy Pride with the ACLU"
-          ]
-        },
-        {
-          "source": "Mobilize Indivisible Central Indiana",
-          "source_id": "mobilize_indivisible_central_indiana",
-          "location": "Pierceton - along Highway 30, Pierceton, IN, 46562",
-          "count": 1,
-          "titles": [
-            "End ICE Detention Day of Action - Pierceton\\, IN"
-          ]
-        },
-        {
-          "source": "Mobilize Indivisible Central Indiana",
-          "source_id": "mobilize_indivisible_central_indiana",
           "location": "Idle Park, 800 Virginia Ave, Indianapolis, IN, 46203",
           "count": 1,
           "titles": [
@@ -32126,33 +32149,6 @@
           "count": 1,
           "titles": [
             "End ICE Detention - Shelbyville"
-          ]
-        },
-        {
-          "source": "Mobilize Indivisible Central Indiana",
-          "source_id": "mobilize_indivisible_central_indiana",
-          "location": "2Toms Brewing Company, 3676 N Wells St, Barrel Room, Fort Wayne, IN, 46808",
-          "count": 1,
-          "titles": [
-            "Indivisible Northeast Indiana Members' Meetup"
-          ]
-        },
-        {
-          "source": "Mobilize Indivisible Central Indiana",
-          "source_id": "mobilize_indivisible_central_indiana",
-          "location": "Allen County Court Administration, 715 S Calhoun St, Fort Wayne, IN, 46802",
-          "count": 1,
-          "titles": [
-            "End Ice Detention at Miami Correctional Facility- Rally & March"
-          ]
-        },
-        {
-          "source": "Mobilize Indivisible Central Indiana",
-          "source_id": "mobilize_indivisible_central_indiana",
-          "location": "Fort Wayne, IN, 46825",
-          "count": 1,
-          "titles": [
-            "Ft. Wayne - Community Town Hall: Maternal Health and Reproductive "
           ]
         },
         {
@@ -106358,6 +106354,38 @@
       "date": "2026-05-08",
       "city": "bloomington",
       "feed": "events_livewhale_218"
+    },
+    {
+      "type": "zero_events",
+      "message": "Feed returned 0 events (was 20)",
+      "severity": "high",
+      "date": "2026-05-08",
+      "city": "bloomington",
+      "feed": "buskirk_chumley"
+    },
+    {
+      "type": "zero_events",
+      "message": "Feed returned 0 events (was 15)",
+      "severity": "high",
+      "date": "2026-05-08",
+      "city": "bloomington",
+      "feed": "hardtruth"
+    },
+    {
+      "type": "zero_events",
+      "message": "Feed returned 0 events (was 13)",
+      "severity": "high",
+      "date": "2026-05-08",
+      "city": "bloomington",
+      "feed": "monroe_county_history_center"
+    },
+    {
+      "type": "zero_events",
+      "message": "Feed returned 0 events (was 58)",
+      "severity": "high",
+      "date": "2026-05-08",
+      "city": "bloomington",
+      "feed": "sycamore_land_trust"
     }
   ],
   "errors": [
@@ -106368,7 +106396,7 @@
     },
     {
       "date": "2026-05-08",
-      "line": "2026-05-08 02:36:32,501 - NAMIScraper - WARNING - Error fetching page 1: 403 Client Error: Forbidden for url: https://namigreaterbloomingtonarea.org/wp-json/tribe/events/v1/events/?per_page=50&page=1",
+      "line": "2026-05-08 02:55:39,019 - NAMIScraper - WARNING - Error fetching page 1: 403 Client Error: Forbidden for url: https://namigreaterbloomingtonarea.org/wp-json/tribe/events/v1/events/?per_page=50&page=1",
       "source": null
     }
   ]
