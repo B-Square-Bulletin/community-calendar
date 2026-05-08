@@ -179,7 +179,7 @@ cities/bloomington/pottery_house_studio.ics
 # cmd: python scrapers/ticketmaster.py --venue-id KovZpZAdE6aA --name "Ruth N Halls Theatre" --default-url "https://events.iu.edu/theatre/"
 cities/bloomington/tm_ruth_halls.ics
 # Sassafras Audubon Society
-# cmd: python scrapers/squarespace.py --url "https://www.sassafrasaudubon.org/calendar" --name "Sassafras Audubon Society"
+# cmd: python scrapers/squarespace.py --url "https://www.sassafrasaudubon.org/upcomingevents" --name "Sassafras Audubon Society"
 cities/bloomington/sassafras_audubon.ics
 # Simon Skjodt Assembly Hall
 # cmd: python scrapers/ticketmaster.py --venue-id KovZpZAFdItA --name "Simon Skjodt Assembly Hall" --default-url "https://iuhoosiers.com/"
