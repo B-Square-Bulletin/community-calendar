@@ -356,6 +356,59 @@ URL:https://www.sassafrasaudubon.org/calendar/2026/5/20/spring-speaker-ser
 X-SOURCE:Sassafras Audubon Society
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Book Club Session 1/3 - Nature's Best Hope
+DTSTART;TZID=America/Los_Angeles:20260608T150000
+DTEND;TZID=America/Los_Angeles:20260608T170000
+UID:69fe5e98e0d8367f270cc7e4@squarespace.com
+DESCRIPTION:
+URL:https://www.sassafrasaudubon.org/calendar/2026/5/8/book-club-session-1
+ 3-natures-best-hope
+X-SOURCE:Sassafras Audubon Society
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Book Club Session 2/3 - Nature's Best Hope (Copy)
+DTSTART;TZID=America/Los_Angeles:20260713T150000
+DTEND;TZID=America/Los_Angeles:20260713T170000
+UID:69fe67495f82fd4a86a6e5ad@squarespace.com
+DESCRIPTION:
+URL:https://www.sassafrasaudubon.org/calendar/2026/5/8/book-club-session-1
+ 3-natures-best-hope-lehwb
+X-SOURCE:Sassafras Audubon Society
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:May Bloomington Bird Walks - Various Dates
+DTSTART;TZID=America/Los_Angeles:20260514T143000
+DTEND;TZID=America/Los_Angeles:20260514T153000
+UID:69fe6f02abc60d6c265c7faf@squarespace.com
+DESCRIPTION:
+LOCATION:Bloomington\, IN\, 47401\, United States
+URL:https://www.sassafrasaudubon.org/calendar/2026/5/8/may-bird-walks-vari
+ ous-dates
+X-SOURCE:Sassafras Audubon Society
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Banding Day at Kent Farm
+DTSTART;TZID=America/Los_Angeles:20260628T123000
+DTEND;TZID=America/Los_Angeles:20260628T133000
+UID:69fe343b04153e235d976807@squarespace.com
+DESCRIPTION:
+LOCATION:Kent Farm\, 5J23+GP9 Woodville Hills\, Indiana\, Bloomington\, Un
+ ited States
+URL:https://www.sassafrasaudubon.org/calendar/2026/6/28/banding-day-at-ken
+ t-farm
+X-SOURCE:Sassafras Audubon Society
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Forest Management Walk: Stewardship for Cerulean Warblers
+DTSTART;TZID=America/Los_Angeles:20260630T160000
+DTEND;TZID=America/Los_Angeles:20260630T170000
+UID:69fe67c05f2d151ca307ec65@squarespace.com
+DESCRIPTION:
+URL:https://www.sassafrasaudubon.org/calendar/2026/6/30/forest-management-
+ walk-stewardship-for-cerulean-warblers
+X-SOURCE:Sassafras Audubon Society
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Woodcock Walk at Flatwoods County Park
 DTSTART;TZID=America/Los_Angeles:20260314T163000
 DTEND;TZID=America/Los_Angeles:20260314T183000
