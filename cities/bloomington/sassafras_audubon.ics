@@ -376,6 +376,16 @@ URL:https://www.sassafrasaudubon.org/calendar/2026/5/8/book-club-session-1
 X-SOURCE:Sassafras Audubon Society
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Book Club Session 3/3 - Nature's Best Hope (Copy) (Copy)
+DTSTART;TZID=America/Los_Angeles:20260810T150000
+DTEND;TZID=America/Los_Angeles:20260810T170000
+UID:69fe6774a0de1a78c43b9fd3@squarespace.com
+DESCRIPTION:
+URL:https://www.sassafrasaudubon.org/calendar/2026/5/8/book-club-session-1
+ 3-natures-best-hope-lehwb-ysaz2
+X-SOURCE:Sassafras Audubon Society
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:May Bloomington Bird Walks - Various Dates
 DTSTART;TZID=America/Los_Angeles:20260514T143000
 DTEND;TZID=America/Los_Angeles:20260514T153000

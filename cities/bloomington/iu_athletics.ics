@@ -4,18 +4,6 @@ PRODID:-//IU Athletics//iuhoosiers.com//
 X-WR-CALNAME:IU Athletics
 X-WR-TIMEZONE:America/Indiana/Indianapolis
 BEGIN:VEVENT
-SUMMARY:Track and Field vs Billy Hayes Invitational
-DTSTART;TZID=America/Indiana/Indianapolis:20260508T000000
-DTEND;TZID=America/Indiana/Indianapolis:20260508T000000
-UID:37160b6d54c961eb19032bf432d5b462@iuhoosiers.com
-ATTACH;FMTTYPE=image/jpeg:https://iuhoosiers.com/images/2026/5/7/20250509_
- TF_BillyHayes_MRS_1008__2_.JPG
-DESCRIPTION:
-LOCATION:Bloomington\, Ind.
-URL:http://www.iuhoosiers.com/
-X-SOURCE:IU Athletics
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Women's Golf vs NCAA Simpsonville Regional
 DTSTART;TZID=America/Indiana/Indianapolis:20260511T000000
 DTEND;TZID=America/Indiana/Indianapolis:20260511T000000
