@@ -90,6 +90,33 @@ URL:https://www.visitbloomington.com/event/trivia/58304/
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Family Night Out - Townie Summer Kick-off
+DTSTART;TZID=America/Indiana/Indianapolis:20260513T000000
+DTEND;TZID=America/Indiana/Indianapolis:20260513T000000
+UID:260511kGAcODmy4Ee80RUQZVeYfg
+DESCRIPTION:05/13/2026 to05/13/2026-\n\nFamily Night Out is a monthly bloc
+ k part designed for easy\, low-pressure community connection right in the 
+ heart of downtown.\n\nOn the second Wednesday of every month from 4:30-8PM
+ \, Kirkwood Ave in
+URL:https://www.visitbloomington.com/event/family-night-out-townie-summer-
+ kick-off/58703/
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Sounds From the Black Hole ft. Crawling Giants\, ForK\, Pain Manag
+ ement May 13 at Walkover Record Shop
+DTSTART;TZID=America/Indiana/Indianapolis:20260513T000000
+DTEND;TZID=America/Indiana/Indianapolis:20260513T000000
+UID:2605110SJu1GQvd0m08gTXvrjhvA
+DESCRIPTION:05/13/2026 to05/13/2026-\n\nExperimental music and semi-improv
+ ised noise of a variable brow height. Inclusive and DIY.\n\nWalkover is lo
+ cated on the square in downtown Bloomington and is a reincarnated TD's CDs
+  and LPs in a new
+URL:https://www.visitbloomington.com/event/sounds-from-the-black-hole-ft-c
+ rawling-giants-fork-pain-management-may-13-at-walkover-record-shop/58780/
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Baseball (Boys JV) - Northview High School
 DTSTART;TZID=America/Indiana/Indianapolis:20260513T173000
 DTEND;TZID=America/Indiana/Indianapolis:20260513T233000
@@ -134,33 +161,6 @@ URL:https://bloomington.in.gov/calendars
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Family Night Out - Townie Summer Kick-off
-DTSTART;TZID=America/Indiana/Indianapolis:20260513T000000
-DTEND;TZID=America/Indiana/Indianapolis:20260513T000000
-UID:260511kGAcODmy4Ee80RUQZVeYfg
-DESCRIPTION:05/13/2026 to05/13/2026-\n\nFamily Night Out is a monthly bloc
- k part designed for easy\, low-pressure community connection right in the 
- heart of downtown.\n\nOn the second Wednesday of every month from 4:30-8PM
- \, Kirkwood Ave in
-URL:https://www.visitbloomington.com/event/family-night-out-townie-summer-
- kick-off/58703/
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Sounds From the Black Hole ft. Crawling Giants\, ForK\, Pain Manag
- ement May 13 at Walkover Record Shop
-DTSTART;TZID=America/Indiana/Indianapolis:20260513T000000
-DTEND;TZID=America/Indiana/Indianapolis:20260513T000000
-UID:2605110SJu1GQvd0m08gTXvrjhvA
-DESCRIPTION:05/13/2026 to05/13/2026-\n\nExperimental music and semi-improv
- ised noise of a variable brow height. Inclusive and DIY.\n\nWalkover is lo
- cated on the square in downtown Bloomington and is a reincarnated TD's CDs
-  and LPs in a new
-URL:https://www.visitbloomington.com/event/sounds-from-the-black-hole-ft-c
- rawling-giants-fork-pain-management-may-13-at-walkover-record-shop/58780/
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Wednesday Triva
 DTSTART;TZID=America/Indiana/Indianapolis:20260513T000000
 DTEND;TZID=America/Indiana/Indianapolis:20260513T000000
@@ -202,6 +202,54 @@ DESCRIPTION:Step into a world of games\, storytelling\, and community!\n\n
  eryone.
 LOCATION:IU Museum of Archaeology & Anthropology
 URL:https://events.iu.edu/iumaa/event/2173977-games-at-the-museum 
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Clay Mobiles with Eva Mancini
+DTSTART;TZID=America/Indiana/Indianapolis:20260514T000000
+DTEND;TZID=America/Indiana/Indianapolis:20260514T000000
+UID:260511zpc0xsRPlkiKIqApxt3-OA
+DESCRIPTION:05/14/2026 to05/14/2026-\n\nCreate your own mobile or wind chi
+ me in this step by step workshop with Eva Mancini. No experience necessary
+ . Please allow 10 days for it to be fired. After which time you will need 
+ to return to the
+URL:https://www.visitbloomington.com/event/clay-mobiles-with-eva-mancini/5
+ 8689/
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Sip 'n' Spin Vinyl Night
+DTSTART;TZID=America/Indiana/Indianapolis:20260514T000000
+DTEND;TZID=America/Indiana/Indianapolis:20260514T000000
+UID:260511Nh8GyH2I30iwZr7iAXpedQ
+DESCRIPTION:05/14/2026 to05/14/2026-\n\nEase into the weekend with a relax
+ ed night of records and cocktails at Cardinal Spirits featuring Kashmere D
+ upree - one half of Busman's Holiday and a familiar voice from WFHB\, Bloo
+ mingtonȁ's community
+URL:https://www.visitbloomington.com/event/sip-n-spin-vinyl-night/58806/
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:IU Baseball vs Illinois
+DTSTART;TZID=America/Indiana/Indianapolis:20260514T000000
+DTEND;TZID=America/Indiana/Indianapolis:20260514T000000
+UID:260511FYt2h-l6BEmwqBVFWfwQ3A
+DESCRIPTION:05/14/2026 to05/16/2026-\n\nCome out and cheer for the IU Base
+ ball team\, go Hoosiers!
+URL:https://www.visitbloomington.com/event/iu-baseball-vs-illinois/58823/
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Cosmic Songwriter Festival
+DTSTART;TZID=America/Indiana/Indianapolis:20260514T000000
+DTEND;TZID=America/Indiana/Indianapolis:20260514T000000
+UID:260511AKoWDXblqUaVyyfhn2ZEww
+DESCRIPTION:05/14/2026 to05/16/2026-\n\nAnnouncing the 4th Annual Cosmic S
+ ongwriter Festival!\n\nThank you for your continued support of Cosmic Song
+ writer! We are excited to announce the 2026 Festival. For a limited time\,
+  get $10 off and
+URL:https://www.visitbloomington.com/event/cosmic-songwriter-festival/5821
+ 6/
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
@@ -256,54 +304,6 @@ DESCRIPTION:Agenda and Packet\n\nThe BHPC Meetings are being held in a hyb
 LOCATION:City Hall
 URL:https://bloomington.in.gov/boards/historic-preservation/meetings?year=
  2023
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Clay Mobiles with Eva Mancini
-DTSTART;TZID=America/Indiana/Indianapolis:20260514T000000
-DTEND;TZID=America/Indiana/Indianapolis:20260514T000000
-UID:260511zpc0xsRPlkiKIqApxt3-OA
-DESCRIPTION:05/14/2026 to05/14/2026-\n\nCreate your own mobile or wind chi
- me in this step by step workshop with Eva Mancini. No experience necessary
- . Please allow 10 days for it to be fired. After which time you will need 
- to return to the
-URL:https://www.visitbloomington.com/event/clay-mobiles-with-eva-mancini/5
- 8689/
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Sip 'n' Spin Vinyl Night
-DTSTART;TZID=America/Indiana/Indianapolis:20260514T000000
-DTEND;TZID=America/Indiana/Indianapolis:20260514T000000
-UID:260511Nh8GyH2I30iwZr7iAXpedQ
-DESCRIPTION:05/14/2026 to05/14/2026-\n\nEase into the weekend with a relax
- ed night of records and cocktails at Cardinal Spirits featuring Kashmere D
- upree - one half of Busman's Holiday and a familiar voice from WFHB\, Bloo
- mingtonȁ's community
-URL:https://www.visitbloomington.com/event/sip-n-spin-vinyl-night/58806/
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:IU Baseball vs Illinois
-DTSTART;TZID=America/Indiana/Indianapolis:20260514T000000
-DTEND;TZID=America/Indiana/Indianapolis:20260514T000000
-UID:260511FYt2h-l6BEmwqBVFWfwQ3A
-DESCRIPTION:05/14/2026 to05/16/2026-\n\nCome out and cheer for the IU Base
- ball team\, go Hoosiers!
-URL:https://www.visitbloomington.com/event/iu-baseball-vs-illinois/58823/
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Cosmic Songwriter Festival
-DTSTART;TZID=America/Indiana/Indianapolis:20260514T000000
-DTEND;TZID=America/Indiana/Indianapolis:20260514T000000
-UID:260511AKoWDXblqUaVyyfhn2ZEww
-DESCRIPTION:05/14/2026 to05/16/2026-\n\nAnnouncing the 4th Annual Cosmic S
- ongwriter Festival!\n\nThank you for your continued support of Cosmic Song
- writer! We are excited to announce the 2026 Festival. For a limited time\,
-  get $10 off and
-URL:https://www.visitbloomington.com/event/cosmic-songwriter-festival/5821
- 6/
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
@@ -367,6 +367,55 @@ DESCRIPTION:Constellation Stage & Screen presents “Finn: A New Musical-
  nd tickets at https://seeconstellation.org/kids/finn/
 LOCATION:Waldron Auditorium
 URL:https://seeconstellation.org/kids/finn/
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Play Night - Trivia (Female Icons) Edition
+DTSTART;TZID=America/Indiana/Indianapolis:20260515T000000
+DTEND;TZID=America/Indiana/Indianapolis:20260515T000000
+UID:260511nZwRIz4n2ECBGNpGgBlkFw
+DESCRIPTION:05/15/2026 to05/15/2026-\n\nGather After Hours: Play Night is 
+ a relaxed evening of creativity\, connection\, and a little friendly compe
+ tition. This round features Trivia Night celebrating iconic women across c
+ ulture\, history\, and
+URL:https://www.visitbloomington.com/event/play-night-trivia-(female-icons
+ )-edition/58675/
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Cosmic Songwriter Festival
+DTSTART;TZID=America/Indiana/Indianapolis:20260515T000000
+DTEND;TZID=America/Indiana/Indianapolis:20260515T000000
+UID:260511mPY6M2EHOkGi8jLElgA4jw
+DESCRIPTION:05/14/2026 to05/16/2026-\n\nAnnouncing the 4th Annual Cosmic S
+ ongwriter Festival!\n\nThank you for your continued support of Cosmic Song
+ writer! We are excited to announce the 2026 Festival. For a limited time\,
+  get $10 off and
+URL:https://www.visitbloomington.com/event/cosmic-songwriter-festival/5821
+ 6/
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Live Music with Postmodern Jazz Quartet
+DTSTART;TZID=America/Indiana/Indianapolis:20260515T000000
+DTEND;TZID=America/Indiana/Indianapolis:20260515T000000
+UID:260511_oE5yF-QcEC0n8ApW659yw
+DESCRIPTION:05/15/2026 to05/15/2026-\n\nJoin us for our monthly jazz salon
+  with the Postmodern Jazz Quartet on the third Friday of each month from 6
+ :30-8:30 pm! This event is free and open to all. Grab a seat in our café 
+ area or walk around
+URL:https://www.visitbloomington.com/event/live-music-with-postmodern-jazz
+ -quartet/58767/
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:IU Baseball vs Illinois
+DTSTART;TZID=America/Indiana/Indianapolis:20260515T000000
+DTEND;TZID=America/Indiana/Indianapolis:20260515T000000
+UID:260511EBoutDmrpEq3pk3u1doMgw
+DESCRIPTION:05/14/2026 to05/16/2026-\n\nCome out and cheer for the IU Base
+ ball team\, go Hoosiers!
+URL:https://www.visitbloomington.com/event/iu-baseball-vs-illinois/58823/
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
@@ -453,55 +502,6 @@ DESCRIPTION:Tiles & Tastings at Oliver Winery An Evening of American Mahjo
   Winery Road\, Bloomington\, IN 47404 WHEN May 15 | 6pm – 8pm
 LOCATION:Oliver Winery
 URL:https://www.facebook.com/events/1320702870115725/
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Play Night - Trivia (Female Icons) Edition
-DTSTART;TZID=America/Indiana/Indianapolis:20260515T000000
-DTEND;TZID=America/Indiana/Indianapolis:20260515T000000
-UID:260511nZwRIz4n2ECBGNpGgBlkFw
-DESCRIPTION:05/15/2026 to05/15/2026-\n\nGather After Hours: Play Night is 
- a relaxed evening of creativity\, connection\, and a little friendly compe
- tition. This round features Trivia Night celebrating iconic women across c
- ulture\, history\, and
-URL:https://www.visitbloomington.com/event/play-night-trivia-(female-icons
- )-edition/58675/
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Cosmic Songwriter Festival
-DTSTART;TZID=America/Indiana/Indianapolis:20260515T000000
-DTEND;TZID=America/Indiana/Indianapolis:20260515T000000
-UID:260511mPY6M2EHOkGi8jLElgA4jw
-DESCRIPTION:05/14/2026 to05/16/2026-\n\nAnnouncing the 4th Annual Cosmic S
- ongwriter Festival!\n\nThank you for your continued support of Cosmic Song
- writer! We are excited to announce the 2026 Festival. For a limited time\,
-  get $10 off and
-URL:https://www.visitbloomington.com/event/cosmic-songwriter-festival/5821
- 6/
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Live Music with Postmodern Jazz Quartet
-DTSTART;TZID=America/Indiana/Indianapolis:20260515T000000
-DTEND;TZID=America/Indiana/Indianapolis:20260515T000000
-UID:260511_oE5yF-QcEC0n8ApW659yw
-DESCRIPTION:05/15/2026 to05/15/2026-\n\nJoin us for our monthly jazz salon
-  with the Postmodern Jazz Quartet on the third Friday of each month from 6
- :30-8:30 pm! This event is free and open to all. Grab a seat in our café 
- area or walk around
-URL:https://www.visitbloomington.com/event/live-music-with-postmodern-jazz
- -quartet/58767/
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:IU Baseball vs Illinois
-DTSTART;TZID=America/Indiana/Indianapolis:20260515T000000
-DTEND;TZID=America/Indiana/Indianapolis:20260515T000000
-UID:260511EBoutDmrpEq3pk3u1doMgw
-DESCRIPTION:05/14/2026 to05/16/2026-\n\nCome out and cheer for the IU Base
- ball team\, go Hoosiers!
-URL:https://www.visitbloomington.com/event/iu-baseball-vs-illinois/58823/
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
@@ -620,6 +620,29 @@ URL:https://seeconstellation.org/kids/finn/
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Cosmic Songwriter Festival
+DTSTART;TZID=America/Indiana/Indianapolis:20260516T000000
+DTEND;TZID=America/Indiana/Indianapolis:20260516T000000
+UID:260511l4uRpHnyBUm1KH4FBbgC-Q
+DESCRIPTION:05/14/2026 to05/16/2026-\n\nAnnouncing the 4th Annual Cosmic S
+ ongwriter Festival!\n\nThank you for your continued support of Cosmic Song
+ writer! We are excited to announce the 2026 Festival. For a limited time\,
+  get $10 off and
+URL:https://www.visitbloomington.com/event/cosmic-songwriter-festival/5821
+ 6/
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:IU Baseball vs Illinois
+DTSTART;TZID=America/Indiana/Indianapolis:20260516T000000
+DTEND;TZID=America/Indiana/Indianapolis:20260516T000000
+UID:260511QEfiUTjUEESln0Tu74dixQ
+DESCRIPTION:05/14/2026 to05/16/2026-\n\nCome out and cheer for the IU Base
+ ball team\, go Hoosiers!
+URL:https://www.visitbloomington.com/event/iu-baseball-vs-illinois/58823/
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Indiana Hoosiers vs. Illinois Fighting Illini
 DTSTART;TZID=America/Indiana/Indianapolis:20260516T000000
 DTEND;TZID=America/Indiana/Indianapolis:20260516T000000
@@ -647,29 +670,6 @@ DESCRIPTION:Playpen Sports Academy is a wonderful way to introduce your ch
  pect some of your children to go on to be great athletes\, we expect all o
  f your children to go on to be great people!
 URL:https://www.playpensports.com/
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Cosmic Songwriter Festival
-DTSTART;TZID=America/Indiana/Indianapolis:20260516T000000
-DTEND;TZID=America/Indiana/Indianapolis:20260516T000000
-UID:260511l4uRpHnyBUm1KH4FBbgC-Q
-DESCRIPTION:05/14/2026 to05/16/2026-\n\nAnnouncing the 4th Annual Cosmic S
- ongwriter Festival!\n\nThank you for your continued support of Cosmic Song
- writer! We are excited to announce the 2026 Festival. For a limited time\,
-  get $10 off and
-URL:https://www.visitbloomington.com/event/cosmic-songwriter-festival/5821
- 6/
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:IU Baseball vs Illinois
-DTSTART;TZID=America/Indiana/Indianapolis:20260516T000000
-DTEND;TZID=America/Indiana/Indianapolis:20260516T000000
-UID:260511QEfiUTjUEESln0Tu74dixQ
-DESCRIPTION:05/14/2026 to05/16/2026-\n\nCome out and cheer for the IU Base
- ball team\, go Hoosiers!
-URL:https://www.visitbloomington.com/event/iu-baseball-vs-illinois/58823/
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
@@ -985,16 +985,6 @@ URL:https://www.visitbloomington.com/event/trivia/58304/
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Baseball (Boys V) - Eastern Greene High School
-DTSTART;TZID=America/Indiana/Indianapolis:20260522T173000
-DTEND;TZID=America/Indiana/Indianapolis:20260522T233000
-UID:251007UQJZt0sd7kKpwGo3VJj2EA
-DESCRIPTION:
-LOCATION:Edgewood High School
-URL:https://www.rbbschools.net/calendar1
-X-SOURCE:Limestone Post
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Fresh Air Fridays: Boots & Bottles Line Dancing
 DTSTART;TZID=America/Indiana/Indianapolis:20260522T160000
 DTEND;TZID=America/Indiana/Indianapolis:20260522T160000
@@ -1005,6 +995,16 @@ DESCRIPTION:Dust off your boots and join us for Boots & Bottles Line Danci
  entary glass of wine.
 LOCATION:Oliver Winery
 URL:https://www.facebook.com/events/1237162778628510/
+X-SOURCE:Limestone Post
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Baseball (Boys V) - Eastern Greene High School
+DTSTART;TZID=America/Indiana/Indianapolis:20260522T173000
+DTEND;TZID=America/Indiana/Indianapolis:20260522T233000
+UID:251007UQJZt0sd7kKpwGo3VJj2EA
+DESCRIPTION:
+LOCATION:Edgewood High School
+URL:https://www.rbbschools.net/calendar1
 X-SOURCE:Limestone Post
 END:VEVENT
 BEGIN:VEVENT
@@ -3450,7 +3450,7 @@ BEGIN:VEVENT
 SUMMARY:Battle of the Books
 DTSTART;TZID=America/Indiana/Indianapolis:20260718T133000
 DTEND;TZID=America/Indiana/Indianapolis:20260718T160000
-UID:260508CeutqzPhd0WrX51_NxOzjA
+UID:260512gYVBvEXIBUmnO6cVmi73aw
 DESCRIPTION:Please register here: calendar.mcpl.info/event/16005953 Partic
  ipate in a reading challenge and trivia competition rolled into one. Get r
  eady to compete as a team and win fabulous prizes!  Battle of the Books \\
@@ -3460,7 +3460,7 @@ DESCRIPTION:Please register here: calendar.mcpl.info/event/16005953 Partic
  ons about the books you read. Ages 8-12 Downtown Library Auditorium \\+ Me
  eting Room 1B/C Combo Please register here: calendar.mcpl.info/event/16005
  953
-LOCATION:Monroe County Public Library- Downtown Branch
+LOCATION:Monroe County Public Library (Indiana)
 URL:https://www.facebook.com/events/3278067982365516/
 X-SOURCE:Limestone Post
 END:VEVENT

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-05-12T03:01:47.488590",
+  "generated": "2026-05-12T18:47:54.353961",
   "cities": {
     "santarosa": {
       "feeds": {
@@ -14298,7 +14298,7 @@
             },
             {
               "date": "2026-05-12",
-              "count": 19
+              "count": 0
             }
           ]
         },
@@ -16278,7 +16278,7 @@
             },
             {
               "date": "2026-05-12",
-              "count": 56
+              "count": 0
             }
           ]
         },
@@ -16518,7 +16518,7 @@
             },
             {
               "date": "2026-05-12",
-              "count": 39
+              "count": 41
             }
           ]
         },
@@ -17110,7 +17110,7 @@
             },
             {
               "date": "2026-05-12",
-              "count": 282
+              "count": 281
             }
           ]
         },
@@ -18370,7 +18370,7 @@
             },
             {
               "date": "2026-05-12",
-              "count": 13
+              "count": 14
             }
           ]
         },
@@ -18730,7 +18730,7 @@
             },
             {
               "date": "2026-05-12",
-              "count": 13
+              "count": 0
             }
           ]
         },
@@ -18910,7 +18910,7 @@
             },
             {
               "date": "2026-05-12",
-              "count": 31
+              "count": 48
             }
           ]
         },
@@ -19090,7 +19090,7 @@
             },
             {
               "date": "2026-05-12",
-              "count": 45
+              "count": 46
             }
           ]
         },
@@ -19270,7 +19270,7 @@
             },
             {
               "date": "2026-05-12",
-              "count": 11
+              "count": 0
             }
           ]
         },
@@ -20170,7 +20170,7 @@
             },
             {
               "date": "2026-05-12",
-              "count": 23
+              "count": 25
             }
           ]
         },
@@ -21790,7 +21790,7 @@
             },
             {
               "date": "2026-05-12",
-              "count": 12
+              "count": 8
             }
           ]
         },
@@ -22330,7 +22330,7 @@
             },
             {
               "date": "2026-05-12",
-              "count": 6
+              "count": 7
             }
           ]
         },
@@ -24850,7 +24850,7 @@
             },
             {
               "date": "2026-05-12",
-              "count": 166
+              "count": 162
             }
           ]
         },
@@ -25210,7 +25210,7 @@
             },
             {
               "date": "2026-05-12",
-              "count": 161
+              "count": 157
             }
           ]
         },
@@ -25570,7 +25570,7 @@
             },
             {
               "date": "2026-05-12",
-              "count": 42
+              "count": 47
             }
           ]
         },
@@ -25751,186 +25751,6 @@
             {
               "date": "2026-05-12",
               "count": 12
-            }
-          ]
-        },
-        "gcal_e1egkmmhjj98nf0rgd2oa4u3ng": {
-          "history": [
-            {
-              "date": "2026-03-29",
-              "count": 11
-            },
-            {
-              "date": "2026-03-30",
-              "count": 10
-            },
-            {
-              "date": "2026-03-31",
-              "count": 7
-            },
-            {
-              "date": "2026-04-01",
-              "count": 8
-            },
-            {
-              "date": "2026-04-02",
-              "count": 7
-            },
-            {
-              "date": "2026-04-03",
-              "count": 7
-            },
-            {
-              "date": "2026-04-04",
-              "count": 7
-            },
-            {
-              "date": "2026-04-05",
-              "count": 5
-            },
-            {
-              "date": "2026-04-06",
-              "count": 7
-            },
-            {
-              "date": "2026-04-07",
-              "count": 7
-            },
-            {
-              "date": "2026-04-08",
-              "count": 7
-            },
-            {
-              "date": "2026-04-09",
-              "count": 6
-            },
-            {
-              "date": "2026-04-10",
-              "count": 6
-            },
-            {
-              "date": "2026-04-11",
-              "count": 11
-            },
-            {
-              "date": "2026-04-12",
-              "count": 13
-            },
-            {
-              "date": "2026-04-13",
-              "count": 13
-            },
-            {
-              "date": "2026-04-14",
-              "count": 16
-            },
-            {
-              "date": "2026-04-15",
-              "count": 16
-            },
-            {
-              "date": "2026-04-17",
-              "count": 16
-            },
-            {
-              "date": "2026-04-18",
-              "count": 18
-            },
-            {
-              "date": "2026-04-19",
-              "count": 17
-            },
-            {
-              "date": "2026-04-20",
-              "count": 11
-            },
-            {
-              "date": "2026-04-21",
-              "count": 11
-            },
-            {
-              "date": "2026-04-22",
-              "count": 11
-            },
-            {
-              "date": "2026-04-23",
-              "count": 11
-            },
-            {
-              "date": "2026-04-24",
-              "count": 15
-            },
-            {
-              "date": "2026-04-25",
-              "count": 14
-            },
-            {
-              "date": "2026-04-26",
-              "count": 15
-            },
-            {
-              "date": "2026-04-27",
-              "count": 13
-            },
-            {
-              "date": "2026-04-28",
-              "count": 12
-            },
-            {
-              "date": "2026-04-29",
-              "count": 12
-            },
-            {
-              "date": "2026-04-30",
-              "count": 10
-            },
-            {
-              "date": "2026-05-01",
-              "count": 10
-            },
-            {
-              "date": "2026-05-02",
-              "count": 9
-            },
-            {
-              "date": "2026-05-03",
-              "count": 7
-            },
-            {
-              "date": "2026-05-04",
-              "count": 6
-            },
-            {
-              "date": "2026-05-05",
-              "count": 5
-            },
-            {
-              "date": "2026-05-06",
-              "count": 5
-            },
-            {
-              "date": "2026-05-07",
-              "count": 5
-            },
-            {
-              "date": "2026-05-08",
-              "count": 4
-            },
-            {
-              "date": "2026-05-09",
-              "count": 4
-            },
-            {
-              "date": "2026-05-10",
-              "count": 4
-            },
-            {
-              "date": "2026-05-11",
-              "count": 10
-            },
-            {
-              "date": "2026-05-12",
-              "count": 10
             }
           ]
         },
@@ -27010,7 +26830,7 @@
             },
             {
               "date": "2026-05-12",
-              "count": 119
+              "count": 149
             }
           ]
         },
@@ -31542,7 +31362,7 @@
             },
             {
               "date": "2026-05-12",
-              "count": 13
+              "count": 15
             }
           ]
         },
@@ -32634,7 +32454,7 @@
             },
             {
               "date": "2026-05-12",
-              "count": 3
+              "count": 2
             }
           ]
         },
@@ -32952,16 +32772,11 @@
         }
       },
       "url_quality": {
-        "total_with_url": 2186,
-        "total_events": 3669,
-        "unique_urls": 1089,
-        "generic_count": 158,
+        "total_with_url": 2162,
+        "total_events": 3650,
+        "unique_urls": 1099,
+        "generic_count": 104,
         "generic_domains": [
-          {
-            "domain": "letsgo.terrorware.com",
-            "events": 54,
-            "url": "https://letsgo.terrorware.com/"
-          },
           {
             "domain": "on.in.gov/mccormickscreek",
             "events": 20,
@@ -33008,9 +32823,9 @@
         "source_specificity": [
           {
             "source": "Brown County Events",
-            "events": 346,
-            "unique_urls": 63,
-            "specificity_pct": 18
+            "events": 352,
+            "unique_urls": 69,
+            "specificity_pct": 20
           },
           {
             "source": "IU Bloomington Libraries",
@@ -33038,9 +32853,15 @@
           },
           {
             "source": "Limestone Post",
-            "events": 159,
-            "unique_urls": 48,
+            "events": 161,
+            "unique_urls": 49,
             "specificity_pct": 30
+          },
+          {
+            "source": "Libcal Iub 5914",
+            "events": 149,
+            "unique_urls": 149,
+            "specificity_pct": 100
           },
           {
             "source": "IU Arts & Humanities Institute, IU Bloomington Libraries",
@@ -33049,28 +32870,22 @@
             "specificity_pct": 2
           },
           {
-            "source": "Libcal Iub 5914",
-            "events": 119,
-            "unique_urls": 119,
-            "specificity_pct": 100
-          },
-          {
             "source": "IU Jacobs School of Music",
             "events": 59,
             "unique_urls": 59,
             "specificity_pct": 100
           },
           {
-            "source": "Let's Go! Bloomington",
-            "events": 53,
-            "unique_urls": 1,
-            "specificity_pct": 2
-          },
-          {
             "source": "McCormick's Creek State Park",
-            "events": 45,
+            "events": 46,
             "unique_urls": 3,
             "specificity_pct": 7
+          },
+          {
+            "source": "Brown County State Park",
+            "events": 37,
+            "unique_urls": 4,
+            "specificity_pct": 11
           },
           {
             "source": "Bloomington Spinners & Weavers Guild",
@@ -33080,8 +32895,14 @@
           },
           {
             "source": "First United Church",
-            "events": 29,
-            "unique_urls": 29,
+            "events": 28,
+            "unique_urls": 28,
+            "specificity_pct": 100
+          },
+          {
+            "source": "IU beINvolved Student Orgs",
+            "events": 25,
+            "unique_urls": 25,
             "specificity_pct": 100
           },
           {
@@ -33089,51 +32910,45 @@
             "events": 24,
             "unique_urls": 7,
             "specificity_pct": 29
-          },
-          {
-            "source": "IU beINvolved Student Orgs",
-            "events": 23,
-            "unique_urls": 23,
-            "specificity_pct": 100
           }
         ]
       },
       "categories": [
         {
           "category": "Arts / Culture",
-          "count": 573
+          "count": 569
         },
         {
           "category": "Music / Concerts",
-          "count": 397
+          "count": 387
         },
         {
           "category": "Sports / Fitness",
           "count": 381
         },
         {
-          "category": "Community / Social",
-          "count": 264
+          "category": "Family / Kids",
+          "count": 240
         },
         {
-          "category": "Family / Kids",
-          "count": 239
+          "category": "Community / Social",
+          "count": 221
         },
         {
           "category": "Nature / Outdoors / Recreation",
-          "count": 204
+          "count": 218
         },
         {
           "category": "Government / Civic",
-          "count": 200
+          "count": 201
         },
         {
           "category": "Education / Workshops",
-          "count": 197
+          "count": 198
         },
         {
           "category": "Food / Drink",
-          "count": 191
+          "count": 185
         },
         {
           "category": "Comedy / Improv",
@@ -33144,40 +32959,40 @@
           "count": 150
         },
         {
+          "category": "Film / Cinema",
+          "count": 147
+        },
+        {
           "category": "Books / Literature / Poetry",
-          "count": 136
+          "count": 133
         },
         {
           "category": "Craft / Maker",
-          "count": 124
-        },
-        {
-          "category": "Film / Cinema",
-          "count": 117
+          "count": 122
         },
         {
           "category": "History / Heritage",
           "count": 97
         },
         {
-          "category": "Health / Wellness",
-          "count": 94
-        },
-        {
           "category": "Dance / Performance",
-          "count": 94
+          "count": 97
         },
         {
-          "category": "Religion / Spirituality",
-          "count": 22
+          "category": "Health / Wellness",
+          "count": 95
         },
         {
           "category": "Technology / Careers",
           "count": 22
         },
         {
+          "category": "Religion / Spirituality",
+          "count": 21
+        },
+        {
           "category": "LGBTQ+ / Gender",
-          "count": 7
+          "count": 6
         },
         {
           "category": "Gardening / Horticulture",
@@ -33189,13 +33004,13 @@
         }
       ],
       "images": {
-        "total": 3669,
-        "with_image": 1193,
+        "total": 3650,
+        "with_image": 1213,
         "by_source": [
           {
             "source": "Brown County Events",
-            "total": 346,
-            "with_image": 332
+            "total": 352,
+            "with_image": 338
           },
           {
             "source": "IU Bloomington Libraries",
@@ -33263,6 +33078,11 @@
             "with_image": 10
           },
           {
+            "source": "Pillar Arts Community Calendar, BloomingtonArts.Today, Limestone Post, WFHB Community Calendar",
+            "total": 9,
+            "with_image": 9
+          },
+          {
             "source": "IU Kelley School of Business, IU Maurer School of Law",
             "total": 8,
             "with_image": 8
@@ -33270,6 +33090,11 @@
           {
             "source": "IU Hamilton Lugar School",
             "total": 9,
+            "with_image": 7
+          },
+          {
+            "source": "Indivisible Central Indiana (Mobilize)",
+            "total": 7,
             "with_image": 7
           },
           {
@@ -33283,11 +33108,6 @@
             "with_image": 6
           },
           {
-            "source": "Indivisible Central Indiana (Mobilize)",
-            "total": 6,
-            "with_image": 6
-          },
-          {
             "source": "IU Athletics",
             "total": 17,
             "with_image": 5
@@ -33296,6 +33116,11 @@
             "source": "Architecture + Design, Eskenazi Museum of Art, IU Eskenazi School of Art, IU First Nations Center",
             "total": 5,
             "with_image": 5
+          },
+          {
+            "source": "Pillar Arts Community Calendar, Limestone Post, WFHB Community Calendar",
+            "total": 4,
+            "with_image": 4
           },
           {
             "source": "Bloomington Spinners & Weavers Guild",
@@ -33353,12 +33178,12 @@
             "with_image": 1
           },
           {
-            "source": "Pillar Arts Community Calendar, Limestone Post, WFHB Community Calendar",
+            "source": "Pillar Arts Community Calendar, Brown County Events",
             "total": 1,
             "with_image": 1
           },
           {
-            "source": "Pillar Arts Community Calendar, Brown County Events",
+            "source": "Pillar Arts Community Calendar, BloomingtonArts.Today, Limestone Post",
             "total": 1,
             "with_image": 1
           },
@@ -33368,7 +33193,7 @@
             "with_image": 1
           },
           {
-            "source": "Pillar Arts Community Calendar, BloomingtonArts.Today, Limestone Post, WFHB Community Calendar",
+            "source": "IU Media School, Pillar Arts Community Calendar, WFHB Community Calendar",
             "total": 1,
             "with_image": 1
           },
@@ -33391,12 +33216,12 @@
       },
       "tzid_inventory": {
         "city_timezone": "America/Indiana/Indianapolis",
-        "distinct_tzids": 7,
+        "distinct_tzids": 6,
         "tzids": [
           {
             "tzid": "UTC (Z suffix)",
-            "count": 19428,
-            "files": 41,
+            "count": 15115,
+            "files": 40,
             "matches_city": false,
             "sample_files": [
               "calendar_feeds.ics",
@@ -33408,8 +33233,8 @@
           },
           {
             "tzid": "America/New_York",
-            "count": 10665,
-            "files": 24,
+            "count": 10477,
+            "files": 23,
             "matches_city": false,
             "sample_files": [
               "eventbrite_martinsville_arts.ics",
@@ -33421,8 +33246,8 @@
           },
           {
             "tzid": "America/Indiana/Indianapolis",
-            "count": 2415,
-            "files": 38,
+            "count": 2398,
+            "files": 35,
             "matches_city": true,
             "sample_files": [
               "bgcbloomington.ics",
@@ -33433,21 +33258,8 @@
             ]
           },
           {
-            "tzid": "(bare \u2014 assumes city tz)",
-            "count": 205,
-            "files": 34,
-            "matches_city": false,
-            "sample_files": [
-              "bgcbloomington.ics",
-              "bloomingtoncommunityband.ics",
-              "bloomspinweave.ics",
-              "browncounty.ics",
-              "browncountyplayhouse.ics"
-            ]
-          },
-          {
             "tzid": "America/Los_Angeles",
-            "count": 171,
+            "count": 173,
             "files": 6,
             "matches_city": false,
             "sample_files": [
@@ -33459,12 +33271,16 @@
             ]
           },
           {
-            "tzid": "America/Halifax",
-            "count": 12,
-            "files": 1,
+            "tzid": "(bare \u2014 assumes city tz)",
+            "count": 139,
+            "files": 31,
             "matches_city": false,
             "sample_files": [
-              "hardtruth.ics"
+              "bgcbloomington.ics",
+              "bloomingtoncommunityband.ics",
+              "bloomspinweave.ics",
+              "browncounty.ics",
+              "browncountyplayhouse.ics"
             ]
           },
           {
@@ -33548,23 +33364,23 @@
         {
           "source": "Gcal D1087E97D4Ace1C1Ca2Dd6336D417Bea870Ddac277Be6D1711Cbc0235Aa85228",
           "source_id": "gcal_d1087e97d4ace1c1ca2dd6336d417bea870ddac277be6d1711cbc0235aa85228",
-          "location": "Monroe County Public Library - Downtown, 303 E Kirkwood Ave, Bl\roomington, IN 47408, USA\r",
-          "count": 3,
-          "titles": [
-            "Discardia Mending Day",
-            "Discardia Mending Day",
-            "Discardia Mending Day"
-          ]
-        },
-        {
-          "source": "Gcal D1087E97D4Ace1C1Ca2Dd6336D417Bea870Ddac277Be6D1711Cbc0235Aa85228",
-          "source_id": "gcal_d1087e97d4ace1c1ca2dd6336d417bea870ddac277be6d1711cbc0235aa85228",
           "location": "Monroe County Humane Association, 791 S Fieldstone Blvd, Bloomi\rngton, IN 47403, USA\r",
           "count": 3,
           "titles": [
             "Monthly Dog Walking Club",
             "Monthly Dog Walking Club",
             "Monthly Dog Walking Club"
+          ]
+        },
+        {
+          "source": "Gcal D1087E97D4Ace1C1Ca2Dd6336D417Bea870Ddac277Be6D1711Cbc0235Aa85228",
+          "source_id": "gcal_d1087e97d4ace1c1ca2dd6336d417bea870ddac277be6d1711cbc0235aa85228",
+          "location": "Monroe County Public Library - Downtown, 303 E Kirkwood Ave, Bl\roomington, IN 47408, USA\r",
+          "count": 3,
+          "titles": [
+            "Discardia Mending Day",
+            "Discardia Mending Day",
+            "Discardia Mending Day"
           ]
         },
         {
@@ -33752,6 +33568,15 @@
         {
           "source": "Mobilize Indivisible Central Indiana",
           "source_id": "mobilize_indivisible_central_indiana",
+          "location": "Carmel Clay Veterans Memorial (across from farmers' market), 400 American Way N, Carmel, IN, 46032",
+          "count": 1,
+          "titles": [
+            "End ICE Detention Day of Action - Carmel"
+          ]
+        },
+        {
+          "source": "Mobilize Indivisible Central Indiana",
+          "source_id": "mobilize_indivisible_central_indiana",
           "location": "South 5th Street & South A Street, Richmond, IN, 47374",
           "count": 1,
           "titles": [
@@ -33770,10 +33595,10 @@
         {
           "source": "Mobilize Indivisible Central Indiana",
           "source_id": "mobilize_indivisible_central_indiana",
-          "location": "Carmel Clay Veterans Memorial (across from farmers' market), 400 American Way N, Carmel, IN, 46032",
+          "location": "Intersection of Hwys 24 & 13 in Wabash County, Wabash, IN, 46992",
           "count": 1,
           "titles": [
-            "End ICE Detention Day of Action - Carmel"
+            "End ICE Detention Day of Action - Wabash County\\, IN"
           ]
         },
         {
@@ -33783,15 +33608,6 @@
           "count": 1,
           "titles": [
             "End ICE Detention Day of Action - Fowler"
-          ]
-        },
-        {
-          "source": "Mobilize Indivisible Central Indiana",
-          "source_id": "mobilize_indivisible_central_indiana",
-          "location": "Intersection of Hwys 24 & 13 in Wabash County, Wabash, IN, 46992",
-          "count": 1,
-          "titles": [
-            "End ICE Detention Day of Action - Wabash County\\, IN"
           ]
         },
         {
@@ -33824,19 +33640,19 @@
         {
           "source": "Mobilize Indivisible Central Indiana",
           "source_id": "mobilize_indivisible_central_indiana",
-          "location": "Idle Park, 800 Virginia Ave, Indianapolis, IN, 46203",
+          "location": "4904 W 16th St, Indianapolis, IN, 46224",
           "count": 1,
           "titles": [
-            "End ICE Detention Day of Action - Fountain Square"
+            "End ICE Detention Day of Action - Speedway (Indy)"
           ]
         },
         {
           "source": "Mobilize Indivisible Central Indiana",
           "source_id": "mobilize_indivisible_central_indiana",
-          "location": "4904 W 16th St, Indianapolis, IN, 46224",
+          "location": "Idle Park, 800 Virginia Ave, Indianapolis, IN, 46203",
           "count": 1,
           "titles": [
-            "End ICE Detention Day of Action - Speedway (Indy)"
+            "End ICE Detention Day of Action - Fountain Square"
           ]
         },
         {
@@ -108177,12 +107993,44 @@
       "date": "2026-05-12",
       "city": "bloomington",
       "feed": "events_search_events_ics_ics"
+    },
+    {
+      "type": "zero_events",
+      "message": "Feed returned 0 events (was 19)",
+      "severity": "high",
+      "date": "2026-05-12",
+      "city": "bloomington",
+      "feed": "buskirk_chumley"
+    },
+    {
+      "type": "zero_events",
+      "message": "Feed returned 0 events (was 13)",
+      "severity": "high",
+      "date": "2026-05-12",
+      "city": "bloomington",
+      "feed": "hardtruth"
+    },
+    {
+      "type": "zero_events",
+      "message": "Feed returned 0 events (was 11)",
+      "severity": "high",
+      "date": "2026-05-12",
+      "city": "bloomington",
+      "feed": "monroe_county_history_center"
+    },
+    {
+      "type": "zero_events",
+      "message": "Feed returned 0 events (was 56)",
+      "severity": "high",
+      "date": "2026-05-12",
+      "city": "bloomington",
+      "feed": "sycamore_land_trust"
     }
   ],
   "errors": [
     {
       "date": "2026-05-12",
-      "line": "2026-05-12 02:58:34,357 - NAMIScraper - WARNING - Error fetching page 1: 403 Client Error: Forbidden for url: https://namigreaterbloomingtonarea.org/wp-json/tribe/events/v1/events/?per_page=50&page=1",
+      "line": "2026-05-12 18:45:21,698 - NAMIScraper - WARNING - Error fetching page 1: 403 Client Error: Forbidden for url: https://namigreaterbloomingtonarea.org/wp-json/tribe/events/v1/events/?per_page=50&page=1",
       "source": null
     }
   ]

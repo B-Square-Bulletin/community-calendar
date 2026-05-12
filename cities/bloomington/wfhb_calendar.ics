@@ -4,17 +4,6 @@ PRODID:-//WFHB Community Calendar//wfhb.org//
 X-WR-CALNAME:WFHB Community Calendar
 X-WR-TIMEZONE:America/Indiana/Indianapolis
 BEGIN:VEVENT
-SUMMARY:B Town Tai Chi
-DTSTART;TZID=America/Indiana/Indianapolis:20260512T091500
-DTEND;TZID=America/Indiana/Indianapolis:20260512T104500
-UID:ai1ec-150019-95467@wfhb.org
-DESCRIPTION:
-LOCATION:Meeting Room 1B\, Monroe County Public Library\, 303 E Kirkwood A
- ve\, Bloomington
-URL:https://wfhb.org/event/b-town-tai-chi-8/?instance_id=95467
-X-SOURCE:WFHB Community Calendar
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Teen Sewcial Club: Beanies
 DTSTART;TZID=America/Indiana/Indianapolis:20260512T160000
 DTEND;TZID=America/Indiana/Indianapolis:20260512T180000

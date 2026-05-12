@@ -209,7 +209,7 @@ PRIORITY:5
 SEQUENCE:10
 TRANSP:OPAQUE
 SUMMARY:Hill Folks Music Series at Brown County Inn
-DESCRIPTION:Join us in the CornCrib Lounge at Brown County Inn every Thursday from 7–9 PM for the Hill Folk Music Series—an evening of live music featuring roots, folk, blues, and Americana from talented artists in Brown County and beyond.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/hill-folks-music-series-at-brown-county-inn/
 ORGANIZER;CN=Brown County Inn:MAILTO:info@browncountyinn.com
 CATEGORIES:Entertainment,Free,Happening,Live Music
@@ -251,7 +251,7 @@ PRIORITY:5
 SEQUENCE:3
 TRANSP:OPAQUE
 SUMMARY:11th Annual Hilly Half | 10K | 5K
-DESCRIPTION:
+DESCRIPTION:The Brown County YMCA Hilly Half Marathon highlights our county, promote health, well-being and create a true sense of community. The Half Marathon scenic route starts and finishes at the Saddle Barn/Lower Shelter house winding its way through picturesque Brown County State Park. Up hills, past the fire tower, vistas and then a fast 2 mile downhill finish\n
 URL:https://browncounty.com/events/11th-annual-hilly-half-10k-5k/
 ORGANIZER;CN=Brown County YMCA:MAILTO:kimrobinson@browncountyymca.com
 CATEGORIES:Happening,Races,Special Events,Wellness
@@ -272,7 +272,7 @@ PRIORITY:5
 SEQUENCE:2
 TRANSP:OPAQUE
 SUMMARY:Live Music at 19th Hole Sports Bar
-DESCRIPTION:Join us every Saturday for live music! Location Lower Level of main clubhouse.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/live-music-at-19th-hole-sports-bar-2/
 CATEGORIES:Food &amp; Drink,Happening,Live Music
 LOCATION:2359 State Road 46, Nashville, IN
@@ -607,7 +607,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Vintage Video
-DESCRIPTION:Join a park naturalist and view a 1940s era advertisement for Indiana State Parks! Learn about the mission of Indiana State Parks, see highlights of some of our famous locations, and learn how as our understanding of our resources changes, so must our policies and practices! The program and video lasts 30 minutes total.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/vintage-video/
 CATEGORIES:Classes &amp; Workshops,Entertainment,Family Friendly,Free,Happening,Special Events,Theatre &amp; Entertainment
 LOCATION:1801 IN-46, Nashville, IN
@@ -693,7 +693,7 @@ BEGIN:VEVENT
 X-SOURCE:Brown County Events
 CLASS:PUBLIC
 UID:MEC-33385c67b942e912230e4037de6e0d10@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260512T180000
+DTSTART;TZID=America/Indiana/Indianapolis:20260514T180000
 DURATION:PT30M
 DTSTAMP:20260511T102026Z
 RDATE;TZID=America/Indiana/Indianapolis:20260512T140000,20260514T140000,20260517T140000,20260519T150000
@@ -713,8 +713,8 @@ BEGIN:VEVENT
 X-SOURCE:Brown County Events
 CLASS:PUBLIC
 UID:MEC-957f52ef44cea9edcb2ef0b1a6469c3e@browncounty.com
-DTSTART;TZID=America/Indiana/Indianapolis:20260512T150000
-DTEND;TZID=America/Indiana/Indianapolis:20260512T153000
+DTSTART;TZID=America/Indiana/Indianapolis:20260515T170000
+DTEND;TZID=America/Indiana/Indianapolis:20260515T173000
 DTSTAMP:20260511T101551Z
 RDATE;TZID=America/Indiana/Indianapolis:20260511T150000,20260512T110000,20260515T130000,20260518T110000
 CREATED:20260511
@@ -743,7 +743,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Discovery Trail Hike
-DESCRIPTION:Join a park naturalist for a guided hike of the Discovery Trail. This is a general hike about a variety of Brown County State Park topics. Learn about flora, fauna, pioneer history, and the interesting geology of Brown County State Park. The Discovery Trail is about half a mile long and considered moderate. There are muddy spots, uneven surfaces, and slopes. The trail will take us about 40 minutes to complete.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/discovery-trail-hike/
 CATEGORIES:Classes &amp; Workshops,Family Friendly,Happening,Outdoor Adventure,Tours,Wellness
 LOCATION:1801 IN-46, Nashville, IN
@@ -819,7 +819,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Brown County Winery’s 40th Anniversary
-DESCRIPTION:We’re having a party!! Join Brown County Winery for a 40th Anniversary Celebration!\nAll the details to come soon.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/brown-county-winerys-40th-anniversary/
 CATEGORIES:Entertainment,Food &amp; Drink,Happening,Special Events
 LOCATION:4520 State Road 46, Nashville, IN
@@ -915,7 +915,7 @@ PRIORITY:5
 SEQUENCE:3
 TRANSP:OPAQUE
 SUMMARY:Live Music On The Rocks | Steve Hickman and the Hard Knocks
-DESCRIPTION:Make live music part of your Labor Day weekend. Set against a scenic forest backdrop of 325 acres, Hard Truth on the Rocks offers an open‑air music experience like no other.\nGuests are invited to spread out across the terraces, sip signature cocktails, and enjoy a rotating mix of live performances throughout the season. The terrace bar offers cocktails, beer, wine, and food options, while seating remains first come, first served, encouraging guests to arrive early and make an evening of it.\nPlease note: select dates may require a small fee at the door. Call ahead to confirm.\n(812) 720-4840\n
+DESCRIPTION:
 URL:https://browncounty.com/events/live-music-on-the-rocks-steve-hickman-and-the-hard-knocks/
 ORGANIZER;CN=Hard Truth Distilling Co.:MAILTO:events@bwqoht.com
 CATEGORIES:Entertainment,Food &amp; Drink,Free,Happening,Holiday,Live Music,Outdoor Concerts,Special Events,Summer
@@ -935,7 +935,7 @@ PRIORITY:5
 SEQUENCE:3
 TRANSP:OPAQUE
 SUMMARY:Live Music On The Rocks | Michael McCartney
-DESCRIPTION:
+DESCRIPTION:Make live music part of your Labor Day weekend. Set against a scenic forest backdrop of 325 acres, Hard Truth on the Rocks offers an open‑air music experience like no other.\nGuests are invited to spread out across the terraces, sip signature cocktails, and enjoy a rotating mix of live performances throughout the season. The terrace bar offers cocktails, beer, wine, and food options, while seating remains first come, first served, encouraging guests to arrive early and make an evening of it.\nPlease note: select dates may require a small fee at the door. Call ahead to confirm.\n(812) 720-4840\n
 URL:https://browncounty.com/events/live-music-on-the-rocks-michael-mccartney/
 ORGANIZER;CN=Hard Truth Distilling Co.:MAILTO:events@bwqoht.com
 CATEGORIES:Entertainment,Food &amp; Drink,Free,Happening,Holiday,Live Music,Outdoor Concerts,Special Events,Summer
@@ -975,7 +975,7 @@ PRIORITY:5
 SEQUENCE:3
 TRANSP:OPAQUE
 SUMMARY:Live Music On The Rocks | Jennie Devoe and special guests the White Lightning Boys
-DESCRIPTION:Make live music part of your next getaway. Set against a scenic forest backdrop of 325 acres, Hard Truth on the Rocks offer an open‑air music experience like no other.\nGuests are invited to spread out across the terraces, sip signature cocktails, and enjoy a rotating mix of live performances throughout the season. The terrace bar offers cocktails, beer, wine, and food options, while seating remains first come, first served, encouraging guests to arrive early and make an evening of it.\nPlease note: select dates may require a small fee at the door. Call ahead to confirm.\n(812) 720-4840\n
+DESCRIPTION:
 URL:https://browncounty.com/events/live-music-on-the-rocks-jennie-devoe-and-special-guests-the-white-lightning-boys/
 ORGANIZER;CN=Hard Truth Distilling Co.:MAILTO:events@bwqoht.com
 CATEGORIES:Entertainment,Food &amp; Drink,Free,Happening,Holiday,Live Music,Outdoor Concerts,Special Events,Summer
@@ -1015,7 +1015,7 @@ PRIORITY:5
 SEQUENCE:25
 TRANSP:OPAQUE
 SUMMARY:Mamma Mania! – NYC’s Ultimate ABBA Tribute
-DESCRIPTION:\n\n\n\n\nPrepare to be transported back to the vibrant 1970s with 2025’s #1 booked ABBA Tribute! Mamma Mania! brings the classic hits of one of pop music’s most iconic groups to life. With their dazzling costumes, flawless harmonies, and captivating stage presence, this tribute captures the essence of ABBA’s unforgettable sound.\nFrom “Dancing Queen” to “Mamma Mia,” fans will enjoy a night filled with nostalgia from a stellar cast of musicians! Performers include current or former touring members of: Mamma Mia – Official North American Tour, Marc Martel’s Queen Extravaganza, INXS, Britney Spears, Rob Thomas, The Weeknd, and many more! Mamma Mania! pays homage to ABBA’s legacy, celebrating the timeless melodies and uplifting lyrics that have charmed listeners for generations.\nJoin us for an evening of music that showcases not only the incredible songs but also the joyful spirit of ABBA. Whether you’re a lifelong fan or new to their music, this tribute promises to be an unforgettable experience filled with energy, enthusiasm, and plenty of dancing. Don’t miss your chance to be part of this extraordinary celebration of ABBA from some of New York’s finest!!\n\n\n\n\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/mamma-mania-nycs-ultimate-abba-tribute/
 CATEGORIES:Entertainment,Happening,Live Music
 LOCATION:Brown County Playhouse, South Van Buren Street, Nashville, IN
@@ -1034,7 +1034,7 @@ PRIORITY:5
 SEQUENCE:24
 TRANSP:OPAQUE
 SUMMARY:Chamberfest Brown County: Letters From The Front
-DESCRIPTION:\n\n\n\n\nIntroducing New Music Celebrating History And Honoring Service\nLetters From The Front is a new musical work for four voices and piano. Composed by New York composer Patrick Zimmerli with libretto by Mirabelle Ordinaire, this song cycle is based on letters sent by service members and their loved ones during wartime. Each piece is based on an actual letter written during one of our nation’s most crucial wars, including the American Revolution, the Civil War, World War I, World War II, Vietnam, and the Gulf War.\nThis new work will be released in the summer of 2026 to celebrate the 250th birthday of the United States.\n\n\n\n\n\nFeaturing: \n\n\nANGELA BORN – MEZZO-SOPRANO\n\n\nDAVID GOVERTSEN – BASS-BARITONE\n\n\nDESIRÉE HASSLER – SOPRANO\n\n\nTYLER LEE – TENOR\n\n\nLAN GINDES – PIANO\n\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/chamberfest-brown-county-letters-from-the-front/
 CATEGORIES:Entertainment,Happening,Live Music
 LOCATION:Brown County Playhouse, South Van Buren Street, Nashville, IN
@@ -1129,7 +1129,7 @@ PRIORITY:5
 SEQUENCE:16
 TRANSP:OPAQUE
 SUMMARY:Satisfaction – The International Rolling Stones Show
-DESCRIPTION:Get ready to rock as the world’s #1 touring tribute to The Rolling Stones hits the stage for one unforgettable night. “Satisfaction” brings you the look, sound, and swagger of Mick Jagger, Keith Richards, and the band that changed rock ‘n’ roll forever. With spot-on vocals, dazzling costumes, and electrifying energy, it’s more than a concert—it’s a full-throttle Stones experience. Don’t miss your chance to relive the greatest hits, from “Jumpin’ Jack Flash” to “Paint It Black” and everything in between!\n
+DESCRIPTION:
 URL:https://browncounty.com/events/satisfaction-the-international-rolling-stones-show/
 CATEGORIES:Entertainment,Happening,Live Music
 LOCATION:Brown County Playhouse, South Van Buren Street, Nashville, IN
@@ -1459,7 +1459,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:9.11 Memorial Fun Run/Walk
-DESCRIPTION:Join us to commemorate the 25th Anniversary of (/11. Be a part of history. Honoring the memories of those who made the ultimate sacrifice.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/9-11-memorial-fun-run-walk/
 ORGANIZER;CN=Jackson Township Fire Department Station 5:MAILTO:
 CATEGORIES:Family Friendly,Happening,Races,Special Events,Wellness
@@ -1632,7 +1632,7 @@ PRIORITY:5
 SEQUENCE:2
 TRANSP:OPAQUE
 SUMMARY:Amplify Nashville featuring The Reverend Peyton’s Big Damn Band Amplify Nashville featuring The Reverend Peyton’s Big Damn Band
-DESCRIPTION:A unique community showcase celebrating local and regional talent rooted in South Central Indiana and the surrounding areas, Amplify Nashville returns to the Brown County Music Center in Nashville, Ind., on Saturday, November 7, 2026. Presented by the Brown County Music Association, this evening brings rising artists to the biggest stage in town, where they can share the spotlight with one of the area’s most celebrated nationally touring acts: The Reverend Peyton’s Big Damn Band.\nThe evening opens with Sami Riggs, the fan-selected winner of the 2025 Brown County Songwriter Showdown. From there, the spotlight turns to two outstanding bands chosen through the inaugural Rumble on the Rocks competition at Hard Truth Distilling on May 30, June 6, and June 13. These emerging artists will be selected through a combination of fan votes and judges’ scores.\nHeadlining the night is Brown County’s own: The Reverend Peyton’s Big Damn Band, often called “the greatest front-porch blues band in the world.” Led by master finger-picker Reverend Peyton, the trio—featuring washboard virtuoso Breezy Peyton and drummer Jacob “The Snakob” Powell—has carried their electrifying country-blues sound to 38 countries and 48 states. With No. 1 records on the Billboard Blues Chart and acclaim from Rolling Stone and others, their music is rooted in heart, tradition, and a live show that leaves audiences clapping, stomping, and singing along.\nAt Amplify Nashville, every ticket helps make a difference. Proceeds from the event support Nashville area food pantry Mother’s Cupboard and other Nashville-area charities, helping strengthen the community that inspires the music.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/amplify-nashville-featuring-the-reverend-peytons-big-damn-band-amplify-nashville-featuring-the-reverend-peytons-big-damn-band/
 CATEGORIES:Entertainment,Festivals,Food &amp; Drink,Happening,Live Music
 LOCATION:200 Maple Leaf Boulevard, Nashville, IN 47448
@@ -1689,7 +1689,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Beth Hart
-DESCRIPTION:Back by popular demand, GRAMMY®-nominated powerhouse vocalist Beth Hart returns to the Brown County Music Center.\nThe multi-award-winning Beth Hart is recognized as one of her generation’s most talented voices; she has played by her own rules. She has collaborated with legends and icons, traversed the globe, topped the Billboard Blues charts six times, gone double platinum and had a string of Top 10 charting albums across Europe, Top 30 Official Billboard US charting albums and surpassed 600 million streaming figures and counting. Moving hearts and souls across the globe, her touring has taken her across the world, filling rooms at iconic venues such as Nashville’s Ryman Auditorium, Amsterdam’s Ziggo Dome, and London’s Royal Albert Hall. Selling out shows worldwide, her recent travels have taken her across the US, Europe, and all the way to India, Morocco, Australia, and Canada.\n‘You Still Got Me’ is Hart’s eleventh studio album, and finds her riding a career trajectory that has been heading for the stars for several years and keeps soaring. Her most recent albums, ‘ A Tribute To Led Zeppelin’ (2022) and ‘War In My Mind’ (2019), became her highest charting UK and US releases to date, along with crashing into the Top 10 in Germany and France, Sweden, Belgium, Switzerland, Poland, Austria, and The Netherlands.\nThere is an electrifying connection between Beth and her fans, one that’s almost unrivaled. Her ability to touch people with her music and words that cut through straight to the heart means that she lives every word she sings, and fans hang on to each word, living it with her. ‘You Still Got Me’ offers fans a chance to hold and comfort her as she continues to navigate her journey with grace and courage.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/beth-hart/
 CATEGORIES:Entertainment,Happening,Live Music
 LOCATION:200 Maple Leaf Boulevard, Nashville, IN 47448
@@ -1708,7 +1708,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:The Wallflowers
-DESCRIPTION:The Wallflowers will mark the 30th anniversary of their landmark album Bringing Down the Horse with a nationwide U.S. tour.\nThe band will perform their classic album in its entirety, in sequence. Originally released on May 21, 1996, Bringing Down the Horse was a critical and commercial triumph. The album peaked at number four on the Billboard 200 and was certified quadruple platinum, cementing the band’s place in ‘90s rock history.\nThe LP yielded four hit singles: “6th Avenue Heartache” – Two Grammy nominations (1997); “One Headlight” – Reached #1 on the Billboard singles chart, winning two Grammy Awards (1998). The song ranked #58 on Rolling Stone’s “100 Greatest Pop Songs”; “The Difference” – Grammy nomination (1998); and “Three Marlenas” – Released as the album’s final single in October 1997.\nInfluenced by a slew of first-generation American songwriters including The Band and Tom Petty & the Heartbreakers, The Wallflowers will also pay tribute on the upcoming tour to the 50th anniversary of Tom Petty & the Heartbreakers’ by playing Petty’s 1982 album Long After Dark in its entirety and in sequence as well. Jakob Dylan, the band’s chief songwriter, remains a vital performer in American rock music. As part of three decades of work, in 2002, he inducted Tom Petty into the Rock n Roll Hall of Fame. In 2018, he performed in the critically acclaimed documentary Echo in the Canyon, collaborating with artists ranging from Neil Young and Eric Clapton to Beck, Cat Power, Norah Jones, Regina Spektor. Dylan also contributed songs to several soundtracks, including The Wallflowers’ cover of “Heroes” for the 1998 Godzilla film soundtrack and “Arms of a Ghost” to television series, NCIS Los Angeles and “Nothing But the Whole Wide World” to Friday Night Lights. In 2025 The Wallflowers supported Eric Clapton on his US tour as they have done in the past for him as well as the supporting performances for the Who and The Rolling Stones.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/the-wallflowers/
 CATEGORIES:Entertainment,Happening,Live Music
 LOCATION:200 Maple Leaf Boulevard, Nashville, IN 47448
@@ -1727,7 +1727,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:The Australian Pink Floyd Show
-DESCRIPTION:The Australian Pink Floyd Show returns to the Brown County Music Center! Performing the music of Pink Floyd with note for note perfection, this critically acclaimed show has been astonishing audiences worldwide for nearly 40 years. For the 2026 Happiest Days of Our Lives Tour, The Australian Pink Floyd Show will take the stage with a collection of greatest hits that resonate deeply with Pink Floyd fans worldwide. Featuring a new stage set and video animation, cutting-edge lighting, precision lasers, massive inflatables, and impeccable live sound, TAPFS promises to offer an unforgettable experience for both long-time fans and newcomers. Covering music from every era of Pink Floyd’s evolution, this tour highlights TAPFS’s unwavering commitment to the legacy of Barrett, Waters, Gilmour, Wright, and Mason, delivering an authentic and heartfelt tribute to the legendary Pink Floyd productions.\nHaving sold nearly 5 million tickets worldwide, The Australian Pink Floyd Show gave its first ever concert in Adelaide, Australia in 1988. Since then, they have performed in over 35 countries worldwide; played at David Gilmour’s 50th birthday celebration and were even joined on stage by David Gilmour and Rick Wright. The show includes a world class light and laser show, video animations, state of the art, high resolution LED screen technology and other special effects. In addition and in true Pink Floyd tradition, there are several huge inflatables including a giant pig, and their own unique Pink Kangaroo. Reproducing the complete Pink Floyd experience and bringing the music to new audiences, TAPFS inspired a whole new genre of acts. They have worked with Pink Floyd touring musicians like Guy Pratt and Durga McBroom. Lorelei McBroom, who was a member of the Pink Floyd touring band on both the Momentary Lapse Of Reason and Delicate Sound Of Thunder Tours has been a member of TAPFS for 15 years. So much more than a tribute band, The Australian Pink Floyd Show is the first Pink Floyd tribute show that took the concept into the worldwide arena circuit. The band continues to play to sell out audiences throughout Europe, UK, America, Canada & South America.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/the-australian-pink-floyd-show/
 CATEGORIES:Entertainment,Happening,Live Music
 LOCATION:200 Maple Leaf Boulevard, Nashville, IN 47448
@@ -1803,7 +1803,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Hindley Street Country Club
-DESCRIPTION:Founded in 2017 by arranger / producer Constantine Delo, The Hindley Street Country Club (The HSCC) started as a group of Adelaide (South Australia) musicians, recording re-arranged covers and uploading them weekly to Facebook and YouTube. Fast forward to today, The HSCC has amassed over 590 million YouTube views with over 1 million subscribers globally and accumulated over 1 billion views across social media platforms. Following on from major internet success, The HSCC now tours throughout the world.\nThe Hindley Street Country Club is making waves around the globe. With a strong foundation in Australia and neighbouring New Zealand, the band captivated audiences in Southeast Asia in 2024, performing at prestigious events like the Singapore Grand Prix and in vibrant Manila, Philippines. Early 2025 saw them embark on a dynamic tour across the United States and Brazil, showcasing their exceptional talent and energy. Now, they are gearing up for an exciting new national tour in the U.S., alongside a highly anticipated summer tour in Eastern Europe and stops in the United Kingdom.\nHindley Street is located in the centre of Adelaide, and many musicians who have played with HSCC had gigs in bands up and down that street in the 1970s, ‘80s and ‘90s. The name is a play on the reputation of the street, which, in addition to pubs, clubs, amusement arcades, cinemas, fast food outlets and ice cream parlours, featured adult entertainment, tattoo shops, motorcycle gangs and a steady stream of traffic cruising up and down the strip. Hindley Street is an eclectic mix of activity today, including a university campus at one end. There is no actual ‘country club’ on Hindley Street in Adelaide, and the in-joke is mixing up a genteel concept like a country club with ‘Hindley Street.’\nFor more information, visit thehscc.com ( https://thehscc.com/ ).\n
+DESCRIPTION:
 URL:https://browncounty.com/events/hindley-street-country-club/
 CATEGORIES:Entertainment,Happening,Live Music
 LOCATION:200 Maple Leaf Boulevard, Nashville, IN 47448
@@ -1822,7 +1822,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Lyle Lovett and his Small Large Band
-DESCRIPTION:A singer, composer and actor, Lyle Lovett has broadened the definition of American music in a career that spans 14 albums. Coupled with his gift for storytelling, the Texas-based musician fuses elements of country, swing, jazz, folk, gospel and blues in a convention-defying manner that breaks down barriers. Lovett’s live performances show not only the breadth of this Texas legend’s deep talents, but also the diversity of his influences, making him one of the most compelling and captivating musicians in popular music. Since his self-titled debut in 1986, Lyle Lovett has evolved into one of music’s most vibrant and iconic performers. Among his many accolades, besides the four Grammy Awards, he was given the Americana Music Association’s inaugural Trailblazer Award, and was named Texas State Musician. His works, rich and eclectic, are some of the most beloved of any artist working today.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/lyle-lovett-and-his-small-large-band/
 CATEGORIES:Entertainment,Happening,Live Music
 LOCATION:200 Maple Leaf Boulevard, Nashville, IN 47448
@@ -1860,7 +1860,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Killer Queen – A Tribute to Queen
-DESCRIPTION:Killer Queen’s first public shows were at London University, following in the footsteps of the real Queen who had played their first shows there decades earlier. Killer Queen’s UK popularity grew to such an extent they soon secured a residency in London’s Strand Theatre attracting nationwide BBC coverage – the first tribute to have a show in the West End. The band’s reputation continued to grow both in the UK and abroad leading to an awards ceremony in Leicester Square, hosted by Suggs from Madness who presented them with the award for“Worldwide Best Tribute Band.” They also scored a number one hit when they they were asked to recreate Queen’s harmonies for “The Real Life” with Fatboy Slim.\nBy now they were in demand in European arenas playing Ahoy and Forest National Arena where Queen filmed the concert set piece videos such as Hammer To Fall and Don’t Stop Me Now. Killer Queen then joined forces with Bjorn Again and The Bootleg Beatles for a Waverley Stadium show in Edinburgh. It was this performance that led to the band being selected to represent Queen in a re-staged tribute Live Aid concert held by Sir Bob Geldof in Malta. They performed with him at his arena charity concert to raise funds for the young homeless people.\nKiller Queen set their sights on America including the awe inspiring Red Rocks Arena in Colorado– one of the country’s most prestigious venues. The Beatles, Springsteen, and U2 have all played there and the band are delighted it’s become a regular sell out fixture on Killer Queen’s tour sheet. 2023 saw the band play packed arenas across Europe: Stavangar in Norway and Cardiff, Nottingham, Aberdeen, Glasgow and Leeds in the UK. 2024 includes an arena tour of Lithuania, UK arena shows in Liverpool, Newcastle and Liverpool as well as more sell out shows in Red Rocks and Austin City Limits.\n“It’s been an amazing journey,” said lead singer Patrick Myers. “That first show changed my life. We thought our band would last maybe a summer at the most but it’s a very addictive thing performing these songs. The concerts grew and grew and we’ve ended up playing and selling out the same arenas that Queen played at their peak. It’s been quite a surreal ride. Becoming regular performers Red Rocks Arena in America is another highlight. The Beatles, U2, Springsteen, and Dylan all played on that stage. It’s really got its own kind of magic going on there.”\n
+DESCRIPTION:
 URL:https://browncounty.com/events/killer-queen-a-tribute-to-queen/
 CATEGORIES:Entertainment,Happening,Live Music
 LOCATION:200 Maple Leaf Boulevard, Nashville, IN 47448
@@ -2168,7 +2168,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:“Plein Air” Painting Sale and Reception
-DESCRIPTION:You’re invited to the “Plein Air” Painting Sale and Reception at the Brown County Art Gallery on Saturday, October 24th!\nPaintings inspired by historical Brown County Artist are available on our individual Artist Association member walls in our gallery.\nKeep your eyes open for our Association Artist members who are painting “plein air” in scenic Brown County throughout the year.\nPurchase small paintings donated by our Association members available in our gift shop to contribute to our initiative.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/plein-air-painting-sale-and-reception/
 ORGANIZER;CN=Historic Brown County Art Gallery:MAILTO:
 CATEGORIES:Art Events &amp; Exhibits,Happening,Special Events
@@ -2267,7 +2267,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Vintage Baseball at Story Inn
-DESCRIPTION:Vintage Baseball is scheduled to return May 16.  Bring the family and enjoy America’s Favorite Past Time at Indiana’s oldest bed & breakfast!\nAn afternoon of Vintage Baseball!\nThree 5-inning games with 1864, 1869, and 1886 rules\nAdmission is free!\nFood and concessions available for purchase.\nGames start at 1pm, 2pm, and 3pm ending around 4:30pm.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/vintage-baseball-at-story-inn/
 ORGANIZER;CN=The Story Inn:MAILTO:Reservations@storyinn.com
 CATEGORIES:Entertainment,Free,Happening,Outdoor Adventure,Tournaments &amp; Games
@@ -2384,7 +2384,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:VW Bus Invasion at Bill Monroe’s Music Park & Campground
-DESCRIPTION:We will have a full itinerary for the event in the upcoming weeks. Camping will be held in the “Woods” section of the campground. You can book your sites at https://billmonroemusicpark.com/ ( https://billmonroemusicpark.com/ )\n
+DESCRIPTION:
 URL:https://browncounty.com/events/vw-bus-invasion-at-bill-monroes-music-park-campground/
 CATEGORIES:Entertainment,Family Friendly,Festivals,Happening
 LOCATION:5163 North State Road 135, Morgantown, IN
@@ -2479,7 +2479,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:(American) Pomp!: Trumpet, Piano, Winds, and Strings
-DESCRIPTION:ChamberFest Brown County presents (American) Pomp!\nA flamboyant end to festival week: a program of genre-bending and jazz-inspired classics, culminating in Gershwin’s iconic Rhapsody in Blue!\nSaint-Saëns: Septet for Trumpet, Piano and Strings, op. 65\nMartinů: La Revue de Cuisine\nGershwin: Rhapsody in Blue\nArtists:​​\n\n​​​​Spencer Myer, piano soloist\nAndreas Ioannides, piano\nQing Hou, violin\nLei Hou, violin\nLarry Neuman, viola\nCaleb Wong, cello\nJim Campbell, clarinet\nMark Ridenour, trumpet\nVince Karamanov, bassoon\nAlex Horton, bass\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/chamberfest-american-pomp-trumpet-piano-winds-and-strings/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -2499,7 +2499,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:Phoenix: Saxophone Quartet
-DESCRIPTION:ChamberFest Brown County presents Phoenix: Saxophone Quartet\n​​The multi-award-winning Project Fusion Sax Quartet presents Phoenix: a program of saxophone chamber music depicting renewal, transformation, and flight. This theme, chosen in the auspicious year of the United States’ 250th anniversary, celebrates a nation founded on the “great experiment” of democratic reinvention and rebirth, whose mascot is fittingly the noble bald eagle: as such, it presents music exclusively of American composers.\nWorks by Gershwin, Maslanka, Kline, Frazier, Mettens, Washington, Ge, Love\nProject Fusion:\n\nDannel Espinoza, soprano sax\nDoug O’Connor, alto sax\nAiwen Zhang, tenor sax\nMatt Evans, baritone sax\n\nThis concert is sponsored by the Eads family in memory of Ralph S. (Tony) Eads.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/chamberfest-phoenix/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -2519,7 +2519,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:Teutonic: The Brahms Piano Trios
-DESCRIPTION:\nChamberFest Brown County presents Teutonic: The Brahms Piano Trios.\nA rare opportunity to hear Brahms’ three magnificent piano trios in one concert: music of unmatched emotional range and complexity. Not for the faint-hearted!\nBrahms: Piano Trio no. 1, op. 8Brahms: Piano Trio no. 2, op. 87Brahms: Piano Trio no. 3, op. 101\nArtists\n\n​Andreas Ioannides, piano\nMadalyn Parnas Möller, violin\nMaurice Neuman, cello\n\n\n\nThis concert is sponsored by the Eads family in memory of Ralph S. (Tony) Eads.\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/chamberfest-teutonic-the-brahms-piano-trios/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -2539,7 +2539,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:Letters from the Front: Honoring US Veterans: Voice and Piano
-DESCRIPTION:ChamberFest Brown County presents Letters from the Front: Honoring US Veterans \nLetters From The Front is an evening of new music for four voices and piano by composer Patrick Zimmerli honoring the members of the United States Armed Forces, veterans, and their families.\nFeaturing artists Ian Gindes, David Govetsen, Tyler Lee, Angela Born, and Desirée Hassler, with narration written by Jeff Ernstoff, this performance is based on actual letters written during our nation’s most crucial wars, including the American Revolution, the Civil War, World War I, World War II, Vietnam, and the Gulf War. \nIn celebration of the 250th birthday of the USA, each song shares the real experiences of service members and their loved ones in recognition of the sacrifices that made our nation possible with classical music that touches on our artistic heritage of art song, classic Broadway, Americana, and more! \nArtists\n\nIan Gindes, piano\nTyler Lee, tenor\nDesirée Hassler, soprano\nAngela Born, mezzo-soprano\nDavid Govertsen, bass-baritone\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/chamberfest-letters-from-the-front-honoring-us-veterans/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -2559,7 +2559,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:Pastorale: Strings and Winds
-DESCRIPTION:ChamberFest Brown County presents a star-studded lineup featuring Chicago Symphony Orchestra musicians present an uplifting program of music for the outdoors: radiant, folksy, uplifting.\n​​​​​Beethoven: Sextet for 2 horns and string quartet, op. 81bSpohr: Octet, op. 32Dvorak: String Quintet, op. 97\n​Artists\n\n​Qing Hou, violin\nLei Hou, violin\nLarry Neuman, viola\nAurlien Pederzoli, viola\nBrandon Vamos, cello\nJim Campbell, clarinet\nJim Smelser, horn\nOto Carrilla, horn\nAlex Horton, bass\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/chamberfest-pastorale/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -2579,7 +2579,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:Astros, Luces, Rayos: Stars, Lights, Lighting
-DESCRIPTION:ChamberFest Brown County presents a captivating performance of voice, percussion, baroque guitar, theorbo, and harpsichord​​​.\nArias and art songs by Sebastián Durón (1660-1716), arguably the most important Spanish composer of his day. Specialist ensemble Música Ficta brings to life the contrasting vitality, charm and poignancy of Spanish art music.\nThis program features recently published secular and sacred songs found in Latin American archives- which have never been recorded- as well as instrumental pieces by Durón and his contemporaries.\nMúsica Ficta:\n\nJairo Serrano, tenor\nAndrés Silva, tenor\nCarlos Serrano, recorders, pipe and tabor\nJulián Navarro, baroque guitar\nEdwin García, baroque guitar, theorbo\nElisabeth Wright, harpsichord\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/chamberfest-astros-luces-rayos/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -2599,7 +2599,7 @@ PRIORITY:5
 SEQUENCE:4
 TRANSP:OPAQUE
 SUMMARY:Young Artist Spotlight: Erinys Quartet​​
-DESCRIPTION:The Erinys Quartet was awarded the First Prize at the 2025 Trondheim International Chamber Music Competition in Norway. Graduates of Curtis, they are currently graduate-quartet-in-residence at IU Jacobs. Don’t miss their dark and evocative program!\n​Repertoire\nBeecher: Juniper and Birch\nMozart: String Quartet No. 15 in D minor, K. 421/417b\nSchubert: String Quartet No. 14 in D minor, D 810 (“Death and the Maiden”)\n​​​​​​​​​​Erinys Quartet:\nElizabeth Stewart, violin\nJoosep Reimaa, violin\nMarija Räisänen, viola\nStergios Theodoridis, cello\n
+DESCRIPTION:
 URL:https://browncounty.com/events/chamberfest-erinys-quartet/
 ORGANIZER;CN=ChamberFest Brown County:MAILTO:chamberfestbrowncounty@riversongmusic.org
 CATEGORIES:Happening,Live Music
@@ -2660,7 +2660,7 @@ PRIORITY:5
 SEQUENCE:3
 TRANSP:OPAQUE
 SUMMARY:Good People Good Times
-DESCRIPTION:We would like to invite you to the 13th GPGT that started in 2011!\nA very limited amount of discounted tickets are available now, as well as Early Arrival (Thursday) Tickets, Saturday Only Tickets, and Primitive RV/Camper/Bus Parking Passes.​\nCome celebrate an amazing weekend with us in the beautiful hills of Brown County!\n2 Days and Nights of Live Music, Live Art, Light Shows, Camping, Workshops, Kids Activities, Running Water Restrooms, Showers($5), and much more!!!\nKids 12 and under are free!There will be free face painting during the day and a kids parade on the Saturday of the event.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/good-people-good-times/
 ORGANIZER;CN=Derrick:MAILTO:gpgtmusicfestival@gmail.com
 CATEGORIES:Classes &amp; Workshops,Entertainment,Family Friendly,Festivals,Food &amp; Drink,Happening,Live Music,Outdoor Concerts,Special Events,Summer
@@ -2740,7 +2740,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Southern Indiana Blues Fest
-DESCRIPTION:\n LINEUP ANNOUNCED \n\nThe Southern Indiana Blues Festival is back at Bill Monroe Music Park August 27–29, 2026, and this year’s lineup is STACKED.\n\n\nFeaturing The Devon Allman Project, John Primer, Jonathan Ellison, Gordon Bonham, Rock Bottom w/ Charlie McCoy (Hall of Fame Induction), Gina & Johnny, Jason Wells, Jimmy Davis & The Mercury 7, Keith Beatty & The Bayonets, and many more!\n\n\n\n Live music\n Camping\n Workshops with festival musicians\n\n\n Tickets & info: billmonroemusicpark.com\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/southern-indiana-blues-fest/
 CATEGORIES:Entertainment,Festivals,Happening,Live Music,Outdoor Concerts
 LOCATION:5163 North State Road 135, Morgantown, IN
@@ -2779,7 +2779,7 @@ PRIORITY:5
 SEQUENCE:2
 TRANSP:OPAQUE
 SUMMARY:Songwriter Showdown
-DESCRIPTION:Songwriter Showdown returns to Nashville, Indiana, for a multi-week live music competition featuring talented songwriters from across the region. Held in Brown County, this exciting series highlights original music, storytelling, and crowd-favorite performances as artists compete for top honors. Experience the creativity and rising talent that make Nashville, Indiana a hub for live music.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/songwriter-showdown/
 CATEGORIES:Entertainment,Family Friendly,Happening,Live Music
 LOCATION:Brown County Playhouse, South Van Buren Street, Nashville, IN
@@ -2818,7 +2818,7 @@ PRIORITY:5
 SEQUENCE:1
 TRANSP:OPAQUE
 SUMMARY:Cider Run 2026
-DESCRIPTION:The ISRA Cider Run is an annual automotive hobbyist event hosted by the Indiana Street Rod Association at the Brown County 4H Fairgrounds in Nashville, Indiana. Since 1972, this gathering brings together street rod and classic car enthusiasts — members and non-members alike — for a day of cruising, car displays, camaraderie, and community fun. Open to all makes and models, the Cider Run offers a relaxed atmosphere to connect with fellow motorsports fans, enjoy scenic Brown County, and celebrate automotive passion each September.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/cider-run-2026/
 CATEGORIES:Fall,Festivals,Happening
 LOCATION:802 Memorial Drive, Nashville, IN
@@ -3136,7 +3136,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Waycross Craft Show!
-DESCRIPTION:10am-4pm November 15, 2026\nAll ages!\nRent a booth and show your crafts, baked goods and other wares off at the Waycross Craft Fair! Folk are invited to come and shop before the holiday season, supporting local artists.\n
+DESCRIPTION:
 URL:https://browncounty.com/events/waycross-craft-show-2/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Art Events &amp; Exhibits,Family Friendly,Festivals,Happening,Holiday,Plan Your Visit,Special Events
@@ -3156,7 +3156,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:Artists, Writers & Readers Retreat
-DESCRIPTION:Come spend a weekend at Waycross to work on new or in-progress projects. Bring supplies and set up throughout our campus, spending the days working independently or with others, however is most fruitful for your creative process. In the evenings, there will be space for sharing, collaborating, and asking for feedback.\n\n\nNovember 13-15, 2026\n\n\nCheck-in: 4-6pm\n\n\nCheck-out: 10am\n\n\n\n\nAges 21+\n\n\nProgram Rates\n\n\nAttendance cost is calculated during online registration, depending on your lodging selection. Rates are per person and include program fees, lodging and meals.\n\n\nConference Center – Single Occupancy: $350 per person\n\n\nConference Center – Double Occupancy: $280 per person\n\n\n\n\n\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/artists-writers-readers-retreat-2/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Art Events &amp; Exhibits,Happening,Plan Your Visit,Special Events
@@ -3216,7 +3216,7 @@ PRIORITY:5
 SEQUENCE:5
 TRANSP:OPAQUE
 SUMMARY:All Y’all Come to Camp
-DESCRIPTION:Spend the weekend surrounded by nature, with classic camp activities like campfires, worship, games, and outdoor adventures – plus plenty of time to relax and unwind at your own pace. Whether you want to dive into all the action or simply enjoy the peaceful setting, this weekend is yours to enjoy.\nJoin us for a refreshing weekend filled with fun, adventure and community. Waycross staff will lead a variety of activities, and participants are encouraged to take part as much or as little as they like.\n\n\nSeptember 4-6, 2026\n\n\nCheck-in: 4-6pm\n\n\nCheck-out: 1pm\n\n\n\n\nAll ages welcome, minors must be accompanied by an adult.\n\n\nProgram Rates\n\n\nAttendance cost is calculated during online registration, depending on your lodging selection. Rates are per person and include program fees, lodging and meals.\n\n\nConference Center – Single Occupancy: $400 per person\n\n\nConference Center – Double Occupancy: $330 per person\n\n\nMain House/Sleeping Wing – Multi-Occupancy: $260 per person\n\n\nCabins – Multi-Occupancy (adult): $180 per person\n\n\nYouth 10-17: $200 per person\n\n\nChildren 4-9: $160 per person\n\n\n3 and under: $0\n\n\n\n\n\n\n
+DESCRIPTION:
 URL:https://browncounty.com/events/all-yall-come-to-camp-2/
 ORGANIZER;CN=Waycross Camp &amp; Conference Center:MAILTO:rebecca@waycrossccc.org
 CATEGORIES:Family Friendly,Happening,Outdoor Adventure,Special Events,Summer

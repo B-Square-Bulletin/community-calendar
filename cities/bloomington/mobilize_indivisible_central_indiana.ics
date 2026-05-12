@@ -115,6 +115,22 @@ URL:https://www.mobilize.us/indivisiblecentralindiana/event/949537/
 X-SOURCE:Indivisible Central Indiana (Mobilize)
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:End ICE Detention Day of Action - Carmel
+DTSTART;TZID=America/Los_Angeles:20260516T070000
+DTEND;TZID=America/Los_Angeles:20260516T093000
+UID:fb007b99166b755446acda3c598a6c62@mobilize.us
+ATTACH;FMTTYPE=image/jpeg:https://mobilize-uploads-prod.s3.amazonaws.com/u
+ ploads/event/Statewide%20End%20ICE%20campaign%20carmel%20vets%20memorial_2
+ 0260429181619311280.png
+DESCRIPTION:Join us for a rally to End ICE detention in Indiana. This even
+ t is part of a statewide day of action. Gather at Carmel Clay Veterans Mem
+ orial (400-498 American Way\, across from the Farmers' Market)
+LOCATION:Carmel Clay Veterans Memorial (across from farmers' market)\, 400
+  American Way N\, Carmel\, IN\, 46032
+URL:https://www.mobilize.us/indivisiblecentralindiana/event/947680/
+X-SOURCE:Indivisible Central Indiana (Mobilize)
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:End ICE Detention Day of Action - Richmond
 DTSTART;TZID=America/Los_Angeles:20260516T070000
 DTEND;TZID=America/Los_Angeles:20260516T080000
@@ -153,19 +169,23 @@ URL:https://www.mobilize.us/indivisiblecentralindiana/event/952160/
 X-SOURCE:Indivisible Central Indiana (Mobilize)
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:End ICE Detention Day of Action - Carmel
-DTSTART;TZID=America/Los_Angeles:20260516T070000
-DTEND;TZID=America/Los_Angeles:20260516T093000
-UID:fb007b99166b755446acda3c598a6c62@mobilize.us
+SUMMARY:End ICE Detention Day of Action - Wabash County\, IN
+DTSTART;TZID=America/Los_Angeles:20260516T080000
+DTEND;TZID=America/Los_Angeles:20260516T083000
+UID:7794d7e113ef89a1334ece393b87d1e6@mobilize.us
 ATTACH;FMTTYPE=image/jpeg:https://mobilize-uploads-prod.s3.amazonaws.com/u
- ploads/event/Statewide%20End%20ICE%20campaign%20carmel%20vets%20memorial_2
- 0260429181619311280.png
-DESCRIPTION:Join us for a rally to End ICE detention in Indiana. This even
- t is part of a statewide day of action. Gather at Carmel Clay Veterans Mem
- orial (400-498 American Way\, across from the Farmers' Market)
-LOCATION:Carmel Clay Veterans Memorial (across from farmers' market)\, 400
-  American Way N\, Carmel\, IN\, 46032
-URL:https://www.mobilize.us/indivisiblecentralindiana/event/947680/
+ ploads/event/Statewide%20End%20ICE%20campaign%20Wabash_2026050400220619277
+ 4.png
+DESCRIPTION:WABASH COUNTY @ Highways 13 & 24 11:00-11:30am This event is o
+ ne of many events participating in a statewide day of action to protest im
+ migrant detention centers in Indiana. We'll be holding BIG signs along hig
+ hway 24. You are welcome to join us but we need to explain parking and saf
+ ety information\, so contact may16indiana@gmail.com. - Over 70% of ICE det
+ ainees have never been convicted of a crime. - ICE detainees at Miami Corr
+ ectional Facility report medical neglect. - Two ICE detainees have di
+LOCATION:Intersection of Hwys 24 & 13 in Wabash County\, Wabash\, IN\, 469
+ 92
+URL:https://www.mobilize.us/indivisiblecentralindiana/event/949539/
 X-SOURCE:Indivisible Central Indiana (Mobilize)
 END:VEVENT
 BEGIN:VEVENT
@@ -189,26 +209,6 @@ URL:https://www.mobilize.us/indivisiblecentralindiana/event/953785/
 X-SOURCE:Indivisible Central Indiana (Mobilize)
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:End ICE Detention Day of Action - Wabash County\, IN
-DTSTART;TZID=America/Los_Angeles:20260516T080000
-DTEND;TZID=America/Los_Angeles:20260516T083000
-UID:7794d7e113ef89a1334ece393b87d1e6@mobilize.us
-ATTACH;FMTTYPE=image/jpeg:https://mobilize-uploads-prod.s3.amazonaws.com/u
- ploads/event/Statewide%20End%20ICE%20campaign%20Wabash_2026050400220619277
- 4.png
-DESCRIPTION:WABASH COUNTY @ Highways 13 & 24 11:00-11:30am This event is o
- ne of many events participating in a statewide day of action to protest im
- migrant detention centers in Indiana. We'll be holding BIG signs along hig
- hway 24. You are welcome to join us but we need to explain parking and saf
- ety information\, so contact may16indiana@gmail.com. - Over 70% of ICE det
- ainees have never been convicted of a crime. - ICE detainees at Miami Corr
- ectional Facility report medical neglect. - Two ICE detainees have di
-LOCATION:Intersection of Hwys 24 & 13 in Wabash County\, Wabash\, IN\, 469
- 92
-URL:https://www.mobilize.us/indivisiblecentralindiana/event/949539/
-X-SOURCE:Indivisible Central Indiana (Mobilize)
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:End ICE Detention Day of Action - Mishawaka
 DTSTART;TZID=America/Los_Angeles:20260516T080000
 DTEND;TZID=America/Los_Angeles:20260516T100000
@@ -226,6 +226,26 @@ DESCRIPTION:MISHAWAKA - corner West McKinley Avenue & Grape Road 11:00-1:0
 LOCATION:Mishawaka\, West McKinley Avenue & Grape Road\, Mishawaka\, IN\, 
  46545
 URL:https://www.mobilize.us/indivisiblecentralindiana/event/953781/
+X-SOURCE:Indivisible Central Indiana (Mobilize)
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:End ICE Detention Day of Action - Bloomington
+DTSTART;TZID=America/Los_Angeles:20260516T080000
+DTEND;TZID=America/Los_Angeles:20260516T100000
+UID:54a6ef8f5e861200172f6522fcbe2ba9@mobilize.us
+ATTACH;FMTTYPE=image/jpeg:https://mobilize-uploads-prod.s3.amazonaws.com/u
+ ploads/event/Bloomington%201%20Statewide%20End%20ICE%20campaign_2026051203
+ 0418972887.png
+DESCRIPTION:BLOOMINGTON - Arlington Pedestrian Bridge over 46/45 11:00-1:0
+ 0pm This event is one of many events participating in a statewide day of a
+ ction to protest immigrant detention centers in Indiana. Join one of our t
+ wo events to do banner drops. This one is over the Arlington Pedestrian Br
+ idge over 46/45. The bridge can be accessed near Arlington Heights Element
+ ary School. - Over 70% of ICE detainees have never been convicted of a cri
+ me. - ICE detainees at Miami Correctional Facility report medical ne
+LOCATION:Arlington Pedestrian Bridge over 45/46\, 700 W Parrish Rd\, Bloom
+ ington\, IN\, 47404
+URL:https://www.mobilize.us/indivisiblecentralindiana/event/953791/
 X-SOURCE:Indivisible Central Indiana (Mobilize)
 END:VEVENT
 BEGIN:VEVENT
@@ -268,19 +288,6 @@ URL:https://www.mobilize.us/indivisiblecentralindiana/event/951599/
 X-SOURCE:Indivisible Central Indiana (Mobilize)
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:End ICE Detention Day of Action - Fountain Square
-DTSTART;TZID=America/Los_Angeles:20260516T090000
-DTEND;TZID=America/Los_Angeles:20260516T103000
-UID:9db33bc13ba7d71856666c78e3323914@mobilize.us
-ATTACH;FMTTYPE=image/jpeg:https://mobilize-uploads-prod.s3.amazonaws.com/u
- ploads/event/Fountain-square-mobilize_20260428225507864715.png
-DESCRIPTION:Join for brunch and a banner drop to help end ICE detention at
-  Miami Correctional Facility.
-LOCATION:Idle Park\, 800 Virginia Ave\, Indianapolis\, IN\, 46203
-URL:https://www.mobilize.us/indivisiblecentralindiana/event/947221/
-X-SOURCE:Indivisible Central Indiana (Mobilize)
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:End ICE Detention Day of Action - Speedway (Indy)
 DTSTART;TZID=America/Los_Angeles:20260516T090000
 DTEND;TZID=America/Los_Angeles:20260516T110000
@@ -300,6 +307,19 @@ URL:https://www.mobilize.us/indivisiblecentralindiana/event/948271/
 X-SOURCE:Indivisible Central Indiana (Mobilize)
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:End ICE Detention Day of Action - Fountain Square
+DTSTART;TZID=America/Los_Angeles:20260516T090000
+DTEND;TZID=America/Los_Angeles:20260516T103000
+UID:9db33bc13ba7d71856666c78e3323914@mobilize.us
+ATTACH;FMTTYPE=image/jpeg:https://mobilize-uploads-prod.s3.amazonaws.com/u
+ ploads/event/Fountain-square-mobilize_20260428225507864715.png
+DESCRIPTION:Join for brunch and a banner drop to help end ICE detention at
+  Miami Correctional Facility.
+LOCATION:Idle Park\, 800 Virginia Ave\, Indianapolis\, IN\, 46203
+URL:https://www.mobilize.us/indivisiblecentralindiana/event/947221/
+X-SOURCE:Indivisible Central Indiana (Mobilize)
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:End Ice Detention at Miami Correctional Facility- Rally & March
 DTSTART;TZID=America/Los_Angeles:20260516T100000
 DTEND;TZID=America/Los_Angeles:20260516T120000
@@ -316,6 +336,26 @@ DESCRIPTION:**Come and join this statewide action at the Allen County Cour
 LOCATION:Allen County Court Administration\, 715 S Calhoun St\, Fort Wayne
  \, IN\, 46802
 URL:https://www.mobilize.us/indivisiblenortheastindiana/event/941852/
+X-SOURCE:Indivisible Central Indiana (Mobilize)
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:End ICE Detention Day of Action - Bloomington
+DTSTART;TZID=America/Los_Angeles:20260516T110000
+DTEND;TZID=America/Los_Angeles:20260516T130000
+UID:90d6014e913117c5706073704eb6f8e4@mobilize.us
+ATTACH;FMTTYPE=image/jpeg:https://mobilize-uploads-prod.s3.amazonaws.com/u
+ ploads/event/Bloomington%202%20Statewide%20End%20ICE%20campaign_2026051203
+ 2053444646.png
+DESCRIPTION:BLOOMINGTON - Vernal Pike Overpass (I-69) 2:00-4:00pm This eve
+ nt is one of many events participating in a statewide day of action to pro
+ test immigrant detention centers in Indiana. Join one of our two events to
+  do banner drops. This one is over the Vernal Pike Overpass. Address liste
+ d here is approximate\, and can be used with your GPS. - Over 70% of ICE d
+ etainees have never been convicted of a crime. - ICE detainees at Miami Co
+ rrectional Facility report medical neglect. - Two ICE detainees have 
+LOCATION:Bloomington - Vernal Pike Overpass (I-69)\, 2718 W Vernal Pike\, 
+ Bloomington\, IN\, 47404
+URL:https://www.mobilize.us/indivisiblecentralindiana/event/953795/
 X-SOURCE:Indivisible Central Indiana (Mobilize)
 END:VEVENT
 BEGIN:VEVENT
