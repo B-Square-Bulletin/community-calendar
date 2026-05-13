@@ -3,32 +3,12 @@ PRODID:-//github.com/rianjs/ical.net//NONSGML ical.net 4.0//EN
 VERSION:2.0
 BEGIN:VEVENT
 X-SOURCE:IU beINvolved Student Orgs
-CATEGORIES:Cultural
-CATEGORIES:Dance
-DESCRIPTION:Our Beginners Class is open and completely free for everyone n
- o experience needed! Come join us to explore the fun and energy of Rueda 
- Casino\, meet new people\, and learn the basics in a welcoming\, relaxed 
- environment.\n\nHosted by: Ritmos Latinos Indiana\n\nAdditional Informati
- on can be found at: https://beinvolved.indiana.edu/event/12437089
-DTEND:20260513T014500Z
-DTSTAMP:20260512T202516Z
-DTSTART:20260512T223000Z
-LOCATION:IMU Georgian room
-SEQUENCE:0
-STATUS:CONFIRMED
-SUMMARY:Beginners Class Ritmos Indiana
-UID:https://beinvolved.indiana.edu/event/12437089
-URL:https://beinvolved.indiana.edu/event/12437089
-X-HOSTS:Ritmos Latinos Indiana
-END:VEVENT
-BEGIN:VEVENT
-X-SOURCE:IU beINvolved Student Orgs
 CATEGORIES:Social
 DESCRIPTION:IU TCG club meeting\n\nHosted by: Magic The Gathering Club\n\n
  Additional Information can be found at: https://beinvolved.indiana.edu/ev
  ent/11954173
 DTEND:20260513T034500Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260512T220000Z
 LOCATION:IMU Sassafras Room
 SEQUENCE:0
@@ -45,7 +25,7 @@ DESCRIPTION:Full Frontal Comedy Rehearsal\n\nHosted by: Full Frontal Comed
  y\n\nAdditional Information can be found at: https://beinvolved.indiana.e
  du/event/11607826
 DTEND:20260514T020000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260514T000000Z
 LOCATION:Bryan Room
 SEQUENCE:0
@@ -66,7 +46,7 @@ DESCRIPTION:Awaken Campus Ministry empowers students to pursue the truth o
  l Information can be found at: https://beinvolved.indiana.edu/event/12008
  465
 DTEND:20260515T000000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260514T210000Z
 LOCATION:IMU Hoosier Room
 SEQUENCE:0
@@ -83,7 +63,7 @@ DESCRIPTION:IU TCG club meeting\n\nHosted by: Magic The Gathering Club\n\n
  Additional Information can be found at: https://beinvolved.indiana.edu/ev
  ent/11954174
 DTEND:20260515T034500Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260514T220000Z
 LOCATION:IMU Sassafras Room
 SEQUENCE:0
@@ -110,7 +90,7 @@ DESCRIPTION:START is a remote\, skill-based volunteership. \n \nAttendance
  s://iucorps.indiana.edu/index.html\n\nAdditional Information can be found
   at: https://beinvolved.indiana.edu/event/12467252
 DTEND:20260515T170000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260515T160000Z
 LOCATION:Online
 SEQUENCE:0
@@ -130,7 +110,7 @@ DESCRIPTION:Our Beginners Class is open and completely free for everyone n
  environment.\n\nHosted by: Ritmos Latinos Indiana\n\nAdditional Informati
  on can be found at: https://beinvolved.indiana.edu/event/12437090
 DTEND:20260520T014500Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260519T223000Z
 LOCATION:IMU Georgian room
 SEQUENCE:0
@@ -147,7 +127,7 @@ DESCRIPTION:IU TCG club meeting\n\nHosted by: Magic The Gathering Club\n\n
  Additional Information can be found at: https://beinvolved.indiana.edu/ev
  ent/11954175
 DTEND:20260520T034500Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260519T220000Z
 LOCATION:IMU Sassafras Room
 SEQUENCE:0
@@ -165,7 +145,7 @@ DESCRIPTION:Beginner Class Practice Time Ritmos Latinos\n\nHosted by: Ritm
  os Latinos Indiana\n\nAdditional Information can be found at: https://bei
  nvolved.indiana.edu/event/12437114
 DTEND:20260527T014500Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260526T223000Z
 LOCATION:IMU Georgian room
 SEQUENCE:0
@@ -188,7 +168,7 @@ DESCRIPTION:Join us at the Indiana Memorial Union to kick off your New Stu
  ional Information can be found at: https://beinvolved.indiana.edu/event/1
  2467254
 DTEND:20260602T020000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260602T000000Z
 LOCATION:IMU Main Stage
 SEQUENCE:0
@@ -206,7 +186,7 @@ DESCRIPTION:Beginner Class Practice Time Ritmos Latinos\n\nHosted by: Ritm
  os Latinos Indiana\n\nAdditional Information can be found at: https://bei
  nvolved.indiana.edu/event/12437115
 DTEND:20260603T014500Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260602T223000Z
 LOCATION:IMU Georgian room
 SEQUENCE:0
@@ -229,7 +209,7 @@ DESCRIPTION:Join us at the Indiana Memorial Union to kick off your New Stu
  ional Information can be found at: https://beinvolved.indiana.edu/event/1
  2467255
 DTEND:20260603T020000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260603T000000Z
 LOCATION:IMU Main Stage
 SEQUENCE:0
@@ -250,7 +230,7 @@ DESCRIPTION:Join us for an hour of bible studies where the bible become re
  na University\n\nAdditional Information can be found at: https://beinvolv
  ed.indiana.edu/event/12269133
 DTEND:20260604T003000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260307T000000Z
 LOCATION:Forest Quad C205
 SEQUENCE:0
@@ -273,7 +253,7 @@ DESCRIPTION:Join us at the Indiana Memorial Union to kick off your New Stu
  ional Information can be found at: https://beinvolved.indiana.edu/event/1
  2467256
 DTEND:20260604T020000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260604T000000Z
 LOCATION:IMU Main Stage
 SEQUENCE:0
@@ -296,7 +276,7 @@ DESCRIPTION:Join us at the Indiana Memorial Union to kick off your New Stu
  ional Information can be found at: https://beinvolved.indiana.edu/event/1
  2467257
 DTEND:20260605T020000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260605T000000Z
 LOCATION:IMU Main Stage
 SEQUENCE:0
@@ -316,7 +296,7 @@ DESCRIPTION:RealFest 2026 is the sixth annual RealFest music festival pres
  ineering Society at Indiana University \n\nAdditional Information can be 
  found at: https://beinvolved.indiana.edu/event/12450128
 DTEND:20260607T020000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260606T170000Z
 LOCATION:Dunn Meadow 4 (Entire Space)
 SEQUENCE:0
@@ -339,7 +319,7 @@ DESCRIPTION:Join us at the Indiana Memorial Union to kick off your New Stu
  ional Information can be found at: https://beinvolved.indiana.edu/event/1
  2467258
 DTEND:20260609T020000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260609T000000Z
 LOCATION:IMU Main Stage
 SEQUENCE:0
@@ -357,7 +337,7 @@ DESCRIPTION:Beginner Class Practice Time Ritmos Latinos\n\nHosted by: Ritm
  os Latinos Indiana\n\nAdditional Information can be found at: https://bei
  nvolved.indiana.edu/event/12437116
 DTEND:20260610T014500Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260609T223000Z
 LOCATION:IMU Meeting Room to be Determined #02
 SEQUENCE:0
@@ -380,7 +360,7 @@ DESCRIPTION:Join us at the Indiana Memorial Union to kick off your New Stu
  ional Information can be found at: https://beinvolved.indiana.edu/event/1
  2467259
 DTEND:20260610T020000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260610T000000Z
 LOCATION:IMU Main Stage
 SEQUENCE:0
@@ -403,7 +383,7 @@ DESCRIPTION:Join us at the Indiana Memorial Union to kick off your New Stu
  ional Information can be found at: https://beinvolved.indiana.edu/event/1
  2467260
 DTEND:20260616T020000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260616T000000Z
 LOCATION:IMU Main Stage
 SEQUENCE:0
@@ -421,7 +401,7 @@ DESCRIPTION:Beginner Class Practice Time Ritmos Latinos\n\nHosted by: Ritm
  os Latinos Indiana\n\nAdditional Information can be found at: https://bei
  nvolved.indiana.edu/event/12437117
 DTEND:20260617T014500Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260616T223000Z
 LOCATION:IMU Georgian room
 SEQUENCE:0
@@ -444,7 +424,7 @@ DESCRIPTION:Join us at the Indiana Memorial Union to kick off your New Stu
  ional Information can be found at: https://beinvolved.indiana.edu/event/1
  2467261
 DTEND:20260617T020000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260617T000000Z
 LOCATION:IMU Main Stage
 SEQUENCE:0
@@ -467,7 +447,7 @@ DESCRIPTION:Join us at the Indiana Memorial Union to kick off your New Stu
  ional Information can be found at: https://beinvolved.indiana.edu/event/1
  2467262
 DTEND:20260618T020000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260618T000000Z
 LOCATION:IMU Main Stage
 SEQUENCE:0
@@ -485,7 +465,7 @@ DESCRIPTION:Beginner Class Practice Time Ritmos Latinos\n\nHosted by: Ritm
  os Latinos Indiana\n\nAdditional Information can be found at: https://bei
  nvolved.indiana.edu/event/12437118
 DTEND:20260624T014500Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260623T223000Z
 LOCATION:IMU Meeting Room to be Determined #02
 SEQUENCE:0
@@ -508,7 +488,7 @@ DESCRIPTION:Join us at the Indiana Memorial Union to kick off your New Stu
  ional Information can be found at: https://beinvolved.indiana.edu/event/1
  2467263
 DTEND:20260630T020000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260630T000000Z
 LOCATION:IMU Main Stage
 SEQUENCE:0
@@ -526,7 +506,7 @@ DESCRIPTION:Beginner Class Practice Time Ritmos Latinos\n\nHosted by: Ritm
  os Latinos Indiana\n\nAdditional Information can be found at: https://bei
  nvolved.indiana.edu/event/12437119
 DTEND:20260701T014500Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260630T223000Z
 LOCATION:IMU State Rooms East & West
 SEQUENCE:0
@@ -549,7 +529,7 @@ DESCRIPTION:Join us at the Indiana Memorial Union to kick off your New Stu
  ional Information can be found at: https://beinvolved.indiana.edu/event/1
  2467264
 DTEND:20260701T020000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260701T000000Z
 LOCATION:IMU Main Stage
 SEQUENCE:0
@@ -572,7 +552,7 @@ DESCRIPTION:Join us at the Indiana Memorial Union to kick off your New Stu
  ional Information can be found at: https://beinvolved.indiana.edu/event/1
  2467265
 DTEND:20260702T020000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260702T000000Z
 LOCATION:IMU Main Stage
 SEQUENCE:0
@@ -595,7 +575,7 @@ DESCRIPTION:Join us at the Indiana Memorial Union to kick off your New Stu
  ional Information can be found at: https://beinvolved.indiana.edu/event/1
  2467266
 DTEND:20260707T020000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260707T000000Z
 LOCATION:IMU Main Stage
 SEQUENCE:0
@@ -613,7 +593,7 @@ DESCRIPTION:Beginner Class Practice Time Ritmos Latinos\n\nHosted by: Ritm
  os Latinos Indiana\n\nAdditional Information can be found at: https://bei
  nvolved.indiana.edu/event/12437120
 DTEND:20260708T014500Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260707T223000Z
 LOCATION:IMU Georgian room
 SEQUENCE:0
@@ -636,7 +616,7 @@ DESCRIPTION:Join us at the Indiana Memorial Union to kick off your New Stu
  ional Information can be found at: https://beinvolved.indiana.edu/event/1
  2467267
 DTEND:20260708T020000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260708T000000Z
 LOCATION:IMU Main Stage
 SEQUENCE:0
@@ -659,7 +639,7 @@ DESCRIPTION:Join us at the Indiana Memorial Union to kick off your New Stu
  ional Information can be found at: https://beinvolved.indiana.edu/event/1
  2467268
 DTEND:20260709T020000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260709T000000Z
 LOCATION:IMU Main Stage
 SEQUENCE:0
@@ -682,7 +662,7 @@ DESCRIPTION:Join us at the Indiana Memorial Union to kick off your New Stu
  ional Information can be found at: https://beinvolved.indiana.edu/event/1
  2467269
 DTEND:20260710T020000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260710T000000Z
 LOCATION:IMU Main Stage
 SEQUENCE:0
@@ -705,7 +685,7 @@ DESCRIPTION:Join us at the Indiana Memorial Union to kick off your New Stu
  ional Information can be found at: https://beinvolved.indiana.edu/event/1
  2467270
 DTEND:20260714T020000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260714T000000Z
 LOCATION:IMU Main Stage
 SEQUENCE:0
@@ -723,7 +703,7 @@ DESCRIPTION:Beginner Class Practice Time Ritmos Latinos\n\nHosted by: Ritm
  os Latinos Indiana\n\nAdditional Information can be found at: https://bei
  nvolved.indiana.edu/event/12437121
 DTEND:20260715T014500Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260714T223000Z
 LOCATION:IMU Georgian room
 SEQUENCE:0
@@ -746,7 +726,7 @@ DESCRIPTION:Join us at the Indiana Memorial Union to kick off your New Stu
  ional Information can be found at: https://beinvolved.indiana.edu/event/1
  2467271
 DTEND:20260715T020000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260715T000000Z
 LOCATION:IMU Main Stage
 SEQUENCE:0
@@ -768,7 +748,7 @@ DESCRIPTION:Join us at the Indiana Memorial Union to kick off your New Stu
  ional Information can be found at: https://beinvolved.indiana.edu/event/1
  2467253
 DTEND:20260716T020000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260716T000000Z
 LOCATION:IMU Main Stage
 SEQUENCE:0
@@ -786,7 +766,7 @@ DESCRIPTION:Beginner Class Practice Time Ritmos Latinos\n\nHosted by: Ritm
  os Latinos Indiana\n\nAdditional Information can be found at: https://bei
  nvolved.indiana.edu/event/12437122
 DTEND:20260722T014500Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260721T223000Z
 LOCATION:IMU Georgian room
 SEQUENCE:0
@@ -804,7 +784,7 @@ DESCRIPTION:Beginner Class Practice Time Ritmos Latinos\n\nHosted by: Ritm
  os Latinos Indiana\n\nAdditional Information can be found at: https://bei
  nvolved.indiana.edu/event/12437123
 DTEND:20260729T014500Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260728T223000Z
 LOCATION:IMU Georgian room
 SEQUENCE:0
@@ -822,7 +802,7 @@ DESCRIPTION:Beginner Class Practice Time Ritmos Latinos\n\nHosted by: Ritm
  os Latinos Indiana\n\nAdditional Information can be found at: https://bei
  nvolved.indiana.edu/event/12437124
 DTEND:20260805T014500Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260804T223000Z
 LOCATION:IMU Georgian room
 SEQUENCE:0
@@ -850,7 +830,7 @@ DESCRIPTION:\nChapter Advisor Training equips advisors to confidently and
  s.\n \n\nHosted by: Sorority and Fraternity Life\n\nAdditional Informatio
  n can be found at: https://beinvolved.indiana.edu/event/12459056
 DTEND:20260807T210000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260807T160000Z
 GEO:39.170590;-86.509780
 LOCATION:Cedar Hall
@@ -868,7 +848,7 @@ DESCRIPTION:Ritmos Workshop by a Guest Instructor\n\nHosted by: Ritmos Lat
  inos Indiana\n\nAdditional Information can be found at: https://beinvolve
  d.indiana.edu/event/12333737
 DTEND:20260808T210000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260808T160000Z
 LOCATION:IMU Georgian room
 SEQUENCE:0
@@ -885,7 +865,7 @@ DESCRIPTION:Join us for a night filled with music and dance. \n\nHosted by
  : Ritmos Latinos Indiana\n\nAdditional Information can be found at: https
  ://beinvolved.indiana.edu/event/12333681
 DTEND:20260809T034500Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260809T000000Z
 LOCATION:IMU Georgian room
 SEQUENCE:0
@@ -903,7 +883,7 @@ DESCRIPTION:Beginner Class Practice Time Ritmos Latinos\n\nHosted by: Ritm
  os Latinos Indiana\n\nAdditional Information can be found at: https://bei
  nvolved.indiana.edu/event/12437125
 DTEND:20260812T014500Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260811T223000Z
 LOCATION:IMU Georgian room
 SEQUENCE:0
@@ -928,7 +908,7 @@ DESCRIPTION:Join us at Hoosier Fest\, our annual resource fair for new int
  h interactive games and displays.\n\nHosted by: \n\nAdditional Informatio
  n can be found at: https://beinvolved.indiana.edu/event/12467131
 DTEND:20260814T200000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260814T180000Z
 LOCATION:BLWI C155 - Willkie Auditorium
 SEQUENCE:0
@@ -951,7 +931,7 @@ DESCRIPTION:All first semester Media School majors are invited to join our
  nHosted by: The Media School Undergraduate Program\n\nAdditional Informat
  ion can be found at: https://beinvolved.indiana.edu/event/12440011
 DTEND:20260820T190000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260820T170000Z
 GEO:39.167010;-86.526240
 LOCATION:President's Hall\, located inside Franklin Hall
@@ -969,7 +949,7 @@ DESCRIPTION:LLSA Exec\n\nHosted by: Latinx Law Student Association at Indi
  ana University Pre-law Division\n\nAdditional Information can be found at
  : https://beinvolved.indiana.edu/event/11951894
 DTEND:20261206T020000Z
-DTSTAMP:20260512T202516Z
+DTSTAMP:20260513T033023Z
 DTSTART:20260414T223000Z
 LOCATION:Ballentine Hall\, BH 010
 SEQUENCE:0
