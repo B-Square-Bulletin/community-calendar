@@ -16,17 +16,6 @@ URL:https://www.sassafrasaudubon.org/calendar/2021/11/13/fall-ducks-and-do
 X-SOURCE:Sassafras Audubon Society
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:Young Birders Club Meeting
-DTSTART;TZID=America/Los_Angeles:20231202T053000
-DTEND;TZID=America/Los_Angeles:20231202T070000
-UID:654a2cb802e58c5eb5c5da62@squarespace.com
-DESCRIPTION:
-LOCATION:Switchyard Park
-URL:https://www.sassafrasaudubon.org/calendar/2023/12/2/young-birders-club
- -meeting
-X-SOURCE:Sassafras Audubon Society
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Fall Feeder Cleaning
 DTSTART;TZID=America/Los_Angeles:20241012T060000
 DTEND;TZID=America/Los_Angeles:20241012T130000
