@@ -86,18 +86,6 @@ URL:https://www.sassafrasaudubon.org/calendar/2024/11/23/november-bird-tri
 X-SOURCE:Sassafras Audubon Society
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:RCA Community Park Field Trip
-DTSTART;TZID=America/Los_Angeles:20240224T070000
-DTEND;TZID=America/Los_Angeles:20240224T090000
-UID:65ccb82eb9ae641c2c7446cc@squarespace.com
-DESCRIPTION:
-LOCATION:RCA Community Park\, 1400 West Rca Park Drive\, Bloomington\, IN\
- , 47403\, United States
-URL:https://www.sassafrasaudubon.org/calendar/2024/2/24/rca-community-park
- -field-trip
-X-SOURCE:Sassafras Audubon Society
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Woodcock Walk at Flatwoods Park
 DTSTART;TZID=America/Los_Angeles:20240316T160000
 DTEND;TZID=America/Los_Angeles:20240316T180000
