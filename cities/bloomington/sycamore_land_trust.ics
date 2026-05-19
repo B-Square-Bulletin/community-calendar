@@ -4,6 +4,41 @@ PRODID:-//Sycamore Land Trust//sycamorelandtrust.org//
 X-WR-CALNAME:Sycamore Land Trust
 X-WR-TIMEZONE:America/Los_Angeles
 BEGIN:VEVENT
+SUMMARY:Sedges and Irises at Beanblossom Bottoms
+DTSTART:20260623T080000
+DTEND:20260623T103000
+UID:1dcf15ab98fec19416e3aff02b63ee54@sycamorelandtrust.org
+DESCRIPTION:What do sedges and irises have in common? On this hike at Bean
+ blossom Bottoms Nature Preserve\, we’ll explore wetland plants that may 
+ look very different at first glance but are all monocots\, sharing key tra
+ its like parallel veins\, fibrous roots\, and floral parts in threes. We
+ ’ll focus on identifying these species in the field\, discuss what they 
+ reveal about wetland health\, and examine how monocot plants help shape an
+ d stabilize wetland ecosystems.
+LOCATION:Beanblossom Bottoms Nature Preserve
+URL:https://sycamorelandtrust.org/2026/05/sedges-and-irises-at-beanblossom
+ -bottoms/
+X-SOURCE:Sycamore Land Trust
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Preserve-a-Preserve: Weed Wrangle at Amy Weingartner Branigin Peni
+ nsula Preserve
+DTSTART:20260619T090000
+DTEND:20260619T110000
+UID:2b35d33f6834d21083e6a75fc728502a@sycamorelandtrust.org
+DESCRIPTION:Help care for the native plant beds at Amy Weingartner Branigi
+ n Peninsula Preserve! We’ll spend the morning hand-weeding\, hauling awa
+ y unwanted plants\, and refreshing the mulch to keep the parking lot garde
+ ns healthy\, attractive\, and beneficial for pollinators. No experience is
+  needed\; just come ready to work outdoors\, learn a bit about native land
+ scaping\, and make a visible difference at the preserve! Tools\, gloves\, 
+ and guidance will be provided.
+LOCATION:Amy Weingartner Branigin Peninsula Preserve
+URL:https://sycamorelandtrust.org/2026/05/preserve-a-preserve-weed-wrangle
+ -at-amy-weingartner-branigin-peninsula-preserve/
+X-SOURCE:Sycamore Land Trust
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Hoosier RiverWatch Powell Preserve Survey
 DTSTART:20260618T090000
 DTEND:20260618T103000
@@ -504,6 +539,17 @@ URL:https://sycamorelandtrust.org/2024/04/little-hikers-whos-here-in-sprin
 X-SOURCE:Sycamore Land Trust
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:Wildflower Walk for Members at Touch the Earth Natural Area
+DTSTART:20260819T080000
+DTEND:20260819T103000
+UID:1e87e20df536d829ab197a397464a660@sycamorelandtrust.org
+DESCRIPTION:
+LOCATION:Touch the Earth Natural Area
+URL:https://sycamorelandtrust.org/2023/08/wildflower-walk-for-members-at-t
+ ouch-the-earth-natural-area/
+X-SOURCE:Sycamore Land Trust
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:Wildflower Meadow Preserve-a-Preserve Volunteer Weed Wrangle
 DTSTART:20260804T080000
 DTEND:20260804T110000
@@ -873,15 +919,6 @@ DESCRIPTION:Explore this bottomland habitat that is home to critters big a
   location TBA. Yellowwod Farm is a private preserve on the border of Monro
  e and Brown counties.
 URL:https://sycamorelandtrust.org/2019/05/060519-little-hikers/
-X-SOURCE:Sycamore Land Trust
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:Beanblossom Bottoms Grand Reopening
-DTSTART:20260518T100000
-DTEND:20260518T130000
-UID:e406ab40197cd7856851da79abf052e7@sycamorelandtrust.org
-DESCRIPTION:
-URL:https://sycamorelandtrust.org/2019/05/051819-bbb-grand-reopening/
 X-SOURCE:Sycamore Land Trust
 END:VEVENT
 END:VCALENDAR

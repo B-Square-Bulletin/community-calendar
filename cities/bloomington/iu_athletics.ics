@@ -4,18 +4,6 @@ PRODID:-//IU Athletics//iuhoosiers.com//
 X-WR-CALNAME:IU Athletics
 X-WR-TIMEZONE:America/Indiana/Indianapolis
 BEGIN:VEVENT
-SUMMARY:Women's Rowing vs Big Ten Rowing Championships
-DTSTART;TZID=America/Indiana/Indianapolis:20260517T000000
-DTEND;TZID=America/Indiana/Indianapolis:20260517T000000
-UID:a1f476549f3d0431d2ed35ef20d5f7d7@iuhoosiers.com
-ATTACH;FMTTYPE=image/jpeg:https://iuhoosiers.com/images/2026/5/17/20260517
- _ROW_B1G_Championships_0336_2.JPEG
-DESCRIPTION:
-LOCATION:Indianapolis\, Ind.
-URL:http://www.bigten.org/
-X-SOURCE:IU Athletics
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Women's Golf vs NCAA Championships
 DTSTART;TZID=America/Indiana/Indianapolis:20260522T000000
 DTEND;TZID=America/Indiana/Indianapolis:20260522T000000
