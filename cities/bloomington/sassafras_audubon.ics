@@ -4,18 +4,6 @@ PRODID:-//Sassafras Audubon Society//sassafrasaudubon.org//
 X-WR-CALNAME:Sassafras Audubon Society
 X-WR-TIMEZONE:America/Los_Angeles
 BEGIN:VEVENT
-SUMMARY:Ducks and Donuts (Spring)
-DTSTART;TZID=America/Los_Angeles:20240309T060000
-DTEND;TZID=America/Los_Angeles:20240309T090000
-UID:65ccb720242d74678c9ec556@squarespace.com
-DESCRIPTION:
-LOCATION:Stillwater Marsh\, 2001 South McGowan Road\, Bloomington\, IN\, 4
- 7401\, United States
-URL:https://www.sassafrasaudubon.org/calendar/2021/11/13/fall-ducks-and-do
- nuts-gsfhb-t2f8m
-X-SOURCE:Sassafras Audubon Society
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:Fall Feeder Cleaning
 DTSTART;TZID=America/Los_Angeles:20241012T060000
 DTEND;TZID=America/Los_Angeles:20241012T130000
