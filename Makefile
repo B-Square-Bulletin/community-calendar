@@ -46,11 +46,11 @@ setup-python:
 test-python:
 	@echo "Running Python tests..."
 	@if command -v pytest > /dev/null 2>&1; then \
-		pytest tests/test_timezone_pipeline.py -v; \
+		pytest tests/ -v; \
 	elif [ -f .venv/bin/pytest ]; then \
-		.venv/bin/pytest tests/test_timezone_pipeline.py -v; \
+		.venv/bin/pytest tests/ -v; \
 	elif $(PYTHON) -m pytest --version > /dev/null 2>&1; then \
-		$(PYTHON) -m pytest tests/test_timezone_pipeline.py -v; \
+		$(PYTHON) -m pytest tests/ -v; \
 	else \
 		echo "ERROR: pytest not found."; \
 		echo "Install with: pip install pytest"; \
