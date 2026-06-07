@@ -10,6 +10,12 @@ A comprehensive community event aggregator that scrapes and combines events from
 
 **Live app:** https://judell.github.io/community-calendar/ (XMLUI frontend → Supabase backend)
 
+## Language
+
+**Database test**:
+A test that verifies database behavior against a disposable local project database.
+_Avoid_: SQL unit test, production test
+
 ## Key Concepts
 
 ### Event Sources

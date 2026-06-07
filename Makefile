@@ -8,9 +8,9 @@ help:
 	@echo "Community Calendar Test Suite"
 	@echo ""
 	@echo "Targets:"
-	@echo "  make test           - Run all tests (Python + SQL)"
+	@echo "  make test           - Run Python tests"
 	@echo "  make test-python    - Run Python tests (pytest)"
-	@echo "  make test-sql       - Run SQL tests (local Supabase)"
+	@echo "  make test-sql       - Run database tests (local Supabase via pgTAP)"
 	@echo "  make setup-python   - Create venv and install dependencies"
 	@echo "  make setup-local    - Start local Supabase and apply schema"
 	@echo "  make teardown-local - Stop local Supabase"
@@ -18,11 +18,11 @@ help:
 	@echo ""
 	@echo "Prerequisites:"
 	@echo "  - Python 3.10+ (run 'make setup-python' for venv)"
-	@echo "  - Supabase CLI installed (for SQL tests)"
-	@echo "  - PostgreSQL client (psql) for SQL tests"
+	@echo "  - Supabase CLI installed (for database tests)"
+	@echo "  - PostgreSQL client (psql) for local database access"
 
-# Run all tests
-test: test-python test-sql
+# Run default tests
+test: test-python
 
 # Alias for test
 test-all: test
@@ -58,15 +58,15 @@ test-python:
 		exit 1; \
 	fi
 
-# Run SQL tests (requires local Supabase)
+# Run database tests (requires prepared local Supabase project DB)
 test-sql:
-	@echo "Running SQL tests..."
+	@echo "Running database tests..."
 	@if ! supabase status > /dev/null 2>&1; then \
 		echo "ERROR: Local Supabase is not running."; \
 		echo "Run: make setup-local"; \
 		exit 1; \
 	fi
-	@./tests/sql/run_tests_local.sh
+	@supabase test db supabase/tests/
 
 # Setup local Supabase environment
 setup-local:
