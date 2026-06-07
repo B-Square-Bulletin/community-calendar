@@ -169,7 +169,7 @@ cities/bloomington/tm_memorial_stadium.ics
 # cmd: python scrapers/limestone_post.py
 cities/bloomington/limestone_post.ics
 # Monroe County Master Gardeners
-# cmd: python scrapers/squarespace.py --url "https://www.mcmga.net/eventscalendar" --name "Monroe County Master Gardeners"
+# cmd: python scrapers/squarespace.py --url "https://www.mcmga.net/events" --name "Monroe County Master Gardeners"
 cities/bloomington/master_gardeners.ics
 # People's Market
 # cmd: python scrapers/squarespace.py --url "https://www.peoplesmarketbtown.org/gatherings" --name "People's Market"
