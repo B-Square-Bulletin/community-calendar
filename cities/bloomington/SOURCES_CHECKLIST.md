@@ -283,6 +283,9 @@ These curate or aggregate events from multiple venues:
 ### 2026-05-08: URL Fix
 - **Sassafras Audubon Society** — Fixed broken scraper URL. Site moved events calendar from `/upcomingevents` (404) to `/calendar`. Updated workflow and feeds.txt metadata. Fixes [#8](https://github.com/B-Square-Bulletin/community-calendar/issues/8).
 
+### 2026-06-06: URL Fix
+- **Monroe County Master Gardeners** — Fixed broken scraper URL. Site moved events calendar from `/events` (404) to `/eventscalendar`. Updated workflow and pending_feeds.txt metadata. Fixes [#13](https://github.com/B-Square-Bulletin/community-calendar/issues/13).
+
 ---
 
 ## Notes
