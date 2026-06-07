@@ -9,7 +9,3 @@
 #   python scripts/add_feed.py URL bloomington "Source Name" --test
 #
 # See CONTRIBUTING.md for details.
-
-# Monroe County Master Gardeners
-# cmd: python scrapers/squarespace.py --url "https://www.mcmga.net/eventscalendar" --name "Monroe County Master Gardeners"
-cities/bloomington/master_gardeners.ics
