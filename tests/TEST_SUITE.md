@@ -43,7 +43,7 @@ SQL tests require a local Supabase instance:
 # One-time setup
 make setup-local
 
-# This starts Supabase and applies all DDL files
+# This starts Supabase and applies migrations
 ```
 
 ## Test Files

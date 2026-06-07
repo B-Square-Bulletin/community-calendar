@@ -5,11 +5,12 @@ This directory contains local testing infrastructure for the community calendar 
 ## Quick Start
 
 ```bash
-# Start local Supabase
-supabase start
+# Start local Supabase and apply migrations
+make setup-local
 
-# Apply base schema (DDL files)
-./tests/sql/setup_local_db.sh
+# Or manually:
+supabase start
+supabase db reset
 
 # Run tests
 ./tests/sql/run_tests_local.sh
@@ -22,7 +23,6 @@ supabase stop
 
 - `test_refresh_source_names.sql` - Test suite for `refresh_source_names()` function
 - `run_tests_local.sh` - Test runner (supports --local or --linked)
-- `setup_local_db.sh` - Applies all DDL files to local instance in correct order
 
 ## Why Local Testing?
 
@@ -34,10 +34,11 @@ Running tests against production is risky. Local testing via `supabase start` gi
 
 ## Configuration
 
-The `supabase/config.toml` has migrations and seed disabled for local dev because:
-- Migrations expect incremental changes from a base state
-- The DDL files represent the current complete schema
-- `setup_local_db.sh` applies DDL files directly
+The `supabase/config.toml` has migrations enabled. The schema is defined in:
+- `supabase/migrations/20260101000000_initial_schema.sql` - Base schema
+- `supabase/migrations/202603*` and later - Incremental changes
+
+Running `supabase db reset` applies all migrations in order.
 
 ## Troubleshooting
 
@@ -50,11 +51,10 @@ supabase start
 
 **If tests fail with "relation does not exist":**
 ```bash
-./tests/sql/setup_local_db.sh
+supabase db reset
 ```
 
 **To reset local DB completely:**
 ```bash
-supabase db reset --local
-./tests/sql/setup_local_db.sh
+supabase db reset
 ```

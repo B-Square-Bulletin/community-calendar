@@ -72,8 +72,8 @@ test-sql:
 setup-local:
 	@echo "Starting local Supabase..."
 	supabase start
-	@echo "Applying schema..."
-	./tests/sql/setup_local_db.sh
+	@echo "Applying migrations..."
+	supabase db reset
 	@echo ""
 	@echo "✓ Local environment ready"
 	@echo "Run: make test-sql"
