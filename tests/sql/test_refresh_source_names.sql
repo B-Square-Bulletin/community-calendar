@@ -1,7 +1,8 @@
 -- Test suite for refresh_source_names() function
--- Tests the set-based rewrite (Option A) that fixes performance + comma-only source bug
+-- Tests the set-based rewrite (Option B in issue #12) that fixes performance + comma-only source bug
 -- 
--- Run: supabase db query --linked -f tests/test_refresh_source_names.sql
+-- Run: psql "$DB_URL" -f tests/sql/test_refresh_source_names.sql
+--   (or use the helper: ./tests/sql/run_tests_local.sh)
 
 -- Cleanup from any previous test runs
 DELETE FROM events WHERE city = 'test_city_refresh_sources';

@@ -132,56 +132,83 @@ CREATE POLICY "Users can delete own picks"
   ON picks FOR DELETE
   USING (auth.uid() = user_id);
 
--- Feed tokens table - tracks authenticated API access for calendar consumers
+-- Feed tokens table - unique token per user for ICS feed access
 
 CREATE TABLE IF NOT EXISTS feed_tokens (
-  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
-  name text NOT NULL,
-  created_at timestamptz DEFAULT now(),
-  last_used_at timestamptz
+  id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  user_id uuid REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL UNIQUE,
+  token uuid DEFAULT gen_random_uuid() NOT NULL UNIQUE,
+  created_at timestamptz DEFAULT now()
 );
+
+-- Note: token column is UNIQUE, which auto-creates feed_tokens_token_key index.
+-- No additional index needed for token lookups.
 
 -- Enable Row Level Security
 ALTER TABLE feed_tokens ENABLE ROW LEVEL SECURITY;
 
--- Users can only see their own tokens
-CREATE POLICY "Users can view own tokens"
+-- Users can only view their own feed token
+CREATE POLICY "Users can view own feed token"
   ON feed_tokens FOR SELECT
   USING (auth.uid() = user_id);
 
--- Users can create their own tokens
-CREATE POLICY "Users can insert own tokens"
+-- Users can insert their own feed token (created on first sign-in)
+CREATE POLICY "Users can insert own feed token"
   ON feed_tokens FOR INSERT
   WITH CHECK (auth.uid() = user_id);
 
--- Users can delete their own tokens
-CREATE POLICY "Users can delete own tokens"
-  ON feed_tokens FOR DELETE
-  USING (auth.uid() = user_id);
-
--- Event enrichments table - audio transcripts + GPT summaries
+-- Event enrichments table - curator overrides/additions per event
+-- Self-standing: enrichments store their own title/start_time/city so they
+-- survive even if the original event row is deleted.
 
 CREATE TABLE IF NOT EXISTS event_enrichments (
-  event_id bigint PRIMARY KEY REFERENCES events(id) ON DELETE CASCADE,
-  transcript text,
-  summary text,
-  created_at timestamptz DEFAULT now()
+  id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  event_id bigint REFERENCES events(id) ON DELETE CASCADE,  -- nullable
+  curator_id uuid REFERENCES auth.users(id) ON DELETE CASCADE,
+  rrule text,
+  url text,
+  description text,
+  location text,
+  end_time timestamptz,
+  categories text[],
+  notes text,
+  title text,            -- copied from event at creation
+  start_time timestamptz, -- copied from event at creation
+  city text,             -- copied from event at creation
+  curator_name text,     -- display name for source attribution
+  created_at timestamptz DEFAULT now(),
+  updated_at timestamptz DEFAULT now(),
+  UNIQUE(event_id, curator_id)
 );
 
--- Enable Row Level Security (public read)
+-- Index for event lookups
+CREATE INDEX IF NOT EXISTS idx_event_enrichments_event_id ON event_enrichments (event_id);
+
+-- Index for curator lookups
+CREATE INDEX IF NOT EXISTS idx_event_enrichments_curator_id ON event_enrichments (curator_id);
+
+-- Enable Row Level Security
 ALTER TABLE event_enrichments ENABLE ROW LEVEL SECURITY;
 
--- Anyone can read enrichments
-CREATE POLICY "Anyone can read enrichments"
+-- Allow anyone to read enrichments
+CREATE POLICY "Enrichments are publicly readable"
   ON event_enrichments FOR SELECT
   USING (true);
 
--- Service role can manage enrichments
-CREATE POLICY "Service role can manage enrichments"
-  ON event_enrichments FOR ALL
-  USING (auth.role() = 'service_role')
-  WITH CHECK (auth.role() = 'service_role');
+-- Users can insert their own enrichments
+CREATE POLICY "Users can insert own enrichments"
+  ON event_enrichments FOR INSERT
+  WITH CHECK (auth.uid() = curator_id);
+
+-- Users can update their own enrichments
+CREATE POLICY "Users can update own enrichments"
+  ON event_enrichments FOR UPDATE
+  USING (auth.uid() = curator_id);
+
+-- Users can delete their own enrichments
+CREATE POLICY "Users can delete own enrichments"
+  ON event_enrichments FOR DELETE
+  USING (auth.uid() = curator_id);
 
 -- Distinct cities materialized view - for city picker UI
 
@@ -223,33 +250,39 @@ CREATE POLICY "Service role can manage GitHub admins"
   USING (auth.role() = 'service_role')
   WITH CHECK (auth.role() = 'service_role');
 
--- User settings table
+-- User settings table - per-user, per-city preferences (e.g., hidden sources)
 
 CREATE TABLE IF NOT EXISTS user_settings (
-  user_id uuid PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
-  openai_api_key text,
+  id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  user_id uuid REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
+  city text NOT NULL,
+  hidden_sources text[] DEFAULT '{}',
+  one_click_pick boolean NOT NULL DEFAULT false,
+  layout_mode text DEFAULT 'list',
+  image_mode text DEFAULT 'everywhere',
+  dashboard jsonb DEFAULT NULL,
   created_at timestamptz DEFAULT now(),
-  updated_at timestamptz DEFAULT now()
+  updated_at timestamptz DEFAULT now(),
+  UNIQUE(user_id, city)
 );
 
 -- Enable Row Level Security
 ALTER TABLE user_settings ENABLE ROW LEVEL SECURITY;
 
--- Users can only see their own settings
+-- Users can only view their own settings
 CREATE POLICY "Users can view own settings"
   ON user_settings FOR SELECT
   USING (auth.uid() = user_id);
 
--- Users can update their own settings
-CREATE POLICY "Users can update own settings"
-  ON user_settings FOR UPDATE
-  USING (auth.uid() = user_id)
-  WITH CHECK (auth.uid() = user_id);
-
--- Users can insert their own settings
+-- Users can only insert their own settings
 CREATE POLICY "Users can insert own settings"
   ON user_settings FOR INSERT
   WITH CHECK (auth.uid() = user_id);
+
+-- Users can only update their own settings
+CREATE POLICY "Users can update own settings"
+  ON user_settings FOR UPDATE
+  USING (auth.uid() = user_id);
 
 -- Admin Google users table
 

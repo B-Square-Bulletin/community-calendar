@@ -85,8 +85,8 @@ make setup-local
 ### SQL tests fail with "relation does not exist"
 
 ```bash
-# Re-apply schema
-./tests/sql/setup_local_db.sh
+# Re-apply schema from migrations
+supabase db reset
 ```
 
 ## Adding New Tests
@@ -94,8 +94,9 @@ make setup-local
 ### Python Tests
 
 1. Add test file to `tests/` directory with `test_` prefix
-2. Update `Makefile` `test-python` target to include new file
-3. Update this README
+2. That's it — `make test-python` runs `pytest tests/`, which auto-discovers
+   any `test_*.py` file. No Makefile change needed.
+3. Update this README if the new coverage is worth documenting
 
 ### SQL Tests
 
