@@ -36,7 +36,7 @@ if [ "$MODE" = "--local" ]; then
   fi
 
   echo "Running test suite..."
-  psql "$DB_URL" -f tests/sql/test_refresh_source_names.sql
+  psql "$DB_URL" -v ON_ERROR_STOP=1 -X -f tests/sql/test_refresh_source_names.sql
 
   echo ""
   echo "Local instance still running. To stop: supabase stop"
@@ -66,5 +66,5 @@ else
     exit 1
   fi
 
-  psql "$SUPABASE_DB_URL" -f tests/sql/test_refresh_source_names.sql
+  psql "$SUPABASE_DB_URL" -v ON_ERROR_STOP=1 -X -f tests/sql/test_refresh_source_names.sql
 fi
