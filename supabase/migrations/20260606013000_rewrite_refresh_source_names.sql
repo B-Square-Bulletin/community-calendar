@@ -11,7 +11,10 @@ BEGIN
   -- Delete old entries for this city first
   DELETE FROM source_names WHERE city = target_city;
   
-  -- Split comma-separated sources and count in one pass
+  -- Split comma-separated sources and count in one pass.
+  -- CONVENTION: commas in events.source are always treated as separators
+  -- between distinct source names (produced by deduplicated_events via
+  -- string_agg). Individual source names must not contain commas.
   -- This processes each event exactly once (O(n)) instead of
   -- running a correlated subquery for each source_name (O(n×m)).
   -- Empty names (from blank sources, trailing/double commas) are filtered out.

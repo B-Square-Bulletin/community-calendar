@@ -8,6 +8,15 @@ set -euo pipefail
 
 MODE="${1:---local}"
 
+# Validate flag early — only --local and --linked are accepted
+if [ "$MODE" != "--local" ] && [ "$MODE" != "--linked" ]; then
+  echo "ERROR: Unknown flag '$MODE'"
+  echo "Usage:"
+  echo "  $0              # runs against local Supabase (default)"
+  echo "  $0 --linked     # runs against production (destructive, requires ALLOW_PROD_TESTS=1)"
+  exit 1
+fi
+
 if [ "$MODE" = "--local" ]; then
   echo "Running tests against LOCAL Supabase instance..."
 
