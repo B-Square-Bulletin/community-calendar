@@ -210,42 +210,46 @@ CREATE POLICY "Users can delete own enrichments"
   ON event_enrichments FOR DELETE
   USING (auth.uid() = curator_id);
 
--- Distinct cities materialized view - for city picker UI
+-- View for distinct city names (used by city picker UI)
+-- security_invoker so the view runs with the querying user's RLS, not the owner's
+CREATE OR REPLACE VIEW distinct_cities WITH (security_invoker = true) AS
+SELECT DISTINCT city FROM events WHERE city IS NOT NULL ORDER BY city;
 
-CREATE MATERIALIZED VIEW IF NOT EXISTS distinct_cities AS
-SELECT DISTINCT city
-FROM events
-WHERE city IS NOT NULL
-ORDER BY city;
+REVOKE ALL ON distinct_cities FROM anon, authenticated;
+GRANT SELECT ON distinct_cities TO anon, authenticated;
 
--- Refresh function for distinct_cities view
-CREATE OR REPLACE FUNCTION refresh_distinct_cities()
-RETURNS void
-LANGUAGE plpgsql
-SECURITY DEFINER
-AS $$
-BEGIN
-  REFRESH MATERIALIZED VIEW distinct_cities;
-END;
-$$;
-
--- Admin GitHub users table
+-- Admin GitHub users table - allows preapproval before first sign-in
 
 CREATE TABLE IF NOT EXISTS admin_github_users (
-  github_id text PRIMARY KEY,
+  github_user text PRIMARY KEY,
   created_at timestamptz DEFAULT now()
 );
 
 -- Enable Row Level Security
 ALTER TABLE admin_github_users ENABLE ROW LEVEL SECURITY;
 
--- Allow anyone to check admin status
-CREATE POLICY "Anyone can check GitHub admin status"
-  ON admin_github_users FOR SELECT
-  USING (true);
+-- Helper function: reads GitHub username from server-side auth.users record
+-- (not from the client-writable JWT user_metadata claim)
+CREATE OR REPLACE FUNCTION public.get_my_github_username()
+RETURNS text
+LANGUAGE sql
+SECURITY DEFINER
+STABLE
+SET search_path = ''
+AS $$
+  SELECT raw_user_meta_data->>'user_name'
+  FROM auth.users
+  WHERE id = auth.uid();
+$$;
 
--- Service role manages admin grants
-CREATE POLICY "Service role can manage GitHub admins"
+-- Authenticated users can only read their own GitHub username row
+CREATE POLICY "Users can view own github admin status"
+  ON admin_github_users FOR SELECT
+  TO authenticated
+  USING (github_user = coalesce(public.get_my_github_username(), ''));
+
+-- Service role manages admin grants/revokes
+CREATE POLICY "Service role can manage github admin users"
   ON admin_github_users FOR ALL
   USING (auth.role() = 'service_role')
   WITH CHECK (auth.role() = 'service_role');
@@ -284,95 +288,144 @@ CREATE POLICY "Users can update own settings"
   ON user_settings FOR UPDATE
   USING (auth.uid() = user_id);
 
--- Admin Google users table
+-- Admin Google users table - allows preapproval before first sign-in
 
 CREATE TABLE IF NOT EXISTS admin_google_users (
-  google_id text PRIMARY KEY,
+  google_email text PRIMARY KEY,
   created_at timestamptz DEFAULT now()
 );
 
 -- Enable Row Level Security
 ALTER TABLE admin_google_users ENABLE ROW LEVEL SECURITY;
 
--- Allow anyone to check admin status
-CREATE POLICY "Anyone can check Google admin status"
-  ON admin_google_users FOR SELECT
-  USING (true);
+-- Helper function: reads email from server-side auth.users record
+-- (not from the client-writable JWT claims)
+CREATE OR REPLACE FUNCTION public.get_my_google_email()
+RETURNS text
+LANGUAGE sql
+SECURITY DEFINER
+STABLE
+SET search_path = ''
+AS $$
+  SELECT email
+  FROM auth.users
+  WHERE id = auth.uid();
+$$;
 
--- Service role manages admin grants
-CREATE POLICY "Service role can manage Google admins"
+-- Authenticated users can only read their own Google email row
+CREATE POLICY "Users can view own google admin status"
+  ON admin_google_users FOR SELECT
+  TO authenticated
+  USING (google_email = coalesce(public.get_my_google_email(), ''));
+
+-- Service role manages admin grants/revokes
+CREATE POLICY "Service role can manage google admin users"
   ON admin_google_users FOR ALL
   USING (auth.role() = 'service_role')
   WITH CHECK (auth.role() = 'service_role');
 
--- Source suggestions table - curator-proposed calendar sources
+-- Source suggestions table - anonymous community submissions for new calendar sources
 
 CREATE TABLE IF NOT EXISTS source_suggestions (
   id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  user_id uuid REFERENCES auth.users(id) ON DELETE SET NULL,
   city text NOT NULL,
-  url text NOT NULL,
   name text NOT NULL,
+  url text,
+  feed_type text,
   notes text,
-  status text DEFAULT 'pending',
   created_at timestamptz DEFAULT now()
 );
 
 -- Enable Row Level Security
 ALTER TABLE source_suggestions ENABLE ROW LEVEL SECURITY;
 
--- Anyone can view suggestions
-CREATE POLICY "Anyone can view source suggestions"
+-- Anyone can insert suggestions (anonymous, no auth required)
+CREATE POLICY "Anyone can insert suggestions"
+  ON source_suggestions FOR INSERT
+  WITH CHECK (true);
+
+-- Anyone can read suggestions
+CREATE POLICY "Anyone can read suggestions"
   ON source_suggestions FOR SELECT
   USING (true);
 
--- Authenticated users can create suggestions
-CREATE POLICY "Authenticated users can create suggestions"
-  ON source_suggestions FOR INSERT
-  WITH CHECK (auth.role() = 'authenticated');
-
--- Admin users can update suggestions
-CREATE POLICY "Admin users can update suggestions"
-  ON source_suggestions FOR UPDATE
-  USING (auth.uid() IN (SELECT user_id FROM admin_users));
-
--- Category overrides table - manual category corrections
+-- Category overrides: curator corrections to LLM-assigned event categories
+-- These feed back as few-shot examples to improve future classifications
 
 CREATE TABLE IF NOT EXISTS category_overrides (
-  source_uid text PRIMARY KEY,
+  id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  event_id bigint REFERENCES events(id) ON DELETE CASCADE,
   category text NOT NULL,
-  created_at timestamptz DEFAULT now()
+  original_category text,
+  curator_id uuid REFERENCES auth.users(id),
+  created_at timestamptz DEFAULT now(),
+  UNIQUE(event_id)
 );
 
--- Enable Row Level Security
 ALTER TABLE category_overrides ENABLE ROW LEVEL SECURITY;
 
--- Anyone can view overrides
-CREATE POLICY "Anyone can view category overrides"
-  ON category_overrides FOR SELECT
-  USING (true);
+CREATE POLICY "Anyone can read overrides" ON category_overrides FOR SELECT USING (true);
+CREATE POLICY "Auth users can insert overrides" ON category_overrides FOR INSERT WITH CHECK (auth.uid() = curator_id);
+CREATE POLICY "Auth users can update own overrides" ON category_overrides FOR UPDATE USING (auth.uid() = curator_id);
 
--- Admin users can manage overrides
-CREATE POLICY "Admin users can manage category overrides"
-  ON category_overrides FOR ALL
-  USING (auth.uid() IN (SELECT user_id FROM admin_users));
+-- Trigger: store original category then propagate override to events.category
+CREATE OR REPLACE FUNCTION apply_category_override()
+RETURNS TRIGGER AS $$
+BEGIN
+  IF NEW.original_category IS NULL THEN
+    SELECT category INTO NEW.original_category FROM events WHERE id = NEW.event_id;
+  END IF;
+  UPDATE events SET category = NEW.category WHERE id = NEW.event_id;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+CREATE TRIGGER on_category_override
+  BEFORE INSERT OR UPDATE ON category_overrides
+  FOR EACH ROW EXECUTE FUNCTION apply_category_override();
+
+-- SECURITY DEFINER function to resolve curator name without exposing auth.users
+CREATE OR REPLACE FUNCTION public.get_curator_name(curator_uuid uuid)
+RETURNS text
+LANGUAGE sql
+SECURITY DEFINER
+STABLE
+SET search_path = ''
+AS $$
+  SELECT raw_user_meta_data->>'user_name'
+  FROM auth.users
+  WHERE id = curator_uuid;
+$$;
+
+-- View for report: uses function instead of direct auth.users join
+CREATE OR REPLACE VIEW category_overrides_view WITH (security_invoker = true) AS
+SELECT
+  co.id,
+  co.category,
+  co.original_category,
+  co.created_at,
+  co.event_id,
+  public.get_curator_name(co.curator_id) AS curator_name
+FROM category_overrides co;
+
+REVOKE ALL ON category_overrides_view FROM anon, authenticated;
+GRANT SELECT ON category_overrides_view TO anon, authenticated;
 
 -- Source names table - aggregated source counts per city
 
 CREATE TABLE IF NOT EXISTS source_names (
+  id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   city text NOT NULL,
   name text NOT NULL,
   event_count integer DEFAULT 0,
-  PRIMARY KEY (city, name)
+  UNIQUE(city, name)
 );
 
 -- Enable Row Level Security (public read)
 ALTER TABLE source_names ENABLE ROW LEVEL SECURITY;
 
 -- Anyone can read source names
-CREATE POLICY "Anyone can read source names"
-  ON source_names FOR SELECT
-  USING (true);
+CREATE POLICY "source_names_read" ON source_names FOR SELECT USING (true);
 
 -- Original refresh_source_names() implementation
 -- (Rewritten in migration 20260606013000)
@@ -410,53 +463,92 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
--- Feeds table - registry of ICS feeds and scrapers
+-- Feeds table - all calendar sources (ICS URLs, scrapers, curators) per city
+-- Source of truth for what feeds are in the system. Replaces feeds.txt and pending_feeds.
 -- NOTE: fallback_url column added in migration 20260510180000
 
 CREATE TABLE IF NOT EXISTS feeds (
-  id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   city text NOT NULL,
+  url text NOT NULL,
   name text NOT NULL,
-  url text,
-  feed_type text NOT NULL,
+  status text NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'pending', 'removed')),
+  feed_type text NOT NULL CHECK (feed_type IN ('ics_url', 'scraper', 'curator')),
   scraper_cmd text,
-  status text DEFAULT 'pending',
-  created_at timestamptz DEFAULT now()
+  created_at timestamptz DEFAULT now(),
+  UNIQUE(city, url)
 );
 
--- Enable Row Level Security (public read)
 ALTER TABLE feeds ENABLE ROW LEVEL SECURITY;
 
--- Anyone can read feeds
-CREATE POLICY "Anyone can read feeds"
-  ON feeds FOR SELECT
-  USING (true);
+CREATE POLICY "Anyone can read feeds" ON feeds FOR SELECT USING (true);
 
--- Admin users can manage feeds
-CREATE POLICY "Admin users can manage feeds"
-  ON feeds FOR ALL
+CREATE POLICY "Admin users can manage feeds" ON feeds FOR ALL
   USING (auth.uid() IN (SELECT user_id FROM admin_users));
 
--- Deduplicated events view - most recent version of each event by source_uid
+-- Used by the Manage Feeds delete button (SECURITY DEFINER bypasses RLS)
+CREATE OR REPLACE FUNCTION remove_feed(feed_id bigint)
+RETURNS void
+LANGUAGE plpgsql SECURITY DEFINER
+AS $$
+BEGIN
+  DELETE FROM feeds WHERE id = feed_id;
+END;
+$$;
+
+-- Deduplicated events materialized view
+-- Server-side deduplication of events by city + normalized title + start_time.
+-- Refreshed after load-events runs so the app can query pre-deduplicated rows.
 
 CREATE MATERIALIZED VIEW IF NOT EXISTS deduplicated_events AS
-SELECT DISTINCT ON (source_uid) *
-FROM events
-WHERE source_uid IS NOT NULL
-ORDER BY source_uid, created_at DESC;
+SELECT
+    min(id) AS id,
+    (array_agg(title ORDER BY e.id))[1] AS title,
+    start_time,
+    (array_agg(end_time ORDER BY e.id) FILTER (WHERE end_time IS NOT NULL))[1] AS end_time,
+    (array_agg(url ORDER BY e.id) FILTER (WHERE url IS NOT NULL AND url <> ''))[1] AS url,
+    (array_agg(location ORDER BY e.id) FILTER (WHERE location IS NOT NULL))[1] AS location,
+    (array_agg(description ORDER BY e.id) FILTER (WHERE description IS NOT NULL))[1] AS description,
+    string_agg(DISTINCT source, ', ') AS source,
+    (array_agg(source_uid ORDER BY e.id))[1] AS source_uid,
+    min(created_at) AS created_at,
+    (array_agg(city ORDER BY e.id))[1] AS city,
+    (array_agg(transcript ORDER BY e.id) FILTER (WHERE transcript IS NOT NULL))[1] AS transcript,
+    (array_agg(source_id ORDER BY e.id))[1] AS source_id,
+    (array_agg(cluster_id ORDER BY e.id) FILTER (WHERE cluster_id IS NOT NULL))[1] AS cluster_id,
+    (array_agg(source_urls ORDER BY e.id) FILTER (WHERE source_urls IS NOT NULL))[1] AS source_urls,
+    (array_agg(category ORDER BY e.id) FILTER (WHERE category IS NOT NULL))[1] AS category,
+    (SELECT ic.ics_categories
+       FROM events ic
+      WHERE ic.ics_categories IS NOT NULL AND ic.id = min(e.id)) AS ics_categories,
+    (array_agg(image_url ORDER BY e.id) FILTER (WHERE image_url IS NOT NULL))[1] AS image_url,
+    bool_or(all_day) AS all_day,
+    array_agg(id ORDER BY e.id) AS merged_ids
+FROM events e
+WHERE source <> 'poster_capture'
+GROUP BY city, lower(TRIM(BOTH FROM title)), start_time
+ORDER BY start_time;
 
--- NOTE: Index optimization in migration 20260421182300
--- Initial indexes (will be replaced by compound index):
+-- Unique index required for REFRESH MATERIALIZED VIEW CONCURRENTLY
+CREATE UNIQUE INDEX IF NOT EXISTS deduplicated_events_id_idx ON deduplicated_events (id);
+
+-- NOTE: separate city/start_time indexes replaced by a compound index in
+-- migration 20260421182300 (deduplicated_events_city_start_time_idx)
 CREATE INDEX IF NOT EXISTS deduplicated_events_city_idx ON deduplicated_events (city);
 CREATE INDEX IF NOT EXISTS deduplicated_events_start_time_idx ON deduplicated_events (start_time);
 
--- Refresh function for deduplicated_events view
-CREATE OR REPLACE FUNCTION refresh_deduplicated_events()
+GRANT SELECT ON deduplicated_events TO anon, authenticated, service_role;
+
+-- RPC used by the nightly build after load-events completes.
+CREATE OR REPLACE FUNCTION public.refresh_deduplicated_events()
 RETURNS void
 LANGUAGE plpgsql
 SECURITY DEFINER
-AS $$
+SET statement_timeout TO '0'
+AS $function$
 BEGIN
-  REFRESH MATERIALIZED VIEW deduplicated_events;
+  REFRESH MATERIALIZED VIEW CONCURRENTLY deduplicated_events;
 END;
-$$;
+$function$;
+
+GRANT EXECUTE ON FUNCTION public.refresh_deduplicated_events() TO anon, authenticated, service_role;
