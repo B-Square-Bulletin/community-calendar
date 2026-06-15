@@ -16,6 +16,14 @@ A comprehensive community event aggregator that scrapes and combines events from
 A test that verifies database behavior against a disposable local project database.
 _Avoid_: SQL unit test, production test
 
+**Source**:
+A venue, organization, group, or government body that contributes events to the calendar. The user-facing concept — what a calendar visitor sees (e.g., "Buskirk-Chumley Theater").
+_Avoid_: Venue, organization (when referring to the calendar entry point)
+
+**Feed**:
+The technical mechanism that delivers events from a source — an ICS URL or a scraper command. One source has one feed. The implementation layer — what the pipeline operates on.
+_Avoid_: URL, scraper (when referring to the abstraction)
+
 ## Key Concepts
 
 ### Event Sources
