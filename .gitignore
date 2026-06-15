@@ -50,3 +50,4 @@ backups/
 # Generated at build/commit time — always diverges across forks
 report.json
 xmlui/version.txt
+.worktrees
