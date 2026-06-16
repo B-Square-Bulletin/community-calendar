@@ -17,88 +17,17 @@ from zoneinfo import ZoneInfo
 
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
-sys.path.insert(0, str(Path(__file__).parent.parent / 'scripts'))
+sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
 from scripts.combine_ics import expand_rrules, parse_ics_datetime as combine_parse_dt
 from scripts.ics_to_json import parse_ics_datetime as json_parse_dt, extract_field
-
-
-# ---------------------------------------------------------------------------
-# Helpers: build minimal ICS content for testing
-# (also available in tests/helpers.py for reuse)
-# ---------------------------------------------------------------------------
-
-def make_ics(events_block, tz_header="X-WR-TIMEZONE:America/Los_Angeles", vtimezone=""):
-    """Build a minimal valid ICS calendar string."""
-    return (
-        "BEGIN:VCALENDAR\r\n"
-        "VERSION:2.0\r\n"
-        f"{tz_header}\r\n"
-        f"{vtimezone}"
-        f"{events_block}"
-        "END:VCALENDAR\r\n"
-    )
-
-
-def make_vevent(summary, dtstart, dtend, uid, rrule=None):
-    """Build a VEVENT block. dtstart/dtend are full ICS property lines."""
-    lines = [
-        "BEGIN:VEVENT",
-        dtstart,
-        dtend,
-        f"SUMMARY:{summary}",
-        f"UID:{uid}",
-    ]
-    if rrule:
-        lines.append(f"RRULE:{rrule}")
-    lines.append("END:VEVENT")
-    return "\r\n".join(lines) + "\r\n"
-
-
-VTIMEZONE_LA = (
-    "BEGIN:VTIMEZONE\r\n"
-    "TZID:America/Los_Angeles\r\n"
-    "BEGIN:STANDARD\r\n"
-    "DTSTART:20241103T020000\r\n"
-    "RRULE:FREQ=YEARLY;BYDAY=1SU;BYMONTH=11\r\n"
-    "TZOFFSETFROM:-0700\r\n"
-    "TZOFFSETTO:-0800\r\n"
-    "TZNAME:PST\r\n"
-    "END:STANDARD\r\n"
-    "BEGIN:DAYLIGHT\r\n"
-    "DTSTART:20250309T020000\r\n"
-    "RRULE:FREQ=YEARLY;BYDAY=2SU;BYMONTH=3\r\n"
-    "TZOFFSETFROM:-0800\r\n"
-    "TZOFFSETTO:-0700\r\n"
-    "TZNAME:PDT\r\n"
-    "END:DAYLIGHT\r\n"
-    "END:VTIMEZONE\r\n"
-)
-
-VTIMEZONE_NY = (
-    "BEGIN:VTIMEZONE\r\n"
-    "TZID:America/New_York\r\n"
-    "BEGIN:STANDARD\r\n"
-    "DTSTART:20241103T020000\r\n"
-    "RRULE:FREQ=YEARLY;BYDAY=1SU;BYMONTH=11\r\n"
-    "TZOFFSETFROM:-0400\r\n"
-    "TZOFFSETTO:-0500\r\n"
-    "TZNAME:EST\r\n"
-    "END:STANDARD\r\n"
-    "BEGIN:DAYLIGHT\r\n"
-    "DTSTART:20250309T020000\r\n"
-    "RRULE:FREQ=YEARLY;BYDAY=2SU;BYMONTH=3\r\n"
-    "TZOFFSETFROM:-0500\r\n"
-    "TZOFFSETTO:-0400\r\n"
-    "TZNAME:EDT\r\n"
-    "END:DAYLIGHT\r\n"
-    "END:VTIMEZONE\r\n"
-)
+from tests.helpers import make_ics, make_vevent, VTIMEZONE_LA, VTIMEZONE_NY
 
 
 # ===========================================================================
 # Test 1: ics_to_json parse_ics_datetime — current behavior baseline
 # ===========================================================================
+
 
 class TestIcsToJsonParseDatetime:
     """Tests for scripts/ics_to_json.py parse_ics_datetime."""
@@ -182,13 +111,14 @@ class TestIcsToJsonParseDatetime:
 # Test 2: extract_field — does it preserve or lose TZID?
 # ===========================================================================
 
+
 class TestExtractField:
     """Tests for ics_to_json.py extract_field with DTSTART."""
 
     def test_bare_dtstart(self):
         """DTSTART with no params returns bare value."""
         content = "DTSTART:20250115T190000\r\nSUMMARY:Test"
-        result = extract_field(content, 'DTSTART')
+        result = extract_field(content, "DTSTART")
         assert result == "20250115T190000"
 
     def test_tzid_dtstart_loses_tzid(self):
@@ -197,7 +127,7 @@ class TestExtractField:
         The regex (?:;[^:]*)?:([^\r\n]*) captures only after the colon.
         """
         content = "DTSTART;TZID=America/New_York:20250115T190000\r\nSUMMARY:Test"
-        result = extract_field(content, 'DTSTART')
+        result = extract_field(content, "DTSTART")
         # Currently returns just the datetime — TZID is lost
         assert result == "20250115T190000"
 
@@ -220,6 +150,7 @@ class TestExtractField:
 # ===========================================================================
 # Test 3: combine_ics RRULE expansion — does it preserve TZID?
 # ===========================================================================
+
 
 class TestCombineIcsRruleExpansion:
     """Tests for combine_ics.py RRULE expansion timezone handling."""
@@ -265,7 +196,7 @@ class TestCombineIcsRruleExpansion:
 
         # Extract DTSTART times from expanded instances
         for block in expanded:
-            m = re.search(r'DTSTART[^:]*:(\d{8}T\d{6})', block)
+            m = re.search(r"DTSTART[^:]*:(\d{8}T\d{6})", block)
             assert m, f"No DTSTART found in:\n{block}"
             time_part = m.group(1)[-6:]  # HHMMSS
             assert time_part == "190000", (
@@ -273,9 +204,11 @@ class TestCombineIcsRruleExpansion:
                 "DST transition shifted the wall-clock time."
             )
 
+
 # ===========================================================================
 # Test 4: Full pipeline — ICS with mismatched TZID → JSON
 # ===========================================================================
+
 
 class TestFullPipeline:
     """
@@ -352,6 +285,7 @@ class TestFullPipeline:
 # Test 5: Enrichment API — naive datetime submission
 # ===========================================================================
 
+
 class TestEnrichmentTimezone:
     """
     Tests for the PickEditor → enrichment API timezone gap.
@@ -375,7 +309,9 @@ class TestEnrichmentTimezone:
         # Postgres with default UTC session timezone treats this as UTC
         as_utc = datetime.fromisoformat(naive).replace(tzinfo=timezone.utc)
         # But the user meant 7pm Pacific
-        as_pacific = datetime.fromisoformat(naive).replace(tzinfo=ZoneInfo("America/Los_Angeles"))
+        as_pacific = datetime.fromisoformat(naive).replace(
+            tzinfo=ZoneInfo("America/Los_Angeles")
+        )
 
         # These are 8 hours apart!
         diff_hours = abs((as_utc - as_pacific).total_seconds() / 3600)
@@ -433,16 +369,18 @@ class TestEnrichmentTimezone:
         # This is what helpers.js utcToLocal() does via Intl.DateTimeFormat
         displayed = datetime.fromisoformat(pg_returns).astimezone(city_tz)
         assert displayed.hour == 19  # Shows 7pm in form — correct
-        assert displayed.day == 15   # Shows Jan 15 — correct
+        assert displayed.day == 15  # Shows Jan 15 — correct
 
         # Step 4: PickEditor constructs naive string from form values
         # (this is what lines 65/143/159 in PickEditor.xmlui do)
         form_date = displayed.strftime("%Y-%m-%d")  # "2025-01-15"
-        form_time = displayed.strftime("%H:%M")      # "19:00"
+        form_time = displayed.strftime("%H:%M")  # "19:00"
         naive_submitted = f"{form_date}T{form_time}:00"  # "2025-01-15T19:00:00"
 
         # Step 5-6: Sent to Postgres REST API — no offset, interpreted as UTC
-        pg_stores_as_utc = datetime.fromisoformat(naive_submitted).replace(tzinfo=timezone.utc)
+        pg_stores_as_utc = datetime.fromisoformat(naive_submitted).replace(
+            tzinfo=timezone.utc
+        )
 
         # Step 7: Frontend reads it back, converts to Pacific for display
         displayed_back = pg_stores_as_utc.astimezone(city_tz)
@@ -503,7 +441,9 @@ class TestEnrichmentTimezone:
         naive_submitted = f"{form_date}T{form_time}:00"
 
         # BUG path: Postgres treats as UTC
-        pg_stores_as_utc = datetime.fromisoformat(naive_submitted).replace(tzinfo=timezone.utc)
+        pg_stores_as_utc = datetime.fromisoformat(naive_submitted).replace(
+            tzinfo=timezone.utc
+        )
         displayed_back = pg_stores_as_utc.astimezone(city_tz)
 
         # 7pm becomes 2pm (5 hours wrong)
@@ -513,6 +453,7 @@ class TestEnrichmentTimezone:
 # ===========================================================================
 # Test 5b: applyTimezoneOffset — the function added to helpers.js
 # ===========================================================================
+
 
 class TestApplyTimezoneOffset:
     """
@@ -528,16 +469,17 @@ class TestApplyTimezoneOffset:
     def apply_tz_offset(naive_dt: str, tz_name: str) -> str:
         """Python equivalent of window.applyTimezoneOffset / capture-event applyTimezoneOffset."""
         import re
+
         if not tz_name or not naive_dt:
             return naive_dt
-        if re.search(r'[+-]\d{2}(:\d{2})?$', naive_dt) or naive_dt.endswith('Z'):
+        if re.search(r"[+-]\d{2}(:\d{2})?$", naive_dt) or naive_dt.endswith("Z"):
             return naive_dt
         dt = datetime.fromisoformat(naive_dt)
         tz = ZoneInfo(tz_name)
         aware = dt.replace(tzinfo=tz)
         offset = aware.utcoffset()
         total_seconds = int(offset.total_seconds())
-        sign = '+' if total_seconds >= 0 else '-'
+        sign = "+" if total_seconds >= 0 else "-"
         abs_seconds = abs(total_seconds)
         h = abs_seconds // 3600
         m = (abs_seconds % 3600) // 60
@@ -565,9 +507,13 @@ class TestApplyTimezoneOffset:
 
     def test_indianapolis(self):
         """Indiana doesn't observe DST."""
-        result = self.apply_tz_offset("2025-01-15T19:00:00", "America/Indiana/Indianapolis")
+        result = self.apply_tz_offset(
+            "2025-01-15T19:00:00", "America/Indiana/Indianapolis"
+        )
         assert result == "2025-01-15T19:00:00-05:00"
-        result_summer = self.apply_tz_offset("2025-06-15T19:00:00", "America/Indiana/Indianapolis")
+        result_summer = self.apply_tz_offset(
+            "2025-06-15T19:00:00", "America/Indiana/Indianapolis"
+        )
         assert result_summer == "2025-06-15T19:00:00-04:00"
 
     def test_already_has_offset(self):
@@ -633,6 +579,7 @@ class TestApplyTimezoneOffset:
 # Test 7: Real ICS files — verify parse_ics_datetime against actual feeds
 # ===========================================================================
 
+
 class TestRealIcsFiles:
     """
     Parse real ICS files from cities/ and verify timezone handling.
@@ -650,18 +597,23 @@ class TestRealIcsFiles:
 
     def _parse_real_events(self, city, city_tz_name, ics_filename, max_events=5):
         """Parse events from a real ICS file and return (raw_input, parsed_output) pairs."""
-        ics_path = self.PROJECT_ROOT / 'tests' / 'fixtures' / city / ics_filename
+        ics_path = self.PROJECT_ROOT / "tests" / "fixtures" / city / ics_filename
         if not ics_path.exists():
             return []
-        content = ics_path.read_text(encoding='utf-8', errors='ignore')
-        from scripts.ics_to_json import extract_raw_datetime, parse_ics_datetime, unfold_ics_lines
+        content = ics_path.read_text(encoding="utf-8", errors="ignore")
+        from scripts.ics_to_json import (
+            extract_raw_datetime,
+            parse_ics_datetime,
+            unfold_ics_lines,
+        )
+
         content = unfold_ics_lines(content)
         local_tz = ZoneInfo(city_tz_name)
-        pattern = r'BEGIN:VEVENT\r?\n(.*?)\r?\nEND:VEVENT'
+        pattern = r"BEGIN:VEVENT\r?\n(.*?)\r?\nEND:VEVENT"
         matches = re.findall(pattern, content, re.DOTALL)
         results = []
         for event_content in matches[:max_events]:
-            raw = extract_raw_datetime(event_content, 'DTSTART')
+            raw = extract_raw_datetime(event_content, "DTSTART")
             if raw:
                 parsed = parse_ics_datetime(raw, local_tz)
                 if parsed:
@@ -672,22 +624,30 @@ class TestRealIcsFiles:
 
     def test_santarosa_sonoma_parks_bare(self):
         """Sonoma Parks scraper: bare datetimes, city tz = America/Los_Angeles."""
-        results = self._parse_real_events('santarosa', 'America/Los_Angeles', 'sonoma_parks.ics')
+        results = self._parse_real_events(
+            "santarosa", "America/Los_Angeles", "sonoma_parks.ics"
+        )
         for raw, parsed in results:
-            assert ';' not in raw, f"Expected bare datetime, got: {raw}"
+            assert ";" not in raw, f"Expected bare datetime, got: {raw}"
             dt = datetime.fromisoformat(parsed)
-            assert dt.tzinfo is not None, f"Parsed datetime should be tz-aware: {parsed}"
+            assert dt.tzinfo is not None, (
+                f"Parsed datetime should be tz-aware: {parsed}"
+            )
             offset_hours = dt.utcoffset().total_seconds() / 3600
-            assert offset_hours in (-7, -8), f"Expected PDT or PST offset, got {offset_hours}h: {parsed}"
+            assert offset_hours in (-7, -8), (
+                f"Expected PDT or PST offset, got {offset_hours}h: {parsed}"
+            )
 
     # --- Santa Rosa: live feed with TZID=America/Los_Angeles (matching) ---
 
     def test_santarosa_uptown_tzid_matching(self):
         """Uptown Theatre: TZID=America/Los_Angeles in a Pacific city."""
-        results = self._parse_real_events('santarosa', 'America/Los_Angeles', 'uptowntheatrenapa.ics')
+        results = self._parse_real_events(
+            "santarosa", "America/Los_Angeles", "uptowntheatrenapa.ics"
+        )
         for raw, parsed in results:
-            if 'TZID=' in raw:
-                assert 'America/Los_Angeles' in raw
+            if "TZID=" in raw:
+                assert "America/Los_Angeles" in raw
                 dt = datetime.fromisoformat(parsed)
                 offset_hours = dt.utcoffset().total_seconds() / 3600
                 assert offset_hours in (-7, -8), f"Expected PDT or PST: {parsed}"
@@ -699,10 +659,12 @@ class TestRealIcsFiles:
         Eventbrite Phoenix: some events have TZID=America/New_York in a Pacific city.
         These should be parsed as Eastern, NOT Pacific.
         """
-        results = self._parse_real_events('santarosa', 'America/Los_Angeles', 'eventbrite_phoenix.ics', max_events=20)
+        results = self._parse_real_events(
+            "santarosa", "America/Los_Angeles", "eventbrite_phoenix.ics", max_events=20
+        )
         eastern_found = False
         for raw, parsed in results:
-            if 'TZID=America/New_York' in raw:
+            if "TZID=America/New_York" in raw:
                 eastern_found = True
                 dt = datetime.fromisoformat(parsed)
                 offset_hours = dt.utcoffset().total_seconds() / 3600
@@ -725,14 +687,15 @@ class TestRealIcsFiles:
         but the IANA zone differs). The TZID should be respected, not overridden.
         """
         results = self._parse_real_events(
-            'bloomington', 'America/Indiana/Indianapolis',
-            'gcal_bloomington_in_gov_c657mi332p5sjpq2lcht9imu60.ics',
-            max_events=10
+            "bloomington",
+            "America/Indiana/Indianapolis",
+            "gcal_bloomington_in_gov_c657mi332p5sjpq2lcht9imu60.ics",
+            max_events=10,
         )
         for raw, parsed in results:
             dt = datetime.fromisoformat(parsed)
             assert dt.tzinfo is not None
-            if 'TZID=America/New_York' in raw:
+            if "TZID=America/New_York" in raw:
                 offset_hours = dt.utcoffset().total_seconds() / 3600
                 assert offset_hours in (-4, -5), (
                     f"TZID=America/New_York should produce Eastern offset, "
@@ -747,12 +710,13 @@ class TestRealIcsFiles:
         Pacific events should NOT be stamped as Indianapolis time.
         """
         results = self._parse_real_events(
-            'bloomington', 'America/Indiana/Indianapolis',
-            'mobilize_indivisible_central_indiana.ics',
-            max_events=10
+            "bloomington",
+            "America/Indiana/Indianapolis",
+            "mobilize_indivisible_central_indiana.ics",
+            max_events=10,
         )
         for raw, parsed in results:
-            if 'TZID=America/Los_Angeles' in raw:
+            if "TZID=America/Los_Angeles" in raw:
                 dt = datetime.fromisoformat(parsed)
                 offset_hours = dt.utcoffset().total_seconds() / 3600
                 assert offset_hours in (-7, -8), (
@@ -769,14 +733,15 @@ class TestRealIcsFiles:
         be respected to get the correct absolute time.
         """
         results = self._parse_real_events(
-            'montclair', 'America/New_York',
-            'eventbrite_montclair_book_center.ics',
-            max_events=20
+            "montclair",
+            "America/New_York",
+            "eventbrite_montclair_book_center.ics",
+            max_events=20,
         )
         for raw, parsed in results:
             dt = datetime.fromisoformat(parsed)
             assert dt.tzinfo is not None
-            if 'TZID=America/Los_Angeles' in raw:
+            if "TZID=America/Los_Angeles" in raw:
                 offset_hours = dt.utcoffset().total_seconds() / 3600
                 assert offset_hours in (-7, -8), (
                     f"TZID=America/Los_Angeles should produce Pacific offset, "
@@ -791,12 +756,10 @@ class TestRealIcsFiles:
         Should be interpreted as UTC (offset +00:00), not Toronto time.
         """
         results = self._parse_real_events(
-            'toronto', 'America/Toronto',
-            'uoft_engineering.ics',
-            max_events=10
+            "toronto", "America/Toronto", "uoft_engineering.ics", max_events=10
         )
         for raw, parsed in results:
-            if 'TZID=UTC' in raw:
+            if "TZID=UTC" in raw:
                 dt = datetime.fromisoformat(parsed)
                 offset_hours = dt.utcoffset().total_seconds() / 3600
                 assert offset_hours == 0, (
@@ -812,12 +775,10 @@ class TestRealIcsFiles:
         Atlantic timezone (-04:00/-03:00), not Toronto Eastern.
         """
         results = self._parse_real_events(
-            'toronto', 'America/Toronto',
-            'indigenous.ics',
-            max_events=10
+            "toronto", "America/Toronto", "indigenous.ics", max_events=10
         )
         for raw, parsed in results:
-            if 'TZID=America/Halifax' in raw:
+            if "TZID=America/Halifax" in raw:
                 dt = datetime.fromisoformat(parsed)
                 offset_hours = dt.utcoffset().total_seconds() / 3600
                 assert offset_hours in (-3, -4), (
@@ -832,10 +793,12 @@ class TestRealIcsFiles:
         Static feed with VTIMEZONE + TZID + RRULE.
         Parse a few events and verify they get Pacific offset.
         """
-        results = self._parse_real_events('santarosa', 'America/Los_Angeles', 'new_world_ballet.ics')
+        results = self._parse_real_events(
+            "santarosa", "America/Los_Angeles", "new_world_ballet.ics"
+        )
         assert len(results) > 0, "new_world_ballet.ics should have parseable events"
         for raw, parsed in results:
-            assert 'TZID=America/Los_Angeles' in raw
+            assert "TZID=America/Los_Angeles" in raw
             dt = datetime.fromisoformat(parsed)
             offset_hours = dt.utcoffset().total_seconds() / 3600
             assert offset_hours in (-7, -8), f"Expected PDT or PST: {parsed}"

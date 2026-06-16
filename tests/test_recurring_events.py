@@ -16,7 +16,7 @@ from pathlib import Path
 
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
-sys.path.insert(0, str(Path(__file__).parent.parent / 'scripts'))
+sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
 from scripts.combine_ics import expand_rrules
 from tests.helpers import make_ics, make_vevent, VTIMEZONE_NY
@@ -70,17 +70,19 @@ class TestRecurrenceIdOverride:
         )
 
         expanded = expand_rrules(ics, window_days=90)
-        assert expanded is not None, "expand_rrules should not return None with RRULE present"
+        assert expanded is not None, (
+            "expand_rrules should not return None with RRULE present"
+        )
         assert len(expanded) > 0, "Should have expanded events"
 
         # Collect DTSTART dates and UIDs
         dtstarts = []
         uids = []
         for block in expanded:
-            m = re.search(r'DTSTART[^:]*:(\d{8})', block)
+            m = re.search(r"DTSTART[^:]*:(\d{8})", block)
             if m:
                 dtstarts.append(m.group(1))
-            uid_m = re.search(r'UID:([^\r\n]+)', block)
+            uid_m = re.search(r"UID:([^\r\n]+)", block)
             if uid_m:
                 uids.append(uid_m.group(1))
 
@@ -92,8 +94,7 @@ class TestRecurrenceIdOverride:
 
         # Edited June 23 MUST appear
         assert "20260623" in dtstarts, (
-            f"June 23 (the edited instance) should appear, "
-            f"but not found in: {dtstarts}"
+            f"June 23 (the edited instance) should appear, but not found in: {dtstarts}"
         )
 
         # Other recurring instances should still appear
@@ -102,17 +103,16 @@ class TestRecurrenceIdOverride:
 
         # UIDs should have date suffixes (from _serialize_vevent mutation)
         for uid in uids:
-            assert "__" in uid, (
-                f"Expanded instance UID should have date suffix: {uid}"
-            )
+            assert "__" in uid, f"Expanded instance UID should have date suffix: {uid}"
 
         # June 23 event should have the correct suffixed UID
         june23_uids = [
-            u for b, u in zip(expanded, uids)
-            if '20260623' in (re.search(r'DTSTART[^:]*:(\d{8})', b) or [''])[0]
+            u
+            for b, u in zip(expanded, uids)
+            if "20260623" in (re.search(r"DTSTART[^:]*:(\d{8})", b) or [""])[0]
         ]
         if june23_uids:
-            assert '__20260623' in june23_uids[0], (
+            assert "__20260623" in june23_uids[0], (
                 f"June 23 UID should end with __20260623, got: {june23_uids[0]}"
             )
 
@@ -125,8 +125,9 @@ class TestRecurrenceIdOverride:
         covers all COUNT=N instances.
         """
         from datetime import date, timedelta
+
         start = date.today() + timedelta(days=7)  # one week from now
-        start_str = start.strftime('%Y%m%d')
+        start_str = start.strftime("%Y%m%d")
         dtstart = f"DTSTART:{start_str}T090000"
         dtend = f"DTEND:{start_str}T100000"
 
@@ -144,7 +145,8 @@ class TestRecurrenceIdOverride:
 
         # All UIDs should have date suffixes
         for block in expanded:
-            assert "__" in re.search(r'UID:([^\r\n]+)', block).group(1)
+            m = re.search(r"UID:([^\r\n]+)", block)
+            assert m and "__" in m.group(1)
 
     def test_multiple_overrides(self):
         """
@@ -153,8 +155,9 @@ class TestRecurrenceIdOverride:
         non-overridden instances should remain.
         """
         from datetime import date, timedelta
+
         start = date.today() + timedelta(days=7)  # one week from now
-        start_str = start.strftime('%Y%m%d')
+        start_str = start.strftime("%Y%m%d")
 
         master = make_vevent(
             "Daily Class",
@@ -165,7 +168,7 @@ class TestRecurrenceIdOverride:
         )
 
         # Override day 3 → move to start+2 days after the series ends
-        override_1_dt = (start + timedelta(days=12)).strftime('%Y%m%d')
+        override_1_dt = (start + timedelta(days=12)).strftime("%Y%m%d")
         override_1 = (
             "BEGIN:VEVENT\r\n"
             f"DTSTART;TZID=America/New_York:{override_1_dt}T100000\r\n"
@@ -177,7 +180,7 @@ class TestRecurrenceIdOverride:
         )
 
         # Override day 7 → move to start+3 days after the series ends
-        override_2_dt = (start + timedelta(days=13)).strftime('%Y%m%d')
+        override_2_dt = (start + timedelta(days=13)).strftime("%Y%m%d")
         override_2 = (
             "BEGIN:VEVENT\r\n"
             f"DTSTART;TZID=America/New_York:{override_2_dt}T100000\r\n"
@@ -202,23 +205,31 @@ class TestRecurrenceIdOverride:
         # Collect dates
         dtstarts = []
         for block in expanded:
-            m = re.search(r'DTSTART[^:]*:(\d{8})', block)
+            m = re.search(r"DTSTART[^:]*:(\d{8})", block)
             if m:
                 dtstarts.append(m.group(1))
 
         # Original overridden days should NOT appear
-        suppressed_3 = (start + timedelta(days=2)).strftime('%Y%m%d')
-        suppressed_7 = (start + timedelta(days=6)).strftime('%Y%m%d')
-        assert suppressed_3 not in dtstarts, f"Day 3 ({suppressed_3}, overridden) should be suppressed"
-        assert suppressed_7 not in dtstarts, f"Day 7 ({suppressed_7}, overridden) should be suppressed"
+        suppressed_3 = (start + timedelta(days=2)).strftime("%Y%m%d")
+        suppressed_7 = (start + timedelta(days=6)).strftime("%Y%m%d")
+        assert suppressed_3 not in dtstarts, (
+            f"Day 3 ({suppressed_3}, overridden) should be suppressed"
+        )
+        assert suppressed_7 not in dtstarts, (
+            f"Day 7 ({suppressed_7}, overridden) should be suppressed"
+        )
 
         # Rescheduled days SHOULD appear
-        assert override_1_dt in dtstarts, f"Rescheduled from day 3 ({override_1_dt}) should appear"
-        assert override_2_dt in dtstarts, f"Rescheduled from day 7 ({override_2_dt}) should appear"
+        assert override_1_dt in dtstarts, (
+            f"Rescheduled from day 3 ({override_1_dt}) should appear"
+        )
+        assert override_2_dt in dtstarts, (
+            f"Rescheduled from day 7 ({override_2_dt}) should appear"
+        )
 
         # Unmodified days should still appear
         assert start_str in dtstarts, f"Day 1 ({start_str}, unmodified) should appear"
-        day_2 = (start + timedelta(days=1)).strftime('%Y%m%d')
+        day_2 = (start + timedelta(days=1)).strftime("%Y%m%d")
         assert day_2 in dtstarts, f"Day 2 ({day_2}, unmodified) should appear"
-        day_4 = (start + timedelta(days=3)).strftime('%Y%m%d')
+        day_4 = (start + timedelta(days=3)).strftime("%Y%m%d")
         assert day_4 in dtstarts, f"Day 4 ({day_4}, unmodified) should appear"

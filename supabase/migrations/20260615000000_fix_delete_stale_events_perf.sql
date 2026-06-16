@@ -6,10 +6,14 @@
 -- filters both columns through a single index scan.
 
 -- New composite index for the (city, source_uid) filter in delete_stale_events
-CREATE INDEX IF NOT EXISTS events_city_source_uid_idx ON events (city, source_uid);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS events_city_source_uid_idx ON events (
+    city, source_uid
+);
 
 -- Rewrite the RPC to use NOT EXISTS (unnest) instead of != ALL()
-CREATE OR REPLACE FUNCTION delete_stale_events(p_city text, p_source_uids text[])
+CREATE OR REPLACE FUNCTION delete_stale_events(
+    p_city text, p_source_uids text []
+)
 RETURNS bigint
 LANGUAGE plpgsql
 SECURITY DEFINER
