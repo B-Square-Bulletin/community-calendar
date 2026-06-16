@@ -25,6 +25,7 @@ from scripts.ics_to_json import parse_ics_datetime as json_parse_dt, extract_fie
 
 # ---------------------------------------------------------------------------
 # Helpers: build minimal ICS content for testing
+# (also available in tests/helpers.py for reuse)
 # ---------------------------------------------------------------------------
 
 def make_ics(events_block, tz_header="X-WR-TIMEZONE:America/Los_Angeles", vtimezone=""):
@@ -271,7 +272,6 @@ class TestCombineIcsRruleExpansion:
                 f"Expected 190000 (7pm local), got {time_part}. "
                 "DST transition shifted the wall-clock time."
             )
-
 
 # ===========================================================================
 # Test 4: Full pipeline — ICS with mismatched TZID → JSON
