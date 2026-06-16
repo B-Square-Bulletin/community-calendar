@@ -39,25 +39,64 @@ class TestRecurrenceIdOverride:
 
     def test_edited_instance_replaces_original(self):
         """
-        A recurring 3rd-Tuesday event has its June 16 instance edited to June 23.
-        The expanded output should contain June 23, NOT June 16.
+        A recurring 3rd-Tuesday event has one instance edited to a later date.
+        The expanded output should contain the new date, NOT the original.
+        Uses relative dates so the test doesn't expire as time passes.
         """
-        # Master event: monthly on 3rd Tuesday starting May 19, 2026
-        # June 16 = 3rd Tuesday → edited to June 23
+        from datetime import date, timedelta
+
+        today = date.today()
+
+        def nth_weekday(year, month, n, weekday):
+            """Return the nth weekday (0=Mon, 1=Tue, ...) of a given month."""
+            first = date(year, month, 1)
+            days = (weekday - first.weekday()) % 7
+            return first + timedelta(days=days + 7 * (n - 1))
+
+        # Start series on 3rd Tuesday of previous month (always in the past)
+        prev_m = today.month - 1
+        prev_y = today.year
+        if prev_m == 0:
+            prev_m, prev_y = 12, today.year - 1
+        start_date = nth_weekday(prev_y, prev_m, 3, 1)
+
+        # Compute 3rd Tuesdays for this month + next 3 months
+        occurrences = []
+        for i in range(4):
+            m = today.month + i
+            y = today.year
+            if m > 12:
+                m -= 12
+                y += 1
+            occurrences.append(nth_weekday(y, m, 3, 1))
+
+        # Filter to dates in the expansion window (today to today+90 days)
+        in_window = [d for d in occurrences if d >= today]
+        assert len(in_window) >= 3, (
+            f"Need at least 3 occurrences in expansion window, got {len(in_window)}"
+        )
+
+        override_original = in_window[0]
+        override_new = override_original + timedelta(days=7)
+
+        start_str = start_date.strftime("%Y%m%d")
+        override_orig_str = override_original.strftime("%Y%m%d")
+        override_new_str = override_new.strftime("%Y%m%d")
+
         master_event = make_vevent(
             "BPTC Board Meeting",
-            "DTSTART;TZID=America/New_York:20260519T173000",
-            "DTEND;TZID=America/New_York:20260519T193000",
+            f"DTSTART;TZID=America/New_York:{start_str}T173000",
+            f"DTEND;TZID=America/New_York:{start_str}T193000",
             "test-recurrence-edit@google.com",
             rrule="FREQ=MONTHLY;BYDAY=3TU",
         )
-        # Override: RECURRENCE-ID points to June 16, DTSTART is June 23
+        # Override: RECURRENCE-ID points to original date, DTSTART is new date
         override_event = (
             "BEGIN:VEVENT\r\n"
-            "DTSTART;TZID=America/New_York:20260623T173000\r\n"
-            "DTEND;TZID=America/New_York:20260623T193000\r\n"
+            f"DTSTART;TZID=America/New_York:{override_new_str}T173000\r\n"
+            f"DTEND;TZID=America/New_York:{override_new_str}T193000\r\n"
             "UID:test-recurrence-edit@google.com\r\n"
-            "RECURRENCE-ID;TZID=America/New_York:20260616T173000\r\n"
+            f"RECURRENCE-ID;TZID=America/New_York:{override_orig_str}T173000\r\n"
             "SUMMARY:BPTC Board Meeting (Edited)\r\n"
             "SEQUENCE:2\r\n"
             "STATUS:CONFIRMED\r\n"
@@ -86,36 +125,40 @@ class TestRecurrenceIdOverride:
             if uid_m:
                 uids.append(uid_m.group(1))
 
-        # Original June 16 MUST NOT appear
-        assert "20260616" not in dtstarts, (
-            f"June 16 should be suppressed by RECURRENCE-ID override, "
+        # The overridden original date MUST NOT appear
+        assert override_orig_str not in dtstarts, (
+            f"{override_original} should be suppressed by RECURRENCE-ID override, "
             f"but found in expanded output: {dtstarts}"
         )
 
-        # Edited June 23 MUST appear
-        assert "20260623" in dtstarts, (
-            f"June 23 (the edited instance) should appear, but not found in: {dtstarts}"
+        # The new (edited) date MUST appear
+        assert override_new_str in dtstarts, (
+            f"{override_new} (the edited instance) should appear, "
+            f"but not found in: {dtstarts}"
         )
 
-        # Other recurring instances should still appear
-        assert "20260721" in dtstarts, "July 21 (3rd Tuesday) should still appear"
-        assert "20260818" in dtstarts, "August 18 (3rd Tuesday) should still appear"
+        # Later unmodified occurrences should still appear
+        for later_dt in in_window[1:3]:
+            later_str = later_dt.strftime("%Y%m%d")
+            assert later_str in dtstarts, (
+                f"{later_dt} (unmodified) should still appear"
+            )
 
         # UIDs should have date suffixes (from _serialize_vevent mutation)
         for uid in uids:
             assert "__" in uid, f"Expanded instance UID should have date suffix: {uid}"
 
-        # June 23 event should have the correct suffixed UID
-        june23_uids = [
+        # The override event should have the correct suffixed UID
+        override_uids = [
             u
             for b, u in zip(expanded, uids)
-            if "20260623" in (re.search(r"DTSTART[^:]*:(\d{8})", b) or [""])[0]
+            if override_new_str in (re.search(r"DTSTART[^:]*:(\d{8})", b) or [""])[0]
         ]
-        if june23_uids:
-            assert "__20260623" in june23_uids[0], (
-                f"June 23 UID should end with __20260623, got: {june23_uids[0]}"
+        if override_uids:
+            assert f"__{override_new_str}" in override_uids[0], (
+                f"Override UID should end with __{override_new_str}, "
+                f"got: {override_uids[0]}"
             )
-
     def test_no_override_preserves_all_instances(self):
         """
         A recurring event with NO RECURRENCE-ID override should expand

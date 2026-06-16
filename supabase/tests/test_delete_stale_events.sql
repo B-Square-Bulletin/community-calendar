@@ -89,19 +89,19 @@ SELECT is(
 );
 
 -- ============================================================================
--- Test 4: Large array performance — 1000 source_uids
+-- Test 4: Large array performance — 3500 source_uids
 -- ============================================================================
 -- Insert one event that should survive
 INSERT INTO events (city, title, start_time, source, source_uid)
 VALUES ('test_dse', 'Survivor', now(), 'Source X', 'uid-survivor');
 
--- Call with 1000-element array (the survivor should NOT be deleted)
+-- Call with 3500-element array (the survivor should NOT be deleted)
 SELECT is(
     delete_stale_events('test_dse', array(
-        SELECT 'uid-' || generate_series(1, 1000)::text
+        SELECT 'uid-' || generate_series(1, 3500)::text
     ) || ARRAY['uid-survivor']),
     bigint '0',
-    'Test 4: With 1000-element array, survivor is kept (no timeout)'
+    'Test 4: With 3500-element array, survivor is kept (no timeout)'
 );
 
 -- Verify survivor still exists

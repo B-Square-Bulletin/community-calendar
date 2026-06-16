@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS events (
 -- RPC for stale event cleanup (used by load-events edge function;
 -- replaces URL-based NOT IN filter that exceeded PostgREST URL length limits)
 --
--- Uses NOT EXISTS (unnest) instead of != ALL() because NOT IN with 3000+ items
+-- Uses NOT EXISTS (unnest) instead of != ALL() because != ALL() with 3000+ items
 -- hits Postgres statement timeout. The unnest pattern is index-friendly and
 -- works with the composite events_city_source_uid_idx index.
 CREATE OR REPLACE FUNCTION delete_stale_events(p_city text, p_source_uids text[])
