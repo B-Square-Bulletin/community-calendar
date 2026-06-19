@@ -130,7 +130,7 @@ These curate or aggregate events from multiple venues:
 
 | Source | Type | Events | Notes |
 |--------|------|--------|-------|
-|| WFHB Community Calendar | Scraper | ~263 | `wfhb_calendar.py` — Events Manager (EM); covers Orbit Room, library events, and many venues not otherwise scrapable |
+|| WFHB Community Calendar | Scraper | ~263 | `wfhb_calendar.py` — Events Manager (EM) aggregator; collects events from Orbit Room, library branches, Bishop Bar, and dozens of venues that have no scrapeable calendar of their own |
 | BloomingtonOnline: Events | Google Calendar | ~224 | Community events |
 | BloomingtonOnline: Food & Drink | Google Calendar | ~133 | Restaurant/brewery specials |
 | BloomingtonOnline: Shopping | Google Calendar | ~18 | Markets, deals |

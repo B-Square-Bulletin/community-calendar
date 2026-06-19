@@ -33,35 +33,54 @@ from bs4 import BeautifulSoup
 from .base import BaseScraper
 
 MONTH_NAMES = {
-    'january': 1, 'february': 2, 'march': 3, 'april': 4, 'may': 5, 'june': 6,
-    'july': 7, 'august': 8, 'september': 9, 'october': 10, 'november': 11, 'december': 12,
+    "january": 1,
+    "february": 2,
+    "march": 3,
+    "april": 4,
+    "may": 5,
+    "june": 6,
+    "july": 7,
+    "august": 8,
+    "september": 9,
+    "october": 10,
+    "november": 11,
+    "december": 12,
 }
 # Also accept abbreviated month names
 MONTH_ABBRS = {
-    'jan': 1, 'feb': 2, 'mar': 3, 'apr': 4, 'jun': 6, 'jul': 7,
-    'aug': 8, 'sep': 9, 'oct': 10, 'nov': 11, 'dec': 12,
+    "jan": 1,
+    "feb": 2,
+    "mar": 3,
+    "apr": 4,
+    "jun": 6,
+    "jul": 7,
+    "aug": 8,
+    "sep": 9,
+    "oct": 10,
+    "nov": 11,
+    "dec": 12,
 }
 
 BROWSER_HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-    'Accept-Language': 'en-US,en;q=0.9',
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
 }
 
 
 def _parse_month(text: str) -> Optional[int]:
     """Parse a month name (full or abbreviated) to month number."""
-    clean = text.strip().rstrip(',').lower()
+    clean = text.strip().rstrip(",").lower()
     return MONTH_NAMES.get(clean) or MONTH_ABBRS.get(clean)
 
 
 def _parse_hour_minute(time_str: str) -> Optional[tuple[int, int]]:
     """Parse a time string like '7:00 pm' or '10:00 am'."""
     time_str = time_str.strip().lower()
-    match = re.match(r'(\d{1,2}):(\d{2})\s*(am|pm)', time_str)
+    match = re.match(r"(\d{1,2}):(\d{2})\s*(am|pm)", time_str)
     if not match:
         # Try 12-hour without minutes, e.g. "9 pm"
-        match = re.match(r'(\d{1,2})\s*(am|pm)', time_str)
+        match = re.match(r"(\d{1,2})\s*(am|pm)", time_str)
         if not match:
             return None
         hour = int(match.group(1))
@@ -71,9 +90,9 @@ def _parse_hour_minute(time_str: str) -> Optional[tuple[int, int]]:
         minute = int(match.group(2))
 
     ampm = match.group(3)
-    if ampm == 'pm' and hour != 12:
+    if ampm == "pm" and hour != 12:
         hour += 12
-    elif ampm == 'am' and hour == 12:
+    elif ampm == "am" and hour == 12:
         hour = 0
 
     return (hour, minute)
@@ -95,9 +114,9 @@ class EmEventsScraper(BaseScraper):
         max_pages: int - Max pages to fetch (default 20, set higher as needed)
     """
 
-    ajax_url: str = ''
-    ajax_action: str = 'search_events'
-    default_location: str = ''
+    ajax_url: str = ""
+    ajax_action: str = "search_events"
+    default_location: str = ""
     batch_size: int = 50
     max_pages: int = 20
 
@@ -116,13 +135,15 @@ class EmEventsScraper(BaseScraper):
                     break
 
                 for event in page_events:
-                    if event['uid'] not in seen_ids:
-                        seen_ids.add(event['uid'])
+                    if event["uid"] not in seen_ids:
+                        seen_ids.add(event["uid"])
                         all_events.append(event)
 
                 # If we got fewer events than batch_size, we're on the last page
                 if len(page_events) < self.batch_size:
-                    self.logger.info(f"Page {pno} had {len(page_events)} events (< {self.batch_size}), done")
+                    self.logger.info(
+                        f"Page {pno} had {len(page_events)} events (< {self.batch_size}), done"
+                    )
                     break
 
             except Exception as e:
@@ -138,9 +159,9 @@ class EmEventsScraper(BaseScraper):
             self.ajax_url,
             headers=BROWSER_HEADERS,
             data={
-                'action': self.ajax_action,
-                'pno': str(pno),
-                'limit': str(self.batch_size),
+                "action": self.ajax_action,
+                "pno": str(pno),
+                "limit": str(self.batch_size),
             },
             timeout=30,
         )
@@ -148,11 +169,11 @@ class EmEventsScraper(BaseScraper):
 
         text = response.text
 
-        soup = BeautifulSoup(text, 'html.parser')
+        soup = BeautifulSoup(text, "html.parser")
         events = []
         tz = ZoneInfo(self.timezone)
 
-        for event_el in soup.select('.em-event'):
+        for event_el in soup.select(".em-event"):
             parsed = self._parse_event(event_el, tz)
             if parsed:
                 events.append(parsed)
@@ -162,15 +183,15 @@ class EmEventsScraper(BaseScraper):
     def _parse_event(self, event_el, tz: ZoneInfo) -> Optional[dict[str, Any]]:
         """Parse a single .em-event element into an event dict."""
         # Title and URL
-        title_el = event_el.select_one('.em-item-title a')
+        title_el = event_el.select_one(".em-item-title a")
         if not title_el:
             return None
 
         title = title_el.get_text(strip=True)
-        url = title_el.get('href', '') or event_el.get('data-href', '')
+        url = title_el.get("href", "") or event_el.get("data-href", "")
 
         # Date parsing: "June 18, 2026"
-        date_el = event_el.select_one('.em-event-date')
+        date_el = event_el.select_one(".em-event-date")
         if not date_el:
             return None
 
@@ -184,7 +205,7 @@ class EmEventsScraper(BaseScraper):
         year, month, day = event_date
 
         # Time parsing: "10:00 am - 10:00 pm"
-        time_el = event_el.select_one('.em-event-time')
+        time_el = event_el.select_one(".em-event-time")
         dtstart = None
         dtend = None
         if time_el:
@@ -204,30 +225,30 @@ class EmEventsScraper(BaseScraper):
             location = self.default_location
 
         # UID
-        event_id = event_el.get('data-event-id', '')
+        event_id = event_el.get("data-event-id", "")
         if not event_id:
             # Fall back to URL-based UID
-            uid_match = re.search(r'/(?:events/)?([^/]+)/?$', url)
+            uid_match = re.search(r"/(?:events/)?([^/]+)/?$", url)
             event_id = uid_match.group(1) if uid_match else str(id(event_el))
         uid = f"em-{event_id}@{self.domain}"
 
         # Description (from listing page — may be truncated or absent)
-        desc_el = event_el.select_one('.em-event-description, .em-item-content')
-        description = desc_el.get_text(strip=True) if desc_el else ''
+        desc_el = event_el.select_one(".em-event-description, .em-item-content")
+        description = desc_el.get_text(strip=True) if desc_el else ""
 
         return {
-            'title': title,
-            'dtstart': dtstart,
-            'dtend': dtend,
-            'url': url,
-            'location': location,
-            'description': description,
-            'uid': uid,
+            "title": title,
+            "dtstart": dtstart,
+            "dtend": dtend,
+            "url": url,
+            "location": location,
+            "description": description,
+            "uid": uid,
         }
 
     def _parse_date(self, date_text: str) -> Optional[tuple[int, int, int]]:
         """Parse a date string like 'June 18, 2026' or 'Jun 18, 2026'."""
-        match = re.match(r'(\w+)\s+(\d{1,2}),?\s*(\d{4})', date_text)
+        match = re.match(r"(\w+)\s+(\d{1,2}),?\s*(\d{4})", date_text)
         if not match:
             return None
 
@@ -242,15 +263,22 @@ class EmEventsScraper(BaseScraper):
         return (year, month, day)
 
     @staticmethod
-    def _parse_time_range(time_text: str, year: int, month: int, day: int, tz: ZoneInfo) -> tuple[Optional[datetime], Optional[datetime]]:
+    def _parse_time_range(
+        time_text: str, year: int, month: int, day: int, tz: ZoneInfo
+    ) -> tuple[Optional[datetime], Optional[datetime]]:
         """Parse time range like '10:00 am - 10:00 pm' or '7:00 pm - 10:00 pm'."""
+        is_all_day = "all day" in time_text.lower()
+
         # Split on dash or en-dash
-        parts = re.split(r'\s*[–\-]\s*', time_text, maxsplit=1)
+        parts = re.split(r"\s*[–\-]\s*", time_text, maxsplit=1)
         if len(parts) < 1 or not parts[0].strip():
             return None, None
 
         start_hm = _parse_hour_minute(parts[0].strip())
         if not start_hm:
+            if is_all_day:
+                dtstart = datetime(year, month, day, 0, 0, tzinfo=tz)
+                return dtstart, dtstart + timedelta(days=1)
             return None, None
 
         dtstart = datetime(year, month, day, start_hm[0], start_hm[1], tzinfo=tz)
@@ -262,9 +290,9 @@ class EmEventsScraper(BaseScraper):
                 dtend = datetime(year, month, day, end_hm[0], end_hm[1], tzinfo=tz)
                 if dtend < dtstart:
                     dtend += timedelta(days=1)
-            elif parts[1].strip().lower() == 'all day':
+            elif parts[1].strip().lower() == "all day":
                 dtend = dtstart + timedelta(days=1)
-        elif 'all day' in time_text.lower():
+        elif is_all_day:
             dtend = dtstart + timedelta(days=1)
 
         return dtstart, dtend
@@ -272,22 +300,22 @@ class EmEventsScraper(BaseScraper):
     @staticmethod
     def _parse_location(event_el) -> str:
         """Parse location from an .em-event element."""
-        loc_el = event_el.select_one('.em-event-location')
+        loc_el = event_el.select_one(".em-event-location")
         if not loc_el:
-            return ''
+            return ""
 
         parts = []
 
         # Venue name from the .em-event-location-info a
-        venue_link = loc_el.select_one('.em-event-location-info a')
+        venue_link = loc_el.select_one(".em-event-location-info a")
         if venue_link:
             parts.append(venue_link.get_text(strip=True))
 
         # Address
-        address_el = loc_el.select_one('.em-event-location-address')
+        address_el = loc_el.select_one(".em-event-location-address")
         if address_el:
             address_text = address_el.get_text(strip=True)
             if address_text:
                 parts.append(address_text)
 
-        return ', '.join(parts) if parts else loc_el.get_text(strip=True)
+        return ", ".join(parts) if parts else loc_el.get_text(strip=True)

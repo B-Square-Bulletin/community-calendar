@@ -3,7 +3,7 @@
 
 import sys
 
-sys.path.insert(0, str(__file__).rsplit('/', 2)[0])
+sys.path.insert(0, str(__file__).rsplit("/", 2)[0])
 from lib.em_events import EmEventsScraper
 
 
@@ -19,5 +19,5 @@ class WFHBCalendarScraper(EmEventsScraper):
     max_pages = 15
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     WFHBCalendarScraper.main()
