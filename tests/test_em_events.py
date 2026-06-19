@@ -16,7 +16,7 @@ from unittest.mock import patch
 
 from scrapers.lib.em_events import EmEventsScraper
 
-TZ = ZoneInfo("America/New_York")
+TZ = ZoneInfo("America/Indiana/Indianapolis")
 
 
 class TestParseDate:
@@ -157,10 +157,10 @@ class TestFetchPage:
         scraper.name = "Test WFHB"
         scraper.domain = "wfhb.org"
         scraper.ajax_url = "https://wfhb.org/wp-admin/admin-ajax.php"
-        scraper.timezone = "America/New_York"
+        scraper.timezone = "America/Indiana/Indianapolis"
         scraper.default_location = "Bloomington, IN"
 
-        with open(self.FIXTURE_PATH) as f:
+        with open(self.FIXTURE_PATH, encoding="utf-8") as f:
             fixture_html = f.read()
 
         with patch("scrapers.lib.em_events.requests.post") as mock_post:
