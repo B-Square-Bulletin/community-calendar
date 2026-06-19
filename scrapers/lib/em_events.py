@@ -1,4 +1,4 @@
-"""All-in-One Event Calendar (ai1ec) scraper library.
+"""Events Manager (EM) scraper library.
 
 WordPress sites using the Events Manager plugin render events in a listing
 with well-structured CSS classes (em-event, em-event-title, etc.). The plugin
@@ -214,10 +214,6 @@ class EmEventsScraper(BaseScraper):
 
         if not dtstart:
             dtstart = datetime(year, month, day, tzinfo=tz)
-
-        # Default end: 2 hours after start if we couldn't parse it
-        if not dtend:
-            dtend = dtstart + timedelta(hours=2)
 
         # Location parsing
         location = self._parse_location(event_el)

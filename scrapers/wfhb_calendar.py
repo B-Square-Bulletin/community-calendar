@@ -13,7 +13,7 @@ class WFHBCalendarScraper(EmEventsScraper):
     name = "WFHB Community Calendar"
     domain = "wfhb.org"
     ajax_url = "https://wfhb.org/wp-admin/admin-ajax.php"
-    timezone = "America/New_York"
+    timezone = "America/Indiana/Indianapolis"
     default_location = "Bloomington, IN"
     batch_size = 50
     max_pages = 15
