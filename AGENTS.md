@@ -622,6 +622,7 @@ python scripts/validate_pipeline.py --cities santarosa --strict
 | **Granicus video** | RSS feeds at `{instance}.granicus.com/ViewPublisherRSS.php?view_id={N}` are **backward-looking only** (archived meeting videos). Not useful for upcoming events. Don't confuse with Legistar (also Granicus-owned), which has a forward-looking WebAPI. |
 | **Bandsintown** | Website behind Cloudflare (403 on curl). REST API requires written approval from Bandsintown. Even with API access, no venue endpoint — only `/artists/{name}/events`. Not viable. |
 | **SeeTickets / Eventim US** | SeeTickets US rebranded as Eventim in March 2025 (same platform). No public API — affiliate account required. Cannot filter by single venue. US platform runs legacy ASP.NET (`wafform.aspx`), unlike Eventim Europe which has an unauthenticated search API at `public-api.eventim.com`. Venues like Mystic Theatre and HopMonk use this platform for ticketing. |
+| **Events Manager (EM)** | WordPress plugin. Use `lib/em_events.py` — AJAX endpoint at `/wp-admin/admin-ajax.php?action=search_events` returns up to 50 events per POST with `pno` and `limit` params. HTML rendered, parse with `.em-event`, `.em-item-title`, `.em-event-date`, `.em-event-time`, `.em-event-location` selectors. |
 | **BoardDocs** | Used by some cities for agenda publishing (e.g., `go.boarddocs.com/nc/raleigh/`). No public calendar API; LlamaIndex has a reader but it's for document extraction, not event feeds. |
 
 ## Agent skills

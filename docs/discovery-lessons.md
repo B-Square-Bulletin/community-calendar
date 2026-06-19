@@ -643,7 +643,7 @@ Don't just search for "events calendar" — search Yelp for **venues and busines
 
 Community radio stations often maintain volunteer-curated community calendars that aggregate events from dozens of venues. These are high-value sources because they cover small venues, one-off events, and community happenings that don't have their own websites or calendars.
 
-**Example:** WFHB (Bloomington Community Radio) uses the All-in-One Event Calendar WordPress plugin. Their `wfhb.org/calendar/` page had been marked as a dead end (mod_security blocked ICS export), but the HTML agenda view is accessible with a browser User-Agent. The ai1ec scraper (`lib/ai1ec.py`) extracts 349 events — covering Bishop Bar's Orbit Room (trivia, pinball league), library-hosted festivals, and dozens of venues that have no scrapeable calendar of their own.
+**Example:** WFHB (Bloomington Community Radio) migrated from ai1ec to the Events Manager (EM) WordPress plugin. Their site moved from `wfhb.org/calendar/` to `wfhb.org/events/`. The EM plugin exposes a usable AJAX endpoint at `wp-admin/admin-ajax.php?action=search_events` that returns HTML with 50 events per call — `lib/em_events.py` handles this. The scraper (`wfhb_calendar.py`) now extracts ~263 events, covering Bishop Bar's Orbit Room (trivia, pinball league), library-hosted festivals, and dozens of venues that have no scrapeable calendar of their own.
 
 **How to find:** Search `"{city name}" community radio calendar` or check local radio station websites for event listing pages.
 

@@ -130,7 +130,7 @@ These curate or aggregate events from multiple venues:
 
 | Source | Type | Events | Notes |
 |--------|------|--------|-------|
-| WFHB Community Calendar | Scraper | ~349 | `wfhb_calendar.py` — ai1ec; covers Orbit Room, library events, and many venues not otherwise scrapable |
+|| WFHB Community Calendar | Scraper | ~263 | `wfhb_calendar.py` — Events Manager (EM); covers Orbit Room, library events, and many venues not otherwise scrapable |
 | BloomingtonOnline: Events | Google Calendar | ~224 | Community events |
 | BloomingtonOnline: Food & Drink | Google Calendar | ~133 | Restaurant/brewery specials |
 | BloomingtonOnline: Shopping | Google Calendar | ~18 | Markets, deals |
@@ -270,7 +270,7 @@ These curate or aggregate events from multiple venues:
 - Lotus Festival (ICS)
 
 ### 2026-03-28: Current Session (59 sources)
-- **WFHB Community Calendar** (~349) — ai1ec scraper; aggregator covering many venues. New platform: `lib/ai1ec.py`
+- **WFHB Community Calendar** (~263) — EM scraper; aggregator covering many venues. Replaced ai1ec: `lib/em_events.py`
 - **Writers Guild at Bloomington** (~7) — Sugar Calendar scraper. New platform: `lib/sugar_calendar.py`
 - **Nerd Nite Bloomington** (~1) — Eventbrite organizer 95199764993
 - **IU Eskenazi School of Art** (~94) — LiveWhale `group_id/11`
