@@ -72,7 +72,7 @@ class BuskirkChumleyScraper(BaseScraper):
             # Diagnostic: log what we got instead of tiles
             data_id_divs = len(soup.select("div[data-id]"))
             self.logger.warning(
-                f"No event tiles found in response ({len(response.text)} bytes, "
+                f"No event tiles found in response ({len(response.content)} bytes, "
                 f"{data_id_divs} div[data-id] elements, "
                 f"first 200 chars: {response.text[:200]!r})"
             )
@@ -160,7 +160,7 @@ class BuskirkChumleyScraper(BaseScraper):
             if presenter and presenter != "BCT":
                 desc_parts.append(f"Presented by: {presenter}")
             if time_p:
-                desc_parts.append(time_p.get_text(strip=True).replace("<br/>", "\n"))
+                desc_parts.append(time_p.get_text(separator="\n", strip=True))
             desc_parts.append(f"\nMore info: {url}")
 
             return {
