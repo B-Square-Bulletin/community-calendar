@@ -7,8 +7,12 @@ Filters to only include events from today forward.
 import argparse
 import json
 import re
+import sys
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
+
+sys.path.insert(0, 'scrapers')
+from lib.feed_utils import build_stem_name_map
 
 import icalendar
 import recurring_ical_events
@@ -322,46 +326,11 @@ def location_matches_allowed_cities(location, allowed_cities, excluded_cities=No
     return False
 
 
-def parse_feeds_txt(feeds_file):
-    """Parse feeds.txt to build filename stem -> display name map."""
-    names = {}
-    if not Path(feeds_file).exists():
-        return names
-    lines = Path(feeds_file).read_text().splitlines()
-    pending_name = None
-    for line in lines:
-        stripped = line.strip()
-        if stripped.startswith('# cmd:'):
-            m = re.search(r'--name\s+"([^"]+)"', stripped)
-            if m:
-                pending_name = m.group(1)
-            continue
-        if (stripped.startswith('#')
-            and not stripped.startswith('# ---')
-            and not stripped.startswith('# cmd:')
-            and stripped not in ('# Scraper', '# Squarespace', '# Songkick',
-                                 '# Chamber of Commerce')):
-            name = stripped.lstrip('# ').split(' | ')[0].strip()
-            if name:
-                pending_name = name
-            continue
-        if stripped.startswith('cities/') and stripped.endswith('.ics'):
-            stem = Path(stripped).stem
-            if pending_name:
-                names[stem] = pending_name
-            pending_name = None
-    return names
-
-
-# Module-level cache for parsed feeds.txt names
-_feeds_txt_names = {}
-
-
 def load_feeds_txt_names(input_dir):
     """Load and cache feeds.txt names for the given input directory."""
     global _feeds_txt_names
     feeds_file = Path(input_dir) / 'feeds.txt'
-    _feeds_txt_names = parse_feeds_txt(feeds_file)
+    _feeds_txt_names = build_stem_name_map(str(feeds_file))
 
 
 def get_source_name(filename):

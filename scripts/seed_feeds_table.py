@@ -8,77 +8,10 @@ Parses each cities/*/feeds.txt and inserts rows into the feeds table.
 
 import os
 import sys
-import re
 import json
 import urllib.request
 import urllib.error
 from pathlib import Path
-
-
-def parse_feeds_txt(feeds_file):
-    """Parse feeds.txt into a list of feed dicts."""
-    feeds = []
-    lines = Path(feeds_file).read_text().splitlines()
-    pending_name = None
-    pending_cmd = None
-    city = Path(feeds_file).parent.name
-
-    for line in lines:
-        stripped = line.strip()
-
-        if stripped.startswith('# cmd:'):
-            pending_cmd = stripped[2:].strip()  # "cmd: python scrapers/foo.py ..."
-            # Extract --name if present
-            m = re.search(r'--name\s+"([^"]+)"', stripped)
-            if m and not pending_name:
-                pending_name = m.group(1)
-            continue
-
-        if (stripped.startswith('#')
-            and not stripped.startswith('# ---')
-            and not stripped.startswith('# cmd:')
-            and stripped not in ('# Scraper', '# Squarespace', '# Songkick',
-                                 '# Chamber of Commerce')):
-            name = stripped.lstrip('# ').split(' | ')[0].strip()
-            if name:
-                pending_name = name
-            continue
-
-        if stripped.startswith('cities/') and stripped.endswith('.ics'):
-            # Scraper or static feed
-            name = pending_name or Path(stripped).stem.replace('_', ' ').title()
-            feeds.append({
-                'city': city,
-                'url': stripped,
-                'name': name,
-                'feed_type': 'scraper',
-                'scraper_cmd': pending_cmd,
-            })
-            pending_name = None
-            pending_cmd = None
-            continue
-
-        if stripped.startswith('https://'):
-            name = pending_name or stripped
-            # Detect curator feeds
-            feed_type = 'curator' if 'my-picks' in stripped else 'ics_url'
-            feeds.append({
-                'city': city,
-                'url': stripped,
-                'name': name,
-                'feed_type': feed_type,
-                'scraper_cmd': None,
-            })
-            pending_name = None
-            pending_cmd = None
-            continue
-
-        # Blank line or other — reset
-        if not stripped:
-            pending_name = None
-            pending_cmd = None
-
-    return feeds
 
 
 def main():
@@ -89,11 +22,25 @@ def main():
         print("Set SUPABASE_URL and SUPABASE_SERVICE_KEY")
         sys.exit(1)
 
+    sys.path.insert(0, 'scrapers')
+    from lib.feed_utils import parse_feeds_txt
+
     all_feeds = []
     for feeds_file in sorted(Path('cities').glob('*/feeds.txt')):
-        feeds = parse_feeds_txt(feeds_file)
-        print(f"{feeds_file.parent.name}: {len(feeds)} feeds")
+        city = feeds_file.parent.name
+        feeds = parse_feeds_txt(str(feeds_file))
+        # Attach city to each feed
+        for f in feeds:
+            url = f.get('url') or f.get('path')
+            feed_type = f['type']
+            # Detect curator feeds
+            if feed_type == 'ics_url' and 'my-picks' in url:
+                feed_type = 'curator'
+            f['city'] = city
+            f['url'] = url
+            f['feed_type'] = feed_type
         all_feeds.extend(feeds)
+        print(f"{city}: {len(feeds)} feeds")
 
     print(f"\nTotal: {len(all_feeds)} feeds")
 
@@ -109,7 +56,20 @@ def main():
     inserted = 0
     for i in range(0, len(all_feeds), batch_size):
         batch = all_feeds[i:i+batch_size]
-        body = json.dumps(batch).encode()
+        # Build rows for Supabase
+        rows = []
+        for f in batch:
+            row = {
+                "city": f["city"],
+                "url": f["url"],
+                "name": f["name"],
+                "feed_type": f["feed_type"],
+            }
+            if f.get("scraper_cmd"):
+                row["scraper_cmd"] = f["scraper_cmd"]
+            rows.append(row)
+
+        body = json.dumps(rows).encode()
         req = urllib.request.Request(
             f"{supabase_url}/rest/v1/feeds",
             data=body,
@@ -118,7 +78,7 @@ def main():
         )
         try:
             urllib.request.urlopen(req)
-            inserted += len(batch)
+            inserted += len(rows)
             print(f"  Inserted {inserted}/{len(all_feeds)}")
         except urllib.error.URLError as e:
             error_body = e.read().decode() if hasattr(e, 'read') else str(e)
