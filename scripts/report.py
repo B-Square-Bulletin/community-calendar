@@ -9,6 +9,8 @@ Updates report.json with:
 - Per-city, per-feed event counts
 - Historical data (unlimited)
 - Anomaly detection
+
+Also POSTs health data to Supabase (dual-write transition).
 """
 
 import argparse
@@ -16,10 +18,17 @@ import glob
 import json
 import os
 import re
+import sys
+import time
+import urllib.request
+import urllib.error
 from datetime import datetime, date, timezone, timedelta
 from typing import Optional
 from pathlib import Path
 from zoneinfo import ZoneInfo
+
+sys.path.insert(0, 'scrapers')
+from lib.feed_utils import parse_feeds_txt
 
 DEFAULT_TIMEZONE = 'America/Los_Angeles'
 
@@ -455,6 +464,9 @@ def update_report(cities: list[str], report_path: str = 'report.json'):
 
     save_report(report, report_path)
 
+    # Dual-write: POST health data to Supabase
+    _maybe_post_health(report, cities)
+
     # Print summary
     print(f"Report updated: {report_path}")
     print(f"Cities: {len(report['cities'])}")
@@ -464,6 +476,117 @@ def update_report(cities: list[str], report_path: str = 'report.json'):
         print(f"New anomalies: {len(all_anomalies)}")
         for a in all_anomalies:
             print(f"  [{a['severity']}] {a['city']}/{a['feed']}: {a['message']}")
+
+
+def _maybe_post_health(report: dict, cities: list[str]):
+    """POST health data to Supabase edge function (dual-write transition).
+
+    Skips silently if SUPABASE_URL / SUPABASE_SERVICE_KEY not set.
+    """
+    supabase_url = os.environ.get("SUPABASE_URL")
+    service_key = os.environ.get("SUPABASE_SERVICE_KEY")
+    if not supabase_url or not service_key:
+        print("Skipping Supabase health post (credentials not configured)")
+        return
+
+    edge_url = f"{supabase_url}/functions/v1/report-health"
+    headers = {
+        "apikey": service_key,
+        "Authorization": f"Bearer {service_key}",
+        "Content-Type": "application/json",
+    }
+
+    for city in cities:
+        payload = _build_health_payload(report, city)
+        if not payload:
+            continue
+
+        body = json.dumps(payload).encode()
+        for attempt in range(3):
+            try:
+                req = urllib.request.Request(edge_url, data=body, headers=headers)
+                with urllib.request.urlopen(req) as resp:
+                    result = json.loads(resp.read().decode())
+                print(f"  ✅ Supabase health post: {city} — "
+                      f"inserted={result.get('inserted', '?')}, "
+                      f"skipped={result.get('skipped', '?')}")
+                break
+            except urllib.error.HTTPError as e:
+                print(f"  ⚠️  Health post HTTP {e.code} for {city} "
+                      f"(attempt {attempt + 1}/3): {e.read().decode()[:200]}")
+            except Exception as e:
+                print(f"  ⚠️  Health post failed for {city} "
+                      f"(attempt {attempt + 1}/3): {e}")
+            if attempt < 2:
+                time.sleep(2 ** attempt)
+
+
+def _build_health_payload(report: dict, city: str) -> dict | None:
+    """Build the {city, feeds, anomalies} payload for the edge function."""
+    if city not in report['cities']:
+        return None
+
+    city_data = report['cities'][city]
+    feeds_meta = _load_feeds_meta(city)
+
+    # Compute checked_date from city timezone
+    tz_name = get_city_timezone(city)
+    try:
+        tz = ZoneInfo(tz_name)
+        checked_date = datetime.now(tz).strftime('%Y-%m-%d')
+    except Exception:
+        checked_date = date.today().isoformat()
+
+    feeds_payload = []
+    for feed_name, feed_data in city_data.get('feeds', {}).items():
+        meta = feeds_meta.get(feed_name, {})
+
+        # Determine latest entry
+        history = feed_data.get('history', [])
+        latest = history[-1] if history else {}
+
+        feeds_payload.append({
+            'feed_name': feed_name,
+            'source_name': meta.get('name'),
+            'source_url': meta.get('source_url'),
+            'feed_type': meta.get('type', 'scraper'),
+            'scraper_cmd': meta.get('scraper_cmd'),
+            'event_count': latest.get('count', 0),
+            'error': latest.get('error'),
+            'checked_date': checked_date,
+        })
+
+    # Anomalies for this city from today
+    today_anomalies = [
+        a for a in report.get('anomalies', [])
+        if a.get('city') == city
+    ]
+    anomalies_payload = []
+    for a in today_anomalies:
+        anomalies_payload.append({
+            'feed_name': a.get('feed', a.get('feed_name', '')),
+            'type': a.get('type', ''),
+            'severity': a.get('severity', 'medium'),
+            'message': a.get('message', ''),
+            'previous_count': a.get('previous_count'),
+            'current_count': a.get('current_count'),
+        })
+
+    return {
+        'city': city,
+        'feeds': feeds_payload,
+        'anomalies': anomalies_payload,
+    }
+
+
+def _load_feeds_meta(city: str) -> dict[str, dict]:
+    """Parse feeds.txt for a city, returning {basename → metadata} map."""
+    feeds_file = Path('cities') / city / 'feeds.txt'
+    if not feeds_file.exists():
+        return {}
+
+    feeds = parse_feeds_txt(str(feeds_file))
+    return {f['basename']: f for f in feeds}
 
 
 def parse_build_errors(log_path: str) -> list[dict]:
