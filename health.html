@@ -200,7 +200,7 @@
               <div class="source-name" x-text="item.source_name || item.feed_name"></div>
               <div class="source-meta" x-text="item.feed_name" x-show="item.source_name"></div>
             </div>
-            <span class="badge high">Error</span>
+            <span class="badge high" x-text="item.category === 'runtime_error' ? 'Runtime Error' : 'High Anomaly'"></span>
           </div>
           <div class="anomaly-msg" x-text="item.anomaly_message"></div>
           <div class="source-meta" x-show="item.error">
@@ -300,11 +300,16 @@
         },
 
         async loadConfig() {
-          // Try config.local.js first (local dev)
+          // Try config.local.js first (local dev only)
+          // Use a <script> element instead of eval() for CSP compatibility
           if (/^(localhost|127\.|0\.0\.0\.0|file:)/.test(location.hostname)) {
             try {
               const r = await fetch('xmlui/config.local.js?' + Date.now());
-              if (r.ok) eval(await r.text());
+              if (r.ok) {
+                const script = document.createElement('script');
+                script.textContent = await r.text();
+                document.head.appendChild(script);
+              }
             } catch (e) {}
           }
           this.ghRepo = window.GH_REPO || localStorage.getItem('gh_repo') || '';
@@ -435,9 +440,9 @@
             };
 
             if (row.error) {
-              errors.push(item);
+              errors.push({...item, category: 'runtime_error'});
             } else if (anomaly && anomaly.severity === 'high') {
-              errors.push(item);
+              errors.push({...item, category: 'high_anomaly'});
             } else if (anomaly && anomaly.severity === 'medium') {
               warnings.push(item);
             } else {

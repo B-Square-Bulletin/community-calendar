@@ -19,7 +19,8 @@ from zoneinfo import ZoneInfo
 sys.path.insert(0, str(Path(__file__).parent.parent))
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
-from scripts.combine_ics import expand_rrules, parse_ics_datetime as combine_parse_dt
+from scripts.combine_ics import expand_rrules, parse_ics_datetime as combine_parse_dt, get_source_name
+import scripts.combine_ics as combine_ics_module
 from scripts.ics_to_json import parse_ics_datetime as json_parse_dt, extract_field
 from tests.helpers import make_ics, make_vevent, VTIMEZONE_LA, VTIMEZONE_NY
 
@@ -888,3 +889,30 @@ class TestMyPicksOutput:
 
         # A calendar app receiving this Z-suffixed time will display it
         # in the user's local timezone — correct behavior.
+
+class TestFeedsTxtNameGuard:
+    """Tests for the _feeds_txt_names module-level guard variable."""
+
+    def test_get_source_name_safe_before_load(self):
+        """Calling get_source_name() before load_feeds_txt_names() does not
+        throw NameError — the module-level default empty dict prevents it.
+        Falls through to titlecase fallback."""
+        # Reset the module-level cache to simulate cold start
+        combine_ics_module._feeds_txt_names = {}
+
+        result = get_source_name('my_feed.ics')
+        assert result == 'My Feed'  # titlecase fallback
+
+    def test_get_source_name_after_load(self, tmp_path):
+        """After load_feeds_txt_names(), uses the cached name map."""
+        (tmp_path / 'feeds.txt').write_text(
+            '# cmd: python scrapers/my_feed.py --name "Custom Name"\n'
+            'cities/testcity/my_feed.ics\n'
+        )
+        combine_ics_module.load_feeds_txt_names(str(tmp_path))
+
+        result = get_source_name('my_feed.ics')
+        assert result == 'Custom Name'
+
+        # Reset to avoid polluting other tests
+        combine_ics_module._feeds_txt_names = {}

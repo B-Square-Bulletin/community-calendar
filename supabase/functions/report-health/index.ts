@@ -176,6 +176,8 @@ Deno.serve(async (req) => {
       city,
       inserted,
       skipped,
+      pruned: prunedHealth + prunedAnomalies,
+      // Internal detail — caller may ignore
       errors,
       anomalies_inserted: anomaliesInserted,
       pruned_health: prunedHealth,

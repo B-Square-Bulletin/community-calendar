@@ -17,6 +17,10 @@ from lib.feed_utils import build_stem_name_map
 import icalendar
 import recurring_ical_events
 
+# Module-level cache for feeds.txt display names. Default empty dict
+# prevents NameError if get_source_name() is called before load_feeds_txt_names().
+_feeds_txt_names = {}
+
 
 # Fallback URLs for sources whose ICS events lack a URL property.
 # Only needed for scraped sources where per-event URLs aren't available.

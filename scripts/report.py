@@ -33,14 +33,20 @@ from lib.feed_utils import parse_feeds_txt
 DEFAULT_TIMEZONE = 'America/Los_Angeles'
 
 
-def get_city_timezone(city):
-    """Load timezone string from cities/{city}/city.conf, fall back to default."""
-    conf = Path(__file__).parent.parent / 'cities' / city / 'city.conf'
+def get_city_timezone(city, _project_root=None):
+    """Load timezone string from cities/{city}/city.conf.
+
+    Returns the timezone string, or None if city.conf is missing.
+    _project_root is for testing; production callers omit it.
+    """
+    if _project_root is None:
+        _project_root = Path(__file__).parent.parent
+    conf = _project_root / 'cities' / city / 'city.conf'
     if conf.exists():
         for line in conf.read_text().splitlines():
             if line.startswith('# timezone:'):
                 return line.split(':', 1)[1].strip()
-    return DEFAULT_TIMEZONE
+    return None
 
 
 # Anomaly thresholds
@@ -357,6 +363,8 @@ def update_report(cities: list[str], report_path: str = 'report.json'):
             continue
 
         tz_name = get_city_timezone(city)
+        if tz_name is None:
+            continue
         tz = ZoneInfo(tz_name)
         ref = datetime(2026, 3, 15, 12, 0, 0, tzinfo=tz)
         offset_hours = int(ref.utcoffset().total_seconds() / 3600)
@@ -514,15 +522,19 @@ def _maybe_post_health(report: dict, cities: list[str]):
             except urllib.error.HTTPError as e:
                 print(f"  ⚠️  Health post HTTP {e.code} for {city} "
                       f"(attempt {attempt + 1}/3): {e.read().decode()[:200]}")
-            except Exception as e:
+            except (urllib.error.URLError, OSError, TimeoutError) as e:
                 print(f"  ⚠️  Health post failed for {city} "
                       f"(attempt {attempt + 1}/3): {e}")
             if attempt < 2:
                 time.sleep(2 ** attempt)
 
 
-def _build_health_payload(report: dict, city: str) -> dict | None:
-    """Build the {city, feeds, anomalies} payload for the edge function."""
+def _build_health_payload(report: dict, city: str,
+                         _project_root=None) -> dict | None:
+    """Build the {city, feeds, anomalies} payload for the edge function.
+
+    _project_root is for testing; production callers omit it.
+    """
     if city not in report['cities']:
         return None
 
@@ -530,11 +542,15 @@ def _build_health_payload(report: dict, city: str) -> dict | None:
     feeds_meta = _load_feeds_meta(city)
 
     # Compute checked_date from city timezone
-    tz_name = get_city_timezone(city)
+    tz_name = get_city_timezone(city, _project_root=_project_root)
+    if tz_name is None:
+        print(f"  ⚠️  No city.conf for {city} — falling back to {DEFAULT_TIMEZONE}")
+        tz_name = DEFAULT_TIMEZONE
     try:
         tz = ZoneInfo(tz_name)
         checked_date = datetime.now(tz).strftime('%Y-%m-%d')
-    except Exception:
+    except (KeyError, Exception):
+        # ZoneInfoNotFoundError is a KeyError in Python 3.9+
         checked_date = date.today().isoformat()
 
     feeds_payload = []
@@ -580,7 +596,12 @@ def _build_health_payload(report: dict, city: str) -> dict | None:
 
 
 def _load_feeds_meta(city: str) -> dict[str, dict]:
-    """Parse feeds.txt for a city, returning {basename → metadata} map."""
+    """Parse feeds.txt for a city, returning {basename → metadata} map.
+
+    TODO(Phase 6): Replace with a direct Supabase feeds table query.
+    The feeds table is the source of truth; feeds.txt is a generated
+    compatibility artifact.  See AGENTS.md and CONTEXT.md.
+    """
     feeds_file = Path('cities') / city / 'feeds.txt'
     if not feeds_file.exists():
         return {}

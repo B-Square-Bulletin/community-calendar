@@ -14,7 +14,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
-from scripts.report import update_report, load_report
+from scripts.report import update_report, load_report, get_city_timezone, _build_health_payload
 
 
 class TestStaleCityCleanup:
@@ -141,3 +141,105 @@ class TestStaleCityCleanup:
         result = json.loads(report_path.read_text())
         assert "newcity" in result["cities"]
         assert "santarosa" not in result["cities"]
+
+
+class TestGetCityTimezone:
+    """Tests for get_city_timezone() city.conf resolution."""
+
+    def test_returns_none_when_city_conf_missing(self, tmp_path):
+        """Returns None when cities/{city}/city.conf does not exist."""
+        result = get_city_timezone('nonexistent', _project_root=tmp_path)
+        assert result is None
+
+    def test_returns_timezone_from_conf(self, tmp_path):
+        """Parses # timezone: line from city.conf."""
+        conf_dir = tmp_path / 'cities' / 'testcity'
+        conf_dir.mkdir(parents=True)
+        (conf_dir / 'city.conf').write_text('# timezone: America/Indianapolis\n')
+
+        result = get_city_timezone('testcity', _project_root=tmp_path)
+        assert result == 'America/Indianapolis'
+
+    def test_ignores_lines_without_timezone_prefix(self, tmp_path):
+        """Only # timezone: lines are parsed; other comments ignored."""
+        conf_dir = tmp_path / 'cities' / 'testcity'
+        conf_dir.mkdir(parents=True)
+        (conf_dir / 'city.conf').write_text(
+            '# geo_radius: 20\n# timezone: America/Chicago\n# notes: test\n'
+        )
+
+        result = get_city_timezone('testcity', _project_root=tmp_path)
+        assert result == 'America/Chicago'
+
+    def test_returns_correct_timezone_for_real_city(self):
+        """Bloomington's real city.conf returns its configured timezone."""
+        result = get_city_timezone('bloomington')
+        assert result == 'America/Indiana/Indianapolis'
+
+
+class TestBuildHealthPayload:
+    """Tests for _build_health_payload() timezone fallback behavior."""
+
+    def test_warns_and_falls_back_when_city_conf_missing(self, tmp_path):
+        """When city.conf is missing, warns and uses DEFAULT_TIMEZONE."""
+        report = {
+            'cities': {
+                'noconf': {
+                    'feeds': {
+                        'test_feed': {
+                            'history': [{'count': 5}],
+                        },
+                    },
+                },
+            },
+            'anomalies': [],
+        }
+
+        payload = _build_health_payload(report, 'noconf',
+                                        _project_root=tmp_path)
+        assert payload is not None
+        assert payload['city'] == 'noconf'
+        assert len(payload['feeds']) == 1
+        assert payload['feeds'][0]['feed_type'] == 'scraper'  # default
+        assert payload['feeds'][0]['checked_date'] is not None
+
+    def test_returns_none_for_unknown_city(self):
+        """Returns None when city not in report."""
+        report = {'cities': {}, 'anomalies': []}
+        result = _build_health_payload(report, 'ghost')
+        assert result is None
+
+    def test_feed_type_from_meta(self, tmp_path):
+        """feed_type comes from feeds_meta, defaulting to 'scraper'."""
+        # Set up feeds.txt so _load_feeds_meta can resolve
+        feeds_dir = tmp_path / 'cities' / 'withfeeds'
+        feeds_dir.mkdir(parents=True)
+        (feeds_dir / 'feeds.txt').write_text(
+            '# My ICS Feed\nhttps://example.com/events/?ical=1\n'
+        )
+
+        report = {
+            'cities': {
+                'withfeeds': {
+                    'feeds': {
+                        'example': {
+                            'history': [{'count': 3}],
+                        },
+                    },
+                },
+            },
+            'anomalies': [],
+        }
+
+        # _load_feeds_meta resolves relative to cwd, so chdir to tmp_path
+        import os
+        old_cwd = os.getcwd()
+        try:
+            os.chdir(tmp_path)
+            payload = _build_health_payload(report, 'withfeeds',
+                                            _project_root=tmp_path)
+            assert payload is not None
+            # The ICS feed should have feed_type='ics_url' from feeds.txt
+            assert payload['feeds'][0]['feed_type'] == 'ics_url'
+        finally:
+            os.chdir(old_cwd)

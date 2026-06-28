@@ -14,6 +14,25 @@ import urllib.error
 from pathlib import Path
 
 
+def _normalize_feed(feed: dict, city: str) -> dict:
+    """Normalize a parsed feed dict with city context.
+
+    Handles:
+    - Synthesizing 'url' from 'path' for scrapers
+    - Mapping 'type' to 'feed_type'
+    - Detecting curator feeds (my-picks URLs)
+    """
+    url = feed.get('url') or feed.get('path') or ''
+    feed_type = feed['type']
+    # Detect curator feeds
+    if feed_type == 'ics_url' and 'my-picks' in url:
+        feed_type = 'curator'
+    feed['city'] = city
+    feed['url'] = url
+    feed['feed_type'] = feed_type
+    return feed
+
+
 def main():
     supabase_url = os.environ.get("SUPABASE_URL")
     service_key = os.environ.get("SUPABASE_SERVICE_KEY")
@@ -29,16 +48,8 @@ def main():
     for feeds_file in sorted(Path('cities').glob('*/feeds.txt')):
         city = feeds_file.parent.name
         feeds = parse_feeds_txt(str(feeds_file))
-        # Attach city to each feed
         for f in feeds:
-            url = f.get('url') or f.get('path')
-            feed_type = f['type']
-            # Detect curator feeds
-            if feed_type == 'ics_url' and 'my-picks' in url:
-                feed_type = 'curator'
-            f['city'] = city
-            f['url'] = url
-            f['feed_type'] = feed_type
+            _normalize_feed(f, city)
         all_feeds.extend(feeds)
         print(f"{city}: {len(feeds)} feeds")
 
