@@ -132,6 +132,18 @@ def update_report(cities: list[str], report_path: str = 'report.json'):
     today = date.today().isoformat()
     now = datetime.now().isoformat()
 
+    # Filter out stale cities no longer being processed (e.g. fork only
+    # builds Bloomington but report.json still has upstream's 9 cities).
+    cities_set = set(cities)
+    report['cities'] = {
+        city: data for city, data in report['cities'].items()
+        if city in cities_set
+    }
+    report['anomalies'] = [
+        a for a in report['anomalies']
+        if a.get('city') in cities_set
+    ]
+
     all_anomalies = []
 
     for city in cities:
