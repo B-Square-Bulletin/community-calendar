@@ -18,41 +18,43 @@ import urllib.error
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-sys.path.insert(0, 'scrapers')
+sys.path.insert(0, "scrapers")
 from lib.feed_utils import slugify, parse_feeds_txt
 
 
-def inject_source_headers(filepath: str, friendly_name: str, fallback_url: str | None) -> None:
+def inject_source_headers(
+    filepath: str, friendly_name: str, fallback_url: str | None
+) -> None:
     """Inject X-SOURCE (and optionally X-SOURCE-URL) into each VEVENT in an ICS file."""
     try:
-        with open(filepath, 'rb') as f:
+        with open(filepath, "rb") as f:
             raw = f.read()
     except Exception:
         return
 
-    if b'BEGIN:VCALENDAR' not in raw:
+    if b"BEGIN:VCALENDAR" not in raw:
         return  # Not valid ICS
 
     # Detect line ending style from raw bytes
-    crlf = b'\r\n' if b'\r\n' in raw else b'\n'
+    crlf = b"\r\n" if b"\r\n" in raw else b"\n"
 
-    name_bytes = friendly_name.encode('utf-8')
-    headers = b'X-SOURCE:' + name_bytes + crlf
+    name_bytes = friendly_name.encode("utf-8")
+    headers = b"X-SOURCE:" + name_bytes + crlf
     if fallback_url:
-        headers += b'X-SOURCE-URL:' + fallback_url.encode('utf-8') + crlf
+        headers += b"X-SOURCE-URL:" + fallback_url.encode("utf-8") + crlf
 
-    marker = b'BEGIN:VEVENT' + crlf
+    marker = b"BEGIN:VEVENT" + crlf
     parts = raw.split(marker)
 
     result = [parts[0]]
     for part in parts[1:]:
-        vevent_head = part.split(b'END:VEVENT')[0]
-        if b'X-SOURCE:' not in vevent_head:
+        vevent_head = part.split(b"END:VEVENT")[0]
+        if b"X-SOURCE:" not in vevent_head:
             result.append(headers + part)
         else:
             result.append(part)
 
-    with open(filepath, 'wb') as f:
+    with open(filepath, "wb") as f:
         f.write(marker.join(result))
 
 
@@ -102,7 +104,9 @@ def mark_feeds_active(feeds_to_activate):
     for feed in feeds_to_activate:
         patch_url = f"{supabase_url}/rest/v1/feeds?id=eq.{feed['id']}"
         data = json.dumps({"status": "active"}).encode()
-        req = urllib.request.Request(patch_url, data=data, headers=headers, method="PATCH")
+        req = urllib.request.Request(
+            patch_url, data=data, headers=headers, method="PATCH"
+        )
         try:
             urllib.request.urlopen(req)
             print(f"  ✅ Marked active: {feed['name']}")
@@ -116,7 +120,7 @@ def mark_feeds_active(feeds_to_activate):
 # Other MEC feeds (e.g. York University v7.17.1) use proper UTC "Z" format and
 # are NOT affected — but watch for this bug if we add more MEC feeds with TZID.
 _MEC_TZ_FIX_URLS = {
-    'browncounty.com',
+    "browncounty.com",
 }
 
 
@@ -126,29 +130,25 @@ def _needs_mec_tz_fix(url: str) -> bool:
 
 def fix_mec_timezone(filepath: str) -> None:
     """Rewrite DTSTART/DTEND in an ICS file to undo MEC's double timezone conversion."""
-    with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
+    with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
         content = f.read()
 
     def fix_dt_line(match):
-        field = match.group(1)   # DTSTART or DTEND
-        tzid = match.group(2)    # e.g. America/Indiana/Indianapolis
+        field = match.group(1)  # DTSTART or DTEND
+        tzid = match.group(2)  # e.g. America/Indiana/Indianapolis
         timestr = match.group(3)  # e.g. 20260404T080000
         try:
             tz = ZoneInfo(tzid)
-            dt = datetime.strptime(timestr, '%Y%m%dT%H%M%S').replace(tzinfo=tz)
+            dt = datetime.strptime(timestr, "%Y%m%dT%H%M%S").replace(tzinfo=tz)
             # The UTC value is what the local time should actually be
-            corrected = dt.astimezone(ZoneInfo('UTC')).strftime('%Y%m%dT%H%M%S')
-            return f'{field};TZID={tzid}:{corrected}'
+            corrected = dt.astimezone(ZoneInfo("UTC")).strftime("%Y%m%dT%H%M%S")
+            return f"{field};TZID={tzid}:{corrected}"
         except Exception:
             return match.group(0)
 
-    fixed = re.sub(
-        r'(DTSTART|DTEND);TZID=([^:]+):(\d{8}T\d{6})',
-        fix_dt_line,
-        content
-    )
+    fixed = re.sub(r"(DTSTART|DTEND);TZID=([^:]+):(\d{8}T\d{6})", fix_dt_line, content)
 
-    with open(filepath, 'w', encoding='utf-8') as f:
+    with open(filepath, "w", encoding="utf-8") as f:
         f.write(fixed)
 
 
@@ -169,8 +169,8 @@ def download_feeds(city: str) -> None:
             return
         all_feeds = parse_feeds_txt(feeds_file)
         # Only include ICS feeds (skip scrapers)
-        ics_feeds = [f for f in all_feeds if f['type'] == 'ics_url']
-        feed_list = [(f['url'], f['name'], f.get('fallback_url')) for f in ics_feeds]
+        ics_feeds = [f for f in all_feeds if f["type"] == "ics_url"]
+        feed_list = [(f["url"], f["name"], f.get("fallback_url")) for f in ics_feeds]
         pending_feeds = []
         print(f"  Using feeds.txt ({len(feed_list)} ICS feeds)")
 
@@ -179,9 +179,15 @@ def download_feeds(city: str) -> None:
         filename = slugify(url) + ".ics"
         outfile = os.path.join(output_dir, filename)
 
-        cmd = ["curl", "-sL",
-               "-A", "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
-               url, "-o", outfile]
+        cmd = [
+            "curl",
+            "-sL",
+            "-A",
+            "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
+            url,
+            "-o",
+            outfile,
+        ]
 
         subprocess.run(cmd)
 
@@ -202,8 +208,10 @@ def download_feeds(city: str) -> None:
                 fix_mec_timezone(outfile)
                 print(f"  🔧 Applied MEC timezone fix to {filename}")
 
-            print(f"  ✅ {filename}: {events} events"
-                  f"{' (source: ' + friendly_name + ')' if friendly_name else ''}")
+            print(
+                f"  ✅ {filename}: {events} events"
+                f"{' (source: ' + friendly_name + ')' if friendly_name else ''}"
+            )
         else:
             print(f"  ❌ {filename}: empty or failed")
 

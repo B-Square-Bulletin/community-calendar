@@ -22,14 +22,14 @@ def _normalize_feed(feed: dict, city: str) -> dict:
     - Mapping 'type' to 'feed_type'
     - Detecting curator feeds (my-picks URLs)
     """
-    url = feed.get('url') or feed.get('path') or ''
-    feed_type = feed['type']
+    url = feed.get("url") or feed.get("path") or ""
+    feed_type = feed["type"]
     # Detect curator feeds
-    if feed_type == 'ics_url' and 'my-picks' in url:
-        feed_type = 'curator'
-    feed['city'] = city
-    feed['url'] = url
-    feed['feed_type'] = feed_type
+    if feed_type == "ics_url" and "my-picks" in url:
+        feed_type = "curator"
+    feed["city"] = city
+    feed["url"] = url
+    feed["feed_type"] = feed_type
     return feed
 
 
@@ -41,11 +41,11 @@ def main():
         print("Set SUPABASE_URL and SUPABASE_SERVICE_KEY")
         sys.exit(1)
 
-    sys.path.insert(0, 'scrapers')
+    sys.path.insert(0, "scrapers")
     from lib.feed_utils import parse_feeds_txt
 
     all_feeds = []
-    for feeds_file in sorted(Path('cities').glob('*/feeds.txt')):
+    for feeds_file in sorted(Path("cities").glob("*/feeds.txt")):
         city = feeds_file.parent.name
         feeds = parse_feeds_txt(str(feeds_file))
         for f in feeds:
@@ -66,7 +66,7 @@ def main():
     batch_size = 50
     inserted = 0
     for i in range(0, len(all_feeds), batch_size):
-        batch = all_feeds[i:i+batch_size]
+        batch = all_feeds[i : i + batch_size]
         # Build rows for Supabase
         rows = []
         for f in batch:
@@ -92,12 +92,12 @@ def main():
             inserted += len(rows)
             print(f"  Inserted {inserted}/{len(all_feeds)}")
         except urllib.error.URLError as e:
-            error_body = e.read().decode() if hasattr(e, 'read') else str(e)
+            error_body = e.read().decode() if hasattr(e, "read") else str(e)
             print(f"  Error at batch {i}: {error_body}")
             sys.exit(1)
 
     print(f"\nDone: {inserted} feeds inserted")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

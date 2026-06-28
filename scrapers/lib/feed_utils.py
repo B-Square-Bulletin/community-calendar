@@ -26,67 +26,71 @@ def slugify(url: str) -> str:
     parsed = urlparse(url)
 
     # Meetup: extract group slug
-    if 'meetup.com' in parsed.netloc:
-        match = re.search(r'meetup\.com/([^/]+)', url)
+    if "meetup.com" in parsed.netloc:
+        match = re.search(r"meetup\.com/([^/]+)", url)
         if match:
             group = match.group(1)
-            group = re.sub(r'[^a-zA-Z0-9]+', '_', group).lower().strip('_')
+            group = re.sub(r"[^a-zA-Z0-9]+", "_", group).lower().strip("_")
             return f"meetup_{group}"
 
     # Tockify: extract calendar name
-    if 'tockify.com' in parsed.netloc:
-        match = re.search(r'/ics/([^/]+)', url)
+    if "tockify.com" in parsed.netloc:
+        match = re.search(r"/ics/([^/]+)", url)
         if match:
             return f"tockify_{match.group(1)}"
 
     # CivicPlus (city/county sites): include catID to avoid collisions
-    if '/iCalendar/iCalendar.aspx' in parsed.path:
-        domain = parsed.netloc.replace('www.', '').split('.')[0]
-        cat_match = re.search(r'catID=(\d+)', parsed.query)
-        cat_id = f"_{cat_match.group(1)}" if cat_match else ''
+    if "/iCalendar/iCalendar.aspx" in parsed.path:
+        domain = parsed.netloc.replace("www.", "").split(".")[0]
+        cat_match = re.search(r"catID=(\d+)", parsed.query)
+        cat_id = f"_{cat_match.group(1)}" if cat_match else ""
         return f"civicplus_{domain}{cat_id}"
 
     # Google Calendar: extract calendar ID prefix
-    if 'calendar.google.com' in parsed.netloc:
-        match = re.search(r'ical/([^%/]+)', url)
+    if "calendar.google.com" in parsed.netloc:
+        match = re.search(r"ical/([^%/]+)", url)
         if match:
             cal_id = match.group(1)
-            cal_id = re.sub(r'[^a-zA-Z0-9]+', '_', cal_id).lower().strip('_')
+            cal_id = re.sub(r"[^a-zA-Z0-9]+", "_", cal_id).lower().strip("_")
             return f"gcal_{cal_id}"
 
     # LibCal: extract institution and calendar ID
-    if 'libcal.com' in parsed.netloc:
-        match = re.match(r'([^.]+)\.libcal\.com', parsed.netloc)
-        inst = match.group(1) if match else 'libcal'
-        cid_match = re.search(r'cid=(\d+)', url)
-        cid = f"_{cid_match.group(1)}" if cid_match else ''
+    if "libcal.com" in parsed.netloc:
+        match = re.match(r"([^.]+)\.libcal\.com", parsed.netloc)
+        inst = match.group(1) if match else "libcal"
+        cid_match = re.search(r"cid=(\d+)", url)
+        cid = f"_{cid_match.group(1)}" if cid_match else ""
         return f"libcal_{inst}{cid}"
 
     # CampusLabs / beINvolved
-    if 'campuslabs.com' in parsed.netloc:
-        match = re.match(r'([^.]+)\.campuslabs\.com', parsed.netloc)
-        inst = match.group(1) if match else 'campuslabs'
+    if "campuslabs.com" in parsed.netloc:
+        match = re.match(r"([^.]+)\.campuslabs\.com", parsed.netloc)
+        inst = match.group(1) if match else "campuslabs"
         return f"campuslabs_{inst}"
 
     # LiveWhale (e.g., events.iu.edu/live/ical/events/group_id/56)
-    if '/live/ical/' in parsed.path:
-        domain = parsed.netloc.replace('www.', '').split('.')[0]
-        gid_match = re.search(r'group_id/(\d+)', url)
-        gid = f"_{gid_match.group(1)}" if gid_match else ''
+    if "/live/ical/" in parsed.path:
+        domain = parsed.netloc.replace("www.", "").split(".")[0]
+        gid_match = re.search(r"group_id/(\d+)", url)
+        gid = f"_{gid_match.group(1)}" if gid_match else ""
         return f"{domain}_livewhale{gid}"
 
     # General case: domain + meaningful path parts
-    domain = parsed.netloc.replace('www.', '').split('.')[0]
-    path_parts = [p for p in parsed.path.split('/')
-                  if p and p not in ('events', 'ical', 'feed', 'calendar',
-                                     'list', 'public', 'basic.ics')]
+    domain = parsed.netloc.replace("www.", "").split(".")[0]
+    path_parts = [
+        p
+        for p in parsed.path.split("/")
+        if p
+        and p
+        not in ("events", "ical", "feed", "calendar", "list", "public", "basic.ics")
+    ]
 
     if path_parts:
         slug = f"{domain}_{'_'.join(path_parts[:2])}"
     else:
         slug = domain
 
-    slug = re.sub(r'[^a-zA-Z0-9]+', '_', slug).lower().strip('_')
+    slug = re.sub(r"[^a-zA-Z0-9]+", "_", slug).lower().strip("_")
     return slug[:50]
 
 
@@ -119,17 +123,17 @@ def parse_feeds_txt(path: str) -> list[dict]:
         stripped = line.strip()
 
         # Skip blank lines, section headers, and generated-file banners
-        if not stripped or stripped.startswith('# ---'):
+        if not stripped or stripped.startswith("# ---"):
             continue
-        if stripped.startswith('# Generated from') or 'source inventory' in stripped:
+        if stripped.startswith("# Generated from") or "source inventory" in stripped:
             continue
 
         # Comment line: could be metadata
-        if stripped.startswith('#'):
+        if stripped.startswith("#"):
             body = stripped[1:].strip()
 
             # Scraper command
-            if body.startswith('cmd:'):
+            if body.startswith("cmd:"):
                 pending_cmd = body[4:].strip()
                 # Extract --name for scrapers
                 m = re.search(r'--name\s+"([^"]+)"', body)
@@ -138,13 +142,12 @@ def parse_feeds_txt(path: str) -> list[dict]:
                 continue
 
             # Category headers to skip (not metadata)
-            if body in ('Scraper', 'Squarespace', 'Songkick',
-                        'Chamber of Commerce'):
+            if body in ("Scraper", "Squarespace", "Songkick", "Chamber of Commerce"):
                 continue
 
             # Friendly name with optional fallback URL
-            if '|' in body:
-                parts = body.split('|', 1)
+            if "|" in body:
+                parts = body.split("|", 1)
                 pending_name = parts[0].strip()
                 pending_fallback = parts[1].strip() or None
             elif body:
@@ -153,23 +156,25 @@ def parse_feeds_txt(path: str) -> list[dict]:
             continue
 
         # URL line (ICS feed)
-        if stripped.startswith('https://'):
+        if stripped.startswith("https://"):
             basename = slugify(stripped)
-            feeds.append({
-                'type': 'ics_url',
-                'name': pending_name or stripped,
-                'url': stripped,
-                'basename': basename,
-                'fallback_url': pending_fallback,
-            })
+            feeds.append(
+                {
+                    "type": "ics_url",
+                    "name": pending_name or stripped,
+                    "url": stripped,
+                    "basename": basename,
+                    "fallback_url": pending_fallback,
+                }
+            )
             pending_name = None
             pending_fallback = None
             pending_cmd = None
             continue
 
         # Path line (scraper output)
-        if stripped.startswith('cities/') or (
-            stripped.endswith('.ics') and '/' in stripped
+        if stripped.startswith("cities/") or (
+            stripped.endswith(".ics") and "/" in stripped
         ):
             basename = Path(stripped).stem
             # Extract --url or --default-url from the pending command
@@ -178,14 +183,16 @@ def parse_feeds_txt(path: str) -> list[dict]:
                 m = re.search(r'(?:--url|--default-url)\s+"([^"]+)"', pending_cmd)
                 if m:
                     source_url = m.group(1)
-            feeds.append({
-                'type': 'scraper',
-                'name': pending_name or basename.replace('_', ' ').title(),
-                'path': stripped,
-                'basename': basename,
-                'scraper_cmd': pending_cmd,
-                'source_url': source_url,
-            })
+            feeds.append(
+                {
+                    "type": "scraper",
+                    "name": pending_name or basename.replace("_", " ").title(),
+                    "path": stripped,
+                    "basename": basename,
+                    "scraper_cmd": pending_cmd,
+                    "source_url": source_url,
+                }
+            )
             pending_name = None
             pending_cmd = None
             continue
@@ -206,8 +213,4 @@ def build_stem_name_map(path: str) -> dict[str, str]:
     X-SOURCE is injected at download time).
     """
     feeds = parse_feeds_txt(path)
-    return {
-        f['basename']: f['name']
-        for f in feeds
-        if f['type'] == 'scraper'
-    }
+    return {f["basename"]: f["name"] for f in feeds if f["type"] == "scraper"}

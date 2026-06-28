@@ -13,13 +13,15 @@ import sys
 import urllib.request
 import urllib.error
 
-sys.path.insert(0, 'scrapers')
+sys.path.insert(0, "scrapers")
 from lib.feed_utils import parse_feeds_txt
 
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: SUPABASE_URL=... SUPABASE_SERVICE_KEY=... python scripts/seed_feeds_from_txt.py <city>")
+        print(
+            "Usage: SUPABASE_URL=... SUPABASE_SERVICE_KEY=... python scripts/seed_feeds_from_txt.py <city>"
+        )
         sys.exit(1)
 
     city = sys.argv[1]
@@ -47,7 +49,7 @@ def main():
     errors = 0
 
     for feed in feeds:
-        url = feed.get('url') or feed.get('path')
+        url = feed.get("url") or feed.get("path")
         row = {
             "city": city,
             "url": url,
