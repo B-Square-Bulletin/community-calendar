@@ -9,6 +9,30 @@ city configuration) that are NOT on upstream/main.
 
 ### Prohibited operations on origin/main
 
+- **NEVER** reset origin/main to match upstream/main. The two branches are
+  different histories by design.
+- **NEVER** force-push to origin/main during normal development.
+- **NEVER** push directly to origin/main from a feature branch (including `git push origin HEAD:main`). Always use a PR into main.
+- **NEVER** assume a git-branch-recovery procedure that references
+  upstream/main applies to this fork. Recovery procedures must preserve the
+  fork's intentional divergence.
+
+### If origin/main is accidentally overwritten
+
+1. Check `git reflog show origin/main` for the previous tip
+2. Restore from reflog: `git push origin <previous-tip>:main --force`
+3. Do NOT push upstream/main. Do NOT reset local main to upstream/main.
+4. See [ADR 0002](docs/adr/0002-fork-model-and-main-protection.md) for the
+   full context.
+
+### Branch protection
+
+origin/main requires pull requests. The CI workflow bot (GITHUB_TOKEN) is
+exempt for automated build artifact commits (see
+`.github/workflows/generate-calendar.yml`).
+
+## Table of Contents
+
 - **NEVER** edit files on main, only work in a branch.
 - **NEVER** reset origin/main to match upstream/main. The two branches are
   different histories by design.
@@ -107,11 +131,11 @@ python scripts/validate_pipeline.py --cities santarosa --strict
 
 ## Reference Docs (read when needed, not in every session)
 
-| Doc | Contents |
-|-----|----------|
-| [CONTEXT.md](CONTEXT.md) | Domain glossary, business rules, component relationships, data flows |
-| [docs/procedures.md](docs/procedures.md) | Discovery workflow, geo-filtering, city registration, Meetup discovery |
-| [docs/scrapers.md](docs/scrapers.md) | Reusable scraper reference (MaxPreps, Legistar, GoDaddy, Songkick, etc.) |
-| [docs/platforms.md](docs/platforms.md) | Platform techniques (Drupal, Wix, SeeTickets) and known limitations |
-| [docs/discovery-lessons.md](docs/discovery-lessons.md) | Real-world discovery lessons and edge cases |
-| [docs/curator-guide.md](docs/curator-guide.md) | Source discovery playbook with topical search categories |
+| Doc                                                    | Contents                                                                 |
+| ------------------------------------------------------ | ------------------------------------------------------------------------ |
+| [CONTEXT.md](CONTEXT.md)                               | Domain glossary, business rules, component relationships, data flows     |
+| [docs/procedures.md](docs/procedures.md)               | Discovery workflow, geo-filtering, city registration, Meetup discovery   |
+| [docs/scrapers.md](docs/scrapers.md)                   | Reusable scraper reference (MaxPreps, Legistar, GoDaddy, Songkick, etc.) |
+| [docs/platforms.md](docs/platforms.md)                 | Platform techniques (Drupal, Wix, SeeTickets) and known limitations      |
+| [docs/discovery-lessons.md](docs/discovery-lessons.md) | Real-world discovery lessons and edge cases                              |
+| [docs/curator-guide.md](docs/curator-guide.md)         | Source discovery playbook with topical search categories                 |
