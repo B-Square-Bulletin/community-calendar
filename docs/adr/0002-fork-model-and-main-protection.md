@@ -16,7 +16,7 @@ The root cause: no guard rails prevented the accidental push, and no documentati
 
 ## Decision
 
-1. **Branch protection on origin/main.** GitHub branch protection requires pull requests for all pushes to main. The CI workflow identity (GITHUB_TOKEN) is exempt so automated build artifact commits continue to work.
+1. **Branch protection on origin/main.** GitHub branch protection requires pull requests for all pushes to main. The `generate-calendar.yml` workflow is allowed to bypass this requirement for its automated commits (both the default GitHub Actions token and the `COMMUNITY_CALENDAR` token used for metadata pushes).
 
 2. **Hard fork model, documented.** This repository is a hard fork, not a tracking fork. origin/main ≠ upstream/main by design. This is documented in CONTEXT.md (glossary: "Fork") and AGENTS.md (agent directive).
 

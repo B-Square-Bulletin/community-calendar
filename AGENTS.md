@@ -19,17 +19,15 @@ city configuration) that are NOT on upstream/main.
 
 ### If origin/main is accidentally overwritten
 
-1. Check `git reflog show origin/main` for the previous tip
-2. Restore from reflog: `git push origin <previous-tip>:main --force`
-3. Do NOT push upstream/main. Do NOT reset local main to upstream/main.
-4. See [ADR 0002](docs/adr/0002-fork-model-and-main-protection.md) for the
-   full context.
+1. In a clone that previously fetched `origin/main`, find the prior tip SHA with `git reflog show origin/main`.
+2. Prefer restoring via PR: `git switch -c restore-main <sha> && git push origin restore-main`, then open a PR into main.
+3. If branch protection prevents restoration and an admin bypass is required, an admin may force-push the SHA: `git push origin <sha>:main --force-with-lease`.
+4. Do NOT push upstream/main. Do NOT reset local main to upstream/main.
+5. See [ADR 0002](docs/adr/0002-fork-model-and-main-protection.md) for the full context.
 
 ### Branch protection
 
-origin/main requires pull requests. The CI workflow bot (GITHUB_TOKEN) is
-exempt for automated build artifact commits (see
-`.github/workflows/generate-calendar.yml`).
+origin/main requires pull requests. The `generate-calendar.yml` workflow is allowed to bypass this requirement for its automated commits (both the default GitHub Actions token and the `COMMUNITY_CALENDAR` token used for metadata pushes).
 
 ## Table of Contents
 

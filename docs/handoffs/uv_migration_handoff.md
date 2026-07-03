@@ -25,14 +25,14 @@ Current state: 11 pinned deps in `requirements.txt`, no lock file, no `pyproject
 ### Deno edge function tests (newly added)
 
 ```bash
-# Prerequisite (one-time): disable RLS + grant permissions on local DB
+# Prerequisite (one-time, LOCAL DEV ONLY): disable RLS + grant permissions on local DB
 docker exec supabase_db_main psql -U postgres -d postgres -c "
   ALTER TABLE feed_health DISABLE ROW LEVEL SECURITY;
   ALTER TABLE feed_anomalies DISABLE ROW LEVEL SECURITY;
   GRANT ALL ON feed_health TO anon, authenticated, service_role;
   GRANT ALL ON feed_anomalies TO anon, authenticated, service_role;
 "
-
+# After testing, re-enable RLS (recommended): docker exec supabase_db_main psql -U postgres -d postgres -c "ALTER TABLE feed_health ENABLE ROW LEVEL SECURITY; ALTER TABLE feed_anomalies ENABLE ROW LEVEL SECURITY;"
 # Run tests
 SUPABASE_URL=http://127.0.0.1:54321 \
 SUPABASE_SERVICE_ROLE_KEY=<your-local-service-role-key> \
