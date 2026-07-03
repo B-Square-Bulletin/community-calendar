@@ -57,7 +57,7 @@ Wix event pages vary. Some use cross-origin iframes from `geteventviewer.com` (n
 
 ## Events Manager (EM)
 
-WordPress plugin. Use `lib/em_events.py` — AJAX endpoint at `/wp-admin/admin-ajax.php?action=search_events` returns up to 50 events per POST with `pno` and `limit` params. HTML rendered, parse with `.em-event`, `.em-item-title`, `.em-event-date`, `.em-event-time`, `.em-event-location` selectors.
+WordPress plugin. Use `scrapers/lib/em_events.py` — AJAX endpoint at `/wp-admin/admin-ajax.php?action=search_events` returns up to 50 events per POST with `pno` and `limit` params. HTML rendered, parse with `.em-event`, `.em-item-title`, `.em-event-date`, `.em-event-time`, `.em-event-location` selectors.
 
 ## Known Platform Limitations
 
