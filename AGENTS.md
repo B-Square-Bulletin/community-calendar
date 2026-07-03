@@ -12,10 +12,8 @@ city configuration) that are NOT on upstream/main.
 - **NEVER** edit files on main, only work in a branch.
 - **NEVER** reset origin/main to match upstream/main. The two branches are
   different histories by design.
-- **NEVER** force-push to origin/main. Only the CI workflow bot is permitted
-  to push directly to origin/main.
-- **NEVER** use `git push origin <any-ref>:main` — this bypasses branch
-  protection.
+- **DO NOT** force-push to origin/main during normal work. Only use the recovery procedure below if origin/main is accidentally overwritten.
+- **DO NOT** use `git push origin <any-ref>:main` during normal work — it bypasses branch protection (the recovery procedure below is the exception).
 - **NEVER** assume a git-branch-recovery procedure that references
   upstream/main applies to this fork. Recovery procedures must preserve the
   fork's intentional divergence.
