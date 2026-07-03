@@ -9,6 +9,7 @@ city configuration) that are NOT on upstream/main.
 
 ### Prohibited operations on origin/main
 
+- **NEVER** edit files on main, only work in a branch.
 - **NEVER** reset origin/main to match upstream/main. The two branches are
   different histories by design.
 - **NEVER** force-push to origin/main during normal development.
@@ -28,30 +29,6 @@ city configuration) that are NOT on upstream/main.
 ### Branch protection
 
 origin/main requires pull requests. The `generate-calendar.yml` workflow is allowed to bypass this requirement for its automated commits (both the default GitHub Actions token and the `COMMUNITY_CALENDAR` token used for metadata pushes).
-
-## Table of Contents
-
-- **NEVER** edit files on main, only work in a branch.
-- **NEVER** reset origin/main to match upstream/main. The two branches are
-  different histories by design.
-- **DO NOT** force-push to origin/main during normal work. Only use the recovery procedure below if origin/main is accidentally overwritten.
-- **DO NOT** use `git push origin <any-ref>:main` during normal work — it bypasses branch protection (the recovery procedure below is the exception).
-- **NEVER** assume a git-branch-recovery procedure that references
-  upstream/main applies to this fork. Recovery procedures must preserve the
-  fork's intentional divergence.
-
-### If origin/main is accidentally overwritten
-
-1. Check `git reflog show origin/main` for the previous tip
-2. Restore from reflog: `git push origin <previous-tip>:main --force`
-3. Do NOT push upstream/main. Do NOT reset local main to upstream/main.
-4. See [ADR 0002](docs/adr/0002-fork-model-and-main-protection.md)
-
-### Branch protection
-
-origin/main requires pull requests. The CI workflow bot (GITHUB_TOKEN) is
-exempt for automated build artifact commits (see
-`.github/workflows/generate-calendar.yml`).
 
 ## Architecture (Compact)
 
