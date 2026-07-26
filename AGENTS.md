@@ -114,3 +114,16 @@ python scripts/validate_pipeline.py --cities santarosa --strict
 | [docs/platforms.md](docs/platforms.md)                 | Platform techniques (Drupal, Wix, SeeTickets) and known limitations      |
 | [docs/discovery-lessons.md](docs/discovery-lessons.md) | Real-world discovery lessons and edge cases                              |
 | [docs/curator-guide.md](docs/curator-guide.md)         | Source discovery playbook with topical search categories                 |
+
+## Known Platform Limitations
+
+| Platform | Issue |
+|----------|-------|
+| **Planning Center/Church Center** | No public API; requires login |
+| **Simpleview CMS** | Tourism sites; no public events API |
+| **Cloudflare-protected sites** | Challenge pages block scrapers |
+| **Facebook Events** | No public API since 2018 |
+| **Granicus video** | RSS feeds at `{instance}.granicus.com/ViewPublisherRSS.php?view_id={N}` are **backward-looking only** (archived meeting videos). Not useful for upcoming events. Don't confuse with Legistar (also Granicus-owned), which has a forward-looking WebAPI. |
+| **Bandsintown** | Website behind Cloudflare (403 on curl). REST API requires written approval from Bandsintown. Even with API access, no venue endpoint — only `/artists/{name}/events`. Not viable. |
+| **SeeTickets / Eventim US** | SeeTickets US rebranded as Eventim in March 2025 (same platform). No public API — affiliate account required. Cannot filter by single venue. US platform runs legacy ASP.NET (`wafform.aspx`), unlike Eventim Europe which has an unauthenticated search API at `public-api.eventim.com`. Venues like Mystic Theatre and HopMonk use this platform for ticketing. |
+| **BoardDocs** | Used by some cities for agenda publishing (e.g., `go.boarddocs.com/nc/raleigh/`). No public calendar API; LlamaIndex has a reader but it's for document extraction, not event feeds. |
