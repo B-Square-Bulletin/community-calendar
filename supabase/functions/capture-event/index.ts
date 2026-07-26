@@ -161,12 +161,8 @@ async function callClaude(content: any[]): Promise<any> {
       "anthropic-version": "2023-06-01",
     },
     body: JSON.stringify({
-      model: "claude-sonnet-5",
+      model: "claude-sonnet-4-20250514",
       max_tokens: 1024,
-      // Sonnet 5 runs adaptive thinking by default when `thinking` is omitted;
-      // on this small extraction task the thinking spend can consume the whole
-      // max_tokens budget, returning a response with no text block at all.
-      thinking: { type: "disabled" },
       messages: [{ role: "user", content }],
     }),
   });

@@ -17,6 +17,7 @@ import json
 import os
 import re
 from datetime import datetime, date, timezone, timedelta
+from typing import Optional
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -38,7 +39,7 @@ DROP_THRESHOLD = 0.5  # 50% drop from previous
 MIN_EVENTS_FOR_DROP = 5  # Only flag drops if previous had at least this many
 
 
-def count_future_events_in_ics(filepath: str) -> tuple[int, str | None]:
+def count_future_events_in_ics(filepath: str) -> tuple[int, Optional[str]]:
     """Count VEVENT entries with future DTSTART in an ICS file."""
     cutoff = datetime.now(timezone.utc) - timedelta(hours=24)
     try:
