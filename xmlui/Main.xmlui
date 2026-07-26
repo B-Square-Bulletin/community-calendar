@@ -19,13 +19,14 @@
   var.sliderEnd="{null}">
 
   <!-- DataSources -->
-  <!-- Events arrive via PushSource from the shell.js boot-time prefetch:
-       cached rows (IndexedDB) may paint first, then fresh rows replace them
-       when the network fetch lands. See window.subscribeEvents in shell.js. -->
-  <PushSource
+  <DataSource
     id="events"
     when="{city}"
-    subscribe="{window.subscribeEvents}"
+    url="{appGlobals.supabaseUrl + '/rest/v1/deduplicated_events?select=id,title,start_time,end_time,url,location,description,source,transcript,cluster_id,source_urls,category,image_url,all_day,merged_ids,city&order=start_time.asc&limit=6000&start_time=gte.' + window.getFromDate() + '&start_time=lte.' + window.getToDate() + (city ? '&city=eq.' + city : '')}"
+    headers="{{
+      apikey: appGlobals.supabasePublishableKey,
+      'Cache-Control': 'no-cache, no-store, must-revalidate'
+    }}"
   />
 
   <DataSource
@@ -88,7 +89,7 @@
 
   <ChangeListener
     listenTo="{eventsCounter}"
-    onDidChange="window.refetchEvents()"
+    onDidChange="events.refetch()"
   />
 
   <!-- filterTerm ChangeListener removed: TextBox onDidChange already sets displayStartIndex -->
@@ -235,7 +236,7 @@
           <Checkbox
             label="One-click pick (skip editor)"
             initialValue="{oneClickPick}"
-            onDidChange="(val) => { if (val !== oneClickPick) { oneClickPick = val; window.saveUserSetting({ one_click_pick: val }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey) } }"
+            onClick="oneClickPick = !oneClickPick; window.saveUserSetting({ one_click_pick: oneClickPick }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey)"
           />
         </VStack>
       </Card>
@@ -243,13 +244,27 @@
       <PickEditor when="{!!pickEvent && activePanel === 'pick'}" event="{pickEvent}" onClose="closePickEditor()" onSaved="picksCounter = picksCounter + 1" />
     </VStack>
     <HStack verticalAlignment="center" marginBottom="$space-2" gap="$space-2">
-      <SearchBox
-        id="searchBox"
-        width="*"
-        initialValue="{window.initialSearch || ''}"
-        onSearch="(val) => { filterTerm = val; displayStartIndex = browseStartIndex; window.syncSearchParam(val); }"
-        onClear="setCategoryFilter(''); window.syncSearchParam(''); filterTerm = ''; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1"
-      />
+      <HStack verticalAlignment="center" gap="$space-1" width="*">
+        <TextBox
+          id="searchBox"
+          autoFocus="false"
+          placeholder="Search events..."
+          fontSize="$fontSize-sm"
+          initialValue="{window.initialSearch || ''}"
+          onDidChange="(val) => { filterTerm = val; displayStartIndex = browseStartIndex; window.syncSearchParam(val); }"
+          width="*"
+        />
+          <Icon
+            name="close"
+            tooltip="Clear search"
+            width="20px"
+            height="20px"
+            cursor="pointer"
+            color="$color-text-tertiary"
+            opacity="{filterTerm ? 1 : 0}"
+          onClick="searchBox.setValue(''); setCategoryFilter(''); window.syncSearchParam(''); displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1"
+        />
+      </HStack>
       <Select
         id="categorySelect"
         aria-label="Event category"
@@ -272,7 +287,7 @@
         <Option value="picks" label="my picks" />
       </HStack>
     </RadioGroup>
-    <VStack when="{eventDayRange && !!events.value && viewMode === 'all'}" gap="$space-0">
+    <VStack when="{eventDayRange && events.loaded && viewMode === 'all'}" gap="$space-0">
       <HStack>
         <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{window.formatDayOffset(sliderRange ? sliderRange[0] : eventDayRange[0])}" />
         <SpaceFiller />
@@ -290,25 +305,25 @@
     </VStack>
     </VStack>
     </VStack>
-    <Spinner when="{!events.value && viewMode === 'all'}" />
+    <Spinner when="{!events.loaded && viewMode === 'all'}" />
     <Button
-      when="{!!events.value && viewMode === 'all' && !filterTerm && moreHasPrev(displayStartIndex)}"
+      when="{events.loaded && viewMode === 'all' && !filterTerm && moreHasPrev(displayStartIndex)}"
       label="Earlier"
       variant="outlined"
       width="100%"
       marginBottom="$space-2"
       onClick="const prevIndex = morePrevIndex(displayStartIndex, filterTerm ? 10 : 50); displayStartIndex = prevIndex; browseStartIndex = prevIndex; scrollRequest = scrollRequest + 1;"
     />
-    <Masonry when="{!!events.value && viewMode === 'all' && layoutMode === 'multicol'}" data="{getPagedEvents(processedEvents, filterTerm, displayStartIndex, filterTerm ? 10 : 50, categoryFilter, sliderStart, sliderEnd)}" columns="3" gap="$space-3" rowGap="0" minColumnWidth="300px">
+    <Masonry when="{events.loaded && viewMode === 'all' && layoutMode === 'multicol'}" data="{getPagedEvents(processedEvents, filterTerm, displayStartIndex, filterTerm ? 10 : 50, categoryFilter, sliderStart, sliderEnd)}" columns="3" gap="$space-3" rowGap="0" minColumnWidth="300px">
       <EventCard event="{$item}" filterTerm="{filterTerm}" categoryColorMap="{window.categoryColorMap}" categoryList="{window.categoryList}" />
     </Masonry>
-    <VStack when="{!!events.value && viewMode === 'all' && layoutMode !== 'multicol'}" gap="$space-0">
+    <VStack when="{events.loaded && viewMode === 'all' && layoutMode !== 'multicol'}" gap="$space-0">
       <Items data="{getPagedEvents(processedEvents, filterTerm, displayStartIndex, filterTerm ? 10 : 50, categoryFilter, sliderStart, sliderEnd)}">
         <EventCard event="{$item}" filterTerm="{filterTerm}" categoryColorMap="{window.categoryColorMap}" categoryList="{window.categoryList}" />
       </Items>
     </VStack>
     <Button
-      when="{!!events.value && viewMode === 'all' && !filterTerm && moreHasMore(displayEvents, displayStartIndex, filterTerm ? 10 : 50)}"
+      when="{events.loaded && viewMode === 'all' && !filterTerm && moreHasMore(displayEvents, displayStartIndex, filterTerm ? 10 : 50)}"
       label="Later"
       variant="outlined"
       width="100%"
@@ -409,7 +424,7 @@
           <Checkbox
             label="One-click pick (skip editor)"
             initialValue="{oneClickPick}"
-            onDidChange="(val) => { if (val !== oneClickPick) { oneClickPick = val; window.saveUserSetting({ one_click_pick: val }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey) } }"
+            onClick="oneClickPick = !oneClickPick; window.saveUserSetting({ one_click_pick: oneClickPick }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey)"
           />
         </VStack>
       </Card>

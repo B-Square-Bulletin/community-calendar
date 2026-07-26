@@ -131,21 +131,7 @@ jobs:
         python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/phoenix-theater-26319831111" --name "Phoenix Theater (Eventbrite)" --output cities/santarosa/eventbrite_phoenix.ics || true
         python scrapers/mobilize.py --url "https://www.mobilize.us/indivisiblesonomacounty/" --name "Indivisible Sonoma County (Mobilize)" --output cities/santarosa/mobilize_indivisible_sonoma.ics || true
         python scrapers/squarespace.py --url "https://www.northbayderby.org/events" --name "North Bay Derby" --output cities/santarosa/squarespace_northbayderby.ics || true
-        python scrapers/squarespace.py --url "https://www.forkinthepath.org/schedule" --name "Fork In the Path" --output cities/santarosa/fork_in_the_path.ics || true
         python scrapers/occidental_arts.py --output cities/santarosa/occidental_arts.ics || true
-        python scrapers/dice_venue.py --venue "Little Saint" --name "Little Saint" --timezone America/Los_Angeles --output cities/santarosa/dice_little_saint.ics || true
-        python scrapers/maxpreps.py --url "https://www.maxpreps.com/ca/windsor/windsor-jaguars/events/" --name "Windsor High School Athletics" --timezone America/Los_Angeles --output cities/santarosa/maxpreps_windsor.ics || true
-        python scrapers/maxpreps.py --url "https://www.maxpreps.com/ca/sebastopol/analy-tigers/events/" --name "Analy High School Athletics" --timezone America/Los_Angeles --output cities/santarosa/maxpreps_analy.ics || true
-        python scrapers/maxpreps.py --url "https://www.maxpreps.com/ca/rohnert-park/rancho-cotate-cougars/events/" --name "Rancho Cotate High School Athletics" --timezone America/Los_Angeles --output cities/santarosa/maxpreps_rancho_cotate.ics || true
-        python scrapers/maxpreps.py --url "https://www.maxpreps.com/ca/healdsburg/healdsburg-greyhounds/events/" --name "Healdsburg High School Athletics" --timezone America/Los_Angeles --output cities/santarosa/maxpreps_healdsburg.ics || true
-        python scrapers/legistar.py --client sonoma-county --source "Sonoma County Board of Supervisors" --output cities/santarosa/legistar_sonoma_county.ics || true
-        python scrapers/growthzone.py --url "https://business.sebastopol.org/api/events" --name "Sebastopol Chamber of Commerce" --output cities/santarosa/growthzone_sebastopol.ics || true
-        python scrapers/tribe_rest.py --api-base https://sonomacommunitycenter.org --name "Sonoma Community Center" --timezone America/Los_Angeles --output cities/santarosa/sonoma_community_center.ics || true
-        python scrapers/visit_santa_rosa.py --output cities/santarosa/visit_santa_rosa.ics || true
-        python scrapers/gatherboard.py --url "https://www.sonomavalleyevents.com" --name "Sonoma Valley Events" --output cities/santarosa/sonoma_valley_events.ics || true
-        python scrapers/santa_rosa_symphony.py --output cities/santarosa/santa_rosa_symphony.ics || true
-        python scrapers/thundertix.py --url "https://ravenperformingartstheater.thundertix.com/" --name "Raven Performing Arts Theater" --default-location "Raven Performing Arts Theater, 115 North St, Healdsburg, CA 95448" --output cities/santarosa/raven_theater.ics || true
-        python scrapers/redwood_cafe.py --output cities/santarosa/redwood_cafe.ics || true
 
         echo "\n=== Santa Rosa Scraper Results ==="
         for f in cities/santarosa/*.ics; do
@@ -220,27 +206,6 @@ jobs:
         python scrapers/limestone_post.py --output cities/bloomington/limestone_post.ics || true
         python scrapers/ismyrotaryclub.py --club-id 3430 --account-id 6580 --name "Bloomington Rotary Club" --default-url "https://www.bloomingtonrotary.org/" --output cities/bloomington/bloomington_rotary.ics || true
         python scrapers/ismyrotaryclub.py --club-id 52230 --account-id 6580 --name "Bloomington Sunrise Rotary" --default-url "https://www.btownsunriserotary.org/" --output cities/bloomington/bloomington_sunrise_rotary.ics || true
-        python scrapers/maxpreps.py --url "https://www.maxpreps.com/in/bloomington/bloomington-north-cougars/events/" --name "Bloomington North Athletics" --timezone "America/Indiana/Indianapolis" --output cities/bloomington/maxpreps_bloomington_north.ics || true
-        python scrapers/maxpreps.py --url "https://www.maxpreps.com/in/bloomington/bloomington-south-panthers/events/" --name "Bloomington South Athletics" --timezone "America/Indiana/Indianapolis" --output cities/bloomington/maxpreps_bloomington_south.ics || true
-        python scrapers/maxpreps.py --url "https://www.maxpreps.com/in/ellettsville/edgewood-mustangs/events/" --name "Edgewood Athletics" --timezone "America/Indiana/Indianapolis" --output cities/bloomington/maxpreps_edgewood.ics || true
-        python scrapers/maxpreps.py --url "https://www.maxpreps.com/in/spencer/owen-valley-patriots/events/" --name "Owen Valley Athletics" --timezone "America/Indiana/Indianapolis" --output cities/bloomington/maxpreps_owen_valley.ics || true
-        python scrapers/maxpreps.py --url "https://www.maxpreps.com/in/martinsville/martinsville-artesians/events/" --name "Martinsville Athletics" --timezone "America/Indiana/Indianapolis" --output cities/bloomington/maxpreps_martinsville.ics || true
-        python scrapers/maxpreps.py --url "https://www.maxpreps.com/in/nashville/brown-county-eagles/events/" --name "Brown County Athletics" --timezone "America/Indiana/Indianapolis" --output cities/bloomington/maxpreps_brown_county.ics || true
-        python scrapers/maxpreps.py --url "https://www.maxpreps.com/in/bloomfield/eastern-greene-thunderbirds/events/" --name "Eastern Greene Athletics" --timezone "America/Indiana/Indianapolis" --output cities/bloomington/maxpreps_eastern_greene.ics || true
-        python scrapers/maxpreps.py --url "https://www.maxpreps.com/in/bloomington/lighthouse-christian-academy-lions/events/" --name "Lighthouse Christian Athletics" --timezone "America/Indiana/Indianapolis" --output cities/bloomington/maxpreps_lighthouse_christian.ics || true
-        python scrapers/mobilize.py --url "https://www.mobilize.us/indivisiblesouthcentralindiana/" --name "Indivisible South Central Indiana (Mobilize)" --output cities/bloomington/mobilize_indivisible_south_central.ics || true
-        python scrapers/owen_county_library.py --output cities/bloomington/owen_county_library.ics || true
-        python scrapers/brown_county_gov.py --output cities/bloomington/brown_county_gov.ics || true
-        python scrapers/bloomington_brewing.py --output cities/bloomington/bloomington_brewing.ics || true
-        python scrapers/simpleview.py --url "https://www.bloomingtonconvention.com" --name "Monroe Convention Center" --default-location "Monroe Convention Center, 302 S College Ave, Bloomington, IN 47403" --output cities/bloomington/simpleview_mcc.ics || true
-        python scrapers/simpleview.py --url "https://www.visitmorgancountyin.com" --name "Visit Morgan County" --towns Martinsville --output cities/bloomington/simpleview_morgan.ics || true
-        python scrapers/dice_venue.py --venue "Orbit Room" --name "The Orbit Room" --timezone America/Indiana/Indianapolis --output cities/bloomington/dice_orbit_room.ics || true
-        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/10637013504" --name "Gaden KhachoeShing Monastery" --output cities/bloomington/eventbrite_gaden.ics || true
-        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/36028304013" --name "Exodus Refugee Immigration" --output cities/bloomington/eventbrite_exodus.ics || true
-        python scrapers/tmbcc.py --output cities/bloomington/tmbcc.ics || true
-        python scrapers/bloomington_symphony.py --output cities/bloomington/bloomington_symphony.ics || true
-        python scrapers/ludus.py --url "https://offnight.ludus.com" --name "Off Night Productions" --default-location "Bloomington, IN" --output cities/bloomington/off_night_productions.ics || true
-        python scrapers/ludus.py --url "https://mcct.ludus.com" --name "Monroe County Civic Theater" --default-location "Bloomington, IN" --output cities/bloomington/mcct.ics || true
       continue-on-error: true
 
 
@@ -409,7 +374,6 @@ jobs:
         # Ticketmaster venues
         python scrapers/ticketmaster.py --venue-id KovZpa2X8e --name "DPAC" -o cities/raleighdurham/dpac.ics || true
         python scrapers/ticketmaster.py --venue-id KovZpZAFF1nA --name "Martin Marietta Center" -o cities/raleighdurham/martin_marietta.ics || true
-        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/quail-ridge-books-17882467120" --name "Quail Ridge Books" --output cities/raleighdurham/eventbrite_quail_ridge.ics || true
       continue-on-error: true
 
 
@@ -437,15 +401,6 @@ jobs:
         python scrapers/mobilize.py --url "https://www.mobilize.us/ionj/" --name "Indivisible One NJ (Mobilize)" --output cities/montclair/mobilize_indivisible_nj.ics || true
         python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/trivia-ad-4701927701" --name "Trivia AD" --output cities/montclair/eventbrite_trivia_ad.ics || true
         python scrapers/squarespace.py --url "https://www.montclairhistory.org/all-events" --name "Montclair History Center" --output cities/montclair/montclair_history_center.ics || true
-        python scrapers/songkick.py --url "https://www.songkick.com/venues/33708-dingbatz" --name "Dingbatz" --output cities/montclair/songkick_dingbatz.ics || true
-        python scrapers/songkick.py --url "https://www.songkick.com/venues/3593184-meatlocker" --name "The Meatlocker" --output cities/montclair/songkick_meatlocker.ics || true
-        python scrapers/pushcart_players.py --output cities/montclair/pushcart_players.ics || true
-        python scrapers/skyline_theatre.py --output cities/montclair/skyline_theatre.ics || true
-        python scrapers/jazz_house_kids.py --output cities/montclair/jazz_house_kids.ics || true
-        python scrapers/outpost_burbs.py --output cities/montclair/outpost_burbs.ics || true
-        python scrapers/nj_poetry_events.py --output cities/montclair/nj_poetry_events.ics || true
-        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/cohome-inc-17450245601" --name "Cohome" --output cities/montclair/eventbrite_cohome.ics || true
-        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/the-franklin-wine-bar-74930758223" --name "The Franklin Wine Bar" --output cities/montclair/eventbrite_franklin_wine_bar.ics || true
       continue-on-error: true
 
 
@@ -515,39 +470,6 @@ jobs:
         python scrapers/songkick.py --url "https://www.songkick.com/venues/4617227-revival" --name "Revival" --output cities/asheville/revival_songkick.ics || true
         python scrapers/songkick.py --url "https://www.songkick.com/venues/4519500-eulogy" --name "Eulogy" --output cities/asheville/eulogy_songkick.ics || true
         python scrapers/asheville_chamber.py --output cities/asheville/asheville_chamber.ics || true
-        python scrapers/rhp_events.py --url "https://thegreyeagle.com/calendar/feed/" --name "The Grey Eagle" --output cities/asheville/grey_eagle.ics || true
-        python scrapers/rhp_events.py --url "https://theorangepeel.net/events/feed/" --name "The Orange Peel" --output cities/asheville/orange_peel.ics || true
-        python scrapers/rhp_events.py --url "https://pisgahbrewing.com/events/feed/" --name "Pisgah Brewing Company" --output cities/asheville/pisgah_brewing.ics || true
-        python scrapers/whereyat.py --output cities/asheville/whereyat.ics || true
-        python scrapers/squarespace.py --url "https://www.bluemountainpizza.com/events" --name "Blue Mountain Pizza" --output cities/asheville/blue_mountain_pizza.ics || true
-        python scrapers/squarespace.py --url "https://www.modelfacecomedy.com/shows" --name "Modelface Comedy" --output cities/asheville/modelface_comedy.ics || true
-        python scrapers/squarespace.py --url "https://www.barleystaproom.com/new-events-2" --name "Barley's Taproom" --output cities/asheville/barleys_taproom.ics || true
-        python scrapers/squarespace.py --url "https://www.shilohnc.org/community-events" --name "Shiloh Community Association" --output cities/asheville/shiloh_community.ics || true
-        python scrapers/squarespace.py --url "https://www.udharmanc.com/events" --name "Urban Dharma" --output cities/asheville/urban_dharma.ics || true
-        python scrapers/squarespace.py --url "https://www.oldtownbmt.com/events" --name "OTD Black Mountain" --output cities/asheville/otd_black_mountain.ics || true
-        python scrapers/squarespace.py --url "https://www.shamrockirons.com/events" --name "Shamrock Irons" --output cities/asheville/shamrock_irons.ics || true
-        python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/black-mountain-center-for-the-arts-11374533255" --name "Black Mountain Center for the Arts" --output cities/asheville/eventbrite_bmca.ics || true
-        python scrapers/mobilize.py --url "https://www.mobilize.us/buncombedems/" --name "Buncombe County Democratic Party" --output cities/asheville/buncombe_dems.ics || true
-        python scrapers/ismyrotaryclub.py --club-id 5996 --account-id 7670 --name "Rotary Club of Asheville" --output cities/asheville/rotary_asheville.ics || true
-        python scrapers/ismyrotaryclub.py --club-id 23683 --account-id 7670 --name "Asheville Breakfast Rotary Club" --output cities/asheville/rotary_asheville_breakfast.ics || true
-        python scrapers/ticketmaster.py --venue-id KovZpZAJvnIA --name "Harrah's Cherokee Center Asheville" --timezone America/New_York --output cities/asheville/tm_harrahs_cherokee.ics || true
-        python scrapers/third_room.py --output cities/asheville/third_room.ics || true
-        python scrapers/eventon.py --url https://whitehorseblackmountain.org --name "White Horse Black Mountain" --default-location "White Horse Black Mountain, 105C Montreat Rd, Black Mountain, NC 28711" --output cities/asheville/white_horse_black_mountain.ics || true
-        python scrapers/feed_and_seed.py --output cities/asheville/feed_and_seed.ics || true
-        python scrapers/tribe_rest.py --api-base https://www.weavervillenc.org --name "Town of Weaverville" --default-location "Weaverville, NC" --output cities/asheville/weaverville.ics || true
-        python scrapers/tribe_rest.py --api-base https://www.fletchernc.org --name "Town of Fletcher" --default-location "Fletcher, NC" --output cities/asheville/fletcher.ics || true
-        python scrapers/haw_creek.py --output cities/asheville/haw_creek.ics || true
-        python scrapers/beth_hatephila.py --output cities/asheville/beth_hatephila.ics || true
-        python scrapers/little_jumbo.py --output cities/asheville/little_jumbo.ics || true
-        python scrapers/wortham.py --output cities/asheville/wortham.ics || true
-        python scrapers/mainstreet.py --url "https://www.hendersonville.com" --name "Hendersonville.com" --output cities/asheville/hendersonville_com.ics || true
-        python scrapers/mainstreet.py --url "https://www.asheville.com" --name "Asheville.com" --output cities/asheville/asheville_com.ics || true
-        python scrapers/dice_venue.py --venue "Eulogy" --name "Eulogy" --output cities/asheville/dice_eulogy.ics || true
-        python scrapers/dice_venue.py --venue "Static Age Records" --name "Static Age Records" --output cities/asheville/dice_static_age.ics || true
-        python scrapers/dice_venue.py --venue "AyurPrana Listening Room" --name "AyurPrana Listening Room" --output cities/asheville/dice_ayurprana.ics || true
-        python scrapers/mountaintrue.py --output cities/asheville/mountaintrue.ics || true
-        python scrapers/asheville_theater_alliance.py --output cities/asheville/asheville_theater_alliance.ics || true
-        python scrapers/asheville_community_theatre.py --output cities/asheville/asheville_community_theatre.ics || true
       continue-on-error: true
 
 
@@ -724,15 +646,6 @@ jobs:
           fi
         done
 
-    - name: Generate RSS feeds
-      if: github.event.inputs.regenerate_only != 'true'
-      run: |
-        IFS=',' read -ra CITIES <<< "${{ steps.locations.outputs.list }}"
-        for city in "${CITIES[@]}"; do
-          city=$(echo "$city" | xargs)
-          python scripts/generate_rss.py "$city" || true
-        done
-
     - name: Classify events in JSON files
       if: env.ANTHROPIC_API_KEY
       env:
@@ -875,7 +788,6 @@ jobs:
 
         git add -f xmlui/config.json
         git add cities.json report.html cities/*/feeds.txt
-        [ -d rss ] && git add rss/*.xml || true
         git diff --staged --quiet || (
           git commit -m "Auto-generate calendar metadata"
           # On conflict, our regenerated files always win

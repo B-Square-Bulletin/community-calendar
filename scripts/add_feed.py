@@ -15,14 +15,55 @@ Usage:
 """
 
 import argparse
+import re
 import subprocess
 import sys
 from pathlib import Path
-
-from feed_slug import slugify
+from urllib.parse import urlparse
 
 # Repository root
 ROOT = Path(__file__).parent.parent
+
+
+def slugify(url: str) -> str:
+    """Generate a filename slug from a URL."""
+    parsed = urlparse(url)
+    
+    # Special case for Meetup
+    if 'meetup.com' in parsed.netloc:
+        # Extract group name from /group-name/events/ical/
+        match = re.search(r'meetup\.com/([^/]+)', url)
+        if match:
+            group = match.group(1)
+            # Clean up the group name
+            group = re.sub(r'[^a-zA-Z0-9]+', '_', group).lower().strip('_')
+            return f"meetup_{group}"
+    
+    # Special case for Tockify
+    if 'tockify.com' in parsed.netloc:
+        match = re.search(r'/ics/([^/]+)', url)
+        if match:
+            return f"tockify_{match.group(1)}"
+
+    # CivicPlus (city/county sites): include catID to avoid collisions
+    if '/iCalendar/iCalendar.aspx' in parsed.path:
+        domain = parsed.netloc.replace('www.', '').split('.')[0]
+        cat_match = re.search(r'catID=(\d+)', parsed.query)
+        cat_id = f"_{cat_match.group(1)}" if cat_match else ''
+        return f"civicplus_{domain}{cat_id}"
+
+    # General case: use domain + path
+    domain = parsed.netloc.replace('www.', '').split('.')[0]
+    path_parts = [p for p in parsed.path.split('/') if p and p not in ('events', 'ical', 'feed', 'calendar')]
+    
+    if path_parts:
+        slug = f"{domain}_{'_'.join(path_parts[:2])}"
+    else:
+        slug = domain
+    
+    # Clean up
+    slug = re.sub(r'[^a-zA-Z0-9]+', '_', slug).lower().strip('_')
+    return slug[:50]  # Limit length
 
 
 def test_feed(url: str) -> tuple[bool, int]:
