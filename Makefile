@@ -8,8 +8,9 @@ help:
 	@echo "Community Calendar Test Suite"
 	@echo ""
 	@echo "Targets:"
-	@echo "  make test           - Run Python tests"
+	@echo "  make test           - Run all tests (Python + JS)"
 	@echo "  make test-python    - Run Python tests (pytest)"
+	@echo "  make test-js        - Run JS tests (node --test)"
 	@echo "  make test-sql       - Run database tests (local Supabase via pgTAP)"
 	@echo "  make setup-python   - Create venv and install dependencies"
 	@echo "  make setup-local    - Start local Supabase and apply schema"
@@ -22,7 +23,12 @@ help:
 	@echo "  - PostgreSQL client (psql) for local database access"
 
 # Run default tests
-test: test-python
+test: test-python test-js
+
+# Run JS tests
+test-js:
+	@echo "Running JS tests..."
+	@node --test xmlui/tests/*.test.js
 
 # Alias for test
 test-all: test

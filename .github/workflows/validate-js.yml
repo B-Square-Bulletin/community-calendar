@@ -1,0 +1,23 @@
+name: Validate JS
+
+on:
+  pull_request:
+    paths:
+      - 'xmlui/**'
+      - '.github/workflows/validate-js.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'xmlui/**'
+      - '.github/workflows/validate-js.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test-js:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Run JS unit tests
+        run: node --test xmlui/tests/*.test.js

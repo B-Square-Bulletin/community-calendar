@@ -261,8 +261,8 @@ function filterEvents(events, term, category) {
   _prevEventsLen = events.length;
   _prevEventsFirst = events[0];
   var result = source.filter(function(e) {
-    var searchText = getEventSearchText(e);
-    e._search = searchText;
+    var searchText = e._search || getEventSearchText(e);
+    if (!e._search) e._search = searchText;
     return searchText.includes(lower);
   });
   var t1 = performance.now();
