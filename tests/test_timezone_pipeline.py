@@ -157,13 +157,16 @@ class TestCombineIcsRruleExpansion:
 
     def test_rrule_expansion_preserves_tzid(self):
         """Expanded instances should retain DTSTART;TZID= from original."""
-        # Use dates far enough in the future to fall within the expansion window
+        from datetime import date, timedelta
+
+        start = date.today() + timedelta(days=7)
+        end = start + timedelta(days=90)
         event = make_vevent(
             "Weekly Class",
-            "DTSTART;TZID=America/Los_Angeles:20260323T190000",
-            "DTEND;TZID=America/Los_Angeles:20260323T200000",
+            f"DTSTART;TZID=America/Los_Angeles:{start.strftime('%Y%m%d')}T190000",
+            f"DTEND;TZID=America/Los_Angeles:{start.strftime('%Y%m%d')}T200000",
             "test-rrule@test",
-            rrule="FREQ=WEEKLY;UNTIL=20260630T235959Z",
+            rrule=f"FREQ=WEEKLY;UNTIL={end.strftime('%Y%m%d')}T235959Z",
         )
         ics = make_ics(event, vtimezone=VTIMEZONE_LA)
         expanded = expand_rrules(ics, window_days=120)
@@ -179,19 +182,23 @@ class TestCombineIcsRruleExpansion:
         """
         An RRULE spanning DST boundary should produce correct wall-clock times.
 
-        DST spring forward: March 9, 2025 (America/Los_Angeles).
-        A weekly 7pm class should stay at 7pm local, not shift to 8pm.
+        Uses computed future dates with a wide window so the expansion will
+        span at least one DST transition regardless of when the test runs.
+        A weekly 7pm class should stay at 7pm local wall-clock time.
         """
-        # Use dates around DST spring-forward (March 8, 2026 for America/Los_Angeles)
+        from datetime import date, timedelta
+
+        start = date.today() + timedelta(days=7)
+        end = start + timedelta(days=180)  # wide window guarantees DST crossing
         event = make_vevent(
             "Weekly Class",
-            "DTSTART;TZID=America/Los_Angeles:20260302T190000",
-            "DTEND;TZID=America/Los_Angeles:20260302T200000",
+            f"DTSTART;TZID=America/Los_Angeles:{start.strftime('%Y%m%d')}T190000",
+            f"DTEND;TZID=America/Los_Angeles:{start.strftime('%Y%m%d')}T200000",
             "dst-test@test",
-            rrule="FREQ=WEEKLY;UNTIL=20260401T235959Z",
+            rrule=f"FREQ=WEEKLY;UNTIL={end.strftime('%Y%m%d')}T235959Z",
         )
         ics = make_ics(event, vtimezone=VTIMEZONE_LA)
-        expanded = expand_rrules(ics, window_days=30)
+        expanded = expand_rrules(ics, window_days=200)
         assert expanded is not None
 
         # Extract DTSTART times from expanded instances
@@ -466,7 +473,7 @@ class TestApplyTimezoneOffset:
     """
 
     @staticmethod
-    def apply_tz_offset(naive_dt: str, tz_name: str) -> str:
+    def apply_tz_offset(naive_dt: str, tz_name: str | None) -> str:
         """Python equivalent of window.applyTimezoneOffset / capture-event applyTimezoneOffset."""
         import re
 
@@ -478,6 +485,7 @@ class TestApplyTimezoneOffset:
         tz = ZoneInfo(tz_name)
         aware = dt.replace(tzinfo=tz)
         offset = aware.utcoffset()
+        assert offset is not None
         total_seconds = int(offset.total_seconds())
         sign = "+" if total_seconds >= 0 else "-"
         abs_seconds = abs(total_seconds)
@@ -633,7 +641,8 @@ class TestRealIcsFiles:
             assert dt.tzinfo is not None, (
                 f"Parsed datetime should be tz-aware: {parsed}"
             )
-            offset_hours = dt.utcoffset().total_seconds() / 3600
+            assert (offset := dt.utcoffset()) is not None
+            offset_hours = offset.total_seconds() / 3600
             assert offset_hours in (-7, -8), (
                 f"Expected PDT or PST offset, got {offset_hours}h: {parsed}"
             )
@@ -649,7 +658,8 @@ class TestRealIcsFiles:
             if "TZID=" in raw:
                 assert "America/Los_Angeles" in raw
                 dt = datetime.fromisoformat(parsed)
-                offset_hours = dt.utcoffset().total_seconds() / 3600
+                assert (offset := dt.utcoffset()) is not None
+                offset_hours = offset.total_seconds() / 3600
                 assert offset_hours in (-7, -8), f"Expected PDT or PST: {parsed}"
 
     # --- Santa Rosa: Eventbrite with TZID=America/New_York (MISMATCH) ---
@@ -667,7 +677,8 @@ class TestRealIcsFiles:
             if "TZID=America/New_York" in raw:
                 eastern_found = True
                 dt = datetime.fromisoformat(parsed)
-                offset_hours = dt.utcoffset().total_seconds() / 3600
+                assert (offset := dt.utcoffset()) is not None
+                offset_hours = offset.total_seconds() / 3600
                 assert offset_hours in (-4, -5), (
                     f"Event with TZID=America/New_York should have Eastern offset, "
                     f"got {offset_hours}h: {raw} → {parsed}"
@@ -696,7 +707,8 @@ class TestRealIcsFiles:
             dt = datetime.fromisoformat(parsed)
             assert dt.tzinfo is not None
             if "TZID=America/New_York" in raw:
-                offset_hours = dt.utcoffset().total_seconds() / 3600
+                assert (offset := dt.utcoffset()) is not None
+                offset_hours = offset.total_seconds() / 3600
                 assert offset_hours in (-4, -5), (
                     f"TZID=America/New_York should produce Eastern offset, "
                     f"got {offset_hours}h: {raw} → {parsed}"
@@ -718,7 +730,8 @@ class TestRealIcsFiles:
         for raw, parsed in results:
             if "TZID=America/Los_Angeles" in raw:
                 dt = datetime.fromisoformat(parsed)
-                offset_hours = dt.utcoffset().total_seconds() / 3600
+                assert (offset := dt.utcoffset()) is not None
+                offset_hours = offset.total_seconds() / 3600
                 assert offset_hours in (-7, -8), (
                     f"TZID=America/Los_Angeles should produce Pacific offset, "
                     f"got {offset_hours}h: {raw} → {parsed}"
@@ -742,7 +755,8 @@ class TestRealIcsFiles:
             dt = datetime.fromisoformat(parsed)
             assert dt.tzinfo is not None
             if "TZID=America/Los_Angeles" in raw:
-                offset_hours = dt.utcoffset().total_seconds() / 3600
+                assert (offset := dt.utcoffset()) is not None
+                offset_hours = offset.total_seconds() / 3600
                 assert offset_hours in (-7, -8), (
                     f"TZID=America/Los_Angeles should produce Pacific offset, "
                     f"got {offset_hours}h: {raw} → {parsed}"
@@ -761,7 +775,8 @@ class TestRealIcsFiles:
         for raw, parsed in results:
             if "TZID=UTC" in raw:
                 dt = datetime.fromisoformat(parsed)
-                offset_hours = dt.utcoffset().total_seconds() / 3600
+                assert (offset := dt.utcoffset()) is not None
+                offset_hours = offset.total_seconds() / 3600
                 assert offset_hours == 0, (
                     f"TZID=UTC should produce +00:00 offset, "
                     f"got {offset_hours}h: {raw} → {parsed}"
@@ -780,7 +795,8 @@ class TestRealIcsFiles:
         for raw, parsed in results:
             if "TZID=America/Halifax" in raw:
                 dt = datetime.fromisoformat(parsed)
-                offset_hours = dt.utcoffset().total_seconds() / 3600
+                assert (offset := dt.utcoffset()) is not None
+                offset_hours = offset.total_seconds() / 3600
                 assert offset_hours in (-3, -4), (
                     f"TZID=America/Halifax should produce Atlantic offset, "
                     f"got {offset_hours}h: {raw} → {parsed}"
@@ -800,7 +816,8 @@ class TestRealIcsFiles:
         for raw, parsed in results:
             assert "TZID=America/Los_Angeles" in raw
             dt = datetime.fromisoformat(parsed)
-            offset_hours = dt.utcoffset().total_seconds() / 3600
+            assert (offset := dt.utcoffset()) is not None
+            offset_hours = offset.total_seconds() / 3600
             assert offset_hours in (-7, -8), f"Expected PDT or PST: {parsed}"
 
     # --- Cross-city consistency: same UTC instant regardless of TZID ---
