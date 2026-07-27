@@ -39,7 +39,16 @@ The build pipeline merges all `.ics` files → `events.json` → Supabase DB →
 GitHub Pages. Full domain model: [CONTEXT.md](CONTEXT.md).
 
 Source attribution flows through a single `X-SOURCE` ICS header — NEVER put
-"Source: X" text in event descriptions (the UI renders `source` separately).
+"Source: X" text in event descriptions **within the ICS → Supabase → UI
+pipeline** (the UI renders `source` separately, so in-description attribution
+would duplicate it).
+
+**Exception:** Terminal renderings that lack a side-channel for attribution
+MAY include "Source: X" in their output. Example: `scripts/generate_rss.py`
+appends "Source: X" to RSS item `<description>` because RSS 2.0 has no
+reader-supported field for event-level source attribution. This exception
+applies to terminal output formats only — never to the ICS descriptions or
+Supabase `description` column itself.
 
 ## Discovery Philosophy
 

@@ -14,6 +14,13 @@
       onDidChange="(val) => draft = val"
       width="*"
     />
+    <!-- Clear path: emit 'clear' to the parent immediately, then reset the
+         TextBox. Per the XMLUI docs, setValue triggers onDidChange, which
+         would schedule a trailing debounced search('') 250ms later — a
+         redundant re-render. We pre-set lastSent='' so the ChangeListener
+         sees the trailing change as a duplicate of what was already sent
+         and drops it. If the user types again before the 250ms window,
+         the new value differs from lastSent and emits normally. -->
     <Icon
       name="close"
       tooltip="Clear search"
@@ -22,13 +29,13 @@
       cursor="pointer"
       color="$color-text-tertiary"
       opacity="{draft ? 1 : 0}"
-      onClick="emitEvent('clear'); box.setValue(''); draft = ''"
+      onClick="emitEvent('clear'); lastSent = ''; box.setValue('')"
     />
   </HStack>
   <ChangeListener
     listenTo="{draft}"
     debounceWaitInMs="250"
-    onDidChange="(change) => { emitEvent('search', change.newValue); lastSent = change.newValue }"
+    onDidChange="(change) => { if (change.newValue === lastSent) return; lastSent = change.newValue; emitEvent('search', change.newValue); }"
   />
   <method name="setValue">
     (v) => box.setValue(v)
