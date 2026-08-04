@@ -176,7 +176,7 @@ These curate or aggregate events from multiple venues:
 | Gallery Walk Bloomington | Wix | No feed; recurring first Friday 5-8pm |
 | BARA (runners) | Wix | No ICS export |
 | Bloomington PRIDE | Squarespace | No ICS export |
-| Bloomington Brewing Co | Squarespace | No ICS export |
+| ~~Bloomington Brewing Co~~ | RESOLVED 2026-08-03: dedicated scraper (`bloomington_brewing.py`) — see Discovered 2026-07-17 |
 | Bloomington Yoga Collective | Squarespace + MindBody | Class schedules only |
 | Vibe Yoga Studio | Squarespace | Class schedules only |
 | Bloomington Volunteer Network | Galaxy Digital | No feed export |
