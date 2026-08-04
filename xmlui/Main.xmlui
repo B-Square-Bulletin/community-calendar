@@ -235,7 +235,7 @@
           <Checkbox
             label="One-click pick (skip editor)"
             initialValue="{oneClickPick}"
-            onClick="oneClickPick = !oneClickPick; window.saveUserSetting({ one_click_pick: oneClickPick }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey)"
+            onDidChange="(val) => { if (val !== oneClickPick) { oneClickPick = val; window.saveUserSetting({ one_click_pick: val }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey) } }"
           />
         </VStack>
       </Card>
@@ -423,7 +423,7 @@
           <Checkbox
             label="One-click pick (skip editor)"
             initialValue="{oneClickPick}"
-            onClick="oneClickPick = !oneClickPick; window.saveUserSetting({ one_click_pick: oneClickPick }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey)"
+            onDidChange="(val) => { if (val !== oneClickPick) { oneClickPick = val; window.saveUserSetting({ one_click_pick: val }, userSettingsData, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey) } }"
           />
         </VStack>
       </Card>
