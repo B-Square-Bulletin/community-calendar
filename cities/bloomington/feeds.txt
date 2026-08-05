@@ -3,14 +3,14 @@
 # To add feeds, use pending_feeds.txt in this directory.
 
 # --- Live feeds ---
-# Area High School Sports
-https://api.eventlink.com/?m=Calendar&a=iCalFeedSubscriptions&token=d0c1206d-adc2-4640-a5b8-7ffd1da04660&id=d7b1e814-13d0-43ac-b67f-c6bad0ec9a4e
 # Art Sanctuary of Indiana
 https://calendar.google.com/calendar/ical/artsanctuaryindiana%40gmail.com/public/basic.ics
 # B-Square: Critical Mass
 https://calendar.google.com/calendar/ical/2gd73d7gc46mstrdnr6k7v7b2o@group.calendar.google.com/public/basic.ics
 # B-Square: Government
 https://calendar.google.com/calendar/ical/bloomington.in.gov_35a6qiaiperdn7b1r6v2ksjlig@group.calendar.google.com/public/basic.ics
+# BHSN
+https://api.eventlink.com/?m=Calendar&a=iCalFeedSubscriptions&token=d0c1206d-adc2-4640-a5b8-7ffd1da04660&id=088c0853-793b-47df-a87d-c34b7cd2cacb
 # Bloominglabs Makerspace
 https://calendar.google.com/calendar/ical/bloominglabs%40gmail.com/public/basic.ics
 # Bloomington Atheists Meetup
