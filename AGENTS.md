@@ -90,7 +90,29 @@ When a scraper fetches individual event pages (listing + detail pattern):
 
 Be a good citizen — don't hammer source sites.
 
-## Pipeline Validation
+## Testing & PR Verification
+
+Python (pytest) and DB (pgTAP/Supabase) tests are orchestrated via the Makefile:
+
+```bash
+make help            # list all targets
+make test            # python pytest (runs from a venv if present)
+make test-sql        # pgTAP DB tests; requires local Supabase running
+make setup-local     # start local Supabase + migrations, then `make test-sql`
+```
+
+- Python tests MUST run with `env -u PYTHONPATH` (the Makefile does this) to
+  avoid importing files from the repo root instead of installed packages.
+- New ICS tests reuse `make_ics()`/`make_vevent()` from `tests/helpers.py`.
+- DB tests live as `.sql` pgTAP files under `supabase/tests/` (see its README).
+
+PR CI `validate-pr.yml` gates main merges. Replicate locally before pushing:
+- `python scripts/validate_pr_feeds.py --base-ref origin/main` (feed/scraper consistency)
+- `pytest tests/ -v`
+- `supabase test db supabase/tests/`
+- `node scripts/bench_collapse_long.js` — perf gate guarding the content-key collapse cache regressions
+
+Pipeline validation for scrape/download runs (not needed for every PR):
 
 ```bash
 python scripts/validate_pipeline.py --cities santarosa,bloomington,davis
