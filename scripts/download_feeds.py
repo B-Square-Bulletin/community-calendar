@@ -16,153 +16,45 @@ import sys
 import urllib.request
 import urllib.error
 from datetime import datetime
-from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
 
-
-def slugify(url: str) -> str:
-    """Generate a readable filename slug from a URL.
-
-    Mirrors the logic in add_feed.py so that add_feed + download_feeds
-    produce consistent filenames.
-    """
-    parsed = urlparse(url)
-
-    # Meetup: extract group slug
-    if 'meetup.com' in parsed.netloc:
-        match = re.search(r'meetup\.com/([^/]+)', url)
-        if match:
-            group = match.group(1)
-            group = re.sub(r'[^a-zA-Z0-9]+', '_', group).lower().strip('_')
-            return f"meetup_{group}"
-
-    # Tockify: extract calendar name
-    if 'tockify.com' in parsed.netloc:
-        match = re.search(r'/ics/([^/]+)', url)
-        if match:
-            return f"tockify_{match.group(1)}"
-
-    # CivicPlus (city/county sites): include catID to avoid collisions
-    if '/iCalendar/iCalendar.aspx' in parsed.path:
-        domain = parsed.netloc.replace('www.', '').split('.')[0]
-        cat_match = re.search(r'catID=(\d+)', parsed.query)
-        cat_id = f"_{cat_match.group(1)}" if cat_match else ''
-        return f"civicplus_{domain}{cat_id}"
-
-    # Google Calendar: extract calendar ID prefix
-    if 'calendar.google.com' in parsed.netloc:
-        match = re.search(r'ical/([^%/]+)', url)
-        if match:
-            cal_id = match.group(1)
-            cal_id = re.sub(r'[^a-zA-Z0-9]+', '_', cal_id).lower().strip('_')
-            return f"gcal_{cal_id}"
-
-    # LibCal: extract institution and calendar ID
-    if 'libcal.com' in parsed.netloc:
-        match = re.match(r'([^.]+)\.libcal\.com', parsed.netloc)
-        inst = match.group(1) if match else 'libcal'
-        cid_match = re.search(r'cid=(\d+)', url)
-        cid = f"_{cid_match.group(1)}" if cid_match else ''
-        return f"libcal_{inst}{cid}"
-
-    # CampusLabs / beINvolved
-    if 'campuslabs.com' in parsed.netloc:
-        match = re.match(r'([^.]+)\.campuslabs\.com', parsed.netloc)
-        inst = match.group(1) if match else 'campuslabs'
-        return f"campuslabs_{inst}"
-
-    # LiveWhale (e.g., events.iu.edu/live/ical/events/group_id/56)
-    if '/live/ical/' in parsed.path:
-        domain = parsed.netloc.replace('www.', '').split('.')[0]
-        gid_match = re.search(r'group_id/(\d+)', url)
-        gid = f"_{gid_match.group(1)}" if gid_match else ''
-        return f"{domain}_livewhale{gid}"
-
-    # General case: domain + meaningful path parts
-    domain = parsed.netloc.replace('www.', '').split('.')[0]
-    path_parts = [p for p in parsed.path.split('/')
-                  if p and p not in ('events', 'ical', 'feed', 'calendar',
-                                     'list', 'public', 'basic.ics')]
-
-    if path_parts:
-        slug = f"{domain}_{'_'.join(path_parts[:2])}"
-    else:
-        slug = domain
-
-    slug = re.sub(r'[^a-zA-Z0-9]+', '_', slug).lower().strip('_')
-    return slug[:50]
+sys.path.insert(0, "scrapers")
+from lib.feed_utils import slugify, parse_feeds_txt
 
 
-def parse_feeds_txt(feeds_file: str):
-    """Parse feeds.txt, yielding (url, friendly_name, fallback_url) tuples.
-
-    Structured comment format:
-        # Friendly Name | https://fallback-url/
-        https://feed-url/
-
-    A comment line immediately before a URL line is the metadata for that URL.
-    Category headers (comments before blank lines or other comments) are ignored.
-    """
-    pending_name = None
-    pending_fallback = None
-
-    with open(feeds_file) as f:
-        for line in f:
-            stripped = line.strip()
-
-            if stripped.startswith('#'):
-                body = stripped[1:].strip()
-                if '|' in body:
-                    parts = body.split('|', 1)
-                    pending_name = parts[0].strip()
-                    pending_fallback = parts[1].strip() or None
-                else:
-                    pending_name = body
-                    pending_fallback = None
-                continue
-
-            if not stripped or not stripped.startswith('https://'):
-                # Blank line or local file ref resets pending comment
-                pending_name = None
-                pending_fallback = None
-                continue
-
-            yield stripped, pending_name, pending_fallback
-            pending_name = None
-            pending_fallback = None
-
-
-def inject_source_headers(filepath: str, friendly_name: str, fallback_url: str | None) -> None:
+def inject_source_headers(
+    filepath: str, friendly_name: str, fallback_url: str | None
+) -> None:
     """Inject X-SOURCE (and optionally X-SOURCE-URL) into each VEVENT in an ICS file."""
     try:
-        with open(filepath, 'rb') as f:
+        with open(filepath, "rb") as f:
             raw = f.read()
     except Exception:
         return
 
-    if b'BEGIN:VCALENDAR' not in raw:
+    if b"BEGIN:VCALENDAR" not in raw:
         return  # Not valid ICS
 
     # Detect line ending style from raw bytes
-    crlf = b'\r\n' if b'\r\n' in raw else b'\n'
+    crlf = b"\r\n" if b"\r\n" in raw else b"\n"
 
-    name_bytes = friendly_name.encode('utf-8')
-    headers = b'X-SOURCE:' + name_bytes + crlf
+    name_bytes = friendly_name.encode("utf-8")
+    headers = b"X-SOURCE:" + name_bytes + crlf
     if fallback_url:
-        headers += b'X-SOURCE-URL:' + fallback_url.encode('utf-8') + crlf
+        headers += b"X-SOURCE-URL:" + fallback_url.encode("utf-8") + crlf
 
-    marker = b'BEGIN:VEVENT' + crlf
+    marker = b"BEGIN:VEVENT" + crlf
     parts = raw.split(marker)
 
     result = [parts[0]]
     for part in parts[1:]:
-        vevent_head = part.split(b'END:VEVENT')[0]
-        if b'X-SOURCE:' not in vevent_head:
+        vevent_head = part.split(b"END:VEVENT")[0]
+        if b"X-SOURCE:" not in vevent_head:
             result.append(headers + part)
         else:
             result.append(part)
 
-    with open(filepath, 'wb') as f:
+    with open(filepath, "wb") as f:
         f.write(marker.join(result))
 
 
@@ -212,7 +104,9 @@ def mark_feeds_active(feeds_to_activate):
     for feed in feeds_to_activate:
         patch_url = f"{supabase_url}/rest/v1/feeds?id=eq.{feed['id']}"
         data = json.dumps({"status": "active"}).encode()
-        req = urllib.request.Request(patch_url, data=data, headers=headers, method="PATCH")
+        req = urllib.request.Request(
+            patch_url, data=data, headers=headers, method="PATCH"
+        )
         try:
             urllib.request.urlopen(req)
             print(f"  ✅ Marked active: {feed['name']}")
@@ -226,7 +120,7 @@ def mark_feeds_active(feeds_to_activate):
 # Other MEC feeds (e.g. York University v7.17.1) use proper UTC "Z" format and
 # are NOT affected — but watch for this bug if we add more MEC feeds with TZID.
 _MEC_TZ_FIX_URLS = {
-    'browncounty.com',
+    "browncounty.com",
 }
 
 
@@ -236,29 +130,25 @@ def _needs_mec_tz_fix(url: str) -> bool:
 
 def fix_mec_timezone(filepath: str) -> None:
     """Rewrite DTSTART/DTEND in an ICS file to undo MEC's double timezone conversion."""
-    with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
+    with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
         content = f.read()
 
     def fix_dt_line(match):
-        field = match.group(1)   # DTSTART or DTEND
-        tzid = match.group(2)    # e.g. America/Indiana/Indianapolis
-        timestr = match.group(3) # e.g. 20260404T080000
+        field = match.group(1)  # DTSTART or DTEND
+        tzid = match.group(2)  # e.g. America/Indiana/Indianapolis
+        timestr = match.group(3)  # e.g. 20260404T080000
         try:
             tz = ZoneInfo(tzid)
-            dt = datetime.strptime(timestr, '%Y%m%dT%H%M%S').replace(tzinfo=tz)
+            dt = datetime.strptime(timestr, "%Y%m%dT%H%M%S").replace(tzinfo=tz)
             # The UTC value is what the local time should actually be
-            corrected = dt.astimezone(ZoneInfo('UTC')).strftime('%Y%m%dT%H%M%S')
-            return f'{field};TZID={tzid}:{corrected}'
+            corrected = dt.astimezone(ZoneInfo("UTC")).strftime("%Y%m%dT%H%M%S")
+            return f"{field};TZID={tzid}:{corrected}"
         except Exception:
             return match.group(0)
 
-    fixed = re.sub(
-        r'(DTSTART|DTEND);TZID=([^:]+):(\d{8}T\d{6})',
-        fix_dt_line,
-        content
-    )
+    fixed = re.sub(r"(DTSTART|DTEND);TZID=([^:]+):(\d{8}T\d{6})", fix_dt_line, content)
 
-    with open(filepath, 'w', encoding='utf-8') as f:
+    with open(filepath, "w", encoding="utf-8") as f:
         f.write(fixed)
 
 
@@ -277,18 +167,27 @@ def download_feeds(city: str) -> None:
         if not os.path.exists(feeds_file):
             print(f"No feeds.txt found for {city}")
             return
-        feed_list = list(parse_feeds_txt(feeds_file))
+        all_feeds = parse_feeds_txt(feeds_file)
+        # Only include ICS feeds (skip scrapers)
+        ics_feeds = [f for f in all_feeds if f["type"] == "ics_url"]
+        feed_list = [(f["url"], f["name"], f.get("fallback_url")) for f in ics_feeds]
         pending_feeds = []
-        print(f"  Using feeds.txt ({len(feed_list)} feeds)")
+        print(f"  Using feeds.txt ({len(feed_list)} ICS feeds)")
 
     count = 0
     for url, friendly_name, fallback_url in feed_list:
         filename = slugify(url) + ".ics"
         outfile = os.path.join(output_dir, filename)
 
-        cmd = ["curl", "-sL",
-               "-A", "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
-               url, "-o", outfile]
+        cmd = [
+            "curl",
+            "-sL",
+            "-A",
+            "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
+            url,
+            "-o",
+            outfile,
+        ]
 
         subprocess.run(cmd)
 
@@ -309,8 +208,10 @@ def download_feeds(city: str) -> None:
                 fix_mec_timezone(outfile)
                 print(f"  🔧 Applied MEC timezone fix to {filename}")
 
-            print(f"  ✅ {filename}: {events} events"
-                  f"{' (source: ' + friendly_name + ')' if friendly_name else ''}")
+            print(
+                f"  ✅ {filename}: {events} events"
+                f"{' (source: ' + friendly_name + ')' if friendly_name else ''}"
+            )
         else:
             print(f"  ❌ {filename}: empty or failed")
 

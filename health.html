@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Feed Health Dashboard</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --warning: #ea580c;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-secondary: #64748b;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 1.5rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+    .banner {
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .banner.ok { background: #dcfce7; color: #166534; }
+    .banner.warn { background: #fef3c7; color: #92400e; }
+    .banner.error { background: #fee2e2; color: #991b1b; }
+    .banner .stale {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-left: auto;
+    }
+    .section {
+      margin-bottom: 2rem;
+    }
+    .section-header {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.5rem 0;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 0.75rem;
+    }
+    .section-header.errors { color: var(--danger); border-color: var(--danger); }
+    .section-header.warnings { color: var(--warning); border-color: var(--warning); }
+    .section-header.ok-section { color: var(--success); border-color: var(--success); }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .card.error-card { border-left: 3px solid var(--danger); }
+    .card.warn-card { border-left: 3px solid var(--warning); }
+    .card.ok-card { border-left: 3px solid var(--success); }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .source-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .source-meta {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.15rem 0.5rem;
+      border-radius: 99px;
+    }
+    .badge.high { background: var(--danger); color: white; }
+    .badge.medium { background: var(--warning); color: white; }
+    .badge.low { background: #f1f5f9; color: var(--text-secondary); }
+    .badge.count {
+      background: #f1f5f9;
+      color: var(--text);
+      margin-left: 0.25rem;
+    }
+    .anomaly-msg {
+      font-size: 0.85rem;
+      margin-top: 0.35rem;
+      color: var(--text-secondary);
+    }
+    .actions {
+      margin-top: 0.5rem;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .actions a, .actions button {
+      font-size: 0.8rem;
+      color: var(--primary);
+      text-decoration: none;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .actions a:hover { text-decoration: underline; }
+    .cmd-block {
+      background: #f1f5f9;
+      border-radius: 4px;
+      padding: 0.35rem 0.6rem;
+      font-family: 'SF Mono', monospace;
+      font-size: 0.75rem;
+      margin-top: 0.35rem;
+      word-break: break-all;
+      position: relative;
+    }
+    .cmd-block .copy-btn {
+      position: absolute;
+      right: 4px;
+      top: 4px;
+      font-size: 0.7rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 2px 6px;
+      cursor: pointer;
+    }
+    .loading, .error-msg, .empty-state {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-secondary);
+    }
+    .error-msg { color: var(--danger); }
+    .empty-state {
+      background: #fef3c7;
+      border-radius: 8px;
+      color: #92400e;
+    }
+    /* Sparkline bars */
+    .sparkline {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 32px;
+      margin-top: 0.5rem;
+    }
+    .sparkline .bar {
+      flex: 1;
+      min-width: 6px;
+      border-radius: 2px 2px 0 0;
+      background: var(--primary);
+      opacity: 0.7;
+      position: relative;
+    }
+    .sparkline .bar.gap {
+      background: var(--border);
+      opacity: 0.5;
+    }
+    .sparkline .bar.zero {
+      background: var(--danger);
+      opacity: 0.4;
+    }
+    .sparkline-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin: 0 1px;
+    }
+    .sparkline-dot.ok { background: var(--success); }
+    .sparkline-dot.gap { background: var(--border); }
+    .sparkline-dot.empty { background: var(--danger); opacity: 0.4; }
+    .history-label {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      margin-right: 0.25rem;
+    }
+    .timestamp {
+      font-size: 0.85rem;
+      color: inherit;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body x-data="healthDashboard()" x-init="init()">
+  <template x-if="error">
+    <div class="error-msg" x-text="error"></div>
+  </template>
+
+  <template x-if="!error && loaded && totalSources === 0">
+    <div class="empty-state">
+      No health data found for this city. The report-health edge function may not have run yet.
+    </div>
+  </template>
+
+  <template x-if="!error && loaded && totalSources > 0">
+    <div class="dashboard-content">
+      <!-- Banner -->
+      <div class="banner"
+           :class="statusClass(anomalyCount, staleWarning)">
+        <span x-text="statusEmoji(anomalyCount, staleWarning)"></span>
+        <span x-text="statusText(anomalyCount, staleWarning)"></span>
+        <span class="timestamp" x-show="latestCheckedAt" x-text="'Updated: ' + formatTime(latestCheckedAt)"></span>
+        <span class="stale" x-show="staleWarning" x-text="staleWarning"></span>
+      </div>
+
+      <!-- Errors -->
+      <div class="section" x-show="errors.length">
+        <div class="section-header errors">
+          Errors (<span x-text="errors.length"></span>)
+        </div>
+        <template x-for="item in errors" :key="item.feed_name">
+          <div class="card error-card">
+            <div class="card-header">
+              <div>
+                <div class="source-name" x-text="item.source_name || item.feed_name"></div>
+                <div class="source-meta" x-text="item.feed_name" x-show="item.source_name"></div>
+              </div>
+              <span class="badge high" x-text="item.error ? 'Runtime Error' : 'High Anomaly'"></span>
+            </div>
+            <div class="anomaly-msg" x-text="item.anomaly_message || item.error"></div>
+            <!-- 7-day sparkline -->
+            <div class="sparkline" x-show="item.history.length">
+              <template x-for="(day, idx) in item.history" :key="idx">
+                <div class="bar"
+                     :class="day === null ? 'gap' : (day === 0 ? 'zero' : '')"
+                     :style="'height:' + sparkHeight(day, item.maxHistory) + 'px'"
+                     :title="historyTitle(day, idx, item.historyDates)"></div>
+              </template>
+            </div>
+            <div class="history-label" x-show="item.history.length" x-text="'Last ' + item.history.length + ' days'"></div>
+            <!-- Expandable detail -->
+            <button class="actions" type="button"
+                    @click="item._expanded = !item._expanded"
+                    x-text="item._expanded ? 'Hide details' : 'Show details'"></button>
+            <template x-if="item._expanded">
+              <div>
+                <div class="actions">
+                  <a x-show="item.source_url" :href="item.source_url" target="_blank">View source →</a>
+                  <a x-show="item.gh_url" :href="item.gh_url" target="_blank">View scraper code →</a>
+                </div>
+                <div class="cmd-block" x-show="item.scraper_cmd">
+                  <span x-text="item.scraper_cmd"></span>
+                  <button class="copy-btn" @click="copyCmd(item.scraper_cmd)">Copy</button>
+                </div>
+              </div>
+            </template>
+          </div>
+        </template>
+      </div>
+
+      <!-- Warnings -->
+      <div class="section" x-show="warnings.length">
+        <div class="section-header warnings">
+          Warnings (<span x-text="warnings.length"></span>)
+        </div>
+        <template x-for="item in warnings" :key="item.feed_name">
+          <div class="card warn-card">
+            <div class="card-header">
+              <div>
+                <div class="source-name" x-text="item.source_name || item.feed_name"></div>
+                <div class="source-meta" x-text="item.feed_name" x-show="item.source_name"></div>
+              </div>
+              <span class="badge medium">Warning</span>
+            </div>
+            <div class="anomaly-msg" x-text="item.anomaly_message"></div>
+            <!-- 7-day sparkline -->
+            <div class="sparkline" x-show="item.history.length">
+              <template x-for="(day, idx) in item.history" :key="idx">
+                <div class="bar"
+                     :class="day === null ? 'gap' : (day === 0 ? 'zero' : '')"
+                     :style="'height:' + sparkHeight(day, item.maxHistory) + 'px'"
+                     :title="historyTitle(day, idx, item.historyDates)"></div>
+              </template>
+            </div>
+            <div class="history-label" x-show="item.history.length" x-text="'Last ' + item.history.length + ' days'"></div>
+            <!-- Expandable detail -->
+            <button class="actions" type="button"
+                    @click="item._expanded = !item._expanded"
+                    x-text="item._expanded ? 'Hide details' : 'Show details'"></button>
+            <template x-if="item._expanded">
+              <div>
+                <div class="actions">
+                  <a x-show="item.source_url" :href="item.source_url" target="_blank">View source →</a>
+                  <a x-show="item.gh_url" :href="item.gh_url" target="_blank">View scraper code →</a>
+                </div>
+                <div class="cmd-block" x-show="item.scraper_cmd">
+                  <span x-text="item.scraper_cmd"></span>
+                  <button class="copy-btn" @click="copyCmd(item.scraper_cmd)">Copy</button>
+                </div>
+              </div>
+            </template>
+          </div>
+        </template>
+      </div>
+
+      <!-- OK -->
+      <div class="section" x-show="oks.length">
+        <div class="section-header ok-section">
+          OK (<span x-text="oks.length"></span>)
+        </div>
+        <template x-for="item in oks" :key="item.feed_name">
+          <div class="card ok-card">
+            <div class="card-header">
+              <div>
+                <div class="source-name" x-text="item.source_name || item.feed_name"></div>
+                <div class="source-meta" x-text="item.feed_name" x-show="item.source_name"></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.5rem">
+                <!-- 3-day mini indicator -->
+                <template x-for="(day, idx) in (item.history || []).slice(-3)" :key="idx">
+                  <span class="sparkline-dot"
+                        :class="day === null ? 'gap' : (day > 0 ? 'ok' : 'empty')"></span>
+                </template>
+                <span class="badge count" x-text="item.event_count + ' events'"></span>
+              </div>
+            </div>
+            <!-- Expandable detail -->
+            <button class="actions" type="button"
+                    @click="item._expanded = !item._expanded"
+                    x-text="item._expanded ? 'Hide history' : 'Show history'"
+                    style="margin-top:0.25rem;font-size:0.75rem"></button>
+            <template x-if="item._expanded">
+              <div>
+                <!-- Full 7-day sparkline when expanded -->
+                <div class="sparkline" x-show="item.history.length">
+                  <template x-for="(day, idx) in item.history" :key="idx">
+                    <div class="bar"
+                         :class="day === null ? 'gap' : (day === 0 ? 'zero' : '')"
+                         :style="'height:' + sparkHeight(day, item.maxHistory) + 'px'"
+                         :title="historyTitle(day, idx, item.historyDates)"></div>
+                  </template>
+                </div>
+                <div class="actions">
+                  <a x-show="item.source_url" :href="item.source_url" target="_blank">View source →</a>
+                  <a x-show="item.gh_url" :href="item.gh_url" target="_blank">View scraper code →</a>
+                </div>
+                <div class="cmd-block" x-show="item.scraper_cmd">
+                  <span x-text="item.scraper_cmd"></span>
+                  <button class="copy-btn" @click="copyCmd(item.scraper_cmd)">Copy</button>
+                </div>
+              </div>
+            </template>
+          </div>
+        </template>
+      </div>
+    </div>
+  </template>
+
+  <div class="loading" x-show="!loaded && !error">Loading feed health data...</div>
+
+  <script>
+    function healthDashboard() {
+      return {
+        loaded: false,
+        error: null,
+        errors: [],
+        warnings: [],
+        oks: [],
+        staleWarning: null,
+        anomalyCount: 0,
+        totalSources: 0,
+        totalEvents: 0,
+        avg7Day: null,
+        latestCheckedAt: null,
+        ghRepo: null,
+        ghBranch: null,
+
+        async init() {
+          await this.loadConfig();
+          await this.loadData();
+        },
+
+        async loadConfig() {
+          if (/^(localhost|127\.|0\.0\.0\.0|file:)/.test(location.hostname)) {
+            try {
+              const r = await fetch('xmlui/config.local.js?' + Date.now());
+              if (r.ok) {
+                const script = document.createElement('script');
+                script.textContent = await r.text();
+                document.head.appendChild(script);
+              }
+            } catch (e) {}
+          }
+          this.ghRepo = window.GH_REPO || localStorage.getItem('gh_repo') || '';
+          this.ghBranch = window.GH_BRANCH || 'main';
+        },
+
+        getSupabaseUrl() {
+          return window.SUPABASE_URL;
+        },
+
+        getSupabaseKey() {
+          return window.SUPABASE_KEY;
+        },
+
+        async loadData() {
+          const supabaseUrl = this.getSupabaseUrl();
+          const supabaseKey = this.getSupabaseKey();
+          if (!supabaseUrl || !supabaseKey) {
+            this.error =
+              'Supabase not configured. Set SUPABASE_URL and SUPABASE_KEY ' +
+              '(copy xmlui/config.local.js from the main repo).';
+            return;
+          }
+
+          const params = new URLSearchParams(location.search);
+          const city = params.get('city') || 'bloomington';
+          const headers = {
+            apikey: supabaseKey,
+            Authorization: 'Bearer ' + supabaseKey,
+          };
+
+          try {
+            // Fetch all health rows for this city (last 60 days)
+            const sevenDaysAgo = new Date(Date.now() - 60 * 86400000).toISOString().split('T')[0];
+            const hResp = await fetch(
+              supabaseUrl + '/rest/v1/feed_health' +
+              '?select=*' +
+              '&city=eq.' + city +
+              '&checked_date=gte.' + sevenDaysAgo +
+              '&order=checked_at.desc' +
+              '&limit=2000',
+              { headers },
+            );
+            if (!hResp.ok) throw new Error('feed_health: ' + hResp.status);
+            const healthRows = await hResp.json();
+
+            // Fetch recent anomalies (last 7 days)
+            const aResp = await fetch(
+              supabaseUrl + '/rest/v1/feed_anomalies' +
+              '?select=*' +
+              '&city=eq.' + city +
+              '&order=detected_at.desc' +
+              '&limit=500',
+              { headers },
+            );
+            if (!aResp.ok) throw new Error('feed_anomalies: ' + aResp.status);
+            const anomalyRows = await aResp.json();
+
+            this.processData(city, healthRows, anomalyRows);
+            this.loaded = true;
+          } catch (e) {
+            this.error = 'Failed to load health data: ' + e.message;
+          }
+        },
+
+        processData(city, healthRows, anomalyRows) {
+          if (!healthRows.length) {
+            this.totalSources = 0;
+            return;
+          }
+
+          // Find the latest checked_date (the current run date)
+          const latestCheckedDate = healthRows.reduce(
+            (max, r) => r.checked_date > max ? r.checked_date : max,
+            healthRows[0].checked_date,
+          );
+
+          // Filter to only sources from the latest run
+          const latestRunRows = healthRows.filter(r => r.checked_date === latestCheckedDate);
+
+          // Build per-source 7-day history from ALL rows (not just latest run)
+          const historyByFeed = {};
+          for (const row of healthRows) {
+            if (!historyByFeed[row.feed_name]) {
+              historyByFeed[row.feed_name] = {};
+            }
+            // Keep latest count for each date (same logic as sparkline)
+            const existing = historyByFeed[row.feed_name][row.checked_date];
+            if (existing === undefined || row.checked_at > existing._at) {
+              historyByFeed[row.feed_name][row.checked_date] = row.event_count;
+              // Track timestamp for conflict resolution (won't be in final output)
+              historyByFeed[row.feed_name][row.checked_date + '._at'] = row.checked_at;
+            }
+          }
+
+          // Generate last 7 day slots for each feed
+          const today = new Date();
+          const dateSlots = [];
+          for (let i = 6; i >= 0; i--) {
+            const d = new Date(today);
+            d.setDate(d.getDate() - i);
+            dateSlots.push(d.toISOString().split('T')[0]);
+          }
+
+          // Build anomaly map: feed_name → latest anomaly (for classification)
+          const anomalyByFeed = {};
+          for (const a of anomalyRows) {
+            if (!anomalyByFeed[a.feed_name]) {
+              anomalyByFeed[a.feed_name] = a;
+            }
+          }
+
+          // Check staleness
+          const latestCheck = healthRows.length
+            ? new Date(healthRows[0].checked_at)
+            : null;
+          this.latestCheckedAt = latestCheck;
+          if (latestCheck) {
+            const hoursSince = (Date.now() - latestCheck.getTime()) / 3600000;
+            if (hoursSince > 36) {
+              this.staleWarning = `Data may be stale (${Math.round(hoursSince)}h old)`;
+            }
+          }
+
+          // Compute 7-day average of total events (from latest run only, by date)
+          const byDate = {};
+          for (const row of latestRunRows) {
+            byDate[row.checked_date] =
+              (byDate[row.checked_date] || 0) + row.event_count;
+          }
+          const sortedDates = Object.keys(byDate).sort();
+          const last7 = sortedDates.slice(-7);
+          this.totalSources = latestRunRows.length;
+          const latestDate = sortedDates[sortedDates.length - 1];
+          this.totalEvents = byDate[latestDate] || 0;
+          if (last7.length > 0) {
+            this.avg7Day = Math.round(
+              last7.reduce((s, d) => s + byDate[d], 0) / last7.length,
+            );
+          }
+
+          // Build per-source: group latest run row by feed_name
+          const latestByFeed = {};
+          for (const row of latestRunRows) {
+            // Keep the latest checked_at per feed (already sorted desc)
+            if (!latestByFeed[row.feed_name]) {
+              latestByFeed[row.feed_name] = row;
+            }
+          }
+
+          // Classify feeds
+          const errors = [];
+          const warnings = [];
+          const oks = [];
+
+          for (const feedName of Object.keys(latestByFeed)) {
+            const row = latestByFeed[feedName];
+            const anomaly = anomalyByFeed[feedName];
+            const historyMap = historyByFeed[feedName] || {};
+            const history = dateSlots.map(d => {
+              const val = historyMap[d];
+              return val !== undefined ? val : null;
+            });
+            // Remove the ._at sentinel keys for max calculation
+            const countsForMax = history.filter(v => v !== null);
+            const maxHistory = countsForMax.length ? Math.max(...countsForMax) : 1;
+
+            const item = {
+              feed_name: feedName,
+              source_name: row.source_name,
+              source_url: row.source_url,
+              scraper_cmd: row.scraper_cmd,
+              feed_type: row.feed_type,
+              event_count: row.event_count,
+              error: row.error,
+              anomaly_message: anomaly ? anomaly.message : null,
+              history: history,
+              historyDates: dateSlots,
+              maxHistory: maxHistory,
+              gh_url: this.buildGhUrl(row),
+              _expanded: false,
+            };
+
+            // Classification: error beats anomaly
+            if (row.error) {
+              item._expanded = true; // auto-expand errors
+              errors.push(item);
+            } else if (anomaly && anomaly.severity === 'high') {
+              item._expanded = true;
+              errors.push(item);
+            } else if (anomaly && anomaly.severity === 'medium') {
+              warnings.push(item);
+            } else {
+              oks.push(item);
+            }
+          }
+
+          this.errors = errors;
+          this.warnings = warnings;
+          this.oks = oks.sort((a, b) =>
+            (a.source_name || a.feed_name).localeCompare(b.source_name || b.feed_name),
+          );
+          this.anomalyCount = errors.length + warnings.length;
+        },
+
+        buildGhUrl(row) {
+          if (!this.ghRepo) return null;
+          if (row.scraper_cmd) {
+            const m = row.scraper_cmd.match(/(scrapers\/\S+?\.py)/);
+            if (m) {
+              return `https://github.com/${this.ghRepo}/blob/${this.ghBranch}/${m[1]}`;
+            }
+          }
+          return null;
+        },
+
+        sparkHeight(count, max) {
+          if (count === null || count === undefined) return 2; // gap: tiny bar
+          if (max === 0) return 2;
+          return Math.max(2, Math.round((count / max) * 28));
+        },
+
+        historyTitle(day, idx, dates) {
+          const date = dates && dates[idx] ? dates[idx] : 'day ' + (idx + 1);
+          if (day === null) return date + ': no data';
+          return date + ': ' + day + ' events';
+        },
+
+        formatTime(d) {
+          if (!d) return '';
+          const dt = new Date(d);
+          const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+          const h = dt.getHours();
+          const ampm = h >= 12 ? 'PM' : 'AM';
+          const h12 = h % 12 || 12;
+          const min = String(dt.getMinutes()).padStart(2, '0');
+          return months[dt.getMonth()] + ' ' + dt.getDate() + ', ' + h12 + ':' + min + ' ' + ampm;
+        },
+
+        statusClass(count, stale) {
+          if (stale) return 'warn';
+          if (count > 0) return 'error';
+          return 'ok';
+        },
+
+        statusEmoji(count, stale) {
+          if (stale) return '⚠️';
+          if (count > 0) return '⚠️';
+          return '✅';
+        },
+
+        statusText(count, stale) {
+          const total = this.totalSources;
+          const events = this.totalEvents;
+          let trend = '';
+          if (this.avg7Day !== null) {
+            const delta = events - this.avg7Day;
+            const pct = this.avg7Day ? Math.round((delta / this.avg7Day) * 100) : 0;
+            const arrow = delta >= 0 ? '↑' : '↓';
+            trend = ` (${arrow}${Math.abs(pct)}% from 7-day avg)`;
+          }
+          if (stale) {
+            return `${count} sources need attention • ${total} sources • ${events} events${trend}`;
+          }
+          if (count > 0) {
+            return `${count} sources need attention • ${total} sources • ${events} events${trend}`;
+          }
+          return `All sources healthy • ${total} sources • ${events} events${trend}`;
+        },
+
+        copyCmd(cmd) {
+          navigator.clipboard.writeText(cmd);
+        },
+      };
+    }
+  </script>
+</body>
+</html>
