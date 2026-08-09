@@ -7,3 +7,4 @@
 xmlui/config.json merge=keepours
 cities.json merge=keepours
 cities/*/feeds.txt merge=keepours
+graphify-out/graph.json merge=graphify

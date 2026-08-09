@@ -51,3 +51,8 @@ backups/
 report.json
 xmlui/version.txt
 .worktrees
+
+# Graphify
+graphify-out/cost.json
+# optional: commit for speed, skip to keep repo small
+graphify-out/cache/
