@@ -194,6 +194,10 @@ class ElfsightCalendarScraper(BaseScraper):
     widget_id: str = ""
     source_page: str = ""
 
+    # CLI args set these per-instance, so they're instance attrs (not class
+    # attrs/ClassVar) — RUF012 mutable-class-default would otherwise flag them.
+    # Subclasses that previously overrode them as class attrs must set them in
+    # __init__ instead.
     def __init__(self):
         super().__init__()
         self.location_filter: list[str] = []

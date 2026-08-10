@@ -47,8 +47,12 @@ format:
 	@uv run ruff format .
 	@echo "✓ Formatted"
 
-# Lint Python code. Ruff gates; type checkers run report-only for now.
+# Lint Python code. Ruff gates (format + check); type checkers run report-only for now.
 lint:
+	@echo "Running ruff format check..."
+	@uv run ruff format --check .
+	@echo "✓ ruff formatted"
+	@echo ""
 	@echo "Running ruff check..."
 	@uv run ruff check .
 	@echo "✓ ruff clean"
