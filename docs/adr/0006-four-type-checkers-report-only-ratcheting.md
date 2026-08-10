@@ -21,7 +21,7 @@ Run **four type checkers** (ty, pyrefly, pyright, zuban in mypy mode) plus **ruf
 3. **Ratcheting.** As files are annotated, the type-checker baseline drops. Once the baseline is clean, `make lint` is flipped to fail on type-checker errors too, and CI inherits the strict target.
 4. **Not in pre-commit.** The four checkers are project-wide and slow; pre-commit runs only ruff (fast, scoped to staged files), so commits stay quick while the full suite runs via `make lint` and, later, CI.
 
-Configuration for all checkers lives in `pyproject.toml` (`[tool.pyright]`, `[tool.ty]`, `[tool.pyrefly]`, and a `[tool.mypy]` section read by zuban's mypy mode — zuban follows mypy's convention of `[tool.mypy]` in `pyproject.toml`, not a top-level `[mypy]`).
+Configuration for all checkers lives in `pyproject.toml` (`[tool.pyright]`, `[tool.ty]`, `[tool.pyrefly]`, and a `[tool.mypy]` section read by zuban's mypy mode — zuban follows mypy's convention of `[tool.mypy]` in `pyproject.toml`, not a top-level `[mypy]`). All four checkers exclude the same directories (`legacy/`, `graphify-out/`, `.venv`, `.worktrees`) so their report-only baselines cover the same file set.
 
 ### Type stubs
 
