@@ -54,10 +54,9 @@ def parse_ics_datetime(dt_str, local_tz=None):
     if ";" in dt_str:
         tzid_match = re.search(r"TZID=([^:;]+)", dt_str)
         if tzid_match:
-            try:
+            # Invalid TZID — fall back to city timezone
+            with contextlib.suppress(KeyError, ValueError):
                 local_tz = ZoneInfo(tzid_match.group(1))
-            except (KeyError, ValueError):
-                pass  # Invalid TZID — fall back to city timezone
         dt_str = dt_str.split(":")[-1]
 
     dt_str = dt_str.strip()
@@ -253,14 +252,14 @@ def cluster_by_title_similarity(events, threshold=0.85):
         # Union-find
         parent = list(range(len(group)))
 
-        def find(x):
+        def find(x, parent=parent):
             while parent[x] != x:
                 parent[x] = parent[parent[x]]
                 x = parent[x]
             return x
 
-        def union(a, b):
-            parent[find(a)] = find(b)
+        def union(a, b, parent=parent):
+            parent[find(a, parent)] = find(b, parent)
 
         for i in range(len(group)):
             for j in range(i + 1, len(group)):

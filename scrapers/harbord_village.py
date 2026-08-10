@@ -6,6 +6,7 @@ from __future__ import annotations
 import re
 from datetime import date, datetime
 from html import unescape
+from typing import ClassVar
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
@@ -40,7 +41,7 @@ class HarbordVillageScraper(BaseScraper):
     timezone = "America/Toronto"
     page_url = "https://harbordvillage.com/calendar-of-hvra-events-for-2026/"
     default_url = page_url
-    headers = {
+    headers: ClassVar[dict[str, str]] = {
         "User-Agent": "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
         "Accept": "text/html,application/xhtml+xml",
     }

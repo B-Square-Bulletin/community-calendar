@@ -32,10 +32,8 @@ def parse_feeds_txt(path):
             continue
 
         # Skip generated-file header comments
-        if (
-            stripped.startswith("# Generated from")
-            or (stripped == "# " + stripped.split("# ", 1)[-1]
-            and "source inventory" in stripped)
+        if stripped.startswith("# Generated from") or (
+            stripped == "# " + stripped.split("# ", 1)[-1] and "source inventory" in stripped
         ):
             continue
 

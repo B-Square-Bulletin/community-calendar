@@ -28,7 +28,7 @@ import logging
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta
-from typing import Any
+from typing import Any, ClassVar
 
 import feedparser
 import requests
@@ -50,7 +50,7 @@ class CatsCradleScraper(BaseScraper):
     # Pagination is broken (all pages return the same 115 entries), so fetch only page 1.
     MAX_PAGES = 1
 
-    VENUE_ADDRESSES = {
+    VENUE_ADDRESSES: ClassVar[dict[str, str]] = {
         "cats-cradle": "Cat's Cradle, 300 E Main St, Carrboro, NC 27510",
         "cats-cradle-back-room": "Cat's Cradle Back Room, 300 E Main St, Carrboro, NC 27510",
         "cats-cradle-back-yard": "Cat's Cradle Back Yard, 300 E Main St, Carrboro, NC 27510",
@@ -184,9 +184,7 @@ class CatsCradleScraper(BaseScraper):
         except ValueError:
             return None
 
-    def _parse_jsonld_event(
-        self, data: dict, url: str, venue_slug: str
-    ) -> dict[str, Any] | None:
+    def _parse_jsonld_event(self, data: dict, url: str, venue_slug: str) -> dict[str, Any] | None:
         """Parse a JSON-LD Event object into our event dict format."""
         event_type = data.get("@type", "")
         if event_type not in ("Event", "MusicEvent"):

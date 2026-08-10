@@ -6,7 +6,7 @@ import html as html_mod
 import json
 import re
 from datetime import datetime, timedelta
-from typing import Any
+from typing import Any, ClassVar
 from urllib.parse import urljoin
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
@@ -26,7 +26,7 @@ class EScribeScraper(BaseScraper):
 
     endpoint_url: str = ""
     root_url: str = ""
-    headers: dict[str, str] = {
+    headers: ClassVar[dict[str, str]] = {
         "User-Agent": "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
         "Content-Type": "application/json; charset=UTF-8",
     }

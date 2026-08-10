@@ -1,7 +1,7 @@
 """Generic Bibliocommons events scraper base."""
 
 from datetime import datetime, timedelta
-from typing import Any
+from typing import Any, ClassVar
 from zoneinfo import ZoneInfo
 
 import requests
@@ -29,12 +29,14 @@ class BibliocommonsEventsScraper(BaseScraper):
     request_timeout: int = 30
 
     # Optional allow-list filters applied client-side on event definition IDs
-    audience_ids: list[str] = []
-    type_ids: list[str] = []
-    program_ids: list[str] = []
-    language_ids: list[str] = []
+    audience_ids: ClassVar[list[str]] = []
+    type_ids: ClassVar[list[str]] = []
+    program_ids: ClassVar[list[str]] = []
+    language_ids: ClassVar[list[str]] = []
 
-    headers = {"User-Agent": "Mozilla/5.0 (compatible; community-calendar/1.0)"}
+    headers: ClassVar[dict[str, str]] = {
+        "User-Agent": "Mozilla/5.0 (compatible; community-calendar/1.0)"
+    }
 
     def fetch_events(self) -> list[dict[str, Any]]:
         if not self.library_slug:

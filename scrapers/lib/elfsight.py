@@ -158,9 +158,12 @@ def expand_recurring_events(
         elif repeat_period == "custom" and repeat_freq == "daily":
             should_include = True
 
-        if should_include and current >= now - timedelta(days=1):
-            if current.date() not in exceptions:
-                occurrences.append(current)
+        if (
+            should_include
+            and current >= now - timedelta(days=1)
+            and current.date() not in exceptions
+        ):
+            occurrences.append(current)
 
         # Advance based on frequency
         if repeat_freq == "daily":
@@ -190,11 +193,11 @@ class ElfsightCalendarScraper(BaseScraper):
 
     widget_id: str = ""
     source_page: str = ""
-    location_filter: list[str] = []
-    event_type_filter: list[str] = []
 
     def __init__(self):
         super().__init__()
+        self.location_filter: list[str] = []
+        self.event_type_filter: list[str] = []
         self._settings = None
         self._locations_map = {}
         self._event_types_map = {}

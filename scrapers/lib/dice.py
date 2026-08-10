@@ -33,7 +33,7 @@ import logging
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
-from typing import Any
+from typing import Any, ClassVar
 
 from .base import BaseScraper
 from .jsonld import (
@@ -63,7 +63,7 @@ class DiceVenueScraper(BaseScraper):
     venue_url: str = ""
     default_location: str = ""
     max_workers: int = 8
-    headers: dict = {
+    headers: ClassVar[dict] = {
         "User-Agent": "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
         "Accept": "text/html,application/xhtml+xml",
     }

@@ -108,10 +108,13 @@ class EventbriteFilteredScraper(BaseScraper):
             # Geo filter: if allowlist provided, location must contain at least
             # one keyword. Empty location passes (treated as online from a
             # Toronto org — see geo_allowlist.txt rationale).
-            if self.geo_allowlist and location:
-                if not matches_keyword(location, self.geo_allowlist):
-                    out_of_area.append(location)
-                    continue
+            if (
+                self.geo_allowlist
+                and location
+                and not matches_keyword(location, self.geo_allowlist)
+            ):
+                out_of_area.append(location)
+                continue
 
             dtstart = ev.get("dtstart")
             if not dtstart:

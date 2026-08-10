@@ -21,7 +21,7 @@ class that covers every store using Bookmanager hosting.
 """
 
 from datetime import date, datetime
-from typing import Any
+from typing import Any, ClassVar
 from zoneinfo import ZoneInfo
 
 import requests
@@ -39,7 +39,7 @@ class BookmanagerEventsScraper(BaseScraper):
     # Subclasses set these (or pass via __init__)
     san: str = ""
 
-    headers = {
+    headers: ClassVar[dict[str, str]] = {
         "User-Agent": (
             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
             "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"

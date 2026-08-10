@@ -11,7 +11,7 @@ sys.path.insert(0, "scrapers")
 import argparse
 import re
 from datetime import datetime, timedelta
-from typing import Any
+from typing import Any, ClassVar
 from zoneinfo import ZoneInfo
 
 import requests
@@ -30,7 +30,7 @@ class LibraryScraper(BaseScraper):
     timezone = "America/Los_Angeles"
 
     # Library-specific configurations
-    CONFIGS = {
+    CONFIGS: ClassVar[dict[str, dict[str, str]]] = {
         "santarosa": {
             "name": "Sonoma County Library",
             "domain": "sonomalibrary.org",

@@ -17,7 +17,7 @@ import argparse
 import json
 import logging
 from datetime import datetime, timedelta
-from typing import Any
+from typing import Any, ClassVar
 from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
@@ -37,7 +37,7 @@ class EssexCountyParksScraper(BaseScraper):
     timezone = "America/New_York"
 
     # Skip "Golf Course Closed/Open" and "NO PUBLIC SESSIONS" non-events
-    SKIP_PATTERNS = [
+    SKIP_PATTERNS: ClassVar[list[str]] = [
         "golf course closed",
         "golf course id unit",
         "no public session",

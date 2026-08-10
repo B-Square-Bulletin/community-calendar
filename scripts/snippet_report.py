@@ -39,7 +39,7 @@ def get_snippet(description, title=None):
     text = re.sub(r"[\t\r]+", " ", text)
     text = re.sub(r" {2,}", " ", text)
 
-    lines = [l.strip() for l in text.split("\n") if l.strip()]
+    lines = [line.strip() for line in text.split("\n") if line.strip()]
 
     label_prefix = re.compile(r"^\w+(\s+\w+){0,2}\s*:\s*")
     cta_prefix = re.compile(

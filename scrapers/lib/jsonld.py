@@ -28,7 +28,7 @@ import json
 import logging
 import re
 from datetime import datetime, timezone
-from typing import Any
+from typing import Any, ClassVar
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -101,8 +101,10 @@ def extract_events_from_blocks(blocks: list[dict], is_event=None) -> list[dict]:
         is_event = _is_event_type
     elif isinstance(is_event, set):
         type_set = is_event
+
         def is_event(t):
             return t in type_set
+
     events = []
     for data in blocks:
         if isinstance(data, list):
@@ -165,11 +167,11 @@ class JsonLdScraper(BaseScraper):
     """
 
     url: str = ""
-    urls: list[str] = []
+    urls: ClassVar[list[str]] = []
     default_location: str = ""
     event_types = None  # None = match all schema.org Event subtypes
     location_filter: str | None = None
-    headers: dict = {
+    headers: ClassVar[dict] = {
         "User-Agent": "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
         "Accept": "text/html,application/xhtml+xml",
     }

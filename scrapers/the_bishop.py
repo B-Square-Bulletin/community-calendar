@@ -14,7 +14,7 @@ from bs4 import BeautifulSoup
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 sys.path.insert(0, str(__file__).rsplit("/", 2)[0])
-from lib.base import BaseScraper
+from lib.base import BaseScraper  # noqa: E402
 
 
 class TheBishopScraper(BaseScraper):

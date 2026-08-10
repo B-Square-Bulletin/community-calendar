@@ -2,6 +2,7 @@
 """Toronto Public Library scraper using generic Bibliocommons base."""
 
 import sys
+from typing import ClassVar
 
 sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
@@ -18,7 +19,7 @@ class TorontoPublicLibraryScraper(BibliocommonsEventsScraper):
     # (Preschool 0-5, School Age 6-12, Teens 13-17, Younger Adults 18-24,
     #  Adults 18+, Older Adults) plus any events with no audience tag.
     # No type filter either — all 19 event types pass through.
-    audience_ids: list[str] = []
+    audience_ids: ClassVar[list[str]] = []
 
     # Keep bounded runtime for CI while still covering broad upcoming set.
     page_limit = 100

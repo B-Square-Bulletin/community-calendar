@@ -4,7 +4,7 @@
 import re
 import sys
 from datetime import datetime, timedelta
-from typing import Any
+from typing import Any, ClassVar
 from zoneinfo import ZoneInfo
 
 import requests
@@ -24,7 +24,7 @@ class BuskirkChumleyScraper(BaseScraper):
     timezone = "America/Indiana/Indianapolis"
 
     # Month name to number mapping
-    MONTHS = {
+    MONTHS: ClassVar[dict[str, int]] = {
         "january": 1,
         "february": 2,
         "march": 3,

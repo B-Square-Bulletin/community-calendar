@@ -138,9 +138,7 @@ class DcMusicLiveScraper(BaseScraper):
             "description": "",
         }
 
-    def _extract_datetime(
-        self, anchor, href: str, tz: ZoneInfo, now: datetime
-    ) -> datetime | None:
+    def _extract_datetime(self, anchor, href: str, tz: ZoneInfo, now: datetime) -> datetime | None:
         # Best signal: Tockify URLs encode a millisecond timestamp.
         m = TOCKIFY_DETAIL_RE.search(href)
         if m:

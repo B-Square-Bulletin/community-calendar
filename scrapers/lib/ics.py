@@ -1,6 +1,6 @@
 """ICS feed scraper base class."""
 
-from typing import Any
+from typing import Any, ClassVar
 
 import requests
 from icalendar import Calendar
@@ -84,14 +84,16 @@ class IcsScraper(BaseScraper):
             return events
 
         for component in cal.walk():
-            if component.name == "VEVENT":
-                event = self._parse_vevent(component)
-                if event:
-                    # Apply filter
-                    if self.filter_event(event):
-                        # Apply transform
-                        event = self.transform_event(event)
-                        events.append(event)
+            if component.name != "VEVENT":
+                continue
+            event = self._parse_vevent(component)
+            if not event:
+                continue
+            # Apply filter
+            if self.filter_event(event):
+                # Apply transform
+                event = self.transform_event(event)
+                events.append(event)
 
         return events
 
@@ -163,7 +165,7 @@ class GoogleCalendarScraper(IcsScraper):
     - "abc123@group.calendar.google.com"
     """
 
-    calendar_ids: list[str] = []
+    calendar_ids: ClassVar[list[str]] = []
 
     def get_ics_urls(self) -> list[str]:
         """Convert calendar IDs to ICS URLs."""

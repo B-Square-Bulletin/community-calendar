@@ -6,6 +6,7 @@ from __future__ import annotations
 import re
 from datetime import date, datetime, timedelta
 from html import unescape
+from typing import ClassVar
 from urllib.parse import unquote, urljoin
 from zoneinfo import ZoneInfo
 
@@ -28,7 +29,7 @@ class JCCCScraper(BaseScraper):
     default_url = page_url
     default_location = "Japanese Canadian Cultural Centre"
     max_pages = 10
-    headers = {
+    headers: ClassVar[dict[str, str]] = {
         "User-Agent": "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
         "Accept": "text/html,application/xhtml+xml",
     }

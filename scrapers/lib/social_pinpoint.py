@@ -17,7 +17,7 @@ import json
 import logging
 import re
 from datetime import datetime
-from typing import Any
+from typing import Any, ClassVar
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
@@ -75,7 +75,7 @@ class SocialPinpointScraper(BaseScraper):
     """Reusable scraper for Social Pinpoint / Have Your Say event pages."""
 
     page_url: str = ""
-    headers: dict[str, str] = {
+    headers: ClassVar[dict[str, str]] = {
         "User-Agent": "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
         "Accept": "text/html,application/xhtml+xml",
     }

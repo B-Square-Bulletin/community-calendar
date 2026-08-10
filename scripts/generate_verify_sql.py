@@ -222,7 +222,7 @@ def generate_sql(tables, columns, functions, indexes, views, matviews, extension
 
     # Extensions
     checks.append(("'── EXTENSIONS ──'", "''"))
-    for name, ddl in sorted(extensions.items()):
+    for name, _ddl in sorted(extensions.items()):
         checks.append(
             (
                 f"'{name}'",
@@ -252,13 +252,13 @@ def main():
         len(tables)
         + len(
             [
-                    ("events", "city"),
-                    ("events", "all_day"),
-                    ("events", "source_uid"),
-                    ("events", "image_url"),
-                    ("events", "category"),
-                    ("events", "transcript"),
-                ]
+                ("events", "city"),
+                ("events", "all_day"),
+                ("events", "source_uid"),
+                ("events", "image_url"),
+                ("events", "category"),
+                ("events", "transcript"),
+            ]
         )
         + len(functions)
         + len(indexes)

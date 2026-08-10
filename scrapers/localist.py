@@ -42,7 +42,12 @@ class LocalistScraper(BaseScraper):
     timezone = "America/Indiana/Indianapolis"
 
     def __init__(
-        self, base_url: str, name: str, venue_id: str | None = None, group_id: str | None = None, days: int = 90
+        self,
+        base_url: str,
+        name: str,
+        venue_id: str | None = None,
+        group_id: str | None = None,
+        days: int = 90,
     ):
         super().__init__()
         self.base_url = base_url.rstrip("/")

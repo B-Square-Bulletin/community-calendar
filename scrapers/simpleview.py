@@ -151,10 +151,9 @@ class SimpleviewScraper(BaseScraper):
                 categories.append(text.strip().lower())
 
             # Town filter: keep item if ANY category matches ANY requested town.
-            if self.towns:
-                if not any(town in cat for cat in categories for town in self.towns):
-                    skipped_town += 1
-                    continue
+            if self.towns and not any(town in cat for cat in categories for town in self.towns):
+                skipped_town += 1
+                continue
 
             items.append({"url": url, "categories": categories})
 

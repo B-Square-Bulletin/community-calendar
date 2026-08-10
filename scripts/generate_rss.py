@@ -187,7 +187,7 @@ def main():
     latest = latest[:LATEST_MAX_ITEMS]
 
     latest_items = []
-    for pub_str, start, ev, guid, _carried in latest:
+    for pub_str, _start, ev, guid, _carried in latest:
         item = render_item(ev, guid, now, app_link)
         item = re.sub(r"<pubDate>[^<]+</pubDate>", f"<pubDate>{pub_str}</pubDate>", item)
         latest_items.append(item)

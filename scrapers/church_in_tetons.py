@@ -35,7 +35,20 @@ from bs4 import BeautifulSoup
 from lib.base import BaseScraper
 from lib.utils import DEFAULT_HEADERS
 
-MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+MONTHS = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+]
 
 TIME_RE = re.compile(r"(\d{1,2})(?::(\d{2}))?\s*([ap]m)", re.I)
 
@@ -128,7 +141,7 @@ class ChurchInTetonsScraper(BaseScraper):
 
     def _parse_date_text(self, date_el) -> tuple[str | None, str | None, int | None]:
         """Parse 'Thursday\\nApril 30' into ('Thursday', 'April', 30)."""
-        lines = [l.strip() for l in date_el.get_text("\n").splitlines() if l.strip()]
+        lines = [line.strip() for line in date_el.get_text("\n").splitlines() if line.strip()]
         if not lines:
             return None, None, None
 

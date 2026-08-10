@@ -12,7 +12,7 @@ sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
 from datetime import datetime, timedelta
-from typing import Any
+from typing import Any, ClassVar
 
 import requests
 from bs4 import BeautifulSoup
@@ -29,7 +29,7 @@ class CopperfieldsScraper(BaseScraper):
     BASE_URL = "https://copperfieldsbooks.com"
     EVENTS_URL = f"{BASE_URL}/upcoming-events"
 
-    STORE_LOCATIONS = {
+    STORE_LOCATIONS: ClassVar[dict[str, str]] = {
         "petaluma": "140 Kentucky Street, Petaluma, CA 94952",
         "sebastopol": "138 N Main St, Sebastopol, CA 95472",
         "healdsburg": "104 Matheson Street, Healdsburg, CA 95448",

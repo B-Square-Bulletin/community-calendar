@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import re
 from datetime import datetime, timedelta
+from typing import ClassVar
 from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
@@ -16,7 +17,7 @@ class MetrolinxBoardScraper(BaseScraper):
     timezone = "America/Toronto"
     page_url = "https://www.metrolinx.com/en/about-us/the-board/board-meetings"
     default_url = page_url
-    headers = {
+    headers: ClassVar[dict[str, str]] = {
         "User-Agent": "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
         "Accept": "text/html,application/xhtml+xml",
     }

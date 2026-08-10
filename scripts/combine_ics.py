@@ -645,7 +645,7 @@ def dedupe_cross_source(events, input_dir):
     unique_events = []
     cross_source_deduped = 0
 
-    for key, group in groups.items():
+    for group in groups.values():
         if len(group) == 1:
             unique_events.append(group[0])
         else:
@@ -731,7 +731,7 @@ def dedupe_fuzzy(events, input_dir):
 
     # Open log file
     log_path = Path(input_dir) / "fuzzy_dedup.log"
-    log_file = open(log_path, "w")
+    log_file = open(log_path, "w")  # noqa: SIM115
     log_file.write(f"Fuzzy dedup run: {datetime.now().isoformat()}\n")
     log_file.write(f"Total events: {len(events)}\n\n")
 

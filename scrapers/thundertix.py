@@ -81,10 +81,8 @@ class ThunderTixScraper(BaseScraper):
                     for item in block.get("itemListElement", []):
                         event = item.get("item", {})
                         if (
-                            (isinstance(event, dict)
-                            and event.get("@type", "").endswith("Event"))
-                            or (isinstance(event, dict) and event.get("@type") == "Event")
-                        ):
+                            isinstance(event, dict) and event.get("@type", "").endswith("Event")
+                        ) or (isinstance(event, dict) and event.get("@type") == "Event"):
                             events.append(event)
                 # @graph
                 for node in block.get("@graph", []):

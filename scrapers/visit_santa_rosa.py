@@ -183,7 +183,6 @@ class VisitSantaRosaScraper(BaseScraper):
         # Handle all-day events
         is_all_day = hit.get("isAllDay", False)
         if is_all_day:
-
             dtstart_val = dtstart.astimezone(__import__("zoneinfo").ZoneInfo(self.timezone)).date()
             dtend_val = dtend.astimezone(__import__("zoneinfo").ZoneInfo(self.timezone)).date()
         else:
@@ -208,8 +207,8 @@ class VisitSantaRosaScraper(BaseScraper):
             line = line.strip()
             if not line:
                 continue
-            if (
-                line.startswith(("URLs:", "Prices:", "Date and Time:", "Venue Details:", "Category:"))
+            if line.startswith(
+                ("URLs:", "Prices:", "Date and Time:", "Venue Details:", "Category:")
             ):
                 break
             desc_parts.append(line)

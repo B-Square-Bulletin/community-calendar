@@ -346,9 +346,7 @@ Example: {example_json}"""
     return result_map, headers
 
 
-def process_file(
-    filepath, config, few_shot, dry_run=False, rate_limiter=None
-):
+def process_file(filepath, config, few_shot, dry_run=False, rate_limiter=None):
     """Classify events in a single events.json file.
 
     Args:

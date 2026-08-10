@@ -14,9 +14,13 @@ import argparse
 import html as html_mod
 import logging
 import re
+import sys
 import time
 from typing import Any
 from urllib.parse import urlparse
+
+import requests
+from icalendar import Calendar
 
 # Squarespace seeds new Events collections with placeholder/demo events whose
 # slugs are event-one … event-five plus a random suffix (e.g.
@@ -32,13 +36,9 @@ def _clean_text(value: Any) -> str:
     return text.replace("\xa0", " ").strip()
 
 
-import sys
-
-import requests
-from icalendar import Calendar
-
 sys.path.insert(0, str(__file__).rsplit("/", 2)[0])
-from scrapers.lib.base import BaseScraper
+from scrapers.lib.base import BaseScraper  # noqa: E402, I001
+
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)

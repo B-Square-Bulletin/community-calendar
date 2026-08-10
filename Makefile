@@ -1,23 +1,24 @@
-.PHONY: help test test-python test-sql test-all setup-local setup-python teardown-local clean
-
-# Detect Python in venv or system
-PYTHON := $(shell if [ -f .venv/bin/python ]; then echo .venv/bin/python; else echo python; fi)
+.PHONY: help test test-python test-sql test-all setup-python setup-local teardown-local format lint check export-requirements clean
 
 # Default target
 help:
 	@echo "Community Calendar Test Suite"
 	@echo ""
 	@echo "Targets:"
-	@echo "  make test           - Run Python tests"
-	@echo "  make test-python    - Run Python tests (pytest)"
-	@echo "  make test-sql       - Run database tests (local Supabase via pgTAP)"
-	@echo "  make setup-python   - Create venv and install dependencies"
-	@echo "  make setup-local    - Start local Supabase and apply schema"
-	@echo "  make teardown-local - Stop local Supabase"
-	@echo "  make clean          - Clean test artifacts"
+	@echo "  make test            - Run Python tests"
+	@echo "  make test-python     - Run Python tests (pytest via uv)"
+	@echo "  make test-sql        - Run database tests (local Supabase via pgTAP)"
+	@echo "  make format          - Auto-format Python code (ruff format)"
+	@echo "  make lint            - Lint Python code (ruff check; type checkers report-only)"
+	@echo "  make check           - Run lint + Python tests"
+	@echo "  make setup-python    - Create venv and install dependencies (uv sync)"
+	@echo "  make setup-local     - Start local Supabase and apply schema"
+	@echo "  make teardown-local  - Stop local Supabase"
+	@echo "  make export-requirements - Regenerate requirements*.txt from uv.lock"
+	@echo "  make clean           - Clean test artifacts"
 	@echo ""
 	@echo "Prerequisites:"
-	@echo "  - Python 3.10+ (run 'make setup-python' for venv)"
+	@echo "  - uv (install with: curl -LsSf https://astral.sh/uv/install.sh | sh)"
 	@echo "  - Supabase CLI installed (for database tests)"
 	@echo "  - PostgreSQL client (psql) for local database access"
 
@@ -27,17 +28,10 @@ test: test-python
 # Alias for test
 test-all: test
 
-# Setup Python environment
+# Setup Python environment with uv
 setup-python:
-	@echo "Setting up Python virtual environment..."
-	@if [ ! -d .venv ]; then \
-		python3 -m venv .venv; \
-		echo "✓ Created .venv"; \
-	else \
-		echo "✓ .venv already exists"; \
-	fi
-	@echo "Installing dependencies..."
-	.venv/bin/pip install -q -r requirements-dev.txt
+	@echo "Setting up Python environment with uv..."
+	@uv sync
 	@echo "✓ Dependencies installed"
 	@echo ""
 	@echo "Activate venv with: source .venv/bin/activate"
@@ -45,18 +39,44 @@ setup-python:
 # Run Python tests
 test-python:
 	@echo "Running Python tests..."
-	@if [ -f .venv/bin/pytest ]; then \
-		env -u PYTHONPATH .venv/bin/pytest tests/ -v; \
-	elif $(PYTHON) -m pytest --version > /dev/null 2>&1; then \
-		env -u PYTHONPATH $(PYTHON) -m pytest tests/ -v; \
-	elif command -v pytest > /dev/null 2>&1; then \
-		env -u PYTHONPATH pytest tests/ -v; \
+	@uv run env -u PYTHONPATH pytest tests/ -v
+
+# Auto-format Python code
+format:
+	@echo "Formatting Python code..."
+	@uv run ruff format .
+	@echo "✓ Formatted"
+
+# Lint Python code. Ruff gates; type checkers run report-only for now.
+lint:
+	@echo "Running ruff check..."
+	@uv run ruff check .
+	@echo "✓ ruff clean"
+	@echo ""
+	@echo "Running type checkers (report-only)..."
+	@status=0; \
+	for checker in "pyright" "ty check" "pyrefly check" "zuban mypy ."; do \
+		echo "  → $$checker"; \
+		uv run $$checker >/tmp/cc-lint-$$(echo $$checker | tr ' ' '_').log 2>&1 || status=$$?; \
+		tail -2 /tmp/cc-lint-$$(echo $$checker | tr ' ' '_').log | sed 's/^/    /'; \
+	done; \
+	echo ""; \
+	if [ $$status -ne 0 ]; then \
+		echo "⚠️  Type checkers reported diagnostics (non-blocking in phase 1)."; \
 	else \
-		echo "ERROR: pytest not found."; \
-		echo "Install with: pip install pytest"; \
-		echo "Or run: make setup-python"; \
-		exit 1; \
+		echo "✓ Type checkers clean"; \
 	fi
+
+# Lint + tests
+check: lint test-python
+
+# Regenerate requirements*.txt from uv.lock (kept for CI until it migrates to uv)
+export-requirements:
+	@echo "Exporting requirements.txt..."
+	@uv export --format requirements.txt --no-dev --no-hashes > requirements.txt
+	@echo "Exporting requirements-dev.txt..."
+	@uv export --format requirements.txt --no-hashes > requirements-dev.txt
+	@echo "✓ requirements*.txt regenerated"
 
 # Run database tests (requires prepared local Supabase project DB)
 test-sql:
@@ -89,4 +109,5 @@ clean:
 	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
 	find . -type f -name "*.pyc" -delete 2>/dev/null || true
 	find . -type d -name .pytest_cache -exec rm -rf {} + 2>/dev/null || true
+	find . -type d -name .ruff_cache -exec rm -rf {} + 2>/dev/null || true
 	@echo "✓ Cleaned"
