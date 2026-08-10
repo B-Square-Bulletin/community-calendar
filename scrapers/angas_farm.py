@@ -10,7 +10,8 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import argparse
 import logging
@@ -18,20 +19,19 @@ import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from typing import Any
-from urllib.request import urlopen, Request
 from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 
 from icalendar import Calendar as ICalendar
-
 from lib.base import BaseScraper
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 BASE_URL = "https://www.angasfarm.ca"
 EVENTS_PATH = "/events-2"
 HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
-    'Accept': 'text/html,application/xhtml+xml',
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+    "Accept": "text/html,application/xhtml+xml",
 }
 
 
@@ -55,7 +55,7 @@ class AngasFarmScraper(BaseScraper):
         html = self._fetch(f"{BASE_URL}{EVENTS_PATH}")
         if not html:
             return []
-        text = html.decode('utf-8')
+        text = html.decode("utf-8")
         slugs = list(set(re.findall(rf'href="({EVENTS_PATH}/[^"?#]+)"', text)))
         self.logger.info(f"Found {len(slugs)} event slugs")
         return slugs
@@ -73,12 +73,12 @@ class AngasFarmScraper(BaseScraper):
         except Exception:
             return []
 
-        for comp in cal.walk('VEVENT'):
-            dtstart = comp.get('dtstart')
+        for comp in cal.walk("VEVENT"):
+            dtstart = comp.get("dtstart")
             if not dtstart:
                 continue
             dt = dtstart.dt
-            if hasattr(dt, 'hour'):
+            if hasattr(dt, "hour"):
                 start_aware = dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
             else:
                 start_aware = datetime.combine(dt, datetime.min.time()).replace(tzinfo=timezone.utc)
@@ -86,17 +86,19 @@ class AngasFarmScraper(BaseScraper):
             if start_aware < now:
                 continue
 
-            dtend = comp.get('dtend')
+            dtend = comp.get("dtend")
             end_dt = dtend.dt if dtend else None
 
-            events.append({
-                'title': str(comp.get('summary', 'Untitled')),
-                'dtstart': dt,
-                'dtend': end_dt,
-                'location': str(comp.get('location', '')),
-                'description': str(comp.get('description', '')),
-                'url': f"{BASE_URL}{slug}",
-            })
+            events.append(
+                {
+                    "title": str(comp.get("summary", "Untitled")),
+                    "dtstart": dt,
+                    "dtend": end_dt,
+                    "location": str(comp.get("location", "")),
+                    "description": str(comp.get("description", "")),
+                    "url": f"{BASE_URL}{slug}",
+                }
+            )
 
         return events
 
@@ -121,8 +123,8 @@ class AngasFarmScraper(BaseScraper):
 
 def main():
     parser = argparse.ArgumentParser(description="Scrape Anga's Farm & Nursery events")
-    parser.add_argument('--output', '-o', help='Output ICS file')
-    parser.add_argument('--debug', action='store_true')
+    parser.add_argument("--output", "-o", help="Output ICS file")
+    parser.add_argument("--debug", action="store_true")
     args = parser.parse_args()
     if args.debug:
         logging.getLogger().setLevel(logging.DEBUG)
@@ -130,5 +132,5 @@ def main():
     scraper.run(args.output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -27,8 +27,7 @@ from email.utils import format_datetime
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
-SITE_BASE = os.environ.get(
-    "SITE_BASE", "https://b-square-bulletin.github.io/community-calendar")
+SITE_BASE = os.environ.get("SITE_BASE", "https://b-square-bulletin.github.io/community-calendar")
 FULL_WINDOW_DAYS = 90
 LATEST_MAX_ITEMS = 100
 
@@ -38,7 +37,7 @@ def parse_dt(value):
     if not value:
         return None
     try:
-        dt = datetime.fromisoformat(value.replace('Z', '+00:00'))
+        dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
     except ValueError:
         return None
     if dt.tzinfo is None:
@@ -47,37 +46,40 @@ def parse_dt(value):
 
 
 def event_guid(ev):
-    uid = ev.get('source_uid')
+    uid = ev.get("source_uid")
     if uid:
         return uid
     basis = f"{ev.get('title', '')}|{ev.get('start_time', '')}"
-    return hashlib.md5(basis.encode('utf-8')).hexdigest()
+    return hashlib.md5(basis.encode("utf-8")).hexdigest()
 
 
 def esc(text):
-    return html.escape(text or '', quote=False)
+    return html.escape(text or "", quote=False)
 
 
 def render_item(ev, guid, pub_dt, app_link, desc_cap=1000):
-    start = parse_dt(ev.get('start_time'))
-    datestr = start.strftime('%a %b %-d, %-I:%M %p') if start and not ev.get('all_day') \
-        else (start.strftime('%a %b %-d') if start else '')
-    title_bits = [ev.get('title', 'Untitled')]
+    start = parse_dt(ev.get("start_time"))
+    datestr = (
+        start.strftime("%a %b %-d, %-I:%M %p")
+        if start and not ev.get("all_day")
+        else (start.strftime("%a %b %-d") if start else "")
+    )
+    title_bits = [ev.get("title", "Untitled")]
     if datestr:
         title_bits.append(datestr)
-    loc = (ev.get('location') or '').split(',')[0].strip()
+    loc = (ev.get("location") or "").split(",")[0].strip()
     if loc:
         title_bits.append(loc)
-    desc = (ev.get('description') or '').strip()
-    source = ev.get('source') or ''
+    desc = (ev.get("description") or "").strip()
+    source = ev.get("source") or ""
     if source:
         desc = f"{desc}\n\nSource: {source}" if desc else f"Source: {source}"
-    link = ev.get('url') or app_link
+    link = ev.get("url") or app_link
     return (
         "    <item>\n"
         f"      <title>{esc(' — '.join(title_bits))}</title>\n"
         f"      <link>{esc(link)}</link>\n"
-        f"      <guid isPermaLink=\"false\">{esc(guid)}</guid>\n"
+        f'      <guid isPermaLink="false">{esc(guid)}</guid>\n'
         f"      <pubDate>{format_datetime(pub_dt)}</pubDate>\n"
         f"      <description>{esc(desc[:desc_cap])}</description>\n"
         "    </item>\n"
@@ -89,15 +91,13 @@ def render_feed(title, description, app_link, self_url, items):
     return (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n'
-        '  <channel>\n'
-        f'    <title>{esc(title)}</title>\n'
-        f'    <link>{esc(app_link)}</link>\n'
+        "  <channel>\n"
+        f"    <title>{esc(title)}</title>\n"
+        f"    <link>{esc(app_link)}</link>\n"
         f'    <atom:link href="{esc(self_url)}" rel="self" type="application/rss+xml"/>\n'
-        f'    <description>{esc(description)}</description>\n'
-        f'    <lastBuildDate>{now}</lastBuildDate>\n'
-        + ''.join(items) +
-        '  </channel>\n'
-        '</rss>\n'
+        f"    <description>{esc(description)}</description>\n"
+        f"    <lastBuildDate>{now}</lastBuildDate>\n" + "".join(items) + "  </channel>\n"
+        "</rss>\n"
     )
 
 
@@ -105,22 +105,21 @@ def read_prev_feed(path):
     """Return {guid: pubDate-string} from an existing feed, or {}."""
     if not path.exists():
         return {}
-    text = path.read_text(encoding='utf-8', errors='replace')
+    text = path.read_text(encoding="utf-8", errors="replace")
     out = {}
-    for m in re.finditer(
-            r'<guid[^>]*>([^<]+)</guid>\s*<pubDate>([^<]+)</pubDate>', text):
+    for m in re.finditer(r"<guid[^>]*>([^<]+)</guid>\s*<pubDate>([^<]+)</pubDate>", text):
         out[html.unescape(m.group(1))] = m.group(2)
     return out
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Generate per-city RSS feeds')
-    parser.add_argument('city')
-    parser.add_argument('--events', help='Path to events.json (default cities/<city>/events.json)')
-    parser.add_argument('--outdir', default=str(ROOT / 'rss'))
+    parser = argparse.ArgumentParser(description="Generate per-city RSS feeds")
+    parser.add_argument("city")
+    parser.add_argument("--events", help="Path to events.json (default cities/<city>/events.json)")
+    parser.add_argument("--outdir", default=str(ROOT / "rss"))
     args = parser.parse_args()
 
-    events_path = Path(args.events) if args.events else ROOT / 'cities' / args.city / 'events.json'
+    events_path = Path(args.events) if args.events else ROOT / "cities" / args.city / "events.json"
     if not events_path.exists():
         print(f"generate_rss: {events_path} not found, skipping {args.city}")
         return 0
@@ -131,7 +130,7 @@ def main():
 
     upcoming = []
     for ev in events:
-        start = parse_dt(ev.get('start_time'))
+        start = parse_dt(ev.get("start_time"))
         if start and now - timedelta(hours=12) <= start <= horizon:
             upcoming.append((start, ev))
     upcoming.sort(key=lambda pair: pair[0])
@@ -147,12 +146,18 @@ def main():
     prev_latest = read_prev_feed(latest_path)
 
     # Full feed: every upcoming event, pubDate = event start.
-    full_items = [render_item(ev, event_guid(ev), start, app_link, desc_cap=300)
-                  for start, ev in upcoming]
-    full_path.write_text(render_feed(
-        f"{city_title} Community Calendar — all upcoming events",
-        f"Every event in the next {FULL_WINDOW_DAYS} days, regenerated daily.",
-        app_link, f"{SITE_BASE}/rss/{full_path.name}", full_items))
+    full_items = [
+        render_item(ev, event_guid(ev), start, app_link, desc_cap=300) for start, ev in upcoming
+    ]
+    full_path.write_text(
+        render_feed(
+            f"{city_title} Community Calendar — all upcoming events",
+            f"Every event in the next {FULL_WINDOW_DAYS} days, regenerated daily.",
+            app_link,
+            f"{SITE_BASE}/rss/{full_path.name}",
+            full_items,
+        )
+    )
 
     # Latest feed: events not present in the previous build's full feed,
     # plus carried-over recent items that are still upcoming.
@@ -162,7 +167,7 @@ def main():
         guid = event_guid(ev)
         current_guids.add(guid)
         if guid in prev_latest:
-            pub = parse_dt(None)  # placeholder; keep original string via re-render below
+            parse_dt(None)  # placeholder; keep original string via re-render below
             latest.append((prev_latest[guid], start, ev, guid, True))
         elif prev_full_guids and guid not in prev_full_guids:
             latest.append((format_datetime(now), start, ev, guid, False))
@@ -173,25 +178,32 @@ def main():
     def pub_key(entry):
         try:
             from email.utils import parsedate_to_datetime
+
             return parsedate_to_datetime(entry[0])
         except Exception:
             return now
+
     latest.sort(key=pub_key, reverse=True)
     latest = latest[:LATEST_MAX_ITEMS]
 
     latest_items = []
     for pub_str, start, ev, guid, _carried in latest:
         item = render_item(ev, guid, now, app_link)
-        item = re.sub(r'<pubDate>[^<]+</pubDate>', f'<pubDate>{pub_str}</pubDate>', item)
+        item = re.sub(r"<pubDate>[^<]+</pubDate>", f"<pubDate>{pub_str}</pubDate>", item)
         latest_items.append(item)
-    latest_path.write_text(render_feed(
-        f"{city_title} Community Calendar — new events",
-        "Events newly added to the calendar, most recent first.",
-        app_link, f"{SITE_BASE}/rss/{latest_path.name}", latest_items))
+    latest_path.write_text(
+        render_feed(
+            f"{city_title} Community Calendar — new events",
+            "Events newly added to the calendar, most recent first.",
+            app_link,
+            f"{SITE_BASE}/rss/{latest_path.name}",
+            latest_items,
+        )
+    )
 
     print(f"generate_rss: {args.city}: full={len(full_items)} latest={len(latest_items)}")
     return 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main())

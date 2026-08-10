@@ -6,7 +6,8 @@ Mercury Theater is at 3333 Petaluma Blvd N (the former Cinnabar Theater space).
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 from lib.squarespace import SquarespaceScraper
 
@@ -18,5 +19,5 @@ class MercuryTheaterScraper(SquarespaceScraper):
     default_location = "Mercury Theater, 3333 Petaluma Blvd N, Petaluma, CA 94952"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     MercuryTheaterScraper.main()

@@ -15,20 +15,20 @@ Department pages use several Drupal themes:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
 from datetime import datetime
-from typing import Any, Optional
+from typing import Any
 from urllib.parse import urljoin
 from zoneinfo import ZoneInfo
 
 import requests
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
 
-HEADERS = {'User-Agent': 'Mozilla/5.0 (compatible; community-calendar/1.0)'}
+HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; community-calendar/1.0)"}
 
 
 class UofTEventsScraper(BaseScraper):
@@ -47,15 +47,17 @@ class UofTEventsScraper(BaseScraper):
         resp = requests.get(self.EVENTS_URL, headers=HEADERS, timeout=30)
         resp.raise_for_status()
 
-        soup = BeautifulSoup(resp.text, 'html.parser')
+        soup = BeautifulSoup(resp.text, "html.parser")
 
         # Collect "More" links and their department names
         more_links = {}
-        for a in soup.find_all('a', class_='btn'):
+        for a in soup.find_all("a", class_="btn"):
             text = a.get_text(strip=True)
-            if text.startswith('More '):
-                dept = text.replace('More ', '').replace(' events', '').replace(' Events', '').strip()
-                url = a.get('href', '')
+            if text.startswith("More "):
+                dept = (
+                    text.replace("More ", "").replace(" events", "").replace(" Events", "").strip()
+                )
+                url = a.get("href", "")
                 if url:
                     more_links[dept] = url
 
@@ -66,7 +68,7 @@ class UofTEventsScraper(BaseScraper):
         self.logger.info(f"Aggregate page: {len(aggregate_events)} events")
 
         # Track URLs we've already seen (from aggregate page) to avoid duplicates
-        seen_urls = {e['url'] for e in aggregate_events if e.get('url')}
+        seen_urls = {e["url"] for e in aggregate_events if e.get("url")}
 
         # Follow each "More" link for deeper coverage
         dept_events = []
@@ -84,18 +86,23 @@ class UofTEventsScraper(BaseScraper):
     def _parse_aggregate(self, soup) -> list[dict[str, Any]]:
         """Parse the aggregate page tables."""
         events = []
-        tables = soup.find_all('table')
+        tables = soup.find_all("table")
         for table in tables:
             # Find department name from the "More" button after this table
-            more_btn = table.find_next('a', class_='btn')
-            dept = ''
+            more_btn = table.find_next("a", class_="btn")
+            dept = ""
             if more_btn:
                 text = more_btn.get_text(strip=True)
-                if text.startswith('More '):
-                    dept = text.replace('More ', '').replace(' events', '').replace(' Events', '').strip()
+                if text.startswith("More "):
+                    dept = (
+                        text.replace("More ", "")
+                        .replace(" events", "")
+                        .replace(" Events", "")
+                        .strip()
+                    )
 
-            for row in table.find_all('tr'):
-                cells = row.find_all('td')
+            for row in table.find_all("tr"):
+                cells = row.find_all("td")
                 if not cells:
                     continue
                 event = self._parse_table_row(cells, dept)
@@ -103,14 +110,14 @@ class UofTEventsScraper(BaseScraper):
                     events.append(event)
         return events
 
-    def _parse_table_row(self, cells, department: str = '') -> Optional[dict[str, Any]]:
+    def _parse_table_row(self, cells, department: str = "") -> dict[str, Any] | None:
         """Parse a table row from the aggregate page."""
         try:
-            link = cells[0].find('a')
+            link = cells[0].find("a")
             if not link:
                 return None
             title = link.get_text(strip=True)
-            url = link.get('href', '')
+            url = link.get("href", "")
 
             if len(cells) < 2:
                 return None
@@ -142,16 +149,16 @@ class UofTEventsScraper(BaseScraper):
             self.logger.warning(f"{dept}: fetch error: {e}")
             return []
 
-        soup = BeautifulSoup(resp.text, 'html.parser')
+        soup = BeautifulSoup(resp.text, "html.parser")
         events = []
 
         # Try each parser pattern in order
         for parser in [
-            self._parse_events_uoft,      # Humanities, Environment, CDTPS, OISE, KPE, Fields
-            self._parse_daniels,           # Daniels (node-event with DD.MM.YY dates)
-            self._parse_listing_events,    # Law, Music (BEM-style)
-            self._parse_dlsph,             # DLSPH (WordPress event-item)
-            self._parse_views_row_links,   # Generic fallback: any views-row with links
+            self._parse_events_uoft,  # Humanities, Environment, CDTPS, OISE, KPE, Fields
+            self._parse_daniels,  # Daniels (node-event with DD.MM.YY dates)
+            self._parse_listing_events,  # Law, Music (BEM-style)
+            self._parse_dlsph,  # DLSPH (WordPress event-item)
+            self._parse_views_row_links,  # Generic fallback: any views-row with links
         ]:
             results = parser(soup, dept, url)
             if results:
@@ -161,9 +168,9 @@ class UofTEventsScraper(BaseScraper):
         # Deduplicate against aggregate page
         new_events = []
         for e in events:
-            if e.get('url') and e['url'] in seen_urls:
+            if e.get("url") and e["url"] in seen_urls:
                 continue
-            seen_urls.add(e.get('url', ''))
+            seen_urls.add(e.get("url", ""))
             new_events.append(e)
 
         if new_events:
@@ -174,23 +181,23 @@ class UofTEventsScraper(BaseScraper):
 
     def _parse_events_uoft(self, soup, dept: str, base_url: str) -> list[dict[str, Any]]:
         """Parse Drupal 'events-uoft' theme (Humanities, Environment, CDTPS, etc.)."""
-        nodes = soup.find_all(class_='node-events-uoft')
+        nodes = soup.find_all(class_="node-events-uoft")
         if not nodes:
             return []
 
         events = []
         for node in nodes:
-            title_el = node.find('h3')
+            title_el = node.find("h3")
             if not title_el:
                 continue
-            link = title_el.find('a')
+            link = title_el.find("a")
             title = title_el.get_text(strip=True)
-            url = urljoin(base_url, link['href']) if link else ''
+            url = urljoin(base_url, link["href"]) if link else ""
 
-            date_el = node.find(class_=lambda c: c and 'date-formatted' in c)
+            date_el = node.find(class_=lambda c: c and "date-formatted" in c)
             if not date_el:
-                date_el = node.find(class_='date-display-single')
-            date_text = date_el.get_text(strip=True) if date_el else ''
+                date_el = node.find(class_="date-display-single")
+            date_text = date_el.get_text(strip=True) if date_el else ""
             dtstart, dtend = self._parse_date(date_text) if date_text else (None, None)
             if not dtstart:
                 continue
@@ -200,27 +207,27 @@ class UofTEventsScraper(BaseScraper):
 
     def _parse_daniels(self, soup, dept: str, base_url: str) -> list[dict[str, Any]]:
         """Parse Daniels-style events (node-event with DD.MM.YY dates)."""
-        articles = soup.find_all('article', class_='node-event')
+        articles = soup.find_all("article", class_="node-event")
         if not articles:
             return []
 
         tz = ZoneInfo(self.timezone)
         events = []
         for article in articles:
-            link = article.find('a')
+            link = article.find("a")
             if not link:
                 continue
-            url = urljoin(base_url, link.get('href', ''))
+            url = urljoin(base_url, link.get("href", ""))
 
-            name_el = article.find(class_='name') or article.find(class_='field--name-title')
+            name_el = article.find(class_="name") or article.find(class_="field--name-title")
             title = name_el.get_text(strip=True) if name_el else link.get_text(strip=True)
 
-            date_el = article.find(class_='date')
+            date_el = article.find(class_="date")
             if not date_el:
                 continue
             date_text = date_el.get_text(strip=True)
             # Format: DD.MM.YY
-            m = re.match(r'(\d{2})\.(\d{2})\.(\d{2})', date_text)
+            m = re.match(r"(\d{2})\.(\d{2})\.(\d{2})", date_text)
             if not m:
                 continue
             day, month, year = m.groups()
@@ -234,32 +241,41 @@ class UofTEventsScraper(BaseScraper):
 
     def _parse_listing_events(self, soup, dept: str, base_url: str) -> list[dict[str, Any]]:
         """Parse Law/Music-style BEM listing items."""
-        items = soup.find_all(class_=lambda c: c and 'listing-item--events' in c
-                              and 'content' not in c and 'date' not in c
-                              and 'img' not in c and 'title' not in c
-                              and 'wrapper' not in c)
+        items = soup.find_all(
+            class_=lambda c: (
+                c
+                and "listing-item--events" in c
+                and "content" not in c
+                and "date" not in c
+                and "img" not in c
+                and "title" not in c
+                and "wrapper" not in c
+            )
+        )
         if not items:
             return []
 
         tz = ZoneInfo(self.timezone)
         events = []
         for item in items:
-            title_el = item.find('h3')
+            title_el = item.find("h3")
             if not title_el:
                 continue
-            link = title_el.find('a')
+            link = title_el.find("a")
             title = title_el.get_text(strip=True)
-            url = urljoin(base_url, link['href']) if link else ''
+            url = urljoin(base_url, link["href"]) if link else ""
 
-            day_el = item.find(class_=lambda c: c and 'date-day' in c)
-            month_el = item.find(class_=lambda c: c and 'date-month' in c)
+            day_el = item.find(class_=lambda c: c and "date-day" in c)
+            month_el = item.find(class_=lambda c: c and "date-month" in c)
             if not day_el or not month_el:
                 continue
 
             day = day_el.get_text(strip=True)
             # Month element has both full and abbreviated; get the hidden full version
-            month_full = month_el.find(class_='u-visually--hidden')
-            month_text = month_full.get_text(strip=True) if month_full else month_el.get_text(strip=True)
+            month_full = month_el.find(class_="u-visually--hidden")
+            month_text = (
+                month_full.get_text(strip=True) if month_full else month_el.get_text(strip=True)
+            )
 
             # Assume current year or next year
             now = datetime.now(tz)
@@ -274,20 +290,20 @@ class UofTEventsScraper(BaseScraper):
 
     def _parse_dlsph(self, soup, dept: str, base_url: str) -> list[dict[str, Any]]:
         """Parse DLSPH-style WordPress events (event-item class)."""
-        items = soup.find_all(class_='event-item')
+        items = soup.find_all(class_="event-item")
         if not items:
             return []
 
         events = []
         for item in items:
-            title_el = item.find(class_='title')
+            title_el = item.find(class_="title")
             if not title_el:
                 continue
-            link = title_el.find('a')
+            link = title_el.find("a")
             title = (link or title_el).get_text(strip=True)
-            url = urljoin(base_url, link['href']) if link else ''
+            url = urljoin(base_url, link["href"]) if link else ""
 
-            date_el = item.find(class_='event-listing-date')
+            date_el = item.find(class_="event-listing-date")
             if not date_el:
                 continue
             date_text = date_el.get_text(strip=True)
@@ -300,29 +316,29 @@ class UofTEventsScraper(BaseScraper):
 
     def _parse_views_row_links(self, soup, dept: str, base_url: str) -> list[dict[str, Any]]:
         """Generic fallback: extract events from Drupal views-row divs."""
-        rows = soup.find_all(class_='views-row')
+        rows = soup.find_all(class_="views-row")
         if not rows:
             return []
 
         events = []
         for row in rows:
             # Skip non-event rows (e.g., banners)
-            link = row.find('a', href=lambda h: h and '/event' in h)
+            link = row.find("a", href=lambda h: h and "/event" in h)
             if not link:
                 continue
             title = link.get_text(strip=True)
-            url = urljoin(base_url, link['href'])
+            url = urljoin(base_url, link["href"])
 
             # Try to find a date anywhere in the row
-            date_text = ''
-            for el in row.find_all(class_=lambda c: c and 'date' in str(c).lower()):
+            date_text = ""
+            for el in row.find_all(class_=lambda c: c and "date" in str(c).lower()):
                 date_text = el.get_text(strip=True)
                 if date_text:
                     break
             if not date_text:
                 # Look for date-like text in the row
                 text = row.get_text()
-                m = re.search(r'(\w+ \d{1,2},? \d{4})', text)
+                m = re.search(r"(\w+ \d{1,2},? \d{4})", text)
                 if m:
                     date_text = m.group(1)
 
@@ -337,19 +353,19 @@ class UofTEventsScraper(BaseScraper):
 
     def _make_event(self, title: str, url: str, dtstart, dtend, department: str) -> dict[str, Any]:
         """Create a standard event dict."""
-        location = 'University of Toronto'
+        location = "University of Toronto"
         if department:
             location = f"{department}, University of Toronto"
         return {
-            'title': title,
-            'dtstart': dtstart,
-            'dtend': dtend,
-            'url': url,
-            'location': location,
-            'description': f"Department: {department}" if department else '',
+            "title": title,
+            "dtstart": dtstart,
+            "dtend": dtend,
+            "url": url,
+            "location": location,
+            "description": f"Department: {department}" if department else "",
         }
 
-    def _parse_date(self, text: str) -> tuple[Optional[datetime], Optional[datetime]]:
+    def _parse_date(self, text: str) -> tuple[datetime | None, datetime | None]:
         """Parse date text into start and optional end datetimes.
 
         Formats:
@@ -361,10 +377,10 @@ class UofTEventsScraper(BaseScraper):
           February 25, to August 1, 2026
         """
         tz = ZoneInfo(self.timezone)
-        text = re.sub(r',\s*to\s', ' to ', text)
+        text = re.sub(r",\s*to\s", " to ", text)
 
         # Range: "Month D to Month D, YYYY"
-        m = re.match(r'(\w+)\s+(\d+)\s+to\s+(\w+)\s+(\d+),?\s+(\d{4})', text)
+        m = re.match(r"(\w+)\s+(\d+)\s+to\s+(\w+)\s+(\d+),?\s+(\d{4})", text)
         if m:
             start_month, start_day, end_month, end_day, year = m.groups()
             dtstart = self._make_dt(start_month, start_day, year, tz)
@@ -372,7 +388,7 @@ class UofTEventsScraper(BaseScraper):
             return dtstart, dtend
 
         # Range same month: "Month D to D, YYYY"
-        m = re.match(r'(\w+)\s+(\d+)\s+to\s+(\d+),?\s+(\d{4})', text)
+        m = re.match(r"(\w+)\s+(\d+)\s+to\s+(\d+),?\s+(\d{4})", text)
         if m:
             month, start_day, end_day, year = m.groups()
             dtstart = self._make_dt(month, start_day, year, tz)
@@ -380,7 +396,7 @@ class UofTEventsScraper(BaseScraper):
             return dtstart, dtend
 
         # Single date: "Month D, YYYY" or "Month D YYYY"
-        m = re.match(r'(\w+)\s+(\d+),?\s+(\d{4})', text)
+        m = re.match(r"(\w+)\s+(\d+),?\s+(\d{4})", text)
         if m:
             month, day, year = m.groups()
             dtstart = self._make_dt(month, day, year, tz)
@@ -389,9 +405,9 @@ class UofTEventsScraper(BaseScraper):
         self.logger.warning(f"Unparseable date: {text}")
         return None, None
 
-    def _make_dt(self, month: str, day: str, year: str, tz) -> Optional[datetime]:
+    def _make_dt(self, month: str, day: str, year: str, tz) -> datetime | None:
         """Create a datetime from month name, day, year."""
-        for fmt in ('%B %d %Y', '%b %d %Y'):
+        for fmt in ("%B %d %Y", "%b %d %Y"):
             try:
                 dt = datetime.strptime(f"{month} {day} {year}", fmt)
                 return dt.replace(tzinfo=tz)
@@ -401,5 +417,5 @@ class UofTEventsScraper(BaseScraper):
         return None
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     UofTEventsScraper.main()

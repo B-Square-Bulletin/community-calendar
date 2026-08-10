@@ -9,7 +9,8 @@ which the JsonLdScraper base class handles automatically.
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 from lib.jsonld import JsonLdScraper
 
@@ -21,5 +22,5 @@ class AdobeRoadScraper(JsonLdScraper):
     default_location = "Adobe Road Winery, 1995 S McDowell Blvd, Petaluma, CA 94954"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     AdobeRoadScraper.main()

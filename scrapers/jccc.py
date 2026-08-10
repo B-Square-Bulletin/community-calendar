@@ -11,7 +11,6 @@ from zoneinfo import ZoneInfo
 
 import requests
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
 
 
@@ -138,7 +137,11 @@ class JCCCScraper(BaseScraper):
     def event_is_current_or_future(self, dtstart: date | datetime, dtend: date | datetime) -> bool:
         now = datetime.now(self.tz)
         if isinstance(dtstart, datetime):
-            end_dt = dtend if isinstance(dtend, datetime) else datetime.combine(dtend, datetime.min.time()).replace(tzinfo=self.tz)
+            end_dt = (
+                dtend
+                if isinstance(dtend, datetime)
+                else datetime.combine(dtend, datetime.min.time()).replace(tzinfo=self.tz)
+            )
             return end_dt >= now
         return dtend > now.date()
 

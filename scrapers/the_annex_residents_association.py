@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from calendar import monthcalendar, THURSDAY
+from calendar import THURSDAY, monthcalendar
 from datetime import date, datetime
 from zoneinfo import ZoneInfo
 
@@ -20,6 +20,7 @@ class TheAnnexResidentsAssociationScraper(BaseScraper):
         "The ARA Board of Directors meets on the second Thursday of every month, "
         "excluding July and August, at 7:00 p.m. Meetings are open to the public."
     )
+
     def fetch_html(self) -> str:
         return self.fetch_text_with_curl(
             self.contact_url,

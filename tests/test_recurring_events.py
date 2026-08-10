@@ -19,7 +19,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
 from scripts.combine_ics import expand_rrules
-from tests.helpers import make_ics, make_vevent, VTIMEZONE_NY
+from tests.helpers import VTIMEZONE_NY, make_ics, make_vevent
 
 
 class TestRecurrenceIdOverride:
@@ -109,9 +109,7 @@ class TestRecurrenceIdOverride:
         )
 
         expanded = expand_rrules(ics, window_days=90)
-        assert expanded is not None, (
-            "expand_rrules should not return None with RRULE present"
-        )
+        assert expanded is not None, "expand_rrules should not return None with RRULE present"
         assert len(expanded) > 0, "Should have expanded events"
 
         # Collect DTSTART dates and UIDs
@@ -133,16 +131,13 @@ class TestRecurrenceIdOverride:
 
         # The new (edited) date MUST appear
         assert override_new_str in dtstarts, (
-            f"{override_new} (the edited instance) should appear, "
-            f"but not found in: {dtstarts}"
+            f"{override_new} (the edited instance) should appear, but not found in: {dtstarts}"
         )
 
         # Later unmodified occurrences should still appear
         for later_dt in in_window[1:3]:
             later_str = later_dt.strftime("%Y%m%d")
-            assert later_str in dtstarts, (
-                f"{later_dt} (unmodified) should still appear"
-            )
+            assert later_str in dtstarts, f"{later_dt} (unmodified) should still appear"
 
         # UIDs should have date suffixes (from _serialize_vevent mutation)
         for uid in uids:
@@ -151,14 +146,14 @@ class TestRecurrenceIdOverride:
         # The override event should have the correct suffixed UID
         override_uids = [
             u
-            for b, u in zip(expanded, uids)
+            for b, u in zip(expanded, uids, strict=False)
             if override_new_str in (re.search(r"DTSTART[^:]*:(\d{8})", b) or [""])[0]
         ]
         if override_uids:
             assert f"__{override_new_str}" in override_uids[0], (
-                f"Override UID should end with __{override_new_str}, "
-                f"got: {override_uids[0]}"
+                f"Override UID should end with __{override_new_str}, got: {override_uids[0]}"
             )
+
     def test_no_override_preserves_all_instances(self):
         """
         A recurring event with NO RECURRENCE-ID override should expand
@@ -263,12 +258,8 @@ class TestRecurrenceIdOverride:
         )
 
         # Rescheduled days SHOULD appear
-        assert override_1_dt in dtstarts, (
-            f"Rescheduled from day 3 ({override_1_dt}) should appear"
-        )
-        assert override_2_dt in dtstarts, (
-            f"Rescheduled from day 7 ({override_2_dt}) should appear"
-        )
+        assert override_1_dt in dtstarts, f"Rescheduled from day 3 ({override_1_dt}) should appear"
+        assert override_2_dt in dtstarts, f"Rescheduled from day 7 ({override_2_dt}) should appear"
 
         # Unmodified days should still appear
         assert start_str in dtstarts, f"Day 1 ({start_str}, unmodified) should appear"

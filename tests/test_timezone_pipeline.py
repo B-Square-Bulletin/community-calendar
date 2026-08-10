@@ -8,7 +8,6 @@ Verifies that timezone information is correctly preserved and converted at each 
 Run: python -m pytest tests/test_timezone_pipeline.py -v
 """
 
-import json
 import re
 import sys
 from datetime import date, datetime, timedelta, timezone
@@ -19,10 +18,10 @@ from zoneinfo import ZoneInfo
 sys.path.insert(0, str(Path(__file__).parent.parent))
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
-from scripts.combine_ics import expand_rrules, parse_ics_datetime as combine_parse_dt
-from scripts.ics_to_json import parse_ics_datetime as json_parse_dt, extract_field
-from tests.helpers import make_ics, make_vevent, VTIMEZONE_LA, VTIMEZONE_NY
-
+from scripts.combine_ics import expand_rrules
+from scripts.ics_to_json import extract_field
+from scripts.ics_to_json import parse_ics_datetime as json_parse_dt
+from tests.helpers import VTIMEZONE_LA, make_ics, make_vevent
 
 # ===========================================================================
 # Test 1: ics_to_json parse_ics_datetime — current behavior baseline
@@ -140,11 +139,9 @@ class TestExtractField:
         (b) Change extract_field to return "TZID=America/New_York:20250115T190000", or
         (c) Have parse_ics_datetime receive the full raw line from event_content directly.
         """
-        content = "DTSTART;TZID=America/New_York:20250115T190000\r\nSUMMARY:Test"
         # Whatever approach we pick, we need both pieces:
         # tzid = "America/New_York" and value = "20250115T190000"
         # This test is a placeholder — uncomment when approach is chosen.
-        pass
 
 
 # ===========================================================================
@@ -156,9 +153,7 @@ def _next_dst_spring_forward(today):
     """Return the next US DST spring-forward date (2nd Sunday of March) after `today`."""
     for year in (today.year, today.year + 1):
         # 2nd Sunday of March = first Sunday on or after March 8
-        second_sunday = date(year, 3, 8) + timedelta(
-            days=(6 - date(year, 3, 8).weekday()) % 7
-        )
+        second_sunday = date(year, 3, 8) + timedelta(days=(6 - date(year, 3, 8).weekday()) % 7)
         if second_sunday > today:
             return second_sunday
     raise AssertionError("unreachable: no future DST spring-forward")
@@ -192,9 +187,7 @@ class TestCombineIcsRruleExpansion:
         assert len(expanded) > 0
         # Each expanded instance should have TZID on DTSTART
         for block in expanded:
-            assert "TZID=America/Los_Angeles" in block, (
-                f"Expanded instance lost TZID:\n{block}"
-            )
+            assert "TZID=America/Los_Angeles" in block, f"Expanded instance lost TZID:\n{block}"
 
     def test_rrule_expansion_dst_transition(self):
         """
@@ -232,9 +225,7 @@ class TestCombineIcsRruleExpansion:
         assert any(d < boundary for d in inst_dates), (
             "no pre-transition instance in window — DST shift untested"
         )
-        assert any(d >= boundary for d in inst_dates), (
-            "no post-transition instance in window"
-        )
+        assert any(d >= boundary for d in inst_dates), "no post-transition instance in window"
         for b in inst:
             assert b[-6:] == "190000", (
                 f"Expected 190000 (7pm local), got {b[-6:]}. "
@@ -346,9 +337,7 @@ class TestEnrichmentTimezone:
         # Postgres with default UTC session timezone treats this as UTC
         as_utc = datetime.fromisoformat(naive).replace(tzinfo=timezone.utc)
         # But the user meant 7pm Pacific
-        as_pacific = datetime.fromisoformat(naive).replace(
-            tzinfo=ZoneInfo("America/Los_Angeles")
-        )
+        as_pacific = datetime.fromisoformat(naive).replace(tzinfo=ZoneInfo("America/Los_Angeles"))
 
         # These are 8 hours apart!
         diff_hours = abs((as_utc - as_pacific).total_seconds() / 3600)
@@ -415,9 +404,7 @@ class TestEnrichmentTimezone:
         naive_submitted = f"{form_date}T{form_time}:00"  # "2025-01-15T19:00:00"
 
         # Step 5-6: Sent to Postgres REST API — no offset, interpreted as UTC
-        pg_stores_as_utc = datetime.fromisoformat(naive_submitted).replace(
-            tzinfo=timezone.utc
-        )
+        pg_stores_as_utc = datetime.fromisoformat(naive_submitted).replace(tzinfo=timezone.utc)
 
         # Step 7: Frontend reads it back, converts to Pacific for display
         displayed_back = pg_stores_as_utc.astimezone(city_tz)
@@ -478,9 +465,7 @@ class TestEnrichmentTimezone:
         naive_submitted = f"{form_date}T{form_time}:00"
 
         # BUG path: Postgres treats as UTC
-        pg_stores_as_utc = datetime.fromisoformat(naive_submitted).replace(
-            tzinfo=timezone.utc
-        )
+        pg_stores_as_utc = datetime.fromisoformat(naive_submitted).replace(tzinfo=timezone.utc)
         displayed_back = pg_stores_as_utc.astimezone(city_tz)
 
         # 7pm becomes 2pm (5 hours wrong)
@@ -544,13 +529,9 @@ class TestApplyTimezoneOffset:
 
     def test_indianapolis(self):
         """Indiana doesn't observe DST."""
-        result = self.apply_tz_offset(
-            "2025-01-15T19:00:00", "America/Indiana/Indianapolis"
-        )
+        result = self.apply_tz_offset("2025-01-15T19:00:00", "America/Indiana/Indianapolis")
         assert result == "2025-01-15T19:00:00-05:00"
-        result_summer = self.apply_tz_offset(
-            "2025-06-15T19:00:00", "America/Indiana/Indianapolis"
-        )
+        result_summer = self.apply_tz_offset("2025-06-15T19:00:00", "America/Indiana/Indianapolis")
         assert result_summer == "2025-06-15T19:00:00-04:00"
 
     def test_already_has_offset(self):
@@ -661,15 +642,11 @@ class TestRealIcsFiles:
 
     def test_santarosa_sonoma_parks_bare(self):
         """Sonoma Parks scraper: bare datetimes, city tz = America/Los_Angeles."""
-        results = self._parse_real_events(
-            "santarosa", "America/Los_Angeles", "sonoma_parks.ics"
-        )
+        results = self._parse_real_events("santarosa", "America/Los_Angeles", "sonoma_parks.ics")
         for raw, parsed in results:
             assert ";" not in raw, f"Expected bare datetime, got: {raw}"
             dt = datetime.fromisoformat(parsed)
-            assert dt.tzinfo is not None, (
-                f"Parsed datetime should be tz-aware: {parsed}"
-            )
+            assert dt.tzinfo is not None, f"Parsed datetime should be tz-aware: {parsed}"
             offset_hours = dt.utcoffset().total_seconds() / 3600
             assert offset_hours in (-7, -8), (
                 f"Expected PDT or PST offset, got {offset_hours}h: {parsed}"
@@ -800,8 +777,7 @@ class TestRealIcsFiles:
                 dt = datetime.fromisoformat(parsed)
                 offset_hours = dt.utcoffset().total_seconds() / 3600
                 assert offset_hours == 0, (
-                    f"TZID=UTC should produce +00:00 offset, "
-                    f"got {offset_hours}h: {raw} → {parsed}"
+                    f"TZID=UTC should produce +00:00 offset, got {offset_hours}h: {raw} → {parsed}"
                 )
 
     # --- Toronto: America/Halifax TZID ---

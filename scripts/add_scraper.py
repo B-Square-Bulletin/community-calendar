@@ -17,11 +17,10 @@ Usage:
 import argparse
 import os
 import re
+import shutil
 import subprocess
 import sys
 from pathlib import Path
-
-import shutil
 
 # Repository root
 ROOT = Path(__file__).parent.parent
@@ -31,11 +30,11 @@ SCRAPERS_DIR = ROOT / "scrapers"
 
 def count_actionlint_errors(path: Path) -> int | None:
     """Count actionlint errors on a workflow file. Returns None if actionlint not available."""
-    actionlint = shutil.which('actionlint')
+    actionlint = shutil.which("actionlint")
     if not actionlint:
         return None
     result = subprocess.run([actionlint, str(path)], capture_output=True, text=True)
-    return result.stdout.count('\n') if result.stdout else 0
+    return result.stdout.count("\n") if result.stdout else 0
 
 
 def validate_workflow(path: Path, prev_error_count: int | None) -> bool:
@@ -57,51 +56,51 @@ def find_scraper(name: str) -> Path | None:
     direct = SCRAPERS_DIR / f"{name}.py"
     if direct.exists():
         return direct
-    
+
     # Try in subdirectories
     for subdir in SCRAPERS_DIR.iterdir():
-        if subdir.is_dir() and not subdir.name.startswith('_'):
+        if subdir.is_dir() and not subdir.name.startswith("_"):
             path = subdir / f"{name}.py"
             if path.exists():
                 return path
-    
+
     return None
 
 
 def test_scraper(scraper_path: Path) -> bool:
     """Run the scraper and verify it produces events."""
     print(f"\n🧪 Testing scraper: {scraper_path}")
-    
+
     output_file = Path("/tmp/scraper_test.ics")
     try:
         result = subprocess.run(
             [sys.executable, str(scraper_path), "--output", str(output_file)],
-            env={**os.environ, 'SCRAPE_MONTHS': '2'},
+            env={**os.environ, "SCRAPE_MONTHS": "2"},
             capture_output=True,
             text=True,
             timeout=120,
-            cwd=ROOT
+            cwd=ROOT,
         )
-        
+
         if result.returncode != 0:
             print(f"❌ Scraper failed with exit code {result.returncode}")
             print(f"   stderr: {result.stderr[:500]}")
             return False
-        
+
         if not output_file.exists():
             print("❌ Scraper did not produce output file")
             return False
-        
+
         content = output_file.read_text()
         event_count = content.count("BEGIN:VEVENT")
-        
+
         if event_count == 0:
             print("⚠️  Scraper produced 0 events (may be normal if no upcoming events)")
         else:
             print(f"✅ Scraper produced {event_count} events")
-        
+
         return True
-        
+
     except subprocess.TimeoutExpired:
         print("❌ Scraper timed out after 120 seconds")
         return False
@@ -113,8 +112,9 @@ def test_scraper(scraper_path: Path) -> bool:
             output_file.unlink()
 
 
-def add_to_workflow(scraper_name: str, city: str, scraper_path: Path,
-                    extra_args: str = '', output_name: str = '') -> bool:
+def add_to_workflow(
+    scraper_name: str, city: str, scraper_path: Path, extra_args: str = "", output_name: str = ""
+) -> bool:
     """Add the scraper to the GitHub Actions workflow."""
     print(f"\n📝 Adding to workflow for city: {city}")
 
@@ -126,46 +126,46 @@ def add_to_workflow(scraper_name: str, city: str, scraper_path: Path,
     output_path = f"cities/{city}/{ics_name}.ics"
     extra = f" {extra_args}" if extra_args else ""
     scraper_line = f"        python {rel_path}{extra} --output {output_path} || true"
-    
+
     # Check if already in workflow
     if f"{city}/{ics_name}.ics" in workflow_content:
         print(f"✅ Already in workflow: {output_path}")
         return True
-    
+
     # Find the scrape step for this city
     # Pattern: "Scrape {City} sources" followed by "run: |" and commands
     city_title = city.title()  # santarosa -> Santarosa
-    
+
     # Try different capitalization patterns
     # Build a regex to find "Scrape ... sources" where the city name appears
     # This handles cases like "Raleigh-Durham" for city "raleighdurham"
     patterns = [
         f"Scrape {city_title} sources",
         f"Scrape {city} sources",
-        f"Scrape Santa Rosa sources" if city == "santarosa" else None,
-        f"Scrape Raleigh-Durham sources" if city == "raleighdurham" else None,
+        "Scrape Santa Rosa sources" if city == "santarosa" else None,
+        "Scrape Raleigh-Durham sources" if city == "raleighdurham" else None,
     ]
 
     # Also try a fuzzy match: find any "Scrape ... sources" line containing the city name
-    scrape_lines = re.findall(r'Scrape [^\n]+ sources', workflow_content)
+    scrape_lines = re.findall(r"Scrape [^\n]+ sources", workflow_content)
     for line in scrape_lines:
-        if city.lower().replace('-', '') in line.lower().replace('-', '').replace(' ', ''):
+        if city.lower().replace("-", "") in line.lower().replace("-", "").replace(" ", ""):
             patterns.append(line)
-    
+
     scrape_section_start = -1
     for pattern in patterns:
         if pattern and pattern in workflow_content:
             scrape_section_start = workflow_content.find(pattern)
             break
-    
+
     if scrape_section_start == -1:
         print(f"❌ Could not find 'Scrape {city} sources' section in workflow")
         print("   You'll need to add the scraper manually to:")
         print(f"   {WORKFLOW_PATH}")
         return False
-    
+
     # Find the next workflow step ("- name:") to bound our search to this step only
-    next_step_match = re.search(r'\n    - name:', workflow_content[scrape_section_start + 1:])
+    next_step_match = re.search(r"\n    - name:", workflow_content[scrape_section_start + 1 :])
     if next_step_match:
         section_end = scrape_section_start + 1 + next_step_match.start()
     else:
@@ -173,7 +173,7 @@ def add_to_workflow(scraper_name: str, city: str, scraper_path: Path,
     section_text = workflow_content[scrape_section_start:section_end]
 
     # Find the last scraper command line in this section only
-    scraper_pattern = re.compile(r'^( +python (?:scrapers|scripts)/\S+ .+\|\| true)$', re.MULTILINE)
+    scraper_pattern = re.compile(r"^( +python (?:scrapers|scripts)/\S+ .+\|\| true)$", re.MULTILINE)
     matches = list(scraper_pattern.finditer(section_text))
 
     if not matches:
@@ -186,10 +186,12 @@ def add_to_workflow(scraper_name: str, city: str, scraper_path: Path,
 
     # Check if already there
     if scraper_line.strip() in workflow_content:
-        print(f"✅ Already in workflow")
+        print("✅ Already in workflow")
         return True
 
-    new_content = workflow_content[:insert_pos] + "\n" + scraper_line + workflow_content[insert_pos:]
+    new_content = (
+        workflow_content[:insert_pos] + "\n" + scraper_line + workflow_content[insert_pos:]
+    )
 
     prev_errors = count_actionlint_errors(WORKFLOW_PATH)
     WORKFLOW_PATH.write_text(new_content)
@@ -203,8 +205,9 @@ def add_to_workflow(scraper_name: str, city: str, scraper_path: Path,
     return True
 
 
-def add_to_pending_feeds(city: str, scraper_path: Path, extra_args: str,
-                         output_name: str, display_name: str) -> bool:
+def add_to_pending_feeds(
+    city: str, scraper_path: Path, extra_args: str, output_name: str, display_name: str
+) -> bool:
     """Append the scraper entry to cities/{city}/pending_feeds.txt."""
     feeds_path = ROOT / f"cities/{city}/pending_feeds.txt"
 
@@ -218,14 +221,14 @@ def add_to_pending_feeds(city: str, scraper_path: Path, extra_args: str,
     output_file = f"cities/{city}/{output_name}.ics"
 
     if output_file in content:
-        print(f"✅ Already in feeds.txt")
+        print("✅ Already in feeds.txt")
         return True
 
     extra = f" {extra_args}" if extra_args else ""
     cmd = f"python {scraper_path.relative_to(ROOT)}{extra}"
     entry = f"\n# {display_name}\n# cmd: {cmd}\n{output_file}\n"
 
-    with open(feeds_path, 'a') as f:
+    with open(feeds_path, "a") as f:
         f.write(entry)
 
     print(f"✅ Added to pending_feeds.txt: {display_name}")
@@ -234,7 +237,7 @@ def add_to_pending_feeds(city: str, scraper_path: Path, extra_args: str,
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Add a scraper to the calendar pipeline',
+        description="Add a scraper to the calendar pipeline",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
@@ -242,22 +245,32 @@ Examples:
   python scripts/add_scraper.py myscraper davis "My Source" --test
   python scripts/add_scraper.py newscraper bloomington "News Source" --dry-run
   python scripts/add_scraper.py eventbrite petaluma "Blue Zones Project Petaluma" --extra-args '--url "https://www.eventbrite.com/o/78957912343" --name "Blue Zones Project Petaluma"' --output-name bluezones_petaluma
-"""
+""",
     )
-    parser.add_argument('scraper', help='Scraper name (without .py extension)')
-    parser.add_argument('city', help='City directory name (e.g., santarosa, davis, bloomington)')
-    parser.add_argument('display_name', help='Human-readable source name for display')
-    parser.add_argument('--test', action='store_true', help='Test the scraper before adding')
-    parser.add_argument('--dry-run', action='store_true', help='Show what would be done without making changes')
-    parser.add_argument('--extra-args', default='', help='Extra arguments inserted before --output (e.g. \'--url "https://..." --name "My Source"\')')
-    parser.add_argument('--output-name', default='', help='Override the output .ics filename (without .ics extension, default: scraper name)')
-    parser.add_argument('--skip-workflow', action='store_true', help='Skip adding to workflow')
-    
+    parser.add_argument("scraper", help="Scraper name (without .py extension)")
+    parser.add_argument("city", help="City directory name (e.g., santarosa, davis, bloomington)")
+    parser.add_argument("display_name", help="Human-readable source name for display")
+    parser.add_argument("--test", action="store_true", help="Test the scraper before adding")
+    parser.add_argument(
+        "--dry-run", action="store_true", help="Show what would be done without making changes"
+    )
+    parser.add_argument(
+        "--extra-args",
+        default="",
+        help='Extra arguments inserted before --output (e.g. \'--url "https://..." --name "My Source"\')',
+    )
+    parser.add_argument(
+        "--output-name",
+        default="",
+        help="Override the output .ics filename (without .ics extension, default: scraper name)",
+    )
+    parser.add_argument("--skip-workflow", action="store_true", help="Skip adding to workflow")
+
     args = parser.parse_args()
-    
+
     print(f"🔧 Adding scraper '{args.scraper}' to {args.city} pipeline")
     print(f"   Display name: {args.display_name}")
-    
+
     # Step 1: Find the scraper
     scraper_path = find_scraper(args.scraper)
     if not scraper_path:
@@ -265,44 +278,49 @@ Examples:
         print(f"   Looked in: {SCRAPERS_DIR}")
         print(f"   Expected file: {args.scraper}.py")
         sys.exit(1)
-    
+
     print(f"\n✅ Found scraper: {scraper_path}")
-    
+
     ics_name = args.output_name or Path(args.scraper).name
     extra = f" {args.extra_args}" if args.extra_args else ""
 
     if args.dry_run:
         print("\n[DRY RUN] Would perform the following:")
-        print(f"  1. Add to workflow: python {scraper_path.relative_to(ROOT)}{extra} --output cities/{args.city}/{ics_name}.ics")
+        print(
+            f"  1. Add to workflow: python {scraper_path.relative_to(ROOT)}{extra} --output cities/{args.city}/{ics_name}.ics"
+        )
         print(f"  2. Add to pending_feeds.txt: cities/{args.city}/{ics_name}.ics")
         return
-    
+
     # Step 2: Test if requested
-    if args.test:
-        if not test_scraper(scraper_path):
-            print("\n⚠️  Scraper test had issues. Continue anyway? [y/N] ", end='')
-            response = input().strip().lower()
-            if response != 'y':
-                sys.exit(1)
-    
+    if args.test and not test_scraper(scraper_path):
+        print("\n⚠️  Scraper test had issues. Continue anyway? [y/N] ", end="")
+        response = input().strip().lower()
+        if response != "y":
+            sys.exit(1)
+
     # Step 3: Add to workflow
-    if not args.skip_workflow:
-        if not add_to_workflow(args.scraper, args.city, scraper_path,
-                               extra_args=args.extra_args, output_name=args.output_name):
-            print("\n⚠️  Failed to add to workflow automatically")
-    
+    if not args.skip_workflow and not add_to_workflow(
+        args.scraper,
+        args.city,
+        scraper_path,
+        extra_args=args.extra_args,
+        output_name=args.output_name,
+    ):
+        print("\n⚠️  Failed to add to workflow automatically")
+
     # Step 4: Add to pending_feeds.txt
     add_to_pending_feeds(args.city, scraper_path, args.extra_args, ics_name, args.display_name)
 
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("✅ Done! Next steps:")
     print("  1. Review changes: git diff")
     print("  2. Commit: git add -A && git commit -m 'Add {scraper} scraper'")
     print("  3. Push: git push")
     print("  4. Trigger workflow or wait for daily run")
     print("  5. The workflow will move the pending scraper into the feeds table")
-    print("="*60)
+    print("=" * 60)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -4,7 +4,8 @@ Brewsters Beer Garden Petaluma - scrapes events via Squarespace JSON API
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 from lib.squarespace import SquarespaceScraper
 
@@ -16,5 +17,5 @@ class BrewstersScraper(SquarespaceScraper):
     default_location = "Brewsters Beer Garden, 229 Water St, Petaluma, CA 94952"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     BrewstersScraper.main()

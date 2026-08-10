@@ -19,24 +19,23 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import argparse
 import json
 import logging
 import re
-import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta
-from typing import Any, Optional
+from typing import Any
 
 import feedparser
 import requests
-
 from lib.base import BaseScraper
 from lib.utils import DEFAULT_HEADERS
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 
@@ -61,7 +60,7 @@ class CatsCradleScraper(BaseScraper):
         "local-506": "Local 506, 506 W Franklin St, Chapel Hill, NC 27516",
     }
 
-    def __init__(self, venue_filter: Optional[str] = None):
+    def __init__(self, venue_filter: str | None = None):
         self.venue_filter = venue_filter
         super().__init__()
 
@@ -78,7 +77,7 @@ class CatsCradleScraper(BaseScraper):
         seen_urls = set()
         unique_entries = []
         for entry in feed.entries:
-            link = entry.get('link', '')
+            link = entry.get("link", "")
             if link not in seen_urls:
                 seen_urls.add(link)
                 unique_entries.append(entry)
@@ -87,7 +86,7 @@ class CatsCradleScraper(BaseScraper):
         # Filter by venue before fetching detail pages
         filtered = []
         for entry in unique_entries:
-            link = entry.get('link', '')
+            link = entry.get("link", "")
             venue_slug = self._extract_venue_slug(link)
             if self.venue_filter and venue_slug != self.venue_filter:
                 continue
@@ -116,12 +115,12 @@ class CatsCradleScraper(BaseScraper):
     def _extract_venue_slug(self, url: str) -> str:
         """Extract venue slug from event URL."""
         # URL: https://catscradle.com/event/{event-slug}/{venue-slug}/{city-state}/
-        parts = url.rstrip('/').split('/')
+        parts = url.rstrip("/").split("/")
         if len(parts) >= 5:
             return parts[-2]  # venue slug is second-to-last
         return "unknown"
 
-    def _fetch_event_jsonld(self, url: str, venue_slug: str) -> Optional[dict[str, Any]]:
+    def _fetch_event_jsonld(self, url: str, venue_slug: str) -> dict[str, Any] | None:
         """Fetch event detail page and extract JSON-LD Event data."""
         try:
             response = requests.get(url, headers=DEFAULT_HEADERS, timeout=30)
@@ -133,10 +132,7 @@ class CatsCradleScraper(BaseScraper):
         html = response.text
 
         # Extract JSON-LD blocks
-        blocks = re.findall(
-            r'<script type="application/ld\+json">(.*?)</script>',
-            html, re.DOTALL
-        )
+        blocks = re.findall(r'<script type="application/ld\+json">(.*?)</script>', html, re.DOTALL)
 
         for block in blocks:
             try:
@@ -145,8 +141,8 @@ class CatsCradleScraper(BaseScraper):
                 continue
 
             # Handle @graph wrapper
-            if isinstance(data, dict) and '@graph' in data:
-                for item in data['@graph']:
+            if isinstance(data, dict) and "@graph" in data:
+                for item in data["@graph"]:
                     event = self._parse_jsonld_event(item, url, venue_slug)
                     if event:
                         return event
@@ -158,51 +154,53 @@ class CatsCradleScraper(BaseScraper):
         self.logger.warning(f"No JSON-LD Event found at {url}")
         return None
 
-    def _parse_rss_entry(self, entry, venue_slug: str) -> Optional[dict[str, Any]]:
+    def _parse_rss_entry(self, entry, venue_slug: str) -> dict[str, Any] | None:
         """Fall back to RSS entry data when JSON-LD is missing."""
-        title = entry.get('title', '')
+        title = entry.get("title", "")
         if not title:
             return None
-        published = entry.get('published_parsed')
+        published = entry.get("published_parsed")
         if not published:
             return None
         dtstart = datetime(*published[:6])
         return {
-            'title': title,
-            'dtstart': dtstart,
-            'dtend': dtstart + timedelta(hours=3),
-            'url': entry.get('link', ''),
-            'location': self.VENUE_ADDRESSES.get(venue_slug, venue_slug),
-            'description': '',
+            "title": title,
+            "dtstart": dtstart,
+            "dtend": dtstart + timedelta(hours=3),
+            "url": entry.get("link", ""),
+            "location": self.VENUE_ADDRESSES.get(venue_slug, venue_slug),
+            "description": "",
         }
 
     @staticmethod
-    def _parse_iso_date(date_str: str) -> Optional[datetime]:
+    def _parse_iso_date(date_str: str) -> datetime | None:
         """Parse ISO date string, handling offset formats like -0400 that
         Python < 3.11 fromisoformat() doesn't support."""
         # Insert colon in timezone offset if missing (e.g., -0400 -> -04:00)
-        date_str = re.sub(r'([+-]\d{2})(\d{2})$', r'\1:\2', date_str)
+        date_str = re.sub(r"([+-]\d{2})(\d{2})$", r"\1:\2", date_str)
         try:
             dt = datetime.fromisoformat(date_str)
             return dt.replace(tzinfo=None)
         except ValueError:
             return None
 
-    def _parse_jsonld_event(self, data: dict, url: str, venue_slug: str) -> Optional[dict[str, Any]]:
+    def _parse_jsonld_event(
+        self, data: dict, url: str, venue_slug: str
+    ) -> dict[str, Any] | None:
         """Parse a JSON-LD Event object into our event dict format."""
-        event_type = data.get('@type', '')
-        if event_type not in ('Event', 'MusicEvent'):
+        event_type = data.get("@type", "")
+        if event_type not in ("Event", "MusicEvent"):
             return None
 
-        title = data.get('name', '')
+        title = data.get("name", "")
         if not title:
             return None
 
         # Clean HTML entities
-        title = title.replace('&#8211;', '–').replace('&#8217;', "'").replace('&amp;', '&')
+        title = title.replace("&#8211;", "–").replace("&#8217;", "'").replace("&amp;", "&")
 
         # Parse startDate (ISO format: "2026-04-02T20:00:00-0400")
-        start_str = data.get('startDate', '')
+        start_str = data.get("startDate", "")
         if not start_str:
             return None
 
@@ -213,47 +211,53 @@ class CatsCradleScraper(BaseScraper):
 
         # Parse endDate if available
         dtend = None
-        end_str = data.get('endDate', '')
+        end_str = data.get("endDate", "")
         if end_str:
             dtend = self._parse_iso_date(end_str)
         if not dtend:
             dtend = dtstart + timedelta(hours=3)
 
         # Location
-        location_data = data.get('location', {})
+        location_data = data.get("location", {})
         if isinstance(location_data, dict):
-            venue_name = location_data.get('name', '')
-            address = location_data.get('address', '')
+            venue_name = location_data.get("name", "")
+            address = location_data.get("address", "")
             if isinstance(address, dict):
-                parts = [address.get('streetAddress', ''),
-                         address.get('addressLocality', ''),
-                         address.get('addressRegion', '')]
-                address = ', '.join(p for p in parts if p)
-            location = f"{venue_name}, {address}" if venue_name and address else (venue_name or address)
+                parts = [
+                    address.get("streetAddress", ""),
+                    address.get("addressLocality", ""),
+                    address.get("addressRegion", ""),
+                ]
+                address = ", ".join(p for p in parts if p)
+            location = (
+                f"{venue_name}, {address}" if venue_name and address else (venue_name or address)
+            )
         else:
             location = self.VENUE_ADDRESSES.get(venue_slug, venue_slug)
 
         # Clean HTML from location
-        location = re.sub(r'&#\d+;', '', location).strip(', ')
+        location = re.sub(r"&#\d+;", "", location).strip(", ")
 
         # Description
-        description = data.get('description', '')
+        description = data.get("description", "")
 
         return {
-            'title': title,
-            'dtstart': dtstart,
-            'dtend': dtend,
-            'url': url,
-            'location': location or self.VENUE_ADDRESSES.get(venue_slug, ''),
-            'description': description[:500] if description else '',
+            "title": title,
+            "dtstart": dtstart,
+            "dtend": dtend,
+            "url": url,
+            "location": location or self.VENUE_ADDRESSES.get(venue_slug, ""),
+            "description": description[:500] if description else "",
         }
 
 
 def main():
     parser = argparse.ArgumentParser(description="Scrape Cat's Cradle events")
-    parser.add_argument('--output', '-o', help='Output ICS file')
-    parser.add_argument('--venue', help='Filter by venue slug (e.g., cats-cradle, motorco-music-hall)')
-    parser.add_argument('--debug', action='store_true')
+    parser.add_argument("--output", "-o", help="Output ICS file")
+    parser.add_argument(
+        "--venue", help="Filter by venue slug (e.g., cats-cradle, motorco-music-hall)"
+    )
+    parser.add_argument("--debug", action="store_true")
     args = parser.parse_args()
 
     if args.debug:
@@ -263,5 +267,5 @@ def main():
     scraper.run(args.output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

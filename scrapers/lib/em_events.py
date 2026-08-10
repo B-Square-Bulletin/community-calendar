@@ -24,7 +24,7 @@ Usage:
 
 import re
 from datetime import datetime, timedelta
-from typing import Any, Optional
+from typing import Any
 from zoneinfo import ZoneInfo
 
 import requests
@@ -68,13 +68,13 @@ BROWSER_HEADERS = {
 }
 
 
-def _parse_month(text: str) -> Optional[int]:
+def _parse_month(text: str) -> int | None:
     """Parse a month name (full or abbreviated) to month number."""
     clean = text.strip().rstrip(",").lower()
     return MONTH_NAMES.get(clean) or MONTH_ABBRS.get(clean)
 
 
-def _parse_hour_minute(time_str: str) -> Optional[tuple[int, int]]:
+def _parse_hour_minute(time_str: str) -> tuple[int, int] | None:
     """Parse a time string like '7:00 pm' or '10:00 am'."""
     time_str = time_str.strip().lower()
     match = re.match(r"(\d{1,2}):(\d{2})\s*(am|pm)", time_str)
@@ -180,7 +180,7 @@ class EmEventsScraper(BaseScraper):
 
         return events
 
-    def _parse_event(self, event_el, tz: ZoneInfo) -> Optional[dict[str, Any]]:
+    def _parse_event(self, event_el, tz: ZoneInfo) -> dict[str, Any] | None:
         """Parse a single .em-event element into an event dict."""
         # Title and URL
         title_el = event_el.select_one(".em-item-title a")
@@ -242,7 +242,7 @@ class EmEventsScraper(BaseScraper):
             "uid": uid,
         }
 
-    def _parse_date(self, date_text: str) -> Optional[tuple[int, int, int]]:
+    def _parse_date(self, date_text: str) -> tuple[int, int, int] | None:
         """Parse a date string like 'June 18, 2026' or 'Jun 18, 2026'."""
         match = re.match(r"(\w+)\s+(\d{1,2}),?\s*(\d{4})", date_text)
         if not match:
@@ -261,7 +261,7 @@ class EmEventsScraper(BaseScraper):
     @staticmethod
     def _parse_time_range(
         time_text: str, year: int, month: int, day: int, tz: ZoneInfo
-    ) -> tuple[Optional[datetime], Optional[datetime]]:
+    ) -> tuple[datetime | None, datetime | None]:
         """Parse time range like '10:00 am - 10:00 pm' or '7:00 pm - 10:00 pm'."""
         is_all_day = "all day" in time_text.lower()
 

@@ -5,7 +5,8 @@ https://jacklondonpark.com/events/
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
 from datetime import datetime
@@ -13,7 +14,6 @@ from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
 
 
@@ -32,22 +32,22 @@ class JackLondonParkScraper(BaseScraper):
         response = requests.get(self.EVENTS_URL, timeout=30)
         response.raise_for_status()
 
-        soup = BeautifulSoup(response.text, 'html.parser')
+        soup = BeautifulSoup(response.text, "html.parser")
         events = []
 
         # Find all event links
         event_links = soup.select('a.wh-thumb-link[href*="/events/"]')
 
         for link in event_links:
-            event_url = link.get('href')
+            event_url = link.get("href")
             if not event_url:
                 continue
 
-            if not event_url.startswith('http'):
+            if not event_url.startswith("http"):
                 event_url = self.BASE_URL + event_url
 
             # Skip the main events page itself
-            if event_url.rstrip('/') == f"{self.BASE_URL}/events":
+            if event_url.rstrip("/") == f"{self.BASE_URL}/events":
                 continue
 
             try:
@@ -65,10 +65,10 @@ class JackLondonParkScraper(BaseScraper):
         self.logger.debug(f"Scraping {url}")
         resp = requests.get(url, timeout=30)
         resp.raise_for_status()
-        soup = BeautifulSoup(resp.text, 'html.parser')
+        soup = BeautifulSoup(resp.text, "html.parser")
 
         # Get title
-        title_el = soup.select_one('article h2')
+        title_el = soup.select_one("article h2")
         if not title_el:
             return None
         title = title_el.get_text(strip=True)
@@ -76,40 +76,40 @@ class JackLondonParkScraper(BaseScraper):
         # Get date and time from the "When:" section
         # Look for pattern like: "When: Sunday, February 22, 2026, 9:30 am to 12:00 pm"
         when_text = None
-        
+
         # First try: div with "When:" that contains the full date/time inline
-        for div in soup.find_all('div'):
+        for div in soup.find_all("div"):
             text = div.get_text(strip=True)
-            if text.startswith('When:') and re.search(r'\d{4}', text):
+            if text.startswith("When:") and re.search(r"\d{4}", text):
                 when_text = text
                 break
-        
+
         # Second try: p with "When:" that contains the full date/time
         if not when_text:
-            for p in soup.find_all('p'):
+            for p in soup.find_all("p"):
                 text = p.get_text(strip=True)
-                if text.startswith('When:') and re.search(r'\d{4}', text):
+                if text.startswith("When:") and re.search(r"\d{4}", text):
                     when_text = text
                     break
-        
+
         # Third try: look for standalone date paragraph after WHEN:
         if not when_text:
-            for p in soup.select('article p'):
+            for p in soup.select("article p"):
                 text = p.get_text(strip=True)
-                if re.match(r'^(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday),', text):
+                if re.match(r"^(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday),", text):
                     when_text = text
                     break
 
         if not when_text:
             self.logger.warning(f"No date found for {url}")
             return None
-        
+
         # Parse the when text
         # Remove "When:" prefix if present
-        when_text = re.sub(r'^When:\s*', '', when_text, flags=re.I)
-        
+        when_text = re.sub(r"^When:\s*", "", when_text, flags=re.I)
+
         # Extract date: "Sunday, February 22, 2026"
-        date_match = re.search(r'([A-Za-z]+,\s*)?([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})', when_text)
+        date_match = re.search(r"([A-Za-z]+,\s*)?([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})", when_text)
         if not date_match:
             self.logger.warning(f"Could not parse date from '{when_text}'")
             return None
@@ -129,21 +129,22 @@ class JackLondonParkScraper(BaseScraper):
         end_dt = None
 
         # Normalize a.m./p.m. to am/pm for easier parsing
-        normalized_when = re.sub(r'a\.m\.', 'am', when_text, flags=re.I)
-        normalized_when = re.sub(r'p\.m\.', 'pm', normalized_when, flags=re.I)
+        normalized_when = re.sub(r"a\.m\.", "am", when_text, flags=re.I)
+        normalized_when = re.sub(r"p\.m\.", "pm", normalized_when, flags=re.I)
 
         time_match = re.search(
-            r'(\d{1,2}):(\d{2})\s*(am|pm)(?:\s*(?:to|-|–|—)\s*(\d{1,2}):(\d{2})\s*(am|pm))?',
-            normalized_when, re.I
+            r"(\d{1,2}):(\d{2})\s*(am|pm)(?:\s*(?:to|-|–|—)\s*(\d{1,2}):(\d{2})\s*(am|pm))?",
+            normalized_when,
+            re.I,
         )
         if time_match:
             start_h = int(time_match.group(1))
             start_m = int(time_match.group(2))
             start_ampm = time_match.group(3).lower()
 
-            if start_ampm == 'pm' and start_h != 12:
+            if start_ampm == "pm" and start_h != 12:
                 start_h += 12
-            elif start_ampm == 'am' and start_h == 12:
+            elif start_ampm == "am" and start_h == 12:
                 start_h = 0
 
             start_dt = date.replace(hour=start_h, minute=start_m)
@@ -153,36 +154,36 @@ class JackLondonParkScraper(BaseScraper):
                 end_m = int(time_match.group(5))
                 end_ampm = time_match.group(6).lower()
 
-                if end_ampm == 'pm' and end_h != 12:
+                if end_ampm == "pm" and end_h != 12:
                     end_h += 12
-                elif end_ampm == 'am' and end_h == 12:
+                elif end_ampm == "am" and end_h == 12:
                     end_h = 0
 
                 end_dt = date.replace(hour=end_h, minute=end_m)
 
         # Get description
         description = ""
-        article_body = soup.select_one('.article-body')
+        article_body = soup.select_one(".article-body")
         if article_body:
-            paras = article_body.select('p')
+            paras = article_body.select("p")
             desc_parts = []
             for p in paras[:3]:
                 text = p.get_text(strip=True)
-                if text and not text.startswith('WHEN:') and not text.startswith('WHERE:'):
+                if text and not text.startswith("WHEN:") and not text.startswith("WHERE:"):
                     desc_parts.append(text)
-            description = ' '.join(desc_parts)[:500]
+            description = " ".join(desc_parts)[:500]
 
         location = "Jack London State Historic Park, 2400 London Ranch Road, Glen Ellen, CA 95442"
 
         return {
-            'title': title,
-            'dtstart': start_dt,
-            'dtend': end_dt or start_dt,
-            'url': url,
-            'location': location,
-            'description': description,
+            "title": title,
+            "dtstart": start_dt,
+            "dtend": end_dt or start_dt,
+            "url": url,
+            "location": location,
+            "description": description,
         }
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     JackLondonParkScraper.main()

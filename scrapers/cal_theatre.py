@@ -7,16 +7,15 @@ This is a Wix site with a calendar widget.
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
-import time
 from datetime import datetime, timedelta
 from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
 from lib.utils import DEFAULT_HEADERS
 
@@ -27,9 +26,10 @@ class CalTheatreScraper(BaseScraper):
     name = "Cal Theatre"
     domain = "caltheatre.com"
 
-    BASE_URL = 'https://www.caltheatre.com'
-    CALENDAR_URL = f'{BASE_URL}/calendar'
+    BASE_URL = "https://www.caltheatre.com"
+    CALENDAR_URL = f"{BASE_URL}/calendar"
     VENUE_ADDRESS = "California Theatre, 528 7th St, Santa Rosa, CA 95401"
+
     def fetch_events(self) -> list[dict[str, Any]]:
         """Fetch events using static request or Selenium."""
         # Try static first
@@ -47,30 +47,41 @@ class CalTheatreScraper(BaseScraper):
 
     def _parse_wix_calendar(self, html_content: str) -> list[dict[str, Any]]:
         """Parse events from Wix calendar text content."""
-        soup = BeautifulSoup(html_content, 'html.parser')
+        soup = BeautifulSoup(html_content, "html.parser")
         events = []
 
-        month_names = ['January', 'February', 'March', 'April', 'May', 'June',
-                       'July', 'August', 'September', 'October', 'November', 'December']
+        month_names = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+        ]
 
         # Try to find calendar day cells with events
-        calendar_cells = soup.find_all(attrs={'data-hook': re.compile(r'calendar-day-\d+')})
+        calendar_cells = soup.find_all(attrs={"data-hook": re.compile(r"calendar-day-\d+")})
 
         for cell in calendar_cells:
             try:
-                cell_text = cell.get_text(' ', strip=True)
+                cell_text = cell.get_text(" ", strip=True)
 
                 # Extract day number from data-hook
-                hook = cell.get('data-hook', '')
-                day_match = re.search(r'calendar-day-(\d+)', hook)
+                hook = cell.get("data-hook", "")
+                day_match = re.search(r"calendar-day-(\d+)", hook)
                 if not day_match:
                     continue
                 day = int(day_match.group(1))
 
                 # Find events - format: "15 7:30 PM Event Title +1 more"
                 event_patterns = re.findall(
-                    r'(\d{1,2}:\d{2}\s*(?:AM|PM))\s+([^+]+?)(?:\s*\+|$)',
-                    cell_text, re.IGNORECASE
+                    r"(\d{1,2}:\d{2}\s*(?:AM|PM))\s+([^+]+?)(?:\s*\+|$)", cell_text, re.IGNORECASE
                 )
 
                 for time_str, title in event_patterns:
@@ -99,14 +110,16 @@ class CalTheatreScraper(BaseScraper):
 
                     dt_end = dt_start + timedelta(hours=3)
 
-                    events.append({
-                        'title': title,
-                        'url': self.CALENDAR_URL,
-                        'dtstart': dt_start,
-                        'dtend': dt_end,
-                        'location': self.VENUE_ADDRESS,
-                        'description': f'Event at California Theatre. See {self.CALENDAR_URL} for details.'
-                    })
+                    events.append(
+                        {
+                            "title": title,
+                            "url": self.CALENDAR_URL,
+                            "dtstart": dt_start,
+                            "dtend": dt_end,
+                            "location": self.VENUE_ADDRESS,
+                            "description": f"Event at California Theatre. See {self.CALENDAR_URL} for details.",
+                        }
+                    )
 
                     self.logger.info(f"Found event: {title} on {dt_start}")
 
@@ -117,5 +130,5 @@ class CalTheatreScraper(BaseScraper):
         return events
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     CalTheatreScraper.main()

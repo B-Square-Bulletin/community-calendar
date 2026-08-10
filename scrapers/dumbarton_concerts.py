@@ -9,18 +9,17 @@ from that official page.
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
 
-from datetime import datetime, timedelta
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
+
 import re
-from typing import Any, Optional
+from datetime import datetime, timedelta
+from typing import Any
 from urllib.parse import urljoin
 from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup, Tag
-
 from lib.base import BaseScraper
-
 
 PAGE_URL = "https://dumbartonconcerts.org/26-27-tickets"
 SITE_URL = "https://dumbartonconcerts.org"
@@ -67,7 +66,11 @@ class DumbartonConcertsScraper(BaseScraper):
             return []
 
         title = self._clean_text(title_el.get_text(" ", strip=True))
-        if not title or title.startswith("I would like to make") or "membership here" in title.lower():
+        if (
+            not title
+            or title.startswith("I would like to make")
+            or "membership here" in title.lower()
+        ):
             return []
 
         dates_text = self._extract_dates_text(content)
@@ -88,14 +91,16 @@ class DumbartonConcertsScraper(BaseScraper):
         for dtstart in self._expand_datetimes(dates, times, tz):
             if dtstart < now - timedelta(hours=4):
                 continue
-            events.append({
-                "title": title,
-                "dtstart": dtstart,
-                "dtend": dtstart + timedelta(hours=2),
-                "url": detail_url or PAGE_URL,
-                "location": LOCATION,
-                "description": description,
-            })
+            events.append(
+                {
+                    "title": title,
+                    "dtstart": dtstart,
+                    "dtend": dtstart + timedelta(hours=2),
+                    "url": detail_url or PAGE_URL,
+                    "location": LOCATION,
+                    "description": description,
+                }
+            )
 
         return events
 

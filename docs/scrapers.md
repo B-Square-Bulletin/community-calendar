@@ -106,6 +106,7 @@ Example:
 ```python
 from lib.godaddy import GoDaddyScraper
 
+
 class MyVenueScraper(GoDaddyScraper):
     name = "My Venue"
     domain = "myvenue.com"
@@ -115,7 +116,8 @@ class MyVenueScraper(GoDaddyScraper):
     default_location = "My Venue, 123 Main St, Anytown, CA"
     timezone = "America/Los_Angeles"
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     MyVenueScraper.main()
 ```
 

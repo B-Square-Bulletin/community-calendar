@@ -11,8 +11,8 @@ If no city is given, exports all cities.
 import json
 import os
 import sys
-import urllib.request
 import urllib.error
+import urllib.request
 
 
 def export_feeds_txt(city, supabase_url, service_key):
@@ -88,11 +88,7 @@ def main():
         cities = [sys.argv[1]]
     else:
         # Get all distinct cities from feeds table
-        query_url = (
-            f"{supabase_url}/rest/v1/feeds"
-            f"?select=city"
-            f"&status=in.(active,pending)"
-        )
+        query_url = f"{supabase_url}/rest/v1/feeds?select=city&status=in.(active,pending)"
         headers = {
             "apikey": service_key,
             "Authorization": f"Bearer {service_key}",
@@ -104,7 +100,7 @@ def main():
         except urllib.error.URLError as e:
             print(f"Failed to query cities: {e}")
             sys.exit(1)
-        cities = sorted(set(r["city"] for r in rows))
+        cities = sorted({r["city"] for r in rows})
 
     for city in cities:
         export_feeds_txt(city, supabase_url, service_key)

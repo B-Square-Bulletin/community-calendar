@@ -3,7 +3,7 @@
 
 import sys
 
-sys.path.insert(0, str(__file__).rsplit('/', 2)[0])
+sys.path.insert(0, str(__file__).rsplit("/", 2)[0])
 from lib.tribe_events import TribeEventsScraper
 
 
@@ -17,5 +17,5 @@ class NAMIScraper(TribeEventsScraper):
     default_location = "Bloomington, IN"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     NAMIScraper.main()

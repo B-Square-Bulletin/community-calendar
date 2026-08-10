@@ -3,7 +3,7 @@
 
 import sys
 
-sys.path.insert(0, str(__file__).rsplit('/', 2)[0])
+sys.path.insert(0, str(__file__).rsplit("/", 2)[0])
 from lib.sugar_calendar import SugarCalendarScraper
 
 
@@ -17,5 +17,5 @@ class WritersGuildScraper(SugarCalendarScraper):
     default_location = "Bloomington, IN"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     WritersGuildScraper.main()

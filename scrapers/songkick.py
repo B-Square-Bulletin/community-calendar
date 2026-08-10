@@ -13,25 +13,26 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import argparse
 import json
 import logging
 import re
 from datetime import datetime, timezone
-from typing import Any, Optional
-from urllib.request import urlopen, Request
+from typing import Any
 from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
-    'Accept': 'text/html,application/xhtml+xml',
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+    "Accept": "text/html,application/xhtml+xml",
 }
 
 
@@ -42,7 +43,7 @@ class SongkickScraper(BaseScraper):
     domain = "songkick.com"
     timezone = "America/New_York"
 
-    def __init__(self, url: str, source_name: Optional[str] = None):
+    def __init__(self, url: str, source_name: str | None = None):
         super().__init__()
         self.url = url
         if source_name:
@@ -53,7 +54,7 @@ class SongkickScraper(BaseScraper):
         req = Request(self.url, headers=HEADERS)
         try:
             with urlopen(req, timeout=30) as resp:
-                html = resp.read().decode('utf-8')
+                html = resp.read().decode("utf-8")
         except (HTTPError, URLError) as e:
             self.logger.warning(f"Failed to fetch {self.url}: {e}")
             return []
@@ -62,8 +63,7 @@ class SongkickScraper(BaseScraper):
         events = []
 
         blocks = re.findall(
-            r'<script\s+type="application/ld\+json">(.*?)</script>',
-            html, re.DOTALL
+            r'<script\s+type="application/ld\+json">(.*?)</script>', html, re.DOTALL
         )
 
         for block_str in blocks:
@@ -74,15 +74,15 @@ class SongkickScraper(BaseScraper):
 
             items = data if isinstance(data, list) else [data]
             for item in items:
-                if not isinstance(item, dict) or item.get('@type') != 'MusicEvent':
+                if not isinstance(item, dict) or item.get("@type") != "MusicEvent":
                     continue
 
-                start_str = item.get('startDate', '')
+                start_str = item.get("startDate", "")
                 if not start_str:
                     continue
 
                 try:
-                    dtstart = datetime.fromisoformat(start_str.replace('Z', '+00:00'))
+                    dtstart = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
                 except ValueError:
                     continue
 
@@ -92,42 +92,52 @@ class SongkickScraper(BaseScraper):
                     continue
 
                 # Build title from performer names (cleaner than "Artist @ Venue")
-                performers = item.get('performer', [])
+                performers = item.get("performer", [])
                 if performers:
-                    title = ', '.join(p.get('name', '') for p in performers if p.get('name'))
+                    title = ", ".join(p.get("name", "") for p in performers if p.get("name"))
                 else:
                     # Fall back to event name, strip " @ Venue" suffix
-                    title = re.sub(r'\s*@\s*.+$', '', item.get('name', 'Untitled'))
+                    title = re.sub(r"\s*@\s*.+$", "", item.get("name", "Untitled"))
 
                 # Location
-                loc = item.get('location', {})
+                loc = item.get("location", {})
                 if isinstance(loc, dict):
-                    loc_name = loc.get('name', '')
-                    addr = loc.get('address', {})
+                    loc_name = loc.get("name", "")
+                    addr = loc.get("address", {})
                     if isinstance(addr, dict):
-                        parts = [addr.get('streetAddress', ''), addr.get('addressLocality', ''),
-                                 addr.get('addressRegion', ''), addr.get('postalCode', '')]
-                        addr_str = ', '.join(p for p in parts if p)
+                        parts = [
+                            addr.get("streetAddress", ""),
+                            addr.get("addressLocality", ""),
+                            addr.get("addressRegion", ""),
+                            addr.get("postalCode", ""),
+                        ]
+                        addr_str = ", ".join(p for p in parts if p)
                     else:
                         addr_str = str(addr)
-                    location = f"{loc_name}, {addr_str}" if loc_name and addr_str else (loc_name or addr_str)
+                    location = (
+                        f"{loc_name}, {addr_str}"
+                        if loc_name and addr_str
+                        else (loc_name or addr_str)
+                    )
                 else:
-                    location = ''
+                    location = ""
 
                 # URL — prefer offers URL (links to ticket purchase)
-                event_url = item.get('url', '')
-                offers = item.get('offers', [])
+                event_url = item.get("url", "")
+                offers = item.get("offers", [])
                 if offers and isinstance(offers[0], dict):
-                    event_url = offers[0].get('url', event_url)
+                    event_url = offers[0].get("url", event_url)
 
-                events.append({
-                    'title': title,
-                    'dtstart': dtstart,
-                    'dtend': None,
-                    'location': location,
-                    'description': item.get('description', ''),
-                    'url': event_url,
-                })
+                events.append(
+                    {
+                        "title": title,
+                        "dtstart": dtstart,
+                        "dtend": None,
+                        "location": location,
+                        "description": item.get("description", ""),
+                        "url": event_url,
+                    }
+                )
 
         self.logger.info(f"Found {len(events)} future events from Songkick")
         return events
@@ -135,10 +145,10 @@ class SongkickScraper(BaseScraper):
 
 def main():
     parser = argparse.ArgumentParser(description="Scrape Songkick venue page")
-    parser.add_argument('--url', required=True, help='Songkick venue URL')
-    parser.add_argument('--name', default='Songkick', help='Source name')
-    parser.add_argument('--output', '-o', help='Output ICS file')
-    parser.add_argument('--debug', action='store_true')
+    parser.add_argument("--url", required=True, help="Songkick venue URL")
+    parser.add_argument("--name", default="Songkick", help="Source name")
+    parser.add_argument("--output", "-o", help="Output ICS file")
+    parser.add_argument("--debug", action="store_true")
     args = parser.parse_args()
 
     if args.debug:
@@ -148,5 +158,5 @@ def main():
     scraper.run(args.output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

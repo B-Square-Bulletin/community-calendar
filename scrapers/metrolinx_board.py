@@ -28,7 +28,7 @@ class MetrolinxBoardScraper(BaseScraper):
 
     def extract_upcoming_dates(self, html: str) -> list[datetime.date]:
         match = re.search(
-            r'Upcoming Meetings</h2><ul[^>]*>(.*?)</ul>',
+            r"Upcoming Meetings</h2><ul[^>]*>(.*?)</ul>",
             html,
             re.S,
         )

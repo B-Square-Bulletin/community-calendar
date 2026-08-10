@@ -9,10 +9,9 @@ Skips entries that already exist (matched by city + url).
 
 import json
 import os
-import re
 import sys
-import urllib.request
 import urllib.error
+import urllib.request
 
 
 def parse_feeds_txt(path):
@@ -33,7 +32,11 @@ def parse_feeds_txt(path):
             continue
 
         # Skip generated-file header comments
-        if stripped.startswith("# Generated from") or stripped == "# " + stripped.split("# ", 1)[-1] and "source inventory" in stripped:
+        if (
+            stripped.startswith("# Generated from")
+            or (stripped == "# " + stripped.split("# ", 1)[-1]
+            and "source inventory" in stripped)
+        ):
             continue
 
         # Comment: could be a name or a cmd
@@ -55,12 +58,14 @@ def parse_feeds_txt(path):
             # Skip lines we don't understand
             continue
 
-        feeds.append({
-            "name": name or url,
-            "url": url,
-            "feed_type": feed_type,
-            "scraper_cmd": scraper_cmd,
-        })
+        feeds.append(
+            {
+                "name": name or url,
+                "url": url,
+                "feed_type": feed_type,
+                "scraper_cmd": scraper_cmd,
+            }
+        )
         name = None
         scraper_cmd = None
 
@@ -69,7 +74,9 @@ def parse_feeds_txt(path):
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: SUPABASE_URL=... SUPABASE_SERVICE_KEY=... python scripts/seed_feeds_from_txt.py <city>")
+        print(
+            "Usage: SUPABASE_URL=... SUPABASE_SERVICE_KEY=... python scripts/seed_feeds_from_txt.py <city>"
+        )
         sys.exit(1)
 
     city = sys.argv[1]

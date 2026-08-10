@@ -7,7 +7,8 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
 from datetime import datetime
@@ -15,7 +16,6 @@ from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
 from lib.utils import DEFAULT_HEADERS
 
@@ -35,34 +35,36 @@ class CinnabarScraper(BaseScraper):
         response = requests.get(self.URL, headers=DEFAULT_HEADERS, timeout=30)
         response.raise_for_status()
 
-        soup = BeautifulSoup(response.text, 'html.parser')
+        soup = BeautifulSoup(response.text, "html.parser")
         events = []
 
-        for show in soup.select('div.pp-content-post.type-show'):
-            title_el = show.select_one('h3.pp-content-grid-title')
-            dates_el = show.select_one('div.pp-content-grid-content p')
-            url_el = show.select_one('a.pp-post-link')
+        for show in soup.select("div.pp-content-post.type-show"):
+            title_el = show.select_one("h3.pp-content-grid-title")
+            dates_el = show.select_one("div.pp-content-grid-content p")
+            url_el = show.select_one("a.pp-post-link")
 
             if not title_el or not dates_el:
                 continue
 
             title = title_el.get_text(strip=True)
             date_text = dates_el.get_text(strip=True)
-            url = url_el['href'] if url_el and url_el.get('href') else self.URL
+            url = url_el["href"] if url_el and url_el.get("href") else self.URL
 
             dtstart, dtend = self._parse_date_range(date_text)
             if not dtstart:
                 self.logger.warning(f"Skipping {title}: couldn't parse '{date_text}'")
                 continue
 
-            events.append({
-                'title': title,
-                'dtstart': dtstart,
-                'dtend': dtend or dtstart,
-                'url': url,
-                'location': self.VENUE_ADDRESS,
-                'description': f"Performance dates: {date_text}",
-            })
+            events.append(
+                {
+                    "title": title,
+                    "dtstart": dtstart,
+                    "dtend": dtend or dtstart,
+                    "url": url,
+                    "location": self.VENUE_ADDRESS,
+                    "description": f"Performance dates: {date_text}",
+                }
+            )
 
             self.logger.info(f"Found: {title} ({date_text})")
 
@@ -77,33 +79,33 @@ class CinnabarScraper(BaseScraper):
         - 'December 19-21, 2025' (same month, hyphen)
         """
         # Normalize dashes
-        text = text.replace('–', '-').replace('—', '-').strip()
+        text = text.replace("–", "-").replace("—", "-").strip()
 
         # Pattern: "Month DD-Month DD, YYYY" (cross-month with repeated month name)
-        m = re.match(r'(\w+)\s+(\d+)\s*-\s*(\w+)\s+(\d+),\s*(\d{4})', text)
+        m = re.match(r"(\w+)\s+(\d+)\s*-\s*(\w+)\s+(\d+),\s*(\d{4})", text)
         if m:
             try:
-                dtstart = datetime.strptime(f"{m.group(1)} {m.group(2)}, {m.group(5)}", '%B %d, %Y')
-                dtend = datetime.strptime(f"{m.group(3)} {m.group(4)}, {m.group(5)}", '%B %d, %Y')
+                dtstart = datetime.strptime(f"{m.group(1)} {m.group(2)}, {m.group(5)}", "%B %d, %Y")
+                dtend = datetime.strptime(f"{m.group(3)} {m.group(4)}, {m.group(5)}", "%B %d, %Y")
                 return dtstart, dtend
             except ValueError:
                 pass
 
         # Pattern: "Month DD-DD, YYYY" (same month)
-        m = re.match(r'(\w+)\s+(\d+)\s*-\s*(\d+),\s*(\d{4})', text)
+        m = re.match(r"(\w+)\s+(\d+)\s*-\s*(\d+),\s*(\d{4})", text)
         if m:
             try:
-                dtstart = datetime.strptime(f"{m.group(1)} {m.group(2)}, {m.group(4)}", '%B %d, %Y')
-                dtend = datetime.strptime(f"{m.group(1)} {m.group(3)}, {m.group(4)}", '%B %d, %Y')
+                dtstart = datetime.strptime(f"{m.group(1)} {m.group(2)}, {m.group(4)}", "%B %d, %Y")
+                dtend = datetime.strptime(f"{m.group(1)} {m.group(3)}, {m.group(4)}", "%B %d, %Y")
                 return dtstart, dtend
             except ValueError:
                 pass
 
         # Pattern: single date "Month DD, YYYY"
-        m = re.match(r'(\w+\s+\d+,\s*\d{4})', text)
+        m = re.match(r"(\w+\s+\d+,\s*\d{4})", text)
         if m:
             try:
-                dtstart = datetime.strptime(m.group(1), '%B %d, %Y')
+                dtstart = datetime.strptime(m.group(1), "%B %d, %Y")
                 return dtstart, None
             except ValueError:
                 pass
@@ -111,5 +113,5 @@ class CinnabarScraper(BaseScraper):
         return None, None
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     CinnabarScraper.main()

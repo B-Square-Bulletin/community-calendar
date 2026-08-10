@@ -7,7 +7,8 @@ Sidearm Sports platform - provides ICS feed.
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 from typing import Any
 
@@ -25,10 +26,10 @@ class UCDavisAthleticsScraper(IcsScraper):
 
     def transform_event(self, event: dict[str, Any]) -> dict[str, Any]:
         """Clean up HTML entities in URL."""
-        if event.get('url'):
-            event['url'] = event['url'].replace('&amp;', '&')
+        if event.get("url"):
+            event["url"] = event["url"].replace("&amp;", "&")
         return event
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     UCDavisAthleticsScraper.main()

@@ -11,14 +11,15 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
 
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
+
+import contextlib
 import os
 from datetime import datetime, timedelta
 from typing import Any
 
 import requests
-
 from lib.base import BaseScraper
 from lib.utils import DEFAULT_HEADERS
 
@@ -35,17 +36,14 @@ class CarolinaPerformingArtsScraper(BaseScraper):
 
     def fetch_events(self) -> list[dict[str, Any]]:
         """Fetch events from CPA REST API."""
-        months_ahead = int(os.environ.get('SCRAPE_MONTHS', 6))
+        months_ahead = int(os.environ.get("SCRAPE_MONTHS", 6))
         now = datetime.now()
-        start = now.strftime('%Y-%m-%d')
-        end = (now + timedelta(days=months_ahead * 31)).strftime('%Y-%m-%d')
+        start = now.strftime("%Y-%m-%d")
+        end = (now + timedelta(days=months_ahead * 31)).strftime("%Y-%m-%d")
 
         self.logger.info(f"Fetching {self.API_URL} (start={start}, end={end})")
         response = requests.get(
-            self.API_URL,
-            params={'start': start, 'end': end},
-            headers=DEFAULT_HEADERS,
-            timeout=30
+            self.API_URL, params={"start": start, "end": end}, headers=DEFAULT_HEADERS, timeout=30
         )
         response.raise_for_status()
 
@@ -62,42 +60,40 @@ class CarolinaPerformingArtsScraper(BaseScraper):
 
     def _parse_event(self, item: dict) -> dict[str, Any] | None:
         """Parse a single API event object."""
-        title = item.get('title', '')
-        start_str = item.get('start', '')
+        title = item.get("title", "")
+        start_str = item.get("start", "")
         if not title or not start_str:
             return None
 
         # Parse "2026-02-12 18:00"
         try:
-            dtstart = datetime.strptime(start_str, '%Y-%m-%d %H:%M')
+            dtstart = datetime.strptime(start_str, "%Y-%m-%d %H:%M")
         except ValueError:
             return None
 
         # End time is usually null
         dtend = None
-        end_str = item.get('end')
+        end_str = item.get("end")
         if end_str:
-            try:
-                dtend = datetime.strptime(end_str, '%Y-%m-%d %H:%M')
-            except ValueError:
-                pass
+            with contextlib.suppress(ValueError):
+                dtend = datetime.strptime(end_str, "%Y-%m-%d %H:%M")
         if not dtend:
             dtend = dtstart + timedelta(hours=2)
 
-        url = item.get('url', '')
-        tag = item.get('tag', '')
+        url = item.get("url", "")
+        tag = item.get("tag", "")
 
-        description = f"Series: {tag}" if tag else ''
+        description = f"Series: {tag}" if tag else ""
 
         return {
-            'title': title,
-            'dtstart': dtstart,
-            'dtend': dtend,
-            'url': url,
-            'location': self.VENUE_ADDRESS,
-            'description': description,
+            "title": title,
+            "dtstart": dtstart,
+            "dtend": dtend,
+            "url": url,
+            "location": self.VENUE_ADDRESS,
+            "description": description,
         }
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     CarolinaPerformingArtsScraper.main()

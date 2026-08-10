@@ -1,7 +1,6 @@
 """ICS feed scraper base class."""
 
-import logging
-from typing import Any, Optional
+from typing import Any
 
 import requests
 from icalendar import Calendar
@@ -27,10 +26,10 @@ class IcsScraper(BaseScraper):
     """
 
     ics_url: str = ""
-    default_location: Optional[str] = None
-    default_url: Optional[str] = None
+    default_location: str | None = None
+    default_url: str | None = None
     request_timeout: int = 60
-    request_headers: Optional[dict] = None  # Custom headers for requests
+    request_headers: dict | None = None  # Custom headers for requests
 
     def get_ics_urls(self) -> list[str]:
         """Return list of ICS URLs to fetch. Override for multiple feeds."""
@@ -48,7 +47,7 @@ class IcsScraper(BaseScraper):
             return []
 
         headers = self.request_headers or {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
         }
 
         for url in urls:
@@ -66,7 +65,7 @@ class IcsScraper(BaseScraper):
         seen_uids = set()
         unique_events = []
         for event in all_events:
-            uid = event.get('uid', '')
+            uid = event.get("uid", "")
             if not uid or uid not in seen_uids:
                 if uid:
                     seen_uids.add(uid)
@@ -96,44 +95,44 @@ class IcsScraper(BaseScraper):
 
         return events
 
-    def _parse_vevent(self, component) -> Optional[dict[str, Any]]:
+    def _parse_vevent(self, component) -> dict[str, Any] | None:
         """Parse a single VEVENT component."""
         try:
-            title = str(component.get('summary', '')).strip()
+            title = str(component.get("summary", "")).strip()
             if not title:
                 return None
 
-            dtstart = component.get('dtstart')
+            dtstart = component.get("dtstart")
             if not dtstart:
                 return None
             dt_start = dtstart.dt
 
-            dtend = component.get('dtend')
+            dtend = component.get("dtend")
             dt_end = dtend.dt if dtend else None
 
-            location = str(component.get('location', '')).strip() or self.default_location
-            description = str(component.get('description', '')).strip() or None
-            url = str(component.get('url', '')).strip() or self.default_url
-            uid = str(component.get('uid', '')).strip()
+            location = str(component.get("location", "")).strip() or self.default_location
+            description = str(component.get("description", "")).strip() or None
+            url = str(component.get("url", "")).strip() or self.default_url
+            uid = str(component.get("uid", "")).strip()
 
             # Get categories if available
-            categories = component.get('categories')
+            categories = component.get("categories")
             cat_list = []
             if categories:
-                if hasattr(categories, 'cats'):
+                if hasattr(categories, "cats"):
                     cat_list = [str(c) for c in categories.cats]
-                elif hasattr(categories, 'to_ical'):
+                elif hasattr(categories, "to_ical"):
                     cat_list = [str(categories)]
 
             return {
-                'title': title,
-                'dtstart': dt_start,
-                'dtend': dt_end,
-                'location': location,
-                'description': description,
-                'url': url,
-                'uid': uid,
-                'categories': cat_list,
+                "title": title,
+                "dtstart": dt_start,
+                "dtend": dt_end,
+                "location": location,
+                "description": description,
+                "url": url,
+                "uid": uid,
+                "categories": cat_list,
             }
 
         except Exception as e:
@@ -171,7 +170,7 @@ class GoogleCalendarScraper(IcsScraper):
         urls = []
         for cal_id in self.calendar_ids:
             # URL-encode the @ symbol
-            encoded_id = cal_id.replace('@', '%40')
+            encoded_id = cal_id.replace("@", "%40")
             url = f"https://calendar.google.com/calendar/ical/{encoded_id}/public/basic.ics"
             urls.append(url)
         return urls

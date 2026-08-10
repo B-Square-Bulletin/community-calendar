@@ -62,20 +62,22 @@ class CitySparkScraper(BaseScraper):
                 "lng": self.lng,
                 # Note: omit 'sort' param - with sort='Date', API returns from end of range
                 "skip": skip,
-                "tps": str(page_size)
+                "tps": str(page_size),
             }
 
             self.logger.info(f"Fetching page at skip={skip}")
-            response = requests.post(url, json=payload, headers={'Content-Type': 'application/json'})
+            response = requests.post(
+                url, json=payload, headers={"Content-Type": "application/json"}
+            )
             response.raise_for_status()
             data = response.json()
 
-            events = data.get('Value') or []
+            events = data.get("Value") or []
             if not events:
                 break
 
             for event in events:
-                event_id = event.get('Id') or event.get('PId', '')
+                event_id = event.get("Id") or event.get("PId", "")
                 if event_id in seen_ids:
                     continue
                 seen_ids.add(event_id)
@@ -92,48 +94,48 @@ class CitySparkScraper(BaseScraper):
 
     def _parse_event(self, event: dict) -> dict[str, Any] | None:
         """Parse a single event from API response."""
-        pacific = ZoneInfo('America/Los_Angeles')
+        pacific = ZoneInfo("America/Los_Angeles")
 
         # Parse UTC times and convert to Pacific
-        start_utc = event.get('StartUTC')
+        start_utc = event.get("StartUTC")
         if not start_utc:
             return None
 
-        event_start_utc = datetime.fromisoformat(start_utc.replace('Z', '+00:00'))
+        event_start_utc = datetime.fromisoformat(start_utc.replace("Z", "+00:00"))
         event_start = event_start_utc.astimezone(pacific)
 
         # Parse end time
-        end_utc = event.get('EndUTC')
+        end_utc = event.get("EndUTC")
         if end_utc:
-            event_end_utc = datetime.fromisoformat(end_utc.replace('Z', '+00:00'))
+            event_end_utc = datetime.fromisoformat(end_utc.replace("Z", "+00:00"))
             event_end = event_end_utc.astimezone(pacific)
         else:
             event_end = event_start
 
         # Get URL from links, fall back to CitySpark event page
-        url = ''
-        links = event.get('Links') or []
+        url = ""
+        links = event.get("Links") or []
         if links and isinstance(links, list) and len(links) > 0:
-            url = links[0].get('url') or ''
+            url = links[0].get("url") or ""
 
         # If no link URL, construct per-event detail URL from CitySpark fields
         if not url and self.calendar_url:
-            slug = re.sub(r'[^a-z0-9]+', '-', event.get('Name', '').lower()).strip('-')
-            pid = event.get('PId')
-            date_start = (event.get('DateStart') or '')[:13]
+            slug = re.sub(r"[^a-z0-9]+", "-", event.get("Name", "").lower()).strip("-")
+            pid = event.get("PId")
+            date_start = (event.get("DateStart") or "")[:13]
             if slug and pid and date_start:
                 url = f"{self.calendar_url}#/details/{slug}/{pid}/{date_start}"
             else:
                 url = self.calendar_url
 
         return {
-            'title': event.get('Name', 'Untitled Event'),
-            'dtstart': event_start,
-            'dtend': event_end,
-            'location': event.get('Venue', ''),
-            'description': event.get('Description', ''),
-            'url': url,
-            'uid': event.get('Id') or event.get('PId', ''),
+            "title": event.get("Name", "Untitled Event"),
+            "dtstart": event_start,
+            "dtend": event_end,
+            "location": event.get("Venue", ""),
+            "description": event.get("Description", ""),
+            "url": url,
+            "uid": event.get("Id") or event.get("PId", ""),
         }
 
 

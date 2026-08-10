@@ -7,7 +7,8 @@ Localist platform - provides ICS feed.
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 from lib import IcsScraper
 
@@ -20,5 +21,5 @@ class UCDavisLibraryScraper(IcsScraper):
     ics_url = "https://events.library.ucdavis.edu/calendar/1.ics"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     UCDavisLibraryScraper.main()

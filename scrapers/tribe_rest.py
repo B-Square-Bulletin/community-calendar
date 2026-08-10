@@ -22,27 +22,28 @@ Pagination is automatic. By default fetches up to 6 months ahead
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import argparse
+import contextlib
 import logging
 import re
 from datetime import datetime
-from typing import Any, Optional
+from typing import Any
 from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
 
 import requests
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (compatible; CommunityCalendar/1.0)',
-    'Accept': 'application/json',
+    "User-Agent": "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
+    "Accept": "application/json",
 }
 
 
@@ -66,9 +67,9 @@ class TribeRestScraper(BaseScraper):
         tz: str = "America/New_York",
         default_location: str = "",
     ):
-        self.api_base = api_base.rstrip('/')
+        self.api_base = api_base.rstrip("/")
         self.name = source_name
-        self.domain = urlparse(self.api_base).netloc.removeprefix('www.')
+        self.domain = urlparse(self.api_base).netloc.removeprefix("www.")
         self.timezone = tz
         self.default_location = default_location
         self.api_url = f"{self.api_base}/wp-json/tribe/events/v1/events/"
@@ -79,12 +80,13 @@ class TribeRestScraper(BaseScraper):
         all_events: list[dict[str, Any]] = []
         tz = ZoneInfo(self.timezone)
         from datetime import timedelta
+
         now = datetime.now(tz)
-        today = now.strftime('%Y-%m-%d')
+        today = now.strftime("%Y-%m-%d")
         # Cap API fetch at SCRAPE_MONTHS (default 6) to avoid fetching thousands
         # of recurring events — the BaseScraper.run() cutoff will prune anything
         # beyond that window anyway.
-        end_date = (now + timedelta(days=self.months_ahead * 31)).strftime('%Y-%m-%d')
+        end_date = (now + timedelta(days=self.months_ahead * 31)).strftime("%Y-%m-%d")
 
         for page in range(1, self.max_pages + 1):
             url = (
@@ -104,7 +106,7 @@ class TribeRestScraper(BaseScraper):
                 self.logger.warning(f"Error fetching page {page}: {e}")
                 break
 
-            events = data.get('events', [])
+            events = data.get("events", [])
             if not events:
                 break
 
@@ -113,7 +115,7 @@ class TribeRestScraper(BaseScraper):
                 if parsed:
                     all_events.append(parsed)
 
-            total_pages = data.get('total_pages', 1)
+            total_pages = data.get("total_pages", 1)
             self.logger.info(
                 f"  Page {page}/{total_pages} — {len(events)} events, "
                 f"running total {len(all_events)}"
@@ -124,13 +126,13 @@ class TribeRestScraper(BaseScraper):
         self.logger.info(f"Found {len(all_events)} events total")
         return all_events
 
-    def _parse_event(self, item: dict, tz: ZoneInfo) -> Optional[dict[str, Any]]:
+    def _parse_event(self, item: dict, tz: ZoneInfo) -> dict[str, Any] | None:
         """Parse a single event from the Tribe Events API response."""
-        title = item.get('title', '')
+        title = item.get("title", "")
         if not title:
             return None
 
-        start_str = item.get('start_date', '')
+        start_str = item.get("start_date", "")
         if not start_str:
             return None
 
@@ -140,44 +142,42 @@ class TribeRestScraper(BaseScraper):
             self.logger.debug(f"Skipping event with bad start_date: {start_str!r}")
             return None
 
-        dtend: Optional[datetime] = None
-        end_str = item.get('end_date', '')
+        dtend: datetime | None = None
+        end_str = item.get("end_date", "")
         if end_str:
-            try:
+            with contextlib.suppress(ValueError):
                 dtend = datetime.fromisoformat(end_str).replace(tzinfo=tz)
-            except ValueError:
-                pass
 
         # Location from venue sub-object
-        venue = item.get('venue') or {}
+        venue = item.get("venue") or {}
         location_parts = [
-            venue.get('venue', ''),
-            venue.get('address', ''),
-            venue.get('city', ''),
-            venue.get('state', ''),
+            venue.get("venue", ""),
+            venue.get("address", ""),
+            venue.get("city", ""),
+            venue.get("state", ""),
         ]
-        location = ', '.join(p for p in location_parts if p) or self.default_location
+        location = ", ".join(p for p in location_parts if p) or self.default_location
 
         # Description — strip HTML tags
-        desc_html = item.get('description', '') or ''
-        desc = BeautifulSoup(desc_html, 'html.parser').get_text(strip=True)
-        desc = re.sub(r'\s+', ' ', desc)[:500]
+        desc_html = item.get("description", "") or ""
+        desc = BeautifulSoup(desc_html, "html.parser").get_text(strip=True)
+        desc = re.sub(r"\s+", " ", desc)[:500]
 
         # URL
-        url = item.get('url', '')
+        url = item.get("url", "")
 
         # Stable UID based on Tribe event id
-        event_id = item.get('id', '')
+        event_id = item.get("id", "")
         uid = f"tribe-{event_id}@{self.domain}" if event_id else None
 
         return {
-            'title': title,
-            'dtstart': dtstart,
-            'dtend': dtend,
-            'url': url,
-            'location': location,
-            'description': desc,
-            'uid': uid,
+            "title": title,
+            "dtstart": dtstart,
+            "dtend": dtend,
+            "url": url,
+            "location": location,
+            "description": desc,
+            "uid": uid,
         }
 
 
@@ -186,20 +186,17 @@ def main():
         description="Scrape a Tribe Events Calendar REST API (WordPress)"
     )
     parser.add_argument(
-        '--api-base', required=True,
-        help='Base site URL, e.g. https://www.weavervillenc.org'
+        "--api-base", required=True, help="Base site URL, e.g. https://www.weavervillenc.org"
     )
-    parser.add_argument('--name', required=True, help='Calendar/source display name')
+    parser.add_argument("--name", required=True, help="Calendar/source display name")
     parser.add_argument(
-        '--timezone', default='America/New_York',
-        help='IANA timezone (default: America/New_York)'
+        "--timezone", default="America/New_York", help="IANA timezone (default: America/New_York)"
     )
     parser.add_argument(
-        '--default-location', default='',
-        help='Fallback location when the API venue is empty'
+        "--default-location", default="", help="Fallback location when the API venue is empty"
     )
-    parser.add_argument('--output', '-o', help='Output ICS file path')
-    parser.add_argument('--debug', action='store_true', help='Enable debug logging')
+    parser.add_argument("--output", "-o", help="Output ICS file path")
+    parser.add_argument("--debug", action="store_true", help="Enable debug logging")
     args = parser.parse_args()
 
     if args.debug:
@@ -214,5 +211,5 @@ def main():
     scraper.run(args.output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

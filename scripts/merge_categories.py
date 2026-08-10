@@ -42,7 +42,7 @@ def main():
             e["category"] = prev_categories[uid]
             carried += 1
 
-    with open(current_path, 'w') as f:
+    with open(current_path, "w") as f:
         json.dump(current_events, f, ensure_ascii=False)
 
     total = len(current_events)

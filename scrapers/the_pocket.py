@@ -11,26 +11,27 @@ the markup; we infer "this year unless the month is past, otherwise next".
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
 from datetime import datetime, timedelta
-from typing import Any, Optional
-from urllib.request import urlopen, Request
+from typing import Any
+from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
-
 
 SHOWS_URL = "https://thepocket.7drumcity.com/shows-preview"
 SITE_URL = "https://thepocket.7drumcity.com"
 
-MONTHS = {m: i + 1 for i, m in enumerate(
-    ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-     'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-)}
+MONTHS = {
+    m: i + 1
+    for i, m in enumerate(
+        ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    )
+}
 
 
 class ThePocketScraper(BaseScraper):
@@ -42,12 +43,12 @@ class ThePocketScraper(BaseScraper):
     _location = "The Pocket, 4221 Connecticut Ave NW, Washington, DC 20008"
 
     def fetch_events(self) -> list[dict[str, Any]]:
-        req = Request(SHOWS_URL, headers={'User-Agent': 'Mozilla/5.0'})
+        req = Request(SHOWS_URL, headers={"User-Agent": "Mozilla/5.0"})
         with urlopen(req, timeout=30) as resp:
-            html = resp.read().decode('utf-8', errors='replace')
+            html = resp.read().decode("utf-8", errors="replace")
 
-        soup = BeautifulSoup(html, 'html.parser')
-        items = soup.find_all('div', class_='uui-layout88_item-2')
+        soup = BeautifulSoup(html, "html.parser")
+        items = soup.find_all("div", class_="uui-layout88_item-2")
         self.logger.info(f"Found {len(items)} event cards")
 
         tz = ZoneInfo(self.timezone)
@@ -61,10 +62,10 @@ class ThePocketScraper(BaseScraper):
 
         return events
 
-    def _parse_item(self, item, tz: ZoneInfo, now: datetime) -> Optional[dict]:
-        month_el = item.select_one('.event-month-2')
-        day_el = item.select_one('.event-day-2')
-        time_el = item.select_one('.event-time-new-2')
+    def _parse_item(self, item, tz: ZoneInfo, now: datetime) -> dict | None:
+        month_el = item.select_one(".event-month-2")
+        day_el = item.select_one(".event-day-2")
+        time_el = item.select_one(".event-time-new-2")
         if not (month_el and day_el):
             return None
 
@@ -99,43 +100,43 @@ class ThePocketScraper(BaseScraper):
 
         # Title: the visible h3 (without `w-condition-invisible`)
         title = None
-        for h in item.select('h3.uui-heading-xxsmall-4'):
-            cls = h.get('class') or []
-            if 'w-condition-invisible' not in cls:
-                title = h.get_text(' ', strip=True)
+        for h in item.select("h3.uui-heading-xxsmall-4"):
+            cls = h.get("class") or []
+            if "w-condition-invisible" not in cls:
+                title = h.get_text(" ", strip=True)
                 break
         if not title:
             return None
 
-        supports_el = item.select_one('h4.supports-line')
-        supports = supports_el.get_text(' ', strip=True) if supports_el else ''
+        supports_el = item.select_one("h4.supports-line")
+        supports = supports_el.get_text(" ", strip=True) if supports_el else ""
         full_title = f"{title} w/ {supports}" if supports else title
 
         # Event URL
-        link = item.select_one('a.link-block-2')
-        href = link.get('href', '') if link else ''
-        if href.startswith('/'):
+        link = item.select_one("a.link-block-2")
+        href = link.get("href", "") if link else ""
+        if href.startswith("/"):
             href = SITE_URL + href
 
         return {
-            'title': full_title,
-            'dtstart': dtstart,
-            'dtend': dtstart + timedelta(hours=3),
-            'url': href,
-            'location': self._location,
-            'description': '',
+            "title": full_title,
+            "dtstart": dtstart,
+            "dtend": dtstart + timedelta(hours=3),
+            "url": href,
+            "location": self._location,
+            "description": "",
         }
 
     @staticmethod
-    def _parse_time(s: str) -> Optional[tuple[int, int]]:
-        m = re.match(r'\s*(\d{1,2})(?::(\d{2}))?\s*(am|pm)\s*$', s, re.I)
+    def _parse_time(s: str) -> tuple[int, int] | None:
+        m = re.match(r"\s*(\d{1,2})(?::(\d{2}))?\s*(am|pm)\s*$", s, re.I)
         if not m:
             return None
         hour = int(m.group(1)) % 12
-        if m.group(3).lower() == 'pm':
+        if m.group(3).lower() == "pm":
             hour += 12
         return hour, int(m.group(2) or 0)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     ThePocketScraper.main()

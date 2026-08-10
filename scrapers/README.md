@@ -12,13 +12,15 @@ For sites using the [Elfsight Event Calendar](https://elfsight.com/event-calenda
 ```python
 from scrapers.lib.elfsight import ElfsightCalendarScraper
 
+
 class MySiteScraper(ElfsightCalendarScraper):
     name = "My Site Events"
     domain = "mysite.com"
     widget_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"  # From page source
     source_page = "https://mysite.com/events"
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     MySiteScraper.main()
 ```
 

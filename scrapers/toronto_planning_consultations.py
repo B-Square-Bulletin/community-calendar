@@ -8,7 +8,9 @@ class TorontoPlanningConsultationsScraper(SocialPinpointScraper):
     name = "City Planning Consultations"
     domain = "haveyoursay.toronto.ca"
     timezone = "America/Toronto"
-    page_url = "https://haveyoursay.toronto.ca/city-planning-development-review-community-consultations"
+    page_url = (
+        "https://haveyoursay.toronto.ca/city-planning-development-review-community-consultations"
+    )
     default_url = page_url
 
 

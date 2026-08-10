@@ -33,13 +33,17 @@ def get_changed_files(base_ref: str) -> list[str]:
     """Get files changed relative to base ref."""
     result = subprocess.run(
         ["git", "diff", "--name-only", f"{base_ref}...HEAD"],
-        capture_output=True, text=True, cwd=ROOT,
+        capture_output=True,
+        text=True,
+        cwd=ROOT,
     )
     if result.returncode != 0:
         # Fallback: diff against base_ref directly
         result = subprocess.run(
             ["git", "diff", "--name-only", base_ref],
-            capture_output=True, text=True, cwd=ROOT,
+            capture_output=True,
+            text=True,
+            cwd=ROOT,
         )
     return result.stdout.strip().splitlines()
 
@@ -66,7 +70,7 @@ def parse_pending_feeds(path: Path) -> list[dict]:
 
 def get_workflow_scraper_outputs(workflow_text: str) -> set[str]:
     """Extract all --output paths from scraper lines in the workflow."""
-    return set(re.findall(r'--output\s+(cities/\S+\.ics)', workflow_text))
+    return set(re.findall(r"--output\s+(cities/\S+\.ics)", workflow_text))
 
 
 def get_new_scraper_files(changed_files: list[str]) -> list[str]:
@@ -118,7 +122,7 @@ def validate(base_ref: str) -> list[str]:
                 # The scraper .py file should exist
                 if feed["scraper_cmd"]:
                     # Extract the .py file from the cmd
-                    cmd_match = re.search(r'python\s+(\S+\.py)', feed["scraper_cmd"])
+                    cmd_match = re.search(r"python\s+(\S+\.py)", feed["scraper_cmd"])
                     if cmd_match:
                         scraper_file = ROOT / cmd_match.group(1)
                         if not scraper_file.exists():
@@ -159,20 +163,21 @@ def validate(base_ref: str) -> list[str]:
 
 def main():
     parser = argparse.ArgumentParser(description="Validate PR feed/scraper consistency")
-    parser.add_argument("--base-ref", default="origin/main",
-                        help="Base ref to diff against (default: origin/main)")
+    parser.add_argument(
+        "--base-ref", default="origin/main", help="Base ref to diff against (default: origin/main)"
+    )
     args = parser.parse_args()
 
     errors = validate(args.base_ref)
 
     if errors:
-        print(f"\n{'='*60}")
+        print(f"\n{'=' * 60}")
         print(f"FAILED: {len(errors)} issue(s) found\n")
         for i, err in enumerate(errors, 1):
             print(f"  {i}. {err}\n")
         print("Scrapers need both a workflow entry AND a feeds.txt/pending_feeds.txt entry.")
-        print("Use: python scripts/add_scraper.py <name> <city> \"Display Name\"")
-        print(f"{'='*60}")
+        print('Use: python scripts/add_scraper.py <name> <city> "Display Name"')
+        print(f"{'=' * 60}")
         sys.exit(1)
     else:
         print("\nAll feed/scraper checks passed.")

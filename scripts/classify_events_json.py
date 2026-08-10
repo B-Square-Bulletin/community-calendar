@@ -63,9 +63,7 @@ class RateLimitTracker:
         """Parse rate limit info from API response headers."""
         try:
             tokens_limit = int(headers.get("anthropic-ratelimit-tokens-limit", 0))
-            tokens_remaining = int(
-                headers.get("anthropic-ratelimit-tokens-remaining", 0)
-            )
+            tokens_remaining = int(headers.get("anthropic-ratelimit-tokens-remaining", 0))
             reset_time = headers.get("anthropic-ratelimit-tokens-reset", "")
 
             if tokens_limit > 0:
@@ -298,19 +296,14 @@ def classify_batch(events, few_shot, api_key, model):
         ics_cats = event.get("ics_categories")
         ics_str = ""
         if ics_cats:
-            if isinstance(ics_cats, list):
-                ics_str = ", ".join(ics_cats)
-            else:
-                ics_str = str(ics_cats)
+            ics_str = ", ".join(ics_cats) if isinstance(ics_cats, list) else str(ics_cats)
         event_lines.append(
             f'{i + 1}. Title: "{title}" Location: "{location}"'
             + (f' ICS tags: "{ics_str}"' if ics_str else "")
             + (f' Description: "{description}"' if description else "")
         )
 
-    example_json = (
-        '[{"index": 1, "category": "Music / Concerts"}, {"index": 2, "category": null}]'
-    )
+    example_json = '[{"index": 1, "category": "Music / Concerts"}, {"index": 2, "category": null}]'
 
     prompt = f"""Classify each event into exactly one category. Categories:
 {chr(10).join("- " + c for c in CATEGORIES)}
@@ -353,7 +346,7 @@ Example: {example_json}"""
     return result_map, headers
 
 
-def process_file(  # noqa: PLR0915, PLR0912
+def process_file(
     filepath, config, few_shot, dry_run=False, rate_limiter=None
 ):
     """Classify events in a single events.json file.
@@ -400,9 +393,7 @@ def process_file(  # noqa: PLR0915, PLR0912
         title_groups[title_key].append((idx, event))
 
     # Pick one representative per title group
-    representative_items = [
-        (group[0][0], group[0][1]) for group in title_groups.values()
-    ]
+    representative_items = [(group[0][0], group[0][1]) for group in title_groups.values()]
     if len(representative_items) < len(to_classify):
         msg = (
             f"  {len(representative_items)} unique titles "
@@ -427,10 +418,7 @@ def process_file(  # noqa: PLR0915, PLR0912
         delay = rate_limiter.calculate_delay(estimated_tokens)
 
         if delay > 0:
-            msg = (
-                f"  Rate limit: waiting {delay:.1f}s before batch "
-                f"{batch_num}/{total_batches}..."
-            )
+            msg = f"  Rate limit: waiting {delay:.1f}s before batch {batch_num}/{total_batches}..."
             print(msg, flush=True)
             time.sleep(delay)
 
@@ -444,10 +432,7 @@ def process_file(  # noqa: PLR0915, PLR0912
         else:
             eta_str = ""
 
-        msg = (
-            f"  Batch {batch_num}/{total_batches} "
-            f"({len(batch_events)} events){eta_str}..."
-        )
+        msg = f"  Batch {batch_num}/{total_batches} ({len(batch_events)} events){eta_str}..."
         print(msg, flush=True)
 
         try:
@@ -468,9 +453,7 @@ def process_file(  # noqa: PLR0915, PLR0912
                 # Fallback: estimate tokens and accumulate for current window
                 # record_request() treats its argument as cumulative, so add
                 # to existing window total rather than passing incremental value
-                cumulative_estimated = (
-                    rate_limiter.tokens_used_in_window + estimated_tokens
-                )
+                cumulative_estimated = rate_limiter.tokens_used_in_window + estimated_tokens
                 rate_limiter.record_request(cumulative_estimated)
                 msg = (
                     f"    Rate limit headers unavailable, "
@@ -558,16 +541,10 @@ def process_file(  # noqa: PLR0915, PLR0912
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Classify events in JSON files via Claude"
-    )
+    parser = argparse.ArgumentParser(description="Classify events in JSON files via Claude")
     parser.add_argument("files", nargs="+", help="events.json files to classify")
-    parser.add_argument(
-        "--model", default="claude-haiku-4-5-20251001", help="Anthropic model"
-    )
-    parser.add_argument(
-        "--dry-run", action="store_true", help="Print results without writing"
-    )
+    parser.add_argument("--model", default="claude-haiku-4-5-20251001", help="Anthropic model")
+    parser.add_argument("--dry-run", action="store_true", help="Print results without writing")
     parser.add_argument(
         "--no-few-shot",
         action="store_true",

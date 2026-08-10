@@ -6,6 +6,7 @@ https://www.cafefridagallery.com/events
 Events are server-side rendered in a Wix Repeater component.
 """
 
+import contextlib
 import html
 import re
 import urllib.request
@@ -15,8 +16,7 @@ from zoneinfo import ZoneInfo
 
 from lib.base import BaseScraper
 
-
-PACIFIC = ZoneInfo('America/Los_Angeles')
+PACIFIC = ZoneInfo("America/Los_Angeles")
 
 
 class CafeFridaScraper(BaseScraper):
@@ -33,11 +33,11 @@ class CafeFridaScraper(BaseScraper):
         self.logger.info(f"Fetching {self.URL}")
 
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
         }
         req = urllib.request.Request(self.URL, headers=headers)
         with urllib.request.urlopen(req, timeout=30) as response:
-            html_content = response.read().decode('utf-8')
+            html_content = response.read().decode("utf-8")
 
         return self._parse_events(html_content)
 
@@ -65,12 +65,11 @@ class CafeFridaScraper(BaseScraper):
         """Parse a single event item."""
         # Extract title
         title_match = re.search(
-            r'class="[^"]*comp-l93ch30e[^"]*"[^>]*>.*?<p[^>]*>(.*?)</p>',
-            item_html, re.DOTALL
+            r'class="[^"]*comp-l93ch30e[^"]*"[^>]*>.*?<p[^>]*>(.*?)</p>', item_html, re.DOTALL
         )
         if not title_match:
             return None
-        title = re.sub(r'<[^>]+>', '', title_match.group(1))
+        title = re.sub(r"<[^>]+>", "", title_match.group(1))
         title = html.unescape(title).strip()
 
         if not title:
@@ -78,76 +77,70 @@ class CafeFridaScraper(BaseScraper):
 
         # Extract date
         date_match = re.search(
-            r'class="[^"]*comp-l93egplp[^"]*"[^>]*>.*?<p[^>]*>(.*?)</p>',
-            item_html, re.DOTALL
+            r'class="[^"]*comp-l93egplp[^"]*"[^>]*>.*?<p[^>]*>(.*?)</p>', item_html, re.DOTALL
         )
-        date_str = ''
+        date_str = ""
         if date_match:
-            date_str = re.sub(r'<[^>]+>', '', date_match.group(1))
+            date_str = re.sub(r"<[^>]+>", "", date_match.group(1))
             date_str = html.unescape(date_str).strip()
 
         # Extract time
         time_match = re.search(
-            r'class="[^"]*comp-l94lcdfy[^"]*"[^>]*>.*?<p[^>]*>(.*?)</p>',
-            item_html, re.DOTALL
+            r'class="[^"]*comp-l94lcdfy[^"]*"[^>]*>.*?<p[^>]*>(.*?)</p>', item_html, re.DOTALL
         )
-        time_str = ''
+        time_str = ""
         if time_match:
-            time_str = re.sub(r'<[^>]+>', '', time_match.group(1))
+            time_str = re.sub(r"<[^>]+>", "", time_match.group(1))
             time_str = html.unescape(time_str).strip()
 
         # Extract description
         desc_match = re.search(
-            r'class="[^"]*comp-l93ch30n[^"]*"[^>]*>.*?<p[^>]*>(.*?)</p>',
-            item_html, re.DOTALL
+            r'class="[^"]*comp-l93ch30n[^"]*"[^>]*>.*?<p[^>]*>(.*?)</p>', item_html, re.DOTALL
         )
-        description = ''
+        description = ""
         if desc_match:
-            description = re.sub(r'<[^>]+>', '', desc_match.group(1))
+            description = re.sub(r"<[^>]+>", "", desc_match.group(1))
             description = html.unescape(description).strip()
 
         # Extract category
         cat_match = re.search(
-            r'class="[^"]*comp-l93ch2zz[^"]*"[^>]*>.*?<h6[^>]*>(.*?)</h6>',
-            item_html, re.DOTALL
+            r'class="[^"]*comp-l93ch2zz[^"]*"[^>]*>.*?<h6[^>]*>(.*?)</h6>', item_html, re.DOTALL
         )
-        category = ''
+        category = ""
         if cat_match:
-            category = re.sub(r'<[^>]+>', '', cat_match.group(1))
+            category = re.sub(r"<[^>]+>", "", cat_match.group(1))
             category = html.unescape(category).strip()
 
         # Parse date: "Sunday, February 1, 2026" or "February 1, 2026"
         event_date = None
         if date_str:
-            dm = re.search(r'(\w+)\s+(\d+),\s+(\d{4})', date_str)
+            dm = re.search(r"(\w+)\s+(\d+),\s+(\d{4})", date_str)
             if dm:
                 month_str, day, year = dm.groups()
-                try:
+                with contextlib.suppress(ValueError):
                     event_date = datetime.strptime(f"{month_str} {day} {year}", "%B %d %Y")
-                except ValueError:
-                    pass
 
         if not event_date:
             return None
 
         # Parse time: "11:30am-1:30pm"
-        time_str_clean = time_str.lower().replace(' ', '')
-        tm = re.match(r'(\d{1,2}):?(\d{2})?(am|pm)-(\d{1,2}):?(\d{2})?(am|pm)', time_str_clean)
+        time_str_clean = time_str.lower().replace(" ", "")
+        tm = re.match(r"(\d{1,2}):?(\d{2})?(am|pm)-(\d{1,2}):?(\d{2})?(am|pm)", time_str_clean)
         if tm:
             sh, sm, sap, eh, em, eap = tm.groups()
-            sm = sm or '00'
-            em = em or '00'
+            sm = sm or "00"
+            em = em or "00"
 
             start_hour = int(sh)
-            if sap == 'pm' and start_hour != 12:
+            if sap == "pm" and start_hour != 12:
                 start_hour += 12
-            elif sap == 'am' and start_hour == 12:
+            elif sap == "am" and start_hour == 12:
                 start_hour = 0
 
             end_hour = int(eh)
-            if eap == 'pm' and end_hour != 12:
+            if eap == "pm" and end_hour != 12:
                 end_hour += 12
-            elif eap == 'am' and end_hour == 12:
+            elif eap == "am" and end_hour == 12:
                 end_hour = 0
 
             dt_start = event_date.replace(hour=start_hour, minute=int(sm), tzinfo=PACIFIC)
@@ -160,14 +153,14 @@ class CafeFridaScraper(BaseScraper):
             description = f"[{category}] {description}"
 
         return {
-            'title': title,
-            'url': self.URL,
-            'dtstart': dt_start,
-            'dtend': dt_end,
-            'location': self.LOCATION,
-            'description': description
+            "title": title,
+            "url": self.URL,
+            "dtstart": dt_start,
+            "dtend": dt_end,
+            "location": self.LOCATION,
+            "description": description,
         }
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     CafeFridaScraper.main()

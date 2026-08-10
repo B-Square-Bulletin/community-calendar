@@ -21,7 +21,7 @@ class that covers every store using Bookmanager hosting.
 """
 
 from datetime import date, datetime
-from typing import Any, Optional
+from typing import Any
 from zoneinfo import ZoneInfo
 
 import requests
@@ -48,10 +48,10 @@ class BookmanagerEventsScraper(BaseScraper):
 
     def __init__(
         self,
-        san: Optional[str] = None,
-        name: Optional[str] = None,
-        domain: Optional[str] = None,
-        timezone: Optional[str] = None,
+        san: str | None = None,
+        name: str | None = None,
+        domain: str | None = None,
+        timezone: str | None = None,
     ):
         super().__init__()
         if san:
@@ -62,8 +62,8 @@ class BookmanagerEventsScraper(BaseScraper):
             self.domain = domain
         if timezone:
             self.timezone = timezone
-        self._store_id: Optional[str] = None
-        self._session_id: Optional[str] = None
+        self._store_id: str | None = None
+        self._session_id: str | None = None
 
     def _post(self, endpoint: str, params: dict[str, str]) -> dict[str, Any]:
         """POST multipart form to Bookmanager API with the right Origin header."""
@@ -138,7 +138,7 @@ class BookmanagerEventsScraper(BaseScraper):
         )
         return events
 
-    def _map_event(self, row: dict[str, Any], tz: ZoneInfo) -> Optional[dict[str, Any]]:
+    def _map_event(self, row: dict[str, Any], tz: ZoneInfo) -> dict[str, Any] | None:
         title = (row.get("title") or "").strip()
         if not title:
             return None
@@ -174,7 +174,9 @@ class BookmanagerEventsScraper(BaseScraper):
         category = row.get("category") or {}
         category_name = category.get("name") if isinstance(category, dict) else None
         if category_name:
-            description = f"[{category_name}]\n{description}" if description else f"[{category_name}]"
+            description = (
+                f"[{category_name}]\n{description}" if description else f"[{category_name}]"
+            )
 
         return {
             "uid": f"bm-{row.get('id')}@{self.domain}",

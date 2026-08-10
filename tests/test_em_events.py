@@ -8,11 +8,10 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from datetime import datetime
+from unittest.mock import patch
 from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
-
-from unittest.mock import patch
 
 from scrapers.lib.em_events import EmEventsScraper
 
@@ -43,18 +42,14 @@ class TestParseTimeRange:
     def test_parse_standard_range(self):
         """Parse '10:00 am - 10:00 pm' on June 18, 2026."""
         scraper = EmEventsScraper()
-        dtstart, dtend = scraper._parse_time_range(
-            "10:00 am - 10:00 pm", 2026, 6, 18, TZ
-        )
+        dtstart, dtend = scraper._parse_time_range("10:00 am - 10:00 pm", 2026, 6, 18, TZ)
         assert dtstart == datetime(2026, 6, 18, 10, 0, tzinfo=TZ)
         assert dtend == datetime(2026, 6, 18, 22, 0, tzinfo=TZ)
 
     def test_parse_pm_to_pm_range(self):
         """Parse '7:00 pm - 10:00 pm' — both PM, no date wrap."""
         scraper = EmEventsScraper()
-        dtstart, dtend = scraper._parse_time_range(
-            "7:00 pm - 10:00 pm", 2026, 6, 18, TZ
-        )
+        dtstart, dtend = scraper._parse_time_range("7:00 pm - 10:00 pm", 2026, 6, 18, TZ)
         assert dtstart == datetime(2026, 6, 18, 19, 0, tzinfo=TZ)
         assert dtend == datetime(2026, 6, 18, 22, 0, tzinfo=TZ)
 

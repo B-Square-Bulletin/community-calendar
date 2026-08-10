@@ -8,27 +8,28 @@ with title, date, concert time, and optional detail link.
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
 from datetime import datetime, timedelta
-from typing import Any, Optional
+from typing import Any
 from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup, Tag
-
 from lib.base import BaseScraper
-
 
 PAGE_URL = "https://trinity.org/concerts"
 LOCATION = "Holy Trinity Catholic Church, 1315 36th Street NW, Washington, DC 20007"
 
 DATE_RE = re.compile(
-    r'(?P<weekday>Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s+'
-    r'(?P<month>[A-Za-z]+)\s+(?P<day>\d{1,2}),\s+(?P<year>\d{4})'
+    r"(?P<weekday>Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s+"
+    r"(?P<month>[A-Za-z]+)\s+(?P<day>\d{1,2}),\s+(?P<year>\d{4})"
 )
-TIME_RE = re.compile(r'concert time\s*(?P<hour>\d{1,2}):(?P<minute>\d{2})\s*(?P<ampm>am|pm)', re.I)
-DOORS_RE = re.compile(r'doors? (?:open at|,)\s*(?P<hour>\d{1,2}):(?P<minute>\d{2})\s*(?P<ampm>am|pm)', re.I)
+TIME_RE = re.compile(r"concert time\s*(?P<hour>\d{1,2}):(?P<minute>\d{2})\s*(?P<ampm>am|pm)", re.I)
+DOORS_RE = re.compile(
+    r"doors? (?:open at|,)\s*(?P<hour>\d{1,2}):(?P<minute>\d{2})\s*(?P<ampm>am|pm)", re.I
+)
 
 
 class HolyTrinityConcertsScraper(BaseScraper):
@@ -56,7 +57,7 @@ class HolyTrinityConcertsScraper(BaseScraper):
 
         return events
 
-    def _find_upcoming_block(self, soup: BeautifulSoup) -> Optional[Tag]:
+    def _find_upcoming_block(self, soup: BeautifulSoup) -> Tag | None:
         header = soup.find("h3", string=lambda s: s and "Upcoming Concerts" in s)
         if not header:
             return None
@@ -67,7 +68,7 @@ class HolyTrinityConcertsScraper(BaseScraper):
         paragraph: Tag,
         tz: ZoneInfo,
         now: datetime,
-    ) -> Optional[dict[str, Any]]:
+    ) -> dict[str, Any] | None:
         text = paragraph.get_text(" ", strip=True)
         if not text:
             return None
@@ -134,7 +135,9 @@ class HolyTrinityConcertsScraper(BaseScraper):
         return ""
 
     @staticmethod
-    def _build_datetime(date_match: re.Match[str], time_match: re.Match[str], tz: ZoneInfo) -> datetime:
+    def _build_datetime(
+        date_match: re.Match[str], time_match: re.Match[str], tz: ZoneInfo
+    ) -> datetime:
         month = date_match.group("month")
         day = int(date_match.group("day"))
         year = int(date_match.group("year"))

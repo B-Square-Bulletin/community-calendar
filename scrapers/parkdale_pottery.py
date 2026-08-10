@@ -9,24 +9,35 @@ from datetime import date, datetime, timedelta
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 from lib.base import BaseScraper
 
-
 MONTHS = {
-    "jan": 1, "january": 1,
-    "feb": 2, "february": 2,
-    "mar": 3, "march": 3,
-    "apr": 4, "april": 4,
+    "jan": 1,
+    "january": 1,
+    "feb": 2,
+    "february": 2,
+    "mar": 3,
+    "march": 3,
+    "apr": 4,
+    "april": 4,
     "may": 5,
-    "jun": 6, "june": 6,
-    "jul": 7, "july": 7,
-    "aug": 8, "august": 8,
-    "sep": 9, "sept": 9, "september": 9,
-    "oct": 10, "october": 10,
-    "nov": 11, "november": 11,
-    "dec": 12, "december": 12,
+    "jun": 6,
+    "june": 6,
+    "jul": 7,
+    "july": 7,
+    "aug": 8,
+    "august": 8,
+    "sep": 9,
+    "sept": 9,
+    "september": 9,
+    "oct": 10,
+    "october": 10,
+    "nov": 11,
+    "november": 11,
+    "dec": 12,
+    "december": 12,
 }
 DATE_RE = re.compile(
     r"\b(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)\s+"
@@ -74,7 +85,9 @@ class ParkdalePotteryScraper(BaseScraper):
     default_location = "Parkdale Pottery, 1688 Queen St W, Toronto, ON M6R 1B3"
 
     def fetch_events(self) -> list[dict]:
-        request = Request(f"{self.base_url}/products.json?limit=250", headers={"User-Agent": "Mozilla/5.0"})
+        request = Request(
+            f"{self.base_url}/products.json?limit=250", headers={"User-Agent": "Mozilla/5.0"}
+        )
         with urlopen(request, timeout=30) as response:
             data = json.loads(response.read())
 
@@ -105,8 +118,22 @@ class ParkdalePotteryScraper(BaseScraper):
                 start_hour, start_minute = parse_time(time_match.group("start"), end_meridian)
                 end_hour, end_minute = parse_time(time_match.group("end"))
                 tz = ZoneInfo(self.timezone)
-                dtstart = datetime(start_date.year, start_date.month, start_date.day, start_hour, start_minute, tzinfo=tz)
-                dtend = datetime(start_date.year, start_date.month, start_date.day, end_hour, end_minute, tzinfo=tz)
+                dtstart = datetime(
+                    start_date.year,
+                    start_date.month,
+                    start_date.day,
+                    start_hour,
+                    start_minute,
+                    tzinfo=tz,
+                )
+                dtend = datetime(
+                    start_date.year,
+                    start_date.month,
+                    start_date.day,
+                    end_hour,
+                    end_minute,
+                    tzinfo=tz,
+                )
             else:
                 dtstart = start_date
                 dtend = None
@@ -118,15 +145,17 @@ class ParkdalePotteryScraper(BaseScraper):
                 if location_text:
                     location = f"{location_text}, Toronto, ON"
 
-            events.append({
-                "title": product.get("title", "").strip(),
-                "dtstart": dtstart,
-                "dtend": dtend,
-                "location": location,
-                "description": text,
-                "url": f"{self.base_url}/products/{product.get('handle', '')}",
-                "uid": f"parkdale-{product['id']}@{self.domain}",
-            })
+            events.append(
+                {
+                    "title": product.get("title", "").strip(),
+                    "dtstart": dtstart,
+                    "dtend": dtend,
+                    "location": location,
+                    "description": text,
+                    "url": f"{self.base_url}/products/{product.get('handle', '')}",
+                    "uid": f"parkdale-{product['id']}@{self.domain}",
+                }
+            )
         return events
 
 

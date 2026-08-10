@@ -8,10 +8,10 @@ Run once when setting up a new city to generate/update city.conf.
 Usage:
     # Geocode cities for a city's allowed list:
     python scripts/geocode_cities.py --city petaluma
-    
+
     # Geocode with a specific center and radius:
     python scripts/geocode_cities.py --city petaluma --center "38.2324,-122.6367" --radius 25
-    
+
     # Just validate existing config (no API calls):
     python scripts/geocode_cities.py --city petaluma --validate-only
 """
@@ -19,13 +19,13 @@ Usage:
 import argparse
 import json
 import time
-from math import radians, cos, sin, asin, sqrt
+from math import asin, cos, radians, sin, sqrt
 from pathlib import Path
 
 import requests
 
-CACHE_FILE = Path(__file__).parent.parent / '.geocode_cache.json'
-NOMINATIM_URL = 'https://nominatim.openstreetmap.org/search'
+CACHE_FILE = Path(__file__).parent.parent / ".geocode_cache.json"
+NOMINATIM_URL = "https://nominatim.openstreetmap.org/search"
 
 
 def load_cache():
@@ -40,7 +40,7 @@ def save_cache(cache):
     CACHE_FILE.write_text(json.dumps(cache, indent=2))
 
 
-def geocode(city_name, state='CA', calendar=None, cache=None):
+def geocode(city_name, state="CA", calendar=None, cache=None):
     """Geocode a city name to lat/lng using Nominatim."""
     if cache is None:
         cache = {}
@@ -48,28 +48,26 @@ def geocode(city_name, state='CA', calendar=None, cache=None):
     cache_key = f"{city_name}, {state}, {calendar}" if calendar else f"{city_name}, {state}"
     if cache_key in cache:
         return cache[cache_key]
-    
+
     # Rate limit: 1 request per second for Nominatim
     time.sleep(1.1)
-    
+
     params = {
-        'q': f"{city_name}, {state}, USA",
-        'format': 'json',
-        'limit': 1,
+        "q": f"{city_name}, {state}, USA",
+        "format": "json",
+        "limit": 1,
     }
-    headers = {
-        'User-Agent': 'CommunityCalendar/1.0 (event aggregator)'
-    }
-    
+    headers = {"User-Agent": "CommunityCalendar/1.0 (event aggregator)"}
+
     try:
         resp = requests.get(NOMINATIM_URL, params=params, headers=headers, timeout=10)
         resp.raise_for_status()
         data = resp.json()
-        
+
         if data:
-            lat = float(data[0]['lat'])
-            lng = float(data[0]['lon'])
-            cache[cache_key] = {'lat': lat, 'lng': lng}
+            lat = float(data[0]["lat"])
+            lng = float(data[0]["lon"])
+            cache[cache_key] = {"lat": lat, "lng": lng}
             save_cache(cache)
             return cache[cache_key]
     except Exception as e:
@@ -83,7 +81,7 @@ def haversine(lat1, lng1, lat2, lng2):
     lat1, lng1, lat2, lng2 = map(radians, [lat1, lng1, lat2, lng2])
     dlat = lat2 - lat1
     dlng = lng2 - lng1
-    a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlng/2)**2
+    a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlng / 2) ** 2
     c = 2 * asin(sqrt(a))
     miles = 3956 * c  # Earth radius in miles
     return miles
@@ -91,40 +89,34 @@ def haversine(lat1, lng1, lat2, lng2):
 
 def parse_allowed_cities_file(filepath):
     """Parse city.conf and extract config."""
-    config = {
-        'center': None,
-        'radius': None,
-        'state': 'CA',
-        'timezone': None,
-        'cities': []
-    }
+    config = {"center": None, "radius": None, "state": "CA", "timezone": None, "cities": []}
 
     for line in filepath.read_text().splitlines():
         line = line.strip()
         if not line:
             continue
-        if line.startswith('# center:'):
-            parts = line.split(':', 1)[1].strip().split(',')
-            config['center'] = (float(parts[0].strip()), float(parts[1].strip()))
-        elif line.startswith('# radius:'):
-            config['radius'] = float(line.split(':', 1)[1].strip())
-        elif line.startswith('# state:'):
-            config['state'] = line.split(':', 1)[1].strip()
-        elif line.startswith('# timezone:'):
-            config['timezone'] = line.split(':', 1)[1].strip()
-        elif not line.startswith('#'):
+        if line.startswith("# center:"):
+            parts = line.split(":", 1)[1].strip().split(",")
+            config["center"] = (float(parts[0].strip()), float(parts[1].strip()))
+        elif line.startswith("# radius:"):
+            config["radius"] = float(line.split(":", 1)[1].strip())
+        elif line.startswith("# state:"):
+            config["state"] = line.split(":", 1)[1].strip()
+        elif line.startswith("# timezone:"):
+            config["timezone"] = line.split(":", 1)[1].strip()
+        elif not line.startswith("#"):
             # Strip trailing comment from city name
-            city = line.split('#')[0].strip()
+            city = line.split("#")[0].strip()
             if city:
-                config['cities'].append(city)
-    
+                config["cities"].append(city)
+
     return config
 
 
 def write_allowed_cities_file(filepath, config, city_coords):
     """Write city.conf with config header."""
     lines = []
-    if config.get('timezone'):
+    if config.get("timezone"):
         lines.append(f"# timezone: {config['timezone']}")
     lines += [
         f"# center: {config['center'][0]}, {config['center'][1]}",
@@ -133,81 +125,85 @@ def write_allowed_cities_file(filepath, config, city_coords):
         "#",
         "# Cities within radius (auto-generated coordinates):",
     ]
-    
-    center_lat, center_lng = config['center']
-    
-    for city in sorted(config['cities']):
+
+    center_lat, center_lng = config["center"]
+
+    for city in sorted(config["cities"]):
         coords = city_coords.get(city)
         if coords:
-            dist = haversine(center_lat, center_lng, coords['lat'], coords['lng'])
-            if dist <= config['radius']:
+            dist = haversine(center_lat, center_lng, coords["lat"], coords["lng"])
+            if dist <= config["radius"]:
                 lines.append(f"{city}  # {coords['lat']:.4f}, {coords['lng']:.4f} ({dist:.1f} mi)")
             else:
-                lines.append(f"{city}  # {coords['lat']:.4f}, {coords['lng']:.4f} ({dist:.1f} mi) ⚠️ OUTSIDE RADIUS")
+                lines.append(
+                    f"{city}  # {coords['lat']:.4f}, {coords['lng']:.4f} ({dist:.1f} mi) ⚠️ OUTSIDE RADIUS"
+                )
         else:
             lines.append(f"{city}  # (coordinates unknown)")
-    
-    filepath.write_text('\n'.join(lines) + '\n', encoding='utf-8')
+
+    filepath.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Geocode cities for geo-filtering')
-    parser.add_argument('--city', required=True, help='City directory name (e.g., petaluma)')
-    parser.add_argument('--center', help='Center coordinates as "lat,lng"')
-    parser.add_argument('--radius', type=float, help='Radius in miles')
-    parser.add_argument('--state', default=None, help='State abbreviation (overrides file; file default: CA)')
-    parser.add_argument('--validate-only', action='store_true', help='Just validate, no geocoding')
-    
+    parser = argparse.ArgumentParser(description="Geocode cities for geo-filtering")
+    parser.add_argument("--city", required=True, help="City directory name (e.g., petaluma)")
+    parser.add_argument("--center", help='Center coordinates as "lat,lng"')
+    parser.add_argument("--radius", type=float, help="Radius in miles")
+    parser.add_argument(
+        "--state", default=None, help="State abbreviation (overrides file; file default: CA)"
+    )
+    parser.add_argument("--validate-only", action="store_true", help="Just validate, no geocoding")
+
     args = parser.parse_args()
-    
-    city_dir = Path(__file__).parent.parent / 'cities' / args.city
-    allowed_file = city_dir / 'city.conf'
-    
+
+    city_dir = Path(__file__).parent.parent / "cities" / args.city
+    allowed_file = city_dir / "city.conf"
+
     if not allowed_file.exists():
         print(f"Error: {allowed_file} does not exist")
-        print(f"Create it first with a list of cities to allow")
+        print("Create it first with a list of cities to allow")
         return 1
-    
+
     # Parse existing file
     config = parse_allowed_cities_file(allowed_file)
-    
+
     # Override with command line args
     if args.center:
-        parts = args.center.split(',')
-        config['center'] = (float(parts[0].strip()), float(parts[1].strip()))
+        parts = args.center.split(",")
+        config["center"] = (float(parts[0].strip()), float(parts[1].strip()))
     if args.radius:
-        config['radius'] = args.radius
+        config["radius"] = args.radius
     if args.state is not None:
-        config['state'] = args.state
-    
+        config["state"] = args.state
+
     # Load geocoding cache
     cache = load_cache()
 
-    if not config['center']:
+    if not config["center"]:
         # Auto-geocode the city name to get center coordinates
-        print(f"  No center defined, geocoding '{args.city}'...", end=' ', flush=True)
-        coords = geocode(args.city, config['state'], args.city, cache)
+        print(f"  No center defined, geocoding '{args.city}'...", end=" ", flush=True)
+        coords = geocode(args.city, config["state"], args.city, cache)
         if coords:
-            config['center'] = (coords['lat'], coords['lng'])
+            config["center"] = (coords["lat"], coords["lng"])
             print(f"OK ({coords['lat']:.4f}, {coords['lng']:.4f})")
         else:
             print("FAILED")
             print("Error: Could not geocode city. Use --center to specify manually.")
             return 1
-    if not config['radius']:
+    if not config["radius"]:
         print("Error: No radius defined. Use --radius or add '# radius: N' to file")
         return 1
-    
+
     print(f"Center: {config['center']}")
     print(f"Radius: {config['radius']} miles")
     print(f"State: {config['state']}")
     print(f"Cities: {len(config['cities'])}")
     print()
-    
+
     city_coords = {}
-    
+
     # Geocode cities
-    for city in config['cities']:
+    for city in config["cities"]:
         cache_key = f"{city}, {config['state']}, {args.city}"
         if cache_key in cache:
             city_coords[city] = cache[cache_key]
@@ -215,44 +211,44 @@ def main():
         elif args.validate_only:
             status = "skipped (validate-only)"
         else:
-            print(f"  Geocoding {city}...", end=' ', flush=True)
-            coords = geocode(city, config['state'], args.city, cache)
+            print(f"  Geocoding {city}...", end=" ", flush=True)
+            coords = geocode(city, config["state"], args.city, cache)
             if coords:
                 city_coords[city] = coords
                 status = f"OK ({coords['lat']:.4f}, {coords['lng']:.4f})"
             else:
                 status = "FAILED"
             print(status)
-    
+
     # Report distances
     print()
     print("Distance report:")
-    center_lat, center_lng = config['center']
+    center_lat, center_lng = config["center"]
     outside_count = 0
-    
-    for city in sorted(config['cities']):
+
+    for city in sorted(config["cities"]):
         coords = city_coords.get(city)
         if coords:
-            dist = haversine(center_lat, center_lng, coords['lat'], coords['lng'])
+            dist = haversine(center_lat, center_lng, coords["lat"], coords["lng"])
             flag = ""
-            if dist > config['radius']:
+            if dist > config["radius"]:
                 flag = " ⚠️  OUTSIDE RADIUS"
                 outside_count += 1
             print(f"  {city}: {dist:.1f} mi{flag}")
         else:
             print(f"  {city}: (no coordinates)")
-    
+
     if outside_count > 0:
         print(f"\n⚠️  {outside_count} cities are outside the {config['radius']} mile radius")
         print("   They will still be allowed but this may indicate a config issue.")
-    
+
     # Update file with coordinates
     if not args.validate_only:
         write_allowed_cities_file(allowed_file, config, city_coords)
         print(f"\nUpdated {allowed_file}")
-    
+
     return 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     exit(main())

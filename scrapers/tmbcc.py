@@ -35,7 +35,8 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import argparse
 import html as html_mod
@@ -44,68 +45,84 @@ import logging
 import re
 import xml.etree.ElementTree as ET
 from datetime import date, datetime, timedelta
-from typing import Any, Optional
+from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 from lib.base import BaseScraper
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-    'Accept': 'text/html,application/xhtml+xml,application/xml,application/json;q=0.9,*/*;q=0.8',
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml,application/json;q=0.9,*/*;q=0.8",
 }
 
-WP_JSON_URL = 'https://tmbcc.org/wp-json/wp/v2/posts?per_page=30&_fields=date,link,title,content'
-RSS_URL = 'https://tmbcc.org/feed/'
+WP_JSON_URL = "https://tmbcc.org/wp-json/wp/v2/posts?per_page=30&_fields=date,link,title,content"
+RSS_URL = "https://tmbcc.org/feed/"
 
-DEFAULT_LOCATION = 'Tibetan Mongolian Buddhist Cultural Center, 3655 Snoddy Rd, Bloomington, IN 47401'
+DEFAULT_LOCATION = (
+    "Tibetan Mongolian Buddhist Cultural Center, 3655 Snoddy Rd, Bloomington, IN 47401"
+)
 
 MONTHS = {
-    'jan': 1, 'january': 1,
-    'feb': 2, 'february': 2,
-    'mar': 3, 'march': 3,
-    'apr': 4, 'april': 4,
-    'may': 5,
-    'jun': 6, 'june': 6,
-    'jul': 7, 'july': 7,
-    'aug': 8, 'august': 8,
-    'sep': 9, 'sept': 9, 'september': 9,
-    'oct': 10, 'october': 10,
-    'nov': 11, 'november': 11,
-    'dec': 12, 'december': 12,
+    "jan": 1,
+    "january": 1,
+    "feb": 2,
+    "february": 2,
+    "mar": 3,
+    "march": 3,
+    "apr": 4,
+    "april": 4,
+    "may": 5,
+    "jun": 6,
+    "june": 6,
+    "jul": 7,
+    "july": 7,
+    "aug": 8,
+    "august": 8,
+    "sep": 9,
+    "sept": 9,
+    "september": 9,
+    "oct": 10,
+    "october": 10,
+    "nov": 11,
+    "november": 11,
+    "dec": 12,
+    "december": 12,
 }
 
 MONTH_PAT = (
-    r'(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|'
-    r'Aug(?:ust)?|Sep(?:t(?:ember)?)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)'
+    r"(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|"
+    r"Aug(?:ust)?|Sep(?:t(?:ember)?)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)"
 )
 # Month followed by a day number — a bare month word ("may", "march") never
 # counts as a date without one.
-ANCHOR_RE = re.compile(
-    MONTH_PAT + r'\.?\s+(\d{1,2})(?!\d)(?:st|nd|rd|th)?\b', re.IGNORECASE)
+ANCHOR_RE = re.compile(MONTH_PAT + r"\.?\s+(\d{1,2})(?!\d)(?:st|nd|rd|th)?\b", re.IGNORECASE)
 # Continuation tokens after the anchor: ", 29th", "& 30th", "- 20th",
 # "to Oct 2", "and 10th" ...
 TAIL_RE = re.compile(
-    r'\s*(?:,|&|and|to|through|thru|[-–—])\s*(?:' + MONTH_PAT + r'\.?\s+)?(\d{1,2})(?!\d)(?:st|nd|rd|th)?\b',
-    re.IGNORECASE)
-YEAR_AFTER_RE = re.compile(r'^\s*,?\s*(20\d{2})\b')
-YEAR_ANY_RE = re.compile(r'\b(20\d{2})\b')
-TIME_RE = re.compile(r'\b(\d{1,2})(?::(\d{2}))?\s*([ap])\.?m\.?\b', re.IGNORECASE)
+    r"\s*(?:,|&|and|to|through|thru|[-–—])\s*(?:"
+    + MONTH_PAT
+    + r"\.?\s+)?(\d{1,2})(?!\d)(?:st|nd|rd|th)?\b",
+    re.IGNORECASE,
+)
+YEAR_AFTER_RE = re.compile(r"^\s*,?\s*(20\d{2})\b")
+YEAR_ANY_RE = re.compile(r"\b(20\d{2})\b")
+TIME_RE = re.compile(r"\b(\d{1,2})(?::(\d{2}))?\s*([ap])\.?m\.?\b", re.IGNORECASE)
 
 
 def clean_text(raw: str) -> str:
     """Strip HTML tags/entities and normalize whitespace."""
-    txt = html_mod.unescape(raw or '')
-    txt = re.sub(r'<[^>]+>', ' ', txt)
-    txt = txt.replace('’', "'").replace('‘', "'")
-    return re.sub(r'\s+', ' ', txt).strip()
+    txt = html_mod.unescape(raw or "")
+    txt = re.sub(r"<[^>]+>", " ", txt)
+    txt = txt.replace("’", "'").replace("‘", "'")
+    return re.sub(r"\s+", " ", txt).strip()
 
 
-def parse_time(text: str) -> Optional[tuple[int, int]]:
+def parse_time(text: str) -> tuple[int, int] | None:
     """Find an explicit am/pm time like '10am' or '10:30 a.m.'."""
     m = TIME_RE.search(text)
     if not m:
@@ -114,14 +131,14 @@ def parse_time(text: str) -> Optional[tuple[int, int]]:
     minute = int(m.group(2) or 0)
     if not (1 <= hour <= 12) or minute > 59:
         return None
-    if m.group(3).lower() == 'p' and hour != 12:
+    if m.group(3).lower() == "p" and hour != 12:
         hour += 12
-    elif m.group(3).lower() == 'a' and hour == 12:
+    elif m.group(3).lower() == "a" and hour == 12:
         hour = 0
     return hour, minute
 
 
-def parse_date_span(text: str) -> Optional[dict[str, Any]]:
+def parse_date_span(text: str) -> dict[str, Any] | None:
     """
     Find the first month-day date phrase in text and consume any
     day-list / range continuation. Returns {'dates': [(month, day), ...],
@@ -158,7 +175,7 @@ def parse_date_span(text: str) -> Optional[dict[str, Any]]:
         if y:
             year = int(y.group(1))
 
-    return {'dates': dates, 'year': year, 'time': parse_time(text)}
+    return {"dates": dates, "year": year, "time": parse_time(text)}
 
 
 class TmbccScraper(BaseScraper):
@@ -168,11 +185,11 @@ class TmbccScraper(BaseScraper):
     domain = "tmbcc.org"
     timezone = "America/Indiana/Indianapolis"
 
-    def _fetch(self, url: str) -> Optional[str]:
+    def _fetch(self, url: str) -> str | None:
         req = Request(url, headers=HEADERS)
         try:
             with urlopen(req, timeout=30) as resp:
-                return resp.read().decode('utf-8', errors='replace')
+                return resp.read().decode("utf-8", errors="replace")
         except (HTTPError, URLError, TimeoutError) as e:
             self.logger.warning(f"Failed to fetch {url}: {e}")
             return None
@@ -199,15 +216,17 @@ class TmbccScraper(BaseScraper):
             if not isinstance(item, dict):
                 continue
             try:
-                published = datetime.fromisoformat(item['date']).date()
+                published = datetime.fromisoformat(item["date"]).date()
             except (KeyError, ValueError, TypeError):
                 continue
-            posts.append({
-                'title': clean_text((item.get('title') or {}).get('rendered', '')),
-                'text': clean_text((item.get('content') or {}).get('rendered', '')),
-                'link': item.get('link', ''),
-                'published': published,
-            })
+            posts.append(
+                {
+                    "title": clean_text((item.get("title") or {}).get("rendered", "")),
+                    "text": clean_text((item.get("content") or {}).get("rendered", "")),
+                    "link": item.get("link", ""),
+                    "published": published,
+                }
+            )
         self.logger.info(f"Fetched {len(posts)} posts via wp-json")
         return posts
 
@@ -220,26 +239,29 @@ class TmbccScraper(BaseScraper):
         except ET.ParseError as e:
             self.logger.warning(f"RSS parse failed: {e}")
             return []
-        ns = {'content': 'http://purl.org/rss/1.0/modules/content/'}
+        ns = {"content": "http://purl.org/rss/1.0/modules/content/"}
         posts = []
-        for item in root.findall('.//item'):
-            title_el = item.find('title')
-            pub_el = item.find('pubDate')
+        for item in root.findall(".//item"):
+            title_el = item.find("title")
+            pub_el = item.find("pubDate")
             if title_el is None or pub_el is None or not pub_el.text:
                 continue
             try:
                 from email.utils import parsedate_to_datetime
+
                 published = parsedate_to_datetime(pub_el.text).date()
             except (ValueError, TypeError):
                 continue
-            enc = item.find('content:encoded', ns)
-            link_el = item.find('link')
-            posts.append({
-                'title': clean_text(title_el.text or ''),
-                'text': clean_text(enc.text if enc is not None else ''),
-                'link': (link_el.text or '').strip() if link_el is not None else '',
-                'published': published,
-            })
+            enc = item.find("content:encoded", ns)
+            link_el = item.find("link")
+            posts.append(
+                {
+                    "title": clean_text(title_el.text or ""),
+                    "text": clean_text(enc.text if enc is not None else ""),
+                    "link": (link_el.text or "").strip() if link_el is not None else "",
+                    "published": published,
+                }
+            )
         self.logger.info(f"Fetched {len(posts)} posts via RSS")
         return posts
 
@@ -255,20 +277,20 @@ class TmbccScraper(BaseScraper):
             year += 1
         return year
 
-    def _post_to_event(self, post: dict[str, Any]) -> Optional[dict[str, Any]]:
-        title = post['title']
+    def _post_to_event(self, post: dict[str, Any]) -> dict[str, Any] | None:
+        title = post["title"]
         # Titles carry the date for every observed post; body text (usually
         # just a poster image) is the fallback.
-        span = parse_date_span(title) or parse_date_span(post['text'])
+        span = parse_date_span(title) or parse_date_span(post["text"])
         if not span:
             self.logger.info(f"Skipping (no parseable date): {title!r}")
             return None
 
         tz = ZoneInfo(self.timezone)
-        year = span['year']
-        first_m, first_d = span['dates'][0]
+        year = span["year"]
+        first_m, first_d = span["dates"][0]
         if year is None:
-            year = self._resolve_year(first_m, first_d, post['published'])
+            year = self._resolve_year(first_m, first_d, post["published"])
 
         # Materialize each (month, day) with year rollover for spans that
         # cross into January (e.g. "Dec 30 - Jan 2").
@@ -276,7 +298,7 @@ class TmbccScraper(BaseScraper):
             days = []
             y = year
             prev_month = first_m
-            for mo, d in span['dates']:
+            for mo, d in span["dates"]:
                 if mo < prev_month:
                     y += 1
                 prev_month = mo
@@ -286,8 +308,8 @@ class TmbccScraper(BaseScraper):
             return None
 
         start_day, end_day = min(days), max(days)
-        if span['time']:
-            hour, minute = span['time']
+        if span["time"]:
+            hour, minute = span["time"]
         else:
             hour, minute = 9, 0  # daytime default; date itself is parsed, not guessed
         dtstart = datetime(start_day.year, start_day.month, start_day.day, hour, minute, tzinfo=tz)
@@ -307,12 +329,12 @@ class TmbccScraper(BaseScraper):
             return None
 
         return {
-            'title': title,
-            'dtstart': dtstart,
-            'dtend': dtend,
-            'url': post['link'] or 'https://tmbcc.org/',
-            'location': DEFAULT_LOCATION,
-            'description': post['text'][:500],
+            "title": title,
+            "dtstart": dtstart,
+            "dtend": dtend,
+            "url": post["link"] or "https://tmbcc.org/",
+            "location": DEFAULT_LOCATION,
+            "description": post["text"][:500],
         }
 
     def fetch_events(self) -> list[dict[str, Any]]:
@@ -323,7 +345,7 @@ class TmbccScraper(BaseScraper):
             event = self._post_to_event(post)
             if not event:
                 continue
-            key = (event['title'].lower(), event['dtstart'].date())
+            key = (event["title"].lower(), event["dtstart"].date())
             if key in seen:
                 continue
             seen.add(key)
@@ -334,9 +356,10 @@ class TmbccScraper(BaseScraper):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Scrape Tibetan Mongolian Buddhist Cultural Center events from blog posts")
-    parser.add_argument('--output', '-o', help='Output ICS file')
-    parser.add_argument('--debug', action='store_true')
+        description="Scrape Tibetan Mongolian Buddhist Cultural Center events from blog posts"
+    )
+    parser.add_argument("--output", "-o", help="Output ICS file")
+    parser.add_argument("--debug", action="store_true")
     args = parser.parse_args()
 
     if args.debug:
@@ -346,5 +369,5 @@ def main():
     scraper.run(args.output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -25,7 +25,8 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import argparse
 import json
@@ -33,13 +34,13 @@ import logging
 import re
 from datetime import datetime, timedelta
 from typing import Any
-from urllib.request import urlopen, Request
+from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 from lib.base import BaseScraper
 from lib.utils import DEFAULT_HEADERS
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 
@@ -50,14 +51,13 @@ class DrupalEventsScraper(BaseScraper):
     domain = "example.org"
     timezone = "America/New_York"
 
-    def __init__(self, feed_url: str, source_name: str | None = None,
-                 tz: str | None = None):
+    def __init__(self, feed_url: str, source_name: str | None = None, tz: str | None = None):
         super().__init__()
         self.feed_url = feed_url
         if source_name:
             self.name = source_name
         # Extract domain from feed URL
-        self.domain = feed_url.split('//')[1].split('/')[0]
+        self.domain = feed_url.split("//")[1].split("/")[0]
         if tz:
             self.timezone = tz
         self.tz = ZoneInfo(self.timezone)
@@ -85,25 +85,25 @@ class DrupalEventsScraper(BaseScraper):
 
     def _parse_event(self, item: dict) -> dict[str, Any] | None:
         """Parse a single event from the Drupal JSON feed."""
-        title = item.get('title', '').strip()
+        title = item.get("title", "").strip()
         if not title:
             return None
 
         # Parse start/end dates — format: "2026-03-13 09:00:00"
-        start_str = item.get('start_date', '')
+        start_str = item.get("start_date", "")
         if not start_str:
             return None
 
         try:
             dtstart = datetime.strptime(start_str, "%Y-%m-%d %H:%M:%S")
             # Use event-level timezone if provided, otherwise default
-            event_tz_str = item.get('timezone', self.timezone)
+            event_tz_str = item.get("timezone", self.timezone)
             event_tz = ZoneInfo(event_tz_str) if event_tz_str else self.tz
             dtstart = dtstart.replace(tzinfo=event_tz)
         except (ValueError, KeyError):
             return None
 
-        end_str = item.get('end_date', '')
+        end_str = item.get("end_date", "")
         if end_str:
             try:
                 dtend = datetime.strptime(end_str, "%Y-%m-%d %H:%M:%S")
@@ -117,29 +117,29 @@ class DrupalEventsScraper(BaseScraper):
         location = self._build_location(item)
 
         # URL
-        url = item.get('url', '')
+        url = item.get("url", "")
 
         # Description — strip HTML tags for plain text
-        description = self._strip_html(item.get('description', '') or '')
+        description = self._strip_html(item.get("description", "") or "")
 
         # Add program type and age group as context
         meta_parts = []
-        program_types = item.get('program_type', {})
+        program_types = item.get("program_type", {})
         if isinstance(program_types, dict):
             meta_parts.extend(program_types.values())
-        age_groups = item.get('age_group', {})
+        age_groups = item.get("age_group", {})
         if isinstance(age_groups, dict):
             meta_parts.extend(age_groups.values())
         if meta_parts:
             description = f"{', '.join(meta_parts)}\n\n{description}".strip()
 
         return {
-            'title': title,
-            'dtstart': dtstart,
-            'dtend': dtend,
-            'location': location,
-            'url': url,
-            'description': description,
+            "title": title,
+            "dtstart": dtstart,
+            "dtend": dtend,
+            "location": location,
+            "url": url,
+            "description": description,
         }
 
     @staticmethod
@@ -148,52 +148,56 @@ class DrupalEventsScraper(BaseScraper):
         parts = []
 
         # Branch name (dict: {"101": "Lancaster"})
-        branch = item.get('branch', {})
+        branch = item.get("branch", {})
         if isinstance(branch, dict):
             branch_names = list(branch.values())
             if branch_names:
                 parts.append(branch_names[0])
 
         # Room (dict: {"349": "LPL Community Room"})
-        room = item.get('room', {})
+        room = item.get("room", {})
         if isinstance(room, dict):
             room_names = list(room.values())
             if room_names:
                 parts.append(room_names[0])
 
         # Offsite address overrides branch/room
-        offsite = item.get('offsite_address')
+        offsite = item.get("offsite_address")
         if offsite:
             return offsite
 
-        return ', '.join(parts)
+        return ", ".join(parts)
 
     @staticmethod
     def _strip_html(html: str) -> str:
         """Strip HTML tags and decode entities for plain text."""
-        text = re.sub(r'<[^>]+>', '', html)
-        text = text.replace('&nbsp;', ' ')
-        text = text.replace('&amp;', '&')
-        text = text.replace('&lt;', '<')
-        text = text.replace('&gt;', '>')
-        text = text.replace('&quot;', '"')
+        text = re.sub(r"<[^>]+>", "", html)
+        text = text.replace("&nbsp;", " ")
+        text = text.replace("&amp;", "&")
+        text = text.replace("&lt;", "<")
+        text = text.replace("&gt;", ">")
+        text = text.replace("&quot;", '"')
         # Collapse whitespace
-        text = re.sub(r'\n\s*\n\s*\n', '\n\n', text)
+        text = re.sub(r"\n\s*\n\s*\n", "\n\n", text)
         return text.strip()
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Scrape Drupal library/community calendar JSON feeds'
+        description="Scrape Drupal library/community calendar JSON feeds"
     )
-    parser.add_argument('--url', required=True,
-                        help='JSON feed URL (e.g., https://calendar.lancasterlibraries.org/events/feed/json)')
-    parser.add_argument('--name', default='Drupal Events',
-                        help='Source name for the calendar')
-    parser.add_argument('--timezone', default='America/New_York',
-                        help='Default timezone (default: America/New_York)')
-    parser.add_argument('--output', '-o', required=True,
-                        help='Output ICS file')
+    parser.add_argument(
+        "--url",
+        required=True,
+        help="JSON feed URL (e.g., https://calendar.lancasterlibraries.org/events/feed/json)",
+    )
+    parser.add_argument("--name", default="Drupal Events", help="Source name for the calendar")
+    parser.add_argument(
+        "--timezone",
+        default="America/New_York",
+        help="Default timezone (default: America/New_York)",
+    )
+    parser.add_argument("--output", "-o", required=True, help="Output ICS file")
 
     args = parser.parse_args()
 
@@ -205,5 +209,5 @@ def main():
     scraper.run(args.output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

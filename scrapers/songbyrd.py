@@ -16,7 +16,8 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 from lib.dice import DiceVenueScraper
 
@@ -29,5 +30,5 @@ class SongbyrdScraper(DiceVenueScraper):
     default_location = "Songbyrd Music House, 540 Penn St NE, Washington, DC 20002"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     SongbyrdScraper.main()

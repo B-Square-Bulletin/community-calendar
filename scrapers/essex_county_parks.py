@@ -10,18 +10,19 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import argparse
 import json
 import logging
 from datetime import datetime, timedelta
-from typing import Any, Optional
-from urllib.request import urlopen, Request
+from typing import Any
+from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 BASE_URL = "https://essexcountyparks.org"
@@ -81,14 +82,16 @@ class EssexCountyParksScraper(BaseScraper):
             class_name = item.get("className", "")
             location = self._location_from_class(class_name)
 
-            events.append({
-                "title": title,
-                "dtstart": dtstart,
-                "dtend": dtend,
-                "url": event_url,
-                "location": location,
-                "description": "",
-            })
+            events.append(
+                {
+                    "title": title,
+                    "dtstart": dtstart,
+                    "dtend": dtend,
+                    "url": event_url,
+                    "location": location,
+                    "description": "",
+                }
+            )
 
         self.logger.info(f"Filtered to {len(events)} events")
         return events

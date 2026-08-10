@@ -6,13 +6,15 @@ from __future__ import annotations
 import html
 import re
 from datetime import date, datetime, time, timedelta
-from typing import Iterable
+from typing import TYPE_CHECKING
 from urllib.parse import urljoin
 from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
 
 
 def _clean(text: str | None) -> str:
@@ -299,7 +301,9 @@ class AgaKhanMuseumScraper(BaseScraper):
         if "-" not in label:
             return []
         start_day, end_day = [_clean(part) for part in label.split("-", 1)]
-        if re.search(r"\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)", start_day, re.I):
+        if re.search(
+            r"\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)", start_day, re.I
+        ):
             start = self.parse_date_fragment(start_day, year)
         else:
             start = self.parse_date_fragment(f"{month_name} {start_day}", year)
@@ -336,8 +340,16 @@ class AgaKhanMuseumScraper(BaseScraper):
                 month_name = _clean(month_heading.get_text(" ", strip=True))
 
             for card in block.select("div.c-col-bio__details-container"):
-                performer = _clean(card.select_one("h3.c-col-bio__name").get_text(" ", strip=True)) if card.select_one("h3.c-col-bio__name") else ""
-                date_label = _clean(card.select_one("h4.c-col-bio__role").get_text(" ", strip=True)) if card.select_one("h4.c-col-bio__role") else ""
+                performer = (
+                    _clean(card.select_one("h3.c-col-bio__name").get_text(" ", strip=True))
+                    if card.select_one("h3.c-col-bio__name")
+                    else ""
+                )
+                date_label = (
+                    _clean(card.select_one("h4.c-col-bio__role").get_text(" ", strip=True))
+                    if card.select_one("h4.c-col-bio__role")
+                    else ""
+                )
                 if not performer or not date_label or not month_name:
                     continue
 
@@ -450,9 +462,8 @@ class AgaKhanMuseumScraper(BaseScraper):
             if isinstance(dtstart, datetime):
                 if dtstart >= now:
                     filtered.append(event)
-            elif isinstance(dtstart, date):
-                if dtstart >= now.date():
-                    filtered.append(event)
+            elif isinstance(dtstart, date) and dtstart >= now.date():
+                filtered.append(event)
         return filtered
 
 

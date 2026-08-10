@@ -7,14 +7,14 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 from datetime import datetime, timedelta
 from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
 from lib.utils import DEFAULT_HEADERS
 
@@ -34,12 +34,12 @@ class LagunitasScraper(BaseScraper):
         response = requests.get(self.URL, headers=DEFAULT_HEADERS, timeout=30)
         response.raise_for_status()
 
-        soup = BeautifulSoup(response.text, 'html.parser')
+        soup = BeautifulSoup(response.text, "html.parser")
         events = []
 
-        for row in soup.select('.event-row'):
-            date_el = row.select_one('.date')
-            title_el = row.select_one('.desc h2')
+        for row in soup.select(".event-row"):
+            date_el = row.select_one(".date")
+            title_el = row.select_one(".desc h2")
 
             if not date_el or not title_el:
                 continue
@@ -49,16 +49,18 @@ class LagunitasScraper(BaseScraper):
 
             # Parse date: MM/DD/YYYY
             try:
-                event_date = datetime.strptime(date_str, '%m/%d/%Y')
+                event_date = datetime.strptime(date_str, "%m/%d/%Y")
             except ValueError:
                 self.logger.warning(f"Skipping {title}: bad date '{date_str}'")
                 continue
 
             # Parse start/end times from .time-wrap .time elements
-            times = row.select('.time-wrap .time')
+            times = row.select(".time-wrap .time")
             if times:
                 start_time = self._parse_time(times[0].get_text(strip=True))
-                end_time = self._parse_time(times[1].get_text(strip=True)) if len(times) > 1 else None
+                end_time = (
+                    self._parse_time(times[1].get_text(strip=True)) if len(times) > 1 else None
+                )
             else:
                 start_time = None
                 end_time = None
@@ -76,16 +78,18 @@ class LagunitasScraper(BaseScraper):
                 dtend = dtstart + timedelta(hours=2)
 
             # Optional "More Info" link
-            link_el = row.select_one('.buy-btn a')
-            url = link_el['href'] if link_el and link_el.get('href') else self.URL
+            link_el = row.select_one(".buy-btn a")
+            url = link_el["href"] if link_el and link_el.get("href") else self.URL
 
-            events.append({
-                'title': title,
-                'dtstart': dtstart,
-                'dtend': dtend,
-                'url': url,
-                'location': self.VENUE_ADDRESS,
-            })
+            events.append(
+                {
+                    "title": title,
+                    "dtstart": dtstart,
+                    "dtend": dtend,
+                    "url": url,
+                    "location": self.VENUE_ADDRESS,
+                }
+            )
 
             self.logger.info(f"Found: {title} on {dtstart.strftime('%Y-%m-%d %H:%M')}")
 
@@ -95,11 +99,11 @@ class LagunitasScraper(BaseScraper):
     def _parse_time(time_str: str) -> tuple[int, int] | None:
         """Parse '3:30 PM' -> (15, 30)."""
         try:
-            dt = datetime.strptime(time_str.strip(), '%I:%M %p')
+            dt = datetime.strptime(time_str.strip(), "%I:%M %p")
             return (dt.hour, dt.minute)
         except ValueError:
             return None
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     LagunitasScraper.main()

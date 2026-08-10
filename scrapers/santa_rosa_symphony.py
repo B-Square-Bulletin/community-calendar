@@ -14,37 +14,47 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import argparse
 import logging
 import re
-from datetime import datetime, timezone
-from typing import Any, Optional
-from urllib.parse import urlencode
-from urllib.request import urlopen, Request
+from datetime import datetime
+from typing import Any
 from urllib.error import HTTPError, URLError
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 from lib.base import BaseScraper
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 }
 
-AJAX_URL = 'https://www.srsymphony.org/wp-admin/admin-ajax.php'
-BASE_URL = 'https://www.srsymphony.org'
+AJAX_URL = "https://www.srsymphony.org/wp-admin/admin-ajax.php"
+BASE_URL = "https://www.srsymphony.org"
 DEFAULT_LOCATION = "Green Music Center, 1801 E Cotati Ave, Rohnert Park, CA"
 
 # Months pattern
 MONTHS = {
-    'january': 1, 'february': 2, 'march': 3, 'april': 4,
-    'may': 5, 'june': 6, 'july': 7, 'august': 8,
-    'september': 9, 'october': 10, 'november': 11, 'december': 12,
+    "january": 1,
+    "february": 2,
+    "march": 3,
+    "april": 4,
+    "may": 5,
+    "june": 6,
+    "july": 7,
+    "august": 8,
+    "september": 9,
+    "october": 10,
+    "november": 11,
+    "december": 12,
 }
 
 
@@ -55,19 +65,21 @@ class SantaRosaSymphonyScraper(BaseScraper):
     domain = "srsymphony.org"
     timezone = "America/Los_Angeles"
 
-    def _post_ajax(self, page: int) -> Optional[str]:
-        payload = urlencode({
-            'action': 'cvf_event_pagination_load_tribe_events',
-            'page': str(page),
-        }).encode('utf-8')
+    def _post_ajax(self, page: int) -> str | None:
+        payload = urlencode(
+            {
+                "action": "cvf_event_pagination_load_tribe_events",
+                "page": str(page),
+            }
+        ).encode("utf-8")
         headers = {
             **HEADERS,
-            'Content-Type': 'application/x-www-form-urlencoded',
+            "Content-Type": "application/x-www-form-urlencoded",
         }
-        req = Request(AJAX_URL, data=payload, headers=headers, method='POST')
+        req = Request(AJAX_URL, data=payload, headers=headers, method="POST")
         try:
             with urlopen(req, timeout=30) as resp:
-                return resp.read().decode('utf-8')
+                return resp.read().decode("utf-8")
         except (HTTPError, URLError) as e:
             self.logger.warning(f"AJAX request failed (page {page}): {e}")
             return None
@@ -81,8 +93,7 @@ class SantaRosaSymphonyScraper(BaseScraper):
         # Pattern: <h3>Title</h3> ... <h4>Date text</h4> <h4>Venue</h4>
         # Extract event blocks
         event_blocks = re.findall(
-            r'<div class="event_item">(.*?)</div>\s*</div>\s*</div>',
-            html, re.DOTALL
+            r'<div class="event_item">(.*?)</div>\s*</div>\s*</div>', html, re.DOTALL
         )
 
         for block in event_blocks:
@@ -95,34 +106,41 @@ class SantaRosaSymphonyScraper(BaseScraper):
 
         return events
 
-    def _parse_event_block(self, block: str, now: datetime) -> Optional[dict[str, Any]]:
+    def _parse_event_block(self, block: str, now: datetime) -> dict[str, Any] | None:
         """Parse a single event card HTML block."""
         # Title from h3
-        title_match = re.search(r'<h3>(.*?)</h3>', block, re.DOTALL)
+        title_match = re.search(r"<h3>(.*?)</h3>", block, re.DOTALL)
         if not title_match:
             return None
-        title = re.sub(r'<[^>]+>', '', title_match.group(1)).strip()
+        title = re.sub(r"<[^>]+>", "", title_match.group(1)).strip()
         # Unescape HTML entities
-        title = title.replace('&amp;', '&').replace('&lt;', '<').replace('&gt;', '>').replace('&#8217;', "'").replace('&#8211;', '-').replace('&nbsp;', ' ')
+        title = (
+            title.replace("&amp;", "&")
+            .replace("&lt;", "<")
+            .replace("&gt;", ">")
+            .replace("&#8217;", "'")
+            .replace("&#8211;", "-")
+            .replace("&nbsp;", " ")
+        )
         if not title:
             return None
 
         # Date text from h4 (first one)
-        h4_blocks = re.findall(r'<h4>(.*?)</h4>', block, re.DOTALL)
+        h4_blocks = re.findall(r"<h4>(.*?)</h4>", block, re.DOTALL)
         if not h4_blocks:
             return None
 
-        date_text = re.sub(r'<[^>]+>', '', h4_blocks[0]).strip()
+        date_text = re.sub(r"<[^>]+>", "", h4_blocks[0]).strip()
         # Venue from second h4 (if exists)
         venue = DEFAULT_LOCATION
         if len(h4_blocks) >= 2:
-            venue_raw = re.sub(r'<[^>]+>', '', h4_blocks[1]).strip()
+            venue_raw = re.sub(r"<[^>]+>", "", h4_blocks[1]).strip()
             if venue_raw:
                 venue = venue_raw
 
         # Detail URL from a.link
         url_match = re.search(r'<a\s+href="([^"]+)"\s+class="link"', block)
-        detail_url = url_match.group(1) if url_match else BASE_URL + '/events/'
+        detail_url = url_match.group(1) if url_match else BASE_URL + "/events/"
 
         # Parse date text
         # Formats: "July 26, 2026", "October 10, 11 & 12, 2026", "April 25, 2027"
@@ -135,14 +153,16 @@ class SantaRosaSymphonyScraper(BaseScraper):
         for dt in dates:
             if dt < now:
                 continue
-            events_out.append({
-                'title': title,
-                'dtstart': dt,
-                'dtend': dt,
-                'location': venue,
-                'description': f"Santa Rosa Symphony. See {detail_url} for details.",
-                'url': detail_url,
-            })
+            events_out.append(
+                {
+                    "title": title,
+                    "dtstart": dt,
+                    "dtend": dt,
+                    "location": venue,
+                    "description": f"Santa Rosa Symphony. See {detail_url} for details.",
+                    "url": detail_url,
+                }
+            )
 
         return events_out[0] if events_out else None
 
@@ -161,7 +181,7 @@ class SantaRosaSymphonyScraper(BaseScraper):
         # Try: "Month Day1, Day2 & Day3, Year"
         # General pattern: month + days + year
         # First extract year
-        year_match = re.search(r'\b(20\d{2})\b', text)
+        year_match = re.search(r"\b(20\d{2})\b", text)
         if not year_match:
             return []
         year = int(year_match.group(1))
@@ -176,8 +196,8 @@ class SantaRosaSymphonyScraper(BaseScraper):
             return []
 
         # Extract all day numbers before the year
-        days_part = text[:year_match.start()]
-        day_nums = re.findall(r'\b(\d{1,2})\b', days_part)
+        days_part = text[: year_match.start()]
+        day_nums = re.findall(r"\b(\d{1,2})\b", days_part)
         if not day_nums:
             return []
 
@@ -222,7 +242,10 @@ class SantaRosaSymphonyScraper(BaseScraper):
         seen = set()
         unique = []
         for ev in all_events:
-            key = (ev['title'], ev['dtstart'].date() if hasattr(ev['dtstart'], 'date') else ev['dtstart'])
+            key = (
+                ev["title"],
+                ev["dtstart"].date() if hasattr(ev["dtstart"], "date") else ev["dtstart"],
+            )
             if key not in seen:
                 seen.add(key)
                 unique.append(ev)
@@ -233,8 +256,8 @@ class SantaRosaSymphonyScraper(BaseScraper):
 
 def main():
     parser = argparse.ArgumentParser(description="Scrape Santa Rosa Symphony events")
-    parser.add_argument('--output', '-o', help='Output ICS file')
-    parser.add_argument('--debug', action='store_true')
+    parser.add_argument("--output", "-o", help="Output ICS file")
+    parser.add_argument("--debug", action="store_true")
     args = parser.parse_args()
 
     if args.debug:
@@ -244,5 +267,5 @@ def main():
     scraper.run(args.output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

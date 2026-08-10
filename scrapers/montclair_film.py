@@ -18,28 +18,30 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import argparse
+import contextlib
 import html as html_mod
 import json
 import logging
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
-from typing import Any, Optional
-from urllib.request import urlopen, Request
+from typing import Any
 from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 LISTING_URL = "https://montclairfilm.org/all-event/"
 HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
-    'Accept': 'text/html,application/xhtml+xml',
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+    "Accept": "text/html,application/xhtml+xml",
 }
 
 
@@ -50,12 +52,12 @@ class MontclairFilmScraper(BaseScraper):
     domain = "montclairfilm.org"
     timezone = "America/New_York"
 
-    def _fetch_page(self, url: str) -> Optional[str]:
+    def _fetch_page(self, url: str) -> str | None:
         """Fetch a URL and return content."""
         req = Request(url, headers=HEADERS)
         try:
             with urlopen(req, timeout=30) as resp:
-                return resp.read().decode('utf-8')
+                return resp.read().decode("utf-8")
         except (HTTPError, URLError) as e:
             self.logger.warning(f"Failed to fetch {url}: {e}")
             return None
@@ -65,9 +67,9 @@ class MontclairFilmScraper(BaseScraper):
         html = self._fetch_page(LISTING_URL)
         if not html:
             return []
-        urls = list(set(re.findall(
-            r'href="(https://www\.montclairfilm\.org/events/[^"?#]+/)"', html
-        )))
+        urls = list(
+            set(re.findall(r'href="(https://www\.montclairfilm\.org/events/[^"?#]+/)"', html))
+        )
         self.logger.info(f"Found {len(urls)} current films on listing page")
         return urls
 
@@ -82,8 +84,7 @@ class MontclairFilmScraper(BaseScraper):
 
         # Extract JSON-LD blocks
         blocks = re.findall(
-            r'<script\s+type="application/ld\+json"[^>]*>(.*?)</script>',
-            html, re.DOTALL
+            r'<script\s+type="application/ld\+json"[^>]*>(.*?)</script>', html, re.DOTALL
         )
 
         for block_str in blocks:
@@ -92,20 +93,20 @@ class MontclairFilmScraper(BaseScraper):
             except json.JSONDecodeError:
                 continue
 
-            if not isinstance(data, dict) or data.get('@type') != 'Event':
+            if not isinstance(data, dict) or data.get("@type") != "Event":
                 continue
 
-            film_title = html_mod.unescape(data.get('name', 'Untitled'))
-            film_desc = data.get('description', '') or ''
-            film_url = data.get('url', event_url)
+            film_title = html_mod.unescape(data.get("name", "Untitled"))
+            film_desc = data.get("description", "") or ""
+            film_url = data.get("url", event_url)
 
-            for sub in data.get('subEvent', []):
-                start_str = sub.get('startDate', '')
+            for sub in data.get("subEvent", []):
+                start_str = sub.get("startDate", "")
                 if not start_str:
                     continue
 
                 try:
-                    dtstart = datetime.fromisoformat(start_str.replace('Z', '+00:00'))
+                    dtstart = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
                 except ValueError:
                     continue
 
@@ -116,35 +117,35 @@ class MontclairFilmScraper(BaseScraper):
 
                 # End time
                 dtend = None
-                end_str = sub.get('endDate', '')
+                end_str = sub.get("endDate", "")
                 if end_str:
-                    try:
-                        dtend = datetime.fromisoformat(end_str.replace('Z', '+00:00'))
-                    except ValueError:
-                        pass
+                    with contextlib.suppress(ValueError):
+                        dtend = datetime.fromisoformat(end_str.replace("Z", "+00:00"))
 
                 # Location (theater + screen)
-                loc_data = sub.get('location', {})
+                loc_data = sub.get("location", {})
                 if isinstance(loc_data, dict):
-                    loc_name = loc_data.get('name', '')
-                    addr = loc_data.get('address', '')
+                    loc_name = loc_data.get("name", "")
+                    addr = loc_data.get("address", "")
                     if isinstance(addr, str):
-                        addr = addr.replace('\r\n', ', ')
+                        addr = addr.replace("\r\n", ", ")
                     location = f"{loc_name}, {addr}" if loc_name and addr else (loc_name or addr)
                 else:
                     location = "Montclair Film, 505 Bloomfield Ave, Montclair, NJ 07042"
 
                 # Ticket URL from subEvent
-                ticket_url = sub.get('url', film_url)
+                ticket_url = sub.get("url", film_url)
 
-                screenings.append({
-                    'title': film_title,
-                    'dtstart': dtstart,
-                    'dtend': dtend,
-                    'location': location,
-                    'description': film_desc[:500] if film_desc else '',
-                    'url': ticket_url,
-                })
+                screenings.append(
+                    {
+                        "title": film_title,
+                        "dtstart": dtstart,
+                        "dtend": dtend,
+                        "location": location,
+                        "description": film_desc[:500] if film_desc else "",
+                        "url": ticket_url,
+                    }
+                )
 
         return screenings
 
@@ -158,10 +159,7 @@ class MontclairFilmScraper(BaseScraper):
         self.logger.info(f"Fetching {len(event_urls)} film pages (parallel)...")
 
         with ThreadPoolExecutor(max_workers=5) as executor:
-            futures = {
-                executor.submit(self._extract_screenings, url): url
-                for url in event_urls
-            }
+            futures = {executor.submit(self._extract_screenings, url): url for url in event_urls}
             for future in as_completed(futures):
                 screenings = future.result()
                 if screenings:
@@ -173,8 +171,8 @@ class MontclairFilmScraper(BaseScraper):
 
 def main():
     parser = argparse.ArgumentParser(description="Scrape Montclair Film showtimes")
-    parser.add_argument('--output', '-o', help='Output ICS file')
-    parser.add_argument('--debug', action='store_true')
+    parser.add_argument("--output", "-o", help="Output ICS file")
+    parser.add_argument("--debug", action="store_true")
     args = parser.parse_args()
 
     if args.debug:
@@ -184,5 +182,5 @@ def main():
     scraper.run(args.output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

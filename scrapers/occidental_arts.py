@@ -2,7 +2,8 @@
 """Scraper for Occidental Center for the Arts events."""
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import time
 from datetime import date, datetime
@@ -12,7 +13,6 @@ from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
 from icalendar import Calendar
-
 from lib.base import BaseScraper
 
 
@@ -24,7 +24,9 @@ class OccidentalArtsScraper(BaseScraper):
 
     BASE_URL = "https://www.occidentalcenterforthearts.org"
     EVENTS_URL = f"{BASE_URL}/upcoming-events"
-    DEFAULT_LOCATION = "Occidental Center for the Arts, 3850 Doris Murphy Court, Occidental, CA 95465"
+    DEFAULT_LOCATION = (
+        "Occidental Center for the Arts, 3850 Doris Murphy Court, Occidental, CA 95465"
+    )
 
     def fetch_events(self) -> list[dict[str, Any]]:
         """Fetch and parse events from the upcoming-events listing."""
@@ -130,5 +132,5 @@ class OccidentalArtsScraper(BaseScraper):
         return False
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     OccidentalArtsScraper.main()

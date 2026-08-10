@@ -15,8 +15,8 @@ import argparse
 import json
 import os
 import sys
-import urllib.request
 import urllib.parse
+import urllib.request
 
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
 SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
@@ -25,9 +25,9 @@ if not SUPABASE_URL or not SUPABASE_KEY:
     sys.exit(1)
 OLLAMA_URL = "http://localhost:11434"
 
-CATEGORIES_FILE = os.path.join(os.path.dirname(__file__), '..', 'categories.json')
+CATEGORIES_FILE = os.path.join(os.path.dirname(__file__), "..", "categories.json")
 with open(CATEGORIES_FILE) as f:
-    CATEGORIES = [c['name'] for c in json.load(f)]
+    CATEGORIES = [c["name"] for c in json.load(f)]
 
 VALID_CATEGORIES = set(CATEGORIES)
 
@@ -35,10 +35,13 @@ VALID_CATEGORIES = set(CATEGORIES)
 def supabase_get(path):
     """GET from Supabase REST API."""
     url = SUPABASE_URL + "/rest/v1/" + path
-    req = urllib.request.Request(url, headers={
-        "apikey": SUPABASE_KEY,
-        "Authorization": "Bearer " + SUPABASE_KEY,
-    })
+    req = urllib.request.Request(
+        url,
+        headers={
+            "apikey": SUPABASE_KEY,
+            "Authorization": "Bearer " + SUPABASE_KEY,
+        },
+    )
     with urllib.request.urlopen(req) as resp:
         return json.loads(resp.read())
 
@@ -47,12 +50,17 @@ def supabase_patch(path, data):
     """PATCH to Supabase REST API."""
     url = SUPABASE_URL + "/rest/v1/" + path
     body = json.dumps(data).encode()
-    req = urllib.request.Request(url, data=body, method="PATCH", headers={
-        "apikey": SUPABASE_KEY,
-        "Authorization": "Bearer " + SUPABASE_KEY,
-        "Content-Type": "application/json",
-        "Prefer": "return=minimal",
-    })
+    req = urllib.request.Request(
+        url,
+        data=body,
+        method="PATCH",
+        headers={
+            "apikey": SUPABASE_KEY,
+            "Authorization": "Bearer " + SUPABASE_KEY,
+            "Content-Type": "application/json",
+            "Prefer": "return=minimal",
+        },
+    )
     with urllib.request.urlopen(req) as resp:
         return resp.status
 
@@ -62,8 +70,9 @@ def batch_update_categories(updates):
     updates is a list of (event_id, category) tuples."""
     if not updates:
         return
-    import subprocess
     import os
+    import subprocess
+
     conn = os.environ.get("SUPABASE_DB_URL")
     if not conn:
         print("ERROR: SUPABASE_DB_URL env var not set", file=sys.stderr)
@@ -76,7 +85,9 @@ def batch_update_categories(updates):
         escaped = category.replace("'", "''")
         cases.append(f"WHEN {event_id} THEN '{escaped}'")
         ids.append(str(event_id))
-    sql = f"UPDATE events SET category = CASE id {' '.join(cases)} END WHERE id IN ({','.join(ids)});"
+    sql = (
+        f"UPDATE events SET category = CASE id {' '.join(cases)} END WHERE id IN ({','.join(ids)});"
+    )
     result = subprocess.run(["psql", conn, "-c", sql], capture_output=True, text=True)
     if result.returncode != 0:
         print(f"  DB update error: {result.stderr}", file=sys.stderr)
@@ -127,7 +138,7 @@ def classify_one(event, few_shot, model):
             ics_line = f"\nThe event's ICS feed tagged it as: {ics_cats}\nWeigh the ICS tags heavily but use your judgment — they can be wrong."
 
     prompt = f"""Classify this event into exactly one category. Categories:
-{chr(10).join('- ' + c for c in CATEGORIES)}
+{chr(10).join("- " + c for c in CATEGORIES)}
 {few_shot}
 {ics_line}
 
@@ -137,12 +148,14 @@ Description: {description}
 
 Respond with ONLY the category name, nothing else. If none fit, respond with "null"."""
 
-    body = json.dumps({
-        "model": model,
-        "prompt": prompt,
-        "stream": False,
-        "options": {"temperature": 0.1},
-    }).encode()
+    body = json.dumps(
+        {
+            "model": model,
+            "prompt": prompt,
+            "stream": False,
+            "options": {"temperature": 0.1},
+        }
+    ).encode()
 
     req = urllib.request.Request(
         OLLAMA_URL + "/api/generate",
@@ -154,7 +167,7 @@ Respond with ONLY the category name, nothing else. If none fit, respond with "nu
 
     raw = result.get("response", "").strip()
     # Clean up: model may add quotes, periods, etc.
-    cleaned = raw.strip('"\'.\n ')
+    cleaned = raw.strip("\"'.\n ")
     if cleaned in VALID_CATEGORIES:
         return cleaned
     # Try partial match
@@ -178,7 +191,7 @@ def main():
     # Check Ollama is running
     try:
         req = urllib.request.Request(OLLAMA_URL + "/api/tags")
-        with urllib.request.urlopen(req, timeout=5) as resp:
+        with urllib.request.urlopen(req, timeout=5):
             pass
     except Exception as e:
         print(f"ERROR: Cannot connect to Ollama at {OLLAMA_URL}: {e}", file=sys.stderr)
@@ -195,8 +208,7 @@ def main():
     path = (
         "events?select=id,title,location,description,ics_categories,category,source"
         "&category=is.null"
-        "&city=eq." + urllib.parse.quote(args.city) +
-        "&order=start_time.asc"
+        "&city=eq." + urllib.parse.quote(args.city) + "&order=start_time.asc"
         "&limit=" + str(args.limit)
     )
     events = supabase_get(path)
@@ -211,7 +223,7 @@ def main():
     updates = []
     for i, event in enumerate(events):
         title = event.get("title", "")[:60]
-        print(f"  [{i+1}/{len(events)}] {title}...", end=" ", flush=True)
+        print(f"  [{i + 1}/{len(events)}] {title}...", end=" ", flush=True)
         category = classify_one(event, few_shot, args.model)
         print(f"→ {category or '(none)'}")
         results.append((event, category))
@@ -225,6 +237,7 @@ def main():
     # Summary
     print("\n--- Summary ---")
     from collections import Counter
+
     cats = Counter(cat for _, cat in results)
     for cat, count in cats.most_common():
         print(f"  {count:4d}  {cat or '(none)'}")

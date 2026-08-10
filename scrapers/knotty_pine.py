@@ -15,16 +15,16 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
 from datetime import datetime, timedelta
-from typing import Any, Optional
+from typing import Any
 from zoneinfo import ZoneInfo
 
 import requests
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
 from lib.utils import DEFAULT_HEADERS
 
@@ -87,19 +87,21 @@ class KnottyPineScraper(BaseScraper):
             )
             dtend = dtstart + timedelta(hours=2, minutes=30)
 
-            events.append({
-                "title": title,
-                "dtstart": dtstart,
-                "dtend": dtend,
-                "url": self.URL,
-                "location": self.VENUE_LOCATION,
-                "description": paragraph_text,
-            })
+            events.append(
+                {
+                    "title": title,
+                    "dtstart": dtstart,
+                    "dtend": dtend,
+                    "url": self.URL,
+                    "location": self.VENUE_LOCATION,
+                    "description": paragraph_text,
+                }
+            )
 
         self.logger.info(f"Parsed {len(events)} events")
         return events
 
-    def _find_date(self, block) -> Optional[str]:
+    def _find_date(self, block) -> str | None:
         """
         The date sits in the first heading inside the textblock. Some headings
         also pack additional <br>-separated lines (e.g. "Friday, July 4, 2025
@@ -124,8 +126,8 @@ class KnottyPineScraper(BaseScraper):
         Pull "10pm Show" if present, otherwise the first time token, otherwise
         default to 8pm. Knotty Pine's pattern is "9pm Door / 10pm Show".
         """
-        show_time: Optional[tuple[int, int]] = None
-        first_time: Optional[tuple[int, int]] = None
+        show_time: tuple[int, int] | None = None
+        first_time: tuple[int, int] | None = None
 
         for match in TIME_RE.finditer(text):
             hour = int(match.group(1)) % 12

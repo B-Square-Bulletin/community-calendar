@@ -10,9 +10,7 @@ from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
-
 
 MONTHS = {
     "jan": 1,
@@ -111,7 +109,9 @@ class HarbordVillageScraper(BaseScraper):
                 parsed_times = self.parse_times(event_text)
                 if parsed_times:
                     (start_hour, start_minute), (end_hour, end_minute) = parsed_times
-                    dtstart = datetime(day.year, day.month, day.day, start_hour, start_minute, tzinfo=tz)
+                    dtstart = datetime(
+                        day.year, day.month, day.day, start_hour, start_minute, tzinfo=tz
+                    )
                     dtend = datetime(day.year, day.month, day.day, end_hour, end_minute, tzinfo=tz)
                 else:
                     dtstart = day

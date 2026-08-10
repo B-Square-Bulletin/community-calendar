@@ -12,21 +12,20 @@ Each upcoming event links to a detail page that exposes:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
 
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, timedelta
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
+
 import html
 import re
 import subprocess
-from typing import Any, Optional
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime, timedelta
+from typing import Any
 from urllib.parse import urljoin
 from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
-
 
 LISTING_URL = "https://bossadc.com/events/"
 SITE_URL = "https://bossadc.com"
@@ -55,18 +54,17 @@ class BossaScraper(BaseScraper):
             href = link.get("href", "").strip()
             if not href:
                 continue
-            seeds.append({
-                "title": link.get_text(" ", strip=True),
-                "url": urljoin(SITE_URL, href),
-                "room": room_el.get_text(" ", strip=True) if room_el else "",
-            })
+            seeds.append(
+                {
+                    "title": link.get_text(" ", strip=True),
+                    "url": urljoin(SITE_URL, href),
+                    "room": room_el.get_text(" ", strip=True) if room_el else "",
+                }
+            )
 
         events: list[dict[str, Any]] = []
         with ThreadPoolExecutor(max_workers=self.max_workers) as pool:
-            futures = {
-                pool.submit(self._fetch_detail, seed): seed["url"]
-                for seed in seeds
-            }
+            futures = {pool.submit(self._fetch_detail, seed): seed["url"] for seed in seeds}
             for future in as_completed(futures):
                 event = future.result()
                 if event:
@@ -74,10 +72,10 @@ class BossaScraper(BaseScraper):
 
         return sorted(events, key=lambda e: e["dtstart"])
 
-    def _fetch_detail(self, seed: dict[str, str]) -> Optional[dict[str, Any]]:
+    def _fetch_detail(self, seed: dict[str, str]) -> dict[str, Any] | None:
         detail_html = self._fetch_text(seed["url"], referer=LISTING_URL)
         soup = BeautifulSoup(detail_html, "html.parser")
-        time_el = soup.select_one('time[datetime]')
+        time_el = soup.select_one("time[datetime]")
         if not time_el:
             return None
 

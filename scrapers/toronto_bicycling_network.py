@@ -4,7 +4,7 @@
 import sys
 from datetime import timedelta
 
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 from lib.wild_apricot_rss import WildApricotRssScraper
 
@@ -40,7 +40,20 @@ class TorontoBicyclingNetworkScraper(WildApricotRssScraper):
         blob = f"{title} {text}".lower()
         if any(term in blob for term in ["dining", "dinner", "lunch", "social", "meeting"]):
             return timedelta(hours=2)
-        if any(term in blob for term in ["ride", "tourist", "cruise", "cycling", "bike", "hike", "walk", "ski", "skate"]):
+        if any(
+            term in blob
+            for term in [
+                "ride",
+                "tourist",
+                "cruise",
+                "cycling",
+                "bike",
+                "hike",
+                "walk",
+                "ski",
+                "skate",
+            ]
+        ):
             return timedelta(hours=3)
         return timedelta(hours=2)
 

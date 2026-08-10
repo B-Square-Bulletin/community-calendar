@@ -7,7 +7,8 @@ Uses embedded Google Calendar ICS feeds.
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 from lib import GoogleCalendarScraper
 
@@ -29,5 +30,5 @@ class UUDavisScraper(GoogleCalendarScraper):
     ]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     UUDavisScraper.main()

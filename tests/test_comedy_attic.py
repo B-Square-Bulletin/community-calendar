@@ -147,9 +147,7 @@ class TestFetchDetailJsonld:
             mock_response.raise_for_status = Mock()
             mock_get.return_value = mock_response
 
-            events = scraper._fetch_detail_jsonld(
-                "https://comedyattic.com/events/129480", tz
-            )
+            events = scraper._fetch_detail_jsonld("https://comedyattic.com/events/129480", tz)
 
         assert len(events) == 6, f"Expected 6 events, got {len(events)}"
 
@@ -159,9 +157,7 @@ class TestFetchDetailJsonld:
         assert ev["dtstart"] == datetime(2026, 6, 19, 19, 0, tzinfo=tz)
         assert ev["dtend"] == datetime(2026, 6, 19, 21, 0, tzinfo=tz)
         assert ev["url"] == "https://www.comedyattic.com/shows/354181"
-        assert (
-            ev["location"] == "The Comedy Attic, 123 S Walnut Street, Bloomington, IN"
-        )
+        assert ev["location"] == "The Comedy Attic, 123 S Walnut Street, Bloomington, IN"
         assert "Gianmarco Soresi" in ev["description"]
         assert "<p>" not in ev["description"]  # HTML stripped
 
@@ -197,9 +193,7 @@ class TestFetchDetailJsonld:
             mock_response.raise_for_status = Mock()
             mock_get.return_value = mock_response
 
-            events = scraper._fetch_detail_jsonld(
-                "https://comedyattic.com/events/137587", tz
-            )
+            events = scraper._fetch_detail_jsonld("https://comedyattic.com/events/137587", tz)
 
         assert len(events) == 2
 
@@ -238,9 +232,7 @@ class TestFetchDetailJsonld:
             mock_response.raise_for_status = Mock()
             mock_get.return_value = mock_response
 
-            events = scraper._fetch_detail_jsonld(
-                "https://comedyattic.com/events/test", tz
-            )
+            events = scraper._fetch_detail_jsonld("https://comedyattic.com/events/test", tz)
 
         assert len(events) == 1
         assert events[0]["title"] == "A Real Show"
@@ -266,15 +258,10 @@ class TestFetchDetailJsonld:
             mock_response.raise_for_status = Mock()
             mock_get.return_value = mock_response
 
-            events = scraper._fetch_detail_jsonld(
-                "https://comedyattic.com/events/test", tz
-            )
+            events = scraper._fetch_detail_jsonld("https://comedyattic.com/events/test", tz)
 
         assert len(events) == 1
-        assert (
-            events[0]["location"]
-            == "The Comedy Attic, 123 S Walnut St, Bloomington, IN"
-        )
+        assert events[0]["location"] == "The Comedy Attic, 123 S Walnut St, Bloomington, IN"
 
     def test_missing_description_falls_back_to_title(self):
         """When JSON-LD has no description, use the event title."""
@@ -297,9 +284,7 @@ class TestFetchDetailJsonld:
             mock_response.raise_for_status = Mock()
             mock_get.return_value = mock_response
 
-            events = scraper._fetch_detail_jsonld(
-                "https://comedyattic.com/events/test", tz
-            )
+            events = scraper._fetch_detail_jsonld("https://comedyattic.com/events/test", tz)
 
         assert len(events) == 1
         assert events[0]["description"] == "Mystery Show"

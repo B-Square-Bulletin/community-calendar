@@ -12,7 +12,8 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
 from datetime import datetime, timedelta
@@ -20,7 +21,6 @@ from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
 from lib.utils import DEFAULT_HEADERS
 
@@ -37,33 +37,29 @@ class DukeArtsScraper(BaseScraper):
     # Date patterns after sr-only spans are removed
     # "Tue, Feb 17 at 1:00pm" or "Feb 21 – Feb 22"
     DATE_TIME_RE = re.compile(
-        r'(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s+'
-        r'((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2})\s+'
-        r'at\s+(\d{1,2}:\d{2}(?:am|pm))'
+        r"(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s+"
+        r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2})\s+"
+        r"at\s+(\d{1,2}:\d{2}(?:am|pm))"
     )
     DATE_RANGE_RE = re.compile(
-        r'((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2})\s*'
-        r'[–—-]\s*'
-        r'((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2})'
+        r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2})\s*"
+        r"[–—-]\s*"
+        r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2})"
     )
 
     def fetch_events(self) -> list[dict[str, Any]]:
         """Fetch events from Duke Arts events page."""
         self.logger.info(f"Fetching {self.EVENTS_URL}")
-        response = requests.get(
-            self.EVENTS_URL,
-            headers=DEFAULT_HEADERS,
-            timeout=30
-        )
+        response = requests.get(self.EVENTS_URL, headers=DEFAULT_HEADERS, timeout=30)
         response.raise_for_status()
 
-        soup = BeautifulSoup(response.text, 'html.parser')
-        template = soup.find('div', class_='facetwp-template')
+        soup = BeautifulSoup(response.text, "html.parser")
+        template = soup.find("div", class_="facetwp-template")
         if not template:
             self.logger.warning("No facetwp-template found")
             return []
 
-        articles = template.find_all('article', class_='post-event')
+        articles = template.find_all("article", class_="post-event")
         self.logger.info(f"Found {len(articles)} event articles")
 
         events = []
@@ -80,27 +76,27 @@ class DukeArtsScraper(BaseScraper):
     def _parse_article(self, article, current_year: int) -> dict[str, Any] | None:
         """Parse a single article element."""
         # Title
-        h3 = article.find('h3')
+        h3 = article.find("h3")
         if not h3:
             return None
-        title = ' '.join(h3.text.split())  # normalize whitespace
+        title = " ".join(h3.text.split())  # normalize whitespace
 
         # URL — prefer more-info-link, fall back to post-header
-        more_info = article.find('a', class_='more-info-link')
-        header_link = article.find('a', class_='post-header')
-        url = ''
-        if more_info and more_info.get('href'):
-            url = more_info['href']
-        elif header_link and header_link.get('href'):
-            url = header_link['href']
+        more_info = article.find("a", class_="more-info-link")
+        header_link = article.find("a", class_="post-header")
+        url = ""
+        if more_info and more_info.get("href"):
+            url = more_info["href"]
+        elif header_link and header_link.get("href"):
+            url = header_link["href"]
 
         # Date
-        date_div = article.find('div', class_='event-date-alt')
+        date_div = article.find("div", class_="event-date-alt")
         if not date_div:
             return None
 
         # Remove sr-only spans to get clean text
-        for span in date_div.find_all('span', class_='sr-only'):
+        for span in date_div.find_all("span", class_="sr-only"):
             span.decompose()
         date_text = date_div.text.strip()
 
@@ -109,14 +105,14 @@ class DukeArtsScraper(BaseScraper):
             return None
 
         # Presenter
-        presenter = article.find('a', class_='post-term')
-        presenter_name = presenter.text.strip() if presenter else ''
+        presenter = article.find("a", class_="post-term")
+        presenter_name = presenter.text.strip() if presenter else ""
 
         # Description
-        excerpt = article.find('p', class_='excerpt')
-        excerpt_text = excerpt.text.strip() if excerpt else ''
+        excerpt = article.find("p", class_="excerpt")
+        excerpt_text = excerpt.text.strip() if excerpt else ""
 
-        description = ''
+        description = ""
         if presenter_name:
             description = f"Presenter: {presenter_name}"
         if excerpt_text:
@@ -129,12 +125,12 @@ class DukeArtsScraper(BaseScraper):
         location = "Duke University, Durham, NC"
 
         return {
-            'title': title,
-            'dtstart': dtstart,
-            'dtend': dtend,
-            'url': url,
-            'location': location,
-            'description': description,
+            "title": title,
+            "dtstart": dtstart,
+            "dtend": dtend,
+            "url": url,
+            "location": location,
+            "description": description,
         }
 
     def _parse_date(self, text: str, year: int):
@@ -145,7 +141,7 @@ class DukeArtsScraper(BaseScraper):
             date_str = m.group(1)  # "Feb 17"
             time_str = m.group(2)  # "1:00pm"
             try:
-                dtstart = datetime.strptime(f"{date_str} {year} {time_str}", '%b %d %Y %I:%M%p')
+                dtstart = datetime.strptime(f"{date_str} {year} {time_str}", "%b %d %Y %I:%M%p")
                 # If parsed date is far in the past, try next year
                 if dtstart.month < datetime.now().month - 2:
                     dtstart = dtstart.replace(year=year + 1)
@@ -158,10 +154,10 @@ class DukeArtsScraper(BaseScraper):
         m = self.DATE_RANGE_RE.search(text)
         if m:
             start_str = m.group(1)  # "Feb 21"
-            end_str = m.group(2)    # "Feb 22"
+            end_str = m.group(2)  # "Feb 22"
             try:
-                dtstart = datetime.strptime(f"{start_str} {year}", '%b %d %Y')
-                dtend = datetime.strptime(f"{end_str} {year}", '%b %d %Y')
+                dtstart = datetime.strptime(f"{start_str} {year}", "%b %d %Y")
+                dtend = datetime.strptime(f"{end_str} {year}", "%b %d %Y")
                 if dtstart.month < datetime.now().month - 2:
                     dtstart = dtstart.replace(year=year + 1)
                     dtend = dtend.replace(year=year + 1)
@@ -175,5 +171,5 @@ class DukeArtsScraper(BaseScraper):
         return None, None
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     DukeArtsScraper.main()

@@ -22,14 +22,15 @@ Usage:
         MyVenueScraper.main()
 """
 
+import contextlib
 import html as html_mod
 import json
 import logging
 import re
 from datetime import datetime, timezone
-from typing import Any, Optional
-from urllib.request import urlopen, Request
+from typing import Any
 from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 
 from .base import BaseScraper
 
@@ -37,12 +38,12 @@ logger = logging.getLogger(__name__)
 
 # All schema.org Event subtypes end in "Event" except these three.
 # Match dynamically so new subtypes (e.g. EducationEvent) aren't silently missed.
-_EVENT_EXTRAS = {'Festival', 'Hackathon', 'CourseInstance', 'EventSeries'}
+_EVENT_EXTRAS = {"Festival", "Hackathon", "CourseInstance", "EventSeries"}
 
 
 def _is_event_type(t: str) -> bool:
     """True if t is 'Event', any schema.org Event subtype, or a known extra."""
-    return t == 'Event' or t.endswith('Event') or t in _EVENT_EXTRAS
+    return t == "Event" or t.endswith("Event") or t in _EVENT_EXTRAS
 
 
 def fix_malformed_description(raw: str) -> str:
@@ -51,12 +52,13 @@ def fix_malformed_description(raw: str) -> str:
     Common with WordPress Modern Events Calendar (MEC) plugin which dumps
     raw HTML into the JSON description field without escaping quotes.
     """
+
     def escape_desc(m):
         prefix = m.group(1)
         content = m.group(2)
         suffix = m.group(3)
         fixed = content.replace('"', '\\"')
-        return f'{prefix}{fixed}{suffix}'
+        return f"{prefix}{fixed}{suffix}"
 
     pattern = r'("description":\s*")(.+?)("\s*[,}])'
     return re.sub(pattern, escape_desc, raw)
@@ -99,42 +101,43 @@ def extract_events_from_blocks(blocks: list[dict], is_event=None) -> list[dict]:
         is_event = _is_event_type
     elif isinstance(is_event, set):
         type_set = is_event
-        is_event = lambda t: t in type_set
+        def is_event(t):
+            return t in type_set
     events = []
     for data in blocks:
         if isinstance(data, list):
             for item in data:
-                if isinstance(item, dict) and is_event(item.get('@type', '')):
+                if isinstance(item, dict) and is_event(item.get("@type", "")):
                     events.append(item)
         elif isinstance(data, dict):
-            if is_event(data.get('@type', '')):
+            if is_event(data.get("@type", "")):
                 events.append(data)
             # Check @graph
-            for item in data.get('@graph', []):
-                if isinstance(item, dict) and is_event(item.get('@type', '')):
+            for item in data.get("@graph", []):
+                if isinstance(item, dict) and is_event(item.get("@type", "")):
                     events.append(item)
             # Check nested event arrays (e.g., HighSchool.event)
-            for item in data.get('event', []):
+            for item in data.get("event", []):
                 if isinstance(item, dict):
                     events.append(item)
     return events
 
 
-def parse_location(loc_data: Any, default_location: str = '') -> str:
+def parse_location(loc_data: Any, default_location: str = "") -> str:
     """Parse schema.org location into a string."""
     if not loc_data or not isinstance(loc_data, dict):
         return default_location
 
-    loc_name = loc_data.get('name', '')
-    addr = loc_data.get('address', {})
+    loc_name = loc_data.get("name", "")
+    addr = loc_data.get("address", {})
 
     if isinstance(addr, dict):
         parts = [
-            addr.get('streetAddress', ''),
-            addr.get('addressLocality', ''),
-            addr.get('addressRegion', ''),
+            addr.get("streetAddress", ""),
+            addr.get("addressLocality", ""),
+            addr.get("addressRegion", ""),
         ]
-        addr_str = ', '.join(p for p in parts if p)
+        addr_str = ", ".join(p for p in parts if p)
         if loc_name and addr_str:
             return f"{loc_name}, {addr_str}"
         return loc_name or addr_str or default_location
@@ -161,22 +164,22 @@ class JsonLdScraper(BaseScraper):
         urls: list[str] - Multiple pages to scrape (overrides url)
     """
 
-    url: str = ''
+    url: str = ""
     urls: list[str] = []
-    default_location: str = ''
+    default_location: str = ""
     event_types = None  # None = match all schema.org Event subtypes
-    location_filter: Optional[str] = None
+    location_filter: str | None = None
     headers: dict = {
-        'User-Agent': 'Mozilla/5.0 (compatible; CommunityCalendar/1.0)',
-        'Accept': 'text/html,application/xhtml+xml',
+        "User-Agent": "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
+        "Accept": "text/html,application/xhtml+xml",
     }
 
-    def fetch_html(self, url: str) -> Optional[str]:
+    def fetch_html(self, url: str) -> str | None:
         """Fetch a URL and return HTML. Uses urllib to avoid WAF issues."""
         req = Request(url, headers=self.headers)
         try:
             with urlopen(req, timeout=15) as resp:
-                return resp.read().decode('utf-8')
+                return resp.read().decode("utf-8")
         except (HTTPError, URLError) as e:
             self.logger.error(f"Failed to fetch {url}: {e}")
             return None
@@ -211,16 +214,16 @@ class JsonLdScraper(BaseScraper):
         self.logger.info(f"Total: {len(all_events)} events")
         return all_events
 
-    def _parse_event(self, item: dict) -> Optional[dict[str, Any]]:
+    def _parse_event(self, item: dict) -> dict[str, Any] | None:
         """Parse a single JSON-LD Event into BaseScraper event dict format."""
-        title = html_mod.unescape(item.get('name', 'Untitled'))
-        start_str = item.get('startDate', '')
+        title = html_mod.unescape(item.get("name", "Untitled"))
+        start_str = item.get("startDate", "")
 
         if not start_str:
             return None
 
         try:
-            dtstart = datetime.fromisoformat(start_str.replace('Z', '+00:00'))
+            dtstart = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
         except ValueError:
             self.logger.debug(f"Skipping {title}: bad startDate {start_str}")
             return None
@@ -233,34 +236,34 @@ class JsonLdScraper(BaseScraper):
 
         # End time
         dtend = None
-        end_str = item.get('endDate', '')
+        end_str = item.get("endDate", "")
         if end_str:
-            try:
-                dtend = datetime.fromisoformat(end_str.replace('Z', '+00:00'))
-            except ValueError:
-                pass
+            with contextlib.suppress(ValueError):
+                dtend = datetime.fromisoformat(end_str.replace("Z", "+00:00"))
 
         # Location
-        location = parse_location(item.get('location'), self.default_location)
+        location = parse_location(item.get("location"), self.default_location)
 
         # Location filter
         if self.location_filter and self.location_filter.lower() not in location.lower():
-            self.logger.debug(f"Filtered out {title}: location '{location}' doesn't match '{self.location_filter}'")
+            self.logger.debug(
+                f"Filtered out {title}: location '{location}' doesn't match '{self.location_filter}'"
+            )
             return None
 
         # Description — strip HTML, unescape entities
-        desc = item.get('description', '') or ''
+        desc = item.get("description", "") or ""
         desc = html_mod.unescape(desc)
-        desc = re.sub(r'<[^>]+>', ' ', desc).strip()
-        desc = re.sub(r'\s+', ' ', desc)
+        desc = re.sub(r"<[^>]+>", " ", desc).strip()
+        desc = re.sub(r"\s+", " ", desc)
 
-        url = item.get('url', '')
+        url = item.get("url", "")
 
         return {
-            'title': title,
-            'dtstart': dtstart,
-            'dtend': dtend,
-            'location': location,
-            'description': desc,
-            'url': url,
+            "title": title,
+            "dtstart": dtstart,
+            "dtend": dtend,
+            "location": location,
+            "description": desc,
+            "url": url,
         }
