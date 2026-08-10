@@ -1,0 +1,5 @@
+# Commits that are mechanical, tool-generated reformats. git blame skips these
+# so the reformat noise doesn't obscure real edits. Enable with:
+#   git config blame.ignoreRevsFile .git-blame-ignore-revs
+# (already configured globally in ~/.gitconfig)
+ac285ec78c8fc04c370d6c39fb9680d3b8f73e92
