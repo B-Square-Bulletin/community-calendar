@@ -10,6 +10,7 @@ don't silently disappear. To fix: add a pattern to PLATFORM_MAP or OUR_SCRAPERS.
 import re
 from collections import defaultdict
 from pathlib import Path
+from typing import Any
 
 # Map raw PRODID patterns to normalized platform names and descriptions.
 # Order matters: first match wins.
@@ -87,8 +88,8 @@ def scan_cities(repo_root: Path) -> tuple[dict, dict]:
     unclassified: {prodid: {city: [files]}}
     """
     cities_dir = repo_root / "cities"
-    platforms = {}
-    unclassified = defaultdict(lambda: defaultdict(list))
+    platforms: dict[str, dict[str, Any]] = {}
+    unclassified: dict[str, dict[str, list[str]]] = defaultdict(lambda: defaultdict(list))
 
     for city_dir in sorted(cities_dir.iterdir()):
         if not city_dir.is_dir():
@@ -118,6 +119,7 @@ def scan_cities(repo_root: Path) -> tuple[dict, dict]:
             elif result == "unknown":
                 unclassified[prodid][city].append(ics_file.stem)
             else:
+                assert isinstance(result, tuple)
                 name, desc = result
                 if name not in platforms:
                     platforms[name] = {"desc": desc, "cities": defaultdict(list)}

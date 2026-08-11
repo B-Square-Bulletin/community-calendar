@@ -139,8 +139,8 @@ def validate(base_ref: str) -> list[str]:
         all_feed_content = ""
         for pending in ROOT.glob("cities/*/pending_feeds.txt"):
             all_feed_content += pending.read_text()
-        for feeds in ROOT.glob("cities/*/feeds.txt"):
-            all_feed_content += feeds.read_text()
+        for feeds_file in ROOT.glob("cities/*/feeds.txt"):
+            all_feed_content += feeds_file.read_text()
 
         for scraper_file in new_scrapers:
             scraper_basename = Path(scraper_file).stem

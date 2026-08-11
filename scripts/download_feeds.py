@@ -161,8 +161,8 @@ def inject_source_headers(filepath: str, friendly_name: str, fallback_url: str |
         else:
             result.append(part)
 
-    with open(filepath, "wb") as f:
-        f.write(marker.join(result))
+    with open(filepath, "wb") as out:
+        out.write(marker.join(result))
 
 
 def fetch_feeds_from_db(city: str):

@@ -10,8 +10,8 @@ class HTMLStripper(HTMLParser):
         super().__init__()
         self.result = []
 
-    def handle_data(self, d):
-        self.result.append(d)
+    def handle_data(self, data):
+        self.result.append(data)
 
     def get_text(self):
         return "".join(self.result)

@@ -55,9 +55,11 @@ venvPath = "."
 venv = ".venv"
 typeCheckingMode = "basic"
 exclude = ["legacy", "graphify-out", ".venv", ".worktrees"]
+extraPaths = ["scripts", "scrapers"]
 
 [tool.ty.environment]
 python-version = "3.10"
+extra-paths = ["scripts", "scrapers"]
 
 [tool.ty.src]
 exclude = ["legacy", "graphify-out", ".venv", ".worktrees"]
@@ -65,6 +67,7 @@ exclude = ["legacy", "graphify-out", ".venv", ".worktrees"]
 [tool.pyrefly]
 project_includes = ["scripts/**", "scrapers/**", "tests/**"]
 project_excludes = ["legacy/**", "graphify-out/**"]
+search_path = ["scripts", "scrapers"]
 
 [tool.mypy]
 python_version = "3.10"

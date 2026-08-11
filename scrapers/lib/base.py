@@ -70,7 +70,7 @@ class BaseScraper(ABC):
         - title, dtstart, dtend, url, location, description
         """
 
-    def create_calendar(self, events: list[dict]) -> Calendar:
+    def create_calendar(self, events: list[dict[str, Any]]) -> Calendar:
         """Create an iCalendar from parsed events."""
         cal = Calendar()
         cal.add("prodid", f"-//{self.name}//{self.domain}//")

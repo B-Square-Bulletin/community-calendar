@@ -12,12 +12,15 @@ jobs:
         with:
           fetch-depth: 0  # Need full history for diff
 
-      - uses: actions/setup-python@v6
+      - uses: astral-sh/setup-uv@v9
         with:
           python-version: '3.10'
 
       - name: Install dependencies
-        run: pip install -r requirements-dev.txt
+        run: uv sync
+
+      - name: Add venv to PATH
+        run: echo "$GITHUB_WORKSPACE/.venv/bin" >> "$GITHUB_PATH"
 
       - name: Validate feed/scraper consistency
         run: python scripts/validate_pr_feeds.py --base-ref origin/${{ github.base_ref }}

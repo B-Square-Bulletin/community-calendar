@@ -10,6 +10,7 @@ import re
 from datetime import datetime, timezone
 from html import unescape as html_unescape
 from pathlib import Path
+from typing import Any
 from zoneinfo import ZoneInfo
 
 
@@ -304,7 +305,7 @@ def ics_to_json(ics_file, output_file=None, future_only=True, city=None):
     # Unfold continuation lines
     content = unfold_ics_lines(content)
 
-    events = []
+    events: list[dict[str, Any]] = []
     # Use 24 hours ago to avoid filtering out same-day events due to timezone differences
     from datetime import timedelta
 

@@ -79,7 +79,7 @@ def expand_recurring_events(
     Returns:
         List of datetime objects for each occurrence
     """
-    occurrences = []
+    occurrences: list[datetime] = []
 
     start_date = event.get("start", {}).get("date")
     start_time = event.get("start", {}).get("time", "00:00")
@@ -295,7 +295,7 @@ class ElfsightCalendarScraper(BaseScraper):
             # Location names
             loc_ids = event.get("location", [])
             locations = [self._locations_map.get(lid, lid) for lid in loc_ids]
-            location_str = ", ".join(locations)
+            location_str = ", ".join(loc for loc in locations if loc is not None)
 
             # Event type names (for categories)
             type_ids = event.get("eventType", [])

@@ -11,7 +11,7 @@ from datetime import datetime
 from unittest.mock import patch
 from zoneinfo import ZoneInfo
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 
 from scrapers.lib.em_events import EmEventsScraper
 
@@ -71,11 +71,13 @@ class TestParseTimeRange:
 class TestParseLocation:
     """_parse_location() extracts venue name + address from EM HTML."""
 
-    def _wrap(self, inner_html: str) -> BeautifulSoup:
+    def _wrap(self, inner_html: str) -> Tag:
         """Wrap inner HTML in a container that _parse_location can find."""
         html = f'<div class="em-event">{inner_html}</div>'
         soup = BeautifulSoup(html, "html.parser")
-        return soup.select_one(".em-event")
+        el = soup.select_one(".em-event")
+        assert el is not None
+        return el
 
     def test_parse_location_with_name_and_address(self):
         """Extract venue name and address from a location div."""

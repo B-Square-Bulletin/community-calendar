@@ -70,7 +70,7 @@ class LibraryScraper(BaseScraper):
     def fetch_events(self) -> list[dict[str, Any]]:
         """Fetch events from the library event pages up to months_ahead."""
         page = 1
-        all_events = []
+        all_events: list[dict[str, Any]] = []
         cutoff = datetime.now().astimezone() + timedelta(days=self.months_ahead * 31)
 
         while True:
@@ -81,8 +81,11 @@ class LibraryScraper(BaseScraper):
             if not events:
                 break
 
-            parsed_events = [self._parse_event(e) for e in events]
-            parsed_events = [e for e in parsed_events if e is not None]
+            parsed_events: list[dict[str, Any]] = []
+            for e in events:
+                parsed = self._parse_event(e)
+                if parsed is not None:
+                    parsed_events.append(parsed)
 
             if not parsed_events:
                 break

@@ -17,9 +17,10 @@ import os
 import sys
 import urllib.parse
 import urllib.request
+from typing import cast
 
-SUPABASE_URL = os.environ.get("SUPABASE_URL")
-SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
+SUPABASE_URL: str = cast("str", os.environ.get("SUPABASE_URL"))
+SUPABASE_KEY: str = cast("str", os.environ.get("SUPABASE_KEY"))
 if not SUPABASE_URL or not SUPABASE_KEY:
     print("Set SUPABASE_URL and SUPABASE_KEY environment variables")
     sys.exit(1)

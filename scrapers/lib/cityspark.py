@@ -72,7 +72,7 @@ class CitySparkScraper(BaseScraper):
             response.raise_for_status()
             data = response.json()
 
-            events = data.get("Value") or []
+            events: list[dict[str, Any]] = data.get("Value") or []
             if not events:
                 break
 
@@ -114,7 +114,7 @@ class CitySparkScraper(BaseScraper):
 
         # Get URL from links, fall back to CitySpark event page
         url = ""
-        links = event.get("Links") or []
+        links: list[dict[str, Any]] = event.get("Links") or []
         if links and isinstance(links, list) and len(links) > 0:
             url = links[0].get("url") or ""
 

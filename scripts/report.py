@@ -19,6 +19,7 @@ import os
 import re
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
+from typing import Any
 from zoneinfo import ZoneInfo
 
 DEFAULT_TIMEZONE = "America/Los_Angeles"
@@ -71,9 +72,9 @@ def count_future_events_in_ics(filepath: str) -> tuple[int, str | None]:
     return count, None
 
 
-def detect_anomalies(feed_name: str, current: int, history: list[dict]) -> list[dict]:
+def detect_anomalies(feed_name: str, current: int, history: list[dict]) -> list[dict[str, Any]]:
     """Detect anomalies for a feed. Returns list of anomaly dicts."""
-    anomalies = []
+    anomalies: list[dict[str, Any]] = []
 
     if not history:
         return anomalies
@@ -219,7 +220,7 @@ def update_report(cities: list[str], report_path: str = "report.json"):
         # Group by domain
         from urllib.parse import urlparse
 
-        by_domain = {}
+        by_domain: dict[str, dict[str, Any]] = {}
         for e in urls_with_url:
             try:
                 domain = urlparse(e["url"]).hostname or e["url"]
@@ -231,7 +232,7 @@ def update_report(cities: list[str], report_path: str = "report.json"):
             by_domain[domain]["count"] += 1
 
         # Generic URLs: domains where all events share one URL, with >5 events
-        generic_domains = []
+        generic_domains: list[dict[str, Any]] = []
         generic_count = 0
         for domain, info in by_domain.items():
             if len(info["urls"]) == 1 and info["count"] > 5:
@@ -251,7 +252,7 @@ def update_report(cities: list[str], report_path: str = "report.json"):
                 http_count += 1
 
         # Source specificity
-        by_source = {}
+        by_source: dict[str, dict[str, Any]] = {}
         for e in urls_with_url:
             src = e.get("source") or "(none)"
             if src not in by_source:
@@ -272,18 +273,18 @@ def update_report(cities: list[str], report_path: str = "report.json"):
         )[:15]
 
         # Category breakdown
-        by_category = {}
+        by_category: dict[str, int] = {}
         for e in events:
             cat = e.get("category") or "(uncategorized)"
             by_category[cat] = by_category.get(cat, 0) + 1
-        category_breakdown = sorted(
+        category_breakdown: list[dict[str, Any]] = sorted(
             [{"category": cat, "count": cnt} for cat, cnt in by_category.items()],
             key=lambda x: -x["count"],
         )
 
         # Image coverage
         with_image = sum(1 for e in events if e.get("image_url"))
-        by_source_images = {}
+        by_source_images: dict[str, dict[str, int]] = {}
         for e in events:
             src = e.get("source") or "(none)"
             if src not in by_source_images:
@@ -291,7 +292,7 @@ def update_report(cities: list[str], report_path: str = "report.json"):
             by_source_images[src]["total"] += 1
             if e.get("image_url"):
                 by_source_images[src]["with_image"] += 1
-        image_by_source = sorted(
+        image_by_source: list[dict[str, Any]] = sorted(
             [
                 {"source": src, "total": info["total"], "with_image": info["with_image"]}
                 for src, info in by_source_images.items()
@@ -342,9 +343,9 @@ def update_report(cities: list[str], report_path: str = "report.json"):
         tz_name = get_city_timezone(city)
         tz = ZoneInfo(tz_name)
         ref = datetime(2026, 3, 15, 12, 0, 0, tzinfo=tz)
-        offset_hours = int(ref.utcoffset().total_seconds() / 3600)
+        offset_hours = int((ref.utcoffset() or timedelta()).total_seconds() / 3600)
 
-        by_source = {}
+        events_by_source: dict[str, list[dict[str, Any]]] = {}
         for e in events:
             st = e.get("start_time", "")
             if "T" not in st:
@@ -355,7 +356,7 @@ def update_report(cities: list[str], report_path: str = "report.json"):
                 minute = int(st[14:16])
             except (ValueError, IndexError):
                 continue
-            by_source.setdefault(src, []).append(
+            events_by_source.setdefault(src, []).append(
                 {
                     "hour": hour,
                     "minute": minute,
@@ -365,7 +366,7 @@ def update_report(cities: list[str], report_path: str = "report.json"):
             )
 
         tz_anomalies = []
-        for src, entries in by_source.items():
+        for src, entries in events_by_source.items():
             if len(entries) < 3:
                 continue
             suspicious = [e for e in entries if 0 <= e["hour"] < 5]
@@ -401,7 +402,7 @@ def update_report(cities: list[str], report_path: str = "report.json"):
     for city in cities:
         city_dir = f"cities/{city}"
         city_tz = get_city_timezone(city)
-        tzid_counts = {}  # tzid → {count, files}
+        tzid_counts: dict[str, dict[str, Any]] = {}  # tzid → {count, files}
         for ics_path in sorted(glob.glob(f"{city_dir}/*.ics")):
             basename = os.path.basename(ics_path)
             if basename == "combined.ics":
@@ -420,19 +421,19 @@ def update_report(cities: list[str], report_path: str = "report.json"):
             # Count bare datetimes (no TZID, no Z)
             bare = len(re.findall(r"^DTSTART:\d{8}T\d{6}$", content, re.MULTILINE))
             if bare:
-                key = "(bare — assumes city tz)"
-                if key not in tzid_counts:
-                    tzid_counts[key] = {"count": 0, "files": set()}
-                tzid_counts[key]["count"] += bare
-                tzid_counts[key]["files"].add(basename)
+                tzid_key = "(bare — assumes city tz)"
+                if tzid_key not in tzid_counts:
+                    tzid_counts[tzid_key] = {"count": 0, "files": set()}
+                tzid_counts[tzid_key]["count"] += bare
+                tzid_counts[tzid_key]["files"].add(basename)
             # Count UTC datetimes
             utc = len(re.findall(r"^DTSTART:\d{8}T\d{6}Z$", content, re.MULTILINE))
             if utc:
-                key = "UTC (Z suffix)"
-                if key not in tzid_counts:
-                    tzid_counts[key] = {"count": 0, "files": set()}
-                tzid_counts[key]["count"] += utc
-                tzid_counts[key]["files"].add(basename)
+                tzid_key = "UTC (Z suffix)"
+                if tzid_key not in tzid_counts:
+                    tzid_counts[tzid_key] = {"count": 0, "files": set()}
+                tzid_counts[tzid_key]["count"] += utc
+                tzid_counts[tzid_key]["files"].add(basename)
 
         if tzid_counts:
             inventory = []

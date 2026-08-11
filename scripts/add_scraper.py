@@ -43,6 +43,8 @@ def validate_workflow(path: Path, prev_error_count: int | None) -> bool:
         print("⚠️  actionlint not available, skipping validation")
         return True
     new_count = count_actionlint_errors(path)
+    if new_count is None:
+        return True
     if new_count > prev_error_count:
         print(f"❌ actionlint: edit introduced new errors ({prev_error_count} → {new_count})")
         return False

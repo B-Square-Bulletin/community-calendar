@@ -267,6 +267,7 @@ class TestFullPipeline:
         result = json_parse_dt(raw_line, la_tz)
 
         # Parse the result to check the actual UTC instant
+        assert result is not None
         result_dt = datetime.fromisoformat(result)
         result_utc = result_dt.astimezone(timezone.utc)
 
@@ -289,6 +290,7 @@ class TestFullPipeline:
         raw_line = "DTSTART;TZID=America/Los_Angeles:20250115T190000"
         result = json_parse_dt(raw_line, la_tz)
 
+        assert result is not None
         result_dt = datetime.fromisoformat(result)
         result_utc = result_dt.astimezone(timezone.utc)
 
@@ -302,6 +304,7 @@ class TestFullPipeline:
         la_tz = ZoneInfo("America/Los_Angeles")
         result = json_parse_dt("20250115T200000Z", la_tz)
 
+        assert result is not None
         result_dt = datetime.fromisoformat(result)
         result_utc = result_dt.astimezone(timezone.utc)
 
@@ -488,7 +491,7 @@ class TestApplyTimezoneOffset:
     """
 
     @staticmethod
-    def apply_tz_offset(naive_dt: str, tz_name: str) -> str:
+    def apply_tz_offset(naive_dt: str, tz_name: str | None) -> str:
         """Python equivalent of window.applyTimezoneOffset / capture-event applyTimezoneOffset."""
         import re
 
@@ -499,7 +502,7 @@ class TestApplyTimezoneOffset:
         dt = datetime.fromisoformat(naive_dt)
         tz = ZoneInfo(tz_name)
         aware = dt.replace(tzinfo=tz)
-        offset = aware.utcoffset()
+        offset = aware.utcoffset() or timedelta()
         total_seconds = int(offset.total_seconds())
         sign = "+" if total_seconds >= 0 else "-"
         abs_seconds = abs(total_seconds)
@@ -647,7 +650,7 @@ class TestRealIcsFiles:
             assert ";" not in raw, f"Expected bare datetime, got: {raw}"
             dt = datetime.fromisoformat(parsed)
             assert dt.tzinfo is not None, f"Parsed datetime should be tz-aware: {parsed}"
-            offset_hours = dt.utcoffset().total_seconds() / 3600
+            offset_hours = (dt.utcoffset() or timedelta()).total_seconds() / 3600
             assert offset_hours in (-7, -8), (
                 f"Expected PDT or PST offset, got {offset_hours}h: {parsed}"
             )
@@ -663,7 +666,7 @@ class TestRealIcsFiles:
             if "TZID=" in raw:
                 assert "America/Los_Angeles" in raw
                 dt = datetime.fromisoformat(parsed)
-                offset_hours = dt.utcoffset().total_seconds() / 3600
+                offset_hours = (dt.utcoffset() or timedelta()).total_seconds() / 3600
                 assert offset_hours in (-7, -8), f"Expected PDT or PST: {parsed}"
 
     # --- Santa Rosa: Eventbrite with TZID=America/New_York (MISMATCH) ---
@@ -681,7 +684,7 @@ class TestRealIcsFiles:
             if "TZID=America/New_York" in raw:
                 eastern_found = True
                 dt = datetime.fromisoformat(parsed)
-                offset_hours = dt.utcoffset().total_seconds() / 3600
+                offset_hours = (dt.utcoffset() or timedelta()).total_seconds() / 3600
                 assert offset_hours in (-4, -5), (
                     f"Event with TZID=America/New_York should have Eastern offset, "
                     f"got {offset_hours}h: {raw} → {parsed}"
@@ -710,7 +713,7 @@ class TestRealIcsFiles:
             dt = datetime.fromisoformat(parsed)
             assert dt.tzinfo is not None
             if "TZID=America/New_York" in raw:
-                offset_hours = dt.utcoffset().total_seconds() / 3600
+                offset_hours = (dt.utcoffset() or timedelta()).total_seconds() / 3600
                 assert offset_hours in (-4, -5), (
                     f"TZID=America/New_York should produce Eastern offset, "
                     f"got {offset_hours}h: {raw} → {parsed}"
@@ -732,7 +735,7 @@ class TestRealIcsFiles:
         for raw, parsed in results:
             if "TZID=America/Los_Angeles" in raw:
                 dt = datetime.fromisoformat(parsed)
-                offset_hours = dt.utcoffset().total_seconds() / 3600
+                offset_hours = (dt.utcoffset() or timedelta()).total_seconds() / 3600
                 assert offset_hours in (-7, -8), (
                     f"TZID=America/Los_Angeles should produce Pacific offset, "
                     f"got {offset_hours}h: {raw} → {parsed}"
@@ -756,7 +759,7 @@ class TestRealIcsFiles:
             dt = datetime.fromisoformat(parsed)
             assert dt.tzinfo is not None
             if "TZID=America/Los_Angeles" in raw:
-                offset_hours = dt.utcoffset().total_seconds() / 3600
+                offset_hours = (dt.utcoffset() or timedelta()).total_seconds() / 3600
                 assert offset_hours in (-7, -8), (
                     f"TZID=America/Los_Angeles should produce Pacific offset, "
                     f"got {offset_hours}h: {raw} → {parsed}"
@@ -775,7 +778,7 @@ class TestRealIcsFiles:
         for raw, parsed in results:
             if "TZID=UTC" in raw:
                 dt = datetime.fromisoformat(parsed)
-                offset_hours = dt.utcoffset().total_seconds() / 3600
+                offset_hours = (dt.utcoffset() or timedelta()).total_seconds() / 3600
                 assert offset_hours == 0, (
                     f"TZID=UTC should produce +00:00 offset, got {offset_hours}h: {raw} → {parsed}"
                 )
@@ -793,7 +796,7 @@ class TestRealIcsFiles:
         for raw, parsed in results:
             if "TZID=America/Halifax" in raw:
                 dt = datetime.fromisoformat(parsed)
-                offset_hours = dt.utcoffset().total_seconds() / 3600
+                offset_hours = (dt.utcoffset() or timedelta()).total_seconds() / 3600
                 assert offset_hours in (-3, -4), (
                     f"TZID=America/Halifax should produce Atlantic offset, "
                     f"got {offset_hours}h: {raw} → {parsed}"
@@ -813,7 +816,7 @@ class TestRealIcsFiles:
         for raw, parsed in results:
             assert "TZID=America/Los_Angeles" in raw
             dt = datetime.fromisoformat(parsed)
-            offset_hours = dt.utcoffset().total_seconds() / 3600
+            offset_hours = (dt.utcoffset() or timedelta()).total_seconds() / 3600
             assert offset_hours in (-7, -8), f"Expected PDT or PST: {parsed}"
 
     # --- Cross-city consistency: same UTC instant regardless of TZID ---
@@ -832,6 +835,8 @@ class TestRealIcsFiles:
         pacific_parsed = json_parse_dt(pacific_raw, la_tz)
         eastern_parsed = json_parse_dt(eastern_raw, la_tz)
 
+        assert pacific_parsed is not None
+        assert eastern_parsed is not None
         pacific_utc = datetime.fromisoformat(pacific_parsed).astimezone(timezone.utc)
         eastern_utc = datetime.fromisoformat(eastern_parsed).astimezone(timezone.utc)
 
