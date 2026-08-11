@@ -2,7 +2,6 @@
 
 from .bibliocommons import BibliocommonsEventsScraper
 
-
 TPL_PRESCHOOL = "67eab59f53f2873000a90aa9"
 TPL_SCHOOL_AGE = "6894f7dab7a97e36001ab2b9"
 TPL_TEENS = "67eab59153f2873000a90aa8"

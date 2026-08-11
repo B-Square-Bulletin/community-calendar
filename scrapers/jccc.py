@@ -6,12 +6,12 @@ from __future__ import annotations
 import re
 from datetime import date, datetime, timedelta
 from html import unescape
+from typing import ClassVar
 from urllib.parse import unquote, urljoin
 from zoneinfo import ZoneInfo
 
 import requests
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
 
 
@@ -29,7 +29,7 @@ class JCCCScraper(BaseScraper):
     default_url = page_url
     default_location = "Japanese Canadian Cultural Centre"
     max_pages = 10
-    headers = {
+    headers: ClassVar[dict[str, str]] = {
         "User-Agent": "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
         "Accept": "text/html,application/xhtml+xml",
     }
@@ -138,7 +138,11 @@ class JCCCScraper(BaseScraper):
     def event_is_current_or_future(self, dtstart: date | datetime, dtend: date | datetime) -> bool:
         now = datetime.now(self.tz)
         if isinstance(dtstart, datetime):
-            end_dt = dtend if isinstance(dtend, datetime) else datetime.combine(dtend, datetime.min.time()).replace(tzinfo=self.tz)
+            end_dt = (
+                dtend
+                if isinstance(dtend, datetime)
+                else datetime.combine(dtend, datetime.min.time()).replace(tzinfo=self.tz)
+            )
             return end_dt >= now
         return dtend > now.date()
 

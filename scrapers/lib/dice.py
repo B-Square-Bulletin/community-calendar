@@ -27,23 +27,24 @@ Usage:
         MyVenueScraper.main()
 """
 
+import contextlib
 import html as html_mod
 import logging
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
-from typing import Any, Optional
+from typing import Any, ClassVar
 
 from .base import BaseScraper
 from .jsonld import (
-    extract_jsonld_blocks,
     extract_events_from_blocks,
+    extract_jsonld_blocks,
     parse_location,
 )
 
 logger = logging.getLogger(__name__)
 
-LINK_PATTERN = re.compile(r'https://link\.dice\.fm/[A-Za-z0-9]+')
+LINK_PATTERN = re.compile(r"https://link\.dice\.fm/[A-Za-z0-9]+")
 
 
 class DiceVenueScraper(BaseScraper):
@@ -59,20 +60,20 @@ class DiceVenueScraper(BaseScraper):
         headers: HTTP headers for both venue and DICE fetches
     """
 
-    venue_url: str = ''
-    default_location: str = ''
+    venue_url: str = ""
+    default_location: str = ""
     max_workers: int = 8
-    headers: dict = {
-        'User-Agent': 'Mozilla/5.0 (compatible; CommunityCalendar/1.0)',
-        'Accept': 'text/html,application/xhtml+xml',
+    headers: ClassVar[dict] = {
+        "User-Agent": "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
+        "Accept": "text/html,application/xhtml+xml",
     }
 
-    def _fetch(self, url: str) -> Optional[str]:
+    def _fetch(self, url: str) -> str | None:
         """Fetch a URL; return decoded body or None on error."""
         try:
             return self.fetch_text_with_curl(
                 url,
-                accept=self.headers.get('Accept'),
+                accept=self.headers.get("Accept"),
                 timeout=20,
             )
         except RuntimeError as e:
@@ -91,7 +92,7 @@ class DiceVenueScraper(BaseScraper):
         self.logger.info(f"Found {len(links)} DICE links on {self.venue_url}")
         return links
 
-    def _extract_event(self, dice_url: str) -> Optional[dict[str, Any]]:
+    def _extract_event(self, dice_url: str) -> dict[str, Any] | None:
         """Fetch one DICE event page and parse its MusicEvent JSON-LD."""
         html = self._fetch(dice_url)
         if not html:
@@ -104,13 +105,13 @@ class DiceVenueScraper(BaseScraper):
             return None
 
         item = events[0]
-        title = html_mod.unescape(item.get('name', 'Untitled'))
-        start_str = item.get('startDate', '')
+        title = html_mod.unescape(item.get("name", "Untitled"))
+        start_str = item.get("startDate", "")
         if not start_str:
             return None
 
         try:
-            dtstart = datetime.fromisoformat(start_str.replace('Z', '+00:00'))
+            dtstart = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
         except ValueError:
             self.logger.debug(f"Bad startDate {start_str!r} on {dice_url}")
             return None
@@ -122,30 +123,28 @@ class DiceVenueScraper(BaseScraper):
             return None
 
         dtend = None
-        end_str = item.get('endDate', '')
+        end_str = item.get("endDate", "")
         if end_str:
-            try:
-                dtend = datetime.fromisoformat(end_str.replace('Z', '+00:00'))
-            except ValueError:
-                pass
+            with contextlib.suppress(ValueError):
+                dtend = datetime.fromisoformat(end_str.replace("Z", "+00:00"))
 
-        location = parse_location(item.get('location'), self.default_location)
+        location = parse_location(item.get("location"), self.default_location)
 
-        desc = item.get('description', '') or ''
+        desc = item.get("description", "") or ""
         desc = html_mod.unescape(desc)
-        desc = re.sub(r'<[^>]+>', ' ', desc).strip()
-        desc = re.sub(r'\s+', ' ', desc)
+        desc = re.sub(r"<[^>]+>", " ", desc).strip()
+        desc = re.sub(r"\s+", " ", desc)
 
         # Prefer the canonical DICE event URL over the link.dice.fm short
-        url = item.get('url', dice_url)
+        url = item.get("url", dice_url)
 
         return {
-            'title': title,
-            'dtstart': dtstart,
-            'dtend': dtend,
-            'location': location,
-            'description': desc,
-            'url': url,
+            "title": title,
+            "dtstart": dtstart,
+            "dtend": dtend,
+            "location": location,
+            "description": desc,
+            "url": url,
         }
 
     def fetch_events(self) -> list[dict[str, Any]]:

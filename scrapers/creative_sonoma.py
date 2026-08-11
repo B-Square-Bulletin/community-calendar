@@ -8,7 +8,8 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
 from datetime import datetime, timedelta
@@ -16,13 +17,12 @@ from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
 
 # Creative Sonoma blocks the standard HEADERS User-Agent
 HEADERS = {
-    'User-Agent': 'Mozilla/5.0',
-    'Accept': 'text/html,application/xhtml+xml',
+    "User-Agent": "Mozilla/5.0",
+    "Accept": "text/html,application/xhtml+xml",
 }
 
 
@@ -45,8 +45,8 @@ class CreativeSonomaScraper(BaseScraper):
             response = requests.get(url, headers=HEADERS, timeout=30)
             response.raise_for_status()
 
-            soup = BeautifulSoup(response.text, 'html.parser')
-            items = soup.select('div.div-one')
+            soup = BeautifulSoup(response.text, "html.parser")
+            items = soup.select("div.div-one")
 
             if not items:
                 self.logger.info(f"No events on page {page}, stopping")
@@ -61,27 +61,27 @@ class CreativeSonomaScraper(BaseScraper):
 
     def _parse_event(self, item) -> dict[str, Any] | None:
         """Parse a single event from a div.div-one element."""
-        title_el = item.select_one('span.ev-tt')
+        title_el = item.select_one("span.ev-tt")
         if not title_el:
             return None
         title = title_el.get_text(strip=True)
 
-        url = item.get('data-url', '')
+        url = item.get("data-url", "")
 
         # Get venue
-        venue_el = item.select_one('span.venue-event')
-        location = venue_el.get_text(strip=True).lstrip('at').strip() if venue_el else ''
+        venue_el = item.select_one("span.venue-event")
+        location = venue_el.get_text(strip=True).lstrip("at").strip() if venue_el else ""
 
         # Get organization
-        org_el = item.select_one('p.meta.auth a')
-        org = org_el.get_text(strip=True) if org_el else ''
+        org_el = item.select_one("p.meta.auth a")
+        org = org_el.get_text(strip=True) if org_el else ""
 
         # Get time slots from sibling div.show-events
-        show_events = item.find_next('div', class_='show-events')
+        show_events = item.find_next("div", class_="show-events")
         if not show_events:
             return None
 
-        time_items = show_events.select('.item')
+        time_items = show_events.select(".item")
         if not time_items:
             return None
 
@@ -90,53 +90,54 @@ class CreativeSonomaScraper(BaseScraper):
         if not dtstart:
             return None
 
-        description = f"Presented by {org}" if org else ''
+        description = f"Presented by {org}" if org else ""
 
         self.logger.info(f"Found: {title} on {dtstart.strftime('%Y-%m-%d')}")
 
         return {
-            'title': title,
-            'dtstart': dtstart,
-            'dtend': dtend or dtstart + timedelta(hours=2),
-            'url': url,
-            'location': location,
-            'description': description,
+            "title": title,
+            "dtstart": dtstart,
+            "dtend": dtend or dtstart + timedelta(hours=2),
+            "url": url,
+            "location": location,
+            "description": description,
         }
 
     @staticmethod
     def _parse_time_slot(text: str) -> tuple:
         """Parse 'Feb 21, 2026 at 1:00pm - 4:00pm  (Sat)' -> (dtstart, dtend)."""
         # Remove day-of-week suffix
-        text = re.sub(r'\s*\([A-Za-z]+\)\s*$', '', text)
+        text = re.sub(r"\s*\([A-Za-z]+\)\s*$", "", text)
 
         # Pattern: "Mon DD, YYYY at H:MMam - H:MMpm"
         m = re.match(
-            r'(\w+ \d+, \d{4})\s+at\s+(\d+:\d+\s*[ap]m)\s*-\s*(\d+:\d+\s*[ap]m)',
-            text, re.IGNORECASE
+            r"(\w+ \d+, \d{4})\s+at\s+(\d+:\d+\s*[ap]m)\s*-\s*(\d+:\d+\s*[ap]m)",
+            text,
+            re.IGNORECASE,
         )
         if m:
             date_str, start_str, end_str = m.group(1), m.group(2), m.group(3)
             try:
-                dtstart = datetime.strptime(f"{date_str} {start_str}", '%b %d, %Y %I:%M%p')
-                dtend = datetime.strptime(f"{date_str} {end_str}", '%b %d, %Y %I:%M%p')
+                dtstart = datetime.strptime(f"{date_str} {start_str}", "%b %d, %Y %I:%M%p")
+                dtend = datetime.strptime(f"{date_str} {end_str}", "%b %d, %Y %I:%M%p")
                 return dtstart, dtend
             except ValueError:
                 pass
 
         # Pattern: date only "Mon DD, YYYY at H:MMam" (no end time)
-        m = re.match(r'(\w+ \d+, \d{4})\s+at\s+(\d+:\d+\s*[ap]m)', text, re.IGNORECASE)
+        m = re.match(r"(\w+ \d+, \d{4})\s+at\s+(\d+:\d+\s*[ap]m)", text, re.IGNORECASE)
         if m:
             try:
-                dtstart = datetime.strptime(f"{m.group(1)} {m.group(2)}", '%b %d, %Y %I:%M%p')
+                dtstart = datetime.strptime(f"{m.group(1)} {m.group(2)}", "%b %d, %Y %I:%M%p")
                 return dtstart, None
             except ValueError:
                 pass
 
         # Pattern: date only "Mon DD, YYYY"
-        m = re.match(r'(\w+ \d+, \d{4})', text)
+        m = re.match(r"(\w+ \d+, \d{4})", text)
         if m:
             try:
-                dtstart = datetime.strptime(m.group(1), '%b %d, %Y')
+                dtstart = datetime.strptime(m.group(1), "%b %d, %Y")
                 return dtstart, None
             except ValueError:
                 pass
@@ -144,5 +145,5 @@ class CreativeSonomaScraper(BaseScraper):
         return None, None
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     CreativeSonomaScraper.main()

@@ -10,7 +10,8 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import argparse
 import logging
@@ -21,32 +22,56 @@ from typing import Any
 
 from lib.base import BaseScraper
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
-EVENTS_URL = 'https://sycamorelandtrust.org/bulletin-board/events-calendar/'
+EVENTS_URL = "https://sycamorelandtrust.org/bulletin-board/events-calendar/"
 
 MONTHS = {
-    'january': 1, 'february': 2, 'march': 3, 'april': 4,
-    'may': 5, 'june': 6, 'july': 7, 'august': 8,
-    'september': 9, 'october': 10, 'november': 11, 'december': 12,
-    'jan': 1, 'feb': 2, 'mar': 3, 'apr': 4,
-    'jun': 6, 'jul': 7, 'aug': 8, 'sep': 9, 'oct': 10, 'nov': 11, 'dec': 12,
+    "january": 1,
+    "february": 2,
+    "march": 3,
+    "april": 4,
+    "may": 5,
+    "june": 6,
+    "july": 7,
+    "august": 8,
+    "september": 9,
+    "october": 10,
+    "november": 11,
+    "december": 12,
+    "jan": 1,
+    "feb": 2,
+    "mar": 3,
+    "apr": 4,
+    "jun": 6,
+    "jul": 7,
+    "aug": 8,
+    "sep": 9,
+    "oct": 10,
+    "nov": 11,
+    "dec": 12,
 }
 
 
 def parse_date_time(date_str: str) -> tuple[datetime, datetime | None]:
     """Parse date string like 'Saturday, March 29, 9:00 am - 12:00 pm'."""
     # Clean up HTML entities
-    date_str = date_str.replace('\xa0', ' ').replace('&nbsp;', ' ').strip()
+    date_str = date_str.replace("\xa0", " ").replace("&nbsp;", " ").strip()
 
     # Remove day name prefix
-    date_str = re.sub(r'^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\s*', '', date_str, flags=re.IGNORECASE)
+    date_str = re.sub(
+        r"^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\s*",
+        "",
+        date_str,
+        flags=re.IGNORECASE,
+    )
 
     # Match: "Month Day, Time - Time" or "Month Day"
     m = re.match(
-        r'(\w+)\s+(\d{1,2}),?\s*(?:(\d{1,2}):(\d{2})\s*(am|pm))?\s*(?:-\s*(\d{1,2}):(\d{2})\s*(am|pm))?',
-        date_str, re.IGNORECASE
+        r"(\w+)\s+(\d{1,2}),?\s*(?:(\d{1,2}):(\d{2})\s*(am|pm))?\s*(?:-\s*(\d{1,2}):(\d{2})\s*(am|pm))?",
+        date_str,
+        re.IGNORECASE,
     )
     if not m:
         return None, None
@@ -75,9 +100,9 @@ def parse_date_time(date_str: str) -> tuple[datetime, datetime | None]:
         hour = int(m.group(3))
         minute = int(m.group(4))
         ampm = m.group(5).lower()
-        if ampm == 'pm' and hour != 12:
+        if ampm == "pm" and hour != 12:
             hour += 12
-        if ampm == 'am' and hour == 12:
+        if ampm == "am" and hour == 12:
             hour = 0
         dtstart = dtstart.replace(hour=hour, minute=minute)
 
@@ -86,9 +111,9 @@ def parse_date_time(date_str: str) -> tuple[datetime, datetime | None]:
         hour = int(m.group(6))
         minute = int(m.group(7))
         ampm = m.group(8).lower()
-        if ampm == 'pm' and hour != 12:
+        if ampm == "pm" and hour != 12:
             hour += 12
-        if ampm == 'am' and hour == 12:
+        if ampm == "am" and hour == 12:
             hour = 0
         dtend = dt.replace(hour=hour, minute=minute)
 
@@ -105,8 +130,7 @@ class SycamoreLandTrustScraper(BaseScraper):
         """Fetch and parse events from the calendar page."""
         logger.info(f"Fetching {EVENTS_URL}")
         result = subprocess.run(
-            ['curl', '-sL', EVENTS_URL],
-            capture_output=True, text=True, timeout=30
+            ["curl", "-sL", EVENTS_URL], capture_output=True, text=True, timeout=30
         )
         html = result.stdout
 
@@ -121,17 +145,19 @@ class SycamoreLandTrustScraper(BaseScraper):
             if not title_m:
                 continue
             url = title_m.group(1)
-            title = re.sub(r'<[^>]+>', '', title_m.group(2)).strip()
+            title = re.sub(r"<[^>]+>", "", title_m.group(2)).strip()
 
             # Extract location
-            loc_m = re.search(r'<span class="location"></span>\s*<a[^>]*>(.*?)</a>', item, re.DOTALL)
-            location = re.sub(r'<[^>]+>', '', loc_m.group(1)).strip() if loc_m else ''
+            loc_m = re.search(
+                r'<span class="location"></span>\s*<a[^>]*>(.*?)</a>', item, re.DOTALL
+            )
+            location = re.sub(r"<[^>]+>", "", loc_m.group(1)).strip() if loc_m else ""
 
             # Extract date/time
             date_m = re.search(r'<span class="date"></span>(.*?)</li>', item, re.DOTALL)
             if not date_m:
                 continue
-            date_text = re.sub(r'<[^>]+>', '', date_m.group(1)).strip()
+            date_text = re.sub(r"<[^>]+>", "", date_m.group(1)).strip()
 
             dtstart, dtend = parse_date_time(date_text)
             if not dtstart:
@@ -139,25 +165,27 @@ class SycamoreLandTrustScraper(BaseScraper):
                 continue
 
             # Extract description
-            desc_m = re.search(r'</ul>\s*<p>(.*?)</p>', item, re.DOTALL)
-            description = re.sub(r'<[^>]+>', '', desc_m.group(1)).strip() if desc_m else ''
+            desc_m = re.search(r"</ul>\s*<p>(.*?)</p>", item, re.DOTALL)
+            description = re.sub(r"<[^>]+>", "", desc_m.group(1)).strip() if desc_m else ""
 
-            events.append({
-                'title': title,
-                'dtstart': dtstart,
-                'dtend': dtend,
-                'location': location,
-                'description': description,
-                'url': url,
-            })
+            events.append(
+                {
+                    "title": title,
+                    "dtstart": dtstart,
+                    "dtend": dtend,
+                    "location": location,
+                    "description": description,
+                    "url": url,
+                }
+            )
 
         return events
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Scrape Sycamore Land Trust events')
-    parser.add_argument('--output', '-o', help='Output ICS file')
-    parser.add_argument('--debug', action='store_true')
+    parser = argparse.ArgumentParser(description="Scrape Sycamore Land Trust events")
+    parser.add_argument("--output", "-o", help="Output ICS file")
+    parser.add_argument("--debug", action="store_true")
     args = parser.parse_args()
 
     if args.debug:
@@ -167,5 +195,5 @@ def main():
     scraper.run(args.output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

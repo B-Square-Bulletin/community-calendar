@@ -8,17 +8,20 @@ https://github.com/CivicTechTO/toronto-opendata-festivalsandevents-jsonld-proxy
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import json
 import logging
-from urllib.request import urlopen, Request
+from urllib.request import Request, urlopen
 
 from lib.jsonld import JsonLdScraper
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
-FEED_URL = "https://civictechto.github.io/toronto-opendata-festivalsandevents-jsonld-proxy/upcoming.jsonld"
+FEED_URL = (
+    "https://civictechto.github.io/toronto-opendata-festivalsandevents-jsonld-proxy/upcoming.jsonld"
+)
 
 
 class TorontoFestivalsScraper(JsonLdScraper):
@@ -33,7 +36,7 @@ class TorontoFestivalsScraper(JsonLdScraper):
         self.logger.info(f"Fetching {FEED_URL}")
         req = Request(FEED_URL, headers=self.headers)
         with urlopen(req, timeout=15) as resp:
-            events = json.loads(resp.read().decode('utf-8'))
+            events = json.loads(resp.read().decode("utf-8"))
 
         self.logger.info(f"Found {len(events)} events in feed")
 
@@ -47,5 +50,5 @@ class TorontoFestivalsScraper(JsonLdScraper):
         return parsed
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     TorontoFestivalsScraper.main()

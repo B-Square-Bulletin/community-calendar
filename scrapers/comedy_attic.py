@@ -63,9 +63,7 @@ class ComedyAtticScraper(BaseScraper):
         # Fetch each detail page and extract JSON-LD showtimes
         events = []
         for idx, (_, url) in enumerate(event_entries):
-            self.logger.debug(
-                f"Fetching detail page {idx + 1}/{len(event_entries)}: {url}"
-            )
+            self.logger.debug(f"Fetching detail page {idx + 1}/{len(event_entries)}: {url}")
             try:
                 showtimes = self._fetch_detail_jsonld(url, tz)
                 events.extend(showtimes)
@@ -76,9 +74,7 @@ class ComedyAtticScraper(BaseScraper):
             if idx < len(event_entries) - 1:
                 time.sleep(0.3)
 
-        self.logger.info(
-            f"Found {len(events)} showtimes across {len(event_entries)} events"
-        )
+        self.logger.info(f"Found {len(events)} showtimes across {len(event_entries)} events")
         return events
 
     def _fetch_detail_jsonld(self, url: str, tz: ZoneInfo) -> list[dict[str, Any]]:

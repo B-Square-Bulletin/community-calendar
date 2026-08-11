@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Tests for the Tribe Events REST API scraper."""
 
-from unittest.mock import patch
 import sys
 from pathlib import Path
+from unittest.mock import patch
 
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -12,7 +12,6 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 from scrapers.lib.tribe_events import HEADERS, TribeEventsScraper
-
 
 # Real event data captured from the NAMI Bloomington Tribe Events API
 SAMPLE_API_EVENT = {
@@ -38,15 +37,17 @@ class TestHeaders:
 
     def test_headers_contains_user_agent(self):
         """HEADERS dict must have a User-Agent key."""
-        assert 'User-Agent' in HEADERS
+        assert "User-Agent" in HEADERS
 
     def test_user_agent_is_browser_like(self):
         """User-Agent should look like a real browser, not a bot identifier."""
-        ua = HEADERS['User-Agent']
+        ua = HEADERS["User-Agent"]
         # Should not contain "compatible" (bot indicator)
-        assert 'compatible' not in ua.lower(), f"UA looks like a bot: {ua}"
+        assert "compatible" not in ua.lower(), f"UA looks like a bot: {ua}"
         # Should contain a browser identifier
-        assert 'Chrome' in ua or 'Firefox' in ua or 'Safari' in ua, f"UA lacks browser identifier: {ua}"
+        assert "Chrome" in ua or "Firefox" in ua or "Safari" in ua, (
+            f"UA lacks browser identifier: {ua}"
+        )
 
 
 class TestFetchEventsHeaders:
@@ -55,9 +56,9 @@ class TestFetchEventsHeaders:
     def test_fetch_events_uses_headers(self):
         """fetch_events should pass HEADERS to requests.get."""
         mock_response = {
-            'events': [],
-            'total': 0,
-            'total_pages': 1,
+            "events": [],
+            "total": 0,
+            "total_pages": 1,
         }
 
         # Create a minimal concrete subclass
@@ -70,7 +71,7 @@ class TestFetchEventsHeaders:
 
         scraper = TestScraper()
 
-        with patch('scrapers.lib.tribe_events.requests.get') as mock_get:
+        with patch("scrapers.lib.tribe_events.requests.get") as mock_get:
             mock_get.return_value.ok = True
             mock_get.return_value.status_code = 200
             mock_get.return_value.json.return_value = mock_response
@@ -90,6 +91,7 @@ class TestParseEvent:
 
     def test_parse_basic_event(self):
         """Parse a real API event and verify output fields."""
+
         class TestScraper(TribeEventsScraper):
             name = "NAMI Greater Bloomington"
             domain = "namigreaterbloomingtonarea.org"
@@ -102,20 +104,20 @@ class TestParseEvent:
         result = scraper._parse_event(SAMPLE_API_EVENT, tz)
 
         assert result is not None
-        assert result['title'] == "Family Support Group (virtual)"
-        assert result['url'] == SAMPLE_API_EVENT['url']
-        assert result['location'] == "Zoom Meeting"  # From venue.venue field
-        assert 'NAMI Family Support Group' in result['description']
-        assert result['uid'] == "tribe-10000502@namigreaterbloomingtonarea.org"
+        assert result["title"] == "Family Support Group (virtual)"
+        assert result["url"] == SAMPLE_API_EVENT["url"]
+        assert result["location"] == "Zoom Meeting"  # From venue.venue field
+        assert "NAMI Family Support Group" in result["description"]
+        assert result["uid"] == "tribe-10000502@namigreaterbloomingtonarea.org"
 
         # Check datetimes
-        assert isinstance(result['dtstart'], datetime)
-        assert result['dtstart'].year == 2026
-        assert result['dtstart'].month == 6
-        assert result['dtstart'].day == 15
-        assert result['dtstart'].hour == 17
-        assert result['dtstart'].minute == 45
+        assert isinstance(result["dtstart"], datetime)
+        assert result["dtstart"].year == 2026
+        assert result["dtstart"].month == 6
+        assert result["dtstart"].day == 15
+        assert result["dtstart"].hour == 17
+        assert result["dtstart"].minute == 45
 
-        assert isinstance(result['dtend'], datetime)
-        assert result['dtend'].hour == 19
-        assert result['dtend'].minute == 0
+        assert isinstance(result["dtend"], datetime)
+        assert result["dtend"].hour == 19
+        assert result["dtend"].minute == 0

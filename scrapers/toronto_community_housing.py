@@ -6,12 +6,12 @@ from __future__ import annotations
 import re
 from datetime import datetime
 from html import unescape
+from typing import ClassVar
 from urllib.parse import urljoin
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
 
 
@@ -26,7 +26,7 @@ class TorontoCommunityHousingScraper(BaseScraper):
     timezone = "America/Toronto"
     page_url = "https://torontohousing.ca/events"
     default_url = page_url
-    headers = {
+    headers: ClassVar[dict[str, str]] = {
         "User-Agent": "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
         "Accept": "text/html,application/xhtml+xml",
     }
@@ -46,7 +46,9 @@ class TorontoCommunityHousingScraper(BaseScraper):
         if not m:
             return None, None
         day, start_s, end_s = m.groups()
-        start = datetime.strptime(f"{day} {start_s.lower().replace('.', '')}", "%A, %B %d, %Y %I:%M %p")
+        start = datetime.strptime(
+            f"{day} {start_s.lower().replace('.', '')}", "%A, %B %d, %Y %I:%M %p"
+        )
         end = datetime.strptime(f"{day} {end_s.lower().replace('.', '')}", "%A, %B %d, %Y %I:%M %p")
         tz = ZoneInfo(self.timezone)
         return start.replace(tzinfo=tz), end.replace(tzinfo=tz)
@@ -58,8 +60,16 @@ class TorontoCommunityHousingScraper(BaseScraper):
         events = []
 
         for card in cards:
-            title = _clean(card.select_one("h3").get_text(" ", strip=True)) if card.select_one("h3") else ""
-            excerpt = _clean(card.select_one("p").get_text(" ", strip=True)) if card.select_one("p") else ""
+            title = (
+                _clean(card.select_one("h3").get_text(" ", strip=True))
+                if card.select_one("h3")
+                else ""
+            )
+            excerpt = (
+                _clean(card.select_one("p").get_text(" ", strip=True))
+                if card.select_one("p")
+                else ""
+            )
             time_el = card.select_one("time")
             address_el = card.select_one("p.address")
             category_el = card.select_one("span.taxonomy")

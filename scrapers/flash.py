@@ -14,18 +14,17 @@ Each card includes:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
 
-from datetime import datetime, timedelta
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
+
 import re
-from typing import Any, Optional
+from datetime import datetime, timedelta
+from typing import Any
 from urllib.parse import urljoin
 from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
-
 
 SCHEDULE_URL = "https://www.flashdc.com/schedule"
 SITE_URL = "https://www.flashdc.com"
@@ -60,7 +59,7 @@ class FlashScraper(BaseScraper):
         article,
         tz: ZoneInfo,
         now: datetime,
-    ) -> Optional[dict[str, Any]]:
+    ) -> dict[str, Any] | None:
         time_el = article.select_one('time[itemprop="startDate"]')
         title_el = article.select_one('[itemprop="name"]')
         link_el = article.select_one('a[itemprop="url"]')

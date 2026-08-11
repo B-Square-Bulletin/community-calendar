@@ -15,29 +15,31 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import argparse
+import contextlib
 import json
 import logging
 import re
 import time
 from datetime import datetime, timezone
-from typing import Any, Optional
-from urllib.request import urlopen, Request
+from typing import Any
 from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
-    'Accept': 'text/html,application/xhtml+xml',
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+    "Accept": "text/html,application/xhtml+xml",
 }
 
-BASE_URL = 'https://guild.host'
+BASE_URL = "https://guild.host"
 
 
 class GuildHostScraper(BaseScraper):
@@ -47,18 +49,18 @@ class GuildHostScraper(BaseScraper):
     domain = "guild.host"
     timezone = "America/Toronto"
 
-    def __init__(self, group: str, source_name: Optional[str] = None):
+    def __init__(self, group: str, source_name: str | None = None):
         super().__init__()
         self.group = group
         if source_name:
             self.name = source_name
 
-    def _fetch_page(self, url: str) -> Optional[str]:
+    def _fetch_page(self, url: str) -> str | None:
         """Fetch a page with error handling."""
         req = Request(url, headers=HEADERS)
         try:
             with urlopen(req, timeout=30) as resp:
-                return resp.read().decode('utf-8')
+                return resp.read().decode("utf-8")
         except (HTTPError, URLError) as e:
             self.logger.warning(f"Failed to fetch {url}: {e}")
             return None
@@ -76,11 +78,10 @@ class GuildHostScraper(BaseScraper):
                 unique.append(slug)
         return unique
 
-    def _parse_jsonld_event(self, html: str, event_url: str) -> Optional[dict[str, Any]]:
+    def _parse_jsonld_event(self, html: str, event_url: str) -> dict[str, Any] | None:
         """Extract Event JSON-LD from an individual event page."""
         blocks = re.findall(
-            r'<script\s+type="application/ld\+json">(.*?)</script>',
-            html, re.DOTALL
+            r'<script\s+type="application/ld\+json">(.*?)</script>', html, re.DOTALL
         )
 
         for block_str in blocks:
@@ -91,71 +92,69 @@ class GuildHostScraper(BaseScraper):
 
             items = data if isinstance(data, list) else [data]
             for item in items:
-                if not isinstance(item, dict) or item.get('@type') != 'Event':
+                if not isinstance(item, dict) or item.get("@type") != "Event":
                     continue
 
-                start_str = item.get('startDate', '')
+                start_str = item.get("startDate", "")
                 if not start_str:
                     continue
 
                 try:
-                    dtstart = datetime.fromisoformat(start_str.replace('Z', '+00:00'))
+                    dtstart = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
                 except ValueError:
                     continue
 
                 # End date
                 dtend = None
-                end_str = item.get('endDate', '')
+                end_str = item.get("endDate", "")
                 if end_str:
-                    try:
-                        dtend = datetime.fromisoformat(end_str.replace('Z', '+00:00'))
-                    except ValueError:
-                        pass
+                    with contextlib.suppress(ValueError):
+                        dtend = datetime.fromisoformat(end_str.replace("Z", "+00:00"))
 
-                title = item.get('name', 'Untitled')
+                title = item.get("name", "Untitled")
 
                 # Location — guild.host uses an array with VirtualLocation and Place
                 location_parts = []
-                locations = item.get('location', [])
+                locations = item.get("location", [])
                 if isinstance(locations, dict):
                     locations = [locations]
                 for loc in locations:
                     if not isinstance(loc, dict):
                         continue
-                    loc_type = loc.get('@type', '')
-                    if loc_type == 'Place':
-                        place_name = loc.get('name', '')
-                        addr = loc.get('address', {})
+                    loc_type = loc.get("@type", "")
+                    if loc_type == "Place":
+                        place_name = loc.get("name", "")
+                        addr = loc.get("address", {})
                         if isinstance(addr, dict):
                             addr_parts = [
-                                addr.get('streetAddress'),
-                                addr.get('addressLocality'),
-                                addr.get('addressRegion'),
-                                addr.get('postalCode'),
+                                addr.get("streetAddress"),
+                                addr.get("addressLocality"),
+                                addr.get("addressRegion"),
+                                addr.get("postalCode"),
                             ]
-                            addr_str = ', '.join(p for p in addr_parts if p)
+                            addr_str = ", ".join(p for p in addr_parts if p)
                             if place_name and addr_str:
                                 location_parts.append(f"{place_name}, {addr_str}")
                             elif place_name:
                                 location_parts.append(place_name)
                             elif addr_str:
                                 location_parts.append(addr_str)
-                    elif loc_type == 'VirtualLocation':
-                        virtual_url = loc.get('url', '')
+                    elif loc_type == "VirtualLocation":
+                        virtual_url = loc.get("url", "")
                         if virtual_url:
                             location_parts.append(f"Online: {virtual_url}")
 
-                location = ' / '.join(location_parts)
+                location = " / ".join(location_parts)
 
-                description = item.get('description', '')
+                description = item.get("description", "")
 
                 return {
-                    'title': title,
-                    'dtstart': dtstart,
-                    'dtend': dtend,
-                    'location': location,
-                    'description': description,
-                    'url': event_url,
+                    "title": title,
+                    "dtstart": dtstart,
+                    "dtend": dtend,
+                    "location": location,
+                    "description": description,
+                    "url": event_url,
                 }
 
         return None
@@ -189,7 +188,7 @@ class GuildHostScraper(BaseScraper):
             event = self._parse_jsonld_event(event_html, event_url)
             if event:
                 # Skip past events
-                dtstart = event['dtstart']
+                dtstart = event["dtstart"]
                 start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=timezone.utc)
                 if start_aware < now:
                     self.logger.debug(f"Skipping past event: {event['title']}")
@@ -206,10 +205,12 @@ class GuildHostScraper(BaseScraper):
 
 def main():
     parser = argparse.ArgumentParser(description="Scrape guild.host group events")
-    parser.add_argument('--group', required=True, help='Guild.host group slug (e.g., civic-tech-toronto)')
-    parser.add_argument('--name', default='Guild.host', help='Source display name')
-    parser.add_argument('--output', '-o', help='Output ICS file')
-    parser.add_argument('--debug', action='store_true')
+    parser.add_argument(
+        "--group", required=True, help="Guild.host group slug (e.g., civic-tech-toronto)"
+    )
+    parser.add_argument("--name", default="Guild.host", help="Source display name")
+    parser.add_argument("--output", "-o", help="Output ICS file")
+    parser.add_argument("--debug", action="store_true")
     args = parser.parse_args()
 
     if args.debug:
@@ -219,5 +220,5 @@ def main():
     scraper.run(args.output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

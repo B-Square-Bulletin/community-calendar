@@ -9,8 +9,8 @@ Usage:
 import argparse
 import json
 import sys
-import urllib.request
 import urllib.parse
+import urllib.request
 
 SUPABASE_URL = "https://dzpdualvwspgqghrysyz.supabase.co"
 SUPABASE_KEY = "sb_publishable_NnzobdoFNU39fjs84UNq8Q_X45oiMG5"
@@ -121,7 +121,7 @@ def main():
         "@context": "https://schema.org",
         "@type": "ItemList",
         "name": f"Community Calendar: {args.city.title()}"
-              + (f" — {args.category}" if args.category else ""),
+        + (f" — {args.category}" if args.category else ""),
         "numberOfItems": len(events),
         "itemListElement": [
             {

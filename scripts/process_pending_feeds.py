@@ -21,8 +21,8 @@ Usage:
 import json
 import os
 import sys
-import urllib.request
 import urllib.error
+import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
@@ -55,19 +55,21 @@ def parse_pending_feeds(path):
 
         # URL or path line
         url = stripped
-        if url.startswith("https://") or url.startswith("http://"):
+        if url.startswith(("https://", "http://")):
             feed_type = "ics_url"
         elif url.startswith("cities/") or url.endswith(".ics"):
             feed_type = "scraper"
         else:
             continue
 
-        feeds.append({
-            "name": name or url,
-            "url": url,
-            "feed_type": feed_type,
-            "scraper_cmd": scraper_cmd,
-        })
+        feeds.append(
+            {
+                "name": name or url,
+                "url": url,
+                "feed_type": feed_type,
+                "scraper_cmd": scraper_cmd,
+            }
+        )
         name = None
         scraper_cmd = None
 
@@ -188,17 +190,21 @@ def process_city(city, supabase_url, service_key):
 
     if errors == 0:
         write_template(pending_path, city)
-        print(f"  reset pending_feeds.txt to template")
+        print("  reset pending_feeds.txt to template")
     else:
-        print(f"  pending_feeds.txt NOT cleared (errors occurred)")
+        print("  pending_feeds.txt NOT cleared (errors occurred)")
 
     return True
 
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: SUPABASE_URL=... SUPABASE_SERVICE_KEY=... python scripts/process_pending_feeds.py <city>")
-        print("       SUPABASE_URL=... SUPABASE_SERVICE_KEY=... python scripts/process_pending_feeds.py --all")
+        print(
+            "Usage: SUPABASE_URL=... SUPABASE_SERVICE_KEY=... python scripts/process_pending_feeds.py <city>"
+        )
+        print(
+            "       SUPABASE_URL=... SUPABASE_SERVICE_KEY=... python scripts/process_pending_feeds.py --all"
+        )
         sys.exit(1)
 
     supabase_url = os.environ.get("SUPABASE_URL")

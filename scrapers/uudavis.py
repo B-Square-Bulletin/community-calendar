@@ -7,7 +7,9 @@ Uses embedded Google Calendar ICS feeds.
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+from typing import ClassVar
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 from lib import GoogleCalendarScraper
 
@@ -21,7 +23,7 @@ class UUDavisScraper(GoogleCalendarScraper):
     default_url = "https://uudavis.org/calendar/"
 
     # Google Calendar IDs extracted from embedded calendar
-    calendar_ids = [
+    calendar_ids: ClassVar[list[str]] = [
         "uudavis@gmail.com",  # Main worship calendar
         "0p5ed7hbg4p7b4atf3lgjmgic@group.calendar.google.com",
         "l7ct33327vaeffd8iu8ij0hjdg@group.calendar.google.com",
@@ -29,5 +31,5 @@ class UUDavisScraper(GoogleCalendarScraper):
     ]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     UUDavisScraper.main()

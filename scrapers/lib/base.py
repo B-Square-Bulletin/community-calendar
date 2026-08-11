@@ -6,7 +6,7 @@ import os
 import subprocess
 from abc import ABC, abstractmethod
 from datetime import datetime, timedelta
-from typing import Any, Optional
+from typing import Any
 from zoneinfo import ZoneInfo
 
 from icalendar import Calendar, Event
@@ -35,29 +35,30 @@ class BaseScraper(ABC):
     name: str = "Unknown Source"
     domain: str = "example.com"
     timezone: str = "America/Los_Angeles"
-    default_url: Optional[str] = None
+    default_url: str | None = None
 
     def __init__(self):
         self.logger = logging.getLogger(self.__class__.__name__)
-        self.months_ahead = int(os.environ.get('SCRAPE_MONTHS', 6))
+        self.months_ahead = int(os.environ.get("SCRAPE_MONTHS", 6))
 
     @classmethod
     def setup_logging(cls, level: int = logging.INFO):
         """Configure logging for scrapers."""
         logging.basicConfig(
-            level=level,
-            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+            level=level, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
         )
 
     @classmethod
-    def parse_args(cls, description: Optional[str] = None) -> argparse.Namespace:
+    def parse_args(cls, description: str | None = None) -> argparse.Namespace:
         """Parse standard command-line arguments."""
         parser = argparse.ArgumentParser(
-            description=description or f'Scrape events from {cls.name}'
+            description=description or f"Scrape events from {cls.name}"
         )
-        parser.add_argument('--output', '-o', type=str, help='Output filename')
-        parser.add_argument('--default-url', type=str, help='Fallback URL when events have no per-event URL')
-        parser.add_argument('--debug', action='store_true', help='Enable debug logging')
+        parser.add_argument("--output", "-o", type=str, help="Output filename")
+        parser.add_argument(
+            "--default-url", type=str, help="Fallback URL when events have no per-event URL"
+        )
+        parser.add_argument("--debug", action="store_true", help="Enable debug logging")
         return parser.parse_args()
 
     @abstractmethod
@@ -68,15 +69,14 @@ class BaseScraper(ABC):
         Returns list of event dicts with keys:
         - title, dtstart, dtend, url, location, description
         """
-        pass
 
     def create_calendar(self, events: list[dict]) -> Calendar:
         """Create an iCalendar from parsed events."""
         cal = Calendar()
-        cal.add('prodid', f'-//{self.name}//{self.domain}//')
-        cal.add('version', '2.0')
-        cal.add('x-wr-calname', self.name)
-        cal.add('x-wr-timezone', self.timezone)
+        cal.add("prodid", f"-//{self.name}//{self.domain}//")
+        cal.add("version", "2.0")
+        cal.add("x-wr-calname", self.name)
+        cal.add("x-wr-timezone", self.timezone)
 
         for event_data in events:
             event = self.create_event(event_data)
@@ -84,63 +84,62 @@ class BaseScraper(ABC):
                 cal.add_component(event)
 
         return cal
-    
-    def create_event(self, data: dict[str, Any]) -> Optional[Event]:
+
+    def create_event(self, data: dict[str, Any]) -> Event | None:
         """Create an iCalendar Event from event data."""
-        title = data.get('title')
-        dtstart = data.get('dtstart')
-        
+        title = data.get("title")
+        dtstart = data.get("dtstart")
+
         if not title or not dtstart:
             self.logger.warning(f"Skipping event with missing title or dtstart: {data}")
             return None
-        
+
         event = Event()
-        event.add('summary', title)
+        event.add("summary", title)
         # Convert to target timezone then strip tzinfo, setting TZID explicitly
         # as a string to avoid icalendar serializing ZoneInfo objects
-        if hasattr(dtstart, 'tzinfo') and dtstart.tzinfo is not None:
+        if hasattr(dtstart, "tzinfo") and dtstart.tzinfo is not None:
             target_tz = ZoneInfo(self.timezone)
             dtstart = dtstart.astimezone(target_tz)
-            dtend = data.get('dtend') or dtstart
+            dtend = data.get("dtend") or dtstart
             dtend = dtend.astimezone(target_tz)
-            tz_params = {'TZID': self.timezone}
-            event.add('dtstart', dtstart.replace(tzinfo=None), parameters=tz_params)
-            event.add('dtend', dtend.replace(tzinfo=None), parameters=tz_params)
+            tz_params = {"TZID": self.timezone}
+            event.add("dtstart", dtstart.replace(tzinfo=None), parameters=tz_params)
+            event.add("dtend", dtend.replace(tzinfo=None), parameters=tz_params)
         else:
-            event.add('dtstart', dtstart)
-            event.add('dtend', data.get('dtend') or dtstart)
-        
-        url = data.get('url') or self.default_url
-        if url:
-            event.add('url', url)
-        
-        if data.get('location'):
-            event.add('location', data['location'])
-        
-        event.add('description', data.get('description', ''))
-        
-        uid = data.get('uid') or generate_uid(title, dtstart, self.domain)
-        event.add('uid', uid)
-        event.add('x-source', self.name)
+            event.add("dtstart", dtstart)
+            event.add("dtend", data.get("dtend") or dtstart)
 
-        if data.get('image_url'):
-            event.add('attach', data['image_url'],
-                       parameters={'fmttype': 'image/jpeg'})
+        url = data.get("url") or self.default_url
+        if url:
+            event.add("url", url)
+
+        if data.get("location"):
+            event.add("location", data["location"])
+
+        event.add("description", data.get("description", ""))
+
+        uid = data.get("uid") or generate_uid(title, dtstart, self.domain)
+        event.add("uid", uid)
+        event.add("x-source", self.name)
+
+        if data.get("image_url"):
+            event.add("attach", data["image_url"], parameters={"fmttype": "image/jpeg"})
 
         return event
-    
+
     def default_output_filename(self) -> str:
         """Generate default output filename."""
         # Convert name to snake_case
-        name_slug = self.name.lower().replace(' ', '_').replace("'", '')
+        name_slug = self.name.lower().replace(" ", "_").replace("'", "")
         return f"{name_slug}.ics"
 
     def fetch_text_with_curl(
         self,
         url: str,
         *,
-        accept: Optional[str] = None,
-        referer: Optional[str] = None,
+        accept: str | None = None,
+        referer: str | None = None,
         timeout: int = 30,
     ) -> str:
         """Fetch text content via curl for sites that block urllib in CI."""
@@ -156,32 +155,36 @@ class BaseScraper(ABC):
             raise RuntimeError(f"curl fetch failed for {url}: {stderr or result.returncode}")
         return result.stdout
 
-    def run(self, output: Optional[str] = None) -> str:
+    def run(self, output: str | None = None) -> str:
         """Main entry point: fetch events and write calendar."""
         self.logger.info(f"Scraping {self.name}")
 
         events = self.fetch_events()
         cutoff = datetime.now().astimezone() + timedelta(days=self.months_ahead * 31)
         before = len(events)
+
         # Handle both datetime and date objects
         def is_before_cutoff(e):
-            dt = e.get('dtstart')
+            dt = e.get("dtstart")
             if not dt:
                 return False
-            if hasattr(dt, 'tzinfo') and dt.tzinfo is None:
+            if hasattr(dt, "tzinfo") and dt.tzinfo is None:
                 dt = dt.replace(tzinfo=cutoff.tzinfo)
-            elif not hasattr(dt, 'hour'):  # date object, not datetime
+            elif not hasattr(dt, "hour"):  # date object, not datetime
                 dt = datetime.combine(dt, datetime.min.time()).replace(tzinfo=cutoff.tzinfo)
             return dt <= cutoff
+
         events = [e for e in events if is_before_cutoff(e)]
         if len(events) < before:
-            self.logger.info(f"Filtered {before - len(events)} events beyond {self.months_ahead} months out")
+            self.logger.info(
+                f"Filtered {before - len(events)} events beyond {self.months_ahead} months out"
+            )
         self.logger.info(f"Found {len(events)} events")
 
         calendar = self.create_calendar(events)
 
         filename = output or self.default_output_filename()
-        with open(filename, 'wb') as f:
+        with open(filename, "wb") as f:
             f.write(calendar.to_ical())
 
         self.logger.info(f"Written to {filename}")
@@ -197,6 +200,6 @@ class BaseScraper(ABC):
             logging.getLogger().setLevel(logging.DEBUG)
 
         scraper = cls()
-        if getattr(args, 'default_url', None):
+        if getattr(args, "default_url", None):
             scraper.default_url = args.default_url
         scraper.run(args.output)

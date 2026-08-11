@@ -22,23 +22,33 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
 from datetime import datetime, timedelta
-from typing import Any, Optional
+from typing import Any
 from zoneinfo import ZoneInfo
 
 import requests
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
 from lib.utils import DEFAULT_HEADERS
 
-MONTHS = (
-    "January February March April May June "
-    "July August September October November December"
-).split()
+MONTHS = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+]
 
 TIME_RE = re.compile(r"(\d{1,2})(?::(\d{2}))?\s*([ap]m)", re.I)
 
@@ -71,7 +81,7 @@ class ChurchInTetonsScraper(BaseScraper):
         self.logger.info(f"Parsed {len(events)} events")
         return events
 
-    def _parse_article(self, article, now: datetime, tz: ZoneInfo) -> Optional[dict[str, Any]]:
+    def _parse_article(self, article, now: datetime, tz: ZoneInfo) -> dict[str, Any] | None:
         title_el = article.select_one(".event-list-title")
         if not title_el:
             return None
@@ -129,20 +139,25 @@ class ChurchInTetonsScraper(BaseScraper):
             "description": description,
         }
 
-    def _parse_date_text(self, date_el) -> tuple[Optional[str], Optional[str], Optional[int]]:
+    def _parse_date_text(self, date_el) -> tuple[str | None, str | None, int | None]:
         """Parse 'Thursday\\nApril 30' into ('Thursday', 'April', 30)."""
-        lines = [l.strip() for l in date_el.get_text("\n").splitlines() if l.strip()]
+        lines = [line.strip() for line in date_el.get_text("\n").splitlines() if line.strip()]
         if not lines:
             return None, None, None
 
-        day_name: Optional[str] = None
-        month_name: Optional[str] = None
-        day_num: Optional[int] = None
+        day_name: str | None = None
+        month_name: str | None = None
+        day_num: int | None = None
 
         for line in lines:
             if not day_name and line.split()[0] in {
-                "Sunday", "Monday", "Tuesday", "Wednesday",
-                "Thursday", "Friday", "Saturday",
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
             }:
                 day_name = line.split()[0]
                 continue
@@ -152,7 +167,7 @@ class ChurchInTetonsScraper(BaseScraper):
                 day_num = int(m.group(2))
         return day_name, month_name, day_num
 
-    def _parse_time_range(self, text: str) -> tuple[tuple[int, int], Optional[tuple[int, int]]]:
+    def _parse_time_range(self, text: str) -> tuple[tuple[int, int], tuple[int, int] | None]:
         """Parse '6:00 pm - 7:00 pm' or '7:01 pm' into (start, end?)."""
         times: list[tuple[int, int]] = []
         for m in TIME_RE.finditer(text):
@@ -167,8 +182,7 @@ class ChurchInTetonsScraper(BaseScraper):
             return times[0], times[1]
         return times[0], None
 
-    def _infer_date(self, day_name: Optional[str], month_name: str,
-                    day_num: int, now: datetime):
+    def _infer_date(self, day_name: str | None, month_name: str, day_num: int, now: datetime):
         """
         Find the date that matches `month_name day_num` and the optional
         weekday hint, starting from the current year and rolling forward up

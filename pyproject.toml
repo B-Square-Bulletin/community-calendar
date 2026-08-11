@@ -1,0 +1,72 @@
+[project]
+name = "community-calendar"
+version = "0.1.0"
+description = "Community calendar build pipeline: ICS feeds and scrapers merged into events.json"
+requires-python = ">=3.10"
+dependencies = [
+    "beautifulsoup4==4.11.1",
+    "lxml==4.9.1",
+    "html5lib==1.1",
+    "pytz==2022.1",
+    "requests==2.27.1",
+    "urllib3==1.26.9",
+    "feedparser==6.0.12",
+    "icalendar>=5.0.0,<7.0.0",
+    "recurring-ical-events>=3.1.0",
+    "Jinja2==3.1.2",
+    "anthropic>=0.18.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==9.1.1",
+    "pytest-cov==7.1.0",
+    "ruff==0.16.2",
+    "ty==0.0.69",
+    "pyrefly==1.2.0",
+    "pyright==1.1.411",
+    "zuban==0.9.1",
+    "types-beautifulsoup4==4.12.0.20250516",
+    "lxml-stubs==0.5.1",
+    "types-html5lib==1.1.11.20260518",
+    "types-pytz==2026.3.1.20260727",
+    "types-icalendar==6.3.2.20260712",
+]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["legacy"]
+force-exclude = true
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "UP", "B", "SIM", "RUF", "C4", "PIE", "TCH"]
+allowed-confusables = ["–", "—", "’", "‘"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["scrapers"]
+
+[tool.pyright]
+pythonVersion = "3.10"
+venvPath = "."
+venv = ".venv"
+typeCheckingMode = "basic"
+exclude = ["legacy", "graphify-out", ".venv", ".worktrees"]
+
+[tool.ty.environment]
+python-version = "3.10"
+
+[tool.ty.src]
+exclude = ["legacy", "graphify-out", ".venv", ".worktrees"]
+
+[tool.pyrefly]
+project_includes = ["scripts/**", "scrapers/**", "tests/**"]
+project_excludes = ["legacy/**", "graphify-out/**"]
+
+[tool.mypy]
+python_version = "3.10"
+exclude = 'legacy|graphify-out|\.venv'
+ignore_missing_imports = true

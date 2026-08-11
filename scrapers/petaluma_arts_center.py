@@ -6,7 +6,8 @@ Note: the events collection slug is /events-exhibitions, not /events.
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 from lib.squarespace import SquarespaceScraper
 
@@ -18,5 +19,5 @@ class PetalumaArtsCenterScraper(SquarespaceScraper):
     default_location = "Petaluma Arts Center, 230 Lakeville St, Petaluma, CA 94952"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     PetalumaArtsCenterScraper.main()

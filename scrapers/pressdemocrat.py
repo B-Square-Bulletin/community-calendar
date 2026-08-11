@@ -3,5 +3,5 @@
 
 from lib.cityspark import PressDemocratScraper
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     PressDemocratScraper.main()

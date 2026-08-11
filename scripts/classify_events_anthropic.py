@@ -17,8 +17,8 @@ import argparse
 import json
 import os
 import sys
-import urllib.request
 import urllib.parse
+import urllib.request
 from datetime import datetime, timezone
 
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
@@ -28,9 +28,9 @@ if not SUPABASE_URL or not SUPABASE_KEY:
     sys.exit(1)
 ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages"
 
-CATEGORIES_FILE = os.path.join(os.path.dirname(__file__), '..', 'categories.json')
+CATEGORIES_FILE = os.path.join(os.path.dirname(__file__), "..", "categories.json")
 with open(CATEGORIES_FILE) as f:
-    CATEGORIES = [c['name'] for c in json.load(f)]
+    CATEGORIES = [c["name"] for c in json.load(f)]
 
 VALID_CATEGORIES = set(CATEGORIES)
 BATCH_SIZE = 20
@@ -39,10 +39,13 @@ BATCH_SIZE = 20
 def supabase_get(path):
     """GET from Supabase REST API."""
     url = SUPABASE_URL + "/rest/v1/" + path
-    req = urllib.request.Request(url, headers={
-        "apikey": SUPABASE_KEY,
-        "Authorization": "Bearer " + SUPABASE_KEY,
-    })
+    req = urllib.request.Request(
+        url,
+        headers={
+            "apikey": SUPABASE_KEY,
+            "Authorization": "Bearer " + SUPABASE_KEY,
+        },
+    )
     with urllib.request.urlopen(req) as resp:
         return json.loads(resp.read())
 
@@ -53,6 +56,7 @@ def batch_update_categories(updates):
     if not updates:
         return
     import subprocess
+
     conn = os.environ.get("SUPABASE_DB_URL")
     if not conn:
         print("ERROR: SUPABASE_DB_URL env var not set", file=sys.stderr)
@@ -64,7 +68,9 @@ def batch_update_categories(updates):
         escaped = category.replace("'", "''")
         cases.append(f"WHEN {event_id} THEN '{escaped}'")
         ids.append(str(event_id))
-    sql = f"UPDATE events SET category = CASE id {' '.join(cases)} END WHERE id IN ({','.join(ids)});"
+    sql = (
+        f"UPDATE events SET category = CASE id {' '.join(cases)} END WHERE id IN ({','.join(ids)});"
+    )
     result = subprocess.run(["psql", conn, "-c", sql], capture_output=True, text=True)
     if result.returncode != 0:
         print(f"  DB update error: {result.stderr}", file=sys.stderr)
@@ -101,18 +107,24 @@ def build_few_shot(overrides):
 
 def anthropic_call(api_key, model, prompt):
     """Call Anthropic Messages API via urllib."""
-    body = json.dumps({
-        "model": model,
-        "max_tokens": 1024,
-        "temperature": 0,
-        "messages": [{"role": "user", "content": prompt}],
-    }).encode()
+    body = json.dumps(
+        {
+            "model": model,
+            "max_tokens": 1024,
+            "temperature": 0,
+            "messages": [{"role": "user", "content": prompt}],
+        }
+    ).encode()
 
-    req = urllib.request.Request(ANTHROPIC_API_URL, data=body, headers={
-        "x-api-key": api_key,
-        "anthropic-version": "2023-06-01",
-        "Content-Type": "application/json",
-    })
+    req = urllib.request.Request(
+        ANTHROPIC_API_URL,
+        data=body,
+        headers={
+            "x-api-key": api_key,
+            "anthropic-version": "2023-06-01",
+            "Content-Type": "application/json",
+        },
+    )
     with urllib.request.urlopen(req, timeout=120) as resp:
         result = json.loads(resp.read())
     return result["content"][0]["text"].strip()
@@ -128,18 +140,15 @@ def classify_batch(events, few_shot, api_key, model):
         ics_cats = event.get("ics_categories")
         ics_str = ""
         if ics_cats:
-            if isinstance(ics_cats, list):
-                ics_str = ", ".join(ics_cats)
-            else:
-                ics_str = str(ics_cats)
+            ics_str = ", ".join(ics_cats) if isinstance(ics_cats, list) else str(ics_cats)
         event_lines.append(
-            f'{i+1}. Title: "{title}" Location: "{location}"'
-            + (f' ICS tags: "{ics_str}"' if ics_str else '')
-            + (f' Description: "{description}"' if description else '')
+            f'{i + 1}. Title: "{title}" Location: "{location}"'
+            + (f' ICS tags: "{ics_str}"' if ics_str else "")
+            + (f' Description: "{description}"' if description else "")
         )
 
     prompt = f"""Classify each event into exactly one category. Categories:
-{chr(10).join('- ' + c for c in CATEGORIES)}
+{chr(10).join("- " + c for c in CATEGORIES)}
 {few_shot}
 
 Events to classify:
@@ -206,8 +215,7 @@ def main():
     path = (
         "events?select=id,title,location,description,ics_categories,category,source"
         "&category=is.null"
-        "&start_time=gte." + today +
-        "&order=start_time.asc"
+        "&start_time=gte." + today + "&order=start_time.asc"
         "&limit=" + str(args.limit)
     )
     if args.city:
@@ -221,7 +229,8 @@ def main():
         return
 
     # Group by title to avoid re-classifying recurring event instances
-    from collections import defaultdict, Counter
+    from collections import Counter, defaultdict
+
     title_groups = defaultdict(list)
     for event in events:
         title_key = (event.get("title") or "").strip().lower()
@@ -230,12 +239,14 @@ def main():
     # Pick one representative per title group
     representative_events = [group[0] for group in title_groups.values()]
     if len(representative_events) < len(events):
-        print(f"  {len(representative_events)} unique titles (deduplicated from {len(events)} events)")
+        print(
+            f"  {len(representative_events)} unique titles (deduplicated from {len(events)} events)"
+        )
 
     # Classify in batches (using representatives only)
     all_results = []
     for batch_start in range(0, len(representative_events), BATCH_SIZE):
-        batch = representative_events[batch_start:batch_start + BATCH_SIZE]
+        batch = representative_events[batch_start : batch_start + BATCH_SIZE]
         batch_num = batch_start // BATCH_SIZE + 1
         total_batches = (len(representative_events) + BATCH_SIZE - 1) // BATCH_SIZE
         print(f"  Batch {batch_num}/{total_batches} ({len(batch)} events)...", flush=True)
@@ -262,7 +273,9 @@ def main():
 
     # Summary
     print("\n--- Summary ---")
-    print(f"  {len(representative_events)} unique titles classified → {len(all_updates)} total events to update")
+    print(
+        f"  {len(representative_events)} unique titles classified → {len(all_updates)} total events to update"
+    )
     cats = Counter(cat for _, cat in all_results)
     for cat, count in cats.most_common():
         print(f"  {count:4d}  {cat or '(none)'}")

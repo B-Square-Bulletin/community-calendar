@@ -10,25 +10,26 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import argparse
 import logging
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, timezone
+from datetime import datetime
 from typing import Any
-from urllib.request import urlopen, Request
 from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 BASE_URL = "https://www.yohomo.ca"
 HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
-    'Accept': 'text/html,application/xhtml+xml',
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+    "Accept": "text/html,application/xhtml+xml",
 }
 
 
@@ -43,7 +44,7 @@ class YohomoScraper(BaseScraper):
         req = Request(url, headers=HEADERS)
         try:
             with urlopen(req, timeout=30) as resp:
-                return resp.read().decode('utf-8')
+                return resp.read().decode("utf-8")
         except (HTTPError, URLError) as e:
             self.logger.warning(f"Failed to fetch {url}: {e}")
             return None
@@ -65,37 +66,41 @@ class YohomoScraper(BaseScraper):
 
             # Extract date parts from the listing
             # Pattern: day-of-week . month day-number
-            date_section = re.search(r'section-event-row-date(.*?)item-event-hours', item, re.DOTALL)
+            date_section = re.search(
+                r"section-event-row-date(.*?)item-event-hours", item, re.DOTALL
+            )
             if not date_section:
                 continue
 
             date_text = date_section.group(1)
             date_parts = re.findall(r'text-style-allcaps"?>([^<]+)<', date_text)
             # Filter out dots and empty strings
-            date_parts = [p.strip() for p in date_parts if p.strip() and p.strip() != '.']
+            date_parts = [p.strip() for p in date_parts if p.strip() and p.strip() != "."]
 
             # Expected: ['Thu', 'Apr', '16'] or ['Thu', 'Apr 16']
             month_str = None
             day_str = None
             for part in date_parts:
                 # Check for "Apr 16" combined
-                m = re.match(r'(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2})', part)
+                m = re.match(r"(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2})", part)
                 if m:
                     month_str = m.group(1)
                     day_str = m.group(2)
                     break
                 # Check for standalone month
-                if re.match(r'Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec', part):
+                if re.match(r"Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec", part):
                     month_str = part[:3]
                 # Check for standalone day number
-                if re.match(r'^\d{1,2}$', part):
+                if re.match(r"^\d{1,2}$", part):
                     day_str = part
 
             if not month_str or not day_str:
                 continue
 
             # Extract time
-            time_match = re.search(r'item-event-hours.*?text-style-allcaps"?>(\d{1,2}:\d{2}\s*[ap]m)', item, re.DOTALL)
+            time_match = re.search(
+                r'item-event-hours.*?text-style-allcaps"?>(\d{1,2}:\d{2}\s*[ap]m)', item, re.DOTALL
+            )
             time_str = time_match.group(1).strip() if time_match else None
 
             # Parse the date
@@ -118,13 +123,15 @@ class YohomoScraper(BaseScraper):
                     pass
 
             # Title from slug
-            title = slug.replace('/event/', '').replace('-', ' ').title()
+            title = slug.replace("/event/", "").replace("-", " ").title()
 
-            events.append({
-                'slug': slug,
-                'date': event_date,
-                'title': title,
-            })
+            events.append(
+                {
+                    "slug": slug,
+                    "date": event_date,
+                    "title": title,
+                }
+            )
 
         self.logger.info(f"Found {len(events)} events on listing page")
         return events
@@ -138,28 +145,28 @@ class YohomoScraper(BaseScraper):
         result = {}
 
         # Title from detail page (more accurate than slug)
-        title_match = re.search(r'<h1[^>]*>([^<]+)</h1>', html)
+        title_match = re.search(r"<h1[^>]*>([^<]+)</h1>", html)
         if title_match:
-            result['title'] = title_match.group(1).strip()
+            result["title"] = title_match.group(1).strip()
 
         # Venue
-        venue_match = re.search(r'event-item-location[^>]*>\s*<p[^>]*>([^<]+)', html)
+        venue_match = re.search(r"event-item-location[^>]*>\s*<p[^>]*>([^<]+)", html)
         if venue_match:
-            result['venue'] = venue_match.group(1).strip()
+            result["venue"] = venue_match.group(1).strip()
 
         # Address
         addr_match = re.search(r'class="address"[^>]*>([^<]+)', html)
         if addr_match:
-            result['address'] = addr_match.group(1).strip()
+            result["address"] = addr_match.group(1).strip()
 
         # Description — rich text block may contain multiple paragraphs
         desc_match = re.search(r'text-rich-text events[^"]*">(.*?)</div>', html, re.DOTALL)
         if desc_match:
             # Strip HTML tags and collapse whitespace
-            desc = re.sub(r'<[^>]+>', ' ', desc_match.group(1))
-            desc = re.sub(r'\s+', ' ', desc).strip()
+            desc = re.sub(r"<[^>]+>", " ", desc_match.group(1))
+            desc = re.sub(r"\s+", " ", desc).strip()
             if desc:
-                result['description'] = desc
+                result["description"] = desc
 
         return result
 
@@ -174,13 +181,13 @@ class YohomoScraper(BaseScraper):
 
         # Filter to future events
         now = datetime.now()
-        listing = [e for e in listing if e['date'] >= now]
+        listing = [e for e in listing if e["date"] >= now]
         self.logger.info(f"{len(listing)} future events, fetching details...")
 
         # Fetch detail pages in parallel
         details = {}
         with ThreadPoolExecutor(max_workers=10) as executor:
-            futures = {executor.submit(self._fetch_detail, e['slug']): e['slug'] for e in listing}
+            futures = {executor.submit(self._fetch_detail, e["slug"]): e["slug"] for e in listing}
             for future in as_completed(futures):
                 slug = futures[future]
                 try:
@@ -191,21 +198,23 @@ class YohomoScraper(BaseScraper):
         # Build final events
         events = []
         for e in listing:
-            detail = details.get(e['slug'], {})
-            title = detail.get('title', e['title'])
-            venue = detail.get('venue', '')
-            address = detail.get('address', '')
-            location = f"{venue}, {address}".strip(', ') if venue or address else ''
-            description = detail.get('description', '')
+            detail = details.get(e["slug"], {})
+            title = detail.get("title", e["title"])
+            venue = detail.get("venue", "")
+            address = detail.get("address", "")
+            location = f"{venue}, {address}".strip(", ") if venue or address else ""
+            description = detail.get("description", "")
 
-            events.append({
-                'title': title,
-                'dtstart': e['date'],
-                'dtend': None,
-                'location': location,
-                'description': description,
-                'url': f"{BASE_URL}{e['slug']}",
-            })
+            events.append(
+                {
+                    "title": title,
+                    "dtstart": e["date"],
+                    "dtend": None,
+                    "location": location,
+                    "description": description,
+                    "url": f"{BASE_URL}{e['slug']}",
+                }
+            )
 
         self.logger.info(f"Found {len(events)} events with details")
         return events
@@ -213,8 +222,8 @@ class YohomoScraper(BaseScraper):
 
 def main():
     parser = argparse.ArgumentParser(description="Scrape YOHOMO queer events")
-    parser.add_argument('--output', '-o', help='Output ICS file')
-    parser.add_argument('--debug', action='store_true')
+    parser.add_argument("--output", "-o", help="Output ICS file")
+    parser.add_argument("--debug", action="store_true")
     args = parser.parse_args()
     if args.debug:
         logging.getLogger().setLevel(logging.DEBUG)
@@ -222,5 +231,5 @@ def main():
     scraper.run(args.output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

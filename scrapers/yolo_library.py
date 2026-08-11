@@ -8,24 +8,23 @@ Filters to Davis-area branches only.
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import html
 import re
 from datetime import datetime
-from typing import Any, Optional
+from typing import Any
 from zoneinfo import ZoneInfo
 
 import feedparser
-
 from lib.base import BaseScraper
-
 
 # Davis-area branches to include
 DAVIS_BRANCHES = {
-    'Mary L Stephens Davis Branch Library',
-    'Davis Branch Library',
-    'Davis',
+    "Mary L Stephens Davis Branch Library",
+    "Davis Branch Library",
+    "Davis",
 }
 
 
@@ -41,7 +40,7 @@ class YoloLibraryScraper(BaseScraper):
     def fetch_events(self) -> list[dict[str, Any]]:
         """Fetch events from RSS feed."""
         self.logger.info(f"Fetching {self.RSS_URL}")
-        
+
         feed = feedparser.parse(self.RSS_URL)
         self.logger.info(f"Found {len(feed.entries)} entries in RSS feed")
 
@@ -54,25 +53,25 @@ class YoloLibraryScraper(BaseScraper):
         self.logger.info(f"Filtered to {len(events)} Davis-area events")
         return events
 
-    def _parse_entry(self, entry: dict) -> Optional[dict[str, Any]]:
+    def _parse_entry(self, entry: dict) -> dict[str, Any] | None:
         """Parse a single RSS entry into event data."""
         try:
             # Get campus/branch from libcal namespace
-            campus = getattr(entry, 'libcal_campus', '') or ''
-            
+            campus = getattr(entry, "libcal_campus", "") or ""
+
             # Filter to Davis-area branches
             is_davis = any(branch.lower() in campus.lower() for branch in DAVIS_BRANCHES)
-            if not is_davis and 'davis' not in campus.lower():
+            if not is_davis and "davis" not in campus.lower():
                 return None
 
-            title = entry.get('title', '')
+            title = entry.get("title", "")
             if not title:
                 return None
 
             # Parse date and time from libcal namespace
-            date_str = getattr(entry, 'libcal_date', '')
-            start_str = getattr(entry, 'libcal_start', '')
-            end_str = getattr(entry, 'libcal_end', '')
+            date_str = getattr(entry, "libcal_date", "")
+            start_str = getattr(entry, "libcal_start", "")
+            end_str = getattr(entry, "libcal_end", "")
 
             if not date_str or not start_str:
                 return None
@@ -87,24 +86,24 @@ class YoloLibraryScraper(BaseScraper):
                 dt_end = dt_end.replace(tzinfo=tz)
 
             # Location
-            location_room = getattr(entry, 'libcal_location', '') or ''
+            location_room = getattr(entry, "libcal_location", "") or ""
             location = f"{location_room}, {campus}" if location_room else campus
 
             # Description - use libcal description, clean HTML
-            description = getattr(entry, 'libcal_description', '') or ''
+            description = getattr(entry, "libcal_description", "") or ""
             description = html.unescape(description)
-            description = re.sub(r'<[^>]+>', '', description)  # Strip HTML tags
+            description = re.sub(r"<[^>]+>", "", description)  # Strip HTML tags
             description = description.strip()
 
-            url = entry.get('link', '')
+            url = entry.get("link", "")
 
             event = {
-                'title': title,
-                'dtstart': dt_start,
-                'dtend': dt_end,
-                'location': location,
-                'description': description,
-                'url': url,
+                "title": title,
+                "dtstart": dt_start,
+                "dtend": dt_end,
+                "location": location,
+                "description": description,
+                "url": url,
             }
 
             self.logger.info(f"Found event: {title} at {campus}")
@@ -115,5 +114,5 @@ class YoloLibraryScraper(BaseScraper):
             return None
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     YoloLibraryScraper.main()

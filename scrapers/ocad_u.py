@@ -2,7 +2,8 @@
 """Scraper for OCAD University public events and exhibitions."""
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import base64
 import re
@@ -13,7 +14,6 @@ from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
 from icalendar import Calendar
-
 from lib.base import BaseScraper
 
 
@@ -46,7 +46,9 @@ class OCADUScraper(BaseScraper):
 
         return urls
 
-    def parse_calendar_payload(self, soup: BeautifulSoup) -> tuple[datetime | None, datetime | None]:
+    def parse_calendar_payload(
+        self, soup: BeautifulSoup
+    ) -> tuple[datetime | None, datetime | None]:
         add_to_calendar = soup.select_one("a[href^='data:text/calendar'][href*='base64,']")
         if not add_to_calendar:
             return None, None
@@ -87,7 +89,9 @@ class OCADUScraper(BaseScraper):
         if not dtstart:
             return None
 
-        info_panel = soup.select_one(".pageheader--information.desktop-only") or soup.select_one(".pageheader--information.mobile-only")
+        info_panel = soup.select_one(".pageheader--information.desktop-only") or soup.select_one(
+            ".pageheader--information.mobile-only"
+        )
         location = ""
         website_url = ""
         if info_panel:

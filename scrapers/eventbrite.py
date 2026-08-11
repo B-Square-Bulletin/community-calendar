@@ -22,28 +22,29 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import argparse
+import contextlib
+import html as html_mod
 import logging
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import Any, Optional
+from datetime import datetime, timezone
+from typing import Any
+from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
-from lib.jsonld import extract_jsonld_blocks, extract_events_from_blocks, parse_location
+from lib.jsonld import extract_events_from_blocks, extract_jsonld_blocks, parse_location
 
-import html as html_mod
-from datetime import datetime, timezone
-from urllib.request import urlopen, Request
-from urllib.error import HTTPError, URLError
-
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 }
 
 
@@ -58,12 +59,12 @@ class EventbriteScraper(BaseScraper):
         self.name = source_name
         super().__init__()
 
-    def _fetch_page(self, url: str) -> Optional[str]:
+    def _fetch_page(self, url: str) -> str | None:
         """Fetch a URL and return HTML."""
         req = Request(url, headers=HEADERS)
         try:
             with urlopen(req, timeout=30) as resp:
-                return resp.read().decode('utf-8')
+                return resp.read().decode("utf-8")
         except (HTTPError, URLError) as e:
             self.logger.warning(f"Failed to fetch {url}: {e}")
             return None
@@ -78,11 +79,11 @@ class EventbriteScraper(BaseScraper):
         # Extract /e/ event URLs (both absolute and relative)
         pattern = r'(?:https://www\.eventbrite\.com)?(/e/[^"?\s]+)'
         paths = set(re.findall(pattern, html))
-        urls = [f"https://www.eventbrite.com{p}" if p.startswith('/') else p for p in paths]
+        urls = [f"https://www.eventbrite.com{p}" if p.startswith("/") else p for p in paths]
         self.logger.info(f"Discovered {len(urls)} event URLs from organizer page")
         return urls
 
-    def _fetch_event_jsonld(self, url: str) -> Optional[dict[str, Any]]:
+    def _fetch_event_jsonld(self, url: str) -> dict[str, Any] | None:
         """Fetch an individual event page and extract JSON-LD Event data."""
         html = self._fetch_page(url)
         if not html:
@@ -97,13 +98,13 @@ class EventbriteScraper(BaseScraper):
 
         item = events[0]
 
-        title = html_mod.unescape(item.get('name', 'Untitled'))
-        start_str = item.get('startDate', '')
+        title = html_mod.unescape(item.get("name", "Untitled"))
+        start_str = item.get("startDate", "")
         if not start_str:
             return None
 
         try:
-            dtstart = datetime.fromisoformat(start_str.replace('Z', '+00:00'))
+            dtstart = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
         except ValueError:
             self.logger.debug(f"Skipping {title}: bad startDate {start_str}")
             return None
@@ -116,29 +117,27 @@ class EventbriteScraper(BaseScraper):
 
         # End time
         dtend = None
-        end_str = item.get('endDate', '')
+        end_str = item.get("endDate", "")
         if end_str:
-            try:
-                dtend = datetime.fromisoformat(end_str.replace('Z', '+00:00'))
-            except ValueError:
-                pass
+            with contextlib.suppress(ValueError):
+                dtend = datetime.fromisoformat(end_str.replace("Z", "+00:00"))
 
         # Location
-        location = parse_location(item.get('location'), '')
+        location = parse_location(item.get("location"), "")
 
         # Description
-        desc = item.get('description', '') or ''
+        desc = item.get("description", "") or ""
         desc = html_mod.unescape(desc)
-        desc = re.sub(r'<[^>]+>', ' ', desc).strip()
-        desc = re.sub(r'\s+', ' ', desc)
+        desc = re.sub(r"<[^>]+>", " ", desc).strip()
+        desc = re.sub(r"\s+", " ", desc)
 
         return {
-            'title': title,
-            'dtstart': dtstart,
-            'dtend': dtend,
-            'location': location,
-            'description': desc[:500] if desc else '',
-            'url': url,
+            "title": title,
+            "dtstart": dtstart,
+            "dtend": dtend,
+            "location": location,
+            "description": desc[:500] if desc else "",
+            "url": url,
         }
 
     def fetch_events(self) -> list[dict[str, Any]]:
@@ -163,10 +162,10 @@ class EventbriteScraper(BaseScraper):
 
 def main():
     parser = argparse.ArgumentParser(description="Scrape Eventbrite organizer events via JSON-LD")
-    parser.add_argument('--url', required=True, help='Eventbrite organizer URL (/o/slug)')
-    parser.add_argument('--name', required=True, help='Source name')
-    parser.add_argument('--output', '-o', help='Output ICS file')
-    parser.add_argument('--debug', action='store_true')
+    parser.add_argument("--url", required=True, help="Eventbrite organizer URL (/o/slug)")
+    parser.add_argument("--name", required=True, help="Source name")
+    parser.add_argument("--output", "-o", help="Output ICS file")
+    parser.add_argument("--debug", action="store_true")
     args = parser.parse_args()
 
     if args.debug:
@@ -176,5 +175,5 @@ def main():
     scraper.run(args.output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

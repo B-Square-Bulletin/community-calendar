@@ -17,7 +17,7 @@ import json
 import logging
 import re
 from datetime import datetime
-from typing import Any, Optional
+from typing import Any, ClassVar
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
@@ -38,7 +38,7 @@ def _clean_text(text: Any) -> str:
     return html_mod.unescape(text or "").strip()
 
 
-def _extract_json_object(source: str, start: int) -> Optional[tuple[dict[str, Any], int]]:
+def _extract_json_object(source: str, start: int) -> tuple[dict[str, Any], int] | None:
     """Parse the JSON object starting at `start`, handling nested braces."""
     if start < 0 or start >= len(source) or source[start] != "{":
         return None
@@ -65,7 +65,7 @@ def _extract_json_object(source: str, start: int) -> Optional[tuple[dict[str, An
         elif ch == "}":
             depth -= 1
             if depth == 0:
-                snippet = source[start:idx + 1]
+                snippet = source[start : idx + 1]
                 return json.loads(snippet), idx + 1
 
     return None
@@ -75,7 +75,7 @@ class SocialPinpointScraper(BaseScraper):
     """Reusable scraper for Social Pinpoint / Have Your Say event pages."""
 
     page_url: str = ""
-    headers: dict[str, str] = {
+    headers: ClassVar[dict[str, str]] = {
         "User-Agent": "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
         "Accept": "text/html,application/xhtml+xml",
     }
@@ -139,7 +139,7 @@ class SocialPinpointScraper(BaseScraper):
             payload = json.loads(resp.read().decode("utf-8"))
         return payload.get("result", [])
 
-    def _parse_datetime(self, value: str) -> Optional[datetime]:
+    def _parse_datetime(self, value: str) -> datetime | None:
         if not value:
             return None
         try:
@@ -149,7 +149,7 @@ class SocialPinpointScraper(BaseScraper):
         except ValueError:
             return None
 
-    def map_record(self, record: dict[str, Any]) -> Optional[dict[str, Any]]:
+    def map_record(self, record: dict[str, Any]) -> dict[str, Any] | None:
         title = _clean_text(record.get("event_title"))
         dtstart = self._parse_datetime(record.get("event_start_date", ""))
         if not title or not dtstart:
@@ -163,10 +163,7 @@ class SocialPinpointScraper(BaseScraper):
         venue = _clean_text(record.get("event_venue"))
         address = _strip_html((record.get("event_address") or {}).get("address", ""))
         event_type = _clean_text(record.get("event_type"))
-        if venue and address:
-            location = f"{venue}, {address}"
-        else:
-            location = venue or address
+        location = f"{venue}, {address}" if venue and address else venue or address
         if not location and event_type.lower() == "online":
             location = "Online"
 
@@ -195,7 +192,9 @@ class SocialPinpointScraper(BaseScraper):
 
     def fetch_events(self) -> list[dict[str, Any]]:
         html = self.fetch_html(self.page_url)
-        blocks = [block for block in self.extract_block_sets(html) if self.should_include_block(block)]
+        blocks = [
+            block for block in self.extract_block_sets(html) if self.should_include_block(block)
+        ]
         self.logger.info("Found %d eligible event-feed block(s)", len(blocks))
 
         seen_event_ids: set[str] = set()

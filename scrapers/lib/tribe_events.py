@@ -17,9 +17,10 @@ Usage:
         MyEventsScraper.main()
 """
 
+import contextlib
 import re
 from datetime import datetime
-from typing import Any, Optional
+from typing import Any
 from zoneinfo import ZoneInfo
 
 import requests
@@ -28,8 +29,8 @@ from bs4 import BeautifulSoup
 from .base import BaseScraper
 
 HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
-    'Accept': 'application/json',
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
+    "Accept": "application/json",
 }
 
 
@@ -48,8 +49,8 @@ class TribeEventsScraper(BaseScraper):
         per_page: int - Events per page (default 50)
     """
 
-    api_url: str = ''
-    default_location: str = ''
+    api_url: str = ""
+    default_location: str = ""
     max_pages: int = 10
     per_page: int = 50
 
@@ -70,7 +71,7 @@ class TribeEventsScraper(BaseScraper):
                 self.logger.warning(f"Error fetching page {page}: {e}")
                 break
 
-            events = data.get('events', [])
+            events = data.get("events", [])
             if not events:
                 break
 
@@ -79,20 +80,20 @@ class TribeEventsScraper(BaseScraper):
                 if parsed:
                     all_events.append(parsed)
 
-            total_pages = data.get('total_pages', 1)
+            total_pages = data.get("total_pages", 1)
             if page >= total_pages:
                 break
 
         self.logger.info(f"Found {len(all_events)} events")
         return all_events
 
-    def _parse_event(self, item: dict, tz: ZoneInfo) -> Optional[dict[str, Any]]:
+    def _parse_event(self, item: dict, tz: ZoneInfo) -> dict[str, Any] | None:
         """Parse a single event from the Tribe Events API."""
-        title = item.get('title', '')
+        title = item.get("title", "")
         if not title:
             return None
 
-        start_str = item.get('start_date', '')
+        start_str = item.get("start_date", "")
         if not start_str:
             return None
 
@@ -102,41 +103,39 @@ class TribeEventsScraper(BaseScraper):
             return None
 
         dtend = None
-        end_str = item.get('end_date', '')
+        end_str = item.get("end_date", "")
         if end_str:
-            try:
+            with contextlib.suppress(ValueError):
                 dtend = datetime.fromisoformat(end_str).replace(tzinfo=tz)
-            except ValueError:
-                pass
 
         # Location
-        venue = item.get('venue', {}) or {}
+        venue = item.get("venue", {}) or {}
         location_parts = [
-            venue.get('venue', ''),
-            venue.get('address', ''),
-            venue.get('city', ''),
-            venue.get('state', ''),
+            venue.get("venue", ""),
+            venue.get("address", ""),
+            venue.get("city", ""),
+            venue.get("state", ""),
         ]
-        location = ', '.join(p for p in location_parts if p) or self.default_location
+        location = ", ".join(p for p in location_parts if p) or self.default_location
 
         # Description — strip HTML
-        desc_html = item.get('description', '') or ''
-        desc = BeautifulSoup(desc_html, 'html.parser').get_text(strip=True)
-        desc = re.sub(r'\s+', ' ', desc)[:500]
+        desc_html = item.get("description", "") or ""
+        desc = BeautifulSoup(desc_html, "html.parser").get_text(strip=True)
+        desc = re.sub(r"\s+", " ", desc)[:500]
 
         # URL
-        url = item.get('url', '')
+        url = item.get("url", "")
 
         # UID
-        event_id = item.get('id', '')
+        event_id = item.get("id", "")
         uid = f"tribe-{event_id}@{self.domain}" if event_id else None
 
         return {
-            'title': title,
-            'dtstart': dtstart,
-            'dtend': dtend,
-            'url': url,
-            'location': location,
-            'description': desc,
-            'uid': uid,
+            "title": title,
+            "dtstart": dtstart,
+            "dtend": dtend,
+            "url": url,
+            "location": location,
+            "description": desc,
+            "uid": uid,
         }

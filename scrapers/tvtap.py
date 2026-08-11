@@ -12,15 +12,14 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
 
-import json
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
+
 from datetime import datetime, timedelta
-from typing import Any, Optional
+from typing import Any
 from zoneinfo import ZoneInfo
 
 import requests
-
 from lib.base import BaseScraper
 from lib.utils import DEFAULT_HEADERS
 
@@ -71,7 +70,7 @@ class TVTAPScraper(BaseScraper):
 
         return events
 
-    def _parse_date(self, raw: Optional[str], tz: ZoneInfo) -> Optional[datetime]:
+    def _parse_date(self, raw: str | None, tz: ZoneInfo) -> datetime | None:
         if not raw:
             return None
         raw = raw.strip()
@@ -83,7 +82,7 @@ class TVTAPScraper(BaseScraper):
         self.logger.warning(f"Could not parse date: {raw!r}")
         return None
 
-    def _parse_node(self, node: dict, tz: ZoneInfo) -> Optional[dict[str, Any]]:
+    def _parse_node(self, node: dict, tz: ZoneInfo) -> dict[str, Any] | None:
         title = (node.get("title") or "").strip()
         if not title:
             return None

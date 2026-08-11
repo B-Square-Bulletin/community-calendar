@@ -10,9 +10,7 @@ from html import unescape
 from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
-
 
 MONTHS = {
     "january": 1,
@@ -42,6 +40,7 @@ class WaterfrontBIAScraper(BaseScraper):
     timezone = "America/Toronto"
     sitemap_url = "https://waterfrontbia.com/sitemap.xml"
     default_url = "https://waterfrontbia.com/events/"
+
     def fetch_url(self, url: str) -> str:
         return self.fetch_text_with_curl(
             url,
@@ -115,7 +114,9 @@ class WaterfrontBIAScraper(BaseScraper):
         )
         if both:
             sh, sm, sap, eh, em, eap = both.groups()
-            return self._to_24h(int(sh), int(sm or 0), sap), self._to_24h(int(eh), int(em or 0), eap)
+            return self._to_24h(int(sh), int(sm or 0), sap), self._to_24h(
+                int(eh), int(em or 0), eap
+            )
 
         one = re.match(r"(\d{1,2})(?::(\d{2}))?\s*(AM|PM)$", text, re.I)
         if one:
@@ -145,7 +146,7 @@ class WaterfrontBIAScraper(BaseScraper):
 
     def parse_event_page(self, url: str) -> dict | None:
         html = self.fetch_url(url)
-        if 'id="__next_error__"' in html or 'NEXT_NOT_FOUND' in html:
+        if 'id="__next_error__"' in html or "NEXT_NOT_FOUND" in html:
             return None
 
         soup = BeautifulSoup(html, "html.parser")
@@ -153,8 +154,16 @@ class WaterfrontBIAScraper(BaseScraper):
         if not strings:
             return None
 
-        title = _clean(soup.find("meta", property="og:title").get("content", "")) if soup.find("meta", property="og:title") else strings[0]
-        description = _clean(soup.find("meta", attrs={"name": "description"}).get("content", "")) if soup.find("meta", attrs={"name": "description"}) else ""
+        title = (
+            _clean(soup.find("meta", property="og:title").get("content", ""))
+            if soup.find("meta", property="og:title")
+            else strings[0]
+        )
+        description = (
+            _clean(soup.find("meta", attrs={"name": "description"}).get("content", ""))
+            if soup.find("meta", attrs={"name": "description"})
+            else ""
+        )
         date_text = self.extract_labeled_value(strings, "Date")
         time_text = self.extract_labeled_value(strings, "Time")
         location = self.extract_labeled_value(strings, "Location")

@@ -20,52 +20,53 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import json
 import logging
-from datetime import datetime, date, timedelta
-from typing import Any, Optional
-from urllib.parse import urlencode
-from urllib.request import urlopen, Request
+from datetime import date, datetime, timedelta
+from typing import Any
 from urllib.error import HTTPError, URLError
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 from lib.base import BaseScraper
 
 API_URL = "https://www.blogto.com/api/v2/events/"
 HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
-    'Accept': 'application/json',
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+    "Accept": "application/json",
 }
 
 STOP_AFTER_EMPTY_DAYS = 7
 
 
-def _parse_clock(s: str) -> Optional[tuple[int, int]]:
+def _parse_clock(s: str) -> tuple[int, int] | None:
     """Parse '9:00 AM' / '12:30 PM' / '8 PM' into (hour24, minute)."""
     if not s:
         return None
-    s = s.strip().upper().replace('.', '')
+    s = s.strip().upper().replace(".", "")
     ampm = None
-    if s.endswith('AM'):
-        ampm = 'AM'
+    if s.endswith("AM"):
+        ampm = "AM"
         s = s[:-2].strip()
-    elif s.endswith('PM'):
-        ampm = 'PM'
+    elif s.endswith("PM"):
+        ampm = "PM"
         s = s[:-2].strip()
-    if ':' in s:
-        h_str, m_str = s.split(':', 1)
+    if ":" in s:
+        h_str, m_str = s.split(":", 1)
     else:
-        h_str, m_str = s, '0'
+        h_str, m_str = s, "0"
     try:
         h = int(h_str)
         m = int(m_str)
     except ValueError:
         return None
-    if ampm == 'PM' and h < 12:
+    if ampm == "PM" and h < 12:
         h += 12
-    elif ampm == 'AM' and h == 12:
+    elif ampm == "AM" and h == 12:
         h = 0
     if not (0 <= h < 24 and 0 <= m < 60):
         return None
@@ -81,20 +82,20 @@ class BlogToScraper(BaseScraper):
 
     def _fetch_day(self, day: date) -> list[dict[str, Any]]:
         params = {
-            'date': day.isoformat(),
-            'bundle_type': 'medium',
-            'limit': 9999,
-            'offset': 0,
+            "date": day.isoformat(),
+            "bundle_type": "medium",
+            "limit": 9999,
+            "offset": 0,
         }
         url = f"{API_URL}?{urlencode(params)}"
         req = Request(url, headers=HEADERS)
         try:
             with urlopen(req, timeout=30) as resp:
-                payload = json.loads(resp.read().decode('utf-8'))
+                payload = json.loads(resp.read().decode("utf-8"))
         except (HTTPError, URLError) as e:
             self.logger.warning(f"Failed to fetch {day}: {e}")
             return []
-        return payload.get('results', []) or []
+        return payload.get("results", []) or []
 
     def fetch_events(self) -> list[dict[str, Any]]:
         tz = ZoneInfo(self.timezone)
@@ -122,17 +123,17 @@ class BlogToScraper(BaseScraper):
             empty_streak = 0
 
             for r in results:
-                event_id = r.get('id')
+                event_id = r.get("id")
                 if event_id is None or event_id in seen:
                     continue
 
-                title = r.get('title')
+                title = r.get("title")
                 if not title:
                     continue
 
-                all_day = bool(r.get('all_day'))
-                start_clock = _parse_clock(r.get('start_time') or '')
-                end_clock = _parse_clock(r.get('end_time') or '')
+                all_day = bool(r.get("all_day"))
+                start_clock = _parse_clock(r.get("start_time") or "")
+                end_clock = _parse_clock(r.get("end_time") or "")
 
                 if all_day or not start_clock:
                     dtstart: Any = day
@@ -149,25 +150,23 @@ class BlogToScraper(BaseScraper):
                     else:
                         dtend = dtstart + timedelta(hours=2)
 
-                venue = r.get('venue_name') or ''
-                description = r.get('description_stripped') or ''
-                share_url = r.get('share_url') or ''
-                image_url = r.get('image_url') or r.get('hub_page_image_url') or ''
+                venue = r.get("venue_name") or ""
+                description = r.get("description_stripped") or ""
+                share_url = r.get("share_url") or ""
+                image_url = r.get("image_url") or r.get("hub_page_image_url") or ""
 
                 seen[event_id] = {
-                    'title': title,
-                    'dtstart': dtstart,
-                    'dtend': dtend,
-                    'location': venue,
-                    'description': description,
-                    'url': share_url,
-                    'image_url': image_url,
-                    'uid': f"blogto-{event_id}@blogto.com",
+                    "title": title,
+                    "dtstart": dtstart,
+                    "dtend": dtend,
+                    "location": venue,
+                    "description": description,
+                    "url": share_url,
+                    "image_url": image_url,
+                    "uid": f"blogto-{event_id}@blogto.com",
                 }
 
-        self.logger.info(
-            f"Walked {days_walked} days, collected {len(seen)} unique events"
-        )
+        self.logger.info(f"Walked {days_walked} days, collected {len(seen)} unique events")
         return list(seen.values())
 
 
@@ -179,5 +178,5 @@ def main():
     BlogToScraper().run(args.output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

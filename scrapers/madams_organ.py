@@ -7,18 +7,17 @@ with MEC-specific namespaced fields for start/end date and time.
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
 
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
+
+import re
 from datetime import datetime, timedelta
 from html import unescape
-import re
-from typing import Any, Optional
+from typing import Any
 from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
-
 from lib.rss import RssScraper
-
 
 RSS_URL = "https://madamsorgan.com/events/feed/"
 LOCATION = "Madam's Organ Blues Bar, 2461 18th Street NW, Washington, DC 20009"
@@ -31,7 +30,7 @@ class MadamsOrganScraper(RssScraper):
     timezone = "America/New_York"
     default_url = "https://madamsorgan.com/events/"
 
-    def parse_entry(self, entry: dict) -> Optional[dict[str, Any]]:
+    def parse_entry(self, entry: dict) -> dict[str, Any] | None:
         title = (entry.get("title") or "").strip()
         start_date = (entry.get("mec_startdate") or "").strip()
         start_hour = (entry.get("mec_starthour") or "").strip()
@@ -64,7 +63,7 @@ class MadamsOrganScraper(RssScraper):
         }
 
     @staticmethod
-    def _parse_datetime(date_str: str, time_str: str, tz: ZoneInfo) -> Optional[datetime]:
+    def _parse_datetime(date_str: str, time_str: str, tz: ZoneInfo) -> datetime | None:
         try:
             base = datetime.strptime(date_str, "%Y-%m-%d")
             tm = datetime.strptime(time_str.lower(), "%I:%M %p")

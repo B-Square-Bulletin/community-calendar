@@ -25,22 +25,23 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import argparse
 import html as html_mod
 import logging
 import re
 from datetime import datetime, timedelta
-from typing import Any, Optional
+from typing import Any
 from zoneinfo import ZoneInfo
 
 from lib.tribe_events import TribeEventsScraper
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
-TIME_RE = re.compile(r'\b(\d{1,2})(?::(\d{2}))?\s*([ap])\.?m\.?\b', re.IGNORECASE)
+TIME_RE = re.compile(r"\b(\d{1,2})(?::(\d{2}))?\s*([ap])\.?m\.?\b", re.IGNORECASE)
 
 
 def extract_times(text: str) -> list[tuple[int, int]]:
@@ -51,9 +52,9 @@ def extract_times(text: str) -> list[tuple[int, int]]:
         minute = int(m.group(2) or 0)
         if not (1 <= hour <= 12) or minute > 59:
             continue
-        if m.group(3).lower() == 'p' and hour != 12:
+        if m.group(3).lower() == "p" and hour != 12:
             hour += 12
-        elif m.group(3).lower() == 'a' and hour == 12:
+        elif m.group(3).lower() == "a" and hour == 12:
             hour = 0
         times.append((hour, minute))
     return times
@@ -68,16 +69,16 @@ class BloomingtonSymphonyScraper(TribeEventsScraper):
     timezone = "America/Indiana/Indianapolis"
     default_location = "Buskirk-Chumley Theater, 114 E Kirkwood Ave, Bloomington, IN 47408"
 
-    def _parse_event(self, item: dict, tz: ZoneInfo) -> Optional[dict[str, Any]]:
+    def _parse_event(self, item: dict, tz: ZoneInfo) -> dict[str, Any] | None:
         parsed = super()._parse_event(item, tz)
         if not parsed:
             return None
 
         # The shared lib leaves HTML entities in titles (e.g. &#8211;).
-        parsed['title'] = html_mod.unescape(parsed['title'])
-        title = parsed['title']
+        parsed["title"] = html_mod.unescape(parsed["title"])
+        title = parsed["title"]
 
-        if item.get('all_day'):
+        if item.get("all_day"):
             fixed = self._fix_all_day(parsed, item, tz)
             if fixed is None:
                 return None
@@ -85,8 +86,8 @@ class BloomingtonSymphonyScraper(TribeEventsScraper):
 
         # Skip past events.
         now = datetime.now(tz)
-        end = parsed.get('dtend') or parsed['dtstart']
-        if hasattr(end, 'hour'):
+        end = parsed.get("dtend") or parsed["dtstart"]
+        if hasattr(end, "hour"):
             if end < now:
                 self.logger.debug(f"Skipping past event: {title!r}")
                 return None
@@ -97,43 +98,47 @@ class BloomingtonSymphonyScraper(TribeEventsScraper):
 
         return parsed
 
-    def _fix_all_day(self, parsed: dict[str, Any], item: dict,
-                     tz: ZoneInfo) -> Optional[dict[str, Any]]:
+    def _fix_all_day(
+        self, parsed: dict[str, Any], item: dict, tz: ZoneInfo
+    ) -> dict[str, Any] | None:
         """All-day Tribe entries here are really timed concerts with the
         showtime in the title (e.g. "..., 5pm and 8pm at Buskirk-Chumley
         Theater"). Recover the first showtime; otherwise emit a genuine
         all-day date rather than a fake midnight datetime."""
-        title = parsed['title']
-        desc = parsed.get('description') or ''
+        title = parsed["title"]
+        desc = parsed.get("description") or ""
         times = extract_times(title) or extract_times(desc)
-        day = parsed['dtstart'].date()
+        day = parsed["dtstart"].date()
 
         if times:
             hour, minute = times[0]
-            parsed['dtstart'] = datetime(day.year, day.month, day.day, hour, minute, tzinfo=tz)
-            parsed['dtend'] = parsed['dtstart'] + timedelta(minutes=90)
+            parsed["dtstart"] = datetime(day.year, day.month, day.day, hour, minute, tzinfo=tz)
+            parsed["dtend"] = parsed["dtstart"] + timedelta(minutes=90)
             if len(times) > 1:
-                extra = ', '.join(
+                extra = ", ".join(
                     f"{(h - 12) if h > 12 else (h or 12)}:{m:02d}{'pm' if h >= 12 else 'am'}"
-                    for h, m in times)
+                    for h, m in times
+                )
                 note = f"Showings at {extra}."
-                if 'showing' not in desc.lower():
-                    parsed['description'] = f"{desc} {note}".strip()[:500]
+                if "showing" not in desc.lower():
+                    parsed["description"] = f"{desc} {note}".strip()[:500]
             self.logger.info(
-                f"All-day entry {title!r}: recovered showtime {times[0][0]:02d}:{times[0][1]:02d}")
+                f"All-day entry {title!r}: recovered showtime {times[0][0]:02d}:{times[0][1]:02d}"
+            )
         else:
             # True all-day: date objects (DTEND exclusive).
-            parsed['dtstart'] = day
-            parsed['dtend'] = day + timedelta(days=1)
+            parsed["dtstart"] = day
+            parsed["dtend"] = day + timedelta(days=1)
             self.logger.info(f"All-day entry {title!r}: no showtime found, emitting as all-day")
         return parsed
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Scrape Bloomington Symphony Orchestra (Indiana) concerts")
-    parser.add_argument('--output', '-o', help='Output ICS file')
-    parser.add_argument('--debug', action='store_true')
+        description="Scrape Bloomington Symphony Orchestra (Indiana) concerts"
+    )
+    parser.add_argument("--output", "-o", help="Output ICS file")
+    parser.add_argument("--debug", action="store_true")
     args = parser.parse_args()
 
     if args.debug:
@@ -143,5 +148,5 @@ def main():
     scraper.run(args.output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

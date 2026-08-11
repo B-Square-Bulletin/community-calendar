@@ -67,7 +67,7 @@ Examples:
 seen_uids = set()
 uid_deduped = []
 for event in all_events:
-    uid_match = re.search(r'UID:([^\r\n]+)', event['content'])
+    uid_match = re.search(r"UID:([^\r\n]+)", event["content"])
     if uid_match:
         uid = uid_match.group(1)
         if uid not in seen_uids:
@@ -266,12 +266,12 @@ Rather than per-city policy files, we use a simple global rule: **primary source
 
 ```python
 AGGREGATORS = {
-    'North Bay Bohemian',
-    'Press Democrat',
-    'Creative Sonoma',
-    'GoLocal Cooperative',
-    'NOW Toronto',
-    'Toronto Events (Tockify)',
+    "North Bay Bohemian",
+    "Press Democrat",
+    "Creative Sonoma",
+    "GoLocal Cooperative",
+    "NOW Toronto",
+    "Toronto Events (Tockify)",
 }
 ```
 
@@ -486,25 +486,25 @@ class BaseScraper:
     def __init__(self, city=None):
         self.city = city
         self.policy = self.load_policy(city) if city else {}
-    
+
     def load_policy(self, city):
-        policy_file = Path(f'cities/{city}/policy.json')
+        policy_file = Path(f"cities/{city}/policy.json")
         if policy_file.exists():
             return json.loads(policy_file.read_text())
         return {}
-    
+
     def should_include_event(self, event):
         """Apply policy filters before yielding event."""
         # Geo filter
-        if self.policy.get('geo', {}).get('allowed_cities'):
-            if not self.location_matches_policy(event.get('location')):
+        if self.policy.get("geo", {}).get("allowed_cities"):
+            if not self.location_matches_policy(event.get("location")):
                 return False
-        
+
         # Quality filter
-        quality = self.policy.get('quality', {})
-        if quality.get('require_location') and not event.get('location'):
+        quality = self.policy.get("quality", {})
+        if quality.get("require_location") and not event.get("location"):
             return False
-        
+
         return True
 ```
 

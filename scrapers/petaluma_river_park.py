@@ -6,7 +6,8 @@ Community park events including weekly walks, markets, and fitness classes.
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 from lib.squarespace import SquarespaceScraper
 
@@ -18,5 +19,5 @@ class PetalumaRiverParkScraper(SquarespaceScraper):
     default_location = "Petaluma River Park, Petaluma, CA"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     PetalumaRiverParkScraper.main()

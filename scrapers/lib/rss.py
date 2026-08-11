@@ -1,9 +1,8 @@
 """RSS feed scraper base class."""
 
-import logging
 from abc import abstractmethod
 from datetime import datetime
-from typing import Any, Optional
+from typing import Any
 from zoneinfo import ZoneInfo
 
 import feedparser
@@ -43,7 +42,7 @@ class RssScraper(BaseScraper):
         return events
 
     @abstractmethod
-    def parse_entry(self, entry: dict) -> Optional[dict[str, Any]]:
+    def parse_entry(self, entry: dict) -> dict[str, Any] | None:
         """
         Parse a single RSS entry into event data.
 
@@ -51,30 +50,29 @@ class RssScraper(BaseScraper):
 
         Returns dict with: title, dtstart, dtend, url, location, description
         """
-        pass
-    
-    def parse_rss_date(self, entry: dict) -> Optional[datetime]:
+
+    def parse_rss_date(self, entry: dict) -> datetime | None:
         """
         Parse date from RSS entry's published_parsed or published field.
         Returns datetime in local timezone.
         """
         tz = ZoneInfo(self.timezone)
-        
+
         # Try parsed tuple first
-        if entry.get('published_parsed'):
+        if entry.get("published_parsed"):
             dt_tuple = entry.published_parsed
-            dt_utc = datetime(*dt_tuple[:6], tzinfo=ZoneInfo('UTC'))
+            dt_utc = datetime(*dt_tuple[:6], tzinfo=ZoneInfo("UTC"))
             return dt_utc.astimezone(tz)
-        
+
         # Try raw string
-        pub_date = entry.get('published')
+        pub_date = entry.get("published")
         if pub_date:
             try:
                 # Common RSS format: "Sat, 07 Feb 2026 16:30:00 GMT"
                 dt_utc = datetime.strptime(pub_date, "%a, %d %b %Y %H:%M:%S %Z")
-                dt_utc = dt_utc.replace(tzinfo=ZoneInfo('UTC'))
+                dt_utc = dt_utc.replace(tzinfo=ZoneInfo("UTC"))
                 return dt_utc.astimezone(tz)
             except ValueError:
                 pass
-        
+
         return None

@@ -6,10 +6,11 @@ https://open.toronto.ca/dataset/city-council-and-committees-meeting-schedule-rep
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 from datetime import datetime
-from typing import Any, Optional
+from typing import Any
 from zoneinfo import ZoneInfo
 
 from lib.ckan import CKANScraper
@@ -28,20 +29,20 @@ class TorontoMeetingsScraper(CKANScraper):
     def build_sort(self) -> str:
         return "Date asc"
 
-    def map_record(self, record: dict) -> Optional[dict[str, Any]]:
-        committee = record.get('Committee', '')
-        date_str = record.get('Date', '')
-        start_time = record.get('Start Time', '')
-        end_time = record.get('End Time', '')
-        location = record.get('Location', '')
-        mtg_num = record.get('MTG #', '')
+    def map_record(self, record: dict) -> dict[str, Any] | None:
+        committee = record.get("Committee", "")
+        date_str = record.get("Date", "")
+        start_time = record.get("Start Time", "")
+        end_time = record.get("End Time", "")
+        location = record.get("Location", "")
+        mtg_num = record.get("MTG #", "")
 
         if not date_str or not committee:
             return None
 
         # Parse date (YYYY-MM-DD)
         try:
-            date = datetime.strptime(date_str, '%Y-%m-%d')
+            date = datetime.strptime(date_str, "%Y-%m-%d")
         except ValueError:
             self.logger.warning(f"Unparseable date: {date_str}")
             return None
@@ -59,12 +60,12 @@ class TorontoMeetingsScraper(CKANScraper):
             title = f"{committee} — Meeting #{mtg_num}"
 
         return {
-            'title': title,
-            'dtstart': dtstart,
-            'dtend': dtend,
-            'location': location,
-            'url': 'https://www.toronto.ca/city-government/council/',
-            'description': f"Committee: {committee}",
+            "title": title,
+            "dtstart": dtstart,
+            "dtend": dtend,
+            "location": location,
+            "url": "https://www.toronto.ca/city-government/council/",
+            "description": f"Committee: {committee}",
         }
 
     def _parse_time(self, date: datetime, time_str: str) -> datetime:
@@ -74,7 +75,7 @@ class TorontoMeetingsScraper(CKANScraper):
 
         # Handle inconsistent format: "13:30 PM" should just be 13:30
         time_str = time_str.strip()
-        for fmt in ('%I:%M %p', '%H:%M %p', '%H:%M'):
+        for fmt in ("%I:%M %p", "%H:%M %p", "%H:%M"):
             try:
                 t = datetime.strptime(time_str, fmt)
                 return date.replace(hour=t.hour, minute=t.minute, tzinfo=TZ)
@@ -84,5 +85,5 @@ class TorontoMeetingsScraper(CKANScraper):
         return date.replace(hour=9, minute=0, tzinfo=TZ)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     TorontoMeetingsScraper.main()

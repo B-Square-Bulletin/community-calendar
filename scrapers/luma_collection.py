@@ -16,19 +16,19 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import argparse
 import json
 import logging
 import re
 from datetime import datetime, timezone
-from typing import Any, Optional
+from typing import Any
 
 from lib import BaseScraper
 
-
-CALENDAR_APP_ARG_RE = re.compile(r'app-argument=luma://calendar/(cal-[A-Za-z0-9]+)')
+CALENDAR_APP_ARG_RE = re.compile(r"app-argument=luma://calendar/(cal-[A-Za-z0-9]+)")
 CALENDAR_API_ID_RE = re.compile(r'"calendar_api_id":"(cal-[A-Za-z0-9]+)"')
 API_URL = "https://api2.luma.com/calendar/get-items"
 
@@ -39,7 +39,7 @@ def _names(value: Any) -> list[str]:
     names = []
     for item in items:
         if isinstance(item, dict):
-            name = str(item.get('name', '')).strip()
+            name = str(item.get("name", "")).strip()
             if name and name not in names:
                 names.append(name)
         elif isinstance(item, str):
@@ -72,7 +72,7 @@ def _location_string(value: Any) -> str:
     return base
 
 
-def _iso_datetime(value: Any) -> Optional[datetime]:
+def _iso_datetime(value: Any) -> datetime | None:
     text = _clean_text(value)
     if not text:
         return None
@@ -82,16 +82,16 @@ def _iso_datetime(value: Any) -> Optional[datetime]:
         return None
 
 
-def _event_url(value: Any) -> Optional[str]:
+def _event_url(value: Any) -> str | None:
     text = _clean_text(value)
     if not text:
         return None
-    if text.startswith("http://") or text.startswith("https://"):
+    if text.startswith(("http://", "https://")):
         return text
     return f"https://luma.com/{text.lstrip('/')}"
 
 
-def _price_text(ticket_info: Any) -> Optional[str]:
+def _price_text(ticket_info: Any) -> str | None:
     if not isinstance(ticket_info, dict):
         return None
     if ticket_info.get("is_free"):
@@ -126,9 +126,9 @@ class LumaCollectionScraper(BaseScraper):
     def __init__(
         self,
         url: str,
-        source_name: Optional[str] = None,
+        source_name: str | None = None,
         timezone_name: str = "America/Toronto",
-        default_url: Optional[str] = None,
+        default_url: str | None = None,
         pagination_limit: int = 100,
     ):
         super().__init__()
@@ -170,7 +170,7 @@ class LumaCollectionScraper(BaseScraper):
         )
         return events
 
-    def _extract_calendar_api_id(self, html_text: str) -> Optional[str]:
+    def _extract_calendar_api_id(self, html_text: str) -> str | None:
         for pattern in (CALENDAR_APP_ARG_RE, CALENDAR_API_ID_RE):
             match = pattern.search(html_text)
             if match:
@@ -179,7 +179,7 @@ class LumaCollectionScraper(BaseScraper):
 
     def _fetch_entries(self, calendar_api_id: str) -> list[dict[str, Any]]:
         entries: list[dict[str, Any]] = []
-        cursor: Optional[str] = None
+        cursor: str | None = None
 
         while True:
             params = [
@@ -210,7 +210,7 @@ class LumaCollectionScraper(BaseScraper):
 
         return entries
 
-    def _parse_entry(self, item: Any, now: datetime) -> Optional[dict[str, Any]]:
+    def _parse_entry(self, item: Any, now: datetime) -> dict[str, Any] | None:
         if not isinstance(item, dict):
             return None
 
@@ -262,9 +262,15 @@ def main():
     parser = argparse.ArgumentParser(description="Scrape Luma collection pages")
     parser.add_argument("--url", required=True, help="Luma collection page URL")
     parser.add_argument("--name", default="Luma Collection", help="Source display name")
-    parser.add_argument("--timezone", default="America/Toronto", help="IANA timezone for emitted ICS")
-    parser.add_argument("--default-url", help="Explicit fallback URL when a specific event URL is missing")
-    parser.add_argument("--pagination-limit", type=int, default=100, help="Items to request per API page")
+    parser.add_argument(
+        "--timezone", default="America/Toronto", help="IANA timezone for emitted ICS"
+    )
+    parser.add_argument(
+        "--default-url", help="Explicit fallback URL when a specific event URL is missing"
+    )
+    parser.add_argument(
+        "--pagination-limit", type=int, default=100, help="Items to request per API page"
+    )
     parser.add_argument("--output", "-o", help="Output ICS file")
     parser.add_argument("--debug", action="store_true")
     args = parser.parse_args()

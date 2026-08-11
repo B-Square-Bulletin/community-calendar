@@ -1,7 +1,7 @@
 """Generic Bibliocommons events scraper base."""
 
 from datetime import datetime, timedelta
-from typing import Any, Optional
+from typing import Any, ClassVar
 from zoneinfo import ZoneInfo
 
 import requests
@@ -29,12 +29,14 @@ class BibliocommonsEventsScraper(BaseScraper):
     request_timeout: int = 30
 
     # Optional allow-list filters applied client-side on event definition IDs
-    audience_ids: list[str] = []
-    type_ids: list[str] = []
-    program_ids: list[str] = []
-    language_ids: list[str] = []
+    audience_ids: ClassVar[list[str]] = []
+    type_ids: ClassVar[list[str]] = []
+    program_ids: ClassVar[list[str]] = []
+    language_ids: ClassVar[list[str]] = []
 
-    headers = {"User-Agent": "Mozilla/5.0 (compatible; community-calendar/1.0)"}
+    headers: ClassVar[dict[str, str]] = {
+        "User-Agent": "Mozilla/5.0 (compatible; community-calendar/1.0)"
+    }
 
     def fetch_events(self) -> list[dict[str, Any]]:
         if not self.library_slug:
@@ -96,7 +98,7 @@ class BibliocommonsEventsScraper(BaseScraper):
         self.logger.info(f"Collected {len(events)} Bibliocommons events ({self.library_slug})")
         return events
 
-    def _fetch_page(self, base_url: str, page: int) -> Optional[dict[str, Any]]:
+    def _fetch_page(self, base_url: str, page: int) -> dict[str, Any] | None:
         try:
             resp = requests.get(
                 base_url,
@@ -142,7 +144,7 @@ class BibliocommonsEventsScraper(BaseScraper):
         definition: dict[str, Any],
         location_entities: dict[str, Any],
         tz: ZoneInfo,
-    ) -> Optional[dict[str, Any]]:
+    ) -> dict[str, Any] | None:
         title = (definition.get("title") or "").strip()
         if not title:
             return None
@@ -168,7 +170,7 @@ class BibliocommonsEventsScraper(BaseScraper):
             "url": f"https://{self.library_slug}.bibliocommons.com/v2/events/{event_id}",
         }
 
-    def _parse_dt(self, value: Any, tz: ZoneInfo) -> Optional[datetime]:
+    def _parse_dt(self, value: Any, tz: ZoneInfo) -> datetime | None:
         if not value or not isinstance(value, str):
             return None
         s = value.strip().replace("Z", "+00:00")
@@ -206,4 +208,3 @@ class BibliocommonsEventsScraper(BaseScraper):
             return ""
         soup = BeautifulSoup(raw, "html.parser")
         return soup.get_text("\n", strip=True)
-

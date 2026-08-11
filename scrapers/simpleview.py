@@ -34,7 +34,8 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import argparse
 import html as html_mod
@@ -44,25 +45,24 @@ import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date, datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
-from typing import Any, Optional
-from urllib.parse import urlparse
-from urllib.request import urlopen, Request
+from typing import Any
 from urllib.error import HTTPError, URLError
-from zoneinfo import ZoneInfo
+from urllib.parse import urlparse
+from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
-from lib.jsonld import extract_jsonld_blocks, extract_events_from_blocks, parse_location
+from lib.jsonld import extract_events_from_blocks, extract_jsonld_blocks, parse_location
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 HEADERS = {
-    'User-Agent': (
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
-        'AppleWebKit/537.36 (KHTML, like Gecko) '
-        'Chrome/120.0.0.0 Safari/537.36'
+    "User-Agent": (
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/120.0.0.0 Safari/537.36"
     ),
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 }
 
 
@@ -73,13 +73,13 @@ class SimpleviewScraper(BaseScraper):
         self,
         base_url: str,
         source_name: str,
-        tz: str = 'America/Indiana/Indianapolis',
-        default_location: str = '',
-        towns: Optional[list[str]] = None,
+        tz: str = "America/Indiana/Indianapolis",
+        default_location: str = "",
+        towns: list[str] | None = None,
     ):
-        self.base_url = base_url.rstrip('/')
+        self.base_url = base_url.rstrip("/")
         self.name = source_name
-        self.domain = urlparse(base_url).netloc.removeprefix('www.')
+        self.domain = urlparse(base_url).netloc.removeprefix("www.")
         self.timezone = tz
         self.default_location = default_location
         # Normalise town filter to lower-case for case-insensitive matching.
@@ -90,11 +90,11 @@ class SimpleviewScraper(BaseScraper):
     # HTTP helpers
     # ------------------------------------------------------------------
 
-    def _fetch(self, url: str) -> Optional[str]:
+    def _fetch(self, url: str) -> str | None:
         req = Request(url, headers=HEADERS)
         try:
             with urlopen(req, timeout=30) as resp:
-                return resp.read().decode('utf-8', errors='replace')
+                return resp.read().decode("utf-8", errors="replace")
         except (HTTPError, URLError) as exc:
             self.logger.warning(f"Failed to fetch {url}: {exc}")
             return None
@@ -126,15 +126,15 @@ class SimpleviewScraper(BaseScraper):
         skipped_past = 0
         skipped_town = 0
 
-        for item in root.findall('.//item'):
-            link_el = item.find('link')
+        for item in root.findall(".//item"):
+            link_el = item.find("link")
             if link_el is None or not link_el.text:
                 continue
             url = link_el.text.strip()
 
             # pubDate is the event END date (23:59:59).  If it's in the past
             # the event has ended — skip without fetching the detail page.
-            pub_el = item.find('pubDate')
+            pub_el = item.find("pubDate")
             if pub_el is not None and pub_el.text:
                 try:
                     pub_dt = parsedate_to_datetime(pub_el.text)
@@ -146,17 +146,16 @@ class SimpleviewScraper(BaseScraper):
 
             # Categories: used for town filtering.
             categories = []
-            for cat_el in item.findall('category'):
-                text = cat_el.text or ''
+            for cat_el in item.findall("category"):
+                text = cat_el.text or ""
                 categories.append(text.strip().lower())
 
             # Town filter: keep item if ANY category matches ANY requested town.
-            if self.towns:
-                if not any(town in cat for cat in categories for town in self.towns):
-                    skipped_town += 1
-                    continue
+            if self.towns and not any(town in cat for cat in categories for town in self.towns):
+                skipped_town += 1
+                continue
 
-            items.append({'url': url, 'categories': categories})
+            items.append({"url": url, "categories": categories})
 
         self.logger.info(
             f"RSS: {len(items)} items kept "
@@ -168,9 +167,9 @@ class SimpleviewScraper(BaseScraper):
     # Detail-page JSON-LD parsing
     # ------------------------------------------------------------------
 
-    def _parse_detail(self, item: dict) -> Optional[dict[str, Any]]:
+    def _parse_detail(self, item: dict) -> dict[str, Any] | None:
         """Fetch a detail page and return an event dict, or None."""
-        url = item['url']
+        url = item["url"]
         html = self._fetch(url)
         if not html:
             return None
@@ -183,8 +182,8 @@ class SimpleviewScraper(BaseScraper):
 
         data = events[0]
 
-        title = html_mod.unescape(data.get('name', 'Untitled'))
-        start_str = data.get('startDate', '')
+        title = html_mod.unescape(data.get("name", "Untitled"))
+        start_str = data.get("startDate", "")
         if not start_str:
             self.logger.debug(f"No startDate at {url}")
             return None
@@ -201,8 +200,8 @@ class SimpleviewScraper(BaseScraper):
         if _is_past(dtstart):
             return None
 
-        dtend: Optional[date] = None
-        end_str = data.get('endDate', '')
+        dtend: date | None = None
+        end_str = data.get("endDate", "")
         if end_str:
             try:
                 dtend_raw = _parse_date_or_datetime(end_str)
@@ -215,20 +214,20 @@ class SimpleviewScraper(BaseScraper):
             except ValueError:
                 pass
 
-        location = parse_location(data.get('location'), self.default_location)
+        location = parse_location(data.get("location"), self.default_location)
 
-        desc_raw = data.get('description', '') or ''
+        desc_raw = data.get("description", "") or ""
         desc = html_mod.unescape(desc_raw)
-        desc = re.sub(r'<[^>]+>', ' ', desc).strip()
-        desc = re.sub(r'\s+', ' ', desc)
+        desc = re.sub(r"<[^>]+>", " ", desc).strip()
+        desc = re.sub(r"\s+", " ", desc)
 
         return {
-            'title': title,
-            'dtstart': dtstart,
-            'dtend': dtend,
-            'location': location,
-            'description': desc[:500] if desc else '',
-            'url': url,
+            "title": title,
+            "dtstart": dtstart,
+            "dtend": dtend,
+            "location": location,
+            "description": desc[:500] if desc else "",
+            "url": url,
         }
 
     # ------------------------------------------------------------------
@@ -257,14 +256,15 @@ class SimpleviewScraper(BaseScraper):
 # Date helpers
 # ------------------------------------------------------------------
 
+
 def _parse_date_or_datetime(s: str):
     """Return a date or datetime from an ISO string.
 
     Simpleview uses date-only (YYYY-MM-DD).  Handles full ISO datetimes too.
     """
     s = s.strip()
-    if 'T' in s or ' ' in s:
-        return datetime.fromisoformat(s.replace('Z', '+00:00'))
+    if "T" in s or " " in s:
+        return datetime.fromisoformat(s.replace("Z", "+00:00"))
     # date-only
     return date.fromisoformat(s)
 
@@ -282,36 +282,37 @@ def _is_past(dt) -> bool:
 # CLI
 # ------------------------------------------------------------------
 
+
 def main():
     parser = argparse.ArgumentParser(
-        description='Scrape a Simpleview CMS tourism/events site via RSS + JSON-LD'
+        description="Scrape a Simpleview CMS tourism/events site via RSS + JSON-LD"
     )
     parser.add_argument(
-        '--url', required=True,
-        help='Site base URL (e.g. https://www.bloomingtonconvention.com)'
+        "--url", required=True, help="Site base URL (e.g. https://www.bloomingtonconvention.com)"
     )
-    parser.add_argument('--name', required=True, help='Display name for the source')
+    parser.add_argument("--name", required=True, help="Display name for the source")
     parser.add_argument(
-        '--timezone', default='America/Indiana/Indianapolis',
-        help='IANA timezone (default: America/Indiana/Indianapolis)'
-    )
-    parser.add_argument(
-        '--default-location', default='',
-        help='Fallback location string when JSON-LD has none'
+        "--timezone",
+        default="America/Indiana/Indianapolis",
+        help="IANA timezone (default: America/Indiana/Indianapolis)",
     )
     parser.add_argument(
-        '--towns', default='',
-        help='Comma-separated town names to keep (matched against RSS category values, case-insensitive). '
-             'Omit to keep all events.'
+        "--default-location", default="", help="Fallback location string when JSON-LD has none"
     )
-    parser.add_argument('--output', '-o', help='Output ICS file path')
-    parser.add_argument('--debug', action='store_true', help='Enable debug logging')
+    parser.add_argument(
+        "--towns",
+        default="",
+        help="Comma-separated town names to keep (matched against RSS category values, case-insensitive). "
+        "Omit to keep all events.",
+    )
+    parser.add_argument("--output", "-o", help="Output ICS file path")
+    parser.add_argument("--debug", action="store_true", help="Enable debug logging")
     args = parser.parse_args()
 
     if args.debug:
         logging.getLogger().setLevel(logging.DEBUG)
 
-    towns = [t.strip() for t in args.towns.split(',') if t.strip()] if args.towns else []
+    towns = [t.strip() for t in args.towns.split(",") if t.strip()] if args.towns else []
 
     scraper = SimpleviewScraper(
         base_url=args.url,
@@ -323,5 +324,5 @@ def main():
     scraper.run(args.output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

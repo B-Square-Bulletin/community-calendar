@@ -37,53 +37,53 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import argparse
 import html as html_mod
 import logging
 import re
 from datetime import datetime, timezone
-from typing import Any, Optional
+from typing import Any
 from urllib.parse import urlparse
 
 import requests
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 # Full browser headers required to bypass Cloudflare bot management on *.ludus.com.
 # The sec-ch-ua / sec-fetch-* client-hint headers are the key — standard curl/urllib
 # omits them and receives a 403 challenge page instead of the real HTML.
 BROWSER_HEADERS = {
-    'User-Agent': (
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
-        'AppleWebKit/537.36 (KHTML, like Gecko) '
-        'Chrome/126.0.0.0 Safari/537.36'
+    "User-Agent": (
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/126.0.0.0 Safari/537.36"
     ),
-    'Accept': (
-        'text/html,application/xhtml+xml,application/xml;'
-        'q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,'
-        'application/signed-exchange;v=b3;q=0.7'
+    "Accept": (
+        "text/html,application/xhtml+xml,application/xml;"
+        "q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,"
+        "application/signed-exchange;v=b3;q=0.7"
     ),
-    'Accept-Language': 'en-US,en;q=0.9',
-    'Cache-Control': 'no-cache',
-    'Pragma': 'no-cache',
-    'Sec-Fetch-Dest': 'document',
-    'Sec-Fetch-Mode': 'navigate',
-    'Sec-Fetch-Site': 'none',
-    'Sec-Fetch-User': '?1',
-    'Upgrade-Insecure-Requests': '1',
-    'sec-ch-ua': '"Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"',
-    'sec-ch-ua-mobile': '?0',
-    'sec-ch-ua-platform': '"macOS"',
+    "Accept-Language": "en-US,en;q=0.9",
+    "Cache-Control": "no-cache",
+    "Pragma": "no-cache",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Sec-Fetch-User": "?1",
+    "Upgrade-Insecure-Requests": "1",
+    "sec-ch-ua": '"Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"',
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": '"macOS"',
 }
 
 # Date format used in Ludus label text: "Sunday, August 16, 2026 2:00 PM"
-_DATE_FMT = '%A, %B %d, %Y %I:%M %p'
+_DATE_FMT = "%A, %B %d, %Y %I:%M %p"
 
 
 class LudusScraper(BaseScraper):
@@ -93,13 +93,13 @@ class LudusScraper(BaseScraper):
         self,
         url: str,
         source_name: str,
-        tz: str = 'America/Indiana/Indianapolis',
-        default_location: str = '',
+        tz: str = "America/Indiana/Indianapolis",
+        default_location: str = "",
     ):
         # Normalise: strip trailing slash, resolve to /index.php
-        parsed = urlparse(url.rstrip('/'))
-        self.base_url = f'{parsed.scheme}://{parsed.netloc}'
-        self.index_url = f'{self.base_url}/index.php'
+        parsed = urlparse(url.rstrip("/"))
+        self.base_url = f"{parsed.scheme}://{parsed.netloc}"
+        self.index_url = f"{self.base_url}/index.php"
 
         self.name = source_name
         self.domain = parsed.netloc
@@ -112,41 +112,42 @@ class LudusScraper(BaseScraper):
     # Internal helpers
     # ------------------------------------------------------------------
 
-    def _fetch_html(self, url: str) -> Optional[str]:
+    def _fetch_html(self, url: str) -> str | None:
         """Fetch a URL with full browser headers; return text or None."""
         try:
             resp = requests.get(url, headers=BROWSER_HEADERS, timeout=30)
             resp.raise_for_status()
             # Sanity check: detect CF challenge page that slipped through
-            if 'Just a moment' in resp.text and 'cloudflare' in resp.text.lower():
+            if "Just a moment" in resp.text and "cloudflare" in resp.text.lower():
                 self.logger.error(
-                    f'Cloudflare challenge returned for {url}. '
-                    'The platform may have tightened its bot rules.'
+                    f"Cloudflare challenge returned for {url}. "
+                    "The platform may have tightened its bot rules."
                 )
                 return None
             return resp.text
         except requests.RequestException as exc:
-            self.logger.error(f'Failed to fetch {url}: {exc}')
+            self.logger.error(f"Failed to fetch {url}: {exc}")
             return None
 
     @staticmethod
     def _clean_text(raw: str) -> str:
         """Strip HTML tags, unescape entities, collapse whitespace."""
         text = html_mod.unescape(raw)
-        text = re.sub(r'<[^>]+>', ' ', text)
-        return re.sub(r'\s+', ' ', text).strip()
+        text = re.sub(r"<[^>]+>", " ", text)
+        return re.sub(r"\s+", " ", text).strip()
 
-    def _parse_showtime_date(self, label_text: str) -> Optional[datetime]:
+    def _parse_showtime_date(self, label_text: str) -> datetime | None:
         """
         Parse a label string like 'Sunday, August 16, 2026 2:00 PM'
         into a tz-aware datetime.  Returns None on parse failure.
         """
         from zoneinfo import ZoneInfo
+
         try:
             dt_naive = datetime.strptime(label_text.strip(), _DATE_FMT)
             return dt_naive.replace(tzinfo=ZoneInfo(self.timezone))
         except ValueError:
-            self.logger.debug(f'Could not parse date string: {label_text!r}')
+            self.logger.debug(f"Could not parse date string: {label_text!r}")
             return None
 
     # ------------------------------------------------------------------
@@ -158,63 +159,65 @@ class LudusScraper(BaseScraper):
         Fetch the Ludus /index.php storefront and return one event dict
         per *upcoming* performance (past-date=0, not sold out, not hidden).
         """
-        self.logger.info(f'Fetching Ludus storefront: {self.index_url}')
+        self.logger.info(f"Fetching Ludus storefront: {self.index_url}")
         html = self._fetch_html(self.index_url)
         if html is None:
             return []
 
-        soup = BeautifulSoup(html, 'html.parser')
-        show_items = soup.find_all('div', class_='show_item')
+        soup = BeautifulSoup(html, "html.parser")
+        show_items = soup.find_all("div", class_="show_item")
 
         if not show_items:
-            self.logger.info('No show_item elements found — venue may be between productions.')
+            self.logger.info("No show_item elements found — venue may be between productions.")
             return []
 
-        self.logger.info(f'Found {len(show_items)} production(s) on page')
+        self.logger.info(f"Found {len(show_items)} production(s) on page")
         now = datetime.now(timezone.utc)
         events: list[dict[str, Any]] = []
 
         for show_div in show_items:
-            show_id = show_div.get('data-show-id', '')
+            show_id = show_div.get("data-show-id", "")
 
             # Title
-            title_el = show_div.find('span', class_='patron_heading_label')
-            title = title_el.get_text(strip=True) if title_el else 'Untitled'
+            title_el = show_div.find("span", class_="patron_heading_label")
+            title = title_el.get_text(strip=True) if title_el else "Untitled"
 
             # Description: strip the "Purchase tickets to <title> here!" boilerplate
-            desc = ''
-            notice_el = show_div.find(class_='show_listing_notice')
+            desc = ""
+            notice_el = show_div.find(class_="show_listing_notice")
             if notice_el:
                 desc = self._clean_text(str(notice_el))[:500]
 
             # Image
-            image_url: Optional[str] = None
-            cover_el = show_div.find(class_='show_item_cover_photo')
+            image_url: str | None = None
+            cover_el = show_div.find(class_="show_item_cover_photo")
             if cover_el:
-                style = cover_el.get('style', '')
+                style = cover_el.get("style", "")
                 img_m = re.search(r"url\('([^']+)'\)", style)
                 if img_m:
                     image_url = img_m.group(1)
 
             # Ticket URL for this production (links to showtime selection)
-            ticket_url = f'{self.base_url}/select.php?show_id={show_id}' if show_id else self.base_url
+            ticket_url = (
+                f"{self.base_url}/select.php?show_id={show_id}" if show_id else self.base_url
+            )
 
             # Performances
             showtime_divs = show_div.find_all(
-                'div', id=lambda x: x and x.startswith('showtimes_item')
+                "div", id=lambda x: x and x.startswith("showtimes_item")
             )
 
             for st_div in showtime_divs:
                 # Skip past or hidden/disabled performances
-                if st_div.get('data-past-date', '0') != '0':
+                if st_div.get("data-past-date", "0") != "0":
                     continue
-                if st_div.get('data-on-off', '0') != '0':
+                if st_div.get("data-on-off", "0") != "0":
                     continue
                 # Sold-out shows are still events worth knowing about
-                sold_out = st_div.get('data-manual-soldout', '0') != '0'
+                sold_out = st_div.get("data-manual-soldout", "0") != "0"
 
                 # Date/time from radio label
-                label_el = st_div.find('label')
+                label_el = st_div.find("label")
                 if not label_el:
                     continue
                 date_str = label_el.get_text(strip=True)
@@ -227,19 +230,19 @@ class LudusScraper(BaseScraper):
                     continue
 
                 event: dict[str, Any] = {
-                    'title': title,
-                    'dtstart': dtstart,
-                    'url': ticket_url,
-                    'location': self.default_location,
-                    'description': ('[SOLD OUT] ' if sold_out else '') + desc,
+                    "title": title,
+                    "dtstart": dtstart,
+                    "url": ticket_url,
+                    "location": self.default_location,
+                    "description": ("[SOLD OUT] " if sold_out else "") + desc,
                 }
                 if image_url:
-                    event['image_url'] = image_url
+                    event["image_url"] = image_url
 
                 events.append(event)
-                self.logger.debug(f'  + {title}: {date_str}')
+                self.logger.debug(f"  + {title}: {date_str}")
 
-        self.logger.info(f'Extracted {len(events)} upcoming performance(s)')
+        self.logger.info(f"Extracted {len(events)} upcoming performance(s)")
         return events
 
 
@@ -247,25 +250,29 @@ class LudusScraper(BaseScraper):
 # CLI
 # ---------------------------------------------------------------------------
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description='Scrape a Ludus ticketing platform storefront (*.ludus.com)'
+        description="Scrape a Ludus ticketing platform storefront (*.ludus.com)"
     )
     parser.add_argument(
-        '--url', required=True,
-        help='Base URL of the Ludus storefront, e.g. https://offnight.ludus.com'
+        "--url",
+        required=True,
+        help="Base URL of the Ludus storefront, e.g. https://offnight.ludus.com",
     )
-    parser.add_argument('--name', required=True, help='Display name for the source')
+    parser.add_argument("--name", required=True, help="Display name for the source")
     parser.add_argument(
-        '--timezone', default='America/Indiana/Indianapolis',
-        help='IANA timezone (default: America/Indiana/Indianapolis)'
+        "--timezone",
+        default="America/Indiana/Indianapolis",
+        help="IANA timezone (default: America/Indiana/Indianapolis)",
     )
     parser.add_argument(
-        '--default-location', default='',
-        help='Fallback venue location string when not in event data'
+        "--default-location",
+        default="",
+        help="Fallback venue location string when not in event data",
     )
-    parser.add_argument('--output', '-o', help='Output .ics file path')
-    parser.add_argument('--debug', action='store_true', help='Enable debug logging')
+    parser.add_argument("--output", "-o", help="Output .ics file path")
+    parser.add_argument("--debug", action="store_true", help="Enable debug logging")
     args = parser.parse_args()
 
     if args.debug:
@@ -280,5 +287,5 @@ def main() -> None:
     scraper.run(args.output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -5,7 +5,7 @@ import re
 import subprocess
 from datetime import timedelta
 from html import unescape
-from typing import Any, Optional
+from typing import Any, ClassVar
 
 import feedparser
 from bs4 import BeautifulSoup
@@ -16,14 +16,14 @@ from .rss import RssScraper
 class WildApricotRssScraper(RssScraper):
     """Reusable base for Wild Apricot RSS feeds."""
 
-    rss_fallback_urls: list[str] = []
-    debug_file_env: Optional[str] = None
-    location_patterns: list[str] = []
+    rss_fallback_urls: ClassVar[list[str]] = []
+    debug_file_env: str | None = None
+    location_patterns: ClassVar[list[str]] = []
     location_split_pattern: str = (
         r",\s+The route\b|,\s+which is\b|,\s+for a total distance\b|"
         r"\. View the map\b|\.\s+The route\b"
     )
-    description_cutoffs: list[str] = []
+    description_cutoffs: ClassVar[list[str]] = []
 
     def fetch_events(self) -> list[dict[str, Any]]:
         content = self._fetch_rss_content()
@@ -56,12 +56,12 @@ class WildApricotRssScraper(RssScraper):
             debug_file = os.environ.get(self.debug_file_env)
             if debug_file and os.path.exists(debug_file):
                 self.logger.warning(f"Falling back to local RSS sample: {debug_file}")
-                with open(debug_file, "r", encoding="utf-8", errors="ignore") as f:
+                with open(debug_file, encoding="utf-8", errors="ignore") as f:
                     return f.read()
 
         raise RuntimeError(f"Failed to fetch RSS from any known endpoint for {self.name}")
 
-    def parse_entry(self, entry: dict) -> Optional[dict[str, Any]]:
+    def parse_entry(self, entry: dict) -> dict[str, Any] | None:
         dt_start = self.parse_rss_date(entry)
         if not dt_start:
             return None
@@ -94,7 +94,7 @@ class WildApricotRssScraper(RssScraper):
         text = unescape(soup.get_text(" ", strip=True))
         return re.sub(r"\s+", " ", text).strip()
 
-    def extract_location(self, text: str) -> Optional[str]:
+    def extract_location(self, text: str) -> str | None:
         for pattern in self.location_patterns:
             match = re.search(pattern, text, re.IGNORECASE)
             if match:

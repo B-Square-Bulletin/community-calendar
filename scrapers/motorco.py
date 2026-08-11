@@ -11,14 +11,15 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
 
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
+
+import contextlib
 import re
 from datetime import datetime, timedelta
 from typing import Any
 
 import requests
-
 from lib.base import BaseScraper
 from lib.utils import DEFAULT_HEADERS
 
@@ -55,7 +56,7 @@ class MotorcoScraper(BaseScraper):
             r",\s*start:\s*'([^']*)'"
             r",\s*end:\s*'([^']*)'"
             r",\s*url:\s*'([^']*)'",
-            html
+            html,
         )
 
         self.logger.info(f"Found {len(raw_events)} raw events in FullCalendar data")
@@ -81,24 +82,24 @@ class MotorcoScraper(BaseScraper):
             # Parse end datetime
             dtend = None
             if end_str:
-                try:
+                with contextlib.suppress(ValueError):
                     dtend = datetime.strptime(end_str, "%Y-%m-%d %H:%M")
-                except ValueError:
-                    pass
             if not dtend:
                 dtend = dtstart + timedelta(hours=3)
 
-            events.append({
-                'title': title,
-                'dtstart': dtstart,
-                'dtend': dtend,
-                'url': url,
-                'location': self.VENUE_ADDRESS,
-                'description': '',
-            })
+            events.append(
+                {
+                    "title": title,
+                    "dtstart": dtstart,
+                    "dtend": dtend,
+                    "url": url,
+                    "location": self.VENUE_ADDRESS,
+                    "description": "",
+                }
+            )
 
         return events
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     MotorcoScraper.main()

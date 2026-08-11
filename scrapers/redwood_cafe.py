@@ -7,7 +7,8 @@ Uses WordPress "My Calendar" plugin - fetches multiple months.
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
 from datetime import datetime, timedelta
@@ -15,7 +16,6 @@ from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
 
 
@@ -25,9 +25,10 @@ class RedwoodCafeScraper(BaseScraper):
     name = "Redwood Cafe"
     domain = "redwoodcafecotati.com"
 
-    BASE_URL = 'https://redwoodcafecotati.com'
-    EVENTS_URL = f'{BASE_URL}/events/'
+    BASE_URL = "https://redwoodcafecotati.com"
+    EVENTS_URL = f"{BASE_URL}/events/"
     VENUE_ADDRESS = "Redwood Cafe, 8240 Old Redwood Hwy, Cotati, CA 94931"
+
     def fetch_events(self) -> list[dict[str, Any]]:
         """Fetch events for current and upcoming months."""
         all_events = []
@@ -52,29 +53,29 @@ class RedwoodCafeScraper(BaseScraper):
 
     def _parse_events(self, html_content: str, year: int, month: int) -> list[dict[str, Any]]:
         """Parse events from the calendar HTML."""
-        soup = BeautifulSoup(html_content, 'html.parser')
+        soup = BeautifulSoup(html_content, "html.parser")
         events = []
 
-        for article in soup.find_all('article', class_='calendar-event'):
+        for article in soup.find_all("article", class_="calendar-event"):
             try:
                 # Get event title from button data-modal-title attribute
-                button = article.find('button', class_='mc-modal')
+                button = article.find("button", class_="mc-modal")
                 if not button:
                     continue
 
-                title = button.get('data-modal-title', '')
+                title = button.get("data-modal-title", "")
                 if not title:
                     continue
 
-                title = title.replace('&amp;', '&')
+                title = title.replace("&amp;", "&")
 
                 # Get time from button text
-                button_text = button.get_text(' ', strip=True)
-                time_match = re.search(r'(\d{1,2}:\d{2})\s*(AM|PM)', button_text, re.IGNORECASE)
+                button_text = button.get_text(" ", strip=True)
+                time_match = re.search(r"(\d{1,2}:\d{2})\s*(AM|PM)", button_text, re.IGNORECASE)
 
                 # Parse day from article ID
-                article_id = article.get('id', '')
-                day_match = re.search(r'mc_calendar_(\d{2})_', article_id)
+                article_id = article.get("id", "")
+                day_match = re.search(r"mc_calendar_(\d{2})_", article_id)
                 if not day_match:
                     continue
 
@@ -99,14 +100,16 @@ class RedwoodCafeScraper(BaseScraper):
 
                 dt_end = dt_start + timedelta(hours=3)
 
-                events.append({
-                    'title': title,
-                    'url': self.EVENTS_URL,
-                    'dtstart': dt_start,
-                    'dtend': dt_end,
-                    'location': self.VENUE_ADDRESS,
-                    'description': 'Live music at Redwood Cafe Cotati.'
-                })
+                events.append(
+                    {
+                        "title": title,
+                        "url": self.EVENTS_URL,
+                        "dtstart": dt_start,
+                        "dtend": dt_end,
+                        "location": self.VENUE_ADDRESS,
+                        "description": "Live music at Redwood Cafe Cotati.",
+                    }
+                )
 
                 self.logger.info(f"Found event: {title} on {dt_start}")
 
@@ -117,5 +120,5 @@ class RedwoodCafeScraper(BaseScraper):
         return events
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     RedwoodCafeScraper.main()

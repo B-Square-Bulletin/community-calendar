@@ -15,7 +15,8 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 from lib.jsonld import JsonLdScraper
 
@@ -28,5 +29,5 @@ class DcEventsConcertsScraper(JsonLdScraper):
     default_location = "Washington, DC"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     DcEventsConcertsScraper.main()

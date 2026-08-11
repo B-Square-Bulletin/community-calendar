@@ -28,14 +28,13 @@ Usage:
 import html as html_mod
 import re
 from datetime import datetime, timezone
-from typing import Any, Optional
+from typing import Any
 from zoneinfo import ZoneInfo
 
 import requests
 
 from .base import BaseScraper
 from .utils import DEFAULT_HEADERS
-
 
 API_BASE = "https://calendar.apps.secureserver.net/v1/events"
 
@@ -52,10 +51,10 @@ class GoDaddyScraper(BaseScraper):
         default_location: str - Fallback location string
     """
 
-    website_id: str = ''
-    section_id: str = ''
-    widget_id: str = ''
-    default_location: str = ''
+    website_id: str = ""
+    section_id: str = ""
+    widget_id: str = ""
+    default_location: str = ""
 
     def fetch_events(self) -> list[dict[str, Any]]:
         """Fetch events from GoDaddy calendar API."""
@@ -70,7 +69,7 @@ class GoDaddyScraper(BaseScraper):
             self.logger.error(f"Failed to fetch: {e}")
             return []
 
-        raw_events = data.get('events', [])
+        raw_events = data.get("events", [])
         self.logger.info(f"API returned {len(raw_events)} events")
 
         events = []
@@ -82,13 +81,13 @@ class GoDaddyScraper(BaseScraper):
         self.logger.info(f"Parsed {len(events)} events")
         return events
 
-    def _parse_event(self, item: dict) -> Optional[dict[str, Any]]:
+    def _parse_event(self, item: dict) -> dict[str, Any] | None:
         """Parse a single event from the GoDaddy API response."""
-        title = item.get('title', '').strip()
+        title = item.get("title", "").strip()
         if not title:
             return None
 
-        start_str = item.get('start', '')
+        start_str = item.get("start", "")
         if not start_str:
             return None
 
@@ -108,31 +107,33 @@ class GoDaddyScraper(BaseScraper):
             return None
 
         dtend = None
-        end_str = item.get('end', '')
+        end_str = item.get("end", "")
         if end_str:
             try:
                 dtend = datetime.fromisoformat(end_str)
                 if dtend.tzinfo is None:
-                    tz = ZoneInfo(self.timezone) if isinstance(self.timezone, str) else self.timezone
+                    tz = (
+                        ZoneInfo(self.timezone) if isinstance(self.timezone, str) else self.timezone
+                    )
                     dtend = dtend.replace(tzinfo=tz)
             except (ValueError, TypeError):
                 pass
 
         # Clean description: strip HTML tags, unescape entities
-        desc = item.get('desc', '') or ''
+        desc = item.get("desc", "") or ""
         desc = html_mod.unescape(desc)
-        desc = re.sub(r'<[^>]+>', ' ', desc).strip()
-        desc = re.sub(r'\s+', ' ', desc)
+        desc = re.sub(r"<[^>]+>", " ", desc).strip()
+        desc = re.sub(r"\s+", " ", desc)
         # Truncate very long descriptions (some GoDaddy calendar entries can be huge)
         if len(desc) > 500:
-            desc = desc[:497] + '...'
+            desc = desc[:497] + "..."
 
-        location = item.get('location', '').strip() or self.default_location
+        location = item.get("location", "").strip() or self.default_location
 
         return {
-            'title': title,
-            'dtstart': dtstart,
-            'dtend': dtend,
-            'location': location,
-            'description': desc,
+            "title": title,
+            "dtstart": dtstart,
+            "dtend": dtend,
+            "location": location,
+            "description": desc,
         }

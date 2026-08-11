@@ -4,9 +4,9 @@ Convert ICS calendar files to JSON format for Supabase ingestion.
 """
 
 import argparse
+import contextlib
 import json
 import re
-import sys
 from datetime import datetime, timezone
 from html import unescape as html_unescape
 from pathlib import Path
@@ -15,24 +15,24 @@ from zoneinfo import ZoneInfo
 
 def strip_html_tags(text):
     """Remove HTML tags from text, preserving the text content."""
-    if not text or '<' not in text:
+    if not text or "<" not in text:
         return text
-    return re.sub(r'<[^>]+>', '', text)
+    return re.sub(r"<[^>]+>", "", text)
 
 
 # Default timezone when city.conf is missing or has no timezone
-DEFAULT_TIMEZONE = 'America/Los_Angeles'
+DEFAULT_TIMEZONE = "America/Los_Angeles"
 
 
 def load_city_timezone(city):
     """Load timezone from cities/{city}/city.conf, fall back to default."""
     if not city:
         return ZoneInfo(DEFAULT_TIMEZONE)
-    conf = Path(__file__).parent.parent / 'cities' / city / 'city.conf'
+    conf = Path(__file__).parent.parent / "cities" / city / "city.conf"
     if conf.exists():
         for line in conf.read_text().splitlines():
-            if line.startswith('# timezone:'):
-                tz_name = line.split(':', 1)[1].strip()
+            if line.startswith("# timezone:"):
+                tz_name = line.split(":", 1)[1].strip()
                 return ZoneInfo(tz_name)
     return ZoneInfo(DEFAULT_TIMEZONE)
 
@@ -51,31 +51,30 @@ def parse_ics_datetime(dt_str, local_tz=None):
         local_tz = ZoneInfo(DEFAULT_TIMEZONE)
 
     # Extract TZID parameter if present, then strip params to get bare datetime
-    if ';' in dt_str:
-        tzid_match = re.search(r'TZID=([^:;]+)', dt_str)
+    if ";" in dt_str:
+        tzid_match = re.search(r"TZID=([^:;]+)", dt_str)
         if tzid_match:
-            try:
+            # Invalid TZID — fall back to city timezone
+            with contextlib.suppress(KeyError, ValueError):
                 local_tz = ZoneInfo(tzid_match.group(1))
-            except (KeyError, ValueError):
-                pass  # Invalid TZID — fall back to city timezone
-        dt_str = dt_str.split(':')[-1]
+        dt_str = dt_str.split(":")[-1]
 
     dt_str = dt_str.strip()
 
     try:
-        if dt_str.endswith('Z'):
+        if dt_str.endswith("Z"):
             # UTC time - convert to city's local time
-            dt = datetime.strptime(dt_str, '%Y%m%dT%H%M%SZ')
+            dt = datetime.strptime(dt_str, "%Y%m%dT%H%M%SZ")
             dt = dt.replace(tzinfo=timezone.utc).astimezone(local_tz)
             return dt.isoformat()
-        elif 'T' in dt_str:
+        elif "T" in dt_str:
             # Local time (already in correct timezone) - attach tz so offset is included
-            dt = datetime.strptime(dt_str, '%Y%m%dT%H%M%S')
+            dt = datetime.strptime(dt_str, "%Y%m%dT%H%M%S")
             dt = dt.replace(tzinfo=local_tz)
             return dt.isoformat()
         else:
             # All-day event — anchor to midnight in the city's local timezone
-            dt = datetime.strptime(dt_str, '%Y%m%d')
+            dt = datetime.strptime(dt_str, "%Y%m%d")
             dt = dt.replace(tzinfo=local_tz)
             return dt.isoformat()
     except ValueError:
@@ -87,17 +86,17 @@ def is_all_day_event(raw_dt_str):
     if not raw_dt_str:
         return False
     # VALUE=DATE parameter means all-day
-    if 'VALUE=DATE' in raw_dt_str.upper() and 'VALUE=DATE-TIME' not in raw_dt_str.upper():
+    if "VALUE=DATE" in raw_dt_str.upper() and "VALUE=DATE-TIME" not in raw_dt_str.upper():
         return True
     # No T in the value portion means date-only
-    value = raw_dt_str.split(':')[-1].strip()
-    return 'T' not in value and len(value) == 8 and value.isdigit()
+    value = raw_dt_str.split(":")[-1].strip()
+    return "T" not in value and len(value) == 8 and value.isdigit()
 
 
 def unfold_ics_lines(content):
     """Unfold ICS continuation lines (lines starting with space or tab)."""
     # ICS spec: long lines are folded by inserting CRLF + space/tab
-    content = re.sub(r'\r?\n[ \t]', '', content)
+    content = re.sub(r"\r?\n[ \t]", "", content)
     return content
 
 
@@ -105,12 +104,14 @@ def extract_field(event_content, field_name):
     """Extract a field value from VEVENT content."""
     # Match field with optional parameters: FIELD;PARAM=VALUE:content or FIELD:content
     # Use word boundary or end-of-field-name to avoid X-SOURCE matching X-SOURCE-ID
-    pattern = rf'^{field_name}(?:;[^:]*)?:([^\r\n]*)'
+    pattern = rf"^{field_name}(?:;[^:]*)?:([^\r\n]*)"
     match = re.search(pattern, event_content, re.IGNORECASE | re.MULTILINE)
     if match:
         value = match.group(1)
         # Unescape ICS escapes
-        value = value.replace('\\n', '\n').replace('\\,', ',').replace('\\;', ';').replace('\\\\', '\\')
+        value = (
+            value.replace("\\n", "\n").replace("\\,", ",").replace("\\;", ";").replace("\\\\", "\\")
+        )
         return value.strip()
     return None
 
@@ -122,14 +123,14 @@ def extract_raw_datetime(event_content, field_name):
     so parse_ics_datetime can extract and use the TZID.
     For bare properties (no params), returns just the value (e.g. "20250115T190000").
     """
-    pattern = rf'^({field_name}(?:;[^:]*)?):([^\r\n]*)'
+    pattern = rf"^({field_name}(?:;[^:]*)?):([^\r\n]*)"
     match = re.search(pattern, event_content, re.IGNORECASE | re.MULTILINE)
     if match:
         params = match.group(1)  # e.g. "DTSTART;TZID=America/New_York" or "DTSTART"
         value = match.group(2).strip()
-        if ';' in params:
+        if ";" in params:
             # Has parameters — return full line so parse_ics_datetime can extract TZID
-            return params + ':' + value
+            return params + ":" + value
         return value
     return None
 
@@ -137,45 +138,49 @@ def extract_raw_datetime(event_content, field_name):
 def extract_image_url(event_content):
     """Extract first image URL from ATTACH or vendor image fields."""
     # Match ATTACH with image FMTTYPE
-    pattern = r'^ATTACH;[^:]*FMTTYPE=image/[^:]*:(.+)'
+    pattern = r"^ATTACH;[^:]*FMTTYPE=image/[^:]*:(.+)"
     match = re.search(pattern, event_content, re.IGNORECASE | re.MULTILINE)
     if match:
         return match.group(1).strip()
     # Match Tockify featured image
-    pattern = r'^X-TKF-FEATURED-IMAGE:(.+)'
+    pattern = r"^X-TKF-FEATURED-IMAGE:(.+)"
     match = re.search(pattern, event_content, re.IGNORECASE | re.MULTILINE)
     if match:
         return match.group(1).strip()
     # Match LiveWhale image (IU events) - unescape \, and request a larger size
-    pattern = r'^X-LIVEWHALE-IMAGE:(.+)'
+    pattern = r"^X-LIVEWHALE-IMAGE:(.+)"
     match = re.search(pattern, event_content, re.IGNORECASE | re.MULTILINE)
     if match:
-        url = match.group(1).strip().replace('\\,', ',')
+        url = match.group(1).strip().replace("\\,", ",")
         # Replace thumbnail dimensions with a larger display size
-        url = re.sub(r'/width/\d+/height/\d+/', '/width/400/height/300/', url)
+        url = re.sub(r"/width/\d+/height/\d+/", "/width/400/height/300/", url)
         return url
     # Match RFC 7986 IMAGE field (e.g. Skedda/Aqus events)
     # Prefer FULLSIZE, accept any display type
-    for display in ('fullsize', 'badge', 'thumbnail', ''):
-        pat = rf'^IMAGE;[^:]*DISPLAY={display}[^:]*:(https?://.+)' if display else r'^IMAGE;[^:]*:(https?://.+)'
+    for display in ("fullsize", "badge", "thumbnail", ""):
+        pat = (
+            rf"^IMAGE;[^:]*DISPLAY={display}[^:]*:(https?://.+)"
+            if display
+            else r"^IMAGE;[^:]*:(https?://.+)"
+        )
         match = re.search(pat, event_content, re.IGNORECASE | re.MULTILINE)
         if match:
             return match.group(1).strip()
     # Match WordPress X-WP-IMAGES-URL (format: size\;url\;w\;h\,...,size\;url\;...)
-    pattern = r'^X-WP-IMAGES-URL:(.+)'
+    pattern = r"^X-WP-IMAGES-URL:(.+)"
     match = re.search(pattern, event_content, re.IGNORECASE | re.MULTILINE)
     if match:
         raw = match.group(1).strip()
         # Parse comma-separated entries: size\;url\;w\;h
-        for size in ('large', 'full', 'medium'):
-            m = re.search(rf'(?:^|,){size}\\;(https?://[^\\,]+)', raw, re.IGNORECASE)
+        for size in ("large", "full", "medium"):
+            m = re.search(rf"(?:^|,){size}\\;(https?://[^\\,]+)", raw, re.IGNORECASE)
             if m:
                 return m.group(1)
     # Match Bedework image (Duke) - relative URL, base is calendar.duke.edu
-    pattern = r'^X-BEDEWORK-IMAGE:(/public/Images/.+)'
+    pattern = r"^X-BEDEWORK-IMAGE:(/public/Images/.+)"
     match = re.search(pattern, event_content, re.IGNORECASE | re.MULTILINE)
     if match:
-        return 'https://calendar.duke.edu' + match.group(1).strip()
+        return "https://calendar.duke.edu" + match.group(1).strip()
     return None
 
 
@@ -184,6 +189,7 @@ def token_set_similarity(a, b):
     'Family Storytime' vs 'Bilingual Family Storytime' scores high because
     the shared words dominate. Uses overlap/min-size ratio."""
     from difflib import SequenceMatcher as SM
+
     words_a = set(a.lower().split())
     words_b = set(b.lower().split())
     if not words_a and not words_b:
@@ -191,11 +197,11 @@ def token_set_similarity(a, b):
     if not words_a or not words_b:
         return 0.0
     intersection = words_a & words_b
-    sorted_inter = ' '.join(sorted(intersection))
-    remaining_a = ' '.join(sorted(words_a - intersection))
-    remaining_b = ' '.join(sorted(words_b - intersection))
-    combined_a = (sorted_inter + ' ' + remaining_a).strip()
-    combined_b = (sorted_inter + ' ' + remaining_b).strip()
+    sorted_inter = " ".join(sorted(intersection))
+    remaining_a = " ".join(sorted(words_a - intersection))
+    remaining_b = " ".join(sorted(words_b - intersection))
+    combined_a = (sorted_inter + " " + remaining_a).strip()
+    combined_b = (sorted_inter + " " + remaining_b).strip()
     ratios = [
         SM(None, sorted_inter, combined_a).ratio() if combined_a else 1.0,
         SM(None, sorted_inter, combined_b).ratio() if combined_b else 1.0,
@@ -231,7 +237,7 @@ def cluster_by_title_similarity(events, threshold=0.85):
     slots = defaultdict(list)
     slot_order = []
     for e in events:
-        key = e.get('start_time', '') or ''
+        key = e.get("start_time", "") or ""
         if key not in slots:
             slot_order.append(key)
         slots[key].append(e)
@@ -245,23 +251,25 @@ def cluster_by_title_similarity(events, threshold=0.85):
 
         # Union-find
         parent = list(range(len(group)))
-        def find(x):
+
+        def find(x, parent=parent):
             while parent[x] != x:
                 parent[x] = parent[parent[x]]
                 x = parent[x]
             return x
-        def union(a, b):
-            parent[find(a)] = find(b)
+
+        def union(a, b, parent=parent):
+            parent[find(a, parent)] = find(b, parent)
 
         for i in range(len(group)):
             for j in range(i + 1, len(group)):
-                ta = group[i].get('title', '')
-                tb = group[j].get('title', '')
+                ta = group[i].get("title", "")
+                tb = group[j].get("title", "")
                 if not ta or not tb or token_set_similarity(ta, tb) < threshold:
                     continue
                 # Don't cluster events at different locations
-                la = group[i].get('location', '') or ''
-                lb = group[j].get('location', '') or ''
+                la = group[i].get("location", "") or ""
+                lb = group[j].get("location", "") or ""
                 if la and lb and la != lb:
                     continue
                 union(i, j)
@@ -271,16 +279,17 @@ def cluster_by_title_similarity(events, threshold=0.85):
             clusters[find(i)].append(group[i])
 
         for c in clusters.values():
-            c.sort(key=lambda e: (e.get('title', '') or '').lower())
+            c.sort(key=lambda e: (e.get("title", "") or "").lower())
 
-        sorted_clusters = sorted(clusters.values(),
-            key=lambda c: (c[0].get('title', '') or '').lower())
+        sorted_clusters = sorted(
+            clusters.values(), key=lambda c: (c[0].get("title", "") or "").lower()
+        )
 
         cluster_idx = 0
         for cluster in sorted_clusters:
             if len(cluster) > 1:
                 for e in cluster:
-                    e['cluster_id'] = cluster_idx
+                    e["cluster_id"] = cluster_idx
                 cluster_idx += 1
             result.extend(cluster)
 
@@ -290,7 +299,7 @@ def cluster_by_title_similarity(events, threshold=0.85):
 def ics_to_json(ics_file, output_file=None, future_only=True, city=None):
     """Convert an ICS file to JSON format for Supabase."""
     local_tz = load_city_timezone(city)
-    content = Path(ics_file).read_text(encoding='utf-8', errors='ignore')
+    content = Path(ics_file).read_text(encoding="utf-8", errors="ignore")
 
     # Unfold continuation lines
     content = unfold_ics_lines(content)
@@ -298,35 +307,38 @@ def ics_to_json(ics_file, output_file=None, future_only=True, city=None):
     events = []
     # Use 24 hours ago to avoid filtering out same-day events due to timezone differences
     from datetime import timedelta
+
     now = datetime.now(timezone.utc) - timedelta(hours=24)
 
     # Extract all VEVENT blocks
-    pattern = r'BEGIN:VEVENT\r?\n(.*?)\r?\nEND:VEVENT'
+    pattern = r"BEGIN:VEVENT\r?\n(.*?)\r?\nEND:VEVENT"
     matches = re.findall(pattern, content, re.DOTALL)
 
     for event_content in matches:
         # Extract fields
-        title = strip_html_tags(html_unescape(extract_field(event_content, 'SUMMARY') or ''))
-        raw_dtstart = extract_raw_datetime(event_content, 'DTSTART')
+        title = strip_html_tags(html_unescape(extract_field(event_content, "SUMMARY") or ""))
+        raw_dtstart = extract_raw_datetime(event_content, "DTSTART")
         start_time = parse_ics_datetime(raw_dtstart, local_tz)
-        end_time = parse_ics_datetime(extract_raw_datetime(event_content, 'DTEND'), local_tz)
+        end_time = parse_ics_datetime(extract_raw_datetime(event_content, "DTEND"), local_tz)
         all_day = is_all_day_event(raw_dtstart)
-        location = strip_html_tags(html_unescape(extract_field(event_content, 'LOCATION') or ''))
-        description = strip_html_tags(html_unescape(extract_field(event_content, 'DESCRIPTION') or ''))
-        url = extract_field(event_content, 'URL')
+        location = strip_html_tags(html_unescape(extract_field(event_content, "LOCATION") or ""))
+        description = strip_html_tags(
+            html_unescape(extract_field(event_content, "DESCRIPTION") or "")
+        )
+        url = extract_field(event_content, "URL")
         if not url:
-            url = extract_field(event_content, 'X-SOURCE-URL')
-        source = extract_field(event_content, 'X-SOURCE')
-        source_id = extract_field(event_content, 'X-SOURCE-ID')
-        source_urls_raw = extract_field(event_content, 'X-SOURCE-URLS')
-        uid = extract_field(event_content, 'UID')
+            url = extract_field(event_content, "X-SOURCE-URL")
+        source = extract_field(event_content, "X-SOURCE")
+        source_id = extract_field(event_content, "X-SOURCE-ID")
+        source_urls_raw = extract_field(event_content, "X-SOURCE-URLS")
+        uid = extract_field(event_content, "UID")
 
         # Extract image URL from ATTACH or X-TKF-FEATURED-IMAGE
         image_url = extract_image_url(event_content)
 
         # Extract ICS CATEGORIES (raw tags for LLM classification)
-        ics_cats_raw = extract_field(event_content, 'CATEGORIES')
-        ics_categories = [c.strip() for c in ics_cats_raw.split(',')] if ics_cats_raw else []
+        ics_cats_raw = extract_field(event_content, "CATEGORIES")
+        ics_categories = [c.strip() for c in ics_cats_raw.split(",")] if ics_cats_raw else []
 
         # Skip if no title or start time
         if not title or not start_time:
@@ -343,42 +355,39 @@ def ics_to_json(ics_file, output_file=None, future_only=True, city=None):
             except ValueError:
                 pass
 
-
         source_urls = {}
         if source_urls_raw:
-            try:
+            with contextlib.suppress(json.JSONDecodeError):
                 source_urls = json.loads(source_urls_raw)
-            except json.JSONDecodeError:
-                pass
 
         event = {
-            'title': title,
-            'start_time': start_time,
-            'end_time': end_time,
-            'location': location or '',
-            'description': description or '',
-            'url': url or '',
-            'city': city or '',
-            'source': source or '',
-            'source_id': source_id or '',
-            'source_uid': uid or '',
-            'source_urls': source_urls if source_urls else None,
-            'cluster_id': None,
-            'ics_categories': ics_categories if ics_categories else None,
-            'image_url': image_url,
-            'all_day': all_day
+            "title": title,
+            "start_time": start_time,
+            "end_time": end_time,
+            "location": location or "",
+            "description": description or "",
+            "url": url or "",
+            "city": city or "",
+            "source": source or "",
+            "source_id": source_id or "",
+            "source_uid": uid or "",
+            "source_urls": source_urls if source_urls else None,
+            "cluster_id": None,
+            "ics_categories": ics_categories if ics_categories else None,
+            "image_url": image_url,
+            "all_day": all_day,
         }
         events.append(event)
 
     # Sort by start time, then cluster similar titles within each timeslot
-    events.sort(key=lambda x: x['start_time'] or '')
+    events.sort(key=lambda x: x["start_time"] or "")
     events = cluster_by_title_similarity(events)
 
     # Output
     json_output = json.dumps(events, indent=2, ensure_ascii=False)
 
     if output_file:
-        Path(output_file).write_text(json_output, encoding='utf-8')
+        Path(output_file).write_text(json_output, encoding="utf-8")
         print(f"Converted {len(events)} events to {output_file}")
     else:
         print(json_output)
@@ -386,12 +395,14 @@ def ics_to_json(ics_file, output_file=None, future_only=True, city=None):
     return events
 
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Convert ICS to JSON for Supabase')
-    parser.add_argument('input', help='Input ICS file')
-    parser.add_argument('-o', '--output', help='Output JSON file (stdout if not specified)')
-    parser.add_argument('--city', help='City name (e.g., santarosa, sebastopol)')
-    parser.add_argument('--all', action='store_true', help='Include past events (default: future only)')
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Convert ICS to JSON for Supabase")
+    parser.add_argument("input", help="Input ICS file")
+    parser.add_argument("-o", "--output", help="Output JSON file (stdout if not specified)")
+    parser.add_argument("--city", help="City name (e.g., santarosa, sebastopol)")
+    parser.add_argument(
+        "--all", action="store_true", help="Include past events (default: future only)"
+    )
 
     args = parser.parse_args()
 

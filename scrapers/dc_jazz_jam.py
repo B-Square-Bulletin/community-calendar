@@ -11,21 +11,20 @@ parse the event date from the title.
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
 from datetime import datetime, timedelta
 from html import unescape
-from typing import Any, Optional
+from typing import Any
 
 from bs4 import BeautifulSoup
-
 from lib.rss import RssScraper
-
 
 # Pattern matches the leading date in titles like:
 #   "Sunday 5/10/26: DC Jazz Jam's Mother's Day jam ..."
-DATE_RE = re.compile(r'(?P<m>\d{1,2})/(?P<d>\d{1,2})/(?P<y>\d{2,4})')
+DATE_RE = re.compile(r"(?P<m>\d{1,2})/(?P<d>\d{1,2})/(?P<y>\d{2,4})")
 
 
 class DcJazzJamScraper(RssScraper):
@@ -41,8 +40,8 @@ class DcJazzJamScraper(RssScraper):
     _start_minute = 30
     _duration_hours = 2.5  # 6:30-9:00pm
 
-    def parse_entry(self, entry: dict) -> Optional[dict[str, Any]]:
-        title = entry.get('title', '').strip()
+    def parse_entry(self, entry: dict) -> dict[str, Any] | None:
+        title = entry.get("title", "").strip()
         if not title:
             return None
 
@@ -51,11 +50,12 @@ class DcJazzJamScraper(RssScraper):
             return None
 
         from zoneinfo import ZoneInfo
+
         tz = ZoneInfo(self.timezone)
         try:
-            month = int(m.group('m'))
-            day = int(m.group('d'))
-            year = int(m.group('y'))
+            month = int(m.group("m"))
+            day = int(m.group("d"))
+            year = int(m.group("y"))
             if year < 100:
                 year += 2000
             dtstart = datetime(year, month, day, self._start_hour, self._start_minute, tzinfo=tz)
@@ -68,27 +68,27 @@ class DcJazzJamScraper(RssScraper):
 
         dtend = dtstart + timedelta(hours=self._duration_hours)
 
-        description_html = entry.get('summary', '') or entry.get('description', '')
+        description_html = entry.get("summary", "") or entry.get("description", "")
         description = self._clean_description(description_html)
 
         return {
-            'title': title,
-            'dtstart': dtstart,
-            'dtend': dtend,
-            'url': entry.get('link', ''),
-            'location': self._location,
-            'description': description,
+            "title": title,
+            "dtstart": dtstart,
+            "dtend": dtend,
+            "url": entry.get("link", ""),
+            "location": self._location,
+            "description": description,
         }
 
     def _clean_description(self, description_html: str) -> str:
         if not description_html:
-            return ''
-        text = unescape(BeautifulSoup(description_html, 'html.parser').get_text(' ', strip=True))
-        text = re.sub(r'\s+', ' ', text).strip()
+            return ""
+        text = unescape(BeautifulSoup(description_html, "html.parser").get_text(" ", strip=True))
+        text = re.sub(r"\s+", " ", text).strip()
         if len(text) > 500:
-            text = text[:500].rstrip() + '…'
+            text = text[:500].rstrip() + "…"
         return text
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     DcJazzJamScraper.main()

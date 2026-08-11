@@ -6,13 +6,12 @@ from __future__ import annotations
 import re
 from datetime import date, datetime
 from html import unescape
+from typing import ClassVar
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
-
 
 MONTHS = {
     "jan": 1,
@@ -42,7 +41,7 @@ class HarbordVillageScraper(BaseScraper):
     timezone = "America/Toronto"
     page_url = "https://harbordvillage.com/calendar-of-hvra-events-for-2026/"
     default_url = page_url
-    headers = {
+    headers: ClassVar[dict[str, str]] = {
         "User-Agent": "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
         "Accept": "text/html,application/xhtml+xml",
     }
@@ -111,7 +110,9 @@ class HarbordVillageScraper(BaseScraper):
                 parsed_times = self.parse_times(event_text)
                 if parsed_times:
                     (start_hour, start_minute), (end_hour, end_minute) = parsed_times
-                    dtstart = datetime(day.year, day.month, day.day, start_hour, start_minute, tzinfo=tz)
+                    dtstart = datetime(
+                        day.year, day.month, day.day, start_hour, start_minute, tzinfo=tz
+                    )
                     dtend = datetime(day.year, day.month, day.day, end_hour, end_minute, tzinfo=tz)
                 else:
                     dtstart = day

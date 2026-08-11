@@ -57,9 +57,7 @@ class TestAcceptEncoding:
             mock.raise_for_status = Mock()
             return mock
 
-        with patch.object(
-            __import__("requests").Session, "get", intercept_get
-        ):
+        with patch.object(__import__("requests").Session, "get", intercept_get):
             events = scraper.fetch_events()
 
         assert "Accept-Encoding" not in captured_headers, (

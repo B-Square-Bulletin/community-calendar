@@ -6,7 +6,7 @@ import html as html_mod
 import json
 import re
 from datetime import datetime, timedelta
-from typing import Any, Optional
+from typing import Any, ClassVar
 from urllib.parse import urljoin
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
@@ -26,7 +26,7 @@ class EScribeScraper(BaseScraper):
 
     endpoint_url: str = ""
     root_url: str = ""
-    headers: dict[str, str] = {
+    headers: ClassVar[dict[str, str]] = {
         "User-Agent": "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
         "Content-Type": "application/json; charset=UTF-8",
     }
@@ -34,10 +34,12 @@ class EScribeScraper(BaseScraper):
     def build_request_body(self) -> bytes:
         today = datetime.now(ZoneInfo(self.timezone)).date()
         cutoff = today + timedelta(days=self.months_ahead * 31)
-        return json.dumps({
-            "calendarStartDate": today.isoformat(),
-            "calendarEndDate": cutoff.isoformat(),
-        }).encode()
+        return json.dumps(
+            {
+                "calendarStartDate": today.isoformat(),
+                "calendarEndDate": cutoff.isoformat(),
+            }
+        ).encode()
 
     def fetch_records(self) -> list[dict[str, Any]]:
         req = Request(
@@ -50,7 +52,7 @@ class EScribeScraper(BaseScraper):
             payload = json.loads(resp.read().decode("utf-8"))
         return payload.get("d", [])
 
-    def parse_datetime(self, value: str) -> Optional[datetime]:
+    def parse_datetime(self, value: str) -> datetime | None:
         if not value:
             return None
         try:
@@ -60,7 +62,7 @@ class EScribeScraper(BaseScraper):
         except ValueError:
             return None
 
-    def map_record(self, record: dict[str, Any]) -> Optional[dict[str, Any]]:
+    def map_record(self, record: dict[str, Any]) -> dict[str, Any] | None:
         title = _clean_text(record.get("MeetingName"))
         dtstart = self.parse_datetime(record.get("StartDate", ""))
         if not title or not dtstart:

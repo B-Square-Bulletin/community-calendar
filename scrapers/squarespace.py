@@ -14,33 +14,33 @@ import argparse
 import html as html_mod
 import logging
 import re
+import sys
 import time
-from datetime import datetime
 from typing import Any
 from urllib.parse import urlparse
+
+import requests
+from icalendar import Calendar
 
 # Squarespace seeds new Events collections with placeholder/demo events whose
 # slugs are event-one … event-five plus a random suffix (e.g.
 # /event-three-mz467-9slf2-wnm2y). Real events get human-readable slugs, so we
 # skip anything matching this pattern to keep demo junk (Impact Forum, Idea
 # Exchange, Vision Summit, Creative Sync, …) out of the calendar.
-DEMO_SLUG_RE = re.compile(r'/event-(one|two|three|four|five)-')
+DEMO_SLUG_RE = re.compile(r"/event-(one|two|three|four|five)-")
 
 
 def _clean_text(value: Any) -> str:
     """Unescape HTML entities (&amp;, &nbsp;, …) and normalize whitespace."""
-    text = html_mod.unescape(str(value or ''))
-    return text.replace('\xa0', ' ').strip()
-
-import requests
-from icalendar import Calendar
-
-import sys
-sys.path.insert(0, str(__file__).rsplit('/', 2)[0])
-from scrapers.lib.base import BaseScraper
+    text = html_mod.unescape(str(value or ""))
+    return text.replace("\xa0", " ").strip()
 
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+sys.path.insert(0, str(__file__).rsplit("/", 2)[0])
+from scrapers.lib.base import BaseScraper  # noqa: E402, I001
+
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 
@@ -54,9 +54,9 @@ class SquarespaceScraper(BaseScraper):
         self.listing_url = url
         parsed = urlparse(url)
         self.base_url = f"{parsed.scheme}://{parsed.netloc}"
-        self.events_path = parsed.path.rstrip('/')
+        self.events_path = parsed.path.rstrip("/")
         self.name = source_name
-        self.domain = parsed.netloc.replace('www.', '')
+        self.domain = parsed.netloc.replace("www.", "")
         super().__init__()
 
     def fetch_events(self) -> list[dict[str, Any]]:
@@ -77,19 +77,21 @@ class SquarespaceScraper(BaseScraper):
         """Find event links on the listing page."""
         logger.info(f"Fetching event list from {self.listing_url}")
 
-        response = requests.get(self.listing_url, headers={
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-        }, timeout=30)
+        response = requests.get(
+            self.listing_url,
+            headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"},
+            timeout=30,
+        )
         response.raise_for_status()
 
         # Find all links under the listing path
-        prefix = self.events_path + '/'
+        prefix = self.events_path + "/"
         urls = set()
         for match in re.finditer(r'href="([^"]*)"', response.text):
             href = match.group(1)
             if href.startswith(prefix) and href != prefix:
                 # Strip query strings and fragments
-                clean = href.split('?')[0].split('#')[0]
+                clean = href.split("?")[0].split("#")[0]
                 if DEMO_SLUG_RE.search(clean):
                     continue  # skip Squarespace seeded demo events
                 urls.add(self.base_url + clean)
@@ -98,7 +100,7 @@ class SquarespaceScraper(BaseScraper):
 
     def _fetch_event_ical(self, event_url: str) -> dict[str, Any] | None:
         """Fetch iCal for a single event and parse it."""
-        ical_url = event_url + '?format=ical'
+        ical_url = event_url + "?format=ical"
         logger.info(f"Fetching iCal: {ical_url}")
 
         try:
@@ -107,18 +109,18 @@ class SquarespaceScraper(BaseScraper):
 
             cal = Calendar.from_ical(response.content)
             for component in cal.walk():
-                if component.name == 'VEVENT':
-                    dtstart = component.get('dtstart')
+                if component.name == "VEVENT":
+                    dtstart = component.get("dtstart")
                     if not dtstart:
                         continue
                     return {
-                        'title': _clean_text(component.get('summary', '')),
-                        'dtstart': dtstart.dt,
-                        'dtend': component.get('dtend').dt if component.get('dtend') else None,
-                        'location': _clean_text(component.get('location', '')),
-                        'description': _clean_text(component.get('description', '')),
-                        'url': event_url,
-                        'uid': str(component.get('uid', ''))
+                        "title": _clean_text(component.get("summary", "")),
+                        "dtstart": dtstart.dt,
+                        "dtend": component.get("dtend").dt if component.get("dtend") else None,
+                        "location": _clean_text(component.get("location", "")),
+                        "description": _clean_text(component.get("description", "")),
+                        "url": event_url,
+                        "uid": str(component.get("uid", "")),
                     }
         except Exception as e:
             logger.warning(f"Failed to fetch {ical_url}: {e}")
@@ -127,11 +129,11 @@ class SquarespaceScraper(BaseScraper):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Scrape Squarespace event pages')
-    parser.add_argument('--url', required=True, help='Events listing page URL')
-    parser.add_argument('--name', required=True, help='Source name')
-    parser.add_argument('--output', '-o', help='Output ICS file')
-    parser.add_argument('--debug', action='store_true')
+    parser = argparse.ArgumentParser(description="Scrape Squarespace event pages")
+    parser.add_argument("--url", required=True, help="Events listing page URL")
+    parser.add_argument("--name", required=True, help="Source name")
+    parser.add_argument("--output", "-o", help="Output ICS file")
+    parser.add_argument("--debug", action="store_true")
     args = parser.parse_args()
 
     if args.debug:
@@ -141,5 +143,5 @@ def main():
     scraper.run(args.output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

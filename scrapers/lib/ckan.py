@@ -7,13 +7,14 @@ The datastore API is standardized: same pagination, same JSON envelope.
 Subclasses provide a resource_id and map_record() to convert rows to events.
 """
 
-import requests
 from abc import abstractmethod
-from typing import Any, Optional
+from typing import Any
+
+import requests
 
 from .base import BaseScraper
 
-HEADERS = {'User-Agent': 'Mozilla/5.0 (compatible; community-calendar/1.0)'}
+HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; community-calendar/1.0)"}
 
 
 class CKANScraper(BaseScraper):
@@ -30,12 +31,11 @@ class CKANScraper(BaseScraper):
     page_size: int = 500
 
     @abstractmethod
-    def map_record(self, record: dict) -> Optional[dict[str, Any]]:
+    def map_record(self, record: dict) -> dict[str, Any] | None:
         """Convert a CKAN datastore record to an event dict.
 
         Return None to skip the record.
         """
-        pass
 
     def build_filters(self) -> dict:
         """Optional: return CKAN filters dict to narrow the query."""
@@ -54,15 +54,16 @@ class CKANScraper(BaseScraper):
 
         while True:
             params: dict[str, Any] = {
-                'resource_id': self.resource_id,
-                'limit': self.page_size,
-                'offset': offset,
+                "resource_id": self.resource_id,
+                "limit": self.page_size,
+                "offset": offset,
             }
             if filters:
                 import json
-                params['filters'] = json.dumps(filters)
+
+                params["filters"] = json.dumps(filters)
             if sort:
-                params['sort'] = sort
+                params["sort"] = sort
 
             url = f"{self.ckan_base_url}/api/3/action/datastore_search"
             self.logger.info(f"Fetching offset={offset}")
@@ -71,11 +72,11 @@ class CKANScraper(BaseScraper):
             resp.raise_for_status()
             data = resp.json()
 
-            if not data.get('success'):
+            if not data.get("success"):
                 self.logger.error(f"CKAN API error: {data}")
                 break
 
-            records = data['result']['records']
+            records = data["result"]["records"]
             if not records:
                 break
 
@@ -85,7 +86,7 @@ class CKANScraper(BaseScraper):
                     events.append(event)
 
             offset += len(records)
-            total = data['result'].get('total', 0)
+            total = data["result"].get("total", 0)
             self.logger.info(f"  Got {len(records)} records ({offset}/{total})")
 
             if offset >= total:

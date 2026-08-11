@@ -7,7 +7,8 @@ Includes city council meetings, commission meetings, and special events.
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
 from datetime import datetime, timedelta
@@ -15,7 +16,6 @@ from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
 from lib.utils import DEFAULT_HEADERS, MONTH_MAP
 
@@ -26,8 +26,8 @@ class SonomaCityScraper(BaseScraper):
     name = "City of Sonoma"
     domain = "sonomacity.org"
 
-    BASE_URL = 'https://www.sonomacity.org'
-    CALENDAR_URL = f'{BASE_URL}/calendar'
+    BASE_URL = "https://www.sonomacity.org"
+    CALENDAR_URL = f"{BASE_URL}/calendar"
     DEFAULT_LOCATION = "City Council Chambers, 177 First St. West, Sonoma, CA 95476"
 
     def fetch_events(self) -> list[dict[str, Any]]:
@@ -40,13 +40,13 @@ class SonomaCityScraper(BaseScraper):
 
     def _parse_events(self, html_content: str) -> list[dict[str, Any]]:
         """Parse events from the calendar page."""
-        soup = BeautifulSoup(html_content, 'html.parser')
+        soup = BeautifulSoup(html_content, "html.parser")
         events = []
         seen_urls = set()
 
-        for link in soup.find_all('a', href=re.compile(r'/event/')):
+        for link in soup.find_all("a", href=re.compile(r"/event/")):
             try:
-                href = link.get('href', '')
+                href = link.get("href", "")
                 if not href or href in seen_urls:
                     continue
 
@@ -54,16 +54,17 @@ class SonomaCityScraper(BaseScraper):
                 if not title or len(title) < 3:
                     continue
 
-                parent = link.find_parent(['article', 'div', 'li'])
+                parent = link.find_parent(["article", "div", "li"])
                 if not parent:
                     continue
 
-                parent_text = parent.get_text(' ', strip=True)
+                parent_text = parent.get_text(" ", strip=True)
 
                 # Parse date: "Feb 4 2026" or "Feb 4, 2026"
                 date_match = re.search(
-                    r'(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2}),?\s+(\d{4})',
-                    parent_text, re.IGNORECASE
+                    r"(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2}),?\s+(\d{4})",
+                    parent_text,
+                    re.IGNORECASE,
                 )
                 if not date_match:
                     continue
@@ -77,7 +78,7 @@ class SonomaCityScraper(BaseScraper):
                     continue
 
                 # Parse time: "6:00pm - 9:00pm" or "6:00pm"
-                time_match = re.search(r'(\d{1,2}:\d{2})\s*(am|pm)', parent_text, re.IGNORECASE)
+                time_match = re.search(r"(\d{1,2}:\d{2})\s*(am|pm)", parent_text, re.IGNORECASE)
                 if time_match:
                     time_str = f"{time_match.group(1)} {time_match.group(2)}"
                     try:
@@ -85,13 +86,13 @@ class SonomaCityScraper(BaseScraper):
                         dt_start = datetime(year, month, day, time_obj.hour, time_obj.minute)
                     except ValueError:
                         dt_start = datetime(year, month, day, 18, 0)
-                elif 'all day' in parent_text.lower():
+                elif "all day" in parent_text.lower():
                     dt_start = datetime(year, month, day, 0, 0)
                 else:
                     dt_start = datetime(year, month, day, 18, 0)
 
                 # Parse end time
-                end_match = re.search(r'-\s*(\d{1,2}:\d{2})\s*(am|pm)', parent_text, re.IGNORECASE)
+                end_match = re.search(r"-\s*(\d{1,2}:\d{2})\s*(am|pm)", parent_text, re.IGNORECASE)
                 if end_match:
                     end_time_str = f"{end_match.group(1)} {end_match.group(2)}"
                     try:
@@ -104,19 +105,21 @@ class SonomaCityScraper(BaseScraper):
 
                 seen_urls.add(href)
 
-                full_url = href if href.startswith('http') else self.BASE_URL + href
+                full_url = href if href.startswith("http") else self.BASE_URL + href
 
                 # Get location if mentioned
                 location = self.DEFAULT_LOCATION
 
-                events.append({
-                    'title': title,
-                    'url': full_url,
-                    'dtstart': dt_start,
-                    'dtend': dt_end,
-                    'location': location,
-                    'description': f'City of Sonoma event. More info: {full_url}'
-                })
+                events.append(
+                    {
+                        "title": title,
+                        "url": full_url,
+                        "dtstart": dt_start,
+                        "dtend": dt_end,
+                        "location": location,
+                        "description": f"City of Sonoma event. More info: {full_url}",
+                    }
+                )
 
                 self.logger.info(f"Found event: {title} on {dt_start}")
 
@@ -127,5 +130,5 @@ class SonomaCityScraper(BaseScraper):
         return events
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     SonomaCityScraper.main()

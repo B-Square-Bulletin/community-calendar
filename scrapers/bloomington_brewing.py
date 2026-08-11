@@ -21,7 +21,8 @@ Usage:
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import argparse
 import logging
@@ -29,29 +30,28 @@ import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from typing import Any
-from urllib.request import urlopen, Request
 from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 from icalendar import Calendar as ICalendar
-
 from lib.base import BaseScraper
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 # Use HTTP — HTTPS triggers LibreSSL handshake failure on macOS with this server
 BASE_URL = "http://bloomingtonbrew.com"
 SITEMAP_URL = f"{BASE_URL}/sitemap.xml"
 HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 '
-                  '(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-    'Accept': 'text/html,application/xhtml+xml,text/calendar,*/*',
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,text/calendar,*/*",
 }
 TZ = ZoneInfo("America/Indiana/Indianapolis")
 
 # Match /events/<year>/<month>/<day>/<slug> paths (not the /events listing itself)
-_EVENT_PATH_RE = re.compile(r'/events/\d{4}/.+')
+_EVENT_PATH_RE = re.compile(r"/events/\d{4}/.+")
 
 
 class BloomingtonBrewingScraper(BaseScraper):
@@ -77,14 +77,14 @@ class BloomingtonBrewingScraper(BaseScraper):
             self.logger.error("Could not fetch sitemap")
             return []
 
-        text = data.decode('utf-8')
+        text = data.decode("utf-8")
         # Extract <loc> entries that match event paths
-        locs = re.findall(r'<loc>(https?://[^<]+)</loc>', text)
+        locs = re.findall(r"<loc>(https?://[^<]+)</loc>", text)
         event_urls = []
         seen = set()
         for loc in locs:
             # Normalize to HTTP base (sitemap may say www.bloomingtonbrew.com)
-            path = re.sub(r'https?://(?:www\.)?bloomingtonbrew\.com', '', loc)
+            path = re.sub(r"https?://(?:www\.)?bloomingtonbrew\.com", "", loc)
             if _EVENT_PATH_RE.match(path) and path not in seen:
                 seen.add(path)
                 event_urls.append(f"{BASE_URL}{path}")
@@ -107,18 +107,19 @@ class BloomingtonBrewingScraper(BaseScraper):
             self.logger.debug(f"iCal parse error for {url}: {e}")
             return []
 
-        for comp in cal.walk('VEVENT'):
-            dtstart_prop = comp.get('dtstart')
+        for comp in cal.walk("VEVENT"):
+            dtstart_prop = comp.get("dtstart")
             if not dtstart_prop:
                 continue
 
             dt = dtstart_prop.dt
 
             # Normalize to aware datetime for comparison
-            if hasattr(dt, 'hour'):
+            if hasattr(dt, "hour"):
                 start_aware = dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
             else:
                 import datetime as _dt
+
                 start_aware = _dt.datetime.combine(dt, _dt.time.min).replace(tzinfo=timezone.utc)
 
             if start_aware < now:
@@ -127,28 +128,33 @@ class BloomingtonBrewingScraper(BaseScraper):
             dtstart_local = start_aware.astimezone(TZ)
 
             dtend = None
-            dtend_prop = comp.get('dtend')
+            dtend_prop = comp.get("dtend")
             if dtend_prop:
                 end_dt = dtend_prop.dt
-                if hasattr(end_dt, 'hour'):
+                if hasattr(end_dt, "hour"):
                     end_aware = end_dt if end_dt.tzinfo else end_dt.replace(tzinfo=timezone.utc)
                 else:
                     import datetime as _dt
-                    end_aware = _dt.datetime.combine(end_dt, _dt.time.min).replace(tzinfo=timezone.utc)
+
+                    end_aware = _dt.datetime.combine(end_dt, _dt.time.min).replace(
+                        tzinfo=timezone.utc
+                    )
                 dtend = end_aware.astimezone(TZ)
 
-            title = str(comp.get('summary', 'Untitled'))
-            location = str(comp.get('location', ''))
-            description = str(comp.get('description', ''))
+            title = str(comp.get("summary", "Untitled"))
+            location = str(comp.get("location", ""))
+            description = str(comp.get("description", ""))
 
-            events.append({
-                'title': title,
-                'dtstart': dtstart_local,
-                'dtend': dtend,
-                'location': location,
-                'description': description[:500],
-                'url': url,
-            })
+            events.append(
+                {
+                    "title": title,
+                    "dtstart": dtstart_local,
+                    "dtend": dtend,
+                    "location": location,
+                    "description": description[:500],
+                    "url": url,
+                }
+            )
 
         return events
 
@@ -173,8 +179,8 @@ class BloomingtonBrewingScraper(BaseScraper):
 
 def main():
     parser = argparse.ArgumentParser(description="Scrape Bloomington Brewing Co. events")
-    parser.add_argument('--output', '-o', help='Output ICS file')
-    parser.add_argument('--debug', action='store_true')
+    parser.add_argument("--output", "-o", help="Output ICS file")
+    parser.add_argument("--debug", action="store_true")
     args = parser.parse_args()
     if args.debug:
         logging.getLogger().setLevel(logging.DEBUG)
@@ -182,5 +188,5 @@ def main():
     scraper.run(args.output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

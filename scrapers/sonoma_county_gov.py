@@ -7,13 +7,13 @@ Uses JSON API endpoint - includes county meetings, parks events, and more.
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
 
-from datetime import datetime, timedelta
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
+
+from datetime import datetime
 from typing import Any
 
 import requests
-
 from lib.base import BaseScraper
 
 
@@ -23,8 +23,9 @@ class SonomaCountyGovScraper(BaseScraper):
     name = "Sonoma County Government"
     domain = "sonomacounty.gov"
 
-    API_URL = 'https://sonomacounty.gov/api/FeedData/CalendarEvents'
-    PAGE_ID = 'x116193'
+    API_URL = "https://sonomacounty.gov/api/FeedData/CalendarEvents"
+    PAGE_ID = "x116193"
+
     def fetch_events(self) -> list[dict[str, Any]]:
         """Fetch events from the JSON API."""
         results = []
@@ -40,16 +41,9 @@ class SonomaCountyGovScraper(BaseScraper):
             month = (start_date.month + i - 1) % 12 + 1
 
             month_start = f"{year}-{month:02d}-01"
-            if month == 12:
-                month_end = f"{year + 1}-01-01"
-            else:
-                month_end = f"{year}-{month + 1:02d}-01"
+            month_end = f"{year + 1}-01-01" if month == 12 else f"{year}-{month + 1:02d}-01"
 
-            params = {
-                'pageId': self.PAGE_ID,
-                'start': month_start,
-                'end': month_end
-            }
+            params = {"pageId": self.PAGE_ID, "start": month_start, "end": month_end}
 
             self.logger.info(f"Fetching events from {month_start} to {month_end}")
             response = requests.get(self.API_URL, params=params, timeout=30)
@@ -64,17 +58,17 @@ class SonomaCountyGovScraper(BaseScraper):
 
     def _parse_event(self, event_data: dict, seen_urls: set) -> dict[str, Any] | None:
         """Parse a single event from JSON data."""
-        title = event_data.get('title', '').strip()
+        title = event_data.get("title", "").strip()
         if not title:
             return None
 
         # Skip canceled events
-        if event_data.get('className') == 'canceled':
+        if event_data.get("className") == "canceled":
             return None
-        if title.upper().startswith('CANCELED'):
+        if title.upper().startswith("CANCELED"):
             return None
 
-        url = event_data.get('url', '')
+        url = event_data.get("url", "")
 
         # Dedupe by URL
         if url in seen_urls:
@@ -82,7 +76,7 @@ class SonomaCountyGovScraper(BaseScraper):
         seen_urls.add(url)
 
         # Parse start time
-        start_str = event_data.get('start', '')
+        start_str = event_data.get("start", "")
         if not start_str:
             return None
 
@@ -96,7 +90,7 @@ class SonomaCountyGovScraper(BaseScraper):
                 return None
 
         # Parse end time
-        end_str = event_data.get('end', '')
+        end_str = event_data.get("end", "")
         if end_str:
             try:
                 dt_end = datetime.strptime(end_str, "%Y-%m-%d %H:%M:%S")
@@ -108,14 +102,14 @@ class SonomaCountyGovScraper(BaseScraper):
         self.logger.info(f"Found event: {title} on {dt_start}")
 
         return {
-            'title': title,
-            'url': url,
-            'dtstart': dt_start,
-            'dtend': dt_end,
-            'description': event_data.get('abstract', ''),
-            'location': 'Sonoma County, CA'
+            "title": title,
+            "url": url,
+            "dtstart": dt_start,
+            "dtend": dt_end,
+            "description": event_data.get("abstract", ""),
+            "location": "Sonoma County, CA",
         }
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     SonomaCountyGovScraper.main()

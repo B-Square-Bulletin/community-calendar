@@ -5,7 +5,8 @@ https://parks.sonomacounty.ca.gov/play/calendar
 """
 
 import sys
-sys.path.insert(0, str(__file__).rsplit('/', 1)[0])
+
+sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
 from datetime import datetime
@@ -13,7 +14,6 @@ from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
-
 from lib.base import BaseScraper
 
 
@@ -23,7 +23,7 @@ class SonomaParksScraper(BaseScraper):
     name = "Sonoma County Parks"
     domain = "parks.sonomacounty.ca.gov"
 
-    CALENDAR_URL = 'https://parks.sonomacounty.ca.gov/play/calendar'
+    CALENDAR_URL = "https://parks.sonomacounty.ca.gov/play/calendar"
 
     def fetch_events(self) -> list[dict[str, Any]]:
         """Fetch and parse events from the calendar page."""
@@ -35,34 +35,34 @@ class SonomaParksScraper(BaseScraper):
 
     def _parse_events(self, html_content: str) -> list[dict[str, Any]]:
         """Parse events from the calendar HTML."""
-        soup = BeautifulSoup(html_content, 'html.parser')
+        soup = BeautifulSoup(html_content, "html.parser")
         events = []
 
-        for listing in soup.find_all('div', class_='listing'):
+        for listing in soup.find_all("div", class_="listing"):
             try:
                 # Get title and URL
-                title_link = listing.find('h3') or listing.find('h4')
+                title_link = listing.find("h3") or listing.find("h4")
                 if not title_link:
                     continue
 
-                anchor = title_link.find('a')
+                anchor = title_link.find("a")
                 if not anchor:
                     continue
 
                 title = anchor.get_text(strip=True)
                 # Clean up "sold out |" prefix
-                title = re.sub(r'^sold out\s*\|\s*', '', title, flags=re.IGNORECASE)
-                url = anchor.get('href', '')
+                title = re.sub(r"^sold out\s*\|\s*", "", title, flags=re.IGNORECASE)
+                url = anchor.get("href", "")
 
                 # Get event content div
-                content = listing.find('div', class_='content')
+                content = listing.find("div", class_="content")
                 if not content:
                     continue
 
-                text = content.get_text(' ', strip=True)
+                text = content.get_text(" ", strip=True)
 
                 # Parse date - format: "February 3, 2026"
-                date_match = re.search(r'(\w+)\s+(\d{1,2}),\s+(\d{4})', text)
+                date_match = re.search(r"(\w+)\s+(\d{1,2}),\s+(\d{4})", text)
                 if not date_match:
                     continue
 
@@ -70,15 +70,16 @@ class SonomaParksScraper(BaseScraper):
 
                 # Parse time - format: "4:00 pm - 5:30 pm"
                 time_match = re.search(
-                    r'(\d{1,2}:\d{2})\s*(am|pm)\s*-\s*(\d{1,2}:\d{2})\s*(am|pm)',
-                    text, re.IGNORECASE
+                    r"(\d{1,2}:\d{2})\s*(am|pm)\s*-\s*(\d{1,2}:\d{2})\s*(am|pm)",
+                    text,
+                    re.IGNORECASE,
                 )
 
                 if time_match:
                     start_time_str = f"{time_match.group(1)} {time_match.group(2)}"
                     end_time_str = f"{time_match.group(3)} {time_match.group(4)}"
                 else:
-                    single_time = re.search(r'(\d{1,2}:\d{2})\s*(am|pm)', text, re.IGNORECASE)
+                    single_time = re.search(r"(\d{1,2}:\d{2})\s*(am|pm)", text, re.IGNORECASE)
                     if single_time:
                         start_time_str = f"{single_time.group(1)} {single_time.group(2)}"
                         end_time_str = None
@@ -89,9 +90,13 @@ class SonomaParksScraper(BaseScraper):
                 # Parse the datetime
                 try:
                     date_str = f"{month_name} {day}, {year}"
-                    dt_start = datetime.strptime(f"{date_str} {start_time_str}", "%B %d, %Y %I:%M %p")
+                    dt_start = datetime.strptime(
+                        f"{date_str} {start_time_str}", "%B %d, %Y %I:%M %p"
+                    )
                     if end_time_str:
-                        dt_end = datetime.strptime(f"{date_str} {end_time_str}", "%B %d, %Y %I:%M %p")
+                        dt_end = datetime.strptime(
+                            f"{date_str} {end_time_str}", "%B %d, %Y %I:%M %p"
+                        )
                     else:
                         dt_end = dt_start
                 except ValueError as e:
@@ -99,25 +104,30 @@ class SonomaParksScraper(BaseScraper):
                     continue
 
                 # Get location if present
-                location_match = re.search(r'\|\s*([^|]+?)\s*(?:$|PETALUMA|Description)', text)
+                location_match = re.search(r"\|\s*([^|]+?)\s*(?:$|PETALUMA|Description)", text)
                 location = None
                 if location_match:
                     loc_text = location_match.group(1).strip()
-                    if any(word in loc_text.lower() for word in ['park', 'trail', 'regional', 'preserve']):
+                    if any(
+                        word in loc_text.lower()
+                        for word in ["park", "trail", "regional", "preserve"]
+                    ):
                         location = loc_text
 
                 # Get description
-                desc_elem = listing.find('p')
-                description = desc_elem.get_text(strip=True) if desc_elem else ''
+                desc_elem = listing.find("p")
+                description = desc_elem.get_text(strip=True) if desc_elem else ""
 
-                events.append({
-                    'title': title,
-                    'url': url,
-                    'dtstart': dt_start,
-                    'dtend': dt_end,
-                    'location': location,
-                    'description': description
-                })
+                events.append(
+                    {
+                        "title": title,
+                        "url": url,
+                        "dtstart": dt_start,
+                        "dtend": dt_end,
+                        "location": location,
+                        "description": description,
+                    }
+                )
 
                 self.logger.info(f"Found event: {title} on {dt_start}")
 
@@ -128,5 +138,5 @@ class SonomaParksScraper(BaseScraper):
         return events
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     SonomaParksScraper.main()
