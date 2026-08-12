@@ -270,7 +270,7 @@ def show_pairs(events, algos, threshold, limit):
 
         if all_pairs:
             scores = [p["score"] for p in all_pairs]
-            buckets = defaultdict(int)
+            buckets: defaultdict[str, int] = defaultdict(int)
             for s in scores:
                 bucket = f"{int(s * 10) / 10:.1f}-{int(s * 10) / 10 + 0.1:.1f}"
                 buckets[bucket] += 1

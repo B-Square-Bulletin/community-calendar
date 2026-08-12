@@ -582,7 +582,7 @@ def dedupe_cross_source(events, input_dir):
     (handles aggregators that append "at Venue Name" to titles).
     """
     # Group events by dedup key
-    groups = {}
+    groups: dict[tuple[str, str], list[dict[str, Any]]] = {}
     for event in events:
         key = get_dedup_key(event)
         if key not in groups:
@@ -593,7 +593,7 @@ def dedupe_cross_source(events, input_dir):
     # on the same date. This handles "Hands on a Hardbody" vs
     # "Hands on a Hardbody at Spreckels Performing Arts Center".
     # Only merge if the shorter title is at least 12 chars (avoid false positives).
-    date_keys = {}
+    date_keys: dict[str, list[tuple[str, str]]] = {}
     for key in groups:
         date_str, _norm_title = key
         if date_str not in date_keys:
@@ -737,7 +737,7 @@ def dedupe_fuzzy(events, input_dir):
     log_file.write(f"Total events: {len(events)}\n\n")
 
     # Group by date
-    by_date = {}
+    by_date: dict[str, list[dict[str, Any]]] = {}
     for event in events:
         date_str = event["dtstart"].strftime("%Y-%m-%d")
         if date_str not in by_date:

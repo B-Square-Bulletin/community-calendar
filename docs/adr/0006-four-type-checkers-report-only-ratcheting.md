@@ -19,11 +19,11 @@ We wanted formatting and linting enforced locally and (eventually) in CI, but we
 Run **four type checkers** (ty, pyrefly, pyright, zuban in mypy mode) plus **ruff** (format + lint), with a phased enforcement policy that is now complete:
 
 1. **Ruff gates.** `make lint` fails on `ruff format` and `ruff check` violations. `legacy/` is excluded (abandoned code).
-2. **Type checkers gate.** `make lint` runs all four checkers and fails on any diagnostics. PR CI runs the same strict target (`make lint`) and blocks merges, so an introduced finding fails the PR. The checkers were report-only during the ratchet (phase 1) and flipped to gating once the baseline reached zero.
+2. **Type checkers gate.** `make lint` runs all four checkers and fails on any diagnostics. PR CI runs the same strict target (`make lint`) and blocks merges, so an introduced finding fails the PR. The checkers were report-only during the ratchet (phase 1) and flipped to gating once the baseline reached zero. After the flip, the strictness settings were tightened — pyright moved from `basic` to `standard` (zero new findings), and zuban/mypy turn on `check_untyped_defs` so the bodies of unannotated functions are checked instead of silently skipped.
 3. **Ratcheting complete.** The baseline was driven to zero across `scripts/`, `scrapers/`, and `tests/` with annotations and narrowing only. The repo carries no `# type: ignore` comments, so any future suppression must be justified at the line it silences.
 4. **Not in pre-commit.** The four checkers are project-wide and slow; pre-commit runs only ruff (fast, scoped to staged files), so commits stay quick while the full suite runs via `make lint` and CI.
 
-Configuration for all checkers lives in `pyproject.toml` (`[tool.pyright]`, `[tool.ty]`, `[tool.pyrefly]`, and a `[tool.mypy]` section read by zuban's mypy mode — zuban follows mypy's convention of `[tool.mypy]` in `pyproject.toml`, not a top-level `[mypy]`). All four checkers exclude the same directories (`legacy/`, `graphify-out/`, `.venv`, `.worktrees`) so they cover the same file set.
+Configuration for all checkers lives in `pyproject.toml` (`[tool.pyright]`, `[tool.ty]`, `[tool.pyrefly]`, and a `[tool.mypy]` section read by zuban's mypy mode — zuban follows mypy's convention of `[tool.mypy]` in `pyproject.toml`, not a top-level `[mypy]`). All four checkers exclude the same directories (`legacy/`, `graphify-out/`, `.venv`, `.worktrees`) so they cover the same file set. pyright runs `typeCheckingMode = "standard"`; zuban/mypy run with `check_untyped_defs = true` (untyped function bodies are checked, not skipped) and `warn_unused_ignores = true`.
 
 ### Type stubs
 

@@ -202,9 +202,9 @@ class ElfsightCalendarScraper(BaseScraper):
         super().__init__()
         self.location_filter: list[str] = []
         self.event_type_filter: list[str] = []
-        self._settings = None
-        self._locations_map = {}
-        self._event_types_map = {}
+        self._settings: dict | None = None
+        self._locations_map: dict[str, str] = {}
+        self._event_types_map: dict[str, str] = {}
 
     def fetch_settings(self) -> dict | None:
         """Fetch and cache the Elfsight widget settings."""
