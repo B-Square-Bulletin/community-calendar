@@ -53,7 +53,8 @@ class AgaKhanMuseumScraper(BaseScraper):
         urls: list[str] = []
         seen: set[str] = set()
         for link in section.select("a.c-event-card__link[href]"):
-            url = link.get("href", "").strip()
+            raw_url = link.get("href", "")
+            url = raw_url.strip() if isinstance(raw_url, str) else ""
             if not url:
                 continue
             url = urljoin(self.page_url, url)
@@ -340,16 +341,10 @@ class AgaKhanMuseumScraper(BaseScraper):
                 month_name = _clean(month_heading.get_text(" ", strip=True))
 
             for card in block.select("div.c-col-bio__details-container"):
-                performer = (
-                    _clean(card.select_one("h3.c-col-bio__name").get_text(" ", strip=True))
-                    if card.select_one("h3.c-col-bio__name")
-                    else ""
-                )
-                date_label = (
-                    _clean(card.select_one("h4.c-col-bio__role").get_text(" ", strip=True))
-                    if card.select_one("h4.c-col-bio__role")
-                    else ""
-                )
+                name_el = card.select_one("h3.c-col-bio__name")
+                performer = _clean(name_el.get_text(" ", strip=True)) if name_el else ""
+                role_el = card.select_one("h4.c-col-bio__role")
+                date_label = _clean(role_el.get_text(" ", strip=True)) if role_el else ""
                 if not performer or not date_label or not month_name:
                     continue
 
@@ -396,7 +391,12 @@ class AgaKhanMuseumScraper(BaseScraper):
         date_label = _clean(date_el.get_text(" ", strip=True)) if date_el else ""
         time_label = _clean(time_el.get_text(" ", strip=True)) if time_el else ""
         venue_label = _clean(venue_el.get_text(" ", strip=True)) if venue_el else ""
-        image_src = image_url.get("src") if image_url else None
+        image_src: str | None
+        if image_url:
+            raw_src = image_url.get("src")
+            image_src = raw_src if isinstance(raw_src, str) else None
+        else:
+            image_src = None
         location = self.build_location(venue_label)
         description = self.extract_description(soup)
 

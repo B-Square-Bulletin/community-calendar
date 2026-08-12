@@ -54,6 +54,8 @@ class ComedyAtticScraper(BaseScraper):
                 continue
             title = header.get_text(strip=True)
             url = header.get("href", "")
+            if not isinstance(url, str):
+                url = ""
             if url and not url.startswith("http"):
                 url = f"https://comedyattic.com{url}"
             event_entries.append((title, url))
@@ -93,6 +95,8 @@ class ComedyAtticScraper(BaseScraper):
         events = []
 
         for script in soup.select('script[type="application/ld+json"]'):
+            if script.string is None:
+                continue
             try:
                 data = json.loads(script.string)
             except (json.JSONDecodeError, TypeError):

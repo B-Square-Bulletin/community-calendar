@@ -11,7 +11,7 @@ from urllib.parse import unquote, urljoin
 from zoneinfo import ZoneInfo
 
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 from lib.base import BaseScraper
 
 
@@ -54,7 +54,8 @@ class JCCCScraper(BaseScraper):
             if not title_el:
                 continue
             title = _clean(title_el.get_text(" ", strip=True))
-            url = urljoin(self.page_url, title_el.get("href", ""))
+            raw_href = title_el.get("href", "")
+            url = urljoin(self.page_url, raw_href) if isinstance(raw_href, str) else ""
             date_texts = [
                 _clean(node.get_text(" ", strip=True))
                 for node in article.select(".field--name-field-dates .field__item")
@@ -151,11 +152,12 @@ class JCCCScraper(BaseScraper):
             return value
         return datetime.combine(value, datetime.min.time()).replace(tzinfo=self.tz)
 
-    def parse_data_uri_location(self, article: BeautifulSoup) -> str:
+    def parse_data_uri_location(self, article: Tag) -> str:
         link = article.select_one('a.dropdown-item[href^="data:text/calendar"]')
         if not link:
             return self.default_location
-        href = link.get("href", "")
+        raw_href = link.get("href", "")
+        href = raw_href if isinstance(raw_href, str) else ""
         payload = unquote(href.split(",", 1)[1]) if "," in href else ""
         match = re.search(r"^LOCATION:(.+)$", payload, re.M)
         return _clean(match.group(1)) if match else self.default_location

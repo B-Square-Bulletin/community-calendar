@@ -31,7 +31,7 @@ make setup-python
 or:
 
 ```bash
-pip install -r requirements-dev.txt
+uv sync
 ```
 
 ### Database Tests

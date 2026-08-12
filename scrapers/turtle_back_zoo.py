@@ -70,8 +70,8 @@ def _parse_time(time_str: str) -> tuple[int, int]:
     def parse_one(t: str) -> int:
         t = re.sub(r"[ap]m", "", t, flags=re.IGNORECASE).strip()
         if ":" in t:
-            h, _ = t.split(":")
-            h = int(h)
+            hour_str, _ = t.split(":")
+            h = int(hour_str)
         else:
             h = int(t)
         if ampm == "pm" and h < 12:

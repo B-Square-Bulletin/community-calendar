@@ -74,7 +74,7 @@ class MadamsOrganScraper(RssScraper):
 
     def _clean_description(self, entry: dict) -> str:
         html = ""
-        content = entry.get("content") or []
+        content: list[dict[str, Any]] = entry.get("content") or []
         if content:
             html = content[0].get("value", "")
         if not html:

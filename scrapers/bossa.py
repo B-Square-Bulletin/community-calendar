@@ -24,7 +24,7 @@ from typing import Any
 from urllib.parse import urljoin
 from zoneinfo import ZoneInfo
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 from lib.base import BaseScraper
 
 LISTING_URL = "https://bossadc.com/events/"
@@ -51,7 +51,10 @@ class BossaScraper(BaseScraper):
             room_el = item.select_one("span.main-head")
             if not link:
                 continue
-            href = link.get("href", "").strip()
+            href_value = link.get("href", "")
+            if not isinstance(href_value, str):
+                continue
+            href = href_value.strip()
             if not href:
                 continue
             seeds.append(
@@ -79,7 +82,8 @@ class BossaScraper(BaseScraper):
         if not time_el:
             return None
 
-        dt_raw = (time_el.get("datetime") or "").strip()
+        dt_value = time_el.get("datetime")
+        dt_raw = dt_value.strip() if isinstance(dt_value, str) else ""
         try:
             dtstart = datetime.strptime(dt_raw, "%Y-%m-%d %H:%M").replace(
                 tzinfo=ZoneInfo(self.timezone)
@@ -147,7 +151,10 @@ class BossaScraper(BaseScraper):
         attr_value: str,
     ) -> str:
         meta = soup.find("meta", attrs={attr_name: attr_value})
-        return meta.get("content", "").strip() if meta else ""
+        if not isinstance(meta, Tag):
+            return ""
+        content = meta.get("content", "")
+        return content.strip() if isinstance(content, str) else ""
 
     @staticmethod
     def _extract_labeled_value(soup: BeautifulSoup, label: str) -> str:

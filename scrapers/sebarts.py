@@ -14,7 +14,7 @@ from datetime import datetime, timedelta
 from typing import Any
 from urllib.parse import urljoin
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 from lib.base import BaseScraper
 from lib.utils import fetch_with_retry
 
@@ -73,7 +73,13 @@ class SebArtsScraper(BaseScraper):
             title = title_elem.text.strip()
         else:
             meta_title = soup.find("meta", property="og:title")
-            title = meta_title["content"].strip() if meta_title else event_link["title"]
+            if isinstance(meta_title, Tag):
+                meta_content = meta_title.get("content")
+                title = (
+                    meta_content.strip() if isinstance(meta_content, str) else event_link["title"]
+                )
+            else:
+                title = event_link["title"]
 
         # Find description
         description_elem = soup.find("div", class_="sqs-block-content")

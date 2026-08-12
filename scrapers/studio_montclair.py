@@ -100,6 +100,7 @@ class StudioMontclairScraper(BaseScraper):
 
         # 1. Exhibition dates: "January 30 to February 27, 2026"
         # Handle optional spaces around commas and line breaks in original
+        end_dt: datetime | None = None
         exh_match = re.search(
             r"(?:Exhibition Dates?:?\s*)?"
             r"((?:January|February|March|April|May|June|July|August|September|October|November|December)"

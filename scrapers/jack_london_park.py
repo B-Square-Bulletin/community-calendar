@@ -40,7 +40,7 @@ class JackLondonParkScraper(BaseScraper):
 
         for link in event_links:
             event_url = link.get("href")
-            if not event_url:
+            if not event_url or not isinstance(event_url, str):
                 continue
 
             if not event_url.startswith("http"):

@@ -73,6 +73,7 @@ class OpenMikesScraper(BaseScraper):
 
     def fetch_events(self) -> list[dict[str, Any]]:
         url = self.default_url
+        assert url is not None
         req = Request(url, headers={"User-Agent": "Mozilla/5.0"})
         with urlopen(req, timeout=30) as resp:
             html = resp.read().decode("utf-8", errors="replace")

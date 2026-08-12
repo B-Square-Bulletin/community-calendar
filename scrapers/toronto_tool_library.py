@@ -143,6 +143,8 @@ class TorontoToolLibraryScraper(BaseScraper):
 
         if start_time:
             tz = ZoneInfo(self.timezone)
+            dtstart: date
+            dtend: date | None
             dtstart = datetime(
                 start_date.year,
                 start_date.month,

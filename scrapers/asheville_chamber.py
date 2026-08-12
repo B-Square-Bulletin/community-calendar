@@ -109,7 +109,10 @@ class AshevilleChamberScraper(BaseScraper):
         skipped_past = 0
 
         for entry in feed.entries:
-            title = entry.get("title", "").strip()
+            title = entry.get("title", "")
+            if not isinstance(title, str):
+                continue
+            title = title.strip()
             name, dtstart, dtend = _parse_title(title)
 
             if dtstart is None:
@@ -124,6 +127,8 @@ class AshevilleChamberScraper(BaseScraper):
                 continue
 
             desc = entry.get("summary", "") or ""
+            if not isinstance(desc, str):
+                desc = ""
             desc = html_mod.unescape(desc)
             desc = re.sub(r"<[^>]+>", " ", desc).strip()
             desc = re.sub(r"\s+", " ", desc)

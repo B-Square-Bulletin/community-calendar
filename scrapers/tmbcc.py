@@ -114,7 +114,7 @@ YEAR_ANY_RE = re.compile(r"\b(20\d{2})\b")
 TIME_RE = re.compile(r"\b(\d{1,2})(?::(\d{2}))?\s*([ap])\.?m\.?\b", re.IGNORECASE)
 
 
-def clean_text(raw: str) -> str:
+def clean_text(raw: str | None) -> str:
     """Strip HTML tags/entities and normalize whitespace."""
     txt = html_mod.unescape(raw or "")
     txt = re.sub(r"<[^>]+>", " ", txt)

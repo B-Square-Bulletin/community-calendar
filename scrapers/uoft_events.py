@@ -167,11 +167,11 @@ class UofTEventsScraper(BaseScraper):
 
         # Deduplicate against aggregate page
         new_events = []
-        for e in events:
-            if e.get("url") and e["url"] in seen_urls:
+        for event in events:
+            if event.get("url") and event["url"] in seen_urls:
                 continue
-            seen_urls.add(e.get("url", ""))
-            new_events.append(e)
+            seen_urls.add(event.get("url", ""))
+            new_events.append(event)
 
         if new_events:
             self.logger.info(f"{dept}: {len(new_events)} new events (from {len(events)} total)")

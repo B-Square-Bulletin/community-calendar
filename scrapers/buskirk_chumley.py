@@ -8,7 +8,7 @@ from typing import Any, ClassVar
 from zoneinfo import ZoneInfo
 
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 
 sys.path.insert(0, str(__file__).rsplit("/", 2)[0])
 from lib.base import BaseScraper
@@ -86,7 +86,7 @@ class BuskirkChumleyScraper(BaseScraper):
         self.logger.info(f"Found {len(events)} events")
         return events
 
-    def _parse_tile(self, tile: BeautifulSoup, tz: ZoneInfo) -> dict[str, Any] | None:
+    def _parse_tile(self, tile: Tag, tz: ZoneInfo) -> dict[str, Any] | None:
         """Parse a single event tile."""
         try:
             # Get the thumb div which contains date info
@@ -134,7 +134,8 @@ class BuskirkChumleyScraper(BaseScraper):
                 return None
 
             title = title_link.get_text(strip=True)
-            url = title_link.get("href", "")
+            href_value = title_link.get("href", "")
+            url = href_value if isinstance(href_value, str) else ""
             if url and not url.startswith("http"):
                 url = f"{self.base_url}{url}"
 

@@ -49,7 +49,7 @@ class HabitatScraper(BaseScraper):
         response.raise_for_status()
 
         soup = BeautifulSoup(response.text, "html.parser")
-        events_section = soup.find(id="events")
+        events_section = soup.select_one("#events")
         if not events_section:
             self.logger.warning("No #events section found")
             return []

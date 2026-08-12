@@ -114,7 +114,7 @@ class MobilizeScraper(BaseScraper):
 
         # Event URL: build from org slug + event id
         event_id = item.get("id")
-        org = item.get("organization") or {}
+        org: dict[str, Any] = item.get("organization") or {}
         org_slug = org.get("slug", "") if isinstance(org, dict) else ""
         event_url = (
             f"https://www.mobilize.us/{org_slug}/event/{event_id}/" if org_slug and event_id else ""
@@ -124,7 +124,7 @@ class MobilizeScraper(BaseScraper):
         image_url = item.get("image_url", "")
 
         # Each timeslot becomes a separate event
-        times = item.get("times") or []
+        times: list[dict[str, Any]] = item.get("times") or []
         now = datetime.now(timezone.utc)
         events = []
 

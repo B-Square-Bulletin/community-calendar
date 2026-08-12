@@ -79,7 +79,7 @@ class DavisChamberScraper(BaseScraper):
 
     def _parse_xml(self, xml_content: str) -> list[dict[str, Any]]:
         """Parse events from XML content."""
-        events = []
+        events: list[dict[str, Any]] = []
 
         try:
             root = ET.fromstring(xml_content)

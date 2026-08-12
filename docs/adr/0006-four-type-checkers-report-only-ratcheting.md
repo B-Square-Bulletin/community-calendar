@@ -1,10 +1,12 @@
-# 0006. Four Type Checkers with Report-Only Ratcheting
+# 0006. Four Type Checkers, Ratcheted from Report-Only to Gating
 
 Date: 2026-08-09
 
 ## Status
 
-Accepted
+Accepted. The phased rollout completed 2026-08-12 (issue #60): the type-checker
+baseline is clean across `scripts/`, `scrapers/`, and `tests/`, and all four
+checkers gate in `make lint` and the PR CI `lint` job.
 
 ## Context
 
@@ -14,14 +16,14 @@ We wanted formatting and linting enforced locally and (eventually) in CI, but we
 
 ## Decision
 
-Run **four type checkers** (ty, pyrefly, pyright, zuban in mypy mode) plus **ruff** (format + lint), with a phased enforcement policy:
+Run **four type checkers** (ty, pyrefly, pyright, zuban in mypy mode) plus **ruff** (format + lint), with a phased enforcement policy that is now complete:
 
-1. **Ruff gates now.** `make lint` fails on `ruff format` and `ruff check` violations. `legacy/` is excluded (abandoned code). The existing repo is cleaned up once in phase 1 (auto-fix what ruff can, manually the rest).
-2. **Type checkers are report-only for now.** `make lint` runs all four checkers, captures their exit codes, and prints a summary, but does not fail on their diagnostics. They are configured leniently (e.g. pyright `typeCheckingMode = "basic"`, mypy/zuban defaults) and run over the whole repo.
-3. **Ratcheting.** As files are annotated, the type-checker baseline drops. Once the baseline is clean, `make lint` is flipped to fail on type-checker errors too, and CI inherits the strict target.
-4. **Not in pre-commit.** The four checkers are project-wide and slow; pre-commit runs only ruff (fast, scoped to staged files), so commits stay quick while the full suite runs via `make lint` and, later, CI.
+1. **Ruff gates.** `make lint` fails on `ruff format` and `ruff check` violations. `legacy/` is excluded (abandoned code).
+2. **Type checkers gate.** `make lint` runs all four checkers and fails on any diagnostics. PR CI runs the same strict target (`make lint`) and blocks merges, so an introduced finding fails the PR. The checkers were report-only during the ratchet (phase 1) and flipped to gating once the baseline reached zero.
+3. **Ratcheting complete.** The baseline was driven to zero across `scripts/`, `scrapers/`, and `tests/` with annotations and narrowing only. The repo carries no `# type: ignore` comments, so any future suppression must be justified at the line it silences.
+4. **Not in pre-commit.** The four checkers are project-wide and slow; pre-commit runs only ruff (fast, scoped to staged files), so commits stay quick while the full suite runs via `make lint` and CI.
 
-Configuration for all checkers lives in `pyproject.toml` (`[tool.pyright]`, `[tool.ty]`, `[tool.pyrefly]`, and a `[tool.mypy]` section read by zuban's mypy mode — zuban follows mypy's convention of `[tool.mypy]` in `pyproject.toml`, not a top-level `[mypy]`). All four checkers exclude the same directories (`legacy/`, `graphify-out/`, `.venv`, `.worktrees`) so their report-only baselines cover the same file set.
+Configuration for all checkers lives in `pyproject.toml` (`[tool.pyright]`, `[tool.ty]`, `[tool.pyrefly]`, and a `[tool.mypy]` section read by zuban's mypy mode — zuban follows mypy's convention of `[tool.mypy]` in `pyproject.toml`, not a top-level `[mypy]`). All four checkers exclude the same directories (`legacy/`, `graphify-out/`, `.venv`, `.worktrees`) so they cover the same file set.
 
 ### Type stubs
 
@@ -38,8 +40,8 @@ The dev group includes typeshed stub packages for the scraper backbone libraries
 **Harder:**
 
 - Four checkers produce four overlapping diagnostic sets; triage cost is real
-- Report-only mode means type errors are easy to ignore while the baseline is large
-- Risk that "report-only" lingers — the flip to gating requires someone to actually drive the baseline down
+- All four gate in CI, so an introduced finding in any one of them blocks a PR — stricter than a single-checker setup
+- The full four-checker lint run is slower than ruff alone, so the fast path stays in pre-commit
 
 ## Alternatives Considered
 

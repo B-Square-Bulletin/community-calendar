@@ -20,7 +20,7 @@ from datetime import datetime, timedelta
 from typing import Any
 
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 from lib.base import BaseScraper
 from lib.utils import DEFAULT_HEADERS
 
@@ -55,7 +55,7 @@ class DukeArtsScraper(BaseScraper):
 
         soup = BeautifulSoup(response.text, "html.parser")
         template = soup.find("div", class_="facetwp-template")
-        if not template:
+        if not isinstance(template, Tag):
             self.logger.warning("No facetwp-template found")
             return []
 

@@ -60,16 +60,10 @@ class TorontoCommunityHousingScraper(BaseScraper):
         events = []
 
         for card in cards:
-            title = (
-                _clean(card.select_one("h3").get_text(" ", strip=True))
-                if card.select_one("h3")
-                else ""
-            )
-            excerpt = (
-                _clean(card.select_one("p").get_text(" ", strip=True))
-                if card.select_one("p")
-                else ""
-            )
+            title_el = card.select_one("h3")
+            title = _clean(title_el.get_text(" ", strip=True)) if title_el else ""
+            excerpt_el = card.select_one("p")
+            excerpt = _clean(excerpt_el.get_text(" ", strip=True)) if excerpt_el else ""
             time_el = card.select_one("time")
             address_el = card.select_one("p.address")
             category_el = card.select_one("span.taxonomy")
@@ -78,7 +72,9 @@ class TorontoCommunityHousingScraper(BaseScraper):
                 continue
 
             dtstart, dtend = self.parse_time_block(time_el.get_text(" ", strip=True))
-            if not dtstart or dtend < now:
+            if not dtstart:
+                continue
+            if dtend is None or dtend < now:
                 continue
 
             location = _clean(address_el.get_text(" ", strip=True)) if address_el else ""
@@ -89,7 +85,8 @@ class TorontoCommunityHousingScraper(BaseScraper):
             if category:
                 description_parts.append(f"Category: {category}")
 
-            url = urljoin(self.page_url, card.get("href", ""))
+            raw_href = card.get("href", "")
+            url = urljoin(self.page_url, raw_href) if isinstance(raw_href, str) else ""
             events.append(
                 {
                     "title": title,

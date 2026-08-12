@@ -70,7 +70,7 @@ class TheBishopScraper(BaseScraper):
         # Find all date spans with ISO 8601 datetime
         for date_span in soup.select(".date-display-single[content]"):
             content = date_span.get("content", "")
-            if not content:
+            if not isinstance(content, str) or not content:
                 continue
 
             # Parse ISO datetime: "2026-02-26T21:00:00-05:00"
@@ -92,7 +92,8 @@ class TheBishopScraper(BaseScraper):
 
             # Get URL
             link = parent.select_one(".views-field-title a")
-            url = link.get("href", "") if link else ""
+            href = link.get("href", "") if link else ""
+            url = href if isinstance(href, str) else ""
             if url and not url.startswith("http"):
                 url = f"{self.base_url}{url}"
 

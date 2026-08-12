@@ -62,11 +62,9 @@ jobs:
         run: node scripts/bench_collapse_long.js
 
   lint:
-    # Mirrors the local lint target (make lint): ruff (format + check) gates the
-    # job, while the four type checkers are report-only — scripts/lint_report.sh
-    # prints their findings but never fails on them, so the type-checker
-    # baseline does not block merges while it is being ratcheted down (ADR
-    # 0006; the final ticket in this series flips them to gating too).
+    # Mirrors the local lint target (make lint): ruff (format + check) and the
+    # four type checkers (pyright, ty, pyrefly, zuban) all gate the job, so an
+    # introduced finding fails the PR (ADR 0006 — phased rollout complete).
     name: Lint
     runs-on: ubuntu-latest
     steps:
@@ -79,8 +77,5 @@ jobs:
       - name: Install dependencies
         run: uv sync
 
-      - name: Add venv to PATH
-        run: echo "$GITHUB_WORKSPACE/.venv/bin" >> "$GITHUB_PATH"
-
-      - name: Run lint checks (ruff gates; type checkers report-only)
-        run: bash scripts/lint_report.sh
+      - name: Run lint (ruff + type checkers)
+        run: make lint

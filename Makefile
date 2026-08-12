@@ -1,4 +1,4 @@
-.PHONY: help test test-python test-sql test-all setup-python setup-local teardown-local format lint check export-requirements clean
+.PHONY: help test test-python test-sql test-all setup-python setup-local teardown-local format lint check clean
 
 # Default target
 help:
@@ -9,12 +9,11 @@ help:
 	@echo "  make test-python     - Run Python tests (pytest via uv)"
 	@echo "  make test-sql        - Run database tests (local Supabase via pgTAP)"
 	@echo "  make format          - Auto-format Python code (ruff format)"
-	@echo "  make lint            - Lint Python code (ruff check; type checkers report-only)"
+	@echo "  make lint            - Lint Python code (ruff check; type checkers gate)"
 	@echo "  make check           - Run lint + Python tests"
 	@echo "  make setup-python    - Create venv and install dependencies (uv sync)"
 	@echo "  make setup-local     - Start local Supabase and apply schema"
 	@echo "  make teardown-local  - Stop local Supabase"
-	@echo "  make export-requirements - Regenerate requirements*.txt from uv.lock"
 	@echo "  make clean           - Clean test artifacts"
 	@echo ""
 	@echo "Prerequisites:"
@@ -47,7 +46,7 @@ format:
 	@uv run ruff format .
 	@echo "✓ Formatted"
 
-# Lint Python code. Ruff gates (format + check); type checkers run report-only for now.
+# Lint Python code. Ruff (format + check) and all four type checkers gate.
 lint:
 	@echo "Running ruff format check..."
 	@uv run ruff format --check .
@@ -57,7 +56,7 @@ lint:
 	@uv run ruff check .
 	@echo "✓ ruff clean"
 	@echo ""
-	@echo "Running type checkers (report-only)..."
+	@echo "Running type checkers..."
 	@status=0; \
 	for checker in "pyright" "ty check" "pyrefly check" "zuban mypy ."; do \
 		echo "  → $$checker"; \
@@ -66,21 +65,14 @@ lint:
 	done; \
 	echo ""; \
 	if [ $$status -ne 0 ]; then \
-		echo "⚠️  Type checkers reported diagnostics (non-blocking in phase 1)."; \
+		echo "❌ Type checkers reported diagnostics (gating)."; \
 	else \
 		echo "✓ Type checkers clean"; \
-	fi
+	fi; \
+	exit $$status
 
 # Lint + tests
 check: lint test-python
-
-# Regenerate requirements*.txt from uv.lock (kept for CI until it migrates to uv)
-export-requirements:
-	@echo "Exporting requirements.txt..."
-	@uv export --format requirements.txt --no-dev --no-hashes > requirements.txt
-	@echo "Exporting requirements-dev.txt..."
-	@uv export --format requirements.txt --no-hashes > requirements-dev.txt
-	@echo "✓ requirements*.txt regenerated"
 
 # Run database tests (requires prepared local Supabase project DB)
 test-sql:

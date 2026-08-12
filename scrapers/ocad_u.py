@@ -36,7 +36,7 @@ class OCADUScraper(BaseScraper):
 
         for link in soup.select(".news-title a[href^='/events-and-exhibitions/']"):
             href = link.get("href")
-            if not href:
+            if not isinstance(href, str) or not href:
                 continue
             full_url = urljoin(self.listing_url, href)
             if full_url in seen:
@@ -54,12 +54,14 @@ class OCADUScraper(BaseScraper):
             return None, None
 
         href = add_to_calendar.get("href", "")
+        if not isinstance(href, str):
+            return None, None
         payload = href.split("base64,", 1)[-1]
         if not payload:
             return None, None
 
         try:
-            cal = Calendar.from_ical(base64.b64decode(payload))
+            cal = Calendar.from_ical(base64.b64decode(payload).decode("utf-8-sig"))
         except Exception:
             return None, None
 
@@ -105,7 +107,9 @@ class OCADUScraper(BaseScraper):
             if website_label and website_label.parent:
                 website_link = website_label.parent.select_one("a[href]")
                 if website_link:
-                    website_url = website_link.get("href", "").strip()
+                    website_href = website_link.get("href", "")
+                    if isinstance(website_href, str):
+                        website_url = website_href.strip()
 
         description_parts: list[str] = []
         headline = soup.select_one(".pageheader--headline p")

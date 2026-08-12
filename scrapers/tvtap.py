@@ -60,7 +60,7 @@ class TVTAPScraper(BaseScraper):
 
         events: list[dict[str, Any]] = []
         for edge in edges:
-            node = edge.get("node") or {}
+            node: dict[str, Any] = edge.get("node") or {}
             parsed = self._parse_node(node, tz)
             if not parsed:
                 continue
@@ -82,7 +82,7 @@ class TVTAPScraper(BaseScraper):
         self.logger.warning(f"Could not parse date: {raw!r}")
         return None
 
-    def _parse_node(self, node: dict, tz: ZoneInfo) -> dict[str, Any] | None:
+    def _parse_node(self, node: dict[str, Any], tz: ZoneInfo) -> dict[str, Any] | None:
         title = (node.get("title") or "").strip()
         if not title:
             return None
