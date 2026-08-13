@@ -5,19 +5,19 @@
     <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
     <atom:link href="https://b-square-bulletin.github.io/community-calendar/rss/bloomington-latest.xml" rel="self" type="application/rss+xml"/>
     <description>Events newly added to the calendar, most recent first.</description>
-    <lastBuildDate>Thu, 13 Aug 2026 01:15:03 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 13 Aug 2026 02:03:48 +0000</lastBuildDate>
     <item>
       <title>Parks &amp; Recreation Board Meeting — Wed Aug 12, 5:00 PM</title>
       <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=960</link>
-      <guid isPermaLink="false">50728629.3166175</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
+      <guid isPermaLink="false">71395990.164282</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
       <description>Source: Ellettsville Town Government</description>
     </item>
     <item>
       <title>Board of Zoning Appeals Meeting — Wed Aug 12, 6:00 PM — Town Hall</title>
       <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=815</link>
-      <guid isPermaLink="false">59618558.1307292</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
+      <guid isPermaLink="false">51447604.2169768</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
       <description>[1]Town Hall
 
    1. https://ellettsville.in.us/egov/apps/locations/facilities.egov?view=detail&amp;id=6
@@ -27,9 +27,600 @@ Source: Ellettsville Town Government</description>
     <item>
       <title>Wed PM Bible Study — Wed Aug 12, 7:00 PM</title>
       <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">36366435-3139-4438-b262-393065326533</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
+      <guid isPermaLink="false">38616535-3564-4637-a230-656631356534</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
       <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Orientation — Thu Aug 13 — LOWELL E. BAIER HALL/IU MAURER SCHOOL OF LAW</title>
+      <link>https://events.iu.edu/lawiub/event/2350631-orientation</link>
+      <guid isPermaLink="false">20260812T040000Z-2350631@events.iu.edu__20260813</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Welcome new students!
+
+Source: IU Maurer School of Law</description>
+    </item>
+    <item>
+      <title>Orientation — Fri Aug 14 — LOWELL E. BAIER HALL/IU MAURER SCHOOL OF LAW</title>
+      <link>https://events.iu.edu/lawiub/event/2350631-orientation</link>
+      <guid isPermaLink="false">20260812T040000Z-2350631@events.iu.edu__20260814</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Welcome new students!
+
+Source: IU Maurer School of Law</description>
+    </item>
+    <item>
+      <title>Sun AM Bible Study — Sun Aug 16, 9:45 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">36363232-3664-4033-a332-356231336462</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Worship — Sun Aug 16, 10:30 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">64313764-6233-4932-b835-386539643334</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun PM Worship — Sun Aug 16, 4:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">64626466-3433-4237-a334-356435636437</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Wed PM Bible Study — Wed Aug 19, 7:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">34393838-6437-4530-a437-373064356365</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Bible Study — Sun Aug 23, 9:45 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">34346439-6135-4937-b134-366435653734</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Worship — Sun Aug 23, 10:30 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">62643138-3834-4532-b833-303939666563</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun PM Worship — Sun Aug 23, 4:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">34663633-3231-4661-a534-323164633430</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Town Council Meeting — Mon Aug 24, 6:30 PM</title>
+      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=610</link>
+      <guid isPermaLink="false">90914731.4025322</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Town Government, Limestone Post</description>
+    </item>
+    <item>
+      <title>Wed PM Bible Study — Wed Aug 26, 7:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">37323464-3433-4266-b463-373236623336</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Bible Study — Sun Aug 30, 9:45 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">32303230-3533-4663-a434-323133353039</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Worship — Sun Aug 30, 10:30 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">30666634-6262-4232-b665-313466623733</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun PM Worship — Sun Aug 30, 4:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">36313934-6232-4332-a631-373365663631</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Wed PM Bible Study — Wed Sep 2, 7:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">33653366-3932-4338-b738-393363353962</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Plan Commission Meeting — Thu Sep 3, 6:00 PM</title>
+      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=473</link>
+      <guid isPermaLink="false">54712369.6701874</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>First Thursday of every month beginning at 6:00 p.m. in Town Hall.
+
+Source: Ellettsville Town Government, Limestone Post</description>
+    </item>
+    <item>
+      <title>DJ BABYSTAR — Fri Sep 4, 11:00 PM</title>
+      <link>https://tockify.com/thebackdoor/detail/1780/1788577200000</link>
+      <guid isPermaLink="false">TKF/56e47e8bfc66f1c00bbd6f6e/1780/29809620/0/0</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>DJ BABYSTAR 11 TO LATE, NO COVER
+
+Source: The Back Door</description>
+    </item>
+    <item>
+      <title>All Daddy, No Chaser — Sat Sep 5, 9:00 PM</title>
+      <link>https://tockify.com/thebackdoor/detail/1779/1788656400000</link>
+      <guid isPermaLink="false">TKF/56e47e8bfc66f1c00bbd6f6e/1779/29810940/0/0</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>All Kings All Night
+
+Maurice Mantini
+Aijaye Finesse
+Jayden Liscious
+Lover Boy
+
+Hosted by Oliver Closeoff
+
+Source: The Back Door</description>
+    </item>
+    <item>
+      <title>Sun AM Bible Study — Sun Sep 6, 9:45 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">32613265-3761-4031-b265-663837333436</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Worship — Sun Sep 6, 10:30 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">31646337-6337-4830-b738-303632396535</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun PM Worship — Sun Sep 6, 4:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">32646666-3562-4334-b938-343265333262</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Town Offices Closed - Labor Day — Mon Sep 7, 12:00 AM</title>
+      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=186</link>
+      <guid isPermaLink="false">5160260.45493554</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Town Government</description>
+    </item>
+    <item>
+      <title>Parks &amp; Recreation Board Meeting — Mon Sep 7, 5:00 PM — Town Hall Meeting Room</title>
+      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=851</link>
+      <guid isPermaLink="false">57894326.5141994</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>[1]Town Hall Meeting Room
+
+   1. https://ellettsville.in.us/egov/apps/locations/facilities.egov?view=detail&amp;id=7
+
+Source: Ellettsville Town Government</description>
+    </item>
+    <item>
+      <title>Board of Zoning Appeals Meeting — Wed Sep 9, 6:00 PM — Town Hall</title>
+      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=816</link>
+      <guid isPermaLink="false">94964278.1345336</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>[1]Town Hall
+
+   1. https://ellettsville.in.us/egov/apps/locations/facilities.egov?view=detail&amp;id=6
+
+Source: Ellettsville Town Government</description>
+    </item>
+    <item>
+      <title>Wed PM Bible Study — Wed Sep 9, 7:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">37376366-6263-4163-b962-353662636135</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Bible Study — Sun Sep 13, 9:45 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">35326135-6161-4639-b933-316462313665</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Worship — Sun Sep 13, 10:30 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">62353762-3465-4836-a237-333066363062</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun PM Worship — Sun Sep 13, 4:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">39323564-6134-4530-b331-613563386537</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Redevelopment Commission Meeting — Mon Sep 14, 5:00 PM — Town Hall Meeting Room</title>
+      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=897</link>
+      <guid isPermaLink="false">9528376.64449504</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>[1]Town Hall Meeting Room
+
+   1. https://ellettsville.in.us/egov/apps/locations/facilities.egov?view=detail&amp;id=7
+
+Source: Ellettsville Town Government</description>
+    </item>
+    <item>
+      <title>Town Council Meeting — Mon Sep 14, 6:30 PM</title>
+      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=571</link>
+      <guid isPermaLink="false">75929305.1705978</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Town Government</description>
+    </item>
+    <item>
+      <title>Common Threads — Tue Sep 15, 3:00 PM — SIDNEY AND LOIS ESKENAZI MUSEUM OF ART</title>
+      <link>https://events.iu.edu/artmuseum/event/2298009-common-threads</link>
+      <guid isPermaLink="false">20260915T190000Z-2298009@events.iu.edu__20260915</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Looking for a welcoming space to crochet, knit, embroider, quilt, and explore other fiber arts? Interested in sharing your experiences and connecting with others while learning new skills? Or even just want a place to vent while you work on your scarf you've been crocheting for 2 years? Look no further; join us for Common Threads!  Common Threads is a free program open to the public and offers a welcoming environment to share, unwind, and learn! You can bring your own fiber art to work on while working alongside others who enjoy working in fiber and textiles. Or you can try learning something new; we welcome all skill levels! Either way, you're sure to have a good time.  This group meets on the 1st and 3rd Tuesday of each month from 3–4:30 p.m., excluding holidays and museum closures. The group will meet in the Roehm Family Art-making Studio, located inside the Simpson Center for Education on the 2nd floor of the Eskenazi Museum of Art.
+
+Source: Eskenazi Museum of Art</description>
+    </item>
+    <item>
+      <title>Wed PM Bible Study — Wed Sep 16, 7:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">37333138-3735-4430-b362-373037393433</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Opening Reception, Samuel Levi Jones: An Archaeology of Knowledge — Thu Sep 17, 5:00 PM — SIDNEY AND LOIS ESKENAZI MUSEUM OF ART</title>
+      <link>https://events.iu.edu/artmuseum/event/2361882-opening-reception-samuel-levi-jones-an-archaeology-o</link>
+      <guid isPermaLink="false">20260917T210000Z-2361882@events.iu.edu</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>5:00–7:00 p.m. | Opening reception,hors d'oeuvres and cash bar, 2nd floor atriumAbout the Artist:  Known for his large-scale abstract assemblages made from deconstructed encyclopedias, law books, medical texts, and other printed materials, Jones transforms sources of institutional knowledge into richly textured works that question how information,history,andauthorityareconstructed.Bydismantlingandreconstructingthesematerials,hisworkexaminessystemsthatshapeculturalnarratives,power,andprivilegeintheUnitedStates.DrawinginspirationfromtheideasofFrenchphilosopherMichelFoucault,SamuelLeviJones:AnArchaeologyofKnowledge brings together works spanning ten years of Jones's practice. For this presentation, Jones also engaged with the Eskenazi Museum of Art's collection,identifyingworksthatresonatewiththemescentraltohisresearch,includingnationalismandpatriotism,censorship,andtherepresentationofmarginalizedidentitiesinhistoricalnarratives.  For more information including museum location, where to p</description>
+    </item>
+    <item>
+      <title>Sun AM Bible Study — Sun Sep 20, 9:45 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">62356530-3031-4739-b933-303736643561</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Worship — Sun Sep 20, 10:30 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">34333531-3132-4334-b461-646138363432</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun PM Worship — Sun Sep 20, 4:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">36623236-6465-4231-a431-313431626337</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Wed PM Bible Study — Wed Sep 23, 7:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">66326365-6431-4232-a239-656166326630</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Bible Study — Sun Sep 27, 9:45 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">36663131-3261-4339-a661-343965623162</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Worship — Sun Sep 27, 10:30 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">38616161-3161-4562-b234-303835383430</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun PM Worship — Sun Sep 27, 4:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">63373139-3963-4761-b733-343434663638</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Town Council Meeting — Mon Sep 28, 6:30 PM</title>
+      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=611</link>
+      <guid isPermaLink="false">61194107.7452563</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Town Government</description>
+    </item>
+    <item>
+      <title>Wed PM Bible Study — Wed Sep 30, 7:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">31653337-3564-4462-a462-396562343461</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Plan Commission Meeting — Thu Oct 1, 6:00 PM</title>
+      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=474</link>
+      <guid isPermaLink="false">83183924.152269</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>First Thursday of every month beginning at 6:00 p.m. in Town Hall.
+
+Source: Ellettsville Town Government</description>
+    </item>
+    <item>
+      <title>Sun AM Bible Study — Sun Oct 4, 9:45 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">65626664-3163-4936-b735-653532366165</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Worship — Sun Oct 4, 10:30 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">34393638-6637-4364-b139-383734646135</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun PM Worship — Sun Oct 4, 4:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">30316339-3466-4631-b237-346162353462</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Parks &amp; Recreation Board Meeting — Mon Oct 5, 5:00 PM — Town Hall Meeting Room</title>
+      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=852</link>
+      <guid isPermaLink="false">38479236.0951707</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>[1]Town Hall Meeting Room
+
+   1. https://ellettsville.in.us/egov/apps/locations/facilities.egov?view=detail&amp;id=7
+
+Source: Ellettsville Town Government</description>
+    </item>
+    <item>
+      <title>Wed PM Bible Study — Wed Oct 7, 7:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">63643435-3239-4437-a435-616633656530</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Bible Study — Sun Oct 11, 9:45 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">66383763-6565-4263-b961-666263663736</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Worship — Sun Oct 11, 10:30 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">34363663-6433-4665-b834-616133333236</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun PM Worship — Sun Oct 11, 4:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">32366265-3831-4262-b763-623261643166</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Redevelopment Commission Meeting — Mon Oct 12, 5:00 PM — Town Hall Meeting Room</title>
+      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=898</link>
+      <guid isPermaLink="false">39286885.5002416</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>[1]Town Hall Meeting Room
+
+   1. https://ellettsville.in.us/egov/apps/locations/facilities.egov?view=detail&amp;id=7
+
+Source: Ellettsville Town Government</description>
+    </item>
+    <item>
+      <title>Town Council Meeting — Mon Oct 12, 6:30 PM</title>
+      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=572</link>
+      <guid isPermaLink="false">86771236.7727798</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Town Government</description>
+    </item>
+    <item>
+      <title>Board of Zoning Appeals Meeting — Wed Oct 14, 6:00 PM — Town Hall</title>
+      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=817</link>
+      <guid isPermaLink="false">84898770.0508264</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>[1]Town Hall
+
+   1. https://ellettsville.in.us/egov/apps/locations/facilities.egov?view=detail&amp;id=6
+
+Source: Ellettsville Town Government</description>
+    </item>
+    <item>
+      <title>Wed PM Bible Study — Wed Oct 14, 7:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">64323535-3666-4661-b939-356637623333</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Bible Study — Sun Oct 18, 9:45 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">64393438-3037-4464-a130-313237643061</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Worship — Sun Oct 18, 10:30 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">34356232-3230-4539-b364-666634326164</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun PM Worship — Sun Oct 18, 4:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">32346239-3130-4237-a431-303230653037</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Common Threads — Tue Oct 20, 3:00 PM — SIDNEY AND LOIS ESKENAZI MUSEUM OF ART</title>
+      <link>https://events.iu.edu/artmuseum/event/2298009-common-threads</link>
+      <guid isPermaLink="false">20260915T190000Z-2298009@events.iu.edu__20261020</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Looking for a welcoming space to crochet, knit, embroider, quilt, and explore other fiber arts? Interested in sharing your experiences and connecting with others while learning new skills? Or even just want a place to vent while you work on your scarf you've been crocheting for 2 years? Look no further; join us for Common Threads!  Common Threads is a free program open to the public and offers a welcoming environment to share, unwind, and learn! You can bring your own fiber art to work on while working alongside others who enjoy working in fiber and textiles. Or you can try learning something new; we welcome all skill levels! Either way, you're sure to have a good time.  This group meets on the 1st and 3rd Tuesday of each month from 3–4:30 p.m., excluding holidays and museum closures. The group will meet in the Roehm Family Art-making Studio, located inside the Simpson Center for Education on the 2nd floor of the Eskenazi Museum of Art.
+
+Source: Eskenazi Museum of Art</description>
+    </item>
+    <item>
+      <title>Wed PM Bible Study — Wed Oct 21, 7:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">36306530-3761-4638-b135-376639666432</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Bible Study — Sun Oct 25, 9:45 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">37373261-6261-4136-b535-383966383565</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Worship — Sun Oct 25, 10:30 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">34353436-6265-4438-a561-303062623963</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun PM Worship — Sun Oct 25, 4:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">37363366-3030-4139-b230-613362346635</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Town Council Meeting — Mon Oct 26, 6:30 PM</title>
+      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=612</link>
+      <guid isPermaLink="false">3064878.02111377</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Town Government</description>
+    </item>
+    <item>
+      <title>Wed PM Bible Study — Wed Oct 28, 7:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">64616565-6432-4138-a565-616661393863</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Bible Study — Sun Nov 1, 9:45 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">35656236-3266-4263-b236-616231313633</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Worship — Sun Nov 1, 10:30 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">63333132-3066-4632-b237-363337343666</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun PM Worship — Sun Nov 1, 4:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">66376565-6432-4433-b930-663839633238</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Parks &amp; Recreation Board Meeting — Mon Nov 2, 5:00 PM — Town Hall Meeting Room</title>
+      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=853</link>
+      <guid isPermaLink="false">19708820.5073126</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>[1]Town Hall Meeting Room
+
+   1. https://ellettsville.in.us/egov/apps/locations/facilities.egov?view=detail&amp;id=7
+
+Source: Ellettsville Town Government</description>
+    </item>
+    <item>
+      <title>Wed PM Bible Study — Wed Nov 4, 7:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">63306666-6661-4336-a433-616634313537</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Plan Commission Meeting — Thu Nov 5, 6:00 PM — Town Hall Meeting Room</title>
+      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=937</link>
+      <guid isPermaLink="false">9285199.48219204</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>[1]Town Hall Meeting Room
+
+   1. https://ellettsville.in.us/egov/apps/locations/facilities.egov?view=detail&amp;id=7
+
+Source: Ellettsville Town Government</description>
+    </item>
+    <item>
+      <title>Sun AM Bible Study — Sun Nov 8, 9:45 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">61636234-3930-4261-a430-633362336565</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Worship — Sun Nov 8, 10:30 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">63356435-3134-4132-b434-303965666438</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun PM Worship — Sun Nov 8, 4:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">34326561-3739-4233-b666-316332373037</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Redevelopment Commission Meeting — Mon Nov 9, 5:00 PM — Town Hall</title>
+      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=709</link>
+      <guid isPermaLink="false">93650476.1140871</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>[1]Town Hall
+
+   1. https://ellettsville.in.us/egov/apps/locations/facilities.egov?view=detail&amp;id=6
+
+Source: Ellettsville Town Government</description>
+    </item>
+    <item>
+      <title>Town Council Meeting — Mon Nov 9, 6:30 PM</title>
+      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=573</link>
+      <guid isPermaLink="false">98008638.0005616</guid>
+      <pubDate>Thu, 13 Aug 2026 02:03:48 +0000</pubDate>
+      <description>Source: Ellettsville Town Government</description>
     </item>
     <item>
       <title>Micro-mythologies: World Mythology Made Miniature — Thu Aug 13 — LILLY LIBRARY</title>
@@ -37,15 +628,6 @@ Source: Ellettsville Town Government</description>
       <guid isPermaLink="false">20260813T040000Z-2236839@events.iu.edu__20260813</guid>
       <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
       <description>"Myths are the world's dreams."- Joseph Campbell.To believe is to be human.One of the greatest forces known to humankind,belief is a universal impetus, one that has raised and toppled temples, instigated and eased wars, and inspired written works, both monumental and miniature. This exhibition showcases a selection of minute materials that pertain to mythologies and belief systems from across the world. From ancient Mesopotamian myth to modern Native American spirituality, belief transcends time and history and intertwines human existence within our world.Micro-Mythologies: World Mythology Made Miniature is a miniature book exhibition which seeks to highlight some of our oldest and most powerful stories, as well as those who preserved them.Mythological influence has shaped the world around us. Whether that be through architecture, art, or literature, myths serve as a testament to human cultural memory and the preservation of intangible tradition. Myths pull back the curtain of the past</description>
-    </item>
-    <item>
-      <title>Orientation — Thu Aug 13 — LOWELL E. BAIER HALL/IU MAURER SCHOOL OF LAW</title>
-      <link>https://events.iu.edu/lawiub/event/2350632-orientation</link>
-      <guid isPermaLink="false">20260813T040000Z-2350632@events.iu.edu__20260813</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Welcome new students!
-
-Source: IU Maurer School of Law</description>
     </item>
     <item>
       <title>The Declaration of Independence: The Motives, the Moment — Thu Aug 13 — LILLY LIBRARY</title>
@@ -76,15 +658,6 @@ Source: IU Bloomington Libraries</description>
       <guid isPermaLink="false">20260813T040000Z-2236839@events.iu.edu__20260814</guid>
       <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
       <description>"Myths are the world's dreams."- Joseph Campbell.To believe is to be human.One of the greatest forces known to humankind,belief is a universal impetus, one that has raised and toppled temples, instigated and eased wars, and inspired written works, both monumental and miniature. This exhibition showcases a selection of minute materials that pertain to mythologies and belief systems from across the world. From ancient Mesopotamian myth to modern Native American spirituality, belief transcends time and history and intertwines human existence within our world.Micro-Mythologies: World Mythology Made Miniature is a miniature book exhibition which seeks to highlight some of our oldest and most powerful stories, as well as those who preserved them.Mythological influence has shaped the world around us. Whether that be through architecture, art, or literature, myths serve as a testament to human cultural memory and the preservation of intangible tradition. Myths pull back the curtain of the past</description>
-    </item>
-    <item>
-      <title>Orientation — Fri Aug 14 — LOWELL E. BAIER HALL/IU MAURER SCHOOL OF LAW</title>
-      <link>https://events.iu.edu/lawiub/event/2350632-orientation</link>
-      <guid isPermaLink="false">20260813T040000Z-2350632@events.iu.edu__20260814</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Welcome new students!
-
-Source: IU Maurer School of Law</description>
     </item>
     <item>
       <title>The Declaration of Independence: The Motives, the Moment — Fri Aug 14 — LILLY LIBRARY</title>
@@ -164,20 +737,6 @@ Source: Monroe County Public Library</description>
 Source: Redbud Books</description>
     </item>
     <item>
-      <title>Sun AM Bible Study — Sun Aug 16, 9:45 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">63653135-3135-4038-b464-626539623734</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Worship — Sun Aug 16, 10:30 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">32303937-6438-4233-a437-313761643836</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
       <title>Soka Gakkai - Discussion for Peace with Youth — Sun Aug 16, 12:45 PM — Southwest Branch -</title>
       <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
       <guid isPermaLink="false">17179461</guid>
@@ -194,13 +753,6 @@ Source: Monroe County Public Library</description>
       <description>Clothing swap, 4-6pm, Sunday August 16th. Bring your clean clothes and fun housewares and accessories and join the fun! In lieu of bringing clothes, please consider a $5 donation to the store.
 
 Source: Redbud Books</description>
-    </item>
-    <item>
-      <title>Sun PM Worship — Sun Aug 16, 4:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">36623964-6262-4966-b538-363462663837</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
     </item>
     <item>
       <title>Micro-mythologies: World Mythology Made Miniature — Mon Aug 17 — LILLY LIBRARY</title>
@@ -238,606 +790,6 @@ Source: IU Bloomington Libraries</description>
       <guid isPermaLink="false">20260813T040000Z-2299716@events.iu.edu__20260818</guid>
       <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
       <description>The Declaration of Independence: The Motives, The Moment examines a crucial time in American history through the collections of the Lilly Library. The first printing of the Declaration of Independence, one of only twenty-six copies known today, is the centerpiece of the exhibition. Printed immediately for distribution, it is the source of all revolutionary era reprintings. The famous hand-written version was an official formality created later, signed in August, and stored away.Books, pamphlets, newspapers, prints, and letters allow viewers to explore key questions about this moment in time. How did a people proud to be in the British empire come to believe independence was possible or even desirable? What ideas and historical events did they draw on to justify resistance to Great Britain? What kinds of communication networks would be crucial for circulating the Declaration and countless other revolutionary documents throughout the colonies?This exhibition is part of America 250 at IU </description>
-    </item>
-    <item>
-      <title>Home Away from Home: Student Life on Campus — Tue Aug 18, 9:00 AM — HERMAN B WELLS LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2354102-home-away-from-home-student-life-on-campus</link>
-      <guid isPermaLink="false">20260813T130000Z-2354102@events.iu.edu__20260818</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Spanning across four decades—1970s to the 2000s—items including scrapbooks, photographs, student papers, and handbooks demonstrate life on and off campus. From decorating dorm rooms to chasing campus ghosts, students have always found ways to build community and make new memories. This exhibit highlights the student experience and the multitude of ways students found a sense of home, identity and belonging at Indiana University.
-
-Source: IU Bloomington Libraries</description>
-    </item>
-    <item>
-      <title>Dine Out for the Library at Lennie's — Tue Aug 18, 4:00 PM — Lennie's</title>
-      <link>http://mcpl.info/dineout</link>
-      <guid isPermaLink="false">260803E9hRWV60z0WpN_NrB4DdmQ</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Dine Out for the Library at Lennie's (514 E. Kirkwood Avenue, Bloomington) from 4–9 PM every Tuesday in August (August 4, 11, 18, and 25). Located steps from the Sample Gates, Lennie's has been dishing up great food, drinks and hospitality since 1989. Show your flyer and Lennie's will donate 20% of your tab to help make our amazing Library programs possible. Flyers available at every Monroe County Public Library branch and online at mcpl.info/dineout
-
-Source: Limestone Post</description>
-    </item>
-    <item>
-      <title>Micro-mythologies: World Mythology Made Miniature — Wed Aug 19 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2236839-micro-mythologies-world-mythology-made-miniature</link>
-      <guid isPermaLink="false">20260813T040000Z-2236839@events.iu.edu__20260819</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>"Myths are the world's dreams."- Joseph Campbell.To believe is to be human.One of the greatest forces known to humankind,belief is a universal impetus, one that has raised and toppled temples, instigated and eased wars, and inspired written works, both monumental and miniature. This exhibition showcases a selection of minute materials that pertain to mythologies and belief systems from across the world. From ancient Mesopotamian myth to modern Native American spirituality, belief transcends time and history and intertwines human existence within our world.Micro-Mythologies: World Mythology Made Miniature is a miniature book exhibition which seeks to highlight some of our oldest and most powerful stories, as well as those who preserved them.Mythological influence has shaped the world around us. Whether that be through architecture, art, or literature, myths serve as a testament to human cultural memory and the preservation of intangible tradition. Myths pull back the curtain of the past</description>
-    </item>
-    <item>
-      <title>The Declaration of Independence: The Motives, the Moment — Wed Aug 19 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2299716-the-declaration-of-independence-the-motives-the</link>
-      <guid isPermaLink="false">20260813T040000Z-2299716@events.iu.edu__20260819</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>The Declaration of Independence: The Motives, The Moment examines a crucial time in American history through the collections of the Lilly Library. The first printing of the Declaration of Independence, one of only twenty-six copies known today, is the centerpiece of the exhibition. Printed immediately for distribution, it is the source of all revolutionary era reprintings. The famous hand-written version was an official formality created later, signed in August, and stored away.Books, pamphlets, newspapers, prints, and letters allow viewers to explore key questions about this moment in time. How did a people proud to be in the British empire come to believe independence was possible or even desirable? What ideas and historical events did they draw on to justify resistance to Great Britain? What kinds of communication networks would be crucial for circulating the Declaration and countless other revolutionary documents throughout the colonies?This exhibition is part of America 250 at IU </description>
-    </item>
-    <item>
-      <title>Home Away from Home: Student Life on Campus — Wed Aug 19, 9:00 AM — HERMAN B WELLS LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2354102-home-away-from-home-student-life-on-campus</link>
-      <guid isPermaLink="false">20260813T130000Z-2354102@events.iu.edu__20260819</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Spanning across four decades—1970s to the 2000s—items including scrapbooks, photographs, student papers, and handbooks demonstrate life on and off campus. From decorating dorm rooms to chasing campus ghosts, students have always found ways to build community and make new memories. This exhibit highlights the student experience and the multitude of ways students found a sense of home, identity and belonging at Indiana University.
-
-Source: IU Bloomington Libraries</description>
-    </item>
-    <item>
-      <title>McCalla Open Gallery Hours — Wed Aug 19, 11:00 AM — McCalla Building</title>
-      <link>https://events.iu.edu/live/events/2338199-mccalla-open-gallery-hours</link>
-      <guid isPermaLink="false">20260813T150000Z-2352833@events.iu.edu__20260819</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Outfitting IU Athletics: Hoosier Champions                  This exhibit showcases objects from IU's championship teams and athletes, connecting them to historic achievements in the Big Ten and the national stage. The items featured in the exhibit are from the IU Athletics Sports Memorabilia Collection and feature photos and videos provided by IU Athletics and Indiana University Archives.                Dates: November 14, 2025 - October 2026                                      By Their Own Hands: The Black Filmmakers Hall of Fame!          Founded in 1974 by the Culture and Ethnic Affairs Guild of the Oakland Museum of California, the Black Filmmakers Hall of Fame began as a film lecture series and awards ceremony celebrating achievements of Black film industry figures. When that organization closed, they donated their materials to IU. In collaboration with the IU Black Film Center and Archive, this exhibit features objects from that collection, including founding documents, costumes</description>
-    </item>
-    <item>
-      <title>Red Cross Blood Drive — Wed Aug 19, 1:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">4ah83egb9t5o03511imsn4arkj@google.com</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Source: First Presbyterian Church</description>
-    </item>
-    <item>
-      <title>Book talk for Pink Crime: Fighting Against the Criminalization of Motherhood, Pregnancy, and Queer Identity — Wed Aug 19, 6:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">68sl0mas64fag2rddtvhh22iek@google.com</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Pink Crime: Fighting Against the Criminalization of Motherhood, Pregnancy, and Queer Identity (The New Press 2026) is about how women and queer people are being criminalized in our current environment. Miscarriages are investigated as abortion, stillbirths are prosecuted as murder, and using the "wrong" bathroom or trying to play sports as a transgender girl can now be against the law. Valena Beety's book connects the dots between these different actions so we can collectively challenge them.
-
-Source: Redbud Books</description>
-    </item>
-    <item>
-      <title>Wed PM Bible Study — Wed Aug 19, 7:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">63393134-6438-4464-b934-356237623265</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>A11 Monsters Inc. Movie Night — Wed Aug 19, 8:00 PM — Forest</title>
-      <link>https://beinvolved.indiana.edu/event/12568687</link>
-      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12568687</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Residents of A11 will gather in the lounge to watch Monsters Inc. and enjoy some snacks!
-
-Hosted by: 
-
-Additional Information can be found at: https://beinvolved.indiana.edu/event/12568687
-
-Source: IU beINvolved Student Orgs</description>
-    </item>
-    <item>
-      <title>Micro-mythologies: World Mythology Made Miniature — Thu Aug 20 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2236839-micro-mythologies-world-mythology-made-miniature</link>
-      <guid isPermaLink="false">20260813T040000Z-2236839@events.iu.edu__20260820</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>"Myths are the world's dreams."- Joseph Campbell.To believe is to be human.One of the greatest forces known to humankind,belief is a universal impetus, one that has raised and toppled temples, instigated and eased wars, and inspired written works, both monumental and miniature. This exhibition showcases a selection of minute materials that pertain to mythologies and belief systems from across the world. From ancient Mesopotamian myth to modern Native American spirituality, belief transcends time and history and intertwines human existence within our world.Micro-Mythologies: World Mythology Made Miniature is a miniature book exhibition which seeks to highlight some of our oldest and most powerful stories, as well as those who preserved them.Mythological influence has shaped the world around us. Whether that be through architecture, art, or literature, myths serve as a testament to human cultural memory and the preservation of intangible tradition. Myths pull back the curtain of the past</description>
-    </item>
-    <item>
-      <title>The Declaration of Independence: The Motives, the Moment — Thu Aug 20 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2299716-the-declaration-of-independence-the-motives-the</link>
-      <guid isPermaLink="false">20260813T040000Z-2299716@events.iu.edu__20260820</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>The Declaration of Independence: The Motives, The Moment examines a crucial time in American history through the collections of the Lilly Library. The first printing of the Declaration of Independence, one of only twenty-six copies known today, is the centerpiece of the exhibition. Printed immediately for distribution, it is the source of all revolutionary era reprintings. The famous hand-written version was an official formality created later, signed in August, and stored away.Books, pamphlets, newspapers, prints, and letters allow viewers to explore key questions about this moment in time. How did a people proud to be in the British empire come to believe independence was possible or even desirable? What ideas and historical events did they draw on to justify resistance to Great Britain? What kinds of communication networks would be crucial for circulating the Declaration and countless other revolutionary documents throughout the colonies?This exhibition is part of America 250 at IU </description>
-    </item>
-    <item>
-      <title>Home Away from Home: Student Life on Campus — Thu Aug 20, 9:00 AM — HERMAN B WELLS LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2354102-home-away-from-home-student-life-on-campus</link>
-      <guid isPermaLink="false">20260813T130000Z-2354102@events.iu.edu__20260820</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Spanning across four decades—1970s to the 2000s—items including scrapbooks, photographs, student papers, and handbooks demonstrate life on and off campus. From decorating dorm rooms to chasing campus ghosts, students have always found ways to build community and make new memories. This exhibit highlights the student experience and the multitude of ways students found a sense of home, identity and belonging at Indiana University.
-
-Source: IU Bloomington Libraries</description>
-    </item>
-    <item>
-      <title>Bloomington DSA - Phone Banking for De-flock Week of Action — Thu Aug 20, 11:00 AM — Downtown Library -</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">17178518</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>This event is not in affiliation with or sponsored by the Monroe County Public Library.
-
-Source: Monroe County Public Library</description>
-    </item>
-    <item>
-      <title>McCalla Open Gallery Hours — Thu Aug 20, 11:00 AM — McCalla Building</title>
-      <link>https://events.iu.edu/live/events/2338199-mccalla-open-gallery-hours</link>
-      <guid isPermaLink="false">20260813T150000Z-2352833@events.iu.edu__20260820</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Outfitting IU Athletics: Hoosier Champions                  This exhibit showcases objects from IU's championship teams and athletes, connecting them to historic achievements in the Big Ten and the national stage. The items featured in the exhibit are from the IU Athletics Sports Memorabilia Collection and feature photos and videos provided by IU Athletics and Indiana University Archives.                Dates: November 14, 2025 - October 2026                                      By Their Own Hands: The Black Filmmakers Hall of Fame!          Founded in 1974 by the Culture and Ethnic Affairs Guild of the Oakland Museum of California, the Black Filmmakers Hall of Fame began as a film lecture series and awards ceremony celebrating achievements of Black film industry figures. When that organization closed, they donated their materials to IU. In collaboration with the IU Black Film Center and Archive, this exhibit features objects from that collection, including founding documents, costumes</description>
-    </item>
-    <item>
-      <title>SCI Skillshare - Signal App: Tips and Tricks — Thu Aug 20, 5:00 PM — Southwest Branch -</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">17178561</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>This event is not in affiliation with or sponsored by the Monroe County Public Library.
-
-Source: Monroe County Public Library</description>
-    </item>
-    <item>
-      <title>Micro-mythologies: World Mythology Made Miniature — Fri Aug 21 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2236839-micro-mythologies-world-mythology-made-miniature</link>
-      <guid isPermaLink="false">20260813T040000Z-2236839@events.iu.edu__20260821</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>"Myths are the world's dreams."- Joseph Campbell.To believe is to be human.One of the greatest forces known to humankind,belief is a universal impetus, one that has raised and toppled temples, instigated and eased wars, and inspired written works, both monumental and miniature. This exhibition showcases a selection of minute materials that pertain to mythologies and belief systems from across the world. From ancient Mesopotamian myth to modern Native American spirituality, belief transcends time and history and intertwines human existence within our world.Micro-Mythologies: World Mythology Made Miniature is a miniature book exhibition which seeks to highlight some of our oldest and most powerful stories, as well as those who preserved them.Mythological influence has shaped the world around us. Whether that be through architecture, art, or literature, myths serve as a testament to human cultural memory and the preservation of intangible tradition. Myths pull back the curtain of the past</description>
-    </item>
-    <item>
-      <title>The Declaration of Independence: The Motives, the Moment — Fri Aug 21 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2299716-the-declaration-of-independence-the-motives-the</link>
-      <guid isPermaLink="false">20260813T040000Z-2299716@events.iu.edu__20260821</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>The Declaration of Independence: The Motives, The Moment examines a crucial time in American history through the collections of the Lilly Library. The first printing of the Declaration of Independence, one of only twenty-six copies known today, is the centerpiece of the exhibition. Printed immediately for distribution, it is the source of all revolutionary era reprintings. The famous hand-written version was an official formality created later, signed in August, and stored away.Books, pamphlets, newspapers, prints, and letters allow viewers to explore key questions about this moment in time. How did a people proud to be in the British empire come to believe independence was possible or even desirable? What ideas and historical events did they draw on to justify resistance to Great Britain? What kinds of communication networks would be crucial for circulating the Declaration and countless other revolutionary documents throughout the colonies?This exhibition is part of America 250 at IU </description>
-    </item>
-    <item>
-      <title>Home Away from Home: Student Life on Campus — Fri Aug 21, 9:00 AM — HERMAN B WELLS LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2354102-home-away-from-home-student-life-on-campus</link>
-      <guid isPermaLink="false">20260813T130000Z-2354102@events.iu.edu__20260821</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Spanning across four decades—1970s to the 2000s—items including scrapbooks, photographs, student papers, and handbooks demonstrate life on and off campus. From decorating dorm rooms to chasing campus ghosts, students have always found ways to build community and make new memories. This exhibit highlights the student experience and the multitude of ways students found a sense of home, identity and belonging at Indiana University.
-
-Source: IU Bloomington Libraries</description>
-    </item>
-    <item>
-      <title>McCalla Open Gallery Hours — Fri Aug 21, 11:00 AM — McCalla Building</title>
-      <link>https://events.iu.edu/live/events/2338199-mccalla-open-gallery-hours</link>
-      <guid isPermaLink="false">20260813T150000Z-2352833@events.iu.edu__20260821</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Outfitting IU Athletics: Hoosier Champions                  This exhibit showcases objects from IU's championship teams and athletes, connecting them to historic achievements in the Big Ten and the national stage. The items featured in the exhibit are from the IU Athletics Sports Memorabilia Collection and feature photos and videos provided by IU Athletics and Indiana University Archives.                Dates: November 14, 2025 - October 2026                                      By Their Own Hands: The Black Filmmakers Hall of Fame!          Founded in 1974 by the Culture and Ethnic Affairs Guild of the Oakland Museum of California, the Black Filmmakers Hall of Fame began as a film lecture series and awards ceremony celebrating achievements of Black film industry figures. When that organization closed, they donated their materials to IU. In collaboration with the IU Black Film Center and Archive, this exhibit features objects from that collection, including founding documents, costumes</description>
-    </item>
-    <item>
-      <title>Community Play Reading: Gretty Good Time by John Belluso — Fri Aug 21, 7:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">2t47i49r4v5u9hr2mpkmtipicj@google.com</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Source: Redbud Books</description>
-    </item>
-    <item>
-      <title>Micro-mythologies: World Mythology Made Miniature — Sat Aug 22 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2236839-micro-mythologies-world-mythology-made-miniature</link>
-      <guid isPermaLink="false">20260813T040000Z-2236839@events.iu.edu__20260822</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>"Myths are the world's dreams."- Joseph Campbell.To believe is to be human.One of the greatest forces known to humankind,belief is a universal impetus, one that has raised and toppled temples, instigated and eased wars, and inspired written works, both monumental and miniature. This exhibition showcases a selection of minute materials that pertain to mythologies and belief systems from across the world. From ancient Mesopotamian myth to modern Native American spirituality, belief transcends time and history and intertwines human existence within our world.Micro-Mythologies: World Mythology Made Miniature is a miniature book exhibition which seeks to highlight some of our oldest and most powerful stories, as well as those who preserved them.Mythological influence has shaped the world around us. Whether that be through architecture, art, or literature, myths serve as a testament to human cultural memory and the preservation of intangible tradition. Myths pull back the curtain of the past</description>
-    </item>
-    <item>
-      <title>The Declaration of Independence: The Motives, the Moment — Sat Aug 22 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2299716-the-declaration-of-independence-the-motives-the</link>
-      <guid isPermaLink="false">20260813T040000Z-2299716@events.iu.edu__20260822</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>The Declaration of Independence: The Motives, The Moment examines a crucial time in American history through the collections of the Lilly Library. The first printing of the Declaration of Independence, one of only twenty-six copies known today, is the centerpiece of the exhibition. Printed immediately for distribution, it is the source of all revolutionary era reprintings. The famous hand-written version was an official formality created later, signed in August, and stored away.Books, pamphlets, newspapers, prints, and letters allow viewers to explore key questions about this moment in time. How did a people proud to be in the British empire come to believe independence was possible or even desirable? What ideas and historical events did they draw on to justify resistance to Great Britain? What kinds of communication networks would be crucial for circulating the Declaration and countless other revolutionary documents throughout the colonies?This exhibition is part of America 250 at IU </description>
-    </item>
-    <item>
-      <title>Synoptic Gospels Bible Study — Sun Aug 23, 9:15 AM — Roger Williams Hall</title>
-      <link>https://firstuc.org/events/synoptic-gospels-bible-study/2026-08-23/</link>
-      <guid isPermaLink="false">10012625-1787476500-1787479200@firstuc.org</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Read the Synoptics in a Year 
-As we seek to live out our mission more fully, you are invited to explore the words and deeds of Jesus through studying the synoptic gospels (Mark, Matthew, and Luke) over the course of 2026. This exploration will include daily readings (access suggested reading schedule here), a weekly Sunday morning discussion group (9:15-10am in Roger Williams Hall and via Zoom, click here), and weekly sermons during worship. Let us join together in following Jesus more faithfully and fruitfully in this new year!
-
-Source: First United Church</description>
-    </item>
-    <item>
-      <title>Sun AM Bible Study — Sun Aug 23, 9:45 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">30346632-3633-4935-b637-386463323435</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Worship — Sun Aug 23, 10:30 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">30323034-6337-4232-b563-653235623934</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sunday Morning Hybrid Worship — Sun Aug 23, 10:30 AM — Sanctuary</title>
-      <link>https://firstuc.org/events/sunday-morning-hybrid-worship-4-2-2/2026-08-23/</link>
-      <guid isPermaLink="false">10012952-1787481000-1787484600@firstuc.org</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Sunday Morning Hybrid Worship
-Join us for worship each Sunday morning at 10:30am. This Sunday’s service will feature Rev. Jessica Petersen-Mutai in the pulpit; she will also offer a special message for the young and young at heart. Be sure to join us in Fellowship Hall after worship for a time of fellowship and refreshment.
-Join the Zoom Webinar by clicking here 
-Dial-in number: (312) 626-6799; Webinar ID: 828 3681 0281 
-The service will be posted on Sunday evening on First United’s Vimeo channel (where you can access all of our previous worship services).
-
-Source: First United Church</description>
-    </item>
-    <item>
-      <title>Pulling Out the Stops: An Organ Demo and Tour with Jacobs School of Music Faculty and Students — Sun Aug 23, 2:30 PM — Alumni Hall</title>
-      <link>https://events.iu.edu/musiciub/event/2380140-pulling-out-the-stops-an-organ-demo-and-tour-with</link>
-      <guid isPermaLink="false">20260823T183000Z-2380140@events.iu.edu</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Hosted by Janette Fishell, professor of music and chair of the Organ Department, and students of the Jacobs School of Music  Presented in partnership with Student Involvement and Leadership and the Office of Student Life
-
-Source: IU Jacobs School of Music</description>
-    </item>
-    <item>
-      <title>Sun PM Worship — Sun Aug 23, 4:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">38396430-3530-4765-a434-333035633131</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Mennonites Service — Sun Aug 23, 4:45 PM — Roger Williams and Chapel</title>
-      <link>https://firstuc.org/events/mennonites-service/2026-08-23/</link>
-      <guid isPermaLink="false">10006126-1787503500-1787511600@firstuc.org</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Source: First United Church</description>
-    </item>
-    <item>
-      <title>AA New Harmony — Sun Aug 23, 7:00 PM — Roger Williams Hall</title>
-      <link>https://firstuc.org/events/aa-new-harmony-2/2026-08-23/</link>
-      <guid isPermaLink="false">10012396-1787511600-1787515200@firstuc.org</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Source: First United Church</description>
-    </item>
-    <item>
-      <title>Micro-mythologies: World Mythology Made Miniature — Mon Aug 24 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2236839-micro-mythologies-world-mythology-made-miniature</link>
-      <guid isPermaLink="false">20260813T040000Z-2236839@events.iu.edu__20260824</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>"Myths are the world's dreams."- Joseph Campbell.To believe is to be human.One of the greatest forces known to humankind,belief is a universal impetus, one that has raised and toppled temples, instigated and eased wars, and inspired written works, both monumental and miniature. This exhibition showcases a selection of minute materials that pertain to mythologies and belief systems from across the world. From ancient Mesopotamian myth to modern Native American spirituality, belief transcends time and history and intertwines human existence within our world.Micro-Mythologies: World Mythology Made Miniature is a miniature book exhibition which seeks to highlight some of our oldest and most powerful stories, as well as those who preserved them.Mythological influence has shaped the world around us. Whether that be through architecture, art, or literature, myths serve as a testament to human cultural memory and the preservation of intangible tradition. Myths pull back the curtain of the past</description>
-    </item>
-    <item>
-      <title>The Declaration of Independence: The Motives, the Moment — Mon Aug 24 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2299716-the-declaration-of-independence-the-motives-the</link>
-      <guid isPermaLink="false">20260813T040000Z-2299716@events.iu.edu__20260824</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>The Declaration of Independence: The Motives, The Moment examines a crucial time in American history through the collections of the Lilly Library. The first printing of the Declaration of Independence, one of only twenty-six copies known today, is the centerpiece of the exhibition. Printed immediately for distribution, it is the source of all revolutionary era reprintings. The famous hand-written version was an official formality created later, signed in August, and stored away.Books, pamphlets, newspapers, prints, and letters allow viewers to explore key questions about this moment in time. How did a people proud to be in the British empire come to believe independence was possible or even desirable? What ideas and historical events did they draw on to justify resistance to Great Britain? What kinds of communication networks would be crucial for circulating the Declaration and countless other revolutionary documents throughout the colonies?This exhibition is part of America 250 at IU </description>
-    </item>
-    <item>
-      <title>Home Away from Home: Student Life on Campus — Mon Aug 24, 9:00 AM — HERMAN B WELLS LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2354102-home-away-from-home-student-life-on-campus</link>
-      <guid isPermaLink="false">20260813T130000Z-2354102@events.iu.edu__20260824</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Spanning across four decades—1970s to the 2000s—items including scrapbooks, photographs, student papers, and handbooks demonstrate life on and off campus. From decorating dorm rooms to chasing campus ghosts, students have always found ways to build community and make new memories. This exhibit highlights the student experience and the multitude of ways students found a sense of home, identity and belonging at Indiana University.
-
-Source: IU Bloomington Libraries</description>
-    </item>
-    <item>
-      <title>Town Council Meeting — Mon Aug 24, 6:30 PM</title>
-      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=610</link>
-      <guid isPermaLink="false">36416576.8471203</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Source: Ellettsville Town Government, Limestone Post</description>
-    </item>
-    <item>
-      <title>Bloomington Democratic Socialists of America — Mon Aug 24, 7:00 PM — Room One</title>
-      <link>https://firstuc.org/events/bloomington-democratic-socialists-of-america/2026-08-24/</link>
-      <guid isPermaLink="false">10011400-1787598000-1787603400@firstuc.org</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Source: First United Church</description>
-    </item>
-    <item>
-      <title>Micro-mythologies: World Mythology Made Miniature — Tue Aug 25 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2236839-micro-mythologies-world-mythology-made-miniature</link>
-      <guid isPermaLink="false">20260813T040000Z-2236839@events.iu.edu__20260825</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>"Myths are the world's dreams."- Joseph Campbell.To believe is to be human.One of the greatest forces known to humankind,belief is a universal impetus, one that has raised and toppled temples, instigated and eased wars, and inspired written works, both monumental and miniature. This exhibition showcases a selection of minute materials that pertain to mythologies and belief systems from across the world. From ancient Mesopotamian myth to modern Native American spirituality, belief transcends time and history and intertwines human existence within our world.Micro-Mythologies: World Mythology Made Miniature is a miniature book exhibition which seeks to highlight some of our oldest and most powerful stories, as well as those who preserved them.Mythological influence has shaped the world around us. Whether that be through architecture, art, or literature, myths serve as a testament to human cultural memory and the preservation of intangible tradition. Myths pull back the curtain of the past</description>
-    </item>
-    <item>
-      <title>The Declaration of Independence: The Motives, the Moment — Tue Aug 25 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2299716-the-declaration-of-independence-the-motives-the</link>
-      <guid isPermaLink="false">20260813T040000Z-2299716@events.iu.edu__20260825</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>The Declaration of Independence: The Motives, The Moment examines a crucial time in American history through the collections of the Lilly Library. The first printing of the Declaration of Independence, one of only twenty-six copies known today, is the centerpiece of the exhibition. Printed immediately for distribution, it is the source of all revolutionary era reprintings. The famous hand-written version was an official formality created later, signed in August, and stored away.Books, pamphlets, newspapers, prints, and letters allow viewers to explore key questions about this moment in time. How did a people proud to be in the British empire come to believe independence was possible or even desirable? What ideas and historical events did they draw on to justify resistance to Great Britain? What kinds of communication networks would be crucial for circulating the Declaration and countless other revolutionary documents throughout the colonies?This exhibition is part of America 250 at IU </description>
-    </item>
-    <item>
-      <title>Home Away from Home: Student Life on Campus — Tue Aug 25, 9:00 AM — HERMAN B WELLS LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2354102-home-away-from-home-student-life-on-campus</link>
-      <guid isPermaLink="false">20260813T130000Z-2354102@events.iu.edu__20260825</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Spanning across four decades—1970s to the 2000s—items including scrapbooks, photographs, student papers, and handbooks demonstrate life on and off campus. From decorating dorm rooms to chasing campus ghosts, students have always found ways to build community and make new memories. This exhibit highlights the student experience and the multitude of ways students found a sense of home, identity and belonging at Indiana University.
-
-Source: IU Bloomington Libraries</description>
-    </item>
-    <item>
-      <title>Young Life College at IUB Tabling — Tue Aug 25, 9:00 AM — 10th St and Fee at Arboretum - Table 1</title>
-      <link>https://beinvolved.indiana.edu/event/12566130</link>
-      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12566130</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Young Life College is looking to connect with students on IU's campus through tabling during the first few weeks of school. We will have active members present to engage with students.
-
-Hosted by: Young Life College at IUB
-
-Additional Information can be found at: https://beinvolved.indiana.edu/event/12566130
-
-Source: IU beINvolved Student Orgs</description>
-    </item>
-    <item>
-      <title>Micro-mythologies: World Mythology Made Miniature — Wed Aug 26 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2236839-micro-mythologies-world-mythology-made-miniature</link>
-      <guid isPermaLink="false">20260813T040000Z-2236839@events.iu.edu__20260826</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>"Myths are the world's dreams."- Joseph Campbell.To believe is to be human.One of the greatest forces known to humankind,belief is a universal impetus, one that has raised and toppled temples, instigated and eased wars, and inspired written works, both monumental and miniature. This exhibition showcases a selection of minute materials that pertain to mythologies and belief systems from across the world. From ancient Mesopotamian myth to modern Native American spirituality, belief transcends time and history and intertwines human existence within our world.Micro-Mythologies: World Mythology Made Miniature is a miniature book exhibition which seeks to highlight some of our oldest and most powerful stories, as well as those who preserved them.Mythological influence has shaped the world around us. Whether that be through architecture, art, or literature, myths serve as a testament to human cultural memory and the preservation of intangible tradition. Myths pull back the curtain of the past</description>
-    </item>
-    <item>
-      <title>The Declaration of Independence: The Motives, the Moment — Wed Aug 26 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2299716-the-declaration-of-independence-the-motives-the</link>
-      <guid isPermaLink="false">20260813T040000Z-2299716@events.iu.edu__20260826</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>The Declaration of Independence: The Motives, The Moment examines a crucial time in American history through the collections of the Lilly Library. The first printing of the Declaration of Independence, one of only twenty-six copies known today, is the centerpiece of the exhibition. Printed immediately for distribution, it is the source of all revolutionary era reprintings. The famous hand-written version was an official formality created later, signed in August, and stored away.Books, pamphlets, newspapers, prints, and letters allow viewers to explore key questions about this moment in time. How did a people proud to be in the British empire come to believe independence was possible or even desirable? What ideas and historical events did they draw on to justify resistance to Great Britain? What kinds of communication networks would be crucial for circulating the Declaration and countless other revolutionary documents throughout the colonies?This exhibition is part of America 250 at IU </description>
-    </item>
-    <item>
-      <title>Home Away from Home: Student Life on Campus — Wed Aug 26, 9:00 AM — HERMAN B WELLS LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2354102-home-away-from-home-student-life-on-campus</link>
-      <guid isPermaLink="false">20260813T130000Z-2354102@events.iu.edu__20260826</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Spanning across four decades—1970s to the 2000s—items including scrapbooks, photographs, student papers, and handbooks demonstrate life on and off campus. From decorating dorm rooms to chasing campus ghosts, students have always found ways to build community and make new memories. This exhibit highlights the student experience and the multitude of ways students found a sense of home, identity and belonging at Indiana University.
-
-Source: IU Bloomington Libraries</description>
-    </item>
-    <item>
-      <title>Young Life College at IUB Tabling — Wed Aug 26, 10:00 AM — Outside Ballantine Hall - Table 2</title>
-      <link>https://beinvolved.indiana.edu/event/12566132</link>
-      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12566132</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Young Life College is looking to connect with students on IU's campus through tabling during the first few weeks of school. We will have active members present to engage with students.
-
-Hosted by: Young Life College at IUB
-
-Additional Information can be found at: https://beinvolved.indiana.edu/event/12566132
-
-Source: IU beINvolved Student Orgs</description>
-    </item>
-    <item>
-      <title>McCalla Open Gallery Hours — Wed Aug 26, 11:00 AM — McCalla Building</title>
-      <link>https://events.iu.edu/live/events/2338199-mccalla-open-gallery-hours</link>
-      <guid isPermaLink="false">20260813T150000Z-2352833@events.iu.edu__20260826</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Outfitting IU Athletics: Hoosier Champions                  This exhibit showcases objects from IU's championship teams and athletes, connecting them to historic achievements in the Big Ten and the national stage. The items featured in the exhibit are from the IU Athletics Sports Memorabilia Collection and feature photos and videos provided by IU Athletics and Indiana University Archives.                Dates: November 14, 2025 - October 2026                                      By Their Own Hands: The Black Filmmakers Hall of Fame!          Founded in 1974 by the Culture and Ethnic Affairs Guild of the Oakland Museum of California, the Black Filmmakers Hall of Fame began as a film lecture series and awards ceremony celebrating achievements of Black film industry figures. When that organization closed, they donated their materials to IU. In collaboration with the IU Black Film Center and Archive, this exhibit features objects from that collection, including founding documents, costumes</description>
-    </item>
-    <item>
-      <title>Externship Orientation — Wed Aug 26, 12:00 PM — LOWELL E. BAIER HALL/IU MAURER SCHOOL OF LAW</title>
-      <link>https://events.iu.edu/lawiub/event/2380150-externship-orientation</link>
-      <guid isPermaLink="false">20260826T160000Z-2380150@events.iu.edu</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Source: IU Maurer School of Law</description>
-    </item>
-    <item>
-      <title>Hospitality Committee Meeting — Wed Aug 26, 7:00 PM — BLBH Ballantine Hall 340</title>
-      <link>https://beinvolved.indiana.edu/event/12568432</link>
-      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12568432</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>The Hospitality committee will meet to discuss their goals for the marathon in the fall.
-
-Hosted by: Indiana University Dance Marathon
-
-Additional Information can be found at: https://beinvolved.indiana.edu/event/12568432
-
-Source: IU beINvolved Student Orgs</description>
-    </item>
-    <item>
-      <title>Wed PM Bible Study — Wed Aug 26, 7:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">35326237-3032-4839-b533-666565653864</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>hamzath dance practice — Wed Aug 26, 8:00 PM — IMU Frangipani Room</title>
-      <link>https://beinvolved.indiana.edu/event/12566134</link>
-      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12566134</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Weekly IMU dance practice
-
-Hosted by: Hamzath at IU
-
-Additional Information can be found at: https://beinvolved.indiana.edu/event/12566134
-
-Source: IU beINvolved Student Orgs</description>
-    </item>
-    <item>
-      <title>Micro-mythologies: World Mythology Made Miniature — Thu Aug 27 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2236839-micro-mythologies-world-mythology-made-miniature</link>
-      <guid isPermaLink="false">20260813T040000Z-2236839@events.iu.edu__20260827</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>"Myths are the world's dreams."- Joseph Campbell.To believe is to be human.One of the greatest forces known to humankind,belief is a universal impetus, one that has raised and toppled temples, instigated and eased wars, and inspired written works, both monumental and miniature. This exhibition showcases a selection of minute materials that pertain to mythologies and belief systems from across the world. From ancient Mesopotamian myth to modern Native American spirituality, belief transcends time and history and intertwines human existence within our world.Micro-Mythologies: World Mythology Made Miniature is a miniature book exhibition which seeks to highlight some of our oldest and most powerful stories, as well as those who preserved them.Mythological influence has shaped the world around us. Whether that be through architecture, art, or literature, myths serve as a testament to human cultural memory and the preservation of intangible tradition. Myths pull back the curtain of the past</description>
-    </item>
-    <item>
-      <title>The Declaration of Independence: The Motives, the Moment — Thu Aug 27 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2299716-the-declaration-of-independence-the-motives-the</link>
-      <guid isPermaLink="false">20260813T040000Z-2299716@events.iu.edu__20260827</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>The Declaration of Independence: The Motives, The Moment examines a crucial time in American history through the collections of the Lilly Library. The first printing of the Declaration of Independence, one of only twenty-six copies known today, is the centerpiece of the exhibition. Printed immediately for distribution, it is the source of all revolutionary era reprintings. The famous hand-written version was an official formality created later, signed in August, and stored away.Books, pamphlets, newspapers, prints, and letters allow viewers to explore key questions about this moment in time. How did a people proud to be in the British empire come to believe independence was possible or even desirable? What ideas and historical events did they draw on to justify resistance to Great Britain? What kinds of communication networks would be crucial for circulating the Declaration and countless other revolutionary documents throughout the colonies?This exhibition is part of America 250 at IU </description>
-    </item>
-    <item>
-      <title>Transfer Student Tailgate — Thu Aug 27, 7:00 AM — South Plaza - Indiana Memorial Stadium</title>
-      <link>https://beinvolved.indiana.edu/event/12568764</link>
-      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12568764</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>New to IU? Ready to get into the Hoosier spirit? Join First Year Experience for a Transfer Student Tailgate. Meet with campus resources, play classic tailgate games, and grab a bite to eat (all before your morning classes!) Hop off at the stadium bus stop and join us at Indiana Memorial Stadium - South Plaza for your first IU Tailgate experience. 
-
-Hosted by: First Year &amp; Family Experience Programs
-
-Additional Information can be found at: https://beinvolved.indiana.edu/event/12568764
-
-Source: IU beINvolved Student Orgs</description>
-    </item>
-    <item>
-      <title>Home Away from Home: Student Life on Campus — Thu Aug 27, 9:00 AM — HERMAN B WELLS LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2354102-home-away-from-home-student-life-on-campus</link>
-      <guid isPermaLink="false">20260813T130000Z-2354102@events.iu.edu__20260827</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Spanning across four decades—1970s to the 2000s—items including scrapbooks, photographs, student papers, and handbooks demonstrate life on and off campus. From decorating dorm rooms to chasing campus ghosts, students have always found ways to build community and make new memories. This exhibit highlights the student experience and the multitude of ways students found a sense of home, identity and belonging at Indiana University.
-
-Source: IU Bloomington Libraries</description>
-    </item>
-    <item>
-      <title>Young Life College at IUB Tabling — Thu Aug 27, 9:00 AM — Outside Ballantine Hall - Table 1</title>
-      <link>https://beinvolved.indiana.edu/event/12566131</link>
-      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12566131</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Young Life College is looking to connect with students on IU's campus through tabling during the first few weeks of school. We will have active members present to engage with students.
-
-Hosted by: Young Life College at IUB
-
-Additional Information can be found at: https://beinvolved.indiana.edu/event/12566131
-
-Source: IU beINvolved Student Orgs</description>
-    </item>
-    <item>
-      <title>McCalla Open Gallery Hours — Thu Aug 27, 11:00 AM — McCalla Building</title>
-      <link>https://events.iu.edu/live/events/2338199-mccalla-open-gallery-hours</link>
-      <guid isPermaLink="false">20260813T150000Z-2352833@events.iu.edu__20260827</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Outfitting IU Athletics: Hoosier Champions                  This exhibit showcases objects from IU's championship teams and athletes, connecting them to historic achievements in the Big Ten and the national stage. The items featured in the exhibit are from the IU Athletics Sports Memorabilia Collection and feature photos and videos provided by IU Athletics and Indiana University Archives.                Dates: November 14, 2025 - October 2026                                      By Their Own Hands: The Black Filmmakers Hall of Fame!          Founded in 1974 by the Culture and Ethnic Affairs Guild of the Oakland Museum of California, the Black Filmmakers Hall of Fame began as a film lecture series and awards ceremony celebrating achievements of Black film industry figures. When that organization closed, they donated their materials to IU. In collaboration with the IU Black Film Center and Archive, this exhibit features objects from that collection, including founding documents, costumes</description>
-    </item>
-    <item>
-      <title>Chi Alpha Service — Thu Aug 27, 6:30 PM — Willkie Quadrangle - C155 ($300 fee)</title>
-      <link>https://beinvolved.indiana.edu/event/12568604</link>
-      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12568604</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Come to Chi Alpha to worship together, learn from the word, connect with your Core Group, and make new friends! 
-
-Hosted by: Chi Alpha Christian Fellowship at IU
-
-Additional Information can be found at: https://beinvolved.indiana.edu/event/12568604
-
-Source: IU beINvolved Student Orgs</description>
-    </item>
-    <item>
-      <title>Micro-mythologies: World Mythology Made Miniature — Fri Aug 28 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2236839-micro-mythologies-world-mythology-made-miniature</link>
-      <guid isPermaLink="false">20260813T040000Z-2236839@events.iu.edu__20260828</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>"Myths are the world's dreams."- Joseph Campbell.To believe is to be human.One of the greatest forces known to humankind,belief is a universal impetus, one that has raised and toppled temples, instigated and eased wars, and inspired written works, both monumental and miniature. This exhibition showcases a selection of minute materials that pertain to mythologies and belief systems from across the world. From ancient Mesopotamian myth to modern Native American spirituality, belief transcends time and history and intertwines human existence within our world.Micro-Mythologies: World Mythology Made Miniature is a miniature book exhibition which seeks to highlight some of our oldest and most powerful stories, as well as those who preserved them.Mythological influence has shaped the world around us. Whether that be through architecture, art, or literature, myths serve as a testament to human cultural memory and the preservation of intangible tradition. Myths pull back the curtain of the past</description>
-    </item>
-    <item>
-      <title>The Declaration of Independence: The Motives, the Moment — Fri Aug 28 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2299716-the-declaration-of-independence-the-motives-the</link>
-      <guid isPermaLink="false">20260813T040000Z-2299716@events.iu.edu__20260828</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>The Declaration of Independence: The Motives, The Moment examines a crucial time in American history through the collections of the Lilly Library. The first printing of the Declaration of Independence, one of only twenty-six copies known today, is the centerpiece of the exhibition. Printed immediately for distribution, it is the source of all revolutionary era reprintings. The famous hand-written version was an official formality created later, signed in August, and stored away.Books, pamphlets, newspapers, prints, and letters allow viewers to explore key questions about this moment in time. How did a people proud to be in the British empire come to believe independence was possible or even desirable? What ideas and historical events did they draw on to justify resistance to Great Britain? What kinds of communication networks would be crucial for circulating the Declaration and countless other revolutionary documents throughout the colonies?This exhibition is part of America 250 at IU </description>
-    </item>
-    <item>
-      <title>Home Away from Home: Student Life on Campus — Fri Aug 28, 9:00 AM — HERMAN B WELLS LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2354102-home-away-from-home-student-life-on-campus</link>
-      <guid isPermaLink="false">20260813T130000Z-2354102@events.iu.edu__20260828</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Spanning across four decades—1970s to the 2000s—items including scrapbooks, photographs, student papers, and handbooks demonstrate life on and off campus. From decorating dorm rooms to chasing campus ghosts, students have always found ways to build community and make new memories. This exhibit highlights the student experience and the multitude of ways students found a sense of home, identity and belonging at Indiana University.
-
-Source: IU Bloomington Libraries</description>
-    </item>
-    <item>
-      <title>McCalla Open Gallery Hours — Fri Aug 28, 11:00 AM — McCalla Building</title>
-      <link>https://events.iu.edu/live/events/2338199-mccalla-open-gallery-hours</link>
-      <guid isPermaLink="false">20260813T150000Z-2352833@events.iu.edu__20260828</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Outfitting IU Athletics: Hoosier Champions                  This exhibit showcases objects from IU's championship teams and athletes, connecting them to historic achievements in the Big Ten and the national stage. The items featured in the exhibit are from the IU Athletics Sports Memorabilia Collection and feature photos and videos provided by IU Athletics and Indiana University Archives.                Dates: November 14, 2025 - October 2026                                      By Their Own Hands: The Black Filmmakers Hall of Fame!          Founded in 1974 by the Culture and Ethnic Affairs Guild of the Oakland Museum of California, the Black Filmmakers Hall of Fame began as a film lecture series and awards ceremony celebrating achievements of Black film industry figures. When that organization closed, they donated their materials to IU. In collaboration with the IU Black Film Center and Archive, this exhibit features objects from that collection, including founding documents, costumes</description>
-    </item>
-    <item>
-      <title>Nrithya At IU Callout Meeting — Fri Aug 28, 5:00 PM — IMU Walnut Room</title>
-      <link>https://beinvolved.indiana.edu/event/12567118</link>
-      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12567118</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Interested in Indian classical dance? Join Nrithya at IU's callout meeting to learn about our 2026–2027 season! We'll cover our team, Bharatanatyam and Kathak styles, auditions, competition season, expectations, and everything you need to know about becoming a member. Whether you're an experienced dancer or just curious, come meet the team and see what Nrithya is all about!
-
-Hosted by: Nrithya at IU
-
-Additional Information can be found at: https://beinvolved.indiana.edu/event/12567118
-
-Source: IU beINvolved Student Orgs</description>
-    </item>
-    <item>
-      <title>Book launch for "Myth and Identity in the Martial Arts" — Fri Aug 28, 6:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">0bs7tc56ad0a5789j0o3pgqlfs@google.com</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Author talk and book launch for Alexus McLeod's "Myth and Identity in the Martial Arts". Discussion of the ways martial arts mythology has influenced culture more broadly from the 19th century to the current day, and how martial arts myth is used to create identity today in ways that are liberatory as well as in ways that can be socially harmful.
-
-Source: Redbud Books</description>
-    </item>
-    <item>
-      <title>Micro-mythologies: World Mythology Made Miniature — Sat Aug 29 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2236839-micro-mythologies-world-mythology-made-miniature</link>
-      <guid isPermaLink="false">20260813T040000Z-2236839@events.iu.edu__20260829</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>"Myths are the world's dreams."- Joseph Campbell.To believe is to be human.One of the greatest forces known to humankind,belief is a universal impetus, one that has raised and toppled temples, instigated and eased wars, and inspired written works, both monumental and miniature. This exhibition showcases a selection of minute materials that pertain to mythologies and belief systems from across the world. From ancient Mesopotamian myth to modern Native American spirituality, belief transcends time and history and intertwines human existence within our world.Micro-Mythologies: World Mythology Made Miniature is a miniature book exhibition which seeks to highlight some of our oldest and most powerful stories, as well as those who preserved them.Mythological influence has shaped the world around us. Whether that be through architecture, art, or literature, myths serve as a testament to human cultural memory and the preservation of intangible tradition. Myths pull back the curtain of the past</description>
-    </item>
-    <item>
-      <title>The Declaration of Independence: The Motives, the Moment — Sat Aug 29 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2299716-the-declaration-of-independence-the-motives-the</link>
-      <guid isPermaLink="false">20260813T040000Z-2299716@events.iu.edu__20260829</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>The Declaration of Independence: The Motives, The Moment examines a crucial time in American history through the collections of the Lilly Library. The first printing of the Declaration of Independence, one of only twenty-six copies known today, is the centerpiece of the exhibition. Printed immediately for distribution, it is the source of all revolutionary era reprintings. The famous hand-written version was an official formality created later, signed in August, and stored away.Books, pamphlets, newspapers, prints, and letters allow viewers to explore key questions about this moment in time. How did a people proud to be in the British empire come to believe independence was possible or even desirable? What ideas and historical events did they draw on to justify resistance to Great Britain? What kinds of communication networks would be crucial for circulating the Declaration and countless other revolutionary documents throughout the colonies?This exhibition is part of America 250 at IU </description>
-    </item>
-    <item>
-      <title>Book launch for "Like Songs About Airports" — Sat Aug 29, 7:30 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">6s6hlupepauj6aio8ek0ppr7em@google.com</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Book launch for Leijia Hanrahan's book &amp; launch for Ill Will Editions press
-
-Source: Redbud Books</description>
-    </item>
-    <item>
-      <title>Sun AM Bible Study — Sun Aug 30, 9:45 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">39613031-6666-4463-b864-666533636363</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Alpha Omega Sunday Service — Sun Aug 30, 10:15 AM — IMU Redbud Room</title>
-      <link>https://beinvolved.indiana.edu/event/12566036</link>
-      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12566036</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>A time for us to do church
-
-Hosted by: Alpha Omega Campus Ministry
-
-Additional Information can be found at: https://beinvolved.indiana.edu/event/12566036
-
-Source: IU beINvolved Student Orgs</description>
-    </item>
-    <item>
-      <title>Sun AM Worship — Sun Aug 30, 10:30 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">34636131-3264-4561-a363-383937363861</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>"Abolish Rent" Reading Group — Sun Aug 30, 12:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">05calpabqp1o2l0f5kr6nhfi3h@google.com</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Ongoing reading group of "Abolish Rent" hosted by Bloomington Homes 4 All
-
-Source: Redbud Books</description>
-    </item>
-    <item>
-      <title>Sun PM Worship — Sun Aug 30, 4:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">62353338-3931-4462-b433-633732663631</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Micro-mythologies: World Mythology Made Miniature — Mon Aug 31 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2236839-micro-mythologies-world-mythology-made-miniature</link>
-      <guid isPermaLink="false">20260813T040000Z-2236839@events.iu.edu__20260831</guid>
-      <pubDate>Thu, 13 Aug 2026 01:15:03 +0000</pubDate>
-      <description>"Myths are the world's dreams."- Joseph Campbell.To believe is to be human.One of the greatest forces known to humankind,belief is a universal impetus, one that has raised and toppled temples, instigated and eased wars, and inspired written works, both monumental and miniature. This exhibition showcases a selection of minute materials that pertain to mythologies and belief systems from across the world. From ancient Mesopotamian myth to modern Native American spirituality, belief transcends time and history and intertwines human existence within our world.Micro-Mythologies: World Mythology Made Miniature is a miniature book exhibition which seeks to highlight some of our oldest and most powerful stories, as well as those who preserved them.Mythological influence has shaped the world around us. Whether that be through architecture, art, or literature, myths serve as a testament to human cultural memory and the preservation of intangible tradition. Myths pull back the curtain of the past</description>
     </item>
   </channel>
 </rss>
