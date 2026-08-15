@@ -66,6 +66,8 @@ def fetch_with_retry(
             )
             time.sleep(delay)
 
+    raise RuntimeError(f"Failed to fetch {url} after {max_retries} attempts")
+
 
 def generate_uid(title: str, dtstart: datetime, domain: str) -> str:
     """Generate a unique ID for an event."""
@@ -113,18 +115,21 @@ def parse_date_flexible(text: str, target_year: int | None = None) -> datetime |
     # "February 3, 2026" or "Feb 3, 2026"
     full_match = re.search(r"([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{4})", text)
     if full_match:
-        month_str, day, year = full_match.groups()
-        month = MONTH_MAP.get(month_str.lower())
-        if month:
-            return datetime(int(year), month, int(day))
+        month_str = full_match.group(1).lower()
+        day_str = full_match.group(2) or ""
+        year_str = full_match.group(3) or ""
+        month_num = MONTH_MAP.get(month_str)
+        if month_num:
+            return datetime(int(year_str), month_num, int(day_str))
 
     # "Feb 03" - needs target_year
     short_match = re.search(r"([A-Za-z]+)\s+(\d{1,2})", text)
     if short_match and target_year:
-        month_str, day = short_match.groups()
-        month = MONTH_MAP.get(month_str.lower())
-        if month:
-            return datetime(target_year, month, int(day))
+        month_str = short_match.group(1).lower()
+        day_str = short_match.group(2) or ""
+        month_num = MONTH_MAP.get(month_str)
+        if month_num:
+            return datetime(target_year, month_num, int(day_str))
 
     return None
 

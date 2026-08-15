@@ -1,5 +1,13 @@
 # Handoff: Toolchain Modernization + Test Suite Commands
 
+**SUPERSEDED** — the toolchain modernization this handoff proposed is complete
+(issue #60, phase 1 PR #59, phase 2 PR #62). The repo now uses `pyproject.toml` +
+`uv.lock` (see [ADR 0005](../adr/0005-uv-for-python-dependency-management.md)) with
+ruff + four type checkers gating in CI (see [ADR 0006](../adr/0006-four-type-checkers-report-only-ratcheting.md)).
+The `requirements.txt` / `requirements-dev.txt` artifacts and the Makefile
+`export-requirements` target no longer exist. The test-suite commands below remain
+valid. This document is retained as a historical record of the pre-migration state.
+
 **Date:** 2026-06-28
 **From session:** feat/11-feed-health-dashboard — report-health edge function testing
 **Next session focus:** Grill the toolchain modernization idea, then PRD → issues → implement.

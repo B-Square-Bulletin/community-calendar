@@ -29,10 +29,14 @@ ROOT = Path(__file__).parent.parent
 WORKFLOW_PATH = ROOT / ".github/workflows/generate-calendar.yml"
 
 
-def get_changed_files(base_ref: str) -> list[str]:
-    """Get files changed relative to base ref."""
+def get_changed_file_statuses(base_ref: str) -> list[tuple[str, str]]:
+    """Get (status, path) pairs for files changed relative to base ref.
+
+    Status is the first letter of git's status code (A=added, M=modified,
+    D=deleted, R=renamed, ...).
+    """
     result = subprocess.run(
-        ["git", "diff", "--name-only", f"{base_ref}...HEAD"],
+        ["git", "diff", "--name-status", f"{base_ref}...HEAD"],
         capture_output=True,
         text=True,
         cwd=ROOT,
@@ -40,12 +44,24 @@ def get_changed_files(base_ref: str) -> list[str]:
     if result.returncode != 0:
         # Fallback: diff against base_ref directly
         result = subprocess.run(
-            ["git", "diff", "--name-only", base_ref],
+            ["git", "diff", "--name-status", base_ref],
             capture_output=True,
             text=True,
             cwd=ROOT,
         )
-    return result.stdout.strip().splitlines()
+    entries = []
+    for line in result.stdout.splitlines():
+        parts = line.split("\t")
+        if len(parts) >= 2:
+            # Status may carry a score suffix (e.g. R100); keep only the letter.
+            # Rename/copy records emit old<TAB>new — use the destination path.
+            entries.append((parts[0][0], parts[-1]))
+    return entries
+
+
+def get_changed_files(base_ref: str) -> list[str]:
+    """Get files changed relative to base ref."""
+    return [path for _, path in get_changed_file_statuses(base_ref)]
 
 
 def is_relevant(changed_files: list[str]) -> bool:
@@ -73,10 +89,16 @@ def get_workflow_scraper_outputs(workflow_text: str) -> set[str]:
     return set(re.findall(r"--output\s+(cities/\S+\.ics)", workflow_text))
 
 
-def get_new_scraper_files(changed_files: list[str]) -> list[str]:
-    """Get newly added scraper .py files (not lib/ helpers)."""
+def get_new_scraper_files(base_ref: str) -> list[str]:
+    """Get newly added scraper .py files (not lib/ helpers).
+
+    Only files added in this branch (status A) count as new; modified
+    scrapers already have their feeds.txt / workflow entries in place.
+    """
     scrapers = []
-    for f in changed_files:
+    for status, f in get_changed_file_statuses(base_ref):
+        if status != "A":
+            continue
         if f.startswith("scrapers/") and f.endswith(".py"):
             # Skip lib/ and __init__.py
             if "/lib/" in f or f.endswith("__init__.py"):
@@ -132,15 +154,15 @@ def validate(base_ref: str) -> list[str]:
                             )
 
     # Check new scraper files have corresponding feeds entries
-    new_scrapers = get_new_scraper_files(changed_files)
+    new_scrapers = get_new_scraper_files(base_ref)
     if new_scrapers:
         # Collect content from both pending_feeds.txt and feeds.txt
         # (pending entries move to feeds.txt once the build processes them)
         all_feed_content = ""
         for pending in ROOT.glob("cities/*/pending_feeds.txt"):
             all_feed_content += pending.read_text()
-        for feeds in ROOT.glob("cities/*/feeds.txt"):
-            all_feed_content += feeds.read_text()
+        for feeds_file in ROOT.glob("cities/*/feeds.txt"):
+            all_feed_content += feeds_file.read_text()
 
         for scraper_file in new_scrapers:
             scraper_basename = Path(scraper_file).stem

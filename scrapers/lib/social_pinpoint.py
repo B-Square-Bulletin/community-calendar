@@ -202,7 +202,7 @@ class SocialPinpointScraper(BaseScraper):
 
         for block in blocks:
             events_url = block.get("eventsUrl")
-            params = block.get("eventApiParams") or {}
+            params: dict[str, Any] = block.get("eventApiParams") or {}
             if not events_url or not params:
                 continue
 

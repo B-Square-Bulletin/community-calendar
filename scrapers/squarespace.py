@@ -50,7 +50,7 @@ class SquarespaceScraper(BaseScraper):
     name = "Squarespace"
     domain = "squarespace.com"
 
-    def __init__(self, url, source_name):
+    def __init__(self, url: str, source_name: str):
         self.listing_url = url
         parsed = urlparse(url)
         self.base_url = f"{parsed.scheme}://{parsed.netloc}"
@@ -107,7 +107,7 @@ class SquarespaceScraper(BaseScraper):
             response = requests.get(ical_url, timeout=30)
             response.raise_for_status()
 
-            cal = Calendar.from_ical(response.content)
+            cal = Calendar.from_ical(response.content.decode("utf-8-sig"))
             for component in cal.walk():
                 if component.name == "VEVENT":
                     dtstart = component.get("dtstart")

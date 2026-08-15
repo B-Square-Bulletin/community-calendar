@@ -76,7 +76,7 @@ class IcsScraper(BaseScraper):
 
     def _parse_ics(self, ics_content: str) -> list[dict[str, Any]]:
         """Parse events from ICS content."""
-        events = []
+        events: list[dict[str, Any]] = []
         try:
             cal = Calendar.from_ical(ics_content)
         except Exception as e:

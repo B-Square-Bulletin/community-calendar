@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 import re
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 from typing import ClassVar
 from urllib.request import Request, urlopen
 
@@ -27,7 +27,7 @@ class MetrolinxBoardScraper(BaseScraper):
         with urlopen(req, timeout=20) as resp:
             return resp.read().decode("utf-8")
 
-    def extract_upcoming_dates(self, html: str) -> list[datetime.date]:
+    def extract_upcoming_dates(self, html: str) -> list[date]:
         match = re.search(
             r"Upcoming Meetings</h2><ul[^>]*>(.*?)</ul>",
             html,

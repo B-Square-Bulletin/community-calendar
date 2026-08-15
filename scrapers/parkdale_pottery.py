@@ -67,6 +67,8 @@ def clean_text(text: str) -> str:
 
 def parse_time(value: str, default_meridian: str | None = None) -> tuple[int, int]:
     match = re.match(r"(\d{1,2})(?::(\d{2}))?\s*(am|pm)?", value.strip(), re.IGNORECASE)
+    if match is None:
+        raise ValueError(f"Could not parse time from {value!r}")
     hour = int(match.group(1))
     minute = int(match.group(2) or "0")
     meridian = (match.group(3) or default_meridian or "").lower()
@@ -112,6 +114,8 @@ class ParkdalePotteryScraper(BaseScraper):
             if start_date < today:
                 continue
 
+            dtstart: datetime | date
+            dtend: datetime | None
             if time_match:
                 end_meridian_match = re.search(r"(am|pm)", time_match.group("end"), re.IGNORECASE)
                 end_meridian = end_meridian_match.group(1) if end_meridian_match else None

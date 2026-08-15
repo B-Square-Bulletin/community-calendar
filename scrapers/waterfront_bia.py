@@ -9,7 +9,7 @@ from datetime import date, datetime, timedelta
 from html import unescape
 from zoneinfo import ZoneInfo
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 from lib.base import BaseScraper
 
 MONTHS = {
@@ -65,6 +65,8 @@ class WaterfrontBIAScraper(BaseScraper):
         same_month = re.match(r"([A-Za-z]+)\s+(\d{1,2})\s*(?:&|-|to)\s*(\d{1,2})$", text, re.I)
         if same_month:
             month = MONTHS.get(same_month.group(1).lower())
+            if not month:
+                return None, None
             start_day = int(same_month.group(2))
             end_day = int(same_month.group(3))
             year = today.year
@@ -85,6 +87,8 @@ class WaterfrontBIAScraper(BaseScraper):
             start_day = int(cross_month.group(2))
             end_month = MONTHS.get(cross_month.group(3).lower())
             end_day = int(cross_month.group(4))
+            if not start_month or not end_month:
+                return None, None
             year = today.year
             start = date(year, start_month, start_day)
             end = date(year, end_month, end_day)
@@ -96,6 +100,8 @@ class WaterfrontBIAScraper(BaseScraper):
         single = re.match(r"([A-Za-z]+)\s+(\d{1,2})$", text, re.I)
         if single:
             month = MONTHS.get(single.group(1).lower())
+            if not month:
+                return None, None
             day = int(single.group(2))
             year = today.year
             start = date(year, month, day)
@@ -154,16 +160,18 @@ class WaterfrontBIAScraper(BaseScraper):
         if not strings:
             return None
 
-        title = (
-            _clean(soup.find("meta", property="og:title").get("content", ""))
-            if soup.find("meta", property="og:title")
-            else strings[0]
-        )
-        description = (
-            _clean(soup.find("meta", attrs={"name": "description"}).get("content", ""))
-            if soup.find("meta", attrs={"name": "description"})
-            else ""
-        )
+        og_meta = soup.find("meta", property="og:title")
+        if isinstance(og_meta, Tag):
+            og_title = og_meta.get("content", "")
+            title = _clean(og_title) if isinstance(og_title, str) else strings[0]
+        else:
+            title = strings[0]
+        desc_meta = soup.find("meta", attrs={"name": "description"})
+        if isinstance(desc_meta, Tag):
+            desc_content = desc_meta.get("content", "")
+            description = _clean(desc_content) if isinstance(desc_content, str) else ""
+        else:
+            description = ""
         date_text = self.extract_labeled_value(strings, "Date")
         time_text = self.extract_labeled_value(strings, "Time")
         location = self.extract_labeled_value(strings, "Location")
@@ -174,10 +182,12 @@ class WaterfrontBIAScraper(BaseScraper):
         tz = ZoneInfo(self.timezone)
         today = datetime.now(tz).date()
         start_day, end_day = self.parse_date_range(date_text, today)
-        if not start_day:
+        if not start_day or end_day is None:
             return None
 
         parsed_times = self.parse_time_range(time_text) if time_text else None
+        dtstart: datetime | date
+        dtend: datetime | date
         if parsed_times:
             (sh, sm), (eh, em) = parsed_times
             dtstart = datetime(start_day.year, start_day.month, start_day.day, sh, sm, tzinfo=tz)

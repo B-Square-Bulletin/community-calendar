@@ -79,7 +79,7 @@ def expand_recurring_events(
     Returns:
         List of datetime objects for each occurrence
     """
-    occurrences = []
+    occurrences: list[datetime] = []
 
     start_date = event.get("start", {}).get("date")
     start_time = event.get("start", {}).get("time", "00:00")
@@ -202,9 +202,9 @@ class ElfsightCalendarScraper(BaseScraper):
         super().__init__()
         self.location_filter: list[str] = []
         self.event_type_filter: list[str] = []
-        self._settings = None
-        self._locations_map = {}
-        self._event_types_map = {}
+        self._settings: dict | None = None
+        self._locations_map: dict[str, str] = {}
+        self._event_types_map: dict[str, str] = {}
 
     def fetch_settings(self) -> dict | None:
         """Fetch and cache the Elfsight widget settings."""
@@ -295,7 +295,7 @@ class ElfsightCalendarScraper(BaseScraper):
             # Location names
             loc_ids = event.get("location", [])
             locations = [self._locations_map.get(lid, lid) for lid in loc_ids]
-            location_str = ", ".join(locations)
+            location_str = ", ".join(loc for loc in locations if loc is not None)
 
             # Event type names (for categories)
             type_ids = event.get("eventType", [])

@@ -116,12 +116,12 @@ class TestRecurrenceIdOverride:
         dtstarts = []
         uids = []
         for block in expanded:
-            m = re.search(r"DTSTART[^:]*:(\d{8})", block)
-            if m:
-                dtstarts.append(m.group(1))
-            uid_m = re.search(r"UID:([^\r\n]+)", block)
-            if uid_m:
-                uids.append(uid_m.group(1))
+            dt_match = re.search(r"DTSTART[^:]*:(\d{8})", block)
+            if dt_match:
+                dtstarts.append(dt_match.group(1))
+            uid_match = re.search(r"UID:([^\r\n]+)", block)
+            if uid_match:
+                uids.append(uid_match.group(1))
 
         # The overridden original date MUST NOT appear
         assert override_orig_str not in dtstarts, (

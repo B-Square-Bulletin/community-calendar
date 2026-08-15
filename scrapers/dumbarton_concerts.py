@@ -175,11 +175,17 @@ class DumbartonConcertsScraper(BaseScraper):
     def _extract_detail_url(self, block: Tag) -> str:
         sibling = block.find_next_sibling()
         while sibling is not None:
+            if not isinstance(sibling, Tag):
+                sibling = sibling.find_next_sibling()
+                continue
             classes = sibling.get("class", [])
             if "button-block" in classes:
                 link = sibling.find("a", href=True)
-                if link:
-                    return urljoin(SITE_URL, link["href"])
+                if link is None or not isinstance(link, Tag):
+                    return ""
+                href = link.get("href")
+                if isinstance(href, str):
+                    return urljoin(SITE_URL, href)
                 return ""
             if "html-block" in classes:
                 return ""

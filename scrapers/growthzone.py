@@ -117,6 +117,8 @@ class GrowthZoneScraper(BaseScraper):
 
         # Parse dates
         start_str = start_elem.text  # Format: 2026-02-16T00:00:00
+        if not start_str:
+            return None
         end_elem = elem.find("EndDate")
         end_str = end_elem.text if end_elem is not None else None
 

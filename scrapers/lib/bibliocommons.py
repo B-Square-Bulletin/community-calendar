@@ -60,8 +60,8 @@ class BibliocommonsEventsScraper(BaseScraper):
                 break
 
             entities = payload.get("entities", {})
-            location_entities = entities.get("locations", {}) or {}
-            event_entities = entities.get("events", {}) or {}
+            location_entities: dict[str, Any] = entities.get("locations", {}) or {}
+            event_entities: dict[str, Any] = entities.get("events", {}) or {}
 
             page_starts: list[datetime] = []
 
@@ -70,7 +70,7 @@ class BibliocommonsEventsScraper(BaseScraper):
                 if not isinstance(event_obj, dict):
                     continue
 
-                definition = event_obj.get("definition") or {}
+                definition: dict[str, Any] = event_obj.get("definition") or {}
                 if not isinstance(definition, dict):
                     continue
 

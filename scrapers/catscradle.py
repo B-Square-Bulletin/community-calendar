@@ -87,6 +87,8 @@ class CatsCradleScraper(BaseScraper):
         filtered = []
         for entry in unique_entries:
             link = entry.get("link", "")
+            if not isinstance(link, str):
+                continue
             venue_slug = self._extract_venue_slug(link)
             if self.venue_filter and venue_slug != self.venue_filter:
                 continue

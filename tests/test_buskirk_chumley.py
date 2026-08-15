@@ -46,7 +46,7 @@ class TestAcceptEncoding:
         header is safe.  Regression test for issue #35.
         """
         scraper = BuskirkChumleyScraper()
-        captured_headers = {}
+        captured_headers: dict[str, str] = {}
 
         def intercept_get(_self, url, **kwargs):
             """Replace Session.get — capture headers, return fixture HTML."""

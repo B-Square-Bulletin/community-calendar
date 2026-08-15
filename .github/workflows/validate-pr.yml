@@ -12,12 +12,15 @@ jobs:
         with:
           fetch-depth: 0  # Need full history for diff
 
-      - uses: actions/setup-python@v6
+      - uses: astral-sh/setup-uv@v7
         with:
           python-version: '3.10'
 
       - name: Install dependencies
-        run: pip install -r requirements-dev.txt
+        run: uv sync
+
+      - name: Add venv to PATH
+        run: echo "$GITHUB_WORKSPACE/.venv/bin" >> "$GITHUB_PATH"
 
       - name: Validate feed/scraper consistency
         run: python scripts/validate_pr_feeds.py --base-ref origin/${{ github.base_ref }}
@@ -57,3 +60,22 @@ jobs:
 
       - name: Verify collapse-cache regression gate
         run: node scripts/bench_collapse_long.js
+
+  lint:
+    # Mirrors the local lint target (make lint): ruff (format + check) and the
+    # four type checkers (pyright, ty, pyrefly, zuban) all gate the job, so an
+    # introduced finding fails the PR (ADR 0006 — phased rollout complete).
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Run lint (ruff + type checkers)
+        run: make lint

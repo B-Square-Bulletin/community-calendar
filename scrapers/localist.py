@@ -59,7 +59,7 @@ class LocalistScraper(BaseScraper):
 
     def _fetch_api(self, page: int = 1) -> dict:
         """Fetch one page of events from the Localist API."""
-        params = {
+        params: dict[str, Any] = {
             "pp": 100,
             "page": page,
             "days": self.days,

@@ -15,6 +15,7 @@ import html as html_module
 import re
 import sys
 from datetime import datetime, timedelta
+from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -37,7 +38,7 @@ def fetch_page(url):
 
 def parse_events(html):
     """Parse event data from the homepage HTML"""
-    events = []
+    events: list[dict[str, Any]] = []
 
     # The site uses Eventbrite widgets with structure:
     # - Image with alt="EVENT TITLE"

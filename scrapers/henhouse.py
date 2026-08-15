@@ -11,7 +11,8 @@ Output: ICS format to stdout
 import hashlib
 import re
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
+from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
@@ -59,7 +60,7 @@ def parse_datetime(date_str):
     return dt, time_part
 
 
-def scrape_henhouse(location_filter="petaluma"):
+def scrape_henhouse(location_filter: str | None = "petaluma") -> list[dict[str, Any]]:
     """Scrape HenHouse events, optionally filtering by location."""
     url = "https://henhousebrewing.com/events/"
 
@@ -70,7 +71,7 @@ def scrape_henhouse(location_filter="petaluma"):
 
     soup = BeautifulSoup(response.text, "html.parser")
 
-    events = []
+    events: list[dict[str, Any]] = []
 
     for listing in soup.find_all("div", class_="event-listing"):
         # Get date/time
@@ -145,7 +146,7 @@ def to_ics(events):
 
         lines.append("BEGIN:VEVENT")
         lines.append(f"UID:{uid}@henhouse.community-calendar")
-        lines.append(f"DTSTAMP:{datetime.utcnow().strftime('%Y%m%dT%H%M%SZ')}")
+        lines.append(f"DTSTAMP:{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}")
         lines.append(f"DTSTART:{dtstart}")
         lines.append(f"DTEND:{dtend_str}")
         lines.append(f"SUMMARY:{event['title']}")
@@ -177,7 +178,7 @@ def main():
     parser.add_argument("--json", action="store_true", help="Output JSON instead of ICS")
     args = parser.parse_args()
 
-    location = None if args.all else args.location
+    location: str | None = None if args.all else args.location
     events = scrape_henhouse(location)
 
     if args.json:

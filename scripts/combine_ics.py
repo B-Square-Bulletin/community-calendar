@@ -9,6 +9,7 @@ import json
 import re
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
+from typing import Any
 
 import icalendar
 import recurring_ical_events
@@ -357,7 +358,7 @@ def parse_feeds_txt(feeds_file):
 
 
 # Module-level cache for parsed feeds.txt names
-_feeds_txt_names = {}
+_feeds_txt_names: dict[str, str] = {}
 
 
 def load_feeds_txt_names(input_dir):
@@ -581,7 +582,7 @@ def dedupe_cross_source(events, input_dir):
     (handles aggregators that append "at Venue Name" to titles).
     """
     # Group events by dedup key
-    groups = {}
+    groups: dict[tuple[str, str], list[dict[str, Any]]] = {}
     for event in events:
         key = get_dedup_key(event)
         if key not in groups:
@@ -592,7 +593,7 @@ def dedupe_cross_source(events, input_dir):
     # on the same date. This handles "Hands on a Hardbody" vs
     # "Hands on a Hardbody at Spreckels Performing Arts Center".
     # Only merge if the shorter title is at least 12 chars (avoid false positives).
-    date_keys = {}
+    date_keys: dict[str, list[tuple[str, str]]] = {}
     for key in groups:
         date_str, _norm_title = key
         if date_str not in date_keys:
@@ -736,7 +737,7 @@ def dedupe_fuzzy(events, input_dir):
     log_file.write(f"Total events: {len(events)}\n\n")
 
     # Group by date
-    by_date = {}
+    by_date: dict[str, list[dict[str, Any]]] = {}
     for event in events:
         date_str = event["dtstart"].strftime("%Y-%m-%d")
         if date_str not in by_date:
@@ -779,6 +780,7 @@ If all events are unique, respond: [[1], [2], [3], ...]
 
 JSON:"""
 
+        text: str | None = None
         try:
             response = client.messages.create(
                 model="claude-3-5-haiku-20241022",
@@ -795,7 +797,12 @@ JSON:"""
             # Parse response
             import json
 
-            text = response.content[0].text.strip()
+            content_block = response.content[0]
+            text = (
+                content_block.text.strip()
+                if isinstance(content_block, anthropic.types.TextBlock)
+                else ""
+            )
             # Handle markdown code blocks
             if text.startswith("```"):
                 text = text.split("\n", 1)[1].rsplit("\n", 1)[0]
@@ -884,7 +891,7 @@ JSON:"""
             print(f"  Fuzzy dedup: {error_msg}")
             log_file.write(f"{error_msg}\n")
             # Log the raw response if available for debugging
-            if "text" in dir():
+            if text:
                 log_file.write(f"  Raw response: {text[:500]}\n")
             continue
 
@@ -911,9 +918,11 @@ JSON:"""
     return [e for i, e in enumerate(events) if i not in events_to_remove]
 
 
-def extract_events(ics_content, source_name=None, source_id=None, fallback_url=None):
+def extract_events(
+    ics_content, source_name=None, source_id=None, fallback_url=None
+) -> list[dict[str, Any]]:
     """Extract VEVENT blocks from ICS content, expanding recurring events."""
-    events = []
+    events: list[dict[str, Any]] = []
 
     # Try RRULE expansion first; returns None if no RRULEs or parsing fails
     expanded_blocks = None
@@ -966,9 +975,11 @@ def combine_ics_files(
     Args:
         exclude_sources: Set of source filenames (without .ics) to skip
     """
-    all_events = []
+    all_events: list[dict[str, Any]] = []
     geo_filtered_count = 0
-    geo_filtered_details = []  # Track what got filtered for curator visibility
+    geo_filtered_details: list[
+        dict[str, str]
+    ] = []  # Track what got filtered for curator visibility
     exclude_sources = exclude_sources or set()
     load_feeds_txt_names(input_dir)
     # Use 24 hours ago to avoid filtering out same-day events due to timezone differences
@@ -1117,7 +1128,7 @@ def combine_ics_files(
         # Write sidecar for report visibility
         geo_report_path = Path(output_file).parent / "geo_filtered.json"
         # Summarize by source + city extracted from location
-        by_source_city = {}
+        by_source_city: dict[tuple[str, str, str], dict[str, Any]] = {}
         for d in geo_filtered_details:
             key = (d["source"], d["source_id"], d["location"])
             if key not in by_source_city:

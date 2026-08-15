@@ -79,7 +79,7 @@ class BrownCountyGovScraper(BaseScraper):
             return []
 
         try:
-            cal = ICalendar.from_ical(data)
+            cal = ICalendar.from_ical(data.decode("utf-8-sig"))
         except Exception as e:
             self.logger.error(f"Failed to parse iCal: {e}")
             return []

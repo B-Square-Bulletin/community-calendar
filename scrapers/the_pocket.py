@@ -20,7 +20,7 @@ from typing import Any
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 from lib.base import BaseScraper
 
 SHOWS_URL = "https://thepocket.7drumcity.com/shows-preview"
@@ -62,7 +62,7 @@ class ThePocketScraper(BaseScraper):
 
         return events
 
-    def _parse_item(self, item, tz: ZoneInfo, now: datetime) -> dict | None:
+    def _parse_item(self, item: Tag, tz: ZoneInfo, now: datetime) -> dict | None:
         month_el = item.select_one(".event-month-2")
         day_el = item.select_one(".event-day-2")
         time_el = item.select_one(".event-time-new-2")
@@ -115,7 +115,7 @@ class ThePocketScraper(BaseScraper):
         # Event URL
         link = item.select_one("a.link-block-2")
         href = link.get("href", "") if link else ""
-        if href.startswith("/"):
+        if isinstance(href, str) and href.startswith("/"):
             href = SITE_URL + href
 
         return {

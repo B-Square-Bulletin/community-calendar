@@ -127,7 +127,7 @@ def main():
             inserted += len(batch)
             print(f"  Inserted {inserted}/{len(all_feeds)}")
         except urllib.error.URLError as e:
-            error_body = e.read().decode() if hasattr(e, "read") else str(e)
+            error_body = e.read().decode() if isinstance(e, urllib.error.HTTPError) else str(e)
             print(f"  Error at batch {i}: {error_body}")
             sys.exit(1)
 

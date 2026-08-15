@@ -3,8 +3,10 @@
 
 import json
 import sys
+from collections.abc import Mapping, Sequence
 from datetime import datetime
 from pathlib import Path
+from typing import Any
 from unittest.mock import Mock, patch
 
 # Add project root and scrapers/ to path so scraper imports resolve
@@ -120,7 +122,7 @@ DATE_ONLY_JSONLD = [
 ]
 
 
-def _make_html(jsonld_blocks: list[dict]) -> str:
+def _make_html(jsonld_blocks: Sequence[Mapping[str, Any]]) -> str:
     """Build a minimal HTML page with embedded JSON-LD script tags."""
     scripts = "".join(
         f'<script type="application/ld+json">{json.dumps(block)}</script>\n'

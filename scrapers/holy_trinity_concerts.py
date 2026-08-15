@@ -32,6 +32,11 @@ DOORS_RE = re.compile(
 )
 
 
+def _is_upcoming_header(s: str) -> bool:
+    """Match the non-empty 'Upcoming Concerts' header text."""
+    return bool(s) and "Upcoming Concerts" in s
+
+
 class HolyTrinityConcertsScraper(BaseScraper):
     name = "Holy Trinity Concerts"
     domain = "trinity.org"
@@ -58,10 +63,11 @@ class HolyTrinityConcertsScraper(BaseScraper):
         return events
 
     def _find_upcoming_block(self, soup: BeautifulSoup) -> Tag | None:
-        header = soup.find("h3", string=lambda s: s and "Upcoming Concerts" in s)
+        header = soup.find("h3", string=_is_upcoming_header)
         if not header:
             return None
-        return header.find_next("div", class_="siteorigin-widget-tinymce")
+        block = header.find_next("div", class_="siteorigin-widget-tinymce")
+        return block if isinstance(block, Tag) else None
 
     def _parse_paragraph(
         self,

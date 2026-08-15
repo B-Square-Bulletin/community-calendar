@@ -69,7 +69,7 @@ class AngasFarmScraper(BaseScraper):
         now = datetime.now(timezone.utc)
         events = []
         try:
-            cal = ICalendar.from_ical(data)
+            cal = ICalendar.from_ical(data.decode("utf-8-sig"))
         except Exception:
             return []
 

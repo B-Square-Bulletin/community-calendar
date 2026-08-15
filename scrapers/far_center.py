@@ -38,7 +38,7 @@ class FARCenterScraper(BaseScraper):
 
         soup = BeautifulSoup(response.text, "html.parser")
         tz = ZoneInfo(self.timezone)
-        events = []
+        events: list[dict[str, Any]] = []
 
         main = soup.select_one(".entry-main")
         if not main:

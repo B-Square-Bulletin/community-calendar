@@ -4,7 +4,10 @@ Date: 2026-08-09
 
 ## Status
 
-Accepted
+Accepted. The phased migration completed 2026-08-12 (issue #60): both Python
+CI workflows install via `astral-sh/setup-uv` + `uv sync`, and the generated
+`requirements*.txt` artifacts were retired. `uv.lock` (via `pyproject.toml`) is
+the single source of truth.
 
 ## Context
 
@@ -26,10 +29,8 @@ Use **uv** for dependency management, with `pyproject.toml` as the single source
 1. Create `pyproject.toml` with `[project]` dependencies migrated from `requirements.txt`, `requires-python = ">=3.10"`, and dev tools in a `[dependency-groups].dev` group (pytest, pytest-cov, ruff, ty, pyrefly, pyright, zuban).
 2. Commit a `uv.lock` lockfile. `uv sync` installs the environment from it.
 3. Pin the toolchain to Python 3.10 via `.python-version` (`uv python pin 3.10`) so local venv and CI match.
-4. For the short term, keep `requirements.txt` / `requirements-dev.txt` as **generated artifacts** exported from the lockfile (`uv export`) so CI workflows that still `pip install -r requirements*.txt` keep working during the phased CI migration. They are refreshed via `make export-requirements`.
+4. The generated `requirements*.txt` artifacts are retired; no workflow or active documentation references them (the `uv_migration_handoff` that proposed the migration is marked superseded). `uv.lock` is the single source of truth.
 5. Replace `make setup-python` (venv + pip) with `uv sync`, and `make test-python` with `uv run pytest`.
-
-The CI migration to `astral-sh/setup-uv` + `uv sync` happens in a later phase (see ADR 0002 for fork/main protection context around PR-based changes).
 
 ## Consequences
 
@@ -42,9 +43,8 @@ The CI migration to `astral-sh/setup-uv` + `uv sync` happens in a later phase (s
 
 **Harder:**
 
-- Two sources of truth briefly coexist (`pyproject.toml` + generated `requirements*.txt`); they can drift if `make export-requirements` is forgotten
-- CI still uses pip until the phased migration completes
 - Team members must adopt `uv` instead of `pip` for day-to-day work
+- Only one dependency entry point (`uv sync`) — contributors who reach for `pip install` or `requirements*.txt` won't find them
 
 ## Alternatives Considered
 
@@ -56,12 +56,12 @@ Leave the manifests as-is and only use uv to install them.
 
 ### Poetry or PDM
 
-Feature-equivalent managers, but uv is the same tool we already use for `uv tool` installs and provides the simplest `uv export` path for keeping the CI pip artifacts working.
+Feature-equivalent managers, but uv is the same tool we already use for `uv tool` installs.
 
 ### Pipenv
 
-Rejected: less maintained, no equivalent of `uv export` for lockfile → requirements artifacts.
+Rejected: less maintained, and the unified lockfile model we adopted works better with uv's `uv sync`.
 
 ### Migrate everything at once (delete `requirements*.txt` immediately)
 
-Rejected: CI workflows (`validate-pr.yml`, `generate-calendar.yml`) still `pip install -r ...`. Deleting the artifacts before CI migration would break the pipeline. The phased approach keeps CI green while the local toolchain moves first.
+Initially rejected because CI workflows still `pip install -r ...`. That dependency was resolved by the phased rollout: CI migrated to uv first (issue #60), then the artifacts were deleted.

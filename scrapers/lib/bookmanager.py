@@ -86,7 +86,7 @@ class BookmanagerEventsScraper(BaseScraper):
         settings = self._post("store/getSettings", {"webstore_name": self.san})
         if isinstance(settings, dict) and settings.get("error"):
             raise RuntimeError(f"store/getSettings failed: {settings}")
-        store_info = settings.get("store_info") or {}
+        store_info: dict[str, Any] = settings.get("store_info") or {}
         store_id = store_info.get("id")
         if store_id is None:
             raise RuntimeError(f"store/getSettings missing store_info.id: {settings}")
@@ -124,7 +124,7 @@ class BookmanagerEventsScraper(BaseScraper):
             self.logger.error(f"event/v2/list failed for {self.name}: {exc}")
             return []
 
-        rows = resp.get("rows", []) if isinstance(resp, dict) else []
+        rows: list[dict[str, Any]] = resp.get("rows", []) if isinstance(resp, dict) else []
         tz = ZoneInfo(self.timezone)
 
         events: list[dict[str, Any]] = []
@@ -171,7 +171,7 @@ class BookmanagerEventsScraper(BaseScraper):
             return None
 
         description = self._clean_html(row.get("description") or row.get("summary") or "")
-        category = row.get("category") or {}
+        category: dict[str, Any] = row.get("category") or {}
         category_name = category.get("name") if isinstance(category, dict) else None
         if category_name:
             description = (

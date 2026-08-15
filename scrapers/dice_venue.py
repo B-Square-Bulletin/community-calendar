@@ -150,7 +150,7 @@ class DiceApiScraper(BaseScraper):
 
         # Location: "<venue name>, <full address>"
         venue_name = item.get("venue") or ""
-        venues = item.get("venues") or []
+        venues: list[dict[str, Any]] = item.get("venues") or []
         if not venue_name and venues:
             venue_name = venues[0].get("name", "")
         address = item.get("address") or ""
@@ -167,7 +167,7 @@ class DiceApiScraper(BaseScraper):
             "description": desc[:500],
             "url": item.get("url") or "",
         }
-        images = item.get("images") or []
+        images: list[str] = item.get("images") or []
         if images:
             event["image_url"] = images[0]
         return event
@@ -189,7 +189,7 @@ class DiceApiScraper(BaseScraper):
             except json.JSONDecodeError as e:
                 self.logger.error(f"Bad JSON from {url}: {e}")
                 break
-            data = payload.get("data") or []
+            data: list[dict[str, Any]] = payload.get("data") or []
             self.logger.info(f"Page {pages + 1}: {len(data)} events")
             for item in data:
                 event = self._parse_event(item)

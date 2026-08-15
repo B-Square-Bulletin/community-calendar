@@ -2,12 +2,15 @@
 
 from abc import abstractmethod
 from datetime import datetime
-from typing import Any
+from typing import TYPE_CHECKING, Any, cast
 from zoneinfo import ZoneInfo
 
 import feedparser
 
 from .base import BaseScraper
+
+if TYPE_CHECKING:
+    from time import struct_time
 
 
 class RssScraper(BaseScraper):
@@ -60,8 +63,16 @@ class RssScraper(BaseScraper):
 
         # Try parsed tuple first
         if entry.get("published_parsed"):
-            dt_tuple = entry.published_parsed
-            dt_utc = datetime(*dt_tuple[:6], tzinfo=ZoneInfo("UTC"))
+            dt_tuple = cast("struct_time", entry["published_parsed"])
+            dt_utc = datetime(
+                dt_tuple.tm_year,
+                dt_tuple.tm_mon,
+                dt_tuple.tm_mday,
+                dt_tuple.tm_hour,
+                dt_tuple.tm_min,
+                dt_tuple.tm_sec,
+                tzinfo=ZoneInfo("UTC"),
+            )
             return dt_utc.astimezone(tz)
 
         # Try raw string

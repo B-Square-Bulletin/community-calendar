@@ -38,6 +38,9 @@ class TorontoPublicLibraryAudienceScraper(BibliocommonsEventsScraper):
         if not audience_ids or not self.target_audience_id:
             return False
 
+        if not isinstance(audience_ids, list):
+            return False
+
         for audience_id in TPL_AUDIENCE_PRIORITY:
             if audience_id in audience_ids:
                 return audience_id == self.target_audience_id

@@ -27,6 +27,7 @@ import html as html_mod
 import json
 import logging
 import re
+from collections.abc import Callable
 from datetime import datetime, timezone
 from typing import Any, ClassVar
 from urllib.error import HTTPError, URLError
@@ -85,7 +86,9 @@ def extract_jsonld_blocks(html: str) -> list[dict]:
     return blocks
 
 
-def extract_events_from_blocks(blocks: list[dict], is_event=None) -> list[dict]:
+def extract_events_from_blocks(
+    blocks: list[dict], is_event: Callable[[str], bool] | set[str] | None = None
+) -> list[dict]:
     """Extract Event objects from JSON-LD blocks.
 
     is_event can be a callable (str -> bool) or a set of type names.
@@ -97,26 +100,31 @@ def extract_events_from_blocks(blocks: list[dict], is_event=None) -> list[dict]:
     - @graph arrays
     - Events nested under other types (e.g., HighSchool.event)
     """
+    checker: Callable[[str], bool]
     if is_event is None:
-        is_event = _is_event_type
+        checker = _is_event_type
     elif isinstance(is_event, set):
         type_set = is_event
 
-        def is_event(t):
+        def _matches_type_set(t: str) -> bool:
             return t in type_set
 
-    events = []
+        checker = _matches_type_set
+    else:
+        checker = is_event
+
+    events: list[dict] = []
     for data in blocks:
         if isinstance(data, list):
             for item in data:
-                if isinstance(item, dict) and is_event(item.get("@type", "")):
+                if isinstance(item, dict) and checker(item.get("@type", "")):
                     events.append(item)
         elif isinstance(data, dict):
-            if is_event(data.get("@type", "")):
+            if checker(data.get("@type", "")):
                 events.append(data)
             # Check @graph
             for item in data.get("@graph", []):
-                if isinstance(item, dict) and is_event(item.get("@type", "")):
+                if isinstance(item, dict) and checker(item.get("@type", "")):
                     events.append(item)
             # Check nested event arrays (e.g., HighSchool.event)
             for item in data.get("event", []):

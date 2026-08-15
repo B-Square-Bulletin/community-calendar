@@ -54,7 +54,7 @@ MONTHS = {
 }
 
 
-def parse_date_time(date_str: str) -> tuple[datetime, datetime | None]:
+def parse_date_time(date_str: str) -> tuple[datetime | None, datetime | None]:
     """Parse date string like 'Saturday, March 29, 9:00 am - 12:00 pm'."""
     # Clean up HTML entities
     date_str = date_str.replace("\xa0", " ").replace("&nbsp;", " ").strip()

@@ -26,7 +26,7 @@ MIN_EVENTS = {
 }
 
 # Critical sources that should always have events
-CRITICAL_SOURCES = {
+CRITICAL_SOURCES: dict[str, list[str]] = {
     "santarosa": ["North Bay Bohemian", "Press Democrat", "Sonoma County Library"],
     "bloomington": [],
     "davis": [],
@@ -47,6 +47,7 @@ class ValidationError:
 def validate_city(city: str, cities_dir: Path) -> list[ValidationError]:
     """Validate a single city's output."""
     errors = []
+    ics_event_count = None
     city_dir = cities_dir / city
 
     if not city_dir.exists():
@@ -97,7 +98,7 @@ def validate_city(city: str, cities_dir: Path) -> list[ValidationError]:
                 )
 
             # Check that events.json roughly matches combined.ics
-            if "ics_event_count" in dir():
+            if ics_event_count is not None:
                 diff = abs(ics_event_count - json_event_count)
                 if diff > 100:
                     errors.append(

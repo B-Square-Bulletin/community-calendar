@@ -29,7 +29,7 @@ class SonomaCountyGovScraper(BaseScraper):
     def fetch_events(self) -> list[dict[str, Any]]:
         """Fetch events from the JSON API."""
         results = []
-        seen_urls = set()
+        seen_urls: set[str] = set()
 
         # Fetch from today to N months ahead
         now = datetime.now()
@@ -56,7 +56,9 @@ class SonomaCountyGovScraper(BaseScraper):
 
         return results
 
-    def _parse_event(self, event_data: dict, seen_urls: set) -> dict[str, Any] | None:
+    def _parse_event(
+        self, event_data: dict[str, Any], seen_urls: set[str]
+    ) -> dict[str, Any] | None:
         """Parse a single event from JSON data."""
         title = event_data.get("title", "").strip()
         if not title:

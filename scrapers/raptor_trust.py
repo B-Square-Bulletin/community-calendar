@@ -18,7 +18,7 @@ import logging
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
-from typing import Any
+from typing import Any, cast
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -70,7 +70,8 @@ class RaptorTrustScraper(BaseScraper):
         now = datetime.now(timezone.utc)
         events = []
         try:
-            cal = ICalendar.from_ical(data)
+            # icalendar accepts bytes (decodes with utf-8-sig) though stubs say str
+            cal = ICalendar.from_ical(cast("str", data))
         except Exception:
             return []
 

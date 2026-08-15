@@ -11,6 +11,7 @@ import logging
 import re
 import sys
 from datetime import datetime, timedelta
+from typing import Any
 
 from bs4 import BeautifulSoup
 from icalendar import Calendar, Event
@@ -114,12 +115,12 @@ def parse_time_range(text: str) -> tuple[tuple[int, int] | None, tuple[int, int]
     return None, None
 
 
-def scrape_events(target_year: int, target_month: int) -> list[dict]:
+def scrape_events(target_year: int, target_month: int) -> list[dict[str, Any]]:
     """Scrape events from Santa Rosa Arts Center."""
     html = fetch_with_retry(EVENTS_URL)
     soup = BeautifulSoup(html, "html.parser")
 
-    events = []
+    events: list[dict[str, Any]] = []
 
     # Find the main content widget
     content_widgets = soup.find_all("div", class_="elementor-widget-text-editor")
@@ -128,7 +129,7 @@ def scrape_events(target_year: int, target_month: int) -> list[dict]:
         # Get all elements in order
         elements = widget.find_all(["h3", "h4", "h5", "p", "div"])
 
-        current_event = None
+        current_event: dict[str, Any] | None = None
 
         for element in elements:
             text = element.get_text(strip=True)
@@ -213,7 +214,7 @@ def scrape_events(target_year: int, target_month: int) -> list[dict]:
 
     # Filter by target month and deduplicate
     seen = set()
-    filtered = []
+    filtered: list[dict[str, Any]] = []
     for event in events:
         dt = event.get("dtstart")
         if dt and dt.year == target_year and dt.month == target_month:

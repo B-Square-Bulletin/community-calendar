@@ -131,7 +131,7 @@ class MaxPrepsScraper(BaseScraper):
 
     def _parse_next_data(self, html: str) -> list[dict[str, Any]]:
         """Extract events from __NEXT_DATA__ JSON."""
-        events = []
+        events: list[dict[str, Any]] = []
 
         # Find __NEXT_DATA__ script
         match = re.search(r'<script[^>]*id="__NEXT_DATA__"[^>]*>([^<]+)</script>', html)

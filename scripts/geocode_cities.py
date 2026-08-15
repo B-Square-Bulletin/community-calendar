@@ -21,6 +21,7 @@ import json
 import time
 from math import asin, cos, radians, sin, sqrt
 from pathlib import Path
+from typing import Any
 
 import requests
 
@@ -89,7 +90,13 @@ def haversine(lat1, lng1, lat2, lng2):
 
 def parse_allowed_cities_file(filepath):
     """Parse city.conf and extract config."""
-    config = {"center": None, "radius": None, "state": "CA", "timezone": None, "cities": []}
+    config: dict[str, Any] = {
+        "center": None,
+        "radius": None,
+        "state": "CA",
+        "timezone": None,
+        "cities": [],
+    }
 
     for line in filepath.read_text().splitlines():
         line = line.strip()

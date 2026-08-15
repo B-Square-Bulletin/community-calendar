@@ -149,7 +149,7 @@ class TribeRestScraper(BaseScraper):
                 dtend = datetime.fromisoformat(end_str).replace(tzinfo=tz)
 
         # Location from venue sub-object
-        venue = item.get("venue") or {}
+        venue: dict[str, Any] = item.get("venue") or {}
         location_parts = [
             venue.get("venue", ""),
             venue.get("address", ""),

@@ -196,7 +196,7 @@ class LumaCollectionScraper(BaseScraper):
                 referer=self.url,
             )
             payload = json.loads(body)
-            page_entries = payload.get("entries") or []
+            page_entries: list[dict[str, Any]] = payload.get("entries") or []
             if not isinstance(page_entries, list):
                 break
             entries.extend(page_entries)
