@@ -6,8 +6,6 @@ import json
 import re
 import sys
 from datetime import date, datetime, timedelta
-from re import Match
-from typing import cast
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
@@ -67,10 +65,9 @@ def clean_text(text: str) -> str:
 
 
 def parse_time(value: str, default_meridian: str | None = None) -> tuple[int, int]:
-    match = cast(
-        "Match[str]",
-        re.match(r"(\d{1,2})(?::(\d{2}))?\s*(am|pm)?", value.strip(), re.IGNORECASE),
-    )
+    match = re.match(r"(\d{1,2})(?::(\d{2}))?\s*(am|pm)?", value.strip(), re.IGNORECASE)
+    if match is None:
+        raise ValueError(f"Could not parse time from {value!r}")
     hour = int(match.group(1))
     minute = int(match.group(2) or "0")
     meridian = (match.group(3) or default_meridian or "").lower()
