@@ -29,7 +29,7 @@ Use **uv** for dependency management, with `pyproject.toml` as the single source
 1. Create `pyproject.toml` with `[project]` dependencies migrated from `requirements.txt`, `requires-python = ">=3.10"`, and dev tools in a `[dependency-groups].dev` group (pytest, pytest-cov, ruff, ty, pyrefly, pyright, zuban).
 2. Commit a `uv.lock` lockfile. `uv sync` installs the environment from it.
 3. Pin the toolchain to Python 3.10 via `.python-version` (`uv python pin 3.10`) so local venv and CI match.
-4. The generated `requirements*.txt` artifacts are retired; no workflow or doc references them. `uv.lock` is the single source of truth.
+4. The generated `requirements*.txt` artifacts are retired; no workflow or active documentation references them (the `uv_migration_handoff` that proposed the migration is marked superseded). `uv.lock` is the single source of truth.
 5. Replace `make setup-python` (venv + pip) with `uv sync`, and `make test-python` with `uv run pytest`.
 
 ## Consequences

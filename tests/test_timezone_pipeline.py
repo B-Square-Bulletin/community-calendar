@@ -778,7 +778,11 @@ class TestRealIcsFiles:
         for raw, parsed in results:
             if "TZID=UTC" in raw:
                 dt = datetime.fromisoformat(parsed)
-                offset_hours = (dt.utcoffset() or timedelta()).total_seconds() / 3600
+                utc_offset = dt.utcoffset()
+                assert utc_offset is not None, (
+                    f"TZID=UTC should produce a timezone-aware datetime, got naive: {raw} → {parsed}"
+                )
+                offset_hours = utc_offset.total_seconds() / 3600
                 assert offset_hours == 0, (
                     f"TZID=UTC should produce +00:00 offset, got {offset_hours}h: {raw} → {parsed}"
                 )

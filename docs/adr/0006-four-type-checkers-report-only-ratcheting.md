@@ -19,7 +19,7 @@ We wanted formatting and linting enforced locally and (eventually) in CI, but we
 Run **four type checkers** (ty, pyrefly, pyright, zuban in mypy mode) plus **ruff** (format + lint), with a phased enforcement policy that is now complete:
 
 1. **Ruff gates.** `make lint` fails on `ruff format` and `ruff check` violations. `legacy/` is excluded (abandoned code).
-2. **Type checkers gate.** `make lint` runs all four checkers and fails on any diagnostics. PR CI runs the same strict target (`make lint`) and blocks merges, so an introduced finding fails the PR. The checkers were report-only during the ratchet (phase 1) and flipped to gating once the baseline reached zero. After the flip, the strictness settings were tightened — pyright moved from `basic` to `standard` (zero new findings), and zuban/mypy turn on `check_untyped_defs` so the bodies of unannotated functions are checked instead of silently skipped.
+2. **Type checkers gate.** `make lint` runs all four checkers and fails on any diagnostics. PR CI runs the same strict target (`make lint`) in the `lint` job, so an introduced finding fails that job. The checkers were report-only during the ratchet (phase 1) and flipped to gating once the baseline reached zero. After the flip, the strictness settings were tightened — pyright moved from `basic` to `standard` (zero new findings), and zuban/mypy turn on `check_untyped_defs` so the bodies of unannotated functions are checked instead of silently skipped. Marking `lint` as a *required* branch-protection check is a post-merge follow-up (issue #60, ticket 09); until then the job runs and reports but is not a merge gate.
 3. **Ratcheting complete.** The baseline was driven to zero across `scripts/`, `scrapers/`, and `tests/` with annotations and narrowing only. The repo carries no `# type: ignore` comments, so any future suppression must be justified at the line it silences.
 4. **Not in pre-commit.** The four checkers are project-wide and slow; pre-commit runs only ruff (fast, scoped to staged files), so commits stay quick while the full suite runs via `make lint` and CI.
 
@@ -40,7 +40,7 @@ The dev group includes typeshed stub packages for the scraper backbone libraries
 **Harder:**
 
 - Four checkers produce four overlapping diagnostic sets; triage cost is real
-- All four gate in CI, so an introduced finding in any one of them blocks a PR — stricter than a single-checker setup
+- All four gate in `make lint` and the PR CI `lint` job, so an introduced finding in any one of them fails the PR check — stricter than a single-checker setup
 - The full four-checker lint run is slower than ruff alone, so the fast path stays in pre-commit
 
 ## Alternatives Considered

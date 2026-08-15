@@ -51,10 +51,11 @@ def get_changed_file_statuses(base_ref: str) -> list[tuple[str, str]]:
         )
     entries = []
     for line in result.stdout.splitlines():
-        parts = line.split("\t", 1)
-        if len(parts) == 2:
-            # Status may carry a score suffix (e.g. R100); keep only the letter
-            entries.append((parts[0][0], parts[1]))
+        parts = line.split("\t")
+        if len(parts) >= 2:
+            # Status may carry a score suffix (e.g. R100); keep only the letter.
+            # Rename/copy records emit old<TAB>new — use the destination path.
+            entries.append((parts[0][0], parts[-1]))
     return entries
 
 
