@@ -56,3 +56,5 @@ xmlui/version.txt
 graphify-out/cost.json
 # optional: commit for speed, skip to keep repo small
 graphify-out/cache/
+
+.scratch
