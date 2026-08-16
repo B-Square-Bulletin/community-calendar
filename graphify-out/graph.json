@@ -1257,8 +1257,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "time",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 87,
+      "community_name": "time",
       "norm_label": "time"
     },
     {
@@ -4287,7 +4287,7 @@
       "_origin": "ast",
       "id": "scrapers_davis_downtown",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "davis_downtown.py"
     },
     {
@@ -4300,7 +4300,7 @@
       "_origin": "ast",
       "id": "scrapers_davis_downtown_davisdowntownscraper",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "davisdowntownscraper"
     },
     {
@@ -4311,7 +4311,7 @@
       "_origin": "ast",
       "id": "scrapers_davis_downtown_rationale_17",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "scraper for davis downtown events."
     },
     {
@@ -6377,8 +6377,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "scrapers_guildhost",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 19,
+      "community_name": "GuildHostScraper",
       "norm_label": "guildhost.py"
     },
     {
@@ -6390,8 +6390,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "scrapers_guildhost_guildhostscraper",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 19,
+      "community_name": "GuildHostScraper",
       "norm_label": "guildhostscraper"
     },
     {
@@ -6402,8 +6402,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_guildhost_guildhostscraper_init",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 19,
+      "community_name": "GuildHostScraper",
       "norm_label": ".__init__()"
     },
     {
@@ -6414,8 +6414,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_guildhost_guildhostscraper_fetch_page",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 19,
+      "community_name": "GuildHostScraper",
       "norm_label": "._fetch_page()"
     },
     {
@@ -6426,8 +6426,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_guildhost_guildhostscraper_extract_event_slugs",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 19,
+      "community_name": "GuildHostScraper",
       "norm_label": "._extract_event_slugs()"
     },
     {
@@ -6438,8 +6438,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_guildhost_guildhostscraper_parse_jsonld_event",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 19,
+      "community_name": "GuildHostScraper",
       "norm_label": "._parse_jsonld_event()"
     },
     {
@@ -6449,8 +6449,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "scrapers_guildhost_py_any",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 19,
+      "community_name": "GuildHostScraper",
       "norm_label": "any"
     },
     {
@@ -6461,8 +6461,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_guildhost_guildhostscraper_fetch_events",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 19,
+      "community_name": "GuildHostScraper",
       "norm_label": ".fetch_events()"
     },
     {
@@ -6473,8 +6473,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_guildhost_main",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 19,
+      "community_name": "GuildHostScraper",
       "norm_label": "main()"
     },
     {
@@ -6484,8 +6484,8 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "scrapers_guildhost_rationale_46",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 19,
+      "community_name": "GuildHostScraper",
       "norm_label": "scraper for guild.host group event pages via json-ld event data."
     },
     {
@@ -6495,8 +6495,8 @@
       "source_location": "L59",
       "_origin": "ast",
       "id": "scrapers_guildhost_rationale_59",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 19,
+      "community_name": "GuildHostScraper",
       "norm_label": "fetch a page with error handling."
     },
     {
@@ -6506,8 +6506,8 @@
       "source_location": "L69",
       "_origin": "ast",
       "id": "scrapers_guildhost_rationale_69",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 19,
+      "community_name": "GuildHostScraper",
       "norm_label": "extract unique event slugs from the listing page html."
     },
     {
@@ -6517,8 +6517,8 @@
       "source_location": "L82",
       "_origin": "ast",
       "id": "scrapers_guildhost_rationale_82",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 19,
+      "community_name": "GuildHostScraper",
       "norm_label": "extract event json-ld from an individual event page."
     },
     {
@@ -6528,8 +6528,8 @@
       "source_location": "L163",
       "_origin": "ast",
       "id": "scrapers_guildhost_rationale_163",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 19,
+      "community_name": "GuildHostScraper",
       "norm_label": "fetch the group listing page, then each event page for json-ld."
     },
     {
@@ -7004,7 +7004,7 @@
       "_origin": "ast",
       "id": "scrapers_ismyrotaryclub",
       "community": 185,
-      "community_name": "SOURCES_CHECKLIST.md",
+      "community_name": "IsMyRotaryClubScraper",
       "norm_label": "ismyrotaryclub.py"
     },
     {
@@ -7016,7 +7016,7 @@
       "_origin": "ast",
       "id": "scrapers_ismyrotaryclub_strip_html",
       "community": 185,
-      "community_name": "SOURCES_CHECKLIST.md",
+      "community_name": "IsMyRotaryClubScraper",
       "norm_label": "strip_html()"
     },
     {
@@ -7029,7 +7029,7 @@
       "_origin": "ast",
       "id": "scrapers_ismyrotaryclub_ismyrotaryclubscraper",
       "community": 185,
-      "community_name": "SOURCES_CHECKLIST.md",
+      "community_name": "IsMyRotaryClubScraper",
       "norm_label": "ismyrotaryclubscraper"
     },
     {
@@ -7041,7 +7041,7 @@
       "_origin": "ast",
       "id": "scrapers_ismyrotaryclub_ismyrotaryclubscraper_init",
       "community": 185,
-      "community_name": "SOURCES_CHECKLIST.md",
+      "community_name": "IsMyRotaryClubScraper",
       "norm_label": ".__init__()"
     },
     {
@@ -7053,7 +7053,7 @@
       "_origin": "ast",
       "id": "scrapers_ismyrotaryclub_ismyrotaryclubscraper_fetch_events",
       "community": 185,
-      "community_name": "SOURCES_CHECKLIST.md",
+      "community_name": "IsMyRotaryClubScraper",
       "norm_label": ".fetch_events()"
     },
     {
@@ -7064,7 +7064,7 @@
       "_origin": "ast",
       "id": "scrapers_ismyrotaryclub_py_any",
       "community": 185,
-      "community_name": "SOURCES_CHECKLIST.md",
+      "community_name": "IsMyRotaryClubScraper",
       "norm_label": "any"
     },
     {
@@ -7076,7 +7076,7 @@
       "_origin": "ast",
       "id": "scrapers_ismyrotaryclub_ismyrotaryclubscraper_parse_event",
       "community": 185,
-      "community_name": "SOURCES_CHECKLIST.md",
+      "community_name": "IsMyRotaryClubScraper",
       "norm_label": "._parse_event()"
     },
     {
@@ -7087,7 +7087,7 @@
       "_origin": "ast",
       "id": "scrapers_ismyrotaryclub_rationale_41",
       "community": 185,
-      "community_name": "SOURCES_CHECKLIST.md",
+      "community_name": "IsMyRotaryClubScraper",
       "norm_label": "remove html tags and collapse whitespace."
     },
     {
@@ -7098,7 +7098,7 @@
       "_origin": "ast",
       "id": "scrapers_ismyrotaryclub_rationale_48",
       "community": 185,
-      "community_name": "SOURCES_CHECKLIST.md",
+      "community_name": "IsMyRotaryClubScraper",
       "norm_label": "scraper for rotary club events via ismyrotaryclub.com json api."
     },
     {
@@ -7109,7 +7109,7 @@
       "_origin": "ast",
       "id": "scrapers_ismyrotaryclub_rationale_70",
       "community": 185,
-      "community_name": "SOURCES_CHECKLIST.md",
+      "community_name": "IsMyRotaryClubScraper",
       "norm_label": "fetch events from the ismyrotaryclub.com json api."
     },
     {
@@ -7120,7 +7120,7 @@
       "_origin": "ast",
       "id": "scrapers_ismyrotaryclub_rationale_104",
       "community": 185,
-      "community_name": "SOURCES_CHECKLIST.md",
+      "community_name": "IsMyRotaryClubScraper",
       "norm_label": "parse a single event from the api response."
     },
     {
@@ -7758,8 +7758,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "scrapers_lib_init",
-      "community": 0,
-      "community_name": "base.py",
+      "community": 23,
+      "community_name": "__init__.py",
       "norm_label": "__init__.py"
     },
     {
@@ -9035,8 +9035,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "scrapers_lib_elfsight",
-      "community": 0,
-      "community_name": "base.py",
+      "community": 74,
+      "community_name": "ElfsightCalendarScraper",
       "norm_label": "elfsight.py"
     },
     {
@@ -9047,8 +9047,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_lib_elfsight_fetch_elfsight_data",
-      "community": 0,
-      "community_name": "base.py",
+      "community": 74,
+      "community_name": "ElfsightCalendarScraper",
       "norm_label": "fetch_elfsight_data()"
     },
     {
@@ -9059,8 +9059,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_lib_elfsight_expand_recurring_events",
-      "community": 0,
-      "community_name": "base.py",
+      "community": 74,
+      "community_name": "ElfsightCalendarScraper",
       "norm_label": "expand_recurring_events()"
     },
     {
@@ -9070,8 +9070,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "scrapers_lib_elfsight_py_datetime",
-      "community": 0,
-      "community_name": "base.py",
+      "community": 74,
+      "community_name": "ElfsightCalendarScraper",
       "norm_label": "datetime"
     },
     {
@@ -9202,8 +9202,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "scrapers_lib_elfsight_rationale_1",
-      "community": 0,
-      "community_name": "base.py",
+      "community": 74,
+      "community_name": "ElfsightCalendarScraper",
       "norm_label": "elfsight event calendar widget scraper library. elfsight is a popular..."
     },
     {
@@ -9213,8 +9213,8 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "scrapers_lib_elfsight_rationale_41",
-      "community": 0,
-      "community_name": "base.py",
+      "community": 74,
+      "community_name": "ElfsightCalendarScraper",
       "norm_label": "fetch event data from elfsight api. args: widget_id: the elfsight widget id..."
     },
     {
@@ -9224,8 +9224,8 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "scrapers_lib_elfsight_rationale_71",
-      "community": 0,
-      "community_name": "base.py",
+      "community": 74,
+      "community_name": "ElfsightCalendarScraper",
       "norm_label": "expand a recurring event into individual occurrence datetimes. args: event:..."
     },
     {
@@ -9840,8 +9840,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "scrapers_lib_ics",
-      "community": 0,
-      "community_name": "base.py",
+      "community": 23,
+      "community_name": "__init__.py",
       "norm_label": "ics.py"
     },
     {
@@ -9854,7 +9854,7 @@
       "_origin": "ast",
       "id": "scrapers_lib_ics_icsscraper",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "icsscraper"
     },
     {
@@ -9866,7 +9866,7 @@
       "_origin": "ast",
       "id": "scrapers_lib_ics_icsscraper_get_ics_urls",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": ".get_ics_urls()"
     },
     {
@@ -9878,7 +9878,7 @@
       "_origin": "ast",
       "id": "scrapers_lib_ics_icsscraper_fetch_events",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": ".fetch_events()"
     },
     {
@@ -9889,7 +9889,7 @@
       "_origin": "ast",
       "id": "scrapers_lib_ics_py_any",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "any"
     },
     {
@@ -9901,7 +9901,7 @@
       "_origin": "ast",
       "id": "scrapers_lib_ics_icsscraper_parse_ics",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "._parse_ics()"
     },
     {
@@ -9913,7 +9913,7 @@
       "_origin": "ast",
       "id": "scrapers_lib_ics_icsscraper_parse_vevent",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "._parse_vevent()"
     },
     {
@@ -9925,7 +9925,7 @@
       "_origin": "ast",
       "id": "scrapers_lib_ics_icsscraper_filter_event",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": ".filter_event()"
     },
     {
@@ -9937,7 +9937,7 @@
       "_origin": "ast",
       "id": "scrapers_lib_ics_icsscraper_transform_event",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": ".transform_event()"
     },
     {
@@ -9949,8 +9949,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "scrapers_lib_ics_googlecalendarscraper",
-      "community": 0,
-      "community_name": "base.py",
+      "community": 23,
+      "community_name": "__init__.py",
       "norm_label": "googlecalendarscraper"
     },
     {
@@ -9962,7 +9962,7 @@
       "_origin": "ast",
       "id": "scrapers_lib_ics_googlecalendarscraper_get_ics_urls",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": ".get_ics_urls()"
     },
     {
@@ -9972,8 +9972,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "scrapers_lib_ics_rationale_1",
-      "community": 0,
-      "community_name": "base.py",
+      "community": 23,
+      "community_name": "__init__.py",
       "norm_label": "ics feed scraper base class."
     },
     {
@@ -9984,7 +9984,7 @@
       "_origin": "ast",
       "id": "scrapers_lib_ics_rationale_12",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "base class for ics feed scrapers. subclasses must set: - name: str - source..."
     },
     {
@@ -9995,7 +9995,7 @@
       "_origin": "ast",
       "id": "scrapers_lib_ics_rationale_35",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "return list of ics urls to fetch. override for multiple feeds."
     },
     {
@@ -10006,7 +10006,7 @@
       "_origin": "ast",
       "id": "scrapers_lib_ics_rationale_41",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "fetch and parse events from ics feed(s)."
     },
     {
@@ -10017,7 +10017,7 @@
       "_origin": "ast",
       "id": "scrapers_lib_ics_rationale_78",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "parse events from ics content."
     },
     {
@@ -10028,7 +10028,7 @@
       "_origin": "ast",
       "id": "scrapers_lib_ics_rationale_101",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "parse a single vevent component."
     },
     {
@@ -10039,7 +10039,7 @@
       "_origin": "ast",
       "id": "scrapers_lib_ics_rationale_145",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "return true to keep event, false to skip. override to filter by title,..."
     },
     {
@@ -10050,7 +10050,7 @@
       "_origin": "ast",
       "id": "scrapers_lib_ics_rationale_152",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "transform event data after parsing. override to modify title, add location, etc."
     },
     {
@@ -10060,8 +10060,8 @@
       "source_location": "L160",
       "_origin": "ast",
       "id": "scrapers_lib_ics_rationale_160",
-      "community": 0,
-      "community_name": "base.py",
+      "community": 23,
+      "community_name": "__init__.py",
       "norm_label": "scraper for google calendar public ics feeds. set calendar_ids to a list of..."
     },
     {
@@ -10072,7 +10072,7 @@
       "_origin": "ast",
       "id": "scrapers_lib_ics_rationale_171",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "convert calendar ids to ics urls."
     },
     {
@@ -10346,8 +10346,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "scrapers_lib_rss",
-      "community": 39,
-      "community_name": "RssScraper",
+      "community": 0,
+      "community_name": "base.py",
       "norm_label": "rss.py"
     },
     {
@@ -10428,8 +10428,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "scrapers_lib_rss_rationale_1",
-      "community": 39,
-      "community_name": "RssScraper",
+      "community": 0,
+      "community_name": "base.py",
       "norm_label": "rss feed scraper base class."
     },
     {
@@ -11494,8 +11494,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "scrapers_lib_wild_apricot_rss_wildapricotrssscraper",
-      "community": 106,
-      "community_name": "WildApricotRssScraper",
+      "community": 39,
+      "community_name": "RssScraper",
       "norm_label": "wildapricotrssscraper"
     },
     {
@@ -11506,8 +11506,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_lib_wild_apricot_rss_wildapricotrssscraper_fetch_events",
-      "community": 106,
-      "community_name": "WildApricotRssScraper",
+      "community": 39,
+      "community_name": "RssScraper",
       "norm_label": ".fetch_events()"
     },
     {
@@ -11517,8 +11517,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "scrapers_lib_wild_apricot_rss_py_any",
-      "community": 106,
-      "community_name": "WildApricotRssScraper",
+      "community": 39,
+      "community_name": "RssScraper",
       "norm_label": "any"
     },
     {
@@ -11529,8 +11529,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_lib_wild_apricot_rss_wildapricotrssscraper_fetch_rss_content",
-      "community": 106,
-      "community_name": "WildApricotRssScraper",
+      "community": 39,
+      "community_name": "RssScraper",
       "norm_label": "._fetch_rss_content()"
     },
     {
@@ -11541,8 +11541,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_lib_wild_apricot_rss_wildapricotrssscraper_parse_entry",
-      "community": 106,
-      "community_name": "WildApricotRssScraper",
+      "community": 39,
+      "community_name": "RssScraper",
       "norm_label": ".parse_entry()"
     },
     {
@@ -11553,8 +11553,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_lib_wild_apricot_rss_wildapricotrssscraper_clean_title",
-      "community": 106,
-      "community_name": "WildApricotRssScraper",
+      "community": 39,
+      "community_name": "RssScraper",
       "norm_label": ".clean_title()"
     },
     {
@@ -11565,8 +11565,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_lib_wild_apricot_rss_wildapricotrssscraper_html_to_text",
-      "community": 106,
-      "community_name": "WildApricotRssScraper",
+      "community": 39,
+      "community_name": "RssScraper",
       "norm_label": ".html_to_text()"
     },
     {
@@ -11577,8 +11577,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_lib_wild_apricot_rss_wildapricotrssscraper_extract_location",
-      "community": 106,
-      "community_name": "WildApricotRssScraper",
+      "community": 39,
+      "community_name": "RssScraper",
       "norm_label": ".extract_location()"
     },
     {
@@ -11589,8 +11589,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_lib_wild_apricot_rss_wildapricotrssscraper_clean_description",
-      "community": 106,
-      "community_name": "WildApricotRssScraper",
+      "community": 39,
+      "community_name": "RssScraper",
       "norm_label": ".clean_description()"
     },
     {
@@ -11601,8 +11601,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_lib_wild_apricot_rss_wildapricotrssscraper_default_duration",
-      "community": 106,
-      "community_name": "WildApricotRssScraper",
+      "community": 39,
+      "community_name": "RssScraper",
       "norm_label": ".default_duration()"
     },
     {
@@ -11612,8 +11612,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "scrapers_lib_wild_apricot_rss_py_timedelta",
-      "community": 106,
-      "community_name": "WildApricotRssScraper",
+      "community": 39,
+      "community_name": "RssScraper",
       "norm_label": "timedelta"
     },
     {
@@ -11634,8 +11634,8 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "scrapers_lib_wild_apricot_rss_rationale_17",
-      "community": 106,
-      "community_name": "WildApricotRssScraper",
+      "community": 39,
+      "community_name": "RssScraper",
       "norm_label": "reusable base for wild apricot rss feeds."
     },
     {
@@ -11971,7 +11971,7 @@
       "_origin": "ast",
       "id": "scrapers_luma",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "luma.py"
     },
     {
@@ -11984,7 +11984,7 @@
       "_origin": "ast",
       "id": "scrapers_luma_lumascraper",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "lumascraper"
     },
     {
@@ -11996,7 +11996,7 @@
       "_origin": "ast",
       "id": "scrapers_luma_lumascraper_init",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": ".__init__()"
     },
     {
@@ -12008,7 +12008,7 @@
       "_origin": "ast",
       "id": "scrapers_luma_lumascraper_transform_event",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": ".transform_event()"
     },
     {
@@ -12020,7 +12020,7 @@
       "_origin": "ast",
       "id": "scrapers_luma_main",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "main()"
     },
     {
@@ -12031,7 +12031,7 @@
       "_origin": "ast",
       "id": "scrapers_luma_rationale_36",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "normalize luma ics feeds so event-specific urls are populated."
     },
     {
@@ -12531,8 +12531,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "scrapers_metrolinx_board",
-      "community": 290,
-      "community_name": "MetrolinxBoardScraper",
+      "community": 7,
+      "community_name": "BaseScraper",
       "norm_label": "metrolinx_board.py"
     },
     {
@@ -12544,8 +12544,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "scrapers_metrolinx_board_metrolinxboardscraper",
-      "community": 290,
-      "community_name": "MetrolinxBoardScraper",
+      "community": 7,
+      "community_name": "BaseScraper",
       "norm_label": "metrolinxboardscraper"
     },
     {
@@ -12556,8 +12556,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_metrolinx_board_metrolinxboardscraper_fetch_html",
-      "community": 290,
-      "community_name": "MetrolinxBoardScraper",
+      "community": 7,
+      "community_name": "BaseScraper",
       "norm_label": ".fetch_html()"
     },
     {
@@ -12568,8 +12568,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_metrolinx_board_metrolinxboardscraper_extract_upcoming_dates",
-      "community": 290,
-      "community_name": "MetrolinxBoardScraper",
+      "community": 7,
+      "community_name": "BaseScraper",
       "norm_label": ".extract_upcoming_dates()"
     },
     {
@@ -12579,8 +12579,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "scrapers_metrolinx_board_py_date",
-      "community": 290,
-      "community_name": "MetrolinxBoardScraper",
+      "community": 7,
+      "community_name": "BaseScraper",
       "norm_label": "date"
     },
     {
@@ -12591,8 +12591,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_metrolinx_board_metrolinxboardscraper_fetch_events",
-      "community": 290,
-      "community_name": "MetrolinxBoardScraper",
+      "community": 7,
+      "community_name": "BaseScraper",
       "norm_label": ".fetch_events()"
     },
     {
@@ -12602,7 +12602,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "scrapers_mobilize",
-      "community": 140,
+      "community": 108,
       "community_name": "MobilizeScraper",
       "norm_label": "mobilize.py"
     },
@@ -12615,7 +12615,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "scrapers_mobilize_mobilizescraper",
-      "community": 140,
+      "community": 108,
       "community_name": "MobilizeScraper",
       "norm_label": "mobilizescraper"
     },
@@ -12627,7 +12627,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_mobilize_mobilizescraper_init",
-      "community": 140,
+      "community": 108,
       "community_name": "MobilizeScraper",
       "norm_label": ".__init__()"
     },
@@ -12639,7 +12639,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_mobilize_mobilizescraper_fetch_page",
-      "community": 140,
+      "community": 108,
       "community_name": "MobilizeScraper",
       "norm_label": "._fetch_page()"
     },
@@ -12651,7 +12651,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_mobilize_mobilizescraper_extract_embedded_data",
-      "community": 140,
+      "community": 108,
       "community_name": "MobilizeScraper",
       "norm_label": "._extract_embedded_data()"
     },
@@ -12663,7 +12663,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_mobilize_mobilizescraper_parse_event",
-      "community": 140,
+      "community": 108,
       "community_name": "MobilizeScraper",
       "norm_label": "._parse_event()"
     },
@@ -12674,7 +12674,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "scrapers_mobilize_py_any",
-      "community": 140,
+      "community": 108,
       "community_name": "MobilizeScraper",
       "norm_label": "any"
     },
@@ -12686,7 +12686,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_mobilize_mobilizescraper_fetch_events",
-      "community": 140,
+      "community": 108,
       "community_name": "MobilizeScraper",
       "norm_label": ".fetch_events()"
     },
@@ -12698,7 +12698,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_mobilize_main",
-      "community": 140,
+      "community": 108,
       "community_name": "MobilizeScraper",
       "norm_label": "main()"
     },
@@ -12709,7 +12709,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "scrapers_mobilize_rationale_41",
-      "community": 140,
+      "community": 108,
       "community_name": "MobilizeScraper",
       "norm_label": "scraper for mobilize.us organization pages via embedded json data."
     },
@@ -12720,7 +12720,7 @@
       "source_location": "L51",
       "_origin": "ast",
       "id": "scrapers_mobilize_rationale_51",
-      "community": 140,
+      "community": 108,
       "community_name": "MobilizeScraper",
       "norm_label": "fetch a url and return html."
     },
@@ -12731,7 +12731,7 @@
       "source_location": "L61",
       "_origin": "ast",
       "id": "scrapers_mobilize_rationale_61",
-      "community": 140,
+      "community": 108,
       "community_name": "MobilizeScraper",
       "norm_label": "extract window.__mlz_embedded_data__ json from html."
     },
@@ -12742,7 +12742,7 @@
       "source_location": "L85",
       "_origin": "ast",
       "id": "scrapers_mobilize_rationale_85",
-      "community": 140,
+      "community": 108,
       "community_name": "MobilizeScraper",
       "norm_label": "parse a mobilize event item into one or more event dicts (one per timeslot)."
     },
@@ -12753,7 +12753,7 @@
       "source_location": "L166",
       "_origin": "ast",
       "id": "scrapers_mobilize_rationale_166",
-      "community": 140,
+      "community": 108,
       "community_name": "MobilizeScraper",
       "norm_label": "fetch the organization page and extract all events."
     },
@@ -13327,8 +13327,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "scrapers_mystic_theatre",
-      "community": 156,
-      "community_name": "MysticTheatreScraper",
+      "community": 0,
+      "community_name": "base.py",
       "norm_label": "mystic_theatre.py"
     },
     {
@@ -13410,8 +13410,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "scrapers_mystic_theatre_py_datetime",
-      "community": 156,
-      "community_name": "MysticTheatreScraper",
+      "community": 0,
+      "community_name": "base.py",
       "norm_label": "datetime"
     },
     {
@@ -13641,8 +13641,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "scrapers_occidental_arts",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 87,
+      "community_name": "time",
       "norm_label": "occidental_arts.py"
     },
     {
@@ -13654,8 +13654,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "scrapers_occidental_arts_occidentalartsscraper",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 82,
+      "community_name": "OccidentalArtsScraper",
       "norm_label": "occidentalartsscraper"
     },
     {
@@ -13666,8 +13666,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_occidental_arts_occidentalartsscraper_fetch_events",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 82,
+      "community_name": "OccidentalArtsScraper",
       "norm_label": ".fetch_events()"
     },
     {
@@ -13677,8 +13677,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "scrapers_occidental_arts_py_any",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 82,
+      "community_name": "OccidentalArtsScraper",
       "norm_label": "any"
     },
     {
@@ -13689,8 +13689,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_occidental_arts_occidentalartsscraper_parse_event",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 82,
+      "community_name": "OccidentalArtsScraper",
       "norm_label": "._parse_event()"
     },
     {
@@ -13701,8 +13701,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_occidental_arts_occidentalartsscraper_extract_description",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 82,
+      "community_name": "OccidentalArtsScraper",
       "norm_label": "._extract_description()"
     },
     {
@@ -13713,8 +13713,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_occidental_arts_occidentalartsscraper_is_past_event",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 82,
+      "community_name": "OccidentalArtsScraper",
       "norm_label": "._is_past_event()"
     },
     {
@@ -13724,8 +13724,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "scrapers_occidental_arts_rationale_20",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 82,
+      "community_name": "OccidentalArtsScraper",
       "norm_label": "scraper for occidental center for the arts events."
     },
     {
@@ -13735,8 +13735,8 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "scrapers_occidental_arts_rationale_32",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 82,
+      "community_name": "OccidentalArtsScraper",
       "norm_label": "fetch and parse events from the upcoming-events listing."
     },
     {
@@ -13746,8 +13746,8 @@
       "source_location": "L55",
       "_origin": "ast",
       "id": "scrapers_occidental_arts_rationale_55",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 82,
+      "community_name": "OccidentalArtsScraper",
       "norm_label": "parse a single event from the listing and its ics export."
     },
     {
@@ -13757,8 +13757,8 @@
       "source_location": "L100",
       "_origin": "ast",
       "id": "scrapers_occidental_arts_rationale_100",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 82,
+      "community_name": "OccidentalArtsScraper",
       "norm_label": "extract human-readable description from the listing card."
     },
     {
@@ -13768,8 +13768,8 @@
       "source_location": "L116",
       "_origin": "ast",
       "id": "scrapers_occidental_arts_rationale_116",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 82,
+      "community_name": "OccidentalArtsScraper",
       "norm_label": "skip events that have already ended."
     },
     {
@@ -15389,7 +15389,7 @@
       "_origin": "ast",
       "id": "scrapers_simpleview",
       "community": 2,
-      "community_name": "simpleview.py",
+      "community_name": "SOURCES_CHECKLIST.md",
       "norm_label": "simpleview.py"
     },
     {
@@ -15402,7 +15402,7 @@
       "_origin": "ast",
       "id": "scrapers_simpleview_simpleviewscraper",
       "community": 2,
-      "community_name": "simpleview.py",
+      "community_name": "SOURCES_CHECKLIST.md",
       "norm_label": "simpleviewscraper"
     },
     {
@@ -15414,7 +15414,7 @@
       "_origin": "ast",
       "id": "scrapers_simpleview_simpleviewscraper_init",
       "community": 2,
-      "community_name": "simpleview.py",
+      "community_name": "SOURCES_CHECKLIST.md",
       "norm_label": ".__init__()"
     },
     {
@@ -15426,7 +15426,7 @@
       "_origin": "ast",
       "id": "scrapers_simpleview_simpleviewscraper_fetch",
       "community": 2,
-      "community_name": "simpleview.py",
+      "community_name": "SOURCES_CHECKLIST.md",
       "norm_label": "._fetch()"
     },
     {
@@ -15438,7 +15438,7 @@
       "_origin": "ast",
       "id": "scrapers_simpleview_simpleviewscraper_discover_items",
       "community": 2,
-      "community_name": "simpleview.py",
+      "community_name": "SOURCES_CHECKLIST.md",
       "norm_label": "._discover_items()"
     },
     {
@@ -15450,7 +15450,7 @@
       "_origin": "ast",
       "id": "scrapers_simpleview_simpleviewscraper_parse_detail",
       "community": 2,
-      "community_name": "simpleview.py",
+      "community_name": "SOURCES_CHECKLIST.md",
       "norm_label": "._parse_detail()"
     },
     {
@@ -15461,7 +15461,7 @@
       "_origin": "ast",
       "id": "scrapers_simpleview_py_any",
       "community": 2,
-      "community_name": "simpleview.py",
+      "community_name": "SOURCES_CHECKLIST.md",
       "norm_label": "any"
     },
     {
@@ -15473,7 +15473,7 @@
       "_origin": "ast",
       "id": "scrapers_simpleview_simpleviewscraper_fetch_events",
       "community": 2,
-      "community_name": "simpleview.py",
+      "community_name": "SOURCES_CHECKLIST.md",
       "norm_label": ".fetch_events()"
     },
     {
@@ -15485,7 +15485,7 @@
       "_origin": "ast",
       "id": "scrapers_simpleview_parse_date_or_datetime",
       "community": 2,
-      "community_name": "simpleview.py",
+      "community_name": "SOURCES_CHECKLIST.md",
       "norm_label": "_parse_date_or_datetime()"
     },
     {
@@ -15497,7 +15497,7 @@
       "_origin": "ast",
       "id": "scrapers_simpleview_is_past",
       "community": 2,
-      "community_name": "simpleview.py",
+      "community_name": "SOURCES_CHECKLIST.md",
       "norm_label": "_is_past()"
     },
     {
@@ -15509,7 +15509,7 @@
       "_origin": "ast",
       "id": "scrapers_simpleview_main",
       "community": 2,
-      "community_name": "simpleview.py",
+      "community_name": "SOURCES_CHECKLIST.md",
       "norm_label": "main()"
     },
     {
@@ -15520,7 +15520,7 @@
       "_origin": "ast",
       "id": "scrapers_simpleview_rationale_70",
       "community": 2,
-      "community_name": "simpleview.py",
+      "community_name": "SOURCES_CHECKLIST.md",
       "norm_label": "scraper for simpleview cms tourism/event sites via rss + json-ld."
     },
     {
@@ -15531,7 +15531,7 @@
       "_origin": "ast",
       "id": "scrapers_simpleview_rationale_107",
       "community": 2,
-      "community_name": "simpleview.py",
+      "community_name": "SOURCES_CHECKLIST.md",
       "norm_label": "fetch rss and return list of {url, categories} dicts. filters out items whose..."
     },
     {
@@ -15542,7 +15542,7 @@
       "_origin": "ast",
       "id": "scrapers_simpleview_rationale_171",
       "community": 2,
-      "community_name": "simpleview.py",
+      "community_name": "SOURCES_CHECKLIST.md",
       "norm_label": "fetch a detail page and return an event dict, or none."
     },
     {
@@ -15553,7 +15553,7 @@
       "_origin": "ast",
       "id": "scrapers_simpleview_rationale_261",
       "community": 2,
-      "community_name": "simpleview.py",
+      "community_name": "SOURCES_CHECKLIST.md",
       "norm_label": "return a date or datetime from an iso string. simpleview uses date-only (yyyy-..."
     },
     {
@@ -15564,7 +15564,7 @@
       "_origin": "ast",
       "id": "scrapers_simpleview_rationale_273",
       "community": 2,
-      "community_name": "simpleview.py",
+      "community_name": "SOURCES_CHECKLIST.md",
       "norm_label": "true if dt (date or datetime) is strictly in the past."
     },
     {
@@ -18038,8 +18038,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "scrapers_toronto_bicycling_network",
-      "community": 106,
-      "community_name": "WildApricotRssScraper",
+      "community": 39,
+      "community_name": "RssScraper",
       "norm_label": "toronto_bicycling_network.py"
     },
     {
@@ -18051,8 +18051,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "scrapers_toronto_bicycling_network_torontobicyclingnetworkscraper",
-      "community": 106,
-      "community_name": "WildApricotRssScraper",
+      "community": 39,
+      "community_name": "RssScraper",
       "norm_label": "torontobicyclingnetworkscraper"
     },
     {
@@ -18063,8 +18063,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scrapers_toronto_bicycling_network_torontobicyclingnetworkscraper_default_duration",
-      "community": 106,
-      "community_name": "WildApricotRssScraper",
+      "community": 39,
+      "community_name": "RssScraper",
       "norm_label": ".default_duration()"
     },
     {
@@ -18074,8 +18074,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "scrapers_toronto_bicycling_network_py_timedelta",
-      "community": 106,
-      "community_name": "WildApricotRssScraper",
+      "community": 39,
+      "community_name": "RssScraper",
       "norm_label": "timedelta"
     },
     {
@@ -18979,7 +18979,7 @@
       "_origin": "ast",
       "id": "scrapers_ucdavis_arts",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "ucdavis_arts.py"
     },
     {
@@ -18992,7 +18992,7 @@
       "_origin": "ast",
       "id": "scrapers_ucdavis_arts_ucdavisartsscraper",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "ucdavisartsscraper"
     },
     {
@@ -19004,7 +19004,7 @@
       "_origin": "ast",
       "id": "scrapers_ucdavis_arts_ucdavisartsscraper_get_ics_urls",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": ".get_ics_urls()"
     },
     {
@@ -19015,7 +19015,7 @@
       "_origin": "ast",
       "id": "scrapers_ucdavis_arts_rationale_19",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "scraper for uc davis arts calendar."
     },
     {
@@ -19026,7 +19026,7 @@
       "_origin": "ast",
       "id": "scrapers_ucdavis_arts_rationale_27",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "generate monthly ics urls."
     },
     {
@@ -19037,7 +19037,7 @@
       "_origin": "ast",
       "id": "scrapers_ucdavis_athletics",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "ucdavis_athletics.py"
     },
     {
@@ -19050,7 +19050,7 @@
       "_origin": "ast",
       "id": "scrapers_ucdavis_athletics_ucdavisathleticsscraper",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "ucdavisathleticsscraper"
     },
     {
@@ -19062,7 +19062,7 @@
       "_origin": "ast",
       "id": "scrapers_ucdavis_athletics_ucdavisathleticsscraper_transform_event",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": ".transform_event()"
     },
     {
@@ -19073,7 +19073,7 @@
       "_origin": "ast",
       "id": "scrapers_ucdavis_athletics_py_any",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "any"
     },
     {
@@ -19084,7 +19084,7 @@
       "_origin": "ast",
       "id": "scrapers_ucdavis_athletics_rationale_19",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "scraper for uc davis athletics events."
     },
     {
@@ -19095,7 +19095,7 @@
       "_origin": "ast",
       "id": "scrapers_ucdavis_athletics_rationale_28",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "clean up html entities in url."
     },
     {
@@ -19106,7 +19106,7 @@
       "_origin": "ast",
       "id": "scrapers_ucdavis_campusgroups",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "ucdavis_campusgroups.py"
     },
     {
@@ -19119,7 +19119,7 @@
       "_origin": "ast",
       "id": "scrapers_ucdavis_campusgroups_ucdaviscampusgroupsscraper",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "ucdaviscampusgroupsscraper"
     },
     {
@@ -19131,7 +19131,7 @@
       "_origin": "ast",
       "id": "scrapers_ucdavis_campusgroups_ucdaviscampusgroupsscraper_transform_event",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": ".transform_event()"
     },
     {
@@ -19142,7 +19142,7 @@
       "_origin": "ast",
       "id": "scrapers_ucdavis_campusgroups_py_any",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "any"
     },
     {
@@ -19153,7 +19153,7 @@
       "_origin": "ast",
       "id": "scrapers_ucdavis_campusgroups_rationale_19",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "scraper for uc davis campusgroups/aggie life events."
     },
     {
@@ -19164,7 +19164,7 @@
       "_origin": "ast",
       "id": "scrapers_ucdavis_campusgroups_rationale_27",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "clean up location and description fields."
     },
     {
@@ -19175,7 +19175,7 @@
       "_origin": "ast",
       "id": "scrapers_ucdavis_library",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "ucdavis_library.py"
     },
     {
@@ -19188,7 +19188,7 @@
       "_origin": "ast",
       "id": "scrapers_ucdavis_library_ucdavislibraryscraper",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "ucdavislibraryscraper"
     },
     {
@@ -19199,7 +19199,7 @@
       "_origin": "ast",
       "id": "scrapers_ucdavis_library_rationale_17",
       "community": 23,
-      "community_name": "IcsScraper",
+      "community_name": "__init__.py",
       "norm_label": "scraper for uc davis library events."
     },
     {
@@ -19542,8 +19542,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "scrapers_uudavis",
-      "community": 0,
-      "community_name": "base.py",
+      "community": 23,
+      "community_name": "__init__.py",
       "norm_label": "uudavis.py"
     },
     {
@@ -19555,8 +19555,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "scrapers_uudavis_uudavisscraper",
-      "community": 0,
-      "community_name": "base.py",
+      "community": 23,
+      "community_name": "__init__.py",
       "norm_label": "uudavisscraper"
     },
     {
@@ -19566,8 +19566,8 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "scrapers_uudavis_rationale_18",
-      "community": 0,
-      "community_name": "base.py",
+      "community": 23,
+      "community_name": "__init__.py",
       "norm_label": "scraper for uu davis events via google calendar."
     },
     {
@@ -22137,8 +22137,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "scripts_geocode_cities",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 64,
+      "community_name": "geocode_cities.py",
       "norm_label": "geocode_cities.py"
     },
     {
@@ -22149,8 +22149,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scripts_geocode_cities_load_cache",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 64,
+      "community_name": "geocode_cities.py",
       "norm_label": "load_cache()"
     },
     {
@@ -22161,8 +22161,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scripts_geocode_cities_save_cache",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 64,
+      "community_name": "geocode_cities.py",
       "norm_label": "save_cache()"
     },
     {
@@ -22173,8 +22173,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scripts_geocode_cities_geocode",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 64,
+      "community_name": "geocode_cities.py",
       "norm_label": "geocode()"
     },
     {
@@ -22185,8 +22185,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scripts_geocode_cities_haversine",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 64,
+      "community_name": "geocode_cities.py",
       "norm_label": "haversine()"
     },
     {
@@ -22197,8 +22197,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scripts_geocode_cities_parse_allowed_cities_file",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 64,
+      "community_name": "geocode_cities.py",
       "norm_label": "parse_allowed_cities_file()"
     },
     {
@@ -22209,8 +22209,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scripts_geocode_cities_write_allowed_cities_file",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 64,
+      "community_name": "geocode_cities.py",
       "norm_label": "write_allowed_cities_file()"
     },
     {
@@ -22221,8 +22221,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "scripts_geocode_cities_main",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 64,
+      "community_name": "geocode_cities.py",
       "norm_label": "main()"
     },
     {
@@ -22232,8 +22232,8 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "scripts_geocode_cities_rationale_33",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 64,
+      "community_name": "geocode_cities.py",
       "norm_label": "load geocoding cache."
     },
     {
@@ -22243,8 +22243,8 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "scripts_geocode_cities_rationale_40",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 64,
+      "community_name": "geocode_cities.py",
       "norm_label": "save geocoding cache."
     },
     {
@@ -22254,8 +22254,8 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "scripts_geocode_cities_rationale_45",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 64,
+      "community_name": "geocode_cities.py",
       "norm_label": "geocode a city name to lat/lng using nominatim."
     },
     {
@@ -22265,8 +22265,8 @@
       "source_location": "L81",
       "_origin": "ast",
       "id": "scripts_geocode_cities_rationale_81",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 64,
+      "community_name": "geocode_cities.py",
       "norm_label": "calculate distance in miles between two lat/lng points."
     },
     {
@@ -22276,8 +22276,8 @@
       "source_location": "L92",
       "_origin": "ast",
       "id": "scripts_geocode_cities_rationale_92",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 64,
+      "community_name": "geocode_cities.py",
       "norm_label": "parse city.conf and extract config."
     },
     {
@@ -22287,8 +22287,8 @@
       "source_location": "L124",
       "_origin": "ast",
       "id": "scripts_geocode_cities_rationale_124",
-      "community": 57,
-      "community_name": "AgaKhanMuseumScraper",
+      "community": 64,
+      "community_name": "geocode_cities.py",
       "norm_label": "write city.conf with config header."
     },
     {
@@ -23157,7 +23157,7 @@
       "_origin": "ast",
       "id": "scripts_report",
       "community": 108,
-      "community_name": "report.py",
+      "community_name": "MobilizeScraper",
       "norm_label": "report.py"
     },
     {
@@ -23169,7 +23169,7 @@
       "_origin": "ast",
       "id": "scripts_report_get_city_timezone",
       "community": 108,
-      "community_name": "report.py",
+      "community_name": "MobilizeScraper",
       "norm_label": "get_city_timezone()"
     },
     {
@@ -23181,7 +23181,7 @@
       "_origin": "ast",
       "id": "scripts_report_count_future_events_in_ics",
       "community": 108,
-      "community_name": "report.py",
+      "community_name": "MobilizeScraper",
       "norm_label": "count_future_events_in_ics()"
     },
     {
@@ -23193,7 +23193,7 @@
       "_origin": "ast",
       "id": "scripts_report_detect_anomalies",
       "community": 108,
-      "community_name": "report.py",
+      "community_name": "MobilizeScraper",
       "norm_label": "detect_anomalies()"
     },
     {
@@ -23204,7 +23204,7 @@
       "_origin": "ast",
       "id": "scripts_report_py_any",
       "community": 108,
-      "community_name": "report.py",
+      "community_name": "MobilizeScraper",
       "norm_label": "any"
     },
     {
@@ -23216,7 +23216,7 @@
       "_origin": "ast",
       "id": "scripts_report_load_report",
       "community": 108,
-      "community_name": "report.py",
+      "community_name": "MobilizeScraper",
       "norm_label": "load_report()"
     },
     {
@@ -23228,7 +23228,7 @@
       "_origin": "ast",
       "id": "scripts_report_save_report",
       "community": 108,
-      "community_name": "report.py",
+      "community_name": "MobilizeScraper",
       "norm_label": "save_report()"
     },
     {
@@ -23240,7 +23240,7 @@
       "_origin": "ast",
       "id": "scripts_report_update_report",
       "community": 108,
-      "community_name": "report.py",
+      "community_name": "MobilizeScraper",
       "norm_label": "update_report()"
     },
     {
@@ -23252,7 +23252,7 @@
       "_origin": "ast",
       "id": "scripts_report_parse_build_errors",
       "community": 108,
-      "community_name": "report.py",
+      "community_name": "MobilizeScraper",
       "norm_label": "parse_build_errors()"
     },
     {
@@ -23264,7 +23264,7 @@
       "_origin": "ast",
       "id": "scripts_report_main",
       "community": 108,
-      "community_name": "report.py",
+      "community_name": "MobilizeScraper",
       "norm_label": "main()"
     },
     {
@@ -23275,7 +23275,7 @@
       "_origin": "ast",
       "id": "scripts_report_rationale_29",
       "community": 108,
-      "community_name": "report.py",
+      "community_name": "MobilizeScraper",
       "norm_label": "load timezone string from cities/{city}/city.conf, fall back to default."
     },
     {
@@ -23286,7 +23286,7 @@
       "_origin": "ast",
       "id": "scripts_report_rationale_44",
       "community": 108,
-      "community_name": "report.py",
+      "community_name": "MobilizeScraper",
       "norm_label": "count vevent entries with future dtstart in an ics file."
     },
     {
@@ -23297,7 +23297,7 @@
       "_origin": "ast",
       "id": "scripts_report_rationale_76",
       "community": 108,
-      "community_name": "report.py",
+      "community_name": "MobilizeScraper",
       "norm_label": "detect anomalies for a feed. returns list of anomaly dicts."
     },
     {
@@ -23308,7 +23308,7 @@
       "_origin": "ast",
       "id": "scripts_report_rationale_116",
       "community": 108,
-      "community_name": "report.py",
+      "community_name": "MobilizeScraper",
       "norm_label": "load existing report or create new one."
     },
     {
@@ -23319,7 +23319,7 @@
       "_origin": "ast",
       "id": "scripts_report_rationale_125",
       "community": 108,
-      "community_name": "report.py",
+      "community_name": "MobilizeScraper",
       "norm_label": "save report to json file."
     },
     {
@@ -23330,7 +23330,7 @@
       "_origin": "ast",
       "id": "scripts_report_rationale_131",
       "community": 108,
-      "community_name": "report.py",
+      "community_name": "MobilizeScraper",
       "norm_label": "main function to update the report."
     },
     {
@@ -23341,7 +23341,7 @@
       "_origin": "ast",
       "id": "scripts_report_rationale_472",
       "community": 108,
-      "community_name": "report.py",
+      "community_name": "MobilizeScraper",
       "norm_label": "parse build.log for error patterns. returns list of error dicts."
     },
     {
@@ -27961,6 +27961,853 @@
       "norm_label": "parse a real api event and verify output fields."
     },
     {
+      "label": "helpers.js",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "xmlui_helpers",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "helpers.js"
+    },
+    {
+      "label": "normalizeVenueToken()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L22",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_normalizevenuetoken",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "normalizevenuetoken()"
+    },
+    {
+      "label": "sourceMatchesLocation()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L31",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_sourcematcheslocation",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "sourcematcheslocation()"
+    },
+    {
+      "label": "CLUSTER_COLORS",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L72",
+      "_origin": "ast",
+      "id": "xmlui_helpers_cluster_colors",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "cluster_colors"
+    },
+    {
+      "label": "buildSearchIndex()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L226",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_buildsearchindex",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "buildsearchindex()"
+    },
+    {
+      "label": "getEventSearchText()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L238",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_geteventsearchtext",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "geteventsearchtext()"
+    },
+    {
+      "label": "filterEvents()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L254",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_filterevents",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "filterevents()"
+    },
+    {
+      "label": "getPagedEvents()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L285",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_getpagedevents",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "getpagedevents()"
+    },
+    {
+      "label": "getDescriptionSnippet()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L331",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_getdescriptionsnippet",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "getdescriptionsnippet()"
+    },
+    {
+      "label": "getCityTimezone()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L356",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_getcitytimezone",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "getcitytimezone()"
+    },
+    {
+      "label": "formatDayOfWeek()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L381",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_formatdayofweek",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "formatdayofweek()"
+    },
+    {
+      "label": "formatMonthDay()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L387",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_formatmonthday",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "formatmonthday()"
+    },
+    {
+      "label": "formatDate()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L393",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_formatdate",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "formatdate()"
+    },
+    {
+      "label": "formatTime()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L400",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_formattime",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "formattime()"
+    },
+    {
+      "label": "uniqueSourceNames()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L415",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_uniquesourcenames",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "uniquesourcenames()"
+    },
+    {
+      "label": "formatSourceLinks()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L427",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_formatsourcelinks",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "formatsourcelinks()"
+    },
+    {
+      "label": "getSnippet()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L442",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_getsnippet",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "getsnippet()"
+    },
+    {
+      "label": "truncate()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L562",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_truncate",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "truncate()"
+    },
+    {
+      "label": "saveUserSetting()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L569",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_saveusersetting",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "saveusersetting()"
+    },
+    {
+      "label": "toggleSourceAndSave()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L592",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_togglesourceandsave",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "togglesourceandsave()"
+    },
+    {
+      "label": "saveHiddenSources()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L602",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_savehiddensources",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "savehiddensources()"
+    },
+    {
+      "label": "toggleOneClickPickAndSave()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L607",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_toggleoneclickpickandsave",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "toggleoneclickpickandsave()"
+    },
+    {
+      "label": "isSourceHidden()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L613",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_issourcehidden",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "issourcehidden()"
+    },
+    {
+      "label": "filterHiddenSources()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L620",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_filterhiddensources",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "filterhiddensources()"
+    },
+    {
+      "label": "getSourceCounts()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L632",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_getsourcecounts",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "getsourcecounts()"
+    },
+    {
+      "label": "isAggregatorSource()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L647",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_isaggregatorsource",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "isaggregatorsource()"
+    },
+    {
+      "label": "getVisibleSourceCounts()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L653",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_getvisiblesourcecounts",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "getvisiblesourcecounts()"
+    },
+    {
+      "label": "sourceCountTooltip()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L683",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_sourcecounttooltip",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "sourcecounttooltip()"
+    },
+    {
+      "label": "dedupeEvents()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L701",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_dedupeevents",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "dedupeevents()"
+    },
+    {
+      "label": "collapseLongRunningEvents()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L796",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_collapselongrunningevents",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "collapselongrunningevents()"
+    },
+    {
+      "label": "sortSourcesForDisplay()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L897",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_sortsourcesfordisplay",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "sortsourcesfordisplay()"
+    },
+    {
+      "label": "clearDedupeCache()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L923",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_cleardedupecache",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "cleardedupecache()"
+    },
+    {
+      "label": "isEventPicked()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L929",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_iseventpicked",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "iseventpicked()"
+    },
+    {
+      "label": "stampPicked()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L938",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_stamppicked",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "stamppicked()"
+    },
+    {
+      "label": "buildGoogleCalendarUrl()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L948",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_buildgooglecalendarurl",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "buildgooglecalendarurl()"
+    },
+    {
+      "label": "formatICSDate()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L979",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_formaticsdate",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "formaticsdate()"
+    },
+    {
+      "label": "escapeICS()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L986",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_escapeics",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "escapeics()"
+    },
+    {
+      "label": "downloadEventICS()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L996",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_downloadeventics",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "downloadeventics()"
+    },
+    {
+      "label": "_enrichmentsCache",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1052",
+      "_origin": "ast",
+      "id": "xmlui_helpers_enrichmentscache",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "_enrichmentscache"
+    },
+    {
+      "label": "buildRRule()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1057",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_buildrrule",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "buildrrule()"
+    },
+    {
+      "label": "parseRRule()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1097",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_parserrule",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "parserrule()"
+    },
+    {
+      "label": "saveEnrichment()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1131",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_saveenrichment",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "saveenrichment()"
+    },
+    {
+      "label": "loadEnrichment()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1176",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_loadenrichment",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "loadenrichment()"
+    },
+    {
+      "label": "loadAllEnrichments()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1203",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_loadallenrichments",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "loadallenrichments()"
+    },
+    {
+      "label": "getEnrichmentFromCache()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1226",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_getenrichmentfromcache",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "getenrichmentfromcache()"
+    },
+    {
+      "label": "toggleDay()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1231",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_toggleday",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "toggleday()"
+    },
+    {
+      "label": "getOrdinalWeekday()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1236",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_getordinalweekday",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "getordinalweekday()"
+    },
+    {
+      "label": "detectRecurrence()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1247",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_detectrecurrence",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "detectrecurrence()"
+    },
+    {
+      "label": "_detectRecurrenceInText()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1271",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_detectrecurrenceintext",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "_detectrecurrenceintext()"
+    },
+    {
+      "label": "expandEnrichments()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1306",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_expandenrichments",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "expandenrichments()"
+    },
+    {
+      "label": "getNextOccurrence()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1381",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_getnextoccurrence",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "getnextoccurrence()"
+    },
+    {
+      "label": "parseLocalTime()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1417",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_parselocaltime",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "parselocaltime()"
+    },
+    {
+      "label": "normalizeTimeValue()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1422",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_normalizetimevalue",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "normalizetimevalue()"
+    },
+    {
+      "label": "extractIsoDateValue()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1430",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_extractisodatevalue",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "extractisodatevalue()"
+    },
+    {
+      "label": "extractHmTimeValue()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1437",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_extracthmtimevalue",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "extracthmtimevalue()"
+    },
+    {
+      "label": "validateIsoDateInput()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1446",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_validateisodateinput",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "validateisodateinput()"
+    },
+    {
+      "label": "validateHmTimeInput()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1452",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_validatehmtimeinput",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "validatehmtimeinput()"
+    },
+    {
+      "label": "toBigCalendarEvents()",
+      "file_type": "code",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1458",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_helpers_tobigcalendarevents",
+      "community": 13,
+      "community_name": "helpers.js",
+      "norm_label": "tobigcalendarevents()"
+    },
+    {
+      "label": "shell.js",
+      "file_type": "code",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "xmlui_shell",
+      "community": 83,
+      "community_name": "shell.js",
+      "norm_label": "shell.js"
+    },
+    {
+      "label": "loadJsonFallback()",
+      "file_type": "code",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L8",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_shell_loadjsonfallback",
+      "community": 83,
+      "community_name": "shell.js",
+      "norm_label": "loadjsonfallback()"
+    },
+    {
+      "label": "idbOpen()",
+      "file_type": "code",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L354",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_shell_idbopen",
+      "community": 83,
+      "community_name": "shell.js",
+      "norm_label": "idbopen()"
+    },
+    {
+      "label": "idbGet()",
+      "file_type": "code",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L362",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_shell_idbget",
+      "community": 83,
+      "community_name": "shell.js",
+      "norm_label": "idbget()"
+    },
+    {
+      "label": "idbSet()",
+      "file_type": "code",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L371",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_shell_idbset",
+      "community": 83,
+      "community_name": "shell.js",
+      "norm_label": "idbset()"
+    },
+    {
+      "label": "eventsUrl()",
+      "file_type": "code",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L388",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_shell_eventsurl",
+      "community": 83,
+      "community_name": "shell.js",
+      "norm_label": "eventsurl()"
+    },
+    {
+      "label": "startFetch()",
+      "file_type": "code",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L397",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_shell_startfetch",
+      "community": 83,
+      "community_name": "shell.js",
+      "norm_label": "startfetch()"
+    },
+    {
+      "label": "deliverFresh()",
+      "file_type": "code",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L408",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_shell_deliverfresh",
+      "community": 83,
+      "community_name": "shell.js",
+      "norm_label": "deliverfresh()"
+    },
+    {
+      "label": "startCacheRead()",
+      "file_type": "code",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L421",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_shell_startcacheread",
+      "community": 83,
+      "community_name": "shell.js",
+      "norm_label": "startcacheread()"
+    },
+    {
+      "label": "report()",
+      "file_type": "code",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L466",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_shell_report",
+      "community": 83,
+      "community_name": "shell.js",
+      "norm_label": "report()"
+    },
+    {
+      "label": "findAndObserve()",
+      "file_type": "code",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L473",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_shell_findandobserve",
+      "community": 83,
+      "community_name": "shell.js",
+      "norm_label": "findandobserve()"
+    },
+    {
+      "label": "xs-trace.js",
+      "file_type": "code",
+      "source_file": "xmlui/xs-trace.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "xmlui_xs_trace",
+      "community": 91,
+      "community_name": "xs-trace.js",
+      "norm_label": "xs-trace.js"
+    },
+    {
+      "label": "getTraceId()",
+      "file_type": "code",
+      "source_file": "xmlui/xs-trace.js",
+      "source_location": "L28",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "xmlui_xs_trace_gettraceid",
+      "community": 91,
+      "community_name": "xs-trace.js",
+      "norm_label": "gettraceid()"
+    },
+    {
       "label": "docs/README.md",
       "file_type": "document",
       "source_file": "docs/README.md",
@@ -27968,7 +28815,7 @@
       "_origin": "ast",
       "id": "docs_readme",
       "community": 69,
-      "community_name": "AGENTS.md",
+      "community_name": "docs/README.md",
       "norm_label": "docs/readme.md"
     },
     {
@@ -28604,7 +29451,7 @@
       "source_file": "AGENTS.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 69,
+      "community": 29,
       "community_name": "AGENTS.md",
       "norm_label": "agents.md",
       "id": "agents"
@@ -29232,7 +30079,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 69,
-      "community_name": "AGENTS.md",
+      "community_name": "docs/README.md",
       "norm_label": "readme.md",
       "id": "readme"
     },
@@ -29330,7 +30177,7 @@
       "source_file": "cities/bloomington/SOURCES_CHECKLIST.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 185,
+      "community": 2,
       "community_name": "SOURCES_CHECKLIST.md",
       "norm_label": "sources_checklist.md",
       "id": "cities_bloomington_sources_checklist"
@@ -30706,7 +31553,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 29,
-      "community_name": "0002. Fork Model and Main Branch Protection",
+      "community_name": "AGENTS.md",
       "norm_label": "0002-fork-model-and-main-protection.md",
       "id": "docs_adr_0002_fork_model_and_main_protection"
     },
@@ -30717,7 +31564,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 29,
-      "community_name": "0002. Fork Model and Main Branch Protection",
+      "community_name": "AGENTS.md",
       "norm_label": "0002. fork model and main branch protection",
       "id": "docs_adr_0002_fork_model_and_main_protection_0002_fork_model_and_main_branch_protection"
     },
@@ -30728,7 +31575,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "community": 29,
-      "community_name": "0002. Fork Model and Main Branch Protection",
+      "community_name": "AGENTS.md",
       "norm_label": "status",
       "id": "docs_adr_0002_fork_model_and_main_protection_status"
     },
@@ -30739,7 +31586,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "community": 29,
-      "community_name": "0002. Fork Model and Main Branch Protection",
+      "community_name": "AGENTS.md",
       "norm_label": "context",
       "id": "docs_adr_0002_fork_model_and_main_protection_context"
     },
@@ -30750,7 +31597,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "community": 29,
-      "community_name": "0002. Fork Model and Main Branch Protection",
+      "community_name": "AGENTS.md",
       "norm_label": "decision",
       "id": "docs_adr_0002_fork_model_and_main_protection_decision"
     },
@@ -30761,7 +31608,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "community": 29,
-      "community_name": "0002. Fork Model and Main Branch Protection",
+      "community_name": "AGENTS.md",
       "norm_label": "consequences",
       "id": "docs_adr_0002_fork_model_and_main_protection_consequences"
     },
@@ -31124,7 +31971,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 69,
-      "community_name": "AGENTS.md",
+      "community_name": "docs/README.md",
       "norm_label": "app-architecture.md",
       "id": "docs_app_architecture"
     },
@@ -31135,7 +31982,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 69,
-      "community_name": "AGENTS.md",
+      "community_name": "docs/README.md",
       "norm_label": "app architecture",
       "id": "docs_app_architecture_app_architecture"
     },
@@ -31146,7 +31993,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "community": 69,
-      "community_name": "AGENTS.md",
+      "community_name": "docs/README.md",
       "norm_label": "xmlui frontend",
       "id": "docs_app_architecture_xmlui_frontend"
     },
@@ -31168,7 +32015,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "community": 69,
-      "community_name": "AGENTS.md",
+      "community_name": "docs/README.md",
       "norm_label": "local development",
       "id": "docs_app_architecture_local_development"
     },
@@ -31179,7 +32026,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "community": 69,
-      "community_name": "AGENTS.md",
+      "community_name": "docs/README.md",
       "norm_label": "xmlui resources",
       "id": "docs_app_architecture_xmlui_resources"
     },
@@ -31190,7 +32037,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 69,
-      "community_name": "AGENTS.md",
+      "community_name": "docs/README.md",
       "norm_label": "audio-capture.md",
       "id": "docs_audio_capture"
     },
@@ -31311,7 +32158,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 69,
-      "community_name": "AGENTS.md",
+      "community_name": "docs/README.md",
       "norm_label": "audio-input.md",
       "id": "docs_audio_input"
     },
@@ -32158,7 +33005,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 69,
-      "community_name": "AGENTS.md",
+      "community_name": "docs/README.md",
       "norm_label": "curator-guide.md",
       "id": "docs_curator_guide"
     },
@@ -32609,7 +33456,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 69,
-      "community_name": "AGENTS.md",
+      "community_name": "docs/README.md",
       "norm_label": "deduplication.md",
       "id": "docs_deduplication"
     },
@@ -33070,7 +33917,7 @@
       "source_file": "docs/discovery-lessons.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 69,
+      "community": 29,
       "community_name": "AGENTS.md",
       "norm_label": "discovery-lessons.md",
       "id": "docs_discovery_lessons"
@@ -34402,7 +35249,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 69,
-      "community_name": "AGENTS.md",
+      "community_name": "docs/README.md",
       "norm_label": "picks.md",
       "id": "docs_picks"
     },
@@ -34500,8 +35347,8 @@
       "source_file": "docs/pipeline.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 280,
-      "community_name": "Event Pipeline",
+      "community": 69,
+      "community_name": "docs/README.md",
       "norm_label": "pipeline.md",
       "id": "docs_pipeline"
     },
@@ -34511,8 +35358,8 @@
       "source_file": "docs/pipeline.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 280,
-      "community_name": "Event Pipeline",
+      "community": 69,
+      "community_name": "docs/README.md",
       "norm_label": "event pipeline",
       "id": "docs_pipeline_event_pipeline"
     },
@@ -34566,8 +35413,8 @@
       "source_file": "docs/pipeline.md",
       "source_location": "L40",
       "_origin": "ast",
-      "community": 280,
-      "community_name": "Event Pipeline",
+      "community": 69,
+      "community_name": "docs/README.md",
       "norm_label": "adding a feed (ics url)",
       "id": "docs_pipeline_adding_a_feed_ics_url"
     },
@@ -34577,8 +35424,8 @@
       "source_file": "docs/pipeline.md",
       "source_location": "L51",
       "_origin": "ast",
-      "community": 280,
-      "community_name": "Event Pipeline",
+      "community": 69,
+      "community_name": "docs/README.md",
       "norm_label": "deleting a feed",
       "id": "docs_pipeline_deleting_a_feed"
     },
@@ -34588,8 +35435,8 @@
       "source_file": "docs/pipeline.md",
       "source_location": "L59",
       "_origin": "ast",
-      "community": 280,
-      "community_name": "Event Pipeline",
+      "community": 69,
+      "community_name": "docs/README.md",
       "norm_label": "adding a scraper",
       "id": "docs_pipeline_adding_a_scraper"
     },
@@ -34599,8 +35446,8 @@
       "source_file": "docs/pipeline.md",
       "source_location": "L69",
       "_origin": "ast",
-      "community": 280,
-      "community_name": "Event Pipeline",
+      "community": 69,
+      "community_name": "docs/README.md",
       "norm_label": "build pipeline",
       "id": "docs_pipeline_build_pipeline"
     },
@@ -34610,8 +35457,8 @@
       "source_file": "docs/pipeline.md",
       "source_location": "L86",
       "_origin": "ast",
-      "community": 280,
-      "community_name": "Event Pipeline",
+      "community": 69,
+      "community_name": "docs/README.md",
       "norm_label": "source attribution",
       "id": "docs_pipeline_source_attribution"
     },
@@ -34621,8 +35468,8 @@
       "source_file": "docs/pipeline.md",
       "source_location": "L98",
       "_origin": "ast",
-      "community": 280,
-      "community_name": "Event Pipeline",
+      "community": 69,
+      "community_name": "docs/README.md",
       "norm_label": "deduplication",
       "id": "docs_pipeline_deduplication"
     },
@@ -34632,8 +35479,8 @@
       "source_file": "docs/pipeline.md",
       "source_location": "L106",
       "_origin": "ast",
-      "community": 280,
-      "community_name": "Event Pipeline",
+      "community": 69,
+      "community_name": "docs/README.md",
       "norm_label": "cities",
       "id": "docs_pipeline_cities"
     },
@@ -34643,7 +35490,7 @@
       "source_file": "docs/platforms.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 69,
+      "community": 29,
       "community_name": "AGENTS.md",
       "norm_label": "platforms.md",
       "id": "docs_platforms"
@@ -34754,7 +35601,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 69,
-      "community_name": "AGENTS.md",
+      "community_name": "docs/README.md",
       "norm_label": "procedures.md",
       "id": "docs_procedures"
     },
@@ -35380,7 +36227,7 @@
       "source_file": "docs/recurrence.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 13,
+      "community": 182,
       "community_name": "Recurrence and Enrichment",
       "norm_label": "recurrence.md",
       "id": "docs_recurrence"
@@ -35391,7 +36238,7 @@
       "source_file": "docs/recurrence.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 13,
+      "community": 182,
       "community_name": "Recurrence and Enrichment",
       "norm_label": "recurrence and enrichment",
       "id": "docs_recurrence_recurrence_and_enrichment"
@@ -35402,7 +36249,7 @@
       "source_file": "docs/recurrence.md",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 13,
+      "community": 182,
       "community_name": "Recurrence and Enrichment",
       "norm_label": "how it works",
       "id": "docs_recurrence_how_it_works"
@@ -35413,7 +36260,7 @@
       "source_file": "docs/recurrence.md",
       "source_location": "L27",
       "_origin": "ast",
-      "community": 13,
+      "community": 182,
       "community_name": "Recurrence and Enrichment",
       "norm_label": "recurrence detection",
       "id": "docs_recurrence_recurrence_detection"
@@ -35425,7 +36272,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "community": 182,
-      "community_name": "event_enrichments table",
+      "community_name": "Recurrence and Enrichment",
       "norm_label": "self-standing enrichments",
       "id": "docs_recurrence_self_standing_enrichments"
     },
@@ -35436,7 +36283,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "community": 182,
-      "community_name": "event_enrichments table",
+      "community_name": "Recurrence and Enrichment",
       "norm_label": "client-side rrule expansion",
       "id": "docs_recurrence_client_side_rrule_expansion"
     },
@@ -35446,7 +36293,7 @@
       "source_file": "docs/recurrence.md",
       "source_location": "L59",
       "_origin": "ast",
-      "community": 13,
+      "community": 182,
       "community_name": "Recurrence and Enrichment",
       "norm_label": "merging with feed events",
       "id": "docs_recurrence_merging_with_feed_events"
@@ -35457,7 +36304,7 @@
       "source_file": "docs/recurrence.md",
       "source_location": "L72",
       "_origin": "ast",
-      "community": 13,
+      "community": 182,
       "community_name": "Recurrence and Enrichment",
       "norm_label": "pinning in my picks",
       "id": "docs_recurrence_pinning_in_my_picks"
@@ -35468,7 +36315,7 @@
       "source_file": "docs/recurrence.md",
       "source_location": "L76",
       "_origin": "ast",
-      "community": 13,
+      "community": 182,
       "community_name": "Recurrence and Enrichment",
       "norm_label": "pick/unpick flow",
       "id": "docs_recurrence_pick_unpick_flow"
@@ -35479,7 +36326,7 @@
       "source_file": "docs/recurrence.md",
       "source_location": "L82",
       "_origin": "ast",
-      "community": 13,
+      "community": 182,
       "community_name": "Recurrence and Enrichment",
       "norm_label": "three capture paths, one editor",
       "id": "docs_recurrence_three_capture_paths_one_editor"
@@ -35490,7 +36337,7 @@
       "source_file": "docs/recurrence.md",
       "source_location": "L92",
       "_origin": "ast",
-      "community": 13,
+      "community": 182,
       "community_name": "Recurrence and Enrichment",
       "norm_label": "ics download",
       "id": "docs_recurrence_ics_download"
@@ -35666,7 +36513,7 @@
       "source_file": "docs/scrapers.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 69,
+      "community": 29,
       "community_name": "AGENTS.md",
       "norm_label": "scrapers.md",
       "id": "docs_scrapers"
@@ -35820,8 +36667,8 @@
       "source_file": "docs/search-and-performance.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 69,
-      "community_name": "AGENTS.md",
+      "community": 244,
+      "community_name": "List Virtualization",
       "norm_label": "search-and-performance.md",
       "id": "docs_search_and_performance"
     },
@@ -35831,8 +36678,8 @@
       "source_file": "docs/search-and-performance.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 69,
-      "community_name": "AGENTS.md",
+      "community": 244,
+      "community_name": "List Virtualization",
       "norm_label": "search and performance",
       "id": "docs_search_and_performance_search_and_performance"
     },
@@ -35842,8 +36689,8 @@
       "source_file": "docs/search-and-performance.md",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 69,
-      "community_name": "AGENTS.md",
+      "community": 244,
+      "community_name": "List Virtualization",
       "norm_label": "description snippets",
       "id": "docs_search_and_performance_description_snippets"
     },
@@ -35853,8 +36700,8 @@
       "source_file": "docs/search-and-performance.md",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 69,
-      "community_name": "AGENTS.md",
+      "community": 244,
+      "community_name": "List Virtualization",
       "norm_label": "snippet quality",
       "id": "docs_search_and_performance_snippet_quality"
     },
@@ -36250,7 +37097,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 69,
-      "community_name": "AGENTS.md",
+      "community_name": "docs/README.md",
       "norm_label": "source-links.md",
       "id": "docs_source_links"
     },
@@ -36261,7 +37108,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "community": 14,
-      "community_name": "formatSourceLinks",
+      "community_name": "dedupeEvents",
       "norm_label": "source attribution links",
       "id": "docs_source_links_source_attribution_links"
     },
@@ -36272,7 +37119,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "community": 14,
-      "community_name": "formatSourceLinks",
+      "community_name": "dedupeEvents",
       "norm_label": "how it works",
       "id": "docs_source_links_how_it_works"
     },
@@ -36283,7 +37130,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "community": 14,
-      "community_name": "formatSourceLinks",
+      "community_name": "dedupeEvents",
       "norm_label": "data flow",
       "id": "docs_source_links_data_flow"
     },
@@ -36294,7 +37141,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "community": 14,
-      "community_name": "formatSourceLinks",
+      "community_name": "dedupeEvents",
       "norm_label": "aggregator attribution principle",
       "id": "docs_source_links_aggregator_attribution_principle"
     },
@@ -36305,7 +37152,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "community": 14,
-      "community_name": "formatSourceLinks",
+      "community_name": "dedupeEvents",
       "norm_label": "graceful degradation",
       "id": "docs_source_links_graceful_degradation"
     },
@@ -36502,8 +37349,8 @@
       "source_file": "docs/timezone.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 163,
-      "community_name": "The pipeline, step by step",
+      "community": 85,
+      "community_name": "Timezone Handling",
       "norm_label": "timezone.md",
       "id": "docs_timezone"
     },
@@ -36513,8 +37360,8 @@
       "source_file": "docs/timezone.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 163,
-      "community_name": "The pipeline, step by step",
+      "community": 85,
+      "community_name": "Timezone Handling",
       "norm_label": "timezone handling",
       "id": "docs_timezone_timezone_handling"
     },
@@ -36524,8 +37371,8 @@
       "source_file": "docs/timezone.md",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 163,
-      "community_name": "The pipeline, step by step",
+      "community": 85,
+      "community_name": "Timezone Handling",
       "norm_label": "the two ics timezone conventions",
       "id": "docs_timezone_the_two_ics_timezone_conventions"
     },
@@ -36535,8 +37382,8 @@
       "source_file": "docs/timezone.md",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 163,
-      "community_name": "The pipeline, step by step",
+      "community": 85,
+      "community_name": "Timezone Handling",
       "norm_label": "x-wr-timezone (calendar-level default)",
       "id": "docs_timezone_x_wr_timezone_calendar_level_default"
     },
@@ -36546,8 +37393,8 @@
       "source_file": "docs/timezone.md",
       "source_location": "L17",
       "_origin": "ast",
-      "community": 163,
-      "community_name": "The pipeline, step by step",
+      "community": 85,
+      "community_name": "Timezone Handling",
       "norm_label": "vtimezone + tzid (per-event)",
       "id": "docs_timezone_vtimezone_tzid_per_event"
     },
@@ -36557,8 +37404,8 @@
       "source_file": "docs/timezone.md",
       "source_location": "L35",
       "_origin": "ast",
-      "community": 163,
-      "community_name": "The pipeline, step by step",
+      "community": 85,
+      "community_name": "Timezone Handling",
       "norm_label": "why both matter",
       "id": "docs_timezone_why_both_matter"
     },
@@ -36689,8 +37536,8 @@
       "source_file": "docs/timezone.md",
       "source_location": "L150",
       "_origin": "ast",
-      "community": 163,
-      "community_name": "The pipeline, step by step",
+      "community": 85,
+      "community_name": "Timezone Handling",
       "norm_label": "city timezone configuration",
       "id": "docs_timezone_city_timezone_configuration"
     },
@@ -36700,8 +37547,8 @@
       "source_file": "docs/timezone.md",
       "source_location": "L159",
       "_origin": "ast",
-      "community": 163,
-      "community_name": "The pipeline, step by step",
+      "community": 85,
+      "community_name": "Timezone Handling",
       "norm_label": "tzid inventory in report.json",
       "id": "docs_timezone_tzid_inventory_in_report_json"
     },
@@ -36711,8 +37558,8 @@
       "source_file": "docs/timezone.md",
       "source_location": "L163",
       "_origin": "ast",
-      "community": 163,
-      "community_name": "The pipeline, step by step",
+      "community": 85,
+      "community_name": "Timezone Handling",
       "norm_label": "tests",
       "id": "docs_timezone_tests"
     },
@@ -37908,7 +38755,7 @@
       "author": null,
       "contributor": null,
       "rationale": "add_scraper.py handles both workflow invocation AND pending_feeds.txt metadata; skipping it leaves the scraper without a display name or vice versa.",
-      "community": 69,
+      "community": 29,
       "community_name": "AGENTS.md",
       "norm_label": "always use add_scraper.py",
       "_origin": "semantic",
@@ -37988,7 +38835,7 @@
       "author": null,
       "contributor": null,
       "rationale": "WFHB Community Calendar is the best oblique strategy - a curated community aggregator covering venues (Orbit Room, library, The Bishop) that have no own calendars.",
-      "community": 185,
+      "community": 2,
       "community_name": "SOURCES_CHECKLIST.md",
       "norm_label": "wfhb oblique strategy",
       "_origin": "semantic",
@@ -38004,7 +38851,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Phase 4 upstream-authority pass graduates aggregator-only venues to direct feeds (e.g., The Back Door, Brown County Art Guild) once a source feed is available.",
-      "community": 185,
+      "community": 2,
       "community_name": "SOURCES_CHECKLIST.md",
       "norm_label": "aggregator-to-direct feed graduation",
       "_origin": "semantic",
@@ -40001,8 +40848,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 55,
-      "community_name": "ics_to_json.py",
+      "community": 164,
+      "community_name": "Postgres Functions vs Edge Functions",
       "norm_label": "load-events edge function (event ingest)",
       "_origin": "semantic",
       "id": "supabase_functions_load_events_index_load_events"
@@ -40046,8 +40893,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
-      "community_name": "Manage Feeds dialog (RSS icon, admin)",
+      "community": 164,
+      "community_name": "Postgres Functions vs Edge Functions",
       "norm_label": "validate-feed edge function (ics preview + rrule detection)",
       "_origin": "semantic",
       "id": "supabase_functions_validate_feed_index_validate_feed"
@@ -40092,8 +40939,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
-      "community_name": "Manage Feeds dialog (RSS icon, admin)",
+      "community": 67,
+      "community_name": "download_feeds.py",
       "norm_label": "feeds table as source of truth (pending_feeds.txt -> feeds -> feeds.txt)",
       "_origin": "semantic",
       "id": "docs_bsquare_catchup_2026_04_15_feeds_table_model"
@@ -40107,8 +40954,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
-      "community_name": "Manage Feeds dialog (RSS icon, admin)",
+      "community": 164,
+      "community_name": "Postgres Functions vs Edge Functions",
       "norm_label": "sources panel no longer depends on get_source_counts rpc",
       "_origin": "semantic",
       "id": "docs_bsquare_catchup_2026_04_15_get_source_counts_removal"
@@ -40122,8 +40969,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
-      "community_name": "Manage Feeds dialog (RSS icon, admin)",
+      "community": 164,
+      "community_name": "Postgres Functions vs Edge Functions",
       "norm_label": "manage feeds dialog (rss icon, admin)",
       "_origin": "semantic",
       "id": "docs_bsquare_update_manage_feeds_dialog"
@@ -40137,8 +40984,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
-      "community_name": "Manage Feeds dialog (RSS icon, admin)",
+      "community": 67,
+      "community_name": "download_feeds.py",
       "norm_label": "feeds table (supabase/ddl/16_feeds.sql)",
       "_origin": "semantic",
       "id": "supabase_ddl_16_feeds_sql_feeds_table"
@@ -40152,8 +40999,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
-      "community_name": "Manage Feeds dialog (RSS icon, admin)",
+      "community": 67,
+      "community_name": "download_feeds.py",
       "norm_label": "pending_feeds.txt repo-side intake flow",
       "_origin": "semantic",
       "id": "docs_bsquare_update_pending_feeds_txt_flow"
@@ -40198,8 +41045,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
-      "community_name": "Manage Feeds dialog (RSS icon, admin)",
+      "community": 164,
+      "community_name": "Postgres Functions vs Edge Functions",
       "norm_label": "get_source_counts postgres function (event counts per source)",
       "_origin": "semantic",
       "id": "supabase_rpc_get_source_counts"
@@ -40213,8 +41060,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
-      "community_name": "Manage Feeds dialog (RSS icon, admin)",
+      "community": 164,
+      "community_name": "Postgres Functions vs Edge Functions",
       "norm_label": "remove_feed postgres function (security definer delete)",
       "_origin": "semantic",
       "id": "supabase_rpc_remove_feed"
@@ -40565,8 +41412,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 55,
-      "community_name": "ics_to_json.py",
+      "community": 164,
+      "community_name": "Postgres Functions vs Edge Functions",
       "norm_label": "events table (unique source_uid + compound index)",
       "_origin": "semantic",
       "id": "supabase_ddl_events_sql_events_table"
@@ -41578,8 +42425,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 64,
-      "community_name": "lib/feed_utils.py parse_feeds_txt",
+      "community": 67,
+      "community_name": "download_feeds.py",
       "norm_label": "lib/feed_utils.py parse_feeds_txt()",
       "_origin": "semantic",
       "id": "lib_feed_utils_parse_feeds_txt"
@@ -41683,8 +42530,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 64,
-      "community_name": "lib/feed_utils.py parse_feeds_txt",
+      "community": 67,
+      "community_name": "download_feeds.py",
       "norm_label": "seed_feeds_from_txt.py",
       "_origin": "semantic",
       "id": "scripts_seed_feeds_from_txt_seed_feeds_from_txt"
@@ -41698,8 +42545,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 64,
-      "community_name": "lib/feed_utils.py parse_feeds_txt",
+      "community": 67,
+      "community_name": "download_feeds.py",
       "norm_label": "seed_feeds_table.py",
       "_origin": "semantic",
       "id": "scripts_seed_feeds_table_seed_feeds_table"
@@ -42036,8 +42883,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 55,
-      "community_name": "ics_to_json.py",
+      "community": 164,
+      "community_name": "Postgres Functions vs Edge Functions",
       "norm_label": "server-side dedup as next performance win",
       "_origin": "semantic",
       "id": "docs_performance_investigation_transcript_server_side_dedup"
@@ -43355,7 +44202,7 @@
       "author": null,
       "contributor": null,
       "community": 182,
-      "community_name": "event_enrichments table",
+      "community_name": "Recurrence and Enrichment",
       "norm_label": "detectrecurrence()",
       "_origin": "semantic",
       "id": "docs_recurrence_detectrecurrence"
@@ -43370,7 +44217,7 @@
       "author": null,
       "contributor": null,
       "community": 182,
-      "community_name": "event_enrichments table",
+      "community_name": "Recurrence and Enrichment",
       "norm_label": "expandenrichments()",
       "_origin": "semantic",
       "id": "docs_recurrence_expandenrichments"
@@ -43384,8 +44231,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 182,
-      "community_name": "event_enrichments table",
+      "community": 14,
+      "community_name": "dedupeEvents",
       "norm_label": "dedupeevents()",
       "_origin": "semantic",
       "id": "docs_recurrence_dedupeevents"
@@ -43400,7 +44247,7 @@
       "author": null,
       "contributor": null,
       "community": 182,
-      "community_name": "event_enrichments table",
+      "community_name": "Recurrence and Enrichment",
       "norm_label": "pickeditor",
       "_origin": "semantic",
       "id": "docs_recurrence_pickeditor"
@@ -43415,7 +44262,7 @@
       "author": null,
       "contributor": null,
       "community": 182,
-      "community_name": "event_enrichments table",
+      "community_name": "Recurrence and Enrichment",
       "norm_label": "event_enrichments table",
       "_origin": "semantic",
       "id": "docs_recurrence_event_enrichments_table"
@@ -43430,7 +44277,7 @@
       "author": null,
       "contributor": null,
       "community": 182,
-      "community_name": "event_enrichments table",
+      "community_name": "Recurrence and Enrichment",
       "norm_label": "picks table",
       "_origin": "semantic",
       "id": "docs_recurrence_picks_table"
@@ -43445,7 +44292,7 @@
       "author": null,
       "contributor": null,
       "community": 182,
-      "community_name": "event_enrichments table",
+      "community_name": "Recurrence and Enrichment",
       "norm_label": "rrule (rfc 5545)",
       "_origin": "semantic",
       "id": "docs_recurrence_rrule"
@@ -43490,7 +44337,7 @@
       "author": null,
       "contributor": null,
       "community": 182,
-      "community_name": "event_enrichments table",
+      "community_name": "Recurrence and Enrichment",
       "norm_label": "addtocalendar",
       "_origin": "semantic",
       "id": "docs_recurrence_addtocalendar"
@@ -43505,7 +44352,7 @@
       "author": null,
       "contributor": null,
       "community": 182,
-      "community_name": "event_enrichments table",
+      "community_name": "Recurrence and Enrichment",
       "norm_label": "refreshcounter",
       "_origin": "semantic",
       "id": "docs_recurrence_refreshcounter"
@@ -43520,7 +44367,7 @@
       "author": null,
       "contributor": null,
       "community": 14,
-      "community_name": "formatSourceLinks",
+      "community_name": "dedupeEvents",
       "norm_label": "source attribution merging",
       "_origin": "semantic",
       "id": "docs_recurrence_source_attribution_merging"
@@ -44029,8 +44876,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 244,
-      "community_name": "List Virtualization",
+      "community": 14,
+      "community_name": "dedupeEvents",
       "norm_label": "filterevents()",
       "_origin": "semantic",
       "id": "docs_search_and_performance_filterevents"
@@ -44044,8 +44891,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 182,
-      "community_name": "event_enrichments table",
+      "community": 14,
+      "community_name": "dedupeEvents",
       "norm_label": "dedupeevents()",
       "_origin": "semantic",
       "id": "docs_search_and_performance_dedupeevents"
@@ -44074,8 +44921,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 244,
-      "community_name": "List Virtualization",
+      "community": 14,
+      "community_name": "dedupeEvents",
       "norm_label": "xstrace measurement",
       "_origin": "semantic",
       "id": "docs_search_and_performance_xstrace"
@@ -44270,7 +45117,7 @@
       "author": null,
       "contributor": null,
       "community": 14,
-      "community_name": "formatSourceLinks",
+      "community_name": "dedupeEvents",
       "norm_label": "formatsourcelinks()",
       "_origin": "semantic",
       "id": "docs_source_links_formatsourcelinks"
@@ -44285,7 +45132,7 @@
       "author": null,
       "contributor": null,
       "community": 14,
-      "community_name": "formatSourceLinks",
+      "community_name": "dedupeEvents",
       "norm_label": "eventcard.xmlui",
       "_origin": "semantic",
       "id": "docs_source_links_eventcard"
@@ -44315,7 +45162,7 @@
       "author": null,
       "contributor": null,
       "community": 14,
-      "community_name": "formatSourceLinks",
+      "community_name": "dedupeEvents",
       "norm_label": "curator-guide.md",
       "_origin": "semantic",
       "id": "docs_source_links_curator_guide"
@@ -44930,7 +45777,7 @@
       "author": null,
       "contributor": null,
       "community": 69,
-      "community_name": "AGENTS.md",
+      "community_name": "docs/README.md",
       "norm_label": "producers as authoritative event sources",
       "_origin": "semantic",
       "id": "readme_event_sources_model"
@@ -44945,7 +45792,7 @@
       "author": null,
       "contributor": null,
       "community": 69,
-      "community_name": "AGENTS.md",
+      "community_name": "docs/README.md",
       "norm_label": "curator role",
       "_origin": "semantic",
       "id": "readme_curator_role"
@@ -91373,6 +92220,1174 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L948",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_buildgooglecalendarurl",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1057",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_buildrrule",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L226",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_buildsearchindex",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L923",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_cleardedupecache",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L72",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_cluster_colors",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L796",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_collapselongrunningevents",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L701",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_dedupeevents",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1247",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_detectrecurrence",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1271",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_detectrecurrenceintext",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L996",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_downloadeventics",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1052",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_enrichmentscache",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L986",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_escapeics",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1306",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_expandenrichments",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1437",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_extracthmtimevalue",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1430",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_extractisodatevalue",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L254",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_filterevents",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L620",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_filterhiddensources",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L393",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_formatdate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L381",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_formatdayofweek",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L979",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_formaticsdate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L387",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_formatmonthday",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L427",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_formatsourcelinks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L400",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_formattime",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L356",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_getcitytimezone",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L331",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_getdescriptionsnippet",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1226",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_getenrichmentfromcache",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L238",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_geteventsearchtext",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1381",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_getnextoccurrence",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1236",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_getordinalweekday",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L285",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_getpagedevents",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L442",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_getsnippet",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L632",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_getsourcecounts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L653",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_getvisiblesourcecounts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L647",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_isaggregatorsource",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L929",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_iseventpicked",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L613",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_issourcehidden",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1203",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_loadallenrichments",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1176",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_loadenrichment",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1422",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_normalizetimevalue",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_normalizevenuetoken",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1417",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_parselocaltime",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1097",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_parserrule",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1131",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_saveenrichment",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L602",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_savehiddensources",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L569",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_saveusersetting",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L897",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_sortsourcesfordisplay",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L683",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_sourcecounttooltip",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_sourcematcheslocation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L938",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_stamppicked",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1458",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_tobigcalendarevents",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1231",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_toggleday",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L607",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_toggleoneclickpickandsave",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L592",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_togglesourceandsave",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L562",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_truncate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L415",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_uniquesourcenames",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1452",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_validatehmtimeinput",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1446",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers",
+      "target": "xmlui_helpers_validateisodateinput",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_sourcematcheslocation",
+      "target": "xmlui_helpers_normalizevenuetoken",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L752",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_dedupeevents",
+      "target": "xmlui_helpers_sourcematcheslocation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L911",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_sortsourcesfordisplay",
+      "target": "xmlui_helpers_sourcematcheslocation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L231",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_buildsearchindex",
+      "target": "xmlui_helpers_geteventsearchtext",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L271",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_filterevents",
+      "target": "xmlui_helpers_geteventsearchtext",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L286",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_getpagedevents",
+      "target": "xmlui_helpers_filterevents",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1459",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_tobigcalendarevents",
+      "target": "xmlui_helpers_filterevents",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L834",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_collapselongrunningevents",
+      "target": "xmlui_helpers_getcitytimezone",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1310",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_expandenrichments",
+      "target": "xmlui_helpers_getcitytimezone",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L395",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_formatdate",
+      "target": "xmlui_helpers_getcitytimezone",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L383",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_formatdayofweek",
+      "target": "xmlui_helpers_getcitytimezone",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L389",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_formatmonthday",
+      "target": "xmlui_helpers_getcitytimezone",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L402",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_formattime",
+      "target": "xmlui_helpers_getcitytimezone",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1393",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_getnextoccurrence",
+      "target": "xmlui_helpers_getcitytimezone",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L429",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_formatsourcelinks",
+      "target": "xmlui_helpers_uniquesourcenames",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L636",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_getsourcecounts",
+      "target": "xmlui_helpers_uniquesourcenames",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L663",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_getvisiblesourcecounts",
+      "target": "xmlui_helpers_uniquesourcenames",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L901",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_sortsourcesfordisplay",
+      "target": "xmlui_helpers_uniquesourcenames",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L603",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_savehiddensources",
+      "target": "xmlui_helpers_saveusersetting",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L609",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_toggleoneclickpickandsave",
+      "target": "xmlui_helpers_saveusersetting",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L598",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_togglesourceandsave",
+      "target": "xmlui_helpers_saveusersetting",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L654",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_getvisiblesourcecounts",
+      "target": "xmlui_helpers_getsourcecounts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L779",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_dedupeevents",
+      "target": "xmlui_helpers_collapselongrunningevents",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L941",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_stamppicked",
+      "target": "xmlui_helpers_iseventpicked",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1007",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_downloadeventics",
+      "target": "xmlui_helpers_formaticsdate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1019",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_downloadeventics",
+      "target": "xmlui_helpers_escapeics",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1250",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_detectrecurrence",
+      "target": "xmlui_helpers_detectrecurrenceintext",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1463",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_tobigcalendarevents",
+      "target": "xmlui_helpers_parselocaltime",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/helpers.js",
+      "source_location": "L1441",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_helpers_extracthmtimevalue",
+      "target": "xmlui_helpers_normalizetimevalue",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L408",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_shell",
+      "target": "xmlui_shell_deliverfresh",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L388",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_shell",
+      "target": "xmlui_shell_eventsurl",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L473",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_shell",
+      "target": "xmlui_shell_findandobserve",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L362",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_shell",
+      "target": "xmlui_shell_idbget",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L354",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_shell",
+      "target": "xmlui_shell_idbopen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L371",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_shell",
+      "target": "xmlui_shell_idbset",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_shell",
+      "target": "xmlui_shell_loadjsonfallback",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L466",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_shell",
+      "target": "xmlui_shell_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L421",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_shell",
+      "target": "xmlui_shell_startcacheread",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L397",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_shell",
+      "target": "xmlui_shell_startfetch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L363",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_shell_idbget",
+      "target": "xmlui_shell_idbopen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L372",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_shell_idbset",
+      "target": "xmlui_shell_idbopen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L423",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_shell_startcacheread",
+      "target": "xmlui_shell_idbget",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L413",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_shell_deliverfresh",
+      "target": "xmlui_shell_idbset",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L399",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_shell_startfetch",
+      "target": "xmlui_shell_eventsurl",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/shell.js",
+      "source_location": "L478",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_shell_findandobserve",
+      "target": "xmlui_shell_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "xmlui/xs-trace.js",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "xmlui_xs_trace",
+      "target": "xmlui_xs_trace_gettraceid",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/README.md",
@@ -107177,5 +109192,5 @@
       "source_file": "supabase/README.md"
     }
   ],
-  "built_at_commit": "92293dd3aeea6f7d84c24812b014e3bdb6f4c1d9"
+  "built_at_commit": "b48076194370bdad1b3fd014e007f7f0b3dbfdbb"
 }

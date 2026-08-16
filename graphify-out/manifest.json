@@ -170,8 +170,8 @@
     "semantic_hash": ""
   },
   "scrapers/cal_theatre.py": {
-    "mtime": 1786833813.0645242,
-    "ast_hash": "cc05481646621438defb05b2efa20dc2",
+    "mtime": 1786842443.797272,
+    "ast_hash": "960786ab49128a5540c4aceb1181e26c",
     "semantic_hash": ""
   },
   "scrapers/carolina_performing_arts.py": {
@@ -210,8 +210,8 @@
     "semantic_hash": ""
   },
   "scrapers/copperfields.py": {
-    "mtime": 1786833813.071794,
-    "ast_hash": "fbcbc63f3de45d9303b43303f6b7c9f7",
+    "mtime": 1786842456.0270202,
+    "ast_hash": "fabeb5280488c9d273b01f041f8e9a39",
     "semantic_hash": ""
   },
   "scrapers/creative_sonoma.py": {
@@ -260,8 +260,8 @@
     "semantic_hash": ""
   },
   "scrapers/dumbarton_concerts.py": {
-    "mtime": 1786833813.082827,
-    "ast_hash": "f4bd8d7f7616315f3eebf7ed779ebae7",
+    "mtime": 1786843445.3833475,
+    "ast_hash": "44596ae5d47b2f037ba182e2e9c92a2e",
     "semantic_hash": ""
   },
   "scrapers/essex_county_parks.py": {
@@ -330,8 +330,8 @@
     "semantic_hash": ""
   },
   "scrapers/holy_trinity_concerts.py": {
-    "mtime": 1786833813.1033094,
-    "ast_hash": "eea64e32d0029d7cdc3da0670649cea9",
+    "mtime": 1786842554.1787224,
+    "ast_hash": "a6d12bd6803cc1c84dad4e7f43e0a505",
     "semantic_hash": ""
   },
   "scrapers/ismyrotaryclub.py": {
@@ -490,8 +490,8 @@
     "semantic_hash": ""
   },
   "scrapers/ludus.py": {
-    "mtime": 1786833813.1297355,
-    "ast_hash": "bc617ca891ebbbca55b5042d5715b9b5",
+    "mtime": 1786842481.5489743,
+    "ast_hash": "e3244c7fec5b065091a56ec6ae9dc471",
     "semantic_hash": ""
   },
   "scrapers/luma.py": {
@@ -610,8 +610,8 @@
     "semantic_hash": ""
   },
   "scrapers/redwood_cafe.py": {
-    "mtime": 1786833813.1467807,
-    "ast_hash": "20ec4a286ff53ac1a190ba59cfe8ff14",
+    "mtime": 1786842492.750931,
+    "ast_hash": "ab1508068b8fc33f7379631c7be3f2e9",
     "semantic_hash": ""
   },
   "scrapers/santa_rosa_arts_center.py": {
@@ -625,8 +625,8 @@
     "semantic_hash": ""
   },
   "scrapers/sebarts.py": {
-    "mtime": 1786833813.148393,
-    "ast_hash": "66c8ee4f00858419b8c18dea486eb812",
+    "mtime": 1786842493.372733,
+    "ast_hash": "3bb1c51508b6ea122c9adde6f33598d0",
     "semantic_hash": ""
   },
   "scrapers/shopify_events.py": {
@@ -655,8 +655,8 @@
     "semantic_hash": ""
   },
   "scrapers/sonoma_city.py": {
-    "mtime": 1786833813.1526806,
-    "ast_hash": "4e61f2456e28b619c3e97df760bdc3be",
+    "mtime": 1786842503.1412332,
+    "ast_hash": "d02ce51a2cd3476763687feff7209307",
     "semantic_hash": ""
   },
   "scrapers/sonoma_county_gov.py": {
@@ -705,8 +705,8 @@
     "semantic_hash": ""
   },
   "scrapers/svma.py": {
-    "mtime": 1786833813.158939,
-    "ast_hash": "a0ff4b9d0bdbffa2310830ab168f5a22",
+    "mtime": 1786842503.645358,
+    "ast_hash": "3cb64344b2f2a722e399d69f6afe6853",
     "semantic_hash": ""
   },
   "scrapers/sweetwater.py": {
@@ -740,8 +740,8 @@
     "semantic_hash": ""
   },
   "scrapers/the_pocket.py": {
-    "mtime": 1786833813.1627188,
-    "ast_hash": "56af4fb9553b209120e66195a819a6d1",
+    "mtime": 1786842513.936542,
+    "ast_hash": "9b683b2c915ce6fcc76cd170ee00287f",
     "semantic_hash": ""
   },
   "scrapers/thundertix.py": {
@@ -865,8 +865,8 @@
     "semantic_hash": ""
   },
   "scrapers/uoft_events.py": {
-    "mtime": 1786833813.179689,
-    "ast_hash": "3a1d577610f264526042eef2857be5e5",
+    "mtime": 1786842504.1049948,
+    "ast_hash": "432ec38d0d56b30a222a9a5ed593bc4b",
     "semantic_hash": ""
   },
   "scrapers/uudavis.py": {
@@ -1630,8 +1630,163 @@
     "semantic_hash": ""
   },
   "docs/adr/0006-four-type-checkers-report-only-ratcheting.md": {
-    "mtime": 1786840641.1219068,
-    "ast_hash": "d42bacd9d0a50ff9530e191337acaf95",
+    "mtime": 1786844600.1612716,
+    "ast_hash": "c7022e411d2a5ed4bba30f5c3c34418d",
+    "semantic_hash": ""
+  },
+  "xmlui/helpers.js": {
+    "mtime": 1786833813.2737992,
+    "ast_hash": "ae1274b202187952273671f0ee0b0845",
+    "semantic_hash": ""
+  },
+  "xmlui/shell.js": {
+    "mtime": 1786833813.282619,
+    "ast_hash": "b4f0c7e3233006f88dbb58fc5283b948",
+    "semantic_hash": ""
+  },
+  "xmlui/xs-trace.js": {
+    "mtime": 1786833813.3248162,
+    "ast_hash": "7ff4ca836e43b14a40f7d93e10778a3b",
+    "semantic_hash": ""
+  },
+  "xmlui/test.html": {
+    "mtime": 1786833813.28364,
+    "ast_hash": "eb4ab68ae348fc35dd500a20eed99e17",
+    "semantic_hash": ""
+  },
+  "xmlui/xmlui/xs-diff.html": {
+    "mtime": 1786833813.3245153,
+    "ast_hash": "333591fd8a14a8d993d5d6713037e5a6",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/bug.svg": {
+    "mtime": 1786833813.2743776,
+    "ast_hash": "b7ee164de171f781b88bd252e33f7e6f",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/calendar-days.svg": {
+    "mtime": 1786833813.2747076,
+    "ast_hash": "768e06e2e9140a6dd67615d46bbb2bb6",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/circle-check.svg": {
+    "mtime": 1786833813.2749827,
+    "ast_hash": "5ba03e03590271271a65d7ae1b64ba89",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/file-audio.svg": {
+    "mtime": 1786833813.275225,
+    "ast_hash": "dc941514bc281bac9ea561aa9433c0fc",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/l-bookmark-check.svg": {
+    "mtime": 1786833813.2755425,
+    "ast_hash": "35be4ed5078de8d0e55bbf8b6f00f3ca",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/l-bookmark-filled.svg": {
+    "mtime": 1786833813.2757351,
+    "ast_hash": "9a994bb65cf0b22f4895f87d30f61469",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/l-bookmark.svg": {
+    "mtime": 1786833813.2760096,
+    "ast_hash": "d79c5c6054c9635cef1b3383b963c661",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/l-calendar-plus-2.svg": {
+    "mtime": 1786833813.2762492,
+    "ast_hash": "6639bce4a26137aaca5bc3bbc509bffa",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/l-calendar-plus.svg": {
+    "mtime": 1786833813.2765088,
+    "ast_hash": "7115f1796204b552bb71d6aef03fc4d2",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/l-camera.svg": {
+    "mtime": 1786833813.2767594,
+    "ast_hash": "3c876d6237f5d825d9ed84a380486332",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/l-copy.svg": {
+    "mtime": 1786833813.2769911,
+    "ast_hash": "336fb857841e1a6e1ca41e0625be3244",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/l-download.svg": {
+    "mtime": 1786833813.2772179,
+    "ast_hash": "3ed4b135748e96deb745fd039a6f4072",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/l-file-down.svg": {
+    "mtime": 1786833813.2775211,
+    "ast_hash": "8fd3196ac8c51b058dc32b504d656bfe",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/l-file-up.svg": {
+    "mtime": 1786833813.277716,
+    "ast_hash": "0894182a536704a0d0c33137dde1cf9b",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/l-info.svg": {
+    "mtime": 1786833813.27791,
+    "ast_hash": "f0d88fafc0f5f41be86059d7650e25c6",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/l-pencil.svg": {
+    "mtime": 1786833813.2781105,
+    "ast_hash": "a88acceb2384f36644e9d799b6c33b9a",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/l-plus.svg": {
+    "mtime": 1786833813.2783227,
+    "ast_hash": "401ce854ce7a69c39921aeb2cda31f43",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/l-rss.svg": {
+    "mtime": 1786833813.2785492,
+    "ast_hash": "29900aaaded9ca9585ee589b758fcc49",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/l-search-code.svg": {
+    "mtime": 1786833813.2787535,
+    "ast_hash": "4bb521a3881f8ce69ce454a6711176bc",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/l-settings.svg": {
+    "mtime": 1786833813.2789469,
+    "ast_hash": "eb6c0e11d73d1200840e57ea375eea1b",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/l-square.svg": {
+    "mtime": 1786833813.2792084,
+    "ast_hash": "29a9844b05aa2ce6c4462882f2b5dac9",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/l-user.svg": {
+    "mtime": 1786833813.2795079,
+    "ast_hash": "ee529daf93fb96b79ac78c714556ee6e",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/l-x.svg": {
+    "mtime": 1786833813.279716,
+    "ast_hash": "9de83cdc8084db9afca019dbac9080a7",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/layers.svg": {
+    "mtime": 1786833813.279927,
+    "ast_hash": "f765ede40e176ec58858dec2ddc9cc78",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/mic.svg": {
+    "mtime": 1786833813.2801538,
+    "ast_hash": "49a26461938ec076258082773240f46a",
+    "semantic_hash": ""
+  },
+  "xmlui/icons/scan.svg": {
+    "mtime": 1786833813.2805037,
+    "ast_hash": "ec4b11ae1d35f782a6527ce1ef3bd538",
     "semantic_hash": ""
   }
 }

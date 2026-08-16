@@ -5,9 +5,6 @@ xmlui/xmlui/xmlui-parser.es.js
 xmlui/xmlui/xmlui-masonry.js
 xmlui/xmlui/xmlui-grid-layout.js
 
-# Entire old frontend (bundles + hand-written source)
-xmlui/
-
 # Dead code - excluded by ruff/pyright/ty/pyrefly in pyproject.toml
 legacy/
 
