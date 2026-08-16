@@ -57,7 +57,7 @@ class UofTEventsScraper(BaseScraper):
                 dept = (
                     text.replace("More ", "").replace(" events", "").replace(" Events", "").strip()
                 )
-                url = a.get("href", "")
+                url = str(a.get("href", ""))
                 if url:
                     more_links[dept] = url
 

@@ -32,9 +32,9 @@ DOORS_RE = re.compile(
 )
 
 
-def _is_upcoming_header(s: str) -> bool:
+def _is_upcoming_header(s: str | None) -> bool:
     """Match the non-empty 'Upcoming Concerts' header text."""
-    return bool(s) and "Upcoming Concerts" in s
+    return isinstance(s, str) and "Upcoming Concerts" in s
 
 
 class HolyTrinityConcertsScraper(BaseScraper):
@@ -134,7 +134,7 @@ class HolyTrinityConcertsScraper(BaseScraper):
     def _extract_link(paragraph: Tag) -> str:
         anchors = paragraph.find_all("a")
         for anchor in anchors:
-            href = (anchor.get("href") or "").strip()
+            href = str(anchor.get("href") or "").strip()
             text = anchor.get_text(" ", strip=True)
             if href and text:
                 return href

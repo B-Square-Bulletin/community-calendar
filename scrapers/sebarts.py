@@ -56,7 +56,7 @@ class SebArtsScraper(BaseScraper):
         events = []
 
         for event_elem in soup.find_all("a", href=re.compile(r"/classes-lectures/")):
-            url = urljoin(self.BASE_URL, event_elem["href"])
+            url = urljoin(self.BASE_URL, str(event_elem["href"]))
             if url not in seen_urls:
                 seen_urls.add(url)
                 events.append({"url": url, "title": event_elem.text.strip()})
