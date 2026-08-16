@@ -1,0 +1,18 @@
+# Compiled/minified JS bundles dominate the graph (~3,800 nodes of minified output)
+xmlui/xmlui/xmlui-standalone.umd.js
+xmlui/xmlui/xmlui-calendar.js
+xmlui/xmlui/xmlui-parser.es.js
+xmlui/xmlui/xmlui-masonry.js
+xmlui/xmlui/xmlui-grid-layout.js
+
+# Dead code - excluded by ruff/pyright/ty/pyrefly in pyproject.toml
+legacy/
+
+# Static screenshots - no structural value
+docs/screenshots/
+
+# Generated/standalone HTML pages
+report.html
+embed-demo.html
+index.html
+videos.html

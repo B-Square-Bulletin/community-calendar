@@ -63,7 +63,7 @@ class RedwoodCafeScraper(BaseScraper):
                 if not button:
                     continue
 
-                title = button.get("data-modal-title", "")
+                title = str(button.get("data-modal-title", ""))
                 if not title:
                     continue
 
@@ -74,7 +74,7 @@ class RedwoodCafeScraper(BaseScraper):
                 time_match = re.search(r"(\d{1,2}:\d{2})\s*(AM|PM)", button_text, re.IGNORECASE)
 
                 # Parse day from article ID
-                article_id = article.get("id", "")
+                article_id = str(article.get("id", ""))
                 day_match = re.search(r"mc_calendar_(\d{2})_", article_id)
                 if not day_match:
                     continue

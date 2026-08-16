@@ -68,7 +68,7 @@ class CopperfieldsScraper(BaseScraper):
                     continue
 
                 title = title_elem.get_text(strip=True)
-                event_url = link.get("href", "")
+                event_url = str(link.get("href", ""))
                 if not event_url.startswith("http"):
                     event_url = self.BASE_URL + event_url
 

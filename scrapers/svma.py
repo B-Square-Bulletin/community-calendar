@@ -44,7 +44,7 @@ class SVMAScraper(BaseScraper):
 
         for link in soup.find_all("a", href=re.compile(r"/event/")):
             try:
-                href = link.get("href", "")
+                href = str(link.get("href", ""))
                 if not href or href in seen_urls:
                     continue
 

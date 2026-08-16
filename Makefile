@@ -47,7 +47,14 @@ format:
 	@echo "✓ Formatted"
 
 # Lint Python code. Ruff (format + check) and all four type checkers gate.
+# `uv sync` runs first so a stale venv (e.g. after removing a dependency) can't
+# mask diagnostics with leftover installed packages — the checkers must resolve
+# against the exact lockfile state, not whatever uv run leaves behind.
 lint:
+	@echo "Syncing environment to lockfile..."
+	@uv sync --quiet
+	@echo "✓ environment synced"
+	@echo ""
 	@echo "Running ruff format check..."
 	@uv run ruff format --check .
 	@echo "✓ ruff formatted"

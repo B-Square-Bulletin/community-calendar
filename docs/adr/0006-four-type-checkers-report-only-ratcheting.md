@@ -27,7 +27,9 @@ Configuration for all checkers lives in `pyproject.toml` (`[tool.pyright]`, `[to
 
 ### Type stubs
 
-The dev group includes typeshed stub packages for the scraper backbone libraries — `types-beautifulsoup4`, `types-html5lib`, `types-pytz`, `types-icalendar`, plus `lxml-stubs` — so the checkers see real types for `bs4`, `lxml`, `pytz`, and `icalendar` instead of opaque `Any`. (Note: `types-lxml` was rejected because recent versions hard-require `beautifulsoup4~=4.13`, which would force upgrading the pinned `beautifulsoup4==4.11.1`; `lxml-stubs` has no such dependency. `feedparser`, `recurring-ical-events`, and `anthropic` have no typeshed stubs, so they remain `Any`.)
+The dev group includes typeshed stub packages for the scraper backbone libraries that the codebase actually imports — `types-pytz` and `types-icalendar` — so the checkers see real types for `pytz` and `icalendar` instead of opaque `Any`. `types-beautifulsoup4` was dropped: bs4 4.13+ ships inline type hints (and the separate stub only tracks the 4.12 line), so the checkers resolve `bs4` from the package itself. `types-lxml` is not added because nothing imports lxml.
+
+The `lxml` and `html5lib` runtime dependencies are likewise unused and removed: every scraper parses with `BeautifulSoup(..., "html.parser")`, and no Python file imports either package. This is a deliberate fork divergence from upstream, whose `scripts/local_build.py` references lxml. `lxml-stubs` and `types-html5lib` went away with the runtime deps they typed. (`feedparser` and `recurring-ical-events` have no typeshed stubs or inline hints, so they remain `Any`; `anthropic` ships inline hints, so the checkers resolve it from the package itself.)
 
 ## Consequences
 

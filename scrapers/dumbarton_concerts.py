@@ -178,7 +178,7 @@ class DumbartonConcertsScraper(BaseScraper):
             if not isinstance(sibling, Tag):
                 sibling = sibling.find_next_sibling()
                 continue
-            classes = sibling.get("class", [])
+            classes = sibling.get_attribute_list("class")
             if "button-block" in classes:
                 link = sibling.find("a", href=True)
                 if link is None or not isinstance(link, Tag):

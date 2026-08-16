@@ -66,14 +66,14 @@ class CalTheatreScraper(BaseScraper):
         ]
 
         # Try to find calendar day cells with events
-        calendar_cells = soup.find_all(attrs={"data-hook": re.compile(r"calendar-day-\d+")})
+        calendar_cells = soup.find_all(None, attrs={"data-hook": re.compile(r"calendar-day-\d+")})
 
         for cell in calendar_cells:
             try:
                 cell_text = cell.get_text(" ", strip=True)
 
                 # Extract day number from data-hook
-                hook = cell.get("data-hook", "")
+                hook = str(cell.get("data-hook", ""))
                 day_match = re.search(r"calendar-day-(\d+)", hook)
                 if not day_match:
                     continue

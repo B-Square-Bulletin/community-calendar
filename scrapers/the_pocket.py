@@ -101,7 +101,7 @@ class ThePocketScraper(BaseScraper):
         # Title: the visible h3 (without `w-condition-invisible`)
         title = None
         for h in item.select("h3.uui-heading-xxsmall-4"):
-            cls = h.get("class") or []
+            cls = h.get_attribute_list("class")
             if "w-condition-invisible" not in cls:
                 title = h.get_text(" ", strip=True)
                 break

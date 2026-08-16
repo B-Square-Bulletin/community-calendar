@@ -192,7 +192,7 @@ class LudusScraper(BaseScraper):
             image_url: str | None = None
             cover_el = show_div.find(class_="show_item_cover_photo")
             if cover_el:
-                style = cover_el.get("style", "")
+                style = str(cover_el.get("style", ""))
                 img_m = re.search(r"url\('([^']+)'\)", style)
                 if img_m:
                     image_url = img_m.group(1)
@@ -204,7 +204,7 @@ class LudusScraper(BaseScraper):
 
             # Performances
             showtime_divs = show_div.find_all(
-                "div", id=lambda x: x and x.startswith("showtimes_item")
+                "div", id=lambda x: isinstance(x, str) and x.startswith("showtimes_item")
             )
 
             for st_div in showtime_divs:
