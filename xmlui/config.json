@@ -5,7 +5,7 @@
   "appGlobals": {
     "supabaseUrl": "https://qatykxdvbpojxnvpicyi.supabase.co",
     "supabasePublishableKey": "sb_publishable_xXwJNayt4zT37TqqvMUD2g_BLeAUdfW",
-    "xsVerbose": true,
+    "xsVerbose": false,
     "xsVerboseLogMax": 200
   },
   "resources": {
