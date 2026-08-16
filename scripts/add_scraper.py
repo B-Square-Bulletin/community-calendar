@@ -230,7 +230,7 @@ def add_to_pending_feeds(
     cmd = f"python {scraper_path.relative_to(ROOT)}{extra}"
     entry = f"\n# {display_name}\n# cmd: {cmd}\n{output_file}\n"
 
-    with open(feeds_path, "a") as f:
+    with feeds_path.open("a") as f:
         f.write(entry)
 
     print(f"✅ Added to pending_feeds.txt: {display_name}")

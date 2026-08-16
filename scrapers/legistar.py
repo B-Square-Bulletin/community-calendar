@@ -11,6 +11,7 @@ import subprocess
 import sys
 import urllib.parse
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
 
 def fetch_events(client, months_ahead=12):
@@ -142,7 +143,7 @@ def main():
     ics = events_to_ics(events, source_name)
 
     if args.output:
-        with open(args.output, "w") as f:
+        with Path(args.output).open("w") as f:
             f.write(ics)
         print(f"Wrote {args.output}", file=sys.stderr)
     else:

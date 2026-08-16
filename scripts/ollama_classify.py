@@ -17,6 +17,7 @@ import os
 import sys
 import urllib.parse
 import urllib.request
+from pathlib import Path
 from typing import cast
 
 SUPABASE_URL: str = cast("str", os.environ.get("SUPABASE_URL"))
@@ -26,8 +27,8 @@ if not SUPABASE_URL or not SUPABASE_KEY:
     sys.exit(1)
 OLLAMA_URL = "http://localhost:11434"
 
-CATEGORIES_FILE = os.path.join(os.path.dirname(__file__), "..", "categories.json")
-with open(CATEGORIES_FILE) as f:
+CATEGORIES_FILE = Path(__file__).parent.parent / "categories.json"
+with CATEGORIES_FILE.open() as f:
     CATEGORIES = [c["name"] for c in json.load(f)]
 
 VALID_CATEGORIES = set(CATEGORIES)

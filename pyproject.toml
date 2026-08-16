@@ -38,7 +38,7 @@ extend-exclude = ["legacy"]
 force-exclude = true
 
 [tool.ruff.lint]
-select = ["E4", "E7", "E9", "F", "I", "UP", "B", "SIM", "RUF", "C4", "PIE", "TCH"]
+select = ["E4", "E7", "E9", "F", "I", "UP", "B", "SIM", "RUF", "C4", "PIE", "TCH", "PTH"]
 allowed-confusables = ["–", "—", "’", "‘"]
 
 [tool.ruff.lint.isort]

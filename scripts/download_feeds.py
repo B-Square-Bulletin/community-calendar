@@ -16,6 +16,7 @@ import sys
 import urllib.error
 import urllib.request
 from datetime import datetime
+from pathlib import Path
 from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
 
@@ -92,7 +93,7 @@ def slugify(url: str) -> str:
     return slug[:50]
 
 
-def parse_feeds_txt(feeds_file: str):
+def parse_feeds_txt(feeds_file: Path):
     """Parse feeds.txt, yielding (url, friendly_name, fallback_url) tuples.
 
     Structured comment format:
@@ -105,7 +106,7 @@ def parse_feeds_txt(feeds_file: str):
     pending_name = None
     pending_fallback = None
 
-    with open(feeds_file) as f:
+    with feeds_file.open() as f:
         for line in f:
             stripped = line.strip()
 
@@ -131,10 +132,10 @@ def parse_feeds_txt(feeds_file: str):
             pending_fallback = None
 
 
-def inject_source_headers(filepath: str, friendly_name: str, fallback_url: str | None) -> None:
+def inject_source_headers(filepath: Path, friendly_name: str, fallback_url: str | None) -> None:
     """Inject X-SOURCE (and optionally X-SOURCE-URL) into each VEVENT in an ICS file."""
     try:
-        with open(filepath, "rb") as f:
+        with filepath.open("rb") as f:
             raw = f.read()
     except Exception:
         return
@@ -161,7 +162,7 @@ def inject_source_headers(filepath: str, friendly_name: str, fallback_url: str |
         else:
             result.append(part)
 
-    with open(filepath, "wb") as out:
+    with filepath.open("wb") as out:
         out.write(marker.join(result))
 
 
@@ -233,9 +234,9 @@ def _needs_mec_tz_fix(url: str) -> bool:
     return any(domain in url for domain in _MEC_TZ_FIX_URLS)
 
 
-def fix_mec_timezone(filepath: str) -> None:
+def fix_mec_timezone(filepath: Path) -> None:
     """Rewrite DTSTART/DTEND in an ICS file to undo MEC's double timezone conversion."""
-    with open(filepath, encoding="utf-8", errors="ignore") as f:
+    with filepath.open(encoding="utf-8", errors="ignore") as f:
         content = f.read()
 
     def fix_dt_line(match):
@@ -253,13 +254,13 @@ def fix_mec_timezone(filepath: str) -> None:
 
     fixed = re.sub(r"(DTSTART|DTEND);TZID=([^:]+):(\d{8}T\d{6})", fix_dt_line, content)
 
-    with open(filepath, "w", encoding="utf-8") as f:
+    with filepath.open("w", encoding="utf-8") as f:
         f.write(fixed)
 
 
 def download_feeds(city: str) -> None:
-    output_dir = os.path.join("cities", city)
-    os.makedirs(output_dir, exist_ok=True)
+    output_dir = Path("cities") / city
+    output_dir.mkdir(parents=True, exist_ok=True)
 
     # Try DB first, fall back to feeds.txt
     db_feeds = fetch_feeds_from_db(city)
@@ -268,8 +269,8 @@ def download_feeds(city: str) -> None:
         feed_list = [(f["url"], f["name"], f.get("fallback_url")) for f in db_feeds]
         pending_feeds = [f for f in db_feeds if f.get("status") == "pending"]
     else:
-        feeds_file = os.path.join("cities", city, "feeds.txt")
-        if not os.path.exists(feeds_file):
+        feeds_file = Path("cities") / city / "feeds.txt"
+        if not feeds_file.exists():
             print(f"No feeds.txt found for {city}")
             return
         feed_list = list(parse_feeds_txt(feeds_file))
@@ -279,7 +280,7 @@ def download_feeds(city: str) -> None:
     count = 0
     for url, friendly_name, fallback_url in feed_list:
         filename = slugify(url) + ".ics"
-        outfile = os.path.join(output_dir, filename)
+        outfile = output_dir / filename
 
         cmd = [
             "curl",
@@ -288,15 +289,15 @@ def download_feeds(city: str) -> None:
             "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
             url,
             "-o",
-            outfile,
+            str(outfile),
         ]
 
         subprocess.run(cmd)
 
         # Report result
-        if os.path.exists(outfile) and os.path.getsize(outfile) > 0:
+        if outfile.exists() and outfile.stat().st_size > 0:
             try:
-                with open(outfile) as ics:
+                with outfile.open() as ics:
                     events = ics.read().count("BEGIN:VEVENT")
             except Exception:
                 events = 0

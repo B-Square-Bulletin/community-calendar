@@ -11,6 +11,7 @@ import logging
 import re
 import sys
 from datetime import datetime, timedelta
+from pathlib import Path
 from typing import Any
 
 from bs4 import BeautifulSoup
@@ -300,7 +301,7 @@ def main():
     ical_data = cal.to_ical().decode("utf-8")
 
     if args.output:
-        with open(args.output, "w") as f:
+        with Path(args.output).open("w") as f:
             f.write(ical_data)
         logger.info(f"Wrote {args.output}")
     else:

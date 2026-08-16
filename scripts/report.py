@@ -13,9 +13,7 @@ Updates report.json with:
 
 import argparse
 import contextlib
-import glob
 import json
-import os
 import re
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
@@ -40,11 +38,11 @@ DROP_THRESHOLD = 0.5  # 50% drop from previous
 MIN_EVENTS_FOR_DROP = 5  # Only flag drops if previous had at least this many
 
 
-def count_future_events_in_ics(filepath: str) -> tuple[int, str | None]:
+def count_future_events_in_ics(filepath: Path) -> tuple[int, str | None]:
     """Count VEVENT entries with future DTSTART in an ICS file."""
     cutoff = datetime.now(timezone.utc) - timedelta(hours=24)
     try:
-        with open(filepath, encoding="utf-8", errors="ignore") as f:
+        with filepath.open(encoding="utf-8", errors="ignore") as f:
             content = f.read()
     except FileNotFoundError:
         return 0, "file_not_found"
@@ -115,7 +113,7 @@ def detect_anomalies(feed_name: str, current: int, history: list[dict]) -> list[
 def load_report(report_path: str) -> dict:
     """Load existing report or create new one."""
     try:
-        with open(report_path) as f:
+        with Path(report_path).open() as f:
             return json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
         return {"generated": None, "cities": {}, "anomalies": []}
@@ -123,7 +121,7 @@ def load_report(report_path: str) -> dict:
 
 def save_report(report: dict, report_path: str):
     """Save report to JSON file."""
-    with open(report_path, "w") as f:
+    with Path(report_path).open("w") as f:
         json.dump(report, f, indent=2, default=str)
 
 
@@ -144,8 +142,8 @@ def update_report(cities: list[str], report_path: str = "report.json"):
         city_data = report["cities"][city]
 
         # Scan all .ics files in the city directory (skip combined.ics)
-        for ics_path in sorted(glob.glob(f"{city_dir}/*.ics")):
-            basename = os.path.basename(ics_path).replace(".ics", "")
+        for ics_path in sorted(Path(city_dir).glob("*.ics")):
+            basename = ics_path.name.replace(".ics", "")
             if basename == "combined":
                 continue
 
@@ -186,9 +184,9 @@ def update_report(cities: list[str], report_path: str = "report.json"):
                 feed_data["history"].append(entry)
 
         # Remove feeds from report that no longer have .ics files
-        current_basenames = {
-            os.path.basename(p).replace(".ics", "") for p in glob.glob(f"{city_dir}/*.ics")
-        } - {"combined"}
+        current_basenames = {p.name.replace(".ics", "") for p in Path(city_dir).glob("*.ics")} - {
+            "combined"
+        }
         stale = [k for k in city_data["feeds"] if k not in current_basenames]
         for k in stale:
             del city_data["feeds"][k]
@@ -208,7 +206,7 @@ def update_report(cities: list[str], report_path: str = "report.json"):
         city_dir = f"cities/{city}"
         events_json = f"cities/{city}/events.json"
         try:
-            with open(events_json) as f:
+            with Path(events_json).open() as f:
                 events = json.load(f)
         except (FileNotFoundError, json.JSONDecodeError):
             continue
@@ -311,7 +309,7 @@ def update_report(cities: list[str], report_path: str = "report.json"):
         # Geo-filtered events (from combine_ics.py sidecar)
         geo_filtered_path = f"{city_dir}/geo_filtered.json"
         try:
-            with open(geo_filtered_path) as f:
+            with Path(geo_filtered_path).open() as f:
                 geo_filtered = json.load(f)
             if geo_filtered:
                 report["cities"][city]["geo_filtered"] = geo_filtered
@@ -335,7 +333,7 @@ def update_report(cities: list[str], report_path: str = "report.json"):
     for city in cities:
         events_json = f"cities/{city}/events.json"
         try:
-            with open(events_json) as f:
+            with Path(events_json).open() as f:
                 events = json.load(f)
         except (FileNotFoundError, json.JSONDecodeError):
             continue
@@ -403,12 +401,12 @@ def update_report(cities: list[str], report_path: str = "report.json"):
         city_dir = f"cities/{city}"
         city_tz = get_city_timezone(city)
         tzid_counts: dict[str, dict[str, Any]] = {}  # tzid → {count, files}
-        for ics_path in sorted(glob.glob(f"{city_dir}/*.ics")):
-            basename = os.path.basename(ics_path)
+        for ics_path in sorted(Path(city_dir).glob("*.ics")):
+            basename = ics_path.name
             if basename == "combined.ics":
                 continue
             try:
-                with open(ics_path, encoding="utf-8", errors="ignore") as f:
+                with ics_path.open(encoding="utf-8", errors="ignore") as f:
                     content = f.read()
             except Exception:
                 continue
@@ -471,7 +469,7 @@ def update_report(cities: list[str], report_path: str = "report.json"):
 def parse_build_errors(log_path: str) -> list[dict]:
     """Parse build.log for error patterns. Returns list of error dicts."""
     try:
-        with open(log_path, encoding="utf-8", errors="ignore") as f:
+        with Path(log_path).open(encoding="utf-8", errors="ignore") as f:
             lines = f.readlines()
     except FileNotFoundError:
         return []

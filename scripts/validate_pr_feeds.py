@@ -81,7 +81,7 @@ def parse_pending_feeds(path: Path) -> list[dict]:
     so the two scripts can't drift."""
     if not path.exists():
         return []
-    return _parse_pending_feeds(str(path))
+    return _parse_pending_feeds(path)
 
 
 def get_workflow_scraper_outputs(workflow_text: str) -> set[str]:

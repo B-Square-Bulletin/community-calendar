@@ -11,6 +11,7 @@ Usage:
 
 import json
 import sys
+from pathlib import Path
 
 
 def main():
@@ -18,12 +19,12 @@ def main():
         print("Usage: merge_categories.py <prev.json> <current.json>", file=sys.stderr)
         sys.exit(1)
 
-    prev_path, current_path = sys.argv[1], sys.argv[2]
+    prev_path, current_path = Path(sys.argv[1]), Path(sys.argv[2])
 
-    with open(prev_path) as f:
+    with prev_path.open() as f:
         prev_events = json.load(f)
 
-    with open(current_path) as f:
+    with current_path.open() as f:
         current_events = json.load(f)
 
     # Build lookup from previous categories
@@ -42,7 +43,7 @@ def main():
             e["category"] = prev_categories[uid]
             carried += 1
 
-    with open(current_path, "w") as f:
+    with current_path.open("w") as f:
         json.dump(current_events, f, ensure_ascii=False)
 
     total = len(current_events)

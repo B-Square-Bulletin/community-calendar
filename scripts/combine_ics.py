@@ -732,7 +732,7 @@ def dedupe_fuzzy(events, input_dir):
 
     # Open log file
     log_path = Path(input_dir) / "fuzzy_dedup.log"
-    log_file = open(log_path, "w")  # noqa: SIM115
+    log_file = log_path.open("w")
     log_file.write(f"Fuzzy dedup run: {datetime.now().isoformat()}\n")
     log_file.write(f"Total events: {len(events)}\n\n")
 

@@ -5,6 +5,7 @@ import re
 import subprocess
 from datetime import timedelta
 from html import unescape
+from pathlib import Path
 from typing import Any, ClassVar
 
 import feedparser
@@ -54,9 +55,9 @@ class WildApricotRssScraper(RssScraper):
 
         if self.debug_file_env:
             debug_file = os.environ.get(self.debug_file_env)
-            if debug_file and os.path.exists(debug_file):
+            if debug_file and Path(debug_file).exists():
                 self.logger.warning(f"Falling back to local RSS sample: {debug_file}")
-                with open(debug_file, encoding="utf-8", errors="ignore") as f:
+                with Path(debug_file).open(encoding="utf-8", errors="ignore") as f:
                     return f.read()
 
         raise RuntimeError(f"Failed to fetch RSS from any known endpoint for {self.name}")

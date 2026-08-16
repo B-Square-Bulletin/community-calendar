@@ -13,6 +13,7 @@ import os
 import sys
 import urllib.error
 import urllib.request
+from pathlib import Path
 
 
 def export_feeds_txt(city, supabase_url, service_key):
@@ -36,14 +37,14 @@ def export_feeds_txt(city, supabase_url, service_key):
         print(f"  ⚠️  Failed to query feeds for {city}: {e}")
         return
 
-    feeds_file = os.path.join("cities", city, "feeds.txt")
-    os.makedirs(os.path.dirname(feeds_file), exist_ok=True)
+    feeds_file = Path("cities") / city / "feeds.txt"
+    feeds_file.parent.mkdir(parents=True, exist_ok=True)
 
     ics_urls = [f for f in feeds if f["feed_type"] == "ics_url"]
     scrapers = [f for f in feeds if f["feed_type"] == "scraper"]
     curators = [f for f in feeds if f["feed_type"] == "curator"]
 
-    with open(feeds_file, "w") as out:
+    with feeds_file.open("w") as out:
         out.write(f"# {city.title()} - source inventory\n")
         out.write("# Generated from feeds table (active + pending). Do not edit manually.\n")
         out.write("# To add feeds, use pending_feeds.txt in this directory.\n\n")

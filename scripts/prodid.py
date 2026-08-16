@@ -99,7 +99,7 @@ def scan_cities(repo_root: Path) -> tuple[dict, dict]:
             if ics_file.name == "combined.ics":
                 continue
             try:
-                with open(ics_file, errors="replace") as f:
+                with ics_file.open(errors="replace") as f:
                     header = ""
                     for i, line in enumerate(f):
                         header += line

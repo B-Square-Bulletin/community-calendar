@@ -132,7 +132,7 @@ def add_to_pending_feeds(url: str, city: str, display_name: str) -> bool:
     # Append the new feed with structured comment
     entry = f"\n# {display_name}\n{url}\n"
 
-    with open(feeds_path, "a") as f:
+    with feeds_path.open("a") as f:
         f.write(entry)
 
     print(f"✅ Added to pending_feeds.txt: {display_name}")
