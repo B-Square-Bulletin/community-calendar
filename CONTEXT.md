@@ -118,7 +118,7 @@ RADIUS_MILES=15
 
 Events flow through the pipeline as **wall-clock times** and become **absolute instants** only at the ICS→JSON boundary:
 
-1. **Scrapers** emit naive `DTSTART`/`DTEND` (wall-clock) — the source site states a clock time, not a zone. This is deliberate: most scrapers declare no `timezone`, so a zone cannot be attached at scrape time.
+1. **Scrapers** emit `DTSTART`/`DTEND` one of two ways. When the source site states a clock time but no zone (the common case), the value is emitted **naive (wall-clock)** — no zone can be attached at scrape time. When the source declares a known zone (e.g. an event-level `timezone` field), the scraper **attaches it directly** (`dtstart.replace(tzinfo=...)`) and the ICS output carries that `TZID`. Both paths flow to the ICS→JSON boundary below.
 2. **Feeds** carry their own `TZID`/`Z`/`VTIMEZONE` where the publisher provides one.
 3. **`ics_to_json.py`** stamps the **event timezone (TZID)** when present, else the **city timezone** from `city.conf` (default `America/Los_Angeles`), producing an offset-qualified ISO string. A `Z`-suffixed time is converted to the city zone.
 4. All-day events anchor to midnight in the city zone; a weekly wall-clock event stays at the same clock time across a DST transition.

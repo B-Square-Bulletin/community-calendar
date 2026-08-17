@@ -89,5 +89,7 @@ class TestUtcToday:
     """utc_today() returns today's date in UTC."""
 
     def test_returns_date_in_utc(self):
+        before = utc_now().date()
         result = utc_today()
-        assert result == utc_now().date()
+        after = utc_now().date()
+        assert before <= result <= after
