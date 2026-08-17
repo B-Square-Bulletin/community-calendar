@@ -28,6 +28,7 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
@@ -121,7 +122,7 @@ class TurtleBackZooScraper(BaseScraper):
 
                 year = int(year_str) if year_str else current_year
                 try:
-                    dt = datetime.strptime(f"{date_str} {year}", "%B %d %Y")
+                    dt = parse_naive_ics(f"{date_str} {year}", "%B %d %Y")
                 except ValueError:
                     continue
 

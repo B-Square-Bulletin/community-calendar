@@ -11,11 +11,11 @@ import sys
 
 sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
-from datetime import datetime
 from typing import Any
 
 import requests
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics
 from lib.utils import DEFAULT_HEADERS
 
 
@@ -48,8 +48,8 @@ class SpreckelsScraper(BaseScraper):
                 continue
 
             try:
-                dtstart = datetime.strptime(item["start_date"], "%Y-%m-%d %H:%M:%S")
-                dtend = datetime.strptime(item["end_date"], "%Y-%m-%d %H:%M:%S")
+                dtstart = parse_naive_ics(item["start_date"], "%Y-%m-%d %H:%M:%S")
+                dtend = parse_naive_ics(item["end_date"], "%Y-%m-%d %H:%M:%S")
             except (KeyError, ValueError) as e:
                 self.logger.warning(f"Skipping {title}: {e}")
                 continue

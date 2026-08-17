@@ -27,6 +27,7 @@ from zoneinfo import ZoneInfo
 import requests
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics
 
 HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; community-calendar/1.0)"}
 
@@ -409,7 +410,7 @@ class UofTEventsScraper(BaseScraper):
         """Create a datetime from month name, day, year."""
         for fmt in ("%B %d %Y", "%b %d %Y"):
             try:
-                dt = datetime.strptime(f"{month} {day} {year}", fmt)
+                dt = parse_naive_ics(f"{month} {day} {year}", fmt)
                 return dt.replace(tzinfo=tz)
             except ValueError:
                 continue

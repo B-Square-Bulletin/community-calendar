@@ -12,6 +12,7 @@ from bs4 import BeautifulSoup
 
 sys.path.insert(0, str(__file__).rsplit("/", 2)[0])
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics, utc_now
 
 
 class FARCenterScraper(BaseScraper):
@@ -114,7 +115,7 @@ class FARCenterScraper(BaseScraper):
             re.IGNORECASE,
         )
         if m:
-            year = datetime.now().year
+            year = utc_now().year
             dtstart = self._make_dt(m.group(1), m.group(2), year, tz)
             dtend = self._make_dt(m.group(1), m.group(3), year, tz)
             if dtstart and dtend and dtend < dtstart:
@@ -128,7 +129,7 @@ class FARCenterScraper(BaseScraper):
             re.IGNORECASE,
         )
         if m:
-            year = datetime.now().year
+            year = utc_now().year
             dtstart = self._make_dt(m.group(1), m.group(2), year, tz)
             dtend = self._make_dt(m.group(3), m.group(4), year, tz)
             return dtstart, dtend
@@ -136,7 +137,7 @@ class FARCenterScraper(BaseScraper):
         # Date only, no time: "April 3"
         m = re.match(r"(\w+ \d{1,2})", text)
         if m:
-            year = datetime.now().year
+            year = utc_now().year
             dtstart = self._make_dt(m.group(1), "12:00 pm", year, tz)
             return dtstart, None
 
@@ -146,7 +147,7 @@ class FARCenterScraper(BaseScraper):
     def _make_dt(date_str: str, time_str: str, year: int, tz: ZoneInfo) -> datetime | None:
         """Combine 'April 3' + '5:00pm' into a datetime."""
         try:
-            dt = datetime.strptime(f"{date_str} {year}", "%B %d %Y")
+            dt = parse_naive_ics(f"{date_str} {year}", "%B %d %Y")
         except ValueError:
             return None
 

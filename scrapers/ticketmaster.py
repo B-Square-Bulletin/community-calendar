@@ -35,6 +35,7 @@ from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -162,7 +163,7 @@ class TicketmasterScraper(BaseScraper):
         tz = ZoneInfo(dates.get("timezone", self.timezone))
 
         try:
-            dtstart = datetime.strptime(f"{local_date} {local_time}", "%Y-%m-%d %H:%M:%S")
+            dtstart = parse_naive_ics(f"{local_date} {local_time}", "%Y-%m-%d %H:%M:%S")
             dtstart = dtstart.replace(tzinfo=tz)
         except ValueError:
             return None

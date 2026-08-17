@@ -14,11 +14,13 @@ import argparse
 import html as html_module
 import re
 import sys
-from datetime import datetime, timedelta
+from datetime import timedelta
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
+
+from lib.timeutil import wall_clock
 
 HOMEPAGE_URL = "https://barrelprooflounge.com/"
 VENUE_NAME = "Barrel Proof Lounge"
@@ -99,7 +101,7 @@ def parse_events(html):
             elif ampm == "am" and hour == 12:
                 hour = 0
 
-            start_dt = datetime(year, month, day, hour, minute)
+            start_dt = wall_clock(year, month, day, hour, minute)
 
             # Parse end time if present
             if dt_match.group(10):  # End hour exists
@@ -117,10 +119,10 @@ def parse_events(html):
                     end_month = month_names[dt_match.group(7).lower()]
                     end_day = int(dt_match.group(8))
                     end_year = int(dt_match.group(9))
-                    end_dt = datetime(end_year, end_month, end_day, end_hour, end_minute)
+                    end_dt = wall_clock(end_year, end_month, end_day, end_hour, end_minute)
                 else:
                     # Same day
-                    end_dt = datetime(year, month, day, end_hour, end_minute)
+                    end_dt = wall_clock(year, month, day, end_hour, end_minute)
                     # Handle overnight events
                     if end_dt < start_dt:
                         end_dt = end_dt + timedelta(days=1)

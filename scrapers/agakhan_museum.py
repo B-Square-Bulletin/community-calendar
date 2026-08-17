@@ -12,6 +12,7 @@ from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
@@ -70,7 +71,7 @@ class AgaKhanMuseumScraper(BaseScraper):
             fragment = f"{fragment}, {default_year}"
         for fmt in ("%B %d, %Y", "%b %d, %Y"):
             try:
-                return datetime.strptime(fragment, fmt).date()
+                return parse_naive_ics(fragment, fmt).date()
             except ValueError:
                 continue
         raise ValueError(f"Unparseable date fragment: {fragment}")
@@ -113,7 +114,7 @@ class AgaKhanMuseumScraper(BaseScraper):
         value = _clean(value).lower().replace(".", "")
         for fmt in ("%I:%M %p", "%I %p"):
             try:
-                return datetime.strptime(value, fmt).time()
+                return parse_naive_ics(value, fmt).time()
             except ValueError:
                 continue
         raise ValueError(f"Unparseable time value: {value}")

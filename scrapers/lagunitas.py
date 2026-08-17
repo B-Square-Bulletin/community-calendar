@@ -10,12 +10,13 @@ import sys
 
 sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
-from datetime import datetime, timedelta
+from datetime import timedelta
 from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics
 from lib.utils import DEFAULT_HEADERS
 
 
@@ -49,7 +50,7 @@ class LagunitasScraper(BaseScraper):
 
             # Parse date: MM/DD/YYYY
             try:
-                event_date = datetime.strptime(date_str, "%m/%d/%Y")
+                event_date = parse_naive_ics(date_str, "%m/%d/%Y")
             except ValueError:
                 self.logger.warning(f"Skipping {title}: bad date '{date_str}'")
                 continue
@@ -99,7 +100,7 @@ class LagunitasScraper(BaseScraper):
     def _parse_time(time_str: str) -> tuple[int, int] | None:
         """Parse '3:30 PM' -> (15, 30)."""
         try:
-            dt = datetime.strptime(time_str.strip(), "%I:%M %p")
+            dt = parse_naive_ics(time_str.strip(), "%I:%M %p")
             return (dt.hour, dt.minute)
         except ValueError:
             return None

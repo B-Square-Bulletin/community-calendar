@@ -9,12 +9,13 @@ import sys
 sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
-from datetime import datetime, timedelta
+from datetime import timedelta
 from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics, wall_clock
 from lib.utils import DEFAULT_HEADERS
 
 
@@ -68,7 +69,7 @@ class SVMAScraper(BaseScraper):
                         year = 2000 + int(year)
                         month = int(month)
                         day = int(day)
-                        dt_start = datetime(year, month, day, 10, 0)
+                        dt_start = wall_clock(year, month, day, 10, 0)
                         dt_end = dt_start + timedelta(hours=2)
                     else:
                         continue
@@ -82,12 +83,12 @@ class SVMAScraper(BaseScraper):
                     time_str = time_str.strip().upper()
                     try:
                         if "AM" in time_str or "PM" in time_str:
-                            time_obj = datetime.strptime(time_str, "%I:%M%p")
+                            time_obj = parse_naive_ics(time_str, "%I:%M%p")
                         else:
-                            time_obj = datetime.strptime(time_str, "%H:%M")
-                        dt_start = datetime(year, month, day, time_obj.hour, time_obj.minute)
+                            time_obj = parse_naive_ics(time_str, "%H:%M")
+                        dt_start = wall_clock(year, month, day, time_obj.hour, time_obj.minute)
                     except ValueError:
-                        dt_start = datetime(year, month, day, 18, 0)
+                        dt_start = wall_clock(year, month, day, 18, 0)
 
                     dt_end = dt_start + timedelta(hours=2)
 

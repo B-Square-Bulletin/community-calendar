@@ -18,6 +18,7 @@ from bs4 import BeautifulSoup
 from icalendar import Calendar, Event
 
 sys.path.insert(0, "/home/exedev/community-calendar/scrapers")
+from lib.timeutil import utc_now, wall_clock
 from lib.utils import append_source, fetch_with_retry, generate_uid
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -79,7 +80,7 @@ def parse_workshop_dates(text: str, target_year: int) -> list[datetime]:
         month = MONTH_MAP.get(month_str[:3])
 
         if month:
-            dates.append(datetime(target_year, month, day))
+            dates.append(wall_clock(target_year, month, day))
 
     return dates
 
@@ -177,14 +178,14 @@ def parse_recurring_monthly(text: str, target_year: int, target_month: int) -> l
 
         if ordinal is not None and weekday is not None:
             # Find the nth weekday of the target month
-            first_of_month = datetime(target_year, target_month, 1)
+            first_of_month = wall_clock(target_year, target_month, 1)
 
             if ordinal == -1:  # last
                 # Go to next month, back one day, find last occurrence
                 if target_month == 12:
-                    next_month = datetime(target_year + 1, 1, 1)
+                    next_month = wall_clock(target_year + 1, 1, 1)
                 else:
-                    next_month = datetime(target_year, target_month + 1, 1)
+                    next_month = wall_clock(target_year, target_month + 1, 1)
                 last_day = next_month - timedelta(days=1)
 
                 # Find last weekday
@@ -325,7 +326,7 @@ def main():
     if args.year and args.month:
         months = [(args.year, args.month)]
     else:
-        now = datetime.now()
+        now = utc_now()
         months = [(now.year, now.month)]
         nxt = (now.replace(day=28) + timedelta(days=4)).replace(day=1)
         months.append((nxt.year, nxt.month))

@@ -16,6 +16,7 @@ from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
+from lib.timeutil import parse_naive_ics
 
 
 def parse_datetime(date_str):
@@ -35,7 +36,7 @@ def parse_datetime(date_str):
         # Remove day of week if present
         if "," in date_part:
             date_part = date_part.split(",", 1)[1].strip()
-        dt = datetime.strptime(date_part, "%B %d, %Y")
+        dt = parse_naive_ics(date_part, "%B %d, %Y")
     except ValueError:
         return None, date_str
 

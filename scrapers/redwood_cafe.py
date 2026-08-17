@@ -11,12 +11,13 @@ import sys
 sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
-from datetime import datetime, timedelta
+from datetime import timedelta
 from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics, utc_now, wall_clock
 
 
 class RedwoodCafeScraper(BaseScraper):
@@ -32,7 +33,7 @@ class RedwoodCafeScraper(BaseScraper):
     def fetch_events(self) -> list[dict[str, Any]]:
         """Fetch events for current and upcoming months."""
         all_events = []
-        now = datetime.now()
+        now = utc_now()
 
         for i in range(self.months_ahead + 1):
             year = now.year + (now.month + i - 1) // 12
@@ -82,7 +83,7 @@ class RedwoodCafeScraper(BaseScraper):
                 day = int(day_match.group(1))
 
                 try:
-                    event_date = datetime(year, month, day)
+                    event_date = wall_clock(year, month, day)
                 except ValueError:
                     self.logger.warning(f"Invalid date: {year}-{month}-{day}")
                     continue
@@ -91,7 +92,7 @@ class RedwoodCafeScraper(BaseScraper):
                 if time_match:
                     time_str = f"{time_match.group(1)} {time_match.group(2)}"
                     try:
-                        time_obj = datetime.strptime(time_str, "%I:%M %p")
+                        time_obj = parse_naive_ics(time_str, "%I:%M %p")
                         dt_start = event_date.replace(hour=time_obj.hour, minute=time_obj.minute)
                     except ValueError:
                         dt_start = event_date.replace(hour=18, minute=0)

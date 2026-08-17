@@ -32,6 +32,7 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -67,7 +68,7 @@ def _parse_month_day_year(text: str, default_year: int = 2026) -> datetime | Non
     if not m:
         return None
     month_str, day_str, year_str = m.groups()
-    month = datetime.strptime(month_str, "%B").month
+    month = parse_naive_ics(month_str, "%B").month
     day = int(day_str)
     year = int(year_str) if year_str else default_year
     return datetime(year, month, day, tzinfo=timezone.utc)

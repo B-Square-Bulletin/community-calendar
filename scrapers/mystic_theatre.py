@@ -18,6 +18,7 @@ from typing import Any
 import requests
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.timeutil import utc_now, wall_clock
 from lib.utils import DEFAULT_HEADERS
 
 
@@ -200,9 +201,11 @@ class MysticTheatreScraper(BaseScraper):
             return None
 
         # Determine year (assume current or next year)
-        now = datetime.now()
+        # Keep the cutoff naive so the wall-clock comparison below stays
+        # naive-vs-naive, with a 2-week tolerance window for the year rollover.
+        now = utc_now().replace(tzinfo=None)
         year = now.year
-        test_date = datetime(year, month, day)
+        test_date = wall_clock(year, month, day)
 
         # If the date is more than 2 weeks in the past, assume next year
         if test_date < now - timedelta(days=14):
@@ -225,7 +228,7 @@ class MysticTheatreScraper(BaseScraper):
             minute = 0
 
         try:
-            return datetime(year, month, day, hour, minute)
+            return wall_clock(year, month, day, hour, minute)
         except ValueError:
             return None
 

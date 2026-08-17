@@ -7,11 +7,16 @@ import argparse
 import contextlib
 import json
 import re
+import sys
 from datetime import datetime, timezone
 from html import unescape as html_unescape
 from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
+
+sys.path.insert(0, "scrapers")
+
+from lib.timeutil import parse_naive_ics
 
 
 def strip_html_tags(text):
@@ -65,17 +70,17 @@ def parse_ics_datetime(dt_str, local_tz=None):
     try:
         if dt_str.endswith("Z"):
             # UTC time - convert to city's local time
-            dt = datetime.strptime(dt_str, "%Y%m%dT%H%M%SZ")
+            dt = parse_naive_ics(dt_str, "%Y%m%dT%H%M%SZ")
             dt = dt.replace(tzinfo=timezone.utc).astimezone(local_tz)
             return dt.isoformat()
         elif "T" in dt_str:
             # Local time (already in correct timezone) - attach tz so offset is included
-            dt = datetime.strptime(dt_str, "%Y%m%dT%H%M%S")
+            dt = parse_naive_ics(dt_str, "%Y%m%dT%H%M%S")
             dt = dt.replace(tzinfo=local_tz)
             return dt.isoformat()
         else:
             # All-day event — anchor to midnight in the city's local timezone
-            dt = datetime.strptime(dt_str, "%Y%m%d")
+            dt = parse_naive_ics(dt_str, "%Y%m%d")
             dt = dt.replace(tzinfo=local_tz)
             return dt.isoformat()
     except ValueError:

@@ -14,6 +14,7 @@ from typing import Any
 from zoneinfo import ZoneInfo
 
 from lib.ckan import CKANScraper
+from lib.timeutil import parse_naive_ics, utc_now
 
 TZ = ZoneInfo("America/Toronto")
 
@@ -42,13 +43,15 @@ class TorontoMeetingsScraper(CKANScraper):
 
         # Parse date (YYYY-MM-DD)
         try:
-            date = datetime.strptime(date_str, "%Y-%m-%d")
+            date = parse_naive_ics(date_str, "%Y-%m-%d")
         except ValueError:
             self.logger.warning(f"Unparseable date: {date_str}")
             return None
 
         # Filter to future dates
-        if date.date() < datetime.now().date():
+        # Keep the cutoff naive so the wall-clock date comparison stays
+        # naive-vs-naive, with a ±1-day tolerance for the UTC-vs-local shift.
+        if date.date() < utc_now().replace(tzinfo=None).date():
             return None
 
         # Parse start time (e.g. "09:30 AM")
@@ -77,7 +80,7 @@ class TorontoMeetingsScraper(CKANScraper):
         time_str = time_str.strip()
         for fmt in ("%I:%M %p", "%H:%M %p", "%H:%M"):
             try:
-                t = datetime.strptime(time_str, fmt)
+                t = parse_naive_ics(time_str, fmt)
                 return date.replace(hour=t.hour, minute=t.minute, tzinfo=TZ)
             except ValueError:
                 continue

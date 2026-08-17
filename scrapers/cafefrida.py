@@ -10,11 +10,11 @@ import contextlib
 import html
 import re
 import urllib.request
-from datetime import datetime
 from typing import Any
 from zoneinfo import ZoneInfo
 
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics
 
 PACIFIC = ZoneInfo("America/Los_Angeles")
 
@@ -118,7 +118,7 @@ class CafeFridaScraper(BaseScraper):
             if dm:
                 month_str, day, year = dm.groups()
                 with contextlib.suppress(ValueError):
-                    event_date = datetime.strptime(f"{month_str} {day} {year}", "%B %d %Y")
+                    event_date = parse_naive_ics(f"{month_str} {day} {year}", "%B %d %Y")
 
         if not event_date:
             return None

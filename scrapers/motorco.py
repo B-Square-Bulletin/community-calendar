@@ -16,11 +16,12 @@ sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import contextlib
 import re
-from datetime import datetime, timedelta
+from datetime import timedelta
 from typing import Any
 
 import requests
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics, utc_now
 from lib.utils import DEFAULT_HEADERS
 
 
@@ -62,7 +63,9 @@ class MotorcoScraper(BaseScraper):
         self.logger.info(f"Found {len(raw_events)} raw events in FullCalendar data")
 
         events = []
-        now = datetime.now()
+        # Keep the "now" cutoff naive so the wall-clock comparison below stays
+        # naive-vs-naive, with a ±1-day tolerance for feed lag.
+        now = utc_now().replace(tzinfo=None)
 
         for title, start_str, end_str, url in raw_events:
             # Unescape title
@@ -70,7 +73,7 @@ class MotorcoScraper(BaseScraper):
 
             # Parse start datetime: "2026-03-12 18:00"
             try:
-                dtstart = datetime.strptime(start_str, "%Y-%m-%d %H:%M")
+                dtstart = parse_naive_ics(start_str, "%Y-%m-%d %H:%M")
             except ValueError:
                 self.logger.warning(f"Could not parse start date: {start_str}")
                 continue
@@ -83,7 +86,7 @@ class MotorcoScraper(BaseScraper):
             dtend = None
             if end_str:
                 with contextlib.suppress(ValueError):
-                    dtend = datetime.strptime(end_str, "%Y-%m-%d %H:%M")
+                    dtend = parse_naive_ics(end_str, "%Y-%m-%d %H:%M")
             if not dtend:
                 dtend = dtstart + timedelta(hours=3)
 

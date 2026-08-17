@@ -17,12 +17,12 @@ import argparse
 import logging
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics, utc_now
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
@@ -55,7 +55,7 @@ class YohomoScraper(BaseScraper):
         # Split on each w-dyn-item
         items = re.split(r'role="listitem"[^>]*class="event w-dyn-item"', html)
 
-        current_year = datetime.now().year
+        current_year = utc_now().year
 
         for item in items[1:]:  # skip before first item
             # Extract slug
@@ -106,9 +106,9 @@ class YohomoScraper(BaseScraper):
             # Parse the date
             try:
                 date_string = f"{month_str} {day_str} {current_year}"
-                event_date = datetime.strptime(date_string, "%b %d %Y")
+                event_date = parse_naive_ics(date_string, "%b %d %Y")
                 # If date is in the past by more than a month, assume next year
-                now = datetime.now()
+                now = utc_now()
                 if event_date.month < now.month - 1:
                     event_date = event_date.replace(year=current_year + 1)
             except ValueError:
@@ -117,7 +117,7 @@ class YohomoScraper(BaseScraper):
             # Parse time if available
             if time_str:
                 try:
-                    t = datetime.strptime(time_str, "%I:%M %p")
+                    t = parse_naive_ics(time_str, "%I:%M %p")
                     event_date = event_date.replace(hour=t.hour, minute=t.minute)
                 except ValueError:
                     pass
@@ -180,7 +180,9 @@ class YohomoScraper(BaseScraper):
             return []
 
         # Filter to future events
-        now = datetime.now()
+        # Keep the cutoff naive so the wall-clock comparison below stays
+        # naive-vs-naive, with a ±1-day tolerance for the UTC-vs-local shift.
+        now = utc_now().replace(tzinfo=None)
         listing = [e for e in listing if e["date"] >= now]
         self.logger.info(f"{len(listing)} future events, fetching details...")
 

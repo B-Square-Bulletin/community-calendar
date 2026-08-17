@@ -22,6 +22,9 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, "scrapers")
+from lib.timeutil import utc_today
+
 ROOT = Path(__file__).parent.parent
 DDL_DIR = ROOT / "supabase" / "ddl"
 MIGRATIONS_DIR = ROOT / "supabase" / "migrations"
@@ -123,15 +126,13 @@ def parse_ddl_files():
 
 def generate_sql(tables, columns, functions, indexes, views, matviews, extensions):
     """Generate the verification SQL."""
-    from datetime import date
-
     lines = [
         "-- Verify that a fork's Supabase database has all required objects.",
         "-- Paste this into the Supabase SQL Editor and run it.",
         "--",
         "-- Each check returns '✅ OK' or '❌ MISSING' with the fix.",
         "--",
-        f"-- Auto-generated from DDL files on {date.today().isoformat()}.",
+        f"-- Auto-generated from DDL files on {utc_today().isoformat()}.",
         "-- Regenerate: python scripts/generate_verify_sql.py",
         "",
     ]

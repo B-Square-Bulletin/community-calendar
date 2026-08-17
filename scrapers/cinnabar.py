@@ -11,12 +11,12 @@ import sys
 sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
-from datetime import datetime
 from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics
 from lib.utils import DEFAULT_HEADERS
 
 
@@ -85,8 +85,8 @@ class CinnabarScraper(BaseScraper):
         m = re.match(r"(\w+)\s+(\d+)\s*-\s*(\w+)\s+(\d+),\s*(\d{4})", text)
         if m:
             try:
-                dtstart = datetime.strptime(f"{m.group(1)} {m.group(2)}, {m.group(5)}", "%B %d, %Y")
-                dtend = datetime.strptime(f"{m.group(3)} {m.group(4)}, {m.group(5)}", "%B %d, %Y")
+                dtstart = parse_naive_ics(f"{m.group(1)} {m.group(2)}, {m.group(5)}", "%B %d, %Y")
+                dtend = parse_naive_ics(f"{m.group(3)} {m.group(4)}, {m.group(5)}", "%B %d, %Y")
                 return dtstart, dtend
             except ValueError:
                 pass
@@ -95,8 +95,8 @@ class CinnabarScraper(BaseScraper):
         m = re.match(r"(\w+)\s+(\d+)\s*-\s*(\d+),\s*(\d{4})", text)
         if m:
             try:
-                dtstart = datetime.strptime(f"{m.group(1)} {m.group(2)}, {m.group(4)}", "%B %d, %Y")
-                dtend = datetime.strptime(f"{m.group(1)} {m.group(3)}, {m.group(4)}", "%B %d, %Y")
+                dtstart = parse_naive_ics(f"{m.group(1)} {m.group(2)}, {m.group(4)}", "%B %d, %Y")
+                dtend = parse_naive_ics(f"{m.group(1)} {m.group(3)}, {m.group(4)}", "%B %d, %Y")
                 return dtstart, dtend
             except ValueError:
                 pass
@@ -105,7 +105,7 @@ class CinnabarScraper(BaseScraper):
         m = re.match(r"(\w+\s+\d+,\s*\d{4})", text)
         if m:
             try:
-                dtstart = datetime.strptime(m.group(1), "%B %d, %Y")
+                dtstart = parse_naive_ics(m.group(1), "%B %d, %Y")
                 return dtstart, None
             except ValueError:
                 pass

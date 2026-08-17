@@ -19,12 +19,12 @@ import argparse
 import json
 import logging
 import re
-from datetime import datetime
 from typing import Any
 from urllib.parse import urlparse
 from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
+from lib.timeutil import utc_now, wall_clock
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -96,14 +96,14 @@ def parse_title_date(title: str) -> dict[str, Any] | None:
         return None
 
     # Infer year: use current year, or next year if date is in the past
-    now = datetime.now()
+    now = utc_now()
     year = now.year
     try:
-        dt = datetime(year, month, day)
+        dt = wall_clock(year, month, day)
     except ValueError:
         return None
     if dt.date() < now.date():
-        dt = datetime(year + 1, month, day)
+        dt = wall_clock(year + 1, month, day)
 
     # Parse time
     if time_str:

@@ -10,11 +10,11 @@ import sys
 
 sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
-from datetime import datetime
 from typing import Any
 
 import requests
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics, utc_now
 
 
 class SonomaCountyGovScraper(BaseScraper):
@@ -32,7 +32,7 @@ class SonomaCountyGovScraper(BaseScraper):
         seen_urls: set[str] = set()
 
         # Fetch from today to N months ahead
-        now = datetime.now()
+        now = utc_now()
         start_date = now.replace(day=1)
 
         for i in range(self.months_ahead + 1):
@@ -83,10 +83,10 @@ class SonomaCountyGovScraper(BaseScraper):
             return None
 
         try:
-            dt_start = datetime.strptime(start_str, "%Y-%m-%d %H:%M:%S")
+            dt_start = parse_naive_ics(start_str, "%Y-%m-%d %H:%M:%S")
         except ValueError:
             try:
-                dt_start = datetime.strptime(start_str, "%Y-%m-%d")
+                dt_start = parse_naive_ics(start_str, "%Y-%m-%d")
             except ValueError:
                 self.logger.warning(f"Could not parse date: {start_str}")
                 return None
@@ -95,7 +95,7 @@ class SonomaCountyGovScraper(BaseScraper):
         end_str = event_data.get("end", "")
         if end_str:
             try:
-                dt_end = datetime.strptime(end_str, "%Y-%m-%d %H:%M:%S")
+                dt_end = parse_naive_ics(end_str, "%Y-%m-%d %H:%M:%S")
             except ValueError:
                 dt_end = dt_start
         else:

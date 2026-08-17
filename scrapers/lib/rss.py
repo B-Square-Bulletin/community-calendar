@@ -8,6 +8,7 @@ from zoneinfo import ZoneInfo
 import feedparser
 
 from .base import BaseScraper
+from .timeutil import parse_naive_ics
 
 if TYPE_CHECKING:
     from time import struct_time
@@ -80,7 +81,7 @@ class RssScraper(BaseScraper):
         if pub_date:
             try:
                 # Common RSS format: "Sat, 07 Feb 2026 16:30:00 GMT"
-                dt_utc = datetime.strptime(pub_date, "%a, %d %b %Y %H:%M:%S %Z")
+                dt_utc = parse_naive_ics(pub_date, "%a, %d %b %Y %H:%M:%S %Z")
                 dt_utc = dt_utc.replace(tzinfo=ZoneInfo("UTC"))
                 return dt_utc.astimezone(tz)
             except ValueError:

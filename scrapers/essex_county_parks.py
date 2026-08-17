@@ -21,6 +21,7 @@ from typing import Any, ClassVar
 from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
+from lib.timeutil import utc_now
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -47,8 +48,8 @@ class EssexCountyParksScraper(BaseScraper):
 
     def fetch_events(self) -> list[dict[str, Any]]:
         """Fetch events from the FullCalendar JSON endpoint."""
-        start = datetime.now().strftime("%Y-%m-%d")
-        end = (datetime.now() + timedelta(days=self.months_ahead * 31)).strftime("%Y-%m-%d")
+        start = utc_now().strftime("%Y-%m-%d")
+        end = (utc_now() + timedelta(days=self.months_ahead * 31)).strftime("%Y-%m-%d")
         url = f"{CALENDAR_URL}?start={start}&end={end}"
 
         self.logger.info(f"Fetching {url}")

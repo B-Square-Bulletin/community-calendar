@@ -11,6 +11,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from .base import BaseScraper
+from .timeutil import utc_now
 
 
 class CitySparkScraper(BaseScraper):
@@ -43,7 +44,7 @@ class CitySparkScraper(BaseScraper):
         page_size = 100  # API max
 
         # Fetch from today to N months ahead
-        now = datetime.now()
+        now = utc_now()
         start_date = now.replace(hour=0, minute=0, second=0, microsecond=0)
         end_date = start_date + timedelta(days=self.months_ahead * 31)
 

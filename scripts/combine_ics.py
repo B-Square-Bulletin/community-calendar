@@ -7,12 +7,16 @@ Filters to only include events from today forward.
 import argparse
 import json
 import re
-from datetime import date, datetime, timedelta, timezone
+import sys
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
+sys.path.insert(0, "scrapers")
+
 import icalendar
 import recurring_ical_events
+from lib.timeutil import parse_naive_ics, utc_now, utc_today
 
 # Fallback URLs for sources whose ICS events lack a URL property.
 # Only needed for scraped sources where per-event URLs aren't available.
@@ -387,8 +391,14 @@ def get_fallback_url(filename):
     return SOURCE_URLS.get(stem)
 
 
-def parse_ics_datetime(dt_str):
-    """Parse an ICS datetime string to a datetime object."""
+def parse_naive_ics_datetime(dt_str):
+    """Parse an ICS datetime string for dedup/collapse comparison.
+
+    Deliberately distinct from ics_to_json.parse_ics_datetime, which stamps
+    TZID/city timezone at the ICS→JSON boundary. This one only needs enough
+    to compare events during collapse; Z-suffixed times become UTC-aware, the
+    rest stay naive wall-clock.
+    """
     if ";" in dt_str:
         dt_str = dt_str.split(":")[-1]
 
@@ -398,9 +408,9 @@ def parse_ics_datetime(dt_str):
         if dt_str.endswith("Z"):
             return datetime.strptime(dt_str, "%Y%m%dT%H%M%SZ").replace(tzinfo=timezone.utc)
         elif "T" in dt_str:
-            return datetime.strptime(dt_str, "%Y%m%dT%H%M%S")
+            return parse_naive_ics(dt_str, "%Y%m%dT%H%M%S")
         else:
-            return datetime.strptime(dt_str, "%Y%m%d")
+            return parse_naive_ics(dt_str, "%Y%m%d")
     except ValueError:
         return None
 
@@ -479,7 +489,7 @@ def expand_rrules(ics_content, window_days=90):
     if not uids_with_rrule:
         return None
 
-    today = date.today()
+    today = utc_today()
     window_end = today + timedelta(days=window_days)
 
     try:
@@ -715,7 +725,6 @@ def dedupe_fuzzy(events, input_dir):
     Logs matches to {input_dir}/fuzzy_dedup.log for analysis.
     """
     import os
-    from datetime import datetime
 
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:
@@ -733,7 +742,7 @@ def dedupe_fuzzy(events, input_dir):
     # Open log file
     log_path = Path(input_dir) / "fuzzy_dedup.log"
     log_file = log_path.open("w")
-    log_file.write(f"Fuzzy dedup run: {datetime.now().isoformat()}\n")
+    log_file.write(f"Fuzzy dedup run: {utc_now().isoformat()}\n")
     log_file.write(f"Total events: {len(events)}\n\n")
 
     # Group by date
@@ -941,7 +950,7 @@ def extract_events(
     for event_content in matches:
         dtstart_match = re.search(r"DTSTART[^:]*:([^\r\n]+)", event_content)
         if dtstart_match:
-            dt = parse_ics_datetime(dtstart_match.group(1))
+            dt = parse_naive_ics_datetime(dtstart_match.group(1))
             if dt:
                 # Add fallback URL if no URL exists
                 if fallback_url and "URL:" not in event_content:

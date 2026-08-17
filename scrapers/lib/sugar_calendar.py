@@ -26,6 +26,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from .base import BaseScraper
+from .timeutil import parse_naive_ics
 
 BROWSER_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
@@ -129,7 +130,7 @@ class SugarCalendarScraper(BaseScraper):
         end_time = match.group(3).strip() if match.group(3) else None
 
         try:
-            dt_date = datetime.strptime(date_str, "%B %d, %Y")
+            dt_date = parse_naive_ics(date_str, "%B %d, %Y")
         except ValueError:
             return None, None
 

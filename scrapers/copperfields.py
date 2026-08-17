@@ -11,12 +11,13 @@ import sys
 sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
-from datetime import datetime, timedelta
+from datetime import timedelta
 from typing import Any, ClassVar
 
 import requests
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.timeutil import utc_now, wall_clock
 from lib.utils import DEFAULT_HEADERS, MONTH_MAP
 
 
@@ -54,7 +55,7 @@ class CopperfieldsScraper(BaseScraper):
         seen_events = set()
 
         # Infer year from current date
-        now = datetime.now()
+        now = utc_now()
 
         for row in soup.find_all("div", class_="views-row"):
             try:
@@ -127,11 +128,11 @@ class CopperfieldsScraper(BaseScraper):
                             hour += 12
                         elif ampm == "am" and hour == 12:
                             hour = 0
-                        dt_start = datetime(year, month, day, hour, minute)
+                        dt_start = wall_clock(year, month, day, hour, minute)
                     else:
-                        dt_start = datetime(year, month, day, 18, 0)
+                        dt_start = wall_clock(year, month, day, 18, 0)
                 else:
-                    dt_start = datetime(year, month, day, 18, 0)
+                    dt_start = wall_clock(year, month, day, 18, 0)
 
                 dt_end = dt_start + timedelta(hours=2)
 

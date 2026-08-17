@@ -33,6 +33,7 @@ from typing import Any, ClassVar
 import feedparser
 import requests
 from lib.base import BaseScraper
+from lib.timeutil import wall_clock
 from lib.utils import DEFAULT_HEADERS
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -164,7 +165,7 @@ class CatsCradleScraper(BaseScraper):
         published = entry.get("published_parsed")
         if not published:
             return None
-        dtstart = datetime(*published[:6])
+        dtstart = wall_clock(*published[:6])
         return {
             "title": title,
             "dtstart": dtstart,

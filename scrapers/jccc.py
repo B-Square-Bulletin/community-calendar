@@ -13,6 +13,7 @@ from zoneinfo import ZoneInfo
 import requests
 from bs4 import BeautifulSoup, Tag
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics
 
 
 def _clean(text: str) -> str:
@@ -77,7 +78,7 @@ class JCCCScraper(BaseScraper):
     def parse_date(self, value: str) -> date:
         for fmt in ("%B %d, %Y", "%b %d, %Y"):
             try:
-                return datetime.strptime(value, fmt).date()
+                return parse_naive_ics(value, fmt).date()
             except ValueError:
                 continue
         raise ValueError(f"Unrecognized date string: {value}")

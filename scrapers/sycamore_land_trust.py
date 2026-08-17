@@ -21,6 +21,7 @@ from datetime import datetime
 from typing import Any
 
 from lib.base import BaseScraper
+from lib.timeutil import utc_now, wall_clock
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -83,14 +84,16 @@ def parse_date_time(date_str: str) -> tuple[datetime | None, datetime | None]:
         return None, None
 
     # Infer year
-    now = datetime.now()
+    # Keep the cutoff naive so the wall-clock date comparison below stays
+    # naive-vs-naive, with a ±1-day tolerance for the year rollover.
+    now = utc_now().replace(tzinfo=None)
     year = now.year
     try:
-        dt = datetime(year, month, day)
+        dt = wall_clock(year, month, day)
     except ValueError:
         return None, None
     if dt.date() < now.date():
-        dt = datetime(year + 1, month, day)
+        dt = wall_clock(year + 1, month, day)
 
     dtstart = dt
     dtend = None

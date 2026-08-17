@@ -4,11 +4,12 @@
 from __future__ import annotations
 
 import re
-from datetime import date, datetime, timedelta
+from datetime import date, timedelta
 from typing import ClassVar
 from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics, utc_today
 
 
 class MetrolinxBoardScraper(BaseScraper):
@@ -40,7 +41,7 @@ class MetrolinxBoardScraper(BaseScraper):
         for value in re.findall(r"<li>([^<]+)</li>", match.group(1)):
             value = value.strip()
             try:
-                dates.append(datetime.strptime(value, "%B %d, %Y").date())
+                dates.append(parse_naive_ics(value, "%B %d, %Y").date())
             except ValueError:
                 continue
         return dates
@@ -48,7 +49,7 @@ class MetrolinxBoardScraper(BaseScraper):
     def fetch_events(self) -> list[dict]:
         html = self.fetch_html()
         dates = self.extract_upcoming_dates(html)
-        today = datetime.now().date()
+        today = utc_today()
         events = []
         for day in dates:
             if day < today:

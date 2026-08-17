@@ -15,10 +15,15 @@ import argparse
 import contextlib
 import json
 import re
-from datetime import date, datetime, timedelta, timezone
+import sys
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
+
+sys.path.insert(0, "scrapers")
+
+from lib.timeutil import utc_now, utc_today
 
 DEFAULT_TIMEZONE = "America/Los_Angeles"
 
@@ -128,8 +133,8 @@ def save_report(report: dict, report_path: str):
 def update_report(cities: list[str], report_path: str = "report.json"):
     """Main function to update the report."""
     report = load_report(report_path)
-    today = date.today().isoformat()
-    now = datetime.now().isoformat()
+    today = utc_today().isoformat()
+    now = utc_now().isoformat()
 
     all_anomalies = []
 
@@ -475,7 +480,7 @@ def parse_build_errors(log_path: str) -> list[dict]:
         return []
 
     errors = []
-    today = date.today().isoformat()
+    today = utc_today().isoformat()
 
     # Patterns that indicate errors
     error_patterns = [

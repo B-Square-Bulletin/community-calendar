@@ -12,6 +12,7 @@ from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.timeutil import utc_now
 
 MONTHS = {
     "jan": 1,
@@ -84,7 +85,7 @@ class HarbordVillageScraper(BaseScraper):
         html = self.fetch_html()
         soup = BeautifulSoup(html, "html.parser")
         year_match = re.search(r"Calendar of HVRA events for (\d{4})", html)
-        year = int(year_match.group(1)) if year_match else datetime.now().year
+        year = int(year_match.group(1)) if year_match else utc_now().year
         tz = ZoneInfo(self.timezone)
         today = datetime.now(tz).date()
         rows = soup.select("tbody tr")

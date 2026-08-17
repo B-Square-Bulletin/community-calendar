@@ -15,6 +15,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import requests
+from lib.timeutil import parse_naive_ics
 
 
 def fetch_events():
@@ -110,7 +111,7 @@ def event_to_ics(event):
                 end_date = event["date2_iso"][:10].replace("-", "")
             else:
                 # Single day event - end is next day
-                dt = datetime.strptime(date_str, "%Y%m%d")
+                dt = parse_naive_ics(date_str, "%Y%m%d")
                 end_date = (dt + timedelta(days=1)).strftime("%Y%m%d")
             lines.append(f"DTEND;VALUE=DATE:{end_date}")
     else:

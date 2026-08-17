@@ -28,6 +28,22 @@ _Avoid_: URL, scraper (when referring to the abstraction)
 This repository is a *hard fork* of the upstream community-calendar project (judell/community-calendar). It intentionally diverges from upstream — origin/main contains Bloomington-only customizations, scrapers, and infrastructure that are not present in upstream/main. origin/main ≠ upstream/main by design.
 _Avoid_: Tracking fork, downstream mirror
 
+**Wall-clock time**:
+A datetime with no timezone, meaning "the time shown on a clock in the venue's local zone". Scrapers parse these; the pipeline attaches a zone later.
+_Avoid_: Naive datetime, local time
+
+**Absolute instant**:
+A timezone-aware datetime denoting one specific moment in time, independent of any local clock.
+_Avoid_: UTC time, aware datetime
+
+**City timezone**:
+The IANA zone a city's events default to when a source states none. Read from `cities/{city}/city.conf` (`# timezone:`), falling back to `America/Los_Angeles`.
+_Avoid_: Local timezone, calendar timezone
+
+**Event timezone (TZID)**:
+The IANA zone an individual event declares via an ICS `TZID` parameter. Overrides the city timezone for that event.
+_Avoid_: Event tz, source timezone
+
 ## Key Concepts
 
 ### Event Sources
@@ -97,6 +113,17 @@ RADIUS_MILES=15
 ```
 
 `scripts/geo_filter.py` reads this config and filters `events.json`. If no `city.conf` exists, all events pass through.
+
+### Timezone Handling
+
+Events flow through the pipeline as **wall-clock times** and become **absolute instants** only at the ICS→JSON boundary:
+
+1. **Scrapers** emit `DTSTART`/`DTEND` one of two ways. When the source site states a clock time but no zone (the common case), the value is emitted **naive (wall-clock)** — no zone can be attached at scrape time. When the source declares a known zone (e.g. an event-level `timezone` field), the scraper **attaches it directly** (`dtstart.replace(tzinfo=...)`) and the ICS output carries that `TZID`. Both paths flow to the ICS→JSON boundary below.
+2. **Feeds** carry their own `TZID`/`Z`/`VTIMEZONE` where the publisher provides one.
+3. **`ics_to_json.py`** stamps the **event timezone (TZID)** when present, else the **city timezone** from `city.conf` (default `America/Los_Angeles`), producing an offset-qualified ISO string. A `Z`-suffixed time is converted to the city zone.
+4. All-day events anchor to midnight in the city zone; a weekly wall-clock event stays at the same clock time across a DST transition.
+
+`now()`/`today()` in the pipeline use UTC (`datetime.now(timezone.utc)`), relying on the code's ±1-day tolerance rather than a city-local "today".
 
 ### Deduplication
 
