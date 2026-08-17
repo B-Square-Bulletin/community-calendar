@@ -28,7 +28,7 @@ import urllib.request
 from pathlib import Path
 from typing import Any
 
-sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
+sys.path.insert(0, __file__.rsplit("/", 1)[0])
 
 from icalendar import Calendar
 from lib.base import BaseScraper

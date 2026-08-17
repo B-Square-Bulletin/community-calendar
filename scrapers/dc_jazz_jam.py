@@ -12,7 +12,7 @@ parse the event date from the title.
 
 import sys
 
-sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
+sys.path.insert(0, __file__.rsplit("/", 1)[0])
 
 import re
 from datetime import datetime, timedelta

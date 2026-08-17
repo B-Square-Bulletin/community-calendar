@@ -26,6 +26,7 @@ dev = [
   "zuban==0.9.1",
   "types-pytz==2026.3.1.20260727",
   "types-icalendar==6.3.2.20260712",
+  "types-requests==2.31.0.6",
 ]
 
 [tool.uv]

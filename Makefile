@@ -65,7 +65,7 @@ lint:
 	@echo ""
 	@echo "Running type checkers..."
 	@status=0; \
-	for checker in "pyright" "ty check" "pyrefly check" "zuban mypy ."; do \
+	for checker in "pyright" "ty check" "pyrefly check --min-severity warn" "zuban mypy ."; do \
 		echo "  → $$checker"; \
 		uv run $$checker >/tmp/cc-lint-$$(echo $$checker | tr ' ' '_').log 2>&1 || status=$$?; \
 		tail -2 /tmp/cc-lint-$$(echo $$checker | tr ' ' '_').log | sed 's/^/    /'; \

@@ -8,7 +8,7 @@ Uses RSS feed at https://srcc.com/Calendar/RSS
 
 import sys
 
-sys.path.insert(0, str(__file__).rsplit("/", 1)[0])  # Add scrapers/ to path
+sys.path.insert(0, __file__.rsplit("/", 1)[0])  # Add scrapers/ to path
 
 import re
 from datetime import timedelta
