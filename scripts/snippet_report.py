@@ -1,8 +1,7 @@
-import glob
 import json
-import os
 import re
 from html.parser import HTMLParser
+from pathlib import Path
 
 
 class HTMLStripper(HTMLParser):
@@ -173,11 +172,11 @@ problem_titles = [
     "Free but ticketed",
 ]
 
-base = "/Users/jonudell/community-calendar/cities"
+base = Path("/Users/jonudell/community-calendar/cities")
 print("=== CHECKING SPECIFIC PROBLEM CASES ===\n")
-for city_dir in sorted(glob.glob(os.path.join(base, "*/events.json"))):
-    city = os.path.basename(os.path.dirname(city_dir))
-    with open(city_dir) as f:
+for city_dir in sorted(base.glob("*/events.json")):
+    city = city_dir.parent.name
+    with city_dir.open() as f:
         events = json.load(f)
     for e in events:
         t = e.get("title", "")
@@ -193,9 +192,9 @@ out = []
 out.append("# Snippet Report (v3 — improved scoring)\n")
 totals = {"with": 0, "without": 0}
 
-for city_dir in sorted(glob.glob(os.path.join(base, "*/events.json"))):
-    city = os.path.basename(os.path.dirname(city_dir))
-    with open(city_dir) as f:
+for city_dir in sorted(base.glob("*/events.json")):
+    city = city_dir.parent.name
+    with city_dir.open() as f:
         events = json.load(f)
 
     with_snippet = 0
@@ -244,7 +243,7 @@ out.insert(
 
 content = "\n".join(out)
 content = content.replace("\u2028", " ").replace("\u2029", " ")
-with open("/Users/jonudell/community-calendar/docs/snippet-report.md", "w") as f:
+with Path("/Users/jonudell/community-calendar/docs/snippet-report.md").open("w") as f:
     f.write(content)
 
 print("\nWritten to docs/snippet-report.md")

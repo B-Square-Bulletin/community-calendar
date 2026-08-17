@@ -15,6 +15,7 @@ import html as html_module
 import re
 import sys
 from datetime import datetime, timedelta
+from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -209,7 +210,7 @@ def main():
     )
 
     if args.output:
-        with open(args.output, "w") as f:
+        with Path(args.output).open("w") as f:
             f.write(ics_content)
         print(f"Written to {args.output}", file=sys.stderr)
     else:

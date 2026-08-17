@@ -20,6 +20,7 @@ import sys
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import cast
 
 SUPABASE_URL: str = cast("str", os.environ.get("SUPABASE_URL"))
@@ -29,8 +30,8 @@ if not SUPABASE_URL or not SUPABASE_KEY:
     sys.exit(1)
 ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages"
 
-CATEGORIES_FILE = os.path.join(os.path.dirname(__file__), "..", "categories.json")
-with open(CATEGORIES_FILE) as f:
+CATEGORIES_FILE = Path(__file__).parent.parent / "categories.json"
+with CATEGORIES_FILE.open() as f:
     CATEGORIES = [c["name"] for c in json.load(f)]
 
 VALID_CATEGORIES = set(CATEGORIES)

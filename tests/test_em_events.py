@@ -157,7 +157,7 @@ class TestFetchPage:
         scraper.timezone = "America/Indiana/Indianapolis"
         scraper.default_location = "Bloomington, IN"
 
-        with open(self.FIXTURE_PATH, encoding="utf-8") as f:
+        with self.FIXTURE_PATH.open(encoding="utf-8") as f:
             fixture_html = f.read()
 
         with patch("scrapers.lib.em_events.requests.post") as mock_post:

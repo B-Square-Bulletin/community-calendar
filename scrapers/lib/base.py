@@ -6,6 +6,7 @@ import os
 import subprocess
 from abc import ABC, abstractmethod
 from datetime import datetime, timedelta
+from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
 
@@ -184,7 +185,7 @@ class BaseScraper(ABC):
         calendar = self.create_calendar(events)
 
         filename = output or self.default_output_filename()
-        with open(filename, "wb") as f:
+        with Path(filename).open("wb") as f:
             f.write(calendar.to_ical())
 
         self.logger.info(f"Written to {filename}")

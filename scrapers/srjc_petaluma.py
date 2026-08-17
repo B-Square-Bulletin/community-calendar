@@ -12,6 +12,7 @@ Data source: LiveWhale calendar at calendar.santarosa.edu
 import argparse
 import sys
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
 import requests
 
@@ -178,7 +179,7 @@ def main():
     ics_content = generate_ics(petaluma_events)
 
     if args.output:
-        with open(args.output, "w") as f:
+        with Path(args.output).open("w") as f:
             f.write(ics_content)
         print(f"Wrote {len(petaluma_events)} events to {args.output}", file=sys.stderr)
     else:

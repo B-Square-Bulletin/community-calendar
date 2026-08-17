@@ -12,12 +12,13 @@ import os
 import sys
 import urllib.error
 import urllib.request
+from pathlib import Path
 
 
-def parse_feeds_txt(path):
+def parse_feeds_txt(path: Path):
     """Parse feeds.txt into a list of feed dicts."""
     feeds = []
-    with open(path) as f:
+    with path.open() as f:
         lines = f.readlines()
 
     name = None
@@ -85,8 +86,8 @@ def main():
         print("Set SUPABASE_URL and SUPABASE_SERVICE_KEY")
         sys.exit(1)
 
-    feeds_path = os.path.join("cities", city, "feeds.txt")
-    if not os.path.exists(feeds_path):
+    feeds_path = Path("cities") / city / "feeds.txt"
+    if not feeds_path.exists():
         print(f"Not found: {feeds_path}")
         sys.exit(1)
 

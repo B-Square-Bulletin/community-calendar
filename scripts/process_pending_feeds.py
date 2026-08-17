@@ -28,10 +28,10 @@ from pathlib import Path
 ROOT = Path(__file__).parent.parent
 
 
-def parse_pending_feeds(path):
+def parse_pending_feeds(path: Path):
     """Parse pending_feeds.txt into a list of feed dicts."""
     feeds = []
-    with open(path) as f:
+    with path.open() as f:
         lines = f.readlines()
 
     name = None
@@ -167,9 +167,9 @@ TEMPLATE = """\
 """
 
 
-def write_template(path, city):
+def write_template(path: Path, city):
     """Reset pending_feeds.txt to the template."""
-    with open(path, "w") as f:
+    with path.open("w") as f:
         f.write(TEMPLATE.replace("{city}", city))
 
 

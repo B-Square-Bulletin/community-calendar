@@ -84,7 +84,7 @@ def load_events(city):
     path = Path(f"cities/{city}/events.json")
     if not path.exists():
         raise FileNotFoundError(f"No events.json found at {path}")
-    with open(path) as f:
+    with path.open() as f:
         return json.load(f)
 
 

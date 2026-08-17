@@ -22,11 +22,11 @@ Usage:
     python sportsbasement.py --list-types
 """
 
-import os
 import sys
+from pathlib import Path
 
 # Add parent directory to path for imports
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from scrapers.lib.elfsight import ElfsightCalendarScraper
 
