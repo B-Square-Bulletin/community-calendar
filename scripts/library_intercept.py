@@ -17,6 +17,7 @@ from zoneinfo import ZoneInfo
 import requests
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics
 
 
 class LibraryScraper(BaseScraper):
@@ -149,9 +150,9 @@ class LibraryScraper(BaseScraper):
 
             date_str, start_time_str, end_time_str = match.groups()
 
-            date = datetime.strptime(date_str, "%A, %B %d, %Y")
-            start_time = datetime.strptime(start_time_str, "%I:%M%p")
-            end_time = datetime.strptime(end_time_str, "%I:%M%p")
+            date = parse_naive_ics(date_str, "%A, %B %d, %Y")
+            start_time = parse_naive_ics(start_time_str, "%I:%M%p")
+            end_time = parse_naive_ics(end_time_str, "%I:%M%p")
 
             tz = ZoneInfo(self.timezone)
             dt_start = date.replace(hour=start_time.hour, minute=start_time.minute, tzinfo=tz)

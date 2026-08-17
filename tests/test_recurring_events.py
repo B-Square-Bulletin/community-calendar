@@ -18,6 +18,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
+from scrapers.lib.timeutil import utc_today
 from scripts.combine_ics import expand_rrules
 from tests.helpers import VTIMEZONE_NY, make_ics, make_vevent
 
@@ -45,7 +46,7 @@ class TestRecurrenceIdOverride:
         """
         from datetime import date, timedelta
 
-        today = date.today()
+        today = utc_today()
 
         def nth_weekday(year, month, n, weekday):
             """Return the nth weekday (0=Mon, 1=Tue, ...) of a given month."""
@@ -162,9 +163,9 @@ class TestRecurrenceIdOverride:
         Uses near-future dates so expansion window (today + 120 days)
         covers all COUNT=N instances.
         """
-        from datetime import date, timedelta
+        from datetime import timedelta
 
-        start = date.today() + timedelta(days=7)  # one week from now
+        start = utc_today() + timedelta(days=7)  # one week from now
         start_str = start.strftime("%Y%m%d")
         dtstart = f"DTSTART:{start_str}T090000"
         dtend = f"DTEND:{start_str}T100000"
@@ -192,9 +193,9 @@ class TestRecurrenceIdOverride:
         be handled correctly. Overridden instances should be replaced,
         non-overridden instances should remain.
         """
-        from datetime import date, timedelta
+        from datetime import timedelta
 
-        start = date.today() + timedelta(days=7)  # one week from now
+        start = utc_today() + timedelta(days=7)  # one week from now
         start_str = start.strftime("%Y%m%d")
 
         master = make_vevent(

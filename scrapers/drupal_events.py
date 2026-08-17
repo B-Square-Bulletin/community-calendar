@@ -32,12 +32,13 @@ import argparse
 import json
 import logging
 import re
-from datetime import datetime, timedelta
+from datetime import timedelta
 from typing import Any
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics, utc_now
 from lib.utils import DEFAULT_HEADERS
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -64,8 +65,8 @@ class DrupalEventsScraper(BaseScraper):
 
     def fetch_events(self) -> list[dict[str, Any]]:
         """Fetch events from the Drupal JSON feed."""
-        start = datetime.now().strftime("%Y-%m-%d")
-        end = (datetime.now() + timedelta(days=self.months_ahead * 31)).strftime("%Y-%m-%d")
+        start = utc_now().strftime("%Y-%m-%d")
+        end = (utc_now() + timedelta(days=self.months_ahead * 31)).strftime("%Y-%m-%d")
         url = f"{self.feed_url}?start={start}&end={end}"
 
         self.logger.info(f"Fetching {url}")
@@ -95,7 +96,7 @@ class DrupalEventsScraper(BaseScraper):
             return None
 
         try:
-            dtstart = datetime.strptime(start_str, "%Y-%m-%d %H:%M:%S")
+            dtstart = parse_naive_ics(start_str, "%Y-%m-%d %H:%M:%S")
             # Use event-level timezone if provided, otherwise default
             event_tz_str = item.get("timezone", self.timezone)
             event_tz = ZoneInfo(event_tz_str) if event_tz_str else self.tz
@@ -106,7 +107,7 @@ class DrupalEventsScraper(BaseScraper):
         end_str = item.get("end_date", "")
         if end_str:
             try:
-                dtend = datetime.strptime(end_str, "%Y-%m-%d %H:%M:%S")
+                dtend = parse_naive_ics(end_str, "%Y-%m-%d %H:%M:%S")
                 dtend = dtend.replace(tzinfo=event_tz)
             except ValueError:
                 dtend = dtstart

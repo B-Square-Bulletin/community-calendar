@@ -20,6 +20,7 @@ from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup, Tag
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics
 
 PAGE_URL = "https://dumbartonconcerts.org/26-27-tickets"
 SITE_URL = "https://dumbartonconcerts.org"
@@ -167,7 +168,7 @@ class DumbartonConcertsScraper(BaseScraper):
     ) -> list[datetime]:
         datetimes: list[datetime] = []
         for month, day, year in dates:
-            base = datetime.strptime(f"{month} {day} {year}", "%B %d %Y")
+            base = parse_naive_ics(f"{month} {day} {year}", "%B %d %Y")
             for hour, minute in times:
                 datetimes.append(base.replace(hour=hour, minute=minute, tzinfo=tz))
         return datetimes

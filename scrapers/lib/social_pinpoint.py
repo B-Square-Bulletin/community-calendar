@@ -24,6 +24,7 @@ from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 from .base import BaseScraper
+from .timeutil import parse_naive_ics
 
 logger = logging.getLogger(__name__)
 
@@ -109,7 +110,7 @@ class SocialPinpointScraper(BaseScraper):
         if not time_finish:
             return True
         try:
-            finish = datetime.strptime(time_finish, "%Y-%m-%d %H:%M:%S")
+            finish = parse_naive_ics(time_finish, "%Y-%m-%d %H:%M:%S")
         except ValueError:
             return True
         now = datetime.now(ZoneInfo(self.timezone)).replace(tzinfo=None)

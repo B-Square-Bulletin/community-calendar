@@ -13,12 +13,12 @@ sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import html
 import re
-from datetime import datetime
 from typing import Any
 from zoneinfo import ZoneInfo
 
 import feedparser
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics
 
 # Davis-area branches to include
 DAVIS_BRANCHES = {
@@ -77,12 +77,12 @@ class YoloLibraryScraper(BaseScraper):
                 return None
 
             tz = ZoneInfo(self.timezone)
-            dt_start = datetime.strptime(f"{date_str} {start_str}", "%Y-%m-%d %H:%M:%S")
+            dt_start = parse_naive_ics(f"{date_str} {start_str}", "%Y-%m-%d %H:%M:%S")
             dt_start = dt_start.replace(tzinfo=tz)
 
             dt_end = None
             if end_str:
-                dt_end = datetime.strptime(f"{date_str} {end_str}", "%Y-%m-%d %H:%M:%S")
+                dt_end = parse_naive_ics(f"{date_str} {end_str}", "%Y-%m-%d %H:%M:%S")
                 dt_end = dt_end.replace(tzinfo=tz)
 
             # Location

@@ -26,6 +26,7 @@ from zoneinfo import ZoneInfo
 import requests
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics
 from lib.utils import DEFAULT_HEADERS
 
 DATE_RE = re.compile(
@@ -70,7 +71,7 @@ class KnottyPineScraper(BaseScraper):
                 continue
 
             try:
-                event_date = datetime.strptime(date_str, "%A, %B %d, %Y").date()
+                event_date = parse_naive_ics(date_str, "%A, %B %d, %Y").date()
             except ValueError:
                 self.logger.warning(f"Could not parse date {date_str!r} for {title}")
                 continue

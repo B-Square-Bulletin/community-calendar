@@ -11,12 +11,13 @@ import sys
 sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
-from datetime import datetime, timedelta
+from datetime import timedelta
 from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.timeutil import utc_now, wall_clock
 from lib.utils import DEFAULT_HEADERS
 
 MONTH_MAP = {
@@ -94,7 +95,7 @@ class GreenMusicCenterScraper(BaseScraper):
             return None
 
         # Determine year — assume current or next year
-        now = datetime.now()
+        now = utc_now()
         year = now.year
         if month < now.month - 1:
             year += 1
@@ -111,12 +112,12 @@ class GreenMusicCenterScraper(BaseScraper):
         time_text = time_el.get_text(strip=True) if time_el else ""
         hour, minute = self._parse_time(time_text)
 
-        dtstart = datetime(year, month, start_day, hour, minute)
+        dtstart = wall_clock(year, month, start_day, hour, minute)
 
         if len(date_parts) > 1:
             try:
                 end_day = int(date_parts[1].strip())
-                dtend = datetime(year, month, end_day, hour, minute)
+                dtend = wall_clock(year, month, end_day, hour, minute)
             except ValueError:
                 dtend = dtstart + timedelta(hours=3)
         else:

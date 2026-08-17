@@ -26,11 +26,12 @@ import hashlib
 import json
 import logging
 import re
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 from .base import BaseScraper
+from .timeutil import parse_naive_ics, utc_now
 
 logger = logging.getLogger(__name__)
 
@@ -88,12 +89,14 @@ def expand_recurring_events(
         return occurrences
 
     try:
-        base_dt = datetime.strptime(f"{start_date} {start_time}", "%Y-%m-%d %H:%M")
+        base_dt = parse_naive_ics(f"{start_date} {start_time}", "%Y-%m-%d %H:%M")
     except ValueError:
         logger.warning(f"Could not parse start date/time: {start_date} {start_time}")
         return occurrences
 
-    now = datetime.now()
+    # Naive UTC "now" so wall-clock comparisons against base_dt stay valid;
+    # the ±1-day tolerance absorbs the UTC-vs-local offset shift.
+    now = utc_now().replace(tzinfo=None)
     cutoff = now + timedelta(days=months_ahead * 30)
 
     repeat_period = event.get("repeatPeriod", "noRepeat")
@@ -117,7 +120,7 @@ def expand_recurring_events(
     end_cutoff = cutoff
     if repeat_ends == "onDate" and repeat_ends_date:
         with contextlib.suppress(ValueError):
-            end_cutoff = min(cutoff, datetime.strptime(repeat_ends_date, "%Y-%m-%d"))
+            end_cutoff = min(cutoff, parse_naive_ics(repeat_ends_date, "%Y-%m-%d"))
 
     # Parse exceptions (skipped dates)
     exceptions = set()
@@ -127,7 +130,9 @@ def expand_recurring_events(
             if orig:
                 # originalDate is typically a timestamp in milliseconds
                 try:
-                    exc_dt = datetime.fromtimestamp(orig / 1000)
+                    # Epoch milliseconds are UTC-based instants, so UTC is the
+                    # correct tz for the skip date.
+                    exc_dt = datetime.fromtimestamp(orig / 1000, tz=timezone.utc)
                     exceptions.add(exc_dt.date())
                 except (ValueError, TypeError):
                     pass

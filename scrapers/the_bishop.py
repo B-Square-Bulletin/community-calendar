@@ -15,6 +15,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 sys.path.insert(0, str(__file__).rsplit("/", 2)[0])
 from lib.base import BaseScraper  # noqa: E402
+from lib.timeutil import utc_now  # noqa: E402
 
 
 class TheBishopScraper(BaseScraper):
@@ -35,7 +36,7 @@ class TheBishopScraper(BaseScraper):
         urls_to_fetch = [self.events_url]
 
         # Add next 3 months
-        now = datetime.now()
+        now = utc_now()
         for i in range(1, 4):
             future = now + timedelta(days=30 * i)
             urls_to_fetch.append(f"{self.events_url}/{future.year}-{future.month:02d}")

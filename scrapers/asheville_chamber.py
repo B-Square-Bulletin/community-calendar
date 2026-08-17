@@ -25,6 +25,7 @@ from zoneinfo import ZoneInfo
 
 import feedparser
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
@@ -50,7 +51,7 @@ def _parse_time(time_str: str) -> tuple[int, int]:
     if "noon" in time_str.lower():
         return 12, 0
     try:
-        dt = datetime.strptime(time_str.upper(), "%I:%M %p")
+        dt = parse_naive_ics(time_str.upper(), "%I:%M %p")
         return dt.hour, dt.minute
     except ValueError:
         return 0, 0
@@ -66,7 +67,7 @@ def _parse_title(title: str) -> tuple[str, datetime | None, datetime | None]:
     start_date_str, start_time_str, end_date_str, end_time_str = m.groups()
 
     try:
-        start_date = datetime.strptime(start_date_str, "%m/%d/%Y")
+        start_date = parse_naive_ics(start_date_str, "%m/%d/%Y")
     except ValueError:
         return title.strip(), None, None
 
@@ -79,7 +80,7 @@ def _parse_title(title: str) -> tuple[str, datetime | None, datetime | None]:
     dtend = None
     if end_date_str:
         try:
-            end_date = datetime.strptime(end_date_str, "%m/%d/%Y")
+            end_date = parse_naive_ics(end_date_str, "%m/%d/%Y")
         except ValueError:
             end_date = None
         if end_date:

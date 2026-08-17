@@ -16,12 +16,13 @@ import sys
 sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
-from datetime import datetime, timedelta
+from datetime import timedelta
 from typing import Any
 
 import requests
 from bs4 import BeautifulSoup, Tag
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics, utc_now
 from lib.utils import DEFAULT_HEADERS
 
 
@@ -63,7 +64,7 @@ class DukeArtsScraper(BaseScraper):
         self.logger.info(f"Found {len(articles)} event articles")
 
         events = []
-        now = datetime.now()
+        now = utc_now()
         current_year = now.year
 
         for article in articles:
@@ -141,9 +142,9 @@ class DukeArtsScraper(BaseScraper):
             date_str = m.group(1)  # "Feb 17"
             time_str = m.group(2)  # "1:00pm"
             try:
-                dtstart = datetime.strptime(f"{date_str} {year} {time_str}", "%b %d %Y %I:%M%p")
+                dtstart = parse_naive_ics(f"{date_str} {year} {time_str}", "%b %d %Y %I:%M%p")
                 # If parsed date is far in the past, try next year
-                if dtstart.month < datetime.now().month - 2:
+                if dtstart.month < utc_now().month - 2:
                     dtstart = dtstart.replace(year=year + 1)
                 dtend = dtstart + timedelta(hours=2)
                 return dtstart, dtend
@@ -156,9 +157,9 @@ class DukeArtsScraper(BaseScraper):
             start_str = m.group(1)  # "Feb 21"
             end_str = m.group(2)  # "Feb 22"
             try:
-                dtstart = datetime.strptime(f"{start_str} {year}", "%b %d %Y")
-                dtend = datetime.strptime(f"{end_str} {year}", "%b %d %Y")
-                if dtstart.month < datetime.now().month - 2:
+                dtstart = parse_naive_ics(f"{start_str} {year}", "%b %d %Y")
+                dtend = parse_naive_ics(f"{end_str} {year}", "%b %d %Y")
+                if dtstart.month < utc_now().month - 2:
                     dtstart = dtstart.replace(year=year + 1)
                     dtend = dtend.replace(year=year + 1)
                 # Set reasonable default times for all-day ranges

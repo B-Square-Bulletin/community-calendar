@@ -16,11 +16,12 @@ sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import contextlib
 import os
-from datetime import datetime, timedelta
+from datetime import timedelta
 from typing import Any
 
 import requests
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics, utc_now
 from lib.utils import DEFAULT_HEADERS
 
 
@@ -37,7 +38,7 @@ class CarolinaPerformingArtsScraper(BaseScraper):
     def fetch_events(self) -> list[dict[str, Any]]:
         """Fetch events from CPA REST API."""
         months_ahead = int(os.environ.get("SCRAPE_MONTHS", 6))
-        now = datetime.now()
+        now = utc_now()
         start = now.strftime("%Y-%m-%d")
         end = (now + timedelta(days=months_ahead * 31)).strftime("%Y-%m-%d")
 
@@ -67,7 +68,7 @@ class CarolinaPerformingArtsScraper(BaseScraper):
 
         # Parse "2026-02-12 18:00"
         try:
-            dtstart = datetime.strptime(start_str, "%Y-%m-%d %H:%M")
+            dtstart = parse_naive_ics(start_str, "%Y-%m-%d %H:%M")
         except ValueError:
             return None
 
@@ -76,7 +77,7 @@ class CarolinaPerformingArtsScraper(BaseScraper):
         end_str = item.get("end")
         if end_str:
             with contextlib.suppress(ValueError):
-                dtend = datetime.strptime(end_str, "%Y-%m-%d %H:%M")
+                dtend = parse_naive_ics(end_str, "%Y-%m-%d %H:%M")
         if not dtend:
             dtend = dtstart + timedelta(hours=2)
 

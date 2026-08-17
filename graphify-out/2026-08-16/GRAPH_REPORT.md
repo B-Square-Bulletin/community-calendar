@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Graph Report - 57-upgrade-beautifulsoup  (2026-08-15)
 
 ## Corpus Check
@@ -6,18 +7,38 @@
 
 ## Summary
 - 3846 nodes · 5551 edges · 352 communities (291 shown, 61 thin omitted)
+=======
+# Graph Report - 58-enabled-deferred-ruff  (2026-08-16)
+
+## Corpus Check
+- 324 files · ~254,103 words
+- Verdict: corpus is large enough that graph structure adds value.
+
+## Summary
+- 3875 nodes · 5852 edges · 356 communities (296 shown, 60 thin omitted)
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 - Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 265 edges (avg confidence: 0.63)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
+<<<<<<< HEAD
 - Built from commit: `b4807619`
+=======
+- Built from commit: `c682d794`
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
+<<<<<<< HEAD
 - base.py
 - cityspark.py
 - SOURCES_CHECKLIST.md
+=======
+- WildApricotRssScraper
+- cityspark.py
+- simpleview.py
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 - dice.py
 - Authentication Setup
 - ThunderTixScraper
@@ -41,10 +62,17 @@
 - __init__.py
 - Audio Capture
 - Additional Platform Techniques
+<<<<<<< HEAD
 - Component Relationships
 - movingwriting.py
 - bench_collapse_long.js
 - AGENTS.md
+=======
+- add_scraper.py
+- utils.py
+- .create_event
+- 0002. Fork Model and Main Branch Protection
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 - scrapers/README.md
 - 13_category_overrides.sql
 - 5. Geo-Filtering Setup
@@ -53,14 +81,22 @@
 - Discovery Lessons Learned
 - Currently Implemented (76 sources)
 - my-picks Edge Function
+<<<<<<< HEAD
 - Working with an AI Agent
+=======
+- Bloomington pending_feeds.txt
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 - RssScraper
 - combine_ics.py
 - My Picks as an Event Submission System
 - Legistar WebAPI
 - Schema.org JSON-LD Export
 - Manage Feeds
+<<<<<<< HEAD
 - UI Puzzles
+=======
+- combine_ics.py (ICS merge, dedup, source attribution)
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 - extract_jsonld_blocks
 - picks
 - event_enrichments
@@ -84,7 +120,11 @@
 - Hard Fork Model
 - download_feeds.py
 - classify_events_json.py
+<<<<<<< HEAD
 - docs/README.md
+=======
+- AGENTS.md
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 - refresh_source_names
 - Event Scrapers
 - Client
@@ -96,6 +136,7 @@
 - Dedupe cache keyed on length + first/last element identity
 - xs-trace timing wrappers (_xsLogs)
 - Magic link (email OTP)
+<<<<<<< HEAD
 - SugarCalendarScraper
 - OccidentalArtsScraper
 - shell.js
@@ -104,12 +145,23 @@
 - supabase/README.md
 - time
 - DavisChamberScraper
+=======
+- sugar_calendar.py
+- OccidentalArtsScraper
+- shell.js
+- Audio Input: Implementation Plan (Superseded)
+- Event Pipeline
+- supabase/README.md
+- time
+- report.py
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 - luma_collection.py
 - TestApplyTimezoneOffset
 - Admin Interface
 - BuskirkChumleyScraper
 - CatsCradleScraper
 - ._parse_block
+<<<<<<< HEAD
 - RaleighLittleTheatreScraper
 - Community Calendar Context
 - validate_pr_feeds.py
@@ -119,6 +171,24 @@
 - studio_montclair.py
 - MobilizeScraper
 - TestIcsToJsonParseDatetime
+=======
+- madams_organ.py
+- RaleighLittleTheatreScraper
+- toronto_meetings.py
+- Community Calendar Context
+- elfsight.py
+- bench_collapse_long.js
+- SOURCES_CHECKLIST.md
+- SeeTicketsScraper
+- ai1ec.py
+- EScribeScraper
+- App Architecture
+- studio_montclair.py
+- MobilizeScraper
+- TestIcsToJsonParseDatetime
+- .fetch_events
+- SECURITY DEFINER Explained
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 - Init
 - report-health edge function processHealthReport
 - PRODID header
@@ -135,28 +205,50 @@
 - cli-todo.md
 - generate-calendar.yml workflow
 - BookmanagerEventsScraper
+<<<<<<< HEAD
 - FARCenterScraper
+=======
+- far_center.py
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 - HistoryCenterScraper
 - srjc_petaluma.py
 - classify_events_anthropic.py
 - ollama_classify.py
+<<<<<<< HEAD
 - ChurchInTetonsScraper
 - DrupalEventsScraper
 - MontclairFilmScraper
 - TicketmasterScraper
+=======
+- church_in_tetons.py
+- DrupalEventsScraper
+- MontclairFilmScraper
+- ticketmaster.py
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 - LibraryScraper
 - Agent Strategies for Community Calendar
 - github.go
 - Community Calendar Curator Guide
+<<<<<<< HEAD
 - combine_ics.py (ICS merge, dedup, source attribution)
 - Personal Picks
 - ._parse_card
 - CarolinaTheatreScraper
+=======
+- Curl-and-done sources (no scraper needed)
+- Personal Picks
+- ._parse_card
+- carolina_theatre.py
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 - DcMusicLiveScraper
 - eventbrite_filtered.py
 - GrowthZoneScraper
 - maxpreps.py
+<<<<<<< HEAD
 - MysticTheatreScraper
+=======
+- mystic_theatre.py
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 - shopify_events.py
 - WaterfrontBIAScraper
 - TestEnrichmentTimezone
@@ -184,7 +276,11 @@
 - legistar.py
 - OCADUScraper
 - SpektrixScraper
+<<<<<<< HEAD
 - sycamore_land_trust.py
+=======
+- utc_now
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 - Bloomington feeds.txt
 - generate_rss.py
 - extract_field
@@ -197,11 +293,19 @@
 - BrownCountyGovScraper
 - CafeFridaScraper
 - CreativeSonomaScraper
+<<<<<<< HEAD
 - DukeArtsScraper
 - EssexCountyParksScraper
 - EtobicokeHortScraper
 - FlashScraper
 - GreenMusicCenterScraper
+=======
+- duke_arts.py
+- essex_county_parks.py
+- EtobicokeHortScraper
+- FlashScraper
+- green_music_center.py
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 - KnottyPineScraper
 - OwenCountyLibraryScraper
 - RaptorTrustScraper
@@ -215,8 +319,13 @@
 - supabase/migrations
 - dedupeEvents
 - 1. Search for Feeds
+<<<<<<< HEAD
 - barrel_proof.py
 - scrape_henhouse
+=======
+- wall_clock
+- henhouse.py
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 - OpenMikesScraper
 - ._parse_item
 - Reusable Scrapers
@@ -231,6 +340,7 @@
 - List Virtualization
 - Search Pattern Discovery Tests
 - HTMLStripper
+<<<<<<< HEAD
 - CalTheatreScraper
 - CarolinaPerformingArtsScraper
 - CopperfieldsScraper
@@ -243,6 +353,18 @@
 - SonomaParksScraper
 - SVMAScraper
 - TheBishopScraper
+=======
+- cal_theatre.py
+- copperfields.py
+- HarbordVillageScraper
+- JackLondonParkScraper
+- GoDaddyScraper
+- motorco.py
+- SonomaCountyGovScraper
+- SonomaParksScraper
+- svma.py
+- .fetch_events
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 - toronto_community_housing.py
 - YoloLibraryScraper
 - my-picks/index.ts
@@ -255,7 +377,11 @@
 - SECURITY DEFINER (setuid equivalent)
 - Government & Civic Sources
 - Listing Page + JSON-LD Pattern
+<<<<<<< HEAD
 - generate_verify_sql.py
+=======
+- timeutil.py
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 - cc-cli
 - Community Calendar
 - cc-cli Testing Notes
@@ -263,9 +389,14 @@
 - Deduplication and Event Ordering
 - VTIMEZONE + TZID
 - TheAnnexResidentsAssociationScraper
+<<<<<<< HEAD
 - Event pipeline
 - Schema.org Event Export
 - RedwoodCafeScraper
+=======
+- Schema.org Event Export
+- redwood_cafe.py
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 - categories.json (single source of truth for categories)
 - Bloomington-only pruning
 - Phase 4: upstream authority (direct feeds for aggregated venues)
@@ -292,7 +423,11 @@
 - feed_tokens
 - user_settings
 - 16_feeds.sql
+<<<<<<< HEAD
 - LagunitasScraper
+=======
+- parse_naive_ics
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 - cc-cli TODO
 - "Curl-and-Done" Sources: No Scraper Needed
 - Snippet Logic Evaluation
@@ -352,6 +487,7 @@
 
 ## God Nodes (most connected - your core abstractions)
 1. `BaseScraper` - 244 edges
+<<<<<<< HEAD
 2. `Discovery Lessons Learned` - 53 edges
 3. `Init()` - 30 edges
 4. `EmEventsScraper` - 27 edges
@@ -361,18 +497,37 @@
 8. `AgaKhanMuseumScraper` - 21 edges
 9. `BibliocommonsEventsScraper` - 20 edges
 10. `Deduplication and Event Ordering` - 17 edges
+=======
+2. `parse_naive_ics()` - 97 edges
+3. `utc_now()` - 65 edges
+4. `Discovery Lessons Learned` - 53 edges
+5. `wall_clock()` - 43 edges
+6. `Init()` - 30 edges
+7. `EmEventsScraper` - 27 edges
+8. `Generate Calendar workflow` - 26 edges
+9. `IcsScraper` - 23 edges
+10. `Community Calendar Curator Guide` - 22 edges
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ## Surprising Connections (you probably didn't know these)
 - `Cloudflare WAF exception for CommunityCalendar/1.0 bot` --references--> `download_feeds()`  [INFERRED]
   docs/curator-guide.md → scripts/download_feeds.py
+<<<<<<< HEAD
 - `ics_to_json()` --references--> `Token-set similarity clustering in ics_to_json.py`  [EXTRACTED]
   scripts/ics_to_json.py → docs/deduplication.md
+=======
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 - `Discovery Lessons Learned` --references--> `BibliocommonsEventsScraper`  [EXTRACTED]
   docs/discovery-lessons.md → scrapers/lib/bibliocommons.py
 - `When a source goes dark, follow the events` --references--> `BibliocommonsEventsScraper`  [EXTRACTED]
   docs/notes-for-blog-posts.md → scrapers/lib/bibliocommons.py
 - `toronto_public_library.py scraper` --implements--> `BibliocommonsEventsScraper`  [EXTRACTED]
   docs/discovery-lessons.md → scrapers/lib/bibliocommons.py
+<<<<<<< HEAD
+=======
+- `Discovery Lessons Learned` --references--> `CKANScraper`  [EXTRACTED]
+  docs/discovery-lessons.md → scrapers/lib/ckan.py
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ## Import Cycles
 - None detected.
@@ -395,19 +550,33 @@
 - **Supabase Edge Functions** — supabase_readme_load_events, supabase_readme_my_picks, supabase_readme_capture_event, supabase_functions_my_picks_readme [EXTRACTED 1.00]
 - **Schema Change Workflow** — supabase_readme, supabase_migrations_readme, supabase_readme_ddl_schema [EXTRACTED 1.00]
 
+<<<<<<< HEAD
 ## Communities (352 total, 61 thin omitted)
 
 ### Community 0 - "base.py"
 Cohesion: 0.10
 Nodes (19): ABC, datetime, Base scraper class with common functionality., Base scraper for CKAN open data portals. CKAN (Comprehensive Knowledge Archive…, GoDaddy Website Builder calendar scraper library. GoDaddy Website Builder sites…, RSS feed scraper base class., generate_uid(), parse_date_flexible() (+11 more)
+=======
+## Communities (356 total, 60 thin omitted)
+
+### Community 0 - "WildApricotRssScraper"
+Cohesion: 0.20
+Nodes (6): Any, timedelta, Reusable base for Wild Apricot RSS feeds., WildApricotRssScraper, timedelta, TorontoBicyclingNetworkScraper
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 1 - "cityspark.py"
 Cohesion: 0.16
 Nodes (12): BohemianScraper, CitySparkScraper, PressDemocratScraper, Any, CitySpark API scraper base class. Used by Bohemian and Press Democrat event…, Scraper for North Bay Bohemian events., Scraper for Press Democrat events., Scraper for CitySpark-powered event calendars. Subclasses must set: - name: str… (+4 more)
 
+<<<<<<< HEAD
 ### Community 2 - "SOURCES_CHECKLIST.md"
 Cohesion: 0.15
 Nodes (12): Aggregator-to-direct feed graduation, WFHB oblique strategy, _is_past(), main(), _parse_date_or_datetime(), Any, Fetch RSS and return list of {url, categories} dicts. Filters out items whose…, Fetch a detail page and return an event dict, or None. (+4 more)
+=======
+### Community 2 - "simpleview.py"
+Cohesion: 0.18
+Nodes (10): _is_past(), main(), _parse_date_or_datetime(), Any, Fetch RSS and return list of {url, categories} dicts. Filters out items whose…, Fetch a detail page and return an event dict, or None., Return a date or datetime from an ISO string. Simpleview uses date-only (YYYY-…, True if dt (date or datetime) is strictly in the past. (+2 more)
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 3 - "dice.py"
 Cohesion: 0.19
@@ -426,12 +595,21 @@ Cohesion: 0.16
 Nodes (12): extract_events_from_blocks(), _is_event_type(), True if t is 'Event', any schema.org Event subtype, or a known extra., Extract Event objects from JSON-LD blocks. is_event can be a callable (str ->…, main(), Any, Fetch an individual event page and extract JSON-LD Event data., Discover events from RSS, then fetch each for JSON-LD. (+4 more)
 
 ### Community 7 - "BaseScraper"
+<<<<<<< HEAD
 Cohesion: 0.07
 Nodes (25): Namespace, BistitchualScraper, clean_text(), parse_time(), HabitatScraper, Any, Scraper for Habitat for Humanity of Monroe County., Fetch events from the who-we-are page #events section. (+17 more)
 
 ### Community 8 - "CONTEXT.md"
 Cohesion: 0.10
 Nodes (21): Globals.xs rename memory note, Globals.xs code-behind naming convention, Hard fork / main protection model, Scraper hygiene: minimize fetches, X-SOURCE source attribution flow, Cities, Deduplication, Event Classification (+13 more)
+=======
+Cohesion: 0.08
+Nodes (24): ABC, Namespace, BistitchualScraper, clean_text(), parse_time(), HabitatScraper, Any, Scraper for Habitat for Humanity of Monroe County. (+16 more)
+
+### Community 8 - "CONTEXT.md"
+Cohesion: 0.09
+Nodes (22): Globals.xs rename memory note, Globals.xs code-behind naming convention, Hard fork / main protection model, Scraper hygiene: minimize fetches, X-SOURCE source attribution flow, Cities, Deduplication, Event Classification (+14 more)
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 9 - "jsonld.py"
 Cohesion: 0.26
@@ -442,8 +620,13 @@ Cohesion: 0.22
 Nodes (7): parse_location(), Any, Parse schema.org location into a string., Fetch a URL and return HTML. Uses urllib to avoid WAF issues., Return list of URLs to scrape. Override for dynamic URL generation., Fetch and parse JSON-LD events from configured URLs., Parse a single JSON-LD Event into BaseScraper event dict format.
 
 ### Community 11 - "Source discovery procedure"
+<<<<<<< HEAD
 Cohesion: 0.22
 Nodes (10): add_scraper.py, feeds table, Manage Feeds dialog, pending_feeds.txt, process_pending_feeds.py, add_feed.py, Source discovery procedure, Google ICS discovery (BEGIN:VCALENDAR) (+2 more)
+=======
+Cohesion: 0.18
+Nodes (11): add_scraper.py, Discovery Philosophy, Event Sources, pending_feeds.txt, Source Types, The `feeds` Table, add_feed.py, Source discovery procedure (+3 more)
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 12 - "20260722200000_durable_category_overrides.sql"
 Cohesion: 0.20
@@ -491,7 +674,11 @@ Nodes (6): getSnippet() in helpers.js, junkPattern regex, snippet_junk_patterns 
 
 ### Community 23 - "__init__.py"
 Cohesion: 0.06
+<<<<<<< HEAD
 Nodes (33): DavisDowntownScraper, Scraper for Davis Downtown events., GoogleCalendarScraper, IcsScraper, Any, ICS feed scraper base class., Parse a single VEVENT component., Base class for ICS feed scrapers. Subclasses must set: - name: str - Source… (+25 more)
+=======
+Nodes (32): DavisDowntownScraper, Scraper for Davis Downtown events., GoogleCalendarScraper, IcsScraper, Any, ICS feed scraper base class., Parse a single VEVENT component., Base class for ICS feed scrapers. Subclasses must set: - name: str - Source… (+24 more)
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 24 - "Audio Capture"
 Cohesion: 0.18
@@ -501,6 +688,7 @@ Nodes (10): A Note for Marcell, Architecture, Audio Capture, Development History
 Cohesion: 0.29
 Nodes (7): Drupal, Additional Platform Techniques, Drupal, Google Calendar Embeds, GrowthZone (Chambers of Commerce), Squarespace Sites, Wix Sites — Don't Scrape Directly
 
+<<<<<<< HEAD
 ### Community 26 - "Component Relationships"
 Cohesion: 0.33
 Nodes (6): Build Pipeline (GitHub Actions), Component Relationships, Data Flow: Feed → Database, Data Flow: Scraper → Database, Database Schema (Key Tables), Frontend (XMLUI App)
@@ -516,6 +704,23 @@ Nodes (15): PR Checks workflow, collapseLongRunningEvents content-key cache perf
 ### Community 29 - "AGENTS.md"
 Cohesion: 0.22
 Nodes (6): Always use add_scraper.py, 0002. Fork Model and Main Branch Protection, Consequences, Context, Decision, Status
+=======
+### Community 26 - "add_scraper.py"
+Cohesion: 0.26
+Nodes (14): add_to_pending_feeds(), add_to_workflow(), count_actionlint_errors(), find_scraper(), main(), Path, Add the scraper to the GitHub Actions workflow., Append the scraper entry to cities/{city}/pending_feeds.txt. (+6 more)
+
+### Community 27 - "utils.py"
+Cohesion: 0.08
+Nodes (38): Event, append_source(), fetch_with_retry(), generate_uid(), parse_date_flexible(), parse_time_flexible(), datetime, Common utilities for scrapers. (+30 more)
+
+### Community 28 - ".create_event"
+Cohesion: 0.16
+Nodes (8): Any, Calendar, Generate default output filename., Fetch text content via curl for sites that block urllib in CI., Main entry point: fetch events and write calendar., Fetch and parse all available events from the source. Returns list of event…, Create an iCalendar from parsed events., Create an iCalendar Event from event data.
+
+### Community 29 - "0002. Fork Model and Main Branch Protection"
+Cohesion: 0.33
+Nodes (5): 0002. Fork Model and Main Branch Protection, Consequences, Context, Decision, Status
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 30 - "scrapers/README.md"
 Cohesion: 0.33
@@ -549,6 +754,7 @@ Nodes (42): 2026-02-08: Initial Discovery, 2026-02-17: Topical Search, 2026-02-1
 Cohesion: 0.40
 Nodes (5): Deployment, my-picks Edge Function, Response, Subscribe in Calendar Apps, Usage
 
+<<<<<<< HEAD
 ### Community 38 - "Working with an AI Agent"
 Cohesion: 0.50
 Nodes (4): Getting started with a cloud workspace, What about Git and the command line?, What if something goes wrong?, Working with an AI Agent
@@ -556,6 +762,15 @@ Nodes (4): Getting started with a cloud workspace, What about Git and the comman
 ### Community 39 - "RssScraper"
 Cohesion: 0.06
 Nodes (26): DcJazzJamScraper, Any, Any, datetime, Base class for RSS feed scrapers. Subclasses must set: - name: str - Source…, Fetch and parse events from RSS feed., Parse a single RSS entry into event data. Returns None if parsing fails.…, Parse date from RSS entry's published_parsed or published field. Returns… (+18 more)
+=======
+### Community 38 - "Bloomington pending_feeds.txt"
+Cohesion: 0.21
+Nodes (11): Bloomington pending_feeds.txt, pending_feeds.txt staging inbox, add_to_pending_feeds(), main(), needs_user_agent(), Check if URL likely needs a User-Agent header., Add the feed URL to cities/{city}/pending_feeds.txt., Generate a filename slug from a URL. (+3 more)
+
+### Community 39 - "RssScraper"
+Cohesion: 0.09
+Nodes (16): DcJazzJamScraper, Any, Any, datetime, Base class for RSS feed scrapers. Subclasses must set: - name: str - Source…, Fetch and parse events from RSS feed., Parse a single RSS entry into event data. Returns None if parsing fails.…, Parse date from RSS entry's published_parsed or published field. Returns… (+8 more)
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 40 - "combine_ics.py"
 Cohesion: 0.09
@@ -577,9 +792,15 @@ Nodes (4): ItemList Wrapper, Schema.org JSON-LD Export, schema_org_export.py, Sc
 Cohesion: 0.50
 Nodes (4): get_source_counts RPC, Manage Feeds, remove_feed RPC, validate-feed edge function
 
+<<<<<<< HEAD
 ### Community 45 - "UI Puzzles"
 Cohesion: 0.50
 Nodes (3): 1. Cluster borders lose meaning in search mode, 2. Event descriptions: scannable vs. informative (solved), UI Puzzles
+=======
+### Community 45 - "combine_ics.py (ICS merge, dedup, source attribution)"
+Cohesion: 0.22
+Nodes (9): Global AGGREGATORS list vs per-city policies, lib/feed_utils.py parse_feeds_txt(), AGGREGATORS set in combine_ics.py, combine_ics.py (ICS merge, dedup, source attribution), export_feeds_txt(), main(), Export feeds for a city to feeds.txt., seed_feeds_from_txt.py (+1 more)
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 46 - "extract_jsonld_blocks"
 Cohesion: 0.50
@@ -618,12 +839,21 @@ Cohesion: 0.67
 Nodes (3): 1. Centralized platforms (curl-and-done), 2. Decentralized — scrape the aggregate page, University Event Systems Vary Widely
 
 ### Community 55 - "ics_to_json.py"
+<<<<<<< HEAD
 Cohesion: 0.11
 Nodes (23): Location string variance problem, cluster_by_title_similarity(), extract_image_url(), extract_raw_datetime(), ics_to_json(), is_all_day_event(), load_city_timezone(), parse_ics_datetime() (+15 more)
 
 ### Community 56 - "SquarespaceScraper"
 Cohesion: 0.12
 Nodes (17): Squarespace ?format=json event data, BrewstersScraper, SquarespaceScraper, CoolPetalumaScraper, SquarespaceScraper, Any, Squarespace Event scraper library. Squarespace sites expose event collection…, Base class for scrapers that use Squarespace ?format=json API. Subclasses… (+9 more)
+=======
+Cohesion: 0.10
+Nodes (26): Fuzzy LLM dedup experiment (abandoned), Location string variance problem, LLM-assisted deduplication: what works and what doesn't, cluster_by_title_similarity(), extract_image_url(), extract_raw_datetime(), ics_to_json(), is_all_day_event() (+18 more)
+
+### Community 56 - "SquarespaceScraper"
+Cohesion: 0.15
+Nodes (14): Squarespace ?format=json event data, BrewstersScraper, SquarespaceScraper, CoolPetalumaScraper, SquarespaceScraper, Squarespace Event scraper library. Squarespace sites expose event collection…, Base class for scrapers that use Squarespace ?format=json API. Subclasses…, SquarespaceScraper (+6 more)
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 57 - "AgaKhanMuseumScraper"
 Cohesion: 0.23
@@ -662,16 +892,27 @@ Cohesion: 0.08
 Nodes (27): Main Branch Protection (ADR 0002), CONTEXT.md fork glossary, generate-calendar.yml CI bypass, Hard Fork Model, origin/main branch, reflog recovery, upstream/main (judell/community-calendar), Cross-fork PR to judell/community-calendar (+19 more)
 
 ### Community 67 - "download_feeds.py"
+<<<<<<< HEAD
 Cohesion: 0.12
 Nodes (22): Feeds table as source of truth (pending_feeds.txt -> feeds -> feeds.txt), pending_feeds.txt repo-side intake flow, Cloudflare WAF exception for CommunityCalendar/1.0 bot, lib/feed_utils.py parse_feeds_txt(), download_feeds(), fetch_feeds_from_db(), fix_mec_timezone(), inject_source_headers() (+14 more)
+=======
+Cohesion: 0.17
+Nodes (16): Cloudflare WAF exception for CommunityCalendar/1.0 bot, download_feeds(), fetch_feeds_from_db(), fix_mec_timezone(), inject_source_headers(), mark_feeds_active(), _needs_mec_tz_fix(), parse_feeds_txt() (+8 more)
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 68 - "classify_events_json.py"
 Cohesion: 0.13
 Nodes (17): anthropic_call(), build_few_shot(), classify_batch(), fetch_overrides(), main(), process_file(), RateLimitTracker, Record that a request was made. Note: tokens_used from API headers is… (+9 more)
 
+<<<<<<< HEAD
 ### Community 69 - "docs/README.md"
 Cohesion: 0.12
 Nodes (14): App Architecture, Local Development, XMLUI Frontend, XMLUI Resources, Adding a Feed (ICS URL), Adding a Scraper, Build Pipeline, Cities (+6 more)
+=======
+### Community 69 - "AGENTS.md"
+Cohesion: 0.18
+Nodes (6): Always use add_scraper.py, 1. Cluster borders lose meaning in search mode, 2. Event descriptions: scannable vs. informative (solved), UI Puzzles, Curator Role, Producers as Authoritative Event Sources
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 71 - "Event Scrapers"
 Cohesion: 0.11
@@ -686,8 +927,13 @@ Cohesion: 0.10
 Nodes (21): When a source goes dark, follow the events, When a source goes dark, follow the events, BibliocommonsEventsScraper, Any, datetime, ZoneInfo, Generic Bibliocommons events scraper base., Reusable scraper for Bibliocommons library event endpoints. Subclasses should… (+13 more)
 
 ### Community 74 - "ElfsightCalendarScraper"
+<<<<<<< HEAD
 Cohesion: 0.10
 Nodes (18): ElfsightCalendarScraper, expand_recurring_events(), fetch_elfsight_data(), datetime, Elfsight Event Calendar widget scraper library. Elfsight is a popular…, Base scraper for sites using Elfsight Event Calendar widget. Subclasses must…, Fetch and cache the Elfsight widget settings., Get location ID to name mapping. (+10 more)
+=======
+Cohesion: 0.13
+Nodes (12): ElfsightCalendarScraper, Base scraper for sites using Elfsight Event Calendar widget. Subclasses must…, Fetch and cache the Elfsight widget settings., Get location ID to name mapping., Get event type ID to name mapping., Check if any value matches any filter (case-insensitive partial match)., Check if an event passes location and event type filters., Fetch and expand all events from the Elfsight calendar. (+4 more)
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 76 - "TmbccScraper"
 Cohesion: 0.20
@@ -701,7 +947,11 @@ Nodes (20): cluster_events(), format_event(), group_by_timeslot(), load_events()
 Cohesion: 0.17
 Nodes (15): index.html, Local development (python http.server), XMLUI framework, 1. Set up Resend (or another SMTP provider), 2. Configure Supabase SMTP, 3. Enable email provider, cc-cli init, GitHub OAuth (+7 more)
 
+<<<<<<< HEAD
 ### Community 81 - "SugarCalendarScraper"
+=======
+### Community 81 - "sugar_calendar.py"
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 Cohesion: 0.16
 Nodes (13): Any, datetime, ZoneInfo, Sugar Calendar (WordPress plugin) scraper library. WordPress sites using Sugar…, Parse 'March 29, 2026at7:00 pm-8:30 pm' or similar., Combine a date with a time string like '7:00 pm'., Fetch the detail page to get location and description., Base class for scrapers targeting Sugar Calendar WordPress sites. Subclasses… (+5 more)
 
@@ -717,17 +967,33 @@ Nodes (9): deliverFresh(), eventsUrl(), findAndObserve(), idbGet(), idbOpen(), i
 Cohesion: 0.15
 Nodes (13): 1. Add Whisper API key as Supabase secret, 2. Extend `capture-event` edge function, 3. Update CaptureDialog.xmlui, 4. Update CaptureDialog icon/label, Audio Input: Implementation Plan (Superseded), Cost Estimate, Current State: Image Capture, Goal (+5 more)
 
+<<<<<<< HEAD
 ### Community 85 - "Timezone Handling"
 Cohesion: 0.22
 Nodes (8): City timezone configuration, Tests, The two ICS timezone conventions, Timezone Handling, TZID inventory in report.json, VTIMEZONE + TZID (per-event), Why both matter, X-WR-TIMEZONE (calendar-level default)
+=======
+### Community 85 - "Event Pipeline"
+Cohesion: 0.22
+Nodes (8): Adding a Feed (ICS URL), Adding a Scraper, Build Pipeline, Cities, Deduplication, Deleting a Feed, Event Pipeline, Source Attribution
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 86 - "supabase/README.md"
 Cohesion: 0.22
 Nodes (8): Expand/Migrate/Contract Pattern, capture-event Edge Function, DDL Schema Snapshot, load-events Edge Function, Migration-First Schema Policy, my-picks Edge Function, Publishable Key Design, RLS-Based Security Model
 
+<<<<<<< HEAD
 ### Community 88 - "DavisChamberScraper"
 Cohesion: 0.18
 Nodes (12): DavisChamberScraper, Any, datetime, Element, ZoneInfo, Parse a single event from XML element., Get text content of a child element., Convert HTML to plain text. (+4 more)
+=======
+### Community 87 - "time"
+Cohesion: 0.21
+Nodes (7): Any, Scraper for Sebastopol Center for the Arts events., Fetch and parse events from the events page., Parse event links from the main page., Parse event details from the event page., SebArtsScraper, time
+
+### Community 88 - "report.py"
+Cohesion: 0.09
+Nodes (28): DavisChamberScraper, Any, datetime, Element, ZoneInfo, Parse a single event from XML element., Get text content of a child element., Convert HTML to plain text. (+20 more)
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 89 - "luma_collection.py"
 Cohesion: 0.25
@@ -746,17 +1012,29 @@ Cohesion: 0.16
 Nodes (12): BuskirkChumleyScraper, Any, Tag, ZoneInfo, Scraper for Buskirk-Chumley Theater., Parse show time from text like 'Doors: 6:30 PM / Show: 7:00 PM'. Returns (hour,…, Fetch events from the events page., # NOTE: Do NOT send Accept-Encoding. The site's CDN (SiteGround (+4 more)
 
 ### Community 94 - "CatsCradleScraper"
+<<<<<<< HEAD
 Cohesion: 0.16
+=======
+Cohesion: 0.15
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 Nodes (11): CatsCradleScraper, main(), Any, datetime, Extract venue slug from event URL., Fetch event detail page and extract JSON-LD Event data., Fall back to RSS entry data when JSON-LD is missing., Parse ISO date string, handling offset formats like -0400 that Python < 3.11… (+3 more)
 
 ### Community 95 - "._parse_block"
 Cohesion: 0.27
 Nodes (5): DumbartonConcertsScraper, Any, datetime, Tag, ZoneInfo
 
+<<<<<<< HEAD
+=======
+### Community 96 - "madams_organ.py"
+Cohesion: 0.43
+Nodes (4): MadamsOrganScraper, Any, datetime, ZoneInfo
+
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 ### Community 97 - "RaleighLittleTheatreScraper"
 Cohesion: 0.16
 Nodes (10): Any, RaleighLittleTheatreScraper, Get current/upcoming show titles and URLs., Scrape a single show page for performance dates., Parse 'March 27 - April 19, 2026' into (start_date, end_date, year)., Parse month name + day into a datetime date., Parse day names into weekday numbers., Parse time strings like '8:00pm' or '1:00pm & 3:00pm'. (+2 more)
 
+<<<<<<< HEAD
 ### Community 99 - "Community Calendar Context"
 Cohesion: 0.22
 Nodes (9): Business Rules, Community Calendar Context, Discovery Philosophy: Complete Coverage, Not Curation, Language, Overview, Scraper Hygiene: Minimize Fetches, Source Attribution Rules, When to Add a Source (+1 more)
@@ -764,6 +1042,27 @@ Nodes (9): Business Rules, Community Calendar Context, Discovery Philosophy: Com
 ### Community 101 - "validate_pr_feeds.py"
 Cohesion: 0.06
 Nodes (50): Bloomington pending_feeds.txt, pending_feeds.txt staging inbox, add_to_pending_feeds(), main(), needs_user_agent(), Check if URL likely needs a User-Agent header., Add the feed URL to cities/{city}/pending_feeds.txt., Generate a filename slug from a URL. (+42 more)
+=======
+### Community 98 - "toronto_meetings.py"
+Cohesion: 0.32
+Nodes (4): Any, datetime, Parse time like '09:30 AM' or '13:30 PM' and combine with date., TorontoMeetingsScraper
+
+### Community 99 - "Community Calendar Context"
+Cohesion: 0.13
+Nodes (15): Build Pipeline (GitHub Actions), Business Rules, Community Calendar Context, Component Relationships, Data Flow: Feed → Database, Data Flow: Scraper → Database, Database Schema (Key Tables), Discovery Philosophy: Complete Coverage, Not Curation (+7 more)
+
+### Community 100 - "elfsight.py"
+Cohesion: 0.33
+Nodes (6): expand_recurring_events(), fetch_elfsight_data(), datetime, Elfsight Event Calendar widget scraper library. Elfsight is a popular…, Fetch event data from Elfsight API. Args: widget_id: The Elfsight widget ID…, Expand a recurring event into individual occurrence datetimes. Args: event:…
+
+### Community 101 - "bench_collapse_long.js"
+Cohesion: 0.07
+Nodes (40): PR Checks workflow, collapseLongRunningEvents content-key cache perf gate, categories, deepEqual(), fs, helpersSrc, main(), path (+32 more)
+
+### Community 102 - "SOURCES_CHECKLIST.md"
+Cohesion: 0.40
+Nodes (4): Discovery Philosophy, Aggregator-to-direct feed graduation, WFHB oblique strategy, Complete coverage over curation
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 103 - "SeeTicketsScraper"
 Cohesion: 0.21
@@ -771,24 +1070,51 @@ Nodes (11): BluebirdScraper, Scraper for The Bluebird Nightclub in Bloomington.,
 
 ### Community 104 - "ai1ec.py"
 Cohesion: 0.21
+<<<<<<< HEAD
 Nodes (11): Ai1ecScraper, _parse_single_time(), Any, ZoneInfo, All-in-One Event Calendar (ai1ec) scraper library. WordPress sites using the…, Parse a single ai1ec event element., Parse time string like 'Mar 28 @ 7:00 pm – 10:00 pm'., Parse a single time like '7:00 pm' or '10:00 pm'. (+3 more)
+=======
+Nodes (11): Ai1ecScraper, _parse_single_time(), Any, ZoneInfo, All-in-One Event Calendar (ai1ec) scraper library. WordPress sites using the…, Fetch and parse events from a single calendar page., Parse a single ai1ec event element., Parse time string like 'Mar 28 @ 7:00 pm – 10:00 pm'. (+3 more)
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 105 - "EScribeScraper"
 Cohesion: 0.23
 Nodes (8): _clean_text(), EScribeScraper, Any, datetime, eScribe meetings calendar scraper base., Reusable scraper for public eScribe meeting calendars., TCDSBMeetingsScraper, TDSBMeetingsScraper
 
+<<<<<<< HEAD
+=======
+### Community 106 - "App Architecture"
+Cohesion: 0.40
+Nodes (4): App Architecture, Local Development, XMLUI Frontend, XMLUI Resources
+
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 ### Community 107 - "studio_montclair.py"
 Cohesion: 0.18
 Nodes (12): main(), _parse_month_day_year(), Any, datetime, Fetch posts from WP REST API and extract events., Remove HTML tags and normalize whitespace., Parse 'January 30, 2026' or 'January 30' into datetime., Scraper for Studio Montclair via WordPress REST API. (+4 more)
 
 ### Community 108 - "MobilizeScraper"
+<<<<<<< HEAD
 Cohesion: 0.09
 Nodes (24): main(), MobilizeScraper, Any, Fetch the organization page and extract all events., Scraper for Mobilize.us organization pages via embedded JSON data., Fetch a URL and return HTML., Extract window.__MLZ_EMBEDDED_DATA__ JSON from HTML., Parse a Mobilize event item into one or more event dicts (one per timeslot). (+16 more)
+=======
+Cohesion: 0.20
+Nodes (8): main(), MobilizeScraper, Any, Fetch the organization page and extract all events., Scraper for Mobilize.us organization pages via embedded JSON data., Fetch a URL and return HTML., Extract window.__MLZ_EMBEDDED_DATA__ JSON from HTML., Parse a Mobilize event item into one or more event dicts (one per timeslot).
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 109 - "TestIcsToJsonParseDatetime"
 Cohesion: 0.12
 Nodes (9): When TZID matches city tz, result should be the same as naive., Tests for scripts/ics_to_json.py parse_ics_datetime., A Z-suffixed UTC time should convert to the city's local timezone., A naive (no Z, no TZID) time should be stamped with city timezone., A naive time during DST should get the DST offset., An all-day event should anchor to midnight in city timezone., BUG DEMONSTRATION: TZID parameter is stripped, city tz used instead. This event…, DESIRED BEHAVIOR: When the raw ICS line includes TZID, use it. This test will… (+1 more)
 
+<<<<<<< HEAD
+=======
+### Community 110 - ".fetch_events"
+Cohesion: 0.50
+Nodes (3): Any, Fetch events from Squarespace JSON API., Parse a single Squarespace event item.
+
+### Community 111 - "SECURITY DEFINER Explained"
+Cohesion: 0.50
+Nodes (4): Required safety measures, SECURITY DEFINER Explained, The antipattern: SECURITY DEFINER on views, Why we use it
+
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 ### Community 114 - "Init"
 Cohesion: 0.25
 Nodes (13): applyDDL(), findRepoRoot(), generatePassword(), Init(), removeNonEssentialWorkflows(), stripScrapeBlocks(), updateWorkflowLocations(), Ask() (+5 more)
@@ -846,14 +1172,23 @@ Cohesion: 0.19
 Nodes (9): Release CLI workflow, .cc-cli-state.json resume support, Separate generated files from source (gh-pages), Build(), Status(), GetCurrentRepo(), main(), printUsage() (+1 more)
 
 ### Community 129 - "generate-calendar.yml workflow"
+<<<<<<< HEAD
 Cohesion: 0.22
 Nodes (14): Cross-source dedupe mergedIds, classify_events_anthropic.py, combine_ics.py, Cross-source dedup, download_feeds.py, export_feeds_txt.py, feeds.txt, Fuzzy dedup clustering (+6 more)
+=======
+Cohesion: 0.18
+Nodes (17): Cross-source dedupe mergedIds, classify_events_anthropic.py, combine_ics.py, Cross-source dedup, download_feeds.py, export_feeds_txt.py, feeds table, feeds.txt (+9 more)
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 130 - "BookmanagerEventsScraper"
 Cohesion: 0.22
 Nodes (8): main(), BookmanagerEventsScraper, Any, ZoneInfo, Generic Bookmanager events scraper base. Bookmanager hosts the storefronts of…, Reusable scraper for Bookmanager-hosted bookstore events pages., POST multipart form to Bookmanager API with the right Origin header., Resolve store_id and session_id by calling the bootstrap endpoints.
 
+<<<<<<< HEAD
 ### Community 131 - "FARCenterScraper"
+=======
+### Community 131 - "far_center.py"
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 Cohesion: 0.24
 Nodes (9): FARCenterScraper, Any, datetime, ZoneInfo, Parse date/time from strings like 'Friday, April 3 | 5:00pm - 8:00pm'., Combine 'April 3' + '5:00pm' into a datetime., Scraper for FAR Center for Contemporary Arts in Bloomington., Fetch events from the FAR Center events list. (+1 more)
 
@@ -873,7 +1208,11 @@ Nodes (13): anthropic_call(), batch_update_categories(), build_few_shot(), class
 Cohesion: 0.21
 Nodes (13): batch_update_categories(), build_few_shot(), classify_one(), fetch_overrides(), main(), Fetch curator overrides as few-shot examples., Build few-shot examples string from curator overrides., Classify a single event via Ollama. (+5 more)
 
+<<<<<<< HEAD
 ### Community 137 - "ChurchInTetonsScraper"
+=======
+### Community 137 - "church_in_tetons.py"
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 Cohesion: 0.24
 Nodes (8): ChurchInTetonsScraper, Any, datetime, ZoneInfo, Parse 'Thursday\\nApril 30' into ('Thursday', 'April', 30)., Parse '6:00 pm - 7:00 pm' or '7:01 pm' into (start, end?)., Find the date that matches `month_name day_num` and the optional weekday hint,…, Scraper for Church in the Tetons (ezChurch).
 
@@ -885,7 +1224,11 @@ Nodes (8): DrupalEventsScraper, main(), Any, Build location string from branch, 
 Cohesion: 0.22
 Nodes (8): main(), MontclairFilmScraper, Any, Discover current films from listing page, then extract screenings., Scraper for Montclair Film showtimes via listing page + JSON-LD subEvents., Fetch a URL and return content., Scrape /all-event/ listing page for currently-showing film URLs., Fetch an event page and extract individual screenings from JSON-LD subEvents.
 
+<<<<<<< HEAD
 ### Community 142 - "TicketmasterScraper"
+=======
+### Community 142 - "ticketmaster.py"
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 Cohesion: 0.19
 Nodes (8): main(), Any, Fetch one page of events from the Discovery API., Fetch all matching events, paginating as needed., Parse a single Ticketmaster event into our event dict format., Scraper for Ticketmaster events via the Discovery API. Supports per-venue…, Build query params for the events endpoint., TicketmasterScraper
 
@@ -894,20 +1237,34 @@ Cohesion: 0.19
 Nodes (8): LibraryScraper, main(), Any, Scrape events from a single page., Parse a single event., Generate default output filename including location., Scraper for library events., Fetch events from the library event pages up to months_ahead.
 
 ### Community 145 - "Agent Strategies for Community Calendar"
+<<<<<<< HEAD
 Cohesion: 0.13
 Nodes (15): Agent Skills, Agent Strategies for Community Calendar, Architecture (Compact), Branch protection, Critical Rules (agents get these wrong), Discovery Philosophy, Git Safety Rules, graphify (+7 more)
+=======
+Cohesion: 0.15
+Nodes (13): Agent Skills, Agent Strategies for Community Calendar, Architecture (Compact), Branch protection, Critical Rules (agents get these wrong), Git Safety Rules, graphify, If origin/main is accidentally overwritten (+5 more)
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 146 - "github.go"
 Cohesion: 0.30
 Nodes (11): CheckExistingFork(), CheckGHInstalled(), DisableNonEssentialWorkflows(), EnablePages(), ForkAndClone(), GetCurrentUser(), RunGH(), SetDefaultRepo() (+3 more)
 
 ### Community 147 - "Community Calendar Curator Guide"
+<<<<<<< HEAD
 Cohesion: 0.10
 Nodes (20): About Aggregators, Blocked Platforms, Community Calendar Curator Guide, Duplicates and Event Ordering, Event Categories, How you work is up to you, Long-Running Events, Monitor the dashboard, act on what matters to you (+12 more)
 
 ### Community 148 - "combine_ics.py (ICS merge, dedup, source attribution)"
 Cohesion: 0.18
 Nodes (12): Fuzzy LLM dedup experiment (abandoned), Global AGGREGATORS list vs per-city policies, Curl-and-done sources (no scraper needed), Public Google Calendar ICS feed, Google Sites pages with embedded Google Calendars, WordPress + Modern Events Calendar ?mec-ical-feed=1, WordPress plugin detection at scale, WordPress + The Events Calendar ?ical=1 ICS (+4 more)
+=======
+Cohesion: 0.08
+Nodes (24): About Aggregators, Blocked Platforms, Community Calendar Curator Guide, Duplicates and Event Ordering, Event Categories, Getting started with a cloud workspace, How you work is up to you, Long-Running Events (+16 more)
+
+### Community 148 - "Curl-and-done sources (no scraper needed)"
+Cohesion: 0.40
+Nodes (6): Curl-and-done sources (no scraper needed), Public Google Calendar ICS feed, Google Sites pages with embedded Google Calendars, WordPress + Modern Events Calendar ?mec-ical-feed=1, WordPress plugin detection at scale, WordPress + The Events Calendar ?ical=1 ICS
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 149 - "Personal Picks"
 Cohesion: 0.13
@@ -917,9 +1274,15 @@ Nodes (17): Admin Access, admin_github_users table, Cross-Source Duplicate Handl
 Cohesion: 0.29
 Nodes (8): BloomingtonArtsTodayScraper, Any, datetime, ZoneInfo, Parse date/time like 'Today•4:00 PM' or 'Tuesday, March 31•7:00 PM'., Scraper for BloomingtonArts.Today., Fetch events from the curated arts calendar., Parse a single event card.
 
+<<<<<<< HEAD
 ### Community 151 - "CarolinaTheatreScraper"
 Cohesion: 0.27
 Nodes (7): CarolinaTheatreScraper, Any, Parse date components and time string into datetime., Scraper for Carolina Theatre Durham events via AJAX endpoint., Fetch events from AJAX endpoint., Parse event cards from AJAX HTML response., Parse a single event card.
+=======
+### Community 151 - "carolina_theatre.py"
+Cohesion: 0.23
+Nodes (8): CarolinaTheatreScraper, Any, datetime, Parse date components and time string into datetime., Scraper for Carolina Theatre Durham events via AJAX endpoint., Fetch events from AJAX endpoint., Parse event cards from AJAX HTML response., Parse a single event card.
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 152 - "DcMusicLiveScraper"
 Cohesion: 0.30
@@ -937,9 +1300,15 @@ Nodes (8): GrowthZoneScraper, main(), Any, Element, Parse a single EventDisplay 
 Cohesion: 0.24
 Nodes (7): main(), MaxPrepsScraper, Any, Scraper for MaxPreps high school athletics., Fetch events from MaxPreps school page., Extract events from __NEXT_DATA__ JSON., Parse a single contest from initSchoolContests.
 
+<<<<<<< HEAD
 ### Community 156 - "MysticTheatreScraper"
 Cohesion: 0.27
 Nodes (7): MysticTheatreScraper, Any, Parse date and time strings into datetime. Date format: "Thu Feb 12" or "Sat…, Scraper for Mystic Theatre Petaluma events., Fetch events from Mystic Theatre calendar page., Parse events from SeeTickets calendar widget HTML., Parse a single event card.
+=======
+### Community 156 - "mystic_theatre.py"
+Cohesion: 0.23
+Nodes (8): MysticTheatreScraper, Any, datetime, Parse date and time strings into datetime. Date format: "Thu Feb 12" or "Sat…, Scraper for Mystic Theatre Petaluma events., Fetch events from Mystic Theatre calendar page., Parse events from SeeTickets calendar widget HTML., Parse a single event card.
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 157 - "shopify_events.py"
 Cohesion: 0.23
@@ -958,12 +1327,21 @@ Cohesion: 0.11
 Nodes (18): Bedework (2 feeds), BiblioCommons (2 feeds), CivicPlus (ical.net) (40 feeds), Detail, Golang ICS (2 feeds), Google Calendar (41 feeds), GrowthZone (5 feeds), ICS Platforms (PRODID Report) (+10 more)
 
 ### Community 163 - "The pipeline, step by step"
+<<<<<<< HEAD
 Cohesion: 0.18
 Nodes (11): Step 1: Source → ICS file, Step 2: ICS files → combined.ics, Step 3: combined.ics → events.json, Step 4: events.json → PostgreSQL, Step 5: PostgreSQL → browser, Step 6: Manual event capture → PostgreSQL, Step 7: Enrichment (curator recurrence) → PostgreSQL, Step 7b: Enrichment expansion in the frontend (+3 more)
 
 ### Community 164 - "Postgres Functions vs Edge Functions"
 Cohesion: 0.10
 Nodes (21): Sources panel no longer depends on get_source_counts RPC, Manage Feeds dialog (RSS icon, admin), My Picks as an event submission system, Edge Functions in This Project, Postgres Functions in This Project, Postgres Functions vs Edge Functions, Required safety measures, SECURITY DEFINER Explained (+13 more)
+=======
+Cohesion: 0.10
+Nodes (19): City timezone configuration, Step 1: Source → ICS file, Step 2: ICS files → combined.ics, Step 3: combined.ics → events.json, Step 4: events.json → PostgreSQL, Step 5: PostgreSQL → browser, Step 6: Manual event capture → PostgreSQL, Step 7: Enrichment (curator recurrence) → PostgreSQL (+11 more)
+
+### Community 164 - "Postgres Functions vs Edge Functions"
+Cohesion: 0.11
+Nodes (20): Feeds table as source of truth (pending_feeds.txt -> feeds -> feeds.txt), Sources panel no longer depends on get_source_counts RPC, Manage Feeds dialog (RSS icon, admin), pending_feeds.txt repo-side intake flow, My Picks as an event submission system, Edge Functions in This Project, Postgres Functions in This Project, Postgres Functions vs Edge Functions (+12 more)
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 165 - "Regression Testing"
 Cohesion: 0.11
@@ -986,8 +1364,13 @@ Cohesion: 0.27
 Nodes (5): DiceApiScraper, main(), Any, Scraper for DICE partner events API, filtered by venue(s) or city., Return the API key, extracting it from the key-url page if needed.
 
 ### Community 170 - "CKANScraper"
+<<<<<<< HEAD
 Cohesion: 0.15
 Nodes (11): CKANScraper, Any, Base scraper for CKAN datastore APIs. Subclasses must set: - ckan_base_url: str…, Convert a CKAN datastore record to an event dict. Return None to skip the…, Optional: return CKAN filters dict to narrow the query., Optional: return sort string for the query., Fetch all records from CKAN datastore, paginating automatically., Any (+3 more)
+=======
+Cohesion: 0.25
+Nodes (7): CKANScraper, Any, Base scraper for CKAN datastore APIs. Subclasses must set: - ckan_base_url: str…, Convert a CKAN datastore record to an event dict. Return None to skip the…, Optional: return CKAN filters dict to narrow the query., Optional: return sort string for the query., Fetch all records from CKAN datastore, paginating automatically.
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 172 - ".build_event"
 Cohesion: 0.36
@@ -1018,8 +1401,13 @@ Cohesion: 0.67
 Nodes (3): Performance Investigation Transcript (Bloomington startup), Client-side processing chain (filterExternalExclusions -> dedupeEvents -> filterHiddenSources -> buildSearchIndex), Main.xmlui (reactive event processing expression)
 
 ### Community 181 - "Documentation Index"
+<<<<<<< HEAD
 Cohesion: 0.15
 Nodes (13): ICS platform inventory, OUR_SCRAPERS, PLATFORM_MAP, scripts/prodid.py, Admin, Architecture & Pipeline, Auto-generated, Discovery & Curation (+5 more)
+=======
+Cohesion: 0.12
+Nodes (16): ICS feed source type (ics_url), Event pipeline, Scraper source type, ICS platform inventory, OUR_SCRAPERS, PLATFORM_MAP, scripts/prodid.py, Admin (+8 more)
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 182 - "Recurrence and Enrichment"
 Cohesion: 0.12
@@ -1049,6 +1437,7 @@ Nodes (3): OCADUScraper, BeautifulSoup, datetime
 Cohesion: 0.24
 Nodes (6): main(), Any, Scraper for Spektrix ticketing API., Fetch JSON from Spektrix API., Fetch events and instances from Spektrix API., SpektrixScraper
 
+<<<<<<< HEAD
 ### Community 189 - "sycamore_land_trust.py"
 Cohesion: 0.27
 Nodes (8): main(), parse_date_time(), Any, datetime, Scraper for Sycamore Land Trust events., Fetch and parse events from the calendar page., Parse date string like 'Saturday, March 29, 9:00 am - 12:00 pm'., SycamoreLandTrustScraper
@@ -1056,6 +1445,15 @@ Nodes (8): main(), parse_date_time(), Any, datetime, Scraper for Sycamore Land T
 ### Community 190 - "Bloomington feeds.txt"
 Cohesion: 0.20
 Nodes (10): Add an event feed (issue template), Events page fallback URL, feed-request issue label, Feeds table is source of truth, Bloomington feeds.txt, feeds.txt auto-generated inventory, Feeds table as source of truth, export_feeds_txt() (+2 more)
+=======
+### Community 189 - "utc_now"
+Cohesion: 0.10
+Nodes (18): CarolinaPerformingArtsScraper, Any, Scraper for Carolina Performing Arts via custom WP REST API., Fetch events from CPA REST API., Parse a single API event object., Return the current absolute instant in UTC., utc_now(), main() (+10 more)
+
+### Community 190 - "Bloomington feeds.txt"
+Cohesion: 0.29
+Nodes (7): Add an event feed (issue template), Events page fallback URL, feed-request issue label, Feeds table is source of truth, Bloomington feeds.txt, feeds.txt auto-generated inventory, Feeds table as source of truth
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 191 - "generate_rss.py"
 Cohesion: 0.38
@@ -1101,11 +1499,19 @@ Nodes (6): CafeFridaScraper, Any, Scraper for Cafe Frida Gallery events., Fetch 
 Cohesion: 0.27
 Nodes (6): CreativeSonomaScraper, Any, Parse 'Feb 21, 2026 at 1:00pm - 4:00pm (Sat)' -> (dtstart, dtend)., Scraper for Creative Sonoma arts events., Fetch events from Creative Sonoma, paginated., Parse a single event from a div.div-one element.
 
+<<<<<<< HEAD
 ### Community 204 - "DukeArtsScraper"
 Cohesion: 0.27
 Nodes (6): DukeArtsScraper, Any, Parse date text into (dtstart, dtend) datetimes., Scraper for Duke Arts via FacetWP HTML parsing., Fetch events from Duke Arts events page., Parse a single article element.
 
 ### Community 205 - "EssexCountyParksScraper"
+=======
+### Community 204 - "duke_arts.py"
+Cohesion: 0.27
+Nodes (6): DukeArtsScraper, Any, Parse date text into (dtstart, dtend) datetimes., Scraper for Duke Arts via FacetWP HTML parsing., Fetch events from Duke Arts events page., Parse a single article element.
+
+### Community 205 - "essex_county_parks.py"
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 Cohesion: 0.28
 Nodes (6): EssexCountyParksScraper, main(), Any, Map CSS class names to human-readable locations., Scraper for Essex County Parks via FullCalendar JSON API., Fetch events from the FullCalendar JSON endpoint.
 
@@ -1117,7 +1523,11 @@ Nodes (4): EtobicokeHortScraper, main(), Any, Scraper for Etobicoke Horticultura
 Cohesion: 0.42
 Nodes (4): FlashScraper, Any, datetime, ZoneInfo
 
+<<<<<<< HEAD
 ### Community 208 - "GreenMusicCenterScraper"
+=======
+### Community 208 - "green_music_center.py"
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 Cohesion: 0.27
 Nodes (6): GreenMusicCenterScraper, Any, Parse '7:30 p.m.' -> (19, 30). Returns (20, 0) as default for evening events., Scraper for Green Music Center events., Fetch events from GMC events page (first page only, static HTML)., Parse a single event_container div.
 
@@ -1173,11 +1583,19 @@ Nodes (8): buildSearchIndex, dedupeEvents, expandEnrichments, filterExternalExcl
 Cohesion: 0.33
 Nodes (6): 1. Search for Feeds, Discovery Searches (find potential sources), Google ICS Discovery (find sites serving actual .ics files), High-Value Searches (do these first), Meetup Deep Dive, Ready-to-Use DuckDuckGo URLs
 
+<<<<<<< HEAD
 ### Community 227 - "barrel_proof.py"
 Cohesion: 0.36
 Nodes (7): event_to_ics(), fetch_page(), main(), parse_events(), Convert event dict to ICS VEVENT, Fetch a URL and return HTML, Parse event data from the homepage HTML
 
 ### Community 228 - "scrape_henhouse"
+=======
+### Community 227 - "wall_clock"
+Cohesion: 0.12
+Nodes (16): event_to_ics(), fetch_page(), main(), parse_events(), Convert event dict to ICS VEVENT, Fetch a URL and return HTML, Parse event data from the homepage HTML, Construct a naive wall-clock datetime in the venue's local zone. Deliberately… (+8 more)
+
+### Community 228 - "henhouse.py"
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 Cohesion: 0.31
 Nodes (8): main(), parse_datetime(), Any, Convert events to ICS format., Parse date strings like 'Saturday, February 14, 2026 • 6-Closing' or 'Every…, Scrape HenHouse events, optionally filtering by location., scrape_henhouse(), to_ics()
 
@@ -1237,6 +1655,7 @@ Nodes (29): Additional Discoveries, Bloomington, IN, CampusGroups, CampusGroups 
 Cohesion: 0.38
 Nodes (3): HTMLParser, get_snippet(), HTMLStripper
 
+<<<<<<< HEAD
 ### Community 248 - "CalTheatreScraper"
 Cohesion: 0.32
 Nodes (5): CalTheatreScraper, Any, Scraper for California Theatre Santa Rosa events., Fetch events using static request or Selenium., Parse events from Wix calendar text content.
@@ -1246,6 +1665,13 @@ Cohesion: 0.32
 Nodes (5): CarolinaPerformingArtsScraper, Any, Scraper for Carolina Performing Arts via custom WP REST API., Fetch events from CPA REST API., Parse a single API event object.
 
 ### Community 250 - "CopperfieldsScraper"
+=======
+### Community 248 - "cal_theatre.py"
+Cohesion: 0.32
+Nodes (5): CalTheatreScraper, Any, Scraper for California Theatre Santa Rosa events., Fetch events using static request or Selenium., Parse events from Wix calendar text content.
+
+### Community 250 - "copperfields.py"
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 Cohesion: 0.32
 Nodes (5): CopperfieldsScraper, Any, Scraper for Copperfield's Books events., Fetch and parse events from the events page., Parse events from the events listing page.
 
@@ -1261,6 +1687,7 @@ Nodes (5): JackLondonParkScraper, Any, Scraper for Jack London State Historic Pa
 Cohesion: 0.38
 Nodes (5): GoDaddyScraper, Any, Base class for scrapers targeting GoDaddy Website Builder calendar widgets.…, Fetch events from GoDaddy calendar API., Parse a single event from the GoDaddy API response.
 
+<<<<<<< HEAD
 ### Community 254 - "MotorcoScraper"
 Cohesion: 0.32
 Nodes (5): MotorcoScraper, Any, Scraper for Motorco Music Hall events from inline FullCalendar data., Fetch events from inline FullCalendar JavaScript data., Extract events from inline FullCalendar JavaScript initialization.
@@ -1269,6 +1696,12 @@ Nodes (5): MotorcoScraper, Any, Scraper for Motorco Music Hall events from inlin
 Cohesion: 0.32
 Nodes (5): Any, Scraper for City of Sonoma calendar., Fetch and parse events from the calendar page., Parse events from the calendar page., SonomaCityScraper
 
+=======
+### Community 254 - "motorco.py"
+Cohesion: 0.32
+Nodes (5): MotorcoScraper, Any, Scraper for Motorco Music Hall events from inline FullCalendar data., Fetch events from inline FullCalendar JavaScript data., Extract events from inline FullCalendar JavaScript initialization.
+
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 ### Community 256 - "SonomaCountyGovScraper"
 Cohesion: 0.32
 Nodes (5): Any, Scraper for Sonoma County Government calendar., Fetch events from the JSON API., Parse a single event from JSON data., SonomaCountyGovScraper
@@ -1277,6 +1710,7 @@ Nodes (5): Any, Scraper for Sonoma County Government calendar., Fetch events fro
 Cohesion: 0.32
 Nodes (5): Any, Scraper for Sonoma County Regional Parks calendar., Fetch and parse events from the calendar page., Parse events from the calendar HTML., SonomaParksScraper
 
+<<<<<<< HEAD
 ### Community 258 - "SVMAScraper"
 Cohesion: 0.32
 Nodes (5): Any, Scraper for Sonoma Valley Museum of Art events., Fetch and parse events from the events page., Parse events from the events page., SVMAScraper
@@ -1284,6 +1718,15 @@ Nodes (5): Any, Scraper for Sonoma Valley Museum of Art events., Fetch and parse
 ### Community 259 - "TheBishopScraper"
 Cohesion: 0.32
 Nodes (5): Any, Scraper for The Bishop Bar in Bloomington., Fetch events from the events page and subsequent months., Fetch events from a single page., TheBishopScraper
+=======
+### Community 258 - "svma.py"
+Cohesion: 0.32
+Nodes (5): Any, Scraper for Sonoma Valley Museum of Art events., Fetch and parse events from the events page., Parse events from the events page., SVMAScraper
+
+### Community 259 - ".fetch_events"
+Cohesion: 0.50
+Nodes (3): Any, Fetch events from the events page and subsequent months., Fetch events from a single page.
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 260 - "toronto_community_housing.py"
 Cohesion: 0.52
@@ -1333,9 +1776,15 @@ Nodes (6): BoardDocs limitation, BoardDocs, City Website Calendars (CivicPlus, e
 Cohesion: 0.40
 Nodes (6): Guild.host scraper, Listing Page + JSON-LD Pattern, Minimize Fetches Principle, Montclair Film scraper, Songkick scraper, Sweetwater scraper
 
+<<<<<<< HEAD
 ### Community 277 - "generate_verify_sql.py"
 Cohesion: 0.47
 Nodes (5): generate_sql(), main(), parse_ddl_files(), Generate the verification SQL., Extract database objects from DDL files.
+=======
+### Community 277 - "timeutil.py"
+Cohesion: 0.15
+Nodes (12): Timezone-safe datetime helpers shared by scrapers and pipeline scripts. The DTZ…, Return today's date in UTC, matching the pipeline's ±1-day tolerance., utc_today(), MetrolinxBoardScraper, date, generate_sql(), main(), parse_ddl_files() (+4 more)
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 278 - "cc-cli"
 Cohesion: 0.25
@@ -1361,15 +1810,22 @@ Nodes (45): 1. City Policy File, 2. Scraper Context, 3. BaseScraper Policy Integ
 Cohesion: 0.60
 Nodes (5): BaseScraper, report.py TZID Inventory, Accepting Both TZ Conventions, VTIMEZONE + TZID, X-WR-TIMEZONE Convention
 
+<<<<<<< HEAD
 ### Community 292 - "Event pipeline"
 Cohesion: 0.29
 Nodes (7): Discovery Philosophy, Event Sources, ICS feed source type (ics_url), Event pipeline, Scraper source type, Source Types, The `feeds` Table
 
+=======
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 ### Community 293 - "Schema.org Event Export"
 Cohesion: 0.29
 Nodes (6): Example output, Fields emitted per event, Schema.org Event Export, Schema.org type mapping, Usage, Validation
 
+<<<<<<< HEAD
 ### Community 297 - "RedwoodCafeScraper"
+=======
+### Community 297 - "redwood_cafe.py"
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 Cohesion: 0.32
 Nodes (5): Any, Scraper for Redwood Cafe Cotati events., Fetch events for current and upcoming months., Parse events from the calendar HTML., RedwoodCafeScraper
 
@@ -1457,9 +1913,15 @@ Nodes (3): WordPress Events Manager (EM), Squarespace ?format=json, WordPress Tr
 Cohesion: 1.00
 Nodes (3): city.conf, Geo-filtering, geocode_cities.py
 
+<<<<<<< HEAD
 ### Community 335 - "LagunitasScraper"
 Cohesion: 0.29
 Nodes (5): LagunitasScraper, Any, Parse '3:30 PM' -> (15, 30)., Scraper for Lagunitas Taproom Petaluma events., Fetch events from Lagunitas taproom page.
+=======
+### Community 335 - "parse_naive_ics"
+Cohesion: 0.14
+Nodes (11): LagunitasScraper, Any, Parse '3:30 PM' -> (15, 30)., Scraper for Lagunitas Taproom Petaluma events., Fetch events from Lagunitas taproom page., parse_naive_ics(), Parse a wall-clock datetime string with a strptime format. Deliberately naive:…, Any (+3 more)
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 338 - "cc-cli TODO"
 Cohesion: 0.40
@@ -1478,8 +1940,13 @@ Cohesion: 0.50
 Nodes (3): Commands, Issue Tracker, Notes
 
 ### Community 345 - "Generate Calendar workflow"
+<<<<<<< HEAD
 Cohesion: 0.20
 Nodes (7): Generate Calendar workflow, ENABLED_CITIES build scope, regenerate_only input, CI build pipeline, main(), parse_args(), corsHeaders
+=======
+Cohesion: 0.25
+Nodes (6): Generate Calendar workflow, ENABLED_CITIES build scope, regenerate_only input, CI build pipeline, main(), parse_args()
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ### Community 356 - "Core requirements"
 Cohesion: 0.17
@@ -1492,11 +1959,16 @@ Nodes (9): Bandsintown limitation, Events Manager (EM), Google Sites with Embedd
 ## Knowledge Gaps
 - **886 isolated node(s):** `github.com/judell/community-calendar/cli`, `community-calendar`, `align-fork.sh script`, `fs`, `path` (+881 more)
   These have ≤1 connection - possible missing edges or undocumented components.
+<<<<<<< HEAD
 - **61 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+=======
+- **60 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
+<<<<<<< HEAD
 - **Why does `BaseScraper` connect `BaseScraper` to `base.py`, `cityspark.py`, `SOURCES_CHECKLIST.md`, `dice.py`, `ThunderTixScraper`, `extract_events_from_blocks`, `jsonld.py`, `EmEventsScraper`, `GuildHostScraper`, `TribeEventsScraper`, `__init__.py`, `movingwriting.py`, `JCCCScraper`, `RssScraper`, `UofTEventsScraper`, `SquarespaceScraper`, `AgaKhanMuseumScraper`, `ComedyAtticScraper`, `SocialPinpointScraper`, `SidearmScraper`, `BibliocommonsEventsScraper`, `ElfsightCalendarScraper`, `TmbccScraper`, `SugarCalendarScraper`, `OccidentalArtsScraper`, `time`, `DavisChamberScraper`, `luma_collection.py`, `BuskirkChumleyScraper`, `CatsCradleScraper`, `._parse_block`, `RaleighLittleTheatreScraper`, `SeeTicketsScraper`, `ai1ec.py`, `EScribeScraper`, `studio_montclair.py`, `MobilizeScraper`, `._parse_paragraph`, `GatherBoardScraper`, `LudusScraper`, `SantaRosaSymphonyScraper`, `VisitSantaRosaScraper`, `BookmanagerEventsScraper`, `FARCenterScraper`, `HistoryCenterScraper`, `ChurchInTetonsScraper`, `DrupalEventsScraper`, `MontclairFilmScraper`, `TicketmasterScraper`, `LibraryScraper`, `._parse_card`, `CarolinaTheatreScraper`, `DcMusicLiveScraper`, `eventbrite_filtered.py`, `GrowthZoneScraper`, `maxpreps.py`, `MysticTheatreScraper`, `shopify_events.py`, `WaterfrontBIAScraper`, `BloomingtonBrewingScraper`, `BossaScraper`, `DiceApiScraper`, `CKANScraper`, `.build_event`, `TribeRestScraper`, `YohomoScraper`, `eventbrite.py`, `asheville_chamber.py`, `BlogToScraper`, `IsMyRotaryClubScraper`, `OCADUScraper`, `SpektrixScraper`, `sycamore_land_trust.py`, `AngasFarmScraper`, `BrownCountyGovScraper`, `CafeFridaScraper`, `CreativeSonomaScraper`, `DukeArtsScraper`, `EssexCountyParksScraper`, `EtobicokeHortScraper`, `FlashScraper`, `GreenMusicCenterScraper`, `KnottyPineScraper`, `OwenCountyLibraryScraper`, `RaptorTrustScraper`, `tvtap.py`, `SquarespaceScraper`, `OpenMikesScraper`, `._parse_item`, `turtle_back_zoo.py`, `WaterfrontTorontoScraper`, `LocalistScraper`, `CalTheatreScraper`, `CarolinaPerformingArtsScraper`, `CopperfieldsScraper`, `HarbordVillageScraper`, `JackLondonParkScraper`, `GoDaddyScraper`, `MotorcoScraper`, `SonomaCityScraper`, `SonomaCountyGovScraper`, `SonomaParksScraper`, `SVMAScraper`, `TheBishopScraper`, `toronto_community_housing.py`, `YoloLibraryScraper`, `songkick.py`, `TheAnnexResidentsAssociationScraper`, `RedwoodCafeScraper`, `CinnabarScraper`, `LagunitasScraper`?**
   _High betweenness centrality (0.444) - this node is a cross-community bridge._
 - **Why does `Discovery Lessons Learned` connect `Discovery Lessons Learned` to `BibliocommonsEventsScraper`, `CKANScraper`, `Curator role (discover and connect sources)`, `"Curl-and-Done" Sources: No Scraper Needed`, `Community Calendar Curator Guide`, `University Event Systems Vary Widely`, `Topical Searches Yield Long-Tail Sources`, `AGENTS.md`?**
@@ -1511,3 +1983,19 @@ _Questions this graph is uniquely positioned to answer:_
   _`EmEventsScraper` has 7 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `github.com/judell/community-calendar/cli`, `community-calendar`, `align-fork.sh script` to the rest of the system?**
   _886 weakly-connected nodes found - possible documentation gaps or missing edges._
+=======
+- **Why does `BaseScraper` connect `BaseScraper` to `cityspark.py`, `simpleview.py`, `dice.py`, `ThunderTixScraper`, `extract_events_from_blocks`, `jsonld.py`, `EmEventsScraper`, `GuildHostScraper`, `TribeEventsScraper`, `__init__.py`, `.create_event`, `JCCCScraper`, `RssScraper`, `UofTEventsScraper`, `SquarespaceScraper`, `AgaKhanMuseumScraper`, `ComedyAtticScraper`, `SocialPinpointScraper`, `SidearmScraper`, `BibliocommonsEventsScraper`, `ElfsightCalendarScraper`, `TmbccScraper`, `sugar_calendar.py`, `OccidentalArtsScraper`, `time`, `report.py`, `luma_collection.py`, `BuskirkChumleyScraper`, `CatsCradleScraper`, `._parse_block`, `RaleighLittleTheatreScraper`, `elfsight.py`, `SeeTicketsScraper`, `ai1ec.py`, `EScribeScraper`, `studio_montclair.py`, `MobilizeScraper`, `._parse_paragraph`, `GatherBoardScraper`, `LudusScraper`, `SantaRosaSymphonyScraper`, `VisitSantaRosaScraper`, `BookmanagerEventsScraper`, `far_center.py`, `HistoryCenterScraper`, `church_in_tetons.py`, `DrupalEventsScraper`, `MontclairFilmScraper`, `ticketmaster.py`, `LibraryScraper`, `._parse_card`, `carolina_theatre.py`, `DcMusicLiveScraper`, `eventbrite_filtered.py`, `GrowthZoneScraper`, `maxpreps.py`, `mystic_theatre.py`, `shopify_events.py`, `WaterfrontBIAScraper`, `BloomingtonBrewingScraper`, `BossaScraper`, `DiceApiScraper`, `CKANScraper`, `.build_event`, `TribeRestScraper`, `YohomoScraper`, `eventbrite.py`, `asheville_chamber.py`, `BlogToScraper`, `IsMyRotaryClubScraper`, `OCADUScraper`, `SpektrixScraper`, `utc_now`, `AngasFarmScraper`, `BrownCountyGovScraper`, `CafeFridaScraper`, `CreativeSonomaScraper`, `duke_arts.py`, `essex_county_parks.py`, `EtobicokeHortScraper`, `FlashScraper`, `green_music_center.py`, `KnottyPineScraper`, `OwenCountyLibraryScraper`, `RaptorTrustScraper`, `tvtap.py`, `SquarespaceScraper`, `wall_clock`, `OpenMikesScraper`, `._parse_item`, `turtle_back_zoo.py`, `WaterfrontTorontoScraper`, `LocalistScraper`, `cal_theatre.py`, `copperfields.py`, `HarbordVillageScraper`, `JackLondonParkScraper`, `GoDaddyScraper`, `motorco.py`, `SonomaCountyGovScraper`, `SonomaParksScraper`, `svma.py`, `toronto_community_housing.py`, `YoloLibraryScraper`, `songkick.py`, `timeutil.py`, `TheAnnexResidentsAssociationScraper`, `redwood_cafe.py`, `CinnabarScraper`, `parse_naive_ics`?**
+  _High betweenness centrality (0.398) - this node is a cross-community bridge._
+- **Why does `Discovery Lessons Learned` connect `Discovery Lessons Learned` to `AGENTS.md`, `BibliocommonsEventsScraper`, `CKANScraper`, `Curator role (discover and connect sources)`, `"Curl-and-Done" Sources: No Scraper Needed`, `Community Calendar Curator Guide`, `University Event Systems Vary Widely`, `Topical Searches Yield Long-Tail Sources`?**
+  _High betweenness centrality (0.061) - this node is a cross-community bridge._
+- **Why does `parse_naive_ics()` connect `parse_naive_ics` to `SonomaCountyGovScraper`, `SonomaParksScraper`, `svma.py`, `far_center.py`, `toronto_community_housing.py`, `srjc_petaluma.py`, `YoloLibraryScraper`, `BaseScraper`, `DrupalEventsScraper`, `ticketmaster.py`, `LibraryScraper`, `timeutil.py`, `JCCCScraper`, `RssScraper`, `combine_ics.py`, `redwood_cafe.py`, `YohomoScraper`, `UofTEventsScraper`, `asheville_chamber.py`, `ics_to_json.py`, `AgaKhanMuseumScraper`, `legistar.py`, `utc_now`, `SocialPinpointScraper`, `SidearmScraper`, `CinnabarScraper`, `CafeFridaScraper`, `CreativeSonomaScraper`, `duke_arts.py`, `KnottyPineScraper`, `sugar_calendar.py`, `time`, `._parse_block`, `madams_organ.py`, `toronto_meetings.py`, `wall_clock`, `henhouse.py`, `elfsight.py`, `turtle_back_zoo.py`, `studio_montclair.py`, `cal_theatre.py`, `LudusScraper`, `JackLondonParkScraper`, `motorco.py`?**
+  _High betweenness centrality (0.047) - this node is a cross-community bridge._
+- **Are the 116 inferred relationships involving `BaseScraper` (e.g. with `AgaKhanMuseumScraper` and `AngasFarmScraper`) actually correct?**
+  _`BaseScraper` has 116 INFERRED edges - model-reasoned connections that need verification._
+- **What connects `github.com/judell/community-calendar/cli`, `community-calendar`, `align-fork.sh script` to the rest of the system?**
+  _886 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `Authentication Setup` be split into smaller, more focused modules?**
+  _Cohesion score 0.14285714285714285 - nodes in this community are weakly interconnected._
+- **Should `BaseScraper` be split into smaller, more focused modules?**
+  _Cohesion score 0.07682926829268293 - nodes in this community are weakly interconnected._
+>>>>>>> 17d76e0d1 (chore(lint): enable DTZ timezone rule group via shared time helpers (#58))

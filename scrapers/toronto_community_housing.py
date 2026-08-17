@@ -13,6 +13,7 @@ from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics
 
 
 def _clean(text: str) -> str:
@@ -46,10 +47,10 @@ class TorontoCommunityHousingScraper(BaseScraper):
         if not m:
             return None, None
         day, start_s, end_s = m.groups()
-        start = datetime.strptime(
+        start = parse_naive_ics(
             f"{day} {start_s.lower().replace('.', '')}", "%A, %B %d, %Y %I:%M %p"
         )
-        end = datetime.strptime(f"{day} {end_s.lower().replace('.', '')}", "%A, %B %d, %Y %I:%M %p")
+        end = parse_naive_ics(f"{day} {end_s.lower().replace('.', '')}", "%A, %B %d, %Y %I:%M %p")
         tz = ZoneInfo(self.timezone)
         return start.replace(tzinfo=tz), end.replace(tzinfo=tz)
 

@@ -18,6 +18,7 @@ from bs4 import BeautifulSoup
 from icalendar import Calendar, Event
 
 sys.path.insert(0, "/home/exedev/community-calendar/scrapers")
+from lib.timeutil import utc_now, wall_clock
 from lib.utils import append_source, fetch_with_retry, generate_uid
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -77,7 +78,7 @@ def parse_event_date(text: str, target_year: int) -> datetime | None:
         day = int(match.group(2))
         month = MONTH_MAP.get(month_str)
         if month:
-            return datetime(target_year, month, day)
+            return wall_clock(target_year, month, day)
 
     return None
 
@@ -286,7 +287,7 @@ def main():
     if args.year and args.month:
         months = [(args.year, args.month)]
     else:
-        now = datetime.now()
+        now = utc_now()
         months = [(now.year, now.month)]
         nxt = (now.replace(day=28) + timedelta(days=4)).replace(day=1)
         months.append((nxt.year, nxt.month))

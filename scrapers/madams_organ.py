@@ -18,6 +18,7 @@ from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
 from lib.rss import RssScraper
+from lib.timeutil import parse_naive_ics
 
 RSS_URL = "https://madamsorgan.com/events/feed/"
 LOCATION = "Madam's Organ Blues Bar, 2461 18th Street NW, Washington, DC 20009"
@@ -65,8 +66,8 @@ class MadamsOrganScraper(RssScraper):
     @staticmethod
     def _parse_datetime(date_str: str, time_str: str, tz: ZoneInfo) -> datetime | None:
         try:
-            base = datetime.strptime(date_str, "%Y-%m-%d")
-            tm = datetime.strptime(time_str.lower(), "%I:%M %p")
+            base = parse_naive_ics(date_str, "%Y-%m-%d")
+            tm = parse_naive_ics(time_str.lower(), "%I:%M %p")
         except ValueError:
             return None
 

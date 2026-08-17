@@ -18,6 +18,7 @@ from zoneinfo import ZoneInfo
 sys.path.insert(0, str(Path(__file__).parent.parent))
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
+from scrapers.lib.timeutil import parse_naive_ics, utc_today
 from scripts.combine_ics import expand_rrules
 from scripts.ics_to_json import extract_field
 from scripts.ics_to_json import parse_ics_datetime as json_parse_dt
@@ -177,7 +178,7 @@ class TestCombineIcsRruleExpansion:
         """Expanded instances should retain DTSTART;TZID= from original."""
         # Anchor relative to today: expand_rrules windows on [today, today+window_days],
         # so hardcoded dates silently drift into the past and yield zero instances.
-        today = date.today()
+        today = utc_today()
         start = today + timedelta(days=7)
         until = today + timedelta(days=60)
         event = _make_weekly_la_event("Weekly Class", "test-rrule@test", start, until)
@@ -198,7 +199,7 @@ class TestCombineIcsRruleExpansion:
         # Anchor around the NEXT US DST spring-forward (2nd Sunday of March — the
         # same rule the VTIMEZONE_LA fixture encodes) so the window always spans
         # the transition, regardless of when the suite runs (hardcoded dates drift).
-        today = date.today()
+        today = utc_today()
         boundary = _next_dst_spring_forward(today)
         # Floor the series start at today: expand_rrules drops pre-today instances,
         # so without the floor a run just before the transition would only see
@@ -221,7 +222,7 @@ class TestCombineIcsRruleExpansion:
         # The window must span the transition — instances on BOTH sides are what
         # make the 190000 assertion meaningful: a wall-clock shift after spring
         # forward is only visible against a pre-transition baseline.
-        inst_dates = [datetime.strptime(b[:8], "%Y%m%d").date() for b in inst]
+        inst_dates = [parse_naive_ics(b[:8], "%Y%m%d").date() for b in inst]
         assert any(d < boundary for d in inst_dates), (
             "no pre-transition instance in window — DST shift untested"
         )

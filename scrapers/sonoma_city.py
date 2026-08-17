@@ -11,12 +11,13 @@ import sys
 sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
-from datetime import datetime, timedelta
+from datetime import timedelta
 from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics, wall_clock
 from lib.utils import DEFAULT_HEADERS, MONTH_MAP
 
 
@@ -82,22 +83,24 @@ class SonomaCityScraper(BaseScraper):
                 if time_match:
                     time_str = f"{time_match.group(1)} {time_match.group(2)}"
                     try:
-                        time_obj = datetime.strptime(time_str, "%I:%M %p")
-                        dt_start = datetime(year, month, day, time_obj.hour, time_obj.minute)
+                        time_obj = parse_naive_ics(time_str, "%I:%M %p")
+                        dt_start = wall_clock(year, month, day, time_obj.hour, time_obj.minute)
                     except ValueError:
-                        dt_start = datetime(year, month, day, 18, 0)
+                        dt_start = wall_clock(year, month, day, 18, 0)
                 elif "all day" in parent_text.lower():
-                    dt_start = datetime(year, month, day, 0, 0)
+                    dt_start = wall_clock(year, month, day, 0, 0)
                 else:
-                    dt_start = datetime(year, month, day, 18, 0)
+                    dt_start = wall_clock(year, month, day, 18, 0)
 
                 # Parse end time
                 end_match = re.search(r"-\s*(\d{1,2}:\d{2})\s*(am|pm)", parent_text, re.IGNORECASE)
                 if end_match:
                     end_time_str = f"{end_match.group(1)} {end_match.group(2)}"
                     try:
-                        end_time_obj = datetime.strptime(end_time_str, "%I:%M %p")
-                        dt_end = datetime(year, month, day, end_time_obj.hour, end_time_obj.minute)
+                        end_time_obj = parse_naive_ics(end_time_str, "%I:%M %p")
+                        dt_end = wall_clock(
+                            year, month, day, end_time_obj.hour, end_time_obj.minute
+                        )
                     except ValueError:
                         dt_end = dt_start + timedelta(hours=2)
                 else:

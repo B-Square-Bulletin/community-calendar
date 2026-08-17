@@ -9,12 +9,12 @@ import sys
 sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
-from datetime import datetime
 from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics
 
 
 class SonomaParksScraper(BaseScraper):
@@ -90,13 +90,9 @@ class SonomaParksScraper(BaseScraper):
                 # Parse the datetime
                 try:
                     date_str = f"{month_name} {day}, {year}"
-                    dt_start = datetime.strptime(
-                        f"{date_str} {start_time_str}", "%B %d, %Y %I:%M %p"
-                    )
+                    dt_start = parse_naive_ics(f"{date_str} {start_time_str}", "%B %d, %Y %I:%M %p")
                     if end_time_str:
-                        dt_end = datetime.strptime(
-                            f"{date_str} {end_time_str}", "%B %d, %Y %I:%M %p"
-                        )
+                        dt_end = parse_naive_ics(f"{date_str} {end_time_str}", "%B %d, %Y %I:%M %p")
                     else:
                         dt_end = dt_start
                 except ValueError as e:

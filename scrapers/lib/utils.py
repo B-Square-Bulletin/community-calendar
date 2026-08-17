@@ -9,6 +9,8 @@ from datetime import datetime
 
 import requests
 
+from .timeutil import wall_clock
+
 logger = logging.getLogger(__name__)
 
 DEFAULT_HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
@@ -103,14 +105,14 @@ def parse_date_flexible(text: str, target_year: int | None = None) -> datetime |
     iso_match = re.search(r"(\d{4})-(\d{2})-(\d{2})", text)
     if iso_match:
         year, month, day = map(int, iso_match.groups())
-        return datetime(year, month, day)
+        return wall_clock(year, month, day)
 
     # MM.DD.YY format
     dot_match = re.search(r"(\d{2})\.(\d{2})\.(\d{2})", text)
     if dot_match:
         month, day, year = map(int, dot_match.groups())
         year = 2000 + year
-        return datetime(year, month, day)
+        return wall_clock(year, month, day)
 
     # "February 3, 2026" or "Feb 3, 2026"
     full_match = re.search(r"([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{4})", text)
@@ -120,7 +122,7 @@ def parse_date_flexible(text: str, target_year: int | None = None) -> datetime |
         year_str = full_match.group(3) or ""
         month_num = MONTH_MAP.get(month_str)
         if month_num:
-            return datetime(int(year_str), month_num, int(day_str))
+            return wall_clock(int(year_str), month_num, int(day_str))
 
     # "Feb 03" - needs target_year
     short_match = re.search(r"([A-Za-z]+)\s+(\d{1,2})", text)
@@ -129,7 +131,7 @@ def parse_date_flexible(text: str, target_year: int | None = None) -> datetime |
         day_str = short_match.group(2) or ""
         month_num = MONTH_MAP.get(month_str)
         if month_num:
-            return datetime(target_year, month_num, int(day_str))
+            return wall_clock(target_year, month_num, int(day_str))
 
     return None
 

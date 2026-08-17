@@ -12,12 +12,13 @@ import sys
 sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
-from datetime import datetime, timedelta
+from datetime import timedelta
 from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics
 
 # Creative Sonoma blocks the standard HEADERS User-Agent
 HEADERS = {
@@ -118,8 +119,8 @@ class CreativeSonomaScraper(BaseScraper):
         if m:
             date_str, start_str, end_str = m.group(1), m.group(2), m.group(3)
             try:
-                dtstart = datetime.strptime(f"{date_str} {start_str}", "%b %d, %Y %I:%M%p")
-                dtend = datetime.strptime(f"{date_str} {end_str}", "%b %d, %Y %I:%M%p")
+                dtstart = parse_naive_ics(f"{date_str} {start_str}", "%b %d, %Y %I:%M%p")
+                dtend = parse_naive_ics(f"{date_str} {end_str}", "%b %d, %Y %I:%M%p")
                 return dtstart, dtend
             except ValueError:
                 pass
@@ -128,7 +129,7 @@ class CreativeSonomaScraper(BaseScraper):
         m = re.match(r"(\w+ \d+, \d{4})\s+at\s+(\d+:\d+\s*[ap]m)", text, re.IGNORECASE)
         if m:
             try:
-                dtstart = datetime.strptime(f"{m.group(1)} {m.group(2)}", "%b %d, %Y %I:%M%p")
+                dtstart = parse_naive_ics(f"{m.group(1)} {m.group(2)}", "%b %d, %Y %I:%M%p")
                 return dtstart, None
             except ValueError:
                 pass
@@ -137,7 +138,7 @@ class CreativeSonomaScraper(BaseScraper):
         m = re.match(r"(\w+ \d+, \d{4})", text)
         if m:
             try:
-                dtstart = datetime.strptime(m.group(1), "%b %d, %Y")
+                dtstart = parse_naive_ics(m.group(1), "%b %d, %Y")
                 return dtstart, None
             except ValueError:
                 pass

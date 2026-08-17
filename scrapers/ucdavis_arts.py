@@ -10,9 +10,8 @@ import sys
 
 sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
-from datetime import datetime
-
 from lib import IcsScraper
+from lib.timeutil import utc_now
 
 
 class UCDavisArtsScraper(IcsScraper):
@@ -26,7 +25,7 @@ class UCDavisArtsScraper(IcsScraper):
     def get_ics_urls(self) -> list[str]:
         """Generate monthly ICS URLs."""
         urls = []
-        now = datetime.now()
+        now = utc_now()
 
         for i in range(self.months_ahead + 1):
             year = now.year + (now.month + i - 1) // 12

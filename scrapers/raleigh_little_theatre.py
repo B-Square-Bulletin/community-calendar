@@ -17,12 +17,13 @@ import sys
 sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
-from datetime import datetime, timedelta
+from datetime import timedelta
 from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.timeutil import wall_clock
 from lib.utils import DEFAULT_HEADERS
 
 # Day name to weekday number (Monday=0)
@@ -289,8 +290,8 @@ class RaleighLittleTheatreScraper(BaseScraper):
             end_month = start_month
 
         try:
-            start_date = datetime(year, start_month, start_day)
-            end_date = datetime(year, end_month, end_day)
+            start_date = wall_clock(year, start_month, start_day)
+            end_date = wall_clock(year, end_month, end_day)
             return start_date, end_date, year
         except ValueError:
             return None
@@ -302,7 +303,7 @@ class RaleighLittleTheatreScraper(BaseScraper):
         if not month:
             return None
         try:
-            return datetime(year, month, int(day_str))
+            return wall_clock(year, month, int(day_str))
         except ValueError:
             return None
 

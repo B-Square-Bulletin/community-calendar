@@ -19,6 +19,7 @@ from zoneinfo import ZoneInfo
 
 import requests
 from lib.base import BaseScraper
+from lib.timeutil import utc_now
 
 
 class DavisChamberScraper(BaseScraper):
@@ -35,7 +36,7 @@ class DavisChamberScraper(BaseScraper):
         events = []
 
         # Fetch current month plus next 6 months
-        now = datetime.now()
+        now = utc_now()
         for month_offset in range(self.months_ahead + 1):
             month_date = now + timedelta(days=month_offset * 30)
             start = month_date.replace(day=1)

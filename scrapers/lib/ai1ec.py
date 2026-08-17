@@ -29,6 +29,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from .base import BaseScraper
+from .timeutil import utc_now
 
 MONTHS = {
     "Jan": 1,
@@ -117,7 +118,7 @@ class Ai1ecScraper(BaseScraper):
 
             month = MONTHS.get(month_el.text.strip(), 0)
             day = int(day_el.text.strip())
-            year = int(year_el.text.strip()) if year_el else datetime.now().year
+            year = int(year_el.text.strip()) if year_el else utc_now().year
 
             events_div = date_group.select_one(".ai1ec-date-events")
             if not events_div:

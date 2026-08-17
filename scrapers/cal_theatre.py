@@ -11,12 +11,13 @@ import sys
 sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
-from datetime import datetime, timedelta
+from datetime import timedelta
 from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics, utc_now
 from lib.utils import DEFAULT_HEADERS
 
 
@@ -90,7 +91,7 @@ class CalTheatreScraper(BaseScraper):
                         continue
 
                     # Try to determine year and month from context
-                    now = datetime.now()
+                    now = utc_now()
                     year = now.year
                     month = now.month
 
@@ -104,7 +105,7 @@ class CalTheatreScraper(BaseScraper):
                     try:
                         month_name = month_names[month - 1]
                         date_str = f"{month_name} {day}, {year}"
-                        dt_start = datetime.strptime(f"{date_str} {time_str}", "%B %d, %Y %I:%M %p")
+                        dt_start = parse_naive_ics(f"{date_str} {time_str}", "%B %d, %Y %I:%M %p")
                     except ValueError:
                         continue
 

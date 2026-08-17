@@ -33,6 +33,7 @@ from zoneinfo import ZoneInfo
 import requests
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.timeutil import wall_clock
 from lib.utils import DEFAULT_HEADERS
 
 MONTHS = [
@@ -191,7 +192,7 @@ class ChurchInTetonsScraper(BaseScraper):
         month_num = MONTHS.index(month_name) + 1
         for year in (now.year, now.year + 1, now.year + 2):
             try:
-                candidate = datetime(year, month_num, day_num).date()
+                candidate = wall_clock(year, month_num, day_num).date()
             except ValueError:
                 continue
             if day_name and candidate.strftime("%A") != day_name:
@@ -201,7 +202,7 @@ class ChurchInTetonsScraper(BaseScraper):
                 continue
             return candidate
         # Last resort: take the first valid date even if weekday mismatched
-        return datetime(now.year, month_num, day_num).date()
+        return wall_clock(now.year, month_num, day_num).date()
 
 
 if __name__ == "__main__":

@@ -38,6 +38,7 @@ from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics
 from lib.utils import DEFAULT_HEADERS
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -164,9 +165,9 @@ class SidearmScraper(BaseScraper):
                 time_str = time_str.replace(".", "").replace(" ", "")
                 try:
                     if ":" in time_str:
-                        t = datetime.strptime(time_str, "%I:%M%p")
+                        t = parse_naive_ics(time_str, "%I:%M%p")
                     else:
-                        t = datetime.strptime(time_str, "%I%p")
+                        t = parse_naive_ics(time_str, "%I%p")
                     dt = dt.replace(hour=t.hour, minute=t.minute)
                 except ValueError:
                     dt = dt.replace(hour=12, minute=0)

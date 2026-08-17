@@ -13,10 +13,12 @@ import urllib.parse
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+from lib.timeutil import parse_naive_ics, utc_now
+
 
 def fetch_events(client, months_ahead=12):
     """Fetch future events from Legistar WebAPI."""
-    today = datetime.now().strftime("%Y-%m-%d")
+    today = utc_now().strftime("%Y-%m-%d")
 
     # OData filter for future events - use literal $ (some Legistar instances reject %24)
     filter_val = urllib.parse.quote(f"EventDate ge datetime'{today}'", safe="'")
@@ -78,7 +80,7 @@ def events_to_ics(events, source_name="Legistar"):
         try:
             # Clean up time string
             time_str = " ".join(event_time.split())  # normalize whitespace
-            dt = datetime.strptime(f"{event_date} {time_str}", "%Y-%m-%d %I:%M %p")
+            dt = parse_naive_ics(f"{event_date} {time_str}", "%Y-%m-%d %I:%M %p")
             dtstart = dt.strftime("%Y%m%dT%H%M%S")
             dtend = (dt + timedelta(hours=2)).strftime("%Y%m%dT%H%M%S")  # Assume 2hr meetings
         except (ValueError, AttributeError):

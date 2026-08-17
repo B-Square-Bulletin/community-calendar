@@ -10,12 +10,13 @@ sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
 import time
-from datetime import datetime, timedelta
+from datetime import timedelta
 from typing import Any
 from urllib.parse import urljoin
 
 from bs4 import BeautifulSoup, Tag
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics
 from lib.utils import fetch_with_retry
 
 
@@ -94,7 +95,7 @@ class SebArtsScraper(BaseScraper):
         date_str = re.sub(r"^[A-Za-z]+,\s*", "", date_str)  # Remove day of week
 
         try:
-            date_obj = datetime.strptime(date_str, "%B %d, %Y")
+            date_obj = parse_naive_ics(date_str, "%B %d, %Y")
         except ValueError:
             return None
 
@@ -103,8 +104,8 @@ class SebArtsScraper(BaseScraper):
             time_str = time_elem.text.strip()
             try:
                 start_time, end_time = time_str.split(" - ")
-                dt_start = datetime.strptime(f"{date_str} {start_time}", "%B %d, %Y %I:%M%p")
-                dt_end = datetime.strptime(f"{date_str} {end_time}", "%B %d, %Y %I:%M%p")
+                dt_start = parse_naive_ics(f"{date_str} {start_time}", "%B %d, %Y %I:%M%p")
+                dt_end = parse_naive_ics(f"{date_str} {end_time}", "%B %d, %Y %I:%M%p")
             except ValueError:
                 dt_start = date_obj
                 dt_end = date_obj + timedelta(days=1)

@@ -22,6 +22,7 @@ from typing import Any
 
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.timeutil import utc_now, wall_clock
 from lib.utils import MONTH_MAP
 
 
@@ -147,7 +148,7 @@ class CarolinaTheatreScraper(BaseScraper):
 
     def _parse_datetime(self, day: int, month: int, time_str: str) -> datetime | None:
         """Parse date components and time string into datetime."""
-        now = datetime.now()
+        now = utc_now()
         year = now.year
 
         # If month is before current month, assume next year
@@ -169,7 +170,7 @@ class CarolinaTheatreScraper(BaseScraper):
                     hour = 0
 
         try:
-            return datetime(year, month, day, hour, minute)
+            return wall_clock(year, month, day, hour, minute)
         except ValueError:
             return None
 

@@ -9,12 +9,12 @@ import sys
 sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
 
 import re
-from datetime import datetime
 from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics
 
 
 class JackLondonParkScraper(BaseScraper):
@@ -119,7 +119,7 @@ class JackLondonParkScraper(BaseScraper):
         year = int(date_match.group(4))
 
         try:
-            date = datetime.strptime(f"{month_name} {day}, {year}", "%B %d, %Y")
+            date = parse_naive_ics(f"{month_name} {day}, {year}", "%B %d, %Y")
         except ValueError:
             self.logger.warning(f"Could not parse date: {month_name} {day}, {year}")
             return None

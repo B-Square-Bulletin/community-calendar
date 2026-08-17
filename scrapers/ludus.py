@@ -51,6 +51,7 @@ from urllib.parse import urlparse
 import requests
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.timeutil import parse_naive_ics
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -144,7 +145,7 @@ class LudusScraper(BaseScraper):
         from zoneinfo import ZoneInfo
 
         try:
-            dt_naive = datetime.strptime(label_text.strip(), _DATE_FMT)
+            dt_naive = parse_naive_ics(label_text.strip(), _DATE_FMT)
             return dt_naive.replace(tzinfo=ZoneInfo(self.timezone))
         except ValueError:
             self.logger.debug(f"Could not parse date string: {label_text!r}")

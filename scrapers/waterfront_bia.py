@@ -11,6 +11,7 @@ from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup, Tag
 from lib.base import BaseScraper
+from lib.timeutil import wall_clock
 
 MONTHS = {
     "january": 1,
@@ -128,7 +129,7 @@ class WaterfrontBIAScraper(BaseScraper):
         if one:
             sh, sm, sap = one.groups()
             start = self._to_24h(int(sh), int(sm or 0), sap)
-            end_dt = datetime(2000, 1, 1, start[0], start[1]) + timedelta(hours=2)
+            end_dt = wall_clock(2000, 1, 1, start[0], start[1]) + timedelta(hours=2)
             return start, (end_dt.hour, end_dt.minute)
 
         return None
