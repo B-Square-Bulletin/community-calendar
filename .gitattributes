@@ -7,7 +7,6 @@
 xmlui/config.json merge=keepours
 cities.json merge=keepours
 cities/*/feeds.txt merge=keepours
-graphify-out/graph.json merge=graphify
 
 # uv-generated artifacts: keep the fork's versions on upstream merges and
 # collapse them in GitHub PR diffs (regenerate with `make export-requirements`).

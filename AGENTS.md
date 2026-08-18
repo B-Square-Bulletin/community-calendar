@@ -136,17 +136,3 @@ python scripts/validate_pipeline.py --cities santarosa --strict
 | [docs/platforms.md](docs/platforms.md)                 | Platform techniques (Drupal, Wix, SeeTickets) and known limitations      |
 | [docs/discovery-lessons.md](docs/discovery-lessons.md) | Real-world discovery lessons and edge cases                              |
 | [docs/curator-guide.md](docs/curator-guide.md)         | Source discovery playbook with topical search categories                 |
-
-## graphify
-
-This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.
-
-**Default first step for codebase questions:** run `graphify query "<question>"` before grepping or browsing source. Use `graphify path "<A>" "<B>"` for relationships and `graphify explain "<concept>"` for focused concepts. These return a scoped subgraph, usually much smaller than GRAPH_REPORT.md or raw grep output.
-
-Only a user-typed `/graphify` (the build/rebuild pipeline) should invoke the installed graphify skill first; codebase Q&A uses `graphify query` above.
-
-Rules:
-- If graphify-out/wiki/index.md exists, use it for broad navigation instead of raw source browsing.
-- Read graphify-out/GRAPH_REPORT.md only for broad architecture review or when query/path/explain do not surface enough context.
-- Dirty graphify-out/ files are expected after hooks or incremental updates; dirty graph files are not a reason to skip graphify. Only skip graphify if the task is about stale or incorrect graph output, or the user explicitly says not to use it.
-- After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).
