@@ -23,7 +23,7 @@ Run **four type checkers** (ty, pyrefly, pyright, zuban in mypy mode) plus **ruf
 3. **Ratcheting complete.** The baseline was driven to zero across `scripts/`, `scrapers/`, and `tests/` with annotations and narrowing only. The repo carries no `# type: ignore` comments, so any future suppression must be justified at the line it silences.
 4. **Not in pre-commit.** The four checkers are project-wide and slow; pre-commit runs only ruff (fast, scoped to staged files), so commits stay quick while the full suite runs via `make lint` and CI.
 
-Configuration for all checkers lives in `pyproject.toml` (`[tool.pyright]`, `[tool.ty]`, `[tool.pyrefly]`, and a `[tool.mypy]` section read by zuban's mypy mode — zuban follows mypy's convention of `[tool.mypy]` in `pyproject.toml`, not a top-level `[mypy]`). All four checkers exclude the same directories (`legacy/`, `graphify-out/`, `.venv`, `.worktrees`) so they cover the same file set. pyright runs `typeCheckingMode = "standard"`; zuban/mypy run with `check_untyped_defs = true` (untyped function bodies are checked, not skipped) and `warn_unused_ignores = true`.
+Configuration for all checkers lives in `pyproject.toml` (`[tool.pyright]`, `[tool.ty]`, `[tool.pyrefly]`, and a `[tool.mypy]` section read by zuban's mypy mode — zuban follows mypy's convention of `[tool.mypy]` in `pyproject.toml`, not a top-level `[mypy]`). All four checkers exclude the same directories (`legacy/`, `.venv`, `.worktrees`) so they cover the same file set. pyright runs `typeCheckingMode = "standard"`; zuban/mypy run with `check_untyped_defs = true` (untyped function bodies are checked, not skipped) and `warn_unused_ignores = true`.
 
 ### Type stubs
 
