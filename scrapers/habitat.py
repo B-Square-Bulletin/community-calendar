@@ -10,7 +10,7 @@ from zoneinfo import ZoneInfo
 import requests
 from bs4 import BeautifulSoup
 
-sys.path.insert(0, str(__file__).rsplit("/", 2)[0])
+sys.path.insert(0, __file__.rsplit("/", 2)[0])
 from lib.base import BaseScraper
 
 MONTHS = {

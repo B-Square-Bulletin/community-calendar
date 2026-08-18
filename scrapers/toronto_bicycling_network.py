@@ -5,7 +5,7 @@ import sys
 from datetime import timedelta
 from typing import ClassVar
 
-sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
+sys.path.insert(0, __file__.rsplit("/", 1)[0])
 
 from lib.wild_apricot_rss import WildApricotRssScraper
 

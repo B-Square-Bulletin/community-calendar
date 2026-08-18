@@ -6,7 +6,7 @@ https://jacklondonpark.com/events/
 
 import sys
 
-sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
+sys.path.insert(0, __file__.rsplit("/", 1)[0])
 
 import re
 from typing import Any

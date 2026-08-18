@@ -9,7 +9,7 @@ Usage:
 
 import sys
 
-sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
+sys.path.insert(0, __file__.rsplit("/", 1)[0])
 
 from typing import Any
 
@@ -30,7 +30,7 @@ class SpreckelsScraper(BaseScraper):
 
     def fetch_events(self) -> list[dict[str, Any]]:
         """Fetch events from Tribe Events Calendar REST API."""
-        params = {
+        params: dict[str, str | int] = {
             "start_date": "2025-01-01",
             "per_page": 50,
         }

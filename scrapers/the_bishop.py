@@ -9,11 +9,12 @@ from zoneinfo import ZoneInfo
 
 import requests
 import urllib3
+import urllib3.exceptions
 from bs4 import BeautifulSoup
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-sys.path.insert(0, str(__file__).rsplit("/", 2)[0])
+sys.path.insert(0, __file__.rsplit("/", 2)[0])
 from lib.base import BaseScraper  # noqa: E402
 from lib.timeutil import utc_now  # noqa: E402
 

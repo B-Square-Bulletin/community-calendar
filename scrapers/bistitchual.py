@@ -9,7 +9,7 @@ from datetime import date, datetime, timedelta
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
-sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
+sys.path.insert(0, __file__.rsplit("/", 1)[0])
 
 from lib.base import BaseScraper
 

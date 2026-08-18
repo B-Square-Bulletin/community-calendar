@@ -8,7 +8,7 @@ WordPress site with The Events Calendar plugin - provides ICS feed.
 
 import sys
 
-sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
+sys.path.insert(0, __file__.rsplit("/", 1)[0])
 
 from lib import IcsScraper
 

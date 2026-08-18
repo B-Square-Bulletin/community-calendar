@@ -8,7 +8,7 @@ CampusGroups platform provides a full ICS feed of all campus events.
 
 import sys
 
-sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
+sys.path.insert(0, __file__.rsplit("/", 1)[0])
 
 from typing import Any
 

@@ -7,7 +7,7 @@ https://open.toronto.ca/dataset/city-council-and-committees-meeting-schedule-rep
 
 import sys
 
-sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
+sys.path.insert(0, __file__.rsplit("/", 1)[0])
 
 from datetime import datetime
 from typing import Any

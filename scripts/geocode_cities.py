@@ -53,7 +53,7 @@ def geocode(city_name, state="CA", calendar=None, cache=None):
     # Rate limit: 1 request per second for Nominatim
     time.sleep(1.1)
 
-    params = {
+    params: dict[str, str | int] = {
         "q": f"{city_name}, {state}, USA",
         "format": "json",
         "limit": 1,

@@ -36,7 +36,7 @@ def _clean_text(value: Any) -> str:
     return text.replace("\xa0", " ").strip()
 
 
-sys.path.insert(0, str(__file__).rsplit("/", 2)[0])
+sys.path.insert(0, __file__.rsplit("/", 2)[0])
 from scrapers.lib.base import BaseScraper  # noqa: E402, I001
 
 

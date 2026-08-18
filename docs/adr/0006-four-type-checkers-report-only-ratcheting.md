@@ -6,7 +6,10 @@ Date: 2026-08-09
 
 Accepted. The phased rollout completed 2026-08-12 (issue #60): the type-checker
 baseline is clean across `scripts/`, `scrapers/`, and `tests/`, and all four
-checkers gate in `make lint` and the PR CI `lint` job.
+checkers gate in `make lint` and the PR CI `lint` job. On 2026-08-17 the
+pyrefly *warning* baseline (174 warn-severity findings: `str(__file__)` in the
+scraper `sys.path` boilerplate, and `untyped-import` on `requests`) was driven
+to zero, and pyrefly now gates on warnings as well as errors.
 
 ## Context
 
@@ -19,7 +22,7 @@ We wanted formatting and linting enforced locally and (eventually) in CI, but we
 Run **four type checkers** (ty, pyrefly, pyright, zuban in mypy mode) plus **ruff** (format + lint), with a phased enforcement policy that is now complete:
 
 1. **Ruff gates.** `make lint` fails on `ruff format` and `ruff check` violations. `legacy/` is excluded (abandoned code).
-2. **Type checkers gate.** `make lint` runs all four checkers and fails on any diagnostics. PR CI runs the same strict target (`make lint`) in the `lint` job, so an introduced finding fails that job. The checkers were report-only during the ratchet (phase 1) and flipped to gating once the baseline reached zero. After the flip, the strictness settings were tightened — pyright moved from `basic` to `standard` (zero new findings), and zuban/mypy turn on `check_untyped_defs` so the bodies of unannotated functions are checked instead of silently skipped. Marking `lint` as a *required* branch-protection check is a post-merge follow-up (issue #60, ticket 09); until then the job runs and reports but is not a merge gate.
+2. **Type checkers gate.** `make lint` runs all four checkers and fails on any diagnostics. pyrefly additionally runs with `--min-severity warn`, so its warn-level findings (e.g. `unnecessary-type-conversion`, `untyped-import`) gate as strictly as errors. PR CI runs the same strict target (`make lint`) in the `lint` job, so an introduced finding fails that job. The checkers were report-only during the ratchet (phase 1) and flipped to gating once the baseline reached zero. After the flip, the strictness settings were tightened — pyright moved from `basic` to `standard` (zero new findings), and zuban/mypy turn on `check_untyped_defs` so the bodies of unannotated functions are checked instead of silently skipped. Marking `lint` as a *required* branch-protection check is a post-merge follow-up (issue #60, ticket 09); until then the job runs and reports but is not a merge gate.
 3. **Ratcheting complete.** The baseline was driven to zero across `scripts/`, `scrapers/`, and `tests/` with annotations and narrowing only. The repo carries no `# type: ignore` comments, so any future suppression must be justified at the line it silences.
 4. **Not in pre-commit.** The four checkers are project-wide and slow; pre-commit runs only ruff (fast, scoped to staged files), so commits stay quick while the full suite runs via `make lint` and CI.
 
@@ -27,7 +30,7 @@ Configuration for all checkers lives in `pyproject.toml` (`[tool.pyright]`, `[to
 
 ### Type stubs
 
-The dev group includes typeshed stub packages for the scraper backbone libraries that the codebase actually imports — `types-pytz` and `types-icalendar` — so the checkers see real types for `pytz` and `icalendar` instead of opaque `Any`. `types-beautifulsoup4` was dropped: bs4 4.13+ ships inline type hints (and the separate stub only tracks the 4.12 line), so the checkers resolve `bs4` from the package itself. `types-lxml` is not added because nothing imports lxml.
+The dev group includes typeshed stub packages for the scraper backbone libraries that the codebase actually imports — `types-pytz`, `types-icalendar`, and `types-requests` (which pulls in `types-urllib3`) — so the checkers see real types for `pytz`, `icalendar`, and `requests` instead of opaque `Any`. The 53 `untyped-import` findings that motivated `types-requests` also surfaced one collateral: `urllib3.exceptions` is not imported explicitly in `scrapers/the_bishop.py`, so it is loaded implicitly by `urllib3` itself; the fix was to `import urllib3.exceptions` explicitly. `types-beautifulsoup4` was dropped: bs4 4.13+ ships inline type hints (and the separate stub only tracks the 4.12 line), so the checkers resolve `bs4` from the package itself. `types-lxml` is not added because nothing imports lxml.
 
 The `lxml` and `html5lib` runtime dependencies are likewise unused and removed: every scraper parses with `BeautifulSoup(..., "html.parser")`, and no Python file imports either package. This is a deliberate fork divergence from upstream, whose `scripts/local_build.py` references lxml. `lxml-stubs` and `types-html5lib` went away with the runtime deps they typed. (`feedparser` and `recurring-ical-events` have no typeshed stubs or inline hints, so they remain `Any`; `anthropic` ships inline hints, so the checkers resolve it from the package itself.)
 

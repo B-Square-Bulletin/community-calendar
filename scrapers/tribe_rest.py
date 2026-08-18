@@ -23,7 +23,7 @@ Pagination is automatic. By default fetches up to 6 months ahead
 
 import sys
 
-sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
+sys.path.insert(0, __file__.rsplit("/", 1)[0])
 
 import argparse
 import contextlib

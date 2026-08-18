@@ -70,7 +70,7 @@ class BookmanagerEventsScraper(BaseScraper):
         url = f"{self.api_base}{endpoint}?_cb={self.san}"
         # requests.post with files= forces multipart/form-data encoding even for
         # plain string fields, which matches what the SPA sends.
-        files = {k: (None, str(v)) for k, v in params.items()}
+        files = {k: (None, v) for k, v in params.items()}
         headers = dict(self.headers)
         headers["Origin"] = f"https://{self.domain}"
         headers["Referer"] = f"https://{self.domain}/events"

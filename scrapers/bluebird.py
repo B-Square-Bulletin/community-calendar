@@ -3,7 +3,7 @@
 
 import sys
 
-sys.path.insert(0, str(__file__).rsplit("/", 2)[0])
+sys.path.insert(0, __file__.rsplit("/", 2)[0])
 from lib.seetickets import SeeTicketsScraper
 
 
