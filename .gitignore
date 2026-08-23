@@ -15,6 +15,7 @@ PENDING.md
 .env
 .env.*
 !.env.example
+.envrc
 sb.sh
 local-overrides.js
 
@@ -41,15 +42,29 @@ xmlui/config.local.js
 # Personal agentic files (fork-specific, not for upstream)
 .pi/
 
-.env
-.envrc
-
 # Local DB Backups
 backups/
 
-# Generated at build/commit time — always diverges across forks
-report.json
+# Generated at build/commit time — always diverges across forks.
+# Anchored to the root: the per-city slices under report/<city>/ ARE
+# committed (the workflow's git add report/ publishes them to Pages).
+/report.json
 xmlui/version.txt
+
+# Bram / Claude Code machine-local state (Setup-managed, never committed;
+# CLAUDE.md above is the same class)
+.claude/
+resources/
+xmlui/.claude/
+xmlui/resources/
+
+# Local audit runner outputs (regenerate with scripts/local_build.py)
+local-build-report.json
+local-build.log
+local-feed-report.json
+local-validation-report.json
+
+# Git worktrees (fork development)
 .worktrees
 
 # Graphify (local-only; do not commit)

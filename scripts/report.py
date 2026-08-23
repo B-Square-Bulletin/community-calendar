@@ -42,6 +42,12 @@ def get_city_timezone(city):
 DROP_THRESHOLD = 0.5  # 50% drop from previous
 MIN_EVENTS_FOR_DROP = 5  # Only flag drops if previous had at least this many
 
+# History bounds (bound-archive-branch-growth): anomaly detection needs
+# one prior data point and the per-city report sparklines use 30, so 90
+# daily entries per feed and 180 days of anomaly log are generous.
+MAX_FEED_HISTORY = 90
+MAX_ANOMALY_DAYS = 180
+
 
 def count_future_events_in_ics(filepath: Path) -> tuple[int, str | None]:
     """Count VEVENT entries with future DTSTART in an ICS file."""
@@ -98,7 +104,7 @@ def detect_anomalies(feed_name: str, current: int, history: list[dict]) -> list[
             {
                 "type": "zero_events",
                 "message": f"Feed returned 0 events (was {prev_count})",
-                "severity": "high",
+                "severity": "info",
             }
         )
     elif prev_count >= MIN_EVENTS_FOR_DROP and current < prev_count:
@@ -113,6 +119,28 @@ def detect_anomalies(feed_name: str, current: int, history: list[dict]) -> list[
             )
 
     return anomalies
+
+
+def classify_ics_content(filepath: Path) -> str:
+    """Classify what a feed file actually contains, so a zero count
+    carries a cause: 'not_ics:html' / 'not_ics:json' / 'not_ics:empty'
+    (broken/blocked), 'quiet' (valid calendar, no future events), or
+    'ok' (has future events — callers only ask for zero-count feeds)."""
+    try:
+        with Path(filepath).open(encoding="utf-8", errors="ignore") as f:
+            content = f.read()
+    except OSError:
+        return "unreadable"
+    if "BEGIN:VCALENDAR" not in content:
+        head = content[:512].lstrip().lower()
+        if not head:
+            return "not_ics:empty"
+        if head.startswith(("<!doctype", "<html")) or "<html" in head:
+            return "not_ics:html"
+        if head.startswith(("{", "[")):
+            return "not_ics:json"
+        return "not_ics:unknown"
+    return "quiet"
 
 
 def load_report(report_path: str) -> dict:
@@ -182,11 +210,16 @@ def update_report(cities: list[str], report_path: str = "report.json"):
             entry = {"date": today, "count": count}
             if error:
                 entry["error"] = error
+            if count == 0 and not error:
+                feed_data["content"] = classify_ics_content(ics_path)
+            else:
+                feed_data.pop("content", None)
 
             if feed_data["history"] and feed_data["history"][-1]["date"] == today:
                 feed_data["history"][-1] = entry
             else:
                 feed_data["history"].append(entry)
+            feed_data["history"] = feed_data["history"][-MAX_FEED_HISTORY:]
 
         # Remove feeds from report that no longer have .ics files
         current_basenames = {p.name.replace(".ics", "") for p in Path(city_dir).glob("*.ics")} - {
@@ -205,6 +238,11 @@ def update_report(cities: list[str], report_path: str = "report.json"):
         key = (a["city"], a["feed"], a["type"])
         if key not in existing_today:
             report["anomalies"].append(a)
+
+    anomaly_cutoff = (utc_today() - timedelta(days=MAX_ANOMALY_DAYS)).isoformat()
+    report["anomalies"] = [
+        a for a in report["anomalies"] if (a.get("date") or "") >= anomaly_cutoff
+    ]
 
     # URL quality analysis from events.json
     for city in cities:
@@ -323,6 +361,13 @@ def update_report(cities: list[str], report_path: str = "report.json"):
         except (FileNotFoundError, json.JSONDecodeError):
             report["cities"][city].pop("geo_filtered", None)
 
+        prev_build: dict[str, Any] = report["cities"][city].get("build") or {}
+        report["cities"][city]["build"] = {
+            "generated": now,
+            "total_events": len(events),
+            "prev_total_events": prev_build.get("total_events"),
+        }
+
         report["cities"][city]["url_quality"] = {
             "total_with_url": total,
             "total_events": len(events),
@@ -354,10 +399,16 @@ def update_report(cities: list[str], report_path: str = "report.json"):
             if "T" not in st:
                 continue
             src = e.get("source", "unknown")
+            # Honor UTC offsets: a correct instant expressed in another
+            # zone (e.g. an Eventbrite feed emitting Eastern) must be
+            # judged by its hour in the city's timezone, not the raw
+            # string hour. Naive timestamps keep the raw-hour reading.
             try:
-                hour = int(st[11:13])
-                minute = int(st[14:16])
-            except (ValueError, IndexError):
+                dt = datetime.fromisoformat(st.replace("Z", "+00:00"))
+                if dt.tzinfo is not None:
+                    dt = dt.astimezone(tz)
+                hour, minute = dt.hour, dt.minute
+            except ValueError:
                 continue
             events_by_source.setdefault(src, []).append(
                 {
@@ -456,6 +507,18 @@ def update_report(cities: list[str], report_path: str = "report.json"):
                 "tzids": inventory,
             }
 
+    # Prune cities that no longer exist in cities.json so retired
+    # cities stop lingering in the aggregate forever.
+    cities_json = Path(__file__).parent.parent / "cities.json"
+    try:
+        active_cities = set(json.loads(cities_json.read_text()).keys())
+    except (OSError, json.JSONDecodeError):
+        active_cities = None
+    if active_cities:
+        for stale in [c for c in report["cities"] if c not in active_cities]:
+            del report["cities"][stale]
+        report["anomalies"] = [a for a in report["anomalies"] if a.get("city") in active_cities]
+
     report["generated"] = now
 
     save_report(report, report_path)
@@ -471,8 +534,27 @@ def update_report(cities: list[str], report_path: str = "report.json"):
             print(f"  [{a['severity']}] {a['city']}/{a['feed']}: {a['message']}")
 
 
+def classify_log_issue(message: str, level: str) -> str:
+    text = message.lower()
+    if "the following arguments are required" in text or "unrecognized arguments" in text:
+        return "arg_error"
+    if "http error" in text or "client error" in text:
+        return "http_error"
+    if "failed to resolve" in text or "name or service not known" in text:
+        return "dns_error"
+    if "connectionerror" in text or "connection refused" in text or "connection reset" in text:
+        return "connection_error"
+    if "timed out" in text or "timeout" in text:
+        return "timeout"
+    if "broken property" in text or "error parsing vevent" in text:
+        return "parse_warning"
+    if "traceback" in text:
+        return "traceback"
+    return "warning" if level == "warning" else "error"
+
+
 def parse_build_errors(log_path: str) -> list[dict]:
-    """Parse build.log for error patterns. Returns list of error dicts."""
+    """Parse build.log for source-level error and warning issues."""
     try:
         with Path(log_path).open(encoding="utf-8", errors="ignore") as f:
             lines = f.readlines()
@@ -482,7 +564,27 @@ def parse_build_errors(log_path: str) -> list[dict]:
     errors = []
     today = utc_today().isoformat()
 
-    # Patterns that indicate errors
+    structured_log_pattern = re.compile(
+        r"^\[(?P<city>[^\]]+)\]\[(?P<phase>[^\]]+)\]\s+"
+        r"(?P<timestamp>\d{4}-\d{2}-\d{2} [^ ]+)?"
+        r"(?:\s+-\s+)?(?P<logger>[A-Za-z0-9_]+)\s+-\s+"
+        r"(?P<level>ERROR|WARNING)\s+-\s+(?P<message>.*)$"
+    )
+
+    # local_build.py brackets each command's output with RUN/EXIT marker lines
+    # labeled by the source's display name. Attributing issues to the active
+    # RUN label keeps errors from a shared scraper script (one script, many
+    # sources) tied to the specific source that logged them instead of being
+    # matched to every source using that script.
+    run_marker_pattern = re.compile(
+        r"^\[(?P<city>[^\]]+)\]\[(?P<phase>[^\]]+)\]\s+RUN\s+(?P<label>.+)$"
+    )
+    exit_marker_pattern = re.compile(
+        r"^\[(?P<city>[^\]]+)\]\[(?P<phase>[^\]]+)\]\s+EXIT\s+-?\d+\s+(?P<label>.+)$"
+    )
+    active_run_label = None
+
+    # Legacy patterns that indicate issues
     error_patterns = [
         re.compile(r"error: the following arguments are required", re.IGNORECASE),
         re.compile(r"HTTP Error \d+", re.IGNORECASE),
@@ -498,6 +600,38 @@ def parse_build_errors(log_path: str) -> list[dict]:
     i = 0
     while i < len(lines):
         line = lines[i].rstrip()
+
+        run_match = run_marker_pattern.match(line)
+        if run_match:
+            active_run_label = run_match.group("label").strip()
+            i += 1
+            continue
+        exit_match = exit_marker_pattern.match(line)
+        if exit_match:
+            active_run_label = None
+            i += 1
+            continue
+
+        structured_match = structured_log_pattern.match(line)
+        if structured_match:
+            level = structured_match.group("level").lower()
+            logger = structured_match.group("logger")
+            message = structured_match.group("message")
+            errors.append(
+                {
+                    "date": today,
+                    "line": line.strip(),
+                    "city": structured_match.group("city"),
+                    "phase": structured_match.group("phase"),
+                    "logger": logger,
+                    "source": active_run_label or logger.removesuffix("Scraper"),
+                    "level": level,
+                    "issue_type": classify_log_issue(message, level),
+                    "message": message,
+                }
+            )
+            i += 1
+            continue
 
         # Check for traceback blocks
         if "Traceback (most recent call last)" in line:
@@ -520,7 +654,15 @@ def parse_build_errors(log_path: str) -> list[dict]:
                 if m:
                     source = m.group(1).replace(".py", "")
 
-            errors.append({"date": today, "line": last_error_line, "source": source})
+            errors.append(
+                {
+                    "date": today,
+                    "line": last_error_line,
+                    "source": active_run_label or source,
+                    "level": "error",
+                    "issue_type": "traceback",
+                }
+            )
             i = j + 1
             continue
 
@@ -538,7 +680,15 @@ def parse_build_errors(log_path: str) -> list[dict]:
                     if m:
                         source = m.group(1).replace(".py", "")
 
-                errors.append({"date": today, "line": line.strip(), "source": source})
+                errors.append(
+                    {
+                        "date": today,
+                        "line": line.strip(),
+                        "source": active_run_label or source,
+                        "level": "error",
+                        "issue_type": classify_log_issue(line, "error"),
+                    }
+                )
                 break
 
         i += 1
@@ -547,12 +697,275 @@ def parse_build_errors(log_path: str) -> list[dict]:
     seen = set()
     unique = []
     for e in errors:
-        key = (e["line"], e["source"])
+        key = (e["line"], e.get("source"), e.get("level"))
         if key not in seen:
             seen.add(key)
             unique.append(e)
 
     return unique
+
+
+def parse_feeds_reference(city: str) -> dict:
+    """Map feed stems to their source using the generated read-only
+    cities/<city>/feeds.txt, so report problems can carry a
+    reproduction command (curl for live feeds, the registered command
+    for scrapers)."""
+    path = Path(__file__).parent.parent / "cities" / city / "feeds.txt"
+    ref: dict[str, dict[str, Any]] = {}
+    if not path.exists():
+        return ref
+    try:
+        from feed_slug import slugify
+    except ImportError:
+        return ref
+    pending_name = None
+    pending_cmd = None
+    for raw in path.read_text().splitlines():
+        line = raw.strip()
+        if line.startswith("# cmd:"):
+            pending_cmd = line[len("# cmd:") :].strip()
+            continue
+        if line.startswith("#"):
+            body = line.lstrip("# ").split(" | ")[0].strip()
+            if body and not line.startswith("# ---"):
+                pending_name = body
+            continue
+        if line.startswith("http"):
+            ref[slugify(line)] = {"kind": "feed", "name": pending_name or "", "url": line}
+            pending_name = pending_cmd = None
+        elif line.startswith("cities/") and line.endswith(".ics"):
+            ref[Path(line).stem] = {
+                "kind": "scraper",
+                "name": pending_name or "",
+                "cmd": pending_cmd,
+            }
+            pending_name = pending_cmd = None
+        else:
+            pending_name = pending_cmd = None
+    return ref
+
+
+def _norm_key(text):
+    return re.sub(r"[^a-z0-9]+", "", (text or "").lower())
+
+
+def build_city_slice(report: dict, city: str, prev_error_lines: set) -> dict:
+    """Assemble the per-city report slice: last-build status, ranked
+    action items answering "has a feed gone silent (and why)", "are
+    there new errors", "are there tz anomalies" — plus the full detail
+    sections for drill-down."""
+    data = report["cities"].get(city, {})
+    feeds = data.get("feeds", {})
+    stems = {_norm_key(name) for name in feeds}
+
+    def error_matches_city(e):
+        if e.get("city") == city:
+            return True
+        src = _norm_key(e.get("source"))
+        return bool(src) and src in stems
+
+    errors = [e for e in report.get("errors", []) if error_matches_city(e)]
+    new_errors = [e for e in errors if e.get("line") not in prev_error_lines]
+    ongoing_errors = [e for e in errors if e.get("line") in prev_error_lines]
+
+    silent = []
+    for name, fd in sorted(feeds.items()):
+        hist = fd.get("history", [])
+        if not hist or hist[-1].get("count") != 0 or hist[-1].get("error"):
+            continue
+        was_count, was_date = None, None
+        for h in reversed(hist):
+            if h.get("count"):
+                was_count, was_date = h["count"], h["date"]
+                break
+        since = hist[-1]["date"]
+        for h in reversed(hist):
+            if h.get("count") == 0 and not h.get("error"):
+                since = h["date"]
+            else:
+                break
+        silent.append(
+            {
+                "feed": name,
+                "was": was_count,
+                "was_date": was_date,
+                "silent_since": since,
+                "content": fd.get("content", "quiet"),
+            }
+        )
+
+    week_ago = (utc_today() - timedelta(days=7)).isoformat()
+    recent_anoms = [
+        a
+        for a in report.get("anomalies", [])
+        if a.get("city") == city and (a.get("date") or "") >= week_ago
+    ]
+    tz = data.get("tz_anomalies", [])
+    ref = parse_feeds_reference(city)
+
+    def repro_for(stem):
+        src = ref.get(stem)
+        if not src:
+            return None
+        if src["kind"] == "feed":
+            return {
+                "display": src.get("name") or stem,
+                "source": src["url"],
+                "command": f"curl -sL -A 'Mozilla/5.0' '{src['url']}' | grep -c 'BEGIN:VEVENT'",
+            }
+        return {
+            "display": src.get("name") or stem,
+            "source": src.get("cmd"),
+            "command": src.get("cmd"),
+        }
+
+    def _was_phrase(s):
+        if s.get("was") is None:
+            return "no good build in recorded history"
+        return f"was {s['was']} events on {s['was_date']}"
+
+    items: list[dict[str, Any]] = []
+    for e in new_errors:
+        stem = _norm_key(e.get("source"))
+        match = next((n for n in feeds if _norm_key(n) == stem), None)
+        items.append(
+            {
+                "severity": 1,
+                "kind": "new_error",
+                "title": f"New error: {e.get('source') or e.get('feed') or 'build'}",
+                "detail": (e.get("message") or e.get("line") or "")[:300],
+                "feed": match,
+                "repro": repro_for(match) if match else None,
+            }
+        )
+    for s in silent:
+        if str(s["content"]).startswith("not_ics"):
+            kind = str(s["content"]).split(":", 1)[-1]
+            items.append(
+                {
+                    "severity": 1,
+                    "kind": "broken_feed",
+                    "title": f"{s['feed']} is serving {kind}, not ICS",
+                    "detail": f"{_was_phrase(s)}; broken since {s['silent_since']}",
+                    "feed": s["feed"],
+                    "repro": repro_for(s["feed"]),
+                }
+            )
+    newly_zero = {a.get("feed") for a in recent_anoms if a.get("type") == "zero_events"}
+    for s in silent:
+        if not str(s["content"]).startswith("not_ics") and s["feed"] in newly_zero:
+            items.append(
+                {
+                    "severity": 2,
+                    "kind": "newly_silent",
+                    "title": f"{s['feed']} went silent (valid calendar, 0 events)",
+                    "detail": _was_phrase(s),
+                    "feed": s["feed"],
+                    "repro": repro_for(s["feed"]),
+                }
+            )
+    for a in recent_anoms:
+        if a.get("type") == "significant_drop":
+            items.append(
+                {
+                    "severity": 2,
+                    "kind": "drop",
+                    "title": f"{a.get('feed')}: {a.get('message')}",
+                    "detail": a.get("date"),
+                    "feed": a.get("feed"),
+                    "repro": repro_for(a.get("feed")),
+                }
+            )
+    for z in tz:
+        stem = _norm_key(z.get("source"))
+        match = next((n for n in feeds if _norm_key(n) == stem), None)
+        items.append(
+            {
+                "severity": 3,
+                "kind": "tz_anomaly",
+                "title": f"{z.get('source')}: {z.get('count')}/{z.get('total')} events at suspicious hours",
+                "detail": f"likely a {z.get('offset')}h offset error",
+                "feed": match,
+                "repro": repro_for(match) if match else None,
+                "samples": z.get("samples"),
+            }
+        )
+    for e in ongoing_errors:
+        items.append(
+            {
+                "severity": 3,
+                "kind": "ongoing_error",
+                "title": f"Ongoing error: {e.get('source') or e.get('feed') or 'build'}",
+                "detail": (e.get("message") or e.get("line") or "")[:300],
+            }
+        )
+    items.sort(key=lambda i: i["severity"])
+
+    # Long-silent feeds are not surfaced as problems — they are a watch
+    # list rendered in the drill-downs.
+    watching = [
+        {**s, "repro": repro_for(s["feed"])}
+        for s in silent
+        if not str(s["content"]).startswith("not_ics") and s["feed"] not in newly_zero
+    ]
+
+    build = dict(data.get("build") or {})
+    if build.get("total_events") is not None and build.get("prev_total_events") is not None:
+        build["delta"] = build["total_events"] - build["prev_total_events"]
+
+    slim_feeds = {}
+    for name, fd in sorted(feeds.items()):
+        hist = fd.get("history", [])
+        slim_feeds[name] = {
+            "count": hist[-1]["count"] if hist else None,
+            "error": hist[-1].get("error") if hist else None,
+            "content": fd.get("content"),
+            "history": hist[-30:],
+        }
+
+    return {
+        "city": city,
+        "generated": report.get("generated"),
+        "build": build,
+        "problems": items,
+        "watching": watching,
+        "silent_feeds": silent,
+        "new_errors": new_errors,
+        "ongoing_errors": ongoing_errors,
+        "tz_anomalies": tz,
+        "recent_anomalies": recent_anoms,
+        "detail": {
+            "feeds": slim_feeds,
+            "url_quality": data.get("url_quality"),
+            "tzid_inventory": data.get("tzid_inventory"),
+            "geo_filtered": data.get("geo_filtered"),
+            "categories": data.get("categories"),
+            "images": data.get("images"),
+        },
+    }
+
+
+def write_city_slices(
+    report: dict,
+    cities: list[str],
+    prev_error_lines: set,
+    slice_dir: str,
+    template_path: str | None,
+):
+    """Write report/<city>/report.json (+ index.html from the template)."""
+    template = None
+    if template_path and Path(template_path).exists():
+        template = Path(template_path).read_text()
+    for city in cities:
+        if city not in report.get("cities", {}):
+            continue
+        out = Path(slice_dir) / city
+        out.mkdir(parents=True, exist_ok=True)
+        slice_data = build_city_slice(report, city, prev_error_lines)
+        (out / "report.json").write_text(json.dumps(slice_data, indent=2, default=str))
+        if template:
+            (out / "index.html").write_text(template)
+        print(f"  wrote {out}/report.json")
 
 
 def main():
@@ -567,9 +980,24 @@ def main():
     parser.add_argument(
         "--build-log", type=str, default=None, help="Path to build.log for error extraction"
     )
+    parser.add_argument(
+        "--slice-dir",
+        type=str,
+        default=None,
+        help="Write per-city report slices (and pages) under this directory",
+    )
+    parser.add_argument(
+        "--template",
+        type=str,
+        default=None,
+        help="HTML template copied to <slice-dir>/<city>/index.html",
+    )
     args = parser.parse_args()
 
     cities = [c.strip() for c in args.cities.split(",")]
+    # Snapshot the prior build's error lines before this run overwrites
+    # them, so slices can distinguish NEW errors from ongoing ones.
+    prev_error_lines = {e.get("line") for e in load_report(args.output).get("errors", [])}
     update_report(cities, args.output)
 
     # Parse build errors if log provided
@@ -579,11 +1007,19 @@ def main():
         report["errors"] = build_errors
         save_report(report, args.output)
         if build_errors:
-            print(f"Build errors found: {len(build_errors)}")
+            error_count = sum(1 for e in build_errors if e.get("level") == "error")
+            warning_count = sum(1 for e in build_errors if e.get("level") == "warning")
+            print(
+                f"Build issues found: {len(build_errors)} ({error_count} errors, {warning_count} warnings)"
+            )
             for e in build_errors:
-                print(f"  [{e.get('source', '?')}] {e['line'][:120]}")
+                print(f"  [{e.get('level', '?')}:{e.get('source', '?')}] {e['line'][:120]}")
         else:
-            print("No build errors found in log.")
+            print("No build issues found in log.")
+
+    if args.slice_dir:
+        report = load_report(args.output)
+        write_city_slices(report, cities, prev_error_lines, args.slice_dir, args.template)
 
 
 if __name__ == "__main__":

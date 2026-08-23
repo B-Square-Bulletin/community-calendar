@@ -221,17 +221,32 @@ After the PR is merged, the next build automatically runs `scripts/process_pendi
 python scripts/add_feed.py URL city "Source Name" --test
 ```
 
-> **Note:** `add_feed.py --test` is useful for validation. In the main repo its normal add mode now writes to `pending_feeds.txt`, not `feeds.txt`.
+> **Note:** `--test` validates only — nothing is written. Running
+> without `--test` validates and then registers (writing to
+> `pending_feeds.txt`, never `feeds.txt`).
 
 ### Scrapers
 
-Scrapers are invoked by the GitHub Actions workflow. Use `add_scraper.py` to add the workflow invocation and stage the scraper in `pending_feeds.txt`:
+Scraper execution is DB-first: the build runs the active scraper rows
+in the `feeds` table (the workflow carries no per-scraper lines). Use
+`add_scraper.py` to test and register a scraper:
 
 ```bash
 python scripts/add_scraper.py <scraper_name> <city> "<Display Name>"
-
-The workflow will move the pending scraper entry into the `feeds` table and regenerate `feeds.txt` before `combine_ics.py` runs.
+# parameterized base scrapers take their site-specific args:
+python scripts/add_scraper.py songkick santarosa "My Venue" \
+  --extra-args '--url "https://www.songkick.com/venues/NNN" --name "My Venue"' \
+  --output-name songkick_myvenue
 ```
+
+The scraper is always tested before registration; add `--test` to
+validate only, writing nothing.
+
+The next build moves the pending entry into the `feeds` table
+(validated at insert time), executes the scraper in that same build,
+and regenerates `feeds.txt` — the read-only reference of what the
+database drives. See `scrapers/README.md` for each base scraper's
+arguments.
 
 ### Forks without a feeds table
 

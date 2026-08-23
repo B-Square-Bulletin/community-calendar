@@ -8,61 +8,24 @@ This script automates the steps for integrating an ICS feed:
 In the main repo, the workflow processes pending_feeds.txt into the feeds
 table, then regenerates feeds.txt from the database.
 
+By default the feed is validated (fetched, checked for real ICS) and
+then registered. --test validates and shows what would be registered
+without writing anything.
+
 Usage:
     python scripts/add_feed.py "https://example.com/events/?ical=1" toronto "Example Events"
     python scripts/add_feed.py "https://meetup.com/group/events/ical/" toronto "Meetup Group" --test
-    python scripts/add_feed.py URL city "Source Name" --dry-run
 """
 
 import argparse
-import re
 import subprocess
 import sys
 from pathlib import Path
-from urllib.parse import urlparse
+
+from feed_slug import slugify
 
 # Repository root
 ROOT = Path(__file__).parent.parent
-
-
-def slugify(url: str) -> str:
-    """Generate a filename slug from a URL."""
-    parsed = urlparse(url)
-
-    # Special case for Meetup
-    if "meetup.com" in parsed.netloc:
-        # Extract group name from /group-name/events/ical/
-        match = re.search(r"meetup\.com/([^/]+)", url)
-        if match:
-            group = match.group(1)
-            # Clean up the group name
-            group = re.sub(r"[^a-zA-Z0-9]+", "_", group).lower().strip("_")
-            return f"meetup_{group}"
-
-    # Special case for Tockify
-    if "tockify.com" in parsed.netloc:
-        match = re.search(r"/ics/([^/]+)", url)
-        if match:
-            return f"tockify_{match.group(1)}"
-
-    # CivicPlus (city/county sites): include catID to avoid collisions
-    if "/iCalendar/iCalendar.aspx" in parsed.path:
-        domain = parsed.netloc.replace("www.", "").split(".")[0]
-        cat_match = re.search(r"catID=(\d+)", parsed.query)
-        cat_id = f"_{cat_match.group(1)}" if cat_match else ""
-        return f"civicplus_{domain}{cat_id}"
-
-    # General case: use domain + path
-    domain = parsed.netloc.replace("www.", "").split(".")[0]
-    path_parts = [
-        p for p in parsed.path.split("/") if p and p not in ("events", "ical", "feed", "calendar")
-    ]
-
-    slug = f"{domain}_{'_'.join(path_parts[:2])}" if path_parts else domain
-
-    # Clean up
-    slug = re.sub(r"[^a-zA-Z0-9]+", "_", slug).lower().strip("_")
-    return slug[:50]  # Limit length
 
 
 def test_feed(url: str) -> tuple[bool, int]:
@@ -147,16 +110,17 @@ def main():
 Examples:
   python scripts/add_feed.py "https://example.com/events/?ical=1" toronto "Example Events"
   python scripts/add_feed.py "https://meetup.com/mygroup/events/ical/" toronto "My Group" --test
-  python scripts/add_feed.py URL city "Source Name" --dry-run
 """,
     )
     parser.add_argument("url", help="ICS feed URL")
     parser.add_argument("city", help="City directory name (e.g., toronto, santarosa)")
     parser.add_argument("display_name", help="Human-readable source name")
-    parser.add_argument("--test", action="store_true", help="Test the feed before adding")
     parser.add_argument(
-        "--dry-run", action="store_true", help="Show what would be done without making changes"
+        "--test",
+        action="store_true",
+        help="Validate the feed and show what would be registered, without writing anything",
     )
+    parser.add_argument("--dry-run", action="store_true", help="Deprecated alias of --test")
     parser.add_argument("--slug", help="Override the auto-generated filename slug")
 
     args = parser.parse_args()
@@ -169,20 +133,31 @@ Examples:
     print(f"   Name: {args.display_name}")
     print(f"   Slug: {slug}")
 
-    # Test the feed
-    if args.test or args.dry_run:
-        valid, _event_count = test_feed(args.url)
-        if not valid and not args.dry_run:
-            print("\n⚠️  Feed test failed. Continue anyway? [y/N] ", end="")
-            response = input().strip().lower()
-            if response != "y":
-                sys.exit(1)
+    validate_only = args.test or args.dry_run
 
-    if args.dry_run:
-        print("\n[DRY RUN] Would perform the following:")
-        print(f"  1. Add to cities/{args.city}/pending_feeds.txt: {args.url}")
-        print("  2. Next build will move it into the feeds table")
-        print(f"  3. download_feeds.py will save as: {slug}.ics")
+    # Always validate first — registering an unvalidated feed is never
+    # the right default.
+    valid, _event_count = test_feed(args.url)
+    if not valid:
+        if validate_only:
+            sys.exit(1)
+        if not sys.stdin.isatty():
+            print(
+                "\n❌ Feed validation failed (non-interactive session — aborting; "
+                "nothing was written)"
+            )
+            sys.exit(1)
+        print("\n⚠️  Feed validation failed. Register anyway? [y/N] ", end="")
+        response = input().strip().lower()
+        if response != "y":
+            sys.exit(1)
+
+    if validate_only:
+        print("\n[TEST] Nothing written. Registering would:")
+        print(f"  add to cities/{args.city}/pending_feeds.txt:")
+        print(f"    # {args.display_name}")
+        print(f"    {args.url}")
+        print(f"  next build: insert into the feeds table, download as {slug}.ics")
         return
 
     # Add to pending_feeds.txt
@@ -194,11 +169,10 @@ Examples:
 
     print("\n" + "=" * 60)
     print("✅ Done! Next steps:")
-    print("  1. Review changes: git diff")
+    print(f"  1. Review the entry: git diff cities/{args.city}/pending_feeds.txt")
     print("  2. Update SOURCES_CHECKLIST.md if needed")
-    print(f"  3. Commit: git add -A && git commit -m 'Add {args.display_name} feed'")
-    print("  4. Push: git push")
-    print(f"\n  The build will insert it into the feeds table and save as: {slug}.ics")
+    print(f"  3. Commit and push (e.g. git commit -m 'Add {args.display_name} feed')")
+    print(f"\n  The next build inserts it into the feeds table and downloads it as {slug}.ics")
     print("=" * 60)
 
 

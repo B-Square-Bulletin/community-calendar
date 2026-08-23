@@ -78,17 +78,6 @@ SOURCE_URLS = {
     "bsquare_bptc": "https://bloomingtontransit.com/",
     "santa_rosa_arts_center": "https://santarosaartscenter.org/events/",
     "movingwriting": "https://www.movingwriting.com/workshops",
-    "bigeasy": "https://bigeasypetaluma.com/events/",
-    "polly_klaas": "https://pollyklaastheater.org/events/",
-    "brooksnote": "https://brooksnotewinery.com/event-calendar/",
-    "petaluma_arts_center": "https://petalumaartscenter.org/events-exhibitions",
-    "brewsters": "https://brewstersbeergarden.com/calendar1",
-    "cool_petaluma": "https://coolpetaluma.org/events",
-    "mcnears": "https://www.mcnears.com/event/",
-    "griffo": "https://griffodistillery.com/pages/calendar",
-    "elks_lodge": "https://elks901.org/calendar-of-events/",
-    "garden_club": "https://petalumagardenclub.org/calendar/",
-    "petaluma_bounty": "https://petalumabounty.org/events-calendar/",
     # Toronto
     "now_toronto": "https://nowtoronto.com/events/",
     "torevent": "https://tockify.com/torevent/",
@@ -161,7 +150,6 @@ SOURCE_URLS = {
     "songkick_elephant": "https://www.songkick.com/venues/3757589-elephant-in-the-room",
     "eventbrite_elephant": "https://www.eventbrite.com/o/elephant-in-the-room-45984150493",
     "ranchonicasio": "https://ranchonicasio.com/events/",
-    "bigeasypetaluma": "https://bigeasypetaluma.com/events/",
     "sweetwater": "https://sweetwatermusichall.org/events/",
     "songkick_sweetwater": "https://www.songkick.com/venues/1633868-sweetwater-music-hall",
     "songkick_mystic": "https://www.songkick.com/venues/9969-mystic-theatre",
@@ -977,7 +965,7 @@ def extract_events(
 
 
 def combine_ics_files(
-    input_dir, output_file, calendar_name="Combined Calendar", exclude_sources=None
+    input_dir, output_file, calendar_name="Combined Calendar", exclude_sources=None, geo_report=None
 ):
     """Combine all ICS files in a directory into one.
 
@@ -1134,8 +1122,13 @@ def combine_ics_files(
 
     if geo_filtered_count > 0:
         print(f"  (Geo-filtered {geo_filtered_count} events outside allowed cities)")
-        # Write sidecar for report visibility
-        geo_report_path = Path(output_file).parent / "geo_filtered.json"
+        # Write sidecar for report visibility. The tracked
+        # cities/<city>/geo_filtered.json is CI-owned generated state;
+        # local audit runs pass --geo-report to keep it out of the tree.
+        geo_report_path = (
+            Path(geo_report) if geo_report else Path(output_file).parent / "geo_filtered.json"
+        )
+        geo_report_path.parent.mkdir(parents=True, exist_ok=True)
         # Summarize by source + city extracted from location
         by_source_city: dict[tuple[str, str, str], dict[str, Any]] = {}
         for d in geo_filtered_details:
@@ -1170,6 +1163,11 @@ if __name__ == "__main__":
         default="",
         help="Comma-separated source filenames to exclude (without .ics)",
     )
+    parser.add_argument(
+        "--geo-report",
+        default="",
+        help="Where to write the geo_filtered.json sidecar (default: next to the output file)",
+    )
 
     args = parser.parse_args()
     exclude_sources = {s.strip() for s in args.exclude.split(",") if s.strip()}
@@ -1177,4 +1175,10 @@ if __name__ == "__main__":
     print(f"Combining ICS files from {args.input_dir}...")
     if exclude_sources:
         print(f"  Excluding sources: {', '.join(sorted(exclude_sources))}")
-    combine_ics_files(args.input_dir, args.output, args.name, exclude_sources)
+    combine_ics_files(
+        args.input_dir,
+        args.output,
+        args.name,
+        exclude_sources,
+        geo_report=args.geo_report or None,
+    )
