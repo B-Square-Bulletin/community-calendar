@@ -13,7 +13,10 @@
 // The fix (upstream dff810892) keys the cache on content (events.length +
 // first/last event id). This benchmark loads the MERGED xmlui/helpers.js,
 // runs the function twice with fresh object references, and asserts:
-//   1. run #2 is a cache HIT (logged via window._pipelineLog)
+//   1. run #2 is a cache HIT at either caching layer — the content-key cache
+//      logs "cache HIT" via window._pipelineLog, while the issue-82 memoize
+//      wrapper short-circuits before it and bumps
+//      window.__ccMemoStats.collapseLongRunningEvents.hits instead
 //   2. run #2 is ~0ms (the regression was 254-336ms)
 //   3. run #2 returns identical results to run #1
 //
@@ -140,8 +143,18 @@ function main() {
     console.error('ERROR: fresh reference array not actually fresh — test is broken');
     process.exit(2);
   }
+  // Snapshot both cache layers before run #2. The hit may land in either:
+  // the content-key cache (logs to _pipelineLog) or the issue-82 memoize
+  // wrapper (bumps __ccMemoStats.collapseLongRunningEvents.hits, no log).
+  const memoStats = windowObj.__ccMemoStats &&
+    windowObj.__ccMemoStats.collapseLongRunningEvents;
+  const memoHitsBefore = memoStats ? memoStats.hits : 0;
+  const logLenBefore = windowObj._pipelineLog.length;
   const run2 = run(freshRefs, 'run#2 (network emit, fresh refs)');
   console.log('run#2: ' + run2.ms.toFixed(1) + 'ms');
+  const run2Hit =
+    /cache HIT/.test(windowObj._pipelineLog.slice(logLenBefore).join('\n')) ||
+    (memoStats && memoStats.hits > memoHitsBefore);
 
   // Run #3 — repeat to confirm the cache stays warm.
   const run3 = run(JSON.parse(JSON.stringify(events)), 'run#3 (repeat)');
@@ -150,15 +163,18 @@ function main() {
   console.log('');
   console.log('window._pipelineLog:');
   windowObj._pipelineLog.forEach(function (line) { console.log('  ' + line); });
+  if (memoStats) {
+    console.log('window.__ccMemoStats.collapseLongRunningEvents: ' +
+      memoStats.hits + ' hits / ' + memoStats.misses + ' misses');
+  }
   console.log('');
 
   // --- Assertions -----------------------------------------------------------
   const failures = [];
   const HIT_THRESHOLD_MS = 5; // cache hits take microseconds; 5ms is generous
 
-  const run2Hit = /cache HIT/.test(windowObj._pipelineLog[windowObj._pipelineLog.length - 2] || '');
   if (!run2Hit) {
-    failures.push('run#2 was not a cache HIT (expected content-key cache hit on fresh references)');
+    failures.push('run#2 was not a cache HIT at either layer (content-key cache or issue-82 memoize)');
   }
   if (run2.ms > HIT_THRESHOLD_MS) {
     failures.push('run#2 took ' + run2.ms.toFixed(1) + 'ms (expected < ' + HIT_THRESHOLD_MS + 'ms; regression was 254-336ms)');

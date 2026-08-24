@@ -20,35 +20,60 @@ Each feed is a comment line with the display name, followed by the URL.
 
 **Naming rule:** the `# Display Name` comment is the user-visible source attribution under each event card in the calendar UI. Use the bare canonical venue/source name only — no parenthetical context, no event counts, no strategy notes. Verification details, run-time counts, and discovery notes belong in `cities/<city>/SOURCES_CHECKLIST.md` (or a city-local `STRATEGIES_REVIEW.md`), not here.
 
-You can test a URL before adding it:
+The CLI alternative validates the feed and registers it (`--test`
+validates only — nothing written):
 
 ```bash
-python scripts/add_feed.py URL city "Source Name" --test
+python scripts/add_feed.py URL city "Source Name"          # validate + register
+python scripts/add_feed.py URL city "Source Name" --test   # validate only
 ```
 
 After your PR is merged, the next build automatically processes `pending_feeds.txt` — inserting the feeds into the database and resetting the file to its template.
 
 ### Adding scrapers
 
-Scrapers require two things that ICS feeds don't:
-
-1. **A workflow entry** in `.github/workflows/generate-calendar.yml` to actually run the scraper
-2. **A pending_feeds.txt entry** so the build inserts the scraper's metadata (display name, command) into the `feeds` table
-
-`add_scraper.py` handles both in one step:
+Scraper execution is DB-first: the build runs whatever active scraper
+rows exist in the `feeds` table. There is nothing to add to the
+workflow — one command registers everything:
 
 ```bash
 python scripts/add_scraper.py <scraper_name> <city> "<Display Name>"
 ```
 
-If you add a scraper manually without using this script, you'll likely miss one of the two pieces — the scraper will either run but have no display name, or be in the database but never execute.
+For parameterized base scrapers, pass the scraper's site-specific
+arguments and an output filename:
 
-See `scrapers/README.md` for available base scrapers and their options.
+```bash
+python scripts/add_scraper.py tribe_rest davis "My Venue" \
+  --extra-args '--api-base "https://myvenue.org" --name "My Venue" --timezone America/Los_Angeles' \
+  --output-name myvenue
+```
+
+The scraper is always tested first — the exact command being
+registered, including `--extra-args` — and registration aborts if the
+test fails. Add `--test` to validate only, writing nothing. On
+success the script appends a scraper entry to
+`cities/<city>/pending_feeds.txt`; the next build inserts it into the
+`feeds` table (validated at insert time) and the DB-first runner
+executes it in that same build.
+
+See `scrapers/README.md` for the available base scrapers and how to
+form each one's arguments (widget IDs, venue IDs, API bases, etc.).
+
+### Removing sources
+
+Use the Manage Feeds dialog (admin icon) — its Delete button removes
+the source's row and all its events in one atomic server operation, for
+scrapers and ICS feeds alike.
 
 ### What NOT to edit
 
-- **`cities/<city>/feeds.txt`** — auto-generated from the database each build. Your changes will be overwritten.
-- **`.github/workflows/generate-calendar.yml`** for ICS feed downloads — ICS feeds are downloaded automatically from the `feeds` table. Only scraper invocations belong in the workflow.
+- **`cities/<city>/feeds.txt`** — auto-generated from the database each
+  build; a read-only, human-readable reference for what the database
+  drives. Your changes will be overwritten.
+- **`.github/workflows/generate-calendar.yml`** — carries no per-source
+  lines at all: ICS feeds download from the `feeds` table and scrapers
+  execute from it too.
 
 ### Documenting your research
 

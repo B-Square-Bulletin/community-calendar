@@ -117,12 +117,12 @@ def parse_time_range(text: str) -> tuple[tuple[int, int] | None, tuple[int, int]
     return None, None
 
 
-def scrape_events(target_year: int, target_month: int) -> list[dict[str, Any]]:
+def scrape_events(target_year: int, target_month: int) -> list[dict]:
     """Scrape events from Santa Rosa Arts Center."""
     html = fetch_with_retry(EVENTS_URL)
     soup = BeautifulSoup(html, "html.parser")
 
-    events: list[dict[str, Any]] = []
+    events = []
 
     # Find the main content widget
     content_widgets = soup.find_all("div", class_="elementor-widget-text-editor")
@@ -216,7 +216,7 @@ def scrape_events(target_year: int, target_month: int) -> list[dict[str, Any]]:
 
     # Filter by target month and deduplicate
     seen = set()
-    filtered: list[dict[str, Any]] = []
+    filtered = []
     for event in events:
         dt = event.get("dtstart")
         if dt and dt.year == target_year and dt.month == target_month:
@@ -235,7 +235,7 @@ def create_calendar(events: list[dict], year: int, month: int) -> Calendar:
     cal = Calendar()
     cal.add("prodid", f"-//Santa Rosa Arts Center//{DOMAIN}//")
     cal.add("version", "2.0")
-    cal.add("x-wr-calname", f"Santa Rosa Arts Center - {year}/{month:02d}")
+    cal.add("x-wr-calname", "Santa Rosa Arts Center")
     cal.add("x-wr-timezone", "America/Los_Angeles")
 
     for event_data in events:

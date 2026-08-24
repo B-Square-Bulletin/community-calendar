@@ -46,13 +46,6 @@ class LibraryScraper(BaseScraper):
             "url_prefix": "https://www.bloomingtonlibrary.org",
             "timezone": "America/Indiana/Indianapolis",
         },
-        "petaluma": {
-            "name": "Petaluma Regional Library",
-            "domain": "sonomalibrary.org",
-            "base_url": "https://events.sonomalibrary.org/events/list?branches%5B99%5D=99&page=",
-            "url_prefix": "https://events.sonomalibrary.org",
-            "timezone": "America/Los_Angeles",
-        },
     }
 
     def __init__(self, location: str = "santarosa"):
@@ -183,7 +176,7 @@ def main():
         "--location",
         type=str,
         required=True,
-        choices=["santarosa", "bloomington", "petaluma"],
+        choices=["santarosa", "bloomington"],
         help="Library to scrape",
     )
     parser.add_argument("--output", "-o", type=str, help="Output filename")

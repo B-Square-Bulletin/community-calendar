@@ -5,90 +5,133 @@ window._xsLogs = [];
     /^(localhost|127(?:\.\d+){3}|0\.0\.0\.0)$/.test(window.location.hostname) ||
     window.location.protocol === 'file:';
 
-  function loadJsonFallback() {
-    try {
-      var cfgXhr = new XMLHttpRequest();
-      cfgXhr.open('GET', 'config.json?_=' + Date.now(), false);
-      cfgXhr.send();
-      if (cfgXhr.status === 200) {
-        var cfg = JSON.parse(cfgXhr.responseText);
+  // async-boot-fetches (#82 item 4): the five boot resources download in
+  // PARALLEL as fetch() promises (started in index.html so they overlap
+  // the CDN scripts; window.__ccBootFetches). The engine scripts are then
+  // DOM-inserted with async=false (order preserved) once everything has
+  // resolved — the same before-engine guarantees the old sequential
+  // sync-XHR chain gave, at max(RTT) instead of sum(RTT). Measured
+  // deployed cost of the old chain: ~0.77 s of serial blocking XHRs.
+  var isLocalDevHost = /^(localhost|127(?:\.\d+){3}|0\.0\.0\.0)$/.test(window.location.hostname);
+
+  // boot-attribution-marks (cc-* namespace, in-memory Performance
+  // timeline only; summarized by window.__ccBootMarks() in helpers.js).
+  // DOMContentLoaded now fires long before the engine scripts load, so
+  // register (or backfill) the mark immediately.
+  if (document.readyState !== 'loading') {
+    try { performance.mark('cc-dom-ready'); } catch (e) {}
+  } else {
+    document.addEventListener('DOMContentLoaded', function () {
+      try { performance.mark('cc-dom-ready'); } catch (e) {}
+    });
+  }
+
+  function ccFetches() {
+    if (window.__ccBootFetches) return window.__ccBootFetches;
+    // Defensive fallback if index.html didn't start the prefetches.
+    var bust = '?_=' + Date.now();
+    var j = function (u) { return fetch(u).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }); };
+    var t = function (u) { return fetch(u).then(function (r) { return r.ok ? r.text() : ''; }).catch(function () { return ''; }); };
+    return {
+      localConfig: isLocalConfigHost ? t('config.local.js' + bust) : Promise.resolve(''),
+      config: j('config.json' + bust),
+      version: t('version.txt' + bust),
+      categories: j('../categories.json' + bust),
+      cities: j('../cities.json' + bust),
+      sourcePriority: j('../source_priority.json' + bust),
+    };
+  }
+
+  function injectScripts(v) {
+    function script(src) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.async = false; // preserve execution order across the chain
+      document.head.appendChild(s);
+      return s;
+    }
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'xmlui/xmlui-grid-layout.css?v=' + v;
+    document.head.appendChild(link);
+    // The bundle bracket now spans download+eval (DOM-inserted scripts
+    // have no between-download execution point to mark).
+    try { performance.mark('cc-bundle-eval-start'); } catch (e) {}
+    var bundle = script('xmlui/xmlui-standalone.umd.js?v=' + v);
+    bundle.addEventListener('load', function () {
+      try { performance.mark('cc-bundle-eval-end'); } catch (e) {}
+    });
+    script('xmlui/xmlui-masonry.js?v=' + v);
+    script('xmlui/xmlui-grid-layout.js?v=' + v);
+    script('helpers.js?v=' + v);
+    script('xs-trace.js?v=' + v).addEventListener('load', function () {
+      // index-standalone.ts arms startApp on DOMContentLoaded with no
+      // readyState fallback, and DCL has long passed by the time the
+      // DOM-inserted bundle evaluates — so start the engine explicitly
+      // once the whole chain (bundle, extensions, helpers) has run.
+      // Injection is gated on DCL below, so the engine's own listener
+      // can never fire and double-start. (Upstream ask: a readyState
+      // fallback in index-standalone.ts.)
+      if (window.xmlui && typeof window.xmlui.startApp === 'function') {
+        try { performance.mark('cc-xmlui-start'); } catch (e) {}
+        window.xmlui.startApp(undefined, undefined, window.xmlui.standalone);
+      }
+    });
+  }
+
+  var F = ccFetches();
+  Promise.all([F.localConfig, F.config, F.version, F.categories, F.cities, F.sourcePriority])
+    .then(function (r) {
+      var localCfg = r[0], cfg = r[1], fetchedVersion = (r[2] || '').trim();
+      // config.local.js applies first, then config.json fills gaps —
+      // same precedence as the old sync path.
+      if (localCfg) { try { new Function(localCfg)(); } catch (e) {} }
+      if (!window.SUPABASE_URL || !window.SUPABASE_KEY) {
         var globals = (cfg && cfg.appGlobals) || {};
         window.SUPABASE_URL = window.SUPABASE_URL || globals.supabaseUrl;
         window.SUPABASE_KEY = window.SUPABASE_KEY || globals.supabasePublishableKey;
       }
-    } catch (e) {}
-  }
+      try { performance.mark('cc-config-loaded'); } catch (e) {}
 
-  if (isLocalConfigHost) {
-    try {
-      var localXhr = new XMLHttpRequest();
-      localXhr.open('GET', 'config.local.js?_=' + Date.now(), false);
-      localXhr.send();
-      if (localXhr.status === 200 && localXhr.responseText) {
-        new Function(localXhr.responseText)();
+      var baseVersion = isLocalDevHost ? 'local-dev' : 'missing-version';
+      if (fetchedVersion) baseVersion = fetchedVersion;
+      try {
+        var lastSeenVersion = localStorage.getItem('cc-shell-version');
+        var hasReloadedForVersion = sessionStorage.getItem('cc-version-reload') === baseVersion;
+        if (lastSeenVersion && lastSeenVersion !== baseVersion && !hasReloadedForVersion) {
+          sessionStorage.setItem('cc-version-reload', baseVersion);
+          localStorage.setItem('cc-shell-version', baseVersion);
+          window.location.replace(window.location.pathname + window.location.search);
+        } else {
+          localStorage.setItem('cc-shell-version', baseVersion);
+          if (hasReloadedForVersion) {
+            sessionStorage.removeItem('cc-version-reload');
+          }
+        }
+      } catch (e) {}
+
+      var assetVersionSuffix = isLocalDevHost ? '-dev-' + Date.now() : '';
+      window.APP_VERSION = baseVersion + assetVersionSuffix;
+
+      window._categories = r[3];
+      window._cities = r[4];
+      window._sourcePriority = r[5];
+      try { performance.mark('cc-static-json-loaded'); } catch (e) {}
+
+      bootShell();
+      // Gate injection on DCL so the engine's own DOMContentLoaded
+      // listener is guaranteed dead by the time the bundle evaluates —
+      // our explicit startApp above is then the only boot path.
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function () {
+          injectScripts(window.APP_VERSION);
+        });
+      } else {
+        injectScripts(window.APP_VERSION);
       }
-    } catch (e) {}
-  }
+    });
 
-  if (!window.SUPABASE_URL || !window.SUPABASE_KEY) {
-    loadJsonFallback();
-  }
-
-  var versionProbe = Date.now();
-  var vxhr = new XMLHttpRequest();
-  vxhr.open('GET', 'version.txt?_=' + versionProbe, false);
-  var isLocalDevHost = /^(localhost|127(?:\.\d+){3}|0\.0\.0\.0)$/.test(window.location.hostname);
-  var baseVersion = isLocalDevHost ? 'local-dev' : 'missing-version';
-  try {
-    vxhr.send();
-    if (vxhr.status >= 200 && vxhr.status < 300) {
-      var fetchedVersion = (vxhr.responseText || '').trim();
-      if (fetchedVersion) {
-        baseVersion = fetchedVersion;
-      }
-    }
-  } catch (e) {}
-  try {
-    var lastSeenVersion = localStorage.getItem('cc-shell-version');
-    var hasReloadedForVersion = sessionStorage.getItem('cc-version-reload') === baseVersion;
-    if (lastSeenVersion && lastSeenVersion !== baseVersion && !hasReloadedForVersion) {
-      sessionStorage.setItem('cc-version-reload', baseVersion);
-      localStorage.setItem('cc-shell-version', baseVersion);
-      window.location.replace(window.location.pathname + window.location.search);
-    } else {
-      localStorage.setItem('cc-shell-version', baseVersion);
-      if (hasReloadedForVersion) {
-        sessionStorage.removeItem('cc-version-reload');
-      }
-    }
-  } catch (e) {}
-
-  var assetVersionSuffix = isLocalDevHost ? '-dev-' + Date.now() : '';
-  window.APP_VERSION = baseVersion + assetVersionSuffix;
-  var v = window.APP_VERSION;
-
-  document.write('<script src="xmlui/xmlui-standalone.umd.js?v=' + v + '"><\/script>');
-  document.write('<script src="xmlui/xmlui-masonry.js?v=' + v + '"><\/script>');
-  document.write('<link rel="stylesheet" href="xmlui/xmlui-grid-layout.css?v=' + v + '">');
-  document.write('<script src="xmlui/xmlui-grid-layout.js?v=' + v + '"><\/script>');
-
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', '../categories.json?v=' + window.APP_VERSION, false);
-  xhr.send();
-  window._categories = JSON.parse(xhr.responseText);
-
-  var cxhr = new XMLHttpRequest();
-  cxhr.open('GET', '../cities.json?v=' + window.APP_VERSION, false);
-  cxhr.send();
-  window._cities = JSON.parse(cxhr.responseText);
-
-  var spxhr = new XMLHttpRequest();
-  spxhr.open('GET', '../source_priority.json?v=' + window.APP_VERSION, false);
-  spxhr.send();
-  window._sourcePriority = JSON.parse(spxhr.responseText);
-
-  document.write('<script src="helpers.js?v=' + window.APP_VERSION + '"><\/script>');
-  document.write('<script src="xs-trace.js?v=' + window.APP_VERSION + '"><\/script>');
+  function bootShell() {
 
   var params = new URLSearchParams(window.location.search);
   var cityParam = params.get('city');
@@ -154,11 +197,18 @@ window._xsLogs = [];
   window.initialCategory = params.get('category') || '';
   window.initialSearch = params.get('search') || '';
 
+  // ?cards=N overrides the browse page size (default 50, clamped 1..500).
+  // Boot-time constant, same pattern as initialSearch. Search-mode paging
+  // stays at 10 regardless; pageSizeFor is the one place that rule lives.
+  var cardsParam = parseInt(params.get('cards'), 10);
+  window.cardPageSize = cardsParam >= 1 && cardsParam <= 500 ? cardsParam : 50;
+  window.pageSizeFor = function (term) {
+    return term ? 10 : window.cardPageSize;
+  };
+
   var cityNameOverrides = {
     santarosa: 'Santa Rosa',
     raleighdurham: 'Raleigh-Durham',
-    tetonvalley: 'Teton Valley',
-    'dc-music': 'DC Music',
   };
 
   window.toDisplayName = function (slug) {
@@ -384,6 +434,20 @@ window._xsLogs = [];
     var currentEmit = null;
     var cachedPromise = null;
     var cachedCity = null;
+    // issue-82 emission coalescing state. lastEmitFn tracks WHICH
+    // subscriber received the last emission — an identical-data skip is
+    // only safe for a subscriber that already has the data; a fresh
+    // subscriber (resubscribe after a city round-trip) must always get
+    // its first emit.
+    var fetchResolvedCity = null;
+    var lastEmitFn = null;
+    var lastEmitCity = null;
+    var lastEmitSig = null;
+
+    function rowsSig(rows) {
+      return rows.length + ':' +
+        (rows.length ? rows[0].id + ':' + rows[rows.length - 1].id : '');
+    }
 
     function eventsUrl(city) {
       return window.SUPABASE_URL + '/rest/v1/deduplicated_events' +
@@ -396,12 +460,22 @@ window._xsLogs = [];
 
     function startFetch(city) {
       fetchCity = city;
+      fetchResolvedCity = null;
       fetchPromise = fetch(eventsUrl(city), {
         headers: {
           apikey: window.SUPABASE_KEY,
           'Cache-Control': 'no-cache, no-store, must-revalidate',
         },
-      }).then(function (res) { return res.json(); });
+      }).then(function (res) { return res.json(); }).then(function (rows) {
+        if (Array.isArray(rows)) {
+          fetchResolvedCity = city;
+          // True network completion, independent of any subscriber —
+          // cc-events-emit-fresh records delivery, which collapses to
+          // subscription time when the response wins that race.
+          try { performance.mark('cc-events-fetch-resolved'); } catch (e) {}
+        }
+        return rows;
+      });
       return fetchPromise;
     }
 
@@ -412,8 +486,20 @@ window._xsLogs = [];
         // switched away, but only emit if this city is still current.
         idbSet('events:' + city, rows).catch(function () {});
         if (city !== window.cityFilter) return false;  // stale-city race guard (#76)
+        // issue-82: skip the replacement when this same subscriber already
+        // holds identical data — the emit would only trigger a re-render.
+        if (currentEmit && currentEmit === lastEmitFn &&
+            city === lastEmitCity && rowsSig(rows) === lastEmitSig) {
+          performance.mark('cc-events-skip-fresh-identical');
+          return true;
+        }
         performance.mark('cc-events-emit-fresh');
-        if (currentEmit) currentEmit(rows);
+        if (currentEmit) {
+          lastEmitFn = currentEmit;
+          lastEmitCity = city;
+          lastEmitSig = rowsSig(rows);
+          currentEmit(rows);
+        }
         return true;
       }).catch(function () { return false; });
     }
@@ -436,7 +522,17 @@ window._xsLogs = [];
       c.then(function (cached) {
         if (Array.isArray(cached) && !gotFresh) {
           if (city !== window.cityFilter) return;  // stale-city guard (#76)
+          // issue-82: when the network fetch has already resolved, the
+          // fresh emit is imminent — a cached paint would only add a
+          // full ingest+render that is immediately redone.
+          if (fetchResolvedCity === city) {
+            performance.mark('cc-events-skip-cached-superseded');
+            return;
+          }
           performance.mark('cc-events-emit-cached');
+          lastEmitFn = emit;
+          lastEmitCity = city;
+          lastEmitSig = rowsSig(cached);
           emit(cached);
         }
       });
@@ -489,4 +585,5 @@ window._xsLogs = [];
       }, 50);
     })();
   }
+  } // end bootShell
 })();

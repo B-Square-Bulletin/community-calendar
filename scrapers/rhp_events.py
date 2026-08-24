@@ -1,14 +1,26 @@
 #!/usr/bin/env python3
 """
-Scraper for Sweetwater Music Hall events via RSS feed + JSON-LD.
+Scraper for venues using the Rockhouse Partners "rhp-events" WordPress plugin.
 
-The RSS feed at /events/feed/ provides event URLs and descriptions.
+The RSS feed at /events/feed/ (or /calendar/feed/) provides event URLs.
 Each event page has JSON-LD with startDate, location, etc.
 The RSS pubDate is the publish date, NOT the event date — so we
 fetch individual pages for accurate dates.
 
+Known venues on this platform: The Grey Eagle, The Orange Peel,
+Pisgah Brewing, Hellbender (Asheville NC), Sweetwater Music Hall
+(Mill Valley CA — see scrapers/sweetwater.py, the pattern's origin).
+
 Usage:
-    python scrapers/sweetwater.py --output cities/santarosa/sweetwater.ics
+    python scrapers/rhp_events.py \
+        --url "https://thegreyeagle.com/calendar/feed/" \
+        --name "The Grey Eagle" \
+        --output cities/asheville/grey_eagle.ics
+
+    python scrapers/rhp_events.py \
+        --url "https://theorangepeel.net/events/feed/" \
+        --name "The Orange Peel" \
+        --output cities/asheville/orange_peel.ics
 """
 
 import sys
@@ -26,6 +38,7 @@ from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
+from urllib.parse import urlparse
 from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
@@ -34,21 +47,42 @@ from lib.jsonld import extract_events_from_blocks, extract_jsonld_blocks, parse_
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
-RSS_URL = "https://sweetwatermusichall.org/events/feed/"
-DEFAULT_LOCATION = "Sweetwater Music Hall, 19 Corte Madera Avenue, Mill Valley, CA"
-
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 }
 
+# datetime.fromisoformat() on Python <3.11 rejects UTC offsets that omit the
+# colon (e.g. "-0400"), which is exactly what this platform's JSON-LD
+# startDate/endDate values use. Insert the colon before parsing so the
+# offset becomes "-04:00". Already-coloned offsets are left untouched
+# because the colon breaks the trailing \d{4} match.
+_TZ_OFFSET_NO_COLON_RE = re.compile(r"([+-]\d{2})(\d{2})$")
 
-class SweetwaterScraper(BaseScraper):
-    """Scraper for Sweetwater Music Hall via RSS + JSON-LD."""
 
-    name = "Sweetwater Music Hall"
-    domain = "sweetwatermusichall.org"
-    timezone = "America/Los_Angeles"
+def _normalize_iso_offset(value: str) -> str:
+    value = value.strip()
+    if value.endswith("Z"):
+        return value[:-1] + "+00:00"
+    return _TZ_OFFSET_NO_COLON_RE.sub(r"\1:\2", value)
+
+
+class RhpEventsScraper(BaseScraper):
+    """Scraper for rhp-events (Rockhouse Partners) venues via RSS + JSON-LD."""
+
+    def __init__(
+        self,
+        rss_url: str,
+        source_name: str,
+        tz: str = "America/New_York",
+        default_location: str = "",
+    ):
+        self.rss_url = rss_url
+        self.name = source_name
+        self.domain = urlparse(rss_url).netloc.removeprefix("www.")
+        self.timezone = tz
+        self.default_location = default_location
+        super().__init__()
 
     def _fetch_page(self, url: str) -> str | None:
         """Fetch a URL and return content."""
@@ -62,7 +96,7 @@ class SweetwaterScraper(BaseScraper):
 
     def _discover_event_urls(self) -> list[str]:
         """Fetch RSS feed and extract event URLs."""
-        content = self._fetch_page(RSS_URL)
+        content = self._fetch_page(self.rss_url)
         if not content:
             self.logger.error("Could not fetch RSS feed")
             return []
@@ -98,15 +132,6 @@ class SweetwaterScraper(BaseScraper):
         )
         return urls
 
-    @staticmethod
-    def _normalize_iso(value: str) -> str:
-        """Make JSON-LD datetimes parseable by Python 3.10's fromisoformat:
-        map 'Z' to '+00:00' and insert the colon into colon-less UTC
-        offsets ('2026-12-31T20:00:00-0800' -> '...-08:00'), which 3.10
-        rejects (3.11+ accepts them)."""
-        value = value.strip().replace("Z", "+00:00")
-        return re.sub(r"([+-]\d{2})(\d{2})$", r"\1:\2", value)
-
     def _fetch_event_jsonld(self, url: str) -> dict[str, Any] | None:
         """Fetch an individual event page and extract JSON-LD Event data."""
         html = self._fetch_page(url)
@@ -128,7 +153,7 @@ class SweetwaterScraper(BaseScraper):
             return None
 
         try:
-            dtstart = datetime.fromisoformat(self._normalize_iso(start_str))
+            dtstart = datetime.fromisoformat(_normalize_iso_offset(start_str))
         except ValueError:
             self.logger.debug(f"Skipping {title}: bad startDate {start_str}")
             return None
@@ -144,10 +169,10 @@ class SweetwaterScraper(BaseScraper):
         end_str = item.get("endDate", "")
         if end_str:
             with contextlib.suppress(ValueError):
-                dtend = datetime.fromisoformat(self._normalize_iso(end_str))
+                dtend = datetime.fromisoformat(_normalize_iso_offset(end_str))
 
         # Location
-        location = parse_location(item.get("location"), DEFAULT_LOCATION)
+        location = parse_location(item.get("location"), self.default_location)
 
         # Description
         desc = item.get("description", "") or ""
@@ -185,7 +210,17 @@ class SweetwaterScraper(BaseScraper):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Scrape Sweetwater Music Hall events")
+    parser = argparse.ArgumentParser(description="Scrape an rhp-events (Rockhouse Partners) venue")
+    parser.add_argument(
+        "--url", required=True, help="RSS feed URL (e.g. https://venue.com/events/feed/)"
+    )
+    parser.add_argument("--name", required=True, help="Source name")
+    parser.add_argument(
+        "--timezone", default="America/New_York", help="IANA timezone (default: America/New_York)"
+    )
+    parser.add_argument(
+        "--default-location", default="", help="Fallback location when JSON-LD has none"
+    )
     parser.add_argument("--output", "-o", help="Output ICS file")
     parser.add_argument("--debug", action="store_true")
     args = parser.parse_args()
@@ -193,7 +228,7 @@ def main():
     if args.debug:
         logging.getLogger().setLevel(logging.DEBUG)
 
-    scraper = SweetwaterScraper()
+    scraper = RhpEventsScraper(args.url, args.name, args.timezone, args.default_location)
     scraper.run(args.output)
 
 

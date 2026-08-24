@@ -2,27 +2,28 @@
 """
 Barrel Proof Lounge scraper - scrapes directly from their website
 
-This scraper extracts events from the Barrel Proof Lounge homepage which
-displays accurate event times (via their Eventbrite widget, but with times
-that match their internal system).
+The 2026 site redesign moved events from server-rendered homepage widget
+blocks to an /events/ page whose "Widget for Eventbrite API" FullCalendar
+embeds the complete event list as an inline JSON array
+(`var wfea_events_N = [...]`) with title/start/end/excerpt/url fields.
+This scraper extracts and parses that array.
 
 Usage:
   python barrel_proof.py --output cities/santarosa/barrel_proof.ics
 """
 
 import argparse
+import contextlib
 import html as html_module
+import json
 import re
 import sys
-from datetime import timedelta
+from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
-from lib.timeutil import wall_clock
-
-HOMEPAGE_URL = "https://barrelprooflounge.com/"
+EVENTS_URL = "https://barrelprooflounge.com/events/"
 VENUE_NAME = "Barrel Proof Lounge"
 VENUE_ADDRESS = "501 Mendocino Ave, Santa Rosa, CA 95401"
 
@@ -40,113 +41,42 @@ def fetch_page(url):
 
 
 def parse_events(html):
-    """Parse event data from the homepage HTML"""
-    events: list[dict[str, Any]] = []
+    """Parse the inline `var wfea_events_N = [...]` JSON on the events page."""
+    events = []
 
-    # The site uses Eventbrite widgets with structure:
-    # - Image with alt="EVENT TITLE"
-    # - Title link: <a id="wfea-popup-title-..." title="...">EVENT TITLE</a>
-    # - Date: visible as "February 10, 2026, 5:00 pm – 7:00 pm"
-    # - Description in a div
+    m = re.search(r"var wfea_events_\d+\s*=\s*(\[.*?\]);", html, re.DOTALL)
+    if not m:
+        print("  Error: no wfea_events array found on events page", file=sys.stderr)
+        return events
 
-    # Find all event blocks by looking for wfea event patterns
-    # Pattern: data-eb-id="EVENTID" ... title ... date ... description
+    try:
+        items = json.loads(m.group(1))
+    except json.JSONDecodeError as e:
+        print(f"  Error: failed to parse wfea_events JSON: {e}", file=sys.stderr)
+        return events
 
-    # Split into event sections - each event starts with a figure/image block
-    event_blocks = re.split(r'<figure[^>]*class="[^"]*wfea[^"]*"', html)
-
-    for block in event_blocks[1:]:  # Skip content before first event
-        # Extract event title from link or image alt
-        title_match = re.search(r'title="[^"]*(?:link to |for )([^"]+)"', block)
-        if not title_match:
-            title_match = re.search(r'alt="([^"]+)"', block)
-        if not title_match:
+    for item in items:
+        title = html_module.unescape((item.get("title") or "").strip())
+        start_str = item.get("start") or ""
+        if not title or not start_str:
             continue
-
-        title = html_module.unescape(title_match.group(1).strip())
-
-        # Extract datetime: "February 10, 2026, 5:00 pm – 7:00 pm"
-        datetime_pattern = r"(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d+),\s+(20\d{2}),\s+(\d+):(\d+)\s+(am|pm)(?:\s*[–-]\s*(?:(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d+),\s+(20\d{2}),\s+)?(\d+):(\d+)\s+(am|pm))?"
-
-        dt_match = re.search(datetime_pattern, block, re.IGNORECASE)
-        if not dt_match:
-            continue
-
-        # Parse start datetime
-        month_names = {
-            "january": 1,
-            "february": 2,
-            "march": 3,
-            "april": 4,
-            "may": 5,
-            "june": 6,
-            "july": 7,
-            "august": 8,
-            "september": 9,
-            "october": 10,
-            "november": 11,
-            "december": 12,
-        }
 
         try:
-            month = month_names[dt_match.group(1).lower()]
-            day = int(dt_match.group(2))
-            year = int(dt_match.group(3))
-            hour = int(dt_match.group(4))
-            minute = int(dt_match.group(5))
-            ampm = dt_match.group(6).lower()
-
-            if ampm == "pm" and hour != 12:
-                hour += 12
-            elif ampm == "am" and hour == 12:
-                hour = 0
-
-            start_dt = wall_clock(year, month, day, hour, minute)
-
-            # Parse end time if present
-            if dt_match.group(10):  # End hour exists
-                end_hour = int(dt_match.group(10))
-                end_minute = int(dt_match.group(11))
-                end_ampm = dt_match.group(12).lower()
-
-                if end_ampm == "pm" and end_hour != 12:
-                    end_hour += 12
-                elif end_ampm == "am" and end_hour == 12:
-                    end_hour = 0
-
-                # Check if end date is specified
-                if dt_match.group(7):  # End month exists
-                    end_month = month_names[dt_match.group(7).lower()]
-                    end_day = int(dt_match.group(8))
-                    end_year = int(dt_match.group(9))
-                    end_dt = wall_clock(end_year, end_month, end_day, end_hour, end_minute)
-                else:
-                    # Same day
-                    end_dt = wall_clock(year, month, day, end_hour, end_minute)
-                    # Handle overnight events
-                    if end_dt < start_dt:
-                        end_dt = end_dt + timedelta(days=1)
-            else:
-                # Default 2 hour event
-                end_dt = start_dt + timedelta(hours=2)
-        except (ValueError, TypeError) as e:
-            print(f"  Warning: Could not parse date for {title}: {e}", file=sys.stderr)
+            start_dt = datetime.fromisoformat(start_str)
+        except ValueError:
+            print(f"  Warning: Could not parse date for {title}: {start_str}", file=sys.stderr)
             continue
 
-        # Extract description from nearby text
-        desc = ""
-        # Look for text between closing </h2> and next major tag, or in a div
-        desc_match = re.search(r"</h2>\s*</header>\s*<div[^>]*>\s*([^<]+)", block)
-        if desc_match:
-            desc = html_module.unescape(desc_match.group(1).strip())
+        end_dt = None
+        end_str = item.get("end") or ""
+        if end_str:
+            with contextlib.suppress(ValueError):
+                end_dt = datetime.fromisoformat(end_str)
+        if end_dt is None or end_dt < start_dt:
+            end_dt = start_dt + timedelta(hours=2)
 
-        # Get eventbrite URL
-        eb_match = re.search(r'data-eb-id="(\d+)"', block)
-        if eb_match:
-            eb_id = eb_match.group(1)
-            url = f"https://www.eventbrite.com/e/{eb_id}"
-        else:
-            url = HOMEPAGE_URL
+        desc = html_module.unescape((item.get("excerpt") or "").strip())
+        url = item.get("url") or EVENTS_URL
 
         events.append(
             {"title": title, "start": start_dt, "end": end_dt, "description": desc, "url": url}
@@ -170,12 +100,11 @@ def event_to_ics(event):
         f"DTEND:{event['end'].strftime('%Y%m%dT%H%M%S')}",
         f"SUMMARY:{title}",
         f"LOCATION:{VENUE_NAME}\\, {VENUE_ADDRESS}",
+        f"X-SOURCE:{VENUE_NAME}",
     ]
 
     if desc:
-        lines.append(f"DESCRIPTION:{desc}\\n\\nSource: Barrel Proof Lounge")
-    else:
-        lines.append("DESCRIPTION:Source: Barrel Proof Lounge")
+        lines.append(f"DESCRIPTION:{desc}")
 
     lines.extend([f"URL:{event['url']}", "END:VEVENT"])
     return "\n".join(lines)
@@ -186,10 +115,10 @@ def main():
     parser.add_argument("--output", "-o", help="Output ICS file")
     args = parser.parse_args()
 
-    print(f"Fetching: {HOMEPAGE_URL}", file=sys.stderr)
-    html = fetch_page(HOMEPAGE_URL)
+    print(f"Fetching: {EVENTS_URL}", file=sys.stderr)
+    html = fetch_page(EVENTS_URL)
     if not html:
-        print("Failed to fetch homepage", file=sys.stderr)
+        print("Failed to fetch events page", file=sys.stderr)
         sys.exit(1)
 
     events = parse_events(html)
