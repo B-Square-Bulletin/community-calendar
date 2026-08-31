@@ -198,9 +198,6 @@ cities/bloomington/bloomington_symphony.ics
 # Brown County Athletics
 # cmd: python scrapers/maxpreps.py --url "https://www.maxpreps.com/in/nashville/brown-county-eagles/events/" --name "Brown County Athletics" --timezone "America/Indiana/Indianapolis"
 cities/bloomington/maxpreps_brown_county.ics
-# Brown County Government
-# cmd: python scrapers/brown_county_gov.py
-cities/bloomington/brown_county_gov.ics
 # Brown County Music Center
 # cmd: python scrapers/ticketmaster.py --venue-id KovZ917AOr1 --name "Brown County Music Center"
 cities/bloomington/tm_brown_county_music.ics
