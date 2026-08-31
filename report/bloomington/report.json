@@ -1,11 +1,11 @@
 {
   "city": "bloomington",
-  "generated": "2026-08-31T00:16:35.044097+00:00",
+  "generated": "2026-08-31T04:01:04.821982+00:00",
   "build": {
-    "generated": "2026-08-31T00:16:35.044097+00:00",
-    "total_events": 7680,
-    "prev_total_events": 7684,
-    "delta": -4
+    "generated": "2026-08-31T04:01:04.821982+00:00",
+    "total_events": 7559,
+    "prev_total_events": 7680,
+    "delta": -121
   },
   "problems": [
     {
@@ -18,6 +18,18 @@
         "display": "Bloomington Community Band",
         "source": "https://www.bloomingtoncommunityband.org/events/?ical=1",
         "command": "curl -sL -A 'Mozilla/5.0' 'https://www.bloomingtoncommunityband.org/events/?ical=1' | grep -c 'BEGIN:VEVENT'"
+      }
+    },
+    {
+      "severity": 1,
+      "kind": "broken_feed",
+      "title": "events_search_events_ics is serving html, not ICS",
+      "detail": "was 145 events on 2026-08-30; broken since 2026-08-31",
+      "feed": "events_search_events_ics",
+      "repro": {
+        "display": "Monroe County Government",
+        "source": "https://events.in.gov/search/events.ics?browse_type=school&event_types%5B%5D=49056849667840",
+        "command": "curl -sL -A 'Mozilla/5.0' 'https://events.in.gov/search/events.ics?browse_type=school&event_types%5B%5D=49056849667840' | grep -c 'BEGIN:VEVENT'"
       }
     },
     {
@@ -83,18 +95,6 @@
     {
       "severity": 2,
       "kind": "newly_silent",
-      "title": "buskirk_chumley went silent (valid calendar, 0 events)",
-      "detail": "was 37 events on 2026-08-27",
-      "feed": "buskirk_chumley",
-      "repro": {
-        "display": "Buskirk-Chumley Theater",
-        "source": "python scrapers/buskirk_chumley.py",
-        "command": "python scrapers/buskirk_chumley.py"
-      }
-    },
-    {
-      "severity": 2,
-      "kind": "newly_silent",
       "title": "gcal_2db8c2cf65a3558e38c4caaea43cb56e722090235237a95f137b087306353e51 went silent (valid calendar, 0 events)",
       "detail": "was 1 events on 2026-08-30",
       "feed": "gcal_2db8c2cf65a3558e38c4caaea43cb56e722090235237a95f137b087306353e51",
@@ -114,18 +114,6 @@
         "display": "Pottery House Studio",
         "source": "python scrapers/squarespace.py --url \"https://www.potteryhousestudio.com/workshops\" --name \"Pottery House Studio\"",
         "command": "python scrapers/squarespace.py --url \"https://www.potteryhousestudio.com/workshops\" --name \"Pottery House Studio\""
-      }
-    },
-    {
-      "severity": 2,
-      "kind": "newly_silent",
-      "title": "sycamore_land_trust went silent (valid calendar, 0 events)",
-      "detail": "was 7 events on 2026-08-27",
-      "feed": "sycamore_land_trust",
-      "repro": {
-        "display": "Sycamore Land Trust",
-        "source": "python scrapers/sycamore_land_trust.py",
-        "command": "python scrapers/sycamore_land_trust.py"
       }
     },
     {
@@ -499,13 +487,6 @@
       "content": "quiet"
     },
     {
-      "feed": "buskirk_chumley",
-      "was": 37,
-      "was_date": "2026-08-27",
-      "silent_since": "2026-08-28",
-      "content": "quiet"
-    },
-    {
       "feed": "cicada_cinema",
       "was": null,
       "was_date": null,
@@ -553,6 +534,13 @@
       "was_date": "2026-08-21",
       "silent_since": "2026-08-22",
       "content": "quiet"
+    },
+    {
+      "feed": "events_search_events_ics",
+      "was": 145,
+      "was_date": "2026-08-30",
+      "silent_since": "2026-08-31",
+      "content": "not_ics:html"
     },
     {
       "feed": "events_search_events_ics_ics",
@@ -643,13 +631,6 @@
       "was": null,
       "was_date": null,
       "silent_since": "2026-08-15",
-      "content": "quiet"
-    },
-    {
-      "feed": "sycamore_land_trust",
-      "was": 7,
-      "was_date": "2026-08-27",
-      "silent_since": "2026-08-28",
       "content": "quiet"
     },
     {
@@ -871,6 +852,14 @@
       "date": "2026-08-31",
       "city": "bloomington",
       "feed": "pottery_house_studio"
+    },
+    {
+      "type": "zero_events",
+      "message": "Feed returned 0 events (was 145)",
+      "severity": "info",
+      "date": "2026-08-31",
+      "city": "bloomington",
+      "feed": "events_search_events_ics"
     }
   ],
   "detail": {
@@ -1993,9 +1982,9 @@
         ]
       },
       "buskirk_chumley": {
-        "count": 0,
+        "count": 32,
         "error": null,
-        "content": "quiet",
+        "content": null,
         "history": [
           {
             "date": "2026-08-15",
@@ -2063,7 +2052,7 @@
           },
           {
             "date": "2026-08-31",
-            "count": 0
+            "count": 32
           }
         ]
       },
@@ -2314,7 +2303,7 @@
         ]
       },
       "campuslabs_iub": {
-        "count": 1552,
+        "count": 1551,
         "error": null,
         "content": null,
         "history": [
@@ -2436,7 +2425,7 @@
           },
           {
             "date": "2026-08-31",
-            "count": 1552
+            "count": 1551
           }
         ]
       },
@@ -3847,7 +3836,7 @@
         ]
       },
       "events_livewhale_221": {
-        "count": 2,
+        "count": 3,
         "error": null,
         "content": null,
         "history": [
@@ -3969,7 +3958,7 @@
           },
           {
             "date": "2026-08-31",
-            "count": 2
+            "count": 3
           }
         ]
       },
@@ -5871,9 +5860,9 @@
         ]
       },
       "events_search_events_ics": {
-        "count": 145,
+        "count": 0,
         "error": null,
-        "content": null,
+        "content": "not_ics:html",
         "history": [
           {
             "date": "2026-08-02",
@@ -5993,7 +5982,7 @@
           },
           {
             "date": "2026-08-31",
-            "count": 145
+            "count": 0
           }
         ]
       },
@@ -7895,7 +7884,7 @@
         ]
       },
       "gcal_c_67228f47640aec0e7a9e654fa0124080357557242e1bc400f3c225c9a90d8bfb": {
-        "count": 3,
+        "count": 1,
         "error": null,
         "content": null,
         "history": [
@@ -7945,7 +7934,7 @@
           },
           {
             "date": "2026-08-31",
-            "count": 3
+            "count": 1
           }
         ]
       },
@@ -10259,7 +10248,7 @@
         ]
       },
       "limestone_post": {
-        "count": 439,
+        "count": 440,
         "error": null,
         "content": null,
         "history": [
@@ -10329,7 +10318,7 @@
           },
           {
             "date": "2026-08-31",
-            "count": 439
+            "count": 440
           }
         ]
       },
@@ -12344,9 +12333,9 @@
         ]
       },
       "sycamore_land_trust": {
-        "count": 0,
+        "count": 13,
         "error": null,
-        "content": "quiet",
+        "content": null,
         "history": [
           {
             "date": "2026-08-15",
@@ -12414,7 +12403,7 @@
           },
           {
             "date": "2026-08-31",
-            "count": 0
+            "count": 13
           }
         ]
       },
@@ -13296,7 +13285,7 @@
         ]
       },
       "tockify_thebackdoor": {
-        "count": 229,
+        "count": 227,
         "error": null,
         "content": null,
         "history": [
@@ -13410,7 +13399,7 @@
           },
           {
             "date": "2026-08-31",
-            "count": 229
+            "count": 227
           }
         ]
       },
@@ -13741,9 +13730,9 @@
       }
     },
     "url_quality": {
-      "total_with_url": 5075,
-      "total_events": 7680,
-      "unique_urls": 3330,
+      "total_with_url": 4954,
+      "total_events": 7559,
+      "unique_urls": 3229,
       "generic_count": 298,
       "generic_domains": [
         {
@@ -13802,8 +13791,8 @@
       "source_specificity": [
         {
           "source": "IU beINvolved Student Orgs",
-          "events": 1202,
-          "unique_urls": 1202,
+          "events": 1203,
+          "unique_urls": 1203,
           "specificity_pct": 100
         },
         {
@@ -13820,9 +13809,9 @@
         },
         {
           "source": "Limestone Post",
-          "events": 267,
-          "unique_urls": 96,
-          "specificity_pct": 36
+          "events": 263,
+          "unique_urls": 92,
+          "specificity_pct": 35
         },
         {
           "source": "Pillar Arts Community Calendar",
@@ -13832,8 +13821,8 @@
         },
         {
           "source": "The Back Door",
-          "events": 228,
-          "unique_urls": 228,
+          "events": 226,
+          "unique_urls": 226,
           "specificity_pct": 100
         },
         {
@@ -13867,12 +13856,6 @@
           "specificity_pct": 100
         },
         {
-          "source": "Monroe County Government",
-          "events": 140,
-          "unique_urls": 120,
-          "specificity_pct": 86
-        },
-        {
           "source": "Bloomington Pride",
           "events": 116,
           "unique_urls": 1,
@@ -13889,6 +13872,12 @@
           "events": 63,
           "unique_urls": 46,
           "specificity_pct": 73
+        },
+        {
+          "source": "IU LGBTQ+ Culture Center",
+          "events": 58,
+          "unique_urls": 10,
+          "specificity_pct": 17
         }
       ]
     },
@@ -13898,7 +13887,7 @@
       "tzids": [
         {
           "tzid": "UTC (Z suffix)",
-          "count": 27345,
+          "count": 27164,
           "files": 55,
           "matches_city": false,
           "sample_files": [
@@ -13924,8 +13913,8 @@
         },
         {
           "tzid": "America/Indiana/Indianapolis",
-          "count": 2650,
-          "files": 44,
+          "count": 2683,
+          "files": 45,
           "matches_city": true,
           "sample_files": [
             "bloomington_brewing.ics",
@@ -13937,8 +13926,8 @@
         },
         {
           "tzid": "(bare \u2014 assumes city tz)",
-          "count": 185,
-          "files": 46,
+          "count": 198,
+          "files": 47,
           "matches_city": false,
           "sample_files": [
             "api.ics",
@@ -14017,10 +14006,10 @@
         "source": "Campuslabs Iub",
         "source_id": "campuslabs_iub",
         "location": "Global & International Studies, GA 1100",
-        "count": 36,
+        "count": 35,
         "titles": [
-          "Hamzath Interest Meeting",
           "Leadership Meeting",
+          "Women in Business Recruitment Event - Professional Development",
           "Women in Business Recruitment Event - Professional Development"
         ]
       },
@@ -14166,11 +14155,11 @@
       {
         "source": "Gcal Bloomington In Gov 1Rosks8Nont4Ebaq41Tfgg8V7G Group Calendar Google Com",
         "source_id": "gcal_bloomington_in_gov_1rosks8nont4ebaq41tfgg8v7g_group_calendar_google_com",
-        "location": "Allison Jukebox Community Center, 351 S Washington St, Blooming\rton, IN 47401, USA\r",
+        "location": "Leonard Springs Nature Park, 4685 S Leonard Springs Rd, Bloomin\rgton, IN 47403, USA\r",
         "count": 2,
         "titles": [
-          "Sharpening and Maintaining Garden Tools",
-          "American Red Cross Adult and Pediatric First Aid/CPR/AED Certifica"
+          "Rooted in Nature",
+          "Wildcraft Tea Time"
         ]
       },
       {
@@ -14179,18 +14168,18 @@
         "location": "Willie Streeter Community Gardens, 2125 S Highland Ave, Bloomin\rgton, IN 47401, USA\r",
         "count": 2,
         "titles": [
-          "Garlic in Your Garden",
-          "Simple Seed Saving for Vegetables"
+          "Simple Seed Saving for Vegetables",
+          "Garlic in Your Garden"
         ]
       },
       {
         "source": "Gcal Bloomington In Gov 1Rosks8Nont4Ebaq41Tfgg8V7G Group Calendar Google Com",
         "source_id": "gcal_bloomington_in_gov_1rosks8nont4ebaq41tfgg8v7g_group_calendar_google_com",
-        "location": "Leonard Springs Nature Park, 4685 S Leonard Springs Rd, Bloomin\rgton, IN 47403, USA\r",
+        "location": "Allison Jukebox Community Center, 351 S Washington St, Blooming\rton, IN 47401, USA\r",
         "count": 2,
         "titles": [
-          "Rooted in Nature",
-          "Wildcraft Tea Time"
+          "Sharpening and Maintaining Garden Tools",
+          "American Red Cross Adult and Pediatric First Aid/CPR/AED Certifica"
         ]
       },
       {
@@ -14395,7 +14384,7 @@
     "categories": [
       {
         "category": "Community / Social",
-        "count": 960
+        "count": 959
       },
       {
         "category": "Religion / Spirituality",
@@ -14403,15 +14392,15 @@
       },
       {
         "category": "Arts / Culture",
-        "count": 716
+        "count": 720
       },
       {
         "category": "Education / Workshops",
-        "count": 678
+        "count": 666
       },
       {
         "category": "Music / Concerts",
-        "count": 589
+        "count": 591
       },
       {
         "category": "Sports / Fitness",
@@ -14419,7 +14408,7 @@
       },
       {
         "category": "Government / Civic",
-        "count": 519
+        "count": 450
       },
       {
         "category": "Games / Trivia",
@@ -14427,27 +14416,27 @@
       },
       {
         "category": "Family / Kids",
-        "count": 356
+        "count": 357
       },
       {
         "category": "Dance / Performance",
-        "count": 338
+        "count": 341
       },
       {
         "category": "History / Heritage",
-        "count": 248
+        "count": 245
       },
       {
         "category": "Craft / Maker",
-        "count": 240
+        "count": 241
       },
       {
         "category": "Health / Wellness",
-        "count": 239
+        "count": 238
       },
       {
         "category": "Comedy / Improv",
-        "count": 213
+        "count": 214
       },
       {
         "category": "Food / Drink",
@@ -14455,19 +14444,15 @@
       },
       {
         "category": "Books / Literature / Poetry",
-        "count": 180
+        "count": 181
       },
       {
         "category": "Film / Cinema",
-        "count": 146
+        "count": 147
       },
       {
         "category": "Nature / Outdoors / Recreation",
-        "count": 120
-      },
-      {
-        "category": "(uncategorized)",
-        "count": 91
+        "count": 124
       },
       {
         "category": "LGBTQ+ / Gender",
@@ -14478,13 +14463,17 @@
         "count": 57
       },
       {
+        "category": "(uncategorized)",
+        "count": 35
+      },
+      {
         "category": "Gardening / Horticulture",
-        "count": 28
+        "count": 31
       }
     ],
     "images": {
-      "total": 7680,
-      "with_image": 2039,
+      "total": 7559,
+      "with_image": 2022,
       "by_source": [
         {
           "source": "Brown County Events",
@@ -14498,8 +14487,8 @@
         },
         {
           "source": "The Back Door",
-          "total": 228,
-          "with_image": 228
+          "total": 226,
+          "with_image": 226
         },
         {
           "source": "IU Bloomington Libraries",
@@ -14530,11 +14519,6 @@
           "source": "Brown County Playhouse",
           "total": 20,
           "with_image": 20
-        },
-        {
-          "source": "Pillar Arts Community Calendar, Limestone Post",
-          "total": 19,
-          "with_image": 19
         },
         {
           "source": "Eskenazi Museum of Art",
@@ -14617,17 +14601,17 @@
           "with_image": 6
         },
         {
-          "source": "Lotus Festival",
-          "total": 5,
-          "with_image": 5
-        },
-        {
           "source": "IU Bloomington Libraries, BloomingtonOnline Events",
           "total": 4,
           "with_image": 4
         },
         {
           "source": "IU Cinema",
+          "total": 4,
+          "with_image": 4
+        },
+        {
+          "source": "Lotus Festival",
           "total": 4,
           "with_image": 4
         },
@@ -14639,6 +14623,11 @@
         {
           "source": "IU La Casa Latino Cultural Center, IU beINvolved Student Orgs",
           "total": 26,
+          "with_image": 3
+        },
+        {
+          "source": "Pillar Arts Community Calendar, Limestone Post",
+          "total": 3,
           "with_image": 3
         },
         {
@@ -14655,6 +14644,11 @@
           "source": "IU First Nations Center, IU Hamilton Lugar School, IU La Casa Latino Cultural Center",
           "total": 3,
           "with_image": 3
+        },
+        {
+          "source": "IU Black Film Center & Archive",
+          "total": 2,
+          "with_image": 2
         },
         {
           "source": "Indivisible South Central Indiana (Mobilize)",
