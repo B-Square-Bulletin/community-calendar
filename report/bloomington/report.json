@@ -1,11 +1,11 @@
 {
   "city": "bloomington",
-  "generated": "2026-09-05T02:08:24.198394+00:00",
+  "generated": "2026-09-05T03:15:07.447066+00:00",
   "build": {
-    "generated": "2026-09-05T02:08:24.198394+00:00",
-    "total_events": 7717,
-    "prev_total_events": 7583,
-    "delta": 134
+    "generated": "2026-09-05T03:15:07.447066+00:00",
+    "total_events": 7731,
+    "prev_total_events": 7717,
+    "delta": 14
   },
   "problems": [
     {
@@ -40,20 +40,8 @@
       "feed": "wonderlab",
       "repro": {
         "display": "WonderLab Museum",
-        "source": "https://wonderlab.org/events/?ical=1",
-        "command": "curl -sL -A 'Mozilla/5.0' 'https://wonderlab.org/events/?ical=1' | grep -c 'BEGIN:VEVENT'"
-      }
-    },
-    {
-      "severity": 2,
-      "kind": "newly_silent",
-      "title": "buskirk_chumley went silent (valid calendar, 0 events)",
-      "detail": "was 34 events on 2026-09-03",
-      "feed": "buskirk_chumley",
-      "repro": {
-        "display": "Buskirk-Chumley Theater",
-        "source": "python scrapers/buskirk_chumley.py",
-        "command": "python scrapers/buskirk_chumley.py"
+        "source": "https://wonderlab.org/events/list/?ical=1",
+        "command": "curl -sL -A 'Mozilla/5.0' 'https://wonderlab.org/events/list/?ical=1' | grep -c 'BEGIN:VEVENT'"
       }
     },
     {
@@ -90,18 +78,6 @@
         "display": "Pottery House Studio",
         "source": "python scrapers/squarespace.py --url \"https://www.potteryhousestudio.com/workshops\" --name \"Pottery House Studio\"",
         "command": "python scrapers/squarespace.py --url \"https://www.potteryhousestudio.com/workshops\" --name \"Pottery House Studio\""
-      }
-    },
-    {
-      "severity": 2,
-      "kind": "newly_silent",
-      "title": "sycamore_land_trust went silent (valid calendar, 0 events)",
-      "detail": "was 13 events on 2026-09-03",
-      "feed": "sycamore_land_trust",
-      "repro": {
-        "display": "Sycamore Land Trust",
-        "source": "python scrapers/sycamore_land_trust.py",
-        "command": "python scrapers/sycamore_land_trust.py"
       }
     },
     {
@@ -456,13 +432,6 @@
       "content": "quiet"
     },
     {
-      "feed": "buskirk_chumley",
-      "was": 34,
-      "was_date": "2026-09-03",
-      "silent_since": "2026-09-04",
-      "content": "quiet"
-    },
-    {
       "feed": "cicada_cinema",
       "was": null,
       "was_date": null,
@@ -600,13 +569,6 @@
       "was": null,
       "was_date": null,
       "silent_since": "2026-08-15",
-      "content": "quiet"
-    },
-    {
-      "feed": "sycamore_land_trust",
-      "was": 13,
-      "was_date": "2026-09-03",
-      "silent_since": "2026-09-04",
       "content": "quiet"
     },
     {
@@ -1983,9 +1945,9 @@
         ]
       },
       "buskirk_chumley": {
-        "count": 0,
+        "count": 33,
         "error": null,
-        "content": "quiet",
+        "content": null,
         "history": [
           {
             "date": "2026-08-15",
@@ -2073,7 +2035,7 @@
           },
           {
             "date": "2026-09-05",
-            "count": 0
+            "count": 33
           }
         ]
       },
@@ -2332,7 +2294,7 @@
         ]
       },
       "campuslabs_iub": {
-        "count": 1632,
+        "count": 1629,
         "error": null,
         "content": null,
         "history": [
@@ -2454,7 +2416,7 @@
           },
           {
             "date": "2026-09-05",
-            "count": 1632
+            "count": 1629
           }
         ]
       },
@@ -2649,7 +2611,7 @@
         ]
       },
       "comedy_attic": {
-        "count": 60,
+        "count": 59,
         "error": null,
         "content": null,
         "history": [
@@ -2739,7 +2701,7 @@
           },
           {
             "date": "2026-09-05",
-            "count": 60
+            "count": 59
           }
         ]
       },
@@ -3632,7 +3594,7 @@
         ]
       },
       "events_livewhale_130": {
-        "count": 36,
+        "count": 37,
         "error": null,
         "content": null,
         "history": [
@@ -3754,7 +3716,7 @@
           },
           {
             "date": "2026-09-05",
-            "count": 36
+            "count": 37
           }
         ]
       },
@@ -4902,7 +4864,7 @@
         ]
       },
       "events_livewhale_343": {
-        "count": 31,
+        "count": 30,
         "error": null,
         "content": null,
         "history": [
@@ -5024,7 +4986,7 @@
           },
           {
             "date": "2026-09-05",
-            "count": 31
+            "count": 30
           }
         ]
       },
@@ -5664,7 +5626,7 @@
         ]
       },
       "events_livewhale_64": {
-        "count": 78,
+        "count": 91,
         "error": null,
         "content": null,
         "history": [
@@ -5786,12 +5748,12 @@
           },
           {
             "date": "2026-09-05",
-            "count": 78
+            "count": 91
           }
         ]
       },
       "events_livewhale_81": {
-        "count": 19,
+        "count": 20,
         "error": null,
         "content": null,
         "history": [
@@ -5913,7 +5875,7 @@
           },
           {
             "date": "2026-09-05",
-            "count": 19
+            "count": 20
           }
         ]
       },
@@ -10406,7 +10368,7 @@
         ]
       },
       "limestone_post": {
-        "count": 480,
+        "count": 482,
         "error": null,
         "content": null,
         "history": [
@@ -10496,7 +10458,7 @@
           },
           {
             "date": "2026-09-05",
-            "count": 480
+            "count": 482
           }
         ]
       },
@@ -12951,9 +12913,9 @@
         ]
       },
       "sycamore_land_trust": {
-        "count": 0,
+        "count": 13,
         "error": null,
-        "content": "quiet",
+        "content": null,
         "history": [
           {
             "date": "2026-08-15",
@@ -13041,7 +13003,7 @@
           },
           {
             "date": "2026-09-05",
-            "count": 0
+            "count": 13
           }
         ]
       },
@@ -14596,9 +14558,9 @@
       }
     },
     "url_quality": {
-      "total_with_url": 5004,
-      "total_events": 7717,
-      "unique_urls": 3254,
+      "total_with_url": 5018,
+      "total_events": 7731,
+      "unique_urls": 3268,
       "generic_count": 307,
       "generic_domains": [
         {
@@ -14662,32 +14624,32 @@
       "source_specificity": [
         {
           "source": "IU beINvolved Student Orgs",
-          "events": 1294,
-          "unique_urls": 1294,
+          "events": 1292,
+          "unique_urls": 1292,
           "specificity_pct": 100
         },
         {
           "source": "Brown County Events",
-          "events": 673,
+          "events": 672,
           "unique_urls": 103,
           "specificity_pct": 15
         },
         {
-          "source": "IU Bloomington Libraries",
-          "events": 366,
-          "unique_urls": 30,
-          "specificity_pct": 8
+          "source": "Limestone Post",
+          "events": 297,
+          "unique_urls": 100,
+          "specificity_pct": 34
         },
         {
-          "source": "Limestone Post",
-          "events": 304,
-          "unique_urls": 108,
-          "specificity_pct": 36
+          "source": "IU Bloomington Libraries",
+          "events": 289,
+          "unique_urls": 29,
+          "specificity_pct": 10
         },
         {
           "source": "Pillar Arts Community Calendar",
-          "events": 258,
-          "unique_urls": 258,
+          "events": 257,
+          "unique_urls": 257,
           "specificity_pct": 100
         },
         {
@@ -14710,9 +14672,9 @@
         },
         {
           "source": "IU Maurer School of Law",
-          "events": 147,
-          "unique_urls": 78,
-          "specificity_pct": 53
+          "events": 156,
+          "unique_urls": 87,
+          "specificity_pct": 56
         },
         {
           "source": "Libcal Iub 5914",
@@ -14733,6 +14695,12 @@
           "specificity_pct": 1
         },
         {
+          "source": "IU Arts & Humanities Institute, IU Bloomington Libraries",
+          "events": 101,
+          "unique_urls": 3,
+          "specificity_pct": 3
+        },
+        {
           "source": "Monroe Lake DNR",
           "events": 60,
           "unique_urls": 44,
@@ -14743,12 +14711,6 @@
           "events": 54,
           "unique_urls": 9,
           "specificity_pct": 17
-        },
-        {
-          "source": "Let's Go Bloomington",
-          "events": 50,
-          "unique_urls": 1,
-          "specificity_pct": 2
         }
       ]
     },
@@ -14758,7 +14720,7 @@
       "tzids": [
         {
           "tzid": "UTC (Z suffix)",
-          "count": 27422,
+          "count": 27426,
           "files": 56,
           "matches_city": false,
           "sample_files": [
@@ -14784,8 +14746,8 @@
         },
         {
           "tzid": "America/Indiana/Indianapolis",
-          "count": 2628,
-          "files": 46,
+          "count": 2662,
+          "files": 47,
           "matches_city": true,
           "sample_files": [
             "bloomington_brewing.ics",
@@ -14797,8 +14759,8 @@
         },
         {
           "tzid": "(bare \u2014 assumes city tz)",
-          "count": 191,
-          "files": 47,
+          "count": 204,
+          "files": 48,
           "matches_city": false,
           "sample_files": [
             "api.ics",
@@ -15036,21 +14998,21 @@
       {
         "source": "Gcal Bloomington In Gov 1Rosks8Nont4Ebaq41Tfgg8V7G Group Calendar Google Com",
         "source_id": "gcal_bloomington_in_gov_1rosks8nont4ebaq41tfgg8v7g_group_calendar_google_com",
-        "location": "Leonard Springs Nature Park, 4685 S Leonard Springs Rd, Bloomin\rgton, IN 47403, USA\r",
+        "location": "Allison Jukebox Community Center, 351 S Washington St, Blooming\rton, IN 47401, USA\r",
         "count": 2,
         "titles": [
-          "Rooted in Nature",
-          "Wildcraft Tea Time"
+          "Sharpening and Maintaining Garden Tools",
+          "American Red Cross Adult and Pediatric First Aid/CPR/AED Certifica"
         ]
       },
       {
         "source": "Gcal Bloomington In Gov 1Rosks8Nont4Ebaq41Tfgg8V7G Group Calendar Google Com",
         "source_id": "gcal_bloomington_in_gov_1rosks8nont4ebaq41tfgg8v7g_group_calendar_google_com",
-        "location": "Allison Jukebox Community Center, 351 S Washington St, Blooming\rton, IN 47401, USA\r",
+        "location": "Leonard Springs Nature Park, 4685 S Leonard Springs Rd, Bloomin\rgton, IN 47403, USA\r",
         "count": 2,
         "titles": [
-          "American Red Cross Adult and Pediatric First Aid/CPR/AED Certifica",
-          "Sharpening and Maintaining Garden Tools"
+          "Rooted in Nature",
+          "Wildcraft Tea Time"
         ]
       },
       {
@@ -15210,7 +15172,7 @@
     "categories": [
       {
         "category": "Community / Social",
-        "count": 988
+        "count": 991
       },
       {
         "category": "Religion / Spirituality",
@@ -15218,19 +15180,19 @@
       },
       {
         "category": "Education / Workshops",
-        "count": 737
+        "count": 718
       },
       {
         "category": "Arts / Culture",
-        "count": 655
+        "count": 680
       },
       {
         "category": "Music / Concerts",
-        "count": 625
+        "count": 627
       },
       {
         "category": "Sports / Fitness",
-        "count": 524
+        "count": 526
       },
       {
         "category": "Games / Trivia",
@@ -15238,7 +15200,7 @@
       },
       {
         "category": "Government / Civic",
-        "count": 400
+        "count": 398
       },
       {
         "category": "Family / Kids",
@@ -15246,11 +15208,11 @@
       },
       {
         "category": "Dance / Performance",
-        "count": 368
+        "count": 370
       },
       {
         "category": "Craft / Maker",
-        "count": 269
+        "count": 270
       },
       {
         "category": "History / Heritage",
@@ -15266,7 +15228,7 @@
       },
       {
         "category": "Comedy / Improv",
-        "count": 214
+        "count": 213
       },
       {
         "category": "Books / Literature / Poetry",
@@ -15286,7 +15248,7 @@
       },
       {
         "category": "(uncategorized)",
-        "count": 50
+        "count": 51
       },
       {
         "category": "Technology / Careers",
@@ -15298,23 +15260,18 @@
       }
     ],
     "images": {
-      "total": 7717,
-      "with_image": 2028,
+      "total": 7731,
+      "with_image": 2013,
       "by_source": [
         {
           "source": "Brown County Events",
-          "total": 673,
-          "with_image": 673
-        },
-        {
-          "source": "IU Bloomington Libraries",
-          "total": 366,
-          "with_image": 297
+          "total": 672,
+          "with_image": 672
         },
         {
           "source": "Pillar Arts Community Calendar",
-          "total": 258,
-          "with_image": 253
+          "total": 257,
+          "with_image": 252
         },
         {
           "source": "The Back Door",
@@ -15322,9 +15279,19 @@
           "with_image": 224
         },
         {
+          "source": "IU Bloomington Libraries",
+          "total": 289,
+          "with_image": 220
+        },
+        {
           "source": "IU Eskenazi School of Art, Architecture + Design",
           "total": 175,
           "with_image": 172
+        },
+        {
+          "source": "IU Arts & Humanities Institute, IU Bloomington Libraries",
+          "total": 101,
+          "with_image": 101
         },
         {
           "source": "IU Jacobs School of Music",
@@ -15338,18 +15305,8 @@
         },
         {
           "source": "IU Hamilton Lugar School",
-          "total": 45,
-          "with_image": 35
-        },
-        {
-          "source": "IU Arts & Humanities Institute, IU Bloomington Libraries",
-          "total": 24,
-          "with_image": 24
-        },
-        {
-          "source": "Brown County Playhouse",
-          "total": 20,
-          "with_image": 20
+          "total": 46,
+          "with_image": 36
         },
         {
           "source": "Eskenazi Museum of Art",
@@ -15357,12 +15314,12 @@
           "with_image": 20
         },
         {
-          "source": "IU Auditorium",
-          "total": 16,
-          "with_image": 16
+          "source": "Brown County Playhouse",
+          "total": 19,
+          "with_image": 19
         },
         {
-          "source": "Pillar Arts Community Calendar, Limestone Post",
+          "source": "IU Auditorium",
           "total": 16,
           "with_image": 16
         },
@@ -15372,19 +15329,19 @@
           "with_image": 15
         },
         {
+          "source": "IU Cinema, Pillar Arts Community Calendar",
+          "total": 13,
+          "with_image": 13
+        },
+        {
           "source": "Monroe County Democratic Party",
           "total": 25,
           "with_image": 13
         },
         {
-          "source": "IU Cinema, Pillar Arts Community Calendar",
+          "source": "IU Arts & Humanities Institute",
           "total": 12,
           "with_image": 12
-        },
-        {
-          "source": "IU Arts & Humanities Institute",
-          "total": 11,
-          "with_image": 11
         },
         {
           "source": "Architecture + Design, Eskenazi Museum of Art, IU Arts & Humanities Institute, IU Eskenazi School of Art",
@@ -15392,24 +15349,19 @@
           "with_image": 10
         },
         {
-          "source": "Bloomington Spinners & Weavers Guild",
-          "total": 30,
-          "with_image": 8
+          "source": "Brown County Playhouse, Brown County Events",
+          "total": 9,
+          "with_image": 9
         },
         {
-          "source": "Brown County Playhouse, Brown County Events",
-          "total": 8,
+          "source": "Bloomington Spinners & Weavers Guild",
+          "total": 30,
           "with_image": 8
         },
         {
           "source": "IU Hamilton Lugar School, IU Kelley School of Business",
           "total": 9,
           "with_image": 8
-        },
-        {
-          "source": "IU Kelley School of Business",
-          "total": 11,
-          "with_image": 7
         },
         {
           "source": "IU LGBTQ+ Culture Center, IU La Casa Latino Cultural Center",
@@ -15419,6 +15371,11 @@
         {
           "source": "Eskenazi Museum of Art, IU Arts & Humanities Institute",
           "total": 6,
+          "with_image": 6
+        },
+        {
+          "source": "IU Kelley School of Business",
+          "total": 10,
           "with_image": 6
         },
         {
@@ -15437,11 +15394,6 @@
           "with_image": 6
         },
         {
-          "source": "Lotus Festival",
-          "total": 5,
-          "with_image": 5
-        },
-        {
           "source": "IU Bloomington Libraries, BloomingtonOnline Events",
           "total": 4,
           "with_image": 4
@@ -15453,6 +15405,11 @@
         },
         {
           "source": "IU Cinema",
+          "total": 4,
+          "with_image": 4
+        },
+        {
+          "source": "Lotus Festival",
           "total": 4,
           "with_image": 4
         },
@@ -15477,12 +15434,12 @@
           "with_image": 2
         },
         {
-          "source": "IU Arts & Humanities Institute, IU Hamilton Lugar School, IU Kelley School of Business",
-          "total": 5,
+          "source": "Indivisible South Central Indiana (Mobilize)",
+          "total": 2,
           "with_image": 2
         },
         {
-          "source": "Indivisible South Central Indiana (Mobilize)",
+          "source": "Pillar Arts Community Calendar, Limestone Post",
           "total": 2,
           "with_image": 2
         },
@@ -15494,6 +15451,11 @@
         {
           "source": "IU Mathers Museum of World Cultures",
           "total": 1,
+          "with_image": 1
+        },
+        {
+          "source": "IU Arts & Humanities Institute, IU Hamilton Lugar School, IU Kelley School of Business",
+          "total": 4,
           "with_image": 1
         },
         {
@@ -15518,6 +15480,11 @@
         },
         {
           "source": "IU Cinema, IU Jacobs School of Music",
+          "total": 1,
+          "with_image": 1
+        },
+        {
+          "source": "IU Arts & Humanities Institute, IU Kelley School of Business",
           "total": 1,
           "with_image": 1
         },
