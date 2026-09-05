@@ -448,6 +448,10 @@ Annual events with reliable dates but no feeds — a once-a-season curator sweep
 - **Directories**: Visit Bloomington/Gallery Walk/IDS Happenings/volunteer network mined; Butler Winery (35, tested); long Needs-Scraper bench (BSO, MCCT, BCGC, BLEMF, Cosmic Songwriter…)
 - **Gap topics**: Monroe County 4-H gcal (386); volunteerism orgs mapped (mostly Needs Scraper/Manual); El Centro + BRSN flagged for quarterly manual sweeps; no parkrun
 
+### 2026-09-04: Writers Guild feed fixed (ai1ec ICS → Sugar Calendar scraper)
+- The `writersguildbloomington` ICS feed served HTML, not ICS: the site migrated from All-in-One Event Calendar (ai1ec) to Sugar Calendar, so the old exporter endpoint (`?plugin=all-in-one-event-calendar&controller=ai1ec_exporter_controller...`) returns the HTML page (confirmed across browser UAs; `/events/` shows 123 `sugar-calendar` refs, 0 `ai1ec`).
+- Converted the DB feed row from `ics_url` to `scraper`: `python scrapers/writers_guild.py --output cities/bloomington/writersguildbloomington.ics` (same name/slug, no event-history disruption). Verified: 4 events, `X-SOURCE:Writers Guild at Bloomington`.
+
 ### 2026-08-07: DB-first cleanup and full local audit
 - Reconciled workflow scraper commands against Supabase: no missing rows, metadata updates, or DB-only scraper rows remained after cleanup.
 - Replaced the empty Boys & Girls Club Tribe ICS export with `tribe_rest.py` (2 events).
