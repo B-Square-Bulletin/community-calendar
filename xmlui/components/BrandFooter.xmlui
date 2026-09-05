@@ -1,0 +1,32 @@
+<!-- Trimmed BSB footer: 4 spec links + copyright on a red bar. External links
+     (Chronicle, BloomDocs) open in a new tab; bsquarebulletin.com links stay in
+     the same tab. No Ghost portal links (they only work on the Ghost site).
+     Shown on all standalone screens; hidden on embed. -->
+<Fragment>
+  <VStack
+    when="{!window.embed}"
+    width="100%"
+    padding="$space-4"
+    background="$color-primary"
+    horizontalAlignment="center"
+    gap="$space-2"
+    fontFamily="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+    <HStack gap="$space-4" wrapContent="true" horizontalAlignment="center">
+      <Link to="https://thebloomingtonchronicle.org/index.php/Main_Page" target="_blank">
+        <Text fontSize="$fontSize-sm" color="$color-surface" value="Bloomington Chronicle" />
+      </Link>
+      <Link to="https://bloomdocs.org/" target="_blank">
+        <Text fontSize="$fontSize-sm" color="$color-surface" value="BloomDocs" />
+      </Link>
+      <Link to="https://bsquarebulletin.com/contact-the-b-square/">
+        <Text fontSize="$fontSize-sm" color="$color-surface" value="Contact" />
+      </Link>
+      <Link to="https://bsquarebulletin.com/republishing-guidelines/">
+        <Text fontSize="$fontSize-sm" color="$color-surface" value="Republishing Guidelines" />
+      </Link>
+    </HStack>
+    <Text fontSize="$fontSize-xs" color="$color-surface" textAlign="center">
+      © The B Square. All rights reserved. Please ask before using. Unless otherwise noted in a photo caption, all content is copyrighted by The B Square.
+    </Text>
+  </VStack>
+</Fragment>

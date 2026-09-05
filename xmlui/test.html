@@ -1075,6 +1075,80 @@
       // REAL DATA TESTS (async, run after initial render)
       // ============================================================
 
+      // Brand chrome tests (#86): the masthead/footer are declarative markup
+      // with no pure-logic seam, so instead of unit-testing functions these
+      // fetch the shipped files and assert the acceptance criteria hold —
+      // a regression here fails the CI Playwright step like any other group.
+      async function runBrandChromeTests() {
+        const group = { name: 'Brand chrome (#86)', tests: [] };
+        const test = (name, fn) => {
+          try {
+            fn();
+            group.tests.push({ name, pass: true });
+          } catch (e) {
+            group.tests.push({ name, pass: false, error: e.message });
+          }
+        };
+        const get = async (path) => {
+          const response = await fetch(path);
+          assert(response.ok, 'Fetch failed for ' + path);
+          return response.text();
+        };
+        try {
+          const [header, footer, main, configText, logo] = await Promise.all([
+            get('components/BrandHeader.xmlui'),
+            get('components/BrandFooter.xmlui'),
+            get('Main.xmlui'),
+            get('config.json'),
+            get('icons/BSB_Logo-2-color-horiz.svg')
+          ]);
+
+          test('header links vendored logo to bsquarebulletin.com same-tab', () => {
+            assert(header.includes('https://bsquarebulletin.com/'), 'Missing paper link');
+            assert(/BSB_Logo-2-color-horiz\.svg\?v=.*APP_VERSION/.test(header), 'Missing versioned logo ref');
+            assert(!/bsquarebulletin\.com[^>]*target="_blank"/.test(header), 'Logo link must stay same-tab');
+          });
+
+          test('header carries sub-label, red rule, Inter, embed gate', () => {
+            assert(header.includes('Community Calendar'), 'Missing sub-label');
+            assert(header.includes('$color-text'), 'Sub-label must be black text token');
+            assert(header.includes('borderBottom="4px solid $color-primary"'), 'Missing 4px red rule');
+            assert(header.includes('Inter'), 'Missing Inter chrome font');
+            assert(header.includes('!window.embed'), 'Missing embed gate');
+          });
+
+          test('footer has red bar, 4 spec links, copyright, embed gate', () => {
+            assert(footer.includes('$color-primary'), 'Missing red bar');
+            assert(footer.includes('https://thebloomingtonchronicle.org/index.php/Main_Page'), 'Missing Chronicle link');
+            assert(footer.includes('https://bloomdocs.org/'), 'Missing BloomDocs link');
+            assert(footer.includes('https://bsquarebulletin.com/contact-the-b-square/'), 'Missing Contact link');
+            assert(footer.includes('https://bsquarebulletin.com/republishing-guidelines/'), 'Missing Republishing link');
+            assert(!footer.replace(/<!--[\s\S]*?-->/g, '').includes('#/portal/'), 'Must not include Ghost portal links');
+            assert(footer.includes('© The B Square. All rights reserved.'), 'Missing copyright line');
+            assert(footer.includes('Inter'), 'Missing Inter chrome font');
+            assert(footer.includes('!window.embed'), 'Missing embed gate');
+          });
+
+          test('logo vendored and registered in config.json', () => {
+            assert(logo.includes('<svg'), 'Logo is not SVG');
+            assert(JSON.parse(configText).resources['icon.bsb-logo'] === 'icons/BSB_Logo-2-color-horiz.svg', 'Logo not registered');
+          });
+
+          test('header/footer included in picker, list, and dashboard blocks', () => {
+            const headerCount = (main.match(/BrandHeader\.xmlui\?v=' \+ window\.APP_VERSION/g) || []).length;
+            const footerCount = (main.match(/BrandFooter\.xmlui\?v=' \+ window\.APP_VERSION/g) || []).length;
+            assertEqual(headerCount, 3, 'Expected 3 BrandHeader includes, got ' + headerCount);
+            assertEqual(footerCount, 3, 'Expected 3 BrandFooter includes, got ' + footerCount);
+            assert(!/<H1>Community Calendar<\/H1>/.test(main), 'Redundant picker heading must be dropped');
+            assert(main.includes('{window.toDisplayName(city)}'), 'City-name heading must stay');
+          });
+        } catch (e) {
+          group.tests.push({ name: 'Load brand chrome files', pass: false, error: e.message });
+        }
+        results.push(group);
+        render();
+      }
+
       const SUPABASE_URL = window.SUPABASE_URL;
       const SUPABASE_KEY = window.SUPABASE_KEY;
 
@@ -1303,6 +1377,15 @@
       loadingDiv.className = 'test-group';
       loadingDiv.innerHTML = '<h2>Real Data (loading...)</h2>';
       document.getElementById('results').appendChild(loadingDiv);
+
+      // Run brand chrome tests (async, independent of Supabase)
+      runBrandChromeTests().catch(err => {
+        results.push({
+          name: 'Brand chrome (#86)',
+          tests: [{ name: 'Run brand chrome tests', pass: false, error: err.message }]
+        });
+        render();
+      });
 
       // Run real data tests (async)
       runRealDataTests().then(() => {

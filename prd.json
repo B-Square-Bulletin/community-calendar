@@ -18,8 +18,8 @@
     {
       "title": "Branded masthead + footer chrome (#86)",
       "description": "Every standalone screen (picker, list/multicol, dashboard) carries the paper's masthead and footer; embeds stay chrome-free and in-app controls stay in place. Done when: BrandHeader (vendored BSB logo same-tab link, sub-label, 4px red rule, Inter, hidden on embed) and BrandFooter (red bar, 4 spec links with correct tab targets, copyright line, Inter, hidden on embed) exist; logo vendored under icons/ and registered in config.json; both included via IncludeMarkup with ?v=APP_VERSION in each standalone block; picker redundant heading dropped with city-name heading and controls intact.",
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Added components/BrandHeader.xmlui (Fragment; logo Link to= paper same-tab, versioned vendored SVG, black bold letter-spaced sub-label, borderBottom 4px solid $color-primary, Inter, when !window.embed) and BrandFooter.xmlui (Fragment; $color-primary bar, 4 spec links via Link+Text with correct targets, no portal links, copyright line, Inter, embed-gated); vendored icons/BSB_Logo-2-color-horiz.svg from BSB Ghost CDN (script-free, valid XML) and registered as icon.bsb-logo in config.json; wired 3 header + 3 footer IncludeMarkup includes (?v=APP_VERSION, per-block when gates) in Main.xmlui covering picker/list/dashboard and dropped the picker H1. Seam decision (pre-approved, unattended): no pure-logic seam exists, so left a fetch-based 'Brand chrome (#86)' group in test.html (5 tests, runs in CI Playwright step over http) as the durable regression test. Link/Image/Text props verified against engine metadata and in-repo precedent (Link to= + children, no href). Verified: 26 node acceptance checks pass, served-markup checks pass over local http, test.html syntax OK, make test 95 passed, make lint clean.",
       "reference": "https://github.com/B-Square-Bulletin/community-calendar/issues/86"
     },
     {

@@ -14,6 +14,7 @@
     "strictDeterminism": false
   },
   "resources": {
+    "icon.bsb-logo": "icons/BSB_Logo-2-color-horiz.svg",
     "icon.l-user": "icons/l-user.svg",
     "icon.l-rss": "icons/l-rss.svg",
     "icon.l-camera": "icons/l-camera.svg",
