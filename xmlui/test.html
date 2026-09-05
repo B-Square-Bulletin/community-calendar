@@ -1003,6 +1003,52 @@
         });
       });
 
+      describe('resolveCity', () => {
+        it('defaults no-param to the single list entry', () => {
+          assertEqual(resolveCity(null, ['bloomington']), 'bloomington');
+        });
+
+        it('defaults undefined param to the single list entry', () => {
+          assertEqual(resolveCity(undefined, ['bloomington']), 'bloomington');
+        });
+
+        it('treats empty-string param as absent and defaults', () => {
+          assertEqual(resolveCity('', ['bloomington']), 'bloomington');
+        });
+
+        it('yields no default for a multi-entry list', () => {
+          assertEqual(resolveCity(null, ['bloomington', 'davis']), null);
+        });
+
+        it('yields no default for an empty list', () => {
+          assertEqual(resolveCity(null, []), null);
+        });
+
+        it('yields no default for a null list', () => {
+          assertEqual(resolveCity(null, null), null);
+        });
+
+        it('yields no default for an undefined list', () => {
+          assertEqual(resolveCity(undefined, undefined), null);
+        });
+
+        it('passes an explicit param through verbatim', () => {
+          assertEqual(resolveCity('davis', ['bloomington', 'davis']), 'davis');
+        });
+
+        it('passes an explicit param through even when it differs from the single entry', () => {
+          assertEqual(resolveCity('davis', ['bloomington']), 'davis');
+        });
+
+        it('passes an unknown slug through verbatim', () => {
+          assertEqual(resolveCity('atlantis', ['bloomington']), 'atlantis');
+        });
+
+        it('passes an explicit param through when the list is null', () => {
+          assertEqual(resolveCity('davis', null), 'davis');
+        });
+      });
+
       describe('getThemeIdForHost', () => {
         it('maps the BSB host to the BSB theme', () => {
           assertEqual(getThemeIdForHost('calendar.bsquarebulletin.com'), 'b-square-bulletin');

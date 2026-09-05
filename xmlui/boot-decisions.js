@@ -16,4 +16,21 @@
     }
     return 'community-calendar';
   };
+
+  // Single-city boot default: on a host whose City list has exactly one
+  // entry, a root visit without ?city= resolves to that City so the
+  // calendar loads immediately instead of a one-button picker. Generic
+  // (not hardcoded): empty string counts as absent, an explicit
+  // non-empty param passes through verbatim (including unknown slugs,
+  // so deep-links behave as today), and empty/null/multi-entry lists
+  // yield no default (null).
+  window.resolveCity = function (cityParam, cityKeys) {
+    if (cityParam) {
+      return cityParam;
+    }
+    if (Array.isArray(cityKeys) && cityKeys.length === 1 && cityKeys[0]) {
+      return cityKeys[0];
+    }
+    return null;
+  };
 })();

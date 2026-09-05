@@ -11,8 +11,8 @@
     {
       "title": "Single-city boot default (skip the picker) (#85)",
       "description": "On a single-entry City list, calendar root without ?city= loads that City immediately with canonical ?city=<slug> URL; multi-city hosts and explicit deep-links behave as today. Done when: window.resolveCity(cityParam, cityKeys) in boot-decisions.js implements generic single-entry default with verbatim passthrough; boot path applies resolved City before prefetch with replaceState touching only city key; null/unloaded list guarded with no picker-markup change; test.html City-default groups pass in regression-tests.yml.",
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Seam decision (pre-approved, unattended loop): window.resolveCity(cityParam, cityKeys) pure in boot-decisions.js; shell.js derives keys from window._cities (array or object map, null-guarded) and applies resolved City before prefetch with replaceState on city key only. Added resolveCity group to test.html. Verified: 13 node assertions pass, make test 95 passed, make lint clean.",
       "reference": "https://github.com/B-Square-Bulletin/community-calendar/issues/85"
     },
     {

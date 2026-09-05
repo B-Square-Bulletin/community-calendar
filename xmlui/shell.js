@@ -230,11 +230,45 @@ window._xsLogs = [];
     return name + ' Now';
   };
 
-  window.cityFilter = cityParam || null;
-  window.cityName = window.toDisplayName(cityParam);
-  if (cityParam) {
-    document.title = window.cityName + ' Community Calendar';
-  }
+  window.cityFilter = null;
+  window.cityName = '';
+  (function () {
+    // Single-city boot default (#85): a single-entry City list resolves
+    // the missing ?city= to that City before the events-prefetch block
+    // below, and the URL becomes canonical via replaceState (city key
+    // only — sibling params and hash survive, no back-button entry).
+    // Null/unloaded lists are guarded (picker as today, no crash).
+    var keys = null;
+    try {
+      if (Array.isArray(window._cities)) {
+        keys = window._cities;
+      } else if (window._cities && typeof window._cities === 'object') {
+        keys = Object.keys(window._cities);
+      }
+    } catch (e) {
+      keys = null;
+    }
+    var resolved = cityParam || null;
+    try {
+      if (typeof window.resolveCity === 'function') {
+        resolved = window.resolveCity(cityParam, keys);
+      }
+    } catch (e) {
+      resolved = cityParam || null;
+    }
+    window.cityFilter = resolved || null;
+    window.cityName = window.toDisplayName(window.cityFilter);
+    if (window.cityFilter) {
+      document.title = window.cityName + ' Community Calendar';
+    }
+    if (!cityParam && window.cityFilter) {
+      try {
+        var url = new URL(window.location);
+        url.searchParams.set('city', window.cityFilter);
+        window.history.replaceState({}, '', url);
+      } catch (e) {}
+    }
+  })();
 
   window.selectCity = function (slug) {
     var url = new URL(window.location);
