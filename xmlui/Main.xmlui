@@ -339,7 +339,7 @@
 
   <!-- Dashboard mode (gate on settings loaded to avoid flash of default state) -->
   <Spinner when="{layoutMode === 'dashboard' && authSession && dashboardTiles === null}" />
-  <IncludeMarkup when="{layoutMode === 'dashboard' && (dashboardTiles !== null)}" url="{'components/BrandHeader.xmlui?v=' + window.APP_VERSION}" />
+  <IncludeMarkup when="{layoutMode === 'dashboard'}" url="{'components/BrandHeader.xmlui?v=' + window.APP_VERSION}" />
   <VStack when="{layoutMode === 'dashboard' && (dashboardTiles !== null)}" width="100%" padding="$space-3">
     <H1>
       <HStack width="100%" verticalAlignment="center">
@@ -422,5 +422,5 @@
     </VStack>
     <DashboardView />
   </VStack>
-  <IncludeMarkup when="{layoutMode === 'dashboard' && (dashboardTiles !== null)}" url="{'components/BrandFooter.xmlui?v=' + window.APP_VERSION}" />
+  <IncludeMarkup when="{layoutMode === 'dashboard'}" url="{'components/BrandFooter.xmlui?v=' + window.APP_VERSION}" />
 </App>

@@ -42,7 +42,11 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/rrule@2.8.1/dist/es5/rrule.min.js"></script>
-    <script src="boot-decisions.js"></script>
+    <script>
+      // Cache-bust boot-decisions.js like shell.js below: post-deploy
+      // clients must not run stale theme/city decisions from first paint.
+      document.write('<script src="boot-decisions.js' + _ccCacheBust + '"><\/script>');
+    </script>
     <script>
       document.write('<script src="shell.js' + _ccCacheBust + '"><\/script>');
     </script>

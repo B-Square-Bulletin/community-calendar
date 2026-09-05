@@ -1079,9 +1079,9 @@
       // with no pure-logic seam, so instead of unit-testing functions these
       // fetch the shipped files and assert the acceptance criteria hold —
       // a regression here fails the CI Playwright step like any other group.
-      async function runBrandChromeTests() {
-        const group = { name: 'Brand chrome (#86)', tests: [] };
-        const test = (name, fn) => {
+      // Shared by the #86/#87 fetch-based groups.
+      function makeGroupTester(group) {
+        return (name, fn) => {
           try {
             fn();
             group.tests.push({ name, pass: true });
@@ -1089,11 +1089,16 @@
             group.tests.push({ name, pass: false, error: e.message });
           }
         };
-        const get = async (path) => {
-          const response = await fetch(path);
-          assert(response.ok, 'Fetch failed for ' + path);
-          return response.text();
-        };
+      }
+      async function fetchText(path) {
+        const response = await fetch(path);
+        assert(response.ok, 'Fetch failed for ' + path);
+        return response.text();
+      }
+      async function runBrandChromeTests() {
+        const group = { name: 'Brand chrome (#86)', tests: [] };
+        const test = makeGroupTester(group);
+        const get = fetchText;
         try {
           const [header, footer, main, configText, logo] = await Promise.all([
             get('components/BrandHeader.xmlui'),
@@ -1111,7 +1116,7 @@
 
           test('header carries sub-label, red rule, Inter, embed gate', () => {
             assert(header.includes('Community Calendar'), 'Missing sub-label');
-            assert(header.includes('$color-text'), 'Sub-label must be black text token');
+            assert(header.includes('color="black"'), 'Sub-label must be black');
             assert(header.includes('borderBottom="4px solid $color-primary"'), 'Missing 4px red rule');
             assert(header.includes('Inter'), 'Missing Inter chrome font');
             assert(header.includes('!window.embed'), 'Missing embed gate');
@@ -1142,6 +1147,11 @@
             assert(!/<H1>Community Calendar<\/H1>/.test(main), 'Redundant picker heading must be dropped');
             assert(main.includes('{window.toDisplayName(city)}'), 'City-name heading must stay');
           });
+
+          test('dashboard loading state keeps chrome (not gated on tiles)', () => {
+            assert(main.includes('when="{layoutMode === \'dashboard\'}"'), 'Dashboard chrome must not gate on dashboardTiles');
+            assert(!/layoutMode === 'dashboard' && \(dashboardTiles !== null\).*Brand(Header|Footer)/.test(main), 'Brand includes must not require tiles');
+          });
         } catch (e) {
           group.tests.push({ name: 'Load brand chrome files', pass: false, error: e.message });
         }
@@ -1155,19 +1165,8 @@
       // CI Playwright step like any other group.
       async function runFontDeliveryTests() {
         const group = { name: 'Font delivery (#87)', tests: [] };
-        const test = (name, fn) => {
-          try {
-            fn();
-            group.tests.push({ name, pass: true });
-          } catch (e) {
-            group.tests.push({ name, pass: false, error: e.message });
-          }
-        };
-        const get = async (path) => {
-          const response = await fetch(path);
-          assert(response.ok, 'Fetch failed for ' + path);
-          return response.text();
-        };
+        const test = makeGroupTester(group);
+        const get = fetchText;
         try {
           const [index, themeText, header, footer] = await Promise.all([
             get('index.html'),
@@ -1198,6 +1197,20 @@
             const stack = theme.themeVars.fontFamily;
             assert(stack.indexOf('Lora') === 1, 'Theme fontFamily must lead with Lora, got: ' + stack);
             assert(stack.includes('Georgia'), 'Theme fontFamily must keep Georgia fallback');
+          });
+
+          test('theme surfaces are warm-neutral (not pure gray)', () => {
+            const theme = JSON.parse(themeText);
+            for (const key of ['color-surface', 'color-surface-200', 'color-surface-300', 'color-surface-400', 'color-surface-500', 'color-surface-600']) {
+              const val = theme.themeVars[key] || '';
+              assert(/hsl\(40/.test(val), key + ' must be warm-neutral hsl(40,…), got: ' + val);
+            }
+          });
+
+          test('index.html version-busts boot-decisions.js before shell.js', () => {
+            assert(index.includes('boot-decisions.js'), 'Missing boot-decisions.js load');
+            assert(!/<script src="boot-decisions\.js"><\/script>/.test(index), 'boot-decisions.js must be cache-busted');
+            assert(index.indexOf('src="boot-decisions.js') < index.indexOf('src="shell.js'), 'boot-decisions.js must load before shell.js');
           });
 
           test('brand chrome keeps Inter-first fallback stacks', () => {

@@ -21,7 +21,7 @@
       fontWeight="$fontWeight-bold"
       letterSpacing="1.5px"
       textTransform="uppercase"
-      color="$color-text"
+      color="black"
       marginTop="$space-1">
       Community Calendar
     </Text>

@@ -29,6 +29,8 @@ const header = read('components/BrandHeader.xmlui');
 const footer = read('components/BrandFooter.xmlui');
 const main = read('Main.xmlui');
 const config = read('config.json');
+const index = read('index.html');
+const themeText = read('themes/b-square-bulletin.json');
 let logo = null;
 try { logo = fs.readFileSync(path.join(ROOT, 'icons/BSB_Logo-2-color-horiz.svg'), 'utf8'); } catch { logo = null; }
 
@@ -37,7 +39,7 @@ check('header exists', !!header);
 check('header links logo to bsquarebulletin.com same-tab',
   !!header && header.includes('https://bsquarebulletin.com/') && !/to="https:\/\/bsquarebulletin\.com[^"]*"[^>]*target="_blank"/.test(header));
 check('header sub-label black bold letter-spaced',
-  !!header && header.includes('Community Calendar') && header.includes('$color-text')
+  !!header && header.includes('Community Calendar') && header.includes('color="black"')
   && header.includes('$fontWeight-bold') && /letterSpacing/i.test(header));
 check('header 4px red bottom rule',
   !!header && /borderBottom="4px solid \$color-primary"/.test(header));
@@ -79,6 +81,9 @@ const headerIncludes = main ? (main.match(/IncludeMarkup[^>]*BrandHeader\.xmlui\
 const footerIncludes = main ? (main.match(/IncludeMarkup[^>]*BrandFooter\.xmlui\?v=' \+ window\.APP_VERSION/g) || []).length : 0;
 check('header included in all 3 standalone blocks (picker,list,dashboard)', headerIncludes === 3);
 check('footer included in all 3 standalone blocks (picker,list,dashboard)', footerIncludes === 3);
+check('dashboard loading state keeps chrome (not gated on tiles)',
+  !!main && main.includes(`when="{layoutMode === 'dashboard'}"`)
+  && !/layoutMode === 'dashboard' && \(dashboardTiles !== null\)[^>]*Brand(Header|Footer)/.test(main));
 check('picker redundant H1 dropped',
   !!main && !/<H1>Community Calendar<\/H1>/.test(main));
 check('city-name heading intact',
@@ -91,6 +96,20 @@ check('no fontFamily overrides on existing components',
     const files = fs.readdirSync(path.join(ROOT, 'components')).filter(f => f.endsWith('.xmlui') && f !== 'BrandHeader.xmlui' && f !== 'BrandFooter.xmlui');
     return files.every(f => !/fontFamily/.test(fs.readFileSync(path.join(ROOT, 'components', f), 'utf8')));
   })());
+
+// --- Theme warm surfaces (#84) + boot versioning ---
+check('theme surfaces are warm-neutral (not pure gray)',
+  !!themeText && (() => {
+    try {
+      const theme = JSON.parse(themeText);
+      return ['color-surface', 'color-surface-200', 'color-surface-300', 'color-surface-400', 'color-surface-500', 'color-surface-600']
+        .every(k => /hsl\(40/.test(theme.themeVars[k] || ''));
+    } catch { return false; }
+  })());
+check('index.html version-busts boot-decisions.js before shell.js',
+  !!index && index.includes('boot-decisions.js')
+  && !/<script src="boot-decisions\.js"><\/script>/.test(index)
+  && index.indexOf('src="boot-decisions.js') < index.indexOf('src="shell.js'));
 
 console.log(failures === 0 ? '\nALL CHECKS PASSED' : `\n${failures} CHECKS FAILED`);
 process.exit(failures === 0 ? 0 : 1);
