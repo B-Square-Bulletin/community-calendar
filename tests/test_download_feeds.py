@@ -43,7 +43,13 @@ class _Resp:
 
 
 class TestRateLimitRetry:
+    def _no_backoff_sleep(self, monkeypatch):
+        # tenacity's nap sleep calls the global time.sleep; make the
+        # exponential backoff instant so retry tests don't wait ~24s.
+        monkeypatch.setattr(df.time, "sleep", lambda _s: None)
+
     def test_retries_then_recovers_on_429(self, monkeypatch):
+        self._no_backoff_sleep(monkeypatch)
         calls = {"n": 0}
 
         def fake_urlopen(req, timeout=None):
@@ -59,6 +65,7 @@ class TestRateLimitRetry:
         assert calls["n"] == 3
 
     def test_retries_then_recovers_on_503(self, monkeypatch):
+        self._no_backoff_sleep(monkeypatch)
         calls = {"n": 0}
 
         def fake_urlopen(req, timeout=None):
@@ -76,6 +83,8 @@ class TestRateLimitRetry:
         assert calls["n"] == 3
 
     def test_exhausted_retries_raise(self, monkeypatch):
+        self._no_backoff_sleep(monkeypatch)
+
         def always_429(req, timeout=None):
             raise _rate_limited(req)
 
