@@ -4,6 +4,9 @@
   "themeVars": {
     "color-primary": "hsl(354, 75%, 47%)",
     "color-secondary": "hsl(354, 75%, 40%)",
+    "textColor-Link": "hsl(354, 65%, 32%)",
+    "textColor-Link--hover": "hsl(354, 60%, 38%)",
+    "textColor-Link--active": "hsl(354, 65%, 32%)",
     "color-surface": "hsl(40, 14%, 97%)",
     "color-surface-200": "hsl(40, 12%, 88%)",
     "color-surface-300": "hsl(40, 10%, 78%)",

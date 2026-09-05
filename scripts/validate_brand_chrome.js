@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-// validate_brand_chrome.js — static chrome check for #86 (branded masthead + footer).
+// validate_brand_chrome.js — static chrome check for #86 (branded masthead + footer)
+// + #88 (content-link decoupling).
 //
 // WHY: header/footer are declarative XMLUI markup with no pure-logic seam, so
 // test.html unit tests don't apply (per #83 Testing Decisions, chrome is
@@ -110,6 +111,71 @@ check('index.html version-busts boot-decisions.js before shell.js',
   !!index && index.includes('boot-decisions.js')
   && !/<script src="boot-decisions\.js"><\/script>/.test(index)
   && index.indexOf('src="boot-decisions.js') < index.indexOf('src="shell.js'));
+
+// --- Content links (#88): decouple from chrome red ---
+// WHY: title/Event-link/Markdown anchors inherit textColor-Link, which
+// defaults to $color-primary-500 (harsh BSB red). BSB theme must pin
+// textColor-Link* to a darker desaturated maroon in the same hue family
+// so Brand chrome stays red while content links soften + hold AA contrast.
+function parseHsl(s) {
+  const m = /hsl\(\s*([\d.]+)\s*,\s*([\d.]+)%\s*,\s*([\d.]+)%\s*\)/.exec(s || '');
+  return m ? { h: +m[1], s: +m[2], l: +m[3] } : null;
+}
+function hslToRgb(h, s, l) {
+  h /= 360; s /= 100; l /= 100;
+  const k = (n) => (n + h * 12) % 12;
+  const a = s * Math.min(l, 1 - l);
+  const f = (n) => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+  return [f(0), f(8), f(4)].map((v) => Math.round(v * 255));
+}
+function relLum([r, g, b]) {
+  const ch = (c) => {
+    c /= 255;
+    return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+  };
+  return 0.2126 * ch(r) + 0.7152 * ch(g) + 0.0722 * ch(b);
+}
+function contrastOf(fg, bg) {
+  const l1 = relLum(fg);
+  const l2 = relLum(bg);
+  const [hi, lo] = l1 >= l2 ? [l1, l2] : [l2, l1];
+  return (hi + 0.05) / (lo + 0.05);
+}
+check('theme keeps chrome red primary (BSB brand)',
+  !!themeText && (() => {
+    try {
+      return JSON.parse(themeText).themeVars['color-primary'] === 'hsl(354, 75%, 47%)';
+    } catch { return false; }
+  })());
+check('theme decouples content links to darker maroon (not chrome red)',
+  !!themeText && (() => {
+    try {
+      const vars = JSON.parse(themeText).themeVars;
+      return ['textColor-Link', 'textColor-Link--hover', 'textColor-Link--active']
+        .every((k) => {
+          const c = parseHsl(vars[k]);
+          return !!c && c.h >= 350 && c.h <= 356 && c.s >= 55 && c.s <= 70 && c.l >= 28 && c.l <= 40;
+        });
+    } catch { return false; }
+  })());
+check('content link color meets WCAG AA 4.5:1 on white card + warm surface',
+  !!themeText && (() => {
+    try {
+      const vars = JSON.parse(themeText).themeVars;
+      const c = parseHsl(vars['textColor-Link']);
+      const surf = parseHsl(vars['color-surface']);
+      const fg = hslToRgb(c.h, c.s, c.l);
+      const white = [255, 255, 255];
+      const surface = hslToRgb(surf.h, surf.s, surf.l);
+      return contrastOf(fg, white) >= 4.5 && contrastOf(fg, surface) >= 4.5;
+    } catch { return false; }
+  })());
+check('event title inherits theme link color (no per-instance override)',
+  !!read('components/EventCard.xmlui') && (() => {
+    const card = read('components/EventCard.xmlui');
+    return card.includes('value="{$props.event.title}"')
+      && !/<Text[^>]*value="\{\$props\.event\.title\}"[^>]*color=/.test(card);
+  })());
 
 console.log(failures === 0 ? '\nALL CHECKS PASSED' : `\n${failures} CHECKS FAILED`);
 process.exit(failures === 0 ? 0 : 1);

@@ -1224,6 +1224,85 @@
         render();
       }
 
+      // Content link tests (#88): links inherit textColor-Link (default
+      // $color-primary-500, harsh BSB red). BSB theme must pin
+      // textColor-Link* to a darker desaturated maroon so Brand chrome
+      // stays red while EventCard title / Event-link / Markdown anchors
+      // soften + hold AA contrast. Same fetch-based pattern as #86/#87.
+      async function runContentLinkTests() {
+        const group = { name: 'Content links (#88)', tests: [] };
+        const test = makeGroupTester(group);
+        const get = fetchText;
+        const parseHsl = (s) => {
+          const m = /hsl\(\s*([\d.]+)\s*,\s*([\d.]+)%\s*,\s*([\d.]+)%\s*\)/.exec(s || '');
+          return m ? { h: +m[1], s: +m[2], l: +m[3] } : null;
+        };
+        const hslToRgb = (h, s, l) => {
+          h /= 360; s /= 100; l /= 100;
+          const k = (n) => (n + h * 12) % 12;
+          const a = s * Math.min(l, 1 - l);
+          const f = (n) => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+          return [f(0), f(8), f(4)].map((v) => Math.round(v * 255));
+        };
+        const relLum = ([r, g, b]) => {
+          const ch = (c) => {
+            c /= 255;
+            return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+          };
+          return 0.2126 * ch(r) + 0.7152 * ch(g) + 0.0722 * ch(b);
+        };
+        const contrastOf = (fg, bg) => {
+          const l1 = relLum(fg);
+          const l2 = relLum(bg);
+          const hi = Math.max(l1, l2);
+          const lo = Math.min(l1, l2);
+          return (hi + 0.05) / (lo + 0.05);
+        };
+        try {
+          const [themeText, header, footer, card] = await Promise.all([
+            get('themes/b-square-bulletin.json'),
+            get('components/BrandHeader.xmlui'),
+            get('components/BrandFooter.xmlui'),
+            get('components/EventCard.xmlui')
+          ]);
+          const theme = JSON.parse(themeText);
+
+          test('theme keeps chrome red primary', () => {
+            assertEqual(theme.themeVars['color-primary'], 'hsl(354, 75%, 47%)');
+            assert(header.includes('borderBottom="4px solid $color-primary"'), 'Header red rule must stay');
+            assert(footer.includes('$color-primary'), 'Footer red bar must stay');
+          });
+
+          test('theme decouples content links to darker maroon', () => {
+            for (const key of ['textColor-Link', 'textColor-Link--hover', 'textColor-Link--active']) {
+              const c = parseHsl(theme.themeVars[key]);
+              assert(!!c, key + ' must be set, got: ' + theme.themeVars[key]);
+              assert(c.h >= 350 && c.h <= 356 && c.s >= 55 && c.s <= 70 && c.l >= 28 && c.l <= 40,
+                key + ' must be maroon hsl(350-356,55-70%,28-40%), got: ' + theme.themeVars[key]);
+            }
+          });
+
+          test('content link meets WCAG AA 4.5:1 on white card + warm surface', () => {
+            const c = parseHsl(theme.themeVars['textColor-Link']);
+            const surf = parseHsl(theme.themeVars['color-surface']);
+            const fg = hslToRgb(c.h, c.s, c.l);
+            const white = [255, 255, 255];
+            const surface = hslToRgb(surf.h, surf.s, surf.l);
+            assert(contrastOf(fg, white) >= 4.5, 'Must pass AA on white card');
+            assert(contrastOf(fg, surface) >= 4.5, 'Must pass AA on warm surface');
+          });
+
+          test('event title inherits theme link color (no per-instance override)', () => {
+            assert(card.includes('value="{$props.event.title}"'), 'Missing title binding');
+            assert(!/<Text[^>]*value="\{\$props\.event\.title\}"[^>]*color=/.test(card), 'Title must inherit textColor-Link');
+          });
+        } catch (e) {
+          group.tests.push({ name: 'Load content link files', pass: false, error: e.message });
+        }
+        results.push(group);
+        render();
+      }
+
       const SUPABASE_URL = window.SUPABASE_URL;
       const SUPABASE_KEY = window.SUPABASE_KEY;
 
@@ -1481,6 +1560,15 @@
         results.push({
           name: 'Font delivery (#87)',
           tests: [{ name: 'Run font delivery tests', pass: false, error: err.message }]
+        });
+        render();
+      });
+
+      // Run content link tests (async, independent of Supabase)
+      runContentLinkTests().catch(err => {
+        results.push({
+          name: 'Content links (#88)',
+          tests: [{ name: 'Run content link tests', pass: false, error: err.message }]
         });
         render();
       });
