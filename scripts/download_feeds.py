@@ -13,13 +13,16 @@ import os
 import re
 import subprocess
 import sys
+import time
 import urllib.error
 import urllib.request
 from datetime import datetime
 from pathlib import Path
+from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
 
 from feed_slug import slugify
+from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
 
 
 def parse_feeds_txt(feeds_file: Path):
@@ -187,6 +190,79 @@ def fix_mec_timezone(filepath: Path) -> None:
         f.write(fixed)
 
 
+USER_AGENT = "Mozilla/5.0 (compatible; CommunityCalendar/1.0)"
+
+# Seconds to wait between consecutive requests to the same host. Localist
+# (events.in.gov) throttles when two requests land within the same second,
+# causing the alternating pass/fail signature seen in the build report.
+_HOST_DELAY_SECONDS = 1.0
+
+
+class _RateLimited(Exception):
+    """HTTP 429/503 — retryable."""
+
+
+def _host_of(url: str) -> str:
+    return urlparse(url).netloc
+
+
+def _wait_for_host(host: str, last_request_at: dict[str, float]) -> None:
+    """Sleep so requests to the same host are spaced _HOST_DELAY_SECONDS apart.
+
+    Tracks per-host timestamps rather than consecutive requests so feeds to
+    the same host are throttled even when interleaved with other hosts.
+    """
+    if not host:
+        return
+    now = time.monotonic()
+    prev = last_request_at.get(host)
+    if prev is not None:
+        delay = _HOST_DELAY_SECONDS - (now - prev)
+        if delay > 0:
+            time.sleep(delay)
+    last_request_at[host] = time.monotonic()
+
+
+@retry(
+    retry=retry_if_exception_type(_RateLimited),
+    stop=stop_after_attempt(4),
+    wait=wait_exponential(multiplier=1, min=2, max=10),
+    reraise=True,
+)
+def _download_body(url: str) -> bytes:
+    """Download a feed body, retrying with exponential backoff on 429/503."""
+    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            return resp.read()
+    except urllib.error.HTTPError as e:
+        if e.code in (429, 503):
+            raise _RateLimited() from e
+        raise
+
+
+def fetch_with_curl_fallback(url: str, outfile: Path) -> bool:
+    """Download url to outfile, retrying transient 429/503s and falling back to curl.
+
+    Returns True if a non-empty file was written. urllib exposes the HTTP
+    status code (so we can detect 429/503 and retry); curl is the fallback
+    for CDNs that reject urllib's TLS fingerprint.
+    """
+    # A failed fetch must not leave a stale file from a prior run behind:
+    # the caller treats a non-empty outfile as success.
+    outfile.unlink(missing_ok=True)
+
+    try:
+        outfile.write_bytes(_download_body(url))
+    except Exception:
+        # Any urllib failure (rate limit, network error, timeout, HTTP error)
+        # falls through to curl, which never raises for a single feed.
+        cmd = ["curl", "-sL", "-A", USER_AGENT, "--retry", "3", url, "-o", str(outfile)]
+        subprocess.run(cmd)
+
+    return outfile.exists() and outfile.stat().st_size > 0
+
+
 def download_feeds(city: str) -> None:
     output_dir = Path("cities") / city
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -207,24 +283,19 @@ def download_feeds(city: str) -> None:
         print(f"  Using feeds.txt ({len(feed_list)} feeds)")
 
     count = 0
+    last_request_at: dict[str, float] = {}
     for url, friendly_name, fallback_url in feed_list:
         filename = slugify(url) + ".ics"
         outfile = output_dir / filename
 
-        cmd = [
-            "curl",
-            "-sL",
-            "-A",
-            "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
-            url,
-            "-o",
-            str(outfile),
-        ]
+        # Throttle per-host so rate-limited sources (events.in.gov) aren't
+        # hammered, even when their feeds are interleaved with other hosts.
+        _wait_for_host(_host_of(url), last_request_at)
 
-        subprocess.run(cmd)
+        ok = fetch_with_curl_fallback(url, outfile)
 
         # Report result
-        if outfile.exists() and outfile.stat().st_size > 0:
+        if ok:
             try:
                 with outfile.open() as ics:
                     events = ics.read().count("BEGIN:VEVENT")
