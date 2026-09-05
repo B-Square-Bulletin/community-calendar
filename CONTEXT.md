@@ -16,6 +16,10 @@ A comprehensive community event aggregator that scrapes and combines events from
 A test that verifies database behavior against a disposable local project database.
 _Avoid_: SQL unit test, production test
 
+**Static chrome check**:
+File-content assertions over declarative markup (`.xmlui`/theme files) with no runtime execution. Runs as bare node, distinct from browser unit tests in `xmlui/test.html`.
+_Avoid_: JS unit test, integration test (when referring to this script type)
+
 **Source**:
 A venue, organization, group, or government body that contributes events to the calendar. The user-facing concept — what a calendar visitor sees (e.g., "Buskirk-Chumley Theater").
 _Avoid_: Venue, organization (when referring to the calendar entry point)
