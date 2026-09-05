@@ -13,13 +13,16 @@ import os
 import re
 import subprocess
 import sys
+import time
 import urllib.error
 import urllib.request
 from datetime import datetime
 from pathlib import Path
+from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
 
 from feed_slug import slugify
+from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
 
 
 def parse_feeds_txt(feeds_file: Path):
@@ -187,6 +190,63 @@ def fix_mec_timezone(filepath: Path) -> None:
         f.write(fixed)
 
 
+USER_AGENT = "Mozilla/5.0 (compatible; CommunityCalendar/1.0)"
+
+# Seconds to wait between consecutive requests to the same host. Localist
+# (events.in.gov) throttles when two requests land within the same second,
+# causing the alternating pass/fail signature seen in the build report.
+_HOST_DELAY_SECONDS = 1.0
+
+
+class _RateLimited(Exception):
+    """HTTP 429 Too Many Requests — retryable."""
+
+
+def _host_of(url: str) -> str:
+    return urlparse(url).netloc
+
+
+def _retry_if_rate_limited(exc: BaseException) -> bool:
+    return isinstance(exc, _RateLimited)
+
+
+@retry(
+    retry=retry_if_exception_type(_RateLimited),
+    stop=stop_after_attempt(4),
+    wait=wait_exponential(multiplier=1, min=2, max=10),
+    reraise=True,
+)
+def _download_body(url: str) -> bytes:
+    """Download a feed body, retrying with exponential backoff on 429."""
+    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            return resp.read()
+    except urllib.error.HTTPError as e:
+        if e.code in (429, 503):
+            raise _RateLimited(url) from e
+        raise
+
+
+def fetch_with_curl_fallback(url: str, outfile: Path) -> bytes | None:
+    """Download url to outfile, retrying transient 429s and falling back to curl.
+
+    urllib exposes the HTTP status code (so we can detect 429 and retry);
+    curl is the fallback for CDNs that reject urllib's TLS fingerprint.
+    """
+    try:
+        outfile.write_bytes(_download_body(url))
+        return outfile.read_bytes()
+    except _RateLimited:
+        pass  # exhausted retries; fall through to curl
+
+    cmd = ["curl", "-sL", "-A", USER_AGENT, "--retry", "3", url, "-o", str(outfile)]
+    subprocess.run(cmd)
+    if outfile.exists() and outfile.stat().st_size > 0:
+        return outfile.read_bytes()
+    return None
+
+
 def download_feeds(city: str) -> None:
     output_dir = Path("cities") / city
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -207,21 +267,19 @@ def download_feeds(city: str) -> None:
         print(f"  Using feeds.txt ({len(feed_list)} feeds)")
 
     count = 0
+    last_host = None
     for url, friendly_name, fallback_url in feed_list:
         filename = slugify(url) + ".ics"
         outfile = output_dir / filename
 
-        cmd = [
-            "curl",
-            "-sL",
-            "-A",
-            "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
-            url,
-            "-o",
-            str(outfile),
-        ]
+        # Throttle consecutive requests to the same host so rate-limited
+        # sources (events.in.gov) aren't hammered back-to-back.
+        host = _host_of(url)
+        if host and host == last_host:
+            time.sleep(_HOST_DELAY_SECONDS)
+        last_host = host
 
-        subprocess.run(cmd)
+        fetch_with_curl_fallback(url, outfile)
 
         # Report result
         if outfile.exists() and outfile.stat().st_size > 0:
