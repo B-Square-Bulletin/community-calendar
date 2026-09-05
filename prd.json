@@ -1,0 +1,33 @@
+{
+  "loop": "ship-features",
+  "items": [
+    {
+      "title": "BSB theme + host-based selection from first paint (#84)",
+      "description": "Visiting calendar.bsquarebulletin.com renders the BSB skin (red accent, Lora serif body, warm-neutral surfaces) automatically from first paint; every other host renders default community-calendar theme exactly as today. Done when: xmlui/themes/b-square-bulletin.json exists as first-class fork file with spec values; xmlui/config.json registers it; xmlui/boot-decisions.js defines window.getThemeIdForHost and loads before shell.js; shell.js sets window.ccThemeId pre-render and Main.xmlui binds defaultTheme with literal fallback; test.html theme groups pass in regression-tests.yml.",
+      "passes": false,
+      "notes": "",
+      "reference": "https://github.com/B-Square-Bulletin/community-calendar/issues/84"
+    },
+    {
+      "title": "Single-city boot default (skip the picker) (#85)",
+      "description": "On a single-entry City list, calendar root without ?city= loads that City immediately with canonical ?city=<slug> URL; multi-city hosts and explicit deep-links behave as today. Done when: window.resolveCity(cityParam, cityKeys) in boot-decisions.js implements generic single-entry default with verbatim passthrough; boot path applies resolved City before prefetch with replaceState touching only city key; null/unloaded list guarded with no picker-markup change; test.html City-default groups pass in regression-tests.yml.",
+      "passes": false,
+      "notes": "",
+      "reference": "https://github.com/B-Square-Bulletin/community-calendar/issues/85"
+    },
+    {
+      "title": "Branded masthead + footer chrome (#86)",
+      "description": "Every standalone screen (picker, list/multicol, dashboard) carries the paper's masthead and footer; embeds stay chrome-free and in-app controls stay in place. Done when: BrandHeader (vendored BSB logo same-tab link, sub-label, 4px red rule, Inter, hidden on embed) and BrandFooter (red bar, 4 spec links with correct tab targets, copyright line, Inter, hidden on embed) exist; logo vendored under icons/ and registered in config.json; both included via IncludeMarkup with ?v=APP_VERSION in each standalone block; picker redundant heading dropped with city-name heading and controls intact.",
+      "passes": false,
+      "notes": "",
+      "reference": "https://github.com/B-Square-Bulletin/community-calendar/issues/86"
+    },
+    {
+      "title": "BSB font delivery (Lora + Inter) (#87)",
+      "description": "Body text renders in Lora and brand chrome in Inter by loading the webfonts the way the paper delivers them. Done when: index.html loads Lora + Inter mirroring the paper's own font delivery with fallback stacks intact; rendered typography verified visually against bsquarebulletin.com with no silent system-font fallback.",
+      "passes": false,
+      "notes": "",
+      "reference": "https://github.com/B-Square-Bulletin/community-calendar/issues/87"
+    }
+  ]
+}
