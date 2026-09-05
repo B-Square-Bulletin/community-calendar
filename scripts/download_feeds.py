@@ -217,7 +217,7 @@ def _retry_if_rate_limited(exc: BaseException) -> bool:
     reraise=True,
 )
 def _download_body(url: str) -> bytes:
-    """Download a feed body, retrying with exponential backoff on 429."""
+    """Download a feed body, retrying with exponential backoff on 429/503."""
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     try:
         with urllib.request.urlopen(req, timeout=60) as resp:
@@ -229,16 +229,22 @@ def _download_body(url: str) -> bytes:
 
 
 def fetch_with_curl_fallback(url: str, outfile: Path) -> bytes | None:
-    """Download url to outfile, retrying transient 429s and falling back to curl.
+    """Download url to outfile, retrying transient 429/503s and falling back to curl.
 
-    urllib exposes the HTTP status code (so we can detect 429 and retry);
+    urllib exposes the HTTP status code (so we can detect 429/503 and retry);
     curl is the fallback for CDNs that reject urllib's TLS fingerprint.
     """
+    # A failed fetch must not leave a stale file from a prior run behind:
+    # download_feeds treats a non-empty outfile as success.
+    outfile.unlink(missing_ok=True)
+
     try:
         outfile.write_bytes(_download_body(url))
         return outfile.read_bytes()
-    except _RateLimited:
-        pass  # exhausted retries; fall through to curl
+    except Exception:
+        # Any urllib failure (rate limit, network error, timeout, HTTP error)
+        # falls through to curl, which never raises for a single feed.
+        pass
 
     cmd = ["curl", "-sL", "-A", USER_AGENT, "--retry", "3", url, "-o", str(outfile)]
     subprocess.run(cmd)
