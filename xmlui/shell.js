@@ -133,6 +133,19 @@ window._xsLogs = [];
 
   function bootShell() {
 
+  // Host-based theme selection from first paint: the engine reads the
+  // theme id from <App defaultTheme> on first render, so resolve it
+  // here before anything renders (and before the events prefetch).
+  try {
+    if (typeof window.getThemeIdForHost === 'function') {
+      window.ccThemeId = window.getThemeIdForHost(window.location.hostname);
+    } else {
+      window.ccThemeId = 'community-calendar';
+    }
+  } catch (e) {
+    window.ccThemeId = 'community-calendar';
+  }
+
   var params = new URLSearchParams(window.location.search);
   var cityParam = params.get('city');
   window.embed = params.get('embed') === 'true';

@@ -4,8 +4,8 @@
     {
       "title": "BSB theme + host-based selection from first paint (#84)",
       "description": "Visiting calendar.bsquarebulletin.com renders the BSB skin (red accent, Lora serif body, warm-neutral surfaces) automatically from first paint; every other host renders default community-calendar theme exactly as today. Done when: xmlui/themes/b-square-bulletin.json exists as first-class fork file with spec values; xmlui/config.json registers it; xmlui/boot-decisions.js defines window.getThemeIdForHost and loads before shell.js; shell.js sets window.ccThemeId pre-render and Main.xmlui binds defaultTheme with literal fallback; test.html theme groups pass in regression-tests.yml.",
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Added b-square-bulletin.json (spec values from #83/prototype), registered it in config.json, created boot-decisions.js with getThemeIdForHost, loaded it before shell.js and tests, set ccThemeId pre-render, bound defaultTheme with fallback, added 5-case theme group to test.html. Seam: theme-only file now; resolveCity lands with #85. Verified: node assertions pass, make test 95 passed, make lint clean.",
       "reference": "https://github.com/B-Square-Bulletin/community-calendar/issues/84"
     },
     {

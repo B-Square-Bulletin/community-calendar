@@ -1,0 +1,23 @@
+{
+  "name": "B Square Bulletin",
+  "id": "b-square-bulletin",
+  "themeVars": {
+    "color-primary": "hsl(354, 75%, 47%)",
+    "color-secondary": "hsl(354, 75%, 40%)",
+    "color-surface": "hsl(40, 14%, 97%)",
+    "color-surface-200": "hsl(0, 0%, 88%)",
+    "color-surface-300": "hsl(0, 0%, 78%)",
+    "color-surface-400": "hsl(0, 0%, 68%)",
+    "color-surface-500": "hsl(0, 0%, 48%)",
+    "color-surface-600": "hsl(0, 0%, 42%)",
+    "borderColor-Card": "hsl(0, 0%, 88%)",
+    "borderRadius-Card": "4px",
+    "fontFamily": "'Lora', Georgia, 'Times New Roman', serif",
+    "lineHeight-title-ModalDialog": "1.2",
+    "fontSize-title-ModalDialog": "$fontSize-lg",
+    "maxHeight-ModalDialog": "500px",
+    "boxShadow-thumb-Slider--hover": "none",
+    "boxShadow-thumb-Slider--focus": "none",
+    "boxShadow-thumb-Slider--active": "none"
+  }
+}

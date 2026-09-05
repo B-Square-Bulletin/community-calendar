@@ -1,6 +1,6 @@
 <App
   name="Community Calendar"
-  defaultTheme="community-calendar"
+  defaultTheme="{window.ccThemeId || 'community-calendar'}"
   fitContent="{window.ccAutoHeight}"
   var.filterTerm="{window.initialSearch || ''}"
   var.viewMode="{'all'}"

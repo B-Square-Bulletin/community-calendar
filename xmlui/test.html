@@ -80,6 +80,7 @@
       };
     </script>
     <script src="helpers.js"></script>
+    <script src="boot-decisions.js"></script>
   </head>
   <body>
     <h1>Community Calendar Tests</h1>
@@ -999,6 +1000,28 @@
           // Narrow range: one week
           const result = expandEnrichments(enrichments, '2026-02-09T00:00:00Z', '2026-02-15T23:59:59Z');
           assertEqual(result.length, 1, 'Should produce exactly 1 occurrence');
+        });
+      });
+
+      describe('getThemeIdForHost', () => {
+        it('maps the BSB host to the BSB theme', () => {
+          assertEqual(getThemeIdForHost('calendar.bsquarebulletin.com'), 'b-square-bulletin');
+        });
+
+        it('maps the project Pages host to the default theme', () => {
+          assertEqual(getThemeIdForHost('b-square-bulletin.github.io'), 'community-calendar');
+        });
+
+        it('maps localhost to the default theme', () => {
+          assertEqual(getThemeIdForHost('localhost'), 'community-calendar');
+        });
+
+        it('maps 127.0.0.1 to the default theme', () => {
+          assertEqual(getThemeIdForHost('127.0.0.1'), 'community-calendar');
+        });
+
+        it('maps any other hostname to the default theme', () => {
+          assertEqual(getThemeIdForHost('example.com'), 'community-calendar');
         });
       });
 

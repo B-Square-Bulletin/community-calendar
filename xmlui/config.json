@@ -3,7 +3,8 @@
     "compileScripts": true
   },
   "themes": [
-    "themes/community-calendar.json"
+    "themes/community-calendar.json",
+    "themes/b-square-bulletin.json"
   ],
   "appGlobals": {
     "supabaseUrl": "https://qatykxdvbpojxnvpicyi.supabase.co",
