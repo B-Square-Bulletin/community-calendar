@@ -83,7 +83,7 @@ const footerIncludes = main ? (main.match(/IncludeMarkup[^>]*BrandFooter\.xmlui\
 check('header included in all 3 standalone blocks (picker,list,dashboard)', headerIncludes === 3);
 check('footer included in all 3 standalone blocks (picker,list,dashboard)', footerIncludes === 3);
 check('dashboard loading state keeps chrome (not gated on tiles)',
-  !!main && main.includes(`when="{layoutMode === 'dashboard'}"`)
+  !!main && /when="\{layoutMode === 'dashboard'( && !window\.embed)?\}"/.test(main)
   && !/layoutMode === 'dashboard' && \(dashboardTiles !== null\)[^>]*Brand(Header|Footer)/.test(main));
 check('picker redundant H1 dropped',
   !!main && !/<H1>Community Calendar<\/H1>/.test(main));

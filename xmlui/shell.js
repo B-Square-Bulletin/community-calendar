@@ -261,11 +261,11 @@ window._xsLogs = [];
     if (window.cityFilter) {
       document.title = window.cityName + ' Community Calendar';
     }
-    if (!cityParam && window.cityFilter) {
+    if (cityParam == null && window.cityFilter) {
       try {
         var url = new URL(window.location);
         url.searchParams.set('city', window.cityFilter);
-        window.history.replaceState({}, '', url);
+        window.history.replaceState({}, '', url.toString());
       } catch (e) {}
     }
   })();
@@ -273,7 +273,7 @@ window._xsLogs = [];
   window.selectCity = function (slug) {
     var url = new URL(window.location);
     url.searchParams.set('city', slug);
-    window.history.pushState({}, '', url);
+    window.history.pushState({}, '', url.toString());
     window.cityFilter = slug;
     window.cityName = window.toDisplayName(slug);
     document.title = window.cityName + ' Community Calendar';

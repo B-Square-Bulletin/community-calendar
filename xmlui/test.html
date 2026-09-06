@@ -1012,8 +1012,8 @@
           assertEqual(resolveCity(undefined, ['bloomington']), 'bloomington');
         });
 
-        it('treats empty-string param as absent and defaults', () => {
-          assertEqual(resolveCity('', ['bloomington']), 'bloomington');
+        it('passes an explicit empty-string param through verbatim (no default)', () => {
+          assertEqual(resolveCity('', ['bloomington']), '');
         });
 
         it('yields no default for a multi-entry list', () => {

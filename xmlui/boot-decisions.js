@@ -20,12 +20,12 @@
   // Single-city boot default: on a host whose City list has exactly one
   // entry, a root visit without ?city= resolves to that City so the
   // calendar loads immediately instead of a one-button picker. Generic
-  // (not hardcoded): empty string counts as absent, an explicit
-  // non-empty param passes through verbatim (including unknown slugs,
-  // so deep-links behave as today), and empty/null/multi-entry lists
+  // (not hardcoded): only null/undefined count as absent (URLSearchParams
+  // returns null when the key is missing); an explicit empty ?city=
+  // passes through verbatim as today, and empty/null/multi-entry lists
   // yield no default (null).
   window.resolveCity = function (cityParam, cityKeys) {
-    if (cityParam) {
+    if (cityParam != null) {
       return cityParam;
     }
     if (Array.isArray(cityKeys) && cityKeys.length === 1 && cityKeys[0]) {
