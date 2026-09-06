@@ -1,6 +1,6 @@
 <App
   name="Community Calendar"
-  defaultTheme="community-calendar"
+  defaultTheme="{window.ccThemeId || 'community-calendar'}"
   fitContent="{window.ccAutoHeight}"
   var.filterTerm="{window.initialSearch || ''}"
   var.viewMode="{'all'}"
@@ -145,8 +145,8 @@
   <variable name="availableCities" value="{Object.keys(window._cities || {}).sort().map(city => ({ city }))}" />
 
   <!-- City picker (shown when no city selected and not in dashboard mode) -->
+  <IncludeMarkup when="{!city && layoutMode !== 'dashboard' && !window.embed}" url="{'components/BrandHeader.xmlui?v=' + window.APP_VERSION}" />
   <VStack when="{!city && layoutMode !== 'dashboard'}" horizontalAlignment="center" width="100%" padding="$space-8">
-    <H1>Community Calendar</H1>
     <VStack gap="$space-4" maxWidth="300px" width="100%">
       <VStack gap="$space-2">
         <Items data="{availableCities}">
@@ -155,8 +155,10 @@
       </VStack>
     </VStack>
   </VStack>
+  <IncludeMarkup when="{!city && layoutMode !== 'dashboard' && !window.embed}" url="{'components/BrandFooter.xmlui?v=' + window.APP_VERSION}" />
 
   <!-- Main Content -->
+  <IncludeMarkup when="{!!city && layoutMode !== 'dashboard' && !window.embed}" url="{'components/BrandHeader.xmlui?v=' + window.APP_VERSION}" />
   <HStack when="{!!city && layoutMode !== 'dashboard'}" horizontalAlignment="center" width="100%" overflowX="hidden">
   <VStack maxWidth="{layoutMode === 'multicol' ? '1200px' : '600px'}" width="100%" overflowX="hidden">
     <VStack>
@@ -333,9 +335,11 @@
     </VStack>
   </VStack>
   </HStack>
+  <IncludeMarkup when="{!!city && layoutMode !== 'dashboard' && !window.embed}" url="{'components/BrandFooter.xmlui?v=' + window.APP_VERSION}" />
 
   <!-- Dashboard mode (gate on settings loaded to avoid flash of default state) -->
   <Spinner when="{layoutMode === 'dashboard' && authSession && dashboardTiles === null}" />
+  <IncludeMarkup when="{layoutMode === 'dashboard' && !window.embed}" url="{'components/BrandHeader.xmlui?v=' + window.APP_VERSION}" />
   <VStack when="{layoutMode === 'dashboard' && (dashboardTiles !== null)}" width="100%" padding="$space-3">
     <H1>
       <HStack width="100%" verticalAlignment="center">
@@ -418,4 +422,5 @@
     </VStack>
     <DashboardView />
   </VStack>
+  <IncludeMarkup when="{layoutMode === 'dashboard' && !window.embed}" url="{'components/BrandFooter.xmlui?v=' + window.APP_VERSION}" />
 </App>

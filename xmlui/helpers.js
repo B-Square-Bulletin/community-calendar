@@ -920,9 +920,28 @@ function sortSourcesForDisplay(events) {
 }
 
 // Clear dedupe cache (useful for testing)
+// Also resets the collapse stage: dedupeEvents feeds its grouped output into
+// collapseLongRunningEvents, whose content-blind key (len + first/last id)
+// would otherwise return the previous test's object for a same-shaped but
+// different-content input.
 function clearDedupeCache() {
   _dedupedEventsCache = null;
   _dedupedEventsLastInput = null;
+  _dedupedEventsLastLen = 0;
+  _dedupedEventsLastFirst = null;
+  _dedupedEventsLastLast = null;
+  _collapseCache = null;
+  _collapseLastLen = 0;
+  _collapseLastFirstId = null;
+  _collapseLastLastId = null;
+  // Also reset the issue-82 memo layer on collapseLongRunningEvents: in the
+  // browser the global identifier is rebound to the memoized wrapper, so the
+  // inner call inside dedupeEvents hits that cache (keyed len + endpoint
+  // ids) rather than _collapseCache directly. Without this, same-shaped but
+  // different-content inputs falsely hit across clearDedupeCache() calls.
+  if (typeof window !== 'undefined' && window.__ccMemoClear && window.__ccMemoClear.collapseLongRunningEvents) {
+    window.__ccMemoClear.collapseLongRunningEvents();
+  }
 }
 
 // Check if an event is picked (supports merged IDs from cross-source duplicates)
@@ -1651,11 +1670,13 @@ if (typeof window !== 'undefined') {
   // (Known tradeoff, same as shell.js rowsSig: a mid-array content change
   // with identical length and endpoint ids would falsely hit.)
   window.__ccMemoStats = {};
+  window.__ccMemoClear = {};
   function memoizeIngest(name, extraKey) {
     var orig = window[name];
     if (!orig) return;
     var lastKey = null, lastResult = null;
     var stats = window.__ccMemoStats[name] = { hits: 0, misses: 0 };
+    window.__ccMemoClear[name] = function() { lastKey = null; lastResult = null; };
     window[name] = function() {
       var key = [ccArraySig(arguments[0])];
       if (extraKey) key = key.concat(extraKey.apply(null, arguments));
@@ -1798,9 +1819,15 @@ if (typeof window !== 'undefined') {
     // Content-signature key, not reference: the engine's per-evaluation
     // value identities defeat ref keying (see combineEvents above), and
     // the rrule expansion inside is worth skipping.
+    // The key must include enrichment content, not just length + endpoint
+    // ids: same-shaped inputs with different fields (e.g. edited
+    // description/location) must miss, otherwise stale virtual events leak
+    // across edits. Enrichment lists are small (curator picks), so a JSON
+    // signature over the expansion-relevant fields is cheap.
     var sig = Array.isArray(enrichments)
       ? (enrichments.length + ':' +
-         (enrichments.length ? enrichments[0].id + ':' + enrichments[enrichments.length - 1].id : ''))
+         (enrichments.length ? enrichments[0].id + ':' + enrichments[enrichments.length - 1].id : '') + ':' +
+         JSON.stringify(enrichments.map(function(e) { return [e.id, e.rrule, e.start_time, e.title, e.location, e.description, e.url, e.curator_name, e.city, e.end_time]; })))
       : 'na';
     var key = sig + '|' + fromDateStr + '|' + toDateStr;
     if (key === _expandLastKey && _expandResult !== null) {

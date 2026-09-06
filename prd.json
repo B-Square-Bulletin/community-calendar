@@ -1,0 +1,33 @@
+{
+  "loop": "ship-features",
+  "items": [
+    {
+      "title": "BSB theme + host-based selection from first paint (#84)",
+      "description": "Visiting calendar.bsquarebulletin.com renders the BSB skin (red accent, Lora serif body, warm-neutral surfaces) automatically from first paint; every other host renders default community-calendar theme exactly as today. Done when: xmlui/themes/b-square-bulletin.json exists as first-class fork file with spec values; xmlui/config.json registers it; xmlui/boot-decisions.js defines window.getThemeIdForHost and loads before shell.js; shell.js sets window.ccThemeId pre-render and Main.xmlui binds defaultTheme with literal fallback; test.html theme groups pass in regression-tests.yml.",
+      "passes": true,
+      "notes": "Added b-square-bulletin.json (spec values from #83/prototype), registered it in config.json, created boot-decisions.js with getThemeIdForHost, loaded it before shell.js and tests, set ccThemeId pre-render, bound defaultTheme with fallback, added 5-case theme group to test.html. Seam: theme-only file now; resolveCity lands with #85. Verified: node assertions pass, make test 95 passed, make lint clean.",
+      "reference": "https://github.com/B-Square-Bulletin/community-calendar/issues/84"
+    },
+    {
+      "title": "Single-city boot default (skip the picker) (#85)",
+      "description": "On a single-entry City list, calendar root without ?city= loads that City immediately with canonical ?city=<slug> URL; multi-city hosts and explicit deep-links behave as today. Done when: window.resolveCity(cityParam, cityKeys) in boot-decisions.js implements generic single-entry default with verbatim passthrough; boot path applies resolved City before prefetch with replaceState touching only city key; null/unloaded list guarded with no picker-markup change; test.html City-default groups pass in regression-tests.yml.",
+      "passes": true,
+      "notes": "Seam decision (pre-approved, unattended loop): window.resolveCity(cityParam, cityKeys) pure in boot-decisions.js; shell.js derives keys from window._cities (array or object map, null-guarded) and applies resolved City before prefetch with replaceState on city key only. Added resolveCity group to test.html. Verified: 13 node assertions pass, make test 95 passed, make lint clean.",
+      "reference": "https://github.com/B-Square-Bulletin/community-calendar/issues/85"
+    },
+    {
+      "title": "Branded masthead + footer chrome (#86)",
+      "description": "Every standalone screen (picker, list/multicol, dashboard) carries the paper's masthead and footer; embeds stay chrome-free and in-app controls stay in place. Done when: BrandHeader (vendored BSB logo same-tab link, sub-label, 4px red rule, Inter, hidden on embed) and BrandFooter (red bar, 4 spec links with correct tab targets, copyright line, Inter, hidden on embed) exist; logo vendored under icons/ and registered in config.json; both included via IncludeMarkup with ?v=APP_VERSION in each standalone block; picker redundant heading dropped with city-name heading and controls intact.",
+      "passes": true,
+      "notes": "Added components/BrandHeader.xmlui (Fragment; logo Link to= paper same-tab, versioned vendored SVG, black bold letter-spaced sub-label, borderBottom 4px solid $color-primary, Inter, when !window.embed) and BrandFooter.xmlui (Fragment; $color-primary bar, 4 spec links via Link+Text with correct targets, no portal links, copyright line, Inter, embed-gated); vendored icons/BSB_Logo-2-color-horiz.svg from BSB Ghost CDN (script-free, valid XML) and registered as icon.bsb-logo in config.json; wired 3 header + 3 footer IncludeMarkup includes (?v=APP_VERSION, per-block when gates) in Main.xmlui covering picker/list/dashboard and dropped the picker H1. Seam decision (pre-approved, unattended): no pure-logic seam exists, so left a fetch-based 'Brand chrome (#86)' group in test.html (5 tests, runs in CI Playwright step over http) as the durable regression test. Link/Image/Text props verified against engine metadata and in-repo precedent (Link to= + children, no href). Verified: 26 node acceptance checks pass, served-markup checks pass over local http, test.html syntax OK, make test 95 passed, make lint clean.",
+      "reference": "https://github.com/B-Square-Bulletin/community-calendar/issues/86"
+    },
+    {
+      "title": "BSB font delivery (Lora + Inter) (#87)",
+      "description": "Body text renders in Lora and brand chrome in Inter by loading the webfonts the way the paper delivers them. Done when: index.html loads Lora + Inter mirroring the paper's own font delivery with fallback stacks intact; rendered typography verified visually against bsquarebulletin.com with no silent system-font fallback.",
+      "passes": true,
+      "notes": "Added Google Fonts stylesheet to xmlui/index.html (preconnects + css2 link: Inter 400-700, Lora 400-700 + italic 400/700 with display=swap) as the reusable public form of the paper's delivery — weights mirror the @font-face set extracted from bsquarebulletin.com screen.css (Inter v12 latin 400-700, Lora v25 latin 400-700 + italic 400/700); theme Lora-first and chrome Inter-first fallback stacks untouched as the floor. Seam decision (pre-approved, unattended loop): no pure-logic seam exists, so left a fetch-based 'Font delivery (#87)' group in test.html (5 tests, runs in CI Playwright step over http) following the #86 precedent. Rendered check attempt 2026-09-05: css2 URL returns 200 serving both families (28 Inter + 42 Lora faces), index/theme/chrome wiring verified served over local http; no local Chromium available so computed-style (no silent fallback) verification stays with the CI Playwright step + eyeballing calendar.bsquarebulletin.com against bsquarebulletin.com after deploy. Verified: 12 node assertions pass, served-markup checks pass, test.html scripts node --check clean, make test 95 passed, make lint clean.",
+      "reference": "https://github.com/B-Square-Bulletin/community-calendar/issues/87"
+    }
+  ]
+}

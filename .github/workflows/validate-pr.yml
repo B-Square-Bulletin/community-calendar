@@ -61,6 +61,21 @@ jobs:
       - name: Verify collapse-cache regression gate
         run: node scripts/bench_collapse_long.js
 
+  brand-chrome:
+    # Static chrome check for #86: file-content assertions over BrandHeader /
+    # BrandFooter markup. Fast pre-check (bare node, no browser); source of
+    # truth stays the Brand chrome group in xmlui/test.html (Playwright step).
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Verify brand chrome (#86)
+        run: node scripts/validate_brand_chrome.js
+
   lint:
     # Mirrors the local lint target (make lint): ruff (format + check) and the
     # four type checkers (pyright, ty, pyrefly, zuban) all gate the job, so an

@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <title>Community Calendar</title>
+    <!-- BSB font delivery (#87): Lora (body) + Inter (brand chrome) via the
+      reusable public form of the paper's own delivery (Ghost self-hosts
+      Inter v12 latin 400-700 and Lora v25 latin 400-700 + italics; Google
+      Fonts serves the same families/weights). Theme/markup fontFamily
+      stacks stay as the fallback floor. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap" />
     <script>
       // Cache-bust shell.js and shell.css. APP_VERSION isn't available yet
       // (shell.js sets it), so use Date.now() — these files are small.
@@ -32,6 +42,11 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/rrule@2.8.1/dist/es5/rrule.min.js"></script>
+    <script>
+      // Cache-bust boot-decisions.js like shell.js below: post-deploy
+      // clients must not run stale theme/city decisions from first paint.
+      document.write('<script src="boot-decisions.js' + _ccCacheBust + '"><\/script>');
+    </script>
     <script>
       document.write('<script src="shell.js' + _ccCacheBust + '"><\/script>');
     </script>

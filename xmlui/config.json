@@ -3,7 +3,8 @@
     "compileScripts": true
   },
   "themes": [
-    "themes/community-calendar.json"
+    "themes/community-calendar.json",
+    "themes/b-square-bulletin.json"
   ],
   "appGlobals": {
     "supabaseUrl": "https://qatykxdvbpojxnvpicyi.supabase.co",
@@ -13,6 +14,7 @@
     "strictDeterminism": false
   },
   "resources": {
+    "icon.bsb-logo": "icons/BSB_Logo-2-color-horiz.svg",
     "icon.l-user": "icons/l-user.svg",
     "icon.l-rss": "icons/l-rss.svg",
     "icon.l-camera": "icons/l-camera.svg",

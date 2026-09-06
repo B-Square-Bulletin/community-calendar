@@ -80,6 +80,7 @@
       };
     </script>
     <script src="helpers.js"></script>
+    <script src="boot-decisions.js"></script>
   </head>
   <body>
     <h1>Community Calendar Tests</h1>
@@ -1002,14 +1003,324 @@
         });
       });
 
+      describe('resolveCity', () => {
+        it('defaults no-param to the single list entry', () => {
+          assertEqual(resolveCity(null, ['bloomington']), 'bloomington');
+        });
+
+        it('defaults undefined param to the single list entry', () => {
+          assertEqual(resolveCity(undefined, ['bloomington']), 'bloomington');
+        });
+
+        it('passes an explicit empty-string param through verbatim (no default)', () => {
+          assertEqual(resolveCity('', ['bloomington']), '');
+        });
+
+        it('yields no default for a multi-entry list', () => {
+          assertEqual(resolveCity(null, ['bloomington', 'davis']), null);
+        });
+
+        it('yields no default for an empty list', () => {
+          assertEqual(resolveCity(null, []), null);
+        });
+
+        it('yields no default for a null list', () => {
+          assertEqual(resolveCity(null, null), null);
+        });
+
+        it('yields no default for an undefined list', () => {
+          assertEqual(resolveCity(undefined, undefined), null);
+        });
+
+        it('passes an explicit param through verbatim', () => {
+          assertEqual(resolveCity('davis', ['bloomington', 'davis']), 'davis');
+        });
+
+        it('passes an explicit param through even when it differs from the single entry', () => {
+          assertEqual(resolveCity('davis', ['bloomington']), 'davis');
+        });
+
+        it('passes an unknown slug through verbatim', () => {
+          assertEqual(resolveCity('atlantis', ['bloomington']), 'atlantis');
+        });
+
+        it('passes an explicit param through when the list is null', () => {
+          assertEqual(resolveCity('davis', null), 'davis');
+        });
+      });
+
+      describe('getThemeIdForHost', () => {
+        it('maps the BSB host to the BSB theme', () => {
+          assertEqual(getThemeIdForHost('calendar.bsquarebulletin.com'), 'b-square-bulletin');
+        });
+
+        it('maps the project Pages host to the default theme', () => {
+          assertEqual(getThemeIdForHost('b-square-bulletin.github.io'), 'community-calendar');
+        });
+
+        it('maps localhost to the default theme', () => {
+          assertEqual(getThemeIdForHost('localhost'), 'community-calendar');
+        });
+
+        it('maps 127.0.0.1 to the default theme', () => {
+          assertEqual(getThemeIdForHost('127.0.0.1'), 'community-calendar');
+        });
+
+        it('maps any other hostname to the default theme', () => {
+          assertEqual(getThemeIdForHost('example.com'), 'community-calendar');
+        });
+      });
+
       // ============================================================
       // REAL DATA TESTS (async, run after initial render)
       // ============================================================
+
+      // Brand chrome tests (#86): the masthead/footer are declarative markup
+      // with no pure-logic seam, so instead of unit-testing functions these
+      // fetch the shipped files and assert the acceptance criteria hold —
+      // a regression here fails the CI Playwright step like any other group.
+      // Shared by the #86/#87 fetch-based groups.
+      function makeGroupTester(group) {
+        return (name, fn) => {
+          try {
+            fn();
+            group.tests.push({ name, pass: true });
+          } catch (e) {
+            group.tests.push({ name, pass: false, error: e.message });
+          }
+        };
+      }
+      async function fetchText(path) {
+        const response = await fetch(path);
+        assert(response.ok, 'Fetch failed for ' + path);
+        return response.text();
+      }
+      async function runBrandChromeTests() {
+        const group = { name: 'Brand chrome (#86)', tests: [] };
+        const test = makeGroupTester(group);
+        const get = fetchText;
+        try {
+          const [header, footer, main, configText, logo] = await Promise.all([
+            get('components/BrandHeader.xmlui'),
+            get('components/BrandFooter.xmlui'),
+            get('Main.xmlui'),
+            get('config.json'),
+            get('icons/BSB_Logo-2-color-horiz.svg')
+          ]);
+
+          test('header links vendored logo to bsquarebulletin.com same-tab', () => {
+            assert(header.includes('https://bsquarebulletin.com/'), 'Missing paper link');
+            assert(/BSB_Logo-2-color-horiz\.svg\?v=.*APP_VERSION/.test(header), 'Missing versioned logo ref');
+            assert(!/bsquarebulletin\.com[^>]*target="_blank"/.test(header), 'Logo link must stay same-tab');
+          });
+
+          test('header carries sub-label, red rule, Inter, embed gate', () => {
+            assert(header.includes('Community Calendar'), 'Missing sub-label');
+            assert(header.includes('color="black"'), 'Sub-label must be black');
+            assert(header.includes('borderBottom="4px solid $color-primary"'), 'Missing 4px red rule');
+            assert(header.includes('Inter'), 'Missing Inter chrome font');
+            assert(header.includes('!window.embed'), 'Missing embed gate');
+          });
+
+          test('footer has red bar, 4 spec links, copyright, embed gate', () => {
+            assert(footer.includes('$color-primary'), 'Missing red bar');
+            assert(footer.includes('https://thebloomingtonchronicle.org/index.php/Main_Page'), 'Missing Chronicle link');
+            assert(footer.includes('https://bloomdocs.org/'), 'Missing BloomDocs link');
+            assert(footer.includes('https://bsquarebulletin.com/contact-the-b-square/'), 'Missing Contact link');
+            assert(footer.includes('https://bsquarebulletin.com/republishing-guidelines/'), 'Missing Republishing link');
+            assert(!footer.replace(/<!--[\s\S]*?-->/g, '').includes('#/portal/'), 'Must not include Ghost portal links');
+            assert(footer.includes('© The B Square. All rights reserved.'), 'Missing copyright line');
+            assert(footer.includes('Inter'), 'Missing Inter chrome font');
+            assert(footer.includes('!window.embed'), 'Missing embed gate');
+          });
+
+          test('logo vendored and registered in config.json', () => {
+            assert(logo.includes('<svg'), 'Logo is not SVG');
+            assert(JSON.parse(configText).resources['icon.bsb-logo'] === 'icons/BSB_Logo-2-color-horiz.svg', 'Logo not registered');
+          });
+
+          test('header/footer included in picker, list, and dashboard blocks', () => {
+            const headerCount = (main.match(/BrandHeader\.xmlui\?v=' \+ window\.APP_VERSION/g) || []).length;
+            const footerCount = (main.match(/BrandFooter\.xmlui\?v=' \+ window\.APP_VERSION/g) || []).length;
+            assertEqual(headerCount, 3, 'Expected 3 BrandHeader includes, got ' + headerCount);
+            assertEqual(footerCount, 3, 'Expected 3 BrandFooter includes, got ' + footerCount);
+            assert(!/<H1>Community Calendar<\/H1>/.test(main), 'Redundant picker heading must be dropped');
+            assert(main.includes('{window.toDisplayName(city)}'), 'City-name heading must stay');
+          });
+
+          test('dashboard loading state keeps chrome (not gated on tiles)', () => {
+            assert(main.includes('when="{layoutMode === \'dashboard\'}"'), 'Dashboard chrome must not gate on dashboardTiles');
+            assert(!/layoutMode === 'dashboard' && \(dashboardTiles !== null\).*Brand(Header|Footer)/.test(main), 'Brand includes must not require tiles');
+          });
+        } catch (e) {
+          group.tests.push({ name: 'Load brand chrome files', pass: false, error: e.message });
+        }
+        results.push(group);
+        render();
+      }
+
+      // Font delivery tests (#87): webfonts are declarative markup with no
+      // pure-logic seam, so like #86 these fetch the shipped files and
+      // assert the acceptance criteria hold — a regression here fails the
+      // CI Playwright step like any other group.
+      async function runFontDeliveryTests() {
+        const group = { name: 'Font delivery (#87)', tests: [] };
+        const test = makeGroupTester(group);
+        const get = fetchText;
+        try {
+          const [index, themeText, header, footer] = await Promise.all([
+            get('index.html'),
+            get('themes/b-square-bulletin.json'),
+            get('components/BrandHeader.xmlui'),
+            get('components/BrandFooter.xmlui')
+          ]);
+
+          test('index.html loads Lora + Inter via Google Fonts with display=swap', () => {
+            assert(index.includes('fonts.googleapis.com/css2'), 'Missing Google Fonts css2 link');
+            assert(/family=Inter/.test(index), 'Missing Inter family');
+            assert(/family=Lora/.test(index), 'Missing Lora family');
+            assert(index.includes('display=swap'), 'Missing display=swap');
+          });
+
+          test('index.html preconnects to font origins', () => {
+            assert(index.includes('fonts.googleapis.com'), 'Missing preconnect to fonts.googleapis.com');
+            assert(index.includes('fonts.gstatic.com'), 'Missing preconnect to fonts.gstatic.com');
+          });
+
+          test('loaded weights mirror the paper (Inter 400-700, Lora + italics)', () => {
+            assert(/Inter:wght@400;500;600;700/.test(index), 'Inter weights must be 400;500;600;700');
+            assert(/Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700/.test(index), 'Lora weights must mirror paper normal + italics');
+          });
+
+          test('theme keeps Lora-first fallback stack as the floor', () => {
+            const theme = JSON.parse(themeText);
+            const stack = theme.themeVars.fontFamily;
+            assert(stack.indexOf('Lora') === 1, 'Theme fontFamily must lead with Lora, got: ' + stack);
+            assert(stack.includes('Georgia'), 'Theme fontFamily must keep Georgia fallback');
+          });
+
+          test('theme surfaces are warm-neutral (not pure gray)', () => {
+            const theme = JSON.parse(themeText);
+            for (const key of ['color-surface', 'color-surface-200', 'color-surface-300', 'color-surface-400', 'color-surface-500', 'color-surface-600']) {
+              const val = theme.themeVars[key] || '';
+              assert(/hsl\(40/.test(val), key + ' must be warm-neutral hsl(40,…), got: ' + val);
+            }
+          });
+
+          test('index.html version-busts boot-decisions.js before shell.js', () => {
+            assert(index.includes('boot-decisions.js'), 'Missing boot-decisions.js load');
+            assert(!/<script src="boot-decisions\.js"><\/script>/.test(index), 'boot-decisions.js must be cache-busted');
+            assert(index.indexOf('src="boot-decisions.js') < index.indexOf('src="shell.js'), 'boot-decisions.js must load before shell.js');
+          });
+
+          test('brand chrome keeps Inter-first fallback stacks', () => {
+            assert(header.includes("'Inter'"), 'Header must keep Inter-first stack');
+            assert(footer.includes("'Inter'"), 'Footer must keep Inter-first stack');
+          });
+        } catch (e) {
+          group.tests.push({ name: 'Load font delivery files', pass: false, error: e.message });
+        }
+        results.push(group);
+        render();
+      }
+
+      // Content link tests (#88): links inherit textColor-Link (default
+      // $color-primary-500, harsh BSB red). BSB theme must pin
+      // textColor-Link* to a darker desaturated maroon so Brand chrome
+      // stays red while EventCard title / Event-link / Markdown anchors
+      // soften + hold AA contrast. Same fetch-based pattern as #86/#87.
+      async function runContentLinkTests() {
+        const group = { name: 'Content links (#88)', tests: [] };
+        const test = makeGroupTester(group);
+        const get = fetchText;
+        const parseHsl = (s) => {
+          const m = /hsl\(\s*([\d.]+)\s*,\s*([\d.]+)%\s*,\s*([\d.]+)%\s*\)/.exec(s || '');
+          return m ? { h: +m[1], s: +m[2], l: +m[3] } : null;
+        };
+        const hslToRgb = (h, s, l) => {
+          h /= 360; s /= 100; l /= 100;
+          const k = (n) => (n + h * 12) % 12;
+          const a = s * Math.min(l, 1 - l);
+          const f = (n) => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+          return [f(0), f(8), f(4)].map((v) => Math.round(v * 255));
+        };
+        const relLum = ([r, g, b]) => {
+          const ch = (c) => {
+            c /= 255;
+            return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+          };
+          return 0.2126 * ch(r) + 0.7152 * ch(g) + 0.0722 * ch(b);
+        };
+        const contrastOf = (fg, bg) => {
+          const l1 = relLum(fg);
+          const l2 = relLum(bg);
+          const hi = Math.max(l1, l2);
+          const lo = Math.min(l1, l2);
+          return (hi + 0.05) / (lo + 0.05);
+        };
+        try {
+          const [themeText, header, footer, card] = await Promise.all([
+            get('themes/b-square-bulletin.json'),
+            get('components/BrandHeader.xmlui'),
+            get('components/BrandFooter.xmlui'),
+            get('components/EventCard.xmlui')
+          ]);
+          const theme = JSON.parse(themeText);
+
+          test('theme keeps chrome red primary', () => {
+            assertEqual(theme.themeVars['color-primary'], 'hsl(354, 75%, 47%)');
+            assert(header.includes('borderBottom="4px solid $color-primary"'), 'Header red rule must stay');
+            assert(footer.includes('$color-primary'), 'Footer red bar must stay');
+          });
+
+          test('theme decouples content links to darker maroon', () => {
+            for (const key of ['textColor-Link', 'textColor-Link--hover', 'textColor-Link--active']) {
+              const c = parseHsl(theme.themeVars[key]);
+              assert(!!c, key + ' must be set, got: ' + theme.themeVars[key]);
+              assert(c.h >= 350 && c.h <= 356 && c.s >= 55 && c.s <= 70 && c.l >= 28 && c.l <= 40,
+                key + ' must be maroon hsl(350-356,55-70%,28-40%), got: ' + theme.themeVars[key]);
+            }
+          });
+
+          test('content link meets WCAG AA 4.5:1 on white card + warm surface', () => {
+            const c = parseHsl(theme.themeVars['textColor-Link']);
+            const surf = parseHsl(theme.themeVars['color-surface']);
+            const fg = hslToRgb(c.h, c.s, c.l);
+            const white = [255, 255, 255];
+            const surface = hslToRgb(surf.h, surf.s, surf.l);
+            assert(contrastOf(fg, white) >= 4.5, 'Must pass AA on white card');
+            assert(contrastOf(fg, surface) >= 4.5, 'Must pass AA on warm surface');
+          });
+
+          test('event title inherits theme link color (no per-instance override)', () => {
+            assert(card.includes('value="{$props.event.title}"'), 'Missing title binding');
+            assert(!/<Text[^>]*value="\{\$props\.event\.title\}"[^>]*color=/.test(card), 'Title must inherit textColor-Link');
+          });
+        } catch (e) {
+          group.tests.push({ name: 'Load content link files', pass: false, error: e.message });
+        }
+        results.push(group);
+        render();
+      }
 
       const SUPABASE_URL = window.SUPABASE_URL;
       const SUPABASE_KEY = window.SUPABASE_KEY;
 
       async function runRealDataTests() {
+        // Skip when Supabase isn't configured locally (config.local.js is
+        // gitignored by design): without a URL the fetch below resolves to a
+        // relative path, the dev server answers 404 HTML, and response.json()
+        // throws. Wherever credentials exist the full suite below still runs,
+        // so no coverage is lost.
+        if (!SUPABASE_URL || !SUPABASE_KEY ||
+            SUPABASE_URL.includes('YOUR_PROJECT_REF') || SUPABASE_KEY.includes('your-anon')) {
+          results.push({
+            name: 'Real Data (skipped — no Supabase config)',
+            tests: [{ name: 'Copy xmlui/config.local.js.example to config.local.js to enable', pass: true }]
+          });
+          render();
+          return;
+        }
         // Fetch real events
         const url = `${SUPABASE_URL}/rest/v1/events?select=*&order=start_time.asc&limit=500`;
         const response = await fetch(url, {
@@ -1234,6 +1545,33 @@
       loadingDiv.className = 'test-group';
       loadingDiv.innerHTML = '<h2>Real Data (loading...)</h2>';
       document.getElementById('results').appendChild(loadingDiv);
+
+      // Run brand chrome tests (async, independent of Supabase)
+      runBrandChromeTests().catch(err => {
+        results.push({
+          name: 'Brand chrome (#86)',
+          tests: [{ name: 'Run brand chrome tests', pass: false, error: err.message }]
+        });
+        render();
+      });
+
+      // Run font delivery tests (async, independent of Supabase)
+      runFontDeliveryTests().catch(err => {
+        results.push({
+          name: 'Font delivery (#87)',
+          tests: [{ name: 'Run font delivery tests', pass: false, error: err.message }]
+        });
+        render();
+      });
+
+      // Run content link tests (async, independent of Supabase)
+      runContentLinkTests().catch(err => {
+        results.push({
+          name: 'Content links (#88)',
+          tests: [{ name: 'Run content link tests', pass: false, error: err.message }]
+        });
+        render();
+      });
 
       // Run real data tests (async)
       runRealDataTests().then(() => {

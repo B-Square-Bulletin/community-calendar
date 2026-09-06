@@ -107,6 +107,7 @@ make setup-local     # start local Supabase + migrations, then `make test-sql`
 - DB tests live as `.sql` pgTAP files under `supabase/tests/` (see its README).
 
 PR CI `validate-pr.yml` gates main merges. Replicate locally before pushing:
+
 - `python scripts/validate_pr_feeds.py --base-ref origin/main` (feed/scraper consistency)
 - `pytest tests/ -v`
 - `supabase test db supabase/tests/`
@@ -118,6 +119,12 @@ Pipeline validation for scrape/download runs (not needed for every PR):
 python scripts/validate_pipeline.py --cities santarosa,bloomington,davis
 python scripts/validate_pipeline.py --cities santarosa --strict
 ```
+
+## Checks
+
+- format: `make format`
+- lint & typecheck: `make lint`
+- test: `make test`
 
 ## Agent Skills
 

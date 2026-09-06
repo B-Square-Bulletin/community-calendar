@@ -1,0 +1,29 @@
+<!-- BSB masthead: centered logo + sub-label with Variant B 4px red rule.
+     Shown on all standalone screens; hidden on embed. Chrome font (Inter) is
+     scoped here, not in the theme, because the theme's fontFamily applies globally. -->
+<Fragment>
+  <VStack
+    when="{!window.embed}"
+    horizontalAlignment="center"
+    width="100%"
+    paddingVertical="$space-4"
+    background="transparent"
+    borderBottom="4px solid $color-primary"
+    fontFamily="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+    <Link to="https://bsquarebulletin.com/">
+      <Image
+        src="{'icons/BSB_Logo-2-color-horiz.svg?v=' + window.APP_VERSION}"
+        alt="The B Square Bulletin"
+        height="48px" />
+    </Link>
+    <Text
+      fontSize="$fontSize-sm"
+      fontWeight="$fontWeight-bold"
+      letterSpacing="1.5px"
+      textTransform="uppercase"
+      color="black"
+      marginTop="$space-1">
+      Community Calendar
+    </Text>
+  </VStack>
+</Fragment>
