@@ -117,7 +117,8 @@
     {
       "title": "Follow-up: inline or justify customPickerTimezone",
       "description": "helpers.js customPickerTimezone() only returns getCityTimezone() || 'UTC' and every caller could do the same. Inline it at the DatePicker binding or document why the indirection earns its keep (e.g. fallback policy owned in one place). Done when: one fewer delegation hop or a comment stating the ownership reason; tests green. No behavior change.",
-      "passes": false,
+      "passes": true,
+      "notes": "Done: kept the seam and documented why it earns its keep — getCityTimezone is a bare (non-window) function the DatePicker binding cannot call, and the `|| 'UTC'` fallback policy now lives in one named place alongside dateWindowOpts/todayDateOnly/dateTruncationText instead of being duplicated in markup. Inlining would have duplicated the fallback in the declarative binding, so justify (not inline) is the smallest change. Seams (repo-established, pre-approved): helpers unit + static chrome; no new seam, no codebase-design (no module/interface reshaping). Durable test WHY the seam exists: new validate_custom_helpers pin 'picker timezone falls back to UTC for an unknown city' (fails without the fallback, verified would-FAIL-without-fallback); existing city-zone pin unchanged. Checks: custom_helpers ALL PASSED (incl. new pin), date_tabs ALL PASSED, hardening ALL PASSED, test.html inline scripts parse, pytest 97 passed, make lint clean, bench_collapse_long PASS, validate_pr_feeds clean. No behavior change.",
       "reference": "https://github.com/B-Square-Bulletin/community-calendar/issues/107 (custom picker wiring; Middle Man smell)",
       "priority": 100
     },

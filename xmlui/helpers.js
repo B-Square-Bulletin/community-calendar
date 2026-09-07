@@ -221,7 +221,12 @@ window.todayDateOnly = function() {
 };
 
 // City timezone for the picker (the stock control resolves its calendar in
-// this zone so day boundaries match the committed window).
+// this zone so day boundaries match the committed window). Kept as a named
+// window.* seam rather than inlined at the DatePicker binding because (a)
+// getCityTimezone is a bare (non-window) function the markup cannot call,
+// and (b) the `|| 'UTC'` fallback policy lives here in one place alongside
+// dateWindowOpts/todayDateOnly/dateTruncationText instead of being
+// duplicated in the declarative binding.
 window.customPickerTimezone = function() {
   return getCityTimezone() || 'UTC';
 };

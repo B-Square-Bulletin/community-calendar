@@ -92,6 +92,13 @@ check('month-remainder preset', [presets[2].from, presets[2].to], ['2026-02-11',
 global.Date = RealDate;
 check('picker timezone is the city zone',
   window.customPickerTimezone(), 'America/Los_Angeles');
+// WHY the customPickerTimezone seam earns its keep (Middle Man review):
+// it owns the unknown-city fallback policy in one place, so the markup
+// never duplicates `|| 'UTC'`.
+window.cityFilter = 'unknown-city';
+check('picker timezone falls back to UTC for an unknown city',
+  window.customPickerTimezone(), 'UTC');
+window.cityFilter = 'davis';
 check('today is date-only yyyy-MM-dd',
   /^\d{4}-\d{2}-\d{2}$/.test(window.todayDateOnly()), true);
 check('past dates disabled before today',
