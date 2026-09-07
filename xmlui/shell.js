@@ -316,7 +316,22 @@ window._xsLogs = [];
     if ((from != null || to != null) && typeof window.decodeDateParams === 'function') {
       try {
         var decoded = window.decodeDateParams({ date: key, from: from, to: to }, { timeZone: tz, horizonEnd: window.toDate });
-        if (!decoded || decoded.preset !== 'custom' || !decoded.start) return;
+        if (!decoded || !decoded.start) return;
+        if (decoded.preset !== 'custom') {
+          // Present-but-invalid/partial pair is ignored by the codec, so
+          // the accompanying ?date= preset (if any) still applies here.
+          window.initialDatePreset = decoded.preset;
+          window.initialDateStart = decoded.start;
+          window.initialDateEnd = decoded.end;
+          if (decoded.truncated) {
+            var pLastMs = new Date(decoded.end).getTime() - 1;
+            var pDay = new Intl.DateTimeFormat('en-CA', {
+              timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit'
+            }).format(new Date(pLastMs));
+            window.initialDateTruncationLabel = 'Showing through ' + pDay + ' — the calendar currently ends there.';
+          }
+          return;
+        }
         window.initialDatePreset = 'custom';
         window.initialDateStart = decoded.start;
         window.initialDateEnd = decoded.end;

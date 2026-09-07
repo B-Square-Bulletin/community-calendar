@@ -1281,6 +1281,25 @@
           assertEqual(decoded.start, '2026-02-12T08:00:00.000Z');
         });
 
+        it('ignores an invalid or partial pair and honors ?date=', () => {
+          // WHY: #103 says a partial or invalid from/to pair is ignored
+          // entirely while the complete valid pair wins — the codec must
+          // defer to the preset key instead of stranding on All.
+          const opts = { now: '2026-02-11T12:00:00Z', timeZone: LA };
+          const expected = resolveDatePreset('today', opts);
+          const badPair = decodeDateParams(
+            { date: 'today', from: 'bogus', to: '2026-02-14' }, opts);
+          assertEqual(badPair.preset, 'today');
+          assertEqual(badPair.start, expected.start);
+          const partial = decodeDateParams(
+            { date: 'today', from: '2026-02-12' }, opts);
+          assertEqual(partial.preset, 'today');
+          assertEqual(partial.start, expected.start);
+          const badDates = decodeDateParams(
+            { date: 'tomorrow', from: '2026-02-30', to: '2026-03-01' }, opts);
+          assertEqual(badDates.preset, 'tomorrow');
+        });
+
         it('falls back to All on partial, invalid, and unknown keys', () => {
           const opts = { now: '2026-02-11T12:00:00Z', timeZone: LA };
           assertEqual(decodeDateParams({ from: '2026-02-12' }, opts).preset, 'all');

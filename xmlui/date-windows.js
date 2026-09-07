@@ -310,7 +310,8 @@
   }
 
   // Decode URL params to a window. The Custom pair wins when both dates
-  // are valid; partial/invalid pairs and unknown preset keys fall back to
+  // are valid; partial/invalid pairs are ignored entirely so a valid
+  // ?date= preset is still honored; unknown preset keys fall back to
   // All; a clamped past start reports `rewritten: true` with corrected
   // `from`/`to` so the caller can rewrite the URL for stable reload.
   function decodeDateParams(params, opts) {
@@ -318,16 +319,14 @@
     var tz = opts.timeZone || 'UTC';
     var q = readParams(params);
 
-    if (q.from != null || q.to != null) {
-      var res = (q.from != null && q.to != null)
-        ? withToFields(resolveCustomRange(q.from, q.to, opts), tz)
-        : null;
+    if (q.from != null && q.to != null) {
+      var res = withToFields(resolveCustomRange(q.from, q.to, opts), tz);
       if (res) {
         res.rewritten = !!res.clamped;
         delete res.clamped;
         return res;
       }
-      return Object.assign(emptyWindow('all'), { rewritten: false });
+      // Invalid pair: ignore it entirely and defer to ?date= below.
     }
 
     if (q.date != null) {

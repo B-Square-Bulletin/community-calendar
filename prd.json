@@ -53,9 +53,10 @@
     {
       "title": "Follow-up: invalid/partial custom pair must defer to ?date=",
       "description": "decodeDateParams and the shell boot seed early-return All whenever from/to are present-but-invalid, even with a valid ?date= preset, while #103 says a partial or invalid pair is ignored entirely and the complete valid pair is what wins over ?date=. Change decode (and boot seed) so a present-but-invalid/partial from/to pair is ignored and the ?date= key is honored; All only when both are absent/invalid. Done when: ?date=today&from=bogus resolves the Today window, partial pairs (only from or only to) with a valid ?date= resolve the preset, and unit tests pin preset-wins-on-invalid-pair plus pair-wins-when-valid.",
-      "passes": false,
+      "passes": true,
       "reference": "https://github.com/B-Square-Bulletin/community-calendar/issues/103 (?from=/?to= pair wins when complete valid; partial/invalid pair ignored entirely)",
-      "priority": 20
+      "priority": 20,
+      "notes": "Done: decodeDateParams now attempts Custom only when both from and to are present, and on resolve failure falls through to honor ?date= (All only when both absent/invalid); shell boot seed applies the decoded preset fallback (preset/start/end plus truncation label) instead of returning All when from/to are present-but-invalid. Seams (repo-established, pre-approved): engine unit + static chrome. Red first: ?date=today&from=bogus and partial ?date=today&from=2026-02-12 both decoded to All before; green after (Today window). Durable tests: new test.html it pinning invalid/partial-pair-defers-to-preset with hand-computed PST literals, plus 3 hardening checks (invalid-defers, partial-defers, valid-pair-still-wins). Checks: seam harness green, validate_date_tabs ALL PASSED, validate_date_hardening ALL PASSED (incl. 3 new), validate_custom_helpers ALL PASSED, test.html scripts parse, pytest 97 passed, make lint clean. Decisions (unattended, pre-approved): inverted-pair split left to prio-30 (coercion unchanged here); no URL rewrite on the preset-fallback path (presets never clamp)."
     },
     {
       "title": "Follow-up: inverted custom URL pair must be ignored, not coerced",
