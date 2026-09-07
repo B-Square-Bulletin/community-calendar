@@ -61,7 +61,8 @@
     {
       "title": "Follow-up: inverted custom URL pair must be ignored, not coerced",
       "description": "URL decode reuses resolveCustomRange, so ?from=2026-09-10&to=2026-09-05 coerces to a single day under the picker rule, while #103 requires from<=to else ignore on the URL path. Split the rules: picker-confirm path keeps end-before-start coerces to single-day; URL-decode path ignores inverted pairs (fall back to ?date= or All per prio-20 precedence). Done when: inverted URL pair yields All (or the accompanying valid preset), picker inverted confirm still yields the single from-day, and unit tests pin both paths.",
-      "passes": false,
+      "passes": true,
+      "notes": "Done: resolveCustomRange honors opts.coerceInverted (default true, picker path unchanged); decodeDateParams passes coerceInverted:false so inverted URL pairs return null and defer to ?date= or All. Seams (repo-established, pre-approved): engine unit + static chrome + node harnesses. Red first: inverted pair decoded to custom before; green after (alone->All, +today->Today, valid pair still custom, equal dates valid, picker still coerces). Durable tests: new test.html it (inverted URL ignored + picker coercion, PST literals) + 3 hardening checks. Checks: validate_date_tabs ALL PASSED, validate_date_hardening ALL PASSED, validate_custom_helpers ALL PASSED, test.html inline scripts parse, pytest 97 passed, make lint clean, bench_collapse_long PASS.",
       "reference": "https://github.com/B-Square-Bulletin/community-calendar/issues/103 (from <= to required, else ignore; picker: end-before-start coerces to single-day)",
       "priority": 30
     },

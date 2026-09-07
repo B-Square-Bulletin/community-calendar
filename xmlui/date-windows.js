@@ -205,9 +205,12 @@
 
   // Resolve an exact Custom range. `from`/`to` are yyyy-MM-dd wall-clock
   // dates in the city timezone; the window is [from 00:00, to+1 00:00).
-  // End-before-start coerces to the single `from` day; over-long ranges
-  // cap at 180 days; past starts clamp to today; ends past the Horizon
-  // truncate. Returns null when either date is missing or invalid.
+  // End-before-start coerces to the single `from` day on the picker path;
+  // the URL-decode path passes {coerceInverted:false} so an inverted pair
+  // returns null (ignored per #103: from <= to required, else ignore).
+  // Over-long ranges cap at 180 days; past starts clamp to today; ends
+  // past the Horizon truncate. Returns null when either date is missing
+  // or invalid.
   function resolveCustomRange(from, to, opts) {
     opts = opts || {};
     var tz = opts.timeZone || 'UTC';
@@ -226,6 +229,9 @@
     var endMs = midnightMs(endDay.y, endDay.mo, endDay.d, tz);
 
     if (endMs <= startMs) {
+      // Inverted pair on the URL path is ignored (null); the picker path
+      // keeps the single-`from`-day coercion.
+      if (opts && opts.coerceInverted === false) return null;
       // Inverted or zero-length range coerces to the single `from` day.
       var next = addDays(f.y, f.mo, f.d, 1);
       endMs = midnightMs(next.y, next.mo, next.d, tz);
@@ -320,7 +326,8 @@
     var q = readParams(params);
 
     if (q.from != null && q.to != null) {
-      var res = withToFields(resolveCustomRange(q.from, q.to, opts), tz);
+      var customOpts = Object.assign({}, opts, { coerceInverted: false });
+      var res = withToFields(resolveCustomRange(q.from, q.to, customOpts), tz);
       if (res) {
         res.rewritten = !!res.clamped;
         delete res.clamped;

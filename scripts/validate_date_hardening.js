@@ -166,6 +166,12 @@ check('partial pair is ignored and the valid preset wins',
   window.decodeDateParams({ date: 'today', from: '2026-02-12' }, { timeZone: 'America/Los_Angeles' }).preset, 'today');
 check('valid pair still wins over the preset key',
   window.decodeDateParams({ date: 'today', from: '2026-02-12', to: '2026-02-14' }, { timeZone: 'America/Los_Angeles' }).preset, 'custom');
+check('inverted URL pair is ignored (All when no preset)',
+  window.decodeDateParams({ from: '2026-09-10', to: '2026-09-05' }, { timeZone: 'America/Los_Angeles' }).preset, 'all');
+check('inverted URL pair defers to the valid preset',
+  window.decodeDateParams({ date: 'today', from: '2026-09-10', to: '2026-09-05' }, { timeZone: 'America/Los_Angeles' }).preset, 'today');
+check('picker path still coerces an inverted pair to the single from-day',
+  window.resolveCustomRange('2026-09-10', '2026-09-05', { timeZone: 'America/Los_Angeles' }).to, '2026-09-10');
 check('canonical thismonth key decodes to the month-remainder window',
   window.decodeDateParams({ date: 'thismonth' }, { timeZone: 'America/Los_Angeles' }).preset, 'thismonth');
 check('legacy month key decodes to the canonical thismonth window',

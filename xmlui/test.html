@@ -1308,6 +1308,24 @@
           assertEqual(decodeDateParams({}, opts).preset, 'all');
         });
 
+        it('ignores an inverted Custom URL pair but keeps the picker coercion', () => {
+          // WHY: #103 splits the rules — from <= to required on the URL
+          // path (ignore, deferring to ?date= or All) while the picker
+          // confirm coerces end-before-start to the single from-day.
+          // Hand-computed PST literals so this test can disagree with code.
+          const opts = { now: '2026-02-11T12:00:00Z', timeZone: LA };
+          assertEqual(
+            decodeDateParams({ from: '2026-09-10', to: '2026-09-05' }, opts).preset, 'all');
+          const withPreset = decodeDateParams(
+            { date: 'today', from: '2026-09-10', to: '2026-09-05' }, opts);
+          assertEqual(withPreset.preset, 'today');
+          assertEqual(withPreset.start, '2026-02-11T08:00:00.000Z');
+          const picked = resolveCustomRange('2026-09-10', '2026-09-05', opts);
+          assertEqual(picked.start, '2026-09-10T07:00:00.000Z');
+          assertEqual(picked.end, '2026-09-11T07:00:00.000Z');
+          assertEqual(picked.to, '2026-09-10');
+        });
+
         it('rewrites a clamped past start for stable reload', () => {
           const decoded = decodeDateParams({ from: '2026-01-01', to: '2026-02-20' },
             { now: '2026-02-11T12:00:00Z', timeZone: LA });
