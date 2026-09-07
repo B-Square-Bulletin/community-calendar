@@ -81,6 +81,7 @@
     </script>
     <script src="helpers.js"></script>
     <script src="boot-decisions.js"></script>
+    <script src="date-windows.js"></script>
   </head>
   <body>
     <h1>Community Calendar Tests</h1>
@@ -1068,6 +1069,227 @@
 
         it('maps any other hostname to the default theme', () => {
           assertEqual(getThemeIdForHost('example.com'), 'community-calendar');
+        });
+      });
+
+      describe('Date windows (#104)', () => {
+        // Table-driven over a stubbed clock (explicit `now`) and a stubbed
+        // city timezone (`timeZone`): expectations are absolute-ISO
+        // literals, so a failure means the engine disagrees with the spec,
+        // not with itself.
+        const LA = 'America/Los_Angeles';
+        const FEB_WEEKEND_START = '2026-02-14T01:00:00.000Z'; // Fri Feb 13 17:00 PST
+        const FEB_WEEKEND_END = '2026-02-16T08:00:00.000Z'; // Mon Feb 16 00:00 PST
+
+        it('resolves Today to city-midnight bounds', () => {
+          const w = resolveDatePreset('today', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(w.preset, 'today');
+          assertEqual(w.start, '2026-02-11T08:00:00.000Z');
+          assertEqual(w.end, '2026-02-12T08:00:00.000Z');
+          assertEqual(w.startTimeOnly, false);
+        });
+
+        it('resolves Tonight to [17:00, midnight) start-time-only', () => {
+          const w = resolveDatePreset('tonight', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(w.preset, 'tonight');
+          assertEqual(w.start, '2026-02-12T01:00:00.000Z');
+          assertEqual(w.end, '2026-02-12T08:00:00.000Z');
+          assertEqual(w.startTimeOnly, true);
+        });
+
+        it('excludes 16:59 from Tonight and ends at midnight', () => {
+          const w = resolveDatePreset('tonight', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assert(new Date('2026-02-12T00:59:59.000Z').getTime() < new Date(w.start).getTime(),
+            '16:59:59 PST must fall before the Tonight window');
+          assertEqual(w.end, '2026-02-12T08:00:00.000Z');
+        });
+
+        it('resolves Tomorrow to the next city day', () => {
+          const w = resolveDatePreset('tomorrow', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(w.start, '2026-02-12T08:00:00.000Z');
+          assertEqual(w.end, '2026-02-13T08:00:00.000Z');
+        });
+
+        it('resolves Next 7 days to seven city midnights', () => {
+          const w = resolveDatePreset('next7', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(w.start, '2026-02-11T08:00:00.000Z');
+          assertEqual(w.end, '2026-02-18T08:00:00.000Z');
+        });
+
+        it('resolves This month to the month remainder', () => {
+          const w = resolveDatePreset('month', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(w.start, '2026-02-11T08:00:00.000Z');
+          assertEqual(w.end, '2026-03-01T08:00:00.000Z');
+        });
+
+        it('ends This month at the next month on month-end', () => {
+          const w = resolveDatePreset('month', { now: '2026-01-31T20:00:00Z', timeZone: LA });
+          assertEqual(w.start, '2026-01-31T08:00:00.000Z');
+          assertEqual(w.end, '2026-02-01T08:00:00.000Z');
+        });
+
+        it('resolves All to an empty window', () => {
+          const w = resolveDatePreset('all', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(w.preset, 'all');
+          assertEqual(w.start, null);
+          assertEqual(w.end, null);
+        });
+
+        it('falls back to All for an unknown preset', () => {
+          const w = resolveDatePreset('fortnight', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(w.preset, 'all');
+          assertEqual(w.start, null);
+        });
+
+        it('resolves the stubbed timezone, not the browser zone (New York)', () => {
+          const w = resolveDatePreset('today', { now: '2026-02-11T12:00:00Z', timeZone: 'America/New_York' });
+          assertEqual(w.start, '2026-02-11T05:00:00.000Z');
+          assertEqual(w.end, '2026-02-12T05:00:00.000Z');
+        });
+
+        // Weekday table: week of Mon Feb 9 - Sun Feb 15 2026 (all PST).
+        // Mon-Thu resolve to the upcoming weekend; Fri/Sat/Sun to the
+        // enclosing one: [Fri 17:00 incl, Mon 00:00 excl).
+        const weekendTable = [
+          ['Mon Feb 9', '2026-02-09T20:00:00Z', FEB_WEEKEND_START, FEB_WEEKEND_END],
+          ['Tue Feb 10', '2026-02-10T20:00:00Z', FEB_WEEKEND_START, FEB_WEEKEND_END],
+          ['Wed Feb 11', '2026-02-11T20:00:00Z', FEB_WEEKEND_START, FEB_WEEKEND_END],
+          ['Thu Feb 12', '2026-02-12T20:00:00Z', FEB_WEEKEND_START, FEB_WEEKEND_END],
+          ['Fri Feb 13', '2026-02-13T20:00:00Z', FEB_WEEKEND_START, FEB_WEEKEND_END],
+          ['Sat Feb 14', '2026-02-14T20:00:00Z', FEB_WEEKEND_START, FEB_WEEKEND_END],
+          ['Sun Feb 15', '2026-02-15T20:00:00Z', FEB_WEEKEND_START, FEB_WEEKEND_END],
+        ];
+        weekendTable.forEach(([label, now, start, end]) => {
+          it('weekend table: ' + label + ' -> Fri 17:00-Mon 00:00', () => {
+            const w = resolveDatePreset('weekend', { now, timeZone: LA });
+            assertEqual(w.start, start, label + ' start');
+            assertEqual(w.end, end, label + ' end');
+          });
+        });
+
+        it('measures DST days by wall-clock (23h spring forward)', () => {
+          const w = resolveDatePreset('today', { now: '2026-03-08T20:00:00Z', timeZone: LA });
+          assertEqual(w.start, '2026-03-08T08:00:00.000Z');
+          assertEqual(w.end, '2026-03-09T07:00:00.000Z');
+          assertEqual(new Date(w.end).getTime() - new Date(w.start).getTime(), 23 * 3600000);
+        });
+
+        it('measures DST days by wall-clock (25h fall back)', () => {
+          const w = resolveDatePreset('today', { now: '2026-11-01T20:00:00Z', timeZone: LA });
+          assertEqual(w.start, '2026-11-01T07:00:00.000Z');
+          assertEqual(w.end, '2026-11-02T08:00:00.000Z');
+          assertEqual(new Date(w.end).getTime() - new Date(w.start).getTime(), 25 * 3600000);
+        });
+
+        it('keeps the weekend window across the spring-forward jump', () => {
+          const w = resolveDatePreset('weekend', { now: '2026-03-07T20:00:00Z', timeZone: LA });
+          assertEqual(w.start, '2026-03-07T01:00:00.000Z'); // Fri 17:00 PST
+          assertEqual(w.end, '2026-03-09T07:00:00.000Z'); // Mon 00:00 PDT
+        });
+
+        it('resolves a Custom range to exact city-midnight bounds', () => {
+          const w = resolveCustomRange('2026-02-12', '2026-02-14', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(w.start, '2026-02-12T08:00:00.000Z');
+          assertEqual(w.end, '2026-02-15T08:00:00.000Z');
+          assertEqual(w.from, '2026-02-12');
+          assertEqual(w.to, '2026-02-14');
+        });
+
+        it('coerces an end-before-start Custom range to the single from-day', () => {
+          const w = resolveCustomRange('2026-02-14', '2026-02-12', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(w.start, '2026-02-14T08:00:00.000Z');
+          assertEqual(w.end, '2026-02-15T08:00:00.000Z');
+          assertEqual(w.to, '2026-02-14');
+        });
+
+        it('caps a Custom range at 180 days', () => {
+          const w = resolveCustomRange('2026-02-12', '2027-02-12', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(w.end, '2026-08-11T07:00:00.000Z');
+          assertEqual(w.to, '2026-08-10');
+        });
+
+        it('clamps a past Custom start to today', () => {
+          const w = resolveCustomRange('2026-01-01', '2026-02-20', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(w.start, '2026-02-11T08:00:00.000Z');
+          assertEqual(w.from, '2026-02-11');
+          assertEqual(w.clamped, true);
+        });
+
+        it('truncates a Custom range at the horizon with a label', () => {
+          const w = resolveCustomRange('2026-02-12', '2026-05-12', {
+            now: '2026-02-11T12:00:00Z', timeZone: LA, horizonEnd: '2026-03-01T08:00:00.000Z'
+          });
+          assertEqual(w.end, '2026-03-01T08:00:00.000Z');
+          assertEqual(w.truncated, true);
+        });
+
+        it('returns null for a Custom range with invalid dates', () => {
+          assertEqual(resolveCustomRange('2026-02-30', '2026-03-01', { now: '2026-02-11T12:00:00Z', timeZone: LA }), null);
+          assertEqual(resolveCustomRange('2026-02-12', null, { now: '2026-02-11T12:00:00Z', timeZone: LA }), null);
+        });
+
+        it('encodes presets to date keys and All to no keys', () => {
+          assertDeepEqual(encodeDateParams({ preset: 'today' }), { date: 'today' });
+          assertDeepEqual(encodeDateParams({ preset: 'weekend' }), { date: 'weekend' });
+          assertDeepEqual(encodeDateParams({ preset: 'all' }), {});
+          assertDeepEqual(encodeDateParams({}), {});
+        });
+
+        it('encodes Custom to an exact from/to pair with no preset key', () => {
+          assertDeepEqual(
+            encodeDateParams({ preset: 'custom', from: '2026-02-12', to: '2026-02-14' }),
+            { from: '2026-02-12', to: '2026-02-14' });
+        });
+
+        it('round-trips every rolling preset through the URL codec', () => {
+          const now = '2026-02-11T12:00:00Z';
+          ['today', 'tonight', 'tomorrow', 'weekend', 'next7', 'month'].forEach((preset) => {
+            const expected = resolveDatePreset(preset, { now, timeZone: LA });
+            const decoded = decodeDateParams(encodeDateParams({ preset }), { now, timeZone: LA });
+            assertEqual(decoded.preset, preset, preset + ' preset');
+            assertEqual(decoded.start, expected.start, preset + ' start');
+            assertEqual(decoded.end, expected.end, preset + ' end');
+          });
+        });
+
+        it('round-trips a Custom pair through the URL codec', () => {
+          const now = '2026-02-11T12:00:00Z';
+          const decoded = decodeDateParams({ from: '2026-02-12', to: '2026-02-14' }, { now, timeZone: LA });
+          assertEqual(decoded.preset, 'custom');
+          assertDeepEqual(encodeDateParams({ preset: 'custom', from: decoded.from, to: decoded.to }),
+            { from: '2026-02-12', to: '2026-02-14' });
+        });
+
+        it('lets the Custom pair win over a preset key', () => {
+          const decoded = decodeDateParams(
+            { date: 'today', from: '2026-02-12', to: '2026-02-14' },
+            { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(decoded.preset, 'custom');
+          assertEqual(decoded.start, '2026-02-12T08:00:00.000Z');
+        });
+
+        it('falls back to All on partial, invalid, and unknown keys', () => {
+          const opts = { now: '2026-02-11T12:00:00Z', timeZone: LA };
+          assertEqual(decodeDateParams({ from: '2026-02-12' }, opts).preset, 'all');
+          assertEqual(decodeDateParams({ from: '2026-02-30', to: '2026-03-01' }, opts).preset, 'all');
+          assertEqual(decodeDateParams({ date: 'fortnight' }, opts).preset, 'all');
+          assertEqual(decodeDateParams({}, opts).preset, 'all');
+        });
+
+        it('rewrites a clamped past start for stable reload', () => {
+          const decoded = decodeDateParams({ from: '2026-01-01', to: '2026-02-20' },
+            { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(decoded.preset, 'custom');
+          assertEqual(decoded.start, '2026-02-11T08:00:00.000Z');
+          assertEqual(decoded.from, '2026-02-11');
+          assertEqual(decoded.rewritten, true);
+        });
+
+        it('decodes URLSearchParams as well as plain objects', () => {
+          const decoded = decodeDateParams(new URLSearchParams('date=tomorrow'),
+            { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(decoded.preset, 'tomorrow');
+          assertEqual(decoded.start, '2026-02-12T08:00:00.000Z');
         });
       });
 
