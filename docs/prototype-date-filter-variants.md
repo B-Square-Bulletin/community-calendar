@@ -15,6 +15,7 @@ Then open (Bloomington data, live Supabase backend):
 - A · Chips: `http://localhost:8000/xmlui/index.html?city=bloomington&variant=A`
 - B · Calendar: `http://localhost:8000/xmlui/index.html?city=bloomington&variant=B`
 - C · Slider: `http://localhost:8000/xmlui/index.html?city=bloomington&variant=C`
+- D · Tabs (no slider): `http://localhost:8000/xmlui/index.html?city=bloomington&variant=D`
 - Production (no param, untouched): `http://localhost:8000/xmlui/index.html?city=bloomington`
 
 The switcher bar under the variants jumps between them (page reloads;
@@ -34,6 +35,11 @@ drops the param and returns to the production slider.
 - **C · Slider + presets hybrid** (day slider kept, but readout-only
   while dragging; the filter commits on release; compact preset buttons
   drive the thumbs). Compare against replacing the slider outright.
+- **D · Tabbed presets, no slider** (Eventbrite-style: solid tab = active
+  filter state, calendar behind the Custom tab, auto-commit picker).
+  **C-vs-D is the slider's trial**: same presets and contract, slider vs
+  no slider. Reaction round 1 settled the slider *feel* and put C ahead
+  on structure but flagged the *look* — D answers with tabs.
 
 Every variant shows a `Showing: <window> (<N> events)` state line. The
 interesting answer is usually "the X of B with the Y of C" — say that.

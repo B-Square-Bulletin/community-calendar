@@ -1,6 +1,6 @@
 <!-- PROTOTYPE — throwaway, branch prototype/date-filter-variants, NEVER merge.
-  "Three date-filter variants on the existing city route, switchable via
-  ?variant=A|B|C." Sub-shape A: mounted in Main.xmlui above the event list,
+  "Four date-filter variants on the existing city route, switchable via
+  ?variant=A|B|C|D." Sub-shape A: mounted in Main.xmlui above the event list,
   gated on window.filterVariant (param absent = production UI untouched).
   All variants commit into the same sliderStart/sliderEnd app vars, so the
   existing list/pager pipeline renders results; no backend writes.
@@ -11,6 +11,7 @@
   var.customOpen="{false}"
   var.lastKey="{''}"
   var.readout="{null}"
+  var.tabKey="{window.protoValueFor($props.start, $props.end)}"
 >
   <!-- Shared state line inputs (props): variant, dayRange, start, end, count.
        Events out: commit ({start, end}) on the Main.xmlui usage site. -->
@@ -93,6 +94,33 @@
     <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{'Showing: ' + window.protoLabelFor($props.start, $props.end) + ' (' + $props.count + ' events)'}" />
   </VStack>
 
+  <!-- ============ Variant D: tabbed presets, NO slider (head-to-head vs C) ============
+       Eventbrite-style: the strip IS the filter state (solid = active tab),
+       calendar lives behind the Custom tab. Same commit contract as A/B. -->
+  <VStack when="{$props.variant === 'D'}" gap="$space-2">
+    <Text fontSize="$fontSize-xs" fontWeight="$fontWeight-bold" value="PROTOTYPE D · Tabbed presets, no slider (Eventbrite-style; C-vs-D is the slider's trial)" />
+    <HStack gap="$space-1" wrapContent="true">
+      <Button label="All" size="xs" variant="{tabKey === 'all' ? 'solid' : 'outlined'}" onClick="tabKey = 'all'; lastKey = ''; customOpen = false; emitEvent('commit', window.protoClearWindow())" />
+      <Button label="Today" size="xs" variant="{tabKey === 'today' ? 'solid' : 'outlined'}" onClick="var p = window.protoPreset('today'); tabKey = 'today'; lastKey = 'today'; customOpen = false; emitEvent('commit', {start: p.start, end: p.end})" />
+      <Button label="Tonight" size="xs" variant="{tabKey === 'tonight' ? 'solid' : 'outlined'}" onClick="var p = window.protoPreset('tonight'); tabKey = 'tonight'; lastKey = 'tonight'; customOpen = false; emitEvent('commit', {start: p.start, end: p.end})" />
+      <Button label="Tomorrow" size="xs" variant="{tabKey === 'tomorrow' ? 'solid' : 'outlined'}" onClick="var p = window.protoPreset('tomorrow'); tabKey = 'tomorrow'; lastKey = 'tomorrow'; customOpen = false; emitEvent('commit', {start: p.start, end: p.end})" />
+      <Button label="Weekend" size="xs" variant="{tabKey === 'weekend' ? 'solid' : 'outlined'}" onClick="var p = window.protoPreset('weekend'); tabKey = 'weekend'; lastKey = 'weekend'; customOpen = false; emitEvent('commit', {start: p.start, end: p.end})" />
+      <Button label="7 days" size="xs" variant="{tabKey === 'next7' ? 'solid' : 'outlined'}" onClick="var p = window.protoPreset('next7'); tabKey = 'next7'; lastKey = 'next7'; customOpen = false; emitEvent('commit', {start: p.start, end: p.end})" />
+      <Button label="Month" size="xs" variant="{tabKey === 'thismonth' ? 'solid' : 'outlined'}" onClick="var p = window.protoPreset('thismonth'); tabKey = 'thismonth'; lastKey = 'thismonth'; customOpen = false; emitEvent('commit', {start: p.start, end: p.end})" />
+      <Button label="Custom…" size="xs" variant="{tabKey === 'custom' ? 'solid' : 'outlined'}" onClick="tabKey = 'custom'; customOpen = !customOpen" />
+    </HStack>
+    <DatePicker
+      when="{customOpen}"
+      mode="range"
+      dateFormat="yyyy-MM-dd"
+      presets="{window.protoForwardPresets()}"
+      width="100%"
+      onDidChange="(range) => { if (!range || !range.from || !range.to) { tabKey = 'all'; lastKey = ''; emitEvent('commit', window.protoClearWindow()); } else { var o = window.protoRangeToOffsets(range); if (o) { tabKey = 'custom'; lastKey = 'custom'; emitEvent('commit', o); } customOpen = false; } }"
+    />
+    <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{'Showing: ' + window.protoLabelFor($props.start, $props.end) + ' (' + $props.count + ' events)'}" />
+    <Text when="{lastKey === 'tonight'}" fontSize="$fontSize-xs" color="$color-text-secondary" value="Tonight starts 5pm — prototype shows the full day; the intraday cutoff is spec'd for implementation." />
+  </VStack>
+
   <!-- ============ Switcher bar (obviously not production) ============ -->
   <HStack
     gap="$space-2"
@@ -106,6 +134,7 @@
     <Button label="A · Chips" size="xs" variant="outlined" onClick="window.setFilterVariant('A')" />
     <Button label="B · Calendar" size="xs" variant="outlined" onClick="window.setFilterVariant('B')" />
     <Button label="C · Slider" size="xs" variant="outlined" onClick="window.setFilterVariant('C')" />
+    <Button label="D · Tabs" size="xs" variant="outlined" onClick="window.setFilterVariant('D')" />
     <Button label="Exit prototype" size="xs" onClick="window.setFilterVariant('')" />
   </HStack>
 </Component>
