@@ -1,6 +1,15 @@
 <!-- BSB masthead: centered logo + sub-label with Variant B 4px red rule.
      Shown on all standalone screens; hidden on embed. Chrome font (Inter) is
-     scoped here, not in the theme, because the theme's fontFamily applies globally. -->
+     scoped here, not in the theme, because the theme's fontFamily applies globally.
+     Dark-mode safety (#90): the SVG wordmark is black paths baked into an
+     <img>, so it cannot recolor itself when the app switches to the dark
+     tone. The white rounded box behind the logo is what keeps it visible:
+     it gives the black wordmark a light background in both tones while the
+     single SVG asset stays untouched and no tone state is tracked. The
+     <Theme tone="light"> wrapper pins the light tone for this subtree so any
+     token-based styling inside it resolves to light-tone values. The
+     sub-label uses $color-text-primary, which the BSB theme defines
+     separately for the light and dark tones. -->
 <Fragment>
   <VStack
     when="{!window.embed}"
@@ -10,18 +19,25 @@
     background="transparent"
     borderBottom="4px solid $color-primary"
     fontFamily="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
-    <Link to="https://bsquarebulletin.com/">
-      <Image
-        src="{'icons/BSB_Logo-2-color-horiz.svg?v=' + window.APP_VERSION}"
-        alt="The B Square Bulletin"
-        height="48px" />
-    </Link>
+    <Theme tone="light">
+      <!-- "white" is deliberately a literal, not a theme token: the box must
+           stay light in the dark tone too, which is exactly what keeps the
+           black wordmark readable. Do not convert to a $color-* token. -->
+      <Stack backgroundColor="white" padding="$space-2" borderRadius="$borderRadius">
+        <Link to="https://bsquarebulletin.com/">
+          <Image
+            src="{'icons/BSB_Logo-2-color-horiz.svg?v=' + window.APP_VERSION}"
+            alt="The B Square Bulletin"
+            height="48px" />
+        </Link>
+      </Stack>
+    </Theme>
     <Text
       fontSize="$fontSize-sm"
       fontWeight="$fontWeight-bold"
       letterSpacing="1.5px"
       textTransform="uppercase"
-      color="black"
+      color="$color-text-primary"
       marginTop="$space-1">
       Community Calendar
     </Text>

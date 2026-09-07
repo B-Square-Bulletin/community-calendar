@@ -36,19 +36,29 @@ let logo = null;
 try { logo = fs.readFileSync(path.join(ROOT, 'icons/BSB_Logo-2-color-horiz.svg'), 'utf8'); } catch { logo = null; }
 
 // --- BrandHeader ---
+// Shared pattern: the header must reference the single vendored logo asset
+// with a cache-busting APP_VERSION query. Used by two checks below.
+const LOGO_REF = /BSB_Logo-2-color-horiz\.svg\?v=.*APP_VERSION/;
 check('header exists', !!header);
 check('header links logo to bsquarebulletin.com same-tab',
   !!header && header.includes('https://bsquarebulletin.com/') && !/to="https:\/\/bsquarebulletin\.com[^"]*"[^>]*target="_blank"/.test(header));
-check('header sub-label black bold letter-spaced',
-  !!header && header.includes('Community Calendar') && header.includes('color="black"')
+check('header sub-label uses $color-text-primary (dark-tone safe), bold, letter-spaced',
+  !!header && header.includes('Community Calendar')
+  && header.includes('$color-text-primary')
+  && !/color\s*=\s*["']black["']/.test(header)
   && header.includes('$fontWeight-bold') && /letterSpacing/i.test(header));
+check('header logo pinned in a light-tone island (single asset, no tone tracking)',
+  !!header && /<Theme[^>]*tone="light"/.test(header)
+  && LOGO_REF.test(header));
+check('header island paints a pinned-light badge behind the logo',
+  !!header && /<Theme[^>]*tone="light"[\s\S]*?backgroundColor="white"[\s\S]*?BSB_Logo-2-color-horiz\.svg[\s\S]*?<\/Theme>/.test(header));
 check('header 4px red bottom rule',
   !!header && /borderBottom="4px solid \$color-primary"/.test(header));
 check('header Inter chrome font scoped to component',
   !!header && header.includes('Inter'));
 check('header hidden on embed', !!header && header.includes('!window.embed'));
 check('header references vendored logo with APP_VERSION',
-  !!header && /BSB_Logo-2-color-horiz\.svg\?v=.*APP_VERSION/.test(header));
+  !!header && LOGO_REF.test(header));
 
 // --- BrandFooter ---
 check('footer exists', !!footer);
@@ -74,6 +84,10 @@ check('footer hidden on embed', !!footer && footer.includes('!window.embed'));
 // --- Logo asset + registration ---
 check('logo vendored under icons/', !!logo && logo.includes('<svg'));
 check('logo has no scripts', !!logo && !/script|onload|onclick/i.test(logo));
+check('logo wordmark stays near-black (asset untouched by tone fix)',
+  !!logo && /fill:#231f20/i.test(logo));
+check('logo red square unchanged (brand red, no filter shift)',
+  !!logo && /fill:#d21c2d/i.test(logo));
 check('logo registered in config.json resources',
   !!config && config.includes('BSB_Logo-2-color-horiz.svg'));
 
@@ -175,6 +189,50 @@ check('event title inherits theme link color (no per-instance override)',
     const card = read('components/EventCard.xmlui');
     return card.includes('value="{$props.event.title}"')
       && !/<Text[^>]*value="\{\$props\.event\.title\}"[^>]*color=/.test(card);
+  })());
+
+// --- Sub-label per-tone contrast (#90): the "Community Calendar" line uses
+// $color-text-primary, which the BSB theme must define for BOTH tones at
+// WCAG AA (>= 4.5:1). Light text is checked against the white badge/card and
+// the warm page surface; dark text against the engine's near-black dark
+// surface (tones reverse the surface scale, so the page behind the
+// transparent masthead goes dark). Ratios print so CI logs carry the numbers.
+function toneTextColor(themeText, tone) {
+  try {
+    return JSON.parse(themeText).tones[tone].themeVars['color-text-primary'] || null;
+  } catch { return null; }
+}
+check('sub-label light token defined + meets AA on light surfaces',
+  !!themeText && (() => {
+    const raw = toneTextColor(themeText, 'light');
+    const c = parseHsl(raw);
+    if (!c) return false;
+    const vars = JSON.parse(themeText).themeVars;
+    const surf = parseHsl(vars['color-surface']);
+    if (!surf) return false;
+    const fg = hslToRgb(c.h, c.s, c.l);
+    const white = [255, 255, 255];
+    const surface = hslToRgb(surf.h, surf.s, surf.l);
+    const onWhite = contrastOf(fg, white);
+    const onSurface = contrastOf(fg, surface);
+    console.log(`  info sub-label light ${raw}: ${onWhite.toFixed(2)}:1 on white, ${onSurface.toFixed(2)}:1 on surface`);
+    return onWhite >= 4.5 && onSurface >= 4.5;
+  })());
+check('sub-label dark token defined + meets AA on dark surface',
+  !!themeText && (() => {
+    const raw = toneTextColor(themeText, 'dark');
+    const c = parseHsl(raw);
+    if (!c) return false;
+    const fg = hslToRgb(c.h, c.s, c.l);
+    // Engine dark tone reverses the surface scale: surface-0 resolves to the
+    // const-1000 end (~9% lightness). Check against that representative
+    // near-black plus pure black as the floor.
+    const darkBg = hslToRgb(204, 30.3, 9);
+    const black = [0, 0, 0];
+    const onDark = contrastOf(fg, darkBg);
+    const onBlack = contrastOf(fg, black);
+    console.log(`  info sub-label dark ${raw}: ${onDark.toFixed(2)}:1 on dark surface, ${onBlack.toFixed(2)}:1 on black`);
+    return onDark >= 4.5 && onBlack >= 4.5;
   })());
 
 console.log(failures === 0 ? '\nALL CHECKS PASSED' : `\n${failures} CHECKS FAILED`);
