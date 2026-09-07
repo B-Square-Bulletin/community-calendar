@@ -311,7 +311,17 @@ window._xsLogs = [];
   window.initialDateEnd = null;
   window.initialDateTruncationLabel = null;
   (function () {
-    var HONORED = { today: 1, tonight: 1, tomorrow: 1, weekend: 1, next7: 1, thismonth: 1, month: 1 };
+    // Single source of truth for preset keys (prio-80): the boot-honored set
+    // derives from the engine's canonical window.DATE_PRESETS (minus 'all',
+    // which is the default when no key is present) plus the engine's legacy
+    // window.DATE_PRESET_ALIASES read keys (?date=month). Literals below are
+    // fallbacks for boot orders where the engine is absent; the alias
+    // decision itself lives in date-windows.js, not here.
+    var HONORED = {};
+    var canonical = window.DATE_PRESETS || ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth'];
+    canonical.forEach(function (k) { if (k !== 'all') HONORED[k] = 1; });
+    var aliases = window.DATE_PRESET_ALIASES || { month: 'thismonth' };
+    Object.keys(aliases).forEach(function (k) { HONORED[k] = 1; });
     var tz = (window._cities && window.cityFilter && window._cities[window.cityFilter] &&
       window._cities[window.cityFilter].timezone) || 'UTC';
     var key = null, from = null, to = null;

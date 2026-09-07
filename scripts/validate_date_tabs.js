@@ -129,15 +129,17 @@ check('weekend commits via the engine with paging reset, scroll, and URL sync',
 check('intraday tabs show pressed state when active',
   !!main && /datePreset === 'tonight' \? 'solid' : 'outlined'/.test(main)
   && /datePreset === 'weekend' \? 'solid' : 'outlined'/.test(main));
-check('helpers.js date-tab presets include the intraday keys',
-  !!helpers && /'tonight'/.test(helpers) && /'weekend'/.test(helpers));
-check('shell.js boot seed honors the intraday evergreen keys',
-  !!shell && /HONORED[^}]*tonight/.test(shell) && /HONORED[^}]*weekend/.test(shell));
+check('helpers.js date-tab presets derive from the engine canonical list (single source)',
+  !!helpers && /window\.DATE_TAB_PRESETS[\s\S]{0,300}?window\.DATE_PRESETS/.test(helpers)
+  && /DATE_TAB_PRESETS/.test(helpers));
+check('shell.js boot seed derives the honored set from the engine list plus its alias map',
+  !!shell && /window\.DATE_PRESETS/.test(shell) && /window\.DATE_PRESET_ALIASES/.test(shell)
+  && /HONORED/.test(shell));
 check('this month commits and boots as ?date=thismonth (#103 contract)',
   !!main && /commitDatePreset\('thismonth'\)/.test(main)
   && /datePreset === 'thismonth' \? 'solid' : 'outlined'/.test(main)
-  && !!helpers && /'thismonth'/.test(helpers)
-  && !!shell && /HONORED[^}]*thismonth/.test(shell));
+  && !!helpers && /DATE_PRESET_ALIASES/.test(helpers)
+  && !!shell && /DATE_PRESET_ALIASES/.test(shell));
 
 // --- Composition: date + search + category; counts reflect the window ---
 check('category counts computed after date filtering',

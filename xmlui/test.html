@@ -1562,18 +1562,18 @@
             }
           });
 
-          test('intraday presets sync as evergreen ?date= links', () => {
-            assert(helpersText.includes("'tonight'"), 'DATE_TAB_PRESETS must include tonight');
-            assert(helpersText.includes("'weekend'"), 'DATE_TAB_PRESETS must include weekend');
+          test('intraday presets sync as evergreen ?date= links (single source: engine list)', () => {
+            assert(/window\.DATE_TAB_PRESETS[\s\S]{0,300}?window\.DATE_PRESETS/.test(helpersText),
+              'DATE_TAB_PRESETS must derive from the engine DATE_PRESETS (single source)');
             assert(/syncDateParams[\s\S]{0,400}?replaceDateUrlParams/.test(helpersText),
               'Date commits must route through the shared URL helper');
             assert(/replaceDateUrlParams[\s\S]{0,1200}?replaceState/.test(helpersText),
               'Date commits must use history-replace (Back skips filter states)');
           });
 
-          test('boot seed honors the intraday evergreen keys', () => {
-            assert(/HONORED[^}]*tonight/.test(shellText), 'Boot seed must honor ?date=tonight');
-            assert(/HONORED[^}]*weekend/.test(shellText), 'Boot seed must honor ?date=weekend');
+          test('boot seed honors the intraday evergreen keys (derived from the engine list)', () => {
+            assert(/window\.DATE_PRESETS/.test(shellText), 'Boot seed must derive HONORED from window.DATE_PRESETS');
+            assert(/window\.DATE_PRESET_ALIASES/.test(shellText), 'Boot seed must derive legacy keys from window.DATE_PRESET_ALIASES');
           });
         } catch (e) {
           group.tests.push({ name: 'Load date tab files', pass: false, error: e.message });

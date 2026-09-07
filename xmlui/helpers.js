@@ -94,7 +94,12 @@ window.replaceDateUrlParams = function(params) {
   }
   window.history.replaceState({}, '', url);
 };
-window.DATE_TAB_PRESETS = ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth'];
+// Single source of truth for preset keys (prio-80): the engine owns the
+// canonical list (window.DATE_PRESETS in date-windows.js); the tab strip is
+// exactly that list, derived here so adding a preset means editing the
+// engine only. The slice freezes a copy with a literal fallback for load
+// orders where the engine is absent.
+window.DATE_TAB_PRESETS = ((window.DATE_PRESETS || ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth']).slice());
 window.syncDateParams = function(sel) {
   var preset = sel && sel.preset;
   if (preset && preset !== 'all' && window.DATE_TAB_PRESETS.indexOf(preset) >= 0) {
@@ -137,6 +142,11 @@ window.dateWindowForPreset = function(preset) {
 // Unknown keys fail open to the All label so bad links never strand the
 // visitor on a baffling empty.
 window.dateWindowLabel = function(preset) {
+  // Legacy read key (?date=month) normalizes through the engine's single
+  // alias map, so old links render the This-month copy.
+  if (window.DATE_PRESET_ALIASES && Object.prototype.hasOwnProperty.call(window.DATE_PRESET_ALIASES, preset)) {
+    preset = window.DATE_PRESET_ALIASES[preset];
+  }
   var labels = {
     all: 'found',
     today: 'today',
@@ -147,9 +157,6 @@ window.dateWindowLabel = function(preset) {
     thismonth: 'this month',
     custom: 'in this date range'
   };
-  // Legacy read key (?date=month) maps to the same label as the canonical
-  // thismonth so old links never render the All copy.
-  if (preset === 'month') return 'this month';
   return labels[preset] || 'found';
 };
 

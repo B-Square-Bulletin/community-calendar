@@ -101,9 +101,10 @@
     {
       "title": "Follow-up: single source of truth for preset keys",
       "description": "The same preset set is spelled three times (DATE_PRESETS in date-windows.js, DATE_TAB_PRESETS in helpers.js, HONORED in shell.js) with the thismonth->month alias only in shell, so adding a preset needs coordinated edits. After prio-10 settles the canonical key, derive helpers/shell lists from the engine list (or one shared constant) with the alias decision documented in one place. Done when: one canonical list feeds engine, tab strip, and boot seed; chrome/unit tests enumerate from it; tests green. No behavior change.",
-      "passes": false,
+      "passes": true,
       "reference": "https://github.com/B-Square-Bulletin/community-calendar/issues/104 (preset-to-window engine owns preset keys; Repeated Switches smell)",
-      "priority": 80
+      "priority": 80,
+      "notes": "Done: engine owns the canonical list (DATE_PRESETS) plus the single legacy alias map (DATE_PRESET_ALIASES={month:thismonth}, exposed on window/module); resolve/decode normalize through the map, helpers DATE_TAB_PRESETS derives via slice with a literal fallback, dateWindowLabel normalizes via the map, and the shell boot HONORED set builds from window.DATE_PRESETS (minus all) plus alias keys. Seams (repo-established, pre-approved): static chrome + node harnesses. Red first: new derivation checks failed pre-change (literal HONORED/DATE_TAB_PRESETS, no alias map); green after. Durable tests: validate_date_tabs single-source chrome checks, 4 new hardening runtime pins (canonical list, alias map, tab==engine, copy-on-slice), test.html intraday checks migrated to the derivation form. Checks: validate_date_tabs ALL PASSED, validate_date_hardening ALL PASSED, validate_custom_helpers ALL PASSED, test.html scripts parse, make test 97 passed, make lint clean, bench_collapse_long PASS, validate_pr_feeds clean. Decisions (unattended, pre-approved): HONORED keeps minus-all plus legacy keys so boot behavior is byte-identical; syncDateParams still strips unknown/legacy keys as before; no new module seam. No behavior change."
     },
     {
       "title": "Follow-up: pass the committed window as one object",

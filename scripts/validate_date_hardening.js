@@ -251,5 +251,27 @@ check('helpers preset+custom resolvers share one opts builder',
   [typeof window.dateWindowOpts, JSON.stringify(Object.keys(window.dateWindowOpts()).sort())],
   ['function', JSON.stringify(['horizonEnd', 'timeZone'])]);
 
+// --- Single source of truth for preset keys (prio-80): the engine owns the
+// canonical list; helpers derive the tab list from it; the legacy alias map
+// is the one place the month->thismonth decision lives. Hand-pinned
+// literals here are the spec, so a forked list fails loudly. ---
+check('engine owns the canonical preset list',
+  window.DATE_PRESETS,
+  ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth']);
+check('engine owns the single legacy alias map',
+  window.DATE_PRESET_ALIASES,
+  { month: 'thismonth' });
+check('tab-strip list derives from the engine canonical list (same copy, not a fork)',
+  window.DATE_TAB_PRESETS,
+  window.DATE_PRESETS);
+check('tab-strip list is a copy (mutating it leaves the engine list intact)',
+  (() => {
+    window.DATE_TAB_PRESETS.push('bogus');
+    const intact = window.DATE_PRESETS.indexOf('bogus') < 0;
+    window.DATE_TAB_PRESETS.pop();
+    return intact;
+  })(),
+  true);
+
 console.log(failures === 0 ? '\nALL CHECKS PASSED' : `\n${failures} CHECKS FAILED`);
 process.exit(failures === 0 ? 0 : 1);
