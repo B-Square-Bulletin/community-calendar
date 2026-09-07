@@ -61,6 +61,16 @@ class BuskirkChumleyScraper(BaseScraper):
         response = session.get(self.events_url, timeout=30)
         response.raise_for_status()
 
+        # SiteGround bot protection serves a captcha redirect (sgcaptcha) when
+        # the request egress IP is flagged (e.g. shared GitHub Actions IPs).
+        # That's a block, not an empty calendar — treat it as a hard failure so
+        # CI surfaces it instead of silently overwriting a good calendar.
+        if "sgcaptcha" in response.text:
+            raise RuntimeError(
+                "SiteGround captcha challenge returned for "
+                f"{self.events_url} (likely IP blocked); not scraping empty"
+            )
+
         soup = BeautifulSoup(response.text, "html.parser")
         events = []
         tz = ZoneInfo(self.timezone)

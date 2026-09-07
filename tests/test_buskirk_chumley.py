@@ -5,12 +5,22 @@ import sys
 from pathlib import Path
 from unittest.mock import Mock, patch
 
+import pytest
+
 # Add project root and scrapers/ to path so scraper imports resolve
 _proj_root = Path(__file__).parent.parent
 sys.path.insert(0, str(_proj_root))
 sys.path.insert(0, str(_proj_root / "scrapers"))
 
 from scrapers.buskirk_chumley import BuskirkChumleyScraper  # noqa: E402
+
+# The SiteGround bot-protection challenge the site serves when a request
+# comes from a flagged IP (e.g. shared GitHub Actions egress). Instead of
+# the events page it returns a meta-refresh to a captcha endpoint.
+CAPTCHA_HTML = """\
+<html><head><link rel="icon" href="data:;"><meta http-equiv="refresh" \
+content="0;/.well-known/sgcaptcha/?r=%2Fevents%2F&y=ipr:52.152.180.196:1788750503.466">\
+</meta></head></html>"""
 
 # Minimal HTML with one event tile that the scraper can parse.
 # Structure matches what the site serves: div[data-id] > .tile > .thumb + .details
@@ -68,3 +78,43 @@ class TestAcceptEncoding:
         # Also verify we got an event back (the tile was parsed)
         assert len(events) == 1, f"Expected 1 event, got {len(events)}"
         assert events[0]["title"] == "Test Show"
+
+
+class TestCaptchaChallenge:
+    """fetch_events must not swallow a SiteGround CAPTCHA challenge.
+
+    A `sgcaptcha` redirect from a flagged IP is not an empty calendar; it is
+    a block. Returning [] here overwrites a previously-good calendar with 0
+    events, silently. Raising surfaces the real failure in CI instead.
+    """
+
+    def test_captcha_response_raises(self):
+        scraper = BuskirkChumleyScraper()
+
+        def intercept_get(_self, url, **kwargs):
+            mock = Mock()
+            mock.text = CAPTCHA_HTML
+            mock.content = CAPTCHA_HTML.encode()
+            mock.raise_for_status = Mock()
+            return mock
+
+        with (
+            patch.object(__import__("requests").Session, "get", intercept_get),
+            pytest.raises(RuntimeError, match="captcha"),
+        ):
+            scraper.fetch_events()
+
+    def test_no_tiles_but_not_captcha_warns_not_raises(self):
+        """An empty page (not a captcha) keeps the existing warn-only path."""
+        scraper = BuskirkChumleyScraper()
+
+        def intercept_get(_self, url, **kwargs):
+            mock = Mock()
+            mock.text = "<html><body>no tiles here</body></html>"
+            mock.content = mock.text.encode()
+            mock.raise_for_status = Mock()
+            return mock
+
+        with patch.object(__import__("requests").Session, "get", intercept_get):
+            events = scraper.fetch_events()
+        assert events == []
