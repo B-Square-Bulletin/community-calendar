@@ -417,6 +417,11 @@ Annual events with reliable dates but no feeds — a once-a-season curator sweep
 
 ## Discovery Run Log
 
+### 2026-09-07: Sassafras Audubon URL resurfaced (issue #8)
+- `Sassafras Audubon Society` scraper 404s again: DB `feeds` row id=18 still runs `squarespace.py --url "https://www.sassafrasaudubon.org/upcomingevents"` (404, Squarespace 404 page). The May fix (workflow + feeds.txt) was lost in the DB-first migration — the seeded DB row kept the stale URL.
+- Verified 2026-09-07: `/upcomingevents` → 404, `/calendar` → 200 with 30 event URLs, all `?format=ical` fetches succeed. Fix is a DB update (no code change): set `scraper_cmd` to `python scrapers/squarespace.py --url "https://www.sassafrasaudubon.org/calendar" --name "Sassafras Audubon Society"` for id=18. `feeds.txt` regenerates from the DB on the next build; do not hand-edit it.
+- Note: `Monroe County Master Gardeners` (id=14, `https://www.mcmga.net/events`) looks like the same stale-URL pattern (upstream noted `/eventscalendar` as the working slug 2026-07-17) — verify separately, kept out of scope for #8.
+
 ### 2026-02-08: Initial Discovery
 - BloomingtonOnline Google Calendars (3 feeds)
 - B-Square Bulletin Google Calendars (4 feeds)
