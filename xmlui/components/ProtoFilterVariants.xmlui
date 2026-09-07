@@ -1,0 +1,111 @@
+<!-- PROTOTYPE — throwaway, branch prototype/date-filter-variants, NEVER merge.
+  "Three date-filter variants on the existing city route, switchable via
+  ?variant=A|B|C." Sub-shape A: mounted in Main.xmlui above the event list,
+  gated on window.filterVariant (param absent = production UI untouched).
+  All variants commit into the same sliderStart/sliderEnd app vars, so the
+  existing list/pager pipeline renders results; no backend writes.
+  Semantics per #98, commit contract per #100 (discrete commits now,
+  continuous gestures coalesce; paging+scroll frozen until commit). -->
+<Component
+  name="ProtoFilterVariants"
+  var.customOpen="{false}"
+  var.lastKey="{''}"
+  var.readout="{null}"
+>
+  <!-- Shared state line inputs (props): variant, dayRange, start, end, count.
+       Events out: commit ({start, end}) on the Main.xmlui usage site. -->
+
+  <!-- ============ Variant A: preset chips + collapsible custom ============ -->
+  <VStack when="{$props.variant === 'A'}" gap="$space-2">
+    <Text fontSize="$fontSize-xs" fontWeight="$fontWeight-bold" value="PROTOTYPE A · Preset chips + collapsible custom" />
+    <RadioGroup
+      initialValue="{window.protoValueFor($props.start, $props.end)}"
+      onDidChange="(val) => { if (val === 'custom') { customOpen = true; } else { var p = window.protoPreset(val); lastKey = val; customOpen = false; emitEvent('commit', {start: p.start, end: p.end}); } }"
+    >
+      <HStack gap="$space-1" wrapContent="true">
+        <Option value="today" label="Today" />
+        <Option value="tonight" label="Tonight" />
+        <Option value="tomorrow" label="Tomorrow" />
+        <Option value="weekend" label="This weekend" />
+        <Option value="next7" label="Next 7 days" />
+        <Option value="thismonth" label="This month" />
+        <Option value="custom" label="Custom…" />
+        <Option value="all" label="All dates" />
+      </HStack>
+    </RadioGroup>
+    <DatePicker
+      when="{customOpen}"
+      mode="range"
+      dateFormat="yyyy-MM-dd"
+      presets="{window.protoForwardPresets()}"
+      confirmRangeSelection="true"
+      width="100%"
+      onDidChange="(range) => { if (!range || !range.from || !range.to) { lastKey = ''; emitEvent('commit', window.protoClearWindow()); } else { var o = window.protoRangeToOffsets(range); if (o) { lastKey = 'custom'; emitEvent('commit', o); } customOpen = false; } }"
+    />
+    <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{'Showing: ' + window.protoLabelFor($props.start, $props.end) + ' (' + $props.count + ' events)'}" />
+    <Text when="{lastKey === 'tonight'}" fontSize="$fontSize-xs" color="$color-text-secondary" value="Tonight starts 5pm — prototype shows the full day; the intraday cutoff is spec'd for implementation." />
+  </VStack>
+
+  <!-- ============ Variant B: calendar-first, presets live in the picker ============ -->
+  <VStack when="{$props.variant === 'B'}" gap="$space-2">
+    <Text fontSize="$fontSize-xs" fontWeight="$fontWeight-bold" value="PROTOTYPE B · Calendar-first (no strip; presets inside the picker, auto-commits)" />
+    <HStack gap="$space-2" verticalAlignment="center">
+      <DatePicker
+        mode="range"
+        dateFormat="yyyy-MM-dd"
+        presets="{window.protoForwardPresets()}"
+        width="*"
+        onDidChange="(range) => { if (!range || !range.from || !range.to) { lastKey = ''; emitEvent('commit', window.protoClearWindow()); } else { var o = window.protoRangeToOffsets(range); if (o) { lastKey = 'custom'; emitEvent('commit', o); } } }"
+      />
+      <Button
+        label="All dates"
+        variant="outlined"
+        onClick="lastKey = ''; emitEvent('commit', window.protoClearWindow())"
+      />
+    </HStack>
+    <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{'Showing: ' + window.protoLabelFor($props.start, $props.end) + ' (' + $props.count + ' events)'}" />
+  </VStack>
+
+  <!-- ============ Variant C: slider + presets hybrid (commit on release) ============ -->
+  <VStack when="{$props.variant === 'C'}" gap="$space-0">
+    <Text fontSize="$fontSize-xs" fontWeight="$fontWeight-bold" value="PROTOTYPE C · Slider + presets hybrid (readout live, filter commits on release)" />
+    <HStack gap="$space-1" wrapContent="true">
+      <Button label="Today" variant="outlined" size="xs" onClick="var p = window.protoPreset('today'); lastKey = 'today'; protoSlider.setValue([p.start, p.end])" />
+      <Button label="Weekend" variant="outlined" size="xs" onClick="var p = window.protoPreset('weekend'); lastKey = 'weekend'; protoSlider.setValue([p.start, p.end])" />
+      <Button label="7 days" variant="outlined" size="xs" onClick="var p = window.protoPreset('next7'); lastKey = 'next7'; protoSlider.setValue([p.start, p.end])" />
+      <Button label="All" variant="outlined" size="xs" onClick="lastKey = ''; emitEvent('commit', window.protoClearWindow())" />
+    </HStack>
+    <HStack>
+      <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{window.formatDayOffset(readout ? readout[0] : ($props.start === null || $props.start === undefined ? $props.dayRange[0] : $props.start))}" />
+      <SpaceFiller />
+      <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{window.formatDayOffset(readout ? readout[1] : ($props.start === null || $props.start === undefined ? $props.dayRange[1] : $props.end))}" />
+    </HStack>
+    <Slider
+      id="protoSlider"
+      initialValue="{($props.start === null || $props.start === undefined) ? $props.dayRange : [$props.start, $props.end]}"
+      minValue="{$props.dayRange[0]}"
+      maxValue="{$props.dayRange[1]}"
+      step="{1}"
+      showValues="false"
+      onDidChange="(val) => { readout = Array.isArray(val) ? [val[0], val[1]] : val; }"
+      onDidCommit="(val) => { readout = null; lastKey = 'custom'; emitEvent('commit', {start: val[0], end: val[1]}); }"
+    />
+    <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{'Showing: ' + window.protoLabelFor($props.start, $props.end) + ' (' + $props.count + ' events)'}" />
+  </VStack>
+
+  <!-- ============ Switcher bar (obviously not production) ============ -->
+  <HStack
+    gap="$space-2"
+    verticalAlignment="center"
+    marginTop="$space-2"
+    padding="$space-2"
+    backgroundColor="$color-surface-200"
+    borderRadius="$space-1"
+  >
+    <Text fontSize="$fontSize-xs" fontWeight="$fontWeight-bold" value="PROTOTYPE:" />
+    <Button label="A · Chips" size="xs" variant="outlined" onClick="window.setFilterVariant('A')" />
+    <Button label="B · Calendar" size="xs" variant="outlined" onClick="window.setFilterVariant('B')" />
+    <Button label="C · Slider" size="xs" variant="outlined" onClick="window.setFilterVariant('C')" />
+    <Button label="Exit prototype" size="xs" onClick="window.setFilterVariant('')" />
+  </HStack>
+</Component>

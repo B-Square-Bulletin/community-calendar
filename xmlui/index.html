@@ -50,6 +50,12 @@
     <script>
       document.write('<script src="shell.js' + _ccCacheBust + '"><\/script>');
     </script>
+    <script>
+      // PROTOTYPE (throwaway, branch prototype/date-filter-variants, never
+      // merge): preset math for the ?variant=A|B|C filter prototypes. Loaded
+      // unconditionally; it only defines functions, no side effects.
+      document.write('<script src="prototype-filter.js' + _ccCacheBust + '"><\/script>');
+    </script>
   </head>
   <body>
   </body>

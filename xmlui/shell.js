@@ -210,6 +210,20 @@ window._xsLogs = [];
   window.initialCategory = params.get('category') || '';
   window.initialSearch = params.get('search') || '';
 
+  // PROTOTYPE (throwaway, branch prototype/date-filter-variants, never merge):
+  // ?variant=A|B|C mounts the date-filter UX prototypes instead of the
+  // production slider. Absent param = production UI, untouched.
+  window.filterVariant = params.get('variant') || '';
+  window.setFilterVariant = function (val) {
+    var url = new URL(window.location);
+    if (val) {
+      url.searchParams.set('variant', val);
+    } else {
+      url.searchParams.delete('variant');
+    }
+    window.location = url.toString();
+  };
+
   // ?cards=N overrides the browse page size (default 50, clamped 1..500).
   // Boot-time constant, same pattern as initialSearch. Search-mode paging
   // stays at 10 regardless; pageSizeFor is the one place that rule lives.

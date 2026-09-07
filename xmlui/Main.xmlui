@@ -274,7 +274,9 @@
         <Option value="picks" label="my picks" />
       </HStack>
     </RadioGroup>
-    <VStack when="{eventDayRange && !!events.value && viewMode === 'all'}" gap="$space-0">
+    <!-- PROTOTYPE gate (throwaway branch only): the production slider stays
+         for normal traffic; ?variant=A|B|C swaps in the prototypes. -->
+    <VStack when="{eventDayRange && !!events.value && viewMode === 'all' && !window.filterVariant}" gap="$space-0">
       <HStack>
         <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{window.formatDayOffset(sliderRange ? sliderRange[0] : eventDayRange[0])}" />
         <SpaceFiller />
@@ -290,6 +292,19 @@
         onDidChange="(val) => { sliderRange = Array.isArray(val) ? [val[0], val[1]] : val; sliderStart = val[0]; sliderEnd = val[1]; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1 }"
       />
     </VStack>
+    <!-- PROTOTYPE mount (throwaway, branch prototype/date-filter-variants,
+         never merge): commits land in the same sliderStart/sliderEnd vars,
+         so the list/pager pipeline below renders them unchanged. Commit =
+         paging reset + single scroll nudge, per the #100 contract. -->
+    <ProtoFilterVariants
+      when="{!!window.filterVariant && !!eventDayRange && !!events.value && viewMode === 'all'}"
+      variant="{window.filterVariant}"
+      dayRange="{eventDayRange}"
+      start="{sliderStart}"
+      end="{sliderEnd}"
+      count="{displayEvents ? displayEvents.length : 0}"
+      onCommit="(r) => { sliderStart = r.start; sliderEnd = r.end; sliderRange = (r.start === null || r.start === undefined) ? false : [r.start, r.end]; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1 }"
+    />
     </VStack>
     </VStack>
     <Spinner when="{!events.value && viewMode === 'all'}" />
