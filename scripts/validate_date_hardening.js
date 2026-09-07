@@ -177,5 +177,46 @@ check('canonical thismonth key decodes to the month-remainder window',
 check('legacy month key decodes to the canonical thismonth window',
   window.decodeDateParams({ date: 'month' }, { timeZone: 'America/Los_Angeles' }).preset, 'thismonth');
 
+// --- Tonight start-time-only exclusions (prio-40): the engine reports
+// startTimeOnly for Tonight but the filter matched plain start_time, leaking
+// flagged all-day events and continuations into Tonight. Hand-computed PST
+// literals (Wed 2026-02-11, UTC-8), never the engine's own output. ---
+const TONIGHT_START = '2026-02-12T01:00:00.000Z'; // 17:00 PST
+const TONIGHT_END = '2026-02-12T08:00:00.000Z';   // midnight PST
+const TONIGHT_OPTS = { startTimeOnly: true, timeZone: 'America/Los_Angeles' };
+const tonightIds = (list) => window.filterByDateWindow(list, TONIGHT_START, TONIGHT_END, TONIGHT_OPTS).map((e) => e.id);
+check('Tonight keeps 17:00 and 23:59, drops 16:59 and next-midnight',
+  tonightIds([
+    { id: 'early', start_time: '2026-02-12T00:59:00.000Z' },
+    { id: 'doors', start_time: '2026-02-12T01:00:00.000Z' },
+    { id: 'headliner', start_time: '2026-02-12T07:59:00.000Z' },
+    { id: 'midnight', start_time: '2026-02-12T08:00:00.000Z' },
+  ]),
+  ['doors', 'headliner']);
+check('Tonight drops flagged all-day starts landing in-window',
+  tonightIds([
+    { id: 'flagged', start_time: '2026-02-12T03:00:00.000Z', all_day: true },
+    { id: 'xcity', start_time: '2026-02-12T05:00:00.000Z', all_day: true },
+    { id: 'doors', start_time: '2026-02-12T01:00:00.000Z' },
+  ]),
+  ['doors']);
+check('Tonight keeps the multi-day starter (end ignored), drops the continuation',
+  tonightIds([
+    { id: 'marathon-start', start_time: '2026-02-12T03:00:00.000Z', end_time: '2026-02-14T05:00:00.000Z' },
+    { id: 'marathon-cont', start_time: '2026-02-11T03:00:00.000Z', end_time: '2026-02-12T05:00:00.000Z' },
+  ]),
+  ['marathon-start']);
+check('startTimeOnly drops a midnight-anchored start even when range-inclusive',
+  window.filterByDateWindow(
+    [{ id: 'unknown-time', start_time: '2026-02-12T00:00:00.000Z' }],
+    '2026-02-12T00:00:00.000Z', '2026-02-12T08:00:00.000Z',
+    { startTimeOnly: true, timeZone: 'UTC' }).map((e) => e.id),
+  []);
+check('without the flag the same window keeps unflagged-shape starts (no behavior change)',
+  window.filterByDateWindow(
+    [{ id: 'show', start_time: '2026-02-12T03:00:00.000Z', all_day: true }],
+    TONIGHT_START, TONIGHT_END).map((e) => e.id),
+  ['show']);
+
 console.log(failures === 0 ? '\nALL CHECKS PASSED' : `\n${failures} CHECKS FAILED`);
 process.exit(failures === 0 ? 0 : 1);

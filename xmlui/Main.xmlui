@@ -142,8 +142,10 @@
   <variable name="processedEvents" value="{window.processEvents(combinedEvents, hiddenSources)}" />
   <!-- Single committed date window (#105): one absolute [start, end) feeds
        both the rendered list and the pager guard below. All is null bounds
-       (the prefetched set passes through); Picks and Dashboard ignore it. -->
-  <variable name="dateFilteredEvents" value="{window.filterByDateWindow(processedEvents, dateWindowStart, dateWindowEnd)}" />
+       (the prefetched set passes through); Tonight is start-time-only per
+       #103 (flagged all-day, midnight-anchored, and continuations excluded);
+       Picks and Dashboard ignore it. -->
+  <variable name="dateFilteredEvents" value="{window.filterByDateWindow(processedEvents, dateWindowStart, dateWindowEnd, {startTimeOnly: datePreset === 'tonight'})}" />
 
   <variable name="availableCities" value="{Object.keys(window._cities || {}).sort().map(city => ({ city }))}" />
 

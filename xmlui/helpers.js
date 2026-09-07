@@ -264,19 +264,48 @@ window.syncCustomParams = function(from, to) {
   window.history.replaceState({}, '', url);
 };
 
+// True when `iso` is midnight (00:00) in `tz`: the pipeline anchors
+// time-unknown events there (see formatTime, which renders them dateless),
+// so a midnight start means "time unknown", never "plays at midnight".
+function startIsMidnightInTz(iso, tz) {
+  try {
+    var parts = new Intl.DateTimeFormat('en-US', {
+      timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false
+    }).formatToParts(new Date(iso));
+    var v = {};
+    parts.forEach(function(p) { v[p.type] = p.value; });
+    var hour = v.hour === '24' ? '00' : v.hour;
+    return (hour === '00' || hour === '0') && (v.minute === '00' || v.minute === '0');
+  } catch (e) {
+    return false;
+  }
+}
+
 // Filter events to the committed absolute window [startISO, endISO).
 // Null bounds (All) return the input by reference so downstream bindings
 // keep a stable identity; unparseable bounds fail open to All rather than
 // stranding the visitor on an empty list.
-function filterByDateWindow(events, startISO, endISO) {
+// `opts.startTimeOnly` (Tonight per #103) keeps the [start, end) range over
+// the start instant but additionally drops flagged all-day events and
+// midnight-anchored (time-unknown) starts, which never play at night;
+// multi-day events qualify by start day only with the end time ignored.
+// `opts.timeZone` overrides the city timezone (tests pin it explicitly).
+function filterByDateWindow(events, startISO, endISO, opts) {
   if (!events) return events;
   if (startISO == null || endISO == null) return events;
   var fromMs = new Date(startISO).getTime();
   var toMs = new Date(endISO).getTime();
   if (!isFinite(fromMs) || !isFinite(toMs) || !(toMs > fromMs)) return events;
+  var startTimeOnly = !!(opts && opts.startTimeOnly);
+  var tz = (opts && opts.timeZone) ||
+    (typeof getCityTimezone === 'function' ? getCityTimezone() : undefined) || 'UTC';
   return events.filter(function(e) {
     var t = new Date(e.start_time).getTime();
-    return t >= fromMs && t < toMs;
+    if (!(t >= fromMs && t < toMs)) return false;
+    if (!startTimeOnly) return true;
+    if (e.all_day || e.allDay) return false;
+    if (startIsMidnightInTz(e.start_time, tz)) return false;
+    return true;
   });
 }
 window.filterByDateWindow = filterByDateWindow;
@@ -1953,7 +1982,9 @@ if (typeof window !== 'undefined') {
   // the memo below keeps that stable identity so downstream bindings skip
   // re-rendering while the window is unchanged.
   memoizeIngest('filterByDateWindow',
-    function(events, startISO, endISO) { return [startISO, endISO]; });
+    function(events, startISO, endISO, opts) {
+      return [startISO, endISO, opts && opts.startTimeOnly ? 1 : 0, (opts && opts.timeZone) || ''];
+    });
 
   window.clearDedupeCache = clearDedupeCache;
   window.isEventPicked = isEventPicked;

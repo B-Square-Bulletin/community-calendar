@@ -1398,6 +1398,51 @@
           assertDeepEqual(result.map(e => e.id), ['doors', 'late']);
         });
 
+        it('Tonight start-time-only drops flagged all-day, midnight-anchored, and continuations; end ignored', () => {
+          // WHY (prio-40): the engine reports startTimeOnly for Tonight but
+          // the filter matched plain start_time, so a flagged all-day event
+          // or a cross-tz midnight-anchored start landing in-window leaked
+          // into Tonight. Hand-computed PST literals (Wed 2026-02-11, UTC-8)
+          // as the independent truth, never the engine's own output.
+          const tonightStart = '2026-02-12T01:00:00.000Z'; // 17:00 PST
+          const tonightEnd = '2026-02-12T08:00:00.000Z';   // midnight PST
+          const OPTS = { startTimeOnly: true, timeZone: 'America/Los_Angeles' };
+          const night = [
+            { id: 'early', start_time: '2026-02-12T00:59:00.000Z' },  // 16:59 PST out
+            { id: 'doors', start_time: '2026-02-12T01:00:00.000Z' },  // 17:00 incl
+            { id: 'headliner', start_time: '2026-02-12T07:59:00.000Z' }, // 23:59 PST in
+            { id: 'midnight', start_time: '2026-02-12T08:00:00.000Z' }, // end excl
+            { id: 'flagged', start_time: '2026-02-12T03:00:00.000Z', all_day: true }, // 19:00 PST flagged all-day out
+            { id: 'xcity', start_time: '2026-02-12T05:00:00.000Z', all_day: true }, // Eastern-midnight-anchored all-day (21:00 PST) out
+            { id: 'marathon-start', start_time: '2026-02-12T03:00:00.000Z', end_time: '2026-02-14T05:00:00.000Z' }, // multi-day starter in, end ignored
+            { id: 'marathon-cont', start_time: '2026-02-11T03:00:00.000Z', end_time: '2026-02-12T05:00:00.000Z' }, // continuation out (ends 21:00 PST tonight)
+          ];
+          const result = filterByDateWindow(night, tonightStart, tonightEnd, OPTS);
+          assertDeepEqual(result.map(e => e.id), ['doors', 'headliner', 'marathon-start']);
+        });
+
+        it('startTimeOnly drops a midnight-anchored start even when the instant qualifies by range', () => {
+          // WHY (prio-40): same-city Tonight windows never contain an
+          // interior local midnight ([17:00, 24:00) by construction), so this
+          // pins the defense-in-depth path for stale/cross-tz data: a
+          // time-unknown event anchored at midnight UTC stays out of a
+          // start-time-only window even though 00:00Z is range-inclusive.
+          const result = filterByDateWindow(
+            [{ id: 'unknown-time', start_time: '2026-02-12T00:00:00.000Z' }],
+            '2026-02-12T00:00:00.000Z', '2026-02-12T08:00:00.000Z',
+            { startTimeOnly: true, timeZone: 'UTC' });
+          assertDeepEqual(result.map(e => e.id), []);
+        });
+
+        it('without the flag the same window keeps unflagged in-range starts (no behavior change)', () => {
+          // WHY (prio-40): the 4th arg is opt-in — every other preset calls
+          // with three args and must keep plain [start, end) semantics.
+          const result = filterByDateWindow(
+            [{ id: 'show', start_time: '2026-02-12T03:00:00.000Z', all_day: true }],
+            '2026-02-12T01:00:00.000Z', '2026-02-12T08:00:00.000Z');
+          assertDeepEqual(result.map(e => e.id), ['show']);
+        });
+
         it('Weekend keeps only starts in [Fri 17:00 incl, Mon 00:00 excl)', () => {
           // WHY: same independent-literal rationale — Fri 2026-02-13 weekend
           // in PST (UTC-8), including the Mon 00:00-00:59 exclusion from #106.

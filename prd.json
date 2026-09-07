@@ -69,9 +69,10 @@
     {
       "title": "Follow-up: enforce Tonight start-time-only exclusions in filter",
       "description": "The engine reports startTimeOnly:true for Tonight but filterByDateWindow ignores the flag and matches plain start_time in [start,end), so all-day/midnight-anchored events and multi-day continuations leak into Tonight. Consume the flag in the filter stage (exclude all-day and midnight-anchored events, multi-day only on start day; end time ignored) or add a dedicated Tonight matcher. Done when: unit tests pin 16:59 out, 17:00 in, 23:59 in, next-day 00:00 out, all-day excluded, multi-day start-day only, and existing Tonight/weekend chrome checks stay green.",
-      "passes": false,
+      "passes": true,
       "reference": "https://github.com/B-Square-Bulletin/community-calendar/issues/103 (Tonight is start-time-only: start >= today 17:00 AND start < tomorrow 00:00; all-day and midnight-anchored excluded; multi-day start-day only)",
-      "priority": 40
+      "priority": 40,
+      "notes": "Done: filterByDateWindow takes opts {startTimeOnly, timeZone}; under the flag it keeps [start,end) start matching but drops all_day/allDay-flagged and local-midnight-anchored (time-unknown) starts, multi-day qualifies by start day with end ignored; Main.xmlui passes {startTimeOnly: datePreset==='tonight'} at the single prod call site; memo key extended with flag+tz. Seams (repo-established, pre-approved): filter unit + node mirror + static chrome. Red first: flagged all-day in-window kept and midnight-anchored kept before; green after. Durable tests: 3 new test.html its + 5 hardening checks (16:59 out, 17:00/23:59 in, 00:00 out, flagged+xcity all-day out, starter in/cont out, midnight mechanism, no-flag compat). Checks: hardening ALL PASSED, date_tabs ALL PASSED, custom_helpers ALL PASSED, test.html scripts parse, pytest 97 passed, make lint clean, bench_collapse_long PASS, validate_pr_feeds clean. Decisions (unattended, pre-approved): flag mapped from datePreset at the one call site instead of threading engine startTimeOnly through 7 commit handlers + seed (avoids shotgun surgery reserved for prio-50 dedup); midnight rule is defense-in-depth, same-city Tonight windows contain no interior local midnight by construction; Intl failure fails open to keep."
     },
     {
       "title": "Follow-up: dedup the seven tab-strip commit handlers",
