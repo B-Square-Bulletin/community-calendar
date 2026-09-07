@@ -1565,7 +1565,9 @@
           test('intraday presets sync as evergreen ?date= links', () => {
             assert(helpersText.includes("'tonight'"), 'DATE_TAB_PRESETS must include tonight');
             assert(helpersText.includes("'weekend'"), 'DATE_TAB_PRESETS must include weekend');
-            assert(/syncDateParams[\s\S]{0,800}?replaceState/.test(helpersText),
+            assert(/syncDateParams[\s\S]{0,400}?replaceDateUrlParams/.test(helpersText),
+              'Date commits must route through the shared URL helper');
+            assert(/replaceDateUrlParams[\s\S]{0,1200}?replaceState/.test(helpersText),
               'Date commits must use history-replace (Back skips filter states)');
           });
 
@@ -1629,7 +1631,9 @@
               'Confirm must reset paging');
             assert(/datePreset = 'custom'[\s\S]{0,600}?syncCustomParams/.test(main),
               'Confirm must sync the exact-date link');
-            assert(/syncCustomParams[\s\S]{0,800}?replaceState/.test(helpersText),
+            assert(/syncCustomParams[\s\S]{0,400}?replaceDateUrlParams/.test(helpersText),
+              'Custom commits must route through the shared URL helper');
+            assert(/replaceDateUrlParams[\s\S]{0,1200}?replaceState/.test(helpersText),
               'Custom commits must use history-replace (Back skips filter states)');
           });
 
@@ -1707,22 +1711,27 @@
             assert(!/window\.embed/.test(context), 'Tab strip must not be embed-gated');
             for (const fn of ['syncDateParams', 'syncCustomParams']) {
               const start = helpersText.indexOf('window.' + fn);
-              const body = helpersText.substring(start, start + 900);
-              assert(!/delete\('embed'\)/.test(body), fn + ' must preserve the embed param');
+              const body = helpersText.substring(start, start + 400);
+              assert(/replaceDateUrlParams/.test(body), fn + ' must route through the shared URL helper');
             }
+            const rAt = helpersText.indexOf('window.replaceDateUrlParams');
+            const rBody = helpersText.substring(rAt, rAt + 1200);
+            assert(!/delete\('embed'\)/.test(rBody), 'Shared URL helper must preserve the embed param');
           });
 
           test('city stays a push while date stays a replace (Back leaves the calendar)', () => {
             assert(/selectCity[\s\S]{0,300}?pushState/.test(shellText), 'City selection must push (Back target)');
-            assert(/syncDateParams[\s\S]{0,900}?replaceState/.test(helpersText),
-              'Preset commits must replace (Back skips filter states)');
-            assert(/syncCustomParams[\s\S]{0,900}?replaceState/.test(helpersText),
-              'Custom commits must replace (Back skips filter states)');
+            assert(/replaceDateUrlParams[\s\S]{0,1200}?replaceState/.test(helpersText),
+              'Date commits must replace (Back skips filter states)');
+            assert(/syncDateParams[\s\S]{0,400}?replaceDateUrlParams/.test(helpersText),
+              'Preset commits must route through the shared URL helper');
+            assert(/syncCustomParams[\s\S]{0,400}?replaceDateUrlParams/.test(helpersText),
+              'Custom commits must route through the shared URL helper');
           });
 
           test('All clears only date keys and preserves siblings', () => {
-            const start = helpersText.indexOf('window.syncDateParams');
-            const body = helpersText.substring(start, start + 900);
+            const rAt = helpersText.indexOf('window.replaceDateUrlParams');
+            const body = helpersText.substring(rAt, rAt + 1200);
             assert(/delete\('date'\)/.test(body), 'All must strip the preset key');
             assert(/delete\('from'\)/.test(body) && /delete\('to'\)/.test(body), 'All must strip the custom pair');
             assert(!/delete\('(city|search|category|embed|mode|images|cards)'\)/.test(body),

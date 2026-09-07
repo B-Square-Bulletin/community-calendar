@@ -107,7 +107,9 @@ check('helpers.js exposes the date-tab seam',
   && /window\.dateWindowForPreset/.test(helpers)
   && /window\.syncDateParams/.test(helpers));
 check('date commit syncs with history-replace (Back skips filter states)',
-  !!helpers && /syncDateParams[\s\S]{0,800}?replaceState/.test(helpers));
+  !!helpers && /window\.replaceDateUrlParams/.test(helpers)
+  && /replaceDateUrlParams[\s\S]{0,1200}?replaceState/.test(helpers)
+  && /syncDateParams[\s\S]{0,400}?replaceDateUrlParams/.test(helpers));
 check('shell.js seeds the date preset before first paint',
   !!shell && /initialDatePreset/.test(shell));
 check('date-windows engine loads before shell boots',
@@ -175,7 +177,8 @@ check('helpers.js exposes the custom seam',
   && /window\.customForwardPresets/.test(helpers)
   && /window\.todayDateOnly/.test(helpers));
 check('helpers.js custom seam commits with history-replace and canonical from/to only',
-  !!helpers && /syncCustomParams[\s\S]{0,800}?replaceState/.test(helpers));
+  !!helpers && /syncCustomParams[\s\S]{0,400}?replaceDateUrlParams/.test(helpers)
+  && /replaceDateUrlParams[\s\S]{0,1200}?replaceState/.test(helpers));
 check('shell.js boot seed honors the custom from/to pair with clamp rewrite',
   !!shell && /from/.test(shell) && /initialDatePreset = 'custom'/.test(shell));
 
@@ -216,18 +219,22 @@ check('tab strip shows identically in the embed (no embed gate)',
   })());
 check('city stays a push while date stays a replace (Back leaves)',
   !!shell && /selectCity[\s\S]{0,300}?pushState/.test(shell)
-  && /syncDateParams[\s\S]{0,900}?replaceState/.test(helpers)
-  && /syncCustomParams[\s\S]{0,900}?replaceState/.test(helpers));
+  && /replaceDateUrlParams[\s\S]{0,1200}?replaceState/.test(helpers)
+  && /syncDateParams[\s\S]{0,400}?replaceDateUrlParams/.test(helpers)
+  && /syncCustomParams[\s\S]{0,400}?replaceDateUrlParams/.test(helpers));
 check('date sync preserves embed; All clears only date keys',
   !!helpers && (() => {
+    const r = helpers.indexOf('window.replaceDateUrlParams');
     const d = helpers.indexOf('window.syncDateParams');
     const c = helpers.indexOf('window.syncCustomParams');
-    if (d < 0 || c < 0) return false;
-    const db = helpers.substring(d, d + 900);
-    const cb = helpers.substring(c, c + 900);
-    return !/delete\('embed'\)/.test(db) && !/delete\('embed'\)/.test(cb)
-      && /delete\('date'\)/.test(db) && /delete\('from'\)/.test(db) && /delete\('to'\)/.test(db)
-      && !/delete\('(city|search|category|embed|mode|images|cards)'\)/.test(db);
+    if (r < 0 || d < 0 || c < 0) return false;
+    const rb = helpers.substring(r, r + 1200);
+    const db = helpers.substring(d, d + 400);
+    const cb = helpers.substring(c, c + 400);
+    return /replaceDateUrlParams/.test(db) && /replaceDateUrlParams/.test(cb)
+      && !/delete\('embed'\)/.test(rb)
+      && /delete\('date'\)/.test(rb) && /delete\('from'\)/.test(rb) && /delete\('to'\)/.test(rb)
+      && !/delete\('(city|search|category|embed|mode|images|cards)'\)/.test(rb);
   })());
 
 // --- Single commit path (prio-50 dedup): one helper serves every preset

@@ -73,20 +73,35 @@ window.syncSearchParam = function(search) {
 // All strips only the date keys, and every commit preserves sibling params
 // (city, search, category, mode, images, embed, cards). history-replace (not
 // push) so Back leaves the calendar instead of stepping through tab history.
-window.DATE_TAB_PRESETS = ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth'];
-window.syncDateParams = function(sel) {
+// Single replace site: syncDateParams/syncCustomParams both route through
+// replaceDateUrlParams, which owns the new-URL -> set/delete -> replaceState
+// shape. A value of undefined leaves the key untouched, null deletes it, and
+// a string sets it.
+window.replaceDateUrlParams = function(params) {
   var url = new URL(window.location);
-  var preset = sel && sel.preset;
-  if (preset && preset !== 'all' && window.DATE_TAB_PRESETS.indexOf(preset) >= 0) {
-    url.searchParams.set('date', preset);
-    url.searchParams.delete('from');
-    url.searchParams.delete('to');
-  } else {
-    url.searchParams.delete('date');
-    url.searchParams.delete('from');
-    url.searchParams.delete('to');
+  params = params || {};
+  if (params.date !== undefined) {
+    if (params.date) url.searchParams.set('date', params.date);
+    else url.searchParams.delete('date');
+  }
+  if (params.from !== undefined) {
+    if (params.from) url.searchParams.set('from', params.from);
+    else url.searchParams.delete('from');
+  }
+  if (params.to !== undefined) {
+    if (params.to) url.searchParams.set('to', params.to);
+    else url.searchParams.delete('to');
   }
   window.history.replaceState({}, '', url);
+};
+window.DATE_TAB_PRESETS = ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth'];
+window.syncDateParams = function(sel) {
+  var preset = sel && sel.preset;
+  if (preset && preset !== 'all' && window.DATE_TAB_PRESETS.indexOf(preset) >= 0) {
+    window.replaceDateUrlParams({ date: preset, from: null, to: null });
+  } else {
+    window.replaceDateUrlParams({ date: null, from: null, to: null });
+  }
 };
 
 // Resolve one #105 day preset to its absolute window ({start, end} ISO
@@ -255,13 +270,13 @@ window.dateWindowForCustom = function(from, to) {
 // cards). history-replace (not push) so Back leaves the calendar instead of
 // stepping through filter states.
 window.syncCustomParams = function(from, to) {
-  var url = new URL(window.location);
   if (from && to) {
-    url.searchParams.set('from', from);
-    url.searchParams.set('to', to);
-    url.searchParams.delete('date');
+    window.replaceDateUrlParams({ date: null, from: from, to: to });
+  } else {
+    // No-op commit (callers guard on the resolve, so this path only fires on
+    // malformed input): rewrite the untouched URL, exactly as before.
+    window.replaceDateUrlParams({});
   }
-  window.history.replaceState({}, '', url);
 };
 
 // True when `iso` is midnight (00:00) in `tz`: the pipeline anchors

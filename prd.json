@@ -85,9 +85,10 @@
     {
       "title": "Follow-up: unify syncDateParams/syncCustomParams URL sync",
       "description": "Both helpers hand-roll new URL -> set/delete date/from/to -> history.replaceState sibling preservation. Extract one sibling-preserving replace helper; route preset sync, custom sync, and All-strip through it. Done when: preset/custom/All commits preserve city/search/category/mode/images/embed/cards identically, All strips only date keys, and URL round-trip tests stay green. No behavior change.",
-      "passes": false,
+      "passes": true,
       "reference": "https://github.com/B-Square-Bulletin/community-calendar/issues/105 (URL contract; Duplicated Code smell)",
-      "priority": 60
+      "priority": 60,
+      "notes": "Done: one sibling-preserving replace site (window.replaceDateUrlParams in helpers.js; undefined leaves a key, null deletes, string sets) owns the new-URL -> set/delete -> history-replaceState shape; syncDateParams (preset set + from/to cleared, All clears all three) and syncCustomParams (valid pair sets from/to + clears date, empty input rewrites the untouched URL as before) both delegate. Seams (repo-established, pre-approved): static chrome + node harnesses. Red first: single-path delegation check failed pre-change; green after. Durable tests: chrome checks in test.html + validate_date_tabs.js migrated to the single-path form (shared helper owns replaceState/deletes, both sync fns route via it). Checks: validate_date_tabs ALL PASSED, validate_date_hardening ALL PASSED (behavioral preset/custom/All sibling checks unchanged, proving no behavior change), validate_custom_helpers ALL PASSED, test.html inline scripts parse, pytest 97 passed, make lint clean, bench_collapse_long PASS, validate_pr_feeds clean. Decisions (unattended, pre-approved): undefined-means-leave semantics preserve the exact syncCustomParams no-op path (callers guard on resolve; previously rewrote the URL untouched); Custom confirm keeps its own from/to path (unification rides prio-70). No behavior change."
     },
     {
       "title": "Follow-up: unify window resolution + truncation copy",
