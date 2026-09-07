@@ -1,0 +1,59 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Lighthouse Christian Athletics//maxpreps.com//
+X-WR-CALNAME:Lighthouse Christian Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Seven Oaks Classical Boys Varsity Soccer @ LCA
+DTSTART;TZID=America/Indiana/Indianapolis:20260910T170000
+DTEND;TZID=America/Indiana/Indianapolis:20260910T184500
+UID:ba21e2e5777c170bc1c99304aba2cd1c@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nThe Seven Oaks Classical varsity soccer t
+ eam has an away non-conference match @  Lighthouse Christian Academy (Bloo
+ mington\, IN) on Thursday\, September 10 @ 5p.
+URL:https://www.maxpreps.com/in/soccer/match/lighthouse-christian-academy-
+ bloomington-vs-seven-oaks-classical-ellettsville/9-10-2026/?c=16288fe5-0c2
+ e-4562-a198-a6da49541306
+X-SOURCE:Lighthouse Christian Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LCA Girls Varsity Volleyball @ Bloomfield
+DTSTART;TZID=America/Indiana/Indianapolis:20260910T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260910T190000
+UID:8dd27e8d9ed291c11eb861e809c9cd6a@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Lighthouse Christian Academy var
+ sity volleyball team has an away non-conference match @  Bloomfield (IN) o
+ n Thursday\, September 10 @ 6p.
+URL:https://www.maxpreps.com/in/volleyball/match/bloomfield-vs-lighthouse-
+ christian-academy-bloomington/9-10-2026/?c=51c1bffb-6165-4f19-acce-4b15d9a
+ 38f3a
+X-SOURCE:Lighthouse Christian Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LCA Boys Freshman Soccer @ Suburban Christian
+DTSTART;TZID=America/Indiana/Indianapolis:20260911T170059
+DTEND;TZID=America/Indiana/Indianapolis:20260911T184559
+UID:7b054c7911e706c4227ff4497700a14b@maxpreps.com
+DESCRIPTION:Boys Freshman Soccer\nThe Lighthouse Christian Academy freshma
+ n soccer team has an away non-conference match @  Suburban Christian (Indi
+ anapolis\, IN) on Friday\, September 11 @ 5p.
+LOCATION:Lighthouse Christian Academy
+URL:https://www.maxpreps.com/in/soccer/match/lighthouse-christian-academy-
+ bloomington-vs-suburban-christian-indianapolis/freshman/9-11-2026/?c=51e95
+ 175-8c0e-46db-b1ed-9ce6f5b656c4
+X-SOURCE:Lighthouse Christian Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Horizon Christian Girls Varsity Volleyball @ LCA
+DTSTART;TZID=America/Indiana/Indianapolis:20260911T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260911T200000
+UID:71bbfe9e47b4697d7fefff64822df68c@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Horizon Christian varsity volley
+ ball team has an away non-conference match @  Lighthouse Christian Academy
+  (Bloomington\, IN) on Friday\, September 11 @ 7p.
+URL:https://www.maxpreps.com/in/volleyball/match/horizon-christian-indiana
+ polis-vs-lighthouse-christian-academy-bloomington/9-11-2026/?c=dc5b5a7d-54
+ c4-4d6c-8cc8-46a256b69b0e
+X-SOURCE:Lighthouse Christian Athletics
+END:VEVENT
+END:VCALENDAR

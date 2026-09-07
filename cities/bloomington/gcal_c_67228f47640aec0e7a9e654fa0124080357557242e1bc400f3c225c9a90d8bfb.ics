@@ -1,0 +1,2022 @@
+BEGIN:VCALENDAR
+PRODID:-//Google Inc//Google Calendar 70.9054//EN
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Community Events
+X-WR-TIMEZONE:America/New_York
+BEGIN:VTIMEZONE
+TZID:America/Indiana/Indianapolis
+X-LIC-LOCATION:America/Indiana/Indianapolis
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260725T040000Z
+DTEND:20260725T070000Z
+DTSTAMP:20260907T031046Z
+UID:1a59q1p3ajlgk8uon0aqe03eje@google.com
+CLASS:PUBLIC
+CREATED:20260720T014427Z
+DESCRIPTION:Dance party with DJ Babystar\n21+\nNo cover\nFood from Sandy’s 
+ Pizza and The Big Dawg Cart
+LAST-MODIFIED:20260720T030308Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Bloomerang Dance After Party w/DJ BABYSTAR
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260607T010000Z
+DTEND:20260607T030000Z
+DTSTAMP:20260907T031046Z
+UID:0h7i5ulv7gua2se73ofoeg6pf0@google.com
+CREATED:20260602T151213Z
+DESCRIPTION:All trans and non-binary drag show hosted and produced by Kitt 
+ St. Clair and Oliver Closeoff. This round featuring: Tess Tosterone\, Calyk
+ o Magick Waffle\, Jizzelle Vontrell\, + Scout<br><br>Bar opens at 7pm<br>Sh
+ ow at 9pm<br>Dance party at 11pm<br>Tickets: $15<br><br><a href="https://ww
+ w.bckdoor.com/tickets">Beyond the Binary Ticket Link</a>
+LAST-MODIFIED:20260602T160127Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Beyond the Binary Drag Show
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260720T161500Z
+DTEND:20260720T200000Z
+DTSTAMP:20260907T031046Z
+UID:5m1qpm2elt24uk6dua8puqg9tm@google.com
+CLASS:PUBLIC
+CREATED:20260720T023051Z
+DESCRIPTION:Writing circle facilitated by Li Meuser. No experience required
+  and materials provided. Feel free to bring prewritten work to share.
+LAST-MODIFIED:20260720T023448Z
+LOCATION:Indiana Recovery Alliance\, 1710 W 3rd St\, Bloomington\, IN 47404
+ \, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Writing to Connect: Writing Circle 
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260604T220000Z
+DTEND:20260605T000000Z
+DTSTAMP:20260907T031046Z
+UID:09qqkrq7m3g821b8fjogve0ish@google.com
+CREATED:20260602T143759Z
+DESCRIPTION:Free monthly movie nights! Come watch along\, or bring an optio
+ n. Movie begins after a group decision on what to watch<br><p>*Masks are re
+ quired for gatherings inside the store or if any one requests they be worn.
+  </p><p>*Free masks are available.</p><p><a href="https://rebelpurl.com/pag
+ es/movie-nights-monthly-thursday-nights">Rebel Purl Movie Night Website </a
+ ><br></p>
+LAST-MODIFIED:20260602T164101Z
+LOCATION:Rebel Purl Yarn Shop\, 303 S Hickory Dr\, Bloomington\, IN 47403\,
+  USA
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Movie Night w/Rebel Purl
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260726T200000Z
+DTEND:20260726T220000Z
+DTSTAMP:20260907T031046Z
+UID:71udqg035vtep39ulf7cmik0ci@google.com
+CLASS:PUBLIC
+CREATED:20260720T013547Z
+DESCRIPTION:*CERAMIC PIECE NOT INCLUDED IN $10 ADMISSION<br><br>Come enjoy 
+ an evening of painting pottery with our friends at Pottery House Studio whi
+ le surrounded by 15+ adoptable kitties! Paintable ceramic pieces range from
+  $6 to $50 depending on what you choose! Paint supplies are included<br><br
+ ><a href="https://www.thecatscloset1.com/event-details-registration/cat-pot
+ tery-night-ceramic-piece-not-included-in-10-admission-7">Cat Pottery Night 
+ Tickets</a>
+LAST-MODIFIED:20260720T013624Z
+LOCATION:223 S Pete Ellis Dr\, Bloomington\, IN 47408\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Cat Pottery Night w/The Cat’s Closet
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260722T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260722T220000
+RRULE:FREQ=MONTHLY;BYDAY=4WE
+DTSTAMP:20260907T031046Z
+UID:23f045hlrecrhio3hkv4kleph8_R20260722T233000@google.com
+CREATED:20260602T150010Z
+DESCRIPTION:<p>New and old volunteers welcome!</p><p>Regular volunteers wil
+ l pick out packages of books and have them ready to go\, we just need your 
+ help wrapping them up and writing letters!</p><p>21+ ONLY</p>
+LAST-MODIFIED:20260713T032645Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Pages to Prisoners Pack-a-Thon
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260829T020000Z
+DTEND:20260829T070000Z
+DTSTAMP:20260907T031046Z
+UID:6ldl4dcju9a4uqksl3ve86gma6@google.com
+CLASS:PUBLIC
+CREATED:20260824T034818Z
+DESCRIPTION:No cover dance party with Secretly 30\, DJs and special guests\
+ n21+
+LAST-MODIFIED:20260824T034818Z
+LOCATION:Back door
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:SECRETLY 30 DANCE PARTY
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260627T030000Z
+DTEND:20260627T070000Z
+DTSTAMP:20260907T031046Z
+UID:704fhim5h1higa8ikod3v16tcv@google.com
+CLASS:PUBLIC
+CREATED:20260622T015017Z
+DESCRIPTION:Dance party with DJ DEEP SENSE\n21+
+LAST-MODIFIED:20260622T015056Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Dance Party w/DJ DEEP SENSE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260821T010000Z
+DTEND:20260821T030000Z
+DTSTAMP:20260907T031046Z
+UID:4teghga2lts9r2qpjmi590i8it@google.com
+CREATED:20260817T034046Z
+DESCRIPTION:Celebrate Pridefest with a drag show on rollerskates! Music by 
+ DJ Axipitor\n18+\nEntrance Free: $5\nSkate Fee: $5
+LAST-MODIFIED:20260817T034046Z
+LOCATION:Western Skateland\, 930 W 17th St\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Skate & Slay Drag Show
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260620T140000Z
+DTEND:20260620T180000Z
+DTSTAMP:20260907T031046Z
+UID:554lv1musaoheckv2qnmnrbsfa@google.com
+CLASS:PUBLIC
+CREATED:20260615T042406Z
+DESCRIPTION:Join The People’s Cooperative Market as they celebrate Juneteen
+ th & Pride at their Saturday farmers’ market! Food\, celebration\, games\, 
+ and fun! Live music by Lucky Sevens and should food from Makin’ It Together
+ . \n\nAll ages! Free entry
+LAST-MODIFIED:20260615T042406Z
+LOCATION:First United Church - Bloomington\, 2420 E 3rd St\, Bloomington\, 
+ IN 47401\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Juneteenth & LGBTQ Pride Market 
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260601T203000
+DTEND;TZID=America/Indiana/Indianapolis:20260601T220000
+RRULE:FREQ=WEEKLY;BYDAY=MO
+DTSTAMP:20260907T031046Z
+UID:3one5b4c9sfvuqbjerbn45jeer@google.com
+CLASS:PUBLIC
+CREATED:20260602T150726Z
+DESCRIPTION:<p>Come out on Monday nights for your chance to show off that b
+ rain power and win fabulous bar cash prizes!</p><p> 21+ Only</p>
+LAST-MODIFIED:20260706T035745Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Trivia Night w/Bloomington Pub Quiz
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260626T220000Z
+DTEND:20260626T230000Z
+DTSTAMP:20260907T031046Z
+UID:4ab18drf8c9qlkpkt4sld8v6os@google.com
+CLASS:PUBLIC
+CREATED:20260622T022014Z
+DESCRIPTION:<p>Join The Cat’s Closet for an evening of trivia hosted by the
+  one and only drag queen Mona Mezcal! An evening of kitty cuddles and prize
+ s. You’re gonna want to redownload Tumblr and start studying</p><p>18+</p><
+ p><a href="https://www.thecatscloset1.com/event-details-registration/chroni
+ cally-online-trivia-with-mona-mezcal">Chronically Online Trivia Ticket Link
+ </a></p>
+LAST-MODIFIED:20260622T022014Z
+LOCATION:The Cat’s Closet\, 223 S Pete Ellis Dr Suites 1 and 2\, Bloomingto
+ n\, IN 47408\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Chronically Online Trivia w/Mona Mezcal
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260716T210000
+DTEND;TZID=America/Indiana/Indianapolis:20260716T220000
+DTSTAMP:20260907T031046Z
+UID:3gk3juqoanuctaqsjhvroaa4sj@google.com
+RECURRENCE-ID;TZID=America/Indiana/Indianapolis:20260716T210000
+CLASS:PUBLIC
+CREATED:20260615T044157Z
+DESCRIPTION:Join Bloomington ABC at their monthly movie night! July’s film 
+ is Persepolis\n21+\nDonations welcome
+LAST-MODIFIED:20260817T034829Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Persepolis Film Screening w/Bloomington ABC
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260724T230000Z
+DTEND:20260725T040000Z
+DTSTAMP:20260907T031046Z
+UID:4kifq5dsnr9dggi6lnfocl3jgc@google.com
+CLASS:PUBLIC
+CREATED:20260713T032054Z
+DESCRIPTION:Three days of music at The Back Door\, The Blockhouse\, and Fri
+ endly Beasts. Dance parties each night after the shows and food vendors to 
+ keep you fed. <br><br>FRIDAY features music at 7pm from BLEEDER\, HIGH DOOM
+ S\, SLUG RUG\, UMANYA\, SAFFRON\, WIND\, and THE SHANNON SHAW BAND. <br><br
+ >After party with DJ AXIPITOR<br><br>Food from Sandy’s Pizza and The Big Da
+ wg Cart<br><a href="https://www.bckdoor.com/tickets" target="_blank">Bloome
+ rang 2026 Tickets</a>
+LAST-MODIFIED:20260720T025620Z
+SEQUENCE:4
+STATUS:CONFIRMED
+SUMMARY:Bloomerang Music Festival Day 1
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260802T010000Z
+DTEND:20260802T030000Z
+DTSTAMP:20260907T031046Z
+UID:7rus00fgg00hmup3tal1pvt2u5@google.com
+CLASS:PUBLIC
+CREATED:20260722T012430Z
+DESCRIPTION:The state fair comes to The Back Door... a drag show for Hoosie
+ rs and their allies. Starring Oliver Closeoff\, April Rosè\, Vanity Rex\, I
+ lana à la Mode\, and Big Birtha Kulture<br><br>Bar opens at 7pm<br>Show at 
+ 9pm<br>No cover dance party at 11pm<br>21+<br>$15<br><a href="https://www.b
+ ckdoor.com/tickets">The State Fair Drag Show Tickets</a>
+LAST-MODIFIED:20260722T012704Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:The State Fair Drag Show
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260603T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260603T200000
+RRULE:FREQ=WEEKLY;BYDAY=WE
+DTSTAMP:20260907T031046Z
+UID:5qf1tm0skllv7afb9r7etfukvg@google.com
+CREATED:20260602T144113Z
+DESCRIPTION:Crafting with humans!  Bring your supplies and craft with us.  
+ All ages welcome\, free event\, no purchase required.  All craft are welcom
+ e\, just avoid anything with fumes or loud noises.  Coloring books availabl
+ e if your craft is on a time out. Bring your own snacks &amp\; drinks or or
+ der delivery if you're hungry.  Indoor and outdoor seating available\, weat
+ her permitting.<br><br><p>*Masks are required for gatherings inside the sto
+ re or if any one requests they be worn. </p><p>*Free masks are available.</
+ p><p><a href="https://rebelpurl.com/pages/craft-night-wednesday-evenings">R
+ ebel Purl Craft Night Website</a> <br></p>
+LAST-MODIFIED:20260602T164040Z
+LOCATION:Rebel Purl Yarn Shop\, 303 S Hickory Dr\, Bloomington\, IN 47403\,
+  USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Craft Night w/Rebel Purl
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260605T183000
+DTEND;TZID=America/Indiana/Indianapolis:20260605T203000
+RRULE:FREQ=WEEKLY;UNTIL=20260717T035959Z;BYDAY=FR
+DTSTAMP:20260907T031046Z
+UID:0m1k8tjubq2g8fcd66185ieqm9@google.com
+CREATED:20260602T162620Z
+DESCRIPTION:Bring your latest knitting\, crochet\, spinning\, weaving\, or 
+ other related project\, and hang out with fellow fiber-enthusiasts.\n\nAges
+  18+ \nLGBTQIA+ allies welcome
+LAST-MODIFIED:20260713T013943Z
+LOCATION:Bloomington Stitchery\, 511 W 4th St #1\, Bloomington\, IN 47404\,
+  USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Knit & Crochet Night w/Bloomington Stitchery
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260809T030000Z
+DTEND:20260809T070000Z
+DTSTAMP:20260907T031046Z
+UID:6k5mhpnecdph9c788ihb9ld5fk@google.com
+CLASS:PUBLIC
+CREATED:20260803T024615Z
+DESCRIPTION:No cover dance party\n21+
+LAST-MODIFIED:20260803T025546Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Dance Party w/DJ KYROBPAQ
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260726T160000Z
+DTEND:20260726T190000Z
+DTSTAMP:20260907T031046Z
+UID:6522sjur2150jeps2a17vdhlc3@google.com
+CLASS:PUBLIC
+CREATED:20260720T012751Z
+DESCRIPTION:Free entry. All Ages \nFeatured bands: King Bee & The Stingers\
+ , Jack Carl\nGrab & Go Breakfast Burritos by Self-Titled Vegetarian Kitchen
+LAST-MODIFIED:20260720T025351Z
+LOCATION:Friendly Beasts Cider Company\, 222 W 2nd St\, Bloomington\, IN 47
+ 401\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Bloomerang Music Festival Day 3
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260627T170000Z
+DTEND:20260627T183000Z
+DTSTAMP:20260907T031046Z
+UID:1o41fhdgn91t243nqo5e89gqlk@google.com
+CLASS:PUBLIC
+CREATED:20260622T022629Z
+DESCRIPTION:<div dir="auto">JOIN Kaleidoscope Youth Community for their ANN
+ UAL FAMILY EVENT<br><div dir="auto">For LGBTQ+  and allied youth\, their fa
+ milies\, and supportive community. Crafts\, food\, and fun!<br>ALL AGES<br>
+ FREE<div dir="auto">
+LAST-MODIFIED:20260622T022630Z
+LOCATION:Bryan Park Henderson Shelter\, Bloomington\, IN 47401\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Annual Family Event w/Kaleidoscope Youth Community
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260809T010000Z
+DTEND:20260809T030000Z
+DTSTAMP:20260907T031046Z
+UID:1u3gvomm45mbcomi9itqgdjs5a@google.com
+CLASS:PUBLIC
+CREATED:20260803T024445Z
+DESCRIPTION:Beyond the Binary celebrates OLIVER CLOSEOFF'S BIRTHDAY! Join K
+ itt St. Clair along with Max Maneater\, Tigresse Bleu\, Guad Ala Jara\, Van
+ ity Rex \, + Mona Mezcal.<br>Bar opens at 7pm<br>Show at 9pm<br>Dance party
+  at 11pm<br>21+<br>$15<br><a href="https://www.bckdoor.com/tickets">Beyond 
+ the Binary Tickets</a>
+LAST-MODIFIED:20260803T024501Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Beyond the Binary Drag Show
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260823T000000Z
+DTEND:20260823T070000Z
+DTSTAMP:20260907T031046Z
+UID:0hm33pv8bfu8t145ckvaub7vol@google.com
+CLASS:PUBLIC
+CREATED:20260817T030238Z
+DESCRIPTION:Two djs\, 1 great night. Come celebrate Pridefest on the dance 
+ floor at The Back Door’s dance party. Taking place after the Homolympics\n\
+ nBar open 2pm-3am\n\nDJ Kyropaq: 8pm-11pm \nDJ Axipitor: 11pm-3am\n21+\n$10
+  after 8pm
+LAST-MODIFIED:20260817T033039Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Pridefest Dance Party
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260628T030000Z
+DTEND:20260628T070000Z
+DTSTAMP:20260907T031046Z
+UID:3gif3brgvad853lfb0lgnoj8mv@google.com
+CLASS:PUBLIC
+CREATED:20260622T020404Z
+DESCRIPTION:Dance party with DJ DEEP SENSE\n21+
+LAST-MODIFIED:20260622T020405Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Dance Party w/DJ DEEP SENSE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260829T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260829T220000
+RRULE:FREQ=MONTHLY;BYDAY=-1SA
+EXDATE;TZID=America/Indiana/Indianapolis:20260829T193000
+DTSTAMP:20260907T031046Z
+UID:2turm74h63v8sv5vc6dnhlecc8@google.com
+CREATED:20260824T040653Z
+DESCRIPTION:<p>New and old volunteers welcome!</p><p>Regular volunteers wil
+ l pick out packages of books and have them ready to go\, we just need your 
+ help wrapping them up and writing letters!</p><p>21+ ONLY</p>
+LAST-MODIFIED:20260824T042517Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Pages to Prisoners Pack-a-Thon
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260604T183000
+DTEND;TZID=America/Indiana/Indianapolis:20260604T203000
+RRULE:FREQ=WEEKLY;UNTIL=20260716T035959Z;BYDAY=TH
+DTSTAMP:20260907T031046Z
+UID:6u8j1dnsrjc070cf76lgtq52rf@google.com
+CLASS:PUBLIC
+CREATED:20260602T162430Z
+DESCRIPTION:Bring your own craft or use supplies to start a new project! \n
+ \n18+\nLGBTQIA+ allies welcome
+LAST-MODIFIED:20260713T013921Z
+LOCATION:Bloomington Stitchery\, 511 W 4th St #1\, Bloomington\, IN 47404\,
+  USA
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:B.Y.O Craft Night w/Bloomington Stitchery
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260725T223000Z
+DTEND:20260726T010000Z
+DTSTAMP:20260907T031046Z
+UID:01uemdje6gubij4pt98lq3b76k@google.com
+CLASS:PUBLIC
+CREATED:20260720T014725Z
+DESCRIPTION:Come see 9 newly formed camper bands (ages 7-14) perform an ori
+ ginal song written at Girls Rock Bloomington camp in the week leading up to
+  the showcase! There will also be 2 AMPS bands (Adolescent Music Program Su
+ pport) performing original songs and a Volunteer Cover Band. Plus\, a photo
+  booth with fun instrument props and a dance party after the show! All ages
+  welcome. Suggested donation $15-$25.
+LAST-MODIFIED:20260720T024517Z
+LOCATION:Buskirk-Chumley Theater\, 114 E Kirkwood Ave\, Bloomington\, IN 47
+ 408\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Girls Rock Bloomington Camp Showcase
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260723T233000Z
+DTEND:20260724T010000Z
+DTSTAMP:20260907T031046Z
+UID:3fusjv5kmd4dclrnn5nr517hce@google.com
+CREATED:20260713T031216Z
+DESCRIPTION:Sometimes a dad is also a daddy. And sometimes that daddy is al
+ so a Softie. Chicago based comedian\, Tim Felton (Picture the lovechild of 
+ Mr. Rogers\, Pee-wee Herman\, and Buster Bluth)\, coming hot off his debut 
+ at Chicago's renowned Steppenwolf Theater invites you along in his journey 
+ to figure out how to connect with people as he gets older....and softer. Pa
+ rt flirting with your barista\, part confiding in your bestie\, Softie expl
+ ores the challenges in making and maintaining relationships in an increasin
+ gly individualized existence<br><br>Bar opens at 7pm<br>Show at 7:30pm<br>2
+ 1+<br>$10<br><a href="https://www.bckdoor.com/tickets">Softie Comedy Show T
+ ickets</a>
+LAST-MODIFIED:20260713T031318Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Softie: Tim Felton Comedy Tour
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260612T010000Z
+DTEND:20260612T030000Z
+DTSTAMP:20260907T031046Z
+UID:5nj3ofoeucgjmmk0aagep051gj@google.com
+CREATED:20260602T163329Z
+DESCRIPTION:Celebrate Pride Month with a drag show on rollerskates! Music b
+ y DJ Axipitor\n18+\nEntrance Free: $5\nSkate Fee: $5
+LAST-MODIFIED:20260602T163905Z
+LOCATION:Western Skateland\, 930 W 17th St\, Bloomington\, IN 47404\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Skate & Slay Drag Show
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260830T010000Z
+DTEND:20260830T030000Z
+DTSTAMP:20260907T031046Z
+UID:4cm3b8v3a4m824haimdk16bjdd@google.com
+CLASS:PUBLIC
+CREATED:20260824T035613Z
+DESCRIPTION:Come and celebrate our best girl\, Mocha T Debeaute! Hosted by 
+ Pat Yo Weave\, and starring: Mocha\, BeelzeBabe\, Oliver Closeoff\, and Sta
+ rletta!\n\nBar opens at 7pm\nShow starts at 9pm\n$15\nNo cover dance party 
+ at 11pm
+LAST-MODIFIED:20260824T035643Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Mocha's Birthday Drag Show
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260725T230000Z
+DTEND:20260726T040000Z
+DTSTAMP:20260907T031046Z
+UID:12opkpml3l0u4du6dds6hbeiqd@google.com
+CLASS:PUBLIC
+CREATED:20260713T032117Z
+DESCRIPTION:Three days of music at The Back Door\, The Blockhouse\, and Fri
+ endly Beasts. Dance parties each night after the shows and food vendors to 
+ keep you fed. <br><br>SATURDAY features music at 7pm from MARINE CORPSE\, L
+ EG\, WYLIE\, JORDAN VICTORIA\, JUNIOR JULY\, BUSMAN'S HOLIDAY\, and JACKY B
+ OY. <br><br>After party with DJ BABYSTAR AT 12am.<br><br>Art market on Satu
+ rday<br><br>Food from Sandy’s Pizza and The Big Dawg Cart<br><a href="https
+ ://www.bckdoor.com/tickets" target="_blank">Bloomerang 2026 Tickets</a>
+LAST-MODIFIED:20260720T030246Z
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Bloomerang Music Festival Day 2
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260729T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260729T220000
+DTSTAMP:20260907T031046Z
+UID:23f045hlrecrhio3hkv4kleph8_R20260722T233000@google.com
+RECURRENCE-ID;TZID=America/Indiana/Indianapolis:20260722T193000
+CREATED:20260602T150010Z
+DESCRIPTION:<p>New and old volunteers welcome!</p><p>Regular volunteers wil
+ l pick out packages of books and have them ready to go\, we just need your 
+ help wrapping them up and writing letters!</p><p>21+ ONLY</p>
+LAST-MODIFIED:20260713T032645Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Pages to Prisoners Pack-a-Thon
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260621T030000Z
+DTEND:20260621T070000Z
+DTSTAMP:20260907T031046Z
+UID:08eq3s7r8shkiop4u6bilp5tu7@google.com
+CLASS:PUBLIC
+CREATED:20260615T060857Z
+DESCRIPTION:Dance party w/DJ BRO-FI\n21+
+LAST-MODIFIED:20260615T060858Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Dance Party w/DJ BRO-FI
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260711T030000Z
+DTEND:20260711T070000Z
+DTSTAMP:20260907T031046Z
+UID:6f46uethg3s1uo16t9elrr30p3@google.com
+CLASS:PUBLIC
+CREATED:20260706T015859Z
+DESCRIPTION:Dance party with DJ Duggernaut \n21+\nNo cover
+LAST-MODIFIED:20260706T040806Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Dance Party w/DJ DUGGERNAUT
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260620T030000Z
+DTEND:20260620T070000Z
+DTSTAMP:20260907T031046Z
+UID:2jhkav1k0krjmj1ooht660493s@google.com
+CLASS:PUBLIC
+CREATED:20260615T044753Z
+DESCRIPTION:Bad Bunny and more\, all night with DJ HEART EYEZ!\n21+
+LAST-MODIFIED:20260615T044754Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Latin Night Dance Party: Verano de Benito
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260724T040000Z
+DTEND:20260724T070000Z
+DTSTAMP:20260907T031046Z
+UID:4g4hhp79q3eunb024no8nner7m@google.com
+CLASS:PUBLIC
+CREATED:20260720T014524Z
+DESCRIPTION:Dance party with DJ Axipitor\n21+\nNo cover\nFood from Sandy’s 
+ Pizza and The Big Dawg Cart
+LAST-MODIFIED:20260720T030221Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:5
+STATUS:CONFIRMED
+SUMMARY:Bloomerang Dance After Party w/DJ AXIPITOR
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260618T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260618T200000
+RRULE:FREQ=WEEKLY;BYDAY=TH
+DTSTAMP:20260907T031046Z
+UID:6mlh3k599156h72982a1p0hvhv_R20260618T220000@google.com
+CREATED:20260602T144614Z
+DESCRIPTION:Bring a game you want to share\, or just show up and play.<br><
+ p>*Masks are required for gatherings inside the store or if any one request
+ es they be worn. </p><p>*Free masks are available.</p><p><a href="https://r
+ ebelpurl.com/pages/games-at-the-yarn-shop-randomly-scheduled">Rebel Purl Ga
+ me Night Website</a><br></p>
+LAST-MODIFIED:20260615T054957Z
+LOCATION:Rebel Purl Yarn Shop\, 303 S Hickory Dr\, Bloomington\, IN 47403\,
+  USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Game Night w/Rebel Purl
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260808T030000Z
+DTEND:20260808T070000Z
+DTSTAMP:20260907T031046Z
+UID:2gb6plfaphlgcvr4vqpmno3e7q@google.com
+CLASS:PUBLIC
+CREATED:20260803T025436Z
+DESCRIPTION:No cover dance party\n21+
+LAST-MODIFIED:20260803T025436Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Dance Party w/DJ BABYSTAR
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260617T210000
+DTEND;TZID=America/Indiana/Indianapolis:20260617T230000
+RRULE:FREQ=MONTHLY;BYDAY=3WE
+DTSTAMP:20260907T031046Z
+UID:1sdph1uj22jni2m9cgm0umlfrn@google.com
+CREATED:20260602T151600Z
+DESCRIPTION:Open Stage is a chance for new and seasoned performers to parti
+ cipate! Third Wednesday every month\, no cover! Cash prize for first and se
+ cond place\, determined by the audience! So come out to cheer on your favs!
+LAST-MODIFIED:20260713T024856Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Open Stage Drag Show
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260822T180000Z
+DTEND:20260823T030000Z
+DTSTAMP:20260907T031046Z
+UID:53g6233fco9ttkcj674kcpovmi@google.com
+CLASS:PUBLIC
+CREATED:20260817T030346Z
+DESCRIPTION:13th ANNUAL BLOOMINGTON PRIDEFEST<br><br>Free entry festival wi
+ th vendors\, food\, music\, comedy\, an art gallery\, wrestling\, drag\, mu
+ sic\, and so much more!<br><br>Meet &amp\; Greet and Guest Drag Performer: 
+ Ciara Myst<br><a href="https://bloomingtonpride.org/pridefest">Bloomington 
+ Pridefest Info</a>
+LAST-MODIFIED:20260817T032952Z
+LOCATION:East Kirkwood Avenue\, E Kirkwood Ave\, Bloomington\, IN\, USA
+SEQUENCE:3
+STATUS:CONFIRMED
+SUMMARY:Bloomington Pridefest
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260603T173000
+DTEND;TZID=America/Indiana/Indianapolis:20260603T183000
+RRULE:FREQ=WEEKLY;BYDAY=WE
+DTSTAMP:20260907T031046Z
+UID:45tfg6j72bmjl0vcl3aq6rv5pr@google.com
+CREATED:20260602T134049Z
+DESCRIPTION:Weekly full-court basketball games for cis women\, transgender 
+ women\, transgender men\, non-binary people\, and others who are underrepre
+ sented in the gym. All skill levels welcome for fun and fitness.<br><br>18+
+ <br><br>*Enter through the Elm Street entrance at Banneker Community Center
+ .<br><strong><b><br></b></strong><br><strong><b>Admission:</b></strong> $5 
+ per person per day\, cash only.<br><a href="https://bloomington.in.gov/park
+ s/facilities/banneker-community-center" target="_blank">Banneker Community 
+ Center Website</a>
+LAST-MODIFIED:20260706T035828Z
+LOCATION:Banneker Community Center 930 W. 7th St. Bloomington\, IN 47404
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Pickup Basketball for Underrepresented Genders
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260606T010000Z
+DTEND:20260606T030000Z
+DTSTAMP:20260907T031046Z
+UID:4ldpt8f4schb7nc6cnjvcvbhf0@google.com
+CREATED:20260602T151042Z
+DESCRIPTION:A show by and for s*x workers and you're invited. Bring $$ for 
+ the collection plate and to throw. Hosted and produced by Mary Mother of Go
+ d\, starring: Seductive Simone\, Maraschino Cherub\, Quinn\, BaldiePoler\, 
+ and Chaos.\nBar opens at 7pm\nShow at 9pm\nDance party with BABYSTAR at 11p
+ m\n$15\n21+
+LAST-MODIFIED:20260602T155505Z
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:WH0R3$ of BABYLON
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260603T100000
+DTEND;TZID=America/Indiana/Indianapolis:20260603T120000
+RRULE:FREQ=MONTHLY;BYDAY=1WE
+DTSTAMP:20260907T031046Z
+UID:6a2bliufecf6e0ict9esrr3kkb@google.com
+CLASS:PUBLIC
+CREATED:20260602T171316Z
+DESCRIPTION:Join the Rainbow Elders for breakfast\, conversation\, and comm
+ unity! Every 1st Wednesday at 10am<br><br><a href="https://bloomingtonpride
+ .org/rainbow-elders">Rainbow Elders Website</a>
+LAST-MODIFIED:20260602T171554Z
+LOCATION:Cloverleaf Family Restaurant\, 4023 W 3rd St\, Bloomington\, IN 47
+ 404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:First Wednesday Breakfast w/Rainbow Elders
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260607T140000
+DTEND;TZID=America/Indiana/Indianapolis:20260607T160000
+RRULE:FREQ=WEEKLY;BYDAY=SU
+DTSTAMP:20260907T031046Z
+UID:73j6qelbm3ri71iffak1e2oih5@google.com
+CREATED:20260602T144307Z
+DESCRIPTION:Crafting with humans!  Bring your supplies and craft with us.  
+ All ages welcome\, free event\, no purchase required.  All craft are welcom
+ e\, just avoid anything with fumes or loud noises.  Coloring books availabl
+ e if your craft is on a time out. Bring your own snacks &amp\; drinks or or
+ der delivery if you're hungry.  Indoor and outdoor seating available\, weat
+ her permitting.<br><p>*Masks are required for gatherings inside the store o
+ r if any one requestes they be worn. </p><p>*Free masks are available</p><a
+  href="https://rebelpurl.com/pages/crafternoon-sunday-afternoons" target="_
+ blank">Rebel Purl Crafternoon Website</a>
+LAST-MODIFIED:20260706T035725Z
+LOCATION:Rebel Purl Yarn Shop\, 303 S Hickory Dr\, Bloomington\, IN 47403\,
+  USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Crafternoon w/Rebel Purl
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260621T200000Z
+DTEND:20260621T220000Z
+DTSTAMP:20260907T031046Z
+UID:1h5jkvd1j2u85bcpp5k8tggnbi@google.com
+CLASS:PUBLIC
+CREATED:20260615T052444Z
+DESCRIPTION:<p>Join Women Writing for (a) Change for a Summer Solstice All 
+ Gender Writing Circle. We will find inspiration from poetry and painters an
+ d spend time writing and sharing our writing with one another. This is a sa
+ fe\, inclusive space for people of all genders and writers of all genres an
+ d experience. Mary Peckham will facilitate this month's Circle.</p><p></p><
+ p>$20 suggested donation to Women Writing for (a) Change\, but give as you 
+ are able\, all are welcome in this pop-up community of writers. </p><p></p>
+ <p>Please reserve your spot: art@juniperartgallery.com</p><p></p><p><br></p
+ >
+LAST-MODIFIED:20260615T052444Z
+LOCATION:Juniper Art Gallery\, 615 W Kirkwood Ave\, Bloomington\, IN 47404\
+ , USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:All-Gender Writing Circle- Summer Solstice 
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260624T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260624T220000
+RRULE:FREQ=MONTHLY;UNTIL=20260722T035959Z;BYDAY=4WE
+DTSTAMP:20260907T031046Z
+UID:23f045hlrecrhio3hkv4kleph8@google.com
+CREATED:20260602T150010Z
+DESCRIPTION:<p>New and old volunteers welcome!</p><p>Regular volunteers wil
+ l pick out packages of books and have them ready to go\, we just need your 
+ help wrapping them up and writing letters!</p><p>21+ ONLY</p>
+LAST-MODIFIED:20260713T032645Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Pages to Prisoners Pack-a-Thon
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260604T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260604T200000
+RRULE:FREQ=WEEKLY;UNTIL=20260618T035959Z;BYDAY=TH
+DTSTAMP:20260907T031046Z
+UID:6mlh3k599156h72982a1p0hvhv@google.com
+CREATED:20260602T144614Z
+DESCRIPTION:Bring a game you want to share\, or just show up and play.<br><
+ p>*Masks are required for gatherings inside the store or if any one request
+ es they be worn. </p><p>*Free masks are available.</p><p><a href="https://r
+ ebelpurl.com/pages/games-at-the-yarn-shop-randomly-scheduled">Rebel Purl Ga
+ me Night Website</a><br></p>
+LAST-MODIFIED:20260615T054957Z
+LOCATION:Rebel Purl Yarn Shop\, 303 S Hickory Dr\, Bloomington\, IN 47403\,
+  USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Game Night w/Rebel Purl
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260618T210000
+DTEND;TZID=America/Indiana/Indianapolis:20260618T220000
+RRULE:FREQ=MONTHLY;BYDAY=3TH
+EXDATE;TZID=America/Indiana/Indianapolis:20260820T210000
+DTSTAMP:20260907T031046Z
+UID:3gk3juqoanuctaqsjhvroaa4sj@google.com
+CLASS:PUBLIC
+CREATED:20260615T044157Z
+DESCRIPTION:Join Bloomington ABC at their monthly movie night! June’s film 
+ is The Gentleman Bank Robber: The Story of Butch Lesbian Freedom Fighter ri
+ ta bo brown.\n21+\nDonations welcome
+LAST-MODIFIED:20260817T034829Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Monthly Movie Night w/Bloomington ABC
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260614T170000Z
+DTEND:20260614T200000Z
+DTSTAMP:20260907T031046Z
+UID:2eea02jke63v1vdpg6atq6b5jg@google.com
+CREATED:20260602T142043Z
+DESCRIPTION:Join Mask Bloc Bloomington at their Medical Supply Swap and DIY
+  Air Filter Workshop! Bring and swap out medical equipment/resources\, lear
+ n how to build a Corsi-Rosenthal box\, and come hangout with other masked f
+ olks! <br>Donations welcome! Contact Mask Bloc Bloomington on Instagram @ma
+ skblocbloomington or through email maskblocbloomington@proton.me to arrange
+  a donation or bring them the day of! Friends and food are also welcome!<br
+ ><p>*Masks required and provided</p>
+LAST-MODIFIED:20260602T160744Z
+LOCATION:Bryan Park\, 1020 S Woodlawn Ave\, Bloomington\, IN 47401\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Medical Supply Swap & DIY Air Filter Workshop
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260602T160000
+DTEND;TZID=America/Indiana/Indianapolis:20260602T184500
+DTSTAMP:20260907T031046Z
+UID:1c89k9uj4dv632p2sf9g3a0405@google.com
+RECURRENCE-ID;TZID=America/Indiana/Indianapolis:20260602T160000
+CLASS:PUBLIC
+CREATED:20260602T135957Z
+DESCRIPTION:Queer Craft Club is a craft night run by and for lgbtq+ people.
+  Allies welcome! Bring your own craft or use what they have. Don’t have a c
+ raft? Ask someone to teach you! Queer Craft Club also has art supply swaps 
+ semi-regularly \n\nFirst of the month meeting every Tuesday!\nMeeting Room 
+ 214 & Auditorium
+LAST-MODIFIED:20260602T155128Z
+LOCATION:Monroe County Public Library - Downtown\, 303 E Kirkwood Ave\, Blo
+ omington\, IN 47408\, USA
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Queer Craft Club 
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260822T010000Z
+DTEND:20260822T030000Z
+DTSTAMP:20260907T031046Z
+UID:7dlloitvol1dsjql1balotat5a@google.com
+CLASS:PUBLIC
+CREATED:20260817T025400Z
+DESCRIPTION:Hosted by Irregular Girl and Siichele\, with a special feature 
+ from CIARA MYST and starring your favs: BEELZEBABE\, VERNA VENDETTA\, and D
+ AHLIA DESIRE!<br><br>21+<br>Bar opens at 7pm<br>Show starts at 9pm<br>No co
+ ver dance party at 11pm<br>$20 GA<br>$25 VIP (includes a reserved seat up f
+ ront and entry all day the next day for our Pridefest Party via wristband).
+ <br><br><br><a href="https://www.bckdoor.com/tickets">Big Lesbian Kick-Off 
+ Tickets</a>
+LAST-MODIFIED:20260817T033632Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Big Lesbian Kick-Off Drag Show
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260718T030000Z
+DTEND:20260718T070000Z
+DTSTAMP:20260907T031046Z
+UID:2000l2pa91ovhgj8ctn0mt40ga@google.com
+CLASS:PUBLIC
+CREATED:20260713T014111Z
+DESCRIPTION:Dance Party with DJ Deep Sense\n21+\nNo cover
+LAST-MODIFIED:20260713T014112Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Dance Party w/DJ DEEP SENSE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260607T170000Z
+DTEND:20260607T210000Z
+DTSTAMP:20260907T031046Z
+UID:350j3p4j2q1e5lfaimrljmauvl@google.com
+CLASS:PUBLIC
+CREATED:20260602T134915Z
+DESCRIPTION:Gay Field Day returns for another year! Join other lgbtq+ frien
+ ds for fun\, games\, and community. Organized lovingly by members of the Qu
+ eer commmunity\, for the Queer Community.<br><br><a href="http:///" target=
+ "_blank"></a><a href="https://biggayfieldday.neocities.org/?fbclid=PAdGRleA
+ SJn55leHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAacq7LqEv_b9e9PEc
+ 6HynmmwFVYhM5biJj8vS9nLE5z0KB9a1ziSfzakvstCFw_aem_ENPukzf4q7cPgRC_W7MffA" t
+ arget="_blank">Big Gay Field Day 2026 Website</a>
+LAST-MODIFIED:20260602T160020Z
+LOCATION:Bryan Park Playground\, Bloomington\, IN 47401\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Big Gay Field Day
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260604T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260604T220000
+RRULE:FREQ=MONTHLY;BYDAY=1TH
+DTSTAMP:20260907T031046Z
+UID:1p9e2majbcj7bafn95o2kvg2i4@google.com
+CREATED:20260602T145445Z
+DESCRIPTION:Free and discreet testing for HIV\, Chlamydia\, and Gonorrhea b
+ rought to you by the Monroe County Health-Board and Positive Link\n\n21+ on
+ ly
+LAST-MODIFIED:20260602T164131Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Free Testing w/Positive Link
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260712T030000Z
+DTEND:20260712T070000Z
+DTSTAMP:20260907T031046Z
+UID:48kcgcvvrj15p2tv530bfl4ghg@google.com
+CLASS:PUBLIC
+CREATED:20260706T020229Z
+DESCRIPTION:Dance Party with DJ Deep Sense\n21+\nNo cover
+LAST-MODIFIED:20260706T020250Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Dance Party w/DJ DEEP SENSE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260618T220000Z
+DTEND:20260619T000000Z
+DTSTAMP:20260907T031046Z
+UID:54p0t7gp39joa6eg44pu8akdci@google.com
+CREATED:20260602T152339Z
+DESCRIPTION:Free monthly movie nights! Come watch along\, or bring an optio
+ n. Movie begins after a group decision on what to watch<br><p>*Masks are re
+ quired for gatherings inside the store or if any one requests they be worn.
+  </p><p>*Free masks are available.</p><p><a href="https://rebelpurl.com/pag
+ es/movie-nights-monthly-thursday-nights" target="_blank"><u>Rebel Purl Movi
+ e Night Website</u></a></p>
+LAST-MODIFIED:20260615T061613Z
+LOCATION:Rebel Purl Yarn Shop\, 303 S Hickory Dr\, Bloomington\, IN 47403\,
+  USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Movie Night w/Rebel Purl
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260602T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260602T230000
+RRULE:FREQ=WEEKLY;BYDAY=TU
+DTSTAMP:20260907T031046Z
+UID:7spf7g77bp9ob1aujmcdce10b2@google.com
+CREATED:20260602T150145Z
+DESCRIPTION:<p>Line Dancing with Wall to Wall Line Dance Club! Old timers a
+ nd new timers welcome. 50% off the bar all night! $3 at the door to dance\,
+  no cover to drink!</p><p>21+ only</p>
+LAST-MODIFIED:20260602T160037Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Country Line Dancing w/Wall to Wall Line Dance Club
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260713T170000
+DTEND;TZID=America/Indiana/Indianapolis:20260713T190000
+RRULE:FREQ=MONTHLY;BYDAY=2MO
+DTSTAMP:20260907T031046Z
+UID:6bs03auvtuf3pm32qnq1164jon@google.com
+CLASS:PUBLIC
+CREATED:20260706T032037Z
+DESCRIPTION:Upland Brewing (350 W. 11th St.\, Bloomington). We will make a 
+ reservation and attempt to get outdoor seating for our June social hour. Af
+ ter seeing how that goes\, we will then pick one social hour location for t
+ he remainder of 2026’s warm weather months and another for the 2026-27 cold
+  weather months.\nJoin The Rainbow Elders for their monthly social hour at 
+ Upland!
+LAST-MODIFIED:20260706T033915Z
+LOCATION:Upland Brewing Co.\, 350 W 11th St\, Bloomington\, IN 47404\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Second Monday Social Hour w/Rainbow Elders
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260619T100000
+DTEND;TZID=America/Indiana/Indianapolis:20260619T120000
+RRULE:FREQ=MONTHLY;BYDAY=3FR
+DTSTAMP:20260907T031046Z
+UID:2c4431lccb4jp65povf3j7lnvr@google.com
+CLASS:PUBLIC
+CREATED:20260602T171522Z
+DESCRIPTION:<br>Join the Rainbow Elders for breakfast\, conversation\, and 
+ community! Every 3rd Friday at 10am<br><br><a href="https://bloomingtonprid
+ e.org/rainbow-elders"><u>Rainbow Elders Website</u></a>
+LAST-MODIFIED:20260602T171613Z
+LOCATION:Village Inn Restaurant\, 3619 W\, IN-46\, Bloomington\, IN 47404\,
+  USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Third Friday Breakfast w/Rainbow Elders
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260719T010000Z
+DTEND:20260719T020000Z
+DTSTAMP:20260907T031046Z
+UID:209sipra5om2il4tsp0ob7hh0u@google.com
+CLASS:PUBLIC
+CREATED:20260713T014429Z
+DESCRIPTION:You've heard of Interview with the Vampire\, welcome to DRAG SH
+ OW WITH THE VAMPIRE! Hosted and produced by Adonis. Starring: Satanic Mecha
+ nic\, Jade2U\, Lollypop Lyx\, Calyko Magick-Waffle\, Venus Fairchild.<br><b
+ r>Bar opens at 7pm<br>Show at 9pm<br>Free dance party at 11 with DJ Axipito
+ r<br>21+<br>$15<br><a href="https://www.bckdoor.com/tickets">Drag Show With
+  the Vampire Tickets</a>
+LAST-MODIFIED:20260713T024624Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Interview With The Vampire Drag Show
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260602T160000
+DTEND;TZID=America/Indiana/Indianapolis:20260602T184500
+RRULE:FREQ=MONTHLY;BYDAY=1TU
+DTSTAMP:20260907T031046Z
+UID:1c89k9uj4dv632p2sf9g3a0405@google.com
+CLASS:PUBLIC
+CREATED:20260602T135957Z
+DESCRIPTION:Queer Craft Club is a craft night run by and for lgbtq+ people.
+  Allies welcome! Bring your own craft or use what they have. Don’t have a c
+ raft? Ask someone to teach you! Queer Craft Club also has art supply swaps 
+ semi-regularly \n\nFirst of the month meeting every Tuesday!
+LAST-MODIFIED:20260602T154300Z
+LOCATION:Monroe County Public Library - Downtown\, 303 E Kirkwood Ave\, Blo
+ omington\, IN 47408\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Queer Craft Club 
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260629T223000Z
+DTEND:20260630T000000Z
+DTSTAMP:20260907T031046Z
+UID:3n0pkc63hg7vcvo8rbtor0e1hs@google.com
+CLASS:PUBLIC
+CREATED:20260629T034116Z
+DESCRIPTION:Join the Bloomington Anarchist Black Cross for their monthly le
+ tter writing night to those in prison!
+LAST-MODIFIED:20260629T041734Z
+LOCATION:The I Fell Building\, 415 W 4th St\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Monthly Letter Writing Night
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260816T030000Z
+DTEND:20260816T070000Z
+DTSTAMP:20260907T031046Z
+UID:700uphjtq9589c5gc6muhcao2g@google.com
+CLASS:PUBLIC
+CREATED:20260810T041620Z
+DESCRIPTION:No cover dance party with a dj!\n21+
+LAST-MODIFIED:20260810T041620Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Dance Party
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260802T030000Z
+DTEND:20260802T070000Z
+DTSTAMP:20260907T031046Z
+UID:7fh0pikt9cl477adjvbhsatlmp@google.com
+CLASS:PUBLIC
+CREATED:20260727T052822Z
+DESCRIPTION:No cover dance party with a dj!\n21+
+LAST-MODIFIED:20260727T052823Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Dance Party
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260816T010000Z
+DTEND:20260816T030000Z
+DTSTAMP:20260907T031046Z
+UID:6gjms2f4fjgb2ij9qo9sluip4v@google.com
+CLASS:PUBLIC
+CREATED:20260810T032759Z
+DESCRIPTION:INDIANA FAMILY - SAY HELLO TO Incarnate Art Form SAN DIEGO FAMI
+ LY<br>Grab a seat and a Transmos at the sacred grounds of the Backdoor.<br>
+ Bare witness to the Coven and our local cryptids.<br><br>Co-Hosted by Incar
+ nate Art Form &amp\; Nykky Hex<br><br>Featuring: Smile Mortis\, Sir-Vin Cvn
+ t\, Eros Erotica\, Evelyn Rose\, Fairy Fawcett\, Maraschino Cherub\, Adonis
+ \, Izzi Blu\, Starletta\, Juniper Perón\, Divina Duven\, Kiki Crimi\, Calyk
+ o Magick-Waffle\, Emme Fatale\, and Virginia Slimm<br><br>Bar opens at 7pm<
+ br>Show at 9pm<br>No cover dance party at 11pm<br><a href="https://www.bckd
+ oor.com/tickets">TRANSPLANT COVEN Show Tickets</a>
+LAST-MODIFIED:20260810T041634Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Transplant: COVEN Drag Show
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260622T233000Z
+DTEND:20260623T013000Z
+DTSTAMP:20260907T031046Z
+UID:6qei4c1n0qh659gerhqikqdvle@google.com
+CREATED:20260602T141704Z
+DESCRIPTION:This summer\, Bloomington Old-Time Music and Dance Group is off
+ ering free workshops to dancers to help them improve their technique and un
+ derstanding of figures danced within the contra structure.<br><br>For begin
+ ner workshops\, no experience is required\, although dancers with experienc
+ e are welcome! The pace of the workshop will be targeted at new dancers. Th
+ ey’ll teach and practice contra basics in a fun and supportive environment 
+ with live music.<br><br>Free to all participants!  And there will be snacks
+ !<br><br><a href="https://us.list-manage.com/Gzfn5YpcqvV?e=dd6f95546d&amp\;
+ c2id=4a72761bff0680aba36a057dffa93c1e">Contra Workshop Registration</a><br>
+ Instructors: Kyla and Tamara<br>Band: Tommy Eiser and Patrick Blackstone
+LAST-MODIFIED:20260602T160834Z
+LOCATION:Harmony School\, 909 E 2nd St\, Bloomington\, IN 47401\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Beginner Contra Skills Workshop
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260814T010000Z
+DTEND:20260814T030000Z
+DTSTAMP:20260907T031046Z
+UID:1smqtkqrcojtk0aj0b3hd2spok@google.com
+CLASS:PUBLIC
+CREATED:20260810T032149Z
+DESCRIPTION:Benefit show for Santana Sword - starring\, Juniper Perón\, Mar
+ y Mother of God\, Venus Fairchild\, Peacock the Pheonix\, and Aleshiana. \n
+ Bar opens at 7pm\nShow at 9pm\n21+\n$10- $15 at the door
+LAST-MODIFIED:20260810T041734Z
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:MOTHER (a benefit show)
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260712T010000Z
+DTEND:20260712T030000Z
+DTSTAMP:20260907T031046Z
+UID:3aifkhhhdj83sjqf81htg2flg8@google.com
+CLASS:PUBLIC
+CREATED:20260706T020859Z
+DESCRIPTION:POWER\, hosted and produced by Desiree Bouvier returns to the s
+ tage. Starring: Emme Fatale\, Brentlee Bich\, Vanity Rex\, Yvonna F. Mi\, a
+ nd Peacock the Phoenix<br><br>Bar opens at 7pm<br>Show at 9pm<br>Dance part
+ y at 11pm with DJ DEEP SENSE<br>21+<br>$15<br><a href="https://www.bckdoor.
+ com/tickets">POWER Drag Show Tickets</a>
+LAST-MODIFIED:20260706T041423Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:POWER Drag Show
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260815T030000Z
+DTEND:20260815T070000Z
+DTSTAMP:20260907T031046Z
+UID:72lnce4n8fktvsgiju3t433p9d@google.com
+CLASS:PUBLIC
+CREATED:20260810T033456Z
+DESCRIPTION:No cover dance party with a dj!\n21+
+LAST-MODIFIED:20260810T033456Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Dance Party
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260605T210000Z
+DTEND:20260606T010000Z
+DTSTAMP:20260907T031046Z
+UID:185cnvkhl9lbiktto95s2sin9o@google.com
+CLASS:PUBLIC
+CREATED:20260602T161318Z
+DESCRIPTION:All are invited! The 7th Annual Fourth and Rogers Block Party i
+ s back to celebrate the neighborhood! The Block Party includes new Gallery 
+ Walk art exhibits and activities at Pictura Gallery/FAR Center for Contempo
+ rary Arts\, Bloomington Fine Arts Supply\, Fell Art Market\, IFell Gallery\
+ , Juniper Gallery and Lotus Studio. West 4th Street will be closed for a bl
+ ock on either side of Rogers Street with plentiful art\, food\, music\, and
+  fun for all ages.<br><br><a href="https://thefar.org/events/event/117513/"
+ >Roger’s Block Party Website</a>
+LAST-MODIFIED:20260602T161318Z
+LOCATION:505 W 4th St\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:The 7th Annual Fourth and Rogers Block Party
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260801T030000Z
+DTEND:20260801T070000Z
+DTSTAMP:20260907T031046Z
+UID:5s167q3snl4h5ie33em7i3isp8@google.com
+CLASS:PUBLIC
+CREATED:20260727T052756Z
+DESCRIPTION:No cover dance party with a dj!\n21+
+LAST-MODIFIED:20260727T052812Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Dance Party
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260725T180000Z
+DTEND:20260725T220000Z
+DTSTAMP:20260907T031046Z
+UID:226ng8010ggttnqp6fj8ithu82@google.com
+CLASS:PUBLIC
+CREATED:20260720T014300Z
+DESCRIPTION:All Ages Art Market with the Bloomerang Music Festival. Free en
+ try. Located in the alley of The Back Door & The Blockhouse
+LAST-MODIFIED:20260720T030156Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Bloomerang Art Market
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260621T010000Z
+DTEND:20260621T030000Z
+DTSTAMP:20260907T031046Z
+UID:668hifpmrgrrtn37p42hse1the@google.com
+CREATED:20260602T151421Z
+DESCRIPTION:A benefit for Pancha La Flor\, starring: Neon Van Ryan\, Patsy 
+ Blue Ribbon\, Ava\, Desiree De Carlo\, Cadence\, Axel Brosie\, Calyko Magic
+ k-Waffle\, Starletta\, and RUPAUL'S DRAG RACE STAR CIARA MYST. <br>Bar open
+ s at 7pm<br>Show at 9<br>Dance party at 11pm<br><a href="https://www.bckdoo
+ r.com/tickets">Pancha’s Playhouse Ticket Link</a>
+LAST-MODIFIED:20260602T155801Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Pancha's Penthouse Drag Show
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260628T010000Z
+DTEND:20260628T030000Z
+DTSTAMP:20260907T031046Z
+UID:65b7fmgbo24abc2e9lvtsisk8e@google.com
+CLASS:PUBLIC
+CREATED:20260622T020256Z
+DESCRIPTION:Hosted by BeelzeBabe and starring Emme Fatale\, Dorothy Dagger\
+ , Mona Mezcal\, and Candy Polk-A-Dotty<br>21+<br>$15<br>Bar opens at 7pm<br
+ >Show starts at 9pm<br>Dance party at 11pm<br><a href="https://www.bckdoor.
+ com/tickets">KINKER: Freakshow Cabaret Ticket Link</a>
+LAST-MODIFIED:20260622T020602Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:KINKER: Freakshow Cabaret 
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260723T010000Z
+DTEND:20260723T030000Z
+DTSTAMP:20260907T031046Z
+UID:70e2fh3pltplb1pb594l12743n@google.com
+CLASS:PUBLIC
+CREATED:20260713T030828Z
+DESCRIPTION:A variety show hosted and produced by Nova Blair<br>Starring:<b
+ r>Seductive Simone<br>Mary Mother of God<br>Tennah McDonald<br>Boden Byrd<b
+ r>Poler Rosie<br>Ms. Rosetta Stoned<br>Mya Smith<br>Mo Mitchell<br>Bar open
+ s at 7pm<br>Show at 9pm<br>21+<br>$10<br><a href="https://www.bckdoor.com/t
+ ickets">The Queerio Pantheon Tickets </a>
+LAST-MODIFIED:20260713T030828Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:The Queerio Pantheon Variety Show
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260830T030000Z
+DTEND:20260830T070000Z
+DTSTAMP:20260907T031046Z
+UID:65j1s89pudosnhljnvs7jqv2tp@google.com
+CLASS:PUBLIC
+CREATED:20260824T035801Z
+DESCRIPTION:No cover dance party with a dj!\n21+
+LAST-MODIFIED:20260824T035801Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Dance Party
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260717T220000Z
+DTEND:20260717T230000Z
+DTSTAMP:20260907T031046Z
+UID:38fk2je175fsnjvsooh5q3eqao@google.com
+CLASS:PUBLIC
+CREATED:20260713T015645Z
+DESCRIPTION:Come enjoy an hour of bingo surrounded by our friendly felines!
+  Prizes awarded after every round<br><a href="https://www.thecatscloset1.co
+ m/event-details-registration/cat-bingo-20">Cat Bingo Night Tickets</a>
+LAST-MODIFIED:20260713T034941Z
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Bingo Night w/The Cat’s Closet
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260822T190000Z
+DTEND:20260822T220000Z
+DTSTAMP:20260907T031046Z
+UID:52q39u5ph79bqh3ddd4psjdknn@google.com
+CLASS:PUBLIC
+CREATED:20260817T025828Z
+DESCRIPTION:Join The Back Door for some good old fashioned fun! THE HOMOLYM
+ PICS will kick off at 3pm with the TWINK TOSS. Other featured events: Ballo
+ on Shot Put\, Dildo Relay Races\, Bareback Dressage\, Make Unders. Judges: 
+ Jonas\, Stephanie\, and Smoove. Bar cash prizes for the winners! \n\nBar op
+ ens at 2pm\, games start at 3pm\n$5 cover till 8pm gets you in and out all 
+ night
+LAST-MODIFIED:20260817T033225Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Homolympics
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260906T030000Z
+DTEND:20260906T070000Z
+DTSTAMP:20260907T031046Z
+UID:2fvfq55772a5t3opbtp9v66a0l@google.com
+CLASS:PUBLIC
+CREATED:20260831T045033Z
+DESCRIPTION:No cover dance party with a dj!\n21+
+LAST-MODIFIED:20260831T045033Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Dance Party
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260726T170000Z
+DTEND:20260726T210000Z
+DTSTAMP:20260907T031046Z
+UID:0umls1e8k4uf87ssm2rg60sgbi@google.com
+CLASS:PUBLIC
+CREATED:20260713T032423Z
+DESCRIPTION:Join The Back Door for another Tea Dance! The bar will have ice
+  cream drinks (Non-Alcoholic Available!) Bootblacking by Guts on the patio\
+ , Rabbit Rabbit Bakes\, and Hideout Press will be live screen-printing a dy
+ kes on bikes tee! Bring your own shirt! \n\nStickers available to denote yo
+ ur availability and your name to make it easier to meet new people!\n\n21+\
+ nNo cover
+LAST-MODIFIED:20260713T032521Z
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Lesbian Tea Dance: Dykes on Bikes
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260817T181500Z
+DTEND:20260817T220000Z
+DTSTAMP:20260907T031046Z
+UID:5e5be0e8n47ttc761av829t6v9@google.com
+CLASS:PUBLIC
+CREATED:20260817T030655Z
+DESCRIPTION:Writing circle facilitated by Li Meuser. No experience required
+  and materials provided. Feel free to bring prewritten work to share.
+LAST-MODIFIED:20260817T031536Z
+LOCATION:Indiana Recovery Alliance\, 1710 W 3rd St\, Bloomington\, IN 47404
+ \, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Writing to Connect: Writing Circle 
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260827T210000
+DTEND;TZID=America/Indiana/Indianapolis:20260827T220000
+RRULE:FREQ=MONTHLY;BYDAY=4TH
+DTSTAMP:20260907T031046Z
+UID:4mt0h5tp58fa3ppshbdpugb8q1@google.com
+CLASS:PUBLIC
+CREATED:20260824T040126Z
+DESCRIPTION:Join Bloomington ABC at their monthly movie night! August’s fil
+ m is “Sacco and Vanzetti” by Peter Miller\n21+\nDonations welcome
+LAST-MODIFIED:20260824T040127Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Monthly Movie Night w/Bloomington ABC
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260616T160000Z
+DTEND:20260616T180000Z
+DTSTAMP:20260907T031046Z
+UID:1eldhni93ao3cv566v2g5rncqt@google.com
+CLASS:PUBLIC
+CREATED:20260615T053905Z
+DESCRIPTION:Free & discreet STI testing through IU Health
+LAST-MODIFIED:20260615T053945Z
+LOCATION:Mother Hubbards Cupboard\, 1100 W Allen St\, Bloomington\, IN 4740
+ 3\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:FREE HIV/HEP-C Testing
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;VALUE=DATE:20260627
+DTEND;VALUE=DATE:20260628
+DTSTAMP:20260907T031046Z
+UID:2400jr3rs690puir38god6o22g@google.com
+CLASS:PUBLIC
+CREATED:20260622T024337Z
+DESCRIPTION:Join Brown County Pride at their Pontoon Party at Lake Monroe!\
+ nEmail browncountypridein@gmail.com to receive updates and RSVP to the even
+ t\nTime TBA/through email\n$30 donation goes towards covering costs
+LAST-MODIFIED:20260622T025437Z
+LOCATION:Monroe Lake\, Clear Creek Township\, IN 47401\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Big Queer Pontoon Afternoon w/Brown County Pride
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260626T000000Z
+DTEND:20260626T020000Z
+DTSTAMP:20260907T031046Z
+UID:2eint3moae75po9dbli612uf3p@google.com
+CLASS:PUBLIC
+CREATED:20260604T102327Z
+DESCRIPTION:A night of laughter\, fun and shenanigans featuring an all quee
+ r cast of stand up comics\, drag performers and perhaps even a little burle
+ sque<br><br>Hosted by Finley &amp\; Peacock the Phoenix<br>featuring:<br><p
+ >Mariah Davison<br>Oliver Closeoff<br>Shawn Hayes<br>Tripti Luna Rose<br>Vi
+ rginia Slimmy</p><br>Bar opens at 7pm<br>Show at 8pm<br>$5 entry<br>21+
+LAST-MODIFIED:20260622T020854Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:CAMP: A Queer Comedy Showcase
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260815T000000Z
+DTEND:20260815T020000Z
+DTSTAMP:20260907T031046Z
+UID:432v6l8fh2q7uo1dk700tkuh6c@google.com
+CLASS:PUBLIC
+CREATED:20260810T041048Z
+DESCRIPTION:Braless Cowboy Film Productions presents: JODI<br>A queer horro
+ r comedy film set on the east side of Indianapolis<br>Bar opens at 7pm<br>M
+ ovie starts at 8pm<br>No cover dance party at 11pm<br>21+<br>$8<br><a href=
+ "https://www.bckdoor.com/tickets">JODI MOVIE TICKETS</a>
+LAST-MODIFIED:20260810T041048Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:JODI Film Screening
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260726T203000Z
+DTEND:20260726T230000Z
+DTSTAMP:20260907T031046Z
+UID:1pv04ihgqpk3i7r3lgpa6usdi1@google.com
+CLASS:PUBLIC
+CREATED:20260710T061438Z
+DESCRIPTION:<p>Join Li Meuser &amp\; Andrea Sterling for a queer-friendly c
+ reative writing group! This is part of continuous series but new attendees 
+ are encouraged to join. Whether or not you consider yourself a writer\, you
+  are welcome! </p><p>Sliding Scale tuition of $20-$50 per gathering. <br><b
+ r>***Spaces are limited. Financial assistance available.</p><p>Reach out fo
+ r more info or to sign up: <a href="mailto:LLMeuser@me.com" target="_blank"
+ >LLMeuser@me.com</a></p><p><a href="https://integrativehealingnow.com/blog/
+ queerconnections/?fbclid=PAVERFWAS9aqdwZG9mAmV4dG4DYWVtAjEwAHNydGMGYXBwX2lk
+ DzEyNDAyNDU3NDI4NzQxNAABp2LUgaHBMo0adcBHthN0Hzc86Fuo-mdWmXaRUmGQFWdfnJbuwio
+ dXXjt4cfV_aem_ovE6_mUN7hp8zlmBc_ne2g">Queer Connections : Writing Beyond We
+ bsite </a><br></p>
+LAST-MODIFIED:20260710T062318Z
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Queer Connections : Writing Workshop 
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260624T230000Z
+DTEND:20260625T010000Z
+DTSTAMP:20260907T031046Z
+UID:33t96rup9p0em93q7to70e9h62@google.com
+CREATED:20260622T021044Z
+DESCRIPTION:Come watch the basketball game at the gay bar! \nNo cover. 21+.
+LAST-MODIFIED:20260622T021045Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Indiana Fever Game Watch Party
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260709T230000Z
+DTEND:20260710T050000Z
+DTSTAMP:20260907T031046Z
+UID:2k7ha366rmgnf21hshl1ir2709@google.com
+CLASS:PUBLIC
+CREATED:20260706T024416Z
+DESCRIPTION:Dance party with DJ Swing Latino to support those in Venezuela 
+ affected by the earthquakes.\n\nDonations of clothing\, shoes\, money medic
+ ine\, and non-perishable items accepted!\n21+
+LAST-MODIFIED:20260706T035936Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:🇻🇪Fundraiser Dance Party w/DJ SWING LATINO
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260707T090000
+DTEND;TZID=America/Indiana/Indianapolis:20260707T110000
+RRULE:FREQ=WEEKLY;WKST=SU;BYDAY=TU,TH
+DTSTAMP:20260907T031046Z
+UID:4ps1m8j5c95vr6epejio1e4qeb@google.com
+CLASS:PUBLIC
+CREATED:20260706T033236Z
+DESCRIPTION:Meet at the trailhead on West Tapp Road\, just east of South We
+ imer Road. The walk will range from 1.5 to 2.5 miles\, with benches along t
+ he way. Friendly dogs are welcome. To be sure of location and time\, please
+  email Cindy Houston (cahoust@aol.com) the day before a walk you would like
+  to join so you can be added to the group text.
+LAST-MODIFIED:20260706T040724Z
+LOCATION:Clear Creek Trail\, Bloomington\, IN 47403\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Weekly Walking Group w/Rainbow Elders
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260822T030000Z
+DTEND:20260822T070000Z
+DTSTAMP:20260907T031046Z
+UID:31dj3krgg0lap3k5gkqr71i4fv@google.com
+CLASS:PUBLIC
+CREATED:20260817T025519Z
+DESCRIPTION:Dance party with DJ Axipitor\n21+\nNo cover
+LAST-MODIFIED:20260817T025520Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Dance Party w/DJ AXIPITOR
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260830T203000Z
+DTEND:20260830T230000Z
+DTSTAMP:20260907T031046Z
+UID:5odiji7gjo5ngqdsh85m6gelad@google.com
+CLASS:PUBLIC
+CREATED:20260710T062417Z
+DESCRIPTION:<p>Join Li Meuser &amp\; Andrea Sterling for a queer-friendly c
+ reative writing group! This is part of continuous series but new attendees 
+ are encouraged to join. Whether or not you consider yourself a writer\, you
+  are welcome! </p><p>Sliding Scale tuition of $20-$50 per gathering. <br><b
+ r>***Spaces are limited. Financial assistance available.</p><p>Reach out fo
+ r more info or to sign up: <a href="mailto:LLMeuser@me.com" target="_blank"
+ >LLMeuser@me.com</a></p><p><a href="https://www.google.com/url?q=https://in
+ tegrativehealingnow.com/blog/queerconnections/?fbclid%3DPAVERFWAS9aqdwZG9mA
+ mV4dG4DYWVtAjEwAHNydGMGYXBwX2lkDzEyNDAyNDU3NDI4NzQxNAABp2LUgaHBMo0adcBHthN0
+ Hzc86Fuo-mdWmXaRUmGQFWdfnJbuwiodXXjt4cfV_aem_ovE6_mUN7hp8zlmBc_ne2g&amp\;sa
+ =D&amp\;source=calendar&amp\;ust=1784096597696463&amp\;usg=AOvVaw0zlBa-kZt_
+ fifHzsWMKUwT" target="_blank">Queer Connections : Writing Beyond Website </
+ a><br></p>
+LAST-MODIFIED:20260817T024949Z
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Queer Connections : Writing Workshop 
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260704T230000Z
+DTEND:20260705T070000Z
+DTSTAMP:20260907T031046Z
+UID:6sll7nd06l0p4cis2tks5cqoi1@google.com
+CLASS:PUBLIC
+CREATED:20260629T015652Z
+DESCRIPTION:The Back Door’s Anti-4th party returns! <br><br>Entry is 1 $5 r
+ affle ticket\, but feel free to buy more than 1 and bring money to tip! Fun
+ ds raised goes towards Exodus Refugee Immigration Bloomington and Gender Di
+ verse and Queer Clinic.<br><a href="https://www.bckdoor.com/product/anti-4t
+ h-raffle-for-exodus-refugee-gdqciu/284?cp=true&amp\;sa=false&amp\;sbp=false
+ &amp\;q=false&amp\;category_id=3&amp\;utm_source=ig&amp\;utm_medium=social&
+ amp\;utm_content=link_in_bio&amp\;fbclid=PAdGRleASu33xleHRuA2FlbQIxMQBzcnRj
+ BmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAafYOsqSrjbzoplj9P-8r54lpRdXNWvywwDbNHOucf3
+ mudPib6NM5zg20XBn-Q_aem_SPoZPrFsKjZkH-pl1IW2Xw">Anti Fourth Raffle Tickets<
+ /a><br><br>Show at 9pm starring:<br>Jizzelle Vontrell<br>Seductive Simone<b
+ r>Virginia Slimm<br>Polar Rosie<br>Oliver Closeoff<br>Mary Mother of God<br
+ ><br>Dance Party at 11pm w/DJ AXIPITOR<br>21+
+LAST-MODIFIED:20260629T052137Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:ANTI-4TH PARTY
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260618T230000Z
+DTEND:20260619T003000Z
+DTSTAMP:20260907T031046Z
+UID:69jno4hhnu9p454522632bhq2l@google.com
+CREATED:20260615T043159Z
+DESCRIPTION:Come watch the basketball game at the gay bar! \nNo cover. 21+.
+LAST-MODIFIED:20260622T021111Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Indiana Fever Game Watch Party
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART;TZID=America/Indiana/Indianapolis:20260605T200000
+DTEND;TZID=America/Indiana/Indianapolis:20260605T213000
+RRULE:FREQ=WEEKLY;WKST=SU;UNTIL=20260718T035959Z;BYDAY=FR
+DTSTAMP:20260907T031046Z
+UID:7anic04koqk4afvb24v2o42m00@google.com
+CLASS:PUBLIC
+CREATED:20260602T183808Z
+DESCRIPTION:Come watch season 11 of Rupaul’s Drag Race All Stars Season 11 
+ with drag queen Starletta! Every Friday until the finale!\nFree\n21+
+LAST-MODIFIED:20260713T034139Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:All Stars Drag Race Viewing Party w/Starletta
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260704T030000Z
+DTEND:20260704T070000Z
+DTSTAMP:20260907T031046Z
+UID:70eprb0kkjbp32a6jst3avf3is@google.com
+CLASS:PUBLIC
+CREATED:20260629T015954Z
+DESCRIPTION:21+
+LAST-MODIFIED:20260629T052240Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Dance Party w/DJ Babystar
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260905T030000Z
+DTEND:20260905T070000Z
+DTSTAMP:20260907T031046Z
+UID:63reh1iamh663nguivdlo5eaeb@google.com
+CLASS:PUBLIC
+CREATED:20260831T043413Z
+DESCRIPTION:No cover dance party\n21+
+LAST-MODIFIED:20260831T043414Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Dance Party w/DJ BABYSTAR
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260906T010000Z
+DTEND:20260906T030000Z
+DTSTAMP:20260907T031046Z
+UID:101rd9kc6uuateij7gu80ljk4c@google.com
+CLASS:PUBLIC
+CREATED:20260831T044712Z
+DESCRIPTION:All Kings Drag Show hosted by Oliver Closeoff<br>Starring<br>Ma
+ urice Mantini<br>Aijaye Finesse<br>Jayden Liscious<br>Lover Boy<br><br>Bar 
+ opens at 7pm<br>Show starts at 9pm<br>No cover dance party at 11pm<br><br><
+ a href="https://www.bckdoor.com/tickets">ALL DADDY NO CHASER SHOW TICKETS</
+ a>
+LAST-MODIFIED:20260831T044712Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:All Daddy\, No Chaser Drag Show
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260623T200000Z
+DTEND:20260623T230000Z
+DTSTAMP:20260907T031046Z
+UID:6bm7ridfqes4l7qtcv4ae88qjn@google.com
+CLASS:PUBLIC
+CREATED:20260615T040559Z
+DESCRIPTION:Queer Craft Club’s is hosting another craft supply swap! Bring 
+ and trade craft supplies! Have a bag with you to take things with you and s
+ tay around to craft! Feel free to shop at Art Remains during the event.\n\n
+ All ages!
+LAST-MODIFIED:20260615T040600Z
+LOCATION:Art Remains Creative ReUse\, 115 N College Ave Ste #012\, Blooming
+ ton\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Queer Craft Supply Swap
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Bloomington Pride
+X-SOURCE-URL:https://bloomingtonpride.org/community-calendar
+DTSTART:20260719T030000Z
+DTEND:20260719T070000Z
+DTSTAMP:20260907T031046Z
+UID:5a74tfco9qi18oassn54n9nl6q@google.com
+CLASS:PUBLIC
+CREATED:20260713T014800Z
+DESCRIPTION:Dance party with DJ Axipitor\n21+\nNo cover
+LAST-MODIFIED:20260713T024648Z
+LOCATION:The Back Door\, 207 S College Ave\, Bloomington\, IN 47404\, USA
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Dance Party w/DJ AXIPITOR
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

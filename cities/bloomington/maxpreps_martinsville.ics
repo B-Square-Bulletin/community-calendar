@@ -1,0 +1,137 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Martinsville Athletics//maxpreps.com//
+X-WR-CALNAME:Martinsville Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Seymour Boys JV Soccer @ Martinsville
+DTSTART;TZID=America/Indiana/Indianapolis:20260908T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260908T194500
+UID:f3a23a9dc8a8cea247804de37bd91868@maxpreps.com
+DESCRIPTION:Boys JV Soccer\nThe Seymour JV soccer team has an away non-con
+ ference match @  Martinsville (IN) on Tuesday\, September 8 @ 6p.
+URL:https://www.maxpreps.com/in/soccer/match/martinsville-vs-seymour/jv/9-
+ 8-2026/?c=4b3e0b71-ea2a-4c56-8b48-43c53384ecd8
+X-SOURCE:Martinsville Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Martinsville Girls Varsity Volleyball @ Decatur Central
+DTSTART;TZID=America/Indiana/Indianapolis:20260908T183000
+DTEND;TZID=America/Indiana/Indianapolis:20260908T193000
+UID:5c1545ab137cfae3b84ebc5b6237402d@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Martinsville varsity volleyball 
+ team has an away conference match @  Decatur Central (Indianapolis\, IN) o
+ n Tuesday\, September 8 @ 6:30p.
+URL:https://www.maxpreps.com/in/volleyball/match/decatur-central-indianapo
+ lis-vs-martinsville/9-8-2026/?c=ea7940f2-4522-4817-8bde-25f80ffee0b7
+X-SOURCE:Martinsville Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Seymour Boys Varsity Soccer @ Martinsville
+DTSTART;TZID=America/Indiana/Indianapolis:20260908T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260908T211500
+UID:9b27152b921fa8de275246662403b3a4@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nThe Seymour varsity soccer team has an aw
+ ay non-conference match @  Martinsville (IN) on Tuesday\, September 8 @ 7:
+ 30p.
+URL:https://www.maxpreps.com/in/soccer/match/martinsville-vs-seymour/9-8-2
+ 026/?c=c4855d84-de87-4fd8-ba72-2cf18bfcb3f8
+X-SOURCE:Martinsville Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Decatur Central Girls JV Soccer @ Martinsville
+DTSTART;TZID=America/Indiana/Indianapolis:20260909T173000
+DTEND;TZID=America/Indiana/Indianapolis:20260909T191500
+UID:81419a13b2dab4f8af7c528d108be023@maxpreps.com
+DESCRIPTION:Girls JV Soccer\nThe Decatur Central JV soccer team has an awa
+ y conference match @  Martinsville (IN) on Wednesday\, September 9 @ 5:30p
+ .
+URL:https://www.maxpreps.com/in/soccer/girls/match/decatur-central-indiana
+ polis-vs-martinsville/jv/9-9-2026/?c=9c1e9b29-03ae-4e48-bc79-9b726b2898a4
+X-SOURCE:Martinsville Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Decatur Central Girls Varsity Soccer @ Martinsville
+DTSTART;TZID=America/Indiana/Indianapolis:20260909T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260909T204500
+UID:895bf816df1111b715a1bb40d9f5cedb@maxpreps.com
+DESCRIPTION:Girls Varsity Soccer\nThe Decatur Central varsity soccer team 
+ has an away conference match @  Martinsville (IN) on Wednesday\, September
+  9 @ 7p.
+URL:https://www.maxpreps.com/in/soccer/girls/match/decatur-central-indiana
+ polis-vs-martinsville/9-9-2026/?c=f391deb9-13c5-43f0-9120-f5eb354bd129
+X-SOURCE:Martinsville Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Martinsville Boys JV Soccer @ Decatur Central
+DTSTART;TZID=America/Indiana/Indianapolis:20260910T173000
+DTEND;TZID=America/Indiana/Indianapolis:20260910T191500
+UID:3da15e68df45e81c10405a1664a98cb6@maxpreps.com
+DESCRIPTION:Boys JV Soccer\nThe Martinsville JV soccer team has an away co
+ nference match @  Decatur Central (Indianapolis\, IN) on Thursday\, Septem
+ ber 10 @ 5:30p.
+URL:https://www.maxpreps.com/in/soccer/match/decatur-central-indianapolis-
+ vs-martinsville/jv/9-10-2026/?c=7c82c51e-0f7f-4a32-ac28-09a91931cf5d
+X-SOURCE:Martinsville Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Roncalli Girls JV Volleyball @ Martinsville
+DTSTART;TZID=America/Indiana/Indianapolis:20260910T173000
+DTEND;TZID=America/Indiana/Indianapolis:20260910T183000
+UID:0c190972f1904005d515554ff47c5ba4@maxpreps.com
+DESCRIPTION:Girls JV Volleyball\nThe Roncalli JV volleyball team has an aw
+ ay non-conference match @  Martinsville (IN) on Thursday\, September 10 @ 
+ 5:30p.
+URL:https://www.maxpreps.com/in/volleyball/match/martinsville-vs-roncalli-
+ indianapolis/jv/9-10-2026/?c=42cdb07e-10d9-46c6-b840-5b11233b43e3
+X-SOURCE:Martinsville Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Roncalli Girls Varsity Volleyball @ Martinsville
+DTSTART;TZID=America/Indiana/Indianapolis:20260910T173000
+DTEND;TZID=America/Indiana/Indianapolis:20260910T183000
+UID:3967264691bb2b9ac7652c3de94bd57f@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Roncalli varsity volleyball team
+  has an away non-conference match @  Martinsville (IN) on Thursday\, Septe
+ mber 10 @ 5:30p.
+URL:https://www.maxpreps.com/in/volleyball/match/martinsville-vs-roncalli-
+ indianapolis/9-10-2026/?c=fa7bcaa2-5fe6-498f-975c-ad7aeda9dd7d
+X-SOURCE:Martinsville Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Martinsville Boys Varsity Soccer @ Decatur Central
+DTSTART;TZID=America/Indiana/Indianapolis:20260910T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260910T204500
+UID:64f121a5d11120124c4636572008c817@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nThe Martinsville varsity soccer team has 
+ an away conference match @  Decatur Central (Indianapolis\, IN) on Thursda
+ y\, September 10 @ 7p.
+URL:https://www.maxpreps.com/in/soccer/match/decatur-central-indianapolis-
+ vs-martinsville/9-10-2026/?c=9de0d744-a07a-4392-b2f2-91e5357313fa
+X-SOURCE:Martinsville Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Decatur Central Varsity Football @ Martinsville
+DTSTART;TZID=America/Indiana/Indianapolis:20260911T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260911T210000
+UID:32da70eb83041327508ee16c909d7ed2@maxpreps.com
+DESCRIPTION:Boys Varsity Football\nThe Decatur Central varsity football te
+ am has an away conference game @  Martinsville (IN) on Friday\, September 
+ 11 @ 7p.
+URL:https://www.maxpreps.com/in/football/game/decatur-central-indianapolis
+ -vs-martinsville/9-11-2026/?c=41f177f4-05ea-413d-82bf-c2d5228a5f1b
+X-SOURCE:Martinsville Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Martinsville JV Football @ Decatur Central
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T103000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T123000
+UID:157b4dde5bf29712dd2ed117522fcea7@maxpreps.com
+DESCRIPTION:Boys JV Football\nThe Martinsville JV football team has an awa
+ y conference game @  Decatur Central (Indianapolis\, IN) on Saturday\, Sep
+ tember 12 @ 10:30a.
+URL:https://www.maxpreps.com/in/football/game/decatur-central-indianapolis
+ -vs-martinsville/jv/9-12-2026/?c=1c77031d-79e7-40e0-8f34-7f68719f7267
+X-SOURCE:Martinsville Athletics
+END:VEVENT
+END:VCALENDAR

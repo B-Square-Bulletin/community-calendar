@@ -1,0 +1,107 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Brown County Athletics//maxpreps.com//
+X-WR-CALNAME:Brown County Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Brown County Girls Varsity Soccer @ Jennings County
+DTSTART;TZID=America/Indiana/Indianapolis:20260908T173000
+DTEND;TZID=America/Indiana/Indianapolis:20260908T191500
+UID:81c48ad3611ec9bf1d9fad7fa7a8959a@maxpreps.com
+DESCRIPTION:Girls Varsity Soccer\nThe Brown County varsity soccer team has
+  an away non-conference match @  Jennings County (North Vernon\, IN) on Tu
+ esday\, September 8 @ 5:30p.
+URL:https://www.maxpreps.com/in/soccer/girls/match/brown-county-nashville-
+ vs-jennings-county-north-vernon/9-8-2026/?c=1fff3920-81e2-4086-ba35-237255
+ 84b4ad
+X-SOURCE:Brown County Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Seven Oaks Classical Girls Varsity Volleyball @ Brown County
+DTSTART;TZID=America/Indiana/Indianapolis:20260908T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260908T190000
+UID:69b486c10955a38ff442e36b38765cd0@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Seven Oaks Classical varsity vol
+ leyball team has an away non-conference match @  Brown County (Nashville\,
+  IN) on Tuesday\, September 8 @ 6p.
+URL:https://www.maxpreps.com/in/volleyball/match/brown-county-nashville-vs
+ -seven-oaks-classical-ellettsville/9-8-2026/?c=2d57537c-e74f-4907-8a45-b28
+ d320c8f44
+X-SOURCE:Brown County Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Brown County Girls Freshman Volleyball @ ILHS
+DTSTART;TZID=America/Indiana/Indianapolis:20260909T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260909T190000
+UID:96e292048a5e47be129566301e28ca7e@maxpreps.com
+DESCRIPTION:Girls Freshman Volleyball\nThe Brown County freshman volleybal
+ l team has an away non-conference match @  Indianapolis Lutheran (Indianap
+ olis\, IN) on Wednesday\, September 9 @ 6p.
+URL:https://www.maxpreps.com/in/volleyball/match/brown-county-nashville-vs
+ -indianapolis-lutheran/freshman/9-9-2026/?c=d5229bf6-c99e-48c3-8547-9a6fe8
+ bbe1c5
+X-SOURCE:Brown County Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shoals Boys Varsity Soccer @ Brown County
+DTSTART;TZID=America/Indiana/Indianapolis:20260909T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260909T194500
+UID:899605defa39a2bf42a2aba538a63a96@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nThe Shoals varsity soccer team has an awa
+ y non-conference match @  Brown County (Nashville\, IN) on Wednesday\, Sep
+ tember 9 @ 6p.
+URL:https://www.maxpreps.com/in/soccer/match/brown-county-nashville-vs-sho
+ als/9-9-2026/?c=49392473-2670-4236-9b02-03a0b891514d
+X-SOURCE:Brown County Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomfield Girls Varsity Soccer @ Brown County
+DTSTART;TZID=America/Indiana/Indianapolis:20260910T173000
+DTEND;TZID=America/Indiana/Indianapolis:20260910T191500
+UID:f9a0c115ddb88242cda31d2a89aba2a2@maxpreps.com
+DESCRIPTION:Girls Varsity Soccer\nThe Bloomfield varsity soccer team has a
+ n away non-conference match @  Brown County (Nashville\, IN) on Thursday\,
+  September 10 @ 5:30p.
+URL:https://www.maxpreps.com/in/soccer/girls/match/bloomfield-vs-brown-cou
+ nty-nashville/9-10-2026/?c=9bd3455a-c4ef-44c1-a5a5-468844e17e41
+X-SOURCE:Brown County Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Brown County Girls JV Volleyball @ Eastern Greene
+DTSTART;TZID=America/Indiana/Indianapolis:20260910T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260910T190000
+UID:6c86e401f539493f03462b03edc5735f@maxpreps.com
+DESCRIPTION:Girls JV Volleyball\nThe Brown County JV volleyball team has a
+ n away non-conference match @  Eastern Greene (Bloomfield\, IN) on Thursda
+ y\, September 10 @ 6p.
+URL:https://www.maxpreps.com/in/volleyball/match/brown-county-nashville-vs
+ -eastern-greene-bloomfield/jv/9-10-2026/?c=ece5ccdf-ce7e-40c7-b377-15b9c1e
+ 44731
+X-SOURCE:Brown County Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Brown County Girls Varsity Volleyball @ Eastern Greene
+DTSTART;TZID=America/Indiana/Indianapolis:20260910T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260910T203000
+UID:b0dca4ae963db2b31760abcd40c9b2af@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Brown County varsity volleyball 
+ team has an away non-conference match @  Eastern Greene (Bloomfield\, IN) 
+ on Thursday\, September 10 @ 7:30p.
+URL:https://www.maxpreps.com/in/volleyball/match/brown-county-nashville-vs
+ -eastern-greene-bloomfield/9-10-2026/?c=448fb992-75d9-4fe1-871c-675fadf889
+ 74
+X-SOURCE:Brown County Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Brown County Varsity Football @ North Decatur
+DTSTART;TZID=America/Indiana/Indianapolis:20260911T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260911T210000
+UID:3107c99016cfc15b34f7e5c0f73e7891@maxpreps.com
+DESCRIPTION:Boys Varsity Football\nThe Brown County varsity football team 
+ has an away conference game @  North Decatur (Greensburg\, IN) on Friday\,
+  September 11 @ 7p.
+URL:https://www.maxpreps.com/in/football/game/brown-county-nashville-vs-no
+ rth-decatur-greensburg/9-11-2026/?c=26f5c28f-a4d8-4590-9751-00b32ac2780d
+X-SOURCE:Brown County Athletics
+END:VEVENT
+END:VCALENDAR

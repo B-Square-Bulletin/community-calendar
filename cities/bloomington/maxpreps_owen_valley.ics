@@ -1,0 +1,137 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Owen Valley Athletics//maxpreps.com//
+X-WR-CALNAME:Owen Valley Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Owen Valley Girls Varsity Soccer @ North Knox
+DTSTART;TZID=America/Indiana/Indianapolis:20260908T173000
+DTEND;TZID=America/Indiana/Indianapolis:20260908T191500
+UID:804b64f7220cc9030c766663b4486f83@maxpreps.com
+DESCRIPTION:Girls Varsity Soccer\nThe Owen Valley varsity soccer team has 
+ an away non-conference match @  North Knox (Bicknell\, IN) on Tuesday\, Se
+ ptember 8 @ 5:30p.
+URL:https://www.maxpreps.com/in/soccer/girls/match/north-knox-bicknell-vs-
+ owen-valley-spencer/9-8-2026/?c=a5f85e2e-fd2a-49ac-9f8a-0cb9e69e3ce9
+X-SOURCE:Owen Valley Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Owen Valley Girls JV Volleyball @ Cloverdale
+DTSTART;TZID=America/Indiana/Indianapolis:20260908T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260908T190000
+UID:8f93ae363cbe3053bf6771dee10dbd83@maxpreps.com
+DESCRIPTION:Girls JV Volleyball\nThe Owen Valley JV volleyball team has an
+  away conference match @  Cloverdale (IN) on Tuesday\, September 8 @ 6p.
+URL:https://www.maxpreps.com/in/volleyball/match/cloverdale-vs-owen-valley
+ -spencer/jv/9-8-2026/?c=90cc1fc5-1cff-4a72-8638-459033fa3dcc
+X-SOURCE:Owen Valley Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Owen Valley Boys Varsity Soccer @ North Knox
+DTSTART;TZID=America/Indiana/Indianapolis:20260908T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260908T204500
+UID:1e13fa9692226a910206e4f3d8f6ab07@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nThe Owen Valley varsity soccer team has a
+ n away non-conference match @  North Knox (Bicknell\, IN) on Tuesday\, Sep
+ tember 8 @ 7p.
+URL:https://www.maxpreps.com/in/soccer/match/north-knox-bicknell-vs-owen-v
+ alley-spencer/9-8-2026/?c=25cdf36e-92b6-4efb-96a5-a466e234277e
+X-SOURCE:Owen Valley Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Owen Valley Girls Varsity Volleyball @ Cloverdale
+DTSTART;TZID=America/Indiana/Indianapolis:20260908T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260908T203000
+UID:0cafc43b6c0ce546e5676c655cf6de50@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Owen Valley varsity volleyball t
+ eam has an away conference match @  Cloverdale (IN) on Tuesday\, September
+  8 @ 7:30p.
+URL:https://www.maxpreps.com/in/volleyball/match/cloverdale-vs-owen-valley
+ -spencer/9-8-2026/?c=1e5cabe9-1caa-4c1a-bfc2-8005d0e765db
+X-SOURCE:Owen Valley Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Edgewood Boys Varsity Soccer @ Owen Valley
+DTSTART;TZID=America/Indiana/Indianapolis:20260909T173000
+DTEND;TZID=America/Indiana/Indianapolis:20260909T191500
+UID:2e2ad859d750acac55f8460ea0c2b3f5@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nThe Edgewood varsity soccer team has an a
+ way conference match @  Owen Valley (Spencer\, IN) on Wednesday\, Septembe
+ r 9 @ 5:30p.
+URL:https://www.maxpreps.com/in/soccer/match/edgewood-ellettsville-vs-owen
+ -valley-spencer/9-9-2026/?c=b25e4407-faa3-4386-afd1-9aeb19c4c95c
+X-SOURCE:Owen Valley Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Owen Valley Girls JV Volleyball @ South Putnam
+DTSTART;TZID=America/Indiana/Indianapolis:20260909T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260909T190000
+UID:d95f45c023f5144fadc00d12e22c83e6@maxpreps.com
+DESCRIPTION:Girls JV Volleyball\nThe Owen Valley JV volleyball team has an
+  away non-conference match @  South Putnam (Greencastle\, IN) on Wednesday
+ \, September 9 @ 6p.
+URL:https://www.maxpreps.com/in/volleyball/match/owen-valley-spencer-vs-so
+ uth-putnam-greencastle/jv/9-9-2026/?c=d5edcd3c-40e5-45a8-b820-5b9a62745473
+X-SOURCE:Owen Valley Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Edgewood Girls Varsity Soccer @ Owen Valley
+DTSTART;TZID=America/Indiana/Indianapolis:20260909T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260909T211500
+UID:d5a6d21ae5207761dbf1c0582aef120c@maxpreps.com
+DESCRIPTION:Girls Varsity Soccer\nThe Edgewood varsity soccer team has an 
+ away conference match @  Owen Valley (Spencer\, IN) on Wednesday\, Septemb
+ er 9 @ 7:30p.
+URL:https://www.maxpreps.com/in/soccer/girls/match/edgewood-ellettsville-v
+ s-owen-valley-spencer/9-9-2026/?c=4d68bb09-89b0-4fdd-8002-efea9ae247ef
+X-SOURCE:Owen Valley Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:White River Valley Boys Varsity Soccer @ Owen Valley
+DTSTART;TZID=America/Indiana/Indianapolis:20260910T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260910T194500
+UID:e5869f63ce190ef55acc9144aebb6f8d@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nThe White River Valley varsity soccer tea
+ m has an away non-conference match @  Owen Valley (Spencer\, IN) on Thursd
+ ay\, September 10 @ 6p.
+URL:https://www.maxpreps.com/in/soccer/match/owen-valley-spencer-vs-white-
+ river-valley-switz-city/9-10-2026/?c=2e3b9180-a4e0-4eda-903e-8e8b52a0b355
+X-SOURCE:Owen Valley Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Edgewood Girls JV Volleyball @ Owen Valley
+DTSTART;TZID=America/Indiana/Indianapolis:20260910T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260910T190000
+UID:17a16ec1d249fef9142a7d4c8b18ddad@maxpreps.com
+DESCRIPTION:Girls JV Volleyball\nThe Edgewood JV volleyball team has an aw
+ ay conference match @  Owen Valley (Spencer\, IN) on Thursday\, September 
+ 10 @ 6p.
+URL:https://www.maxpreps.com/in/volleyball/match/edgewood-ellettsville-vs-
+ owen-valley-spencer/jv/9-10-2026/?c=bf69b815-64dd-441d-bbe7-7bc1b563eab4
+X-SOURCE:Owen Valley Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Edgewood Girls Varsity Volleyball @ Owen Valley
+DTSTART;TZID=America/Indiana/Indianapolis:20260910T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260910T200000
+UID:e858513d38993c6511b39f84c6296782@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Edgewood varsity volleyball team
+  has an away conference match @  Owen Valley (Spencer\, IN) on Thursday\, 
+ September 10 @ 7p.
+URL:https://www.maxpreps.com/in/volleyball/match/edgewood-ellettsville-vs-
+ owen-valley-spencer/9-10-2026/?c=52c3837a-ac0c-4500-b395-28ad95023233
+X-SOURCE:Owen Valley Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Owen Valley Varsity Football @ Edgewood
+DTSTART;TZID=America/Indiana/Indianapolis:20260911T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260911T210000
+UID:c74697ee44a6d38ad12ecb1539028368@maxpreps.com
+DESCRIPTION:Boys Varsity Football\nThe Owen Valley varsity football team h
+ as an away conference game @  Edgewood (Ellettsville\, IN) on Friday\, Sep
+ tember 11 @ 7p.
+URL:https://www.maxpreps.com/in/football/game/edgewood-ellettsville-vs-owe
+ n-valley-spencer/9-11-2026/?c=f7f377ac-044e-4bac-a614-51f862308786
+X-SOURCE:Owen Valley Athletics
+END:VEVENT
+END:VCALENDAR

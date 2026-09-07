@@ -1,0 +1,174 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Bloomington North Athletics//maxpreps.com//
+X-WR-CALNAME:Bloomington North Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Bloomington North Girls JV Volleyball @ Mooresville
+DTSTART;TZID=America/Indiana/Indianapolis:20260908T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260908T190000
+UID:c995aa99ff3a7bdcb7fd54f0c1dbece2@maxpreps.com
+DESCRIPTION:Girls JV Volleyball\nThe Bloomington North JV volleyball team 
+ has an away conference match @  Mooresville (IN) on Tuesday\, September 8 
+ @ 6p.
+URL:https://www.maxpreps.com/in/volleyball/match/bloomington-north-vs-moor
+ esville/jv/9-8-2026/?c=aad6ccac-62b6-4ab8-8813-3bdfdb0ddd35
+X-SOURCE:Bloomington North Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Columbus North Boys JV Soccer @ Bloomington North
+DTSTART;TZID=America/Indiana/Indianapolis:20260908T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260908T194500
+UID:79b6b88ab7e08fbc0156e689d358391e@maxpreps.com
+DESCRIPTION:Boys JV Soccer\nThe Columbus North JV soccer team has an away 
+ non-conference match @  Bloomington North (Bloomington\, IN) on Tuesday\, 
+ September 8 @ 6p.
+URL:https://www.maxpreps.com/in/soccer/match/bloomington-north-vs-columbus
+ -north/jv/9-8-2026/?c=645189e8-1b2b-4b75-b00e-c739b6d2c854
+X-SOURCE:Bloomington North Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington North Girls Varsity Volleyball @ Mooresville
+DTSTART;TZID=America/Indiana/Indianapolis:20260908T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260908T200000
+UID:82f3a5785078f24db988e4f3e758c8fa@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Bloomington North varsity volley
+ ball team has an away conference match @  Mooresville (IN) on Tuesday\, Se
+ ptember 8 @ 7p.
+URL:https://www.maxpreps.com/in/volleyball/match/bloomington-north-vs-moor
+ esville/9-8-2026/?c=60a49c68-479b-4b22-b509-43cb77345854
+X-SOURCE:Bloomington North Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Columbus North Boys Varsity Soccer @ Bloomington North
+DTSTART;TZID=America/Indiana/Indianapolis:20260908T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260908T211500
+UID:a7abd7816ff87049c373e7f150a52064@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nThe Columbus North varsity soccer team ha
+ s an away non-conference match @  Bloomington North (Bloomington\, IN) on 
+ Tuesday\, September 8 @ 7:30p.
+URL:https://www.maxpreps.com/in/soccer/match/bloomington-north-vs-columbus
+ -north/9-8-2026/?c=f19c6c67-4be9-407a-b6d1-8d9f79ed19bb
+X-SOURCE:Bloomington North Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington North Girls Varsity Soccer @ Mooresville
+DTSTART;TZID=America/Indiana/Indianapolis:20260909T183000
+DTEND;TZID=America/Indiana/Indianapolis:20260909T201500
+UID:474915de43c062e375c022686c03f480@maxpreps.com
+DESCRIPTION:Girls Varsity Soccer\nThe Bloomington North varsity soccer tea
+ m has an away conference match @  Mooresville (IN) on Wednesday\, Septembe
+ r 9 @ 6:30p.
+URL:https://www.maxpreps.com/in/soccer/girls/match/bloomington-north-vs-mo
+ oresville/9-9-2026/?c=64a80ae0-a269-4248-8ff4-4199465dfa7a
+X-SOURCE:Bloomington North Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Mooresville Boys JV Soccer @ Bloomington North
+DTSTART;TZID=America/Indiana/Indianapolis:20260910T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260910T194500
+UID:5e1806e44cbb1d5bbaacd08ea5a5a604@maxpreps.com
+DESCRIPTION:Boys JV Soccer\nThe Mooresville JV soccer team has an away con
+ ference match @  Bloomington North (Bloomington\, IN) on Thursday\, Septem
+ ber 10 @ 6p.
+URL:https://www.maxpreps.com/in/soccer/match/bloomington-north-vs-mooresvi
+ lle/jv/9-10-2026/?c=adb4b1e7-dd1b-41cb-a473-367be4c44813
+X-SOURCE:Bloomington North Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:BNLHS Girls JV Volleyball @ Bloomington North
+DTSTART;TZID=America/Indiana/Indianapolis:20260910T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260910T190000
+UID:5d616a0998209fa972794a577417b82d@maxpreps.com
+DESCRIPTION:Girls JV Volleyball\nThe Bedford North Lawrence JV volleyball 
+ team has an away non-conference match @  Bloomington North (Bloomington\, 
+ IN) on Thursday\, September 10 @ 6p.
+URL:https://www.maxpreps.com/in/volleyball/match/bedford-north-lawrence-vs
+ -bloomington-north/jv/9-10-2026/?c=1b0e3bad-d427-4a42-ae83-5536f8b59cce
+X-SOURCE:Bloomington North Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Mooresville Boys Varsity Soccer @ Bloomington North
+DTSTART;TZID=America/Indiana/Indianapolis:20260910T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260910T211500
+UID:cc9540ec7d01444979f34bc7fb32759c@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nThe Mooresville varsity soccer team has a
+ n away conference match @  Bloomington North (Bloomington\, IN) on Thursda
+ y\, September 10 @ 7:30p.
+URL:https://www.maxpreps.com/in/soccer/match/bloomington-north-vs-mooresvi
+ lle/9-10-2026/?c=a440c9c0-dd7a-4883-bc4a-977d8ebaacad
+X-SOURCE:Bloomington North Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:BNLHS Girls Varsity Volleyball @ Bloomington North
+DTSTART;TZID=America/Indiana/Indianapolis:20260910T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260910T203000
+UID:176f1154e2480a910edb99a62eded477@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Bedford North Lawrence varsity v
+ olleyball team has an away non-conference match @  Bloomington North (Bloo
+ mington\, IN) on Thursday\, September 10 @ 7:30p.
+URL:https://www.maxpreps.com/in/volleyball/match/bedford-north-lawrence-vs
+ -bloomington-north/9-10-2026/?c=9eb0fecd-67ed-49ce-857d-f93c6ecf6573
+X-SOURCE:Bloomington North Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington North Girls JV Soccer @ Columbus North
+DTSTART;TZID=America/Indiana/Indianapolis:20260911T173000
+DTEND;TZID=America/Indiana/Indianapolis:20260911T191500
+UID:9846a8fb89e39315fa710d01308569b7@maxpreps.com
+DESCRIPTION:Girls JV Soccer\nThe Bloomington North JV soccer team has an a
+ way non-conference match @  Columbus North (Columbus\, IN) on Friday\, Sep
+ tember 11 @ 5:30p.
+URL:https://www.maxpreps.com/in/soccer/girls/match/bloomington-north-vs-co
+ lumbus-north/jv/9-11-2026/?c=e5d05090-4ca3-4482-b6a0-8ccb012dee6e
+X-SOURCE:Bloomington North Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington North Varsity Football @ Mooresville
+DTSTART;TZID=America/Indiana/Indianapolis:20260911T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260911T210000
+UID:c07ce2eb8121166836714e71b5b92c0c@maxpreps.com
+DESCRIPTION:Boys Varsity Football\nThe Bloomington North varsity football 
+ team has an away conference game @  Mooresville (IN) on Friday\, September
+  11 @ 7p.
+URL:https://www.maxpreps.com/in/football/game/bloomington-north-vs-mooresv
+ ille/9-11-2026/?c=1fece0e2-8a52-4460-acd0-c83cba159661
+X-SOURCE:Bloomington North Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Mooresville Freshman Football @ Bloomington North
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T090000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T110000
+UID:21f64b88f0167a0345bc26134bd21a2a@maxpreps.com
+DESCRIPTION:Boys Freshman Football\nThe Mooresville freshman football team
+  has an away conference game @  Bloomington North (Bloomington\, IN) on Sa
+ turday\, September 12 @ 9a.
+URL:https://www.maxpreps.com/in/football/game/bloomington-north-vs-mooresv
+ ille/freshman/9-12-2026/?c=c259c442-8733-44ed-9a97-51e6ccbe46b6
+X-SOURCE:Bloomington North Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington North Girls Varsity Volleyball @ THNV
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T100000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T110000
+UID:5b7565858e1c4330a4b415b3080d230e@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Bloomington North varsity volley
+ ball team has an away non-conference match @  Terre Haute North Vigo (Terr
+ e Haute\, IN) on Saturday\, September 12 @ 10a.
+URL:https://www.maxpreps.com/in/volleyball/match/bloomington-north-vs-terr
+ e-haute-north-vigo/9-12-2026/?c=f8130402-7f2d-4b82-ad0a-972f0bd82ab3
+X-SOURCE:Bloomington North Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Mooresville JV Football @ Bloomington North
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T103000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T123000
+UID:fb6bc41b65d21b440d904762f65ff15f@maxpreps.com
+DESCRIPTION:Boys JV Football\nThe Mooresville JV football team has an away
+  conference game @  Bloomington North (Bloomington\, IN) on Saturday\, Sep
+ tember 12 @ 10:30a.
+URL:https://www.maxpreps.com/in/football/game/bloomington-north-vs-mooresv
+ ille/jv/9-12-2026/?c=24ecd155-e0fa-43e8-b0e3-3f6e167aebd3
+X-SOURCE:Bloomington North Athletics
+END:VEVENT
+END:VCALENDAR

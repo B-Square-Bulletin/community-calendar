@@ -1,0 +1,131 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Eastern Greene Athletics//maxpreps.com//
+X-WR-CALNAME:Eastern Greene Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Eastern Greene JV Football @ North Daviess
+DTSTART;TZID=America/Indiana/Indianapolis:20260908T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260908T200000
+UID:7148338e1ef67b1c03e1fc8c959bbf90@maxpreps.com
+DESCRIPTION:Boys JV Football\nThe Eastern Greene JV football team has an a
+ way conference game @  North Daviess (Elnora\, IN) on Tuesday\, September 
+ 8 @ 6p.
+URL:https://www.maxpreps.com/in/football/game/eastern-greene-bloomfield-vs
+ -north-daviess-elnora/jv/9-8-2026/?c=69260891-062d-4e1e-a395-90af720858e0
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Eastern Greene Boys Varsity Soccer @ Washington Catholic
+DTSTART;TZID=America/Indiana/Indianapolis:20260908T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260908T194500
+UID:4bb5d3b314a1dcc22d835a84e3fab006@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nThe Eastern Greene varsity soccer team ha
+ s an away non-conference match @  Washington Catholic (Washington\, IN) on
+  Tuesday\, September 8 @ 6p.
+URL:https://www.maxpreps.com/in/soccer/match/eastern-greene-bloomfield-vs-
+ washington-catholic/9-8-2026/?c=0cbe3f3c-e908-4159-9756-dbbbc2a958c0
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Edgewood Girls JV Volleyball @ Eastern Greene
+DTSTART;TZID=America/Indiana/Indianapolis:20260908T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260908T190000
+UID:e86c2a58ebec07ff6745791d82badb53@maxpreps.com
+DESCRIPTION:Girls JV Volleyball\nThe Edgewood JV volleyball team has an aw
+ ay non-conference match @  Eastern Greene (Bloomfield\, IN) on Tuesday\, S
+ eptember 8 @ 6p.
+URL:https://www.maxpreps.com/in/volleyball/match/eastern-greene-bloomfield
+ -vs-edgewood-ellettsville/jv/9-8-2026/?c=dad3060e-47d4-4230-bcd4-ea430e2b3
+ 2ff
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Edgewood Girls Varsity Volleyball @ Eastern Greene
+DTSTART;TZID=America/Indiana/Indianapolis:20260908T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260908T203000
+UID:20a9d98639d10b0f9a11372cd1f667c8@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Edgewood varsity volleyball team
+  has an away non-conference match @  Eastern Greene (Bloomfield\, IN) on T
+ uesday\, September 8 @ 7:30p.
+URL:https://www.maxpreps.com/in/volleyball/match/eastern-greene-bloomfield
+ -vs-edgewood-ellettsville/9-8-2026/?c=9bf9aa51-011a-4273-9dba-0b20b3c1b626
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Brown County Girls JV Volleyball @ Eastern Greene
+DTSTART;TZID=America/Indiana/Indianapolis:20260910T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260910T190000
+UID:6c86e401f539493f03462b03edc5735f@maxpreps.com
+DESCRIPTION:Girls JV Volleyball\nThe Brown County JV volleyball team has a
+ n away non-conference match @  Eastern Greene (Bloomfield\, IN) on Thursda
+ y\, September 10 @ 6p.
+URL:https://www.maxpreps.com/in/volleyball/match/brown-county-nashville-vs
+ -eastern-greene-bloomfield/jv/9-10-2026/?c=ece5ccdf-ce7e-40c7-b377-15b9c1e
+ 44731
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Brown County Girls Varsity Volleyball @ Eastern Greene
+DTSTART;TZID=America/Indiana/Indianapolis:20260910T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260910T203000
+UID:b0dca4ae963db2b31760abcd40c9b2af@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Brown County varsity volleyball 
+ team has an away non-conference match @  Eastern Greene (Bloomfield\, IN) 
+ on Thursday\, September 10 @ 7:30p.
+URL:https://www.maxpreps.com/in/volleyball/match/brown-county-nashville-vs
+ -eastern-greene-bloomfield/9-10-2026/?c=448fb992-75d9-4fe1-871c-675fadf889
+ 74
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Mitchell Varsity Football @ Eastern Greene
+DTSTART;TZID=America/Indiana/Indianapolis:20260911T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260911T210000
+UID:bca38c0a67349bc6e9d9334945a69924@maxpreps.com
+DESCRIPTION:Boys Varsity Football\nThe Mitchell varsity football team has 
+ an away non-conference game @  Eastern Greene (Bloomfield\, IN) on Friday\
+ , September 11 @ 7p.
+URL:https://www.maxpreps.com/in/football/game/eastern-greene-bloomfield-vs
+ -mitchell/9-11-2026/?c=147a6c5e-7a99-49c3-ae79-4aed7aabd93a
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Eastern Greene Girls Varsity Volleyball @ Northeast Dubois
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T090000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T100000
+UID:fb57ab236b9c774cf3b6ed6dae6647c4@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Eastern Greene varsity volleybal
+ l team has an away tournament match @  Northeast Dubois (Dubois\, IN) on S
+ aturday\, September 12 @ 9a.
+URL:https://www.maxpreps.com/in/volleyball/match/eastern-greene-bloomfield
+ -vs-northeast-dubois/9-12-2026/?c=3dee904d-d8ac-406a-ba70-373a1b850962
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Vincennes Rivet Boys Varsity Soccer @ Eastern Greene
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T090000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T104500
+UID:2d93a62cdd34d4f55b5ee6efab427409@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nThe Vincennes Rivet varsity soccer team h
+ as an away tournament match @  Eastern Greene (Bloomfield\, IN) on Saturda
+ y\, September 12 @ 9a.
+LOCATION:Tournament Game 
+URL:https://www.maxpreps.com/in/soccer/match/eastern-greene-bloomfield-vs-
+ vincennes-rivet/9-12-2026/?c=ed27a2b9-8bac-4fd1-a7bd-12a748d302fc
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:West Vigo Boys Varsity Soccer @ Eastern Greene
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T130000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T144500
+UID:cee33ecae7896616373a62c7f5f79ce7@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nThe West Vigo varsity soccer team has an 
+ away tournament match @  Eastern Greene (Bloomfield\, IN) on Saturday\, Se
+ ptember 12 @ 1p.
+URL:https://www.maxpreps.com/in/soccer/match/eastern-greene-bloomfield-vs-
+ west-vigo-west-terre-haute/9-12-2026/?c=867b30ab-fd86-462a-ab5c-77ebbdb9b2
+ fc
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+END:VCALENDAR

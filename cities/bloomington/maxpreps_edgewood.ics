@@ -1,0 +1,128 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Edgewood Athletics//maxpreps.com//
+X-WR-CALNAME:Edgewood Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Edgewood Boys Varsity Soccer @ Cascade
+DTSTART;TZID=America/Indiana/Indianapolis:20260908T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260908T194500
+UID:c6bb57947b288aa4f5d26345d1eaa807@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nThe Edgewood varsity soccer team has an a
+ way non-conference match @  Cascade (Clayton\, IN) on Tuesday\, September 
+ 8 @ 6p.
+URL:https://www.maxpreps.com/in/soccer/match/cascade-clayton-vs-edgewood-e
+ llettsville/9-8-2026/?c=1b88bdad-43ee-43f7-840d-b30633addb72
+X-SOURCE:Edgewood Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Edgewood Girls JV Volleyball @ Eastern Greene
+DTSTART;TZID=America/Indiana/Indianapolis:20260908T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260908T190000
+UID:e86c2a58ebec07ff6745791d82badb53@maxpreps.com
+DESCRIPTION:Girls JV Volleyball\nThe Edgewood JV volleyball team has an aw
+ ay non-conference match @  Eastern Greene (Bloomfield\, IN) on Tuesday\, S
+ eptember 8 @ 6p.
+URL:https://www.maxpreps.com/in/volleyball/match/eastern-greene-bloomfield
+ -vs-edgewood-ellettsville/jv/9-8-2026/?c=dad3060e-47d4-4230-bcd4-ea430e2b3
+ 2ff
+X-SOURCE:Edgewood Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Edgewood Girls Varsity Volleyball @ Eastern Greene
+DTSTART;TZID=America/Indiana/Indianapolis:20260908T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260908T203000
+UID:20a9d98639d10b0f9a11372cd1f667c8@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Edgewood varsity volleyball team
+  has an away non-conference match @  Eastern Greene (Bloomfield\, IN) on T
+ uesday\, September 8 @ 7:30p.
+URL:https://www.maxpreps.com/in/volleyball/match/eastern-greene-bloomfield
+ -vs-edgewood-ellettsville/9-8-2026/?c=9bf9aa51-011a-4273-9dba-0b20b3c1b626
+X-SOURCE:Edgewood Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Edgewood Boys Varsity Soccer @ Owen Valley
+DTSTART;TZID=America/Indiana/Indianapolis:20260909T173000
+DTEND;TZID=America/Indiana/Indianapolis:20260909T191500
+UID:2e2ad859d750acac55f8460ea0c2b3f5@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nThe Edgewood varsity soccer team has an a
+ way conference match @  Owen Valley (Spencer\, IN) on Wednesday\, Septembe
+ r 9 @ 5:30p.
+URL:https://www.maxpreps.com/in/soccer/match/edgewood-ellettsville-vs-owen
+ -valley-spencer/9-9-2026/?c=b25e4407-faa3-4386-afd1-9aeb19c4c95c
+X-SOURCE:Edgewood Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Edgewood Girls Varsity Soccer @ Owen Valley
+DTSTART;TZID=America/Indiana/Indianapolis:20260909T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260909T211500
+UID:d5a6d21ae5207761dbf1c0582aef120c@maxpreps.com
+DESCRIPTION:Girls Varsity Soccer\nThe Edgewood varsity soccer team has an 
+ away conference match @  Owen Valley (Spencer\, IN) on Wednesday\, Septemb
+ er 9 @ 7:30p.
+URL:https://www.maxpreps.com/in/soccer/girls/match/edgewood-ellettsville-v
+ s-owen-valley-spencer/9-9-2026/?c=4d68bb09-89b0-4fdd-8002-efea9ae247ef
+X-SOURCE:Edgewood Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Edgewood Girls JV Volleyball @ Owen Valley
+DTSTART;TZID=America/Indiana/Indianapolis:20260910T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260910T190000
+UID:17a16ec1d249fef9142a7d4c8b18ddad@maxpreps.com
+DESCRIPTION:Girls JV Volleyball\nThe Edgewood JV volleyball team has an aw
+ ay conference match @  Owen Valley (Spencer\, IN) on Thursday\, September 
+ 10 @ 6p.
+URL:https://www.maxpreps.com/in/volleyball/match/edgewood-ellettsville-vs-
+ owen-valley-spencer/jv/9-10-2026/?c=bf69b815-64dd-441d-bbe7-7bc1b563eab4
+X-SOURCE:Edgewood Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Edgewood Girls Varsity Volleyball @ Owen Valley
+DTSTART;TZID=America/Indiana/Indianapolis:20260910T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260910T200000
+UID:e858513d38993c6511b39f84c6296782@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Edgewood varsity volleyball team
+  has an away conference match @  Owen Valley (Spencer\, IN) on Thursday\, 
+ September 10 @ 7p.
+URL:https://www.maxpreps.com/in/volleyball/match/edgewood-ellettsville-vs-
+ owen-valley-spencer/9-10-2026/?c=52c3837a-ac0c-4500-b395-28ad95023233
+X-SOURCE:Edgewood Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Owen Valley Varsity Football @ Edgewood
+DTSTART;TZID=America/Indiana/Indianapolis:20260911T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260911T210000
+UID:c74697ee44a6d38ad12ecb1539028368@maxpreps.com
+DESCRIPTION:Boys Varsity Football\nThe Owen Valley varsity football team h
+ as an away conference game @  Edgewood (Ellettsville\, IN) on Friday\, Sep
+ tember 11 @ 7p.
+URL:https://www.maxpreps.com/in/football/game/edgewood-ellettsville-vs-owe
+ n-valley-spencer/9-11-2026/?c=f7f377ac-044e-4bac-a614-51f862308786
+X-SOURCE:Edgewood Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:South Vermillion Girls Varsity Soccer @ Edgewood
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T100000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T114500
+UID:43a76c74eab3b19d55b85f5821d4b1ae@maxpreps.com
+DESCRIPTION:Girls Varsity Soccer\nThe South Vermillion varsity soccer team
+  has an away non-conference match @  Edgewood (Ellettsville\, IN) on Satur
+ day\, September 12 @ 10a.
+URL:https://www.maxpreps.com/in/soccer/girls/match/edgewood-ellettsville-v
+ s-south-vermillion-clinton/9-12-2026/?c=5df89707-8961-4019-afda-6f8c3f88c5
+ bf
+X-SOURCE:Edgewood Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:South Vermillion Boys Varsity Soccer @ Edgewood
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T120000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T134500
+UID:e4e7c68df083388f65706a2fa4cf7c91@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nThe South Vermillion varsity soccer team 
+ has an away non-conference match @  Edgewood (Ellettsville\, IN) on Saturd
+ ay\, September 12 @ 12p.
+URL:https://www.maxpreps.com/in/soccer/match/edgewood-ellettsville-vs-sout
+ h-vermillion-clinton/9-12-2026/?c=35ded6f7-bce5-4add-a4ee-2ed0fedca6ac
+X-SOURCE:Edgewood Athletics
+END:VEVENT
+END:VCALENDAR

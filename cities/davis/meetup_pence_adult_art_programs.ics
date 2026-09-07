@@ -1,0 +1,183 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Meetup//Meetup Calendar 1.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+NAME:Pence Adult Art Programs
+X-WR-CALNAME:Pence Adult Art Programs
+BEGIN:VTIMEZONE
+TZID:America/Los_Angeles
+TZURL:http://tzurl.org/zoneinfo-outlook/America/Los_Angeles
+X-LIC-LOCATION:America/Los_Angeles
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0800
+TZOFFSETTO:-0700
+TZNAME:PDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0700
+TZOFFSETTO:-0800
+TZNAME:PST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+X-SOURCE:Meetup: Pence Art Programs
+X-SOURCE-URL:https://www.meetup.com/pence-adult-art-programs/
+UID:event_313610437@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T145418Z
+DTSTART;TZID=America/Los_Angeles:20260409T100000
+DTEND;TZID=America/Los_Angeles:20260409T114500
+SUMMARY:Healing Arts One-Time Workshop
+DESCRIPTION:Pence Adult Art Programs\nPart of the Pence's Healing Arts Pro
+ gram and run by facilitator Amy Vidra\, this one-time workshop focuses mor
+ e broadly on themes related to depression\, anxiety\, or major life change
+ s. Through the process of art making\, participants will have opportunitie
+ s for discussion\, education\, and connecting with peers in a safe and sup
+ portive space.\n\nREGISTRATION ONLINE IS REQUIRED IN ADVANCE through the P
+ ence Gallery's website\, and space is limited to the first 8 participants 
+ who register. Participants must be 18 or older\, and no art experience is 
+ necessary. This program is generously sponsored by Bob & Joanne Andresen.\
+ n\nHealing Arts One-Time Workshop\nThursday\, April 9\, 10-11:45 AM\n$5 Me
+ mbers\, $10 Non-Members (all materials included)\n\n**Reminder - an RSVP o
+ n Meetup does NOT count as registration. Registration is required in advan
+ ce through the [Pence’s website (CLICK HERE)](https://pencegallery.org/e
+ ducation/programs/workshops-and-classes/).**\n\n\\*If you register for thi
+ s session and are unable to attend\, please let us know in advance.\n\nAny
+  questions? Email pencegallery@gmail.com.
+URL;VALUE=URI:https://www.meetup.com/pence-adult-art-programs/events/31361
+ 0437/
+STATUS:CONFIRMED
+CREATED:20260302T233409Z
+LAST-MODIFIED:20260302T233409Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Pence Art Programs
+X-SOURCE-URL:https://www.meetup.com/pence-adult-art-programs/
+UID:event_314045269@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T145418Z
+DTSTART;TZID=America/Los_Angeles:20260501T100000
+DTEND;TZID=America/Los_Angeles:20260501T114500
+SUMMARY:Healing Arts 6-Session Workshop
+DESCRIPTION:Pence Adult Art Programs\nThe Pence’s 6-session Healing Arts
+  workshop uses art as a healing language for those experiencing grief from
+  the loss of a loved one. Through the process of art making\, participants
+  will have opportunities for discussion\, education\, and connecting with 
+ peers in a safe and supportive space in the Pence Learning Center under th
+ e guidance of facilitators Amy Vidra and Lyndsey Rocca.\n\nREGISTRATION ON
+ LINE IS REQUIRED IN ADVANCE through the Pence Gallery's website\, and spac
+ e is limited to the first 8 participants who register. Participants must b
+ e 18 or older\, and no art experience is necessary. This program is genero
+ usly sponsored by Bob & Joanne Andresen.\n\nHealing Arts 6-Session Worksho
+ p\nFridays\\\, 10\\-11:45 AM \\| May 1\\\, 8\\\, 15\\\, 22\\\, 29 & June 5
+ \n$25 Members\, $35 Non-Members (all materials included)\n\n**Reminder - a
+ n RSVP on Meetup does NOT count as registration. Registration is required 
+ in advance through the [Pence’s website (CLICK HERE)](https://pencegalle
+ ry.org/education/programs/workshops-and-classes/).**\n\n\\*Please note tha
+ t when registering for this program\, you are signing up for all 6 session
+ s. If you are unable to attend one or more of the sessions\, please let us
+  know in advance.\n\nAny questions? Email pencegallery@gmail.com.
+URL;VALUE=URI:https://www.meetup.com/pence-adult-art-programs/events/31404
+ 5269/
+STATUS:CONFIRMED
+CREATED:20260330T225227Z
+LAST-MODIFIED:20260330T225227Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Pence Art Programs
+X-SOURCE-URL:https://www.meetup.com/pence-adult-art-programs/
+UID:event_314062355@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T145418Z
+DTSTART;TZID=America/Los_Angeles:20260509T100000
+DTEND;TZID=America/Los_Angeles:20260509T160000
+SUMMARY:Urban Sketching with Pete Scully
+DESCRIPTION:Pence Adult Art Programs\nUrban sketching is a fun and accessi
+ ble way to see and connect with where you live with a sketchbook! In this 
+ one-day workshop with Pete Scully\, students will draw in ink and pencil a
+ nd watercolor\, and learn some principles of perspective and composition. 
+ You’ll explore how to ‘see’ what to sketch\, discover how to ‘un-p
+ uzzle’ an urban scene\, and let your sketches tell a story. Students wil
+ l also loosen up with some quick people sketches! Sketching will be done b
+ oth inside and outside\; if you like to sit when you sketch\, a light port
+ able stool is recommended. Artists of all levels are welcome\, including b
+ eginners. Prior drawing experience is helpful\, but not required.\n\nUrban
+  Sketching with Pete Scully\nSaturday\, May 9\, 10 AM - 4 PM\n$140 Members
+ \, $160 Non-Members (Materials not included)\n\n**Registration is required
+  through the [Pence's website (CLICK HERE)](https://pencegallery.org/educa
+ tion/programs/workshops-and-classes/).**\n\nAny questions? Email pencegall
+ ery@gmail.com.
+URL;VALUE=URI:https://www.meetup.com/pence-adult-art-programs/events/31406
+ 2355/
+STATUS:CONFIRMED
+CREATED:20260331T231022Z
+LAST-MODIFIED:20260331T231022Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Pence Art Programs
+X-SOURCE-URL:https://www.meetup.com/pence-adult-art-programs/
+UID:event_314155336@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T145418Z
+DTSTART;TZID=America/Los_Angeles:20260517T130000
+DTEND;TZID=America/Los_Angeles:20260517T143000
+SUMMARY:Artist Talk & Reception with Linda Clark Johnson
+DESCRIPTION:Pence Adult Art Programs\nJoin artist Linda Clark Johnson as s
+ he discusses her artistic process in working with cyanotype\, including he
+ r love of sunlight and her ways of gathering and arranging plants. Linda w
+ ill also show visitors how to get started with cyanotype through an artist
+  demo\, as well as explore her current work in her exhibit\, *Sunshine & S
+ hadows*\, on view at the Pence Gallery from May 2 - June 21\, 2026.\n\nArt
+ ist Talk & Reception with Linda Clark Johnson\nSunday\, May 17\, 1-2:30 PM
+ \nFree Admission
+URL;VALUE=URI:https://www.meetup.com/pence-adult-art-programs/events/31415
+ 5336/
+STATUS:CONFIRMED
+CREATED:20260406T232116Z
+LAST-MODIFIED:20260406T232116Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Pence Art Programs
+X-SOURCE-URL:https://www.meetup.com/pence-adult-art-programs/
+UID:event_314155530@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T145418Z
+DTSTART;TZID=America/Los_Angeles:20260518T100000
+DTEND;TZID=America/Los_Angeles:20260518T114500
+SUMMARY:Healing Arts One-Time Workshop
+DESCRIPTION:Pence Adult Art Programs\nPart of the Pence's Healing Arts Pro
+ gram and run by facilitator Amy Vidra\, this one-time workshop focuses mor
+ e broadly on themes related to depression\, anxiety\, or major life change
+ s. Through the process of art making\, participants will have opportunitie
+ s for discussion\, education\, and connecting with peers in a safe and sup
+ portive space.\n\nREGISTRATION ONLINE IS REQUIRED IN ADVANCE through the P
+ ence Gallery's website\, and space is limited to the first 8 participants 
+ who register. Participants must be 18 or older\, and no art experience is 
+ necessary. This program is generously sponsored by Bob & Joanne Andresen.\
+ n\nHealing Arts One-Time Workshop\nMonday\, May 18\, 10-11:45 AM\n$5 Membe
+ rs\, $10 Non-Members (all materials included)\n\n**Reminder - an RSVP on M
+ eetup does NOT count as registration. Registration is required in advance 
+ through the [Pence’s website (CLICK HERE)](https://pencegallery.org/educ
+ ation/programs/workshops-and-classes/).**\n\n\\*If you register for this s
+ ession and are unable to attend\, please let us know in advance.\n\nAny qu
+ estions? Email pencegallery@gmail.com.
+URL;VALUE=URI:https://www.meetup.com/pence-adult-art-programs/events/31415
+ 5530/
+STATUS:CONFIRMED
+CREATED:20260406T234609Z
+LAST-MODIFIED:20260406T234609Z
+CLASS:PUBLIC
+END:VEVENT
+X-ORIGINAL-URL:https://www.meetup.com/pence-adult-art-programs/events/ical
+ /
+X-WR-CALNAME:Pence Adult Art Programs
+END:VCALENDAR
