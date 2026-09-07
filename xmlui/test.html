@@ -1497,8 +1497,11 @@
           test('single committed window feeds list and pager; commit resets paging', () => {
             assert(main.includes('name="dateFilteredEvents"'), 'Missing dateFilteredEvents variable');
             assert(main.includes('moreHasMore(dateFilteredEvents'), 'Pager guard must read the same window');
-            assert(/datePreset = 'today'[\s\S]{0,300}?displayStartIndex = 0/.test(main), 'Commit must reset paging');
-            assert(main.includes('scrollRequest = scrollRequest + 1'), 'Commit must scroll to top');
+            assert(/commitDatePreset\('today'\)/.test(main), 'Today tab must route through the shared commit');
+            const cbAt = globalsText.indexOf('function commitDatePreset(');
+            const cb = cbAt < 0 ? '' : globalsText.substring(cbAt, cbAt + 2500);
+            assert(/displayStartIndex = 0/.test(cb), 'Commit must reset paging');
+            assert(cb.includes('scrollRequest = scrollRequest + 1'), 'Commit must scroll to top');
             assert(main.includes('getActiveCategories(dateFilteredEvents)'), 'Category counts must reflect the window');
           });
 
@@ -1527,10 +1530,11 @@
         const test = makeGroupTester(group);
         const get = fetchText;
         try {
-          const [main, helpersText, shellText] = await Promise.all([
+          const [main, helpersText, shellText, globalsText] = await Promise.all([
             get('Main.xmlui'),
             get('helpers.js'),
-            get('shell.js')
+            get('shell.js'),
+            get('Globals.xs')
           ]);
 
           test('strip carries Tonight and This weekend tabs', () => {
@@ -1540,14 +1544,15 @@
 
           test('intraday tabs commit instantly like the day presets', () => {
             for (const key of ['tonight', 'weekend']) {
-              assert(new RegExp("dateWindowForPreset\\('" + key + "'\\)").test(main),
-                'Missing engine-backed commit for: ' + key);
-              assert(new RegExp("datePreset = '" + key + "'[\\s\\S]{0,300}?displayStartIndex = 0").test(main),
-                'Commit must reset paging for: ' + key);
-              assert(new RegExp("datePreset = '" + key + "'[\\s\\S]{0,400}?syncDateParams").test(main),
-                'Commit must sync the URL for: ' + key);
+              assert(new RegExp("commitDatePreset\\('" + key + "'\\)").test(main),
+                'Missing shared-helper commit for: ' + key);
             }
-            assert(main.includes('scrollRequest = scrollRequest + 1'), 'Commit must scroll to top');
+            const cbAt = globalsText.indexOf('function commitDatePreset(');
+            const cb = cbAt < 0 ? '' : globalsText.substring(cbAt, cbAt + 2500);
+            assert(cb.includes('window.dateWindowForPreset'), 'Shared commit must resolve via the engine');
+            assert(/displayStartIndex = 0/.test(cb), 'Commit must reset paging');
+            assert(cb.includes('syncDateParams'), 'Commit must sync the URL');
+            assert(cb.includes('scrollRequest = scrollRequest + 1'), 'Commit must scroll to top');
           });
 
           test('intraday tabs show pressed state when active', () => {
@@ -1656,10 +1661,11 @@
         const test = makeGroupTester(group);
         const get = fetchText;
         try {
-          const [main, helpersText, shellText] = await Promise.all([
+          const [main, helpersText, shellText, globalsText] = await Promise.all([
             get('Main.xmlui'),
             get('helpers.js'),
-            get('shell.js')
+            get('shell.js'),
+            get('Globals.xs')
           ]);
 
           test('strip carries a tab-strip heading for the empty-reset focus target', () => {
@@ -1672,17 +1678,23 @@
             assert(main.includes('>Show next 7 days<'), 'Missing Show next 7 days reset');
             const at = main.indexOf('Show next 7 days');
             const handler = main.substring(Math.max(0, at - 900), at);
-            assert(handler.includes("dateWindowForPreset('next7')"), 'Reset must commit the Next-7 window');
-            assert(handler.includes('displayStartIndex = 0'), 'Reset must reset paging');
-            assert(handler.includes('syncDateParams'), 'Reset must sync the URL');
+            assert(handler.includes("commitDatePreset('next7'"), 'Reset must ride the shared commit');
             assert(handler.includes('focusDateTabHeading'), 'Reset must move focus to the heading');
             assert(!handler.includes('scrollRequest'), 'Reset must not scroll (focus carries preventScroll)');
+            const cbAt = globalsText.indexOf('function commitDatePreset(');
+            const cb = cbAt < 0 ? '' : globalsText.substring(cbAt, cbAt + 2500);
+            assert(/displayStartIndex = 0/.test(cb), 'Reset must reset paging via the shared commit');
+            assert(cb.includes('syncDateParams'), 'Reset must sync the URL via the shared commit');
           });
 
           test('every commit surfaces the horizon-truncation label', () => {
             assert(helpersText.includes('window.dateTruncationText'), 'Missing dateTruncationText seam');
-            assert(/dateWindowForPreset\('today'\)[\s\S]{0,300}?dateTruncationText/.test(main),
-              'Preset commits must surface the truncation label');
+            assert(/commitDatePreset\('today'\)/.test(main),
+              'Preset tabs must route through the shared commit');
+            const cbAt = globalsText.indexOf('function commitDatePreset(');
+            const cb = cbAt < 0 ? '' : globalsText.substring(cbAt, cbAt + 2500);
+            assert(cb.includes('window.dateTruncationText'),
+              'Shared commit must surface the truncation label');
             assert(/horizonEnd/.test(helpersText) && /getToDate/.test(helpersText),
               'Preset windows must truncate at the prefetch horizon');
             assert(shellText.includes('initialDateTruncationLabel'), 'Boot seed must restore the truncation label');

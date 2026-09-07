@@ -26,6 +26,15 @@ function check(name, cond) {
 function read(p) {
   try { return fs.readFileSync(path.join(ROOT, p), 'utf8'); } catch { return null; }
 }
+// Body of the single date commit helper (Globals.xs code-behind): every
+// preset tap plus the empty-state reset funnels through commitDatePreset,
+// so commit-contract assertions below read the helper body once instead of
+// repeating per-button inline sequences.
+function commitBody() {
+  const g = read('Globals.xs') || '';
+  const at = g.indexOf('function commitDatePreset(');
+  return at < 0 ? '' : g.substring(at, at + 2500);
+}
 
 const main = read('Main.xmlui');
 const helpers = read('helpers.js');
@@ -88,8 +97,9 @@ check('one committed window variable feeds the list',
 check('pager guard reads the same window (not a second filter)',
   !!main && /moreHasMore\(dateFilteredEvents/.test(main));
 check('commit resets paging and scrolls on commit only',
-  !!main && /datePreset = 'today'[\s\S]{0,300}?displayStartIndex = 0/.test(main)
-  && /scrollRequest = scrollRequest \+ 1/.test(main));
+  !!main && /commitDatePreset\('today'\)/.test(main)
+  && /displayStartIndex = 0/.test(commitBody())
+  && /scrollRequest = scrollRequest \+ 1/.test(commitBody()));
 
 // --- URL contract: replace (Back leaves), All strips date keys only ---
 check('helpers.js exposes the date-tab seam',
@@ -105,13 +115,15 @@ check('date-windows engine loads before shell boots',
 
 // --- Intraday tabs (#106): same commit/URL/boot contract as day presets ---
 check('tonight commits via the engine with paging reset, scroll, and URL sync',
-  !!main && /dateWindowForPreset\('tonight'\)/.test(main)
-  && /datePreset = 'tonight'[\s\S]{0,300}?displayStartIndex = 0/.test(main)
-  && /datePreset = 'tonight'[\s\S]{0,400}?syncDateParams/.test(main));
+  !!main && /commitDatePreset\('tonight'\)/.test(main)
+  && /dateWindowForPreset/.test(commitBody())
+  && /displayStartIndex = 0/.test(commitBody())
+  && /syncDateParams/.test(commitBody()));
 check('weekend commits via the engine with paging reset, scroll, and URL sync',
-  !!main && /dateWindowForPreset\('weekend'\)/.test(main)
-  && /datePreset = 'weekend'[\s\S]{0,300}?displayStartIndex = 0/.test(main)
-  && /datePreset = 'weekend'[\s\S]{0,400}?syncDateParams/.test(main));
+  !!main && /commitDatePreset\('weekend'\)/.test(main)
+  && /dateWindowForPreset/.test(commitBody())
+  && /displayStartIndex = 0/.test(commitBody())
+  && /syncDateParams/.test(commitBody()));
 check('intraday tabs show pressed state when active',
   !!main && /datePreset === 'tonight' \? 'solid' : 'outlined'/.test(main)
   && /datePreset === 'weekend' \? 'solid' : 'outlined'/.test(main));
@@ -120,8 +132,7 @@ check('helpers.js date-tab presets include the intraday keys',
 check('shell.js boot seed honors the intraday evergreen keys',
   !!shell && /HONORED[^}]*tonight/.test(shell) && /HONORED[^}]*weekend/.test(shell));
 check('this month commits and boots as ?date=thismonth (#103 contract)',
-  !!main && /dateWindowForPreset\('thismonth'\)/.test(main)
-  && /datePreset = 'thismonth'[\s\S]{0,400}?syncDateParams/.test(main)
+  !!main && /commitDatePreset\('thismonth'\)/.test(main)
   && /datePreset === 'thismonth' \? 'solid' : 'outlined'/.test(main)
   && !!helpers && /'thismonth'/.test(helpers)
   && !!shell && /HONORED[^}]*thismonth/.test(shell));
@@ -180,18 +191,19 @@ check('reset commits Next 7 with paging reset, URL sync, and heading focus but n
     const at = main.indexOf('Show next 7 days');
     if (at < 0) return false;
     const handler = main.substring(Math.max(0, at - 900), at);
-    return /dateWindowForPreset\('next7'\)/.test(handler)
-      && /displayStartIndex = 0/.test(handler)
-      && /syncDateParams/.test(handler)
+    return /commitDatePreset\('next7'/.test(handler)
       && /focusDateTabHeading/.test(handler)
-      && !/scrollRequest/.test(handler);
+      && !/scrollRequest/.test(handler)
+      && /displayStartIndex = 0/.test(commitBody())
+      && /syncDateParams/.test(commitBody());
   })());
 check('helpers.js exposes the hardening seam',
   !!helpers && /window\.dateWindowLabel/.test(helpers)
   && /window\.dateTruncationText/.test(helpers)
   && /window\.focusDateTabHeading/.test(helpers));
 check('preset commits surface the truncation label at the horizon',
-  !!main && /dateWindowForPreset\('today'\)[\s\S]{0,300}?dateTruncationText/.test(main)
+  !!main && /commitDatePreset\('today'\)/.test(main)
+  && /dateTruncationText/.test(commitBody())
   && /horizonEnd/.test(helpers) && /getToDate/.test(helpers));
 check('shell.js boot seed restores the truncation label at the horizon',
   !!shell && /initialDateTruncationLabel/.test(shell)
@@ -217,6 +229,25 @@ check('date sync preserves embed; All clears only date keys',
       && /delete\('date'\)/.test(db) && /delete\('from'\)/.test(db) && /delete\('to'\)/.test(db)
       && !/delete\('(city|search|category|embed|mode|images|cards)'\)/.test(db);
   })());
+
+// --- Single commit path (prio-50 dedup): one helper serves every preset
+// tap plus the empty-state reset. The per-button inline commit sequences
+// (dateWindowForPreset + assignments + paging reset + scroll + sync) must
+// not reappear in markup; the code-behind helper owns them.
+check('code-behind exposes one shared date commit helper',
+  !!globals && /function commitDatePreset\(/.test(globals));
+check('every preset tab routes through the shared commit helper',
+  !!main && ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth'].every(function(k) {
+    return main.includes("commitDatePreset('" + k + "'");
+  }));
+check('no inline engine commits remain in markup (single path only)',
+  !!main && !/dateWindowForPreset\('/.test(main));
+check('no inline preset assignments remain in markup (helper owns the commit)',
+  !!main && ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth'].every(function(k) {
+    // The Custom confirm keeps its own from/to path (syncCustomParams);
+    // unifying it rides prio-70. Only the seven preset keys must be gone.
+    return !main.includes("datePreset = '" + k + "'");
+  }));
 
 console.log(failures === 0 ? '\nALL CHECKS PASSED' : `\n${failures} CHECKS FAILED`);
 process.exit(failures === 0 ? 0 : 1);

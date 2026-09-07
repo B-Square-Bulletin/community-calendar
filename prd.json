@@ -77,9 +77,10 @@
     {
       "title": "Follow-up: dedup the seven tab-strip commit handlers",
       "description": "Each Main.xmlui preset Button repeats the full commit sequence (dateWindowForPreset, preset/start/end assignment, paging reset, scrollRequest+1, truncation text, syncDateParams) differing only in key; the empty-state reset repeats it again. Extract one shared commit helper (helpers.js or Main.xmlui lambda) taking the preset key and use it from all buttons plus the empty reset. Done when: one commit path serves every preset tap and the reset, static chrome checks still find all tabs, and node harnesses + pytest are green. No behavior change.",
-      "passes": false,
+      "passes": true,
       "reference": "https://github.com/B-Square-Bulletin/community-calendar/issues/105 (commit contract; Duplicated Code smell)",
-      "priority": 50
+      "priority": 50,
+      "notes": "Done: one shared commitDatePreset(preset, opts) in Globals.xs code-behind serves all 7 preset tabs plus the empty-state reset; each Button is now a one-liner and the reset passes {scroll:false} then chains focusDateTabHeading(). Seams (repo-established, pre-approved): static chrome + node harnesses. Red first: 5 new single-path checks failed pre-change; green after. Chrome checks migrated to the single-path form (buttons route via the helper, helper body owns engine resolve/paging reset/scroll/URL sync/truncation label; reset asserts no-scroll). Checks: validate_date_tabs ALL PASSED, validate_date_hardening ALL PASSED, validate_custom_helpers ALL PASSED, test.html/Globals.xs parse, pytest 97 passed, make lint exit 0, bench_collapse_long PASS, validate_pr_feeds clean. Decisions (unattended, pre-approved): helper lives in Globals.xs rather than helpers.js because the commit mutates XS view state (datePreset/displayStartIndex/scrollRequest) which window.* helpers cannot assign — precedent is setCategoryFilter/openPickEditor; the Custom confirm keeps its own from/to path (unification rides prio-70). No behavior change: identical statements relocated verbatim, All branch included. Risk (no browser in-loop): App-var writability from code-behind follows the scrollRequest precedent but is unverified live — live click-through deferred to #109's browser checklist per review-item rules."
     },
     {
       "title": "Follow-up: unify syncDateParams/syncCustomParams URL sync",

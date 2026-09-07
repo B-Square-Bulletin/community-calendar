@@ -59,6 +59,37 @@ function setCategoryFilter(category) {
   window.syncCategoryParam(categoryFilter);
 }
 
+// Single date-tab commit path: every preset tab plus the empty-state reset
+// funnels through here instead of repeating the commit sequence inline in
+// markup. Resolves the absolute window via the date-window engine, assigns
+// the committed preset/bounds, resets paging, scrolls to top on user taps,
+// surfaces the horizon-truncation label, and syncs the evergreen ?date= link
+// with history-replace. The empty-state reset passes {scroll: false} and
+// chains window.focusDateTabHeading() so focus moves without scrolling.
+function commitDatePreset(preset, opts) {
+  var withScroll = !opts || opts.scroll !== false;
+  if (!preset || preset === 'all') {
+    datePreset = 'all';
+    dateWindowStart = null;
+    dateWindowEnd = null;
+    dateTruncationLabel = null;
+    displayStartIndex = 0;
+    browseStartIndex = 0;
+    if (withScroll) scrollRequest = scrollRequest + 1;
+    window.syncDateParams({ preset: 'all' });
+    return;
+  }
+  var w = window.dateWindowForPreset(preset);
+  datePreset = preset;
+  dateWindowStart = w.start;
+  dateWindowEnd = w.end;
+  dateTruncationLabel = window.dateTruncationText(w);
+  displayStartIndex = 0;
+  browseStartIndex = 0;
+  if (withScroll) scrollRequest = scrollRequest + 1;
+  window.syncDateParams({ preset: preset });
+}
+
 function openPanel(name) {
   activePanel = name || '';
 }
