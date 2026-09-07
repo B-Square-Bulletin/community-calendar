@@ -91,15 +91,77 @@ window.syncDateParams = function(sel) {
 
 // Resolve one #105 day preset to its absolute window ({start, end} ISO
 // strings, nulls for All) in the city timezone via the #104 engine.
+// #108: the prefetch horizon truncates overrunning windows (This month past
+// the horizon) and the truncation flag rides along for the label below.
 window.dateWindowForPreset = function(preset) {
-  if (!preset || preset === 'all') return { start: null, end: null };
+  if (!preset || preset === 'all') return { start: null, end: null, truncated: false };
   try {
-    if (typeof window.resolveDatePreset !== 'function') return { start: null, end: null };
-    var w = window.resolveDatePreset(preset, { timeZone: getCityTimezone() || 'UTC' });
-    if (!w || !w.start) return { start: null, end: null };
-    return { start: w.start, end: w.end };
+    if (typeof window.resolveDatePreset !== 'function') return { start: null, end: null, truncated: false };
+    var opts = { timeZone: getCityTimezone() || 'UTC' };
+    try {
+      if (typeof window.getToDate === 'function') opts.horizonEnd = window.getToDate();
+    } catch (e) {}
+    var w = window.resolveDatePreset(preset, opts);
+    if (!w || !w.start) return { start: null, end: null, truncated: false };
+    return { start: w.start, end: w.end, truncated: !!w.truncated };
   } catch (e) {
-    return { start: null, end: null };
+    return { start: null, end: null, truncated: false };
+  }
+};
+
+// --- Empty / truncation states (#108) ---
+// Human label for the empty state `No events {label}.`, one per preset.
+// Unknown keys fail open to the All label so bad links never strand the
+// visitor on a baffling empty.
+window.dateWindowLabel = function(preset) {
+  var labels = {
+    all: 'found',
+    today: 'today',
+    tonight: 'tonight',
+    tomorrow: 'tomorrow',
+    weekend: 'this weekend',
+    next7: 'in the next 7 days',
+    month: 'this month',
+    custom: 'in this date range'
+  };
+  return labels[preset] || 'found';
+};
+
+// Horizon-truncation copy for the label below the tabs:
+// `Showing through {horizonDate} — the calendar currently ends there.`
+// Null unless the committed window overran the prefetch horizon. The named
+// date is the inclusive last day (the exclusive end instant minus 1ms) in
+// the city timezone.
+window.dateTruncationText = function(w) {
+  if (!w || !w.truncated || !w.end) return null;
+  try {
+    var tz = getCityTimezone() || 'UTC';
+    var lastMs = new Date(w.end).getTime() - 1;
+    if (!isFinite(lastMs)) return null;
+    var day = new Intl.DateTimeFormat('en-CA', {
+      timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit'
+    }).format(new Date(lastMs));
+    return 'Showing through ' + day + ' — the calendar currently ends there.';
+  } catch (e) {
+    return null;
+  }
+};
+
+// Move focus to the tab-strip heading after the empty-state reset commits
+// Next 7, without scrolling the page. True when the heading took focus;
+// false (fail loud, never silent) when neither the heading nor the strip
+// itself is focusable (the strip fallback covers engines that drop id on
+// text components).
+window.focusDateTabHeading = function() {
+  try {
+    if (typeof document === 'undefined' || !document.getElementById) return false;
+    var el = document.getElementById('dateTabHeading') || document.getElementById('dateTabStrip');
+    if (!el || typeof el.focus !== 'function') return false;
+    if (el.hasAttribute && !el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+    el.focus({ preventScroll: true });
+    return true;
+  } catch (e) {
+    return false;
   }
 };
 

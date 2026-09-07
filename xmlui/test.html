@@ -1549,6 +1549,85 @@
         render();
       }
 
+      // Date-tab hardening chrome tests (#108): empty state with a one-tap
+      // Next-7 reset, horizon-truncation labels on every window, embed
+      // parity, and city-push versus date-replace Back behavior. Like
+      // #105/#106/#107 these fetch the shipped files — the repo's
+      // established seam for view-layer checks — with a bare-node mirror in
+      // scripts/validate_date_tabs.js (behavioral seam coverage lives in
+      // scripts/validate_date_hardening.js).
+      async function runDateTabs108ChromeTests() {
+        const group = { name: 'Date tabs (#108)', tests: [] };
+        const test = makeGroupTester(group);
+        const get = fetchText;
+        try {
+          const [main, helpersText, shellText] = await Promise.all([
+            get('Main.xmlui'),
+            get('helpers.js'),
+            get('shell.js')
+          ]);
+
+          test('strip carries a tab-strip heading for the empty-reset focus target', () => {
+            assert(main.includes('id="dateTabHeading"'), 'Missing dateTabHeading focus target');
+          });
+
+          test('empty window reads No events {label} with a one-tap Next 7 reset', () => {
+            assert(main.includes('No events '), 'Missing empty-state copy');
+            assert(main.includes('window.dateWindowLabel(datePreset)'), 'Empty copy must use the window label');
+            assert(main.includes('>Show next 7 days<'), 'Missing Show next 7 days reset');
+            const at = main.indexOf('Show next 7 days');
+            const handler = main.substring(Math.max(0, at - 900), at);
+            assert(handler.includes("dateWindowForPreset('next7')"), 'Reset must commit the Next-7 window');
+            assert(handler.includes('displayStartIndex = 0'), 'Reset must reset paging');
+            assert(handler.includes('syncDateParams'), 'Reset must sync the URL');
+            assert(handler.includes('focusDateTabHeading'), 'Reset must move focus to the heading');
+            assert(!handler.includes('scrollRequest'), 'Reset must not scroll (focus carries preventScroll)');
+          });
+
+          test('every commit surfaces the horizon-truncation label', () => {
+            assert(helpersText.includes('window.dateTruncationText'), 'Missing dateTruncationText seam');
+            assert(/dateWindowForPreset\('today'\)[\s\S]{0,300}?dateTruncationText/.test(main),
+              'Preset commits must surface the truncation label');
+            assert(/horizonEnd/.test(helpersText) && /getToDate/.test(helpersText),
+              'Preset windows must truncate at the prefetch horizon');
+            assert(shellText.includes('initialDateTruncationLabel'), 'Boot seed must restore the truncation label');
+            assert(/horizonEnd: window\.toDate/.test(shellText), 'Boot seed must resolve at the horizon');
+          });
+
+          test('embed shows the identical filter UI with date params round-tripping', () => {
+            const at = main.indexOf('id="dateTabStrip"');
+            const context = main.substring(Math.max(0, at - 600), at);
+            assert(!/window\.embed/.test(context), 'Tab strip must not be embed-gated');
+            for (const fn of ['syncDateParams', 'syncCustomParams']) {
+              const start = helpersText.indexOf('window.' + fn);
+              const body = helpersText.substring(start, start + 900);
+              assert(!/delete\('embed'\)/.test(body), fn + ' must preserve the embed param');
+            }
+          });
+
+          test('city stays a push while date stays a replace (Back leaves the calendar)', () => {
+            assert(/selectCity[\s\S]{0,300}?pushState/.test(shellText), 'City selection must push (Back target)');
+            assert(/syncDateParams[\s\S]{0,900}?replaceState/.test(helpersText),
+              'Preset commits must replace (Back skips filter states)');
+            assert(/syncCustomParams[\s\S]{0,900}?replaceState/.test(helpersText),
+              'Custom commits must replace (Back skips filter states)');
+          });
+
+          test('All clears only date keys and preserves siblings', () => {
+            const start = helpersText.indexOf('window.syncDateParams');
+            const body = helpersText.substring(start, start + 900);
+            assert(/delete\('date'\)/.test(body), 'All must strip the preset key');
+            assert(/delete\('from'\)/.test(body) && /delete\('to'\)/.test(body), 'All must strip the custom pair');
+            assert(!/delete\('(city|search|category|embed|mode|images|cards)'\)/.test(body),
+              'All must preserve city, search, category, and display params');
+          });
+        } catch (e) {
+          group.tests.push({ name: 'Load date hardening files', pass: false, error: e.message });
+        }
+        results.push(group);
+        render();
+      }
+
       // ============================================================
       // REAL DATA TESTS (async, run after initial render)
       // ============================================================
@@ -2095,6 +2174,15 @@
         results.push({
           name: 'Date tabs (#107)',
           tests: [{ name: 'Run date tab custom tests', pass: false, error: err.message }]
+        });
+        render();
+      });
+
+      // Run date tab hardening chrome tests (async, independent of Supabase)
+      runDateTabs108ChromeTests().catch(err => {
+        results.push({
+          name: 'Date tabs (#108)',
+          tests: [{ name: 'Run date tab hardening tests', pass: false, error: err.message }]
         });
         render();
       });

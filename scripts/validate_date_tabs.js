@@ -162,5 +162,55 @@ check('helpers.js custom seam commits with history-replace and canonical from/to
 check('shell.js boot seed honors the custom from/to pair with clamp rewrite',
   !!shell && /from/.test(shell) && /initialDatePreset = 'custom'/.test(shell));
 
+// --- Hardening (#108): empty, truncation, embed, Back ---
+check('tab strip carries a heading for the empty-reset focus target',
+  !!main && /id="dateTabHeading"/.test(main));
+check('empty window reads No events {label} with a one-tap Next 7 reset',
+  !!main && /No events /.test(main)
+  && /window\.dateWindowLabel\(datePreset\)/.test(main)
+  && />Show next 7 days</.test(main));
+check('reset commits Next 7 with paging reset, URL sync, and heading focus but no scroll',
+  !!main && (() => {
+    const at = main.indexOf('Show next 7 days');
+    if (at < 0) return false;
+    const handler = main.substring(Math.max(0, at - 900), at);
+    return /dateWindowForPreset\('next7'\)/.test(handler)
+      && /displayStartIndex = 0/.test(handler)
+      && /syncDateParams/.test(handler)
+      && /focusDateTabHeading/.test(handler)
+      && !/scrollRequest/.test(handler);
+  })());
+check('helpers.js exposes the hardening seam',
+  !!helpers && /window\.dateWindowLabel/.test(helpers)
+  && /window\.dateTruncationText/.test(helpers)
+  && /window\.focusDateTabHeading/.test(helpers));
+check('preset commits surface the truncation label at the horizon',
+  !!main && /dateWindowForPreset\('today'\)[\s\S]{0,300}?dateTruncationText/.test(main)
+  && /horizonEnd/.test(helpers) && /getToDate/.test(helpers));
+check('shell.js boot seed restores the truncation label at the horizon',
+  !!shell && /initialDateTruncationLabel/.test(shell)
+  && /horizonEnd: window\.toDate/.test(shell));
+check('tab strip shows identically in the embed (no embed gate)',
+  !!main && (() => {
+    const at = main.indexOf('id="dateTabStrip"');
+    if (at < 0) return false;
+    return !/window\.embed/.test(main.substring(Math.max(0, at - 600), at));
+  })());
+check('city stays a push while date stays a replace (Back leaves)',
+  !!shell && /selectCity[\s\S]{0,300}?pushState/.test(shell)
+  && /syncDateParams[\s\S]{0,900}?replaceState/.test(helpers)
+  && /syncCustomParams[\s\S]{0,900}?replaceState/.test(helpers));
+check('date sync preserves embed; All clears only date keys',
+  !!helpers && (() => {
+    const d = helpers.indexOf('window.syncDateParams');
+    const c = helpers.indexOf('window.syncCustomParams');
+    if (d < 0 || c < 0) return false;
+    const db = helpers.substring(d, d + 900);
+    const cb = helpers.substring(c, c + 900);
+    return !/delete\('embed'\)/.test(db) && !/delete\('embed'\)/.test(cb)
+      && /delete\('date'\)/.test(db) && /delete\('from'\)/.test(db) && /delete\('to'\)/.test(db)
+      && !/delete\('(city|search|category|embed|mode|images|cards)'\)/.test(db);
+  })());
+
 console.log(failures === 0 ? '\nALL CHECKS PASSED' : `\n${failures} CHECKS FAILED`);
 process.exit(failures === 0 ? 0 : 1);

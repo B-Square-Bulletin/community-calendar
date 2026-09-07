@@ -284,15 +284,18 @@
          start-time-only from 5pm city-time; the weekend is Fri 17:00
          through Sunday night (engine-resolved per weekday). The Custom tab
          focuses the stock range picker below; the picker commits once on
-         explicit confirm (never per tick or mid-drag). -->
+         explicit confirm (never per tick or mid-drag). #108: the heading
+         gives the strip an accessible name and is the empty-reset focus
+         target; preset commits surface the horizon-truncation label. -->
+    <Text id="dateTabHeading" fontSize="$fontSize-sm" fontWeight="$fontWeight-bold" value="Filter by date" />
     <HStack id="dateTabStrip" verticalAlignment="center" gap="$space-1" wrapContent="true" width="100%" marginBottom="$space-2">
       <Button variant="{datePreset === 'all' ? 'solid' : 'outlined'}" onClick="datePreset = 'all'; dateWindowStart = null; dateWindowEnd = null; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; dateTruncationLabel = null; window.syncDateParams({preset: 'all'})">All dates</Button>
-      <Button variant="{datePreset === 'today' ? 'solid' : 'outlined'}" onClick="const w = window.dateWindowForPreset('today'); datePreset = 'today'; dateWindowStart = w.start; dateWindowEnd = w.end; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; dateTruncationLabel = null; window.syncDateParams({preset: 'today'})">Today</Button>
-      <Button variant="{datePreset === 'tonight' ? 'solid' : 'outlined'}" onClick="const w = window.dateWindowForPreset('tonight'); datePreset = 'tonight'; dateWindowStart = w.start; dateWindowEnd = w.end; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; dateTruncationLabel = null; window.syncDateParams({preset: 'tonight'})">Tonight</Button>
-      <Button variant="{datePreset === 'tomorrow' ? 'solid' : 'outlined'}" onClick="const w = window.dateWindowForPreset('tomorrow'); datePreset = 'tomorrow'; dateWindowStart = w.start; dateWindowEnd = w.end; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; dateTruncationLabel = null; window.syncDateParams({preset: 'tomorrow'})">Tomorrow</Button>
-      <Button variant="{datePreset === 'weekend' ? 'solid' : 'outlined'}" onClick="const w = window.dateWindowForPreset('weekend'); datePreset = 'weekend'; dateWindowStart = w.start; dateWindowEnd = w.end; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; dateTruncationLabel = null; window.syncDateParams({preset: 'weekend'})">This weekend</Button>
-      <Button variant="{datePreset === 'next7' ? 'solid' : 'outlined'}" onClick="const w = window.dateWindowForPreset('next7'); datePreset = 'next7'; dateWindowStart = w.start; dateWindowEnd = w.end; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; dateTruncationLabel = null; window.syncDateParams({preset: 'next7'})">Next 7 days</Button>
-      <Button variant="{datePreset === 'month' ? 'solid' : 'outlined'}" onClick="const w = window.dateWindowForPreset('month'); datePreset = 'month'; dateWindowStart = w.start; dateWindowEnd = w.end; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; dateTruncationLabel = null; window.syncDateParams({preset: 'month'})">This month</Button>
+      <Button variant="{datePreset === 'today' ? 'solid' : 'outlined'}" onClick="const w = window.dateWindowForPreset('today'); datePreset = 'today'; dateWindowStart = w.start; dateWindowEnd = w.end; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; dateTruncationLabel = window.dateTruncationText(w); window.syncDateParams({preset: 'today'})">Today</Button>
+      <Button variant="{datePreset === 'tonight' ? 'solid' : 'outlined'}" onClick="const w = window.dateWindowForPreset('tonight'); datePreset = 'tonight'; dateWindowStart = w.start; dateWindowEnd = w.end; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; dateTruncationLabel = window.dateTruncationText(w); window.syncDateParams({preset: 'tonight'})">Tonight</Button>
+      <Button variant="{datePreset === 'tomorrow' ? 'solid' : 'outlined'}" onClick="const w = window.dateWindowForPreset('tomorrow'); datePreset = 'tomorrow'; dateWindowStart = w.start; dateWindowEnd = w.end; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; dateTruncationLabel = window.dateTruncationText(w); window.syncDateParams({preset: 'tomorrow'})">Tomorrow</Button>
+      <Button variant="{datePreset === 'weekend' ? 'solid' : 'outlined'}" onClick="const w = window.dateWindowForPreset('weekend'); datePreset = 'weekend'; dateWindowStart = w.start; dateWindowEnd = w.end; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; dateTruncationLabel = window.dateTruncationText(w); window.syncDateParams({preset: 'weekend'})">This weekend</Button>
+      <Button variant="{datePreset === 'next7' ? 'solid' : 'outlined'}" onClick="const w = window.dateWindowForPreset('next7'); datePreset = 'next7'; dateWindowStart = w.start; dateWindowEnd = w.end; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; dateTruncationLabel = window.dateTruncationText(w); window.syncDateParams({preset: 'next7'})">Next 7 days</Button>
+      <Button variant="{datePreset === 'month' ? 'solid' : 'outlined'}" onClick="const w = window.dateWindowForPreset('month'); datePreset = 'month'; dateWindowStart = w.start; dateWindowEnd = w.end; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; dateTruncationLabel = window.dateTruncationText(w); window.syncDateParams({preset: 'month'})">This month</Button>
       <Button variant="{datePreset === 'custom' ? 'solid' : 'outlined'}" onClick="customRangePicker.focus()">Custom</Button>
     </HStack>
     <!-- Custom range picker (#107): stock range control with date-only
@@ -313,6 +316,14 @@
       onDidChange="(val) => { const w = window.dateWindowForCustom(val && val.from, val && val.to); if (!w) return; datePreset = 'custom'; dateWindowStart = w.start; dateWindowEnd = w.end; dateTruncationLabel = w.truncated ? 'Showing through ' + w.to + ' — the calendar currently ends there.' : null; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncCustomParams(w.from, w.to); }"
     />
     <Text when="{dateTruncationLabel}" fontSize="$fontSize-sm" color="$color-text-secondary" value="{dateTruncationLabel}" />
+    <!-- Empty window (#108): an explicit message plus a one-tap reset to
+         Next 7 days. The reset commits like a tab tap (paging reset, URL
+         sync) but moves focus to the tab-strip heading with no scroll
+         instead of firing scroll-to-top. -->
+    <VStack when="{!!events.value && viewMode === 'all' && !getPagedEvents(dateFilteredEvents, filterTerm, displayStartIndex, pageSizeFor(filterTerm), categoryFilter).length}" gap="$space-2" width="100%" padding="$space-3" horizontalAlignment="center">
+      <Text value="{'No events ' + window.dateWindowLabel(datePreset) + '.'}" />
+      <Button variant="outlined" onClick="const w = window.dateWindowForPreset('next7'); datePreset = 'next7'; dateWindowStart = w.start; dateWindowEnd = w.end; dateTruncationLabel = window.dateTruncationText(w); displayStartIndex = 0; browseStartIndex = 0; window.syncDateParams({preset: 'next7'}); window.focusDateTabHeading()">Show next 7 days</Button>
+    </VStack>
     </VStack>
     </VStack>
     <Spinner when="{!events.value && viewMode === 'all'}" />

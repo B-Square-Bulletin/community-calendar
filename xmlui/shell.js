@@ -279,6 +279,18 @@ window._xsLogs = [];
     document.title = window.cityName + ' Community Calendar';
   };
 
+  // Prefetch horizon (#108): the committed windows truncate here, so it is
+  // initialized before the date-tab seed below — a reloaded overrun link
+  // restores its truncation label on first paint, not just on later taps.
+  (function () {
+    var now = new Date();
+    var oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
+    var threeMonthsLater = new Date(now.getTime() + 90 * 24 * 60 * 60 * 1000);
+    window.fromDate = oneHourAgo.toISOString();
+    window.toDate = threeMonthsLater.toISOString();
+    console.log('Date range initialized:', window.fromDate, 'to', window.toDate);
+  })();
+
   // Date-tab boot seed (#105 day presets + #106 intraday tabs + #107 Custom):
   // first paint already reflects a shared date link, alongside the existing
   // search/category seeds above. A complete valid from/to pair wins over the
@@ -302,11 +314,14 @@ window._xsLogs = [];
     } catch (e) {}
     if ((from != null || to != null) && typeof window.decodeDateParams === 'function') {
       try {
-        var decoded = window.decodeDateParams({ date: key, from: from, to: to }, { timeZone: tz });
+        var decoded = window.decodeDateParams({ date: key, from: from, to: to }, { timeZone: tz, horizonEnd: window.toDate });
         if (!decoded || decoded.preset !== 'custom' || !decoded.start) return;
         window.initialDatePreset = 'custom';
         window.initialDateStart = decoded.start;
         window.initialDateEnd = decoded.end;
+        if (decoded.truncated && decoded.to) {
+          window.initialDateTruncationLabel = 'Showing through ' + decoded.to + ' — the calendar currently ends there.';
+        }
         if (decoded.rewritten) {
           var url = new URL(window.location);
           url.searchParams.set('from', decoded.from);
@@ -321,11 +336,18 @@ window._xsLogs = [];
     if (key === 'thismonth') key = 'month';
     try {
       if (typeof window.resolveDatePreset !== 'function') return;
-      var w = window.resolveDatePreset(key, { timeZone: tz });
+      var w = window.resolveDatePreset(key, { timeZone: tz, horizonEnd: window.toDate });
       if (!w || !w.start) return;
       window.initialDatePreset = key;
       window.initialDateStart = w.start;
       window.initialDateEnd = w.end;
+      if (w.truncated) {
+        var lastMs = new Date(w.end).getTime() - 1;
+        var day = new Intl.DateTimeFormat('en-CA', {
+          timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit'
+        }).format(new Date(lastMs));
+        window.initialDateTruncationLabel = 'Showing through ' + day + ' — the calendar currently ends there.';
+      }
     } catch (e) {}
   })();
 
@@ -468,15 +490,6 @@ window._xsLogs = [];
       if (window.xsTraceEvent) window.xsTraceEvent('pick', { eventId: eventId, status: insertRes.status });
     }
   };
-
-  (function () {
-    var now = new Date();
-    var oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
-    var threeMonthsLater = new Date(now.getTime() + 90 * 24 * 60 * 60 * 1000);
-    window.fromDate = oneHourAgo.toISOString();
-    window.toDate = threeMonthsLater.toISOString();
-    console.log('Date range initialized:', window.fromDate, 'to', window.toDate);
-  })();
 
   window.getFromDate = function () {
     return window.fromDate;
