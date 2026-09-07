@@ -48,6 +48,30 @@ _Avoid_: Local timezone, calendar timezone
 The IANA zone an individual event declares via an ICS `TZID` parameter. Overrides the city timezone for that event.
 _Avoid_: Event tz, source timezone
 
+**Date window**:
+The absolute `[start, end)` interval the calendar is currently filtered to, resolved in the city timezone. What the list, pager, and URL all reflect.
+_Avoid_: Date filter, day offsets
+
+**Preset**:
+A named rule that resolves to a date window relative to the day it is opened (Today, Tonight, Tomorrow, This weekend, Next 7 days, This month, Custom, All). Rolling presets stay evergreen; Custom carries exact dates.
+_Avoid_: Tab, quick filter
+
+**Commit**:
+The moment a chosen window becomes active: the list re-filters, the pager resets, and the URL syncs. Discrete picks commit instantly; continuous gestures commit on release/confirm, never per tick.
+_Avoid_: Apply, select (when meaning the committed state)
+
+**Horizon**:
+The end of the prefetched event set (about 90 days out). Windows past it clamp and label the truncation; the calendar running out is distinct from the filter matching nothing.
+_Avoid_: Max date, data end
+
+**Clamping**:
+Moving a range start earlier than today forward to today, rewriting the URL so reload is stable. Never a silent empty from a stale date.
+_Avoid_: Snapping, correcting
+
+**Truncation**:
+Labeling when a window extends past the horizon so the visitor knows the calendar ended, not the filter.
+_Avoid_: Cutoff (when meaning horizon), capping
+
 ## Key Concepts
 
 ### Event Sources
