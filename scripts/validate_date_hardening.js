@@ -329,5 +329,33 @@ check('date filter object All passes through by reference',
   })(),
   true);
 
+// --- Date-path naming (prio-110): no single-letter window/date locals ---
+// WHY these pins exist: resolved windows used to travel as `w` and
+// city-today builds shadowed `t` across the engine, helpers, boot seed, and
+// markup, which slowed review of date math. These source pins fail if a
+// single-letter window/date local returns; behavior parity is proved by
+// every dated assertion above staying green.
+const dateSources = {
+  'date-windows.js': fs.readFileSync(path.join(ROOT, 'date-windows.js'), 'utf8'),
+  'helpers.js': fs.readFileSync(path.join(ROOT, 'helpers.js'), 'utf8'),
+  'shell.js': fs.readFileSync(path.join(ROOT, 'shell.js'), 'utf8'),
+  'Globals.xs': fs.readFileSync(path.join(ROOT, 'Globals.xs'), 'utf8'),
+  'Main.xmlui': fs.readFileSync(path.join(ROOT, 'Main.xmlui'), 'utf8'),
+};
+function hasDateSingleLetter(src) {
+  return /(?:var|const|let)\s+[wt]\s*=\s*window\.(?:dateWindowFor|resolveDate|resolveCustom|decodeDate)/.test(src)
+    || /function\s+(?:truncationLabelForWindow|dateTruncationText)\s*\(\s*w\s*[,)]/.test(src)
+    || /function\s*\(\s*w\s*\)/.test(src)
+    || /var\s+[ft]\s*=\s*parseDateOnly/.test(src)
+    || /var\s+t\s*=\s*(?:cityToday\(\)|new Date\(e\.start_time\)|new Date\(Date\.UTC\(y, mo - 1, d\)|new Date\(value\))/.test(src)
+    || /var\s+t1\s*=\s*addDays/.test(src)
+    || /var\s+tomorrowT\s*=\s*addDays/.test(src)
+    || /var\s+c\s*=\s*cityParts/.test(src)
+    || /const\s+w\s*=\s*window\.dateWindowForCustom/.test(src);
+}
+check('no single-letter window/date locals on the date path',
+  Object.entries(dateSources).map(([name, src]) => [name, !hasDateSingleLetter(src)]),
+  [['date-windows.js', true], ['helpers.js', true], ['shell.js', true], ['Globals.xs', true], ['Main.xmlui', true]]);
+
 console.log(failures === 0 ? '\nALL CHECKS PASSED' : `\n${failures} CHECKS FAILED`);
 process.exit(failures === 0 ? 0 : 1);

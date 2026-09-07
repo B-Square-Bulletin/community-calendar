@@ -318,7 +318,7 @@
       disabledDates="{window.customDisabledDates()}"
       presets="{window.customForwardPresets()}"
       confirmRangeSelection="true"
-      onDidChange="(val) => { const w = window.dateWindowForCustom(val); if (!w) return; datePreset = 'custom'; dateWindowStart = w.start; dateWindowEnd = w.end; dateTruncationLabel = window.dateTruncationText(w); displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncCustomParams(w); }"
+      onDidChange="(val) => { const customWindow = window.dateWindowForCustom(val); if (!customWindow) return; datePreset = 'custom'; dateWindowStart = customWindow.start; dateWindowEnd = customWindow.end; dateTruncationLabel = window.dateTruncationText(customWindow); displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncCustomParams(customWindow); }"
     />
     <Text when="{dateTruncationLabel}" fontSize="$fontSize-sm" color="$color-text-secondary" value="{dateTruncationLabel}" />
     <!-- Empty window (#108): an explicit message plus a one-tap reset to

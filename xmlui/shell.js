@@ -364,13 +364,13 @@ window._xsLogs = [];
     if (!key || !HONORED[key]) return;
     try {
       if (typeof window.decodeDateParams !== 'function') return;
-      var w = window.decodeDateParams({ date: key }, { timeZone: tz, horizonEnd: window.toDate });
-      if (!w || !w.start) return;
-      window.initialDatePreset = w.preset;
-      window.initialDateStart = w.start;
-      window.initialDateEnd = w.end;
-      if (w.truncated && typeof window.truncationLabelForWindow === 'function') {
-        window.initialDateTruncationLabel = window.truncationLabelForWindow(w, tz);
+      var decodedWindow = window.decodeDateParams({ date: key }, { timeZone: tz, horizonEnd: window.toDate });
+      if (!decodedWindow || !decodedWindow.start) return;
+      window.initialDatePreset = decodedWindow.preset;
+      window.initialDateStart = decodedWindow.start;
+      window.initialDateEnd = decodedWindow.end;
+      if (decodedWindow.truncated && typeof window.truncationLabelForWindow === 'function') {
+        window.initialDateTruncationLabel = window.truncationLabelForWindow(decodedWindow, tz);
       }
     } catch (e) {}
   })();

@@ -129,9 +129,9 @@ window.dateWindowForPreset = function(preset) {
   if (!preset || preset === 'all') return { start: null, end: null, truncated: false };
   try {
     if (typeof window.resolveDatePreset !== 'function') return { start: null, end: null, truncated: false };
-    var w = window.resolveDatePreset(preset, window.dateWindowOpts());
-    if (!w || !w.start) return { start: null, end: null, truncated: false };
-    return { start: w.start, end: w.end, truncated: !!w.truncated };
+    var windowRange = window.resolveDatePreset(preset, window.dateWindowOpts());
+    if (!windowRange || !windowRange.start) return { start: null, end: null, truncated: false };
+    return { start: windowRange.start, end: windowRange.end, truncated: !!windowRange.truncated };
   } catch (e) {
     return { start: null, end: null, truncated: false };
   }
@@ -166,18 +166,18 @@ window.dateWindowLabel = function(preset) {
 // copy plus the inclusive-last-day math, so the Main.xmlui custom confirm
 // and the shell boot seed render byte-identical labels through this seam.
 // Falls back to the local render only when the engine is absent.
-window.dateTruncationText = function(w) {
-  if (!w || !w.truncated || !w.end) return null;
+window.dateTruncationText = function(windowRange) {
+  if (!windowRange || !windowRange.truncated || !windowRange.end) return null;
   try {
     if (typeof window.truncationLabelForWindow === 'function') {
-      return window.truncationLabelForWindow(w, getCityTimezone() || 'UTC');
+      return window.truncationLabelForWindow(windowRange, getCityTimezone() || 'UTC');
     }
   } catch (e) {
     return null;
   }
   try {
     var tz = getCityTimezone() || 'UTC';
-    var lastMs = new Date(w.end).getTime() - 1;
+    var lastMs = new Date(windowRange.end).getTime() - 1;
     if (!isFinite(lastMs)) return null;
     var day = new Intl.DateTimeFormat('en-CA', {
       timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit'
@@ -253,18 +253,18 @@ window.customForwardPresets = function() {
     return { y: +v.year, mo: +v.month, d: +v.day };
   }
   function addDays(y, mo, d, n) {
-    var t = new Date(Date.UTC(y, mo - 1, d) + n * 86400000);
-    return { y: t.getUTCFullYear(), mo: t.getUTCMonth() + 1, d: t.getUTCDate() };
+    var shifted = new Date(Date.UTC(y, mo - 1, d) + n * 86400000);
+    return { y: shifted.getUTCFullYear(), mo: shifted.getUTCMonth() + 1, d: shifted.getUTCDate() };
   }
   try {
-    var t = cityToday();
-    var next7End = addDays(t.y, t.mo, t.d, 6);
-    var next30End = addDays(t.y, t.mo, t.d, 29);
-    var monthEnd = new Date(Date.UTC(t.y, t.mo, 0)).getUTCDate();
+    var todayParts = cityToday();
+    var next7End = addDays(todayParts.y, todayParts.mo, todayParts.d, 6);
+    var next30End = addDays(todayParts.y, todayParts.mo, todayParts.d, 29);
+    var monthEnd = new Date(Date.UTC(todayParts.y, todayParts.mo, 0)).getUTCDate();
     return [
-      { label: 'Next 7 days', from: fmt(t.y, t.mo, t.d), to: fmt(next7End.y, next7End.mo, next7End.d) },
-      { label: 'Next 30 days', from: fmt(t.y, t.mo, t.d), to: fmt(next30End.y, next30End.mo, next30End.d) },
-      { label: 'This month', from: fmt(t.y, t.mo, t.d), to: fmt(t.y, t.mo, monthEnd) }
+      { label: 'Next 7 days', from: fmt(todayParts.y, todayParts.mo, todayParts.d), to: fmt(next7End.y, next7End.mo, next7End.d) },
+      { label: 'Next 30 days', from: fmt(todayParts.y, todayParts.mo, todayParts.d), to: fmt(next30End.y, next30End.mo, next30End.d) },
+      { label: 'This month', from: fmt(todayParts.y, todayParts.mo, todayParts.d), to: fmt(todayParts.y, todayParts.mo, monthEnd) }
     ];
   } catch (e) {
     return [];
@@ -289,9 +289,9 @@ window.dateWindowForCustom = function(rangeOrFrom, to) {
   if (from == null || to == null) return null;
   try {
     if (typeof window.resolveCustomRange !== 'function') return null;
-    var w = window.resolveCustomRange(from, to, window.dateWindowOpts());
-    if (!w || !w.start) return null;
-    return { start: w.start, end: w.end, from: w.from, to: w.to, truncated: !!w.truncated, clamped: !!w.clamped };
+    var windowRange = window.resolveCustomRange(from, to, window.dateWindowOpts());
+    if (!windowRange || !windowRange.start) return null;
+    return { start: windowRange.start, end: windowRange.end, from: windowRange.from, to: windowRange.to, truncated: !!windowRange.truncated, clamped: !!windowRange.clamped };
   } catch (e) {
     return null;
   }
@@ -366,8 +366,8 @@ function filterByDateWindow(events, windowOrStartISO, endISOOrOpts, maybeOpts) {
   var tz = (opts && opts.timeZone) ||
     (typeof getCityTimezone === 'function' ? getCityTimezone() : undefined) || 'UTC';
   return events.filter(function(e) {
-    var t = new Date(e.start_time).getTime();
-    if (!(t >= fromMs && t < toMs)) return false;
+    var eventStartMs = new Date(e.start_time).getTime();
+    if (!(eventStartMs >= fromMs && eventStartMs < toMs)) return false;
     if (!startTimeOnly) return true;
     if (e.all_day || e.allDay) return false;
     if (startIsMidnightInTz(e.start_time, tz)) return false;

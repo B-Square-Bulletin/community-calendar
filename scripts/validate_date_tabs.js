@@ -173,7 +173,7 @@ check('custom confirm commits once via the engine with paging reset, scroll, and
   && /datePreset = 'custom'[\s\S]{0,600}?syncCustomParams/.test(main));
 check('horizon overrun renders the truncation label below the tabs (single copy in the engine)',
   !!main && /dateTruncationLabel/.test(main)
-  && /window\.dateTruncationText\(w\)/.test(main)
+  && /window\.dateTruncationText\(customWindow\)/.test(main)
   && (() => {
     const eng = read('date-windows.js') || '';
     return /Showing through/.test(eng) && /calendar currently ends there/.test(eng);
@@ -317,9 +317,9 @@ check('custom confirm resolves and syncs through the window-object form',
     if (at < 0) return false;
     const handler = main.substring(at, at + 2200);
     return /dateWindowForCustom\(val\)/.test(handler)
-      && /syncCustomParams\(w\)/.test(handler)
+      && /syncCustomParams\(customWindow\)/.test(handler)
       && !/dateWindowForCustom\(val && val\.from/.test(handler)
-      && !/syncCustomParams\(w\.from/.test(handler);
+      && !/syncCustomParams\(customWindow\.from/.test(handler);
   })());
 check('helpers window seams accept the object form (with positional fallback)',
   !!helpers && /window\.dateWindowForCustom = function\(rangeOrFrom/.test(helpers)

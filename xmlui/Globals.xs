@@ -79,11 +79,11 @@ function commitDatePreset(preset, opts) {
     window.syncDateParams({ preset: 'all' });
     return;
   }
-  var w = window.dateWindowForPreset(preset);
+  var windowRange = window.dateWindowForPreset(preset);
   datePreset = preset;
-  dateWindowStart = w.start;
-  dateWindowEnd = w.end;
-  dateTruncationLabel = window.dateTruncationText(w);
+  dateWindowStart = windowRange.start;
+  dateWindowEnd = windowRange.end;
+  dateTruncationLabel = window.dateTruncationText(windowRange);
   displayStartIndex = 0;
   browseStartIndex = 0;
   if (withScroll) scrollRequest = scrollRequest + 1;

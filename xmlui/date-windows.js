@@ -79,8 +79,8 @@
   }
 
   function addDays(y, mo, d, n) {
-    var t = new Date(Date.UTC(y, mo - 1, d) + n * 86400000);
-    return { y: t.getUTCFullYear(), mo: t.getUTCMonth() + 1, d: t.getUTCDate() };
+    var shifted = new Date(Date.UTC(y, mo - 1, d) + n * 86400000);
+    return { y: shifted.getUTCFullYear(), mo: shifted.getUTCMonth() + 1, d: shifted.getUTCDate() };
   }
 
   function midnightMs(y, mo, d, timeZone) {
@@ -94,8 +94,8 @@
   function toMs(value) {
     if (value == null) return null;
     if (typeof value === 'number') return value;
-    var t = new Date(value).getTime();
-    return isNaN(t) ? null : t;
+    var ms = new Date(value).getTime();
+    return isNaN(ms) ? null : ms;
   }
 
   function parseDateOnly(s) {
@@ -105,8 +105,8 @@
     var y = +m[1], mo = +m[2], d = +m[3];
     if (mo < 1 || mo > 12 || d < 1 || d > 31) return null;
     // Round-trip through the calendar so 2026-02-30 is rejected.
-    var t = new Date(Date.UTC(y, mo - 1, d));
-    if (t.getUTCFullYear() !== y || t.getUTCMonth() !== mo - 1 || t.getUTCDate() !== d) {
+    var roundTrip = new Date(Date.UTC(y, mo - 1, d));
+    if (roundTrip.getUTCFullYear() !== y || roundTrip.getUTCMonth() !== mo - 1 || roundTrip.getUTCDate() !== d) {
       return null;
     }
     return { y: y, mo: mo, d: d, iso: s };
@@ -141,13 +141,13 @@
     return TRUNCATION_LABEL_PREFIX + day + TRUNCATION_LABEL_SUFFIX;
   }
 
-  // Null unless `w` overran the prefetch horizon. Names the inclusive last
+  // Null unless `windowRange` overran the prefetch horizon. Names the inclusive last
   // day (the exclusive end instant minus 1ms) in `timeZone`.
-  function truncationLabelForWindow(w, timeZone) {
-    if (!w || !w.truncated || !w.end) return null;
+  function truncationLabelForWindow(windowRange, timeZone) {
+    if (!windowRange || !windowRange.truncated || !windowRange.end) return null;
     try {
       var tz = timeZone || 'UTC';
-      var lastMs = new Date(w.end).getTime() - 1;
+      var lastMs = new Date(windowRange.end).getTime() - 1;
       if (!isFinite(lastMs)) return null;
       var day = new Intl.DateTimeFormat('en-CA', {
         timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit'
@@ -181,12 +181,12 @@
       return emptyWindow('all');
     }
 
-    var c = cityParts(nowMs, tz);
-    var todayMs = midnightMs(c.y, c.mo, c.d, tz);
+    var todayParts = cityParts(nowMs, tz);
+    var todayMs = midnightMs(todayParts.y, todayParts.mo, todayParts.d, tz);
     var startMs, endMs, startTimeOnly = false;
 
     if (preset === 'today') {
-      var tomorrow = addDays(c.y, c.mo, c.d, 1);
+      var tomorrow = addDays(todayParts.y, todayParts.mo, todayParts.d, 1);
       startMs = todayMs;
       endMs = midnightMs(tomorrow.y, tomorrow.mo, tomorrow.d, tz);
     } else if (preset === 'tonight') {
@@ -194,44 +194,44 @@
       // [today 17:00, tomorrow 00:00). 16:59 and all-day events are
       // excluded by the matcher (ticket #106); the engine reports the
       // window plus the flag.
-      var tomorrowT = addDays(c.y, c.mo, c.d, 1);
-      startMs = zonedTimeToUtcMs(c.y, c.mo, c.d, 17, 0, tz);
-      endMs = midnightMs(tomorrowT.y, tomorrowT.mo, tomorrowT.d, tz);
+      var tomorrowParts = addDays(todayParts.y, todayParts.mo, todayParts.d, 1);
+      startMs = zonedTimeToUtcMs(todayParts.y, todayParts.mo, todayParts.d, 17, 0, tz);
+      endMs = midnightMs(tomorrowParts.y, tomorrowParts.mo, tomorrowParts.d, tz);
       startTimeOnly = true;
     } else if (preset === 'tomorrow') {
-      var t1 = addDays(c.y, c.mo, c.d, 1);
-      var t2 = addDays(c.y, c.mo, c.d, 2);
-      startMs = midnightMs(t1.y, t1.mo, t1.d, tz);
-      endMs = midnightMs(t2.y, t2.mo, t2.d, tz);
+      var tomorrowStart = addDays(todayParts.y, todayParts.mo, todayParts.d, 1);
+      var dayAfterParts = addDays(todayParts.y, todayParts.mo, todayParts.d, 2);
+      startMs = midnightMs(tomorrowStart.y, tomorrowStart.mo, tomorrowStart.d, tz);
+      endMs = midnightMs(dayAfterParts.y, dayAfterParts.mo, dayAfterParts.d, tz);
     } else if (preset === 'weekend') {
       // [Fri 17:00 incl, Mon 00:00 excl). Mon-Thu resolve to the upcoming
       // weekend, Fri/Sat/Sun to the enclosing one.
-      var friDelta = (5 - c.wd + 7) % 7; // days from today to Friday
+      var friDelta = (5 - todayParts.wd + 7) % 7; // days from today to Friday
       var fri, mon;
-      if (c.wd >= 1 && c.wd <= 4) {
-        fri = addDays(c.y, c.mo, c.d, friDelta);
+      if (todayParts.wd >= 1 && todayParts.wd <= 4) {
+        fri = addDays(todayParts.y, todayParts.mo, todayParts.d, friDelta);
         mon = addDays(fri.y, fri.mo, fri.d, 3);
-      } else if (c.wd === 5) {
-        fri = { y: c.y, mo: c.mo, d: c.d };
+      } else if (todayParts.wd === 5) {
+        fri = { y: todayParts.y, mo: todayParts.mo, d: todayParts.d };
         mon = addDays(fri.y, fri.mo, fri.d, 3);
-      } else if (c.wd === 6) {
-        fri = addDays(c.y, c.mo, c.d, -1);
+      } else if (todayParts.wd === 6) {
+        fri = addDays(todayParts.y, todayParts.mo, todayParts.d, -1);
         mon = addDays(fri.y, fri.mo, fri.d, 3);
       } else {
-        fri = addDays(c.y, c.mo, c.d, -2);
+        fri = addDays(todayParts.y, todayParts.mo, todayParts.d, -2);
         mon = addDays(fri.y, fri.mo, fri.d, 3);
       }
       startMs = zonedTimeToUtcMs(fri.y, fri.mo, fri.d, 17, 0, tz);
       endMs = midnightMs(mon.y, mon.mo, mon.d, tz);
     } else if (preset === 'next7') {
-      var plus7 = addDays(c.y, c.mo, c.d, 7);
+      var plus7 = addDays(todayParts.y, todayParts.mo, todayParts.d, 7);
       startMs = todayMs;
       endMs = midnightMs(plus7.y, plus7.mo, plus7.d, tz);
     } else if (preset === 'thismonth') {
       // This-month remainder: today through the end of the month.
-      var firstNext = c.mo === 12
-        ? { y: c.y + 1, mo: 1, d: 1 }
-        : { y: c.y, mo: c.mo + 1, d: 1 };
+      var firstNext = todayParts.mo === 12
+        ? { y: todayParts.y + 1, mo: 1, d: 1 }
+        : { y: todayParts.y, mo: todayParts.mo + 1, d: 1 };
       startMs = todayMs;
       endMs = midnightMs(firstNext.y, firstNext.mo, firstNext.d, tz);
     }
@@ -260,15 +260,15 @@
     var nowMs = toMs(opts.now) != null ? toMs(opts.now) : Date.now();
     var horizonMs = toMs(opts.horizonEnd);
 
-    var f = parseDateOnly(from);
-    var t = parseDateOnly(to);
-    if (!f || !t) return null;
+    var fromParts = parseDateOnly(from);
+    var toParts = parseDateOnly(to);
+    if (!fromParts || !toParts) return null;
 
-    var c = cityParts(nowMs, tz);
-    var todayMs = midnightMs(c.y, c.mo, c.d, tz);
+    var todayParts = cityParts(nowMs, tz);
+    var todayMs = midnightMs(todayParts.y, todayParts.mo, todayParts.d, tz);
 
-    var startMs = midnightMs(f.y, f.mo, f.d, tz);
-    var endDay = addDays(t.y, t.mo, t.d, 1);
+    var startMs = midnightMs(fromParts.y, fromParts.mo, fromParts.d, tz);
+    var endDay = addDays(toParts.y, toParts.mo, toParts.d, 1);
     var endMs = midnightMs(endDay.y, endDay.mo, endDay.d, tz);
 
     if (endMs <= startMs) {
@@ -276,12 +276,12 @@
       // keeps the single-`from`-day coercion.
       if (opts && opts.coerceInverted === false) return null;
       // Inverted or zero-length range coerces to the single `from` day.
-      var next = addDays(f.y, f.mo, f.d, 1);
+      var next = addDays(fromParts.y, fromParts.mo, fromParts.d, 1);
       endMs = midnightMs(next.y, next.mo, next.d, tz);
     }
 
     // 180-day cap, measured in wall-clock days from `from`.
-    var capDay = addDays(f.y, f.mo, f.d, MAX_WINDOW_DAYS);
+    var capDay = addDays(fromParts.y, fromParts.mo, fromParts.d, MAX_WINDOW_DAYS);
     var capMs = midnightMs(capDay.y, capDay.mo, capDay.d, tz);
     if (endMs > capMs) {
       endMs = capMs;
@@ -302,7 +302,7 @@
     var hz = applyHorizon(startMs, endMs, horizonMs);
     return {
       preset: 'custom',
-      from: clamped ? isoDateInTz(startMs, tz) : f.iso,
+      from: clamped ? isoDateInTz(startMs, tz) : fromParts.iso,
       to: null, // filled below
       start: toISO(startMs),
       end: toISO(hz.endMs),
@@ -385,11 +385,11 @@
       // thismonth encodes.
       if (Object.prototype.hasOwnProperty.call(DATE_PRESET_ALIASES, q.date)) q.date = DATE_PRESET_ALIASES[q.date];
       if (isKnownPreset(q.date)) {
-        var w = q.date === 'all'
+        var windowRange = q.date === 'all'
           ? emptyWindow('all')
           : resolveDatePreset(q.date, opts);
-        w.rewritten = false;
-        return w;
+        windowRange.rewritten = false;
+        return windowRange;
       }
       return Object.assign(emptyWindow('all'), { rewritten: false });
     }

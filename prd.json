@@ -125,7 +125,8 @@
     {
       "title": "Follow-up: rename single-letter window/date locals",
       "description": "Resolved windows travel as w and city-today builds shadow t (cityToday result vs next7End/next30End temps) across Main.xmlui/helpers.js/shell.js, slowing review of date math. Rename to window/windowRange/today-style explicit names without changing logic. Done when: no single-letter window/date locals remain on the date path; tests green. No behavior change.",
-      "passes": false,
+      "passes": true,
+      "notes": "Done: renamed every single-letter window/date local on the shipped date path, no logic touched — engine: addDays t->shifted, toMs t->ms, parseDateOnly t->roundTrip, truncationLabelForWindow w->windowRange, tonight tomorrowT->tomorrowParts, tomorrow t1/t2->tomorrowStart/dayAfterParts, custom f/t->fromParts/toParts, cityParts c->todayParts (both fns), decode w->windowRange; helpers: resolvers w->windowRange, dateTruncationText w->windowRange, forward-preset t->todayParts, filter event t->eventStartMs; Globals.xs commit w->windowRange; shell seed w->decodedWindow; Main.xmlui confirm w->customWindow. Out of scope, left alone: image-resize w/h, audio/fetch/tile t, test.html spec-pin locals, generic v/p/e/n/m. Red first: 14-pattern source grep failed pre-change, green after. Durable pin: new hardening check 'no single-letter window/date locals on the date path'; behavior parity via all dated assertions green. Checks: date_tabs/hardening/custom_helpers ALL PASSED, pytest 97 passed, lint clean, bench PASS, validate_pr_feeds clean.",
       "reference": "https://github.com/B-Square-Bulletin/community-calendar/issues/104 (date-math readability; Mysterious Name smell)",
       "priority": 110
     }
