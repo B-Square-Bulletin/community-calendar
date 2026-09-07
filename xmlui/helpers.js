@@ -73,7 +73,7 @@ window.syncSearchParam = function(search) {
 // All strips only the date keys, and every commit preserves sibling params
 // (city, search, category, mode, images, embed, cards). history-replace (not
 // push) so Back leaves the calendar instead of stepping through tab history.
-window.DATE_TAB_PRESETS = ['all', 'today', 'tomorrow', 'next7', 'month'];
+window.DATE_TAB_PRESETS = ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'month'];
 window.syncDateParams = function(sel) {
   var url = new URL(window.location);
   var preset = sel && sel.preset;

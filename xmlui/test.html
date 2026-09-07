@@ -1329,6 +1329,40 @@
         it('fails open to All on an inverted window', () => {
           assert(filterByDateWindow(evts, '2026-02-18T08:00:00.000Z', '2026-02-11T08:00:00.000Z') === evts, 'Inverted window must pass through');
         });
+
+        it('Tonight keeps only starts in [17:00, midnight): 16:59, all-day, and next-midnight excluded', () => {
+          // WHY: Tonight is start-time-only per #106 — hand-computed PST
+          // literals (Wed 2026-02-11, UTC-8) as the independent truth, not the
+          // engine's own output, so this test can disagree with the code.
+          const tonightStart = '2026-02-12T01:00:00.000Z'; // 17:00 PST
+          const tonightEnd = '2026-02-12T08:00:00.000Z';   // midnight PST
+          const night = [
+            { id: 'early', start_time: '2026-02-12T00:59:00.000Z' },  // 16:59 PST
+            { id: 'allday', start_time: '2026-02-11T08:00:00.000Z' }, // all-day, midnight start
+            { id: 'stale', start_time: '2026-02-11T02:00:00.000Z' },  // multi-day, started Tue
+            { id: 'doors', start_time: '2026-02-12T01:00:00.000Z' },  // 17:00 incl
+            { id: 'late', start_time: '2026-02-12T07:30:00.000Z' },   // 23:30 PST
+            { id: 'midnight', start_time: '2026-02-12T08:00:00.000Z' }, // end excl
+          ];
+          const result = filterByDateWindow(night, tonightStart, tonightEnd);
+          assertDeepEqual(result.map(e => e.id), ['doors', 'late']);
+        });
+
+        it('Weekend keeps only starts in [Fri 17:00 incl, Mon 00:00 excl)', () => {
+          // WHY: same independent-literal rationale — Fri 2026-02-13 weekend
+          // in PST (UTC-8), including the Mon 00:00-00:59 exclusion from #106.
+          const fri1700 = '2026-02-14T01:00:00.000Z';
+          const mon0000 = '2026-02-16T08:00:00.000Z';
+          const wknd = [
+            { id: 'fri-early', start_time: '2026-02-14T00:59:00.000Z' }, // Fri 16:59 PST
+            { id: 'fri-doors', start_time: '2026-02-14T01:00:00.000Z' }, // Fri 17:00 incl
+            { id: 'sun-show', start_time: '2026-02-16T04:00:00.000Z' },  // Sun 20:00 PST
+            { id: 'mon-mid', start_time: '2026-02-16T08:00:00.000Z' },   // Mon 00:00 excl
+            { id: 'mon-late', start_time: '2026-02-16T08:30:00.000Z' },  // Mon 00:30 PST
+          ];
+          const result = filterByDateWindow(wknd, fri1700, mon0000);
+          assertDeepEqual(result.map(e => e.id), ['fri-doors', 'sun-show']);
+        });
       });
 
       // Date-tab chrome tests (#105): the strip is declarative markup with no
@@ -1349,12 +1383,10 @@
             get('Globals.xs')
           ]);
 
-          test('strip carries All plus the four #105 day presets (no later-ticket tabs)', () => {
-            for (const label of ['All dates', 'Today', 'Tomorrow', 'Next 7 days', 'This month']) {
+          test('strip carries All plus the day presets and the #106 intraday tabs (Custom still later)', () => {
+            for (const label of ['All dates', 'Today', 'Tomorrow', 'Tonight', 'This weekend', 'Next 7 days', 'This month']) {
               assert(main.includes('>' + label + '<'), 'Missing tab: ' + label);
             }
-            assert(!main.includes('>Tonight<'), 'Tonight arrives in #106');
-            assert(!main.includes('>This weekend<'), 'Weekend arrives in #106');
             assert(!main.includes('>Custom<'), 'Custom arrives in #107');
           });
 
@@ -1382,6 +1414,65 @@
             assert(helpersText.includes('window.syncDateParams'), 'Missing syncDateParams');
             assert(shellText.includes('initialDatePreset'), 'Missing boot seed');
             assert(indexText.includes('date-windows.js'), 'Engine must load before shell boots');
+          });
+        } catch (e) {
+          group.tests.push({ name: 'Load date tab files', pass: false, error: e.message });
+        }
+        results.push(group);
+        render();
+      }
+
+      // Date-tab intraday chrome tests (#106): Tonight + This weekend ride the
+      // same commit/URL/boot contract as the #105 day presets (instant commit,
+      // pressed state, evergreen ?date= links, history-replace). Like #105,
+      // these fetch the shipped files — the repo's established seam for
+      // view-layer checks — with a bare-node mirror in
+      // scripts/validate_date_tabs.js.
+      async function runDateTabs106ChromeTests() {
+        const group = { name: 'Date tabs (#106)', tests: [] };
+        const test = makeGroupTester(group);
+        const get = fetchText;
+        try {
+          const [main, helpersText, shellText] = await Promise.all([
+            get('Main.xmlui'),
+            get('helpers.js'),
+            get('shell.js')
+          ]);
+
+          test('strip carries Tonight and This weekend tabs', () => {
+            assert(main.includes('>Tonight<'), 'Missing tab: Tonight');
+            assert(main.includes('>This weekend<'), 'Missing tab: This weekend');
+          });
+
+          test('intraday tabs commit instantly like the day presets', () => {
+            for (const key of ['tonight', 'weekend']) {
+              assert(new RegExp("dateWindowForPreset\\('" + key + "'\\)").test(main),
+                'Missing engine-backed commit for: ' + key);
+              assert(new RegExp("datePreset = '" + key + "'[\\s\\S]{0,300}?displayStartIndex = 0").test(main),
+                'Commit must reset paging for: ' + key);
+              assert(new RegExp("datePreset = '" + key + "'[\\s\\S]{0,400}?syncDateParams").test(main),
+                'Commit must sync the URL for: ' + key);
+            }
+            assert(main.includes('scrollRequest = scrollRequest + 1'), 'Commit must scroll to top');
+          });
+
+          test('intraday tabs show pressed state when active', () => {
+            for (const key of ['tonight', 'weekend']) {
+              assert(main.includes("datePreset === '" + key + "' ? 'solid' : 'outlined'"),
+                'Missing pressed state for: ' + key);
+            }
+          });
+
+          test('intraday presets sync as evergreen ?date= links', () => {
+            assert(helpersText.includes("'tonight'"), 'DATE_TAB_PRESETS must include tonight');
+            assert(helpersText.includes("'weekend'"), 'DATE_TAB_PRESETS must include weekend');
+            assert(/syncDateParams[\s\S]{0,800}?replaceState/.test(helpersText),
+              'Date commits must use history-replace (Back skips filter states)');
+          });
+
+          test('boot seed honors the intraday evergreen keys', () => {
+            assert(/HONORED[^}]*tonight/.test(shellText), 'Boot seed must honor ?date=tonight');
+            assert(/HONORED[^}]*weekend/.test(shellText), 'Boot seed must honor ?date=weekend');
           });
         } catch (e) {
           group.tests.push({ name: 'Load date tab files', pass: false, error: e.message });
@@ -1918,6 +2009,15 @@
         results.push({
           name: 'Date tabs (#105)',
           tests: [{ name: 'Run date tab tests', pass: false, error: err.message }]
+        });
+        render();
+      });
+
+      // Run date tab intraday chrome tests (async, independent of Supabase)
+      runDateTabs106ChromeTests().catch(err => {
+        results.push({
+          name: 'Date tabs (#106)',
+          tests: [{ name: 'Run date tab intraday tests', pass: false, error: err.message }]
         });
         render();
       });

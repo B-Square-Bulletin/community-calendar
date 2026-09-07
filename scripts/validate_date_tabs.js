@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // validate_date_tabs.js — static chrome check for #105 (day-preset tab strip,
-// slider removed).
+// slider removed) plus #106 (Tonight + This-weekend intraday tabs).
 //
 // WHY: the tab strip is declarative XMLUI markup with no pure-logic seam, so
 // test.html unit tests don't apply (per #103 Testing Decisions, chrome is
@@ -46,8 +46,12 @@ check('tab strip carries Next 7 days tab',
   !!main && />Next 7 days</.test(main));
 check('tab strip carries This month tab',
   !!main && />This month</.test(main));
-check('tab strip does not carry later-ticket tabs (Tonight/Weekend/Custom)',
-  !!main && !/>Tonight</.test(main) && !/>This weekend</.test(main) && !/>Custom</.test(main));
+check('tab strip carries Tonight tab (#106)',
+  !!main && />Tonight</.test(main));
+check('tab strip carries This weekend tab (#106)',
+  !!main && />This weekend</.test(main));
+check('tab strip does not carry the later-ticket Custom tab',
+  !!main && !/>Custom</.test(main));
 check('tab strip wraps without horizontal scroll',
   !!main && /id="dateTabStrip"[\s\S]{0,400}?wrapContent="true"/.test(main));
 
@@ -99,6 +103,23 @@ check('shell.js seeds the date preset before first paint',
   !!shell && /initialDatePreset/.test(shell));
 check('date-windows engine loads before shell boots',
   !!index && index.includes('date-windows.js'));
+
+// --- Intraday tabs (#106): same commit/URL/boot contract as day presets ---
+check('tonight commits via the engine with paging reset, scroll, and URL sync',
+  !!main && /dateWindowForPreset\('tonight'\)/.test(main)
+  && /datePreset = 'tonight'[\s\S]{0,300}?displayStartIndex = 0/.test(main)
+  && /datePreset = 'tonight'[\s\S]{0,400}?syncDateParams/.test(main));
+check('weekend commits via the engine with paging reset, scroll, and URL sync',
+  !!main && /dateWindowForPreset\('weekend'\)/.test(main)
+  && /datePreset = 'weekend'[\s\S]{0,300}?displayStartIndex = 0/.test(main)
+  && /datePreset = 'weekend'[\s\S]{0,400}?syncDateParams/.test(main));
+check('intraday tabs show pressed state when active',
+  !!main && /datePreset === 'tonight' \? 'solid' : 'outlined'/.test(main)
+  && /datePreset === 'weekend' \? 'solid' : 'outlined'/.test(main));
+check('helpers.js date-tab presets include the intraday keys',
+  !!helpers && /'tonight'/.test(helpers) && /'weekend'/.test(helpers));
+check('shell.js boot seed honors the intraday evergreen keys',
+  !!shell && /HONORED[^}]*tonight/.test(shell) && /HONORED[^}]*weekend/.test(shell));
 
 // --- Composition: date + search + category; counts reflect the window ---
 check('category counts computed after date filtering',

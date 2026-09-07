@@ -276,15 +276,19 @@
         <Option value="picks" label="my picks" />
       </HStack>
     </RadioGroup>
-    <!-- Date-tab strip (#105): day-granular presets, direct replacement for
-         the removed slider. Each tap commits instantly — one absolute window
-         feeds the list and the pager, paging resets plus scroll-to-top fire
-         on commit only, and the commit syncs the URL with history-replace.
-         Tonight, This weekend, and Custom arrive in later tickets. -->
+    <!-- Date-tab strip (#105 day presets + #106 intraday tabs): each tap
+         commits instantly — one absolute window feeds the list and the
+         pager, paging resets plus scroll-to-top fire on commit only, and
+         the commit syncs the URL with history-replace. Tonight is
+         start-time-only from 5pm city-time; the weekend is Fri 17:00
+         through Sunday night (engine-resolved per weekday). Custom
+         arrives in a later ticket. -->
     <HStack id="dateTabStrip" verticalAlignment="center" gap="$space-1" wrapContent="true" width="100%" marginBottom="$space-2">
       <Button variant="{datePreset === 'all' ? 'solid' : 'outlined'}" onClick="datePreset = 'all'; dateWindowStart = null; dateWindowEnd = null; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncDateParams({preset: 'all'})">All dates</Button>
       <Button variant="{datePreset === 'today' ? 'solid' : 'outlined'}" onClick="const w = window.dateWindowForPreset('today'); datePreset = 'today'; dateWindowStart = w.start; dateWindowEnd = w.end; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncDateParams({preset: 'today'})">Today</Button>
+      <Button variant="{datePreset === 'tonight' ? 'solid' : 'outlined'}" onClick="const w = window.dateWindowForPreset('tonight'); datePreset = 'tonight'; dateWindowStart = w.start; dateWindowEnd = w.end; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncDateParams({preset: 'tonight'})">Tonight</Button>
       <Button variant="{datePreset === 'tomorrow' ? 'solid' : 'outlined'}" onClick="const w = window.dateWindowForPreset('tomorrow'); datePreset = 'tomorrow'; dateWindowStart = w.start; dateWindowEnd = w.end; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncDateParams({preset: 'tomorrow'})">Tomorrow</Button>
+      <Button variant="{datePreset === 'weekend' ? 'solid' : 'outlined'}" onClick="const w = window.dateWindowForPreset('weekend'); datePreset = 'weekend'; dateWindowStart = w.start; dateWindowEnd = w.end; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncDateParams({preset: 'weekend'})">This weekend</Button>
       <Button variant="{datePreset === 'next7' ? 'solid' : 'outlined'}" onClick="const w = window.dateWindowForPreset('next7'); datePreset = 'next7'; dateWindowStart = w.start; dateWindowEnd = w.end; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncDateParams({preset: 'next7'})">Next 7 days</Button>
       <Button variant="{datePreset === 'month' ? 'solid' : 'outlined'}" onClick="const w = window.dateWindowForPreset('month'); datePreset = 'month'; dateWindowStart = w.start; dateWindowEnd = w.end; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncDateParams({preset: 'month'})">This month</Button>
     </HStack>

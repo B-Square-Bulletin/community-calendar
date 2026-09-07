@@ -279,19 +279,21 @@ window._xsLogs = [];
     document.title = window.cityName + ' Community Calendar';
   };
 
-  // Date-tab boot seed (#105): first paint already reflects a shared date
-  // link, alongside the existing search/category seeds above. Only the
-  // day-granular presets of this ticket are honored; any other key
-  // (unknown, tonight/weekend/custom from later tickets, or a from/to pair)
+  // Date-tab boot seed (#105 day presets + #106 intraday tabs): first paint
+  // already reflects a shared date link, alongside the existing
+  // search/category seeds above. Only known rolling presets are honored;
+  // any other key (unknown, custom from a later ticket, or a from/to pair)
   // falls back to All so bad links never strand the visitor on an empty.
+  // The legacy `thismonth` key maps to the engine's `month` preset.
   window.initialDatePreset = 'all';
   window.initialDateStart = null;
   window.initialDateEnd = null;
   (function () {
-    var HONORED = { today: 1, tomorrow: 1, next7: 1, thismonth: 1 };
+    var HONORED = { today: 1, tonight: 1, tomorrow: 1, weekend: 1, next7: 1, month: 1, thismonth: 1 };
     var key = null;
     try { key = params.get('date'); } catch (e) { key = null; }
     if (!key || !HONORED[key]) return;
+    if (key === 'thismonth') key = 'month';
     var tz = (window._cities && window.cityFilter && window._cities[window.cityFilter] &&
       window._cities[window.cityFilter].timezone) || 'UTC';
     try {
