@@ -103,6 +103,102 @@ window.dateWindowForPreset = function(preset) {
   }
 };
 
+// --- Custom range picker (#107) ---
+// Today in the city timezone as yyyy-MM-dd (the picker's date-only minimum;
+// recomputed on every call so boot plus day-rollover stay correct).
+window.todayDateOnly = function() {
+  try {
+    var tz = getCityTimezone() || 'UTC';
+    return new Intl.DateTimeFormat('en-CA', {
+      timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit'
+    }).format(new Date());
+  } catch (e) {
+    return new Date().toISOString().substring(0, 10);
+  }
+};
+
+// City timezone for the picker (the stock control resolves its calendar in
+// this zone so day boundaries match the committed window).
+window.customPickerTimezone = function() {
+  return getCityTimezone() || 'UTC';
+};
+
+// Past dates disabled at the control level: everything before today.
+window.customDisabledDates = function() {
+  return [{ before: window.todayDateOnly() }];
+};
+
+// Boot-computed forward presets for the stock picker: Next 7, Next 30, and
+// This-month-remainder as {label, from, to} in city-timezone yyyy-MM-dd.
+// Computed fresh on every call (boot plus day-rollover); the built-in
+// backward presets are never supplied so they stay hidden.
+window.customForwardPresets = function() {
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function fmt(y, mo, d) { return y + '-' + pad(mo) + '-' + pad(d); }
+  function cityToday() {
+    var tz = getCityTimezone() || 'UTC';
+    var parts = new Intl.DateTimeFormat('en-CA', {
+      timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit'
+    }).formatToParts(new Date());
+    var v = {};
+    parts.forEach(function(p) { v[p.type] = p.value; });
+    return { y: +v.year, mo: +v.month, d: +v.day };
+  }
+  function addDays(y, mo, d, n) {
+    var t = new Date(Date.UTC(y, mo - 1, d) + n * 86400000);
+    return { y: t.getUTCFullYear(), mo: t.getUTCMonth() + 1, d: t.getUTCDate() };
+  }
+  try {
+    var t = cityToday();
+    var next7End = addDays(t.y, t.mo, t.d, 6);
+    var next30End = addDays(t.y, t.mo, t.d, 29);
+    var monthEnd = new Date(Date.UTC(t.y, t.mo, 0)).getUTCDate();
+    return [
+      { label: 'Next 7 days', from: fmt(t.y, t.mo, t.d), to: fmt(next7End.y, next7End.mo, next7End.d) },
+      { label: 'Next 30 days', from: fmt(t.y, t.mo, t.d), to: fmt(next30End.y, next30End.mo, next30End.d) },
+      { label: 'This month', from: fmt(t.y, t.mo, t.d), to: fmt(t.y, t.mo, monthEnd) }
+    ];
+  } catch (e) {
+    return [];
+  }
+};
+
+// Resolve an exact Custom range to its committed window ({start, end} ISO
+// plus canonical from/to, truncated, clamped) in the city timezone via the
+// #104 engine. Null on malformed or partial input (the commit ignores it,
+// so nothing filters mid-drag or per tick). End-before-start coerces to a
+// single day, over-long ranges cap at 180 days, past starts clamp to today,
+// and ends past the prefetch horizon truncate with the truncation label.
+window.dateWindowForCustom = function(from, to) {
+  if (from == null || to == null) return null;
+  try {
+    if (typeof window.resolveCustomRange !== 'function') return null;
+    var opts = { timeZone: getCityTimezone() || 'UTC' };
+    try {
+      if (typeof window.getToDate === 'function') opts.horizonEnd = window.getToDate();
+    } catch (e) {}
+    var w = window.resolveCustomRange(from, to, opts);
+    if (!w || !w.start) return null;
+    return { start: w.start, end: w.end, from: w.from, to: w.to, truncated: !!w.truncated, clamped: !!w.clamped };
+  } catch (e) {
+    return null;
+  }
+};
+
+// Sync the canonical Custom link: exact from/to only with no preset key,
+// preserving sibling params (city, search, category, mode, images, embed,
+// cards). history-replace (not push) so Back leaves the calendar instead of
+// stepping through filter states.
+window.syncCustomParams = function(from, to) {
+  var url = new URL(window.location);
+  if (from && to) {
+    url.searchParams.set('from', from);
+    url.searchParams.set('to', to);
+    url.searchParams.delete('date');
+  }
+  window.history.replaceState({}, '', url);
+};
+
 // Filter events to the committed absolute window [startISO, endISO).
 // Null bounds (All) return the input by reference so downstream bindings
 // keep a stable identity; unparseable bounds fail open to All rather than

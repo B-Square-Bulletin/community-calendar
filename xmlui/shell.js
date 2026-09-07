@@ -279,23 +279,46 @@ window._xsLogs = [];
     document.title = window.cityName + ' Community Calendar';
   };
 
-  // Date-tab boot seed (#105 day presets + #106 intraday tabs): first paint
-  // already reflects a shared date link, alongside the existing
-  // search/category seeds above. Only known rolling presets are honored;
-  // any other key (unknown, custom from a later ticket, or a from/to pair)
-  // falls back to All so bad links never strand the visitor on an empty.
+  // Date-tab boot seed (#105 day presets + #106 intraday tabs + #107 Custom):
+  // first paint already reflects a shared date link, alongside the existing
+  // search/category seeds above. A complete valid from/to pair wins over the
+  // preset key and restores the exact Custom window; partial or invalid pairs
+  // and unknown keys fall back to All so bad links never strand the visitor
+  // on an empty. A clamped past start rewrites the URL for stable reload.
   // The legacy `thismonth` key maps to the engine's `month` preset.
   window.initialDatePreset = 'all';
   window.initialDateStart = null;
   window.initialDateEnd = null;
+  window.initialDateTruncationLabel = null;
   (function () {
     var HONORED = { today: 1, tonight: 1, tomorrow: 1, weekend: 1, next7: 1, month: 1, thismonth: 1 };
-    var key = null;
-    try { key = params.get('date'); } catch (e) { key = null; }
-    if (!key || !HONORED[key]) return;
-    if (key === 'thismonth') key = 'month';
     var tz = (window._cities && window.cityFilter && window._cities[window.cityFilter] &&
       window._cities[window.cityFilter].timezone) || 'UTC';
+    var key = null, from = null, to = null;
+    try {
+      key = params.get('date');
+      from = params.get('from');
+      to = params.get('to');
+    } catch (e) {}
+    if ((from != null || to != null) && typeof window.decodeDateParams === 'function') {
+      try {
+        var decoded = window.decodeDateParams({ date: key, from: from, to: to }, { timeZone: tz });
+        if (!decoded || decoded.preset !== 'custom' || !decoded.start) return;
+        window.initialDatePreset = 'custom';
+        window.initialDateStart = decoded.start;
+        window.initialDateEnd = decoded.end;
+        if (decoded.rewritten) {
+          var url = new URL(window.location);
+          url.searchParams.set('from', decoded.from);
+          url.searchParams.set('to', decoded.to);
+          url.searchParams.delete('date');
+          window.history.replaceState({}, '', url.toString());
+        }
+      } catch (e) {}
+      return;
+    }
+    if (!key || !HONORED[key]) return;
+    if (key === 'thismonth') key = 'month';
     try {
       if (typeof window.resolveDatePreset !== 'function') return;
       var w = window.resolveDatePreset(key, { timeZone: tz });

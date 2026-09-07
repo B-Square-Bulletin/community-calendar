@@ -50,8 +50,7 @@ check('tab strip carries Tonight tab (#106)',
   !!main && />Tonight</.test(main));
 check('tab strip carries This weekend tab (#106)',
   !!main && />This weekend</.test(main));
-check('tab strip does not carry the later-ticket Custom tab',
-  !!main && !/>Custom</.test(main));
+// Tonight/Weekend landed in #106; Custom arrives in #107 (checked below).
 check('tab strip wraps without horizontal scroll',
   !!main && /id="dateTabStrip"[\s\S]{0,400}?wrapContent="true"/.test(main));
 
@@ -129,6 +128,39 @@ check('picks view ignores the window',
     const picksBlock = (main.match(/viewMode === 'picks'[\s\S]*?(?=<\/VStack>)/g) || []).join('\n');
     return !/dateWindow|datePreset|dateFilteredEvents/.test(picksBlock);
   })());
+
+// --- Custom range picker (#107): stock range control behind the Custom tab ---
+check('tab strip carries the Custom tab (#107)',
+  !!main && />Custom</.test(main));
+check('custom tab shows pressed state when active',
+  !!main && /datePreset === 'custom' \? 'solid' : 'outlined'/.test(main));
+check('custom range picker present in range mode with explicit confirm',
+  !!main && /<DatePicker[\s\S]{0,600}?mode="range"/.test(main)
+  && /<DatePicker[\s\S]{0,1200}?confirmRangeSelection="true"/.test(main));
+check('custom picker uses date-only format plus the city timezone',
+  !!main && /<DatePicker[\s\S]{0,1200}?dateFormat="yyyy-MM-dd"/.test(main)
+  && /<DatePicker[\s\S]{0,1200}?timeZone=/.test(main));
+check('custom picker disables past dates with today as the minimum',
+  !!main && /<DatePicker[\s\S]{0,1600}?disabledDates=/.test(main)
+  && /<DatePicker[\s\S]{0,1600}?startDate=/.test(main));
+check('custom picker offers only forward presets (no built-in backward keys)',
+  !!main && /<DatePicker[\s\S]{0,1600}?presets=/.test(main)
+  && !/last7Days|last30Days|thisMonth|lastMonth/.test(main));
+check('custom confirm commits once via the engine with paging reset, scroll, and canonical link',
+  !!main && /dateWindowForCustom\(/.test(main)
+  && /datePreset = 'custom'[\s\S]{0,500}?displayStartIndex = 0/.test(main)
+  && /datePreset = 'custom'[\s\S]{0,600}?syncCustomParams/.test(main));
+check('horizon overrun renders the truncation label below the tabs',
+  !!main && /Showing through/.test(main) && /calendar currently ends there/.test(main));
+check('helpers.js exposes the custom seam',
+  !!helpers && /window\.dateWindowForCustom/.test(helpers)
+  && /window\.syncCustomParams/.test(helpers)
+  && /window\.customForwardPresets/.test(helpers)
+  && /window\.todayDateOnly/.test(helpers));
+check('helpers.js custom seam commits with history-replace and canonical from/to only',
+  !!helpers && /syncCustomParams[\s\S]{0,800}?replaceState/.test(helpers));
+check('shell.js boot seed honors the custom from/to pair with clamp rewrite',
+  !!shell && /from/.test(shell) && /initialDatePreset = 'custom'/.test(shell));
 
 console.log(failures === 0 ? '\nALL CHECKS PASSED' : `\n${failures} CHECKS FAILED`);
 process.exit(failures === 0 ? 0 : 1);

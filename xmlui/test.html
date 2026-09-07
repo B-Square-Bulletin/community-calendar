@@ -1383,11 +1383,10 @@
             get('Globals.xs')
           ]);
 
-          test('strip carries All plus the day presets and the #106 intraday tabs (Custom still later)', () => {
-            for (const label of ['All dates', 'Today', 'Tomorrow', 'Tonight', 'This weekend', 'Next 7 days', 'This month']) {
+          test('strip carries All plus every preset tab including Custom (#107)', () => {
+            for (const label of ['All dates', 'Today', 'Tomorrow', 'Tonight', 'This weekend', 'Next 7 days', 'This month', 'Custom']) {
               assert(main.includes('>' + label + '<'), 'Missing tab: ' + label);
             }
-            assert(!main.includes('>Custom<'), 'Custom arrives in #107');
           });
 
           test('slider deleted outright (no dual UI, no orphaned vars)', () => {
@@ -1473,6 +1472,75 @@
           test('boot seed honors the intraday evergreen keys', () => {
             assert(/HONORED[^}]*tonight/.test(shellText), 'Boot seed must honor ?date=tonight');
             assert(/HONORED[^}]*weekend/.test(shellText), 'Boot seed must honor ?date=weekend');
+          });
+        } catch (e) {
+          group.tests.push({ name: 'Load date tab files', pass: false, error: e.message });
+        }
+        results.push(group);
+        render();
+      }
+
+      // Date-tab custom chrome tests (#107): the Custom tab plus the stock
+      // range picker behind it. Like #105/#106 these fetch the shipped files
+      // — the repo's established seam for view-layer checks — with a
+      // bare-node mirror in scripts/validate_date_tabs.js.
+      async function runDateTabs107ChromeTests() {
+        const group = { name: 'Date tabs (#107)', tests: [] };
+        const test = makeGroupTester(group);
+        const get = fetchText;
+        try {
+          const [main, helpersText, shellText] = await Promise.all([
+            get('Main.xmlui'),
+            get('helpers.js'),
+            get('shell.js')
+          ]);
+
+          test('strip carries the Custom tab with pressed state', () => {
+            assert(main.includes('>Custom<'), 'Missing tab: Custom');
+            assert(main.includes("datePreset === 'custom' ? 'solid' : 'outlined'"),
+              'Missing pressed state for: custom');
+          });
+
+          test('stock range picker opens from the Custom tab with explicit confirm only', () => {
+            assert(/<DatePicker[\s\S]{0,600}?mode="range"/.test(main), 'Picker must run in range mode');
+            assert(/<DatePicker[\s\S]{0,1200}?confirmRangeSelection="true"/.test(main),
+              'Picker must require explicit confirm (no auto-commit on second click)');
+            assert(main.includes('customRangePicker.focus()'), 'Custom tab must open the picker');
+          });
+
+          test('picker uses date-only format, the city timezone, and a today minimum', () => {
+            assert(/<DatePicker[\s\S]{0,1200}?dateFormat="yyyy-MM-dd"/.test(main),
+              'Picker must use date-only yyyy-MM-dd');
+            assert(/<DatePicker[\s\S]{0,1200}?timeZone=/.test(main), 'Picker must use the city timezone');
+            assert(/<DatePicker[\s\S]{0,1600}?startDate=/.test(main), 'Picker must set today as the minimum');
+            assert(/<DatePicker[\s\S]{0,1600}?disabledDates=/.test(main), 'Picker must disable past dates');
+          });
+
+          test('picker offers only the forward presets (no built-in backward keys)', () => {
+            assert(/<DatePicker[\s\S]{0,1600}?presets=/.test(main), 'Picker must supply forward presets');
+            assert(!/last7Days|last30Days|thisMonth|lastMonth/.test(main),
+              'Built-in backward presets must stay hidden');
+            assert(helpersText.includes('window.customForwardPresets'), 'Missing customForwardPresets seam');
+          });
+
+          test('confirm commits once through the engine and syncs the canonical link', () => {
+            assert(/dateWindowForCustom\(/.test(main), 'Confirm must resolve via dateWindowForCustom');
+            assert(/datePreset = 'custom'[\s\S]{0,500}?displayStartIndex = 0/.test(main),
+              'Confirm must reset paging');
+            assert(/datePreset = 'custom'[\s\S]{0,600}?syncCustomParams/.test(main),
+              'Confirm must sync the exact-date link');
+            assert(/syncCustomParams[\s\S]{0,800}?replaceState/.test(helpersText),
+              'Custom commits must use history-replace (Back skips filter states)');
+          });
+
+          test('horizon overrun renders the truncation label below the tabs', () => {
+            assert(main.includes('Showing through'), 'Missing truncation copy');
+            assert(main.includes('calendar currently ends there'), 'Missing truncation copy');
+          });
+
+          test('boot seed honors the custom from/to pair with clamp rewrite', () => {
+            assert(shellText.includes("initialDatePreset = 'custom'"), 'Boot seed must restore Custom');
+            assert(/decodeDateParams/.test(shellText), 'Boot seed must decode the from/to pair');
           });
         } catch (e) {
           group.tests.push({ name: 'Load date tab files', pass: false, error: e.message });
@@ -2018,6 +2086,15 @@
         results.push({
           name: 'Date tabs (#106)',
           tests: [{ name: 'Run date tab intraday tests', pass: false, error: err.message }]
+        });
+        render();
+      });
+
+      // Run date tab custom chrome tests (async, independent of Supabase)
+      runDateTabs107ChromeTests().catch(err => {
+        results.push({
+          name: 'Date tabs (#107)',
+          tests: [{ name: 'Run date tab custom tests', pass: false, error: err.message }]
         });
         render();
       });
