@@ -20,18 +20,6 @@ _Avoid_: SQL unit test, production test
 File-content assertions over declarative markup (`.xmlui`/theme files) with no runtime execution. Runs as bare node, distinct from browser unit tests in `xmlui/test.html`.
 _Avoid_: JS unit test, integration test (when referring to this script type)
 
-**Brand chrome**:
-The BSB masthead and footer components (logo, "Community Calendar" sub-label, footer links) — the site's brand lockup, distinct from event content.
-_Avoid_: Header, banner (when referring to the brand lockup)
-
-**Theme**:
-A token JSON file under `xmlui/themes/` (e.g. `b-square-bulletin.json`) controlling colors, fonts, and surfaces. Themes may declare per-tone values.
-_Avoid_: Skin, stylesheet (when referring to the token file)
-
-**Tone**:
-The light/dark display state flipped by the `ToneSwitch` control. `$color-*` tokens resolve per tone at render time; image assets do not adapt on their own.
-_Avoid_: Theme (when referring to light/dark state)
-
 **Source**:
 A venue, organization, group, or government body that contributes events to the calendar. The user-facing concept — what a calendar visitor sees (e.g., "Buskirk-Chumley Theater").
 _Avoid_: Venue, organization (when referring to the calendar entry point)

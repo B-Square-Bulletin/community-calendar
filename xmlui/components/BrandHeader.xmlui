@@ -1,11 +1,15 @@
 <!-- BSB masthead: centered logo + sub-label with Variant B 4px red rule.
      Shown on all standalone screens; hidden on embed. Chrome font (Inter) is
      scoped here, not in the theme, because the theme's fontFamily applies globally.
-     Dark-tone safety (#90): the logo sits in a <Theme tone="light"> island on a
-     pinned-light badge, so the black SVG wordmark stays visible when the app
-     tone is dark. The single SVG asset is untouched and no tone state is
-     tracked. The sub-label uses a theme text token, which the engine resolves
-     per tone. -->
+     Dark-mode safety (#90): the SVG wordmark is black paths baked into an
+     <img>, so it cannot recolor itself when the app switches to the dark
+     tone. The white rounded box behind the logo is what keeps it visible:
+     it gives the black wordmark a light background in both tones while the
+     single SVG asset stays untouched and no tone state is tracked. The
+     <Theme tone="light"> wrapper pins the light tone for this subtree so any
+     token-based styling inside it resolves to light-tone values. The
+     sub-label uses $color-text-primary, which the BSB theme defines
+     separately for the light and dark tones. -->
 <Fragment>
   <VStack
     when="{!window.embed}"
@@ -16,8 +20,9 @@
     borderBottom="4px solid $color-primary"
     fontFamily="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
     <Theme tone="light">
-      <!-- "white" is pinned, not themed: the badge is the light surface the
-           black wordmark needs. Do not convert to a $color-* token. -->
+      <!-- "white" is deliberately a literal, not a theme token: the box must
+           stay light in the dark tone too, which is exactly what keeps the
+           black wordmark readable. Do not convert to a $color-* token. -->
       <Stack backgroundColor="white" padding="$space-2" borderRadius="$borderRadius">
         <Link to="https://bsquarebulletin.com/">
           <Image

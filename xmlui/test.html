@@ -1100,12 +1100,13 @@
         const test = makeGroupTester(group);
         const get = fetchText;
         try {
-          const [header, footer, main, configText, logo] = await Promise.all([
+          const [header, footer, main, configText, logo, themeText] = await Promise.all([
             get('components/BrandHeader.xmlui'),
             get('components/BrandFooter.xmlui'),
             get('Main.xmlui'),
             get('config.json'),
-            get('icons/BSB_Logo-2-color-horiz.svg')
+            get('icons/BSB_Logo-2-color-horiz.svg'),
+            get('themes/b-square-bulletin.json')
           ]);
 
           test('header links vendored logo to bsquarebulletin.com same-tab', () => {
@@ -1116,7 +1117,7 @@
 
           test('header carries sub-label, red rule, Inter, embed gate', () => {
             assert(header.includes('Community Calendar'), 'Missing sub-label');
-            assert(/\$color-text-(primary|secondary)/.test(header), 'Sub-label must use a theme text token (dark-tone safe)');
+            assert(header.includes('$color-text-primary'), 'Sub-label must use $color-text-primary (dark-tone safe)');
             assert(!/color\s*=\s*["']black["']/.test(header), 'Sub-label must not hard-code black');
             assert(header.includes('borderBottom="4px solid $color-primary"'), 'Missing 4px red rule');
             assert(header.includes('Inter'), 'Missing Inter chrome font');
@@ -1124,13 +1125,23 @@
           });
 
           test('header logo is tone-safe in dark mode (issue #90)', () => {
-            assert(/<Theme[^>]*tone="light"/.test(header), 'Logo must sit in a <Theme tone="light"> island');
+            assert(/<Theme[^>]*tone="light"/.test(header), 'Logo must sit in a <Theme tone="light"> wrapper');
             assert(/BSB_Logo-2-color-horiz\.svg\?v=.*APP_VERSION/.test(header), 'Missing versioned logo ref');
             assert(!/bsquarebulletin\.com[^>]*target="_blank"/.test(header), 'Logo link must stay same-tab');
-            assert(header.includes('backgroundColor="white"'), 'Island must paint a pinned-light badge behind the logo');
+            assert(header.includes('backgroundColor="white"'), 'Wrapper must paint a white box behind the logo (what keeps the black wordmark visible)');
             assert(header.indexOf('<Theme') < header.indexOf('BSB_Logo-2-color-horiz.svg') &&
               header.indexOf('BSB_Logo-2-color-horiz.svg') < header.indexOf('</Theme>'),
-              'Logo must be nested inside the light island');
+              'Logo must be nested inside the light-tone wrapper');
+            assert(/fill:#231f20/i.test(logo), 'Wordmark must stay near-black (asset untouched)');
+            assert(/fill:#d21c2d/i.test(logo), 'Red square must stay brand red (no filter shift)');
+          });
+
+          test('sub-label text token defined per tone (issue #90)', () => {
+            const theme = JSON.parse(themeText);
+            const light = theme.tones && theme.tones.light.themeVars['color-text-primary'];
+            const dark = theme.tones && theme.tones.dark.themeVars['color-text-primary'];
+            assert(light && dark, 'BSB theme must define color-text-primary for light AND dark tones');
+            assert(light !== dark, 'Light and dark text values must differ, got: ' + light);
           });
 
           test('footer has red bar, 4 spec links, copyright, embed gate', () => {
