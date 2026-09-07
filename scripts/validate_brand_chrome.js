@@ -51,9 +51,7 @@ check('header logo pinned in a light-tone island (single asset, no tone tracking
   !!header && /<Theme[^>]*tone="light"/.test(header)
   && LOGO_REF.test(header));
 check('header island paints a pinned-light badge behind the logo',
-  !!header && header.includes('backgroundColor="white"')
-  && header.indexOf('<Theme') < header.indexOf('BSB_Logo-2-color-horiz.svg')
-  && header.indexOf('BSB_Logo-2-color-horiz.svg') < header.indexOf('</Theme>'));
+  !!header && /<Theme[^>]*tone="light"[\s\S]*?backgroundColor="white"[\s\S]*?BSB_Logo-2-color-horiz\.svg[\s\S]*?<\/Theme>/.test(header));
 check('header 4px red bottom rule',
   !!header && /borderBottom="4px solid \$color-primary"/.test(header));
 check('header Inter chrome font scoped to component',
@@ -211,6 +209,7 @@ check('sub-label light token defined + meets AA on light surfaces',
     if (!c) return false;
     const vars = JSON.parse(themeText).themeVars;
     const surf = parseHsl(vars['color-surface']);
+    if (!surf) return false;
     const fg = hslToRgb(c.h, c.s, c.l);
     const white = [255, 255, 255];
     const surface = hslToRgb(surf.h, surf.s, surf.l);

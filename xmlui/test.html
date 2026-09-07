@@ -1129,8 +1129,7 @@
             assert(/BSB_Logo-2-color-horiz\.svg\?v=.*APP_VERSION/.test(header), 'Missing versioned logo ref');
             assert(!/bsquarebulletin\.com[^>]*target="_blank"/.test(header), 'Logo link must stay same-tab');
             assert(header.includes('backgroundColor="white"'), 'Wrapper must paint a white box behind the logo (what keeps the black wordmark visible)');
-            assert(header.indexOf('<Theme') < header.indexOf('BSB_Logo-2-color-horiz.svg') &&
-              header.indexOf('BSB_Logo-2-color-horiz.svg') < header.indexOf('</Theme>'),
+            assert(/<Theme[^>]*tone="light"[\s\S]*?backgroundColor="white"[\s\S]*?BSB_Logo-2-color-horiz\.svg[\s\S]*?<\/Theme>/.test(header),
               'Logo must be nested inside the light-tone wrapper');
             assert(/fill:#231f20/i.test(logo), 'Wordmark must stay near-black (asset untouched)');
             assert(/fill:#d21c2d/i.test(logo), 'Red square must stay brand red (no filter shift)');
@@ -1138,8 +1137,8 @@
 
           test('sub-label text token defined per tone (issue #90)', () => {
             const theme = JSON.parse(themeText);
-            const light = theme.tones && theme.tones.light.themeVars['color-text-primary'];
-            const dark = theme.tones && theme.tones.dark.themeVars['color-text-primary'];
+            const light = theme.tones?.light?.themeVars?.['color-text-primary'];
+            const dark = theme.tones?.dark?.themeVars?.['color-text-primary'];
             assert(light && dark, 'BSB theme must define color-text-primary for light AND dark tones');
             assert(light !== dark, 'Light and dark text values must differ, got: ' + light);
           });
