@@ -119,6 +119,12 @@ check('helpers.js date-tab presets include the intraday keys',
   !!helpers && /'tonight'/.test(helpers) && /'weekend'/.test(helpers));
 check('shell.js boot seed honors the intraday evergreen keys',
   !!shell && /HONORED[^}]*tonight/.test(shell) && /HONORED[^}]*weekend/.test(shell));
+check('this month commits and boots as ?date=thismonth (#103 contract)',
+  !!main && /dateWindowForPreset\('thismonth'\)/.test(main)
+  && /datePreset = 'thismonth'[\s\S]{0,400}?syncDateParams/.test(main)
+  && /datePreset === 'thismonth' \? 'solid' : 'outlined'/.test(main)
+  && !!helpers && /'thismonth'/.test(helpers)
+  && !!shell && /HONORED[^}]*thismonth/.test(shell));
 
 // --- Composition: date + search + category; counts reflect the window ---
 check('category counts computed after date filtering',

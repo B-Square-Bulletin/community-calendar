@@ -20,7 +20,7 @@
   // Canonical preset keys. Rolling presets encode as ?date=<key>; Custom
   // encodes as an exact ?from=yyyy-MM-dd&to=yyyy-MM-dd pair with no preset
   // key; All strips every date key.
-  var DATE_PRESETS = ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'month'];
+  var DATE_PRESETS = ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth'];
 
   var DATE_RE = /^(\d{4})-(\d{2})-(\d{2})$/;
 
@@ -131,6 +131,9 @@
     var nowMs = toMs(opts.now) != null ? toMs(opts.now) : Date.now();
     var horizonMs = toMs(opts.horizonEnd);
 
+    // Legacy read fallback: pre-rename links encoded ?date=month; the
+    // canonical key per the #103 URL contract is ?date=thismonth.
+    if (preset === 'month') preset = 'thismonth';
     if (preset === 'all' || !isKnownPreset(preset)) {
       return emptyWindow('all');
     }
@@ -181,7 +184,7 @@
       var plus7 = addDays(c.y, c.mo, c.d, 7);
       startMs = todayMs;
       endMs = midnightMs(plus7.y, plus7.mo, plus7.d, tz);
-    } else if (preset === 'month') {
+    } else if (preset === 'thismonth') {
       // This-month remainder: today through the end of the month.
       var firstNext = c.mo === 12
         ? { y: c.y + 1, mo: 1, d: 1 }
@@ -328,6 +331,9 @@
     }
 
     if (q.date != null) {
+      // Legacy read fallback (see resolveDatePreset): ?date=month decodes
+      // to the canonical thismonth window; only thismonth encodes.
+      if (q.date === 'month') q.date = 'thismonth';
       if (isKnownPreset(q.date)) {
         var w = q.date === 'all'
           ? emptyWindow('all')

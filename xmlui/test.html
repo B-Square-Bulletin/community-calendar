@@ -1117,15 +1117,28 @@
         });
 
         it('resolves This month to the month remainder', () => {
-          const w = resolveDatePreset('month', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          const w = resolveDatePreset('thismonth', { now: '2026-02-11T12:00:00Z', timeZone: LA });
           assertEqual(w.start, '2026-02-11T08:00:00.000Z');
           assertEqual(w.end, '2026-03-01T08:00:00.000Z');
         });
 
         it('ends This month at the next month on month-end', () => {
-          const w = resolveDatePreset('month', { now: '2026-01-31T20:00:00Z', timeZone: LA });
+          const w = resolveDatePreset('thismonth', { now: '2026-01-31T20:00:00Z', timeZone: LA });
           assertEqual(w.start, '2026-01-31T08:00:00.000Z');
           assertEqual(w.end, '2026-02-01T08:00:00.000Z');
+        });
+
+        it('decodes the legacy ?date=month key to the canonical thismonth window', () => {
+          // WHY: pre-rename links encoded ?date=month; the #103 contract is
+          // ?date=thismonth exact, so decode maps the legacy key forward
+          // while encode only ever emits the canonical key.
+          const now = '2026-02-11T12:00:00Z';
+          const expected = resolveDatePreset('thismonth', { now, timeZone: LA });
+          const decoded = decodeDateParams({ date: 'month' }, { now, timeZone: LA });
+          assertEqual(decoded.preset, 'thismonth');
+          assertEqual(decoded.start, expected.start);
+          assertEqual(decoded.end, expected.end);
+          assertDeepEqual(encodeDateParams({ preset: 'thismonth' }), { date: 'thismonth' });
         });
 
         it('resolves All to an empty window', () => {
@@ -1243,7 +1256,7 @@
 
         it('round-trips every rolling preset through the URL codec', () => {
           const now = '2026-02-11T12:00:00Z';
-          ['today', 'tonight', 'tomorrow', 'weekend', 'next7', 'month'].forEach((preset) => {
+          ['today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth'].forEach((preset) => {
             const expected = resolveDatePreset(preset, { now, timeZone: LA });
             const decoded = decodeDateParams(encodeDateParams({ preset }), { now, timeZone: LA });
             assertEqual(decoded.preset, preset, preset + ' preset');

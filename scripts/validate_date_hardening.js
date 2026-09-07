@@ -70,6 +70,8 @@ check('empty label for This weekend',
 check('empty label for Next 7 days',
   window.dateWindowLabel('next7'), 'in the next 7 days');
 check('empty label for This month',
+  window.dateWindowLabel('thismonth'), 'this month');
+check('empty label for legacy month key matches This month',
   window.dateWindowLabel('month'), 'this month');
 check('empty label for Custom',
   window.dateWindowLabel('custom'), 'in this date range');
@@ -77,12 +79,12 @@ check('empty label fails open on unknown keys',
   window.dateWindowLabel('bogus'), 'found');
 
 // --- Truncation copy (#108): preset windows truncate at the horizon ---
-const month = window.dateWindowForPreset('month');
+const month = window.dateWindowForPreset('thismonth');
 check('this-month window truncates at the horizon only when it overruns',
   [month.end, month.truncated],
   ['2026-03-01T08:00:00.000Z', false]);
 window.getToDate = () => '2026-02-15T08:00:00.000Z';
-const monthCut = window.dateWindowForPreset('month');
+const monthCut = window.dateWindowForPreset('thismonth');
 check('this-month window truncates mid-month when the horizon is nearer',
   [monthCut.end, monthCut.truncated],
   ['2026-02-15T08:00:00.000Z', true]);
@@ -158,6 +160,10 @@ check('malformed custom pair falls back to All',
   window.decodeDateParams({ from: '2026-02-30', to: '2026-03-01' }, { timeZone: 'America/Los_Angeles' }).preset, 'all');
 check('partial custom pair falls back to All',
   window.decodeDateParams({ from: '2026-02-12' }, { timeZone: 'America/Los_Angeles' }).preset, 'all');
+check('canonical thismonth key decodes to the month-remainder window',
+  window.decodeDateParams({ date: 'thismonth' }, { timeZone: 'America/Los_Angeles' }).preset, 'thismonth');
+check('legacy month key decodes to the canonical thismonth window',
+  window.decodeDateParams({ date: 'month' }, { timeZone: 'America/Los_Angeles' }).preset, 'thismonth');
 
 console.log(failures === 0 ? '\nALL CHECKS PASSED' : `\n${failures} CHECKS FAILED`);
 process.exit(failures === 0 ? 0 : 1);

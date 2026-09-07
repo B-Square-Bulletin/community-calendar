@@ -73,7 +73,7 @@ window.syncSearchParam = function(search) {
 // All strips only the date keys, and every commit preserves sibling params
 // (city, search, category, mode, images, embed, cards). history-replace (not
 // push) so Back leaves the calendar instead of stepping through tab history.
-window.DATE_TAB_PRESETS = ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'month'];
+window.DATE_TAB_PRESETS = ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth'];
 window.syncDateParams = function(sel) {
   var url = new URL(window.location);
   var preset = sel && sel.preset;
@@ -121,9 +121,12 @@ window.dateWindowLabel = function(preset) {
     tomorrow: 'tomorrow',
     weekend: 'this weekend',
     next7: 'in the next 7 days',
-    month: 'this month',
+    thismonth: 'this month',
     custom: 'in this date range'
   };
+  // Legacy read key (?date=month) maps to the same label as the canonical
+  // thismonth so old links never render the All copy.
+  if (preset === 'month') return 'this month';
   return labels[preset] || 'found';
 };
 

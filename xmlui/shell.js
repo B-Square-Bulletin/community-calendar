@@ -297,13 +297,14 @@ window._xsLogs = [];
   // preset key and restores the exact Custom window; partial or invalid pairs
   // and unknown keys fall back to All so bad links never strand the visitor
   // on an empty. A clamped past start rewrites the URL for stable reload.
-  // The legacy `thismonth` key maps to the engine's `month` preset.
+  // The legacy `month` key maps to the engine's canonical `thismonth`
+  // preset (the #103 URL contract is ?date=thismonth exact).
   window.initialDatePreset = 'all';
   window.initialDateStart = null;
   window.initialDateEnd = null;
   window.initialDateTruncationLabel = null;
   (function () {
-    var HONORED = { today: 1, tonight: 1, tomorrow: 1, weekend: 1, next7: 1, month: 1, thismonth: 1 };
+    var HONORED = { today: 1, tonight: 1, tomorrow: 1, weekend: 1, next7: 1, thismonth: 1, month: 1 };
     var tz = (window._cities && window.cityFilter && window._cities[window.cityFilter] &&
       window._cities[window.cityFilter].timezone) || 'UTC';
     var key = null, from = null, to = null;
@@ -333,7 +334,7 @@ window._xsLogs = [];
       return;
     }
     if (!key || !HONORED[key]) return;
-    if (key === 'thismonth') key = 'month';
+    if (key === 'month') key = 'thismonth';
     try {
       if (typeof window.resolveDatePreset !== 'function') return;
       var w = window.resolveDatePreset(key, { timeZone: tz, horizonEnd: window.toDate });
