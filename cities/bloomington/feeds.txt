@@ -251,7 +251,7 @@ cities/bloomington/simpleview_mcc.ics
 # cmd: python scrapers/ludus.py --url "https://mcct.ludus.com" --name "Monroe County Civic Theater" --default-location "Bloomington, IN"
 cities/bloomington/mcct.ics
 # Monroe County Master Gardeners
-# cmd: python scrapers/squarespace.py --url "https://www.mcmga.net/events" --name "Monroe County Master Gardeners"
+# cmd: python scrapers/squarespace.py --url "https://www.mcmga.net/eventscalendar" --name "Monroe County Master Gardeners"
 cities/bloomington/master_gardeners.ics
 # Off Night Productions
 # cmd: python scrapers/ludus.py --url "https://offnight.ludus.com" --name "Off Night Productions" --default-location "Bloomington, IN"
@@ -272,7 +272,7 @@ cities/bloomington/pottery_house_studio.ics
 # cmd: python scrapers/ticketmaster.py --venue-id KovZpZAdE6aA --name "Ruth N Halls Theatre" --default-url "https://events.iu.edu/theatre/"
 cities/bloomington/tm_ruth_halls.ics
 # Sassafras Audubon Society
-# cmd: python scrapers/squarespace.py --url "https://www.sassafrasaudubon.org/upcomingevents" --name "Sassafras Audubon Society"
+# cmd: python scrapers/squarespace.py --url "https://www.sassafrasaudubon.org/calendar" --name "Sassafras Audubon Society"
 cities/bloomington/sassafras_audubon.ics
 # Simon Skjodt Assembly Hall
 # cmd: python scrapers/ticketmaster.py --venue-id KovZpZAFdItA --name "Simon Skjodt Assembly Hall" --default-url "https://iuhoosiers.com/"
