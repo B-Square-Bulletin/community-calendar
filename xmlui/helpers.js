@@ -272,7 +272,15 @@ window.customForwardPresets = function() {
 // so nothing filters mid-drag or per tick). End-before-start coerces to a
 // single day, over-long ranges cap at 180 days, past starts clamp to today,
 // and ends past the prefetch horizon truncate with the truncation label.
-window.dateWindowForCustom = function(from, to) {
+// Takes the window shape {from, to} (prio-90 Data Clumps fix); the legacy
+// positional (from, to) pair still works so existing harnesses stay green.
+window.dateWindowForCustom = function(rangeOrFrom, to) {
+  var from = rangeOrFrom;
+  if (rangeOrFrom != null && typeof rangeOrFrom === 'object' && !Array.isArray(rangeOrFrom) &&
+      ('from' in rangeOrFrom || 'to' in rangeOrFrom)) {
+    from = rangeOrFrom.from;
+    to = rangeOrFrom.to;
+  }
   if (from == null || to == null) return null;
   try {
     if (typeof window.resolveCustomRange !== 'function') return null;
@@ -287,8 +295,15 @@ window.dateWindowForCustom = function(from, to) {
 // Sync the canonical Custom link: exact from/to only with no preset key,
 // preserving sibling params (city, search, category, mode, images, embed,
 // cards). history-replace (not push) so Back leaves the calendar instead of
-// stepping through filter states.
-window.syncCustomParams = function(from, to) {
+// stepping through filter states. Takes the committed window {from, to}
+// (prio-90); the legacy positional (from, to) pair still works.
+window.syncCustomParams = function(rangeOrFrom, to) {
+  var from = rangeOrFrom;
+  if (rangeOrFrom != null && typeof rangeOrFrom === 'object' && !Array.isArray(rangeOrFrom) &&
+      ('from' in rangeOrFrom || 'to' in rangeOrFrom)) {
+    from = rangeOrFrom.from;
+    to = rangeOrFrom.to;
+  }
   if (from && to) {
     window.replaceDateUrlParams({ date: null, from: from, to: to });
   } else {
@@ -315,7 +330,10 @@ function startIsMidnightInTz(iso, tz) {
   }
 }
 
-// Filter events to the committed absolute window [startISO, endISO).
+// Filter events to the committed absolute window {start, end} (prio-90 Data
+// Clumps fix: the window travels as one object, not loose positional
+// bounds). The legacy positional (startISO, endISO) form still works so
+// existing call sites and harnesses stay green.
 // Null bounds (All) return the input by reference so downstream bindings
 // keep a stable identity; unparseable bounds fail open to All rather than
 // stranding the visitor on an empty list.
@@ -324,7 +342,16 @@ function startIsMidnightInTz(iso, tz) {
 // midnight-anchored (time-unknown) starts, which never play at night;
 // multi-day events qualify by start day only with the end time ignored.
 // `opts.timeZone` overrides the city timezone (tests pin it explicitly).
-function filterByDateWindow(events, startISO, endISO, opts) {
+function filterByDateWindow(events, windowOrStartISO, endISOOrOpts, maybeOpts) {
+  var startISO = windowOrStartISO;
+  var endISO = endISOOrOpts;
+  var opts = maybeOpts;
+  if (windowOrStartISO != null && typeof windowOrStartISO === 'object' && !Array.isArray(windowOrStartISO) &&
+      ('start' in windowOrStartISO || 'end' in windowOrStartISO)) {
+    startISO = windowOrStartISO.start;
+    endISO = windowOrStartISO.end;
+    opts = endISOOrOpts;
+  }
   if (!events) return events;
   if (startISO == null || endISO == null) return events;
   var fromMs = new Date(startISO).getTime();
@@ -2011,12 +2038,21 @@ if (typeof window !== 'undefined') {
     return out;
   };
 
-  // Date-tab window filter (#105): absolute [startISO, endISO) over the
-  // committed window. Null bounds (All) return the input by reference, and
-  // the memo below keeps that stable identity so downstream bindings skip
-  // re-rendering while the window is unchanged.
+  // Date-tab window filter (#105): absolute {start, end} committed window
+  // (prio-90: one object, not loose bounds). Null bounds (All) return the
+  // input by reference, and the memo below keeps that stable identity so
+  // downstream bindings skip re-rendering while the window is unchanged.
   memoizeIngest('filterByDateWindow',
-    function(events, startISO, endISO, opts) {
+    function(events, windowOrStartISO, endISOOrOpts, maybeOpts) {
+      var startISO = windowOrStartISO;
+      var endISO = endISOOrOpts;
+      var opts = maybeOpts;
+      if (windowOrStartISO != null && typeof windowOrStartISO === 'object' && !Array.isArray(windowOrStartISO) &&
+          ('start' in windowOrStartISO || 'end' in windowOrStartISO)) {
+        startISO = windowOrStartISO.start;
+        endISO = windowOrStartISO.end;
+        opts = endISOOrOpts;
+      }
       return [startISO, endISO, opts && opts.startTimeOnly ? 1 : 0, (opts && opts.timeZone) || ''];
     });
 

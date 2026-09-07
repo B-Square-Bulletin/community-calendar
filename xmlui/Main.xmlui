@@ -140,12 +140,13 @@
   <variable name="expandedEnrichments" value="{window.expandEnrichments(enrichments.value, window.getFromDate(), window.getToDate()) || []}" />
   <variable name="combinedEvents" value="{window.combineEvents(events.value, expandedEnrichments)}" />
   <variable name="processedEvents" value="{window.processEvents(combinedEvents, hiddenSources)}" />
-  <!-- Single committed date window (#105): one absolute [start, end) feeds
-       both the rendered list and the pager guard below. All is null bounds
+  <!-- Single committed date window (#105): one absolute {start, end} feeds
+       both the rendered list and the pager guard below (prio-90: the window
+       travels as one object, not loose bounds). All is null bounds
        (the prefetched set passes through); Tonight is start-time-only per
        #103 (flagged all-day, midnight-anchored, and continuations excluded);
        Picks and Dashboard ignore it. -->
-  <variable name="dateFilteredEvents" value="{window.filterByDateWindow(processedEvents, dateWindowStart, dateWindowEnd, {startTimeOnly: datePreset === 'tonight'})}" />
+  <variable name="dateFilteredEvents" value="{window.filterByDateWindow(processedEvents, {start: dateWindowStart, end: dateWindowEnd}, {startTimeOnly: datePreset === 'tonight'})}" />
 
   <variable name="availableCities" value="{Object.keys(window._cities || {}).sort().map(city => ({ city }))}" />
 
@@ -306,7 +307,8 @@
          forward presets only (Next 7, Next 30, This month), and explicit
          confirm. Commit fires once via onDidChange on Proceed: malformed or
          partial input is ignored, past starts clamp, inverted ranges coerce
-         to a single day, and the canonical exact-date link syncs. -->
+         to a single day, and the canonical exact-date link syncs (prio-90:
+         the committed window travels as one object). -->
     <DatePicker
       id="customRangePicker"
       mode="range"
@@ -316,7 +318,7 @@
       disabledDates="{window.customDisabledDates()}"
       presets="{window.customForwardPresets()}"
       confirmRangeSelection="true"
-      onDidChange="(val) => { const w = window.dateWindowForCustom(val && val.from, val && val.to); if (!w) return; datePreset = 'custom'; dateWindowStart = w.start; dateWindowEnd = w.end; dateTruncationLabel = window.dateTruncationText(w); displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncCustomParams(w.from, w.to); }"
+      onDidChange="(val) => { const w = window.dateWindowForCustom(val); if (!w) return; datePreset = 'custom'; dateWindowStart = w.start; dateWindowEnd = w.end; dateTruncationLabel = window.dateTruncationText(w); displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncCustomParams(w); }"
     />
     <Text when="{dateTruncationLabel}" fontSize="$fontSize-sm" color="$color-text-secondary" value="{dateTruncationLabel}" />
     <!-- Empty window (#108): an explicit message plus a one-tap reset to

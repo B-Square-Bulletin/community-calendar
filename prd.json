@@ -109,9 +109,10 @@
     {
       "title": "Follow-up: pass the committed window as one object",
       "description": "{start,end,truncated} plus from/to travel as loose positional params across dateWindowForCustom/syncCustomParams/filterByDateWindow. Bundle them into one window object at these seams. Done when: custom resolve/sync and the date filter take/return the window shape, call sites updated (Main.xmlui, shell seed), tests green. No behavior change.",
-      "passes": false,
+      "passes": true,
       "reference": "https://github.com/B-Square-Bulletin/community-calendar/issues/104 (committed-window seam; Data Clumps smell)",
-      "priority": 90
+      "priority": 90,
+      "notes": "Done: dateWindowForCustom({from,to}), syncCustomParams({from,to}), and filterByDateWindow(events,{start,end},opts) take the committed window as one object; legacy positional overloads kept so existing test.html/harness calls stay green. Main.xmlui migrated: list filters via {start: dateWindowStart, end: dateWindowEnd}, custom confirm resolves via dateWindowForCustom(val) and syncs via syncCustomParams(w); memo key normalizes both forms. Shell seed needs no change (already decodes to a window object via decodeDateParams). Seams (repo-established, pre-approved): helpers unit + static chrome. Red first: object-form custom/sync/filter all failed pre-change; green after with positional parity. Durable tests WHY the window travels as one object (Data Clumps): 3 new test.html its (object==positional parity, object-All by reference, object+startTimeOnly), 6 hardening parity pins (incl. hand-computed PST custom literal), 3 chrome checks (list/custom-confirm/helpers object form). Checks: validate_date_tabs ALL PASSED, validate_date_hardening ALL PASSED, validate_custom_helpers ALL PASSED, pytest 97 passed, make lint clean, bench_collapse_long PASS, validate_pr_feeds clean. Decisions (unattended, pre-approved): dual-signature compat over a hard break (avoids churning green positional tests); picker val passed whole (its {from,to} is already the window shape); null window returns null. No behavior change; gate: object tests would fail if bundling regressed, edges (null/All/flag) pinned."
     },
     {
       "title": "Follow-up: inline or justify customPickerTimezone",

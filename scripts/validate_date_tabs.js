@@ -304,5 +304,27 @@ check('shell boot seed routes truncation through the shared formatter (no hand-r
   !!shell && /truncationLabelForWindow|dateTruncationText/.test(shell)
   && !/Showing through '/.test(shell));
 
+// --- Committed window as one object (prio-90 Data Clumps): custom resolve/
+// sync and the date filter take the window shape; call sites pass objects,
+// not loose positional bounds. Helpers keep the legacy positional overloads
+// so behavioral harnesses (hardening/custom) stay green — the parity pins
+// there prove no behavior change.
+check('date list filters through the window-object form',
+  !!main && /filterByDateWindow\(processedEvents,\s*\{start:\s*dateWindowStart,\s*end:\s*dateWindowEnd\}/.test(main));
+check('custom confirm resolves and syncs through the window-object form',
+  !!main && (() => {
+    const at = main.indexOf('<DatePicker');
+    if (at < 0) return false;
+    const handler = main.substring(at, at + 2200);
+    return /dateWindowForCustom\(val\)/.test(handler)
+      && /syncCustomParams\(w\)/.test(handler)
+      && !/dateWindowForCustom\(val && val\.from/.test(handler)
+      && !/syncCustomParams\(w\.from/.test(handler);
+  })());
+check('helpers window seams accept the object form (with positional fallback)',
+  !!helpers && /window\.dateWindowForCustom = function\(rangeOrFrom/.test(helpers)
+  && /window\.syncCustomParams = function\(rangeOrFrom/.test(helpers)
+  && /function filterByDateWindow\(events, windowOrStartISO/.test(helpers));
+
 console.log(failures === 0 ? '\nALL CHECKS PASSED' : `\n${failures} CHECKS FAILED`);
 process.exit(failures === 0 ? 0 : 1);

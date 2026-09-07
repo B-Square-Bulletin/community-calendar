@@ -1458,6 +1458,38 @@
           const result = filterByDateWindow(wknd, fri1700, mon0000);
           assertDeepEqual(result.map(e => e.id), ['fri-doors', 'sun-show']);
         });
+
+        it('window-object form matches the positional form (prio-90 Data Clumps)', () => {
+          // WHY (prio-90): {start,end} plus from/to traveled as loose
+          // positional params across the custom/date-filter seams; the
+          // committed window now travels as one object. Hand-computed
+          // literals as the independent truth; parity against the legacy
+          // positional form proves no behavior change.
+          const pos = filterByDateWindow(evts, '2026-02-11T08:00:00.000Z', '2026-02-18T08:00:00.000Z');
+          const obj = filterByDateWindow(evts, { start: '2026-02-11T08:00:00.000Z', end: '2026-02-18T08:00:00.000Z' });
+          assertDeepEqual(obj.map(e => e.id), pos.map(e => e.id));
+          assertDeepEqual(obj.map(e => e.id), [1, 2]);
+        });
+
+        it('window-object All ({start: null, end: null}) passes through by reference', () => {
+          // WHY (prio-90): the list binding commits All as null bounds; the
+          // object form must keep the stable by-reference identity so
+          // downstream bindings skip re-rendering.
+          assert(filterByDateWindow(evts, { start: null, end: null }) === evts, 'Object All must return the input by reference');
+        });
+
+        it('window-object form honors startTimeOnly opts', () => {
+          // WHY (prio-90): Tonight passes {startTimeOnly} alongside the
+          // window; the object form must carry opts in the third slot.
+          const OPTS = { startTimeOnly: true, timeZone: 'America/Los_Angeles' };
+          const night = [
+            { id: 'doors', start_time: '2026-02-12T01:00:00.000Z' },
+            { id: 'flagged', start_time: '2026-02-12T03:00:00.000Z', all_day: true },
+          ];
+          const result = filterByDateWindow(night,
+            { start: '2026-02-12T01:00:00.000Z', end: '2026-02-12T08:00:00.000Z' }, OPTS);
+          assertDeepEqual(result.map(e => e.id), ['doors']);
+        });
       });
 
       // Date-tab chrome tests (#105): the strip is declarative markup with no

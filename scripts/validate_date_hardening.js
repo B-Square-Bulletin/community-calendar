@@ -273,5 +273,61 @@ check('tab-strip list is a copy (mutating it leaves the engine list intact)',
   })(),
   true);
 
+// --- Committed window as one object (prio-90 Data Clumps): the custom
+// resolve/sync and the date filter take the window shape. Hand-computed PST
+// literals plus positional-vs-object parity prove no behavior change.
+// NOTE: the stubbed Feb-11 clock was restored to RealDate above, so re-stub
+// here for the date-literal pins (same NOW + horizon as the top of file).
+check('custom resolve accepts the {from, to} window shape',
+  (() => {
+    const StubDate = RealDate;
+    const nowMs = new StubDate('2026-02-11T12:00:00.000Z').getTime();
+    global.Date = class extends StubDate {
+      constructor(...a) { super(...(a.length ? a : [nowMs])); }
+      static now() { return nowMs; }
+    };
+    window.getToDate = () => '2026-03-01T08:00:00.000Z';
+    const w = window.dateWindowForCustom({ from: '2026-02-12', to: '2026-02-14' });
+    global.Date = RealDate;
+    return [w.start, w.end, w.from, w.to];
+  })(),
+  ['2026-02-12T08:00:00.000Z', '2026-02-15T08:00:00.000Z', '2026-02-12', '2026-02-14']);
+check('custom resolve object form matches the positional form',
+  (() => {
+    const a = window.dateWindowForCustom({ from: '2026-02-12', to: '2026-02-14' });
+    const b = window.dateWindowForCustom('2026-02-12', '2026-02-14');
+    return [a.start === b.start, a.end === b.end, a.from === b.from, a.to === b.to];
+  })(),
+  [true, true, true, true]);
+check('custom resolve ignores a null window object',
+  window.dateWindowForCustom(null), null);
+check('custom sync accepts the committed window object',
+  (() => {
+    window.location = new URL('https://example.com/?city=davis');
+    window.syncCustomParams({ from: '2026-02-12', to: '2026-02-14' });
+    const u = new URL(window.location);
+    return [u.searchParams.get('from'), u.searchParams.get('to'), u.searchParams.get('date')];
+  })(),
+  ['2026-02-12', '2026-02-14', null]);
+check('date filter accepts the {start, end} window shape with parity',
+  (() => {
+    const list = [
+      { id: 1, start_time: '2026-02-11T10:00:00.000Z' },
+      { id: 2, start_time: '2026-02-12T10:00:00.000Z' },
+    ];
+    const viaObj = window.filterByDateWindow(list,
+      { start: '2026-02-11T08:00:00.000Z', end: '2026-02-12T08:00:00.000Z' }).map((e) => e.id);
+    const viaPos = window.filterByDateWindow(list,
+      '2026-02-11T08:00:00.000Z', '2026-02-12T08:00:00.000Z').map((e) => e.id);
+    return [viaObj, viaPos];
+  })(),
+  [[1], [1]]);
+check('date filter object All passes through by reference',
+  (() => {
+    const list = [{ id: 1, start_time: '2026-02-11T10:00:00.000Z' }];
+    return window.filterByDateWindow(list, { start: null, end: null }) === list;
+  })(),
+  true);
+
 console.log(failures === 0 ? '\nALL CHECKS PASSED' : `\n${failures} CHECKS FAILED`);
 process.exit(failures === 0 ? 0 : 1);
