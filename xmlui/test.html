@@ -1293,6 +1293,103 @@
         });
       });
 
+      describe('Date tab filter (#105)', () => {
+        // WHY these tests: filterByDateWindow is the pure seam between the
+        // committed tab window and the rendered list — the one #105 behavior
+        // with absolute-ISO literals as an independent source of truth.
+        // Markup/URL behavior is covered by the fetch-based chrome group
+        // below (the repo's established seam for view-layer checks).
+        const evts = [
+          { id: 1, start_time: '2026-02-11T10:00:00.000Z' },
+          { id: 2, start_time: '2026-02-12T10:00:00.000Z' },
+          { id: 3, start_time: '2026-02-18T10:00:00.000Z' },
+        ];
+
+        it('passes everything through on All (null bounds) by reference', () => {
+          assertEqual(filterByDateWindow(evts, null, null).length, 3);
+          assert(filterByDateWindow(evts, null, null) === evts, 'All must return the input by reference');
+        });
+
+        it('keeps the window start (inclusive) and drops the window end (exclusive)', () => {
+          const result = filterByDateWindow(evts, '2026-02-11T08:00:00.000Z', '2026-02-12T08:00:00.000Z');
+          assertEqual(result.length, 1);
+          assertEqual(result[0].id, 1);
+        });
+
+        it('filters a multi-day window to its members only', () => {
+          const result = filterByDateWindow(evts, '2026-02-11T08:00:00.000Z', '2026-02-18T08:00:00.000Z');
+          assertDeepEqual(result.map(e => e.id), [1, 2]);
+        });
+
+        it('fails open to All on unparseable bounds (never strands on empty)', () => {
+          assert(filterByDateWindow(evts, 'not-a-date', '2026-02-18T08:00:00.000Z') === evts, 'Bad start must pass through');
+          assert(filterByDateWindow(evts, '2026-02-11T08:00:00.000Z', 'nope') === evts, 'Bad end must pass through');
+        });
+
+        it('fails open to All on an inverted window', () => {
+          assert(filterByDateWindow(evts, '2026-02-18T08:00:00.000Z', '2026-02-11T08:00:00.000Z') === evts, 'Inverted window must pass through');
+        });
+      });
+
+      // Date-tab chrome tests (#105): the strip is declarative markup with no
+      // pure-logic seam, so like #86 these fetch the shipped files and assert
+      // the acceptance criteria hold — a regression here fails the CI
+      // Playwright step like any other group. Fast mirror lives in
+      // scripts/validate_date_tabs.js (bare node, no browser).
+      async function runDateTabsChromeTests() {
+        const group = { name: 'Date tabs (#105)', tests: [] };
+        const test = makeGroupTester(group);
+        const get = fetchText;
+        try {
+          const [main, helpersText, shellText, indexText, globalsText] = await Promise.all([
+            get('Main.xmlui'),
+            get('helpers.js'),
+            get('shell.js'),
+            get('index.html'),
+            get('Globals.xs')
+          ]);
+
+          test('strip carries All plus the four #105 day presets (no later-ticket tabs)', () => {
+            for (const label of ['All dates', 'Today', 'Tomorrow', 'Next 7 days', 'This month']) {
+              assert(main.includes('>' + label + '<'), 'Missing tab: ' + label);
+            }
+            assert(!main.includes('>Tonight<'), 'Tonight arrives in #106');
+            assert(!main.includes('>This weekend<'), 'Weekend arrives in #106');
+            assert(!main.includes('>Custom<'), 'Custom arrives in #107');
+          });
+
+          test('slider deleted outright (no dual UI, no orphaned vars)', () => {
+            assert(!/<Slider/.test(main), 'Slider control must be gone');
+            for (const token of ['sliderRange', 'sliderStart', 'sliderEnd', 'eventDayRange',
+                'getEventDayRange', 'formatDayOffset', '_dateRangeBase',
+                'filterByDayWindow', 'filterByDayRange', 'dateSlider']) {
+              assert(!main.includes(token), 'Orphaned slider token in Main.xmlui: ' + token);
+            }
+            assert(!/dateStart|dateEnd/.test(globalsText), 'Globals.xs must take no date params');
+          });
+
+          test('single committed window feeds list and pager; commit resets paging', () => {
+            assert(main.includes('name="dateFilteredEvents"'), 'Missing dateFilteredEvents variable');
+            assert(main.includes('moreHasMore(dateFilteredEvents'), 'Pager guard must read the same window');
+            assert(/datePreset = 'today'[\s\S]{0,300}?displayStartIndex = 0/.test(main), 'Commit must reset paging');
+            assert(main.includes('scrollRequest = scrollRequest + 1'), 'Commit must scroll to top');
+            assert(main.includes('getActiveCategories(dateFilteredEvents)'), 'Category counts must reflect the window');
+          });
+
+          test('date seam, boot seed, and engine load are wired', () => {
+            assert(helpersText.includes('window.filterByDateWindow'), 'Missing filterByDateWindow');
+            assert(helpersText.includes('window.dateWindowForPreset'), 'Missing dateWindowForPreset');
+            assert(helpersText.includes('window.syncDateParams'), 'Missing syncDateParams');
+            assert(shellText.includes('initialDatePreset'), 'Missing boot seed');
+            assert(indexText.includes('date-windows.js'), 'Engine must load before shell boots');
+          });
+        } catch (e) {
+          group.tests.push({ name: 'Load date tab files', pass: false, error: e.message });
+        }
+        results.push(group);
+        render();
+      }
+
       // ============================================================
       // REAL DATA TESTS (async, run after initial render)
       // ============================================================
@@ -1812,6 +1909,15 @@
         results.push({
           name: 'Content links (#88)',
           tests: [{ name: 'Run content link tests', pass: false, error: err.message }]
+        });
+        render();
+      });
+
+      // Run date tab chrome tests (async, independent of Supabase)
+      runDateTabsChromeTests().catch(err => {
+        results.push({
+          name: 'Date tabs (#105)',
+          tests: [{ name: 'Run date tab tests', pass: false, error: err.message }]
         });
         render();
       });

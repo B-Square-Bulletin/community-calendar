@@ -45,7 +45,11 @@
     <script>
       // Cache-bust boot-decisions.js like shell.js below: post-deploy
       // clients must not run stale theme/city decisions from first paint.
+      // date-windows.js (#104) is a dependency-free pure engine, so it loads
+      // the same synchronous way: bootShell() needs it to seed the initial
+      // date window before the injected engine scripts arrive.
       document.write('<script src="boot-decisions.js' + _ccCacheBust + '"><\/script>');
+      document.write('<script src="date-windows.js' + _ccCacheBust + '"><\/script>');
     </script>
     <script>
       document.write('<script src="shell.js' + _ccCacheBust + '"><\/script>');

@@ -68,6 +68,58 @@ window.syncSearchParam = function(search) {
   }, 500);
 };
 
+// --- URL sync for date tabs (#105) ---
+// One committed absolute window per Commit: a preset key syncs as ?date=,
+// All strips only the date keys, and every commit preserves sibling params
+// (city, search, category, mode, images, embed, cards). history-replace (not
+// push) so Back leaves the calendar instead of stepping through tab history.
+window.DATE_TAB_PRESETS = ['all', 'today', 'tomorrow', 'next7', 'month'];
+window.syncDateParams = function(sel) {
+  var url = new URL(window.location);
+  var preset = sel && sel.preset;
+  if (preset && preset !== 'all' && window.DATE_TAB_PRESETS.indexOf(preset) >= 0) {
+    url.searchParams.set('date', preset);
+    url.searchParams.delete('from');
+    url.searchParams.delete('to');
+  } else {
+    url.searchParams.delete('date');
+    url.searchParams.delete('from');
+    url.searchParams.delete('to');
+  }
+  window.history.replaceState({}, '', url);
+};
+
+// Resolve one #105 day preset to its absolute window ({start, end} ISO
+// strings, nulls for All) in the city timezone via the #104 engine.
+window.dateWindowForPreset = function(preset) {
+  if (!preset || preset === 'all') return { start: null, end: null };
+  try {
+    if (typeof window.resolveDatePreset !== 'function') return { start: null, end: null };
+    var w = window.resolveDatePreset(preset, { timeZone: getCityTimezone() || 'UTC' });
+    if (!w || !w.start) return { start: null, end: null };
+    return { start: w.start, end: w.end };
+  } catch (e) {
+    return { start: null, end: null };
+  }
+};
+
+// Filter events to the committed absolute window [startISO, endISO).
+// Null bounds (All) return the input by reference so downstream bindings
+// keep a stable identity; unparseable bounds fail open to All rather than
+// stranding the visitor on an empty list.
+function filterByDateWindow(events, startISO, endISO) {
+  if (!events) return events;
+  if (startISO == null || endISO == null) return events;
+  var fromMs = new Date(startISO).getTime();
+  var toMs = new Date(endISO).getTime();
+  if (!isFinite(fromMs) || !isFinite(toMs) || !(toMs > fromMs)) return events;
+  return events.filter(function(e) {
+    var t = new Date(e.start_time).getTime();
+    return t >= fromMs && t < toMs;
+  });
+}
+window.filterByDateWindow = filterByDateWindow;
+
 // --- Cluster Colors ---
 const CLUSTER_COLORS = ['#6b9bd2', '#7bc47f', '#d4a04a'];
 window.clusterBorder = function(clusterId, filtered) {
@@ -1535,47 +1587,6 @@ if (typeof window !== 'undefined') {
     var stored = localStorage.getItem('hidden_sources');
     if (stored) { window._localHiddenSources = JSON.parse(stored); }
   } catch(e) {}
-  // Date range slider helpers
-  window._dateRangeBase = new Date();
-  window._dateRangeBase.setHours(0, 0, 0, 0);
-
-  window.dayOffsetToISO = function(dayOffset) {
-    var d = new Date(window._dateRangeBase.getTime() + dayOffset * 24 * 60 * 60 * 1000);
-    return d.toISOString();
-  };
-
-  window.formatDayOffset = function(dayOffset) {
-    var d = new Date(window._dateRangeBase.getTime() + dayOffset * 24 * 60 * 60 * 1000);
-    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    return months[d.getMonth()] + ' ' + d.getDate();
-  };
-
-  window.getEventDayRange = function(events) {
-    if (!events || !events.length) return [0, 90];
-    var base = window._dateRangeBase.getTime();
-    var msPerDay = 24 * 60 * 60 * 1000;
-    var minOffset = Infinity, maxOffset = -Infinity;
-    for (var i = 0; i < events.length; i++) {
-      var d = new Date(events[i].start_time);
-      d.setHours(0, 0, 0, 0);
-      var offset = Math.round((d.getTime() - base) / msPerDay);
-      if (offset < minOffset) minOffset = offset;
-      if (offset > maxOffset) maxOffset = offset;
-    }
-    return [minOffset, maxOffset];
-  };
-
-  window.filterByDayRange = function(events, range) {
-    if (!range || !events) return events;
-    var fromMs = window._dateRangeBase.getTime() + range[0] * 24 * 60 * 60 * 1000;
-    var toMs = window._dateRangeBase.getTime() + (range[1] + 1) * 24 * 60 * 60 * 1000;
-    var result = events.filter(function(e) {
-      var t = new Date(e.start_time).getTime();
-      return t >= fromMs && t < toMs;
-    });
-    console.log('filterByDayRange', range, 'in:', events.length, 'out:', result.length);
-    return result;
-  };
 
   var _filterExternalExclusions = function(events) {
     var exc = window.externalExclusions;
@@ -1776,21 +1787,12 @@ if (typeof window !== 'undefined') {
     return out;
   };
 
-  // Replaces Main.xmlui's inline date-slider filter lambda. Returns the
-  // input by reference when the slider is inactive so downstream bindings
-  // keep a stable identity.
-  window.filterByDayWindow = function(events, startDay, endDay) {
-    if (startDay === null || startDay === undefined || !events) return events;
-    var base = window._dateRangeBase.getTime();
-    var fromMs = base + startDay * 86400000;
-    var toMs = base + (endDay + 1) * 86400000;
-    return events.filter(function(e) {
-      var t = new Date(e.start_time).getTime();
-      return t >= fromMs && t < toMs;
-    });
-  };
-  memoizeIngest('filterByDayWindow',
-    function(events, startDay, endDay) { return [startDay, endDay]; });
+  // Date-tab window filter (#105): absolute [startISO, endISO) over the
+  // committed window. Null bounds (All) return the input by reference, and
+  // the memo below keeps that stable identity so downstream bindings skip
+  // re-rendering while the window is unchanged.
+  memoizeIngest('filterByDateWindow',
+    function(events, startISO, endISO) { return [startISO, endISO]; });
 
   window.clearDedupeCache = clearDedupeCache;
   window.isEventPicked = isEventPicked;

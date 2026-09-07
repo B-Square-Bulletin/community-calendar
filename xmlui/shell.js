@@ -279,6 +279,31 @@ window._xsLogs = [];
     document.title = window.cityName + ' Community Calendar';
   };
 
+  // Date-tab boot seed (#105): first paint already reflects a shared date
+  // link, alongside the existing search/category seeds above. Only the
+  // day-granular presets of this ticket are honored; any other key
+  // (unknown, tonight/weekend/custom from later tickets, or a from/to pair)
+  // falls back to All so bad links never strand the visitor on an empty.
+  window.initialDatePreset = 'all';
+  window.initialDateStart = null;
+  window.initialDateEnd = null;
+  (function () {
+    var HONORED = { today: 1, tomorrow: 1, next7: 1, thismonth: 1 };
+    var key = null;
+    try { key = params.get('date'); } catch (e) { key = null; }
+    if (!key || !HONORED[key]) return;
+    var tz = (window._cities && window.cityFilter && window._cities[window.cityFilter] &&
+      window._cities[window.cityFilter].timezone) || 'UTC';
+    try {
+      if (typeof window.resolveDatePreset !== 'function') return;
+      var w = window.resolveDatePreset(key, { timeZone: tz });
+      if (!w || !w.start) return;
+      window.initialDatePreset = key;
+      window.initialDateStart = w.start;
+      window.initialDateEnd = w.end;
+    } catch (e) {}
+  })();
+
   var SUPABASE_URL = window.SUPABASE_URL;
   var SUPABASE_KEY = window.SUPABASE_KEY;
   var sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);

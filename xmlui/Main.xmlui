@@ -14,9 +14,9 @@
   var.city="{window.cityFilter || null}"
   global.isAdmin="{false}"
   global.activePanel="{''}"
-  var.sliderRange="{false}"
-  var.sliderStart="{null}"
-  var.sliderEnd="{null}">
+  var.datePreset="{window.initialDatePreset || 'all'}"
+  var.dateWindowStart="{window.initialDateStart || null}"
+  var.dateWindowEnd="{window.initialDateEnd || null}">
 
   <!-- DataSources -->
   <!-- Events arrive via PushSource from the shell.js boot-time prefetch:
@@ -139,8 +139,10 @@
   <variable name="expandedEnrichments" value="{window.expandEnrichments(enrichments.value, window.getFromDate(), window.getToDate()) || []}" />
   <variable name="combinedEvents" value="{window.combineEvents(events.value, expandedEnrichments)}" />
   <variable name="processedEvents" value="{window.processEvents(combinedEvents, hiddenSources)}" />
-  <variable name="eventDayRange" value="{processedEvents && processedEvents.length > 100 ? window.getEventDayRange(processedEvents) : null}" />
-  <variable name="displayEvents" value="{window.filterByDayWindow(processedEvents, sliderStart, sliderEnd)}" />
+  <!-- Single committed date window (#105): one absolute [start, end) feeds
+       both the rendered list and the pager guard below. All is null bounds
+       (the prefetched set passes through); Picks and Dashboard ignore it. -->
+  <variable name="dateFilteredEvents" value="{window.filterByDateWindow(processedEvents, dateWindowStart, dateWindowEnd)}" />
 
   <variable name="availableCities" value="{Object.keys(window._cities || {}).sort().map(city => ({ city }))}" />
 
@@ -263,7 +265,7 @@
         onDidChange="(val) => { categoryFilter = val || ''; window.syncCategoryParam(categoryFilter); }"
         width="*"
       >
-        <Items data="{window.getActiveCategories(processedEvents)}">
+        <Items data="{window.getActiveCategories(dateFilteredEvents)}">
           <Option value="{$item.name}" label="{$item.label}" />
         </Items>
       </Select>
@@ -274,22 +276,18 @@
         <Option value="picks" label="my picks" />
       </HStack>
     </RadioGroup>
-    <VStack when="{eventDayRange && !!events.value && viewMode === 'all'}" gap="$space-0">
-      <HStack>
-        <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{window.formatDayOffset(sliderRange ? sliderRange[0] : eventDayRange[0])}" />
-        <SpaceFiller />
-        <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{window.formatDayOffset(sliderRange ? sliderRange[1] : eventDayRange[1])}" />
-      </HStack>
-      <Slider
-        id="dateSlider"
-        initialValue="{eventDayRange}"
-        minValue="{eventDayRange[0]}"
-        maxValue="{eventDayRange[1]}"
-        step="{1}"
-        showValues="false"
-        onDidChange="(val) => { sliderRange = Array.isArray(val) ? [val[0], val[1]] : val; sliderStart = val[0]; sliderEnd = val[1]; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1 }"
-      />
-    </VStack>
+    <!-- Date-tab strip (#105): day-granular presets, direct replacement for
+         the removed slider. Each tap commits instantly — one absolute window
+         feeds the list and the pager, paging resets plus scroll-to-top fire
+         on commit only, and the commit syncs the URL with history-replace.
+         Tonight, This weekend, and Custom arrive in later tickets. -->
+    <HStack id="dateTabStrip" verticalAlignment="center" gap="$space-1" wrapContent="true" width="100%" marginBottom="$space-2">
+      <Button variant="{datePreset === 'all' ? 'solid' : 'outlined'}" onClick="datePreset = 'all'; dateWindowStart = null; dateWindowEnd = null; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncDateParams({preset: 'all'})">All dates</Button>
+      <Button variant="{datePreset === 'today' ? 'solid' : 'outlined'}" onClick="const w = window.dateWindowForPreset('today'); datePreset = 'today'; dateWindowStart = w.start; dateWindowEnd = w.end; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncDateParams({preset: 'today'})">Today</Button>
+      <Button variant="{datePreset === 'tomorrow' ? 'solid' : 'outlined'}" onClick="const w = window.dateWindowForPreset('tomorrow'); datePreset = 'tomorrow'; dateWindowStart = w.start; dateWindowEnd = w.end; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncDateParams({preset: 'tomorrow'})">Tomorrow</Button>
+      <Button variant="{datePreset === 'next7' ? 'solid' : 'outlined'}" onClick="const w = window.dateWindowForPreset('next7'); datePreset = 'next7'; dateWindowStart = w.start; dateWindowEnd = w.end; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncDateParams({preset: 'next7'})">Next 7 days</Button>
+      <Button variant="{datePreset === 'month' ? 'solid' : 'outlined'}" onClick="const w = window.dateWindowForPreset('month'); datePreset = 'month'; dateWindowStart = w.start; dateWindowEnd = w.end; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncDateParams({preset: 'month'})">This month</Button>
+    </HStack>
     </VStack>
     </VStack>
     <Spinner when="{!events.value && viewMode === 'all'}" />
@@ -301,16 +299,16 @@
       marginBottom="$space-2"
       onClick="const prevIndex = morePrevIndex(displayStartIndex, pageSizeFor(filterTerm)); displayStartIndex = prevIndex; browseStartIndex = prevIndex; scrollRequest = scrollRequest + 1;"
     />
-    <Masonry when="{!!events.value && viewMode === 'all' && layoutMode === 'multicol'}" data="{getPagedEvents(processedEvents, filterTerm, displayStartIndex, pageSizeFor(filterTerm), categoryFilter, sliderStart, sliderEnd)}" columns="3" gap="$space-3" rowGap="0" minColumnWidth="300px">
+    <Masonry when="{!!events.value && viewMode === 'all' && layoutMode === 'multicol'}" data="{getPagedEvents(dateFilteredEvents, filterTerm, displayStartIndex, pageSizeFor(filterTerm), categoryFilter)}" columns="3" gap="$space-3" rowGap="0" minColumnWidth="300px">
       <EventCard event="{$item}" filterTerm="{filterTerm}" categoryColorMap="{window.categoryColorMap}" categoryList="{window.categoryList}" />
     </Masonry>
     <VStack when="{!!events.value && viewMode === 'all' && layoutMode !== 'multicol'}" gap="$space-0">
-      <Items data="{getPagedEvents(processedEvents, filterTerm, displayStartIndex, pageSizeFor(filterTerm), categoryFilter, sliderStart, sliderEnd)}">
+      <Items data="{getPagedEvents(dateFilteredEvents, filterTerm, displayStartIndex, pageSizeFor(filterTerm), categoryFilter)}">
         <EventCard event="{$item}" filterTerm="{filterTerm}" categoryColorMap="{window.categoryColorMap}" categoryList="{window.categoryList}" />
       </Items>
     </VStack>
     <Button
-      when="{!!events.value && viewMode === 'all' && !filterTerm && moreHasMore(displayEvents, displayStartIndex, pageSizeFor(filterTerm))}"
+      when="{!!events.value && viewMode === 'all' && !filterTerm && moreHasMore(dateFilteredEvents, displayStartIndex, pageSizeFor(filterTerm))}"
       label="Later"
       variant="outlined"
       width="100%"

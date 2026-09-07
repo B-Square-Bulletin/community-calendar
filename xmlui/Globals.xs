@@ -31,18 +31,11 @@ function morePrevIndex(startIndex, pageSize) {
   return Math.max(0, startIndex - Math.max(1, pageSize - 1));
 }
 
-function getPagedEvents(events, term, startIndex, pageSize, category, dateStart, dateEnd) {
-  let source = events;
-  if (dateStart !== null && dateEnd !== null && window._dateRangeBase && eventDayRange && (dateStart !== eventDayRange[0] || dateEnd !== eventDayRange[1])) {
-    const baseMs = window._dateRangeBase.getTime();
-    const fromMs = baseMs + dateStart * 86400000;
-    const toMs = baseMs + (dateEnd + 1) * 86400000;
-    source = (events || []).filter((e) => {
-      const t = new Date(e.start_time).getTime();
-      return t >= fromMs && t < toMs;
-    });
-  }
-  const filtered = window.filterEvents(source, term, category) || [];
+function getPagedEvents(events, term, startIndex, pageSize, category) {
+  // Date filtering lives upstream: the caller passes dateFilteredEvents (the
+  // single committed window, #105), so this stage only applies search +
+  // category + paging. Picks and Dashboard never pass through here.
+  const filtered = window.filterEvents(events, term, category) || [];
   const size = pageSize || 50;
   const index = Number.isFinite(startIndex) ? Math.max(0, startIndex) : 0;
 
