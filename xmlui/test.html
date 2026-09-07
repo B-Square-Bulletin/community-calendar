@@ -1116,10 +1116,21 @@
 
           test('header carries sub-label, red rule, Inter, embed gate', () => {
             assert(header.includes('Community Calendar'), 'Missing sub-label');
-            assert(header.includes('color="black"'), 'Sub-label must be black');
+            assert(/\$color-text-(primary|secondary)/.test(header), 'Sub-label must use a theme text token (dark-tone safe)');
+            assert(!/color\s*=\s*["']black["']/.test(header), 'Sub-label must not hard-code black');
             assert(header.includes('borderBottom="4px solid $color-primary"'), 'Missing 4px red rule');
             assert(header.includes('Inter'), 'Missing Inter chrome font');
             assert(header.includes('!window.embed'), 'Missing embed gate');
+          });
+
+          test('header logo is tone-safe in dark mode (issue #90)', () => {
+            assert(/<Theme[^>]*tone="light"/.test(header), 'Logo must sit in a <Theme tone="light"> island');
+            assert(/BSB_Logo-2-color-horiz\.svg\?v=.*APP_VERSION/.test(header), 'Missing versioned logo ref');
+            assert(!/bsquarebulletin\.com[^>]*target="_blank"/.test(header), 'Logo link must stay same-tab');
+            assert(header.includes('backgroundColor="white"'), 'Island must paint a pinned-light badge behind the logo');
+            assert(header.indexOf('<Theme') < header.indexOf('BSB_Logo-2-color-horiz.svg') &&
+              header.indexOf('BSB_Logo-2-color-horiz.svg') < header.indexOf('</Theme>'),
+              'Logo must be nested inside the light island');
           });
 
           test('footer has red bar, 4 spec links, copyright, embed gate', () => {

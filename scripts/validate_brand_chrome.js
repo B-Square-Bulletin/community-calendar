@@ -39,9 +39,18 @@ try { logo = fs.readFileSync(path.join(ROOT, 'icons/BSB_Logo-2-color-horiz.svg')
 check('header exists', !!header);
 check('header links logo to bsquarebulletin.com same-tab',
   !!header && header.includes('https://bsquarebulletin.com/') && !/to="https:\/\/bsquarebulletin\.com[^"]*"[^>]*target="_blank"/.test(header));
-check('header sub-label black bold letter-spaced',
-  !!header && header.includes('Community Calendar') && header.includes('color="black"')
+check('header sub-label uses theme text token (dark-tone safe), bold, letter-spaced',
+  !!header && header.includes('Community Calendar')
+  && /\$color-text-(primary|secondary)/.test(header)
+  && !/color\s*=\s*["']black["']/.test(header)
   && header.includes('$fontWeight-bold') && /letterSpacing/i.test(header));
+check('header logo pinned in a light-tone island (single asset, no tone tracking)',
+  !!header && /<Theme[^>]*tone="light"/.test(header)
+  && /BSB_Logo-2-color-horiz\.svg\?v=.*APP_VERSION/.test(header));
+check('header island paints a pinned-light badge behind the logo',
+  !!header && header.includes('backgroundColor="white"')
+  && header.indexOf('<Theme') < header.indexOf('BSB_Logo-2-color-horiz.svg')
+  && header.indexOf('BSB_Logo-2-color-horiz.svg') < header.indexOf('</Theme>'));
 check('header 4px red bottom rule',
   !!header && /borderBottom="4px solid \$color-primary"/.test(header));
 check('header Inter chrome font scoped to component',

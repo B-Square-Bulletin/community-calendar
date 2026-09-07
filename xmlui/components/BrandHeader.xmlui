@@ -1,6 +1,11 @@
 <!-- BSB masthead: centered logo + sub-label with Variant B 4px red rule.
      Shown on all standalone screens; hidden on embed. Chrome font (Inter) is
-     scoped here, not in the theme, because the theme's fontFamily applies globally. -->
+     scoped here, not in the theme, because the theme's fontFamily applies globally.
+     Dark-tone safety (#90): the logo sits in a <Theme tone="light"> island on a
+     pinned-light badge, so the black SVG wordmark stays visible when the app
+     tone is dark. The single SVG asset is untouched and no tone state is
+     tracked. The sub-label uses a theme text token, which the engine resolves
+     per tone. -->
 <Fragment>
   <VStack
     when="{!window.embed}"
@@ -10,18 +15,24 @@
     background="transparent"
     borderBottom="4px solid $color-primary"
     fontFamily="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
-    <Link to="https://bsquarebulletin.com/">
-      <Image
-        src="{'icons/BSB_Logo-2-color-horiz.svg?v=' + window.APP_VERSION}"
-        alt="The B Square Bulletin"
-        height="48px" />
-    </Link>
+    <Theme tone="light">
+      <!-- "white" is pinned, not themed: the badge is the light surface the
+           black wordmark needs. Do not convert to a $color-* token. -->
+      <Stack backgroundColor="white" padding="$space-2" borderRadius="$borderRadius">
+        <Link to="https://bsquarebulletin.com/">
+          <Image
+            src="{'icons/BSB_Logo-2-color-horiz.svg?v=' + window.APP_VERSION}"
+            alt="The B Square Bulletin"
+            height="48px" />
+        </Link>
+      </Stack>
+    </Theme>
     <Text
       fontSize="$fontSize-sm"
       fontWeight="$fontWeight-bold"
       letterSpacing="1.5px"
       textTransform="uppercase"
-      color="black"
+      color="$color-text-primary"
       marginTop="$space-1">
       Community Calendar
     </Text>
