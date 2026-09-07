@@ -218,5 +218,38 @@ check('without the flag the same window keeps unflagged-shape starts (no behavio
     TONIGHT_START, TONIGHT_END).map((e) => e.id),
   ['show']);
 
+// --- Single-path parity (prio-70 dedup): the shared opts builder, the
+// engine-owned truncation copy, and the decode-based boot resolver must
+// render byte-identical windows and labels to the code they replaced. ---
+check('helpers truncation delegates to the engine formatter byte-identically',
+  window.dateTruncationText(monthCut),
+  window.truncationLabelForWindow(monthCut, 'America/Los_Angeles'));
+check('engine formatter names the inclusive last day (hand-computed PST)',
+  window.truncationLabelForWindow(monthCut, 'America/Los_Angeles'),
+  'Showing through 2026-02-14 — the calendar currently ends there.');
+check('engine formatter is null without an overrun',
+  [window.truncationLabelForWindow(month, 'America/Los_Angeles'),
+   window.truncationLabelForWindow({ start: null, end: null, truncated: false }, 'America/Los_Angeles')],
+  [null, null]);
+check('single copy constant owns the truncation wording',
+  [window.TRUNCATION_LABEL_PREFIX, window.TRUNCATION_LABEL_SUFFIX],
+  ['Showing through ', ' — the calendar currently ends there.']);
+check('boot-equivalent decode of a preset-only key matches the direct resolve',
+  (() => {
+    const via = window.decodeDateParams({ date: 'thismonth' },
+      { timeZone: 'America/Los_Angeles', horizonEnd: '2026-02-15T08:00:00.000Z' });
+    const direct = window.resolveDatePreset('thismonth',
+      { timeZone: 'America/Los_Angeles', horizonEnd: '2026-02-15T08:00:00.000Z' });
+    return [via.start, via.end, via.preset];
+  })(),
+  (() => {
+    const direct = window.resolveDatePreset('thismonth',
+      { timeZone: 'America/Los_Angeles', horizonEnd: '2026-02-15T08:00:00.000Z' });
+    return [direct.start, direct.end, 'thismonth'];
+  })());
+check('helpers preset+custom resolvers share one opts builder',
+  [typeof window.dateWindowOpts, JSON.stringify(Object.keys(window.dateWindowOpts()).sort())],
+  ['function', JSON.stringify(['horizonEnd', 'timeZone'])]);
+
 console.log(failures === 0 ? '\nALL CHECKS PASSED' : `\n${failures} CHECKS FAILED`);
 process.exit(failures === 0 ? 0 : 1);

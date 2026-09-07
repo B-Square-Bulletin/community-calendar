@@ -293,12 +293,19 @@ window._xsLogs = [];
 
   // Date-tab boot seed (#105 day presets + #106 intraday tabs + #107 Custom):
   // first paint already reflects a shared date link, alongside the existing
-  // search/category seeds above. A complete valid from/to pair wins over the
-  // preset key and restores the exact Custom window; partial or invalid pairs
-  // and unknown keys fall back to All so bad links never strand the visitor
-  // on an empty. A clamped past start rewrites the URL for stable reload.
-  // The legacy `month` key maps to the engine's canonical `thismonth`
-  // preset (the #103 URL contract is ?date=thismonth exact).
+  // search/category seeds above. Both the from/to pair and the preset-only
+  // path resolve through the single decodeDateParams codec (prio-70 dedup:
+  // the preset-only branch used to call resolveDatePreset directly), and
+  // both label the horizon overrun through the engine's shared
+  // truncationLabelForWindow formatter (date-windows.js loads before this
+  // file per index.html, so it is always present; the typeof guard degrades
+  // to no label rather than a failed seed). A complete valid from/to pair
+  // wins over the preset key and restores the exact Custom window; partial
+  // or invalid pairs and unknown keys fall back to All so bad links never
+  // strand the visitor on an empty. A clamped past start rewrites the URL
+  // for stable reload. The legacy `month` key decodes to the engine's
+  // canonical `thismonth` preset (the #103 URL contract is ?date=thismonth
+  // exact; the alias lives in the codec, not here).
   window.initialDatePreset = 'all';
   window.initialDateStart = null;
   window.initialDateEnd = null;
@@ -323,20 +330,16 @@ window._xsLogs = [];
           window.initialDatePreset = decoded.preset;
           window.initialDateStart = decoded.start;
           window.initialDateEnd = decoded.end;
-          if (decoded.truncated) {
-            var pLastMs = new Date(decoded.end).getTime() - 1;
-            var pDay = new Intl.DateTimeFormat('en-CA', {
-              timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit'
-            }).format(new Date(pLastMs));
-            window.initialDateTruncationLabel = 'Showing through ' + pDay + ' — the calendar currently ends there.';
+          if (decoded.truncated && typeof window.truncationLabelForWindow === 'function') {
+            window.initialDateTruncationLabel = window.truncationLabelForWindow(decoded, tz);
           }
           return;
         }
         window.initialDatePreset = 'custom';
         window.initialDateStart = decoded.start;
         window.initialDateEnd = decoded.end;
-        if (decoded.truncated && decoded.to) {
-          window.initialDateTruncationLabel = 'Showing through ' + decoded.to + ' — the calendar currently ends there.';
+        if (decoded.truncated && typeof window.truncationLabelForWindow === 'function') {
+          window.initialDateTruncationLabel = window.truncationLabelForWindow(decoded, tz);
         }
         if (decoded.rewritten) {
           var url = new URL(window.location);
@@ -349,20 +352,15 @@ window._xsLogs = [];
       return;
     }
     if (!key || !HONORED[key]) return;
-    if (key === 'month') key = 'thismonth';
     try {
-      if (typeof window.resolveDatePreset !== 'function') return;
-      var w = window.resolveDatePreset(key, { timeZone: tz, horizonEnd: window.toDate });
+      if (typeof window.decodeDateParams !== 'function') return;
+      var w = window.decodeDateParams({ date: key }, { timeZone: tz, horizonEnd: window.toDate });
       if (!w || !w.start) return;
-      window.initialDatePreset = key;
+      window.initialDatePreset = w.preset;
       window.initialDateStart = w.start;
       window.initialDateEnd = w.end;
-      if (w.truncated) {
-        var lastMs = new Date(w.end).getTime() - 1;
-        var day = new Intl.DateTimeFormat('en-CA', {
-          timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit'
-        }).format(new Date(lastMs));
-        window.initialDateTruncationLabel = 'Showing through ' + day + ' — the calendar currently ends there.';
+      if (w.truncated && typeof window.truncationLabelForWindow === 'function') {
+        window.initialDateTruncationLabel = window.truncationLabelForWindow(w, tz);
       }
     } catch (e) {}
   })();

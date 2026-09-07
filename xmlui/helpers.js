@@ -104,6 +104,18 @@ window.syncDateParams = function(sel) {
   }
 };
 
+// Single window-resolution opts (prio-70 dedup): dateWindowForPreset and
+// dateWindowForCustom share this builder for the city-timezone plus
+// prefetch-horizon plumbing, so the getCityTimezone -> getToDate ->
+// resolve shape lives in exactly one place.
+window.dateWindowOpts = function() {
+  var opts = { timeZone: getCityTimezone() || 'UTC' };
+  try {
+    if (typeof window.getToDate === 'function') opts.horizonEnd = window.getToDate();
+  } catch (e) {}
+  return opts;
+};
+
 // Resolve one #105 day preset to its absolute window ({start, end} ISO
 // strings, nulls for All) in the city timezone via the #104 engine.
 // #108: the prefetch horizon truncates overrunning windows (This month past
@@ -112,11 +124,7 @@ window.dateWindowForPreset = function(preset) {
   if (!preset || preset === 'all') return { start: null, end: null, truncated: false };
   try {
     if (typeof window.resolveDatePreset !== 'function') return { start: null, end: null, truncated: false };
-    var opts = { timeZone: getCityTimezone() || 'UTC' };
-    try {
-      if (typeof window.getToDate === 'function') opts.horizonEnd = window.getToDate();
-    } catch (e) {}
-    var w = window.resolveDatePreset(preset, opts);
+    var w = window.resolveDatePreset(preset, window.dateWindowOpts());
     if (!w || !w.start) return { start: null, end: null, truncated: false };
     return { start: w.start, end: w.end, truncated: !!w.truncated };
   } catch (e) {
@@ -145,13 +153,21 @@ window.dateWindowLabel = function(preset) {
   return labels[preset] || 'found';
 };
 
-// Horizon-truncation copy for the label below the tabs:
+// Horizon-truncation copy for the label below the tabs (prio-70 dedup):
+// this is a thin delegate — the engine's truncationLabelForWindow owns the
 // `Showing through {horizonDate} — the calendar currently ends there.`
-// Null unless the committed window overran the prefetch horizon. The named
-// date is the inclusive last day (the exclusive end instant minus 1ms) in
-// the city timezone.
+// copy plus the inclusive-last-day math, so the Main.xmlui custom confirm
+// and the shell boot seed render byte-identical labels through this seam.
+// Falls back to the local render only when the engine is absent.
 window.dateTruncationText = function(w) {
   if (!w || !w.truncated || !w.end) return null;
+  try {
+    if (typeof window.truncationLabelForWindow === 'function') {
+      return window.truncationLabelForWindow(w, getCityTimezone() || 'UTC');
+    }
+  } catch (e) {
+    return null;
+  }
   try {
     var tz = getCityTimezone() || 'UTC';
     var lastMs = new Date(w.end).getTime() - 1;
@@ -253,11 +269,7 @@ window.dateWindowForCustom = function(from, to) {
   if (from == null || to == null) return null;
   try {
     if (typeof window.resolveCustomRange !== 'function') return null;
-    var opts = { timeZone: getCityTimezone() || 'UTC' };
-    try {
-      if (typeof window.getToDate === 'function') opts.horizonEnd = window.getToDate();
-    } catch (e) {}
-    var w = window.resolveCustomRange(from, to, opts);
+    var w = window.resolveCustomRange(from, to, window.dateWindowOpts());
     if (!w || !w.start) return null;
     return { start: w.start, end: w.end, from: w.from, to: w.to, truncated: !!w.truncated, clamped: !!w.clamped };
   } catch (e) {

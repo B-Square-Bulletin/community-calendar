@@ -169,8 +169,13 @@ check('custom confirm commits once via the engine with paging reset, scroll, and
   !!main && /dateWindowForCustom\(/.test(main)
   && /datePreset = 'custom'[\s\S]{0,500}?displayStartIndex = 0/.test(main)
   && /datePreset = 'custom'[\s\S]{0,600}?syncCustomParams/.test(main));
-check('horizon overrun renders the truncation label below the tabs',
-  !!main && /Showing through/.test(main) && /calendar currently ends there/.test(main));
+check('horizon overrun renders the truncation label below the tabs (single copy in the engine)',
+  !!main && /dateTruncationLabel/.test(main)
+  && /window\.dateTruncationText\(w\)/.test(main)
+  && (() => {
+    const eng = read('date-windows.js') || '';
+    return /Showing through/.test(eng) && /calendar currently ends there/.test(eng);
+  })());
 check('helpers.js exposes the custom seam',
   !!helpers && /window\.dateWindowForCustom/.test(helpers)
   && /window\.syncCustomParams/.test(helpers)
@@ -255,6 +260,47 @@ check('no inline preset assignments remain in markup (helper owns the commit)',
     // unifying it rides prio-70. Only the seven preset keys must be gone.
     return !main.includes("datePreset = '" + k + "'");
   }));
+
+// --- Single window-resolution + truncation path (prio-70 dedup): preset,
+// custom-confirm, and boot share one resolver plus dateTruncationText and a
+// single copy constant in the engine. No behavior change: the behavioral
+// harness (validate_date_hardening.js) proves identical windows + labels.
+check('engine owns the single truncation copy plus a window formatter',
+  (() => {
+    const eng = read('date-windows.js') || '';
+    return /TRUNCATION/.test(eng)
+      && /truncationLabelForWindow/.test(eng)
+      && /calendar currently ends there/.test(eng);
+  })());
+check('helpers preset+custom resolvers share one opts builder',
+  (() => {
+    const at = (helpers || '').indexOf('window.dateWindowOpts');
+    if (at < 0) return false;
+    const pb = (helpers || '').indexOf('window.dateWindowForPreset');
+    const cb = (helpers || '').indexOf('window.dateWindowForCustom');
+    if (pb < 0 || cb < 0) return false;
+    const tail = helpers.substring(at, at + 300);
+    if (!/getCityTimezone/.test(tail) || !/getToDate/.test(tail)) return false;
+    return /dateWindowOpts\(\)/.test(helpers.substring(pb, pb + 900))
+      && /dateWindowOpts\(\)/.test(helpers.substring(cb, cb + 900));
+  })());
+check('helpers truncation text delegates to the engine formatter (one copy)',
+  !!helpers && /window\.dateTruncationText/.test(helpers)
+  && /truncationLabelForWindow/.test(helpers));
+check('custom confirm routes truncation through dateTruncationText (no inline copy)',
+  !!main && (() => {
+    const at = main.indexOf('<DatePicker');
+    if (at < 0) return false;
+    const handler = main.substring(at, at + 2200);
+    return /dateTruncationText/.test(handler)
+      && !/Showing through/.test(handler);
+  })());
+check('shell boot seed resolves the preset-only path via decodeDateParams (one resolver)',
+  !!shell && !/resolveDatePreset\(key/.test(shell)
+  && /decodeDateParams\(\{ date: key/.test(shell));
+check('shell boot seed routes truncation through the shared formatter (no hand-rolled copy)',
+  !!shell && /truncationLabelForWindow|dateTruncationText/.test(shell)
+  && !/Showing through '/.test(shell));
 
 console.log(failures === 0 ? '\nALL CHECKS PASSED' : `\n${failures} CHECKS FAILED`);
 process.exit(failures === 0 ? 0 : 1);

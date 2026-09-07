@@ -316,7 +316,7 @@
       disabledDates="{window.customDisabledDates()}"
       presets="{window.customForwardPresets()}"
       confirmRangeSelection="true"
-      onDidChange="(val) => { const w = window.dateWindowForCustom(val && val.from, val && val.to); if (!w) return; datePreset = 'custom'; dateWindowStart = w.start; dateWindowEnd = w.end; dateTruncationLabel = w.truncated ? 'Showing through ' + w.to + ' — the calendar currently ends there.' : null; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncCustomParams(w.from, w.to); }"
+      onDidChange="(val) => { const w = window.dateWindowForCustom(val && val.from, val && val.to); if (!w) return; datePreset = 'custom'; dateWindowStart = w.start; dateWindowEnd = w.end; dateTruncationLabel = window.dateTruncationText(w); displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncCustomParams(w.from, w.to); }"
     />
     <Text when="{dateTruncationLabel}" fontSize="$fontSize-sm" color="$color-text-secondary" value="{dateTruncationLabel}" />
     <!-- Empty window (#108): an explicit message plus a one-tap reset to

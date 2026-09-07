@@ -114,6 +114,40 @@
     return { endMs: Math.max(startMs, horizonMs), truncated: true };
   }
 
+  // Single truncation copy (#108, prio-70 dedup): every committed-window
+  // label below the tabs reads
+  // `Showing through {day} — the calendar currently ends there.` where
+  // {day} is the inclusive last day. helpers.js dateTruncationText, the
+  // Main.xmlui custom confirm, and the shell boot seed all route through
+  // truncationLabelForWindow, so this prefix/suffix pair is the one place
+  // the copy lives. date-windows.js owns it (not helpers.js) because the
+  // shell boot seed runs before helpers.js loads (index.html injects the
+  // engine scripts after boot) while date-windows.js is already present.
+  var TRUNCATION_LABEL_PREFIX = 'Showing through ';
+  var TRUNCATION_LABEL_SUFFIX = ' — the calendar currently ends there.';
+
+  function formatTruncationLabel(day) {
+    if (!day) return null;
+    return TRUNCATION_LABEL_PREFIX + day + TRUNCATION_LABEL_SUFFIX;
+  }
+
+  // Null unless `w` overran the prefetch horizon. Names the inclusive last
+  // day (the exclusive end instant minus 1ms) in `timeZone`.
+  function truncationLabelForWindow(w, timeZone) {
+    if (!w || !w.truncated || !w.end) return null;
+    try {
+      var tz = timeZone || 'UTC';
+      var lastMs = new Date(w.end).getTime() - 1;
+      if (!isFinite(lastMs)) return null;
+      var day = new Intl.DateTimeFormat('en-CA', {
+        timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit'
+      }).format(new Date(lastMs));
+      return formatTruncationLabel(day);
+    } catch (e) {
+      return null;
+    }
+  }
+
   // Move a custom start earlier than today forward to today (Clamping).
   // Preset windows are computed from today and never clamp; only stale
   // Custom ranges (and decoded URLs) do.
@@ -357,6 +391,10 @@
   var api = {
     DATE_PRESETS: DATE_PRESETS,
     MAX_WINDOW_DAYS: MAX_WINDOW_DAYS,
+    TRUNCATION_LABEL_PREFIX: TRUNCATION_LABEL_PREFIX,
+    TRUNCATION_LABEL_SUFFIX: TRUNCATION_LABEL_SUFFIX,
+    formatTruncationLabel: formatTruncationLabel,
+    truncationLabelForWindow: truncationLabelForWindow,
     resolveDatePreset: resolveDatePreset,
     resolveCustomRange: function (from, to, opts) {
       var tz = (opts && opts.timeZone) || 'UTC';
@@ -369,6 +407,10 @@
   if (typeof window !== 'undefined') {
     window.DATE_PRESETS = api.DATE_PRESETS;
     window.MAX_WINDOW_DAYS = api.MAX_WINDOW_DAYS;
+    window.TRUNCATION_LABEL_PREFIX = api.TRUNCATION_LABEL_PREFIX;
+    window.TRUNCATION_LABEL_SUFFIX = api.TRUNCATION_LABEL_SUFFIX;
+    window.formatTruncationLabel = api.formatTruncationLabel;
+    window.truncationLabelForWindow = api.truncationLabelForWindow;
     window.resolveDatePreset = api.resolveDatePreset;
     window.resolveCustomRange = api.resolveCustomRange;
     window.encodeDateParams = api.encodeDateParams;

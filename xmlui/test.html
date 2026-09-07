@@ -1591,10 +1591,11 @@
         const test = makeGroupTester(group);
         const get = fetchText;
         try {
-          const [main, helpersText, shellText] = await Promise.all([
+          const [main, helpersText, shellText, engineText] = await Promise.all([
             get('Main.xmlui'),
             get('helpers.js'),
-            get('shell.js')
+            get('shell.js'),
+            get('date-windows.js')
           ]);
 
           test('strip carries the Custom tab with pressed state', () => {
@@ -1637,9 +1638,16 @@
               'Custom commits must use history-replace (Back skips filter states)');
           });
 
-          test('horizon overrun renders the truncation label below the tabs', () => {
-            assert(main.includes('Showing through'), 'Missing truncation copy');
-            assert(main.includes('calendar currently ends there'), 'Missing truncation copy');
+          test('horizon overrun renders the truncation label below the tabs (single copy in the engine)', () => {
+            const pickerAt = main.indexOf('<DatePicker');
+            const confirm = pickerAt < 0 ? '' : main.substring(pickerAt, pickerAt + 2200);
+            assert(/window\.dateTruncationText\(w\)/.test(confirm),
+              'Custom confirm must label the overrun through dateTruncationText (one copy)');
+            assert(!/Showing through/.test(confirm),
+              'Custom confirm must not hand-roll the truncation copy');
+            assert(engineText.includes('Showing through'), 'Engine must own the truncation copy');
+            assert(engineText.includes('calendar currently ends there'), 'Engine must own the truncation copy');
+            assert(engineText.includes('truncationLabelForWindow'), 'Engine must expose the shared formatter');
           });
 
           test('boot seed honors the custom from/to pair with clamp rewrite', () => {
