@@ -250,6 +250,11 @@ check('date sync preserves embed; All clears only date keys',
 // not reappear in markup; the code-behind helper owns them.
 check('code-behind exposes one shared date commit helper',
   !!globals && /function commitDatePreset\(/.test(globals));
+// XMLUI code-behind forbids `var` inside function bodies (top-level `var`
+// App-vars are fine): a `var` in commitDatePreset breaks every preset tap
+// with "'var' declarations are not allowed within functions".
+check('commit helper uses no var-in-function declarations (XMLUI rejects them)',
+  !!globals && !/^\s*var\s+\w/m.test(commitBody()));
 check('every preset tab routes through the shared commit helper',
   !!main && ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth'].every(function(k) {
     return main.includes("commitDatePreset('" + k + "'");

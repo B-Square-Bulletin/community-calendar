@@ -67,7 +67,7 @@ function setCategoryFilter(category) {
 // with history-replace. The empty-state reset passes {scroll: false} and
 // chains window.focusDateTabHeading() so focus moves without scrolling.
 function commitDatePreset(preset, opts) {
-  var withScroll = !opts || opts.scroll !== false;
+  const withScroll = !opts || opts.scroll !== false;
   if (!preset || preset === 'all') {
     datePreset = 'all';
     dateWindowStart = null;
@@ -79,7 +79,7 @@ function commitDatePreset(preset, opts) {
     window.syncDateParams({ preset: 'all' });
     return;
   }
-  var windowRange = window.dateWindowForPreset(preset);
+  const windowRange = window.dateWindowForPreset(preset);
   datePreset = preset;
   dateWindowStart = windowRange.start;
   dateWindowEnd = windowRange.end;
