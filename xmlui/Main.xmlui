@@ -17,7 +17,8 @@
   var.datePreset="{window.initialDatePreset || 'all'}"
   var.dateWindowStart="{window.initialDateStart || null}"
   var.dateWindowEnd="{window.initialDateEnd || null}"
-  var.dateTruncationLabel="{window.initialDateTruncationLabel || null}">
+  var.dateTruncationLabel="{window.initialDateTruncationLabel || null}"
+  var.customOpen="{window.initialDatePreset === 'custom'}">
 
   <!-- DataSources -->
   <!-- Events arrive via PushSource from the shell.js boot-time prefetch:
@@ -286,40 +287,58 @@
          paging resets plus scroll-to-top fire on commit only, and the commit
          syncs the URL with history-replace. Tonight is start-time-only from
          5pm city-time; the weekend is Fri 17:00 through Sunday night
-         (engine-resolved per weekday). The Custom tab focuses the stock
-         range picker below; the picker commits once on explicit confirm
+         (engine-resolved per weekday). The Custom tab opens the stock
+         range picker below; the picker commits on the second click
          (never per tick or mid-drag). #108: the heading gives the strip an
          accessible name and is the empty-reset focus target; preset commits
          surface the horizon-truncation label. -->
     <Text id="dateTabHeading" fontSize="$fontSize-sm" fontWeight="$fontWeight-bold" value="Filter by date" />
     <HStack id="dateTabStrip" verticalAlignment="center" gap="$space-1" wrapContent="true" width="100%" marginBottom="$space-2">
-      <Button variant="{datePreset === 'all' ? 'solid' : 'outlined'}" onClick="commitDatePreset('all')">All dates</Button>
-      <Button variant="{datePreset === 'today' ? 'solid' : 'outlined'}" onClick="commitDatePreset('today')">Today</Button>
-      <Button variant="{datePreset === 'tonight' ? 'solid' : 'outlined'}" onClick="commitDatePreset('tonight')">Tonight</Button>
-      <Button variant="{datePreset === 'tomorrow' ? 'solid' : 'outlined'}" onClick="commitDatePreset('tomorrow')">Tomorrow</Button>
-      <Button variant="{datePreset === 'weekend' ? 'solid' : 'outlined'}" onClick="commitDatePreset('weekend')">This weekend</Button>
-      <Button variant="{datePreset === 'next7' ? 'solid' : 'outlined'}" onClick="commitDatePreset('next7')">Next 7 days</Button>
-      <Button variant="{datePreset === 'thismonth' ? 'solid' : 'outlined'}" onClick="commitDatePreset('thismonth')">This month</Button>
-      <Button variant="{datePreset === 'custom' ? 'solid' : 'outlined'}" onClick="customRangePicker.focus()">Custom</Button>
+      <Button variant="{datePreset === 'all' && !customOpen ? 'solid' : 'outlined'}" onClick="commitDatePreset('all')">All dates</Button>
+      <Button variant="{datePreset === 'today' && !customOpen ? 'solid' : 'outlined'}" onClick="commitDatePreset('today')">Today</Button>
+      <Button variant="{datePreset === 'tonight' && !customOpen ? 'solid' : 'outlined'}" onClick="commitDatePreset('tonight')">Tonight</Button>
+      <Button variant="{datePreset === 'tomorrow' && !customOpen ? 'solid' : 'outlined'}" onClick="commitDatePreset('tomorrow')">Tomorrow</Button>
+      <Button variant="{datePreset === 'weekend' && !customOpen ? 'solid' : 'outlined'}" onClick="commitDatePreset('weekend')">This weekend</Button>
+      <Button variant="{datePreset === 'next7' && !customOpen ? 'solid' : 'outlined'}" onClick="commitDatePreset('next7')">Next 7 days</Button>
+      <Button variant="{datePreset === 'thismonth' && !customOpen ? 'solid' : 'outlined'}" onClick="commitDatePreset('thismonth')">This month</Button>
+      <Button variant="{(datePreset === 'custom' || customOpen) ? 'solid' : 'outlined'}" onClick="customOpen = true; window.openCustomPicker()">Custom</Button>
     </HStack>
     <!-- Custom range picker (#107): stock range control with date-only
          format, the city timezone, today minimum plus past dates disabled,
-         forward presets only (Next 7, Next 30, This month), and explicit
-         confirm. Commit fires once via onDidChange on Proceed: malformed or
-         partial input is ignored, past starts clamp, inverted ranges coerce
-         to a single day, and the canonical exact-date link syncs (prio-90:
-         the committed window travels as one object). -->
-    <DatePicker
-      id="customRangePicker"
-      mode="range"
-      dateFormat="yyyy-MM-dd"
-      timeZone="{window.customPickerTimezone()}"
-      startDate="{window.todayDateOnly()}"
-      disabledDates="{window.customDisabledDates()}"
-      presets="{window.customForwardPresets()}"
-      confirmRangeSelection="true"
-      onDidChange="(val) => { const customWindow = window.dateWindowForCustom(val); if (!customWindow) return; datePreset = 'custom'; dateWindowStart = customWindow.start; dateWindowEnd = customWindow.end; dateTruncationLabel = window.dateTruncationText(customWindow); displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncCustomParams(customWindow); }"
-    />
+         forward presets only (Next 7, Next 30, This month), and auto-commit
+         on the second click (no Cancel/Proceed footer). The row mounts only while the Custom flow is open
+         (customOpen, seeded true on a custom deep-link): opening mounts
+         without committing, and every non-custom commit closes it via the
+         shared commitDatePreset path, so the range display can never
+         disagree with the committed window. The Custom tab is the single
+         entry point: it mounts the row and calls window.openCustomPicker(),
+         which clicks the picker's Control element — the path that opens the
+         popup for a programmatic trigger (focus() merely selects the date
+         text: the vendored handle exposes no open API). The in-box calendar
+         glyph (endIcon) is a plain adornment inside that same Control, so
+         tapping it opens the popup too. Tapping Custom again re-opens a
+         dismissed popup. Commit fires once via onDidChange on the second
+         click: malformed or partial input is ignored, past starts clamp,
+         inverted ranges coerce to a single day, and the canonical
+         exact-date link syncs (prio-90: the committed window travels as
+         one object). Manual typing alone never commits. -->
+    <HStack id="customPickerRow" when="{customOpen}" verticalAlignment="center" gap="$space-2" width="100%">
+      <DatePicker
+        id="customRangePicker"
+        mode="range"
+        label="Custom date range"
+        placeholder="Select start and end dates"
+        dateFormat="yyyy-MM-dd"
+        timeZone="{window.customPickerTimezone()}"
+        startDate="{window.todayDateOnly()}"
+        disabledDates="{window.customDisabledDates()}"
+        presets="{window.customForwardPresets()}"
+        showPresets="false"
+        endIcon="calendar-days"
+        confirmRangeSelection="false"
+        onDidChange="(val) => { const customWindow = window.dateWindowForCustom(val); if (!customWindow) return; datePreset = 'custom'; dateWindowStart = customWindow.start; dateWindowEnd = customWindow.end; dateTruncationLabel = window.dateTruncationText(customWindow); displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncCustomParams(customWindow); }"
+      />
+    </HStack>
     <Text when="{dateTruncationLabel}" fontSize="$fontSize-sm" color="$color-text-secondary" value="{dateTruncationLabel}" />
     <!-- Empty window (#108): an explicit message plus a one-tap reset to
          Next 7 days. The reset commits through the shared commitDatePreset

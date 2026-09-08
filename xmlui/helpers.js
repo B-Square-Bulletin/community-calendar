@@ -318,6 +318,40 @@ window.syncCustomParams = function(rangeOrFrom, to) {
   }
 };
 
+// Open the stock range picker popup with a real click, never focus().
+// The vendored control opens only from its Control onClick: the exposed
+// handle offers focus/setValue/getValue but no open API, openOnClick is
+// false, and the onClick ignores input/button targets — so focus() merely
+// selects the date text and the popup stays shut. Clicking the Control
+// element itself takes the setOpen(true) path on desktop and mobile alike.
+// The Control is found by climbing from its input (inner class names are
+// hashed; the [data-mode="range"] root attribute is the stable anchor).
+// Returns true when the popup was asked to open, false when the picker is
+// not mounted (callers keep customOpen=true; the row mounts on that flag).
+window.openCustomPicker = function() {
+  try {
+    var root = document.querySelector('#customPickerRow [data-mode="range"]')
+      || document.querySelector('[data-mode="range"]');
+    if (!root) return false;
+    var input = root.querySelector('input');
+    if (!input || !input.parentElement) return false;
+    var control = input;
+    while (control !== root && control.parentElement &&
+        control.parentElement.parentElement &&
+        control.parentElement.parentElement !== root) {
+      control = control.parentElement;
+    }
+    if (control === root || control === input) {
+      input.focus();
+      return true;
+    }
+    control.click();
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
 // True when `iso` is midnight (00:00) in `tz`: the pipeline anchors
 // time-unknown events there (see formatTime, which renders them dateless),
 // so a midnight start means "time unknown", never "plays at midnight".

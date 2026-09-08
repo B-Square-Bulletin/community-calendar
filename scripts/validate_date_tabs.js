@@ -127,8 +127,8 @@ check('weekend commits via the engine with paging reset, scroll, and URL sync',
   && /displayStartIndex = 0/.test(commitBody())
   && /syncDateParams/.test(commitBody()));
 check('intraday tabs show pressed state when active',
-  !!main && /datePreset === 'tonight' \? 'solid' : 'outlined'/.test(main)
-  && /datePreset === 'weekend' \? 'solid' : 'outlined'/.test(main));
+  !!main && /datePreset === 'tonight' && !customOpen \? 'solid' : 'outlined'/.test(main)
+  && /datePreset === 'weekend' && !customOpen \? 'solid' : 'outlined'/.test(main));
 check('helpers.js date-tab presets derive from the engine canonical list (single source)',
   !!helpers && /window\.DATE_TAB_PRESETS[\s\S]{0,300}?window\.DATE_PRESETS/.test(helpers)
   && /DATE_TAB_PRESETS/.test(helpers));
@@ -137,7 +137,7 @@ check('shell.js boot seed derives the honored set from the engine list plus its 
   && /HONORED/.test(shell));
 check('this month commits and boots as ?date=thismonth (#103 contract)',
   !!main && /commitDatePreset\('thismonth'\)/.test(main)
-  && /datePreset === 'thismonth' \? 'solid' : 'outlined'/.test(main)
+  && /datePreset === 'thismonth' && !customOpen \? 'solid' : 'outlined'/.test(main)
   && !!helpers && /DATE_PRESET_ALIASES/.test(helpers)
   && !!shell && /DATE_PRESET_ALIASES/.test(shell));
 
@@ -154,10 +154,10 @@ check('picks view ignores the window',
 check('tab strip carries the Custom tab (#107)',
   !!main && />Custom</.test(main));
 check('custom tab shows pressed state when active',
-  !!main && /datePreset === 'custom' \? 'solid' : 'outlined'/.test(main));
-check('custom range picker present in range mode with explicit confirm',
+  !!main && /datePreset === 'custom' \|\| customOpen/.test(main));
+check('custom range picker present in range mode with auto-commit on second click',
   !!main && /<DatePicker[\s\S]{0,600}?mode="range"/.test(main)
-  && /<DatePicker[\s\S]{0,1200}?confirmRangeSelection="true"/.test(main));
+  && /<DatePicker[\s\S]{0,1200}?confirmRangeSelection="false"/.test(main));
 check('custom picker uses date-only format plus the city timezone',
   !!main && /<DatePicker[\s\S]{0,1200}?dateFormat="yyyy-MM-dd"/.test(main)
   && /<DatePicker[\s\S]{0,1200}?timeZone=/.test(main));
@@ -167,6 +167,18 @@ check('custom picker disables past dates with today as the minimum',
 check('custom picker offers only forward presets (no built-in backward keys)',
   !!main && /<DatePicker[\s\S]{0,1600}?presets=/.test(main)
   && !/last7Days|last30Days|thisMonth|lastMonth/.test(main));
+check('custom picker hides the preset sidebar (ranges live on the tab strip)',
+  !!main && /<DatePicker[\s\S]{0,1600}?showPresets="false"/.test(main));
+check('custom picker carries the in-box calendar glyph (plain adornment, opens the popup)',
+  !!main && (() => {
+    let config = null;
+    try { config = fs.readFileSync(path.join(ROOT, 'config.json'), 'utf8'); } catch { return false; }
+    const at = main.indexOf('<DatePicker');
+    if (at < 0) return false;
+    const picker = main.substring(at, at + 1600);
+    const m = picker.match(/endIcon="([^"]+)"/);
+    return !!m && config.includes('"icon.' + m[1] + '"');
+  })());
 check('custom confirm commits once via the engine with paging reset, scroll, and canonical link',
   !!main && /dateWindowForCustom\(/.test(main)
   && /datePreset = 'custom'[\s\S]{0,500}?displayStartIndex = 0/.test(main)
@@ -330,6 +342,55 @@ check('helpers window seams accept the object form (with positional fallback)',
   !!helpers && /window\.dateWindowForCustom = function\(rangeOrFrom/.test(helpers)
   && /window\.syncCustomParams = function\(rangeOrFrom/.test(helpers)
   && /function filterByDateWindow\(events, windowOrStartISO/.test(helpers));
+
+// --- Custom picker affordance + stale-display guard (issue 103 follow-up):
+// the picker mounts only while the Custom flow is open, a visible trigger
+// opens it, and every non-custom commit closes it so the range display can
+// never disagree with the committed window.
+check('custom flow tracks an explicit UI-only open flag seeded from boot',
+  !!main && /var\.customOpen="\{window\.initialDatePreset === 'custom'\}"/.test(main));
+check('custom tab opens the flow UI-only without committing a window',
+  !!main && (() => {
+    const at = main.indexOf('>Custom<');
+    if (at < 0) return false;
+    const handler = main.substring(Math.max(0, at - 400), at);
+    return /customOpen = true/.test(handler)
+      && !/datePreset = 'custom'/.test(handler);
+  })());
+check('custom picker row mounts only while the custom flow is open',
+  !!main && /id="customPickerRow"[\s\S]{0,200}?when="\{customOpen\}"/.test(main));
+check('custom picker carries an accessible label plus a placeholder',
+  !!main && /<DatePicker[\s\S]{0,1600}?label="Custom date range"/.test(main)
+  && /<DatePicker[\s\S]{0,1600}?placeholder=/.test(main));
+check('shared commit helper closes the custom flow (no stale range display)',
+  !!globals && /customOpen = false/.test(commitBody()));
+check('custom tab reads pressed while the custom flow is open (not only after commit)',
+  !!main && (() => {
+    const at = main.indexOf('>Custom</');
+    if (at < 0) return false;
+    const open = main.lastIndexOf('<Button', at);
+    if (open < 0) return false;
+    return /variant="\{[^"]*customOpen/.test(main.substring(open, at));
+  })());
+check('exactly one tab pressed at a time: non-custom tabs yield while the custom flow is open',
+  !!main && (() => {
+    const m = main.match(/&& !customOpen \? 'solid' : 'outlined'/g) || [];
+    return m.length === 7;
+  })());
+check('custom tab opens the popup via the click seam (focus() only selects text)',
+  !!main && (() => {
+    const at = main.indexOf('>Custom</');
+    if (at < 0) return false;
+    const open = main.lastIndexOf('<Button', at);
+    if (open < 0) return false;
+    const el = main.substring(open, at);
+    return /window\.openCustomPicker\(\)/.test(el)
+      && !/\.focus\(\)/.test(el);
+  })());
+check('no redundant picker trigger survives beside the Custom tab',
+  !!main && !/Choose dates/.test(main));
+check('helpers.js exposes the picker-open seam used by the trigger',
+  !!helpers && /window\.openCustomPicker = function/.test(helpers));
 
 console.log(failures === 0 ? '\nALL CHECKS PASSED' : `\n${failures} CHECKS FAILED`);
 process.exit(failures === 0 ? 0 : 1);

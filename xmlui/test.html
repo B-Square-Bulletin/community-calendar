@@ -1589,7 +1589,7 @@
 
           test('intraday tabs show pressed state when active', () => {
             for (const key of ['tonight', 'weekend']) {
-              assert(main.includes("datePreset === '" + key + "' ? 'solid' : 'outlined'"),
+              assert(main.includes("datePreset === '" + key + "' && !customOpen ? 'solid' : 'outlined'"),
                 'Missing pressed state for: ' + key);
             }
           });
@@ -1632,15 +1632,16 @@
 
           test('strip carries the Custom tab with pressed state', () => {
             assert(main.includes('>Custom<'), 'Missing tab: Custom');
-            assert(main.includes("datePreset === 'custom' ? 'solid' : 'outlined'"),
-              'Missing pressed state for: custom');
+            assert(/<Button variant="\{[^"]*customOpen[\s\S]{0,300}?>Custom</.test(main),
+              'Custom tab must read pressed while the custom flow is open');
           });
 
-          test('stock range picker opens from the Custom tab with explicit confirm only', () => {
+          test('stock range picker opens from the Custom tab and auto-commits on second click', () => {
             assert(/<DatePicker[\s\S]{0,600}?mode="range"/.test(main), 'Picker must run in range mode');
-            assert(/<DatePicker[\s\S]{0,1200}?confirmRangeSelection="true"/.test(main),
-              'Picker must require explicit confirm (no auto-commit on second click)');
-            assert(main.includes('customRangePicker.focus()'), 'Custom tab must open the picker');
+            assert(/<DatePicker[\s\S]{0,1200}?confirmRangeSelection="false"/.test(main),
+              'Picker must auto-commit on second click (no Cancel/Proceed footer)');
+            assert(main.includes('window.openCustomPicker()'),
+              'Custom tab must open the picker via the click seam (focus() only selects text)');
           });
 
           test('picker uses date-only format, the city timezone, and a today minimum', () => {
