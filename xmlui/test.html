@@ -1496,7 +1496,7 @@
       // pure-logic seam, so like #86 these fetch the shipped files and assert
       // the acceptance criteria hold — a regression here fails the CI
       // Playwright step like any other group. Fast mirror lives in
-      // scripts/validate_date_tabs.js (bare node, no browser).
+      // tests/js/validate-date-tabs.test.js (vitest, no browser).
       async function runDateTabsChromeTests() {
         const group = { name: 'Date tabs (#105)', tests: [] };
         const test = makeGroupTester(group);
@@ -1555,8 +1555,8 @@
       // same commit/URL/boot contract as the #105 day presets (instant commit,
       // pressed state, evergreen ?date= links, history-replace). Like #105,
       // these fetch the shipped files — the repo's established seam for
-      // view-layer checks — with a bare-node mirror in
-      // scripts/validate_date_tabs.js.
+      // view-layer checks — with a vitest mirror in
+      // tests/js/validate-date-tabs.test.js.
       async function runDateTabs106ChromeTests() {
         const group = { name: 'Date tabs (#106)', tests: [] };
         const test = makeGroupTester(group);
@@ -1617,7 +1617,7 @@
       // Date-tab custom chrome tests (#107): the Custom tab plus the stock
       // range picker behind it. Like #105/#106 these fetch the shipped files
       // — the repo's established seam for view-layer checks — with a
-      // bare-node mirror in scripts/validate_date_tabs.js.
+      // vitest mirror in tests/js/validate-date-tabs.test.js.
       async function runDateTabs107ChromeTests() {
         const group = { name: 'Date tabs (#107)', tests: [] };
         const test = makeGroupTester(group);
@@ -1674,7 +1674,7 @@
           test('horizon overrun renders the truncation label below the tabs (single copy in the engine)', () => {
             const pickerAt = main.indexOf('<DatePicker');
             const confirm = pickerAt < 0 ? '' : main.substring(pickerAt, pickerAt + 2200);
-            assert(/window\.dateTruncationText\(w\)/.test(confirm),
+            assert(/window\.dateTruncationText\(customWindow\)/.test(confirm),
               'Custom confirm must label the overrun through dateTruncationText (one copy)');
             assert(!/Showing through/.test(confirm),
               'Custom confirm must not hand-roll the truncation copy');
@@ -1698,9 +1698,9 @@
       // Next-7 reset, horizon-truncation labels on every window, embed
       // parity, and city-push versus date-replace Back behavior. Like
       // #105/#106/#107 these fetch the shipped files — the repo's
-      // established seam for view-layer checks — with a bare-node mirror in
-      // scripts/validate_date_tabs.js (behavioral seam coverage lives in
-      // scripts/validate_date_hardening.js).
+      // established seam for view-layer checks — with a vitest mirror in
+      // tests/js/validate-date-tabs.test.js (behavioral seam coverage lives in
+      // tests/js/validate-date-hardening.test.js).
       async function runDateTabs108ChromeTests() {
         const group = { name: 'Date tabs (#108)', tests: [] };
         const test = makeGroupTester(group);
@@ -1884,7 +1884,7 @@
           });
 
           test('dashboard loading state keeps chrome (not gated on tiles)', () => {
-            assert(main.includes('when="{layoutMode === \'dashboard\'}"'), 'Dashboard chrome must not gate on dashboardTiles');
+            assert(/when="\{layoutMode === 'dashboard'( && !window\.embed)?\}"/.test(main), 'Dashboard chrome must not gate on dashboardTiles');
             assert(!/layoutMode === 'dashboard' && \(dashboardTiles !== null\).*Brand(Header|Footer)/.test(main), 'Brand includes must not require tiles');
           });
         } catch (e) {

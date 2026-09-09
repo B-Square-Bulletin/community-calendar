@@ -54,27 +54,66 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install JS dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Verify collapse-cache regression gate
-        run: node scripts/bench_collapse_long.js
+        run: pnpm bench
 
-  brand-chrome:
-    # Static chrome check for #86: file-content assertions over BrandHeader /
-    # BrandFooter markup. Fast pre-check (bare node, no browser); source of
-    # truth stays the Brand chrome group in xmlui/test.html (Playwright step).
+  node-tests:
+    # Vitest seam + static chrome checks (tests/js/): migration of the four
+    # scripts/validate_*.js harnesses. Gates the PR alongside pytest.
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'pnpm'
 
-      - name: Verify brand chrome (#86)
-        run: node scripts/validate_brand_chrome.js
+      - name: Install JS dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run node tests (vitest)
+        run: pnpm vitest run
+
+  browser-tests:
+    # Playwright gate over the browser-only xmlui/test.html groups.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install JS dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run browser tests
+        run: pnpm playwright test
 
   lint:
     # Mirrors the local lint target (make lint): ruff (format + check) and the

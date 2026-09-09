@@ -17,8 +17,16 @@ A test that verifies database behavior against a disposable local project databa
 _Avoid_: SQL unit test, production test
 
 **Static chrome check**:
-File-content assertions over declarative markup (`.xmlui`/theme files) with no runtime execution. Runs as bare node, distinct from browser unit tests in `xmlui/test.html`.
+File-content assertions over declarative markup (`.xmlui`/theme files) with no runtime execution. Runs under vitest in `tests/js/`, distinct from browser groups in `xmlui/test.html`.
 _Avoid_: JS unit test, integration test (when referring to this script type)
+
+**Vitest seam test**:
+Behavioral assertions over the pure date-window/helpers seam (`date-windows.js`, `helpers.js`) loaded via a `vm` stub harness in `tests/js/`. Hand-computed literals, never the engine's own output, so the test can disagree with the code.
+_Avoid_: bare-node script (the pre-vitest form), browser test (when referring to this seam type)
+
+**Browser group**:
+A served-file group in `xmlui/test.html` (Date tabs, Brand chrome, Content links) asserting over fetched shipped files in a real browser. Gated in PR CI via Playwright (`pnpm playwright test`); the vitest files are fast mirrors, not the source of truth.
+_Avoid_: static chrome check (when referring to the browser execution)
 
 **Source**:
 A venue, organization, group, or government body that contributes events to the calendar. The user-facing concept — what a calendar visitor sees (e.g., "Buskirk-Chumley Theater").

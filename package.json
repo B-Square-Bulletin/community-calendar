@@ -1,0 +1,20 @@
+{
+  "name": "community-calendar-js",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Node test harness for the community-calendar XMLUI date-window seam and static chrome checks",
+  "packageManager": "pnpm@9.12.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:node": "vitest run",
+    "test:browser": "playwright test",
+    "bench": "node scripts/bench_collapse_long.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "vitest": "^3.2.4"
+  }
+}
