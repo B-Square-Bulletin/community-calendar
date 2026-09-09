@@ -303,9 +303,9 @@ window._xsLogs = [];
   // wins over the preset key and restores the exact Custom window; partial
   // or invalid pairs and unknown keys fall back to All so bad links never
   // strand the visitor on an empty. A clamped past start rewrites the URL
-  // for stable reload. The legacy `month` key decodes to the engine's
-  // canonical `thismonth` preset (the #103 URL contract is ?date=thismonth
-  // exact; the alias lives in the codec, not here).
+  // for stable reload. ?date= keys are lowercase exact matches per the #103
+  // URL contract (unknown = All); the retired pre-rename `month` key is
+  // unknown and falls back to All.
   window.initialDatePreset = 'all';
   window.initialDateStart = null;
   window.initialDateEnd = null;
@@ -313,15 +313,13 @@ window._xsLogs = [];
   (function () {
     // Single source of truth for preset keys (prio-80): the boot-honored set
     // derives from the engine's canonical window.DATE_PRESETS (minus 'all',
-    // which is the default when no key is present) plus the engine's legacy
-    // window.DATE_PRESET_ALIASES read keys (?date=month). Literals below are
-    // fallbacks for boot orders where the engine is absent; the alias
-    // decision itself lives in date-windows.js, not here.
+    // which is the default when no key is present). Literals below are
+    // fallbacks for boot orders where the engine is absent. Unknown keys
+    // (including the retired `month`) fall back to All per the #103 URL
+    // contract — there is no alias map.
     var HONORED = {};
     var canonical = window.DATE_PRESETS || ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth'];
     canonical.forEach(function (k) { if (k !== 'all') HONORED[k] = 1; });
-    var aliases = window.DATE_PRESET_ALIASES || { month: 'thismonth' };
-    Object.keys(aliases).forEach(function (k) { HONORED[k] = 1; });
     var tz = (window._cities && window.cityFilter && window._cities[window.cityFilter] &&
       window._cities[window.cityFilter].timezone) || 'UTC';
     var key = null, from = null, to = null;

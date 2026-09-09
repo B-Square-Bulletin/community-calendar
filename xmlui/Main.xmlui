@@ -288,8 +288,8 @@
          syncs the URL with history-replace. Tonight is start-time-only from
          5pm city-time; the weekend is Fri 17:00 through Sunday night
          (engine-resolved per weekday). The Custom tab opens the stock
-         range picker below; the picker commits on the second click
-         (never per tick or mid-drag). #108: the heading gives the strip an
+          range picker below; the picker commits on explicit confirm only
+          (Cancel/Proceed footer, never per tick or mid-drag). #108: the heading gives the strip an
          accessible name and is the empty-reset focus target; preset commits
          surface the horizon-truncation label. -->
     <Text id="dateTabHeading" fontSize="$fontSize-sm" fontWeight="$fontWeight-bold" value="Filter by date" />
@@ -305,8 +305,9 @@
     </HStack>
     <!-- Custom range picker (#107): stock range control with date-only
          format, the city timezone, today minimum plus past dates disabled,
-         forward presets only (Next 7, Next 30, This month), and auto-commit
-         on the second click (no Cancel/Proceed footer). The row mounts only while the Custom flow is open
+         forward presets only (Next 7, Next 30, This month), and explicit
+         confirm (Cancel/Proceed footer — nothing commits mid-drag or per
+         tick). The row mounts only while the Custom flow is open
          (customOpen, seeded true on a custom deep-link): opening mounts
          without committing, and every non-custom commit closes it via the
          shared commitDatePreset path, so the range display can never
@@ -317,8 +318,8 @@
          text: the vendored handle exposes no open API). The in-box calendar
          glyph (endIcon) is a plain adornment inside that same Control, so
          tapping it opens the popup too. Tapping Custom again re-opens a
-         dismissed popup. Commit fires once via onDidChange on the second
-         click: malformed or partial input is ignored, past starts clamp,
+         dismissed popup. Commit fires once on explicit confirm (Proceed
+         via onDidChange): malformed or partial input is ignored, past starts clamp,
          inverted ranges coerce to a single day, and the canonical
          exact-date link syncs (prio-90: the committed window travels as
          one object). Manual typing alone never commits. -->
@@ -333,9 +334,9 @@
         startDate="{window.todayDateOnly()}"
         disabledDates="{window.customDisabledDates()}"
         presets="{window.customForwardPresets()}"
-        showPresets="false"
+        showPresets="true"
         endIcon="calendar-days"
-        confirmRangeSelection="false"
+        confirmRangeSelection="true"
         onDidChange="(val) => { const customWindow = window.dateWindowForCustom(val); if (!customWindow) return; datePreset = 'custom'; dateWindowStart = customWindow.start; dateWindowEnd = customWindow.end; dateTruncationLabel = window.dateTruncationText(customWindow); displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncCustomParams(customWindow); }"
       />
     </HStack>

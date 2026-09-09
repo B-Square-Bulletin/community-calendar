@@ -1128,16 +1128,14 @@
           assertEqual(w.end, '2026-02-01T08:00:00.000Z');
         });
 
-        it('decodes the legacy ?date=month key to the canonical thismonth window', () => {
-          // WHY: pre-rename links encoded ?date=month; the #103 contract is
-          // ?date=thismonth exact, so decode maps the legacy key forward
-          // while encode only ever emits the canonical key.
+        it('decodes ?date=month as unknown and falls back to All (lowercase exact match)', () => {
+          // WHY: the #103 URL contract is lowercase exact match with
+          // unknown = All; the retired pre-rename key is unknown, not an
+          // alias, so old ?date=month links fail open instead of stranding.
           const now = '2026-02-11T12:00:00Z';
-          const expected = resolveDatePreset('thismonth', { now, timeZone: LA });
           const decoded = decodeDateParams({ date: 'month' }, { now, timeZone: LA });
-          assertEqual(decoded.preset, 'thismonth');
-          assertEqual(decoded.start, expected.start);
-          assertEqual(decoded.end, expected.end);
+          assertEqual(decoded.preset, 'all');
+          assertEqual(decoded.start, null);
           assertDeepEqual(encodeDateParams({ preset: 'thismonth' }), { date: 'thismonth' });
         });
 
@@ -1603,9 +1601,9 @@
               'Date commits must use history-replace (Back skips filter states)');
           });
 
-          test('boot seed honors the intraday evergreen keys (derived from the engine list)', () => {
+          test('boot seed honors the evergreen keys (derived from the engine list, no aliases)', () => {
             assert(/window\.DATE_PRESETS/.test(shellText), 'Boot seed must derive HONORED from window.DATE_PRESETS');
-            assert(/window\.DATE_PRESET_ALIASES/.test(shellText), 'Boot seed must derive legacy keys from window.DATE_PRESET_ALIASES');
+            assert(!/window\.DATE_PRESET_ALIASES/.test(shellText), 'Boot seed must not consult a legacy alias map (unknown = All)');
           });
         } catch (e) {
           group.tests.push({ name: 'Load date tab files', pass: false, error: e.message });
@@ -1636,10 +1634,10 @@
               'Custom tab must read pressed while the custom flow is open');
           });
 
-          test('stock range picker opens from the Custom tab and auto-commits on second click', () => {
+          test('stock range picker opens from the Custom tab and commits on explicit confirm', () => {
             assert(/<DatePicker[\s\S]{0,600}?mode="range"/.test(main), 'Picker must run in range mode');
-            assert(/<DatePicker[\s\S]{0,1200}?confirmRangeSelection="false"/.test(main),
-              'Picker must auto-commit on second click (no Cancel/Proceed footer)');
+            assert(/<DatePicker[\s\S]{0,1200}?confirmRangeSelection="true"/.test(main),
+              'Picker must require explicit confirm (Cancel/Proceed footer, no auto-commit)');
             assert(main.includes('window.openCustomPicker()'),
               'Custom tab must open the picker via the click seam (focus() only selects text)');
           });
@@ -1654,6 +1652,7 @@
 
           test('picker offers only the forward presets (no built-in backward keys)', () => {
             assert(/<DatePicker[\s\S]{0,1600}?presets=/.test(main), 'Picker must supply forward presets');
+            assert(/<DatePicker[\s\S]{0,1600}?showPresets="true"/.test(main), 'Picker must show the forward-preset sidebar');
             assert(!/last7Days|last30Days|thisMonth|lastMonth/.test(main),
               'Built-in backward presets must stay hidden');
             assert(helpersText.includes('window.customForwardPresets'), 'Missing customForwardPresets seam');

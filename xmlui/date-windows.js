@@ -22,15 +22,10 @@
   // key; All strips every date key. This list is the single source of truth
   // for preset keys (prio-80): helpers.js DATE_TAB_PRESETS and the shell
   // boot HONORED set both derive from window.DATE_PRESETS, so adding a
-  // preset means editing this list only. Legacy read aliases live in
-  // DATE_PRESET_ALIASES next to it — the one place the alias decision is
-  // documented — and resolve/decode normalize through it.
+  // preset means editing this list only. Unknown ?date= keys (including the
+  // retired pre-rename `month`) fall back to All per the #103 URL contract
+  // (lowercase exact match) — there is no alias map.
   var DATE_PRESETS = ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth'];
-
-  // Legacy read fallback: pre-rename links encoded ?date=month; the
-  // canonical key per the #103 URL contract is ?date=thismonth. Only
-  // thismonth ever encodes; month decodes.
-  var DATE_PRESET_ALIASES = { month: 'thismonth' };
 
   var DATE_RE = /^(\d{4})-(\d{2})-(\d{2})$/;
 
@@ -175,8 +170,6 @@
     var nowMs = toMs(opts.now) != null ? toMs(opts.now) : Date.now();
     var horizonMs = toMs(opts.horizonEnd);
 
-    // Legacy read fallback via the single alias map above.
-    if (Object.prototype.hasOwnProperty.call(DATE_PRESET_ALIASES, preset)) preset = DATE_PRESET_ALIASES[preset];
     if (preset === 'all' || !isKnownPreset(preset)) {
       return emptyWindow('all');
     }
@@ -380,10 +373,6 @@
     }
 
     if (q.date != null) {
-      // Legacy read fallback via the single alias map (see DATE_PRESETS):
-      // ?date=month decodes to the canonical thismonth window; only
-      // thismonth encodes.
-      if (Object.prototype.hasOwnProperty.call(DATE_PRESET_ALIASES, q.date)) q.date = DATE_PRESET_ALIASES[q.date];
       if (isKnownPreset(q.date)) {
         var windowRange = q.date === 'all'
           ? emptyWindow('all')
@@ -400,7 +389,6 @@
   // Public surface (repo style: bare functions on window).
   var api = {
     DATE_PRESETS: DATE_PRESETS,
-    DATE_PRESET_ALIASES: DATE_PRESET_ALIASES,
     MAX_WINDOW_DAYS: MAX_WINDOW_DAYS,
     TRUNCATION_LABEL_PREFIX: TRUNCATION_LABEL_PREFIX,
     TRUNCATION_LABEL_SUFFIX: TRUNCATION_LABEL_SUFFIX,
@@ -417,7 +405,6 @@
 
   if (typeof window !== 'undefined') {
     window.DATE_PRESETS = api.DATE_PRESETS;
-    window.DATE_PRESET_ALIASES = api.DATE_PRESET_ALIASES;
     window.MAX_WINDOW_DAYS = api.MAX_WINDOW_DAYS;
     window.TRUNCATION_LABEL_PREFIX = api.TRUNCATION_LABEL_PREFIX;
     window.TRUNCATION_LABEL_SUFFIX = api.TRUNCATION_LABEL_SUFFIX;

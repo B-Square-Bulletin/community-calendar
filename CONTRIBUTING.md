@@ -88,6 +88,6 @@ Update `cities/<city>/SOURCES_CHECKLIST.md` with what you found — working feed
 
 ## Other Guidelines
 
-- **Testing**: Tests are browser-based (`test.html`), not Node. Open `test.html` in a browser to run.
+- **Testing**: JS date-window/helpers seams run under vitest (`tests/js/`, `make test-node` / `pnpm vitest run`, gated in PR CI); browser-only groups live in `xmlui/test.html` and run under Playwright (`make test-browser` / `pnpm playwright test`, gated in PR CI). Open `test.html` in a browser for a manual run. Python tests run via `make test` (pytest).
 - **Git push**: CI may push between your commits. If `git push` fails, use `git pull --rebase && git push`.
 - **Forks**: If you're running your own fork, see `docs/syncing-your-fork.md` for how to set up the feeds table. Forks without a `feeds` table can still use `feeds.txt` directly — `download_feeds.py` falls back to reading it when `SUPABASE_URL` isn't set.

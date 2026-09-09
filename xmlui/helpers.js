@@ -142,11 +142,6 @@ window.dateWindowForPreset = function(preset) {
 // Unknown keys fail open to the All label so bad links never strand the
 // visitor on a baffling empty.
 window.dateWindowLabel = function(preset) {
-  // Legacy read key (?date=month) normalizes through the engine's single
-  // alias map, so old links render the This-month copy.
-  if (window.DATE_PRESET_ALIASES && Object.prototype.hasOwnProperty.call(window.DATE_PRESET_ALIASES, preset)) {
-    preset = window.DATE_PRESET_ALIASES[preset];
-  }
   var labels = {
     all: 'found',
     today: 'today',
@@ -240,6 +235,10 @@ window.customDisabledDates = function() {
 // This-month-remainder as {label, from, to} in city-timezone yyyy-MM-dd.
 // Computed fresh on every call (boot plus day-rollover); the built-in
 // backward presets are never supplied so they stay hidden.
+// WHY local date math: these build wall-clock yyyy-MM-dd preset strings for
+// the picker's `presets` prop, not absolute instants — deliberately kept next
+// to todayDateOnly/customDisabledDates rather than threaded through the
+// instant-window engine (whose addDays/cityParts are private to it).
 window.customForwardPresets = function() {
   function pad(n) { return (n < 10 ? '0' : '') + n; }
   function fmt(y, mo, d) { return y + '-' + pad(mo) + '-' + pad(d); }

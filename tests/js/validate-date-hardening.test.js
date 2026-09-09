@@ -58,8 +58,8 @@ describe('empty labels', () => {
   it('empty label for This month', () => {
     expect(window.dateWindowLabel('thismonth')).toEqual('this month');
   });
-  it('empty label for legacy month key matches This month', () => {
-    expect(window.dateWindowLabel('month')).toEqual('this month');
+  it('empty label for the retired month key fails open to All', () => {
+    expect(window.dateWindowLabel('month')).toEqual('found');
   });
   it('empty label for Custom', () => {
     expect(window.dateWindowLabel('custom')).toEqual('in this date range');
@@ -193,8 +193,8 @@ describe('invalid-link fallbacks', () => {
   it('canonical thismonth key decodes to the month-remainder window', () => {
     expect(window.decodeDateParams({ date: 'thismonth' }, { timeZone: 'America/Los_Angeles' }).preset).toEqual('thismonth');
   });
-  it('legacy month key decodes to the canonical thismonth window', () => {
-    expect(window.decodeDateParams({ date: 'month' }, { timeZone: 'America/Los_Angeles' }).preset).toEqual('thismonth');
+  it('retired month key falls back to All (unknown = All per #103)', () => {
+    expect(window.decodeDateParams({ date: 'month' }, { timeZone: 'America/Los_Angeles' }).preset).toEqual('all');
   });
 });
 
@@ -273,8 +273,8 @@ describe('preset keys', () => {
   it('engine owns the canonical preset list', () => {
     expect(window.DATE_PRESETS).toEqual(['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth']);
   });
-  it('engine owns the single legacy alias map', () => {
-    expect(window.DATE_PRESET_ALIASES).toEqual({ month: 'thismonth' });
+  it('engine exposes no alias map (unknown keys fall to All per #103)', () => {
+    expect(window.DATE_PRESET_ALIASES).toEqual(undefined);
   });
   it('tab-strip list derives from the engine canonical list (same copy, not a fork)', () => {
     expect(window.DATE_TAB_PRESETS).toEqual(window.DATE_PRESETS);

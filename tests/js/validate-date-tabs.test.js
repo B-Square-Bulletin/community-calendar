@@ -110,12 +110,10 @@ describe('intraday tabs', () => {
   && /datePreset === 'weekend' && !customOpen \? 'solid' : 'outlined'/.test(main)).toBe(true); });
   it('helpers.js date-tab presets derive from the engine canonical list (single source)', () => { expect(!!helpers && /window\.DATE_TAB_PRESETS[\s\S]{0,300}?window\.DATE_PRESETS/.test(helpers)
   && /DATE_TAB_PRESETS/.test(helpers)).toBe(true); });
-  it('shell.js boot seed derives the honored set from the engine list plus its alias map', () => { expect(!!shell && /window\.DATE_PRESETS/.test(shell) && /window\.DATE_PRESET_ALIASES/.test(shell)
+  it('shell.js boot seed derives the honored set from the engine list (no alias map)', () => { expect(!!shell && /window\.DATE_PRESETS/.test(shell) && !/window\.DATE_PRESET_ALIASES/.test(shell)
   && /HONORED/.test(shell)).toBe(true); });
   it('this month commits and boots as ?date=thismonth (#103 contract)', () => { expect(!!main && /commitDatePreset\('thismonth'\)/.test(main)
-  && /datePreset === 'thismonth' && !customOpen \? 'solid' : 'outlined'/.test(main)
-  && !!helpers && /DATE_PRESET_ALIASES/.test(helpers)
-  && !!shell && /DATE_PRESET_ALIASES/.test(shell)).toBe(true); });
+  && /datePreset === 'thismonth' && !customOpen \? 'solid' : 'outlined'/.test(main)).toBe(true); });
 });
 
 describe('composition', () => {
@@ -129,15 +127,15 @@ describe('composition', () => {
 describe('custom picker', () => {
   it('tab strip carries the Custom tab (#107)', () => { expect(!!main && />Custom</.test(main)).toBe(true); });
   it('custom tab shows pressed state when active', () => { expect(!!main && /datePreset === 'custom' \|\| customOpen/.test(main)).toBe(true); });
-  it('custom range picker present in range mode with auto-commit on second click', () => { expect(!!main && /<DatePicker[\s\S]{0,600}?mode="range"/.test(main)
-  && /<DatePicker[\s\S]{0,1200}?confirmRangeSelection="false"/.test(main)).toBe(true); });
+  it('custom range picker present in range mode with explicit confirm (Cancel/Proceed footer)', () => { expect(!!main && /<DatePicker[\s\S]{0,600}?mode="range"/.test(main)
+  && /<DatePicker[\s\S]{0,1200}?confirmRangeSelection="true"/.test(main)).toBe(true); });
   it('custom picker uses date-only format plus the city timezone', () => { expect(!!main && /<DatePicker[\s\S]{0,1200}?dateFormat="yyyy-MM-dd"/.test(main)
   && /<DatePicker[\s\S]{0,1200}?timeZone=/.test(main)).toBe(true); });
   it('custom picker disables past dates with today as the minimum', () => { expect(!!main && /<DatePicker[\s\S]{0,1600}?disabledDates=/.test(main)
   && /<DatePicker[\s\S]{0,1600}?startDate=/.test(main)).toBe(true); });
   it('custom picker offers only forward presets (no built-in backward keys)', () => { expect(!!main && /<DatePicker[\s\S]{0,1600}?presets=/.test(main)
   && !/last7Days|last30Days|thisMonth|lastMonth/.test(main)).toBe(true); });
-  it('custom picker hides the preset sidebar (ranges live on the tab strip)', () => { expect(!!main && /<DatePicker[\s\S]{0,1600}?showPresets="false"/.test(main)).toBe(true); });
+  it('custom picker shows the forward-preset sidebar (Next 7 / Next 30 / This month)', () => { expect(!!main && /<DatePicker[\s\S]{0,1600}?showPresets="true"/.test(main)).toBe(true); });
   it('custom picker carries the in-box calendar glyph (plain adornment, opens the popup)', () => { expect(!!main && (() => {
     let config = null;
     try { config = fs.readFileSync(path.join(ROOT, 'config.json'), 'utf8'); } catch { return false; }
