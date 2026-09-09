@@ -168,6 +168,13 @@ describe('hardening', () => {
   it('empty window reads No events {label} with a one-tap Next 7 reset', () => { expect(!!main && /No events /.test(main)
   && /window\.dateWindowLabel\(datePreset\)/.test(main)
   && />Show next 7 days</.test(main)).toBe(true); });
+  it('empty guard reads the full filtered list, not the paged slice', () => { expect(!!main && (() => {
+    const at = main.indexOf('Show next 7 days');
+    if (at < 0) return false;
+    const handler = main.substring(Math.max(0, at - 900), at);
+    return /window\.filterEvents\(dateFilteredEvents/.test(handler)
+      && !/getPagedEvents\(dateFilteredEvents/.test(handler);
+  })()).toBe(true); });
   it('reset commits Next 7 with paging reset, URL sync, and heading focus but no scroll', () => { expect(!!main && (() => {
     const at = main.indexOf('Show next 7 days');
     if (at < 0) return false;

@@ -1725,6 +1725,10 @@
             assert(handler.includes("commitDatePreset('next7'"), 'Reset must ride the shared commit');
             assert(handler.includes('focusDateTabHeading'), 'Reset must move focus to the heading');
             assert(!handler.includes('scrollRequest'), 'Reset must not scroll (focus carries preventScroll)');
+            assert(handler.includes('window.filterEvents(dateFilteredEvents'),
+              'Empty guard must read the full filtered list, not the paged slice');
+            assert(!handler.includes('getPagedEvents(dateFilteredEvents'),
+              'Empty guard must not use the paged slice (stale page index misreports "No events")');
             const cbAt = globalsText.indexOf('function commitDatePreset(');
             const cb = cbAt < 0 ? '' : globalsText.substring(cbAt, cbAt + 2500);
             assert(/displayStartIndex = 0/.test(cb), 'Reset must reset paging via the shared commit');

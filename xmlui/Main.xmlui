@@ -345,11 +345,14 @@
     </HStack>
     <Text when="{dateTruncationLabel}" fontSize="$fontSize-sm" color="$color-text-secondary" value="{dateTruncationLabel}" />
     <!-- Empty window (#108): an explicit message plus a one-tap reset to
-         Next 7 days. The reset commits through the shared commitDatePreset
+         Next 7 days. The guard reads the full filtered list (date + search
+         + category), not the paged slice, so a stale displayStartIndex on a
+         later page can never misreport "No events" when matches exist on
+         page 1. The reset commits through the shared commitDatePreset
          path with scrolling off (paging reset, URL sync) but moves focus to
          the tab-strip heading with no scroll instead of firing
          scroll-to-top. -->
-    <VStack when="{!!events.value && viewMode === 'all' && !getPagedEvents(dateFilteredEvents, filterTerm, displayStartIndex, pageSizeFor(filterTerm), categoryFilter).length}" gap="$space-2" width="100%" padding="$space-3" horizontalAlignment="center">
+    <VStack when="{!!events.value && viewMode === 'all' && !window.filterEvents(dateFilteredEvents, filterTerm, categoryFilter).length}" gap="$space-2" width="100%" padding="$space-3" horizontalAlignment="center">
       <Text value="{'No events ' + window.dateWindowLabel(datePreset) + '.'}" />
       <Button variant="outlined" onClick="commitDatePreset('next7', {scroll: false}); window.focusDateTabHeading()">Show next 7 days</Button>
     </VStack>
