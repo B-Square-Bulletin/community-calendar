@@ -1650,12 +1650,12 @@
             assert(/<DatePicker[\s\S]{0,1600}?disabledDates=/.test(main), 'Picker must disable past dates');
           });
 
-          test('picker offers only the forward presets (no built-in backward keys)', () => {
-            assert(/<DatePicker[\s\S]{0,1600}?presets=/.test(main), 'Picker must supply forward presets');
-            assert(/<DatePicker[\s\S]{0,1600}?showPresets="true"/.test(main), 'Picker must show the forward-preset sidebar');
+          test('picker has no preset sidebar (divergence from #103/#107: Next 7 / This month duplicated the tabs)', () => {
+            assert(!/<DatePicker[\s\S]{0,1600}?presets=/.test(main), 'Picker must not supply presets');
+            assert(!/<DatePicker[\s\S]{0,1600}?showPresets=/.test(main), 'Picker must not show a preset sidebar');
             assert(!/last7Days|last30Days|thisMonth|lastMonth/.test(main),
               'Built-in backward presets must stay hidden');
-            assert(helpersText.includes('window.customForwardPresets'), 'Missing customForwardPresets seam');
+            assert(!helpersText.includes('window.customForwardPresets'), 'customForwardPresets seam must be gone');
           });
 
           test('confirm commits once through the engine and syncs the canonical link', () => {

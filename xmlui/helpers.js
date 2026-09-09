@@ -231,45 +231,6 @@ window.customDisabledDates = function() {
   return [{ before: window.todayDateOnly() }];
 };
 
-// Boot-computed forward presets for the stock picker: Next 7, Next 30, and
-// This-month-remainder as {label, from, to} in city-timezone yyyy-MM-dd.
-// Computed fresh on every call (boot plus day-rollover); the built-in
-// backward presets are never supplied so they stay hidden.
-// WHY local date math: these build wall-clock yyyy-MM-dd preset strings for
-// the picker's `presets` prop, not absolute instants — deliberately kept next
-// to todayDateOnly/customDisabledDates rather than threaded through the
-// instant-window engine (whose addDays/cityParts are private to it).
-window.customForwardPresets = function() {
-  function pad(n) { return (n < 10 ? '0' : '') + n; }
-  function fmt(y, mo, d) { return y + '-' + pad(mo) + '-' + pad(d); }
-  function cityToday() {
-    var tz = getCityTimezone() || 'UTC';
-    var parts = new Intl.DateTimeFormat('en-CA', {
-      timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit'
-    }).formatToParts(new Date());
-    var v = {};
-    parts.forEach(function(p) { v[p.type] = p.value; });
-    return { y: +v.year, mo: +v.month, d: +v.day };
-  }
-  function addDays(y, mo, d, n) {
-    var shifted = new Date(Date.UTC(y, mo - 1, d) + n * 86400000);
-    return { y: shifted.getUTCFullYear(), mo: shifted.getUTCMonth() + 1, d: shifted.getUTCDate() };
-  }
-  try {
-    var todayParts = cityToday();
-    var next7End = addDays(todayParts.y, todayParts.mo, todayParts.d, 6);
-    var next30End = addDays(todayParts.y, todayParts.mo, todayParts.d, 29);
-    var monthEnd = new Date(Date.UTC(todayParts.y, todayParts.mo, 0)).getUTCDate();
-    return [
-      { label: 'Next 7 days', from: fmt(todayParts.y, todayParts.mo, todayParts.d), to: fmt(next7End.y, next7End.mo, next7End.d) },
-      { label: 'Next 30 days', from: fmt(todayParts.y, todayParts.mo, todayParts.d), to: fmt(next30End.y, next30End.mo, next30End.d) },
-      { label: 'This month', from: fmt(todayParts.y, todayParts.mo, todayParts.d), to: fmt(todayParts.y, todayParts.mo, monthEnd) }
-    ];
-  } catch (e) {
-    return [];
-  }
-};
-
 // Resolve an exact Custom range to its committed window ({start, end} ISO
 // plus canonical from/to, truncated, clamped) in the city timezone via the
 // #104 engine. Null on malformed or partial input (the commit ignores it,

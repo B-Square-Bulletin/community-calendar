@@ -305,9 +305,14 @@
     </HStack>
     <!-- Custom range picker (#107): stock range control with date-only
          format, the city timezone, today minimum plus past dates disabled,
-         forward presets only (Next 7, Next 30, This month), and explicit
-         confirm (Cancel/Proceed footer — nothing commits mid-drag or per
-         tick). The row mounts only while the Custom flow is open
+         and explicit confirm (Cancel/Proceed footer — nothing commits
+         mid-drag or per tick). Divergence from #103/#107 spec: the spec
+         required boot-computed forward presets (Next 7, Next 30, This
+         month) in the picker sidebar, but Next 7 / This month duplicated
+         the tab strip with divergent URL semantics (evergreen ?date= vs
+         absolute ?from/&to=), leaving only Next 30 unique — so the
+         sidebar was removed outright and Custom means arbitrary range
+         only. The row mounts only while the Custom flow is open
          (customOpen, seeded true on a custom deep-link): opening mounts
          without committing, and every non-custom commit closes it via the
          shared commitDatePreset path, so the range display can never
@@ -333,8 +338,6 @@
         timeZone="{window.customPickerTimezone()}"
         startDate="{window.todayDateOnly()}"
         disabledDates="{window.customDisabledDates()}"
-        presets="{window.customForwardPresets()}"
-        showPresets="true"
         endIcon="calendar-days"
         confirmRangeSelection="true"
         onDidChange="(val) => { const customWindow = window.dateWindowForCustom(val); if (!customWindow) return; datePreset = 'custom'; dateWindowStart = customWindow.start; dateWindowEnd = customWindow.end; dateTruncationLabel = window.dateTruncationText(customWindow); displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncCustomParams(customWindow); }"

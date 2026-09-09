@@ -133,9 +133,9 @@ describe('custom picker', () => {
   && /<DatePicker[\s\S]{0,1200}?timeZone=/.test(main)).toBe(true); });
   it('custom picker disables past dates with today as the minimum', () => { expect(!!main && /<DatePicker[\s\S]{0,1600}?disabledDates=/.test(main)
   && /<DatePicker[\s\S]{0,1600}?startDate=/.test(main)).toBe(true); });
-  it('custom picker offers only forward presets (no built-in backward keys)', () => { expect(!!main && /<DatePicker[\s\S]{0,1600}?presets=/.test(main)
+  it('custom picker has no preset sidebar (divergence from #103/#107: Next 7 / This month duplicated the tabs)', () => { expect(!!main && !/<DatePicker[\s\S]{0,1600}?presets=/.test(main)
+  && !/<DatePicker[\s\S]{0,1600}?showPresets=/.test(main)
   && !/last7Days|last30Days|thisMonth|lastMonth/.test(main)).toBe(true); });
-  it('custom picker shows the forward-preset sidebar (Next 7 / Next 30 / This month)', () => { expect(!!main && /<DatePicker[\s\S]{0,1600}?showPresets="true"/.test(main)).toBe(true); });
   it('custom picker carries the in-box calendar glyph (plain adornment, opens the popup)', () => { expect(!!main && (() => {
     let config = null;
     try { config = fs.readFileSync(path.join(ROOT, 'config.json'), 'utf8'); } catch { return false; }
@@ -156,7 +156,7 @@ describe('custom picker', () => {
   })()).toBe(true); });
   it('helpers.js exposes the custom seam', () => { expect(!!helpers && /window\.dateWindowForCustom/.test(helpers)
   && /window\.syncCustomParams/.test(helpers)
-  && /window\.customForwardPresets/.test(helpers)
+  && !/window\.customForwardPresets/.test(helpers)
   && /window\.todayDateOnly/.test(helpers)).toBe(true); });
   it('helpers.js custom seam commits with history-replace and canonical from/to only', () => { expect(!!helpers && /syncCustomParams[\s\S]{0,400}?replaceDateUrlParams/.test(helpers)
   && /replaceDateUrlParams[\s\S]{0,1200}?replaceState/.test(helpers)).toBe(true); });

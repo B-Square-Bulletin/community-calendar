@@ -1,7 +1,7 @@
 // tests/js/validate-custom-helpers.test.js — vitest migration of
 // scripts/validate_custom_helpers.js (seam harness for #107: Custom range picker).
 //
-// WHY: dateWindowForCustom / customForwardPresets / syncCustomParams are pure
+// WHY: dateWindowForCustom / syncCustomParams are pure
 // helpers with no browser dependency. Expected values are hand-computed
 // literals (PST, UTC-8), never the engine's own output, so these tests can
 // disagree with the code.
@@ -55,25 +55,6 @@ describe('custom window', () => {
   it('custom end past the horizon truncates', () => {
     const w = window.dateWindowForCustom('2026-02-12', '2026-05-12');
     expect([w.end, w.truncated]).toEqual(['2026-03-01T08:00:00.000Z', true]);
-  });
-});
-
-describe('forward presets', () => {
-  it('forward preset labels', () => {
-    expect(window.customForwardPresets().map((x) => x.label)).toEqual(
-      ['Next 7 days', 'Next 30 days', 'This month']);
-  });
-  it('next-7 preset', () => {
-    const presets = window.customForwardPresets();
-    expect([presets[0].from, presets[0].to]).toEqual(['2026-02-11', '2026-02-17']);
-  });
-  it('next-30 preset', () => {
-    const presets = window.customForwardPresets();
-    expect([presets[1].from, presets[1].to]).toEqual(['2026-02-11', '2026-03-12']);
-  });
-  it('month-remainder preset', () => {
-    const presets = window.customForwardPresets();
-    expect([presets[2].from, presets[2].to]).toEqual(['2026-02-11', '2026-02-28']);
   });
 });
 
