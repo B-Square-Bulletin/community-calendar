@@ -17,8 +17,16 @@ A test that verifies database behavior against a disposable local project databa
 _Avoid_: SQL unit test, production test
 
 **Static chrome check**:
-File-content assertions over declarative markup (`.xmlui`/theme files) with no runtime execution. Runs as bare node, distinct from browser unit tests in `xmlui/test.html`.
+File-content assertions over declarative markup (`.xmlui`/theme files) with no runtime execution. Runs under vitest in `tests/js/`, distinct from browser groups in `xmlui/test.html`.
 _Avoid_: JS unit test, integration test (when referring to this script type)
+
+**Vitest seam test**:
+Behavioral assertions over the pure date-window/helpers seam (`date-windows.js`, `helpers.js`) loaded via a `vm` stub harness in `tests/js/`. Hand-computed literals, never the engine's own output, so the test can disagree with the code.
+_Avoid_: bare-node script (the pre-vitest form), browser test (when referring to this seam type)
+
+**Browser group**:
+A served-file group in `xmlui/test.html` (Date tabs, Brand chrome, Content links) asserting over fetched shipped files in a real browser. Gated in PR CI via Playwright (`pnpm playwright test`); the vitest files are fast mirrors, not the source of truth.
+_Avoid_: static chrome check (when referring to the browser execution)
 
 **Source**:
 A venue, organization, group, or government body that contributes events to the calendar. The user-facing concept — what a calendar visitor sees (e.g., "Buskirk-Chumley Theater").
@@ -47,6 +55,30 @@ _Avoid_: Local timezone, calendar timezone
 **Event timezone (TZID)**:
 The IANA zone an individual event declares via an ICS `TZID` parameter. Overrides the city timezone for that event.
 _Avoid_: Event tz, source timezone
+
+**Date window**:
+The absolute `[start, end)` interval the calendar is currently filtered to, resolved in the city timezone. What the list, pager, and URL all reflect.
+_Avoid_: Date filter, day offsets
+
+**Preset**:
+A named rule that resolves to a date window relative to the day it is opened (Today, Tonight, Tomorrow, This weekend, Next 7 days, This month, Custom, All). Rolling presets stay evergreen; Custom carries exact dates.
+_Avoid_: Tab, quick filter
+
+**Commit**:
+The moment a chosen window becomes active: the list re-filters, the pager resets, and the URL syncs. Discrete picks commit instantly; continuous gestures commit on release/confirm, never per tick.
+_Avoid_: Apply, select (when meaning the committed state)
+
+**Horizon**:
+The end of the prefetched event set (about 90 days out). Windows past it clamp and label the truncation; the calendar running out is distinct from the filter matching nothing.
+_Avoid_: Max date, data end
+
+**Clamping**:
+Moving a range start earlier than today forward to today, rewriting the URL so reload is stable. Never a silent empty from a stale date.
+_Avoid_: Snapping, correcting
+
+**Truncation**:
+Labeling when a window extends past the horizon so the visitor knows the calendar ended, not the filter.
+_Avoid_: Cutoff (when meaning horizon), capping
 
 ## Key Concepts
 

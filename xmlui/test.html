@@ -81,6 +81,7 @@
     </script>
     <script src="helpers.js"></script>
     <script src="boot-decisions.js"></script>
+    <script src="date-windows.js"></script>
   </head>
   <body>
     <h1>Community Calendar Tests</h1>
@@ -1071,6 +1072,722 @@
         });
       });
 
+      describe('Date windows (#104)', () => {
+        // Table-driven over a stubbed clock (explicit `now`) and a stubbed
+        // city timezone (`timeZone`): expectations are absolute-ISO
+        // literals, so a failure means the engine disagrees with the spec,
+        // not with itself.
+        const LA = 'America/Los_Angeles';
+        const FEB_WEEKEND_START = '2026-02-14T01:00:00.000Z'; // Fri Feb 13 17:00 PST
+        const FEB_WEEKEND_END = '2026-02-16T08:00:00.000Z'; // Mon Feb 16 00:00 PST
+
+        it('resolves Today to city-midnight bounds', () => {
+          const w = resolveDatePreset('today', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(w.preset, 'today');
+          assertEqual(w.start, '2026-02-11T08:00:00.000Z');
+          assertEqual(w.end, '2026-02-12T08:00:00.000Z');
+          assertEqual(w.startTimeOnly, false);
+        });
+
+        it('resolves Tonight to [17:00, midnight) start-time-only', () => {
+          const w = resolveDatePreset('tonight', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(w.preset, 'tonight');
+          assertEqual(w.start, '2026-02-12T01:00:00.000Z');
+          assertEqual(w.end, '2026-02-12T08:00:00.000Z');
+          assertEqual(w.startTimeOnly, true);
+        });
+
+        it('excludes 16:59 from Tonight and ends at midnight', () => {
+          const w = resolveDatePreset('tonight', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assert(new Date('2026-02-12T00:59:59.000Z').getTime() < new Date(w.start).getTime(),
+            '16:59:59 PST must fall before the Tonight window');
+          assertEqual(w.end, '2026-02-12T08:00:00.000Z');
+        });
+
+        it('resolves Tomorrow to the next city day', () => {
+          const w = resolveDatePreset('tomorrow', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(w.start, '2026-02-12T08:00:00.000Z');
+          assertEqual(w.end, '2026-02-13T08:00:00.000Z');
+        });
+
+        it('resolves Next 7 days to seven city midnights', () => {
+          const w = resolveDatePreset('next7', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(w.start, '2026-02-11T08:00:00.000Z');
+          assertEqual(w.end, '2026-02-18T08:00:00.000Z');
+        });
+
+        it('resolves This month to the month remainder', () => {
+          const w = resolveDatePreset('thismonth', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(w.start, '2026-02-11T08:00:00.000Z');
+          assertEqual(w.end, '2026-03-01T08:00:00.000Z');
+        });
+
+        it('ends This month at the next month on month-end', () => {
+          const w = resolveDatePreset('thismonth', { now: '2026-01-31T20:00:00Z', timeZone: LA });
+          assertEqual(w.start, '2026-01-31T08:00:00.000Z');
+          assertEqual(w.end, '2026-02-01T08:00:00.000Z');
+        });
+
+        it('decodes ?date=month as unknown and falls back to All (lowercase exact match)', () => {
+          // WHY: the #103 URL contract is lowercase exact match with
+          // unknown = All; the retired pre-rename key is unknown, not an
+          // alias, so old ?date=month links fail open instead of stranding.
+          const now = '2026-02-11T12:00:00Z';
+          const decoded = decodeDateParams({ date: 'month' }, { now, timeZone: LA });
+          assertEqual(decoded.preset, 'all');
+          assertEqual(decoded.start, null);
+          assertDeepEqual(encodeDateParams({ preset: 'thismonth' }), { date: 'thismonth' });
+        });
+
+        it('resolves All to an empty window', () => {
+          const w = resolveDatePreset('all', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(w.preset, 'all');
+          assertEqual(w.start, null);
+          assertEqual(w.end, null);
+        });
+
+        it('falls back to All for an unknown preset', () => {
+          const w = resolveDatePreset('fortnight', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(w.preset, 'all');
+          assertEqual(w.start, null);
+        });
+
+        it('resolves the stubbed timezone, not the browser zone (New York)', () => {
+          const w = resolveDatePreset('today', { now: '2026-02-11T12:00:00Z', timeZone: 'America/New_York' });
+          assertEqual(w.start, '2026-02-11T05:00:00.000Z');
+          assertEqual(w.end, '2026-02-12T05:00:00.000Z');
+        });
+
+        // Weekday table: week of Mon Feb 9 - Sun Feb 15 2026 (all PST).
+        // Mon-Thu resolve to the upcoming weekend; Fri/Sat/Sun to the
+        // enclosing one: [Fri 17:00 incl, Mon 00:00 excl).
+        const weekendTable = [
+          ['Mon Feb 9', '2026-02-09T20:00:00Z', FEB_WEEKEND_START, FEB_WEEKEND_END],
+          ['Tue Feb 10', '2026-02-10T20:00:00Z', FEB_WEEKEND_START, FEB_WEEKEND_END],
+          ['Wed Feb 11', '2026-02-11T20:00:00Z', FEB_WEEKEND_START, FEB_WEEKEND_END],
+          ['Thu Feb 12', '2026-02-12T20:00:00Z', FEB_WEEKEND_START, FEB_WEEKEND_END],
+          ['Fri Feb 13', '2026-02-13T20:00:00Z', FEB_WEEKEND_START, FEB_WEEKEND_END],
+          ['Sat Feb 14', '2026-02-14T20:00:00Z', FEB_WEEKEND_START, FEB_WEEKEND_END],
+          ['Sun Feb 15', '2026-02-15T20:00:00Z', FEB_WEEKEND_START, FEB_WEEKEND_END],
+        ];
+        weekendTable.forEach(([label, now, start, end]) => {
+          it('weekend table: ' + label + ' -> Fri 17:00-Mon 00:00', () => {
+            const w = resolveDatePreset('weekend', { now, timeZone: LA });
+            assertEqual(w.start, start, label + ' start');
+            assertEqual(w.end, end, label + ' end');
+          });
+        });
+
+        it('measures DST days by wall-clock (23h spring forward)', () => {
+          const w = resolveDatePreset('today', { now: '2026-03-08T20:00:00Z', timeZone: LA });
+          assertEqual(w.start, '2026-03-08T08:00:00.000Z');
+          assertEqual(w.end, '2026-03-09T07:00:00.000Z');
+          assertEqual(new Date(w.end).getTime() - new Date(w.start).getTime(), 23 * 3600000);
+        });
+
+        it('measures DST days by wall-clock (25h fall back)', () => {
+          const w = resolveDatePreset('today', { now: '2026-11-01T20:00:00Z', timeZone: LA });
+          assertEqual(w.start, '2026-11-01T07:00:00.000Z');
+          assertEqual(w.end, '2026-11-02T08:00:00.000Z');
+          assertEqual(new Date(w.end).getTime() - new Date(w.start).getTime(), 25 * 3600000);
+        });
+
+        it('keeps the weekend window across the spring-forward jump', () => {
+          const w = resolveDatePreset('weekend', { now: '2026-03-07T20:00:00Z', timeZone: LA });
+          assertEqual(w.start, '2026-03-07T01:00:00.000Z'); // Fri 17:00 PST
+          assertEqual(w.end, '2026-03-09T07:00:00.000Z'); // Mon 00:00 PDT
+        });
+
+        it('resolves a Custom range to exact city-midnight bounds', () => {
+          const w = resolveCustomRange('2026-02-12', '2026-02-14', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(w.start, '2026-02-12T08:00:00.000Z');
+          assertEqual(w.end, '2026-02-15T08:00:00.000Z');
+          assertEqual(w.from, '2026-02-12');
+          assertEqual(w.to, '2026-02-14');
+        });
+
+        it('coerces an end-before-start Custom range to the single from-day', () => {
+          const w = resolveCustomRange('2026-02-14', '2026-02-12', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(w.start, '2026-02-14T08:00:00.000Z');
+          assertEqual(w.end, '2026-02-15T08:00:00.000Z');
+          assertEqual(w.to, '2026-02-14');
+        });
+
+        it('caps a Custom range at 180 days', () => {
+          const w = resolveCustomRange('2026-02-12', '2027-02-12', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(w.end, '2026-08-11T07:00:00.000Z');
+          assertEqual(w.to, '2026-08-10');
+        });
+
+        it('clamps a past Custom start to today', () => {
+          const w = resolveCustomRange('2026-01-01', '2026-02-20', { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(w.start, '2026-02-11T08:00:00.000Z');
+          assertEqual(w.from, '2026-02-11');
+          assertEqual(w.clamped, true);
+        });
+
+        it('truncates a Custom range at the horizon with a label', () => {
+          const w = resolveCustomRange('2026-02-12', '2026-05-12', {
+            now: '2026-02-11T12:00:00Z', timeZone: LA, horizonEnd: '2026-03-01T08:00:00.000Z'
+          });
+          assertEqual(w.end, '2026-03-01T08:00:00.000Z');
+          assertEqual(w.truncated, true);
+        });
+
+        it('returns null for a Custom range with invalid dates', () => {
+          assertEqual(resolveCustomRange('2026-02-30', '2026-03-01', { now: '2026-02-11T12:00:00Z', timeZone: LA }), null);
+          assertEqual(resolveCustomRange('2026-02-12', null, { now: '2026-02-11T12:00:00Z', timeZone: LA }), null);
+        });
+
+        it('encodes presets to date keys and All to no keys', () => {
+          assertDeepEqual(encodeDateParams({ preset: 'today' }), { date: 'today' });
+          assertDeepEqual(encodeDateParams({ preset: 'weekend' }), { date: 'weekend' });
+          assertDeepEqual(encodeDateParams({ preset: 'all' }), {});
+          assertDeepEqual(encodeDateParams({}), {});
+        });
+
+        it('encodes Custom to an exact from/to pair with no preset key', () => {
+          assertDeepEqual(
+            encodeDateParams({ preset: 'custom', from: '2026-02-12', to: '2026-02-14' }),
+            { from: '2026-02-12', to: '2026-02-14' });
+        });
+
+        it('round-trips every rolling preset through the URL codec', () => {
+          const now = '2026-02-11T12:00:00Z';
+          ['today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth'].forEach((preset) => {
+            const expected = resolveDatePreset(preset, { now, timeZone: LA });
+            const decoded = decodeDateParams(encodeDateParams({ preset }), { now, timeZone: LA });
+            assertEqual(decoded.preset, preset, preset + ' preset');
+            assertEqual(decoded.start, expected.start, preset + ' start');
+            assertEqual(decoded.end, expected.end, preset + ' end');
+          });
+        });
+
+        it('round-trips a Custom pair through the URL codec', () => {
+          const now = '2026-02-11T12:00:00Z';
+          const decoded = decodeDateParams({ from: '2026-02-12', to: '2026-02-14' }, { now, timeZone: LA });
+          assertEqual(decoded.preset, 'custom');
+          assertDeepEqual(encodeDateParams({ preset: 'custom', from: decoded.from, to: decoded.to }),
+            { from: '2026-02-12', to: '2026-02-14' });
+        });
+
+        it('lets the Custom pair win over a preset key', () => {
+          const decoded = decodeDateParams(
+            { date: 'today', from: '2026-02-12', to: '2026-02-14' },
+            { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(decoded.preset, 'custom');
+          assertEqual(decoded.start, '2026-02-12T08:00:00.000Z');
+        });
+
+        it('ignores an invalid or partial pair and honors ?date=', () => {
+          // WHY: #103 says a partial or invalid from/to pair is ignored
+          // entirely while the complete valid pair wins — the codec must
+          // defer to the preset key instead of stranding on All.
+          const opts = { now: '2026-02-11T12:00:00Z', timeZone: LA };
+          const expected = resolveDatePreset('today', opts);
+          const badPair = decodeDateParams(
+            { date: 'today', from: 'bogus', to: '2026-02-14' }, opts);
+          assertEqual(badPair.preset, 'today');
+          assertEqual(badPair.start, expected.start);
+          const partial = decodeDateParams(
+            { date: 'today', from: '2026-02-12' }, opts);
+          assertEqual(partial.preset, 'today');
+          assertEqual(partial.start, expected.start);
+          const badDates = decodeDateParams(
+            { date: 'tomorrow', from: '2026-02-30', to: '2026-03-01' }, opts);
+          assertEqual(badDates.preset, 'tomorrow');
+        });
+
+        it('falls back to All on partial, invalid, and unknown keys', () => {
+          const opts = { now: '2026-02-11T12:00:00Z', timeZone: LA };
+          assertEqual(decodeDateParams({ from: '2026-02-12' }, opts).preset, 'all');
+          assertEqual(decodeDateParams({ from: '2026-02-30', to: '2026-03-01' }, opts).preset, 'all');
+          assertEqual(decodeDateParams({ date: 'fortnight' }, opts).preset, 'all');
+          assertEqual(decodeDateParams({}, opts).preset, 'all');
+        });
+
+        it('ignores an inverted Custom URL pair but keeps the picker coercion', () => {
+          // WHY: #103 splits the rules — from <= to required on the URL
+          // path (ignore, deferring to ?date= or All) while the picker
+          // confirm coerces end-before-start to the single from-day.
+          // Hand-computed PST literals so this test can disagree with code.
+          const opts = { now: '2026-02-11T12:00:00Z', timeZone: LA };
+          assertEqual(
+            decodeDateParams({ from: '2026-09-10', to: '2026-09-05' }, opts).preset, 'all');
+          const withPreset = decodeDateParams(
+            { date: 'today', from: '2026-09-10', to: '2026-09-05' }, opts);
+          assertEqual(withPreset.preset, 'today');
+          assertEqual(withPreset.start, '2026-02-11T08:00:00.000Z');
+          const picked = resolveCustomRange('2026-09-10', '2026-09-05', opts);
+          assertEqual(picked.start, '2026-09-10T07:00:00.000Z');
+          assertEqual(picked.end, '2026-09-11T07:00:00.000Z');
+          assertEqual(picked.to, '2026-09-10');
+        });
+
+        it('rewrites a clamped past start for stable reload', () => {
+          const decoded = decodeDateParams({ from: '2026-01-01', to: '2026-02-20' },
+            { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(decoded.preset, 'custom');
+          assertEqual(decoded.start, '2026-02-11T08:00:00.000Z');
+          assertEqual(decoded.from, '2026-02-11');
+          assertEqual(decoded.rewritten, true);
+        });
+
+        it('decodes URLSearchParams as well as plain objects', () => {
+          const decoded = decodeDateParams(new URLSearchParams('date=tomorrow'),
+            { now: '2026-02-11T12:00:00Z', timeZone: LA });
+          assertEqual(decoded.preset, 'tomorrow');
+          assertEqual(decoded.start, '2026-02-12T08:00:00.000Z');
+        });
+      });
+
+      describe('Date tab filter (#105)', () => {
+        // WHY these tests: filterByDateWindow is the pure seam between the
+        // committed tab window and the rendered list — the one #105 behavior
+        // with absolute-ISO literals as an independent source of truth.
+        // Markup/URL behavior is covered by the fetch-based chrome group
+        // below (the repo's established seam for view-layer checks).
+        const evts = [
+          { id: 1, start_time: '2026-02-11T10:00:00.000Z' },
+          { id: 2, start_time: '2026-02-12T10:00:00.000Z' },
+          { id: 3, start_time: '2026-02-18T10:00:00.000Z' },
+        ];
+
+        it('passes everything through on All (null bounds) by reference', () => {
+          assertEqual(filterByDateWindow(evts, null, null).length, 3);
+          assert(filterByDateWindow(evts, null, null) === evts, 'All must return the input by reference');
+        });
+
+        it('keeps the window start (inclusive) and drops the window end (exclusive)', () => {
+          const result = filterByDateWindow(evts, '2026-02-11T08:00:00.000Z', '2026-02-12T08:00:00.000Z');
+          assertEqual(result.length, 1);
+          assertEqual(result[0].id, 1);
+        });
+
+        it('filters a multi-day window to its members only', () => {
+          const result = filterByDateWindow(evts, '2026-02-11T08:00:00.000Z', '2026-02-18T08:00:00.000Z');
+          assertDeepEqual(result.map(e => e.id), [1, 2]);
+        });
+
+        it('fails open to All on unparseable bounds (never strands on empty)', () => {
+          assert(filterByDateWindow(evts, 'not-a-date', '2026-02-18T08:00:00.000Z') === evts, 'Bad start must pass through');
+          assert(filterByDateWindow(evts, '2026-02-11T08:00:00.000Z', 'nope') === evts, 'Bad end must pass through');
+        });
+
+        it('fails open to All on an inverted window', () => {
+          assert(filterByDateWindow(evts, '2026-02-18T08:00:00.000Z', '2026-02-11T08:00:00.000Z') === evts, 'Inverted window must pass through');
+        });
+
+        it('Tonight keeps only starts in [17:00, midnight): 16:59, all-day, and next-midnight excluded', () => {
+          // WHY: Tonight is start-time-only per #106 — hand-computed PST
+          // literals (Wed 2026-02-11, UTC-8) as the independent truth, not the
+          // engine's own output, so this test can disagree with the code.
+          const tonightStart = '2026-02-12T01:00:00.000Z'; // 17:00 PST
+          const tonightEnd = '2026-02-12T08:00:00.000Z';   // midnight PST
+          const night = [
+            { id: 'early', start_time: '2026-02-12T00:59:00.000Z' },  // 16:59 PST
+            { id: 'allday', start_time: '2026-02-11T08:00:00.000Z' }, // all-day, midnight start
+            { id: 'stale', start_time: '2026-02-11T02:00:00.000Z' },  // multi-day, started Tue
+            { id: 'doors', start_time: '2026-02-12T01:00:00.000Z' },  // 17:00 incl
+            { id: 'late', start_time: '2026-02-12T07:30:00.000Z' },   // 23:30 PST
+            { id: 'midnight', start_time: '2026-02-12T08:00:00.000Z' }, // end excl
+          ];
+          const result = filterByDateWindow(night, tonightStart, tonightEnd);
+          assertDeepEqual(result.map(e => e.id), ['doors', 'late']);
+        });
+
+        it('Tonight start-time-only drops flagged all-day, midnight-anchored, and continuations; end ignored', () => {
+          // WHY (prio-40): the engine reports startTimeOnly for Tonight but
+          // the filter matched plain start_time, so a flagged all-day event
+          // or a cross-tz midnight-anchored start landing in-window leaked
+          // into Tonight. Hand-computed PST literals (Wed 2026-02-11, UTC-8)
+          // as the independent truth, never the engine's own output.
+          const tonightStart = '2026-02-12T01:00:00.000Z'; // 17:00 PST
+          const tonightEnd = '2026-02-12T08:00:00.000Z';   // midnight PST
+          const OPTS = { startTimeOnly: true, timeZone: 'America/Los_Angeles' };
+          const night = [
+            { id: 'early', start_time: '2026-02-12T00:59:00.000Z' },  // 16:59 PST out
+            { id: 'doors', start_time: '2026-02-12T01:00:00.000Z' },  // 17:00 incl
+            { id: 'headliner', start_time: '2026-02-12T07:59:00.000Z' }, // 23:59 PST in
+            { id: 'midnight', start_time: '2026-02-12T08:00:00.000Z' }, // end excl
+            { id: 'flagged', start_time: '2026-02-12T03:00:00.000Z', all_day: true }, // 19:00 PST flagged all-day out
+            { id: 'xcity', start_time: '2026-02-12T05:00:00.000Z', all_day: true }, // Eastern-midnight-anchored all-day (21:00 PST) out
+            { id: 'marathon-start', start_time: '2026-02-12T03:00:00.000Z', end_time: '2026-02-14T05:00:00.000Z' }, // multi-day starter in, end ignored
+            { id: 'marathon-cont', start_time: '2026-02-11T03:00:00.000Z', end_time: '2026-02-12T05:00:00.000Z' }, // continuation out (ends 21:00 PST tonight)
+          ];
+          const result = filterByDateWindow(night, tonightStart, tonightEnd, OPTS);
+          assertDeepEqual(result.map(e => e.id), ['doors', 'headliner', 'marathon-start']);
+        });
+
+        it('startTimeOnly drops a midnight-anchored start even when the instant qualifies by range', () => {
+          // WHY (prio-40): same-city Tonight windows never contain an
+          // interior local midnight ([17:00, 24:00) by construction), so this
+          // pins the defense-in-depth path for stale/cross-tz data: a
+          // time-unknown event anchored at midnight UTC stays out of a
+          // start-time-only window even though 00:00Z is range-inclusive.
+          const result = filterByDateWindow(
+            [{ id: 'unknown-time', start_time: '2026-02-12T00:00:00.000Z' }],
+            '2026-02-12T00:00:00.000Z', '2026-02-12T08:00:00.000Z',
+            { startTimeOnly: true, timeZone: 'UTC' });
+          assertDeepEqual(result.map(e => e.id), []);
+        });
+
+        it('without the flag the same window keeps unflagged in-range starts (no behavior change)', () => {
+          // WHY (prio-40): the 4th arg is opt-in — every other preset calls
+          // with three args and must keep plain [start, end) semantics.
+          const result = filterByDateWindow(
+            [{ id: 'show', start_time: '2026-02-12T03:00:00.000Z', all_day: true }],
+            '2026-02-12T01:00:00.000Z', '2026-02-12T08:00:00.000Z');
+          assertDeepEqual(result.map(e => e.id), ['show']);
+        });
+
+        it('Weekend keeps only starts in [Fri 17:00 incl, Mon 00:00 excl)', () => {
+          // WHY: same independent-literal rationale — Fri 2026-02-13 weekend
+          // in PST (UTC-8), including the Mon 00:00-00:59 exclusion from #106.
+          const fri1700 = '2026-02-14T01:00:00.000Z';
+          const mon0000 = '2026-02-16T08:00:00.000Z';
+          const wknd = [
+            { id: 'fri-early', start_time: '2026-02-14T00:59:00.000Z' }, // Fri 16:59 PST
+            { id: 'fri-doors', start_time: '2026-02-14T01:00:00.000Z' }, // Fri 17:00 incl
+            { id: 'sun-show', start_time: '2026-02-16T04:00:00.000Z' },  // Sun 20:00 PST
+            { id: 'mon-mid', start_time: '2026-02-16T08:00:00.000Z' },   // Mon 00:00 excl
+            { id: 'mon-late', start_time: '2026-02-16T08:30:00.000Z' },  // Mon 00:30 PST
+          ];
+          const result = filterByDateWindow(wknd, fri1700, mon0000);
+          assertDeepEqual(result.map(e => e.id), ['fri-doors', 'sun-show']);
+        });
+
+        it('window-object form matches the positional form (prio-90 Data Clumps)', () => {
+          // WHY (prio-90): {start,end} plus from/to traveled as loose
+          // positional params across the custom/date-filter seams; the
+          // committed window now travels as one object. Hand-computed
+          // literals as the independent truth; parity against the legacy
+          // positional form proves no behavior change.
+          const pos = filterByDateWindow(evts, '2026-02-11T08:00:00.000Z', '2026-02-18T08:00:00.000Z');
+          const obj = filterByDateWindow(evts, { start: '2026-02-11T08:00:00.000Z', end: '2026-02-18T08:00:00.000Z' });
+          assertDeepEqual(obj.map(e => e.id), pos.map(e => e.id));
+          assertDeepEqual(obj.map(e => e.id), [1, 2]);
+        });
+
+        it('window-object All ({start: null, end: null}) passes through by reference', () => {
+          // WHY (prio-90): the list binding commits All as null bounds; the
+          // object form must keep the stable by-reference identity so
+          // downstream bindings skip re-rendering.
+          assert(filterByDateWindow(evts, { start: null, end: null }) === evts, 'Object All must return the input by reference');
+        });
+
+        it('window-object form honors startTimeOnly opts', () => {
+          // WHY (prio-90): Tonight passes {startTimeOnly} alongside the
+          // window; the object form must carry opts in the third slot.
+          const OPTS = { startTimeOnly: true, timeZone: 'America/Los_Angeles' };
+          const night = [
+            { id: 'doors', start_time: '2026-02-12T01:00:00.000Z' },
+            { id: 'flagged', start_time: '2026-02-12T03:00:00.000Z', all_day: true },
+          ];
+          const result = filterByDateWindow(night,
+            { start: '2026-02-12T01:00:00.000Z', end: '2026-02-12T08:00:00.000Z' }, OPTS);
+          assertDeepEqual(result.map(e => e.id), ['doors']);
+        });
+      });
+
+      // Date-tab chrome tests (#105): the strip is declarative markup with no
+      // pure-logic seam, so like #86 these fetch the shipped files and assert
+      // the acceptance criteria hold — a regression here fails the CI
+      // Playwright step like any other group. Fast mirror lives in
+      // tests/js/validate-date-tabs.test.js (vitest, no browser).
+      async function runDateTabsChromeTests() {
+        const group = { name: 'Date tabs (#105)', tests: [] };
+        const test = makeGroupTester(group);
+        const get = fetchText;
+        try {
+          const [main, helpersText, shellText, indexText, globalsText] = await Promise.all([
+            get('Main.xmlui'),
+            get('helpers.js'),
+            get('shell.js'),
+            get('index.html'),
+            get('Globals.xs')
+          ]);
+
+          test('strip carries All plus every preset tab including Custom (#107)', () => {
+            for (const label of ['All dates', 'Today', 'Tomorrow', 'Tonight', 'This weekend', 'Next 7 days', 'This month', 'Custom']) {
+              assert(main.includes('>' + label + '<'), 'Missing tab: ' + label);
+            }
+          });
+
+          test('slider deleted outright (no dual UI, no orphaned vars)', () => {
+            assert(!/<Slider/.test(main), 'Slider control must be gone');
+            for (const token of ['sliderRange', 'sliderStart', 'sliderEnd', 'eventDayRange',
+                'getEventDayRange', 'formatDayOffset', '_dateRangeBase',
+                'filterByDayWindow', 'filterByDayRange', 'dateSlider']) {
+              assert(!main.includes(token), 'Orphaned slider token in Main.xmlui: ' + token);
+            }
+            assert(!/dateStart|dateEnd/.test(globalsText), 'Globals.xs must take no date params');
+          });
+
+          test('single committed window feeds list and pager; commit resets paging', () => {
+            assert(main.includes('name="dateFilteredEvents"'), 'Missing dateFilteredEvents variable');
+            assert(main.includes('moreHasMore(dateFilteredEvents'), 'Pager guard must read the same window');
+            assert(/commitDatePreset\('today'\)/.test(main), 'Today tab must route through the shared commit');
+            const cbAt = globalsText.indexOf('function commitDatePreset(');
+            const cb = cbAt < 0 ? '' : globalsText.substring(cbAt, cbAt + 2500);
+            assert(/displayStartIndex = 0/.test(cb), 'Commit must reset paging');
+            assert(cb.includes('scrollRequest = scrollRequest + 1'), 'Commit must scroll to top');
+            assert(main.includes('getActiveCategories(dateFilteredEvents)'), 'Category counts must reflect the window');
+          });
+
+          test('date seam, boot seed, and engine load are wired', () => {
+            assert(helpersText.includes('window.filterByDateWindow'), 'Missing filterByDateWindow');
+            assert(helpersText.includes('window.dateWindowForPreset'), 'Missing dateWindowForPreset');
+            assert(helpersText.includes('window.syncDateParams'), 'Missing syncDateParams');
+            assert(shellText.includes('initialDatePreset'), 'Missing boot seed');
+            assert(indexText.includes('date-windows.js'), 'Engine must load before shell boots');
+          });
+        } catch (e) {
+          group.tests.push({ name: 'Load date tab files', pass: false, error: e.message });
+        }
+        results.push(group);
+        render();
+      }
+
+      // Date-tab intraday chrome tests (#106): Tonight + This weekend ride the
+      // same commit/URL/boot contract as the #105 day presets (instant commit,
+      // pressed state, evergreen ?date= links, history-replace). Like #105,
+      // these fetch the shipped files — the repo's established seam for
+      // view-layer checks — with a vitest mirror in
+      // tests/js/validate-date-tabs.test.js.
+      async function runDateTabs106ChromeTests() {
+        const group = { name: 'Date tabs (#106)', tests: [] };
+        const test = makeGroupTester(group);
+        const get = fetchText;
+        try {
+          const [main, helpersText, shellText, globalsText] = await Promise.all([
+            get('Main.xmlui'),
+            get('helpers.js'),
+            get('shell.js'),
+            get('Globals.xs')
+          ]);
+
+          test('strip carries Tonight and This weekend tabs', () => {
+            assert(main.includes('>Tonight<'), 'Missing tab: Tonight');
+            assert(main.includes('>This weekend<'), 'Missing tab: This weekend');
+          });
+
+          test('intraday tabs commit instantly like the day presets', () => {
+            for (const key of ['tonight', 'weekend']) {
+              assert(new RegExp("commitDatePreset\\('" + key + "'\\)").test(main),
+                'Missing shared-helper commit for: ' + key);
+            }
+            const cbAt = globalsText.indexOf('function commitDatePreset(');
+            const cb = cbAt < 0 ? '' : globalsText.substring(cbAt, cbAt + 2500);
+            assert(cb.includes('window.dateWindowForPreset'), 'Shared commit must resolve via the engine');
+            assert(/displayStartIndex = 0/.test(cb), 'Commit must reset paging');
+            assert(cb.includes('syncDateParams'), 'Commit must sync the URL');
+            assert(cb.includes('scrollRequest = scrollRequest + 1'), 'Commit must scroll to top');
+          });
+
+          test('intraday tabs show pressed state when active', () => {
+            for (const key of ['tonight', 'weekend']) {
+              assert(main.includes("datePreset === '" + key + "' && !customOpen ? 'solid' : 'outlined'"),
+                'Missing pressed state for: ' + key);
+            }
+          });
+
+          test('intraday presets sync as evergreen ?date= links (single source: engine list)', () => {
+            assert(/window\.DATE_TAB_PRESETS[\s\S]{0,300}?window\.DATE_PRESETS/.test(helpersText),
+              'DATE_TAB_PRESETS must derive from the engine DATE_PRESETS (single source)');
+            assert(/syncDateParams[\s\S]{0,400}?replaceDateUrlParams/.test(helpersText),
+              'Date commits must route through the shared URL helper');
+            assert(/replaceDateUrlParams[\s\S]{0,1200}?replaceState/.test(helpersText),
+              'Date commits must use history-replace (Back skips filter states)');
+          });
+
+          test('boot seed honors the evergreen keys (derived from the engine list, no aliases)', () => {
+            assert(/window\.DATE_PRESETS/.test(shellText), 'Boot seed must derive HONORED from window.DATE_PRESETS');
+            assert(!/window\.DATE_PRESET_ALIASES/.test(shellText), 'Boot seed must not consult a legacy alias map (unknown = All)');
+          });
+        } catch (e) {
+          group.tests.push({ name: 'Load date tab files', pass: false, error: e.message });
+        }
+        results.push(group);
+        render();
+      }
+
+      // Date-tab custom chrome tests (#107): the Custom tab plus the stock
+      // range picker behind it. Like #105/#106 these fetch the shipped files
+      // — the repo's established seam for view-layer checks — with a
+      // vitest mirror in tests/js/validate-date-tabs.test.js.
+      async function runDateTabs107ChromeTests() {
+        const group = { name: 'Date tabs (#107)', tests: [] };
+        const test = makeGroupTester(group);
+        const get = fetchText;
+        try {
+          const [main, helpersText, shellText, engineText] = await Promise.all([
+            get('Main.xmlui'),
+            get('helpers.js'),
+            get('shell.js'),
+            get('date-windows.js')
+          ]);
+
+          test('strip carries the Custom tab with pressed state', () => {
+            assert(main.includes('>Custom<'), 'Missing tab: Custom');
+            assert(/<Button variant="\{[^"]*customOpen[\s\S]{0,300}?>Custom</.test(main),
+              'Custom tab must read pressed while the custom flow is open');
+          });
+
+          test('stock range picker opens from the Custom tab and commits on explicit confirm', () => {
+            assert(/<DatePicker[\s\S]{0,600}?mode="range"/.test(main), 'Picker must run in range mode');
+            assert(/<DatePicker[\s\S]{0,1200}?confirmRangeSelection="true"/.test(main),
+              'Picker must require explicit confirm (Cancel/Proceed footer, no auto-commit)');
+            assert(main.includes('window.openCustomPicker()'),
+              'Custom tab must open the picker via the click seam (focus() only selects text)');
+          });
+
+          test('picker uses date-only format, the city timezone, and a today minimum', () => {
+            assert(/<DatePicker[\s\S]{0,1200}?dateFormat="yyyy-MM-dd"/.test(main),
+              'Picker must use date-only yyyy-MM-dd');
+            assert(/<DatePicker[\s\S]{0,1200}?timeZone=/.test(main), 'Picker must use the city timezone');
+            assert(/<DatePicker[\s\S]{0,1600}?startDate=/.test(main), 'Picker must set today as the minimum');
+            assert(/<DatePicker[\s\S]{0,1600}?disabledDates=/.test(main), 'Picker must disable past dates');
+          });
+
+          test('picker has no preset sidebar (divergence from #103/#107: Next 7 / This month duplicated the tabs)', () => {
+            assert(!/<DatePicker[\s\S]{0,1600}?presets=/.test(main), 'Picker must not supply presets');
+            assert(!/<DatePicker[\s\S]{0,1600}?showPresets=/.test(main), 'Picker must not show a preset sidebar');
+            assert(!/last7Days|last30Days|thisMonth|lastMonth/.test(main),
+              'Built-in backward presets must stay hidden');
+            assert(!helpersText.includes('window.customForwardPresets'), 'customForwardPresets seam must be gone');
+          });
+
+          test('confirm commits once through the engine and syncs the canonical link', () => {
+            assert(/dateWindowForCustom\(/.test(main), 'Confirm must resolve via dateWindowForCustom');
+            assert(/datePreset = 'custom'[\s\S]{0,500}?displayStartIndex = 0/.test(main),
+              'Confirm must reset paging');
+            assert(/datePreset = 'custom'[\s\S]{0,600}?syncCustomParams/.test(main),
+              'Confirm must sync the exact-date link');
+            assert(/syncCustomParams[\s\S]{0,400}?replaceDateUrlParams/.test(helpersText),
+              'Custom commits must route through the shared URL helper');
+            assert(/replaceDateUrlParams[\s\S]{0,1200}?replaceState/.test(helpersText),
+              'Custom commits must use history-replace (Back skips filter states)');
+          });
+
+          test('horizon overrun renders the truncation label below the tabs (single copy in the engine)', () => {
+            const pickerAt = main.indexOf('<DatePicker');
+            const confirm = pickerAt < 0 ? '' : main.substring(pickerAt, pickerAt + 2200);
+            assert(/window\.dateTruncationText\(customWindow\)/.test(confirm),
+              'Custom confirm must label the overrun through dateTruncationText (one copy)');
+            assert(!/Showing through/.test(confirm),
+              'Custom confirm must not hand-roll the truncation copy');
+            assert(engineText.includes('Showing through'), 'Engine must own the truncation copy');
+            assert(engineText.includes('calendar currently ends there'), 'Engine must own the truncation copy');
+            assert(engineText.includes('truncationLabelForWindow'), 'Engine must expose the shared formatter');
+          });
+
+          test('boot seed honors the custom from/to pair with clamp rewrite', () => {
+            assert(shellText.includes("initialDatePreset = 'custom'"), 'Boot seed must restore Custom');
+            assert(/decodeDateParams/.test(shellText), 'Boot seed must decode the from/to pair');
+          });
+        } catch (e) {
+          group.tests.push({ name: 'Load date tab files', pass: false, error: e.message });
+        }
+        results.push(group);
+        render();
+      }
+
+      // Date-tab hardening chrome tests (#108): empty state with a one-tap
+      // Next-7 reset, horizon-truncation labels on every window, embed
+      // parity, and city-push versus date-replace Back behavior. Like
+      // #105/#106/#107 these fetch the shipped files — the repo's
+      // established seam for view-layer checks — with a vitest mirror in
+      // tests/js/validate-date-tabs.test.js (behavioral seam coverage lives in
+      // tests/js/validate-date-hardening.test.js).
+      async function runDateTabs108ChromeTests() {
+        const group = { name: 'Date tabs (#108)', tests: [] };
+        const test = makeGroupTester(group);
+        const get = fetchText;
+        try {
+          const [main, helpersText, shellText, globalsText] = await Promise.all([
+            get('Main.xmlui'),
+            get('helpers.js'),
+            get('shell.js'),
+            get('Globals.xs')
+          ]);
+
+          test('strip carries a tab-strip heading for the empty-reset focus target', () => {
+            assert(main.includes('id="dateTabHeading"'), 'Missing dateTabHeading focus target');
+          });
+
+          test('empty window reads No events {label} with a one-tap Next 7 reset', () => {
+            assert(main.includes('No events '), 'Missing empty-state copy');
+            assert(main.includes('window.dateWindowLabel(datePreset)'), 'Empty copy must use the window label');
+            assert(main.includes('>Show next 7 days<'), 'Missing Show next 7 days reset');
+            const at = main.indexOf('Show next 7 days');
+            const handler = main.substring(Math.max(0, at - 900), at);
+            assert(handler.includes("commitDatePreset('next7'"), 'Reset must ride the shared commit');
+            assert(handler.includes('focusDateTabHeading'), 'Reset must move focus to the heading');
+            assert(!handler.includes('scrollRequest'), 'Reset must not scroll (focus carries preventScroll)');
+            assert(handler.includes('window.filterEvents(dateFilteredEvents'),
+              'Empty guard must read the full filtered list, not the paged slice');
+            assert(!handler.includes('getPagedEvents(dateFilteredEvents'),
+              'Empty guard must not use the paged slice (stale page index misreports "No events")');
+            const cbAt = globalsText.indexOf('function commitDatePreset(');
+            const cb = cbAt < 0 ? '' : globalsText.substring(cbAt, cbAt + 2500);
+            assert(/displayStartIndex = 0/.test(cb), 'Reset must reset paging via the shared commit');
+            assert(cb.includes('syncDateParams'), 'Reset must sync the URL via the shared commit');
+          });
+
+          test('every commit surfaces the horizon-truncation label', () => {
+            assert(helpersText.includes('window.dateTruncationText'), 'Missing dateTruncationText seam');
+            assert(/commitDatePreset\('today'\)/.test(main),
+              'Preset tabs must route through the shared commit');
+            const cbAt = globalsText.indexOf('function commitDatePreset(');
+            const cb = cbAt < 0 ? '' : globalsText.substring(cbAt, cbAt + 2500);
+            assert(cb.includes('window.dateTruncationText'),
+              'Shared commit must surface the truncation label');
+            assert(/horizonEnd/.test(helpersText) && /getToDate/.test(helpersText),
+              'Preset windows must truncate at the prefetch horizon');
+            assert(shellText.includes('initialDateTruncationLabel'), 'Boot seed must restore the truncation label');
+            assert(/horizonEnd: window\.toDate/.test(shellText), 'Boot seed must resolve at the horizon');
+          });
+
+          test('embed shows the identical filter UI with date params round-tripping', () => {
+            const at = main.indexOf('id="dateTabStrip"');
+            const context = main.substring(Math.max(0, at - 600), at);
+            assert(!/window\.embed/.test(context), 'Tab strip must not be embed-gated');
+            for (const fn of ['syncDateParams', 'syncCustomParams']) {
+              const start = helpersText.indexOf('window.' + fn);
+              const body = helpersText.substring(start, start + 400);
+              assert(/replaceDateUrlParams/.test(body), fn + ' must route through the shared URL helper');
+            }
+            const rAt = helpersText.indexOf('window.replaceDateUrlParams');
+            const rBody = helpersText.substring(rAt, rAt + 1200);
+            assert(!/delete\('embed'\)/.test(rBody), 'Shared URL helper must preserve the embed param');
+          });
+
+          test('city stays a push while date stays a replace (Back leaves the calendar)', () => {
+            assert(/selectCity[\s\S]{0,300}?pushState/.test(shellText), 'City selection must push (Back target)');
+            assert(/replaceDateUrlParams[\s\S]{0,1200}?replaceState/.test(helpersText),
+              'Date commits must replace (Back skips filter states)');
+            assert(/syncDateParams[\s\S]{0,400}?replaceDateUrlParams/.test(helpersText),
+              'Preset commits must route through the shared URL helper');
+            assert(/syncCustomParams[\s\S]{0,400}?replaceDateUrlParams/.test(helpersText),
+              'Custom commits must route through the shared URL helper');
+          });
+
+          test('All clears only date keys and preserves siblings', () => {
+            const rAt = helpersText.indexOf('window.replaceDateUrlParams');
+            const body = helpersText.substring(rAt, rAt + 1200);
+            assert(/delete\('date'\)/.test(body), 'All must strip the preset key');
+            assert(/delete\('from'\)/.test(body) && /delete\('to'\)/.test(body), 'All must strip the custom pair');
+            assert(!/delete\('(city|search|category|embed|mode|images|cards)'\)/.test(body),
+              'All must preserve city, search, category, and display params');
+          });
+        } catch (e) {
+          group.tests.push({ name: 'Load date hardening files', pass: false, error: e.message });
+        }
+        results.push(group);
+        render();
+      }
+
       // ============================================================
       // REAL DATA TESTS (async, run after initial render)
       // ============================================================
@@ -1170,7 +1887,7 @@
           });
 
           test('dashboard loading state keeps chrome (not gated on tiles)', () => {
-            assert(main.includes('when="{layoutMode === \'dashboard\'}"'), 'Dashboard chrome must not gate on dashboardTiles');
+            assert(/when="\{layoutMode === 'dashboard'( && !window\.embed)?\}"/.test(main), 'Dashboard chrome must not gate on dashboardTiles');
             assert(!/layoutMode === 'dashboard' && \(dashboardTiles !== null\).*Brand(Header|Footer)/.test(main), 'Brand includes must not require tiles');
           });
         } catch (e) {
@@ -1590,6 +2307,42 @@
         results.push({
           name: 'Content links (#88)',
           tests: [{ name: 'Run content link tests', pass: false, error: err.message }]
+        });
+        render();
+      });
+
+      // Run date tab chrome tests (async, independent of Supabase)
+      runDateTabsChromeTests().catch(err => {
+        results.push({
+          name: 'Date tabs (#105)',
+          tests: [{ name: 'Run date tab tests', pass: false, error: err.message }]
+        });
+        render();
+      });
+
+      // Run date tab intraday chrome tests (async, independent of Supabase)
+      runDateTabs106ChromeTests().catch(err => {
+        results.push({
+          name: 'Date tabs (#106)',
+          tests: [{ name: 'Run date tab intraday tests', pass: false, error: err.message }]
+        });
+        render();
+      });
+
+      // Run date tab custom chrome tests (async, independent of Supabase)
+      runDateTabs107ChromeTests().catch(err => {
+        results.push({
+          name: 'Date tabs (#107)',
+          tests: [{ name: 'Run date tab custom tests', pass: false, error: err.message }]
+        });
+        render();
+      });
+
+      // Run date tab hardening chrome tests (async, independent of Supabase)
+      runDateTabs108ChromeTests().catch(err => {
+        results.push({
+          name: 'Date tabs (#108)',
+          tests: [{ name: 'Run date tab hardening tests', pass: false, error: err.message }]
         });
         render();
       });

@@ -1,17 +1,20 @@
-.PHONY: help test test-python test-sql test-all setup-python setup-local teardown-local format lint check clean
+.PHONY: help test test-python test-node test-browser test-sql test-all setup-python setup-node setup-local teardown-local format lint check clean
 
 # Default target
 help:
 	@echo "Community Calendar Test Suite"
 	@echo ""
 	@echo "Targets:"
-	@echo "  make test            - Run Python tests"
+	@echo "  make test            - Run Python + node (vitest) tests"
 	@echo "  make test-python     - Run Python tests (pytest via uv)"
+	@echo "  make test-node       - Run node seam tests (vitest via pnpm)"
+	@echo "  make test-browser    - Run browser groups (Playwright over xmlui/test.html)"
 	@echo "  make test-sql        - Run database tests (local Supabase via pgTAP)"
 	@echo "  make format          - Auto-format Python code (ruff format)"
 	@echo "  make lint            - Lint Python code (ruff check; type checkers gate)"
-	@echo "  make check           - Run lint + Python tests"
+	@echo "  make check           - Run lint + Python + node tests"
 	@echo "  make setup-python    - Create venv and install dependencies (uv sync)"
+	@echo "  make setup-node      - Install JS dependencies (pnpm install)"
 	@echo "  make setup-local     - Start local Supabase and apply schema"
 	@echo "  make teardown-local  - Stop local Supabase"
 	@echo "  make clean           - Clean test artifacts"
@@ -22,7 +25,7 @@ help:
 	@echo "  - PostgreSQL client (psql) for local database access"
 
 # Run default tests
-test: test-python
+test: test-python test-node
 
 # Alias for test
 test-all: test
@@ -38,7 +41,23 @@ setup-python:
 # Run Python tests
 test-python:
 	@echo "Running Python tests..."
-	@uv run env -u PYTHONPATH pytest tests/ -v
+	@uv run env -u PYTHONPATH pytest tests/ -v --ignore=tests/js
+
+# Setup node dependencies with pnpm
+setup-node:
+	@echo "Setting up node environment with pnpm..."
+	@pnpm install
+	@echo "✓ Node dependencies installed"
+
+# Run node seam tests (vitest; browser + bench stay manual/CI-only)
+test-node:
+	@echo "Running node tests..."
+	@pnpm vitest run
+
+# Run browser groups (requires playwright browsers: pnpm exec playwright install chromium)
+test-browser:
+	@echo "Running browser tests..."
+	@pnpm playwright test
 
 # Auto-format Python code
 format:
@@ -79,7 +98,7 @@ lint:
 	exit $$status
 
 # Lint + tests
-check: lint test-python
+check: lint test-python test-node
 
 # Run database tests (requires prepared local Supabase project DB)
 test-sql:

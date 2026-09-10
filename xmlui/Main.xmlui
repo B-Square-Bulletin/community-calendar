@@ -14,9 +14,11 @@
   var.city="{window.cityFilter || null}"
   global.isAdmin="{false}"
   global.activePanel="{''}"
-  var.sliderRange="{false}"
-  var.sliderStart="{null}"
-  var.sliderEnd="{null}">
+  var.datePreset="{window.initialDatePreset || 'all'}"
+  var.dateWindowStart="{window.initialDateStart || null}"
+  var.dateWindowEnd="{window.initialDateEnd || null}"
+  var.dateTruncationLabel="{window.initialDateTruncationLabel || null}"
+  var.customOpen="{window.initialDatePreset === 'custom'}">
 
   <!-- DataSources -->
   <!-- Events arrive via PushSource from the shell.js boot-time prefetch:
@@ -139,8 +141,13 @@
   <variable name="expandedEnrichments" value="{window.expandEnrichments(enrichments.value, window.getFromDate(), window.getToDate()) || []}" />
   <variable name="combinedEvents" value="{window.combineEvents(events.value, expandedEnrichments)}" />
   <variable name="processedEvents" value="{window.processEvents(combinedEvents, hiddenSources)}" />
-  <variable name="eventDayRange" value="{processedEvents && processedEvents.length > 100 ? window.getEventDayRange(processedEvents) : null}" />
-  <variable name="displayEvents" value="{window.filterByDayWindow(processedEvents, sliderStart, sliderEnd)}" />
+  <!-- Single committed date window (#105): one absolute {start, end} feeds
+       both the rendered list and the pager guard below (prio-90: the window
+       travels as one object, not loose bounds). All is null bounds
+       (the prefetched set passes through); Tonight is start-time-only per
+       #103 (flagged all-day, midnight-anchored, and continuations excluded);
+       Picks and Dashboard ignore it. -->
+  <variable name="dateFilteredEvents" value="{window.filterByDateWindow(processedEvents, {start: dateWindowStart, end: dateWindowEnd}, {startTimeOnly: datePreset === 'tonight'})}" />
 
   <variable name="availableCities" value="{Object.keys(window._cities || {}).sort().map(city => ({ city }))}" />
 
@@ -263,7 +270,7 @@
         onDidChange="(val) => { categoryFilter = val || ''; window.syncCategoryParam(categoryFilter); }"
         width="*"
       >
-        <Items data="{window.getActiveCategories(processedEvents)}">
+        <Items data="{window.getActiveCategories(dateFilteredEvents)}">
           <Option value="{$item.name}" label="{$item.label}" />
         </Items>
       </Select>
@@ -274,21 +281,80 @@
         <Option value="picks" label="my picks" />
       </HStack>
     </RadioGroup>
-    <VStack when="{eventDayRange && !!events.value && viewMode === 'all'}" gap="$space-0">
-      <HStack>
-        <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{window.formatDayOffset(sliderRange ? sliderRange[0] : eventDayRange[0])}" />
-        <SpaceFiller />
-        <Text fontSize="$fontSize-xs" color="$color-text-secondary" value="{window.formatDayOffset(sliderRange ? sliderRange[1] : eventDayRange[1])}" />
-      </HStack>
-      <Slider
-        id="dateSlider"
-        initialValue="{eventDayRange}"
-        minValue="{eventDayRange[0]}"
-        maxValue="{eventDayRange[1]}"
-        step="{1}"
-        showValues="false"
-        onDidChange="(val) => { sliderRange = Array.isArray(val) ? [val[0], val[1]] : val; sliderStart = val[0]; sliderEnd = val[1]; displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1 }"
+    <!-- Date-tab strip (#105 day presets + #106 intraday tabs + #107 Custom):
+         every preset tap commits through the single commitDatePreset path in
+         Globals.xs — one absolute window feeds the list and the pager,
+         paging resets plus scroll-to-top fire on commit only, and the commit
+         syncs the URL with history-replace. Tonight is start-time-only from
+         5pm city-time; the weekend is Fri 17:00 through Sunday night
+         (engine-resolved per weekday). The Custom tab opens the stock
+          range picker below; the picker commits on explicit confirm only
+          (Cancel/Proceed footer, never per tick or mid-drag). #108: the heading gives the strip an
+         accessible name and is the empty-reset focus target; preset commits
+         surface the horizon-truncation label. -->
+    <Text id="dateTabHeading" fontSize="$fontSize-sm" fontWeight="$fontWeight-bold" value="Filter by date" />
+    <HStack id="dateTabStrip" verticalAlignment="center" gap="$space-1" wrapContent="true" width="100%" marginBottom="$space-2">
+      <Button variant="{datePreset === 'all' && !customOpen ? 'solid' : 'outlined'}" onClick="commitDatePreset('all')">All dates</Button>
+      <Button variant="{datePreset === 'today' && !customOpen ? 'solid' : 'outlined'}" onClick="commitDatePreset('today')">Today</Button>
+      <Button variant="{datePreset === 'tonight' && !customOpen ? 'solid' : 'outlined'}" onClick="commitDatePreset('tonight')">Tonight</Button>
+      <Button variant="{datePreset === 'tomorrow' && !customOpen ? 'solid' : 'outlined'}" onClick="commitDatePreset('tomorrow')">Tomorrow</Button>
+      <Button variant="{datePreset === 'weekend' && !customOpen ? 'solid' : 'outlined'}" onClick="commitDatePreset('weekend')">This weekend</Button>
+      <Button variant="{datePreset === 'next7' && !customOpen ? 'solid' : 'outlined'}" onClick="commitDatePreset('next7')">Next 7 days</Button>
+      <Button variant="{datePreset === 'thismonth' && !customOpen ? 'solid' : 'outlined'}" onClick="commitDatePreset('thismonth')">This month</Button>
+      <Button variant="{(datePreset === 'custom' || customOpen) ? 'solid' : 'outlined'}" onClick="customOpen = true; window.openCustomPicker()">Custom</Button>
+    </HStack>
+    <!-- Custom range picker (#107): stock range control with date-only
+         format, the city timezone, today minimum plus past dates disabled,
+         and explicit confirm (Cancel/Proceed footer — nothing commits
+         mid-drag or per tick). Divergence from #103/#107 spec: the spec
+         required boot-computed forward presets (Next 7, Next 30, This
+         month) in the picker sidebar, but Next 7 / This month duplicated
+         the tab strip with divergent URL semantics (evergreen ?date= vs
+         absolute ?from/&to=), leaving only Next 30 unique — so the
+         sidebar was removed outright and Custom means arbitrary range
+         only. The row mounts only while the Custom flow is open
+         (customOpen, seeded true on a custom deep-link): opening mounts
+         without committing, and every non-custom commit closes it via the
+         shared commitDatePreset path, so the range display can never
+         disagree with the committed window. The Custom tab is the single
+         entry point: it mounts the row and calls window.openCustomPicker(),
+         which clicks the picker's Control element — the path that opens the
+         popup for a programmatic trigger (focus() merely selects the date
+         text: the vendored handle exposes no open API). The in-box calendar
+         glyph (endIcon) is a plain adornment inside that same Control, so
+         tapping it opens the popup too. Tapping Custom again re-opens a
+         dismissed popup. Commit fires once on explicit confirm (Proceed
+         via onDidChange): malformed or partial input is ignored, past starts clamp,
+         inverted ranges coerce to a single day, and the canonical
+         exact-date link syncs (prio-90: the committed window travels as
+         one object). Manual typing alone never commits. -->
+    <HStack id="customPickerRow" when="{customOpen}" verticalAlignment="center" gap="$space-2" width="100%">
+      <DatePicker
+        id="customRangePicker"
+        mode="range"
+        label="Custom date range"
+        placeholder="Select start and end dates"
+        dateFormat="yyyy-MM-dd"
+        timeZone="{window.customPickerTimezone()}"
+        startDate="{window.todayDateOnly()}"
+        disabledDates="{window.customDisabledDates()}"
+        endIcon="calendar-days"
+        confirmRangeSelection="true"
+        onDidChange="(val) => { const customWindow = window.dateWindowForCustom(val); if (!customWindow) return; datePreset = 'custom'; dateWindowStart = customWindow.start; dateWindowEnd = customWindow.end; dateTruncationLabel = window.dateTruncationText(customWindow); displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncCustomParams(customWindow); }"
       />
+    </HStack>
+    <Text when="{dateTruncationLabel}" fontSize="$fontSize-sm" color="$color-text-secondary" value="{dateTruncationLabel}" />
+    <!-- Empty window (#108): an explicit message plus a one-tap reset to
+         Next 7 days. The guard reads the full filtered list (date + search
+         + category), not the paged slice, so a stale displayStartIndex on a
+         later page can never misreport "No events" when matches exist on
+         page 1. The reset commits through the shared commitDatePreset
+         path with scrolling off (paging reset, URL sync) but moves focus to
+         the tab-strip heading with no scroll instead of firing
+         scroll-to-top. -->
+    <VStack when="{!!events.value && viewMode === 'all' && !window.filterEvents(dateFilteredEvents, filterTerm, categoryFilter).length}" gap="$space-2" width="100%" padding="$space-3" horizontalAlignment="center">
+      <Text value="{'No events ' + window.dateWindowLabel(datePreset) + '.'}" />
+      <Button variant="outlined" onClick="commitDatePreset('next7', {scroll: false}); window.focusDateTabHeading()">Show next 7 days</Button>
     </VStack>
     </VStack>
     </VStack>
@@ -301,16 +367,16 @@
       marginBottom="$space-2"
       onClick="const prevIndex = morePrevIndex(displayStartIndex, pageSizeFor(filterTerm)); displayStartIndex = prevIndex; browseStartIndex = prevIndex; scrollRequest = scrollRequest + 1;"
     />
-    <Masonry when="{!!events.value && viewMode === 'all' && layoutMode === 'multicol'}" data="{getPagedEvents(processedEvents, filterTerm, displayStartIndex, pageSizeFor(filterTerm), categoryFilter, sliderStart, sliderEnd)}" columns="3" gap="$space-3" rowGap="0" minColumnWidth="300px">
+    <Masonry when="{!!events.value && viewMode === 'all' && layoutMode === 'multicol'}" data="{getPagedEvents(dateFilteredEvents, filterTerm, displayStartIndex, pageSizeFor(filterTerm), categoryFilter)}" columns="3" gap="$space-3" rowGap="0" minColumnWidth="300px">
       <EventCard event="{$item}" filterTerm="{filterTerm}" categoryColorMap="{window.categoryColorMap}" categoryList="{window.categoryList}" />
     </Masonry>
     <VStack when="{!!events.value && viewMode === 'all' && layoutMode !== 'multicol'}" gap="$space-0">
-      <Items data="{getPagedEvents(processedEvents, filterTerm, displayStartIndex, pageSizeFor(filterTerm), categoryFilter, sliderStart, sliderEnd)}">
+      <Items data="{getPagedEvents(dateFilteredEvents, filterTerm, displayStartIndex, pageSizeFor(filterTerm), categoryFilter)}">
         <EventCard event="{$item}" filterTerm="{filterTerm}" categoryColorMap="{window.categoryColorMap}" categoryList="{window.categoryList}" />
       </Items>
     </VStack>
     <Button
-      when="{!!events.value && viewMode === 'all' && !filterTerm && moreHasMore(displayEvents, displayStartIndex, pageSizeFor(filterTerm))}"
+      when="{!!events.value && viewMode === 'all' && !filterTerm && moreHasMore(dateFilteredEvents, displayStartIndex, pageSizeFor(filterTerm))}"
       label="Later"
       variant="outlined"
       width="100%"

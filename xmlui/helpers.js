@@ -68,6 +68,308 @@ window.syncSearchParam = function(search) {
   }, 500);
 };
 
+// --- URL sync for date tabs (#105) ---
+// One committed absolute window per Commit: a preset key syncs as ?date=,
+// All strips only the date keys, and every commit preserves sibling params
+// (city, search, category, mode, images, embed, cards). history-replace (not
+// push) so Back leaves the calendar instead of stepping through tab history.
+// Single replace site: syncDateParams/syncCustomParams both route through
+// replaceDateUrlParams, which owns the new-URL -> set/delete -> replaceState
+// shape. A value of undefined leaves the key untouched, null deletes it, and
+// a string sets it.
+window.replaceDateUrlParams = function(params) {
+  var url = new URL(window.location);
+  params = params || {};
+  if (params.date !== undefined) {
+    if (params.date) url.searchParams.set('date', params.date);
+    else url.searchParams.delete('date');
+  }
+  if (params.from !== undefined) {
+    if (params.from) url.searchParams.set('from', params.from);
+    else url.searchParams.delete('from');
+  }
+  if (params.to !== undefined) {
+    if (params.to) url.searchParams.set('to', params.to);
+    else url.searchParams.delete('to');
+  }
+  window.history.replaceState({}, '', url);
+};
+// Single source of truth for preset keys (prio-80): the engine owns the
+// canonical list (window.DATE_PRESETS in date-windows.js); the tab strip is
+// exactly that list, derived here so adding a preset means editing the
+// engine only. The slice freezes a copy with a literal fallback for load
+// orders where the engine is absent.
+window.DATE_TAB_PRESETS = ((window.DATE_PRESETS || ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth']).slice());
+window.syncDateParams = function(sel) {
+  var preset = sel && sel.preset;
+  if (preset && preset !== 'all' && window.DATE_TAB_PRESETS.indexOf(preset) >= 0) {
+    window.replaceDateUrlParams({ date: preset, from: null, to: null });
+  } else {
+    window.replaceDateUrlParams({ date: null, from: null, to: null });
+  }
+};
+
+// Single window-resolution opts (prio-70 dedup): dateWindowForPreset and
+// dateWindowForCustom share this builder for the city-timezone plus
+// prefetch-horizon plumbing, so the getCityTimezone -> getToDate ->
+// resolve shape lives in exactly one place.
+window.dateWindowOpts = function() {
+  var opts = { timeZone: getCityTimezone() || 'UTC' };
+  try {
+    if (typeof window.getToDate === 'function') opts.horizonEnd = window.getToDate();
+  } catch (e) {}
+  return opts;
+};
+
+// Resolve one #105 day preset to its absolute window ({start, end} ISO
+// strings, nulls for All) in the city timezone via the #104 engine.
+// #108: the prefetch horizon truncates overrunning windows (This month past
+// the horizon) and the truncation flag rides along for the label below.
+window.dateWindowForPreset = function(preset) {
+  if (!preset || preset === 'all') return { start: null, end: null, truncated: false };
+  try {
+    if (typeof window.resolveDatePreset !== 'function') return { start: null, end: null, truncated: false };
+    var windowRange = window.resolveDatePreset(preset, window.dateWindowOpts());
+    if (!windowRange || !windowRange.start) return { start: null, end: null, truncated: false };
+    return { start: windowRange.start, end: windowRange.end, truncated: !!windowRange.truncated };
+  } catch (e) {
+    return { start: null, end: null, truncated: false };
+  }
+};
+
+// --- Empty / truncation states (#108) ---
+// Human label for the empty state `No events {label}.`, one per preset.
+// Unknown keys fail open to the All label so bad links never strand the
+// visitor on a baffling empty.
+window.dateWindowLabel = function(preset) {
+  var labels = {
+    all: 'found',
+    today: 'today',
+    tonight: 'tonight',
+    tomorrow: 'tomorrow',
+    weekend: 'this weekend',
+    next7: 'in the next 7 days',
+    thismonth: 'this month',
+    custom: 'in this date range'
+  };
+  return labels[preset] || 'found';
+};
+
+// Horizon-truncation copy for the label below the tabs (prio-70 dedup):
+// this is a thin delegate — the engine's truncationLabelForWindow owns the
+// `Showing through {horizonDate} — the calendar currently ends there.`
+// copy plus the inclusive-last-day math, so the Main.xmlui custom confirm
+// and the shell boot seed render byte-identical labels through this seam.
+// Falls back to the local render only when the engine is absent.
+window.dateTruncationText = function(windowRange) {
+  if (!windowRange || !windowRange.truncated || !windowRange.end) return null;
+  try {
+    if (typeof window.truncationLabelForWindow === 'function') {
+      return window.truncationLabelForWindow(windowRange, getCityTimezone() || 'UTC');
+    }
+  } catch (e) {
+    return null;
+  }
+  try {
+    var tz = getCityTimezone() || 'UTC';
+    var lastMs = new Date(windowRange.end).getTime() - 1;
+    if (!isFinite(lastMs)) return null;
+    var day = new Intl.DateTimeFormat('en-CA', {
+      timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit'
+    }).format(new Date(lastMs));
+    return 'Showing through ' + day + ' — the calendar currently ends there.';
+  } catch (e) {
+    return null;
+  }
+};
+
+// Move focus to the tab-strip heading after the empty-state reset commits
+// Next 7, without scrolling the page. True when the heading took focus;
+// false (fail loud, never silent) when neither the heading nor the strip
+// itself is focusable (the strip fallback covers engines that drop id on
+// text components).
+window.focusDateTabHeading = function() {
+  try {
+    if (typeof document === 'undefined' || !document.getElementById) return false;
+    var el = document.getElementById('dateTabHeading') || document.getElementById('dateTabStrip');
+    if (!el || typeof el.focus !== 'function') return false;
+    if (el.hasAttribute && !el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+    el.focus({ preventScroll: true });
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
+// --- Custom range picker (#107) ---
+// Today in the city timezone as yyyy-MM-dd (the picker's date-only minimum;
+// recomputed on every call so boot plus day-rollover stay correct).
+window.todayDateOnly = function() {
+  try {
+    var tz = getCityTimezone() || 'UTC';
+    return new Intl.DateTimeFormat('en-CA', {
+      timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit'
+    }).format(new Date());
+  } catch (e) {
+    return new Date().toISOString().substring(0, 10);
+  }
+};
+
+// City timezone for the picker (the stock control resolves its calendar in
+// this zone so day boundaries match the committed window). Kept as a named
+// window.* seam rather than inlined at the DatePicker binding because (a)
+// getCityTimezone is a bare (non-window) function the markup cannot call,
+// and (b) the `|| 'UTC'` fallback policy lives here in one place alongside
+// dateWindowOpts/todayDateOnly/dateTruncationText instead of being
+// duplicated in the declarative binding.
+window.customPickerTimezone = function() {
+  return getCityTimezone() || 'UTC';
+};
+
+// Past dates disabled at the control level: everything before today.
+window.customDisabledDates = function() {
+  return [{ before: window.todayDateOnly() }];
+};
+
+// Resolve an exact Custom range to its committed window ({start, end} ISO
+// plus canonical from/to, truncated, clamped) in the city timezone via the
+// #104 engine. Null on malformed or partial input (the commit ignores it,
+// so nothing filters mid-drag or per tick). End-before-start coerces to a
+// single day, over-long ranges cap at 180 days, past starts clamp to today,
+// and ends past the prefetch horizon truncate with the truncation label.
+// Takes the window shape {from, to} (prio-90 Data Clumps fix); the legacy
+// positional (from, to) pair still works so existing harnesses stay green.
+window.dateWindowForCustom = function(rangeOrFrom, to) {
+  var from = rangeOrFrom;
+  if (rangeOrFrom != null && typeof rangeOrFrom === 'object' && !Array.isArray(rangeOrFrom) &&
+      ('from' in rangeOrFrom || 'to' in rangeOrFrom)) {
+    from = rangeOrFrom.from;
+    to = rangeOrFrom.to;
+  }
+  if (from == null || to == null) return null;
+  try {
+    if (typeof window.resolveCustomRange !== 'function') return null;
+    var windowRange = window.resolveCustomRange(from, to, window.dateWindowOpts());
+    if (!windowRange || !windowRange.start) return null;
+    return { start: windowRange.start, end: windowRange.end, from: windowRange.from, to: windowRange.to, truncated: !!windowRange.truncated, clamped: !!windowRange.clamped };
+  } catch (e) {
+    return null;
+  }
+};
+
+// Sync the canonical Custom link: exact from/to only with no preset key,
+// preserving sibling params (city, search, category, mode, images, embed,
+// cards). history-replace (not push) so Back leaves the calendar instead of
+// stepping through filter states. Takes the committed window {from, to}
+// (prio-90); the legacy positional (from, to) pair still works.
+window.syncCustomParams = function(rangeOrFrom, to) {
+  var from = rangeOrFrom;
+  if (rangeOrFrom != null && typeof rangeOrFrom === 'object' && !Array.isArray(rangeOrFrom) &&
+      ('from' in rangeOrFrom || 'to' in rangeOrFrom)) {
+    from = rangeOrFrom.from;
+    to = rangeOrFrom.to;
+  }
+  if (from && to) {
+    window.replaceDateUrlParams({ date: null, from: from, to: to });
+  } else {
+    // No-op commit (callers guard on the resolve, so this path only fires on
+    // malformed input): rewrite the untouched URL, exactly as before.
+    window.replaceDateUrlParams({});
+  }
+};
+
+// Open the stock range picker popup with a real click, never focus().
+// The vendored control opens only from its Control onClick: the exposed
+// handle offers focus/setValue/getValue but no open API, openOnClick is
+// false, and the onClick ignores input/button targets — so focus() merely
+// selects the date text and the popup stays shut. Clicking the Control
+// element itself takes the setOpen(true) path on desktop and mobile alike.
+// The Control is found by climbing from its input (inner class names are
+// hashed; the [data-mode="range"] root attribute is the stable anchor).
+// Returns true when the popup was asked to open, false when the picker is
+// not mounted (callers keep customOpen=true; the row mounts on that flag).
+window.openCustomPicker = function() {
+  try {
+    var root = document.querySelector('#customPickerRow [data-mode="range"]')
+      || document.querySelector('[data-mode="range"]');
+    if (!root) return false;
+    var input = root.querySelector('input');
+    if (!input || !input.parentElement) return false;
+    var control = input;
+    while (control !== root && control.parentElement &&
+        control.parentElement.parentElement &&
+        control.parentElement.parentElement !== root) {
+      control = control.parentElement;
+    }
+    if (control === root || control === input) {
+      input.focus();
+      return true;
+    }
+    control.click();
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
+// True when `iso` is midnight (00:00) in `tz`: the pipeline anchors
+// time-unknown events there (see formatTime, which renders them dateless),
+// so a midnight start means "time unknown", never "plays at midnight".
+function startIsMidnightInTz(iso, tz) {
+  try {
+    var parts = new Intl.DateTimeFormat('en-US', {
+      timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false
+    }).formatToParts(new Date(iso));
+    var v = {};
+    parts.forEach(function(p) { v[p.type] = p.value; });
+    var hour = v.hour === '24' ? '00' : v.hour;
+    return (hour === '00' || hour === '0') && (v.minute === '00' || v.minute === '0');
+  } catch (e) {
+    return false;
+  }
+}
+
+// Filter events to the committed absolute window {start, end} (prio-90 Data
+// Clumps fix: the window travels as one object, not loose positional
+// bounds). The legacy positional (startISO, endISO) form still works so
+// existing call sites and harnesses stay green.
+// Null bounds (All) return the input by reference so downstream bindings
+// keep a stable identity; unparseable bounds fail open to All rather than
+// stranding the visitor on an empty list.
+// `opts.startTimeOnly` (Tonight per #103) keeps the [start, end) range over
+// the start instant but additionally drops flagged all-day events and
+// midnight-anchored (time-unknown) starts, which never play at night;
+// multi-day events qualify by start day only with the end time ignored.
+// `opts.timeZone` overrides the city timezone (tests pin it explicitly).
+function filterByDateWindow(events, windowOrStartISO, endISOOrOpts, maybeOpts) {
+  var startISO = windowOrStartISO;
+  var endISO = endISOOrOpts;
+  var opts = maybeOpts;
+  if (windowOrStartISO != null && typeof windowOrStartISO === 'object' && !Array.isArray(windowOrStartISO) &&
+      ('start' in windowOrStartISO || 'end' in windowOrStartISO)) {
+    startISO = windowOrStartISO.start;
+    endISO = windowOrStartISO.end;
+    opts = endISOOrOpts;
+  }
+  if (!events) return events;
+  if (startISO == null || endISO == null) return events;
+  var fromMs = new Date(startISO).getTime();
+  var toMs = new Date(endISO).getTime();
+  if (!isFinite(fromMs) || !isFinite(toMs) || !(toMs > fromMs)) return events;
+  var startTimeOnly = !!(opts && opts.startTimeOnly);
+  var tz = (opts && opts.timeZone) ||
+    (typeof getCityTimezone === 'function' ? getCityTimezone() : undefined) || 'UTC';
+  return events.filter(function(e) {
+    var eventStartMs = new Date(e.start_time).getTime();
+    if (!(eventStartMs >= fromMs && eventStartMs < toMs)) return false;
+    if (!startTimeOnly) return true;
+    if (e.all_day || e.allDay) return false;
+    if (startIsMidnightInTz(e.start_time, tz)) return false;
+    return true;
+  });
+}
+window.filterByDateWindow = filterByDateWindow;
+
 // --- Cluster Colors ---
 const CLUSTER_COLORS = ['#6b9bd2', '#7bc47f', '#d4a04a'];
 window.clusterBorder = function(clusterId, filtered) {
@@ -1535,47 +1837,6 @@ if (typeof window !== 'undefined') {
     var stored = localStorage.getItem('hidden_sources');
     if (stored) { window._localHiddenSources = JSON.parse(stored); }
   } catch(e) {}
-  // Date range slider helpers
-  window._dateRangeBase = new Date();
-  window._dateRangeBase.setHours(0, 0, 0, 0);
-
-  window.dayOffsetToISO = function(dayOffset) {
-    var d = new Date(window._dateRangeBase.getTime() + dayOffset * 24 * 60 * 60 * 1000);
-    return d.toISOString();
-  };
-
-  window.formatDayOffset = function(dayOffset) {
-    var d = new Date(window._dateRangeBase.getTime() + dayOffset * 24 * 60 * 60 * 1000);
-    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    return months[d.getMonth()] + ' ' + d.getDate();
-  };
-
-  window.getEventDayRange = function(events) {
-    if (!events || !events.length) return [0, 90];
-    var base = window._dateRangeBase.getTime();
-    var msPerDay = 24 * 60 * 60 * 1000;
-    var minOffset = Infinity, maxOffset = -Infinity;
-    for (var i = 0; i < events.length; i++) {
-      var d = new Date(events[i].start_time);
-      d.setHours(0, 0, 0, 0);
-      var offset = Math.round((d.getTime() - base) / msPerDay);
-      if (offset < minOffset) minOffset = offset;
-      if (offset > maxOffset) maxOffset = offset;
-    }
-    return [minOffset, maxOffset];
-  };
-
-  window.filterByDayRange = function(events, range) {
-    if (!range || !events) return events;
-    var fromMs = window._dateRangeBase.getTime() + range[0] * 24 * 60 * 60 * 1000;
-    var toMs = window._dateRangeBase.getTime() + (range[1] + 1) * 24 * 60 * 60 * 1000;
-    var result = events.filter(function(e) {
-      var t = new Date(e.start_time).getTime();
-      return t >= fromMs && t < toMs;
-    });
-    console.log('filterByDayRange', range, 'in:', events.length, 'out:', result.length);
-    return result;
-  };
 
   var _filterExternalExclusions = function(events) {
     var exc = window.externalExclusions;
@@ -1776,21 +2037,23 @@ if (typeof window !== 'undefined') {
     return out;
   };
 
-  // Replaces Main.xmlui's inline date-slider filter lambda. Returns the
-  // input by reference when the slider is inactive so downstream bindings
-  // keep a stable identity.
-  window.filterByDayWindow = function(events, startDay, endDay) {
-    if (startDay === null || startDay === undefined || !events) return events;
-    var base = window._dateRangeBase.getTime();
-    var fromMs = base + startDay * 86400000;
-    var toMs = base + (endDay + 1) * 86400000;
-    return events.filter(function(e) {
-      var t = new Date(e.start_time).getTime();
-      return t >= fromMs && t < toMs;
+  // Date-tab window filter (#105): absolute {start, end} committed window
+  // (prio-90: one object, not loose bounds). Null bounds (All) return the
+  // input by reference, and the memo below keeps that stable identity so
+  // downstream bindings skip re-rendering while the window is unchanged.
+  memoizeIngest('filterByDateWindow',
+    function(events, windowOrStartISO, endISOOrOpts, maybeOpts) {
+      var startISO = windowOrStartISO;
+      var endISO = endISOOrOpts;
+      var opts = maybeOpts;
+      if (windowOrStartISO != null && typeof windowOrStartISO === 'object' && !Array.isArray(windowOrStartISO) &&
+          ('start' in windowOrStartISO || 'end' in windowOrStartISO)) {
+        startISO = windowOrStartISO.start;
+        endISO = windowOrStartISO.end;
+        opts = endISOOrOpts;
+      }
+      return [startISO, endISO, opts && opts.startTimeOnly ? 1 : 0, (opts && opts.timeZone) || ''];
     });
-  };
-  memoizeIngest('filterByDayWindow',
-    function(events, startDay, endDay) { return [startDay, endDay]; });
 
   window.clearDedupeCache = clearDedupeCache;
   window.isEventPicked = isEventPicked;

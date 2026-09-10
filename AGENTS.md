@@ -111,7 +111,7 @@ PR CI `validate-pr.yml` gates main merges. Replicate locally before pushing:
 - `python scripts/validate_pr_feeds.py --base-ref origin/main` (feed/scraper consistency)
 - `pytest tests/ -v`
 - `supabase test db supabase/tests/`
-- `node scripts/bench_collapse_long.js` — perf gate guarding the content-key collapse cache regressions
+- `pnpm bench` — perf gate guarding the content-key collapse cache regressions
 
 Pipeline validation for scrape/download runs (not needed for every PR):
 

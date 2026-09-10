@@ -31,18 +31,11 @@ function morePrevIndex(startIndex, pageSize) {
   return Math.max(0, startIndex - Math.max(1, pageSize - 1));
 }
 
-function getPagedEvents(events, term, startIndex, pageSize, category, dateStart, dateEnd) {
-  let source = events;
-  if (dateStart !== null && dateEnd !== null && window._dateRangeBase && eventDayRange && (dateStart !== eventDayRange[0] || dateEnd !== eventDayRange[1])) {
-    const baseMs = window._dateRangeBase.getTime();
-    const fromMs = baseMs + dateStart * 86400000;
-    const toMs = baseMs + (dateEnd + 1) * 86400000;
-    source = (events || []).filter((e) => {
-      const t = new Date(e.start_time).getTime();
-      return t >= fromMs && t < toMs;
-    });
-  }
-  const filtered = window.filterEvents(source, term, category) || [];
+function getPagedEvents(events, term, startIndex, pageSize, category) {
+  // Date filtering lives upstream: the caller passes dateFilteredEvents (the
+  // single committed window, #105), so this stage only applies search +
+  // category + paging. Picks and Dashboard never pass through here.
+  const filtered = window.filterEvents(events, term, category) || [];
   const size = pageSize || 50;
   const index = Number.isFinite(startIndex) ? Math.max(0, startIndex) : 0;
 
@@ -64,6 +57,40 @@ var dashboardGridLayout = null;
 function setCategoryFilter(category) {
   categoryFilter = category || '';
   window.syncCategoryParam(categoryFilter);
+}
+
+// Single date-tab commit path: every preset tab plus the empty-state reset
+// funnels through here instead of repeating the commit sequence inline in
+// markup. Resolves the absolute window via the date-window engine, assigns
+// the committed preset/bounds, closes the Custom picker flow (customOpen)
+// so a stale range can never display under a non-custom window, resets paging, scrolls to top on user taps,
+// surfaces the horizon-truncation label, and syncs the evergreen ?date= link
+// with history-replace. The empty-state reset passes {scroll: false} and
+// chains window.focusDateTabHeading() so focus moves without scrolling.
+function commitDatePreset(preset, opts) {
+  const withScroll = !opts || opts.scroll !== false;
+  if (!preset || preset === 'all') {
+    datePreset = 'all';
+    customOpen = false;
+    dateWindowStart = null;
+    dateWindowEnd = null;
+    dateTruncationLabel = null;
+    displayStartIndex = 0;
+    browseStartIndex = 0;
+    if (withScroll) scrollRequest = scrollRequest + 1;
+    window.syncDateParams({ preset: 'all' });
+    return;
+  }
+  const windowRange = window.dateWindowForPreset(preset);
+  datePreset = preset;
+  customOpen = false;
+  dateWindowStart = windowRange.start;
+  dateWindowEnd = windowRange.end;
+  dateTruncationLabel = window.dateTruncationText(windowRange);
+  displayStartIndex = 0;
+  browseStartIndex = 0;
+  if (withScroll) scrollRequest = scrollRequest + 1;
+  window.syncDateParams({ preset: preset });
 }
 
 function openPanel(name) {
