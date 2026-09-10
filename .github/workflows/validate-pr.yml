@@ -88,7 +88,8 @@ jobs:
         run: pnpm vitest run
 
   browser-tests:
-    # Playwright gate over the browser-only xmlui/test.html groups.
+    # Playwright gate over xmlui/test.html's served-file groups and the
+    # date-tab accessibility spec (axe + keyboard/focus/360px, #109).
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6

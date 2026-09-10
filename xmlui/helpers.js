@@ -187,11 +187,14 @@ window.dateTruncationText = function(windowRange) {
 // Next 7, without scrolling the page. True when the heading took focus;
 // false (fail loud, never silent) when neither the heading nor the strip
 // itself is focusable (the strip fallback covers engines that drop id on
-// text components).
+// text components). XMLUI renders a component `id` as the data-xmlui-id
+// attribute, never a DOM id, so this queries that attribute (the browser a11y
+// spec proves the real DOM contract).
 window.focusDateTabHeading = function() {
   try {
-    if (typeof document === 'undefined' || !document.getElementById) return false;
-    var el = document.getElementById('dateTabHeading') || document.getElementById('dateTabStrip');
+    if (typeof document === 'undefined' || !document.querySelector) return false;
+    var el = document.querySelector('[data-xmlui-id="dateTabHeading"]')
+      || document.querySelector('[data-xmlui-id="dateTabStrip"]');
     if (!el || typeof el.focus !== 'function') return false;
     if (el.hasAttribute && !el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
     el.focus({ preventScroll: true });
@@ -200,6 +203,46 @@ window.focusDateTabHeading = function() {
     return false;
   }
 };
+
+// Move focus to the Custom tab. The vendored picker's own Escape handler
+// closes the popup but leaves focus on <body> (it does not restore the
+// trigger), so the spec's "Escape returns focus to the Custom tab" needs this
+// explicit move. Fail loud (false) when the tab is not mounted.
+window.returnFocusToCustomTab = function() {
+  try {
+    if (typeof document === 'undefined' || !document.querySelector) return false;
+    var tab = document.querySelector('[data-xmlui-id="customDateTab"]');
+    if (!tab || typeof tab.focus !== 'function') return false;
+    tab.focus({ preventScroll: true });
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
+// True while the Custom range picker popup is showing. The vendored control
+// exposes no open/close API; its root carries data-state="open" only while the
+// popup is open, which is the one stable signal available.
+function customPickerIsOpen() {
+  try {
+    if (typeof document === 'undefined' || !document.querySelector) return false;
+    return !!document.querySelector('[data-xmlui-id="customRangePicker"][data-state="open"]');
+  } catch (e) {
+    return false;
+  }
+}
+
+// Escape in the picker returns focus to the Custom tab. Capture phase so the
+// picker's own Escape handler cannot close the popup first and hide the open
+// state this keys on; the focus move is deferred a tick so it lands after the
+// popup has closed.
+if (typeof document !== 'undefined' && document.addEventListener) {
+  document.addEventListener('keydown', function(e) {
+    if (e.key !== 'Escape' && e.key !== 'Esc') return;
+    if (!customPickerIsOpen()) return;
+    setTimeout(function() { window.returnFocusToCustomTab(); }, 0);
+  }, true);
+}
 
 // --- Custom range picker (#107) ---
 // Today in the city timezone as yyyy-MM-dd (the picker's date-only minimum;
@@ -290,7 +333,7 @@ window.syncCustomParams = function(rangeOrFrom, to) {
 // not mounted (callers keep customOpen=true; the row mounts on that flag).
 window.openCustomPicker = function() {
   try {
-    var root = document.querySelector('#customPickerRow [data-mode="range"]')
+    var root = document.querySelector('[data-xmlui-id="customPickerRow"] [data-mode="range"]')
       || document.querySelector('[data-mode="range"]');
     if (!root) return false;
     var input = root.querySelector('input');
