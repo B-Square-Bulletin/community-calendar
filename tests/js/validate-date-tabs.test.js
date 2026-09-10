@@ -316,3 +316,30 @@ describe('custom affordance', () => {
   it('no redundant picker trigger survives beside the Custom tab', () => { expect(!!main && !/Choose dates/.test(main)).toBe(true); });
   it('helpers.js exposes the picker-open seam used by the trigger', () => { expect(!!helpers && /window\.openCustomPicker = function/.test(helpers)).toBe(true); });
 });
+
+describe('a11y semantics (#109)', () => {
+  // The strip block only: from the strip id to its closing HStack, so the
+  // aria-pressed count can't be satisfied by some other button elsewhere.
+  const strip = (() => {
+    if (!main) return '';
+    const at = main.indexOf('id="dateTabStrip"');
+    if (at < 0) return '';
+    const end = main.indexOf('</HStack>', at);
+    return end < 0 ? '' : main.substring(at, end);
+  })();
+  it('every date tab exposes a pressed state to assistive tech', () => {
+    const count = (strip.match(/aria-pressed=/g) || []).length;
+    expect(count).toBe(8);
+  });
+  it('a preset tab is pressed only while its window is committed and the flow is closed', () => {
+    expect(/aria-pressed="\{datePreset === 'all' && !customOpen\}"/.test(strip)).toBe(true);
+    expect(/aria-pressed="\{datePreset === 'today' && !customOpen\}"/.test(strip)).toBe(true);
+    expect(/aria-pressed="\{datePreset === 'thismonth' && !customOpen\}"/.test(strip)).toBe(true);
+  });
+  it('the Custom tab is pressed while the custom flow is open, not only after a commit', () => {
+    expect(/aria-pressed="\{\(datePreset === 'custom' \|\| customOpen\)\}"/.test(strip)).toBe(true);
+  });
+  it('the Custom tab carries the id Escape returns focus to', () => {
+    expect(/id="customDateTab"[\s\S]{0,400}?>Custom</.test(strip)).toBe(true);
+  });
+});

@@ -14,6 +14,7 @@
     "bench": "node scripts/bench_collapse_long.js"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@playwright/test": "^1.49.1",
     "vitest": "^3.2.4"
   }

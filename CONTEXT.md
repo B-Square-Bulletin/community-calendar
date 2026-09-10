@@ -64,6 +64,10 @@ _Avoid_: Date filter, day offsets
 A named rule that resolves to a date window relative to the day it is opened (Today, Tonight, Tomorrow, This weekend, Next 7 days, This month, Custom, All). Rolling presets stay evergreen; Custom carries exact dates.
 _Avoid_: Tab, quick filter
 
+**Date tab**:
+The control in the date-tab strip that commits one preset or opens the Custom flow. Exactly one is pressed at a time, announced as such to assistive technology; Custom stays pressed while its picker flow is open, even before a range commits.
+_Avoid_: Preset (the rule the tab commits), quick filter
+
 **Commit**:
 The moment a chosen window becomes active: the list re-filters, the pager resets, and the URL syncs. Discrete picks commit instantly; continuous gestures commit on release/confirm, never per tick.
 _Avoid_: Apply, select (when meaning the committed state)

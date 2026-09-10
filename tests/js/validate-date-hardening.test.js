@@ -88,40 +88,35 @@ describe('truncation copy', () => {
 });
 
 describe('focus move', () => {
+  // XMLUI renders a component `id` as data-xmlui-id, never a DOM id, so the
+  // focus seam must query that attribute (proven end-to-end in the Playwright
+  // a11y spec). A stub keyed on getElementById would pass while the real app
+  // silently fails to move focus.
+  const focusable = () => ({
+    focus(opts) { global.focusedWith = opts; },
+    hasAttribute() { return false; },
+    setAttribute(k, v) { global.tabIndexSet = [k, v]; },
+  });
   it('reset focuses the tab-strip heading without scrolling', () => {
     global.document = {
-      getElementById(id) {
-        if (id !== 'dateTabHeading') return null;
-        return {
-          focus(opts) { global.focusedWith = opts; },
-          hasAttribute() { return false; },
-          setAttribute(k, v) { global.tabIndexSet = [k, v]; },
-        };
-      },
+      querySelector(sel) { return sel === '[data-xmlui-id="dateTabHeading"]' ? focusable() : null; },
     };
     expect(window.focusDateTabHeading()).toEqual(true);
   });
   it('focus carries preventScroll', () => {
     global.document = {
-      getElementById(id) {
-        if (id !== 'dateTabHeading') return null;
-        return {
-          focus(opts) { global.focusedWith = opts; },
-          hasAttribute() { return false; },
-          setAttribute(k, v) { global.tabIndexSet = [k, v]; },
-        };
-      },
+      querySelector(sel) { return sel === '[data-xmlui-id="dateTabHeading"]' ? focusable() : null; },
     };
     window.focusDateTabHeading();
     expect([global.focusedWith, global.tabIndexSet]).toEqual([{ preventScroll: true }, ['tabindex', '-1']]);
   });
   it('focus fails loud (false) with no heading and no strip', () => {
-    global.document = { getElementById: () => null };
+    global.document = { querySelector: () => null };
     expect(window.focusDateTabHeading()).toEqual(false);
   });
   it('focus falls back to the strip when the heading id is dropped', () => {
     global.document = {
-      getElementById: (id) => id === 'dateTabStrip' ? {
+      querySelector: (sel) => sel === '[data-xmlui-id="dateTabStrip"]' ? {
         focus(opts) { global.focusedWith = opts; },
         hasAttribute() { return true; },
         setAttribute(k, v) { global.tabIndexSet = [k, v]; },
@@ -130,6 +125,24 @@ describe('focus move', () => {
     global.focusedWith = null;
     expect(window.focusDateTabHeading()).toEqual(true);
     delete global.document;
+  });
+});
+
+describe('Escape returns focus to the Custom tab (#109)', () => {
+  it('returnFocusToCustomTab focuses the Custom tab without scrolling', () => {
+    global.document = {
+      querySelector(sel) {
+        return sel === '[data-xmlui-id="customDateTab"]' ? {
+          focus(opts) { global.customFocusedWith = opts; },
+        } : null;
+      },
+    };
+    expect(window.returnFocusToCustomTab()).toEqual(true);
+    expect(global.customFocusedWith).toEqual({ preventScroll: true });
+  });
+  it('returnFocusToCustomTab fails loud (false) when the tab is absent', () => {
+    global.document = { querySelector: () => null };
+    expect(window.returnFocusToCustomTab()).toEqual(false);
   });
 });
 

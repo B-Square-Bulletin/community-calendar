@@ -1630,8 +1630,10 @@
 
           test('strip carries the Custom tab with pressed state', () => {
             assert(main.includes('>Custom<'), 'Missing tab: Custom');
-            assert(/<Button variant="\{[^"]*customOpen[\s\S]{0,300}?>Custom</.test(main),
+            assert(/<Button [^>]*variant="\{[^"]*customOpen[\s\S]{0,400}?>Custom</.test(main),
               'Custom tab must read pressed while the custom flow is open');
+            assert(/<Button [^>]*aria-pressed="\{\(datePreset === 'custom' \|\| customOpen\)\}"[\s\S]{0,400}?>Custom</.test(main),
+              'Custom tab must announce the pressed state to assistive tech (#109)');
           });
 
           test('stock range picker opens from the Custom tab and commits on explicit confirm', () => {
