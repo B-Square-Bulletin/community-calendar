@@ -18,7 +18,16 @@ const HEADING = '[data-xmlui-id="dateTabHeading"]';
 const CUSTOM_ROW = '[data-xmlui-id="customPickerRow"]';
 const CUSTOM_TAB = '[data-xmlui-id="customDateTab"]';
 
-const TABS = ['All dates', 'Today', 'Tonight', 'Tomorrow', 'This weekend', 'Next 7 days', 'This month', 'Custom'];
+const TABS = [
+  'All dates',
+  'Today',
+  'Tonight',
+  'Tomorrow',
+  'This weekend',
+  'Next 7 days',
+  'This month',
+  'Custom',
+];
 
 // Upper bound for driving Tab from page load: covers the pre-strip stops
 // (icons, search, clear, select) plus the 8 tabs with margin.
@@ -30,9 +39,11 @@ function tab(page, label) {
 
 async function boot(page) {
   await page.route('**/rest/v1/**', (route) =>
-    route.fulfill({ status: 200, contentType: 'application/json', body: '[]' }));
+    route.fulfill({ status: 200, contentType: 'application/json', body: '[]' })
+  );
   await page.route('**/auth/v1/**', (route) =>
-    route.fulfill({ status: 200, contentType: 'application/json', body: '{}' }));
+    route.fulfill({ status: 200, contentType: 'application/json', body: '{}' })
+  );
   await page.goto('/xmlui/index.html?city=bloomington');
   await page.waitForSelector(TAB_STRIP, { state: 'visible', timeout: 45000 });
 }
@@ -48,8 +59,9 @@ test('date-filter region has no WCAG A/AA axe violations', async ({ page }) => {
   // app regions are out of this ticket's scope, so they must not gate CI.
   const full = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze();
   if (full.violations.length) {
-    console.log('[a11y informational] full-page violations: ' +
-      full.violations.map((v) => v.id).join(', '));
+    console.log(
+      '[a11y informational] full-page violations: ' + full.violations.map((v) => v.id).join(', ')
+    );
   }
   expect(results.violations).toEqual([]);
 });
@@ -66,7 +78,9 @@ test('exactly one tab is pressed and it tracks the committed window', async ({ p
   await expect(pressed).toHaveCount(1);
 });
 
-test('Custom tab reads pressed while its flow is open, before any range commits', async ({ page }) => {
+test('Custom tab reads pressed while its flow is open, before any range commits', async ({
+  page,
+}) => {
   await boot(page);
   await page.locator(CUSTOM_TAB).click();
   await expect(page.locator(CUSTOM_ROW)).toBeVisible();
@@ -74,7 +88,9 @@ test('Custom tab reads pressed while its flow is open, before any range commits'
   await expect(tab(page, 'All dates')).toHaveAttribute('aria-pressed', 'false');
 });
 
-test('keyboard-only: Enter on a focused tab commits the window and syncs the URL', async ({ page }) => {
+test('keyboard-only: Enter on a focused tab commits the window and syncs the URL', async ({
+  page,
+}) => {
   await boot(page);
   const today = tab(page, 'Today');
   await today.focus();
@@ -97,12 +113,16 @@ test('committing a preset keeps focus on the pressed tab (no focus move)', async
 test('Escape in the Custom picker returns focus to the Custom tab', async ({ page }) => {
   await boot(page);
   await page.locator(CUSTOM_TAB).click();
-  await expect(page.locator('[data-xmlui-id="customRangePicker"][data-state="open"]')).toBeVisible();
+  await expect(
+    page.locator('[data-xmlui-id="customRangePicker"][data-state="open"]')
+  ).toBeVisible();
   await page.keyboard.press('Escape');
   await expect(page.locator(CUSTOM_TAB)).toBeFocused();
 });
 
-test('keyboard-only: Tab from page load reaches every date tab (Safari/WebKit tab order)', async ({ page }) => {
+test('keyboard-only: Tab from page load reaches every date tab (Safari/WebKit tab order)', async ({
+  page,
+}) => {
   await boot(page);
   // Regression for a Safari/WebKit quirk: sequential tab order skips native
   // <button> elements that lack an explicit tabindex attribute, so the tabs
@@ -114,12 +134,14 @@ test('keyboard-only: Tab from page load reaches every date tab (Safari/WebKit ta
   // plus the 8 tabs with margin; focusedLabels holds one entry per stop.
   const focusedLabels = [];
   for (let i = 0; i < MAX_TAB_STOPS; i++) {
-    focusedLabels.push(await page.evaluate(() => {
-      const el = document.activeElement;
-      return el && el !== document.body
-        ? (el.textContent || el.getAttribute('aria-label') || '').trim().replace(/\s+/g, ' ')
-        : '';
-    }));
+    focusedLabels.push(
+      await page.evaluate(() => {
+        const el = document.activeElement;
+        return el && el !== document.body
+          ? (el.textContent || el.getAttribute('aria-label') || '').trim().replace(/\s+/g, ' ')
+          : '';
+      })
+    );
     await page.keyboard.press('Tab');
   }
   // The strip must arrive as one contiguous in-order run, not scattered
@@ -129,7 +151,9 @@ test('keyboard-only: Tab from page load reaches every date tab (Safari/WebKit ta
   expect(focusedLabels.slice(stripStart, stripStart + TABS.length)).toEqual(TABS);
 });
 
-test('empty-state reset is keyboard reachable and moves focus to the heading without scrolling', async ({ page }) => {
+test('empty-state reset is keyboard reachable and moves focus to the heading without scrolling', async ({
+  page,
+}) => {
   await boot(page);
   // The hermetic boot returns no events, so the empty window renders.
   await expect(page.locator('button', { hasText: 'Show next 7 days' })).toBeVisible();
@@ -140,7 +164,10 @@ test('empty-state reset is keyboard reachable and moves focus to the heading wit
       const el = document.activeElement;
       return el && el !== document.body ? (el.textContent || '').trim().replace(/\s+/g, ' ') : '';
     });
-    if (label === 'Show next 7 days') { reached = true; break; }
+    if (label === 'Show next 7 days') {
+      reached = true;
+      break;
+    }
     await page.keyboard.press('Tab');
   }
   expect(reached).toBe(true);
@@ -155,13 +182,17 @@ test('empty-state reset is keyboard reachable and moves focus to the heading wit
   expect(await page.evaluate(() => window.scrollY)).toBe(scrolledY);
 });
 
-test('360px: the tab strip wraps with every preset reachable and no horizontal scroll', async ({ page }) => {
+test('360px: the tab strip wraps with every preset reachable and no horizontal scroll', async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 360, height: 800 });
   await boot(page);
   const overflow = await page.locator(TAB_STRIP).evaluate((el) => el.scrollWidth - el.clientWidth);
   expect(overflow).toBeLessThanOrEqual(1);
   // The strip must not push the page itself into horizontal scroll either.
-  const pageOverflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+  const pageOverflow = await page.evaluate(
+    () => document.documentElement.scrollWidth - window.innerWidth
+  );
   expect(pageOverflow).toBeLessThanOrEqual(1);
   for (const label of TABS) {
     await expect(tab(page, label)).toBeVisible();

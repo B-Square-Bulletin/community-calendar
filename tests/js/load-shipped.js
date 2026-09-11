@@ -20,8 +20,12 @@ function loadShipped(opts = {}) {
     _cities: opts.cities || { davis: { timezone: 'America/Los_Angeles' } },
     location: new URL(opts.url || 'https://example.com/?city=davis'),
     history: {
-      replaceState(o, t, u) { win.location = new URL(u); },
-      pushState(o, t, u) { win.location = new URL(u); },
+      replaceState(o, t, u) {
+        win.location = new URL(u);
+      },
+      pushState(o, t, u) {
+        win.location = new URL(u);
+      },
     },
   };
   global.window = win;

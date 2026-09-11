@@ -11,3 +11,13 @@ repos:
         entry: uv run ruff check --fix
         language: system
         types: [python]
+      - id: prettier-check
+        name: prettier check
+        entry: pnpm exec prettier --check
+        language: system
+        files: \.(js|mjs|cjs)$
+      - id: eslint
+        name: eslint
+        entry: pnpm exec eslint
+        language: system
+        files: \.(js|mjs|cjs)$

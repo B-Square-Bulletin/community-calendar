@@ -37,7 +37,7 @@
     var result = fn();
     var duration = performance.now() - start;
     logs.push({
-      kind: "app:trace",
+      kind: 'app:trace',
       label: label,
       traceId: getTraceId(),
       perfTs: start,
@@ -50,7 +50,7 @@
     var logs = window._xsLogs;
     if (!logs) return;
     logs.push({
-      kind: "app:trace",
+      kind: 'app:trace',
       label: label,
       data: data,
       traceId: getTraceId(),
@@ -64,9 +64,9 @@
     var start = performance.now();
     var result = fn();
     var duration = performance.now() - start;
-    var data = typeof extractData === "function" ? extractData(result) : undefined;
+    var data = typeof extractData === 'function' ? extractData(result) : undefined;
     logs.push({
-      kind: "app:trace",
+      kind: 'app:trace',
       label: label,
       data: data,
       traceId: getTraceId(),
