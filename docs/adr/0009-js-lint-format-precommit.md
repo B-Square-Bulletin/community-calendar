@@ -29,8 +29,9 @@ checks that asserted the old source formatting verbatim.
    `pnpm run lint:js`/`format:js`; `lint`/`format` aggregate both and
    `make check` covers all.
 4. **Pre-commit extends the existing framework** (no Husky): check-only
-   `prettier --check` + `eslint` hooks filtered to `js|mjs|cjs`, so hooks
-   never rewrite files — fixing stays explicit via `make format-js`.
+   `prettier --check` + `eslint` hooks filtered to `js|mjs|cjs`, so the new
+   JS hooks never rewrite files — fixing stays explicit via `make format-js`.
+   (Existing ruff hooks still rewrite staged Python files.)
 5. **Baseline cuts stay minimal and behavior-preserving:** legacy
    `catch (e) {}` preserved via `caughtErrors: none` + `allowEmptyCatch`;
    CDN/CJS-interop globals declared in config; only truly unreferenced dead

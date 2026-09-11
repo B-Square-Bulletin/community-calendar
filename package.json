@@ -5,7 +5,7 @@
   "description": "Node test harness for the community-calendar XMLUI date-window seam and static chrome checks",
   "packageManager": "pnpm@9.12.0",
   "engines": {
-    "node": ">=20"
+    "node": ">=20.19.0"
   },
   "scripts": {
     "test": "vitest run",
