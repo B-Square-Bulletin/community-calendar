@@ -1,4 +1,4 @@
-.PHONY: help test test-python test-node test-browser test-sql test-all setup-python setup-node setup-local teardown-local format lint check clean
+.PHONY: help test test-python test-node test-browser test-sql test-all setup-python setup-node setup-local teardown-local format format-python format-js lint lint-python lint-js check clean
 
 # Default target
 help:
@@ -10,8 +10,12 @@ help:
 	@echo "  make test-node       - Run node seam tests (vitest via pnpm)"
 	@echo "  make test-browser    - Run browser groups (Playwright over xmlui/test.html)"
 	@echo "  make test-sql        - Run database tests (local Supabase via pgTAP)"
-	@echo "  make format          - Auto-format Python code (ruff format)"
-	@echo "  make lint            - Lint Python code (ruff check; type checkers gate)"
+	@echo "  make format          - Auto-format Python + JS code"
+	@echo "  make format-python   - Auto-format Python code (ruff format)"
+	@echo "  make format-js       - Auto-format JS code (prettier --write + eslint --fix)"
+	@echo "  make lint            - Lint Python + JS code"
+	@echo "  make lint-python     - Lint Python code (ruff check; type checkers gate)"
+	@echo "  make lint-js         - Lint JS code (prettier --check + eslint)"
 	@echo "  make check           - Run lint + Python + node tests"
 	@echo "  make setup-python    - Create venv and install dependencies (uv sync)"
 	@echo "  make setup-node      - Install JS dependencies (pnpm install)"
@@ -59,17 +63,35 @@ test-browser:
 	@echo "Running browser tests..."
 	@pnpm playwright test
 
+# Auto-format Python + JS code
+format: format-python format-js
+
 # Auto-format Python code
-format:
+format-python:
 	@echo "Formatting Python code..."
 	@uv run ruff format .
 	@echo "✓ Formatted"
+
+# Auto-format JS code (prettier owns style, eslint --fix owns correctness)
+format-js:
+	@echo "Formatting JS code..."
+	@pnpm run format:js
+	@echo "✓ Formatted"
+
+# Lint Python + JS code
+lint: lint-python lint-js
+
+# Lint JS code. Prettier (format) + ESLint (recommended) gate.
+lint-js:
+	@echo "Linting JS code..."
+	@pnpm run lint:js
+	@echo "✓ JS clean"
 
 # Lint Python code. Ruff (format + check) and all four type checkers gate.
 # `uv sync` runs first so a stale venv (e.g. after removing a dependency) can't
 # mask diagnostics with leftover installed packages — the checkers must resolve
 # against the exact lockfile state, not whatever uv run leaves behind.
-lint:
+lint-python:
 	@echo "Syncing environment to lockfile..."
 	@uv sync --quiet
 	@echo "✓ environment synced"

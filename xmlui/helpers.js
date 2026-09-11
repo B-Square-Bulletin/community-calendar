@@ -4,20 +4,32 @@
 // --- Categories (derived from categories.json, loaded in index.html) ---
 var CATEGORY_NAMES = {};
 window.categoryColorMap = {};
-window._categories.forEach(function(c) {
+window._categories.forEach(function (c) {
   CATEGORY_NAMES[c.name] = true;
   window.categoryColorMap[c.name] = { label: c.label, background: c.background };
 });
-window.categoryList = window._categories.map(function(c) { return c.name; });
-window.getActiveCategories = function(events) {
+window.categoryList = window._categories.map(function (c) {
+  return c.name;
+});
+window.getActiveCategories = function (events) {
   var counts = {};
-  (events || []).forEach(function(e) { if (e.category) counts[e.category] = (counts[e.category] || 0) + 1; });
-  return window.categoryList.filter(function(c) { return counts[c]; }).map(function(c) { return { name: c, label: c + ' (' + counts[c] + ')' }; });
+  (events || []).forEach(function (e) {
+    if (e.category) counts[e.category] = (counts[e.category] || 0) + 1;
+  });
+  return window.categoryList
+    .filter(function (c) {
+      return counts[c];
+    })
+    .map(function (c) {
+      return { name: c, label: c + ' (' + counts[c] + ')' };
+    });
 };
 
 // Aggregator list comes from source_priority.json (loaded by shell.js).
 // Pipeline reads the same file in scripts/combine_ics.py.
-var AGGREGATOR_SOURCES = new Set((window._sourcePriority && window._sourcePriority.aggregators) || []);
+var AGGREGATOR_SOURCES = new Set(
+  (window._sourcePriority && window._sourcePriority.aggregators) || []
+);
 
 function normalizeVenueToken(value) {
   return (value || '')
@@ -37,13 +49,13 @@ function sourceMatchesLocation(source, location) {
   var normalized = normalizeVenueToken(source);
   if (raw) candidates.push(raw);
   if (normalized && candidates.indexOf(normalized) < 0) candidates.push(normalized);
-  return candidates.some(function(candidate) {
+  return candidates.some(function (candidate) {
     return candidate && normalizedLocation.includes(candidate);
   });
 }
 
 // --- URL sync for category filter ---
-window.syncCategoryParam = function(category) {
+window.syncCategoryParam = function (category) {
   var url = new URL(window.location);
   if (category) {
     url.searchParams.set('category', category);
@@ -55,9 +67,9 @@ window.syncCategoryParam = function(category) {
 
 // --- URL sync for search filter (debounced) ---
 var _searchSyncTimer = null;
-window.syncSearchParam = function(search) {
+window.syncSearchParam = function (search) {
   clearTimeout(_searchSyncTimer);
-  _searchSyncTimer = setTimeout(function() {
+  _searchSyncTimer = setTimeout(function () {
     var url = new URL(window.location);
     if (search) {
       url.searchParams.set('search', search);
@@ -77,7 +89,7 @@ window.syncSearchParam = function(search) {
 // replaceDateUrlParams, which owns the new-URL -> set/delete -> replaceState
 // shape. A value of undefined leaves the key untouched, null deletes it, and
 // a string sets it.
-window.replaceDateUrlParams = function(params) {
+window.replaceDateUrlParams = function (params) {
   var url = new URL(window.location);
   params = params || {};
   if (params.date !== undefined) {
@@ -99,8 +111,10 @@ window.replaceDateUrlParams = function(params) {
 // exactly that list, derived here so adding a preset means editing the
 // engine only. The slice freezes a copy with a literal fallback for load
 // orders where the engine is absent.
-window.DATE_TAB_PRESETS = ((window.DATE_PRESETS || ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth']).slice());
-window.syncDateParams = function(sel) {
+window.DATE_TAB_PRESETS = (
+  window.DATE_PRESETS || ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth']
+).slice();
+window.syncDateParams = function (sel) {
   var preset = sel && sel.preset;
   if (preset && preset !== 'all' && window.DATE_TAB_PRESETS.indexOf(preset) >= 0) {
     window.replaceDateUrlParams({ date: preset, from: null, to: null });
@@ -113,7 +127,7 @@ window.syncDateParams = function(sel) {
 // dateWindowForCustom share this builder for the city-timezone plus
 // prefetch-horizon plumbing, so the getCityTimezone -> getToDate ->
 // resolve shape lives in exactly one place.
-window.dateWindowOpts = function() {
+window.dateWindowOpts = function () {
   var opts = { timeZone: getCityTimezone() || 'UTC' };
   try {
     if (typeof window.getToDate === 'function') opts.horizonEnd = window.getToDate();
@@ -125,10 +139,11 @@ window.dateWindowOpts = function() {
 // strings, nulls for All) in the city timezone via the #104 engine.
 // #108: the prefetch horizon truncates overrunning windows (This month past
 // the horizon) and the truncation flag rides along for the label below.
-window.dateWindowForPreset = function(preset) {
+window.dateWindowForPreset = function (preset) {
   if (!preset || preset === 'all') return { start: null, end: null, truncated: false };
   try {
-    if (typeof window.resolveDatePreset !== 'function') return { start: null, end: null, truncated: false };
+    if (typeof window.resolveDatePreset !== 'function')
+      return { start: null, end: null, truncated: false };
     var windowRange = window.resolveDatePreset(preset, window.dateWindowOpts());
     if (!windowRange || !windowRange.start) return { start: null, end: null, truncated: false };
     return { start: windowRange.start, end: windowRange.end, truncated: !!windowRange.truncated };
@@ -141,7 +156,7 @@ window.dateWindowForPreset = function(preset) {
 // Human label for the empty state `No events {label}.`, one per preset.
 // Unknown keys fail open to the All label so bad links never strand the
 // visitor on a baffling empty.
-window.dateWindowLabel = function(preset) {
+window.dateWindowLabel = function (preset) {
   var labels = {
     all: 'found',
     today: 'today',
@@ -150,7 +165,7 @@ window.dateWindowLabel = function(preset) {
     weekend: 'this weekend',
     next7: 'in the next 7 days',
     thismonth: 'this month',
-    custom: 'in this date range'
+    custom: 'in this date range',
   };
   return labels[preset] || 'found';
 };
@@ -161,7 +176,7 @@ window.dateWindowLabel = function(preset) {
 // copy plus the inclusive-last-day math, so the Main.xmlui custom confirm
 // and the shell boot seed render byte-identical labels through this seam.
 // Falls back to the local render only when the engine is absent.
-window.dateTruncationText = function(windowRange) {
+window.dateTruncationText = function (windowRange) {
   if (!windowRange || !windowRange.truncated || !windowRange.end) return null;
   try {
     if (typeof window.truncationLabelForWindow === 'function') {
@@ -175,7 +190,10 @@ window.dateTruncationText = function(windowRange) {
     var lastMs = new Date(windowRange.end).getTime() - 1;
     if (!isFinite(lastMs)) return null;
     var day = new Intl.DateTimeFormat('en-CA', {
-      timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit'
+      timeZone: tz,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
     }).format(new Date(lastMs));
     return 'Showing through ' + day + ' — the calendar currently ends there.';
   } catch (e) {
@@ -190,11 +208,12 @@ window.dateTruncationText = function(windowRange) {
 // text components). XMLUI renders a component `id` as the data-xmlui-id
 // attribute, never a DOM id, so this queries that attribute (the browser a11y
 // spec proves the real DOM contract).
-window.focusDateTabHeading = function() {
+window.focusDateTabHeading = function () {
   try {
     if (typeof document === 'undefined' || !document.querySelector) return false;
-    var el = document.querySelector('[data-xmlui-id="dateTabHeading"]')
-      || document.querySelector('[data-xmlui-id="dateTabStrip"]');
+    var el =
+      document.querySelector('[data-xmlui-id="dateTabHeading"]') ||
+      document.querySelector('[data-xmlui-id="dateTabStrip"]');
     if (!el || typeof el.focus !== 'function') return false;
     if (el.hasAttribute && !el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
     el.focus({ preventScroll: true });
@@ -208,7 +227,7 @@ window.focusDateTabHeading = function() {
 // closes the popup but leaves focus on <body> (it does not restore the
 // trigger), so the spec's "Escape returns focus to the Custom tab" needs this
 // explicit move. Fail loud (false) when the tab is not mounted.
-window.returnFocusToCustomTab = function() {
+window.returnFocusToCustomTab = function () {
   try {
     if (typeof document === 'undefined' || !document.querySelector) return false;
     var tab = document.querySelector('[data-xmlui-id="customDateTab"]');
@@ -237,21 +256,30 @@ function customPickerIsOpen() {
 // state this keys on; the focus move is deferred a tick so it lands after the
 // popup has closed.
 if (typeof document !== 'undefined' && document.addEventListener) {
-  document.addEventListener('keydown', function(e) {
-    if (e.key !== 'Escape' && e.key !== 'Esc') return;
-    if (!customPickerIsOpen()) return;
-    setTimeout(function() { window.returnFocusToCustomTab(); }, 0);
-  }, true);
+  document.addEventListener(
+    'keydown',
+    function (e) {
+      if (e.key !== 'Escape' && e.key !== 'Esc') return;
+      if (!customPickerIsOpen()) return;
+      setTimeout(function () {
+        window.returnFocusToCustomTab();
+      }, 0);
+    },
+    true
+  );
 }
 
 // --- Custom range picker (#107) ---
 // Today in the city timezone as yyyy-MM-dd (the picker's date-only minimum;
 // recomputed on every call so boot plus day-rollover stay correct).
-window.todayDateOnly = function() {
+window.todayDateOnly = function () {
   try {
     var tz = getCityTimezone() || 'UTC';
     return new Intl.DateTimeFormat('en-CA', {
-      timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit'
+      timeZone: tz,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
     }).format(new Date());
   } catch (e) {
     return new Date().toISOString().substring(0, 10);
@@ -265,12 +293,12 @@ window.todayDateOnly = function() {
 // and (b) the `|| 'UTC'` fallback policy lives here in one place alongside
 // dateWindowOpts/todayDateOnly/dateTruncationText instead of being
 // duplicated in the declarative binding.
-window.customPickerTimezone = function() {
+window.customPickerTimezone = function () {
   return getCityTimezone() || 'UTC';
 };
 
 // Past dates disabled at the control level: everything before today.
-window.customDisabledDates = function() {
+window.customDisabledDates = function () {
   return [{ before: window.todayDateOnly() }];
 };
 
@@ -282,10 +310,14 @@ window.customDisabledDates = function() {
 // and ends past the prefetch horizon truncate with the truncation label.
 // Takes the window shape {from, to} (prio-90 Data Clumps fix); the legacy
 // positional (from, to) pair still works so existing harnesses stay green.
-window.dateWindowForCustom = function(rangeOrFrom, to) {
+window.dateWindowForCustom = function (rangeOrFrom, to) {
   var from = rangeOrFrom;
-  if (rangeOrFrom != null && typeof rangeOrFrom === 'object' && !Array.isArray(rangeOrFrom) &&
-      ('from' in rangeOrFrom || 'to' in rangeOrFrom)) {
+  if (
+    rangeOrFrom != null &&
+    typeof rangeOrFrom === 'object' &&
+    !Array.isArray(rangeOrFrom) &&
+    ('from' in rangeOrFrom || 'to' in rangeOrFrom)
+  ) {
     from = rangeOrFrom.from;
     to = rangeOrFrom.to;
   }
@@ -294,7 +326,14 @@ window.dateWindowForCustom = function(rangeOrFrom, to) {
     if (typeof window.resolveCustomRange !== 'function') return null;
     var windowRange = window.resolveCustomRange(from, to, window.dateWindowOpts());
     if (!windowRange || !windowRange.start) return null;
-    return { start: windowRange.start, end: windowRange.end, from: windowRange.from, to: windowRange.to, truncated: !!windowRange.truncated, clamped: !!windowRange.clamped };
+    return {
+      start: windowRange.start,
+      end: windowRange.end,
+      from: windowRange.from,
+      to: windowRange.to,
+      truncated: !!windowRange.truncated,
+      clamped: !!windowRange.clamped,
+    };
   } catch (e) {
     return null;
   }
@@ -305,10 +344,14 @@ window.dateWindowForCustom = function(rangeOrFrom, to) {
 // cards). history-replace (not push) so Back leaves the calendar instead of
 // stepping through filter states. Takes the committed window {from, to}
 // (prio-90); the legacy positional (from, to) pair still works.
-window.syncCustomParams = function(rangeOrFrom, to) {
+window.syncCustomParams = function (rangeOrFrom, to) {
   var from = rangeOrFrom;
-  if (rangeOrFrom != null && typeof rangeOrFrom === 'object' && !Array.isArray(rangeOrFrom) &&
-      ('from' in rangeOrFrom || 'to' in rangeOrFrom)) {
+  if (
+    rangeOrFrom != null &&
+    typeof rangeOrFrom === 'object' &&
+    !Array.isArray(rangeOrFrom) &&
+    ('from' in rangeOrFrom || 'to' in rangeOrFrom)
+  ) {
     from = rangeOrFrom.from;
     to = rangeOrFrom.to;
   }
@@ -331,17 +374,21 @@ window.syncCustomParams = function(rangeOrFrom, to) {
 // hashed; the [data-mode="range"] root attribute is the stable anchor).
 // Returns true when the popup was asked to open, false when the picker is
 // not mounted (callers keep customOpen=true; the row mounts on that flag).
-window.openCustomPicker = function() {
+window.openCustomPicker = function () {
   try {
-    var root = document.querySelector('[data-xmlui-id="customPickerRow"] [data-mode="range"]')
-      || document.querySelector('[data-mode="range"]');
+    var root =
+      document.querySelector('[data-xmlui-id="customPickerRow"] [data-mode="range"]') ||
+      document.querySelector('[data-mode="range"]');
     if (!root) return false;
     var input = root.querySelector('input');
     if (!input || !input.parentElement) return false;
     var control = input;
-    while (control !== root && control.parentElement &&
-        control.parentElement.parentElement &&
-        control.parentElement.parentElement !== root) {
+    while (
+      control !== root &&
+      control.parentElement &&
+      control.parentElement.parentElement &&
+      control.parentElement.parentElement !== root
+    ) {
       control = control.parentElement;
     }
     if (control === root || control === input) {
@@ -361,10 +408,15 @@ window.openCustomPicker = function() {
 function startIsMidnightInTz(iso, tz) {
   try {
     var parts = new Intl.DateTimeFormat('en-US', {
-      timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false
+      timeZone: tz,
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
     }).formatToParts(new Date(iso));
     var v = {};
-    parts.forEach(function(p) { v[p.type] = p.value; });
+    parts.forEach(function (p) {
+      v[p.type] = p.value;
+    });
     var hour = v.hour === '24' ? '00' : v.hour;
     return (hour === '00' || hour === '0') && (v.minute === '00' || v.minute === '0');
   } catch (e) {
@@ -388,8 +440,12 @@ function filterByDateWindow(events, windowOrStartISO, endISOOrOpts, maybeOpts) {
   var startISO = windowOrStartISO;
   var endISO = endISOOrOpts;
   var opts = maybeOpts;
-  if (windowOrStartISO != null && typeof windowOrStartISO === 'object' && !Array.isArray(windowOrStartISO) &&
-      ('start' in windowOrStartISO || 'end' in windowOrStartISO)) {
+  if (
+    windowOrStartISO != null &&
+    typeof windowOrStartISO === 'object' &&
+    !Array.isArray(windowOrStartISO) &&
+    ('start' in windowOrStartISO || 'end' in windowOrStartISO)
+  ) {
     startISO = windowOrStartISO.start;
     endISO = windowOrStartISO.end;
     opts = endISOOrOpts;
@@ -400,9 +456,11 @@ function filterByDateWindow(events, windowOrStartISO, endISOOrOpts, maybeOpts) {
   var toMs = new Date(endISO).getTime();
   if (!isFinite(fromMs) || !isFinite(toMs) || !(toMs > fromMs)) return events;
   var startTimeOnly = !!(opts && opts.startTimeOnly);
-  var tz = (opts && opts.timeZone) ||
-    (typeof getCityTimezone === 'function' ? getCityTimezone() : undefined) || 'UTC';
-  return events.filter(function(e) {
+  var tz =
+    (opts && opts.timeZone) ||
+    (typeof getCityTimezone === 'function' ? getCityTimezone() : undefined) ||
+    'UTC';
+  return events.filter(function (e) {
     var eventStartMs = new Date(e.start_time).getTime();
     if (!(eventStartMs >= fromMs && eventStartMs < toMs)) return false;
     if (!startTimeOnly) return true;
@@ -415,42 +473,50 @@ window.filterByDateWindow = filterByDateWindow;
 
 // --- Cluster Colors ---
 const CLUSTER_COLORS = ['#6b9bd2', '#7bc47f', '#d4a04a'];
-window.clusterBorder = function(clusterId, filtered) {
+window.clusterBorder = function (clusterId, filtered) {
   if (clusterId == null || filtered) return 'none';
   return '3px solid ' + CLUSTER_COLORS[clusterId % CLUSTER_COLORS.length];
 };
 
 // --- Image Resize (client-side, before upload) ---
 // Converts any image (including HEIC via browser decode) to JPEG under maxBytes
-window.resizeImageFile = function(file, maxBytes) {
+window.resizeImageFile = function (file, maxBytes) {
   maxBytes = maxBytes || 3500000; // ~3.5MB raw → ~4.8MB base64, under Claude's 5MB limit
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     var img = new Image();
     var url = URL.createObjectURL(file);
-    img.onload = function() {
+    img.onload = function () {
       URL.revokeObjectURL(url);
       var canvas = document.createElement('canvas');
-      var w = img.width, h = img.height;
+      var w = img.width,
+        h = img.height;
       // Try at full resolution first, then scale down
       var scale = 1.0;
-      var attempt = function() {
+      var attempt = function () {
         canvas.width = Math.round(w * scale);
         canvas.height = Math.round(h * scale);
         var ctx = canvas.getContext('2d');
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        canvas.toBlob(function(blob) {
-          if (!blob) { reject(new Error('Canvas toBlob failed')); return; }
-          if (blob.size <= maxBytes || scale <= 0.2) {
-            resolve(new File([blob], 'photo.jpg', { type: 'image/jpeg' }));
-          } else {
-            scale *= 0.7;
-            attempt();
-          }
-        }, 'image/jpeg', 0.85);
+        canvas.toBlob(
+          function (blob) {
+            if (!blob) {
+              reject(new Error('Canvas toBlob failed'));
+              return;
+            }
+            if (blob.size <= maxBytes || scale <= 0.2) {
+              resolve(new File([blob], 'photo.jpg', { type: 'image/jpeg' }));
+            } else {
+              scale *= 0.7;
+              attempt();
+            }
+          },
+          'image/jpeg',
+          0.85
+        );
       };
       attempt();
     };
-    img.onerror = function() {
+    img.onerror = function () {
       URL.revokeObjectURL(url);
       // If browser can't decode (e.g. HEIC on non-Safari), pass through original
       resolve(file);
@@ -462,7 +528,7 @@ window.resizeImageFile = function(file, maxBytes) {
 // Append UTC offset to a naive datetime string using an IANA timezone.
 // E.g., applyTimezoneOffset("2025-01-15T19:00:00", "America/Los_Angeles") → "2025-01-15T19:00:00-08:00"
 // Returns the string unchanged if it already has an offset or Z suffix.
-window.applyTimezoneOffset = function(naiveDatetime, timezone) {
+window.applyTimezoneOffset = function (naiveDatetime, timezone) {
   if (!timezone || !naiveDatetime) return naiveDatetime;
   if (/[+-]\d{2}(:\d{2})?$/.test(naiveDatetime) || naiveDatetime.endsWith('Z')) {
     return naiveDatetime;
@@ -480,7 +546,7 @@ window.applyTimezoneOffset = function(naiveDatetime, timezone) {
 
 // Convert a UTC ISO datetime string to local date/time parts using the city timezone
 // Returns { date: 'YYYY-MM-DD', time: 'HH:MM' }
-window.utcToLocal = function(isoString, timezone) {
+window.utcToLocal = function (isoString, timezone) {
   if (!isoString) return { date: '', time: '' };
   if (!timezone) {
     // Fallback: naive substring (no conversion)
@@ -489,11 +555,18 @@ window.utcToLocal = function(isoString, timezone) {
   var d = new Date(isoString);
   if (isNaN(d.getTime())) return { date: '', time: '' };
   var parts = new Intl.DateTimeFormat('en-CA', {
-    timeZone: timezone, year: 'numeric', month: '2-digit', day: '2-digit',
-    hour: '2-digit', minute: '2-digit', hour12: false
+    timeZone: timezone,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
   }).formatToParts(d);
   var vals = {};
-  parts.forEach(function(p) { vals[p.type] = p.value; });
+  parts.forEach(function (p) {
+    vals[p.type] = p.value;
+  });
   // Intl hour12:false can return "24" for midnight in some engines; normalize
   var hour = vals.hour === '24' ? '00' : vals.hour;
   return { date: vals.year + '-' + vals.month + '-' + vals.day, time: hour + ':' + vals.minute };
@@ -501,29 +574,35 @@ window.utcToLocal = function(isoString, timezone) {
 
 // Resize image then upload to capture-event edge function via fetch
 // Returns Promise<{ event }> or Promise<{ error }>
-window.resizeAndUpload = function(file, supabaseUrl, publishableKey) {
-  return window.resizeImageFile(file).then(function(resized) {
-    var fd = new FormData();
-    fd.append('mode', 'extract');
-    // Pass city timezone so Claude uses it as the default for extracted events
-    var cityTz = window._cities && window.cityFilter && window._cities[window.cityFilter];
-    if (cityTz && cityTz.timezone) {
-      fd.append('timezone', cityTz.timezone);
-    }
-    fd.append('file', resized, resized.name);
-    return fetch(supabaseUrl + '/functions/v1/capture-event', {
-      method: 'POST',
-      headers: { 'apikey': publishableKey },
-      body: fd
+window.resizeAndUpload = function (file, supabaseUrl, publishableKey) {
+  return window
+    .resizeImageFile(file)
+    .then(function (resized) {
+      var fd = new FormData();
+      fd.append('mode', 'extract');
+      // Pass city timezone so Claude uses it as the default for extracted events
+      var cityTz = window._cities && window.cityFilter && window._cities[window.cityFilter];
+      if (cityTz && cityTz.timezone) {
+        fd.append('timezone', cityTz.timezone);
+      }
+      fd.append('file', resized, resized.name);
+      return fetch(supabaseUrl + '/functions/v1/capture-event', {
+        method: 'POST',
+        headers: { apikey: publishableKey },
+        body: fd,
+      });
+    })
+    .then(function (resp) {
+      if (!resp.ok) {
+        return resp.text().then(function (t) {
+          return { error: 'Server error ' + resp.status + ': ' + t };
+        });
+      }
+      return resp.json();
+    })
+    .catch(function (err) {
+      return { error: 'Upload failed: ' + err.message };
     });
-  }).then(function(resp) {
-    if (!resp.ok) {
-      return resp.text().then(function(t) { return { error: 'Server error ' + resp.status + ': ' + t }; });
-    }
-    return resp.json();
-  }).catch(function(err) {
-    return { error: 'Upload failed: ' + err.message };
-  });
 };
 
 // --- Audio Recording ---
@@ -532,7 +611,7 @@ window.audioChunks = [];
 window.audioBlob = null;
 window.audioMimeType = null;
 
-window.startRecording = async function() {
+window.startRecording = async function () {
   try {
     var stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     var mimeType = MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : 'audio/mp4';
@@ -540,7 +619,7 @@ window.startRecording = async function() {
     window.audioChunks = [];
     window.audioBlob = null;
     window.audioMimeType = mimeType;
-    window.audioRecorder.ondataavailable = function(e) {
+    window.audioRecorder.ondataavailable = function (e) {
       if (e.data.size > 0) {
         window.audioChunks.push(e.data);
         window.audioBlob = new Blob(window.audioChunks, { type: mimeType });
@@ -548,20 +627,22 @@ window.startRecording = async function() {
     };
     window.audioRecorder.start(500);
     return true;
-  } catch(e) {
+  } catch (e) {
     console.error('Failed to start recording:', e);
     return false;
   }
 };
 
-window.stopRecording = function() {
+window.stopRecording = function () {
   if (window.audioRecorder && window.audioRecorder.state === 'recording') {
     window.audioRecorder.stop();
-    window.audioRecorder.stream.getTracks().forEach(function(t) { t.stop(); });
+    window.audioRecorder.stream.getTracks().forEach(function (t) {
+      t.stop();
+    });
   }
 };
 
-window.getRecordingFile = function() {
+window.getRecordingFile = function () {
   if (!window.audioBlob) return null;
   var ext = window.audioMimeType === 'audio/webm' ? 'webm' : 'm4a';
   return new File([window.audioBlob], 'recording.' + ext, { type: window.audioMimeType });
@@ -576,15 +657,20 @@ function buildSearchIndex(events) {
     e._search = getEventSearchText(e);
   }
   if (!window._pipelineLog) window._pipelineLog = [];
-  window._pipelineLog.push('buildSearchIndex: ' + (performance.now() - _t0).toFixed(1) + 'ms, ' + events.length + ' events');
+  window._pipelineLog.push(
+    'buildSearchIndex: ' + (performance.now() - _t0).toFixed(1) + 'ms, ' + events.length + ' events'
+  );
   return events;
 }
 
 function getEventSearchText(event) {
   return (
-    (event.title || '') + ' ' +
-    (event.location || '') + ' ' +
-    (event.source || '') + ' ' +
+    (event.title || '') +
+    ' ' +
+    (event.location || '') +
+    ' ' +
+    (event.source || '') +
+    ' ' +
     (event.description || '')
   ).toLowerCase();
 }
@@ -599,16 +685,32 @@ var _prevEventsFirst = null;
 function filterEvents(events, term, category) {
   if (!events) return events || [];
   var t0 = performance.now();
-  var base = category ? events.filter(function(e) { return e.category === category; }) : events;
-  if (!term) { _prevTerm = ''; _prevCategory = ''; _prevFiltered = null; _prevEventsLen = 0; _prevEventsFirst = null; return base; }
+  var base = category
+    ? events.filter(function (e) {
+        return e.category === category;
+      })
+    : events;
+  if (!term) {
+    _prevTerm = '';
+    _prevCategory = '';
+    _prevFiltered = null;
+    _prevEventsLen = 0;
+    _prevEventsFirst = null;
+    return base;
+  }
   var lower = term.toLowerCase();
   // Progressive narrowing: reuse previous result if extending the same search within same category AND same input
-  var sameInput = (events.length === _prevEventsLen && events[0] === _prevEventsFirst);
-  var narrowing = (sameInput && _prevTerm && lower.startsWith(_prevTerm) && category === _prevCategory && _prevFiltered);
+  var sameInput = events.length === _prevEventsLen && events[0] === _prevEventsFirst;
+  var narrowing =
+    sameInput &&
+    _prevTerm &&
+    lower.startsWith(_prevTerm) &&
+    category === _prevCategory &&
+    _prevFiltered;
   var source = narrowing ? _prevFiltered : base;
   _prevEventsLen = events.length;
   _prevEventsFirst = events[0];
-  var result = source.filter(function(e) {
+  var result = source.filter(function (e) {
     // Use the cache buildSearchIndex populated (after sortSourcesForDisplay's
     // source-merge); fall back to computing only for a straggler that lacks it.
     // Do NOT reintroduce a compute-once guard in buildSearchIndex — its
@@ -618,7 +720,18 @@ function filterEvents(events, term, category) {
   });
   var t1 = performance.now();
   if (!window._filterLog) window._filterLog = [];
-  window._filterLog.push('filterEvents: ' + (t1 - t0).toFixed(1) + 'ms, source=' + source.length + (narrowing ? ' (narrowed)' : ' (full)') + ', results=' + result.length + ', term="' + term + '"');
+  window._filterLog.push(
+    'filterEvents: ' +
+      (t1 - t0).toFixed(1) +
+      'ms, source=' +
+      source.length +
+      (narrowing ? ' (narrowed)' : ' (full)') +
+      ', results=' +
+      result.length +
+      ', term="' +
+      term +
+      '"'
+  );
   _prevTerm = lower;
   _prevCategory = category || '';
   _prevFiltered = result;
@@ -657,8 +770,8 @@ function getPagedEvents(events, term, startIndex, pageSize, category) {
   }
 
   const page = filtered.slice(index, index + size);
-  const hasMore = (index + size) < filtered.length;
-  const nextIndex = hasMore ? (index + step) : null;
+  const hasMore = index + size < filtered.length;
+  const nextIndex = hasMore ? index + step : null;
   const hasPrev = index > 0;
   const prevIndex = hasPrev ? Math.max(0, index - step) : null;
 
@@ -708,37 +821,55 @@ function getCityTimezone() {
 
 // Next scheduled build time in the city's local timezone
 // Build runs daily at midnight UTC (cron: 0 0 * * *)
-window.nextBuildLocalTime = function() {
+window.nextBuildLocalTime = function () {
   var now = new Date();
-  var next = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1, 0, 0, 0));
+  var next = new Date(
+    Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1, 0, 0, 0)
+  );
   if (now.getUTCHours() === 0 && now.getUTCMinutes() < 10) {
     next = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0));
   }
   var tz = getCityTimezone();
   return next.toLocaleString('en-US', {
     timeZone: tz,
-    weekday: 'short', month: 'short', day: 'numeric',
-    hour: 'numeric', minute: '2-digit', timeZoneName: 'short'
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    timeZoneName: 'short',
   });
 };
 
 // Format day of week
 function formatDayOfWeek(isoString) {
   if (!isoString) return '';
-  return new Date(isoString).toLocaleDateString('en-US', { weekday: 'short', timeZone: getCityTimezone() });
+  return new Date(isoString).toLocaleDateString('en-US', {
+    weekday: 'short',
+    timeZone: getCityTimezone(),
+  });
 }
 
 // Format month and day
 function formatMonthDay(isoString) {
   if (!isoString) return '';
-  return new Date(isoString).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: getCityTimezone() });
+  return new Date(isoString).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    timeZone: getCityTimezone(),
+  });
 }
 
 // Format date for display
 function formatDate(isoString) {
   if (!isoString) return '';
   var tz = getCityTimezone();
-  return new Date(isoString).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', timeZone: tz });
+  return new Date(isoString).toLocaleDateString('en-US', {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    timeZone: tz,
+  });
 }
 
 // Format time for display
@@ -760,11 +891,16 @@ function formatTime(isoString) {
 function uniqueSourceNames(source) {
   if (!source) return [];
   var seen = new Set();
-  return source.split(',').map(function(s) { return s.trim(); }).filter(function(s) {
-    if (!s || seen.has(s)) return false;
-    seen.add(s);
-    return true;
-  });
+  return source
+    .split(',')
+    .map(function (s) {
+      return s.trim();
+    })
+    .filter(function (s) {
+      if (!s || seen.has(s)) return false;
+      seen.add(s);
+      return true;
+    });
 }
 
 // Extract a short readable snippet from an event description (for always-visible preview)
@@ -774,10 +910,12 @@ function formatSourceLinks(source, sourceUrls, hiddenSources) {
   var sources = uniqueSourceNames(source);
   // Filter out hidden sources, but keep all if all would be removed
   if (hiddenSources && hiddenSources.length) {
-    var visible = sources.filter(function(s) { return hiddenSources.indexOf(s) < 0; });
+    var visible = sources.filter(function (s) {
+      return hiddenSources.indexOf(s) < 0;
+    });
     if (visible.length > 0) sources = visible;
   }
-  var parts = sources.map(function(name) {
+  var parts = sources.map(function (name) {
     var url = sourceUrls && sourceUrls[name];
     return url ? '[' + name + '](' + url + ')' : name;
   });
@@ -804,7 +942,7 @@ function getSnippet(description, title) {
   // Strip URLs, markdown artifacts
   text = text.replace(/https?:\/\/\S+/g, '');
   text = text.replace(/\*\*([^*]+)\*\*/g, '$1').replace(/\*([^*]+)\*/g, '$1');
-  text = text.replace(/\\([*_\[\](){}+#>|`~])/g, '$1');
+  text = text.replace(/\\([*_[\](){}+#>|`~])/g, '$1');
 
   // Fix smashed words from bad HTML cleanup (e.g. "ZwiftJoin" → "Zwift Join")
   text = text.replace(/([a-z])([A-Z])/g, '$1 $2');
@@ -812,17 +950,34 @@ function getSnippet(description, title) {
   // Normalize whitespace
   text = text.replace(/[\t\r]+/g, ' ').replace(/ {2,}/g, ' ');
 
-  var lines = text.split('\n').map(function(l) { return l.trim(); }).filter(Boolean);
+  var lines = text
+    .split('\n')
+    .map(function (l) {
+      return l.trim();
+    })
+    .filter(Boolean);
 
   // General patterns
   var labelPrefix = /^\w+(\s+\w+){0,2}\s*:\s*/;
-  var ctaPrefix = /^(back to|buy|register|sign up|rsvp|tickets?|click|tap|view|see all|read more|get|call or text|call or email)\b/i;
-  var badAnywhere = /\b(zoom|meeting id|passcode|one tap|meeting url|webex|microsoft teams|google meet|agenda|packet|minutes|prohibited|not permitted|are not allowed|from almost anywhere in the world|from anywhere in the world)\b/i;
+  var ctaPrefix =
+    /^(back to|buy|register|sign up|rsvp|tickets?|click|tap|view|see all|read more|get|call or text|call or email)\b/i;
+  var badAnywhere =
+    /\b(zoom|meeting id|passcode|one tap|meeting url|webex|microsoft teams|google meet|agenda|packet|minutes|prohibited|not permitted|are not allowed|from almost anywhere in the world|from anywhere in the world)\b/i;
   var moneyOrPrice = /(\$\s*\d|\bprice\b|\bfee\b|\badmission\b|\bfree but\b)/i;
 
   // Normalize title for comparison
-  var normTitle = title ? title.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim() : null;
-  function normText(s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(); }
+  var normTitle = title
+    ? title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, ' ')
+        .trim()
+    : null;
+  function normText(s) {
+    return s
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, ' ')
+      .trim();
+  }
 
   // Salvage text after a label prefix if the remainder is a real sentence
   function salvageLabel(line) {
@@ -830,7 +985,8 @@ function getSnippet(description, title) {
     var rest = line.replace(labelPrefix, '').trim();
     // Remainder must be substantial and sentence-like (has function words)
     if (rest.length < 30) return '';
-    if (!/\b(the|a|an|and|or|for|with|to|from|at|in|on|by|is|are|was|will|this|that)\b/i.test(rest)) return '';
+    if (!/\b(the|a|an|and|or|for|with|to|from|at|in|on|by|is|are|was|will|this|that)\b/i.test(rest))
+      return '';
     // If remainder itself starts with a label, reject
     if (labelPrefix.test(rest)) return '';
     return rest;
@@ -852,7 +1008,12 @@ function getSnippet(description, title) {
     // Sentence-like signals (articles, prepositions, common verbs)
     if (/[.!?]/.test(line)) score += 3;
     if (/\b(the|a|an|and|or|but|for|with|to|from|at|in|on|by)\b/i.test(line)) score += 2;
-    if (/\b(join|learn|discover|explore|enjoy|experience|celebrate|meet|hear|watch|featuring|presents)\b/i.test(line)) score += 2;
+    if (
+      /\b(join|learn|discover|explore|enjoy|experience|celebrate|meet|hear|watch|featuring|presents)\b/i.test(
+        line
+      )
+    )
+      score += 2;
 
     // Penalize admin/pricing/digit-heavy/boilerplate
     if (moneyOrPrice.test(line)) score -= 3;
@@ -861,7 +1022,11 @@ function getSnippet(description, title) {
     // Penalize very short lines that aren't sentences
     if (line.length < 25 && !/[.!?]/.test(line)) score -= 3;
     // Penalize lines that are just an institution/venue name (no verb or article)
-    if (!/\b(the|a|an|is|are|was|will|has|have|can|do|and|but|for|with|from)\b/i.test(line) && line.length < 40) score -= 3;
+    if (
+      !/\b(the|a|an|is|are|was|will|has|have|can|do|and|but|for|with|from)\b/i.test(line) &&
+      line.length < 40
+    )
+      score -= 3;
 
     // Penalize title repetition
     if (normTitle) {
@@ -918,13 +1083,18 @@ function saveUserSetting(fields, userSettingsData, supabaseUrl, supabaseKey) {
       apikey: supabaseKey,
       Authorization: 'Bearer ' + window.authSession.access_token,
       'Content-Type': 'application/json',
-      'Prefer': 'resolution=merge-duplicates'
+      Prefer: 'resolution=merge-duplicates',
     },
-    body: JSON.stringify(Object.assign({
-      user_id: window.authUser.id,
-      city: window.cityFilter,
-      updated_at: new Date().toISOString()
-    }, fields))
+    body: JSON.stringify(
+      Object.assign(
+        {
+          user_id: window.authUser.id,
+          city: window.cityFilter,
+          updated_at: new Date().toISOString(),
+        },
+        fields
+      )
+    ),
   });
 
   if (userSettingsData && userSettingsData[0]) {
@@ -935,23 +1105,26 @@ function saveUserSetting(fields, userSettingsData, supabaseUrl, supabaseKey) {
 
 // Toggle a source's visibility and persist. Returns updated userSettingsData.
 function toggleSourceAndSave(source, userSettingsData, supabaseUrl, supabaseKey) {
-  var current = (userSettingsData && userSettingsData[0] && userSettingsData[0].hidden_sources) || [];
+  var current =
+    (userSettingsData && userSettingsData[0] && userSettingsData[0].hidden_sources) || [];
   var idx = current.indexOf(source);
-  var updated = idx >= 0
-    ? current.filter(function(s) { return s !== source; })
-    : current.concat([source]);
+  var updated =
+    idx >= 0
+      ? current.filter(function (s) {
+          return s !== source;
+        })
+      : current.concat([source]);
   return saveUserSetting({ hidden_sources: updated }, userSettingsData, supabaseUrl, supabaseKey);
 }
 
 // Apply a complete hidden_sources array and persist. Returns updated userSettingsData.
 function saveHiddenSources(hiddenArray, userSettingsData, supabaseUrl, supabaseKey) {
-  return saveUserSetting({ hidden_sources: hiddenArray }, userSettingsData, supabaseUrl, supabaseKey);
-}
-
-// Toggle one-click-pick and persist. Returns updated userSettingsData.
-function toggleOneClickPickAndSave(userSettingsData, supabaseUrl, supabaseKey) {
-  var current = (userSettingsData && userSettingsData[0] && userSettingsData[0].one_click_pick) || false;
-  return saveUserSetting({ one_click_pick: !current }, userSettingsData, supabaseUrl, supabaseKey);
+  return saveUserSetting(
+    { hidden_sources: hiddenArray },
+    userSettingsData,
+    supabaseUrl,
+    supabaseKey
+  );
 }
 
 // Check if a source is in the hidden sources list
@@ -965,11 +1138,23 @@ function isSourceHidden(source, hiddenSources) {
 function filterHiddenSources(events, hiddenSources) {
   if (!hiddenSources || !hiddenSources.length) return events;
   if (!events) return [];
-  return events.filter(function(e) {
+  return events.filter(function (e) {
     if (!e.source) return true;
-    var sources = e.source.split(',').map(function(s) { return s.trim(); }).filter(Boolean);
-    if (sources.some(function(s) { return hiddenSources.indexOf(s) >= 0 && AGGREGATOR_SOURCES.has(s); })) return false;
-    return !sources.every(function(s) { return hiddenSources.indexOf(s) >= 0; });
+    var sources = e.source
+      .split(',')
+      .map(function (s) {
+        return s.trim();
+      })
+      .filter(Boolean);
+    if (
+      sources.some(function (s) {
+        return hiddenSources.indexOf(s) >= 0 && AGGREGATOR_SOURCES.has(s);
+      })
+    )
+      return false;
+    return !sources.every(function (s) {
+      return hiddenSources.indexOf(s) >= 0;
+    });
   });
 }
 
@@ -977,9 +1162,9 @@ function filterHiddenSources(events, hiddenSources) {
 function getSourceCounts(events) {
   if (!events || !events.length) return [];
   const counts = {};
-  events.forEach(e => {
+  events.forEach((e) => {
     const sources = uniqueSourceNames(e.source || 'Unknown');
-    sources.forEach(src => {
+    sources.forEach((src) => {
       counts[src] = (counts[src] || 0) + 1;
     });
   });
@@ -998,28 +1183,40 @@ function isAggregatorSource(name) {
 function getVisibleSourceCounts(events, hiddenSources) {
   var all = getSourceCounts(events);
   if (!hiddenSources || !hiddenSources.length) {
-    return all.map(function(item) {
+    return all.map(function (item) {
       return { source: item.source, count: item.count, total: item.count, hiddenViaAggregator: 0 };
     });
   }
   var counts = {};
   var aggHidden = {};
-  (events || []).forEach(function(e) {
+  (events || []).forEach(function (e) {
     var sources = uniqueSourceNames(e.source || 'Unknown');
-    var viaAgg = sources.some(function(s) { return hiddenSources.indexOf(s) >= 0 && AGGREGATOR_SOURCES.has(s); });
+    var viaAgg = sources.some(function (s) {
+      return hiddenSources.indexOf(s) >= 0 && AGGREGATOR_SOURCES.has(s);
+    });
     if (viaAgg) {
-      sources.forEach(function(src) { aggHidden[src] = (aggHidden[src] || 0) + 1; });
+      sources.forEach(function (src) {
+        aggHidden[src] = (aggHidden[src] || 0) + 1;
+      });
       return;
     }
-    if (sources.length && sources.every(function(s) { return hiddenSources.indexOf(s) >= 0; })) return;
-    sources.forEach(function(src) { counts[src] = (counts[src] || 0) + 1; });
+    if (
+      sources.length &&
+      sources.every(function (s) {
+        return hiddenSources.indexOf(s) >= 0;
+      })
+    )
+      return;
+    sources.forEach(function (src) {
+      counts[src] = (counts[src] || 0) + 1;
+    });
   });
-  return all.map(function(item) {
+  return all.map(function (item) {
     return {
       source: item.source,
       count: counts[item.source] || 0,
       total: item.count,
-      hiddenViaAggregator: aggHidden[item.source] || 0
+      hiddenViaAggregator: aggHidden[item.source] || 0,
     };
   });
 }
@@ -1032,13 +1229,17 @@ function sourceCountTooltip(row, hiddenSources) {
     return 'Hidden aggregator: all ' + row.total_count + ' events it carries are hidden';
   }
   if (!row.agg_hidden) return '';
-  return row.agg_hidden + ' of ' + row.total_count + ' events also arrive via a hidden aggregator (*) and are hidden with it';
+  return (
+    row.agg_hidden +
+    ' of ' +
+    row.total_count +
+    ' events also arrive via a hidden aggregator (*) and are hidden with it'
+  );
 }
 
 // Deduplicate events: merge events with same title + start_time, combine sources
 // Cache variables (module-level for browser, will be on window)
 let _dedupedEventsCache = null;
-let _dedupedEventsLastInput = null;
 let _dedupedEventsLastLen = 0;
 let _dedupedEventsLastFirst = null;
 let _dedupedEventsLastLast = null;
@@ -1049,30 +1250,44 @@ function dedupeEvents(events) {
   // Use cache if the data is unchanged.
   // The combined array is always a new reference (spread), so check
   // length + first/last element identity as a fast proxy.
-  if (_dedupedEventsCache &&
-      events.length === _dedupedEventsLastLen &&
-      events[0] === _dedupedEventsLastFirst &&
-      events[events.length - 1] === _dedupedEventsLastLast) {
+  if (
+    _dedupedEventsCache &&
+    events.length === _dedupedEventsLastLen &&
+    events[0] === _dedupedEventsLastFirst &&
+    events[events.length - 1] === _dedupedEventsLastLast
+  ) {
     return _dedupedEventsCache;
   }
-  _dedupedEventsLastInput = events;
   _dedupedEventsLastLen = events.length;
   _dedupedEventsLastFirst = events[0];
   _dedupedEventsLastLast = events[events.length - 1];
 
   const groups = {};
-  events.forEach(e => {
+  events.forEach((e) => {
     // Normalize start_time to ISO string for consistent dedup across formats
     // e.g. '2026-02-11T18:00:00+00:00' and '2026-02-11T18:00:00.000Z' are the same instant
     const normalizedTime = e.start_time ? new Date(e.start_time).toISOString() : '';
     const key = (e.title || '').trim().toLowerCase() + '|' + normalizedTime;
     if (!groups[key]) {
-      groups[key] = { ...e, sources: new Set((e.source || '').split(',').map(s => s.trim()).filter(Boolean)), mergedIds: [e.id] };
+      groups[key] = {
+        ...e,
+        sources: new Set(
+          (e.source || '')
+            .split(',')
+            .map((s) => s.trim())
+            .filter(Boolean)
+        ),
+        mergedIds: [e.id],
+      };
     } else {
       // Track all merged event IDs (for picks to work across sources)
       groups[key].mergedIds.push(e.id);
       // Add individual sources (split comma-separated values before deduping)
-      (e.source || '').split(',').map(s => s.trim()).filter(Boolean).forEach(s => groups[key].sources.add(s));
+      (e.source || '')
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean)
+        .forEach((s) => groups[key].sources.add(s));
       // Prefer non-empty values for other fields
       if (!groups[key].url && e.url) groups[key].url = e.url;
       if (!groups[key].location && e.location) groups[key].location = e.location;
@@ -1085,40 +1300,44 @@ function dedupeEvents(events) {
   // Known aggregators sort to the end; among non-aggregators, a source whose name
   // appears in the event location is promoted to the front.
   // Filter mergedIds to only include numeric IDs (exclude synthetic enrichment IDs)
-  let result = Object.values(groups).map(e => {
-    const sourcesArr = Array.from(e.sources).sort((a, b) => {
-      var aAgg = AGGREGATOR_SOURCES.has(a) ? 1 : 0;
-      var bAgg = AGGREGATOR_SOURCES.has(b) ? 1 : 0;
-      if (aAgg !== bAgg) return aAgg - bAgg;
-      return a.localeCompare(b);
-    });
-    if (e.location) {
-      // Among non-aggregators, promote a source whose name appears in the location
-      const authIdx = sourcesArr.findIndex(s => !AGGREGATOR_SOURCES.has(s) && sourceMatchesLocation(s, e.location));
-      if (authIdx > 0) {
-        const [auth] = sourcesArr.splice(authIdx, 1);
-        sourcesArr.unshift(auth);
+  let result = Object.values(groups)
+    .map((e) => {
+      const sourcesArr = Array.from(e.sources).sort((a, b) => {
+        var aAgg = AGGREGATOR_SOURCES.has(a) ? 1 : 0;
+        var bAgg = AGGREGATOR_SOURCES.has(b) ? 1 : 0;
+        if (aAgg !== bAgg) return aAgg - bAgg;
+        return a.localeCompare(b);
+      });
+      if (e.location) {
+        // Among non-aggregators, promote a source whose name appears in the location
+        const authIdx = sourcesArr.findIndex(
+          (s) => !AGGREGATOR_SOURCES.has(s) && sourceMatchesLocation(s, e.location)
+        );
+        if (authIdx > 0) {
+          const [auth] = sourcesArr.splice(authIdx, 1);
+          sourcesArr.unshift(auth);
+        }
       }
-    }
-    return {
-      ...e,
-      source: sourcesArr.join(', '),
-      mergedIds: e.mergedIds.filter(id => typeof id === 'number' || /^\d+$/.test(id))
-    };
-  }).sort((a, b) => {
-    const timeCmp = (a.start_time || '').localeCompare(b.start_time || '');
-    if (timeCmp !== 0) return timeCmp;
-    // Within same timeslot, group clustered events together by cluster_id, then title
-    const ca = a.cluster_id != null ? a.cluster_id : null;
-    const cb = b.cluster_id != null ? b.cluster_id : null;
-    if (ca != null && cb != null) {
-      if (ca !== cb) return ca - cb;
+      return {
+        ...e,
+        source: sourcesArr.join(', '),
+        mergedIds: e.mergedIds.filter((id) => typeof id === 'number' || /^\d+$/.test(id)),
+      };
+    })
+    .sort((a, b) => {
+      const timeCmp = (a.start_time || '').localeCompare(b.start_time || '');
+      if (timeCmp !== 0) return timeCmp;
+      // Within same timeslot, group clustered events together by cluster_id, then title
+      const ca = a.cluster_id != null ? a.cluster_id : null;
+      const cb = b.cluster_id != null ? b.cluster_id : null;
+      if (ca != null && cb != null) {
+        if (ca !== cb) return ca - cb;
+        return (a.title || '').localeCompare(b.title || '');
+      }
+      if (ca != null) return -1;
+      if (cb != null) return 1;
       return (a.title || '').localeCompare(b.title || '');
-    }
-    if (ca != null) return -1;
-    if (cb != null) return 1;
-    return (a.title || '').localeCompare(b.title || '');
-  });
+    });
 
   // Collapse long-running events (exhibitions, recurring services)
   result = collapseLongRunningEvents(result);
@@ -1148,20 +1367,29 @@ function collapseLongRunningEvents(events) {
   // and recomputed (~300ms spike). See issue #77.
   var firstId = events[0] && events[0].id;
   var lastId = events[events.length - 1] && events[events.length - 1].id;
-  if (_collapseCache &&
-      events.length === _collapseLastLen &&
-      firstId === _collapseLastFirstId &&
-      lastId === _collapseLastLastId) {
+  if (
+    _collapseCache &&
+    events.length === _collapseLastLen &&
+    firstId === _collapseLastFirstId &&
+    lastId === _collapseLastLastId
+  ) {
     if (!window._pipelineLog) window._pipelineLog = [];
-    window._pipelineLog.push('collapseLong run#' + _collapseRun + ': ' + (performance.now() - _t0).toFixed(1) + 'ms (cache HIT), ' + events.length + ' events');
+    window._pipelineLog.push(
+      'collapseLong run#' +
+        _collapseRun +
+        ': ' +
+        (performance.now() - _t0).toFixed(1) +
+        'ms (cache HIT), ' +
+        events.length +
+        ' events'
+    );
     return _collapseCache;
   }
   _collapseLastLen = events.length;
   _collapseLastFirstId = firstId;
   _collapseLastLastId = lastId;
 
-  const MIN_OCCURRENCES = 5;  // Need at least this many to consider "long-running"
-  const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+  const MIN_OCCURRENCES = 5; // Need at least this many to consider "long-running"
 
   // Get start of today (midnight local)
   const now = new Date();
@@ -1181,8 +1409,12 @@ function collapseLongRunningEvents(events) {
   function getTimeOfDay(dateStr) {
     if (_todCache[dateStr]) return _todCache[dateStr];
     const d = new Date(dateStr);
-    const h = String(parseInt(d.toLocaleString('en-US', { hour: 'numeric', hour12: false, timeZone: tz }))).padStart(2, '0');
-    const m = String(parseInt(d.toLocaleString('en-US', { minute: 'numeric', timeZone: tz }))).padStart(2, '0');
+    const h = String(
+      parseInt(d.toLocaleString('en-US', { hour: 'numeric', hour12: false, timeZone: tz }))
+    ).padStart(2, '0');
+    const m = String(
+      parseInt(d.toLocaleString('en-US', { minute: 'numeric', timeZone: tz }))
+    ).padStart(2, '0');
     var result = h + ':' + m;
     _todCache[dateStr] = result;
     return result;
@@ -1190,9 +1422,14 @@ function collapseLongRunningEvents(events) {
 
   // Group by title + location + time-of-day to identify long-running events
   const groups = {};
-  events.forEach(e => {
+  events.forEach((e) => {
     const timeOfDay = getTimeOfDay(e.start_time);
-    const key = (e.title || '').trim().toLowerCase() + '|' + (e.location || '').trim().toLowerCase() + '|' + timeOfDay;
+    const key =
+      (e.title || '').trim().toLowerCase() +
+      '|' +
+      (e.location || '').trim().toLowerCase() +
+      '|' +
+      timeOfDay;
     if (!groups[key]) {
       groups[key] = [];
     }
@@ -1214,9 +1451,14 @@ function collapseLongRunningEvents(events) {
   // Build result: for long-running events, include only first occurrence per week
   const result = [];
 
-  events.forEach(e => {
+  events.forEach((e) => {
     const timeOfDay = getTimeOfDay(e.start_time);
-    const key = (e.title || '').trim().toLowerCase() + '|' + (e.location || '').trim().toLowerCase() + '|' + timeOfDay;
+    const key =
+      (e.title || '').trim().toLowerCase() +
+      '|' +
+      (e.location || '').trim().toLowerCase() +
+      '|' +
+      timeOfDay;
 
     if (longRunningKeys.has(key)) {
       const weekNum = getWeekFromToday(e.start_time);
@@ -1235,24 +1477,32 @@ function collapseLongRunningEvents(events) {
 
   _collapseCache = result.sort((a, b) => (a.start_time || '').localeCompare(b.start_time || ''));
   if (!window._pipelineLog) window._pipelineLog = [];
-  window._pipelineLog.push('collapseLong run#' + _collapseRun + ': ' + (performance.now() - _t0).toFixed(1) + 'ms (cache MISS, computed), ' + events.length + ' events');
+  window._pipelineLog.push(
+    'collapseLong run#' +
+      _collapseRun +
+      ': ' +
+      (performance.now() - _t0).toFixed(1) +
+      'ms (cache MISS, computed), ' +
+      events.length +
+      ' events'
+  );
   return _collapseCache;
 }
 
 function sortSourcesForDisplay(events) {
   if (!events) return [];
-  return events.map(function(e) {
+  return events.map(function (e) {
     if (!e.source) return e;
     var sourcesArr = uniqueSourceNames(e.source);
     if (sourcesArr.length <= 1) return e;
-    sourcesArr.sort(function(a, b) {
+    sourcesArr.sort(function (a, b) {
       var aAgg = AGGREGATOR_SOURCES.has(a) ? 1 : 0;
       var bAgg = AGGREGATOR_SOURCES.has(b) ? 1 : 0;
       if (aAgg !== bAgg) return aAgg - bAgg;
       return a.localeCompare(b);
     });
     if (e.location) {
-      var authIdx = sourcesArr.findIndex(function(s) {
+      var authIdx = sourcesArr.findIndex(function (s) {
         return !AGGREGATOR_SOURCES.has(s) && sourceMatchesLocation(s, e.location);
       });
       if (authIdx > 0) {
@@ -1271,7 +1521,6 @@ function sortSourcesForDisplay(events) {
 // different-content input.
 function clearDedupeCache() {
   _dedupedEventsCache = null;
-  _dedupedEventsLastInput = null;
   _dedupedEventsLastLen = 0;
   _dedupedEventsLastFirst = null;
   _dedupedEventsLastLast = null;
@@ -1284,7 +1533,11 @@ function clearDedupeCache() {
   // inner call inside dedupeEvents hits that cache (keyed len + endpoint
   // ids) rather than _collapseCache directly. Without this, same-shaped but
   // different-content inputs falsely hit across clearDedupeCache() calls.
-  if (typeof window !== 'undefined' && window.__ccMemoClear && window.__ccMemoClear.collapseLongRunningEvents) {
+  if (
+    typeof window !== 'undefined' &&
+    window.__ccMemoClear &&
+    window.__ccMemoClear.collapseLongRunningEvents
+  ) {
     window.__ccMemoClear.collapseLongRunningEvents();
   }
 }
@@ -1295,17 +1548,7 @@ function isEventPicked(mergedIds, picks) {
   if (!mergedIds) return false;
   // mergedIds can be an array (from dedupe) or a single ID
   const ids = Array.isArray(mergedIds) ? mergedIds : [mergedIds];
-  return picks.some(p => ids.some(id => p.event_id == id));
-}
-
-// Stamp each event with _picked boolean so List items change when picks change
-function stampPicked(events, picks) {
-  if (!events) return events;
-  return events.map(function(e) {
-    var picked = isEventPicked(e.mergedIds || e.id, picks);
-    if (e._picked === picked) return e;
-    return Object.assign({}, e, { _picked: picked });
-  });
+  return picks.some((p) => ids.some((id) => p.event_id == id));
 }
 
 // Build Google Calendar URL for an event
@@ -1317,7 +1560,10 @@ function buildGoogleCalendarUrl(event) {
   function formatGoogleDate(isoString) {
     if (!isoString) return '';
     const d = new Date(isoString);
-    return d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+    return d
+      .toISOString()
+      .replace(/[-:]/g, '')
+      .replace(/\.\d{3}/, '');
   }
 
   const startDate = formatGoogleDate(event.start_time);
@@ -1328,7 +1574,7 @@ function buildGoogleCalendarUrl(event) {
     text: event.title || '',
     dates: startDate + '/' + endDate,
     location: event.location || '',
-    details: event.description || ''
+    details: event.description || '',
   });
 
   if (event.rrule) {
@@ -1343,7 +1589,10 @@ function buildGoogleCalendarUrl(event) {
 function formatICSDate(isoString) {
   if (!isoString) return '';
   const d = new Date(isoString);
-  return d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  return d
+    .toISOString()
+    .replace(/[-:]/g, '')
+    .replace(/\.\d{3}/, '');
 }
 
 // Escape text for ICS format
@@ -1369,7 +1618,7 @@ function downloadEventICS(event) {
     'BEGIN:VEVENT',
     `UID:event-${event.id}@community-calendar`,
     `DTSTAMP:${formatICSDate(new Date().toISOString())}`,
-    `DTSTART:${formatICSDate(event.start_time)}`
+    `DTSTART:${formatICSDate(event.start_time)}`,
   ];
 
   if (event.end_time) {
@@ -1423,21 +1672,21 @@ function buildRRule(frequency, selectedDays, ordinal, monthDay, until) {
 
   // Map day codes to rrule weekday constants
   const dayMap = {
-    'SU': rrule.RRule.SU,
-    'MO': rrule.RRule.MO,
-    'TU': rrule.RRule.TU,
-    'WE': rrule.RRule.WE,
-    'TH': rrule.RRule.TH,
-    'FR': rrule.RRule.FR,
-    'SA': rrule.RRule.SA
+    SU: rrule.RRule.SU,
+    MO: rrule.RRule.MO,
+    TU: rrule.RRule.TU,
+    WE: rrule.RRule.WE,
+    TH: rrule.RRule.TH,
+    FR: rrule.RRule.FR,
+    SA: rrule.RRule.SA,
   };
 
   const options = {
-    freq: frequency === 'WEEKLY' ? rrule.RRule.WEEKLY : rrule.RRule.MONTHLY
+    freq: frequency === 'WEEKLY' ? rrule.RRule.WEEKLY : rrule.RRule.MONTHLY,
   };
 
   if (frequency === 'WEEKLY' && selectedDays && selectedDays.length > 0) {
-    options.byweekday = selectedDays.map(d => dayMap[d]).filter(Boolean);
+    options.byweekday = selectedDays.map((d) => dayMap[d]).filter(Boolean);
   }
 
   if (frequency === 'MONTHLY' && monthDay && ordinal) {
@@ -1448,7 +1697,9 @@ function buildRRule(frequency, selectedDays, ordinal, monthDay, until) {
     // Parse yyyy-MM-dd or MM/dd/yyyy format and set to end of day UTC
     var parts = until.includes('-') ? until.split('-') : null;
     if (parts && parts.length === 3) {
-      options.until = new Date(Date.UTC(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]), 23, 59, 59));
+      options.until = new Date(
+        Date.UTC(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]), 23, 59, 59)
+      );
     }
   }
 
@@ -1470,19 +1721,27 @@ function parseRRule(rruleString) {
       [rrule.RRule.WEEKLY]: 'WEEKLY',
       [rrule.RRule.MONTHLY]: 'MONTHLY',
       [rrule.RRule.DAILY]: 'DAILY',
-      [rrule.RRule.YEARLY]: 'YEARLY'
+      [rrule.RRule.YEARLY]: 'YEARLY',
     };
 
     const dayCodeMap = {
-      0: 'MO', 1: 'TU', 2: 'WE', 3: 'TH', 4: 'FR', 5: 'SA', 6: 'SU'
+      0: 'MO',
+      1: 'TU',
+      2: 'WE',
+      3: 'TH',
+      4: 'FR',
+      5: 'SA',
+      6: 'SU',
     };
 
     const frequency = freqMap[rule.options.freq] || 'none';
-    const days = (rule.options.byweekday || []).map(d => {
-      // byweekday can be Weekday objects or numbers
-      const dayNum = typeof d === 'number' ? d : d.weekday;
-      return dayCodeMap[dayNum];
-    }).filter(Boolean);
+    const days = (rule.options.byweekday || [])
+      .map((d) => {
+        // byweekday can be Weekday objects or numbers
+        const dayNum = typeof d === 'number' ? d : d.weekday;
+        return dayCodeMap[dayNum];
+      })
+      .filter(Boolean);
 
     return { frequency, days };
   } catch (e) {
@@ -1499,10 +1758,10 @@ async function saveEnrichment(eventId, data) {
   }
 
   const headers = {
-    'apikey': window.SUPABASE_KEY,
-    'Authorization': 'Bearer ' + window.authSession.access_token,
+    apikey: window.SUPABASE_KEY,
+    Authorization: 'Bearer ' + window.authSession.access_token,
     'Content-Type': 'application/json',
-    'Prefer': 'resolution=merge-duplicates,return=representation'
+    Prefer: 'resolution=merge-duplicates,return=representation',
   };
 
   const payload = {
@@ -1515,14 +1774,14 @@ async function saveEnrichment(eventId, data) {
     end_time: data.end_time || null,
     categories: data.categories || null,
     notes: data.notes || null,
-    updated_at: new Date().toISOString()
+    updated_at: new Date().toISOString(),
   };
 
   const url = `${window.SUPABASE_URL}/rest/v1/event_enrichments`;
   const res = await fetch(url, {
     method: 'POST',
     headers,
-    body: JSON.stringify(payload)
+    body: JSON.stringify(payload),
   });
 
   if (res.ok) {
@@ -1546,8 +1805,8 @@ async function loadEnrichment(eventId) {
   if (!window.authSession) return null;
 
   const headers = {
-    'apikey': window.SUPABASE_KEY,
-    'Authorization': 'Bearer ' + window.authSession.access_token
+    apikey: window.SUPABASE_KEY,
+    Authorization: 'Bearer ' + window.authSession.access_token,
   };
 
   const url = `${window.SUPABASE_URL}/rest/v1/event_enrichments?event_id=eq.${eventId}&curator_id=eq.${window.authUser.id}`;
@@ -1568,8 +1827,8 @@ async function loadAllEnrichments() {
   if (!window.authSession) return [];
 
   const headers = {
-    'apikey': window.SUPABASE_KEY,
-    'Authorization': 'Bearer ' + window.authSession.access_token
+    apikey: window.SUPABASE_KEY,
+    Authorization: 'Bearer ' + window.authSession.access_token,
   };
 
   const url = `${window.SUPABASE_URL}/rest/v1/event_enrichments?curator_id=eq.${window.authUser.id}`;
@@ -1578,7 +1837,7 @@ async function loadAllEnrichments() {
   if (res.ok) {
     const data = await res.json();
     // Populate cache
-    data.forEach(e => {
+    data.forEach((e) => {
       _enrichmentsCache[e.event_id] = e;
     });
     return data;
@@ -1593,7 +1852,7 @@ function getEnrichmentFromCache(eventId) {
 
 // Toggle a day in/out of an array (for RRULE day picker)
 function toggleDay(days, day) {
-  return days.includes(day) ? days.filter(d => d !== day) : [...days, day];
+  return days.includes(day) ? days.filter((d) => d !== day) : [...days, day];
 }
 
 // Compute ordinal weekday from a date string, e.g. '2026-03-03' → { ordinal: 1, day: 'TU' }
@@ -1615,10 +1874,20 @@ function detectRecurrence() {
     if (result) {
       // If WEEKLY with no days, scan ALL arguments for a day name
       if (result.frequency === 'WEEKLY' && result.days.length === 0) {
-        var dayMap = { sunday: 'SU', monday: 'MO', tuesday: 'TU', wednesday: 'WE', thursday: 'TH', friday: 'FR', saturday: 'SA' };
+        var dayMap = {
+          sunday: 'SU',
+          monday: 'MO',
+          tuesday: 'TU',
+          wednesday: 'WE',
+          thursday: 'TH',
+          friday: 'FR',
+          saturday: 'SA',
+        };
         for (var j = 0; j < allArgs.length; j++) {
           if (allArgs[j]) {
-            var dayMatch = allArgs[j].toLowerCase().match(/\b(sunday|monday|tuesday|wednesday|thursday|friday|saturday)s?\b/);
+            var dayMatch = allArgs[j]
+              .toLowerCase()
+              .match(/\b(sunday|monday|tuesday|wednesday|thursday|friday|saturday)s?\b/);
             if (dayMatch) {
               result.days = [dayMap[dayMatch[1]]];
               break;
@@ -1637,29 +1906,79 @@ function _detectRecurrenceInText(text) {
   const lower = text.toLowerCase();
   // Match "every Monday", "on Mondays", "every Wednesday", "on Wednesdays", etc.
   // Exclude "on Monday February 16" or "on Monday, Jan 5" (specific dates, not recurrence)
-  const everyDay = lower.match(/(?:every|on)\s+(sunday|monday|tuesday|wednesday|thursday|friday|saturday)s?(?![,\s]+(?:january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sep|oct|nov|dec)\b)/);
+  const everyDay = lower.match(
+    /(?:every|on)\s+(sunday|monday|tuesday|wednesday|thursday|friday|saturday)s?(?![,\s]+(?:january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sep|oct|nov|dec)\b)/
+  );
   if (everyDay) {
-    const dayMap = { sunday: 'SU', monday: 'MO', tuesday: 'TU', wednesday: 'WE', thursday: 'TH', friday: 'FR', saturday: 'SA' };
+    const dayMap = {
+      sunday: 'SU',
+      monday: 'MO',
+      tuesday: 'TU',
+      wednesday: 'WE',
+      thursday: 'TH',
+      friday: 'FR',
+      saturday: 'SA',
+    };
     return { frequency: 'WEEKLY', days: [dayMap[everyDay[1]]] };
   }
   // Match "weekly", "every week" — also look for a day name in the same text
   if (/\bevery\s+week\b|\bweekly\b/.test(lower)) {
-    const dayMap = { sunday: 'SU', monday: 'MO', tuesday: 'TU', wednesday: 'WE', thursday: 'TH', friday: 'FR', saturday: 'SA' };
-    const dayInText = lower.match(/\b(sunday|monday|tuesday|wednesday|thursday|friday|saturday)s?\b/);
+    const dayMap = {
+      sunday: 'SU',
+      monday: 'MO',
+      tuesday: 'TU',
+      wednesday: 'WE',
+      thursday: 'TH',
+      friday: 'FR',
+      saturday: 'SA',
+    };
+    const dayInText = lower.match(
+      /\b(sunday|monday|tuesday|wednesday|thursday|friday|saturday)s?\b/
+    );
     return { frequency: 'WEEKLY', days: dayInText ? [dayMap[dayInText[1]]] : [] };
   }
   // Match "1st Tuesday", "2nd and 4th Friday", etc. — extract ordinal + day
-  const ordinalMatch = lower.match(/(\d+)(?:st|nd|rd|th)\s+(?:and\s+\d+(?:st|nd|rd|th)\s+)?(sunday|monday|tuesday|wednesday|thursday|friday|saturday)/);
+  const ordinalMatch = lower.match(
+    /(\d+)(?:st|nd|rd|th)\s+(?:and\s+\d+(?:st|nd|rd|th)\s+)?(sunday|monday|tuesday|wednesday|thursday|friday|saturday)/
+  );
   if (ordinalMatch) {
-    const dayMap = { sunday: 'SU', monday: 'MO', tuesday: 'TU', wednesday: 'WE', thursday: 'TH', friday: 'FR', saturday: 'SA' };
-    return { frequency: 'MONTHLY', days: [], ordinal: parseInt(ordinalMatch[1]), monthDay: dayMap[ordinalMatch[2]] };
+    const dayMap = {
+      sunday: 'SU',
+      monday: 'MO',
+      tuesday: 'TU',
+      wednesday: 'WE',
+      thursday: 'TH',
+      friday: 'FR',
+      saturday: 'SA',
+    };
+    return {
+      frequency: 'MONTHLY',
+      days: [],
+      ordinal: parseInt(ordinalMatch[1]),
+      monthDay: dayMap[ordinalMatch[2]],
+    };
   }
   // Match word-form ordinals: "first Wednesday", "second Tuesday", "third Friday", "fourth Monday"
   const wordOrdinalMap = { first: 1, second: 2, third: 3, fourth: 4 };
-  const wordOrdinalMatch = lower.match(/(first|second|third|fourth)\s+(sunday|monday|tuesday|wednesday|thursday|friday|saturday)/);
+  const wordOrdinalMatch = lower.match(
+    /(first|second|third|fourth)\s+(sunday|monday|tuesday|wednesday|thursday|friday|saturday)/
+  );
   if (wordOrdinalMatch) {
-    const dayMap = { sunday: 'SU', monday: 'MO', tuesday: 'TU', wednesday: 'WE', thursday: 'TH', friday: 'FR', saturday: 'SA' };
-    return { frequency: 'MONTHLY', days: [], ordinal: wordOrdinalMap[wordOrdinalMatch[1]], monthDay: dayMap[wordOrdinalMatch[2]] };
+    const dayMap = {
+      sunday: 'SU',
+      monday: 'MO',
+      tuesday: 'TU',
+      wednesday: 'WE',
+      thursday: 'TH',
+      friday: 'FR',
+      saturday: 'SA',
+    };
+    return {
+      frequency: 'MONTHLY',
+      days: [],
+      ordinal: wordOrdinalMap[wordOrdinalMatch[1]],
+      monthDay: dayMap[wordOrdinalMatch[2]],
+    };
   }
   // Match "biweekly", "monthly"
   if (/\bmonthly\b/.test(lower)) return { frequency: 'MONTHLY', days: [] };
@@ -1678,7 +1997,15 @@ function expandEnrichments(enrichments, fromDateStr, toDateStr) {
     if (tz) {
       const d = new Date(dateStr);
       const local = new Date(d.toLocaleString('en-US', { timeZone: tz }));
-      return new Date(Date.UTC(local.getFullYear(), local.getMonth(), local.getDate(), local.getHours(), local.getMinutes()));
+      return new Date(
+        Date.UTC(
+          local.getFullYear(),
+          local.getMonth(),
+          local.getDate(),
+          local.getHours(),
+          local.getMinutes()
+        )
+      );
     }
     return new Date(dateStr);
   }
@@ -1687,31 +2014,36 @@ function expandEnrichments(enrichments, fromDateStr, toDateStr) {
   const toDate = toLocalFakeUTC(toDateStr);
   const virtualEvents = [];
 
-  enrichments.forEach(enrichment => {
+  enrichments.forEach((enrichment) => {
     if (!enrichment.rrule || !enrichment.start_time || !enrichment.title) return;
 
     try {
       // Convert stored UTC time to local wall-clock, then treat as UTC for rrule.js
       // This ensures day-of-week is correct in the city's timezone
       const localParts = tz
-        ? utcToLocal(enrichment.start_time, tz)
-        : { date: enrichment.start_time.substring(0, 10), time: enrichment.start_time.substring(11, 16) };
+        ? window.utcToLocal(enrichment.start_time, tz)
+        : {
+            date: enrichment.start_time.substring(0, 10),
+            time: enrichment.start_time.substring(11, 16),
+          };
       const dtstart = new Date(localParts.date + 'T' + (localParts.time || '00:00') + ':00Z');
 
       // Build the full RRULE string with dtstart
-      const ruleStr = enrichment.rrule.startsWith('RRULE:') ? enrichment.rrule : 'RRULE:' + enrichment.rrule;
+      const ruleStr = enrichment.rrule.startsWith('RRULE:')
+        ? enrichment.rrule
+        : 'RRULE:' + enrichment.rrule;
       const rule = rrule.RRule.fromString(ruleStr);
 
       // Create new rule with dtstart set
       const ruleWithStart = new rrule.RRule({
         ...rule.origOptions,
-        dtstart: dtstart
+        dtstart: dtstart,
       });
 
       // Get occurrences within the date range
       const occurrences = ruleWithStart.between(fromDate, toDate, true);
 
-      occurrences.forEach(date => {
+      occurrences.forEach((date) => {
         // Convert local-as-UTC back to a display-friendly ISO string
         // The date from rrule.js is in fake-UTC (actually local time), use as-is for display
         const isoDate = date.toISOString();
@@ -1727,7 +2059,7 @@ function expandEnrichments(enrichments, fromDateStr, toDateStr) {
           source: 'Picks: ' + (enrichment.curator_name || 'curator'),
           city: enrichment.city || null,
           rrule: enrichment.rrule,
-          _enrichment_id: enrichment.id
+          _enrichment_id: enrichment.id,
         });
       });
     } catch (e) {
@@ -1746,29 +2078,47 @@ function getNextOccurrence(enrichments, eventId, originalStartTime) {
   if (!originalStartTime) return '';
   if (!enrichments || !Array.isArray(enrichments) || !eventId) return originalStartTime;
 
-  var enrichment = enrichments.find(function(e) { return e.event_id == eventId; });
+  var enrichment = enrichments.find(function (e) {
+    return e.event_id == eventId;
+  });
   if (!enrichment || !enrichment.rrule) return originalStartTime;
 
   try {
-    var ruleStr = enrichment.rrule.startsWith('RRULE:') ? enrichment.rrule : 'RRULE:' + enrichment.rrule;
+    var ruleStr = enrichment.rrule.startsWith('RRULE:')
+      ? enrichment.rrule
+      : 'RRULE:' + enrichment.rrule;
     var rule = rrule.RRule.fromString(ruleStr);
     // Use city timezone to convert dtstart to local wall-clock time for rrule.js
     // rrule.js works in UTC internally, so we pass local time as if it were UTC
     var tz = getCityTimezone();
     var srcTime = enrichment.start_time || originalStartTime;
-    var localParts = tz ? utcToLocal(srcTime, tz) : { date: srcTime.substring(0, 10), time: srcTime.substring(11, 16) };
+    var localParts = tz
+      ? window.utcToLocal(srcTime, tz)
+      : { date: srcTime.substring(0, 10), time: srcTime.substring(11, 16) };
     var dtstart = new Date(localParts.date + 'T' + (localParts.time || '00:00') + ':00Z');
     var ruleWithStart = new rrule.RRule({
       ...rule.origOptions,
-      dtstart: dtstart
+      dtstart: dtstart,
     });
     // Compare against "now" in the same local-as-UTC convention
-    var nowLocal = tz
-      ? new Date(new Date().toLocaleString('en-US', { timeZone: tz }))
-      : new Date();
-    var nowFake = new Date(Date.UTC(nowLocal.getFullYear(), nowLocal.getMonth(), nowLocal.getDate(), nowLocal.getHours(), nowLocal.getMinutes()));
+    var nowLocal = tz ? new Date(new Date().toLocaleString('en-US', { timeZone: tz })) : new Date();
+    var nowFake = new Date(
+      Date.UTC(
+        nowLocal.getFullYear(),
+        nowLocal.getMonth(),
+        nowLocal.getDate(),
+        nowLocal.getHours(),
+        nowLocal.getMinutes()
+      )
+    );
     var next = ruleWithStart.after(nowFake, true);
-    console.log('getNextOccurrence', { eventId: eventId, enrichmentsLen: enrichments.length, rrule: enrichment.rrule, next: next ? next.toISOString() : null, original: originalStartTime });
+    console.log('getNextOccurrence', {
+      eventId: eventId,
+      enrichmentsLen: enrichments.length,
+      rrule: enrichment.rrule,
+      next: next ? next.toISOString() : null,
+      original: originalStartTime,
+    });
     return next ? next.toISOString() : originalStartTime;
   } catch (e) {
     console.error('getNextOccurrence error', e);
@@ -1808,26 +2158,22 @@ function extractHmTimeValue(value, fallback) {
 }
 
 function validateIsoDateInput(value) {
-  return /^\d{4}-\d{2}-\d{2}$/.test(String(value || '').trim())
-    ? null
-    : 'Use YYYY-MM-DD';
+  return /^\d{4}-\d{2}-\d{2}$/.test(String(value || '').trim()) ? null : 'Use YYYY-MM-DD';
 }
 
 function validateHmTimeInput(value) {
-  return /^\d{1,2}:\d{2}$/.test(String(value || '').trim())
-    ? null
-    : 'Use HH:MM';
+  return /^\d{1,2}:\d{2}$/.test(String(value || '').trim()) ? null : 'Use HH:MM';
 }
 
 function toBigCalendarEvents(events, term, category) {
   var filtered = filterEvents(events, term, category) || [];
-  return filtered.map(function(e) {
+  return filtered.map(function (e) {
     return {
       title: e.title || '',
       start: parseLocalTime(e.start_time),
       end: parseLocalTime(e.end_time || e.start_time),
       allDay: false,
-      resource: e
+      resource: e,
     };
   });
 }
@@ -1836,17 +2182,31 @@ function toBigCalendarEvents(events, term, category) {
 if (typeof window !== 'undefined') {
   window.toggleDay = toggleDay;
   var _filterEvents = filterEvents;
-  window.filterEvents = function(events, term, category) {
+  window.filterEvents = function (events, term, category) {
     return window.xsTraceWith
-      ? window.xsTraceWith("filterEvents", function() { return _filterEvents(events, term, category); },
-          function(result) { return { term: term || '', category: category || '', resultCount: result.length }; })
+      ? window.xsTraceWith(
+          'filterEvents',
+          function () {
+            return _filterEvents(events, term, category);
+          },
+          function (result) {
+            return { term: term || '', category: category || '', resultCount: result.length };
+          }
+        )
       : _filterEvents(events, term, category);
   };
   var _buildSearchIndex = buildSearchIndex;
-  window.buildSearchIndex = function(events) {
+  window.buildSearchIndex = function (events) {
     return window.xsTraceWith
-      ? window.xsTraceWith("buildSearchIndex", function() { return _buildSearchIndex(events); },
-          function(result) { return { count: result.length }; })
+      ? window.xsTraceWith(
+          'buildSearchIndex',
+          function () {
+            return _buildSearchIndex(events);
+          },
+          function (result) {
+            return { count: result.length };
+          }
+        )
       : _buildSearchIndex(events);
   };
   window.getPagedEvents = getPagedEvents;
@@ -1868,30 +2228,41 @@ if (typeof window !== 'undefined') {
   window.saveHiddenSources = saveHiddenSources;
   window.isSourceHidden = isSourceHidden;
   var _filterHiddenSources = filterHiddenSources;
-  window.filterHiddenSources = function(events, hidden) {
+  window.filterHiddenSources = function (events, hidden) {
     return window.xsTraceWith
-      ? window.xsTraceWith("filterHiddenSources", function() { return _filterHiddenSources(events, hidden); },
-          function(result) { return { inputCount: (events || []).length, outputCount: result.length }; })
+      ? window.xsTraceWith(
+          'filterHiddenSources',
+          function () {
+            return _filterHiddenSources(events, hidden);
+          },
+          function (result) {
+            return { inputCount: (events || []).length, outputCount: result.length };
+          }
+        )
       : _filterHiddenSources(events, hidden);
   };
 
   // Seed hidden sources from localStorage for unauthenticated users
   try {
     var stored = localStorage.getItem('hidden_sources');
-    if (stored) { window._localHiddenSources = JSON.parse(stored); }
-  } catch(e) {}
+    if (stored) {
+      window._localHiddenSources = JSON.parse(stored);
+    }
+  } catch (e) {}
 
-  var _filterExternalExclusions = function(events) {
+  var _filterExternalExclusions = function (events) {
     var exc = window.externalExclusions;
     if (!exc) return events;
     if (!events) return [];
     var exSources = exc.excludedSources || [];
     var exCategories = exc.excludedCategories || [];
     var rejSet = {};
-    (exc.excludedEvents || []).forEach(function(uid) { rejSet[uid] = true; });
+    (exc.excludedEvents || []).forEach(function (uid) {
+      rejSet[uid] = true;
+    });
     var requireApproval = exc.requireApproval && exc.lastReviewed;
     var lastReviewed = exc.lastReviewed || null;
-    return events.filter(function(e) {
+    return events.filter(function (e) {
       if (e.source) {
         var parts = e.source.split(', ');
         for (var i = 0; i < parts.length; i++) {
@@ -1904,10 +2275,17 @@ if (typeof window !== 'undefined') {
       return true;
     });
   };
-  window.filterExternalExclusions = function(events) {
+  window.filterExternalExclusions = function (events) {
     return window.xsTraceWith
-      ? window.xsTraceWith("filterExternalExclusions", function() { return _filterExternalExclusions(events); },
-          function(result) { return { inputCount: (events || []).length, outputCount: result.length }; })
+      ? window.xsTraceWith(
+          'filterExternalExclusions',
+          function () {
+            return _filterExternalExclusions(events);
+          },
+          function (result) {
+            return { inputCount: (events || []).length, outputCount: result.length };
+          }
+        )
       : _filterExternalExclusions(events);
   };
   window.getSourceCounts = getSourceCounts;
@@ -1915,24 +2293,45 @@ if (typeof window !== 'undefined') {
   window.getVisibleSourceCounts = getVisibleSourceCounts;
   window.sourceCountTooltip = sourceCountTooltip;
   var _dedupeEvents = dedupeEvents;
-  window.dedupeEvents = function(events) {
+  window.dedupeEvents = function (events) {
     return window.xsTraceWith
-      ? window.xsTraceWith("dedupeEvents", function() { return _dedupeEvents(events); },
-          function(result) { return { inputCount: (events || []).length, outputCount: result.length }; })
+      ? window.xsTraceWith(
+          'dedupeEvents',
+          function () {
+            return _dedupeEvents(events);
+          },
+          function (result) {
+            return { inputCount: (events || []).length, outputCount: result.length };
+          }
+        )
       : _dedupeEvents(events);
   };
   var _collapseLongRunning = collapseLongRunningEvents;
-  window.collapseLongRunningEvents = function(events) {
+  window.collapseLongRunningEvents = function (events) {
     return window.xsTraceWith
-      ? window.xsTraceWith("collapseLongRunningEvents", function() { return _collapseLongRunning(events); },
-          function(result) { return { inputCount: (events || []).length, outputCount: result.length }; })
+      ? window.xsTraceWith(
+          'collapseLongRunningEvents',
+          function () {
+            return _collapseLongRunning(events);
+          },
+          function (result) {
+            return { inputCount: (events || []).length, outputCount: result.length };
+          }
+        )
       : _collapseLongRunning(events);
   };
   var _sortSourcesForDisplay = sortSourcesForDisplay;
-  window.sortSourcesForDisplay = function(events) {
+  window.sortSourcesForDisplay = function (events) {
     return window.xsTraceWith
-      ? window.xsTraceWith("sortSourcesForDisplay", function() { return _sortSourcesForDisplay(events); },
-          function(result) { return { count: result.length }; })
+      ? window.xsTraceWith(
+          'sortSourcesForDisplay',
+          function () {
+            return _sortSourcesForDisplay(events);
+          },
+          function (result) {
+            return { count: result.length };
+          }
+        )
       : _sortSourcesForDisplay(events);
   };
   // issue-82 ingest instrumentation (observe-only). Wraps the transform
@@ -1945,13 +2344,18 @@ if (typeof window !== 'undefined') {
   function instrumentIngest(name) {
     var orig = window[name];
     if (!orig) return;
-    window[name] = function() {
+    window[name] = function () {
       var t0 = performance.now();
-      try { performance.mark('cc:' + name + ':start'); } catch (e) {}
+      try {
+        performance.mark('cc:' + name + ':start');
+      } catch (e) {}
       var result = orig.apply(this, arguments);
       var ms = performance.now() - t0;
-      try { performance.measure('cc:' + name, 'cc:' + name + ':start'); } catch (e) {}
-      var s = window.__ccIngestStats[name] ||
+      try {
+        performance.measure('cc:' + name, 'cc:' + name + ':start');
+      } catch (e) {}
+      var s =
+        window.__ccIngestStats[name] ||
         (window.__ccIngestStats[name] = { calls: 0, totalMs: 0, rows: 0 });
       s.calls += 1;
       s.totalMs += ms;
@@ -1978,14 +2382,23 @@ if (typeof window !== 'undefined') {
   function memoizeIngest(name, extraKey) {
     var orig = window[name];
     if (!orig) return;
-    var lastKey = null, lastResult = null;
-    var stats = window.__ccMemoStats[name] = { hits: 0, misses: 0 };
-    window.__ccMemoClear[name] = function() { lastKey = null; lastResult = null; };
-    window[name] = function() {
+    var lastKey = null,
+      lastResult = null;
+    var stats = (window.__ccMemoStats[name] = { hits: 0, misses: 0 });
+    window.__ccMemoClear[name] = function () {
+      lastKey = null;
+      lastResult = null;
+    };
+    window[name] = function () {
       var key = [ccArraySig(arguments[0])];
       if (extraKey) key = key.concat(extraKey.apply(null, arguments));
-      if (lastKey !== null && key.length === lastKey.length &&
-          key.every(function(k, i) { return k === lastKey[i]; })) {
+      if (
+        lastKey !== null &&
+        key.length === lastKey.length &&
+        key.every(function (k, i) {
+          return k === lastKey[i];
+        })
+      ) {
         stats.hits += 1;
         return lastResult;
       }
@@ -1996,14 +2409,16 @@ if (typeof window !== 'undefined') {
       return result;
     };
   }
-  memoizeIngest('filterExternalExclusions',
-    function() { return [window.externalExclusions]; });
+  memoizeIngest('filterExternalExclusions', function () {
+    return [window.externalExclusions];
+  });
   memoizeIngest('sortSourcesForDisplay');
   memoizeIngest('collapseLongRunningEvents');
   // hiddenSources may be a fresh small array each evaluation, so key on
   // its content, not its reference.
-  memoizeIngest('filterHiddenSources',
-    function(events, hidden) { return [JSON.stringify(hidden || null)]; });
+  memoizeIngest('filterHiddenSources', function (events, hidden) {
+    return [JSON.stringify(hidden || null)];
+  });
   memoizeIngest('buildSearchIndex');
   // getPagedEvents is not memoized: it is cheap and its scalar arguments
   // (page index, filter term) legitimately change.
@@ -2026,28 +2441,43 @@ if (typeof window !== 'undefined') {
     return a.length + ':' + a[0].id + ':' + a[a.length - 1].id;
   }
   window.__ccRefStats = { combineCalls: 0, eventsRefChanges: 0, enrichRefChanges: 0 };
-  var _combineLastARef = null, _combineLastBRef = null;
-  var _combineLastASig = null, _combineLastBSig = null, _combineResult = null;
-  window.combineEvents = function(events, enrichments) {
+  var _combineLastARef = null,
+    _combineLastBRef = null;
+  var _combineLastASig = null,
+    _combineLastBSig = null,
+    _combineResult = null;
+  window.combineEvents = function (events, enrichments) {
     var s = window.__ccRefStats;
     s.combineCalls += 1;
-    if (events !== _combineLastARef) { s.eventsRefChanges += 1; _combineLastARef = events; }
-    if (enrichments !== _combineLastBRef) { s.enrichRefChanges += 1; _combineLastBRef = enrichments; }
-    var aSig = ccArraySig(events), bSig = ccArraySig(enrichments);
-    if (aSig === _combineLastASig && bSig === _combineLastBSig &&
-        _combineResult !== null) {
+    if (events !== _combineLastARef) {
+      s.eventsRefChanges += 1;
+      _combineLastARef = events;
+    }
+    if (enrichments !== _combineLastBRef) {
+      s.enrichRefChanges += 1;
+      _combineLastBRef = enrichments;
+    }
+    var aSig = ccArraySig(events),
+      bSig = ccArraySig(enrichments);
+    if (aSig === _combineLastASig && bSig === _combineLastBSig && _combineResult !== null) {
       return _combineResult;
     }
     _combineLastASig = aSig;
     _combineLastBSig = bSig;
-    _combineResult = (Array.isArray(events) ? events : [])
-      .concat(Array.isArray(enrichments) ? enrichments : []);
+    _combineResult = (Array.isArray(events) ? events : []).concat(
+      Array.isArray(enrichments) ? enrichments : []
+    );
     return _combineResult;
   };
 
-  ['filterExternalExclusions', 'sortSourcesForDisplay',
-   'collapseLongRunningEvents', 'filterHiddenSources', 'buildSearchIndex',
-   'getPagedEvents'].forEach(instrumentIngest);
+  [
+    'filterExternalExclusions',
+    'sortSourcesForDisplay',
+    'collapseLongRunningEvents',
+    'filterHiddenSources',
+    'buildSearchIndex',
+    'getPagedEvents',
+  ].forEach(instrumentIngest);
 
   // issue-83: single named entry points keep Main.xmlui bindings tiny. The
   // engine re-parses inline {...} expressions on every render (no parse
@@ -2055,15 +2485,20 @@ if (typeof window !== 'undefined') {
   // expression parses in microseconds. Each stage below is the
   // memoized + instrumented window.* wrapper installed above.
   var _chainFirstDone = false;
-  window.processEvents = function(combined, hidden) {
+  window.processEvents = function (combined, hidden) {
     var result = window.buildSearchIndex(
       window.filterHiddenSources(
         window.collapseLongRunningEvents(
-          window.sortSourcesForDisplay(
-            window.filterExternalExclusions(combined))), hidden));
+          window.sortSourcesForDisplay(window.filterExternalExclusions(combined))
+        ),
+        hidden
+      )
+    );
     if (!_chainFirstDone && result && result.length) {
       _chainFirstDone = true;
-      try { performance.mark('cc-chain-first-done'); } catch (e) {}
+      try {
+        performance.mark('cc-chain-first-done');
+      } catch (e) {}
     }
     return result;
   };
@@ -2071,12 +2506,19 @@ if (typeof window !== 'undefined') {
   // boot-attribution-marks: one-read summary of every cc-* mark as ms
   // since navigation start, in fired order. In-memory only — marks live
   // in the page's Performance timeline and vanish on reload.
-  window.__ccBootMarks = function() {
+  window.__ccBootMarks = function () {
     var out = {};
-    performance.getEntriesByType('mark')
-      .filter(function(m) { return m.name.indexOf('cc') === 0; })
-      .sort(function(a, b) { return a.startTime - b.startTime; })
-      .forEach(function(m) { out[m.name] = Math.round(m.startTime); });
+    performance
+      .getEntriesByType('mark')
+      .filter(function (m) {
+        return m.name.indexOf('cc') === 0;
+      })
+      .sort(function (a, b) {
+        return a.startTime - b.startTime;
+      })
+      .forEach(function (m) {
+        out[m.name] = Math.round(m.startTime);
+      });
     return out;
   };
 
@@ -2084,19 +2526,22 @@ if (typeof window !== 'undefined') {
   // (prio-90: one object, not loose bounds). Null bounds (All) return the
   // input by reference, and the memo below keeps that stable identity so
   // downstream bindings skip re-rendering while the window is unchanged.
-  memoizeIngest('filterByDateWindow',
-    function(events, windowOrStartISO, endISOOrOpts, maybeOpts) {
-      var startISO = windowOrStartISO;
-      var endISO = endISOOrOpts;
-      var opts = maybeOpts;
-      if (windowOrStartISO != null && typeof windowOrStartISO === 'object' && !Array.isArray(windowOrStartISO) &&
-          ('start' in windowOrStartISO || 'end' in windowOrStartISO)) {
-        startISO = windowOrStartISO.start;
-        endISO = windowOrStartISO.end;
-        opts = endISOOrOpts;
-      }
-      return [startISO, endISO, opts && opts.startTimeOnly ? 1 : 0, (opts && opts.timeZone) || ''];
-    });
+  memoizeIngest('filterByDateWindow', function (events, windowOrStartISO, endISOOrOpts, maybeOpts) {
+    var startISO = windowOrStartISO;
+    var endISO = endISOOrOpts;
+    var opts = maybeOpts;
+    if (
+      windowOrStartISO != null &&
+      typeof windowOrStartISO === 'object' &&
+      !Array.isArray(windowOrStartISO) &&
+      ('start' in windowOrStartISO || 'end' in windowOrStartISO)
+    ) {
+      startISO = windowOrStartISO.start;
+      endISO = windowOrStartISO.end;
+      opts = endISOOrOpts;
+    }
+    return [startISO, endISO, opts && opts.startTimeOnly ? 1 : 0, (opts && opts.timeZone) || ''];
+  });
 
   window.clearDedupeCache = clearDedupeCache;
   window.isEventPicked = isEventPicked;
@@ -2120,8 +2565,9 @@ if (typeof window !== 'undefined') {
   // wrapper itself (the file's other _-prefixed captures exist for the
   // same reason).
   var _expandEnrichmentsOrig = expandEnrichments;
-  var _expandLastKey = null, _expandResult = null;
-  window.expandEnrichments = function(enrichments, fromDateStr, toDateStr) {
+  var _expandLastKey = null,
+    _expandResult = null;
+  window.expandEnrichments = function (enrichments, fromDateStr, toDateStr) {
     // Content-signature key, not reference: the engine's per-evaluation
     // value identities defeat ref keying (see combineEvents above), and
     // the rrule expansion inside is worth skipping.
@@ -2131,9 +2577,28 @@ if (typeof window !== 'undefined') {
     // across edits. Enrichment lists are small (curator picks), so a JSON
     // signature over the expansion-relevant fields is cheap.
     var sig = Array.isArray(enrichments)
-      ? (enrichments.length + ':' +
-         (enrichments.length ? enrichments[0].id + ':' + enrichments[enrichments.length - 1].id : '') + ':' +
-         JSON.stringify(enrichments.map(function(e) { return [e.id, e.rrule, e.start_time, e.title, e.location, e.description, e.url, e.curator_name, e.city, e.end_time]; })))
+      ? enrichments.length +
+        ':' +
+        (enrichments.length
+          ? enrichments[0].id + ':' + enrichments[enrichments.length - 1].id
+          : '') +
+        ':' +
+        JSON.stringify(
+          enrichments.map(function (e) {
+            return [
+              e.id,
+              e.rrule,
+              e.start_time,
+              e.title,
+              e.location,
+              e.description,
+              e.url,
+              e.curator_name,
+              e.city,
+              e.end_time,
+            ];
+          })
+        )
       : 'na';
     var key = sig + '|' + fromDateStr + '|' + toDateStr;
     if (key === _expandLastKey && _expandResult !== null) {
@@ -2144,7 +2609,7 @@ if (typeof window !== 'undefined') {
     return _expandResult;
   };
   window.getNextOccurrence = getNextOccurrence;
-  window.formatPickDate = function(enrichments, eventId, startTime) {
+  window.formatPickDate = function (enrichments, eventId, startTime) {
     var d = getNextOccurrence(enrichments, eventId, startTime);
     var day = formatDayOfWeek(d);
     var md = formatMonthDay(d);
@@ -2156,37 +2621,46 @@ if (typeof window !== 'undefined') {
   window.toBigCalendarEvents = toBigCalendarEvents;
 
   // --- Dashboard helpers ---
-  window.filterTileEvents = function(events, category, search) {
+  window.filterTileEvents = function (events, category, search) {
     if (!events || !Array.isArray(events)) return [];
     var result = events;
     if (category) {
-      result = result.filter(function(e) { return e.category === category; });
+      result = result.filter(function (e) {
+        return e.category === category;
+      });
     }
     if (search) {
       var term = search.toLowerCase();
-      result = result.filter(function(e) {
-        return (e.title && e.title.toLowerCase().indexOf(term) >= 0) ||
-               (e.description && e.description.toLowerCase().indexOf(term) >= 0) ||
-               (e.location && e.location.toLowerCase().indexOf(term) >= 0);
+      result = result.filter(function (e) {
+        return (
+          (e.title && e.title.toLowerCase().indexOf(term) >= 0) ||
+          (e.description && e.description.toLowerCase().indexOf(term) >= 0) ||
+          (e.location && e.location.toLowerCase().indexOf(term) >= 0)
+        );
       });
     }
     return result;
   };
 
-  window.getCityList = function() {
+  window.getCityList = function () {
     return Object.keys(window._cities).sort();
   };
 
-  window.defaultDashboardTile = function(city) {
+  window.defaultDashboardTile = function (city) {
     var id = 'tile-' + Date.now();
-    return { i: id, city: city || window.cityFilter || window.getCityList()[0] || '', category: '', search: '' };
+    return {
+      i: id,
+      city: city || window.cityFilter || window.getCityList()[0] || '',
+      category: '',
+      search: '',
+    };
   };
 
-  window.defaultDashboardLayout = function(tileId) {
+  window.defaultDashboardLayout = function (tileId) {
     return { i: tileId, x: 0, y: 0, w: 6, h: 4 };
   };
 
-  window.saveDashboardConfig = function(tiles, gridLayout, supabaseUrl, supabaseKey) {
+  window.saveDashboardConfig = function (tiles, gridLayout, supabaseUrl, supabaseKey) {
     if (!window.authSession) return;
     var config = { tiles: tiles, gridLayout: gridLayout };
     fetch(supabaseUrl + '/rest/v1/user_settings?on_conflict=user_id,city', {
@@ -2195,14 +2669,14 @@ if (typeof window !== 'undefined') {
         apikey: supabaseKey,
         Authorization: 'Bearer ' + window.authSession.access_token,
         'Content-Type': 'application/json',
-        'Prefer': 'resolution=merge-duplicates'
+        Prefer: 'resolution=merge-duplicates',
       },
       body: JSON.stringify({
         user_id: window.authUser.id,
         city: '_dashboard',
         dashboard: config,
-        updated_at: new Date().toISOString()
-      })
+        updated_at: new Date().toISOString(),
+      }),
     });
   };
 }

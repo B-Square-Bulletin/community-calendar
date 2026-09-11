@@ -11,11 +11,17 @@
     "test": "vitest run",
     "test:node": "vitest run",
     "test:browser": "playwright test",
-    "bench": "node scripts/bench_collapse_long.js"
+    "bench": "node scripts/bench_collapse_long.js",
+    "lint:js": "prettier --check \"xmlui/*.js\" \"tests/js/*.js\" \"scripts/*.js\" \"*.config.js\" \"eslint.config.mjs\" && eslint .",
+    "format:js": "prettier --write \"xmlui/*.js\" \"tests/js/*.js\" \"scripts/*.js\" \"*.config.js\" \"eslint.config.mjs\" && eslint --fix ."
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.49.1",
+    "eslint": "^10.10.0",
+    "globals": "^17.12.0",
+    "prettier": "^3.9.6",
     "vitest": "^3.2.4"
   }
 }

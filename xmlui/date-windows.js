@@ -37,12 +37,20 @@
   // derived from Intl so DST transitions resolve by wall-clock.
   function tzOffsetMs(timeZone, utcMs) {
     var dtf = new Intl.DateTimeFormat('en-US', {
-      timeZone: timeZone, year: 'numeric', month: '2-digit', day: '2-digit',
-      hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+      timeZone: timeZone,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
     });
     var parts = dtf.formatToParts(new Date(utcMs));
     var v = {};
-    parts.forEach(function (p) { v[p.type] = p.value; });
+    parts.forEach(function (p) {
+      v[p.type] = p.value;
+    });
     var hour = v.hour === '24' ? '00' : v.hour;
     var asUtc = Date.UTC(+v.year, +v.month - 1, +v.day, +hour, +v.minute, +v.second);
     return asUtc - utcMs;
@@ -64,11 +72,16 @@
 
   function cityParts(nowMs, timeZone) {
     var parts = new Intl.DateTimeFormat('en-US', {
-      timeZone: timeZone, year: 'numeric', month: '2-digit', day: '2-digit',
-      weekday: 'short'
+      timeZone: timeZone,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      weekday: 'short',
     }).formatToParts(new Date(nowMs));
     var v = {};
-    parts.forEach(function (p) { v[p.type] = p.value; });
+    parts.forEach(function (p) {
+      v[p.type] = p.value;
+    });
     var wd = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 }[v.weekday];
     return { y: +v.year, mo: +v.month, d: +v.day, wd: wd };
   }
@@ -97,11 +110,17 @@
     if (typeof s !== 'string') return null;
     var m = DATE_RE.exec(s);
     if (!m) return null;
-    var y = +m[1], mo = +m[2], d = +m[3];
+    var y = +m[1],
+      mo = +m[2],
+      d = +m[3];
     if (mo < 1 || mo > 12 || d < 1 || d > 31) return null;
     // Round-trip through the calendar so 2026-02-30 is rejected.
     var roundTrip = new Date(Date.UTC(y, mo - 1, d));
-    if (roundTrip.getUTCFullYear() !== y || roundTrip.getUTCMonth() !== mo - 1 || roundTrip.getUTCDate() !== d) {
+    if (
+      roundTrip.getUTCFullYear() !== y ||
+      roundTrip.getUTCMonth() !== mo - 1 ||
+      roundTrip.getUTCDate() !== d
+    ) {
       return null;
     }
     return { y: y, mo: mo, d: d, iso: s };
@@ -145,7 +164,10 @@
       var lastMs = new Date(windowRange.end).getTime() - 1;
       if (!isFinite(lastMs)) return null;
       var day = new Intl.DateTimeFormat('en-CA', {
-        timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit'
+        timeZone: tz,
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
       }).format(new Date(lastMs));
       return formatTruncationLabel(day);
     } catch (e) {
@@ -176,7 +198,9 @@
 
     var todayParts = cityParts(nowMs, tz);
     var todayMs = midnightMs(todayParts.y, todayParts.mo, todayParts.d, tz);
-    var startMs, endMs, startTimeOnly = false;
+    var startMs,
+      endMs,
+      startTimeOnly = false;
 
     if (preset === 'today') {
       var tomorrow = addDays(todayParts.y, todayParts.mo, todayParts.d, 1);
@@ -222,9 +246,10 @@
       endMs = midnightMs(plus7.y, plus7.mo, plus7.d, tz);
     } else if (preset === 'thismonth') {
       // This-month remainder: today through the end of the month.
-      var firstNext = todayParts.mo === 12
-        ? { y: todayParts.y + 1, mo: 1, d: 1 }
-        : { y: todayParts.y, mo: todayParts.mo + 1, d: 1 };
+      var firstNext =
+        todayParts.mo === 12
+          ? { y: todayParts.y + 1, mo: 1, d: 1 }
+          : { y: todayParts.y, mo: todayParts.mo + 1, d: 1 };
       startMs = todayMs;
       endMs = midnightMs(firstNext.y, firstNext.mo, firstNext.d, tz);
     }
@@ -235,7 +260,7 @@
       start: toISO(startMs),
       end: toISO(hz.endMs),
       startTimeOnly: startTimeOnly,
-      truncated: hz.truncated
+      truncated: hz.truncated,
     };
   }
 
@@ -301,13 +326,16 @@
       end: toISO(hz.endMs),
       startTimeOnly: false,
       truncated: hz.truncated,
-      clamped: clamped
+      clamped: clamped,
     };
   }
 
   function isoDateInTz(utcMs, timeZone) {
     var parts = new Intl.DateTimeFormat('en-CA', {
-      timeZone: timeZone, year: 'numeric', month: '2-digit', day: '2-digit'
+      timeZone: timeZone,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
     }).format(new Date(utcMs));
     return parts; // en-CA yields yyyy-MM-dd
   }
@@ -374,9 +402,7 @@
 
     if (q.date != null) {
       if (isKnownPreset(q.date)) {
-        var windowRange = q.date === 'all'
-          ? emptyWindow('all')
-          : resolveDatePreset(q.date, opts);
+        var windowRange = q.date === 'all' ? emptyWindow('all') : resolveDatePreset(q.date, opts);
         windowRange.rewritten = false;
         return windowRange;
       }
@@ -400,7 +426,7 @@
       return withToFields(resolveCustomRange(from, to, opts), tz);
     },
     encodeDateParams: encodeDateParams,
-    decodeDateParams: decodeDateParams
+    decodeDateParams: decodeDateParams,
   };
 
   if (typeof window !== 'undefined') {

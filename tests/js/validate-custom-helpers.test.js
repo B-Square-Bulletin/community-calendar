@@ -18,8 +18,12 @@ const RealDate = Date;
 const NOW = new RealDate('2026-02-11T12:00:00.000Z').getTime();
 function stubDate() {
   global.Date = class extends RealDate {
-    constructor(...a) { super(...(a.length ? a : [NOW])); }
-    static now() { return NOW; }
+    constructor(...a) {
+      super(...(a.length ? a : [NOW]));
+    }
+    static now() {
+      return NOW;
+    }
   };
 }
 function restoreDate() {
@@ -33,8 +37,14 @@ describe('custom window', () => {
   afterEach(restoreDate);
   it('custom basic window', () => {
     const w = window.dateWindowForCustom('2026-02-12', '2026-02-14');
-    expect([w.start, w.end, w.from, w.to, w.truncated, w.clamped]).toEqual(
-      ['2026-02-12T08:00:00.000Z', '2026-02-15T08:00:00.000Z', '2026-02-12', '2026-02-14', false, false]);
+    expect([w.start, w.end, w.from, w.to, w.truncated, w.clamped]).toEqual([
+      '2026-02-12T08:00:00.000Z',
+      '2026-02-15T08:00:00.000Z',
+      '2026-02-12',
+      '2026-02-14',
+      false,
+      false,
+    ]);
   });
   it('custom partial input ignored', () => {
     expect(window.dateWindowForCustom('2026-02-12', null)).toEqual(null);
@@ -47,13 +57,15 @@ describe('custom window', () => {
   });
   it('custom inverted range coerces to single day', () => {
     const w = window.dateWindowForCustom('2026-02-14', '2026-02-12');
-    expect([w.start, w.end, w.to]).toEqual(
-      ['2026-02-14T08:00:00.000Z', '2026-02-15T08:00:00.000Z', '2026-02-14']);
+    expect([w.start, w.end, w.to]).toEqual([
+      '2026-02-14T08:00:00.000Z',
+      '2026-02-15T08:00:00.000Z',
+      '2026-02-14',
+    ]);
   });
   it('custom past start clamps to today', () => {
     const w = window.dateWindowForCustom('2026-01-01', '2026-02-20');
-    expect([w.start, w.from, w.clamped]).toEqual(
-      ['2026-02-11T08:00:00.000Z', '2026-02-11', true]);
+    expect([w.start, w.from, w.clamped]).toEqual(['2026-02-11T08:00:00.000Z', '2026-02-11', true]);
   });
   it('custom range caps at 180 days', () => {
     const prevGetToDate = window.getToDate;
@@ -89,8 +101,12 @@ describe('picker seams', () => {
   it('canonical custom link carries from/to only with siblings preserved', () => {
     window.syncCustomParams('2026-02-12', '2026-02-14');
     const u = new URL(window.location);
-    expect([u.searchParams.get('from'), u.searchParams.get('to'), u.searchParams.get('date'),
-      u.searchParams.get('city'), u.searchParams.get('search')]).toEqual(
-      ['2026-02-12', '2026-02-14', null, 'davis', 'x']);
+    expect([
+      u.searchParams.get('from'),
+      u.searchParams.get('to'),
+      u.searchParams.get('date'),
+      u.searchParams.get('city'),
+      u.searchParams.get('search'),
+    ]).toEqual(['2026-02-12', '2026-02-14', null, 'davis', 'x']);
   });
 });

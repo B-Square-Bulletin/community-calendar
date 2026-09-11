@@ -19,10 +19,14 @@ window._xsLogs = [];
   // DOMContentLoaded now fires long before the engine scripts load, so
   // register (or backfill) the mark immediately.
   if (document.readyState !== 'loading') {
-    try { performance.mark('cc-dom-ready'); } catch (e) {}
+    try {
+      performance.mark('cc-dom-ready');
+    } catch (e) {}
   } else {
     document.addEventListener('DOMContentLoaded', function () {
-      try { performance.mark('cc-dom-ready'); } catch (e) {}
+      try {
+        performance.mark('cc-dom-ready');
+      } catch (e) {}
     });
   }
 
@@ -30,8 +34,24 @@ window._xsLogs = [];
     if (window.__ccBootFetches) return window.__ccBootFetches;
     // Defensive fallback if index.html didn't start the prefetches.
     var bust = '?_=' + Date.now();
-    var j = function (u) { return fetch(u).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }); };
-    var t = function (u) { return fetch(u).then(function (r) { return r.ok ? r.text() : ''; }).catch(function () { return ''; }); };
+    var j = function (u) {
+      return fetch(u)
+        .then(function (r) {
+          return r.ok ? r.json() : null;
+        })
+        .catch(function () {
+          return null;
+        });
+    };
+    var t = function (u) {
+      return fetch(u)
+        .then(function (r) {
+          return r.ok ? r.text() : '';
+        })
+        .catch(function () {
+          return '';
+        });
+    };
     return {
       localConfig: isLocalConfigHost ? t('config.local.js' + bust) : Promise.resolve(''),
       config: j('config.json' + bust),
@@ -56,10 +76,14 @@ window._xsLogs = [];
     document.head.appendChild(link);
     // The bundle bracket now spans download+eval (DOM-inserted scripts
     // have no between-download execution point to mark).
-    try { performance.mark('cc-bundle-eval-start'); } catch (e) {}
+    try {
+      performance.mark('cc-bundle-eval-start');
+    } catch (e) {}
     var bundle = script('xmlui/xmlui-standalone.umd.js?v=' + v);
     bundle.addEventListener('load', function () {
-      try { performance.mark('cc-bundle-eval-end'); } catch (e) {}
+      try {
+        performance.mark('cc-bundle-eval-end');
+      } catch (e) {}
     });
     script('xmlui/xmlui-masonry.js?v=' + v);
     script('xmlui/xmlui-grid-layout.js?v=' + v);
@@ -73,25 +97,35 @@ window._xsLogs = [];
       // can never fire and double-start. (Upstream ask: a readyState
       // fallback in index-standalone.ts.)
       if (window.xmlui && typeof window.xmlui.startApp === 'function') {
-        try { performance.mark('cc-xmlui-start'); } catch (e) {}
+        try {
+          performance.mark('cc-xmlui-start');
+        } catch (e) {}
         window.xmlui.startApp(undefined, undefined, window.xmlui.standalone);
       }
     });
   }
 
   var F = ccFetches();
-  Promise.all([F.localConfig, F.config, F.version, F.categories, F.cities, F.sourcePriority])
-    .then(function (r) {
-      var localCfg = r[0], cfg = r[1], fetchedVersion = (r[2] || '').trim();
+  Promise.all([F.localConfig, F.config, F.version, F.categories, F.cities, F.sourcePriority]).then(
+    function (r) {
+      var localCfg = r[0],
+        cfg = r[1],
+        fetchedVersion = (r[2] || '').trim();
       // config.local.js applies first, then config.json fills gaps —
       // same precedence as the old sync path.
-      if (localCfg) { try { new Function(localCfg)(); } catch (e) {} }
+      if (localCfg) {
+        try {
+          new Function(localCfg)();
+        } catch (e) {}
+      }
       if (!window.SUPABASE_URL || !window.SUPABASE_KEY) {
         var globals = (cfg && cfg.appGlobals) || {};
         window.SUPABASE_URL = window.SUPABASE_URL || globals.supabaseUrl;
         window.SUPABASE_KEY = window.SUPABASE_KEY || globals.supabasePublishableKey;
       }
-      try { performance.mark('cc-config-loaded'); } catch (e) {}
+      try {
+        performance.mark('cc-config-loaded');
+      } catch (e) {}
 
       var baseVersion = isLocalDevHost ? 'local-dev' : 'missing-version';
       if (fetchedVersion) baseVersion = fetchedVersion;
@@ -116,7 +150,9 @@ window._xsLogs = [];
       window._categories = r[3];
       window._cities = r[4];
       window._sourcePriority = r[5];
-      try { performance.mark('cc-static-json-loaded'); } catch (e) {}
+      try {
+        performance.mark('cc-static-json-loaded');
+      } catch (e) {}
 
       bootShell();
       // Gate injection on DCL so the engine's own DOMContentLoaded
@@ -129,614 +165,692 @@ window._xsLogs = [];
       } else {
         injectScripts(window.APP_VERSION);
       }
-    });
+    }
+  );
 
   function bootShell() {
-
-  // Host-based theme selection from first paint: the engine reads the
-  // theme id from <App defaultTheme> on first render, so resolve it
-  // here before anything renders (and before the events prefetch).
-  try {
-    if (typeof window.getThemeIdForHost === 'function') {
-      window.ccThemeId = window.getThemeIdForHost(window.location.hostname);
-    } else {
+    // Host-based theme selection from first paint: the engine reads the
+    // theme id from <App defaultTheme> on first render, so resolve it
+    // here before anything renders (and before the events prefetch).
+    try {
+      if (typeof window.getThemeIdForHost === 'function') {
+        window.ccThemeId = window.getThemeIdForHost(window.location.hostname);
+      } else {
+        window.ccThemeId = 'community-calendar';
+      }
+    } catch (e) {
       window.ccThemeId = 'community-calendar';
     }
-  } catch (e) {
-    window.ccThemeId = 'community-calendar';
-  }
 
-  var params = new URLSearchParams(window.location.search);
-  var cityParam = params.get('city');
-  window.embed = params.get('embed') === 'true';
+    var params = new URLSearchParams(window.location.search);
+    var cityParam = params.get('city');
+    window.embed = params.get('embed') === 'true';
 
-  // config.json ships xsVerbose:false (the engine's trace serialization is
-  // too slow for production). ?trace=true arms the engine's per-session
-  // localStorage override before it boots, so the Inspector and trace
-  // capture still work anywhere; ?trace=false disarms it.
-  if (params.get('trace') === 'true') {
-    try { localStorage.setItem('xmlui:xsVerbose', 'true'); } catch (e) {}
-  } else if (params.get('trace') === 'false') {
-    try { localStorage.removeItem('xmlui:xsVerbose'); } catch (e) {}
-  }
-
-  window.externalExclusions = null;
-  var excludeUrl = params.get('exclude');
-  if (excludeUrl) {
-    try {
-      var exhr = new XMLHttpRequest();
-      exhr.open('GET', excludeUrl, false);
-      if (excludeUrl.indexOf('api.github.com') !== -1) {
-        exhr.setRequestHeader('Accept', 'application/vnd.github.v3+json');
-      }
-      exhr.send();
-      if (exhr.status === 200) {
-        var resp = JSON.parse(exhr.responseText);
-        if (resp.content && resp.encoding === 'base64') {
-          window.externalExclusions = JSON.parse(decodeURIComponent(escape(atob(resp.content))));
-        } else {
-          window.externalExclusions = resp;
-        }
-      }
-    } catch (e) {}
-  }
-
-  window.hasLayoutModeParam = params.has('mode');
-  window.layoutMode = params.get('mode') || 'list';
-  window.setLayoutMode = function (val) {
-    window.layoutMode = val;
-    var url = new URL(window.location);
-    if (val === 'multicol' || val === 'dashboard') {
-      url.searchParams.set('mode', val);
-    } else {
-      url.searchParams.delete('mode');
-    }
-    window.history.replaceState({}, '', url);
-  };
-
-  window.hasImagesParam = params.has('images');
-  window.showListImages = params.get('images') !== 'preview';
-  window.setShowListImages = function (val) {
-    window.showListImages = val !== 'preview';
-    var url = new URL(window.location);
-    if (val === 'preview') {
-      url.searchParams.set('images', 'preview');
-    } else {
-      url.searchParams.delete('images');
-    }
-    window.history.replaceState({}, '', url);
-  };
-
-  window.initialCategory = params.get('category') || '';
-  window.initialSearch = params.get('search') || '';
-
-  // ?cards=N overrides the browse page size (default 50, clamped 1..500).
-  // Boot-time constant, same pattern as initialSearch. Search-mode paging
-  // stays at 10 regardless; pageSizeFor is the one place that rule lives.
-  var cardsParam = parseInt(params.get('cards'), 10);
-  window.cardPageSize = cardsParam >= 1 && cardsParam <= 500 ? cardsParam : 50;
-  window.pageSizeFor = function (term) {
-    return term ? 10 : window.cardPageSize;
-  };
-
-  var cityNameOverrides = {
-    santarosa: 'Santa Rosa',
-    raleighdurham: 'Raleigh-Durham',
-  };
-
-  window.toDisplayName = function (slug) {
-    if (!slug) return '';
-    var name = cityNameOverrides[slug] || slug.charAt(0).toUpperCase() + slug.slice(1);
-    return name + ' Now';
-  };
-
-  window.cityFilter = null;
-  window.cityName = '';
-  (function () {
-    // Single-city boot default (#85): a single-entry City list resolves
-    // the missing ?city= to that City before the events-prefetch block
-    // below, and the URL becomes canonical via replaceState (city key
-    // only — sibling params and hash survive, no back-button entry).
-    // Null/unloaded lists are guarded (picker as today, no crash).
-    var keys = null;
-    try {
-      if (Array.isArray(window._cities)) {
-        keys = window._cities;
-      } else if (window._cities && typeof window._cities === 'object') {
-        keys = Object.keys(window._cities);
-      }
-    } catch (e) {
-      keys = null;
-    }
-    var resolved = cityParam || null;
-    try {
-      if (typeof window.resolveCity === 'function') {
-        resolved = window.resolveCity(cityParam, keys);
-      }
-    } catch (e) {
-      resolved = cityParam || null;
-    }
-    window.cityFilter = resolved || null;
-    window.cityName = window.toDisplayName(window.cityFilter);
-    if (window.cityFilter) {
-      document.title = window.cityName + ' Community Calendar';
-    }
-    if (cityParam == null && window.cityFilter) {
+    // config.json ships xsVerbose:false (the engine's trace serialization is
+    // too slow for production). ?trace=true arms the engine's per-session
+    // localStorage override before it boots, so the Inspector and trace
+    // capture still work anywhere; ?trace=false disarms it.
+    if (params.get('trace') === 'true') {
       try {
-        var url = new URL(window.location);
-        url.searchParams.set('city', window.cityFilter);
-        window.history.replaceState({}, '', url.toString());
+        localStorage.setItem('xmlui:xsVerbose', 'true');
+      } catch (e) {}
+    } else if (params.get('trace') === 'false') {
+      try {
+        localStorage.removeItem('xmlui:xsVerbose');
       } catch (e) {}
     }
-  })();
 
-  window.selectCity = function (slug) {
-    var url = new URL(window.location);
-    url.searchParams.set('city', slug);
-    window.history.pushState({}, '', url.toString());
-    window.cityFilter = slug;
-    window.cityName = window.toDisplayName(slug);
-    document.title = window.cityName + ' Community Calendar';
-  };
-
-  // Prefetch horizon (#108): the committed windows truncate here, so it is
-  // initialized before the date-tab seed below — a reloaded overrun link
-  // restores its truncation label on first paint, not just on later taps.
-  (function () {
-    var now = new Date();
-    var oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
-    var threeMonthsLater = new Date(now.getTime() + 90 * 24 * 60 * 60 * 1000);
-    window.fromDate = oneHourAgo.toISOString();
-    window.toDate = threeMonthsLater.toISOString();
-    console.log('Date range initialized:', window.fromDate, 'to', window.toDate);
-  })();
-
-  // Date-tab boot seed (#105 day presets + #106 intraday tabs + #107 Custom):
-  // first paint already reflects a shared date link, alongside the existing
-  // search/category seeds above. Both the from/to pair and the preset-only
-  // path resolve through the single decodeDateParams codec (prio-70 dedup:
-  // the preset-only branch used to call resolveDatePreset directly), and
-  // both label the horizon overrun through the engine's shared
-  // truncationLabelForWindow formatter (date-windows.js loads before this
-  // file per index.html, so it is always present; the typeof guard degrades
-  // to no label rather than a failed seed). A complete valid from/to pair
-  // wins over the preset key and restores the exact Custom window; partial
-  // or invalid pairs and unknown keys fall back to All so bad links never
-  // strand the visitor on an empty. A clamped past start rewrites the URL
-  // for stable reload. ?date= keys are lowercase exact matches per the #103
-  // URL contract (unknown = All); the retired pre-rename `month` key is
-  // unknown and falls back to All.
-  window.initialDatePreset = 'all';
-  window.initialDateStart = null;
-  window.initialDateEnd = null;
-  window.initialDateTruncationLabel = null;
-  (function () {
-    // Single source of truth for preset keys (prio-80): the boot-honored set
-    // derives from the engine's canonical window.DATE_PRESETS (minus 'all',
-    // which is the default when no key is present). Literals below are
-    // fallbacks for boot orders where the engine is absent. Unknown keys
-    // (including the retired `month`) fall back to All per the #103 URL
-    // contract — there is no alias map.
-    var HONORED = {};
-    var canonical = window.DATE_PRESETS || ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth'];
-    canonical.forEach(function (k) { if (k !== 'all') HONORED[k] = 1; });
-    var tz = (window._cities && window.cityFilter && window._cities[window.cityFilter] &&
-      window._cities[window.cityFilter].timezone) || 'UTC';
-    var key = null, from = null, to = null;
-    try {
-      key = params.get('date');
-      from = params.get('from');
-      to = params.get('to');
-    } catch (e) {}
-    if ((from != null || to != null) && typeof window.decodeDateParams === 'function') {
+    window.externalExclusions = null;
+    var excludeUrl = params.get('exclude');
+    if (excludeUrl) {
       try {
-        var decoded = window.decodeDateParams({ date: key, from: from, to: to }, { timeZone: tz, horizonEnd: window.toDate });
-        if (!decoded || !decoded.start) return;
-        if (decoded.preset !== 'custom') {
-          // Present-but-invalid/partial pair is ignored by the codec, so
-          // the accompanying ?date= preset (if any) still applies here.
-          window.initialDatePreset = decoded.preset;
+        var exhr = new XMLHttpRequest();
+        exhr.open('GET', excludeUrl, false);
+        if (excludeUrl.indexOf('api.github.com') !== -1) {
+          exhr.setRequestHeader('Accept', 'application/vnd.github.v3+json');
+        }
+        exhr.send();
+        if (exhr.status === 200) {
+          var resp = JSON.parse(exhr.responseText);
+          if (resp.content && resp.encoding === 'base64') {
+            window.externalExclusions = JSON.parse(decodeURIComponent(escape(atob(resp.content))));
+          } else {
+            window.externalExclusions = resp;
+          }
+        }
+      } catch (e) {}
+    }
+
+    window.hasLayoutModeParam = params.has('mode');
+    window.layoutMode = params.get('mode') || 'list';
+    window.setLayoutMode = function (val) {
+      window.layoutMode = val;
+      var url = new URL(window.location);
+      if (val === 'multicol' || val === 'dashboard') {
+        url.searchParams.set('mode', val);
+      } else {
+        url.searchParams.delete('mode');
+      }
+      window.history.replaceState({}, '', url);
+    };
+
+    window.hasImagesParam = params.has('images');
+    window.showListImages = params.get('images') !== 'preview';
+    window.setShowListImages = function (val) {
+      window.showListImages = val !== 'preview';
+      var url = new URL(window.location);
+      if (val === 'preview') {
+        url.searchParams.set('images', 'preview');
+      } else {
+        url.searchParams.delete('images');
+      }
+      window.history.replaceState({}, '', url);
+    };
+
+    window.initialCategory = params.get('category') || '';
+    window.initialSearch = params.get('search') || '';
+
+    // ?cards=N overrides the browse page size (default 50, clamped 1..500).
+    // Boot-time constant, same pattern as initialSearch. Search-mode paging
+    // stays at 10 regardless; pageSizeFor is the one place that rule lives.
+    var cardsParam = parseInt(params.get('cards'), 10);
+    window.cardPageSize = cardsParam >= 1 && cardsParam <= 500 ? cardsParam : 50;
+    window.pageSizeFor = function (term) {
+      return term ? 10 : window.cardPageSize;
+    };
+
+    var cityNameOverrides = {
+      santarosa: 'Santa Rosa',
+      raleighdurham: 'Raleigh-Durham',
+    };
+
+    window.toDisplayName = function (slug) {
+      if (!slug) return '';
+      var name = cityNameOverrides[slug] || slug.charAt(0).toUpperCase() + slug.slice(1);
+      return name + ' Now';
+    };
+
+    window.cityFilter = null;
+    window.cityName = '';
+    (function () {
+      // Single-city boot default (#85): a single-entry City list resolves
+      // the missing ?city= to that City before the events-prefetch block
+      // below, and the URL becomes canonical via replaceState (city key
+      // only — sibling params and hash survive, no back-button entry).
+      // Null/unloaded lists are guarded (picker as today, no crash).
+      var keys = null;
+      try {
+        if (Array.isArray(window._cities)) {
+          keys = window._cities;
+        } else if (window._cities && typeof window._cities === 'object') {
+          keys = Object.keys(window._cities);
+        }
+      } catch (e) {
+        keys = null;
+      }
+      var resolved = cityParam || null;
+      try {
+        if (typeof window.resolveCity === 'function') {
+          resolved = window.resolveCity(cityParam, keys);
+        }
+      } catch (e) {
+        resolved = cityParam || null;
+      }
+      window.cityFilter = resolved || null;
+      window.cityName = window.toDisplayName(window.cityFilter);
+      if (window.cityFilter) {
+        document.title = window.cityName + ' Community Calendar';
+      }
+      if (cityParam == null && window.cityFilter) {
+        try {
+          var url = new URL(window.location);
+          url.searchParams.set('city', window.cityFilter);
+          window.history.replaceState({}, '', url.toString());
+        } catch (e) {}
+      }
+    })();
+
+    window.selectCity = function (slug) {
+      var url = new URL(window.location);
+      url.searchParams.set('city', slug);
+      window.history.pushState({}, '', url.toString());
+      window.cityFilter = slug;
+      window.cityName = window.toDisplayName(slug);
+      document.title = window.cityName + ' Community Calendar';
+    };
+
+    // Prefetch horizon (#108): the committed windows truncate here, so it is
+    // initialized before the date-tab seed below — a reloaded overrun link
+    // restores its truncation label on first paint, not just on later taps.
+    (function () {
+      var now = new Date();
+      var oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
+      var threeMonthsLater = new Date(now.getTime() + 90 * 24 * 60 * 60 * 1000);
+      window.fromDate = oneHourAgo.toISOString();
+      window.toDate = threeMonthsLater.toISOString();
+      console.log('Date range initialized:', window.fromDate, 'to', window.toDate);
+    })();
+
+    // Date-tab boot seed (#105 day presets + #106 intraday tabs + #107 Custom):
+    // first paint already reflects a shared date link, alongside the existing
+    // search/category seeds above. Both the from/to pair and the preset-only
+    // path resolve through the single decodeDateParams codec (prio-70 dedup:
+    // the preset-only branch used to call resolveDatePreset directly), and
+    // both label the horizon overrun through the engine's shared
+    // truncationLabelForWindow formatter (date-windows.js loads before this
+    // file per index.html, so it is always present; the typeof guard degrades
+    // to no label rather than a failed seed). A complete valid from/to pair
+    // wins over the preset key and restores the exact Custom window; partial
+    // or invalid pairs and unknown keys fall back to All so bad links never
+    // strand the visitor on an empty. A clamped past start rewrites the URL
+    // for stable reload. ?date= keys are lowercase exact matches per the #103
+    // URL contract (unknown = All); the retired pre-rename `month` key is
+    // unknown and falls back to All.
+    window.initialDatePreset = 'all';
+    window.initialDateStart = null;
+    window.initialDateEnd = null;
+    window.initialDateTruncationLabel = null;
+    (function () {
+      // Single source of truth for preset keys (prio-80): the boot-honored set
+      // derives from the engine's canonical window.DATE_PRESETS (minus 'all',
+      // which is the default when no key is present). Literals below are
+      // fallbacks for boot orders where the engine is absent. Unknown keys
+      // (including the retired `month`) fall back to All per the #103 URL
+      // contract — there is no alias map.
+      var HONORED = {};
+      var canonical = window.DATE_PRESETS || [
+        'all',
+        'today',
+        'tonight',
+        'tomorrow',
+        'weekend',
+        'next7',
+        'thismonth',
+      ];
+      canonical.forEach(function (k) {
+        if (k !== 'all') HONORED[k] = 1;
+      });
+      var tz =
+        (window._cities &&
+          window.cityFilter &&
+          window._cities[window.cityFilter] &&
+          window._cities[window.cityFilter].timezone) ||
+        'UTC';
+      var key = null,
+        from = null,
+        to = null;
+      try {
+        key = params.get('date');
+        from = params.get('from');
+        to = params.get('to');
+      } catch (e) {}
+      if ((from != null || to != null) && typeof window.decodeDateParams === 'function') {
+        try {
+          var decoded = window.decodeDateParams(
+            { date: key, from: from, to: to },
+            { timeZone: tz, horizonEnd: window.toDate }
+          );
+          if (!decoded || !decoded.start) return;
+          if (decoded.preset !== 'custom') {
+            // Present-but-invalid/partial pair is ignored by the codec, so
+            // the accompanying ?date= preset (if any) still applies here.
+            window.initialDatePreset = decoded.preset;
+            window.initialDateStart = decoded.start;
+            window.initialDateEnd = decoded.end;
+            if (decoded.truncated && typeof window.truncationLabelForWindow === 'function') {
+              window.initialDateTruncationLabel = window.truncationLabelForWindow(decoded, tz);
+            }
+            return;
+          }
+          window.initialDatePreset = 'custom';
           window.initialDateStart = decoded.start;
           window.initialDateEnd = decoded.end;
           if (decoded.truncated && typeof window.truncationLabelForWindow === 'function') {
             window.initialDateTruncationLabel = window.truncationLabelForWindow(decoded, tz);
           }
-          return;
-        }
-        window.initialDatePreset = 'custom';
-        window.initialDateStart = decoded.start;
-        window.initialDateEnd = decoded.end;
-        if (decoded.truncated && typeof window.truncationLabelForWindow === 'function') {
-          window.initialDateTruncationLabel = window.truncationLabelForWindow(decoded, tz);
-        }
-        if (decoded.rewritten) {
-          var url = new URL(window.location);
-          url.searchParams.set('from', decoded.from);
-          url.searchParams.set('to', decoded.to);
-          url.searchParams.delete('date');
-          window.history.replaceState({}, '', url.toString());
+          if (decoded.rewritten) {
+            var url = new URL(window.location);
+            url.searchParams.set('from', decoded.from);
+            url.searchParams.set('to', decoded.to);
+            url.searchParams.delete('date');
+            window.history.replaceState({}, '', url.toString());
+          }
+        } catch (e) {}
+        return;
+      }
+      if (!key || !HONORED[key]) return;
+      try {
+        if (typeof window.decodeDateParams !== 'function') return;
+        var decodedWindow = window.decodeDateParams(
+          { date: key },
+          { timeZone: tz, horizonEnd: window.toDate }
+        );
+        if (!decodedWindow || !decodedWindow.start) return;
+        window.initialDatePreset = decodedWindow.preset;
+        window.initialDateStart = decodedWindow.start;
+        window.initialDateEnd = decodedWindow.end;
+        if (decodedWindow.truncated && typeof window.truncationLabelForWindow === 'function') {
+          window.initialDateTruncationLabel = window.truncationLabelForWindow(decodedWindow, tz);
         }
       } catch (e) {}
-      return;
-    }
-    if (!key || !HONORED[key]) return;
+    })();
+
+    var SUPABASE_URL = window.SUPABASE_URL;
+    var SUPABASE_KEY = window.SUPABASE_KEY;
+    var sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    window.authUser = null;
+    window.authSession = null;
     try {
-      if (typeof window.decodeDateParams !== 'function') return;
-      var decodedWindow = window.decodeDateParams({ date: key }, { timeZone: tz, horizonEnd: window.toDate });
-      if (!decodedWindow || !decodedWindow.start) return;
-      window.initialDatePreset = decodedWindow.preset;
-      window.initialDateStart = decodedWindow.start;
-      window.initialDateEnd = decodedWindow.end;
-      if (decodedWindow.truncated && typeof window.truncationLabelForWindow === 'function') {
-        window.initialDateTruncationLabel = window.truncationLabelForWindow(decodedWindow, tz);
+      var projRef = new URL(SUPABASE_URL).hostname.split('.')[0];
+      var stored = localStorage.getItem('sb-' + projRef + '-auth-token');
+      if (stored) {
+        var parsed = JSON.parse(stored);
+        if (parsed.user && parsed.expires_at) {
+          var nowSec = Math.floor(Date.now() / 1000);
+          if (parsed.expires_at > nowSec) {
+            window.authUser = parsed.user;
+            window.authSession = parsed;
+          }
+        }
       }
     } catch (e) {}
-  })();
 
-  var SUPABASE_URL = window.SUPABASE_URL;
-  var SUPABASE_KEY = window.SUPABASE_KEY;
-  var sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-  window.authUser = null;
-  window.authSession = null;
-  try {
-    var projRef = new URL(SUPABASE_URL).hostname.split('.')[0];
-    var stored = localStorage.getItem('sb-' + projRef + '-auth-token');
-    if (stored) {
-      var parsed = JSON.parse(stored);
-      if (parsed.user && parsed.expires_at) {
-        var nowSec = Math.floor(Date.now() / 1000);
-        if (parsed.expires_at > nowSec) {
-          window.authUser = parsed.user;
-          window.authSession = parsed;
-        }
-      }
-    }
-  } catch (e) {}
-
-  window.signIn = function (provider) {
-    var returnTo = window.location.origin + window.location.pathname + window.location.search;
-    window.location.href =
-      SUPABASE_URL +
-      '/auth/v1/authorize?provider=' +
-      (provider || 'github') +
-      '&redirect_to=' +
-      encodeURIComponent(returnTo);
-  };
-
-  window.signInWithEmail = async function (email, onSuccess) {
-    var result = await sb.auth.signInWithOtp({
-      email: email,
-      options: { emailRedirectTo: window.location.origin + window.location.pathname + window.location.search },
-    });
-    if (result.error) alert('Error: ' + result.error.message);
-    else if (onSuccess) onSuccess();
-  };
-
-  window.verifyEmailOtp = async function (email, token, onSuccess) {
-    var result = await sb.auth.verifyOtp({ email: email, token: token, type: 'email' });
-    if (result.error) alert('Error: ' + result.error.message);
-    else if (onSuccess) onSuccess();
-  };
-
-  window.signOut = function () {
-    console.log('signOut called');
-    localStorage.removeItem('sb-dzpdualvwspgqghrysyz-auth-token');
-    console.log('localStorage cleared, reloading...');
-    window.location.reload();
-  };
-
-  sb.auth.onAuthStateChange(async function (event, session) {
-    window.authSession = session;
-    window.authUser = session && session.user ? session.user : null;
-    console.log('Auth state changed:', event, window.authUser && window.authUser.email);
-
-    if (session && session.user) {
-      try {
-        var headers = {
-          apikey: SUPABASE_KEY,
-          Authorization: 'Bearer ' + session.access_token,
-          'Content-Type': 'application/json',
-          Prefer: 'return=minimal',
-        };
-
-        var checkUrl = SUPABASE_URL + '/rest/v1/feed_tokens?select=token&user_id=eq.' + session.user.id;
-        var checkRes = await fetch(checkUrl, { headers: headers });
-        if (!checkRes.ok) {
-          console.warn('Feed token check failed:', checkRes.status);
-          return;
-        }
-        var existing = await checkRes.json();
-        console.log('Feed token check:', existing);
-
-        if (!existing || existing.length === 0) {
-          var insertUrl = SUPABASE_URL + '/rest/v1/feed_tokens';
-          var insertRes = await fetch(insertUrl, {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify({ user_id: session.user.id }),
-          });
-          if (insertRes.ok) {
-            console.log('Created feed token for new user, reloading...');
-            window.location.reload();
-          } else {
-            console.error('Error creating feed token:', insertRes.status);
-          }
-        }
-      } catch (err) {
-        console.warn('Feed token bootstrap skipped:', (err && err.message) || err);
-      }
-    }
-  });
-
-  if (window.location.hash.includes('access_token')) {
-    sb.auth.getSession().then(function () {
-      window.location.replace(window.location.pathname + window.location.search);
-    });
-  }
-
-  window.togglePick = async function (eventId) {
-    console.log('togglePick called with eventId:', eventId);
-    if (!window.authSession) {
-      alert('Please sign in to pick events');
-      return;
-    }
-    var headers = {
-      apikey: SUPABASE_KEY,
-      Authorization: 'Bearer ' + window.authSession.access_token,
-      'Content-Type': 'application/json',
-      Prefer: 'return=minimal',
+    window.signIn = function (provider) {
+      var returnTo = window.location.origin + window.location.pathname + window.location.search;
+      window.location.href =
+        SUPABASE_URL +
+        '/auth/v1/authorize?provider=' +
+        (provider || 'github') +
+        '&redirect_to=' +
+        encodeURIComponent(returnTo);
     };
-    var userId = window.authUser.id;
 
-    var checkUrl = SUPABASE_URL + '/rest/v1/picks?select=id&user_id=eq.' + userId + '&event_id=eq.' + eventId;
-    var checkRes = await fetch(checkUrl, { headers: headers });
-    var existing = await checkRes.json();
-    console.log('Existing picks:', existing);
-
-    if (existing && existing.length > 0) {
-      console.log('Removing pick:', existing[0].id);
-      var deleteUrl = SUPABASE_URL + '/rest/v1/picks?id=eq.' + existing[0].id;
-      var deleteRes = await fetch(deleteUrl, { method: 'DELETE', headers: headers });
-      console.log('Delete response:', deleteRes.status);
-      if (window.xsTraceEvent) window.xsTraceEvent('unpick', { eventId: eventId, status: deleteRes.status });
-    } else {
-      console.log('Adding pick for event:', eventId);
-      var insertUrl = SUPABASE_URL + '/rest/v1/picks';
-      var insertRes = await fetch(insertUrl, {
-        method: 'POST',
-        headers: headers,
-        body: JSON.stringify({ user_id: userId, event_id: eventId }),
-      });
-      console.log('Insert response:', insertRes.status);
-      if (window.xsTraceEvent) window.xsTraceEvent('pick', { eventId: eventId, status: insertRes.status });
-    }
-  };
-
-  window.getFromDate = function () {
-    return window.fromDate;
-  };
-  window.getToDate = function () {
-    return window.toDate;
-  };
-  window.getQueryMonths = function () {
-    var from = new Date(window.fromDate);
-    var to = new Date(window.toDate);
-    return Math.round((to - from) / (30 * 24 * 60 * 60 * 1000));
-  };
-
-  // Events prefetch + cache. The events fetch starts here, at boot, instead
-  // of waiting ~500ms for the XMLUI engine to evaluate a DataSource. The
-  // last payload per city is kept in IndexedDB so repeat visits paint
-  // immediately from cache while the network fetch refreshes in the
-  // background. Main.xmlui consumes this through a PushSource bound to
-  // window.subscribeEvents; window.refetchEvents replaces events.refetch().
-  (function () {
-    var STORE = 'payloads';
-    function idbOpen() {
-      return new Promise(function (resolve, reject) {
-        var req = indexedDB.open('cc-events-cache', 1);
-        req.onupgradeneeded = function () { req.result.createObjectStore(STORE); };
-        req.onsuccess = function () { resolve(req.result); };
-        req.onerror = function () { reject(req.error); };
-      });
-    }
-    function idbGet(key) {
-      return idbOpen().then(function (db) {
-        return new Promise(function (resolve, reject) {
-          var req = db.transaction(STORE, 'readonly').objectStore(STORE).get(key);
-          req.onsuccess = function () { resolve(req.result); };
-          req.onerror = function () { reject(req.error); };
-        });
-      });
-    }
-    function idbSet(key, val) {
-      return idbOpen().then(function (db) {
-        return new Promise(function (resolve, reject) {
-          var tx = db.transaction(STORE, 'readwrite');
-          tx.objectStore(STORE).put(val, key);
-          tx.oncomplete = function () { resolve(); };
-          tx.onerror = function () { reject(tx.error); };
-        });
-      });
-    }
-
-    // skip-stale-cached-paint: a cache old enough to differ from fresh is
-    // wrong-data, because the engine does not re-render the list on the
-    // fresh replacement emission (latent since the cached-then-fresh
-    // pattern landed; reproduced on both deployments 2026-08-19). Data
-    // changes at most nightly, so a young cache is byte-identical to
-    // fresh and keeps the instant paint; an old one waits for fresh.
-    var CACHE_TTL_MS = 6 * 60 * 60 * 1000;
-    function unwrapCachedRows(val) {
-      if (val && Array.isArray(val.rows) && typeof val.at === 'number' &&
-          Date.now() - val.at <= CACHE_TTL_MS) {
-        return val.rows;
-      }
-      if (val) {
-        // Aged envelope, or a legacy raw-array entry with no age: skip.
-        try { performance.mark('cc-events-skip-cached-stale'); } catch (e) {}
-      }
-      return null;
-    }
-
-    var fetchPromise = null;
-    var fetchCity = null;
-    var currentEmit = null;
-    var cachedPromise = null;
-    var cachedCity = null;
-    // issue-82 emission coalescing state. lastEmitFn tracks WHICH
-    // subscriber received the last emission — an identical-data skip is
-    // only safe for a subscriber that already has the data; a fresh
-    // subscriber (resubscribe after a city round-trip) must always get
-    // its first emit.
-    var fetchResolvedCity = null;
-    var lastEmitFn = null;
-    var lastEmitCity = null;
-    var lastEmitSig = null;
-
-    function rowsSig(rows) {
-      return rows.length + ':' +
-        (rows.length ? rows[0].id + ':' + rows[rows.length - 1].id : '');
-    }
-
-    function eventsUrl(city) {
-      return window.SUPABASE_URL + '/rest/v1/deduplicated_events' +
-        '?select=id,title,start_time,end_time,url,location,description,source,transcript,cluster_id,source_urls,category,image_url,all_day,merged_ids,city' +
-        '&order=start_time.asc&limit=6000' +
-        '&start_time=gte.' + window.fromDate +
-        '&start_time=lte.' + window.toDate +
-        '&city=eq.' + encodeURIComponent(city);
-    }
-
-    function startFetch(city) {
-      fetchCity = city;
-      fetchResolvedCity = null;
-      fetchPromise = fetch(eventsUrl(city), {
-        headers: {
-          apikey: window.SUPABASE_KEY,
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
+    window.signInWithEmail = async function (email, onSuccess) {
+      var result = await sb.auth.signInWithOtp({
+        email: email,
+        options: {
+          emailRedirectTo:
+            window.location.origin + window.location.pathname + window.location.search,
         },
-      }).then(function (res) { return res.json(); }).then(function (rows) {
-        if (Array.isArray(rows)) {
-          fetchResolvedCity = city;
-          // True network completion, independent of any subscriber —
-          // cc-events-emit-fresh records delivery, which collapses to
-          // subscription time when the response wins that race.
-          try { performance.mark('cc-events-fetch-resolved'); } catch (e) {}
-        }
-        return rows;
       });
-      return fetchPromise;
-    }
+      if (result.error) alert('Error: ' + result.error.message);
+      else if (onSuccess) onSuccess();
+    };
 
-    function deliverFresh(promise, city) {
-      return promise.then(function (rows) {
-        if (!Array.isArray(rows)) return false;
-        // rows are genuinely `city`'s rows — cache them even if the user has
-        // switched away, but only emit if this city is still current.
-        idbSet('events:' + city, { at: Date.now(), rows: rows }).catch(function () {});
-        if (city !== window.cityFilter) return false;  // stale-city race guard (#76)
-        // issue-82: skip the replacement when this same subscriber already
-        // holds identical data — the emit would only trigger a re-render.
-        if (currentEmit && currentEmit === lastEmitFn &&
-            city === lastEmitCity && rowsSig(rows) === lastEmitSig) {
-          performance.mark('cc-events-skip-fresh-identical');
-          return true;
-        }
-        performance.mark('cc-events-emit-fresh');
-        if (currentEmit) {
-          lastEmitFn = currentEmit;
-          lastEmitCity = city;
-          lastEmitSig = rowsSig(rows);
-          currentEmit(rows);
-        }
-        return true;
-      }).catch(function () { return false; });
-    }
+    window.verifyEmailOtp = async function (email, token, onSuccess) {
+      var result = await sb.auth.verifyOtp({ email: email, token: token, type: 'email' });
+      if (result.error) alert('Error: ' + result.error.message);
+      else if (onSuccess) onSuccess();
+    };
 
-    function startCacheRead(city) {
-      cachedCity = city;
-      cachedPromise = idbGet('events:' + city)
-        .then(unwrapCachedRows)
-        .catch(function () { return null; });
-      return cachedPromise;
-    }
+    window.signOut = function () {
+      console.log('signOut called');
+      localStorage.removeItem('sb-dzpdualvwspgqghrysyz-auth-token');
+      console.log('localStorage cleared, reloading...');
+      window.location.reload();
+    };
 
-    window.subscribeEvents = function (emit) {
-      currentEmit = emit;
-      var city = window.cityFilter;
-      if (!city) return;
-      var gotFresh = false;
-      // Cached copy paints first, unless the network won the race. The read
-      // was started at boot, so by subscribe time it has usually resolved
-      // and the emit fires immediately.
-      var c = (cachedPromise && cachedCity === city) ? cachedPromise : startCacheRead(city);
-      c.then(function (cached) {
-        if (Array.isArray(cached) && !gotFresh) {
-          if (city !== window.cityFilter) return;  // stale-city guard (#76)
-          // issue-82: when the network fetch has already resolved, the
-          // fresh emit is imminent — a cached paint would only add a
-          // full ingest+render that is immediately redone.
-          if (fetchResolvedCity === city) {
-            performance.mark('cc-events-skip-cached-superseded');
+    sb.auth.onAuthStateChange(async function (event, session) {
+      window.authSession = session;
+      window.authUser = session && session.user ? session.user : null;
+      console.log('Auth state changed:', event, window.authUser && window.authUser.email);
+
+      if (session && session.user) {
+        try {
+          var headers = {
+            apikey: SUPABASE_KEY,
+            Authorization: 'Bearer ' + session.access_token,
+            'Content-Type': 'application/json',
+            Prefer: 'return=minimal',
+          };
+
+          var checkUrl =
+            SUPABASE_URL + '/rest/v1/feed_tokens?select=token&user_id=eq.' + session.user.id;
+          var checkRes = await fetch(checkUrl, { headers: headers });
+          if (!checkRes.ok) {
+            console.warn('Feed token check failed:', checkRes.status);
             return;
           }
-          performance.mark('cc-events-emit-cached');
-          lastEmitFn = emit;
-          lastEmitCity = city;
-          lastEmitSig = rowsSig(cached);
-          emit(cached);
+          var existing = await checkRes.json();
+          console.log('Feed token check:', existing);
+
+          if (!existing || existing.length === 0) {
+            var insertUrl = SUPABASE_URL + '/rest/v1/feed_tokens';
+            var insertRes = await fetch(insertUrl, {
+              method: 'POST',
+              headers: headers,
+              body: JSON.stringify({ user_id: session.user.id }),
+            });
+            if (insertRes.ok) {
+              console.log('Created feed token for new user, reloading...');
+              window.location.reload();
+            } else {
+              console.error('Error creating feed token:', insertRes.status);
+            }
+          }
+        } catch (err) {
+          console.warn('Feed token bootstrap skipped:', (err && err.message) || err);
         }
+      }
+    });
+
+    if (window.location.hash.includes('access_token')) {
+      sb.auth.getSession().then(function () {
+        window.location.replace(window.location.pathname + window.location.search);
       });
-      var p = (fetchPromise && fetchCity === city) ? fetchPromise : startFetch(city);
-      deliverFresh(p, city).then(function (ok) { if (ok) gotFresh = true; });
-      return function () { if (currentEmit === emit) currentEmit = null; };
-    };
-
-    window.refetchEvents = function () {
-      var city = window.cityFilter;
-      if (!city) return;
-      deliverFresh(startFetch(city), city);
-    };
-
-    if (window.cityFilter) {
-      startCacheRead(window.cityFilter);
-      startFetch(window.cityFilter);
     }
-  })();
 
-  window.ccAutoHeight = new URLSearchParams(location.search).get('autoheight') === 'true';
-  if (window.ccAutoHeight && window.parent !== window) {
+    window.togglePick = async function (eventId) {
+      console.log('togglePick called with eventId:', eventId);
+      if (!window.authSession) {
+        alert('Please sign in to pick events');
+        return;
+      }
+      var headers = {
+        apikey: SUPABASE_KEY,
+        Authorization: 'Bearer ' + window.authSession.access_token,
+        'Content-Type': 'application/json',
+        Prefer: 'return=minimal',
+      };
+      var userId = window.authUser.id;
+
+      var checkUrl =
+        SUPABASE_URL + '/rest/v1/picks?select=id&user_id=eq.' + userId + '&event_id=eq.' + eventId;
+      var checkRes = await fetch(checkUrl, { headers: headers });
+      var existing = await checkRes.json();
+      console.log('Existing picks:', existing);
+
+      if (existing && existing.length > 0) {
+        console.log('Removing pick:', existing[0].id);
+        var deleteUrl = SUPABASE_URL + '/rest/v1/picks?id=eq.' + existing[0].id;
+        var deleteRes = await fetch(deleteUrl, { method: 'DELETE', headers: headers });
+        console.log('Delete response:', deleteRes.status);
+        if (window.xsTraceEvent)
+          window.xsTraceEvent('unpick', { eventId: eventId, status: deleteRes.status });
+      } else {
+        console.log('Adding pick for event:', eventId);
+        var insertUrl = SUPABASE_URL + '/rest/v1/picks';
+        var insertRes = await fetch(insertUrl, {
+          method: 'POST',
+          headers: headers,
+          body: JSON.stringify({ user_id: userId, event_id: eventId }),
+        });
+        console.log('Insert response:', insertRes.status);
+        if (window.xsTraceEvent)
+          window.xsTraceEvent('pick', { eventId: eventId, status: insertRes.status });
+      }
+    };
+
+    window.getFromDate = function () {
+      return window.fromDate;
+    };
+    window.getToDate = function () {
+      return window.toDate;
+    };
+    window.getQueryMonths = function () {
+      var from = new Date(window.fromDate);
+      var to = new Date(window.toDate);
+      return Math.round((to - from) / (30 * 24 * 60 * 60 * 1000));
+    };
+
+    // Events prefetch + cache. The events fetch starts here, at boot, instead
+    // of waiting ~500ms for the XMLUI engine to evaluate a DataSource. The
+    // last payload per city is kept in IndexedDB so repeat visits paint
+    // immediately from cache while the network fetch refreshes in the
+    // background. Main.xmlui consumes this through a PushSource bound to
+    // window.subscribeEvents; window.refetchEvents replaces events.refetch().
     (function () {
-      var lastH = 0;
-      var observer = null;
-
-      function report(el) {
-        var h = Math.ceil(el.getBoundingClientRect().height);
-        if (h === lastH || h === 0) return;
-        lastH = h;
-        window.parent.postMessage({ type: 'cc-embed-resize', height: h }, '*');
+      var STORE = 'payloads';
+      function idbOpen() {
+        return new Promise(function (resolve, reject) {
+          var req = indexedDB.open('cc-events-cache', 1);
+          req.onupgradeneeded = function () {
+            req.result.createObjectStore(STORE);
+          };
+          req.onsuccess = function () {
+            resolve(req.result);
+          };
+          req.onerror = function () {
+            reject(req.error);
+          };
+        });
       }
-
-      function findAndObserve() {
-        var el = document.querySelector('[data-xmlui-app-fit-content]');
-        if (!el) return false;
-        if ('ResizeObserver' in window) {
-          observer = new ResizeObserver(function () {
-            report(el);
+      function idbGet(key) {
+        return idbOpen().then(function (db) {
+          return new Promise(function (resolve, reject) {
+            var req = db.transaction(STORE, 'readonly').objectStore(STORE).get(key);
+            req.onsuccess = function () {
+              resolve(req.result);
+            };
+            req.onerror = function () {
+              reject(req.error);
+            };
           });
-          observer.observe(el);
-        }
-        report(el);
-        return true;
+        });
+      }
+      function idbSet(key, val) {
+        return idbOpen().then(function (db) {
+          return new Promise(function (resolve, reject) {
+            var tx = db.transaction(STORE, 'readwrite');
+            tx.objectStore(STORE).put(val, key);
+            tx.oncomplete = function () {
+              resolve();
+            };
+            tx.onerror = function () {
+              reject(tx.error);
+            };
+          });
+        });
       }
 
-      var tries = 0;
-      var findIv = setInterval(function () {
-        if (findAndObserve() || ++tries > 80) clearInterval(findIv);
-      }, 50);
+      // skip-stale-cached-paint: a cache old enough to differ from fresh is
+      // wrong-data, because the engine does not re-render the list on the
+      // fresh replacement emission (latent since the cached-then-fresh
+      // pattern landed; reproduced on both deployments 2026-08-19). Data
+      // changes at most nightly, so a young cache is byte-identical to
+      // fresh and keeps the instant paint; an old one waits for fresh.
+      var CACHE_TTL_MS = 6 * 60 * 60 * 1000;
+      function unwrapCachedRows(val) {
+        if (
+          val &&
+          Array.isArray(val.rows) &&
+          typeof val.at === 'number' &&
+          Date.now() - val.at <= CACHE_TTL_MS
+        ) {
+          return val.rows;
+        }
+        if (val) {
+          // Aged envelope, or a legacy raw-array entry with no age: skip.
+          try {
+            performance.mark('cc-events-skip-cached-stale');
+          } catch (e) {}
+        }
+        return null;
+      }
+
+      var fetchPromise = null;
+      var fetchCity = null;
+      var currentEmit = null;
+      var cachedPromise = null;
+      var cachedCity = null;
+      // issue-82 emission coalescing state. lastEmitFn tracks WHICH
+      // subscriber received the last emission — an identical-data skip is
+      // only safe for a subscriber that already has the data; a fresh
+      // subscriber (resubscribe after a city round-trip) must always get
+      // its first emit.
+      var fetchResolvedCity = null;
+      var lastEmitFn = null;
+      var lastEmitCity = null;
+      var lastEmitSig = null;
+
+      function rowsSig(rows) {
+        return rows.length + ':' + (rows.length ? rows[0].id + ':' + rows[rows.length - 1].id : '');
+      }
+
+      function eventsUrl(city) {
+        return (
+          window.SUPABASE_URL +
+          '/rest/v1/deduplicated_events' +
+          '?select=id,title,start_time,end_time,url,location,description,source,transcript,cluster_id,source_urls,category,image_url,all_day,merged_ids,city' +
+          '&order=start_time.asc&limit=6000' +
+          '&start_time=gte.' +
+          window.fromDate +
+          '&start_time=lte.' +
+          window.toDate +
+          '&city=eq.' +
+          encodeURIComponent(city)
+        );
+      }
+
+      function startFetch(city) {
+        fetchCity = city;
+        fetchResolvedCity = null;
+        fetchPromise = fetch(eventsUrl(city), {
+          headers: {
+            apikey: window.SUPABASE_KEY,
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+          },
+        })
+          .then(function (res) {
+            return res.json();
+          })
+          .then(function (rows) {
+            if (Array.isArray(rows)) {
+              fetchResolvedCity = city;
+              // True network completion, independent of any subscriber —
+              // cc-events-emit-fresh records delivery, which collapses to
+              // subscription time when the response wins that race.
+              try {
+                performance.mark('cc-events-fetch-resolved');
+              } catch (e) {}
+            }
+            return rows;
+          });
+        return fetchPromise;
+      }
+
+      function deliverFresh(promise, city) {
+        return promise
+          .then(function (rows) {
+            if (!Array.isArray(rows)) return false;
+            // rows are genuinely `city`'s rows — cache them even if the user has
+            // switched away, but only emit if this city is still current.
+            idbSet('events:' + city, { at: Date.now(), rows: rows }).catch(function () {});
+            if (city !== window.cityFilter) return false; // stale-city race guard (#76)
+            // issue-82: skip the replacement when this same subscriber already
+            // holds identical data — the emit would only trigger a re-render.
+            if (
+              currentEmit &&
+              currentEmit === lastEmitFn &&
+              city === lastEmitCity &&
+              rowsSig(rows) === lastEmitSig
+            ) {
+              performance.mark('cc-events-skip-fresh-identical');
+              return true;
+            }
+            performance.mark('cc-events-emit-fresh');
+            if (currentEmit) {
+              lastEmitFn = currentEmit;
+              lastEmitCity = city;
+              lastEmitSig = rowsSig(rows);
+              currentEmit(rows);
+            }
+            return true;
+          })
+          .catch(function () {
+            return false;
+          });
+      }
+
+      function startCacheRead(city) {
+        cachedCity = city;
+        cachedPromise = idbGet('events:' + city)
+          .then(unwrapCachedRows)
+          .catch(function () {
+            return null;
+          });
+        return cachedPromise;
+      }
+
+      window.subscribeEvents = function (emit) {
+        currentEmit = emit;
+        var city = window.cityFilter;
+        if (!city) return;
+        var gotFresh = false;
+        // Cached copy paints first, unless the network won the race. The read
+        // was started at boot, so by subscribe time it has usually resolved
+        // and the emit fires immediately.
+        var c = cachedPromise && cachedCity === city ? cachedPromise : startCacheRead(city);
+        c.then(function (cached) {
+          if (Array.isArray(cached) && !gotFresh) {
+            if (city !== window.cityFilter) return; // stale-city guard (#76)
+            // issue-82: when the network fetch has already resolved, the
+            // fresh emit is imminent — a cached paint would only add a
+            // full ingest+render that is immediately redone.
+            if (fetchResolvedCity === city) {
+              performance.mark('cc-events-skip-cached-superseded');
+              return;
+            }
+            performance.mark('cc-events-emit-cached');
+            lastEmitFn = emit;
+            lastEmitCity = city;
+            lastEmitSig = rowsSig(cached);
+            emit(cached);
+          }
+        });
+        var p = fetchPromise && fetchCity === city ? fetchPromise : startFetch(city);
+        deliverFresh(p, city).then(function (ok) {
+          if (ok) gotFresh = true;
+        });
+        return function () {
+          if (currentEmit === emit) currentEmit = null;
+        };
+      };
+
+      window.refetchEvents = function () {
+        var city = window.cityFilter;
+        if (!city) return;
+        deliverFresh(startFetch(city), city);
+      };
+
+      if (window.cityFilter) {
+        startCacheRead(window.cityFilter);
+        startFetch(window.cityFilter);
+      }
     })();
-  }
+
+    window.ccAutoHeight = new URLSearchParams(location.search).get('autoheight') === 'true';
+    if (window.ccAutoHeight && window.parent !== window) {
+      (function () {
+        var lastH = 0;
+        var observer = null;
+
+        function report(el) {
+          var h = Math.ceil(el.getBoundingClientRect().height);
+          if (h === lastH || h === 0) return;
+          lastH = h;
+          window.parent.postMessage({ type: 'cc-embed-resize', height: h }, '*');
+        }
+
+        function findAndObserve() {
+          var el = document.querySelector('[data-xmlui-app-fit-content]');
+          if (!el) return false;
+          if ('ResizeObserver' in window) {
+            observer = new ResizeObserver(function () {
+              report(el);
+            });
+            observer.observe(el);
+          }
+          report(el);
+          return true;
+        }
+
+        var tries = 0;
+        var findIv = setInterval(function () {
+          if (findAndObserve() || ++tries > 80) clearInterval(findIv);
+        }, 50);
+      })();
+    }
   } // end bootShell
 })();
