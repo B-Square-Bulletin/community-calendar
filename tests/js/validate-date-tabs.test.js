@@ -327,6 +327,15 @@ describe('a11y semantics (#109)', () => {
     const end = main.indexOf('</HStack>', at);
     return end < 0 ? '' : main.substring(at, end);
   })();
+  // Opening <Button> tag for the button carrying label, or null when the
+  // label is absent. Both tabindex checks below locate their button this
+  // way so the markup walk lives in one place.
+  const buttonOpenTag = (src, label) => {
+    const at = src.indexOf('>' + label + '<');
+    if (at < 0) return null;
+    const open = src.lastIndexOf('<Button', at);
+    return open < 0 ? null : src.substring(open, at);
+  };
   it('every date tab exposes a pressed state to assistive tech', () => {
     const count = (strip.match(/aria-pressed=/g) || []).length;
     expect(count).toBe(8);
@@ -343,16 +352,13 @@ describe('a11y semantics (#109)', () => {
     expect(/id="customDateTab"[\s\S]{0,400}?>Custom</.test(strip)).toBe(true);
   });
   it('every date tab button carries an explicit tabindex (Safari tab order)', () => {
-    const buttons = strip.match(/<Button[^>]*>[^<]*<\/Button>/g) || [];
-    expect(buttons.length).toBe(8);
-    for (const b of buttons) {
-      expect(/tabindex="0"/.test(b)).toBe(true);
+    const labels = ['All dates', 'Today', 'Tonight', 'Tomorrow', 'This weekend', 'Next 7 days', 'This month', 'Custom'];
+    expect(labels.length).toBe(8);
+    for (const label of labels) {
+      expect(/tabindex="0"/.test(buttonOpenTag(strip, label) || '')).toBe(true);
     }
   });
   it('the empty-state reset button carries an explicit tabindex (Safari tab order)', () => {
-    const at = main ? main.indexOf('>Show next 7 days</') : -1;
-    if (at < 0) { expect(false).toBe(true); return; }
-    const open = main.lastIndexOf('<Button', at);
-    expect(open >= 0 && /tabindex="0"/.test(main.substring(open, at))).toBe(true);
+    expect(/tabindex="0"/.test(buttonOpenTag(main || '', 'Show next 7 days') || '')).toBe(true);
   });
 });

@@ -20,6 +20,10 @@ const CUSTOM_TAB = '[data-xmlui-id="customDateTab"]';
 
 const TABS = ['All dates', 'Today', 'Tonight', 'Tomorrow', 'This weekend', 'Next 7 days', 'This month', 'Custom'];
 
+// Upper bound for driving Tab from page load: covers the pre-strip stops
+// (icons, search, clear, select) plus the 8 tabs with margin.
+const MAX_TAB_STOPS = 40;
+
 function tab(page, label) {
   return page.locator(`${TAB_STRIP} button`, { hasText: label });
 }
@@ -106,9 +110,11 @@ test('keyboard-only: Tab from page load reaches every date tab (Safari/WebKit ta
   // and assert every date tab is reached by the keyboard alone. The test runs
   // under the webkit project (playwright.config.js) where this fails without
   // tabindex="0" on the buttons, and stays green under chromium.
-  const focusTexts = [];
-  for (let i = 0; i < 40; i++) {
-    focusTexts.push(await page.evaluate(() => {
+  // MAX_TAB_STOPS covers the pre-strip stops (icons, search, clear, select)
+  // plus the 8 tabs with margin; focusedLabels holds one entry per stop.
+  const focusedLabels = [];
+  for (let i = 0; i < MAX_TAB_STOPS; i++) {
+    focusedLabels.push(await page.evaluate(() => {
       const el = document.activeElement;
       return el && el !== document.body
         ? (el.textContent || el.getAttribute('aria-label') || '').trim().replace(/\s+/g, ' ')
@@ -116,9 +122,37 @@ test('keyboard-only: Tab from page load reaches every date tab (Safari/WebKit ta
     }));
     await page.keyboard.press('Tab');
   }
-  for (const label of TABS) {
-    expect(focusTexts).toContain(label);
+  // The strip must arrive as one contiguous in-order run, not scattered
+  // across unrelated stops.
+  const stripStart = focusedLabels.indexOf(TABS[0]);
+  expect(stripStart).toBeGreaterThanOrEqual(0);
+  expect(focusedLabels.slice(stripStart, stripStart + TABS.length)).toEqual(TABS);
+});
+
+test('empty-state reset is keyboard reachable and moves focus to the heading without scrolling', async ({ page }) => {
+  await boot(page);
+  // The hermetic boot returns no events, so the empty window renders.
+  await expect(page.locator('button', { hasText: 'Show next 7 days' })).toBeVisible();
+  // Reach the reset by Tab alone.
+  let reached = false;
+  for (let i = 0; i < MAX_TAB_STOPS; i++) {
+    const label = await page.evaluate(() => {
+      const el = document.activeElement;
+      return el && el !== document.body ? (el.textContent || '').trim().replace(/\s+/g, ' ') : '';
+    });
+    if (label === 'Show next 7 days') { reached = true; break; }
+    await page.keyboard.press('Tab');
   }
+  expect(reached).toBe(true);
+  // Commit with Enter: Next 7 syncs to the URL and focus moves to the
+  // tab-strip heading with no scroll (commit passes scroll: false and the
+  // heading focus uses preventScroll).
+  await page.evaluate(() => window.scrollTo(0, 200));
+  const scrolledY = await page.evaluate(() => window.scrollY);
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/[?&]date=next7(&|$)/);
+  await expect(page.locator(HEADING)).toBeFocused();
+  expect(await page.evaluate(() => window.scrollY)).toBe(scrolledY);
 });
 
 test('360px: the tab strip wraps with every preset reachable and no horizontal scroll', async ({ page }) => {
