@@ -19,5 +19,10 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
+    {
+      name: 'webkit',
+      testMatch: '**/date-tabs-a11y.browser.spec.js',
+      use: { ...devices['Desktop Safari'] },
+    },
   ],
 });
