@@ -342,4 +342,17 @@ describe('a11y semantics (#109)', () => {
   it('the Custom tab carries the id Escape returns focus to', () => {
     expect(/id="customDateTab"[\s\S]{0,400}?>Custom</.test(strip)).toBe(true);
   });
+  it('every date tab button carries an explicit tabindex (Safari tab order)', () => {
+    const buttons = strip.match(/<Button[^>]*>[^<]*<\/Button>/g) || [];
+    expect(buttons.length).toBe(8);
+    for (const b of buttons) {
+      expect(/tabindex="0"/.test(b)).toBe(true);
+    }
+  });
+  it('the empty-state reset button carries an explicit tabindex (Safari tab order)', () => {
+    const at = main ? main.indexOf('>Show next 7 days</') : -1;
+    if (at < 0) { expect(false).toBe(true); return; }
+    const open = main.lastIndexOf('<Button', at);
+    expect(open >= 0 && /tabindex="0"/.test(main.substring(open, at))).toBe(true);
+  });
 });

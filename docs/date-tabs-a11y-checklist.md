@@ -24,6 +24,8 @@ Covered by `pnpm playwright test tests/js/date-tabs-a11y.browser.spec.js`:
 - [x] Keyboard-only: Enter on a focused tab commits the window and syncs `?date=`
 - [x] Committing a preset moves no focus
 - [x] Escape in the picker returns focus to the Custom tab
+- [x] Tab from page load reaches every date tab in Safari/WebKit tab order
+      (explicit `tabindex="0"` on the tabs; run under the `webkit` project)
 - [x] 360px: the strip wraps with every preset reachable and no horizontal scroll
 
 ## Human: screen reader (VoiceOver)
@@ -41,7 +43,8 @@ Covered by `pnpm playwright test tests/js/date-tabs-a11y.browser.spec.js`:
 ## Human: keyboard-only
 
 - [ ] Every one of the eight tabs is reachable with `Tab` and shows a visible
-      focus ring.
+      focus ring. (Reachability is automated in the WebKit gate; the visible
+      focus ring still needs an eye.)
 - [ ] Enter or Space commits the focused tab.
 - [ ] The full Custom flow (open, pick start, pick end, Proceed) completes
       without a mouse, and Escape returns focus to the Custom tab.

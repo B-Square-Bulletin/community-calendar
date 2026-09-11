@@ -294,14 +294,14 @@
          surface the horizon-truncation label. -->
     <Text id="dateTabHeading" fontSize="$fontSize-sm" fontWeight="$fontWeight-bold" value="Filter by date" />
     <HStack id="dateTabStrip" verticalAlignment="center" gap="$space-1" wrapContent="true" width="100%" marginBottom="$space-2">
-      <Button variant="{datePreset === 'all' && !customOpen ? 'solid' : 'outlined'}" aria-pressed="{datePreset === 'all' && !customOpen}" onClick="commitDatePreset('all')">All dates</Button>
-      <Button variant="{datePreset === 'today' && !customOpen ? 'solid' : 'outlined'}" aria-pressed="{datePreset === 'today' && !customOpen}" onClick="commitDatePreset('today')">Today</Button>
-      <Button variant="{datePreset === 'tonight' && !customOpen ? 'solid' : 'outlined'}" aria-pressed="{datePreset === 'tonight' && !customOpen}" onClick="commitDatePreset('tonight')">Tonight</Button>
-      <Button variant="{datePreset === 'tomorrow' && !customOpen ? 'solid' : 'outlined'}" aria-pressed="{datePreset === 'tomorrow' && !customOpen}" onClick="commitDatePreset('tomorrow')">Tomorrow</Button>
-      <Button variant="{datePreset === 'weekend' && !customOpen ? 'solid' : 'outlined'}" aria-pressed="{datePreset === 'weekend' && !customOpen}" onClick="commitDatePreset('weekend')">This weekend</Button>
-      <Button variant="{datePreset === 'next7' && !customOpen ? 'solid' : 'outlined'}" aria-pressed="{datePreset === 'next7' && !customOpen}" onClick="commitDatePreset('next7')">Next 7 days</Button>
-      <Button variant="{datePreset === 'thismonth' && !customOpen ? 'solid' : 'outlined'}" aria-pressed="{datePreset === 'thismonth' && !customOpen}" onClick="commitDatePreset('thismonth')">This month</Button>
-      <Button id="customDateTab" variant="{(datePreset === 'custom' || customOpen) ? 'solid' : 'outlined'}" aria-pressed="{(datePreset === 'custom' || customOpen)}" onClick="customOpen = true; window.openCustomPicker()">Custom</Button>
+      <Button tabindex="0" variant="{datePreset === 'all' && !customOpen ? 'solid' : 'outlined'}" aria-pressed="{datePreset === 'all' && !customOpen}" onClick="commitDatePreset('all')">All dates</Button>
+      <Button tabindex="0" variant="{datePreset === 'today' && !customOpen ? 'solid' : 'outlined'}" aria-pressed="{datePreset === 'today' && !customOpen}" onClick="commitDatePreset('today')">Today</Button>
+      <Button tabindex="0" variant="{datePreset === 'tonight' && !customOpen ? 'solid' : 'outlined'}" aria-pressed="{datePreset === 'tonight' && !customOpen}" onClick="commitDatePreset('tonight')">Tonight</Button>
+      <Button tabindex="0" variant="{datePreset === 'tomorrow' && !customOpen ? 'solid' : 'outlined'}" aria-pressed="{datePreset === 'tomorrow' && !customOpen}" onClick="commitDatePreset('tomorrow')">Tomorrow</Button>
+      <Button tabindex="0" variant="{datePreset === 'weekend' && !customOpen ? 'solid' : 'outlined'}" aria-pressed="{datePreset === 'weekend' && !customOpen}" onClick="commitDatePreset('weekend')">This weekend</Button>
+      <Button tabindex="0" variant="{datePreset === 'next7' && !customOpen ? 'solid' : 'outlined'}" aria-pressed="{datePreset === 'next7' && !customOpen}" onClick="commitDatePreset('next7')">Next 7 days</Button>
+      <Button tabindex="0" variant="{datePreset === 'thismonth' && !customOpen ? 'solid' : 'outlined'}" aria-pressed="{datePreset === 'thismonth' && !customOpen}" onClick="commitDatePreset('thismonth')">This month</Button>
+      <Button id="customDateTab" tabindex="0" variant="{(datePreset === 'custom' || customOpen) ? 'solid' : 'outlined'}" aria-pressed="{(datePreset === 'custom' || customOpen)}" onClick="customOpen = true; window.openCustomPicker()">Custom</Button>
     </HStack>
     <!-- Custom range picker (#107): stock range control with date-only
          format, the city timezone, today minimum plus past dates disabled,
@@ -354,7 +354,7 @@
          scroll-to-top. -->
     <VStack when="{!!events.value && viewMode === 'all' && !window.filterEvents(dateFilteredEvents, filterTerm, categoryFilter).length}" gap="$space-2" width="100%" padding="$space-3" horizontalAlignment="center">
       <Text value="{'No events ' + window.dateWindowLabel(datePreset) + '.'}" />
-      <Button variant="outlined" onClick="commitDatePreset('next7', {scroll: false}); window.focusDateTabHeading()">Show next 7 days</Button>
+      <Button tabindex="0" variant="outlined" onClick="commitDatePreset('next7', {scroll: false}); window.focusDateTabHeading()">Show next 7 days</Button>
     </VStack>
     </VStack>
     </VStack>

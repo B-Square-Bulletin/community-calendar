@@ -98,6 +98,29 @@ test('Escape in the Custom picker returns focus to the Custom tab', async ({ pag
   await expect(page.locator(CUSTOM_TAB)).toBeFocused();
 });
 
+test('keyboard-only: Tab from page load reaches every date tab (Safari/WebKit tab order)', async ({ page }) => {
+  await boot(page);
+  // Regression for a Safari/WebKit quirk: sequential tab order skips native
+  // <button> elements that lack an explicit tabindex attribute, so the tabs
+  // were only programmatically focusable in Safari. Drive Tab from page load
+  // and assert every date tab is reached by the keyboard alone. The test runs
+  // under the webkit project (playwright.config.js) where this fails without
+  // tabindex="0" on the buttons, and stays green under chromium.
+  const focusTexts = [];
+  for (let i = 0; i < 40; i++) {
+    focusTexts.push(await page.evaluate(() => {
+      const el = document.activeElement;
+      return el && el !== document.body
+        ? (el.textContent || el.getAttribute('aria-label') || '').trim().replace(/\s+/g, ' ')
+        : '';
+    }));
+    await page.keyboard.press('Tab');
+  }
+  for (const label of TABS) {
+    expect(focusTexts).toContain(label);
+  }
+});
+
 test('360px: the tab strip wraps with every preset reachable and no horizontal scroll', async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 800 });
   await boot(page);
