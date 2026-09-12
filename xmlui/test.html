@@ -2314,20 +2314,20 @@
         ];
 
         it('does not skip a fresh payload that differs only in the middle', () => {
-          assertEqual(shouldSkipFreshEmit(state(eventsSignature(stale)), fresh), false);
+          assertEqual(shouldSkipFreshEmit(state(eventsSignature(stale)), eventsSignature(fresh)), false);
         });
 
         it('skips a truly identical payload for the same subscriber and city', () => {
           const copy = JSON.parse(JSON.stringify(stale));
-          assertEqual(shouldSkipFreshEmit(state(eventsSignature(stale)), copy), true);
+          assertEqual(shouldSkipFreshEmit(state(eventsSignature(stale)), eventsSignature(copy)), true);
         });
 
         it('does not skip when no subscriber is current', () => {
-          assertEqual(shouldSkipFreshEmit({ ...state(eventsSignature(stale)), currentEmit: null }, stale), false);
+          assertEqual(shouldSkipFreshEmit({ ...state(eventsSignature(stale)), currentEmit: null }, eventsSignature(stale)), false);
         });
 
         it('does not skip for a different city', () => {
-          assertEqual(shouldSkipFreshEmit({ ...state(eventsSignature(stale)), city: 'davis', lastEmitCity: 'santarosa' }, stale), false);
+          assertEqual(shouldSkipFreshEmit({ ...state(eventsSignature(stale)), city: 'davis', lastEmitCity: 'santarosa' }, eventsSignature(stale)), false);
         });
       });
 

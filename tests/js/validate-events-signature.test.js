@@ -59,18 +59,25 @@ describe('shouldSkipFreshEmit', () => {
   });
 
   it('does not skip a fresh payload that differs only in the middle', () => {
-    expect(window.shouldSkipFreshEmit(state(window.eventsSignature(stale)), fresh)).toBe(false);
+    expect(
+      window.shouldSkipFreshEmit(
+        state(window.eventsSignature(stale)),
+        window.eventsSignature(fresh)
+      )
+    ).toBe(false);
   });
   it('skips a truly identical payload for the same subscriber and city', () => {
     const copy = JSON.parse(JSON.stringify(stale));
-    expect(window.shouldSkipFreshEmit(state(window.eventsSignature(stale)), copy)).toBe(true);
+    expect(
+      window.shouldSkipFreshEmit(state(window.eventsSignature(stale)), window.eventsSignature(copy))
+    ).toBe(true);
   });
   it('does not skip when no subscriber is current', () => {
     const s = { ...state(window.eventsSignature(stale)), currentEmit: null };
-    expect(window.shouldSkipFreshEmit(s, stale)).toBe(false);
+    expect(window.shouldSkipFreshEmit(s, window.eventsSignature(stale))).toBe(false);
   });
   it('does not skip for a different city', () => {
     const s = { ...state(window.eventsSignature(stale)), lastEmitCity: 'santarosa' };
-    expect(window.shouldSkipFreshEmit(s, stale)).toBe(false);
+    expect(window.shouldSkipFreshEmit(s, window.eventsSignature(stale))).toBe(false);
   });
 });

@@ -712,15 +712,17 @@ window.eventsSignature = eventsSignature;
 // The issue-82 fresh-emission skip decision, extracted from shell.js so
 // test.html can pin the coalescing itself, not just the signature: a fresh
 // payload is skipped only when it is identical to the last emission and
-// came from the same subscriber and city. With the old weak key, a
-// mid-payload change looked identical and suppressed the fresh emit — and
+// came from the same subscriber and city. Callers pass the precomputed
+// eventsSignature so the payload is hashed once per delivery — the same
+// signature is then stored for the next comparison. With the old weak key,
+// a mid-payload change looked identical and suppressed the fresh emit — and
 // therefore the epoch bump that repaints the stale cache.
-function shouldSkipFreshEmit(state, rows) {
+function shouldSkipFreshEmit(state, freshSig) {
   return !!(
     state.currentEmit &&
     state.currentEmit === state.lastEmitFn &&
     state.city === state.lastEmitCity &&
-    eventsSignature(rows) === state.lastEmitSig
+    freshSig === state.lastEmitSig
   );
 }
 window.shouldSkipFreshEmit = shouldSkipFreshEmit;

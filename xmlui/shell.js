@@ -734,6 +734,9 @@ window._xsLogs = [];
             // switched away, but only emit if this city is still current.
             idbSet('events:' + city, { at: Date.now(), rows: rows }).catch(function () {});
             if (city !== window.cityFilter) return false; // stale-city race guard (#76)
+            // Hash the payload once: the coalescing decision and the stored
+            // lastEmitSig both need the same full-payload eventsSignature.
+            var freshSig = window.eventsSignature(rows);
             // issue-82: skip the replacement when this same subscriber already
             // holds identical data — the emit would only trigger a re-render.
             if (
@@ -745,7 +748,7 @@ window._xsLogs = [];
                   lastEmitCity: lastEmitCity,
                   lastEmitSig: lastEmitSig,
                 },
-                rows
+                freshSig
               )
             ) {
               performance.mark('cc-events-skip-fresh-identical');
@@ -755,7 +758,7 @@ window._xsLogs = [];
             if (currentEmit) {
               lastEmitFn = currentEmit;
               lastEmitCity = city;
-              lastEmitSig = window.eventsSignature(rows);
+              lastEmitSig = freshSig;
               currentEmit(rows);
             }
             return true;
