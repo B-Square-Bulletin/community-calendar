@@ -292,8 +292,13 @@ describe('invalid-link fallbacks', () => {
     ).toEqual('today');
   });
   it('picker path still coerces an inverted pair to the single from-day', () => {
+    // Pin now like xmlui/test.html does: without it the clamp-to-today
+    // rule makes this time-bombed once the real date passes 2026-09-10.
     expect(
-      window.resolveCustomRange('2026-09-10', '2026-09-05', { timeZone: 'America/Los_Angeles' }).to
+      window.resolveCustomRange('2026-09-10', '2026-09-05', {
+        now: '2026-02-11T12:00:00Z',
+        timeZone: 'America/Los_Angeles',
+      }).to
     ).toEqual('2026-09-10');
   });
   it('canonical thismonth key decodes to the month-remainder window', () => {

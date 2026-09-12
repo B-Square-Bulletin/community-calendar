@@ -18,6 +18,8 @@ import urllib.error
 import download_feeds as df
 import pytest
 
+from tests.helpers import make_ics, make_vevent
+
 
 def _rate_limited(req) -> urllib.error.HTTPError:
     """Build the HTTPError urllib raises for an HTTP 429 response."""
@@ -139,6 +141,58 @@ class TestHostThrottle:
         df._wait_for_host("events.in.gov", last_request_at)  # t=10.4, 0.2s later
 
         assert 0 < sleeps[0] <= 1.0
+
+
+BROWNCOUNTY_URL = "https://browncounty.com/events/?mec-ical-feed=1"
+BROWNCOUNTY_RAW_ICS = make_ics(
+    make_vevent(
+        "Live Music at Country Heritage",
+        "DTSTART;TZID=America/Indiana/Indianapolis:20260912T180000",
+        "DTEND;TZID=America/Indiana/Indianapolis:20260912T210000",
+        "MEC-test@browncounty.com",
+    )
+)
+
+
+class TestMecTimezonePassthrough:
+    def test_browncounty_tzid_times_left_untouched(self, monkeypatch, tmp_path):
+        """MEC v7.32 emits correct TZID wall-clock times — download must not shift them.
+
+        Regression for: Live Music at Country Heritage showed 10pm in the
+        calendar vs 6pm on https://browncounty.com/events/live-music-at-country-heritage/
+        because the stale v7.25 workaround added +4h to every DTSTART/DTEND.
+        Drives the production download_feeds path (fetch + DB mocked) so a
+        reintroduced rewrite hook fails this test.
+        """
+        monkeypatch.chdir(tmp_path)
+        monkeypatch.setattr(
+            df,
+            "fetch_feeds_from_db",
+            lambda city: [
+                {
+                    "id": 1,
+                    "url": BROWNCOUNTY_URL,
+                    "name": "Brown County Events",
+                    "fallback_url": None,
+                    "status": "active",
+                }
+            ],
+        )
+
+        def fake_fetch(url, outfile):
+            outfile.write_text(BROWNCOUNTY_RAW_ICS, encoding="utf-8")
+            return True
+
+        monkeypatch.setattr(df, "fetch_with_curl_fallback", fake_fetch)
+
+        df.download_feeds("bloomington")
+
+        produced = list((tmp_path / "cities" / "bloomington").glob("*.ics"))
+        assert len(produced) == 1
+        content = produced[0].read_text(encoding="utf-8")
+        assert "DTSTART;TZID=America/Indiana/Indianapolis:20260912T180000" in content
+        assert "DTEND;TZID=America/Indiana/Indianapolis:20260912T210000" in content
+        assert "20260912T220000" not in content
 
 
 class TestCurlFallback:
