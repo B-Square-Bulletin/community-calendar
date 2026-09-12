@@ -18,6 +18,8 @@ import urllib.error
 import download_feeds as df
 import pytest
 
+from tests.helpers import make_ics, make_vevent
+
 
 def _rate_limited(req) -> urllib.error.HTTPError:
     """Build the HTTPError urllib raises for an HTTP 429 response."""
@@ -142,17 +144,13 @@ class TestHostThrottle:
 
 
 BROWNCOUNTY_URL = "https://browncounty.com/events/?mec-ical-feed=1"
-BROWNCOUNTY_RAW_ICS = (
-    "BEGIN:VCALENDAR\r\n"
-    "PRODID:-//WordPress - MECv7.32.0//EN\r\n"
-    "BEGIN:VEVENT\r\n"
-    "UID:MEC-test@browncounty.com\r\n"
-    "DTSTART;TZID=America/Indiana/Indianapolis:20260912T180000\r\n"
-    "DTEND;TZID=America/Indiana/Indianapolis:20260912T210000\r\n"
-    "SUMMARY:Live Music at Country Heritage\r\n"
-    "URL:https://browncounty.com/events/live-music-at-country-heritage/\r\n"
-    "END:VEVENT\r\n"
-    "END:VCALENDAR\r\n"
+BROWNCOUNTY_RAW_ICS = make_ics(
+    make_vevent(
+        "Live Music at Country Heritage",
+        "DTSTART;TZID=America/Indiana/Indianapolis:20260912T180000",
+        "DTEND;TZID=America/Indiana/Indianapolis:20260912T210000",
+        "MEC-test@browncounty.com",
+    )
 )
 
 
