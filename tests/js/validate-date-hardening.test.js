@@ -141,16 +141,16 @@ describe('focus move', () => {
       querySelector: (sel) =>
         sel === '[data-xmlui-id="dateTabStrip"]'
           ? {
-              focus(opts) {
-                global.focusedWith = opts;
-              },
-              hasAttribute() {
-                return true;
-              },
-              setAttribute(k, v) {
-                global.tabIndexSet = [k, v];
-              },
-            }
+            focus(opts) {
+              global.focusedWith = opts;
+            },
+            hasAttribute() {
+              return true;
+            },
+            setAttribute(k, v) {
+              global.tabIndexSet = [k, v];
+            },
+          }
           : null,
     };
     global.focusedWith = null;
@@ -165,10 +165,10 @@ describe('Escape returns focus to the Custom tab (#109)', () => {
       querySelector(sel) {
         return sel === '[data-xmlui-id="customDateTab"]'
           ? {
-              focus(opts) {
-                global.customFocusedWith = opts;
-              },
-            }
+            focus(opts) {
+              global.customFocusedWith = opts;
+            },
+          }
           : null;
       },
     };
@@ -292,8 +292,9 @@ describe('invalid-link fallbacks', () => {
     ).toEqual('today');
   });
   it('picker path still coerces an inverted pair to the single from-day', () => {
-    // Pin now like xmlui/test.html does: without it the clamp-to-today
-    // rule makes this time-bombed once the real date passes 2026-09-10.
+    // Pin now like xmlui/test.html does: this section runs under the real
+    // clock, and the clamp-to-today rule shifts .to once the actual date
+    // passes the from-day (2026-09-10), time-bombing the assertion.
     expect(
       window.resolveCustomRange('2026-09-10', '2026-09-05', {
         now: '2026-02-11T12:00:00Z',
