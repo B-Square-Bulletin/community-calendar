@@ -141,16 +141,16 @@ describe('focus move', () => {
       querySelector: (sel) =>
         sel === '[data-xmlui-id="dateTabStrip"]'
           ? {
-            focus(opts) {
-              global.focusedWith = opts;
-            },
-            hasAttribute() {
-              return true;
-            },
-            setAttribute(k, v) {
-              global.tabIndexSet = [k, v];
-            },
-          }
+              focus(opts) {
+                global.focusedWith = opts;
+              },
+              hasAttribute() {
+                return true;
+              },
+              setAttribute(k, v) {
+                global.tabIndexSet = [k, v];
+              },
+            }
           : null,
     };
     global.focusedWith = null;
@@ -165,10 +165,10 @@ describe('Escape returns focus to the Custom tab (#109)', () => {
       querySelector(sel) {
         return sel === '[data-xmlui-id="customDateTab"]'
           ? {
-            focus(opts) {
-              global.customFocusedWith = opts;
-            },
-          }
+              focus(opts) {
+                global.customFocusedWith = opts;
+              },
+            }
           : null;
       },
     };
