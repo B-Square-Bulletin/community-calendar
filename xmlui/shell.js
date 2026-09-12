@@ -644,29 +644,29 @@ window._xsLogs = [];
         });
       }
 
-      // skip-stale-cached-paint: a cache old enough to differ from fresh is
-      // wrong-data, because the engine does not re-render the list on the
-      // fresh replacement emission (latent since the cached-then-fresh
-      // pattern landed; reproduced on both deployments 2026-08-19). Data
-      // changes at most nightly, so a young cache is byte-identical to
-      // fresh and keeps the instant paint; an old one waits for fresh.
+      // The epoch nudge in Main.xmlui (xmlui#3816 workaround) makes the
+      // fresh replacement emission actually repaint the list, so a stale
+      // cached paint self-corrects seconds later and the TTL gate that
+      // skipped it (4ff187d) is retired: instant paint always, correct
+      // within the fresh fetch. The {at, rows} envelope stays; painting a
+      // cache older than the nightly-build horizon marks
+      // cc-events-cached-stale-painted for observability.
       var CACHE_TTL_MS = 6 * 60 * 60 * 1000;
       function unwrapCachedRows(val) {
-        if (
-          val &&
-          Array.isArray(val.rows) &&
-          typeof val.at === 'number' &&
-          Date.now() - val.at <= CACHE_TTL_MS
-        ) {
-          return val.rows;
+        var rows = null;
+        var age = null;
+        if (val && Array.isArray(val.rows)) {
+          rows = val.rows;
+          if (typeof val.at === 'number') age = Date.now() - val.at;
+        } else if (Array.isArray(val)) {
+          rows = val; // legacy raw entry, age unknown
         }
-        if (val) {
-          // Aged envelope, or a legacy raw-array entry with no age: skip.
+        if (rows && (age === null || age > CACHE_TTL_MS)) {
           try {
-            performance.mark('cc-events-skip-cached-stale');
+            performance.mark('cc-events-cached-stale-painted');
           } catch (e) {}
         }
-        return null;
+        return rows;
       }
 
       var fetchPromise = null;
@@ -683,10 +683,6 @@ window._xsLogs = [];
       var lastEmitFn = null;
       var lastEmitCity = null;
       var lastEmitSig = null;
-
-      function rowsSig(rows) {
-        return rows.length + ':' + (rows.length ? rows[0].id + ':' + rows[rows.length - 1].id : '');
-      }
 
       function eventsUrl(city) {
         return (
@@ -738,13 +734,22 @@ window._xsLogs = [];
             // switched away, but only emit if this city is still current.
             idbSet('events:' + city, { at: Date.now(), rows: rows }).catch(function () {});
             if (city !== window.cityFilter) return false; // stale-city race guard (#76)
+            // Hash the payload once: the coalescing decision and the stored
+            // lastEmitSig both need the same full-payload eventsSignature.
+            var freshSig = window.eventsSignature(rows);
             // issue-82: skip the replacement when this same subscriber already
             // holds identical data — the emit would only trigger a re-render.
             if (
-              currentEmit &&
-              currentEmit === lastEmitFn &&
-              city === lastEmitCity &&
-              rowsSig(rows) === lastEmitSig
+              window.shouldSkipFreshEmit(
+                {
+                  currentEmit: currentEmit,
+                  lastEmitFn: lastEmitFn,
+                  city: city,
+                  lastEmitCity: lastEmitCity,
+                  lastEmitSig: lastEmitSig,
+                },
+                freshSig
+              )
             ) {
               performance.mark('cc-events-skip-fresh-identical');
               return true;
@@ -753,7 +758,7 @@ window._xsLogs = [];
             if (currentEmit) {
               lastEmitFn = currentEmit;
               lastEmitCity = city;
-              lastEmitSig = rowsSig(rows);
+              lastEmitSig = freshSig;
               currentEmit(rows);
             }
             return true;
@@ -795,7 +800,7 @@ window._xsLogs = [];
             performance.mark('cc-events-emit-cached');
             lastEmitFn = emit;
             lastEmitCity = city;
-            lastEmitSig = rowsSig(cached);
+            lastEmitSig = window.eventsSignature(cached);
             emit(cached);
           }
         });
