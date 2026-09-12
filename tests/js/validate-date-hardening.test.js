@@ -292,8 +292,9 @@ describe('invalid-link fallbacks', () => {
     ).toEqual('today');
   });
   it('picker path still coerces an inverted pair to the single from-day', () => {
-    // Pin now like xmlui/test.html does: without it the clamp-to-today
-    // rule makes this time-bombed once the real date passes 2026-09-10.
+    // Pin now like xmlui/test.html does: this section runs under the real
+    // clock, and the clamp-to-today rule shifts .to once the actual date
+    // passes the from-day (2026-09-10), time-bombing the assertion.
     expect(
       window.resolveCustomRange('2026-09-10', '2026-09-05', {
         now: '2026-02-11T12:00:00Z',
