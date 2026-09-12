@@ -141,41 +141,60 @@ class TestHostThrottle:
         assert 0 < sleeps[0] <= 1.0
 
 
+BROWNCOUNTY_URL = "https://browncounty.com/events/?mec-ical-feed=1"
+BROWNCOUNTY_RAW_ICS = (
+    "BEGIN:VCALENDAR\r\n"
+    "PRODID:-//WordPress - MECv7.32.0//EN\r\n"
+    "BEGIN:VEVENT\r\n"
+    "UID:MEC-test@browncounty.com\r\n"
+    "DTSTART;TZID=America/Indiana/Indianapolis:20260912T180000\r\n"
+    "DTEND;TZID=America/Indiana/Indianapolis:20260912T210000\r\n"
+    "SUMMARY:Live Music at Country Heritage\r\n"
+    "URL:https://browncounty.com/events/live-music-at-country-heritage/\r\n"
+    "END:VEVENT\r\n"
+    "END:VCALENDAR\r\n"
+)
+
+
 class TestMecTimezonePassthrough:
-    def test_browncounty_tzid_times_left_untouched(self, tmp_path):
+    def test_browncounty_tzid_times_left_untouched(self, monkeypatch, tmp_path):
         """MEC v7.32 emits correct TZID wall-clock times — download must not shift them.
 
         Regression for: Live Music at Country Heritage showed 10pm in the
         calendar vs 6pm on https://browncounty.com/events/live-music-at-country-heritage/
         because the stale v7.25 workaround added +4h to every DTSTART/DTEND.
+        Drives the production download_feeds path (fetch + DB mocked) so a
+        reintroduced rewrite hook fails this test.
         """
-        ics = (
-            "BEGIN:VCALENDAR\r\n"
-            "PRODID:-//WordPress - MECv7.32.0//EN\r\n"
-            "BEGIN:VEVENT\r\n"
-            "UID:MEC-test@browncounty.com\r\n"
-            "DTSTART;TZID=America/Indiana/Indianapolis:20260912T180000\r\n"
-            "DTEND;TZID=America/Indiana/Indianapolis:20260912T210000\r\n"
-            "SUMMARY:Live Music at Country Heritage\r\n"
-            "URL:https://browncounty.com/events/live-music-at-country-heritage/\r\n"
-            "END:VEVENT\r\n"
-            "END:VCALENDAR\r\n"
+        monkeypatch.chdir(tmp_path)
+        monkeypatch.setattr(
+            df,
+            "fetch_feeds_from_db",
+            lambda city: [
+                {
+                    "id": 1,
+                    "url": BROWNCOUNTY_URL,
+                    "name": "Brown County Events",
+                    "fallback_url": None,
+                    "status": "active",
+                }
+            ],
         )
-        outfile = tmp_path / "browncounty.ics"
-        outfile.write_text(ics, encoding="utf-8")
 
-        # The only download-time mutation allowed is X-SOURCE injection,
-        # which must leave DTSTART/DTEND wall-clock times untouched.
-        df.inject_source_headers(outfile, "Brown County Events", None)
-        content = outfile.read_text(encoding="utf-8")
+        def fake_fetch(url, outfile):
+            outfile.write_text(BROWNCOUNTY_RAW_ICS, encoding="utf-8")
+            return True
+
+        monkeypatch.setattr(df, "fetch_with_curl_fallback", fake_fetch)
+
+        df.download_feeds("bloomington")
+
+        produced = list((tmp_path / "cities" / "bloomington").glob("*.ics"))
+        assert len(produced) == 1
+        content = produced[0].read_text(encoding="utf-8")
         assert "DTSTART;TZID=America/Indiana/Indianapolis:20260912T180000" in content
         assert "DTEND;TZID=America/Indiana/Indianapolis:20260912T210000" in content
-
-    def test_no_mec_tz_rewrite_hook_remains(self):
-        """The stale v7.25 +4h rewrite must be gone, not just bypassed."""
-        assert not hasattr(df, "fix_mec_timezone")
-        assert not hasattr(df, "_needs_mec_tz_fix")
-        assert not getattr(df, "_MEC_TZ_FIX_URLS", set())
+        assert "20260912T220000" not in content
 
 
 class TestCurlFallback:
