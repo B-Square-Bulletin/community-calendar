@@ -687,13 +687,18 @@ window._xsLogs = [];
       // #86: the ingest memos in helpers.js key on ccArraySig (length +
       // endpoint ids), which falsely HITs on a mid-only payload change and
       // returns the previous array BY REFERENCE — so fresh data the #85
-      // emission fix correctly lets through never reaches the list. Each emit
-      // site below publishes the strong eventsSignature it already computed
-      // into window.__ccEmitSig, and the memo keys carry it, so an emission
-      // whose content changed invalidates the chain while repeat evaluations
-      // within one emission still hit. (Upstream folds in an emit sequence for
-      // its transient cached slice, which has no payload signature; the fork
-      // has no sliced emit, so the signature alone identifies an emission.)
+      // emission fix correctly lets through never reaches the list. Every
+      // emission publishes its own strong identity here, and the memo keys
+      // carry it, so an emission whose content differs invalidates the chain
+      // exactly once. emitSeq disambiguates an emission that carries no
+      // independent payload signature (upstream's transient cached slice);
+      // between emissions the value is constant, so repeat evaluations within
+      // one emission still hit.
+      var emitSeq = 0;
+      function publishEmitSig(sig) {
+        emitSeq += 1;
+        window.__ccEmitSig = (sig == null ? 'null' : sig) + '#' + emitSeq;
+      }
 
       function eventsUrl(city) {
         return (
@@ -770,7 +775,7 @@ window._xsLogs = [];
               lastEmitFn = currentEmit;
               lastEmitCity = city;
               lastEmitSig = freshSig;
-              window.__ccEmitSig = freshSig;
+              publishEmitSig(freshSig);
               currentEmit(rows);
             }
             return true;
@@ -813,7 +818,7 @@ window._xsLogs = [];
             lastEmitFn = emit;
             lastEmitCity = city;
             lastEmitSig = window.eventsSignature(cached);
-            window.__ccEmitSig = lastEmitSig;
+            publishEmitSig(lastEmitSig);
             emit(cached);
           }
         });
