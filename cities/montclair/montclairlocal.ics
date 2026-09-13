@@ -1,0 +1,557 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Montclair Local - ECPv6.15.18//NONSGML v1.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Montclair Local
+X-ORIGINAL-URL:https://montclairlocal.news
+X-WR-CALDESC:Events for Montclair Local
+REFRESH-INTERVAL;VALUE=DURATION:PT1H
+X-Robots-Tag:noindex
+X-PUBLISHED-TTL:PT1H
+BEGIN:VTIMEZONE
+TZID:America/New_York
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:20250309T070000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:20251102T060000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:20260308T070000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:20261101T060000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:20270314T070000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:20271107T060000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260313T180000
+DTEND;TZID=America/New_York:20260413T200000
+DTSTAMP:20260406T230143
+CREATED:20260305T165857Z
+LAST-MODIFIED:20260305T165857Z
+UID:10138205-1773424800-1776110400@montclairlocal.news
+SUMMARY:Good Works
+DESCRIPTION:Studio Montclair is proud to acknowledge the artist members who volunteer by providing an exhibition to highlight their artwork. While this exhibition by artist members is a tribute to their works\, their works on display are likewise a tribute to all people who donate their time and efforts to a greater good. \nSince its inception in 1997\, Studio Montclair has depended upon the work of volunteers. They are the backbone of the organization and it thrives only due to their tireless efforts on its behalf. Volunteers hang the works in the exhibitions\, paint the gallery after each show\, organize the receptions\, write press releases\, service the website\, maintain and post on social media\, and photograph our events. Volunteers serve on the Board of Trustees\, coordinate and facilitate the artist critique groups\, provide oversight on all matters pertaining to Art and the artist members\, and much more. \nParticipating Artists:\nNancy Blankenhorn\, Janet Boltax\, Phil Cantor\, Corrine Carr\, Dennis Connors\, Dan Epstein\, Peggy Gardner\, Linda Jacobs\, Amanda Kopp\, Steve Kushner\, Rick Ladd\, Paulina Olivares\, Denis Orloff\, Ted Papoulas\, Jim Price\, David Schlosser\, Paul Schmitz \nListing Information for the Exhibition: \nExhibition Dates: March 13 – April 10\, 2026\nOpening Reception: Friday\, March 13\, 6-8pm. All Are Welcome!\nGalleries: Studio Montclair’s Leach Gallery\, 641 Bloomfield Ave.\, Montclair\, NJ\nGallery Hours: Thursday – Sunday\, 1:00 – 5:00pm; please check SMI website for updates and additional hours\nStudio Montclair Contact Info: smi@studiomontclair.org\, 862-500-1447 \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/good-works/
+LOCATION:Leach Gallery\, 641 Bloomfield Avenue\, Montclair\, 07042\, United States
+CATEGORIES:Art & Culture
+ATTACH;FMTTYPE=image/jpeg:https://montclairlocal.news/wp-content/uploads/2026/03/SM_SocialPost-GoodWorks2026.jpg
+ORGANIZER;CN="Hours%3A Thrusday - Sunday%2C 1%3A00 - 5%3A00pm each day.":MAILTO:smi@studiomontclair.org
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;VALUE=DATE:20260320
+DTEND;VALUE=DATE:20260420
+DTSTAMP:20260406T230143
+CREATED:20260316T233414Z
+LAST-MODIFIED:20260316T233414Z
+UID:10138262-1773964800-1776643199@montclairlocal.news
+SUMMARY:The Museum Makes Art: MAM’s Creative Community
+DESCRIPTION:This exhibition celebrates the creativity of the Montclair Art Museum community by showcasing artwork by our staff\, docents\, art educators\, Board members\, and members of MAM’s African American Cultural Committee (AACC). \nMAM’s mission statement reads\, “Through art\, we create experiences that inspire\, challenge\, and foster community to shape our shared future.” While this statement speaks to the purpose and values that we strive to share with all of our visitors\, it also reflects the collective culture cultivated by the people working within the museum offices\, art studios\, galleries\, and behind the scenes. Featuring 53 artists\, the work on view is as multifaceted as the Museum and includes a wide range of artistic mediums and techniques. Each piece expresses unique ideas and perspectives that we hope will spark conversation and creativity. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/the-museum-makes-art-mams-creative-community/
+LOCATION:Montclair Art Museum\, 3 South Mountain Ave\, Montclair\, NJ\, 07042\, United States
+CATEGORIES:Art & Culture
+ATTACH;FMTTYPE=image/jpeg:https://montclairlocal.news/wp-content/uploads/2026/03/Aries-by-Angela-Beekers-Uberi.jpg
+GEO:40.8185787;-74.2242523
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Montclair Art Museum 3 South Mountain Ave Montclair NJ 07042 United States;X-APPLE-RADIUS=500;X-TITLE=3 South Mountain Ave:geo:-74.2242523,40.8185787
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260324T080000
+DTEND;TZID=America/New_York:20260601T170000
+DTSTAMP:20260406T230143
+CREATED:20260227T005108Z
+LAST-MODIFIED:20260227T005108Z
+UID:10138186-1774339200-1780333200@montclairlocal.news
+SUMMARY:Project for Empty Space | Lives In Translation: "A Feeling of Itself"
+DESCRIPTION:“A Feeling of Itself” is a three-part exhibition presented in collaboration with Lives in Translation (LiT) and the Design Consortium at Rutgers University-Newark\, led by designers Chantal Fischzang and Gisela Ochoa. The three-part program will unfold across multiple sites in Newark from March through June 2026. \n“A Feeling of Itself” explores the richness and complexity of living between languages. Rooted in the concept of arraigo—a sense of belonging shaped through one’s roots—the exhibition layers bilingual interviews\, photography\, typography\, and data visualization to illuminate how translation becomes a powerful form of cultural connection. At a time when multilingual identity and migrant/immigrant communities face increasing scrutiny and political attack\, this exhibition asserts language diversity as a source of power\, dignity\, and collective memory. “A Feeling of Itself” celebrates multilingualism not as a barrier\, but as a creative and civic strength that defines Newark’s past\, present\, and future. \nThe three-part program will commence in March 2026\, with the “A Feeling of Itself” Window Installation at 19 Williams Street in Newark\, presented in partnership with Teachers Village and RBH Group. The second phase\, on view March 24 through June 1\, 2026\, expands into a full exhibition at Project for Empty Space\, 800 Broad Street\, Newark\, and will open with a reception on April 2 from 6–8 pm. The project culminates in a site-specific lighting installation across the exterior façade on Edison Place\, transforming the building itself into a beacon connecting language and light. \nDrawing from multilingual conversations across the region\, the project transforms linguistic data into immersive public artworks. Through light\, sound\, and spatial design\, the installations render language visible\, celebrating Newark’s polyphonic identity while foregrounding the lived experiences of multilingual students and families. Interviews between LiT students and their relatives\, conducted in English and their respective mother tongues\, form the emotional core of the exhibition\, revealing the layered dynamics of code-switching and presenting language as both a personal inheritance and a shared civic resource. The exhibit also features visualizations of survey data collected from students\, faculty\, and staff from all three Rutgers campuses\, highlighting its identity as a majority multilingual university. \nHoused in the Department of Spanish and Portuguese Studies at Rutgers University-Newark\, Lives in Translation pairs multilingual students with community organizations to provide translation\, interpretation\, and documentation of linguistic diversity. Among other languages\, the program works with Spanish\, Chinese (Mandarin and Cantonese)\, Korean\, Portuguese\, Gujarati\, Arabic\, Polish\, Haitian Creole\, Russian\, Hindi\, Tagalog\, Italian\, Vietnamese\, Urdu\, and French—reflecting the 15 most-used languages in New Jersey. The exhibition also reflects LiT’s broader advocacy efforts\, including testimony before the New Jersey State Senate in support of expanded statewide language access legislation\, an initiative that positions New Jersey as a national leader in equitable access to public services for limited-English-proficient residents. \nThe works on view extend a longstanding partnership with RU-N’s Design Consortium\, bringing visibility to LiT’s research\, data\, and impact. Grounded in cooperative learning and community building through communication design\, the Consortium is housed at Express Newark\, a center in Newark\, NJ\, where artists\, students\, and community members collaborate to advance social change. \nThrough collaboration\, research\, and public art\, “A Feeling of Itself “affirms that translation is not merely transactional—it is relational. In giving form to voices that move fluidly across languages\, the exhibition invites audiences to experience language as light: connective\, radiant\, and alive. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/project-for-empty-space-lives-in-translation-a-feeling-of-itself/
+LOCATION:Project for Empty Space\, 800 Broad Street\, Newark\, 07102\, United States
+CATEGORIES:Art & Culture
+ATTACH;FMTTYPE=image/jpeg:https://montclairlocal.news/wp-content/uploads/2026/02/01_2026LIT-SocialPost-scaled.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260327T200000
+DTEND;TZID=America/New_York:20260412T190000
+DTSTAMP:20260406T230143
+CREATED:20260326T191725Z
+LAST-MODIFIED:20260326T191725Z
+UID:10139415-1774641600-1776020400@montclairlocal.news
+SUMMARY:What the Constitution Means to Me
+DESCRIPTION:Playwright Heidi Schreck’s boundary-breaking play breathes new life into our Constitution and imagines how it will shape the next generation of Americans. Fifteen-year-old Heidi earned her college tuition by winning Constitutional debate competitions across the United States. In this hilarious\, hopeful and achingly human new play\, she resurrects her teenage self in order to trace the profound relationship between four generations of women and the founding document that shaped their lives. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/what-the-constitution-means-to-me/2026-03-27/
+LOCATION:The Van Guard Theater\, 180 Bloomfield Ave\, Montclair\, 07042\, United States
+CATEGORIES:Entertainment
+ATTACH;FMTTYPE=image/png:https://montclairlocal.news/wp-content/uploads/2026/03/Screenshot-2026-03-24-132014.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260407T083000
+DTEND;TZID=America/New_York:20260407T180000
+DTSTAMP:20260406T230143
+CREATED:20260324T182505Z
+LAST-MODIFIED:20260324T182505Z
+UID:10138382-1775550600-1775584800@montclairlocal.news
+SUMMARY:2-for-1 TWOsdays
+DESCRIPTION:Every 1st Tuesday of the month\, your day pass = entry for TWO. \nThat means you and a buddy can cowork\, jam\, and caffeinate together for just $30. \nNo codes. No awkward signup hoops. Just great vibes\, great company & a great deal. \nWork vibes + friend energy + saving money = a very good Tuesday. \nFAQs\nDo we have to arrive at the same time?\nNope — but there is one key rule. \nThe first person (Friend One) must be physically in the space and checked in. \nWhen the second person (Friend Two) arrives\, they’ll tell us Friend One’s name at the front desk and we’ll check them in as their buddy. \nNone of this\, like\, “My friend is coming later\, they’re the one who’ll pay” stuff. \nWhat if Friend One is a member?\nSame deal – the member needs to be in the space and checked in for their buddy to join them. \nCan you split the cost between me and my buddy?\nSure\, if you’re both here at the same time. Otherwise Venmo or Zelle comes in handy for Person 1 to get paid by Person 2 in that instance. \nCan I buy my day pass in advance?\nAbsolutely – and we encourage it!\nYou can grab a day pass ahead of time right here. \nThat said\, if you’re more of a just show up person\, that works too! Just come in with your credit card and your friendly neighborhood RecRoom team member will process your pass and get you set up. \nThat’s it. Simple\, flexible\, and easy to keep doing month after month. Maybe you want to put it as a recurring appointment on your calendar? #hinthint #notsubtle \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/2-for-1-twosdays-2/
+LOCATION:RecRoom\, 1 Lackawanna Plaza\, Ste. 6\, Montclair\, 07042\, United States
+CATEGORIES:Community
+ATTACH;FMTTYPE=image/png:https://montclairlocal.news/wp-content/uploads/2026/03/4726-BAF-Tues.-SQUARE-Post.png
+ORGANIZER;CN="1 Lackawanna PlazaMontclair%2C NJ%2C 07042":MAILTO:hi@recroomnj.com
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260407T110000
+DTEND;TZID=America/New_York:20260407T120000
+DTSTAMP:20260406T230143
+CREATED:20260402T173817Z
+LAST-MODIFIED:20260402T173817Z
+UID:10139467-1775559600-1775563200@montclairlocal.news
+SUMMARY:Mindfulness in the Garden (Weekday Series)
+DESCRIPTION:Mindfulness in the Garden (Weekday Series) \nInstructor: Jodi Brooks \nTuesdays\, 11:00 AM – 12:00 PM \nEarly Spring Session: Apr 7\, 14\, & 28 (No class 4/21) \nDiscover how a mindfulness practice can help us awaken and live in harmony with oneself and with the natural world. This class will include: simple instructions for getting started with a formal mindfulness practice\, very gentle stretching & breathwork\, and an outdoor contemplative garden walk. This is a practice of slowing down\, cultivating quiet and paying attention to our senses. All levels are welcome. No experience needed. Spring classes will be held outdoors\, with a short walk (weather permitting). \nFee: 3 April classes: General public $75\, Members $60 \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/mindfulness-in-the-garden-weekday-series/2026-04-07/
+LOCATION:Van Vleck House & Gardens\, 21 Van Vleck Street\, Montclair\, NJ\, 07042\, United States
+ATTACH;FMTTYPE=image/jpeg:https://montclairlocal.news/wp-content/uploads/2026/04/Mindfulness-scaled.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260407T120000
+DTEND;TZID=America/New_York:20260407T130000
+DTSTAMP:20260406T230143
+CREATED:20260318T044934Z
+LAST-MODIFIED:20260318T044934Z
+UID:10138274-1775563200-1775566800@montclairlocal.news
+SUMMARY:Is a Retail Space Right for Your Business?
+DESCRIPTION:Thinking about opening a storefront? Before you sign that lease\, join us for a power-packed hour\, where you’ll get the framework to make one of the biggest decisions in your business journey! Deciding whether a physical retail space aligns with your goals\, your market\, and your bottom line is bigger than just the cost of the space: we’ll get real about costs\, customer expectations\, location strategy\, and operational demands. You’ll leave with clarity on whether retail is your next smart move—and if it is\, the essential steps to do it right from day one. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/is-a-retail-space-right-for-your-business/
+LOCATION:Online – Virtual\, Montclair\, NJ\, 07042\, United States
+CATEGORIES:Virtual Event
+ATTACH;FMTTYPE=image/png:https://montclairlocal.news/wp-content/uploads/2026/03/PH-Event-Brite-4.png
+ORGANIZER;CN="Montclair State University%2C Feliciano Center for Entrepreneurship &amp%3B Innovation":MAILTO:innovation@montclair.edu
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260407T183000
+DTEND;TZID=America/New_York:20260407T200000
+DTSTAMP:20260406T230143
+CREATED:20260305T170431Z
+LAST-MODIFIED:20260305T170431Z
+UID:10138199-1775586600-1775592000@montclairlocal.news
+SUMMARY:Open Book / Open Mind; Nicholas Lemann\, "Returning"
+DESCRIPTION:Join Montclair Public Library for another amazing author conversation! Co-presented by Bnai Keshet\, Congregation Shomrei Emunah\, Temple Ner Tamid and Temple Sholom of West Essex. Register now at tinyurl.com/OBOMLemann \nNew Yorker staff writer Nicholas Lemann will talk to journalist and author Dale Russakoff (“The Prize”) about “Returning\,” his new memoir about 300 years of his Jewish family in Louisiana\, exploring their stories from peddlers to plantation owners (and enslavers) as well as merchants and professionals.\n“What does it mean to belong? ‘Returning’ offers a profound mediation on family\, Jewish identity\, and the meaning of home in a world constantly shaken by economic\, social\, and cultural change.”― Henry Louis Gates Jr.\nDoors open at 6 p.m. The discussion will be followed by an audience Q&A and book sales and signing with Watchung Booksellers. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/open-book-open-mind-nicholas-lemann-returning/
+LOCATION:Montclair Public Library\, 50 S Fullerton Ave\, Montclair\, NJ\, 07042\, United States
+CATEGORIES:Art & Culture
+ATTACH;FMTTYPE=image/png:https://montclairlocal.news/wp-content/uploads/2026/03/Listing_OBOM2026_Lemann.png
+GEO:40.8116415;-74.2187774
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Montclair Public Library 50 S Fullerton Ave Montclair NJ 07042 United States;X-APPLE-RADIUS=500;X-TITLE=50 S Fullerton Ave:geo:-74.2187774,40.8116415
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260409T140000
+DTEND;TZID=America/New_York:20260409T160000
+DTSTAMP:20260406T230143
+CREATED:20260122T191923Z
+LAST-MODIFIED:20260122T191923Z
+UID:10136664-1775743200-1775750400@montclairlocal.news
+SUMMARY:Chess and Coffee
+DESCRIPTION:Come play chess with a nice cup of coffee at our weekly meetup! Chess boards will be provided\, but feel free to bring your own. \nThis is a drop-in open play\, there will be no guided instruction. Registration is recommended for updates. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/chess-and-coffee-10/2026-04-09/
+LOCATION:Montclair Public Library\, 50 South Fullerton Avenue\, Montclair\, New Jersey\, 07042\, United States
+CATEGORIES:Entertainment
+ATTACH;FMTTYPE=image/png:https://montclairlocal.news/wp-content/uploads/2026/01/Chess-and-Coffee-Webslide-2026-1.png
+ORGANIZER;CN="Montclair Public Library":MAILTO:publicrelations@montclair.bccls.org
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260410T080000
+DTEND;TZID=America/New_York:20260410T170000
+DTSTAMP:20260406T230143
+CREATED:20260402T172835Z
+LAST-MODIFIED:20260402T172835Z
+UID:10139445-1775808000-1775840400@montclairlocal.news
+SUMMARY:Gin & Sonic live at Montclair Brewery
+DESCRIPTION:These Montclair musical luminaries return with their sound as refined as ever\, specializing in delivering the highest quality performance they can. Combining rock classics with soulful R&B and edgy pop crowd-pleasers\, GIN & SONIC brings the party to you no matter where you are! \n$5 cover charge per person that goes directly to the artists. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/gin-sonic-live-at-montclair-brewery/
+LOCATION:Montclair Brewery\, 101 Walnut Street\, Montclair\, NJ\, 07042\, United States
+CATEGORIES:Entertainment
+ATTACH;FMTTYPE=image/png:https://montclairlocal.news/wp-content/uploads/2026/03/4.11-Gin-Sonic-flyer.png
+ORGANIZER;CN="Montclair Brewery":MAILTO:Staff@montclairbrewery.com
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260410T170000
+DTEND;TZID=America/New_York:20260410T220000
+DTSTAMP:20260406T230143
+CREATED:20260330T160636Z
+LAST-MODIFIED:20260330T160636Z
+UID:10139447-1775840400-1775858400@montclairlocal.news
+SUMMARY:Notorious BBQ at Montclair Brewery
+DESCRIPTION:The expert in all things brisket\, Notorious BBQ\, is back! If you haven’t yet tried his world-class BBQ\, you’re missing out! In addition to this delectable offering\, there will be beans\, slaw\, and a savory homemade sauce available for purchase. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/notorious-bbq-at-montclair-brewery/
+LOCATION:Montclair Brewery\, 101 Walnut Street\, Montclair\, NJ\, 07042\, United States
+CATEGORIES:Community,Entertainment,Kids & Families
+ATTACH;FMTTYPE=image/png:https://montclairlocal.news/wp-content/uploads/2026/03/4.10-Food-VendorsTrucks-Eventbrite-2160-x-1080-px.png
+ORGANIZER;CN="Montclair Brewery":MAILTO:Staff@montclairbrewery.com
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260410T180000
+DTEND;TZID=America/New_York:20260410T200000
+DTSTAMP:20260406T230143
+CREATED:20260328T192424Z
+LAST-MODIFIED:20260331T192059Z
+UID:10139440-1775844000-1775851200@montclairlocal.news
+SUMMARY:SeaChange Immersive Installation
+DESCRIPTION:SeaChange is an immersive ocean experience created by a team of East Coast artists and surfers dedicated to protecting our oceans. This video and sculpture installation by artists Debrah Pearson Feainn and Jerry Fried is a dynamic environment of 360 video\, scultuptural elements\, environmental sound\, and original music\, presented at 30 minute intervals \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/seachange-immersive-installation/2026-04-10/
+LOCATION:Fletcher Hall\, Unitarian Universalist Congregation at Montclair\, 67 Church Street\, Montclair\, NJ\, 07042\, United States
+CATEGORIES:Art & Culture
+ATTACH;FMTTYPE=image/png:https://montclairlocal.news/wp-content/uploads/2026/03/Screenshot-76.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260410T193000
+DTEND;TZID=America/New_York:20260410T213000
+DTSTAMP:20260406T230143
+CREATED:20260402T172835Z
+LAST-MODIFIED:20260402T172835Z
+UID:10139446-1775849400-1775856600@montclairlocal.news
+SUMMARY:Gin & Sonic live at Montclair Brewery
+DESCRIPTION:These Montclair musical luminaries return with their sound as refined as ever\, specializing in delivering the highest quality performance they can. Combining rock classics with soulful R&B and edgy pop crowd-pleasers\, GIN & SONIC brings the party to you no matter where you are! \n$5 cover charge per person that goes directly to the artists. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/gin-sonic-live-at-montclair-brewery/
+LOCATION:Montclair Brewery\, 101 Walnut Street\, Montclair\, NJ\, 07042\, United States
+CATEGORIES:Entertainment
+ATTACH;FMTTYPE=image/png:https://montclairlocal.news/wp-content/uploads/2026/03/4.11-Gin-Sonic-flyer.png
+ORGANIZER;CN="Montclair Brewery":MAILTO:Staff@montclairbrewery.com
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260411T073000
+DTEND;TZID=America/New_York:20260411T213000
+DTSTAMP:20260406T230143
+CREATED:20260115T194355Z
+LAST-MODIFIED:20260115T194355Z
+UID:10136546-1775892600-1775943000@montclairlocal.news
+SUMMARY:The Elementary Spacetime Show
+DESCRIPTION:A highly inventive new musical by César Alvarez and Emily Orling\, The Elementary Spacetime Show tells the story of Alameda: a young girl who enters a liminal void somewhere in between life and death. Alameda must pass through the eight existential trials of a cosmic Vaudevillian game show to discover the possibility that her darkness is a gift. Her journey is set to a kaleidoscopic contemporary score that bravely handles the subject of teenage suicide with both sensitivity and vibrant showmanship\, blending sly humor with emotional nuance. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/the-elementary-spacetime-show/2026-04-11/1/
+LOCATION:Alexander Kasser Theater\, Montclair State University\, Montclair\, NJ\, 07042\, United States
+CATEGORIES:Art & Culture,Beauty,Live Music
+ATTACH;FMTTYPE=image/png:https://montclairlocal.news/wp-content/uploads/2026/01/elementary_spacetime_show_800x800.png
+GEO:40.8615199;-74.1985521
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Alexander Kasser Theater Montclair State University Montclair NJ 07042 United States;X-APPLE-RADIUS=500;X-TITLE=Montclair State University:geo:-74.1985521,40.8615199
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260411T090000
+DTEND;TZID=America/New_York:20260411T100000
+DTSTAMP:20260406T230143
+CREATED:20260326T181434Z
+LAST-MODIFIED:20260326T181434Z
+UID:10139429-1775898000-1775901600@montclairlocal.news
+SUMMARY:Reiki Guided Meditation & Chakra Balancing with Jen
+DESCRIPTION:Join us for a transformative Reiki meditation session designed to close out your week and energize you for the days ahead. Led by Jen Seaman\, a Reiki Master and Light Healer with over 15 years of experience\, this meditation focuses on recharging your energy\, aligning your center and grounding you. Through guided visualization and the healing power of Reiki\, you’ll clear away the stresses of the past week\, restore your inner balance\, and set powerful intentions for the new week. Perfect for anyone seeking to enhance their well-being and raise their vibration to a new level. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/reiki-guided-meditation-chakra-balancing-with-jen-2/
+CATEGORIES:General Events
+ATTACH;FMTTYPE=image/jpeg:https://montclairlocal.news/wp-content/uploads/2026/03/March-Calendar-14.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260411T130000
+DTEND;TZID=America/New_York:20260411T140000
+DTSTAMP:20260406T230143
+CREATED:20260115T191046Z
+LAST-MODIFIED:20260115T191046Z
+UID:10136511-1775912400-1775916000@montclairlocal.news
+SUMMARY:Lego Robotics for Elementary Students
+DESCRIPTION:LEGO Robotics for Elementary Kids (Grades K–5) \nLEGO Robotics at Kinetic Minds introduces kids to engineering and beginner coding through hands-on building\, testing\, and problem-solving using LEGO robotics kits. \nIn this small-group\, drop-in friendly workshop\, kids work in pairs to build real robots\, program simple behaviors\, and improve their designs through guided challenges. The focus is on curiosity\, experimentation\, and learning how things work—there’s no single “right” build and no step-by-step cookie-cutter instructions. \nWorkshops are intentionally capped at a low student-to-instructor ratio to support collaboration\, confidence\, and meaningful learning. \nKids will explore:\n• Engineering and building with LEGO robotics components\n• Beginner coding concepts (motors\, sensors\, cause and effect)\n• Testing\, debugging\, and iterating designs\n• Teamwork\, communication\, and explaining ideas \nDetails:\n• 60-minute session\n• Small-group format\n• No prior experience required \nCommunity Sponsorship:\n20% of seats are reserved for community sponsorship. Families interested in sponsored spots can email info@kineticmindscreative.com\nfor details. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/lego-robotics-for-elementary-students/2026-04-11/
+LOCATION:RecRoom\, 1 Lackawanna Plaza\, Ste. 6\, Montclair\, 07042\, United States
+CATEGORIES:Kids & Families
+ATTACH;FMTTYPE=image/png:https://montclairlocal.news/wp-content/uploads/2026/01/LEGO-Robotics.png
+ORGANIZER;CN="Kinetic Minds":MAILTO:info@kineticmindscreative.com
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260411T140000
+DTEND;TZID=America/New_York:20260411T160000
+DTSTAMP:20260406T230143
+CREATED:20260115T194355Z
+LAST-MODIFIED:20260115T194355Z
+UID:10136547-1775916000-1775923200@montclairlocal.news
+SUMMARY:The Elementary Spacetime Show
+DESCRIPTION:A highly inventive new musical by César Alvarez and Emily Orling\, The Elementary Spacetime Show tells the story of Alameda: a young girl who enters a liminal void somewhere in between life and death. Alameda must pass through the eight existential trials of a cosmic Vaudevillian game show to discover the possibility that her darkness is a gift. Her journey is set to a kaleidoscopic contemporary score that bravely handles the subject of teenage suicide with both sensitivity and vibrant showmanship\, blending sly humor with emotional nuance. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/the-elementary-spacetime-show/2026-04-11/2/
+LOCATION:Alexander Kasser Theater\, Montclair State University\, Montclair\, NJ\, 07042\, United States
+CATEGORIES:Art & Culture,Beauty,Live Music
+ATTACH;FMTTYPE=image/png:https://montclairlocal.news/wp-content/uploads/2026/01/elementary_spacetime_show_800x800.png
+GEO:40.8615199;-74.1985521
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Alexander Kasser Theater Montclair State University Montclair NJ 07042 United States;X-APPLE-RADIUS=500;X-TITLE=Montclair State University:geo:-74.1985521,40.8615199
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260411T150000
+DTEND;TZID=America/New_York:20260411T170000
+DTSTAMP:20260406T230143
+CREATED:20260328T192424Z
+LAST-MODIFIED:20260331T192059Z
+UID:10139441-1775919600-1775926800@montclairlocal.news
+SUMMARY:SeaChange Immersive Installation
+DESCRIPTION:SeaChange is an immersive ocean experience created by a team of East Coast artists and surfers dedicated to protecting our oceans. This video and sculpture installation by artists Debrah Pearson Feainn and Jerry Fried is a dynamic environment of 360 video\, scultuptural elements\, environmental sound\, and original music\, presented at 30 minute intervals \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/seachange-immersive-installation/2026-04-11/
+LOCATION:Fletcher Hall\, Unitarian Universalist Congregation at Montclair\, 67 Church Street\, Montclair\, NJ\, 07042\, United States
+CATEGORIES:Art & Culture
+ATTACH;FMTTYPE=image/png:https://montclairlocal.news/wp-content/uploads/2026/03/Screenshot-76.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260411T160000
+DTEND;TZID=America/New_York:20260411T180000
+DTSTAMP:20260406T230143
+CREATED:20260305T191927Z
+LAST-MODIFIED:20260305T191927Z
+UID:10138221-1775923200-1775930400@montclairlocal.news
+SUMMARY:Special Screening-  YOU GOT GOLD: A CELEBRATION OF JOHN PRINE
+DESCRIPTION:April 11 Only! Q&A to Follow!\nYOU GOT GOLD: A CELEBRATION OF JOHN PRINE captures a star-studded tribute to the legendary songwriter\, filmed in October 2022 at Nashville’s Ryman Auditorium. The event brought together acclaimed artists\, friends\, and family to share behind-the-scenes stories and perform classic songs\, honoring Prine’s enduring legacy.\nPrine\, widely celebrated as one of history’s greatest songwriters\, captivated millions of fans and earned the admiration of icons such as Bonnie Raitt\, Brandi Carlile\, Tyler Childers\, Lucinda Williams\, Dwight Yoakam\, Jason Isbell\, and Bob Weir\, amongst many others\, are featured in the film performing on the Ryman stage for this special celebration of his life and music.\nPresented in Partnership with Outpost in the Burbs. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/special-screening-you-got-gold-a-celebration-of-john-prine/
+LOCATION:The Clairidge\, 486 Bloomfield Ave\, Montclair\, 07042\, United States
+CATEGORIES:Film
+ATTACH;FMTTYPE=image/jpeg:https://montclairlocal.news/wp-content/uploads/2026/03/You-Got-Gold-2.jpg
+ORGANIZER;CN="Montclair Film":MAILTO:info@montclairfilm.org
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260411T160000
+DTEND;TZID=America/New_York:20260411T230000
+DTSTAMP:20260406T230143
+CREATED:20260324T180802Z
+LAST-MODIFIED:20260324T180802Z
+UID:10138305-1775923200-1775948400@montclairlocal.news
+SUMMARY:In Spite of Ourselves: The Music of John Prine Tribute Concert & Film Screening
+DESCRIPTION:Outpost in the Burbs and Montclair Film celebrate the life and music of John Prine with a live concert and film screening. The show features: \n8PM at the First Congregational Church;\nTed Leo\nLaura Cantrell\nLeslie Mendelson\nCarolann Solebello\nSam Robbins \nand 4pm Film Screening at The Clairidge Theatre –\nYOU GOT GOLD: A CELEBRATION OF JOHN PRINE \nYou Got Gold: A Celebration of John Prine\ncaptures a star-studded tribute to the legendary songwriter\, filmed in October 2022 at Nashville’s Ryman Auditorium. The event brought together acclaimed artists\, friends\, and family to share behind the scenes stories and perform classic songs\, honoring Prine’s enduring legacy. Prine\, widely celebrated as one of history’s greatest songwriters\, captivated millions of fans and earned the admiration of icons such as Bonnie Raitt\, Brandi Carlile\, Tyler Childers\, Lucinda Williams\, Dwight Yoakam\, Jason Isbell\, and Bob Weir\, amongst many others\, are featured in the film performing on the Ryman stage for this special celebration of his life and music. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/in-spite-of-ourselves-the-music-of-john-prine-tribute-concert-film-screening/
+LOCATION:Outpost in the Burbs\, 40 South Fullelrton Avenue\, Montclair\, NJ\, 07043\, United States
+CATEGORIES:Art & Culture,General Events
+ATTACH;FMTTYPE=image/jpeg:https://montclairlocal.news/wp-content/uploads/2026/03/Prine4-11jpg.jpg
+ORGANIZER;CN="Outpost in the Burbs":MAILTO:info@outpostiintheburbs.org
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260411T170000
+DTEND;TZID=America/New_York:20260411T220000
+DTSTAMP:20260406T230143
+CREATED:20260330T160810Z
+LAST-MODIFIED:20260330T160810Z
+UID:10139449-1775926800-1775944800@montclairlocal.news
+SUMMARY:The Mozzarella God at Montclair Brewery
+DESCRIPTION:Surrender to the flavors of the rated top 6 best food truck in New Jersey: The Mozzarella God! With gluten-free options of fresh mozzarella\, this fusion cuisine puts a creative twist on classic dishes. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/the-mozzarella-god-at-montclair-brewery-2/
+LOCATION:Montclair Brewery\, 101 Walnut Street\, Montclair\, NJ\, 07042\, United States
+CATEGORIES:Community,Entertainment,Kids & Families
+ATTACH;FMTTYPE=image/png:https://montclairlocal.news/wp-content/uploads/2026/03/4.11-Food-VendorsTrucks-Eventbrite-2160-x-1080-px.png
+ORGANIZER;CN="Montclair Brewery":MAILTO:Staff@montclairbrewery.com
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260411T173000
+DTEND;TZID=America/New_York:20260411T190000
+DTSTAMP:20260406T230143
+CREATED:20260318T044157Z
+LAST-MODIFIED:20260318T044251Z
+UID:10138270-1775928600-1775934000@montclairlocal.news
+SUMMARY:Flower Crown Making Workshop
+DESCRIPTION:Transform fresh\, seasonal flowers into a wearable masterpiece in this hands-on creative session. You’ll learn to construct a flower crown using flower wires for a custom fit and flower tapes for a seamless\, secure finish. Perfect for festivals or gifts\, this workshop leaves you with a beautiful handcrafted crown and the skills to create more at home. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/flower-crown-making-workshop/
+LOCATION:The Eclectic Chic Boutique\, 547 Bloomfield Avenue\, Montclair\, NJ\, 07042\, United States
+CATEGORIES:General Events
+ATTACH;FMTTYPE=image/png:https://montclairlocal.news/wp-content/uploads/2026/03/Flower-Crown.png
+ORGANIZER;CN="The Eclectic Chic Boutique":MAILTO:kristen@theeclecticchicboutique.com
+GEO:40.821883;-74.213388
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=The Eclectic Chic Boutique 547 Bloomfield Avenue Montclair NJ 07042 United States;X-APPLE-RADIUS=500;X-TITLE=547 Bloomfield Avenue:geo:-74.213388,40.821883
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260411T193000
+DTEND;TZID=America/New_York:20260411T213000
+DTSTAMP:20260406T230143
+CREATED:20260316T233147Z
+LAST-MODIFIED:20260316T233147Z
+UID:10138260-1775935800-1775943000@montclairlocal.news
+SUMMARY:Tito Puente Jr.
+DESCRIPTION:Son of the legendary American salsa and Latin jazz musician Tito Puente\, Tito Puente\, Jr. has big shoes to fill. And boy does he! \nAlways honoring his father’s legacy\, Tito Puente\, Jr. has also made a name for himself as one of the most exciting Latin musicians touring today. Tito Puente Jr. carries his father with him – imprinted on his physical being and locked in his soul. It’s in his looks\, his joy\, and his music. Tito Jr. is on a passionate mission\, determined to nurture the musical legacy left by his father. \nHe has found captive audiences who echo his passion. Crowds lured to a venue by the father are returning to see the son — and to once again participate in the high voltage celebration that takes place on stage. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/tito-puente-jr/
+LOCATION:Wilkins Theatre\, 1000 Morris Ave\, Union\, NJ\, 07083\, United States
+CATEGORIES:General Events
+ATTACH;FMTTYPE=image/jpeg:https://montclairlocal.news/wp-content/uploads/2026/03/FEATURED-260411-TitoPuenteJr.png.jpg
+ORGANIZER;CN="Kean Stage":MAILTO:keanstage@kean.edu
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260411T200000
+DTEND;TZID=America/New_York:20260411T230000
+DTSTAMP:20260406T230143
+CREATED:20260320T203343Z
+LAST-MODIFIED:20260320T203343Z
+UID:10138302-1775937600-1775948400@montclairlocal.news
+SUMMARY:R.E.M. + The Replacements tribute bands
+DESCRIPTION:Two of indie rock’s most influential bands come to life for one night only. The Ones You Love channel the jangly urgency and anthemic sweep of R.E.M.\, while Ashtray Floors bring the raw\, ragged spirit of The Replacements. Expect a set packed with college rock classics\, deep cuts\, and sing-along favorites—equal parts nostalgia and high-energy live show. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/r-e-m-the-replacements-tribute-bands/
+LOCATION:Tierney’s Tavern\, 136 Valley Road\, Montclair\, NJ\, 07042\, United States
+CATEGORIES:Live Music
+ATTACH;FMTTYPE=image/jpeg:https://montclairlocal.news/wp-content/uploads/2026/03/TOYL-promo.jpeg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260412T120000
+DTEND;TZID=America/New_York:20260412T140000
+DTSTAMP:20260406T230143
+CREATED:20260328T192424Z
+LAST-MODIFIED:20260331T192059Z
+UID:10139442-1775995200-1776002400@montclairlocal.news
+SUMMARY:SeaChange Immersive Installation
+DESCRIPTION:SeaChange is an immersive ocean experience created by a team of East Coast artists and surfers dedicated to protecting our oceans. This video and sculpture installation by artists Debrah Pearson Feainn and Jerry Fried is a dynamic environment of 360 video\, scultuptural elements\, environmental sound\, and original music\, presented at 30 minute intervals \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/seachange-immersive-installation/2026-04-12/
+LOCATION:Fletcher Hall\, Unitarian Universalist Congregation at Montclair\, 67 Church Street\, Montclair\, NJ\, 07042\, United States
+CATEGORIES:Art & Culture
+ATTACH;FMTTYPE=image/png:https://montclairlocal.news/wp-content/uploads/2026/03/Screenshot-76.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260412T130000
+DTEND;TZID=America/New_York:20260412T153000
+DTSTAMP:20260406T230143
+CREATED:20260318T044508Z
+LAST-MODIFIED:20260318T044508Z
+UID:10138271-1775998800-1776007800@montclairlocal.news
+SUMMARY:Rug Tufting Workshop
+DESCRIPTION:Learn how to make your own custom rug! This rug tufting class will guide you through creating your own custom rug using a tufting gun. You’ll learn essential techniques for handling the tufting gun safely and effectively\, focusing entirely on mastering the craft since your design and yarn colors will already be prepared on the tufting frame. Once tufting is complete\, you’ll discover how to apply glue and backing to secure and protect your rug. The class finishes with the exciting step of trimming excess yarn\, revealing the final texture and look of your handmade rug. This hands-on experience combines creativity with practical skills to help you craft a unique\, personalized piece. \nUpon booking you will receive a link to choose your rug design for the class. \nThis is a great opportunity to make a fun gift\, to keep or to give. Invite your partner\, friends\, family\, or coworkers for a fun and creative day out. \nBring a mask if you are sensitive to yarn particles and chemical smells from glue. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/rug-tufting-workshop/
+LOCATION:The Eclectic Chic Boutique\, 547 Bloomfield Avenue\, Montclair\, NJ\, 07042\, United States
+CATEGORIES:General Events
+ATTACH;FMTTYPE=image/png:https://montclairlocal.news/wp-content/uploads/2026/03/Rug-Tufting-Workshop.png
+ORGANIZER;CN="The Eclectic Chic Boutique":MAILTO:kristen@theeclecticchicboutique.com
+GEO:40.821883;-74.213388
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=The Eclectic Chic Boutique 547 Bloomfield Avenue Montclair NJ 07042 United States;X-APPLE-RADIUS=500;X-TITLE=547 Bloomfield Avenue:geo:-74.213388,40.821883
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260412T140000
+DTEND;TZID=America/New_York:20260412T150000
+DTSTAMP:20260406T230143
+CREATED:20260326T181002Z
+LAST-MODIFIED:20260326T181002Z
+UID:10139427-1776002400-1776006000@montclairlocal.news
+SUMMARY:Second Sunday Concerts: Teatro Nuovo
+DESCRIPTION:Led by conductor/musicologist Will Crutchfield\, Teatro Nuovo – Italian for “new theater” – is a young organization devoted to cutting-edge interpretation of classic Italian opera. Since its debut in 2018\, Teatro Nuovo has presented thirteen operas by Rossini\, Donizetti\, Bellini\, Verdi\, Ricci\, and Mayr\, culminating in the modern premiere of Carolina Uccelli’s Anna di Resburgo\, which made the New York Times list of the 20 best Classical events for 2024. This year Teatro Nuovo will celebrate the bicentennial of Italian opera in America.\nThis concert will show how delving into forgotten traditions can animate the future of the art\, as Will Crutchfield and young vocal stars will perform virtuoso thrillers and heart-melting lyrics from the golden age of Italian Bel Canto. Don’t miss this exciting opportunity to hear some of opera’s newest rising stars!\nRegistrations are advised but some seats will be available just before the start of the concert. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/second-sunday-concerts-teatro-nuovo/
+LOCATION:Van Vleck House & Gardens\, 21 Van Vleck Street\, Montclair\, NJ\, 07042\, United States
+CATEGORIES:General Events
+ATTACH;FMTTYPE=image/jpeg:https://montclairlocal.news/wp-content/uploads/2026/03/25.4.6-Teatro-Nuovo-YA-Concert_Levy-and-Tamborini-1.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260412T170000
+DTEND;TZID=America/New_York:20260412T183000
+DTSTAMP:20260406T230143
+CREATED:20260318T043847Z
+LAST-MODIFIED:20260318T043847Z
+UID:10138269-1776013200-1776018600@montclairlocal.news
+SUMMARY:Transition Your Wardrobe Sewing Workshop
+DESCRIPTION:Join us and learn basic sewing and design techniques to update your wardrobe to match your gender identity and style! Learning to sew is a great life skill to have\, you can make your own repairs and adjustments\, as well as repurpose old clothes to turn them into one of a kind fashion. No sewing experience necessary. Bring one piece of clothing you would like to upcycle. If you have a sewing machine or sewing needles and materials from home you want to use you are welcome to bring in and use during this session. We will have some sewing materials and tools on hand for you to use and get creative. Allies are also welcome to join. \nThis event is in partnership with Out Montclair. Visit https://outmontclair.org/ to learn more about their mission. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/transition-your-wardrobe-sewing-workshop-7/
+LOCATION:The Eclectic Chic Boutique\, 547 Bloomfield Avenue\, Montclair\, NJ\, 07042\, United States
+CATEGORIES:General Events
+ORGANIZER;CN="The Eclectic Chic Boutique":MAILTO:kristen@theeclecticchicboutique.com
+GEO:40.821883;-74.213388
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=The Eclectic Chic Boutique 547 Bloomfield Avenue Montclair NJ 07042 United States;X-APPLE-RADIUS=500;X-TITLE=547 Bloomfield Avenue:geo:-74.213388,40.821883
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260412T173000
+DTEND;TZID=America/New_York:20260412T193000
+DTSTAMP:20260406T230143
+CREATED:20260330T160721Z
+LAST-MODIFIED:20260330T160721Z
+UID:10139448-1776015000-1776022200@montclairlocal.news
+SUMMARY:JAAK live at Montclair Brewery
+DESCRIPTION:JAAK is an original jazz fusion band located in Hudson County\, NJ. Consisting of trumpet\, sax\,keys\, bass\, and drums\, their sound crosses different styles including jazz\, funk\, R&B\, hip hop\,pop\, rock\, and video game music. JAAK has two singles out on streaming platforms\, with an EPand more original music on the way. JAAK has played in venues and events around HudsonCounty\, including Brightside Tavern\, Hendrickson’s Corner\, Groove on Grove Festival\, WPUBraveathon Radio Show\, and Green Space Studios. JAAK also covers various artists\, andinspires their sound from the likes of Miles Davis\, Freddie Hubbard\, Billy Cobham\, Billy Ocean\,Tony Williams\, and Steely Dan. \n$5 cover charge per person that goes directly to the artists. \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/jaak-live-at-montclair-brewery-3/
+LOCATION:Montclair Brewery\, 101 Walnut Street\, Montclair\, NJ\, 07042\, United States
+CATEGORIES:Community,Entertainment,Kids & Families,Live Music
+ATTACH;FMTTYPE=image/png:https://montclairlocal.news/wp-content/uploads/2026/03/JAAK-at-MB.png
+ORGANIZER;CN="Montclair Brewery":MAILTO:Staff@montclairbrewery.com
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Montclair Local News
+X-SOURCE-URL:https://montclairlocal.news/events/
+DTSTART;TZID=America/New_York:20260412T180000
+DTEND;TZID=America/New_York:20260412T203000
+DTSTAMP:20260406T230143
+CREATED:20260325T160505Z
+LAST-MODIFIED:20260325T160505Z
+UID:10139417-1776016800-1776025800@montclairlocal.news
+SUMMARY:Learn How to Get Published with the Book Doctors
+DESCRIPTION:As part of its ongoing writers’ workshop series\, Watchung Booksellers hosts authors Arielle Eckstut and David Henry Sterry\, aka The Book Doctors\, to share insights on how to get published. The workshop will be held on Sunday\, April 12 from 6-8:30 p.m. \nThis workshop will take you through the four primary paths to publication\, choosing the right idea\, crafting an attention-getting pitch and query\, and finding the right agent/publisher. You’ll be armed with knowledge before pitching your idea at Pitch-a-palooza during the Montclair Lit Fest! \nDavid Henry Sterry & Arielle Eckstut are co-founders of the Book Doctors. They are co-authors of The Essential Guide to Getting Your Book Published: How To Write It\, Sell It\, and Market It… Successfully. Tickets are $80 for the class and can be purchased at watchungbooksellers.com/events/writers-workshops \nShare this:\n				Share on Facebook (Opens in new window)\n				Facebook\n			\n				Share on Bluesky (Opens in new window)\n				Bluesky\n			\n				Share on LinkedIn (Opens in new window)\n				LinkedIn\n			\n				Share on Threads (Opens in new window)\n				Threads\n			\n				Share on Nextdoor (Opens in new window)\n				Nextdoor\n			\n				Share on WhatsApp (Opens in new window)\n				WhatsApp\n			\n				Email a link to a friend (Opens in new window)\n				Email
+URL:https://montclairlocal.news/event/learn-how-to-get-published-with-the-book-doctors/
+CATEGORIES:Art & Culture,Community,Literature
+ATTACH;FMTTYPE=image/png:https://montclairlocal.news/wp-content/uploads/2026/03/aprilwkshop.png
+END:VEVENT
+END:VCALENDAR

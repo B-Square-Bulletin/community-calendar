@@ -1,0 +1,56 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Eastern Greene Athletics//maxpreps.com//
+X-WR-CALNAME:Eastern Greene Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Eastern Greene Girls Varsity Volleyball @ Northeast Dubois
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T090000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T100000
+UID:fb57ab236b9c774cf3b6ed6dae6647c4@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nNo result has been reported for the 
+ Eastern Greene varsity volleyball away tournament match @ Northeast Dubois
+  (Dubois\, IN).
+URL:https://www.maxpreps.com/in/volleyball/match/eastern-greene-bloomfield
+ -vs-northeast-dubois/9-12-2026/?c=3dee904d-d8ac-406a-ba70-373a1b850962
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Mitchell Girls Varsity Volleyball @ Eastern Greene
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T090000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T100000
+UID:d5a2229768dc1044952f937a19860934@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nNo result has been reported for the 
+ Mitchell varsity volleyball away tournament match @ Eastern Greene (Bloomf
+ ield\, IN).
+URL:https://www.maxpreps.com/in/volleyball/match/eastern-greene-bloomfield
+ -vs-mitchell/9-12-2026/?c=41a29615-aa4c-4f76-a3a8-9568021d6958
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Vincennes Rivet Boys Varsity Soccer @ Eastern Greene
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T090000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T104500
+UID:2d93a62cdd34d4f55b5ee6efab427409@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nOn 9/12\, the Vincennes Rivet varsity soc
+ cer team won their away tournament match against Eastern Greene (Bloomfiel
+ d\, IN) by a score of 5-2.
+LOCATION:Tournament Game 
+URL:https://www.maxpreps.com/in/soccer/match/eastern-greene-bloomfield-vs-
+ vincennes-rivet/9-12-2026/?c=ed27a2b9-8bac-4fd1-a7bd-12a748d302fc
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:West Vigo Boys Varsity Soccer @ Eastern Greene
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T130000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T144500
+UID:cee33ecae7896616373a62c7f5f79ce7@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nOn 9/12\, the West Vigo varsity soccer te
+ am won their away tournament match against Eastern Greene (Bloomfield\, IN
+ ) by a score of 4-2.
+URL:https://www.maxpreps.com/in/soccer/match/eastern-greene-bloomfield-vs-
+ west-vigo-west-terre-haute/9-12-2026/?c=867b30ab-fd86-462a-ab5c-77ebbdb9b2
+ fc
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+END:VCALENDAR

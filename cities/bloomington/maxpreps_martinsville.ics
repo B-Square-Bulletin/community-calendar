@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Martinsville Athletics//maxpreps.com//
+X-WR-CALNAME:Martinsville Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Martinsville JV Football @ Decatur Central
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T103000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T123000
+UID:157b4dde5bf29712dd2ed117522fcea7@maxpreps.com
+DESCRIPTION:Boys JV Football\nNo result has been reported for the Martinsv
+ ille JV football away conference game @ Decatur Central (Indianapolis\, IN
+ ).
+URL:https://www.maxpreps.com/in/football/game/decatur-central-indianapolis
+ -vs-martinsville/jv/9-12-2026/?c=1c77031d-79e7-40e0-8f34-7f68719f7267
+X-SOURCE:Martinsville Athletics
+END:VEVENT
+END:VCALENDAR

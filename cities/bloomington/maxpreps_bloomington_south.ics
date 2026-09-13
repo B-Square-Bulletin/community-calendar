@@ -1,0 +1,78 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Bloomington South Athletics//maxpreps.com//
+X-WR-CALNAME:Bloomington South Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Jeffersonville Girls Varsity Volleyball @ Bloomington South
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T110000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T120000
+UID:0f030e2afb0c95590e548680a847ebd6@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nNo result has been reported for the 
+ Jeffersonville varsity volleyball away non-conference match @ Bloomington 
+ South (Bloomington\, IN).
+URL:https://www.maxpreps.com/in/volleyball/match/bloomington-south-vs-jeff
+ ersonville/9-12-2026/?c=d0a16f21-203d-4994-905b-a213d26684fb
+X-SOURCE:Bloomington South Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Jeffersonville Girls JV Volleyball @ Bloomington South
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T110000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T120000
+UID:395dee7f205fe8f516c35f30470edb92@maxpreps.com
+DESCRIPTION:Girls JV Volleyball\nNo result has been reported for the Jeffe
+ rsonville JV volleyball away non-conference match @ Bloomington South (Blo
+ omington\, IN).
+URL:https://www.maxpreps.com/in/volleyball/match/bloomington-south-vs-jeff
+ ersonville/jv/9-12-2026/?c=757945fa-3061-4c1e-a87c-518bc2c254f9
+X-SOURCE:Bloomington South Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Jeffersonville Girls Freshman Volleyball @ Bloomington South
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T110000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T120000
+UID:4ac00d9762e5db6db8789c5bfb15a446@maxpreps.com
+DESCRIPTION:Girls Freshman Volleyball\nOn 9/12\, the Jeffersonville freshm
+ an volleyball team lost their away non-conference match against Bloomingto
+ n South (Bloomington\, IN) by a score of 2-0.
+URL:https://www.maxpreps.com/in/volleyball/match/bloomington-south-vs-jeff
+ ersonville/freshman/9-12-2026/?c=4692d3ed-62c2-4924-aa7b-d7946e79dd7f
+X-SOURCE:Bloomington South Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington South JV Football @ Muncie Central
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T120000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T140000
+UID:30be5819cfab6f5360c15d48c241ee22@maxpreps.com
+DESCRIPTION:Boys JV Football\nNo result has been reported for the Blooming
+ ton South JV football away non-conference game @ Muncie Central (Muncie\, 
+ IN).
+URL:https://www.maxpreps.com/in/football/game/bloomington-south-vs-muncie-
+ central/jv/9-12-2026/?c=d2d03a05-23de-4de1-9f82-e154195c5a80
+X-SOURCE:Bloomington South Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Floyd Central Boys JV Soccer @ Bloomington South
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T130000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T144500
+UID:e51131dd366101bc162290252a712b30@maxpreps.com
+DESCRIPTION:Boys JV Soccer\nNo result has been reported for the Floyd Cent
+ ral JV soccer away non-conference match @ Bloomington South (Bloomington\,
+  IN).
+URL:https://www.maxpreps.com/in/soccer/match/bloomington-south-vs-floyd-ce
+ ntral-floyds-knobs/jv/9-12-2026/?c=7a8707d3-2434-4d75-a4ae-2145675b2c78
+X-SOURCE:Bloomington South Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Floyd Central Boys Varsity Soccer @ Bloomington South
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T143000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T161500
+UID:f8b8475eb93d9242820098fdcf6d3775@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nOn 9/12\, the Floyd Central varsity socce
+ r team lost their away non-conference match against Bloomington South (Blo
+ omington\, IN) by a score of 3-1.
+URL:https://www.maxpreps.com/in/soccer/match/bloomington-south-vs-floyd-ce
+ ntral-floyds-knobs/9-12-2026/?c=7b497096-caba-4058-ac21-0daaa2ad3cd6
+X-SOURCE:Bloomington South Athletics
+END:VEVENT
+END:VCALENDAR

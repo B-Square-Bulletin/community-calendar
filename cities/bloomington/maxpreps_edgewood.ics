@@ -1,0 +1,31 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Edgewood Athletics//maxpreps.com//
+X-WR-CALNAME:Edgewood Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:South Vermillion Girls Varsity Soccer @ Edgewood
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T100000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T114500
+UID:43a76c74eab3b19d55b85f5821d4b1ae@maxpreps.com
+DESCRIPTION:Girls Varsity Soccer\nNo result has been reported for the Sout
+ h Vermillion varsity soccer away non-conference match @ Edgewood (Ellettsv
+ ille\, IN).
+URL:https://www.maxpreps.com/in/soccer/girls/match/edgewood-ellettsville-v
+ s-south-vermillion-clinton/9-12-2026/?c=5df89707-8961-4019-afda-6f8c3f88c5
+ bf
+X-SOURCE:Edgewood Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:South Vermillion Boys Varsity Soccer @ Edgewood
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T120000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T134500
+UID:e4e7c68df083388f65706a2fa4cf7c91@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nNo result has been reported for the South
+  Vermillion varsity soccer away non-conference match @ Edgewood (Ellettsvi
+ lle\, IN).
+URL:https://www.maxpreps.com/in/soccer/match/edgewood-ellettsville-vs-sout
+ h-vermillion-clinton/9-12-2026/?c=35ded6f7-bce5-4add-a4ee-2ed0fedca6ac
+X-SOURCE:Edgewood Athletics
+END:VEVENT
+END:VCALENDAR

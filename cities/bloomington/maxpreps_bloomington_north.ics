@@ -1,0 +1,42 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Bloomington North Athletics//maxpreps.com//
+X-WR-CALNAME:Bloomington North Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Mooresville Freshman Football @ Bloomington North
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T090000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T110000
+UID:21f64b88f0167a0345bc26134bd21a2a@maxpreps.com
+DESCRIPTION:Boys Freshman Football\nNo result has been reported for the Mo
+ oresville freshman football away conference game @ Bloomington North (Bloo
+ mington\, IN).
+URL:https://www.maxpreps.com/in/football/game/bloomington-north-vs-mooresv
+ ille/freshman/9-12-2026/?c=c259c442-8733-44ed-9a97-51e6ccbe46b6
+X-SOURCE:Bloomington North Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington North Girls Varsity Volleyball @ THNV
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T100000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T110000
+UID:5b7565858e1c4330a4b415b3080d230e@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nOn 9/12\, the Bloomington North vars
+ ity volleyball team lost their away non-conference match against Terre Hau
+ te North Vigo (Terre Haute\, IN) by a score of 3-1.
+URL:https://www.maxpreps.com/in/volleyball/match/bloomington-north-vs-terr
+ e-haute-north-vigo/9-12-2026/?c=f8130402-7f2d-4b82-ad0a-972f0bd82ab3
+X-SOURCE:Bloomington North Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Mooresville JV Football @ Bloomington North
+DTSTART;TZID=America/Indiana/Indianapolis:20260912T103000
+DTEND;TZID=America/Indiana/Indianapolis:20260912T123000
+UID:fb6bc41b65d21b440d904762f65ff15f@maxpreps.com
+DESCRIPTION:Boys JV Football\nOn 9/12\, the Mooresville JV football team w
+ on their away conference game against Bloomington North (Bloomington\, IN)
+  by a score of 44-0.
+URL:https://www.maxpreps.com/in/football/game/bloomington-north-vs-mooresv
+ ille/jv/9-12-2026/?c=24ecd155-e0fa-43e8-b0e3-3f6e167aebd3
+X-SOURCE:Bloomington North Athletics
+END:VEVENT
+END:VCALENDAR

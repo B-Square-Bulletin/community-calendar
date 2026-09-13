@@ -1,0 +1,548 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Meetup//Meetup Calendar 1.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+NAME:Toronto Movies & Social Group - Celebrating 14 Years!
+X-WR-CALNAME:Toronto Movies & Social Group - Celebrating 14 Years!
+BEGIN:VTIMEZONE
+TZID:America/Toronto
+TZURL:http://tzurl.org/zoneinfo-outlook/America/Toronto
+X-LIC-LOCATION:America/Toronto
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Movies & Social
+X-SOURCE-URL:https://www.meetup.com/toronto-movies-and-social-group/
+UID:event_314146084@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031650Z
+DTSTART;TZID=America/Toronto:20260407T181500
+DTEND;TZID=America/Toronto:20260407T213000
+SUMMARY:🎬$4.99 Tuesday Movie Meetup – Apocalypse Now 🎬
+DESCRIPTION:Toronto Movies & Social Group - Celebrating 14 Years!\n🎬 **
+ Tuesday Movie Meetup – *Apocalypse Now*** 🎬\n\nJoin us for a classic 
+ cinema experience this Tuesday\, April 7 at **6:30 PM** at Imagine Cinemas
+  Carlton!\nWe’ll be watching the legendary war film Apocalypse Now — a
+ nd at an unbeatable price of **just $4.99**\, this is one you don’t want
+  to miss.\n\n🎟️ **Get your ticket here:**\n[https://omniwebticketing6
+ .com/imaginecinemas/carlton/?schdate=2026-04-07&perfix=134931](https://omn
+ iwebticketing6.com/imaginecinemas/carlton/?schdate=2026-04-07&perfix=13493
+ 1)\n\n🎬 **Watch the trailer:**\n[https://www.youtube.com/watch?v=FTjG-A
+ ux_yQ](https://www.youtube.com/watch?v=FTjG-Aux_yQ)\n\n***\n\n**🎥 About
+  the Movie:**\nSet during the Vietnam War\, *Apocalypse Now* follows Capta
+ in Benjamin Willard on a dangerous mission deep into the jungle to assassi
+ nate the rogue Colonel Kurtz\, who has descended into madness. Known for i
+ ts haunting visuals\, powerful performances\, and unforgettable soundtrack
+ \, the film explores the darkness of war and the human psyche.\n\n⏱️ *
+ *Runtime:** 3 hours 2 minutes\n\n***\n\n👋 **Meetup Details:**\n\n* 📍
+  Location: Outside **Auditorium 6**\n* Meetup time 6:15PM\n* 🕡 Showtime
+ : **6:30 PM**\n* 🔎 Look for **Nick with a Meetup sign** before and afte
+ r the movie outside Auditorium 6\n\n**After the movie we'll gather outside
+  Auditorium 6 for a few moments to share our thoughts about the experience
+ .**\n\n👍 **Flexible plans? No problem!**\nNot sure about your schedule?
+  Feel free to just show up on the day—last-minute attendees are always w
+ elcome.\nCome out for a great film\, meet fellow movie lovers\, and enjoy 
+ one of the greatest war movies ever made—at a price that can’t be beat
+ . See you there!
+URL;VALUE=URI:https://www.meetup.com/toronto-movies-and-social-group/event
+ s/314146084/
+STATUS:CONFIRMED
+CREATED:20260406T121506Z
+LAST-MODIFIED:20260406T121506Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Movies & Social
+X-SOURCE-URL:https://www.meetup.com/toronto-movies-and-social-group/
+UID:event_313932057@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031650Z
+DTSTART;TZID=America/Toronto:20260407T193000
+DTEND;TZID=America/Toronto:20260407T213000
+SUMMARY: Bingo Night at Eataly/Birroteca – Limited Spots! 🎉
+DESCRIPTION:Toronto Movies & Social Group - Celebrating 14 Years!\n🎉 **
+ Bingo Night at Birroteca – Limited Spots!** 🎉\n\nLooking for a fun (a
+ nd slightly competitive 😄) way to spend your Tuesday night? Join us for
+  **Bingo Night** on **Tuesday\, April 7** at **Birroteca in Eataly (55 Blo
+ or St West)**!\n\n🕢 **Bingo starts at 7:30 PM**\n👋 **Colleen will be
+  there earlier** — just ask for her table when you arrive and come say h
+ i!\nGet ready for a lively evening of laughs\, great food\, and maybe even
+  a little beginner’s luck 🍀 if you haven't signed up for trivia with 
+ colleen before\, pls. e-transfer a $5 deposit to tommills@rogers.com\,and 
+ notify me right away\, on this page\, or the personal msg. page. NOTE - ev
+ eryone MUST spend at least $10\, plus tax and tip.\n\n🍝 Check out the m
+ enu here:\n[https://www.eataly.ca/wp-content/uploads/2024/09/ETO_Birroteca
+ _Menu_Main_2026.03.26-1.pdf](https://www.eataly.ca/wp-content/uploads/2024
+ /09/ETO_Birroteca_Menu_Main_2026.03.26-1.pdf)\n\n⚠️ **Very limited spo
+ ts available** — please respect your RSVP so everyone who signs up can e
+ njoy the night.\nCome for the bingo\, stay for the food\, and leave with b
+ ragging rights (and maybe a win or two 😉). See you there!
+URL;VALUE=URI:https://www.meetup.com/toronto-movies-and-social-group/event
+ s/313932057/
+STATUS:CONFIRMED
+CREATED:20260324T211609Z
+LAST-MODIFIED:20260324T211609Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Movies & Social
+X-SOURCE-URL:https://www.meetup.com/toronto-movies-and-social-group/
+UID:event_313838273@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031650Z
+DTSTART;TZID=America/Toronto:20260410T180000
+DTEND;TZID=America/Toronto:20260410T210000
+SUMMARY:🎬Movie: You\, Me & Tuscany -  Food & Drinks after the movie 
+ 🍿!
+DESCRIPTION:Toronto Movies & Social Group - Celebrating 14 Years!\n🎬 Le
+ t’s Go to the Movies (and Actually Talk… or Not)\n\nWhether you're a f
+ ilm nerd\, popcorn enthusiast\, or just looking for a chill night out with
+  interesting people — this one's for you.\n\nWe’re heading out to see 
+ a movie together\, then grabbing food or drinks after. If the film's great
+  (or terrible)\, we’ll probably talk about it forever. If it’s just ok
+ ay\, we’ll talk about it for 10 minutes and move on to everything else 
+ — books\, dating apps\, weird dreams\, how Toronto keeps getting more ex
+ pensive\, etc.\n\nThe vibe is relaxed\, friendly\, and not too serious. No
+  film degree needed. No icebreakers. No pressure to “perform.” Just co
+ me enjoy the film\, connect with some thoughtful people\, and see where th
+ e night goes Click here to watch trailer!\n\n🎞️ **Movie Title + Trail
+ er:** [\\[Click here to watch trailer!\\]](https://www.youtube.com/watch?v
+ =09kuFgvohIU)\n\n📖 **📖 Plot Summary:** Halle Bailey (The Little Merm
+ aid\, The Color Purple) stars as Anna\, a young woman who has abandoned he
+ r dreams of becoming a chef and is now drifting through her twenties with 
+ a series of bad choices. When Anna loses her house-sitting job (and housin
+ g) in one fell swoop\, a chance encounter with Matteo—a handsome Italian
+  who happens to have a villa sitting empty in Tuscany—will inspire her t
+ o jet off for Italy\, against the advice of her always-honest bestie\, Cla
+ ire (Home Before Dark’s Aziza Scott).\n\n***\n\n### 🗓️ **Event Deta
+ ils**\n\n📍 **Meetup Time:** 6:00 PM (Final time + theatre announced Tue
+ sday of event week)\n🎬 **Movie Start Time:** TBA\n⏱️ **Runtime:** T
+ BA\n📌 **Meetup Spot:** To be confirmed (based on theatre)\n🎟️ **Co
+ st:**\n\n* **$11.50** for *CineClub* members\n* **$16.00** regular admissi
+ on\n👉 You are responsible for buying your own ticket.\n\n**🪑 Reserve
+ d Seating:**\nYou must buy your ticket *before* signing up. You'll be aske
+ d where you're sitting so we can all sit together! However\, members are w
+ elcome to sit anywhere that works for them.\n🎫 Buy your ticket here: [h
+ ttps://www.cineplex.com](https://www.cineplex.com)\n📍🪑 **Where I wil
+ l be sitting:**\n\n🍿 **After the Movie:**\nYes\, we’re heading out af
+ ter! It’s not just a movie night — it’s a social night. Let's talk\,
+  laugh\, and dissect every plot twist.\n\n***\n\n### ✅ **Before You Sign
+  Up**\n\n* Please **buy your ticket first** — seating is limited!\n* Whe
+ n signing up\, let us know your **seat number** so we can try to group eve
+ ryone together.\n* You can still sign up or just **show up on the day** if
+  you’re not sure you can make it — we’re flexible!\n\n📲 **Join Ou
+ r WhatsApp Group:** [Click here to join](#)\n🎟️ **Join Cineplex’s C
+ ineClub for discounts**: [https://www.cineplex.com/cineclub](https://www.c
+ ineplex.com/cineclub)\n🎁 **Get your SCENE Card** for free movies and po
+ ints: [https://www.scene.ca](https://www.scene.ca)\n\n***\n\n### 🎥 **A 
+ Quick Word About Movie Etiquette**\n\nWe love a great film experience. Ple
+ ase:\n\n* Turn off your phone\n* Don’t talk during the movie\n* Be respe
+ ctful of others\n\nRepeat offenders will be removed from the group — we 
+ take our cinema seriously (but with snacks).\n\n***\n\n### 👥 **About th
+ e Group**\n\nThis event is open to everyone — single\, not single\, shy\
+ , social\, new in town or a long-time local. We're a group for people who 
+ love movies *and* making real connections. We also do walks\, hikes\, rest
+ aurants\, arts & culture — come be part of it!\n🎬 **Organized by:** M
+ athew\n📧 Questions? Reach out: **torontomoviesandoutings@hotmail.com**
+URL;VALUE=URI:https://www.meetup.com/toronto-movies-and-social-group/event
+ s/313838273/
+STATUS:CONFIRMED
+CREATED:20260318T192208Z
+LAST-MODIFIED:20260318T192208Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Movies & Social
+X-SOURCE-URL:https://www.meetup.com/toronto-movies-and-social-group/
+UID:event_313791776@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031650Z
+DTSTART;TZID=America/Toronto:20260411T081500
+DTEND;TZID=America/Toronto:20260411T183000
+SUMMARY:🚆🦜 GO Train Adventure to Niagara Falls – Bird Kingdom & Lu
+ nch! 🌊🍔
+DESCRIPTION:Toronto Movies & Social Group - Celebrating 14 Years!\n🚆
+ 🦜 **GO Train Adventure to Niagara Falls – Bird Kingdom & Lunch!** 
+ 🌊🍔\n\nBird is the word. I love birds and we're lucky enough to have 
+ Bird Kingdom to visit\, one of the largest indoor aviaries in the world!\n
+ \nJoin us for a fun Saturday day-trip adventure as we hop on the GO Train 
+ and head to Niagara Falls for birds\, burgers\, and beautiful views!\n\n**
+ 📅 Date:** Saturday\, April 11\n**⏰ Meet Time:** 8:15 AM\n**📍 Meeti
+ ng Spot:** Outside the Fairmont Royal York Hotel (across from Union Statio
+ n)\nWe’ll walk into Union Station together to catch the **9:04 AM GO Tra
+ in** to Niagara Falls.\n⚠️ **The train departs exactly at 9:04 AM and 
+ the doors close one minute earlier**\, so please arrive on time!\n\n**🚆
+  Train Schedule**\n• Depart Union Station: **9:04 AM**\n• Arrive Niaga
+ ra Falls: **11:30 AM**\n\n**Update/change due to larger group size:**\n\nU
+ pon arrival at the station we’ll walk over to **Chuck's Roadhouse** and 
+ start with a group meal first.\n\n**Bar & Grill** for a relaxed and afford
+ able lunch.\n👉 Menu: [https://chucksroadhouse.com/menu/](https://chucks
+ roadhouse.com/menu/)\n\nNote - everyone is responsible for their own food/
+ drink bill\n\nFollowing lunch\, we’ll do some **sightseeing around Niaga
+ ra Falls**\, take photos\, and hit our final stop.\n\nBefore we leave we'l
+ l stop at **Bird Kingdom**\, the **world’s largest free-flying indoor av
+ iary**\, home to hundreds of tropical birds inside a lush multi-level rain
+ forest environment. ([Bird Kingdom](https://birdkingdom.ca/?utm_source=cha
+ tgpt.com))\n💳 **Bring your PRESTO card for 20% off admission!**\n\n👉
+  More info: [https://www.birdkingdom.ca/](https://www.birdkingdom.ca/)\n\n
+ **🚶 What to Expect**\n• Lots of walking\n• Rain or shine – the tr
+ ip happens regardless of weather\n• Great scenery\, good food\, and fun 
+ company\n\n**🚆 Return Train**\n• Niagara Falls → Union Station\n•
+  **4:00 PM departure. Doors close one minute earlier.**\n\nThere are later
+  trains and buses if you wish to stay longer.\n\n💰 **Travel Deal:** The
+  **GO Transit Weekend Day Pass is only $10** for unlimited travel that day
+ .\n👉 Details: [https://www.gotransit.com/en/partners-and-promotions/wee
+ kend-passes-with-go](https://www.gotransit.com/en/partners-and-promotions/
+ weekend-passes-with-go)\n\nNOTE - do not purchase your $10 GO pass yet. tr
+ acks still not repaired. may have to reschedule this event\n\nLook for **N
+ ick and the Meetup sign** at the meeting spot.\nLet’s ride the rails\, s
+ ee amazing birds\, grab a great lunch\, and enjoy one of Canada’s most i
+ conic destinations together! 🚆🦜🌊\n\n[WhatsApp for the trip](https
+ ://chat.whatsapp.com/FDfbPqh5Xc3Kh39eFcQWsB?mode=gi_t)
+URL;VALUE=URI:https://www.meetup.com/toronto-movies-and-social-group/event
+ s/313791776/
+STATUS:CONFIRMED
+CREATED:20260316T134019Z
+LAST-MODIFIED:20260316T134019Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Movies & Social
+X-SOURCE-URL:https://www.meetup.com/toronto-movies-and-social-group/
+UID:event_313870441@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031650Z
+DTSTART;TZID=America/Toronto:20260411T110000
+DTEND;TZID=America/Toronto:20260411T140000
+SUMMARY: 🌿🚶 LEASIDE SPUR TRAIL\, WILKET CREEK & EDWARDS GARDENS WALK
+  (10KM) 🚶🌿
+DESCRIPTION:Toronto Movies & Social Group - Celebrating 14 Years!\n🌿
+ 🚶 LEASIDE SPUR TRAIL\, WILKET CREEK & EDWARDS GARDENS WALK (10KM) 🚶
+ 🌿\n\nForest Trails\, Flowing Creeks & A Spring Garden Pause\nSome of th
+ e best parts of Toronto don’t feel like the city at all.\nJoin us for a 
+ longer\, energizing social walk through some of the city’s most scenic g
+ reen spaces — from quiet trails to winding creeks\, with a beautiful sto
+ p at the gardens along the way.\n\nWe’ll explore the Leaside Spur Trail\
+ , connect into the peaceful paths of Wilket Creek Park\, and make our way 
+ toward Edwards Gardens — where you’ll have time to wander\, take in th
+ e seasonal blooms\, and enjoy a little moment of calm in the middle of the
+  walk.\nThis is not a formal tour.\n\nIt’s a social\, active walk with g
+ reat scenery and even better company.\n\n👉 **Don’t forget to join our
+  WhatsApp group** – [CLICK HERE!](https://chat.whatsapp.com/H59mSCbsAi01
+ 8gYANrKAnc?mode=ac_t)\n\n***\n\n🚶‍♂️ What We’ll Do\n\nWe’ll b
+ egin at McDonald’s and head onto the Leaside Spur Trail\, easing into th
+ e walk before connecting with Wilket Creek’s forested paths.\nFrom there
+ \, we’ll continue toward Sunnybrook Park and into Edwards Gardens\, wher
+ e we’ll take a relaxed break so you can explore\, enjoy the flowers\, an
+ d recharge.\nAfter our stop\, we’ll loop back along the trails\, returni
+ ng to our starting point.\n\nOnce we’re back\, those who want can grab a
+  bite at Jersey Mike's Subs for a well-earned lunch. 🥪\nNo pressure to 
+ join — totally optional.\n\n***\n\n🌦️ Weather & Expectations\n\nThi
+ s walk will happen in typical Toronto conditions — including cold\, ligh
+ t rian\, or damp trails.\nPlease come prepared for a full 10KM walk with s
+ ome hills.\nGood footwear is essential.\n.\nAlso — this is NOT a guided 
+ or historical tour. I’ll share bits along the way\, but the focus is on 
+ movement\, nature\, and connection.\n\n***\n\n🧢 Meetup Details\n\n📍 
+ Meetup Location: Outside McDonald’s\n🫎 I’ll be wearing my Moose Hat
+ \n⏰ Meetup Time: 11:00 AM\nI will only wait 5 minutes.\nEarly is on time
+ .\nOn time is late.\n\nWe’ll begin promptly and won’t be able to track
+  late arrivals — thank you for understanding.\nEnd point: Back at McDona
+ ld’s\n\n***\n\n🎟️ Meetup Fee: $5 cash in person or e-transfer to\n
+ 📧 **mathewmaclean@hotmail.com**\nThis helps support the group and allow
+ s us to keep hosting events like this. Thank you for supporting community!
+  💖\n\n***\n\n🎒 What to Bring\n\nWater or a warm drink\nGood walking 
+ shoes (trails may be uneven or muddy)\nA snack\nWeather-appropriate clothi
+ ng (layers are key!)\n\nOptional: cash/card if joining for lunch\nPlease a
+ lso use the washroom before arriving\, as stops are limited.\n\n***\n\n
+ 🌈 Who Is This For?\n\nThis group is open to anyone who wants to be soci
+ al and make friends — whether single or not.\nWe also host:\n🎬 Movies
+ \n🚶 Walks & hikes\n🎭 Arts & culture outings\n🍽️ Restaurant gath
+ erings\n\nThere’s always something happening.\n\n***\n\nREMEMBER: You’
+ re welcome to just show up on the day if you’re unsure about your schedu
+ le.\nAnd as always\, sometimes plans shift and events may need to be cance
+ led — please keep an eye on updates.\n\n***\n\n👤 Organizer: Mathew\nQ
+ uestions? Post on the event wall or email\n📧 torontomoviesandoutings@ho
+ tmail.com\n\nCome for the trails. Stay for the gardens.\nLeave feeling lik
+ e you escaped the city — without ever leaving it. 🌿✨
+URL;VALUE=URI:https://www.meetup.com/toronto-movies-and-social-group/event
+ s/313870441/
+STATUS:CONFIRMED
+CREATED:20260320T175038Z
+LAST-MODIFIED:20260320T175038Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Movies & Social
+X-SOURCE-URL:https://www.meetup.com/toronto-movies-and-social-group/
+UID:event_314000361@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031650Z
+DTSTART;TZID=America/Toronto:20260411T203000
+DTEND;TZID=America/Toronto:20260411T233000
+SUMMARY:🎤🍻  SOCIAL NIGHT & KARAOKE @ TAPS BAR & GRILL 🍻🎤
+DESCRIPTION:Toronto Movies & Social Group - Celebrating 14 Years!\n🎤
+ 🍻 **NIGHT SOCIAL & KARAOKE @ TAPS BAR & GRIL**L 🍻🎤\nGood Food\, G
+ ood Vibes & A Mic (If You Want It)\n\nSometimes the best way to meet peopl
+ e… isn’t a walk — it’s a table\, a drink\, and a little bit of cha
+ os in the form of karaoke.\nJoin us for a relaxed\, social night at Taps B
+ ar and Grill — a laid-back spot where we can hang out\, eat\, laugh\, an
+ d (optionally) take the stage.\nThis is one of those nights where there’
+ s no pressure to perform\, no expectations — just a group of people gett
+ ing together\, having a good time\, and maybe cheering each other on.\nSin
+ g if you want.\n\nDon’t sing if you don’t want.\nEither way — you’
+ re part of the fun.\n\n👉 **Don’t forget to join our WhatsApp group** 
+ – [CLICK HERE!](https://chat.whatsapp.com/H59mSCbsAi018gYANrKAnc?mode=ac
+ _t)\n\n***\n\n🎤 What We’ll Do\n\nWe’ll meet outside Taps and head i
+ n together to grab a table.\nFrom there\, it’s all about settling in —
+  ordering food\, having some drinks\, and getting to know each other in a 
+ relaxed\, easygoing environment.\nKaraoke will be happening throughout the
+  night\, so if you feel like jumping in\, go for it. If not\, sit back\, e
+ njoy the show\, and be part of the vibe.\nThis is a great event if you’r
+ e newer to the group or just want something more low-key and social.\n\n**
+ *\n\n🌙 Vibe & Expectations\nThis is a chill\, welcoming night — not a
+  performance\, not a competition.\n\nIt’s about:\n✔️ Meeting new peo
+ ple\n✔️ Having real conversations\n✔️ Letting loose a little\n\nNo
+  pressure\, no awkward setups — just a solid hang with good people\, foo
+ d\, and something happening in the background.\n\n***\n\n🧢 Meetup Detai
+ ls\n📍 Meetup Location: Outside Taps Bar & Grill\n🫎 I’ll be wearing
+  my Moose Hat\n⏰ Meetup Time: 8:30 PM\nI will only wait 5 minutes before
+  heading inside\, so try to be on time.\n🎤 Karaoke Time: 9:30PM\n🍔
+ 🍺 Part of the night is supporting the space we’re in — plan to grab
+  at least one drink or appetizer to help keep places like this welcoming f
+ or our group\n\n***\n\n🎟️ Meetup Fee: $5 cash in person or e-transfer
+  to\nMembers who have not been to my event\, have to send the e-transfer a
+ s soon as they sign up.\n📧 **mathewmaclean@hotmail.com**\n\nPlease note
+ : Food and drinks are separate and paid individually.\nThis fee helps supp
+ ort the group and allows us to keep hosting events like this. Thank you fo
+ r supporting community! 💖\n\n***\n\n🎒 What to Bring\n\nYourself (tha
+ t’s the main thing)\nCash/card for food & drinks\nA song idea… just in
+  case 🎤\n\n***\n\n🌈 Who Is This For?\n\nThis group is open to anyone
+  who wants to be social and make friends — whether single or not.\nWe al
+ so host:\n🎬 Movies\n🚶 Walks & hikes\n🎭 Arts & culture outings\n
+ 🍽️ Restaurant gatherings\n\nThere’s always something happening.\n\n
+ ***\n\nREMEMBER: You’re welcome to just show up if you’re unsure about
+  your schedule.\nAnd as always\, sometimes plans shift and events may need
+  to be canceled — please keep an eye on updates.\n\n***\n\n👤 Organize
+ r: Mathew\nQuestions? Post on the event wall or email\n📧 torontomoviesa
+ ndoutings@hotmail.com\n\nCome for the food. Stay for the laughs.\nLeave wi
+ th new people in your life — and maybe a song stuck in your head. 🎶
+ ✨
+URL;VALUE=URI:https://www.meetup.com/toronto-movies-and-social-group/event
+ s/314000361/
+STATUS:CONFIRMED
+CREATED:20260328T142906Z
+LAST-MODIFIED:20260328T142906Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Movies & Social
+X-SOURCE-URL:https://www.meetup.com/toronto-movies-and-social-group/
+UID:event_313870696@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031650Z
+DTSTART;TZID=America/Toronto:20260412T110000
+DTEND;TZID=America/Toronto:20260412T140000
+SUMMARY:🏙️🚶 OLD CABBAGETOWN\, REGENT PARK & DISTILLERY DISTRICT WA
+ LK (9KM) 🚶🏙️
+DESCRIPTION:Toronto Movies & Social Group - Celebrating 14 Years!\n🏙️
+ 🚶 OLD CABBAGETOWN\, REGENT PARK & DISTILLERY DISTRICT WALK (9KM) 🚶
+ 🏙️\n\nHistoric Streets\, City Contrasts & A Distillery District Finis
+ h\nSome walks show you just how many different versions of Toronto can exi
+ st within a few kilometres.\n\nJoin us for a social city walk through some
+  of Toronto’s most layered and contrasting neighbourhoods — from the s
+ torybook streets of Cabbagetown\, to the revitalized energy of Regent Park
+ \, ending in the iconic Distillery District.\n\nCabbagetown is known for h
+ aving one of the largest collections of Victorian homes in North America 
+ — quiet\, tree-lined streets that feel almost frozen in time.\n\nFrom th
+ ere\, we’ll move into Regent Park\, where old Toronto meets new in one o
+ f the city’s most significant redevelopments.\n\nWe’ll finish in the D
+ istillery District\, once home to the largest distillery in the world\, no
+ w a vibrant pedestrian area full of brick buildings\, art\, and atmosphere
+ .\nThis is not a formal historical tour.\n\nIt’s a social walk with ligh
+ t storytelling\, good energy\, and lots to take in along the way.\n\n👉 
+ **Don’t forget to join our WhatsApp group** – [CLICK HERE!](https://ch
+ at.whatsapp.com/H59mSCbsAi018gYANrKAnc?mode=ac_t)\n\n***\n\n🚶‍♂️ 
+ What We’ll Do\n\nWe’ll meet outside the subway station and begin our w
+ alk into Cabbagetown\, wandering through its charming residential streets 
+ before making our way toward Regent Park.\nAs we move through the neighbou
+ rhood\, you’ll see the blend of old and new Toronto — community spaces
+ \, modern builds\, and the evolution of the area.\nFrom there\, we’ll co
+ ntinue south toward the Distillery District\, where the walk wraps up.\n\n
+ You’re free to explore\, grab a drink\, or head out whenever you like.\n
+ \nPlease note: there will be some stairs along the route.\n\n***\n\n🌦
+ ️ Weather & Expectations\n\nThis walk will happen in typical April weath
+ er — which means anything from sun to light rain.\nAs long as it’s not
+  extreme conditions or heavy downpour\, we’ll be going ahead.\nBe prepar
+ ed and dress accordingly.\n\nComfortable shoes are important\, and layers 
+ are always a good idea.\nAlso — this is NOT a guided or formal historica
+ l tour. I’ll share context casually\, but the focus is on being social a
+ nd enjoying the walk.\n\n***\n\n🧢 Meetup Details\n📍 Meetup Location:
+  Outside the subway station\n🫎 I’ll be wearing my Moose Hat\n⏰ Meet
+ up Time: 11:00 AM\nI will only wait 5 minutes.\nEarly is on time.\nOn time
+  is late.\n\nWe’ll begin promptly\, so please plan ahead.\nEnd Point: Di
+ stillery District\n\n***\n\n🎟️ Meetup Fee: $5 cash in person or e-tra
+ nsfer to\n📧 **mathewmaclean@hotmail.com**\n\nThis helps support the gro
+ up and allows us to keep hosting events like this. Thank you for supportin
+ g community! 💖\n\n***\n\n🎒 What to Bring\nWater\nGood walking shoes\
+ nA small snack\n\nWeather-appropriate clothing (rain-ready if needed ☔)\
+ nPlease also use the washroom before arriving\, as stops are limited.\n\n*
+ **\n\n🌈 Who Is This For?\n\nThis group is open to anyone who wants to b
+ e social and make friends — whether single or not.\nWe also host:\n🎬 
+ Movies\n🚶 Walks & hikes\n🎭 Arts & culture outings\n🍽️ Restauran
+ t gatherings\n\nThere’s always something happening.\n\n***\n\nREMEMBER: 
+ You’re welcome to just show up on the day if you’re unsure about your 
+ schedule.\n\nAnd as always\, sometimes plans shift and events may need to 
+ be canceled — please keep an eye on updates.\n\n***\n\n👤 Organizer: M
+ athew\nQuestions? Post on the event wall or email\n\n📧 torontomoviesand
+ outings@hotmail.com\nCome for the history. Stay for the contrasts.\nLeave 
+ seeing Toronto just a little differently than before. 🏙️✨
+URL;VALUE=URI:https://www.meetup.com/toronto-movies-and-social-group/event
+ s/313870696/
+STATUS:CONFIRMED
+CREATED:20260320T175601Z
+LAST-MODIFIED:20260320T175601Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Movies & Social
+X-SOURCE-URL:https://www.meetup.com/toronto-movies-and-social-group/
+UID:event_313944035@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031650Z
+DTSTART;TZID=America/Toronto:20260414T181500
+DTEND;TZID=America/Toronto:20260414T210000
+SUMMARY:🎬 Movie Meetup: 30th Anniversary of Jerry Maguire 🎉. Tuesday
+  $7.99 pricing. 
+DESCRIPTION:Toronto Movies & Social Group - Celebrating 14 Years!\n🎬 **
+ Movie Meetup: 30th Anniversary of *Jerry Maguire*** 🎉\n\nJoin us for a 
+ feel-good classic as we celebrate **30 years of heart\, hustle\, and unfor
+ gettable quotes** with a special screening of Jerry Maguire!\n📅 **Date:
+ ** Tuesday\, April 14\n🕡 **Showtime:** 6:30 PM\n📍 **Location:** Cine
+ plex Cinemas Yonge-Dundas\n💲 **Special Tuesday Price:** Just $7.99!\n
+ 🎟️ **Get tickets here:**\n[https://www.cineplex.com/movie/jerry-magui
+ re-30th-anniversary](https://www.cineplex.com/movie/jerry-maguire-30th-ann
+ iversary)\n\n***\n\n### 🌟 Why This Night Matters\n\nReleased in 1996 an
+ d starring Tom Cruise\, Renée Zellweger\, and Cuba Gooding Jr. (in his Os
+ car-winning role)\, *Jerry Maguire* is more than just a sports movie—it
+ ’s a story about integrity\, love\, and finding what really matters.\nWi
+ th iconic lines like *“Show me the money!”* and *“You had me at hell
+ o\,”* this film has become a cultural touchstone. Hitting the **30-year 
+ milestone** is the perfect excuse to relive the magic on the big screen wi
+ th fellow fans.\n\n***\n\n### 🎥 Movie Details\n\n⏱️ **Runtime:** 2 
+ hours 19 minutes (139 minutes)\n▶️ **Watch the trailer:**\n[trailer he
+ re](https://youtu.be/KUd3gwaf0KQ?si=VH-Vn7cRe7xIkVrw)\n\n***\n\n### 🙌 M
+ eetup Details\n\nNick will be **outside the auditorium before and after th
+ e movie** holding a Meetup sign—feel free to say hello\, chat about your
+  favorite scenes\, or just soak in the nostalgia together.\n\nWhether it
+ ’s your first time watching or your tenth\, this is one of those movies 
+ that just hits differently in a theatre. Come celebrate a true classic wit
+ h great company! 🍿
+URL;VALUE=URI:https://www.meetup.com/toronto-movies-and-social-group/event
+ s/313944035/
+STATUS:CONFIRMED
+CREATED:20260325T160224Z
+LAST-MODIFIED:20260325T160224Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Movies & Social
+X-SOURCE-URL:https://www.meetup.com/toronto-movies-and-social-group/
+UID:event_313666404@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031650Z
+DTSTART;TZID=America/Toronto:20260416T180000
+DTEND;TZID=America/Toronto:20260416T203000
+SUMMARY:Free event. CBC Because News . Quiz show taping
+DESCRIPTION:Toronto Movies & Social Group - Celebrating 14 Years!\nI took 
+ the group to a few of these already. Great times always.\n\n**This is a fu
+ lly accessible venue**\n\n[Because News](https://www.cbc.ca/radio/becausen
+ ews/about-because-news-1.4344480) is Canada's funniest news quiz. Host and
+  award-winning comedian Gavin Crawford makes games out of the headlines\, 
+ along with a panel of comedians and celebrities.\n\nIt's also become [some
+ what of a TikTok hit](https://www.niemanlab.org/2023/10/wait-wait-dont-tel
+ l-me-how-this-canadian-radio-show-became-a-tiktok-hit/)\n\nNote - very lim
+ ited\, sold out event. **Only sign up if you can 100% commit to attend.**\
+ n\nMeet 6PM\nDoors open 6:30PM\nTaping should end around 8:30PM.\n\n**THIS
+  GROUP IS OPEN TO THOSE THAT WANT TO BE SOCIAL\, MAKE FRIENDS\, THAT ARE S
+ INGLE OR NOT SINGLE. WE ALSO HAVE LOTS OF OTHER EVENTS LIKE\, MOVIES\, WAL
+ KS\, HIKES\, ARTS & CULTURE AND RESTAURANTS. WE LOVE TO SUPPORT MEMBERS TO
+  SOCIALIZE AND TO FORM LONG LASTING FRIENDSHIPS.**\n\n**Rules:** [Click He
+ re!](https://www.meetup.com/toronto-movies-and-social-group/events/2932412
+ 63/)\n**Getting The Best Out Of MeetUp:** [Click Here!](https://www.meetup
+ .com/toronto-movies-and-social-group/events/293241269/)\n\nConsider [joini
+ ng our Whatsapp](https://chat.whatsapp.com/JpUbpvfPcNuFzTJ1VqTLZO) to disc
+ uss this and future events too\n\nDon't Forget to join our email list (Mee
+ tup does not send out emails to\neveryone in a group) to get our weekly ne
+ ws later about upcoming events: [http://eepurl.com/hKt76f](http://eepurl.c
+ om/hKt76f)\nFacebook group @ [http://www.facebook.com/groups/5029451130627
+ 39/](http://www.facebook.com/groups/502945113062739/)
+URL;VALUE=URI:https://www.meetup.com/toronto-movies-and-social-group/event
+ s/313666404/
+STATUS:CONFIRMED
+CREATED:20260306T145611Z
+LAST-MODIFIED:20260306T145611Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Movies & Social
+X-SOURCE-URL:https://www.meetup.com/toronto-movies-and-social-group/
+UID:event_314084170@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031650Z
+DTSTART;TZID=America/Toronto:20260416T183000
+DTEND;TZID=America/Toronto:20260416T213000
+SUMMARY:🧠💡❓Trivia Night @ The Frog: A Firkin Pub
+DESCRIPTION:Toronto Movies & Social Group - Celebrating 14 Years!\n## 🧠
+ 🎉 Trivia Night @ The Frog: A Firkin Pub 🍻\n\n**Think fast\, laugh ha
+ rd\, and make new friends!**\nWe’ll be meeting at **The Frog: A Firkin P
+ ub**\, conveniently located just steps from **Yonge–Sheppard Station** 
+ — cozy - great food and fun!\n\n### 🕖 About the Event\n\nTrivia start
+ s at **7:00 PM** and runs until around **9:30 P**M— just **ask for Colle
+ en’s group** when you arrive!\n\nExpect a lively mix of **pop culture\, 
+ history\, music\, sports\, and random fun question.** Whether you come sol
+ o or bring a friend\, we’ll make sure everyone’s part of a team. 🧩
+ 💬\n\n### 💸 Cost & Policy\n\nEveryone must spend at least **$10 (plus
+  tax & tip)** at the pub.\n\n**NEW POLICY:**\n\n* 🆕 *First-timers* must
+  send a **$5 deposit** by e-transfer to **tommills@rogers.com** and messag
+ e Colleen right away on this page or the sign-up page. you'll be refunded 
+ in cashif/when you show up.\n* 💌 There will be a **$1 reminder charge**
+  if you don’t send the deposit promptly\, for each reminder.\n* 👥 You
+  may bring **1 guest**\, but please e-transfer **$10** in advance. You’l
+ l be refunded once your guest arrives.\n\n### 🧠 Why You’ll Love It\n\
+ nTrivia night isn’t just about questions — it’s about **connection\,
+  laughter\, and teamwork**. Come test your wits\, cheer on your tablemates
+ \, and enjoy the buzz of a pub full of friendly faces. Whether you’re a 
+ trivia pro or just in it for the fun\, it’s always a great time!\n\n📱
+  **Don’t forget to join our WhatsApp group** – [CLICK HERE!](https://c
+ hat.whatsapp.com/H59mSCbsAi018gYANrKAnc?mode=ac_t)\n\n### ⚠️ Notes\n\n
+ * Please don’t just “show up” without RSVPing — seating is limited
+ \, and teams need to be balanced.\n* Occasionally\, the organizer may need
+  to rearrange teams if one is *too stacked* (e.g.\, all the sports or musi
+ c experts together!).\n* Sometimes things happen — events can be cancele
+ d or adjusted\, so keep an eye out for updates.\n\n📩 **Questions?**\nCo
+ ntact **Colleen**\, your organizer\, by posting on the event page.
+URL;VALUE=URI:https://www.meetup.com/toronto-movies-and-social-group/event
+ s/314084170/
+STATUS:CONFIRMED
+CREATED:20260402T042021Z
+LAST-MODIFIED:20260402T042021Z
+CLASS:PUBLIC
+END:VEVENT
+X-ORIGINAL-URL:https://www.meetup.com/toronto-movies-and-social-group/even
+ ts/ical/
+X-WR-CALNAME:Toronto Movies & Social Group - Celebrating 14 Years!
+END:VCALENDAR

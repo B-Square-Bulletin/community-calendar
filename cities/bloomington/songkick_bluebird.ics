@@ -1,0 +1,50 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//The Bluebird//songkick.com//
+X-WR-CALNAME:The Bluebird
+X-WR-TIMEZONE:America/New_York
+BEGIN:VEVENT
+SUMMARY:The Wilder Blue
+DTSTART:20260917T200000
+DTEND:20260917T200000
+UID:cc72a678b13615888f217e67c8d3235e@songkick.com
+DESCRIPTION:The Wilder Blue at Bluebird at 2026-09-17T20:00:00-0400
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43350249-wilder-blue-at-bluebird?utm_
+ medium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Rod Tuffcurls\, The Benchpress
+DTSTART:20260918T200000
+DTEND:20260918T200000
+UID:9d6fd7fab0daeeb60eba9b08cd357a54@songkick.com
+DESCRIPTION:Rod Tuffcurls at Bluebird at 2026-09-18T20:00:00-0400
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43287261-rod-tuffcurls-at-bluebird?ut
+ m_medium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Priscilla Block
+DTSTART:20260924T200000
+DTEND:20260924T200000
+UID:529d4e5282871c637654056cff3e1455@songkick.com
+DESCRIPTION:Priscilla Block at Bluebird at 2026-09-24T20:00:00-0400
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43312487-priscilla-block-at-bluebird?
+ utm_medium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Emo Nite
+DTSTART:20261009T210000
+DTEND:20261009T210000
+UID:efd85af93d6a1846b9b38d6a479a3dfb@songkick.com
+DESCRIPTION:Emo Nite at Bluebird at 2026-10-09T21:00:00-0400
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43353797-emo-nite-at-bluebird?utm_med
+ ium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+END:VCALENDAR

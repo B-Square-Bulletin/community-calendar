@@ -1,0 +1,449 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Meetup//Meetup Calendar 1.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+NAME:TORONTO ARTS & CULTURE
+X-WR-CALNAME:TORONTO ARTS & CULTURE
+BEGIN:VTIMEZONE
+TZID:America/Toronto
+TZURL:http://tzurl.org/zoneinfo-outlook/America/Toronto
+X-LIC-LOCATION:America/Toronto
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Arts & Culture
+X-SOURCE-URL:https://www.meetup.com/toronto-arts-and-culture/
+UID:event_312209023@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031642Z
+DTSTART;TZID=America/Toronto:20260408T170000
+DTEND;TZID=America/Toronto:20260412T100000
+SUMMARY:MONTREAL: Plural Contemporary Art Fair + more   ( our 25th group t
+ rip! )
+DESCRIPTION:TORONTO ARTS & CULTURE\nThis trip is in 2 months. PLEASE read 
+ everything over FIRST!!\n\nTo celebrate our **25th long weekend culture tr
+ ip**--we return to Montreal...for 4 days. CULTURE CULTURE CULTURE\n\n## De
+ tails:\n\n***After an 5-month break\, we will return to Montreal in Spring
+  2026!!***\n\nOur 25th Group trip (2-3 trips each year since 2016).\n\nAND
+ \, we will return to *PLURAL Contemporary Art Fair*--***-for the 8th time!
+ ***\n\nCheck your calendars. All DETAILS are below.\n\n***(Note--this trip
+  is filling up)***\n\n**PLEASE READ** **EVERYTHING** over before signing o
+ n--everything you need to know is here. I'll try to make it work--but this
+  trip is always in high demand.\n\n**There is a Non-Refundable fee to join
+  us. Please Email me before signing up. All details are below. $150 per pe
+ rson.**\n\n[https://www.plural.art/en](https://www.plural.art/en)\n\nCan y
+ ou join us for a mid-April/Spring 2026 long weekend! We have the best time
+  in Montreal!\n\nSomething to look forward to--as Toronto winter approache
+ s. We normally post these trips 4-6 months in advance. This trip is in jus
+ t 4 months.\n\n--Each trip is unique\, very organized\, individual\, and n
+ ever to be repeated! For the culturally curious! Art/Food enthusiast. Expl
+ orers!\n\nWe can work off a group size of 15 people.\n\n**VERY IMPORTANT**
+ : Please read all the information before signing up to this trip\, as ther
+ e is a **NON-refundable fee** involved upfront.\n\nCheck your schedules an
+ d calendars--and then double check them.\n\n\\*\\*\\*Please do not sign up
+  for the trip until you've emailed me. Very important.\n\nThese are very s
+ ocial trips--we are 'explorers'. Montreal treats us very well. We generall
+ y walk everywhere (thousands of steps!)\n\n**We will return to Plural Cont
+ emporary Art Fair for the *8th time*.**\n\n[https://www.plural.art/en](htt
+ ps://www.plural.art/en)\n\n**4 nights (Wednesday\, Thursday\, Friday\, Sat
+ urday--returning home on Sunday)**\n\n**Plural** celebrates the best of co
+ ntemporary art in Canada. Created *by* and *for* the galleries\, the fair 
+ presents and brings together the plurality of voices and works in contempo
+ rary art from across the country. It elevates art market practices through
+  a rigorous selection of galleries presenting thoughtfully chosen artists 
+ and artworks\; and through accessible programming that addresses current i
+ ssues and questions in the field of art.\n\n**Plural's 19th edition** will
+  be held from April 10-12th at the Port of Montreal’s Grand Quay. (Old M
+ ontreal). Just a fabulous space/btw. Old warehouse.\n\nIf you are familiar
+  with Art Toronto and The Artist Project\, then you have an idea about Pap
+ ier Fair. **This is Quebec's most important Art Fair. 50 booths+**\n\n**Al
+ so\, on the this trip**\, we will visit OTHER larger Montreal galleries an
+ d explore various smaller galleries\, food\, public art\, and architecture
+ . We will meet artists\, curators\, and directors--with private tours. PLU
+ S more.\n\n--We spend most of **ONE** day at the Fair\, then the other tim
+ e exploring Montreal's vibrant culture scene. After 20+ past trips\, we ar
+ e so fortunate to have many Montreal culture/gallery friends--they look fo
+ rward to us/and we to them.\n\nOur full schedule of events is not finalize
+ d until late March 2026\, but I keep you posted along the way (every month
+ ). **We meet as a group** before the trip in Toronto--mid/late March. TBD\
+ n\nSpecial surprises always await us in Montreal!\n\n***Here is what you n
+ eed to know to make a decision:***\n\n1. **I will** provide 3 1/2 days of 
+ cultural programming **on the ground**. Wednesday night\, all day Thursday
+ \, all day Friday and Saturday. You return home on Sunday at your own time
+ .\n2. **You are** responsible for your own travel\, accommodation\, insura
+ nce and other costs you will incur. In the past\, members have travelled e
+ ither by air\, VIA\, drive\, Bus. They have stayed in hotels (points)\, Ai
+ rbnb\, Bed & Breakfast\, Hostel\, or with friends.\n\nBy planning ahead\, 
+ you can get the best rates etc. VIA and accommodations.\n\nThere is no "wr
+ ong" place to stay in Montreal\, but ideally you want to be about 1km/20 m
+ ins **walk** from St. Catherine St/Place des Arts.\n\n3\\. These are full 
+ trips\\\, with very little "free\\-time"\\. We are on the go\\.\n4\\. On t
+ he Saturday night\\\, we have a "full Group" restaurant dinner\\. About $1
+ 25\\-$150 per person range\\. This is the only formal meal event I organiz
+ e\\\, although other meals fall into place while there\\.\n5\\. You would 
+ need to be in Montreal and ready to go by about 6pm on Wednesday April 8th
+ \\\, and you return home on your own time of choosing on Sunday April 13th
+ \\.\n6\\. Can you attend\\\, please be sure\\.\\.\\.\n\n**There is a non-r
+ efundable fee to participate in this trip\, and you MUST connect with me b
+ efore signing up on Meetup at:**\n\ntorontoisculture@gmail.com\n\nThe non-
+ refundable fee is **$150 per person** payable within 2 days of signing up 
+ on Meetup.\n\n7\\. For your budgeting\\\, **other** gallery/event "entry" 
+ costs may total $150 maximum over the weekend.\n8\\. By planning ahead\\\,
+  you can get the best rates on travel and accommodations\\. **Be proactive
+ . By doing so\, this covers your non-refundable fee. I travel by VIA\, and
+  stay at Airbnb.**\n9\\. These are NOT expensive trips\\-\\-but they are v
+ ery rewarding\\! Much of what we do while there is FREE\\.\n\nAny question
+ s?\n\ntorontoisculture@gmail.com\n\nGreg
+URL;VALUE=URI:https://www.meetup.com/toronto-arts-and-culture/events/31220
+ 9023/
+STATUS:CONFIRMED
+CREATED:20251128T144612Z
+LAST-MODIFIED:20251128T144612Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Arts & Culture
+X-SOURCE-URL:https://www.meetup.com/toronto-arts-and-culture/
+UID:event_313637935@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031642Z
+DTSTART;TZID=America/Toronto:20260413T190000
+DTEND;TZID=America/Toronto:20260413T203000
+SUMMARY:TPL Author Talk:  Vermeer\, A Life Lost and Found    (ART History)
+DESCRIPTION:TORONTO ARTS & CULTURE\n{ EVENT is Sold-out. Full }\n\nOvervie
+ w\nJoin renowned art-historian Andrew Graham-Dixon as he discusses his rev
+ elatory new biography of the Dutch Master with novelist Teju Cole.\n\n**Fo
+ r centuries\, the work of Johannes Vermeer\, the Master of Delft\, has beg
+ uiled the art world with its deceptively simple scenes of 17th century Dut
+ ch life**. Viewers have always sensed that the paintings contained a secre
+ t meaning\, with no less a writer than Marcel Proust remarking that the wo
+ rk possessed something more than met the eye\, but it was impossible to sa
+ y just what it was. Vermeer has always remained elusive\, making a fulsome
+  biography almost impossible — until now.\n\n***RESERVE your own FREE ti
+ cket--at the Eventbrite link I've included below***\n\nIn what the *Times 
+ Literary Supplement* calls "the best biography of Vermeer and the most com
+ plete analysis of his artwork that has ever been published\," Andrew Graha
+ m-Dixon has revealed the enigmatic essence at the heart of Vermeer's work\
+ , opening up a radical new school of interpretation. In conversation with 
+ acclaimed novelist\, critic\, and photographer Teju Cole\, Graham-Dixon wi
+ ll illuminate the best-kept secrets of this most supreme of all painters.\
+ n\n**ABOUT THIS EVENT'S GUESTS:**\n\n**Andrew Graham-Dixon** is one of the
+  leading art critics and presenters of arts television in the English-spea
+ king world. He has presented numerous landmark series on art for the BBC a
+ nd other independents\, and his published works include *A History of Brit
+ ish Art* (1995)\, *Michelangelo and the Sistine Chapel* (2007)\, and *Cara
+ vaggio: A Life Sacred and Profane* (2010)\, which was shortlisted for the 
+ Samuel Johnson Prize for Non-Fiction.\n\n**Teju Cole** is a novelist\, ess
+ ayist\, and photographer. He was the photography critic of the *New York T
+ imes Magazine* from 2015 until 2019. He is currently the Gore Vidal Profes
+ sor of the Practice of Creative Writing at Harvard and a contributing writ
+ er to the *New York Times Magazine*. His published works include the novel
+ s *Open City* (2011) and *Tremor* (2023)\, which was named a book of the y
+ ear by *Time*\, *the Washington Post*\, and *New York Magazine*\; the essa
+ y collection *Known and Strange Things* (2016)\, which was shortlisted for
+  both the PEN/Diamonstein-Spielvogel Award for the Art of the Essay and th
+ e inaugural PEN/Jean Stein Award\; and *Blind Spot* (June 2017)\, a genre-
+ crossing work of photography and texts\, which was shortlisted for the Ape
+ rture/Paris Photo Photobook Award and named one of the best books of the y
+ ear by *Time Magazine.*\n\nhttps://tpl.bibliocommons.com/v2/events/69a0bac
+ c491b809c6f1cbdf7\n\n**FREE Ticket link here:**\n\nhttps://www.eventbrite.
+ ca/e/andrew-graham-dixon-teju-cole-vermeer-a-life-lost-and-found-tickets-1
+ 983799694288?aff=oddtdtcreator
+URL;VALUE=URI:https://www.meetup.com/toronto-arts-and-culture/events/31363
+ 7935/
+STATUS:CONFIRMED
+CREATED:20260304T203547Z
+LAST-MODIFIED:20260304T203547Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Arts & Culture
+X-SOURCE-URL:https://www.meetup.com/toronto-arts-and-culture/
+UID:event_313872358@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031642Z
+DTSTART;TZID=America/Toronto:20260418T130000
+DTEND;TZID=America/Toronto:20260418T150000
+SUMMARY:APRIL Art Crawl: We visit/tour 3 Private galleries on Dupont St ($
+ 10 per person)
+DESCRIPTION:TORONTO ARTS & CULTURE\nWe will continue our monthly **Art Cra
+ wls** into April! (then take a break)\n\n*Please read everything over firs
+ t.*\n\nJanuary\, February\, March\, April. During winter months/early Spri
+ ng.\n\nAbout ***12-15 people***/members each time.\n\n**Once/twice each mo
+ nth** on a *Saturday afternoon*. (1pm-3pm range)\n\n**$10 per person.**\n\
+ n**Sent via e-transfer when you signup/rsvp. You're not confirmed until th
+ en.**\n\n***We will visit 3 different*** galleries each month (short walks
+  between each one).\n\n**\\*\\*\\*\\*\\*This ART walk will be along the Du
+ pont St corridor. About 1.5km of walking.**\n\n\\*\\*We'll meet the Galler
+ y owners/artists/directors--who will lead us in 30 minutes of tour and con
+ versation at each stop.\n\nCold\, snow\, rain\, slush\, sun---**we will ca
+ rry on!**\n\nNO cancellations/no refunds or any re-scheduling.\n\nInterest
+ ed in ART/artists--**and learning/visiting the exceptional local private a
+ rt galleries we have in Toronto..**\n\n*Saturday April 18th* (1pm-3:30pm)\
+ n\nOnce I have 14 confirmations from Meetup members (you)--I will email yo
+ u the location/route of our ART Crawl!!\n\n***This walk/tour will be along
+  Dupont Street--visiting some hidden gems!***\n\nIf interested\, **please 
+ email me $10 when you signup.**\n\n*Include your first name only*\, and em
+ ail address for a reply. I will then confirm you. And confirm up our itine
+ rary in a week or so. See you on April 18th! Or before.\n\nThis will be ou
+ r 6th ART Crawl of 2026.\n\nEach month will be posted separately. $10 per 
+ person each time.\n\nYou can email (e transfer) me directly here:\n\ntoron
+ toisculture@gmail\,com\n\nGreg\n\nThanks.
+URL;VALUE=URI:https://www.meetup.com/toronto-arts-and-culture/events/31387
+ 2358/
+STATUS:CONFIRMED
+CREATED:20260320T194800Z
+LAST-MODIFIED:20260320T194800Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Arts & Culture
+X-SOURCE-URL:https://www.meetup.com/toronto-arts-and-culture/
+UID:event_313679604@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031642Z
+DTSTART;TZID=America/Toronto:20260422T193000
+DTEND;TZID=America/Toronto:20260422T213000
+SUMMARY:Alliance Francaise (concert):  Beltuner   (Jazz Fusion/Tango sound
+ s!)   $18 
+DESCRIPTION:TORONTO ARTS & CULTURE\n**Beltuner is a Paris-based quartet** 
+ known for their electrifying live performances and fearless blend of music
+ al styles. Since bursting onto the French jazz scene in the early 2000s\, 
+ they have built a devoted following with their infectious energy and genre
+ -defying sound.\n\nThe group features Johann Riche on accordion and vocals
+ \, Pascal Muller on guitar\, Bertrand Allaume on bass\, and Mathieu Stora 
+ on percussion. Together\, they create a bold and joyful fusion that draws 
+ from swing\, manouche\, musette (small bagpipe)\, tango\, pop\, and contem
+ porary jazz.\n\nTicket link is below: $18 per person\n\nRecent performance
+  clip--\n\nhttps://www.youtube.com/watch?v=iV4TjDMRlC0\n\nAudiences can ex
+ pect an exhilarating concert experience\, filled with vibrant soundscapes 
+ **and the unmistakable charm of Paris.**\n\n**Ticket link here:**\n\nhttps
+ ://www.alliance-francaise.ca/en/art/cultural-season/concerts/288-beltuner\
+ n\nOne of our fav venues in Toronto--seating just 140 people.
+URL;VALUE=URI:https://www.meetup.com/toronto-arts-and-culture/events/31367
+ 9604/
+STATUS:CONFIRMED
+CREATED:20260307T111700Z
+LAST-MODIFIED:20260307T111700Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Arts & Culture
+X-SOURCE-URL:https://www.meetup.com/toronto-arts-and-culture/
+UID:event_314131138@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031642Z
+DTSTART;TZID=America/Toronto:20260424T130000
+DTEND;TZID=America/Toronto:20260424T150000
+SUMMARY:Art Crawl:  Government of Ontario Art Collection+  ($10)
+DESCRIPTION:TORONTO ARTS & CULTURE\n**PLEASE read everything** over FIRST.
+  This event was logistically challenging to put together.\n\nART Crawl #7 
+ is on a FRIDAY afternoon--at **York University.**\n\nThis will be a very s
+ pecial and unique opportunity for us.\n\nWe'll visit and tour two location
+ s: Ontario Archives and Goldfarb Gallery.\n\nThis is where the *Province o
+ f Ontario Art Collection* is held--at the **Ontario Archives.**\n\nhttps:/
+ /www.archives.gov.on.ca/art-collection/\n\nhttps://thegoldfarbgallery.ca/\
+ n\nWe'll have a private tour with the both Curator's (behind the scenes)!\
+ n\nThe usual fee.\n\n**$10 per person.** Emailed to me directly in advance
+ --when you RSVP on Meetup\n\n**Sent by E-transfer here:**\n\ntorontoiscult
+ ure@gmail.com\n\n***To confirm:***\n\nWe are visiting/touring TWO location
+ s at York University.\n\n1. Ontario Archives (**Province of Ontario Art Co
+ llection**)\n2. **Goldfarb Gallery** (this is York University's public gal
+ lery (opened recently))\n\nBoth locations are a 5-10 mins WALK from York U
+ niversity TTC station.\n\nDirections and more details--\n\nhttps://www.arc
+ hives.gov.on.ca/hours-and-location/\n\n(As this is a government office--th
+ ey are open M/F from 9am-5pm only)
+URL;VALUE=URI:https://www.meetup.com/toronto-arts-and-culture/events/31413
+ 1138/
+STATUS:CONFIRMED
+CREATED:20260405T105541Z
+LAST-MODIFIED:20260405T105541Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Arts & Culture
+X-SOURCE-URL:https://www.meetup.com/toronto-arts-and-culture/
+UID:event_314073365@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031642Z
+DTSTART;TZID=America/Toronto:20260508T193000
+DTEND;TZID=America/Toronto:20260508T213000
+SUMMARY:Lyric Theatre:  ARMONIA\, Excellence in Flamenco
+DESCRIPTION:TORONTO ARTS & CULTURE\n**Esmeralda Enrique Spanish Dance Comp
+ any** \\| Academy of Spanish Dance:\n\n*Ticket link is below* (20% off pro
+ mo)--\n\nFlamenco is Life. It's a living art.\n\n***Special guests\, accla
+ imed flamenco dancer José Manuel Álvarez (Barcelona\, Spain) and beloved
+  singer Manuel Soto (Jerez\, Spain)\,*** join dancers Kiyo Asaoka\, Makeda
+  Benítez\, Pamela Briz\, Nancy Cardwell\, Virginia Castro Durán\, Rocío
+  Conde\, Alison MacDonald\, and as always\, Artistic Director Esmeralda En
+ rique\, with flamenco guitarists\, Caroline Planté (Montréal) and Benjam
+ in Barrile (Toronto)\, singer Marcos Marín (Montréal) with percussionist
+ \, Miguel Medina (Montréal).\n\nhttps://www.youtube.com/watch?v=5IeTi_ZxU
+ GU\n\n**Ticket link:**\n\nhttps://www.flamencos.net/ (You are purchasing f
+ or Friday May 8th)\n\nOnce you enter Ticketmaster link (May 8th)--look for
+  the **UNLOCK** box\n\n**Enter promo code:** MEETUP\n\nThis will give you 
+ a 20% off ticket price.\n\nPlay around with the seating chart--but more th
+ an likely you can find a $40-$45 ticket (be patient!)
+URL;VALUE=URI:https://www.meetup.com/toronto-arts-and-culture/events/31407
+ 3365/
+STATUS:CONFIRMED
+CREATED:20260401T160428Z
+LAST-MODIFIED:20260401T160428Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Arts & Culture
+X-SOURCE-URL:https://www.meetup.com/toronto-arts-and-culture/
+UID:event_313880312@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031642Z
+DTSTART;TZID=America/Toronto:20260509T190000
+DTEND;TZID=America/Toronto:20260509T220000
+SUMMARY:Aga Khan Museum:  Labyrinth Ensemble
+DESCRIPTION:TORONTO ARTS & CULTURE\nWe will return to see **Labyrinth Ense
+ mble** for the 5th time!\n\n[https://www.labyrinthontario.com/s/stories/la
+ byrinth-ensemble-with-efren-lopez-2](https://www.labyrinthontario.com/s/st
+ ories/labyrinth-ensemble-with-efren-lopez-2)\n\nEvery FOUR years\, the 14 
+ members 'disband'\, and a new group of 14 members is put together. A new c
+ ohort!\n\nWhich also means 14 new instruments to learn about!\n\nThe new c
+ ohort will dig into European Medieval\, the Eastern Mediterranean\, the Mi
+ ddle East\, and Central Asian musical traditions\, and will feature unique
+  instrumentation ranging from guzheng\, Hardanger fiddle\, lutes\, hurdy g
+ urdy\, qanun and microtonal guitar\; bringing a whole new sound to the pro
+ ject.\n\nThe Aga Khan Museum concert venue is one of our top 3 spots in To
+ ronto--for live music.\n\nTickets have just gone 'on sale'. I've purchased
+  a ticket in Row F.\n\nPrices are: $50 regular. $37.50 for Senior.\n\nhttp
+ s://agakhanmuseum.org/whats-on/labyrinth-with-efren-lopez/\n\n\\*\\*\\*Pur
+ chase your own ticket--**and the ticket price includes** entry into the Mu
+ seum from 6pm onwards (which we always do). We can check out the new exhib
+ itions.\n\nIf interested\, grab your own ticket. Don't miss out!\n\nA shor
+ t video--3 of the 14 members perform at local Thorncliffe Park festival la
+ st summer\n\nhttps://www.youtube.com/watch?v=o2XjudW45nQ
+URL;VALUE=URI:https://www.meetup.com/toronto-arts-and-culture/events/31388
+ 0312/
+STATUS:CONFIRMED
+CREATED:20260321T101554Z
+LAST-MODIFIED:20260321T101554Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Arts & Culture
+X-SOURCE-URL:https://www.meetup.com/toronto-arts-and-culture/
+UID:event_312927549@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031642Z
+DTSTART;TZID=America/Toronto:20260510T140000
+DTEND;TZID=America/Toronto:20260510T160000
+SUMMARY:Tarragon Theatre:  cicadas
+DESCRIPTION:TORONTO ARTS & CULTURE\nWorld Premiere--\n\n*Ticket link is be
+ low*. $30-$72 (look at the seating map--and your age!)\n\nIn 2035\, a deca
+ de after the Trinity Bellwoods Collapse\, an investigation into the myster
+ ious disappearance of a young girl leads to a very peculiar house that has
+  sunk into the earth.\n\n**Could a strangely luminous painting** unlock lo
+ ng-buried secrets of what flowed beneath the home? Howling winds\, storms\
+ , and the ever-present sound of cicadas remind us that nothing stays burie
+ d.\n\n***cicadas*** is a modern eco-thriller from the minds of Governor Ge
+ neral’s Award and Siminovitch Prize laureate David Yee and award-winning
+  composer Chris Thornborrow that serves as both mystery and warning.\n\nDi
+ rected by Nina Lee Aquino\n\nhttps://nac-cna.ca/en/bio/nina-lee-aquino\n\n
+ **Ticket link here: (Sunday May 10th)**\n\nhttps://tarragontheatre.com/pla
+ ys/2025-2026/cicadas/\n\n(Play around with the seating map\, and ticket pr
+ ices. Any seat is a great seat--even the last row!)
+URL;VALUE=URI:https://www.meetup.com/toronto-arts-and-culture/events/31292
+ 7549/
+STATUS:CONFIRMED
+CREATED:20260117T120825Z
+LAST-MODIFIED:20260117T120825Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Arts & Culture
+X-SOURCE-URL:https://www.meetup.com/toronto-arts-and-culture/
+UID:event_312945576@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031642Z
+DTSTART;TZID=America/Toronto:20260521T190000
+DTEND;TZID=America/Toronto:20260521T210000
+SUMMARY:Toronto Symphony Orchestra & Anoushka Shankar  ( 15% off promo )
+DESCRIPTION:TORONTO ARTS & CULTURE\n**Experience the coming together of Ea
+ stern and Western traditions as Anoushka Shankar makes her TSO début\, pe
+ rforming her father Ravi Shankar’s captivating Sitar Concerto No. 2.**\n
+ \nhttps://www.youtube.com/watch?v=cf-yD9TWsxo\n\nThe program also features
+  Beethoven’s lively and playful Symphony No. 8\, along with a selection 
+ from *Passages*\, the groundbreaking collaboration between Philip Glass an
+ d Ravi Shankar\, blending the vibrancy of Western and Indian classical mus
+ ic.\n\nhttps://www.anoushkashankar.com/\n\n**Gustavo Gimeno**\, conductor\
+ n**Anoushka Shankar**\, sitar\n\nPhilip Glass: “Meetings Along the Edge
+ ” from *Passages* (Canadian Première)\nBeethoven: Symphony No. 8\nR. Sh
+ ankar: Sitar Concerto No. 2 “Raga-Mala”\n\n**Ticket link here:**\n\nUs
+ e this **promo code** for 15% discount: TORONTOISCULTURE\n\nhttps://my.tso
+ .ca/3673/3780\n\nNice seats could be Main Floor (Section 6/green) or Centr
+ e Balcony or ANY where you would like.\n\nWe last saw Anoushka Shankar at 
+ Massey Hall in April 2023.\n\nA bit more--\n\nhttps://www.youtube.com/watc
+ h?v=0doG7LpEK1w
+URL;VALUE=URI:https://www.meetup.com/toronto-arts-and-culture/events/31294
+ 5576/
+STATUS:CONFIRMED
+CREATED:20260118T185224Z
+LAST-MODIFIED:20260118T185224Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Arts & Culture
+X-SOURCE-URL:https://www.meetup.com/toronto-arts-and-culture/
+UID:event_313966389@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031642Z
+DTSTART;TZID=America/Toronto:20260603T180000
+DTEND;TZID=America/Toronto:20260603T210000
+SUMMARY:Koerner Hall:  2026 Griffin Poetry Prize Readings
+DESCRIPTION:TORONTO ARTS & CULTURE\nWe attend the **Griffin Poetry Prize**
+  every year!\n\n*A superb literary night of prose!*\n\nhttps://griffinpoet
+ ryprize.com/\n\n*The Griffin Poetry Prize has been acknowledging and encou
+ raging poets for twenty-two years. At a time when censorship and attacks o
+ n a diverse array of writers are on the rise in many countries – includi
+ ng the United States – it’s heartening to see such a strong vote of co
+ nfidence in poets coming from Canada. Poetry is not a minor art form\; it 
+ is the crucible of human language.*\n\nMargaret Atwood\, Founding Trustee\
+ n\n**Tickets are $25 or $30\,** with the purchase link below. Tickets have
+  just gone on sale. Includes a lovely WINE reception.\n\nAny seat is a gre
+ at seat. I am sitting in Orchestra\, Row M.\n\nOn Wednesday June 3rd--\n\n
+ The evening will include a selection of readings by some of the **world’
+ s best poets\,** including the five poets shortlisted for the **$130\,000 
+ Griffin Poetry Prize\,** this year’s Lifetime Recognition Award recipien
+ t\, and the Canadian First Book Prize winner.\n\nIt will be a celebration 
+ of poetry not to be missed! A harvester of words at the highest level. Lan
+ guage artists!\n\nIf you've **not** attended before--take a chance this ye
+ ar. You will experience nothing like it. This is our 8th year attending.\n
+ \n**Ticket link--any seat is a great seat**\n\nhttps://www.rcmusic.com/eve
+ nts-and-performances/2026-griffin-poetry-prize-readings\n\n\\-\\-\\-In 202
+ 3\\\, 2024\\\, 2025\\-\\-30\\+ of us attended each year\\. Your ticket als
+ o **includes** an anthology of poems by short-listed authors (worth $20 at
+  book shop)\, and some wine!\n\nNOTE: the 6:00 pm start time (wine recepti
+ on/yummy snacks)\n\nPlan ahead so you can get there in time. Arrive by 630
+ pm.
+URL;VALUE=URI:https://www.meetup.com/toronto-arts-and-culture/events/31396
+ 6389/
+STATUS:CONFIRMED
+CREATED:20260326T195023Z
+LAST-MODIFIED:20260326T195023Z
+CLASS:PUBLIC
+END:VEVENT
+X-ORIGINAL-URL:https://www.meetup.com/Toronto-Arts-and-Culture/events/ical
+ /
+X-WR-CALNAME:TORONTO ARTS & CULTURE
+END:VCALENDAR
