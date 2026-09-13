@@ -4,7 +4,9 @@ Date: 2026-08-02
 
 ## Status
 
-Accepted
+Accepted. The wholesale-adoption clause in Decision 1 is refined by
+[0010](0010-semantic-graft-for-divergent-sync-conflicts.md), which applies to
+files the fork has since materially diverged on.
 
 ## Context
 
@@ -48,6 +50,8 @@ into a fork whose history includes a revert of the same code.
    resolves the `xmlui/shell.js` conflict by adopting upstream's version. The
    revert (PR #41) was the correct response to the regression; the re-adoption
    is correct because upstream fixed the root cause and the fork verified it.
+   (Once the fork diverges on a file, resolve by semantic graft instead of
+   wholesale adoption — [0010](0010-semantic-graft-for-divergent-sync-conflicts.md).)
 
 2. **Every upstream sync must pass a headless verification benchmark before
    merge.** `scripts/bench_collapse_long.js` loads the merged `xmlui/helpers.js`

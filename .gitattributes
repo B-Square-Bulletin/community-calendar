@@ -17,4 +17,4 @@ requirements-dev.txt merge=keepours linguist-generated=true
 # Per-city calendar artifacts: keep the fork's versions (regenerate with
 # the daily "Auto-generate calendar metadata" pipeline).
 rss/* merge=keepours linguist-generated=true
-report/* merge=keepours linguist-generated=true
+report/** merge=keepours linguist-generated=true

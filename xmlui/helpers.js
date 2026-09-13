@@ -675,6 +675,58 @@ function getEventSearchText(event) {
   ).toLowerCase();
 }
 
+// Strong content identity for an events payload. shell.js's issue-82
+// emission coalescing uses this to decide whether a fresh fetch is
+// identical to the paint it would replace. Unlike ccArraySig — kept O(1)
+// because memoizeIngest runs it on every evaluation — this runs only a
+// handful of times per load (cache paint, fetch compare/store, refetch),
+// so it can afford to examine every row. The previous key (length +
+// first/last id) called two payloads identical when only the middle
+// changed, which let a stale cached paint suppress the fresh emission
+// and, after the epoch nudge landed, leave the repaint unfired. Two
+// 32-bit multiplicative hashes with independent seeds (an FNV-1a pass and
+// a MurmurHash3-style pass) over the same stream give ~64 bits, so an
+// accidental collision between distinct payloads is negligible.
+function eventsSignature(rows) {
+  if (!Array.isArray(rows)) return 'na';
+  if (!rows.length) return '0';
+  var h1 = 0x811c9dc5; // FNV-1a offset basis
+  var h2 = 0x9747b28c; // independent seed
+  for (var i = 0; i < rows.length; i++) {
+    var row = rows[i];
+    var s = row === undefined ? 'undefined' : JSON.stringify(row);
+    if (s === undefined) s = 'undefined';
+    for (var j = 0; j < s.length; j++) {
+      var c = s.charCodeAt(j);
+      h1 = Math.imul(h1 ^ c, 0x01000193); // FNV-1a prime
+      h2 = Math.imul(h2 ^ c, 0x85ebca6b); // MurmurHash3 constant
+    }
+    // Row separator: keeps ["ab"] from hashing the same as ["a", "b"].
+    h1 = Math.imul(h1 ^ 0x1f, 0x01000193);
+    h2 = Math.imul(h2 ^ 0x1f, 0x85ebca6b);
+  }
+  return rows.length + ':' + (h1 >>> 0).toString(16) + ':' + (h2 >>> 0).toString(16);
+}
+window.eventsSignature = eventsSignature;
+
+// The issue-82 fresh-emission skip decision, extracted from shell.js so
+// test.html can pin the coalescing itself, not just the signature: a fresh
+// payload is skipped only when it is identical to the last emission and
+// came from the same subscriber and city. Callers pass the precomputed
+// eventsSignature so the payload is hashed once per delivery — the same
+// signature is then stored for the next comparison. With the old weak key,
+// a mid-payload change looked identical and suppressed the fresh emit — and
+// therefore the epoch bump that repaints the stale cache.
+function shouldSkipFreshEmit(state, freshSig) {
+  return !!(
+    state.currentEmit &&
+    state.currentEmit === state.lastEmitFn &&
+    state.city === state.lastEmitCity &&
+    freshSig === state.lastEmitSig
+  );
+}
+window.shouldSkipFreshEmit = shouldSkipFreshEmit;
+
 // Filter events by search term with progressive narrowing
 var _prevTerm = '';
 var _prevCategory = '';
@@ -1355,6 +1407,7 @@ var _collapseCache = null;
 var _collapseLastLen = 0;
 var _collapseLastFirstId = null;
 var _collapseLastLastId = null;
+var _collapseLastEmitSig = null;
 var _collapseRun = 0;
 
 function collapseLongRunningEvents(events) {
@@ -1365,13 +1418,23 @@ function collapseLongRunningEvents(events) {
   // network emit has different object *references* than the cached emit but the
   // same content, so an identity check always missed on the 2nd pipeline run
   // and recomputed (~300ms spike). See issue #77.
+  //
+  // The id triple alone is too weak (#86): a payload differing only in the
+  // middle matches it, and this returns _collapseCache BY REFERENCE, so the
+  // fresh rows are swallowed here even after the outer memoizeIngest key is
+  // fixed — the outer memo misses, calls through, and gets the stale array
+  // back. The emission signature shell.js publishes closes that: it changes
+  // iff the emitted content changed, and stays constant within one emission,
+  // so the repeated pipeline runs this cache exists for still hit.
   var firstId = events[0] && events[0].id;
   var lastId = events[events.length - 1] && events[events.length - 1].id;
+  var emitSig = window.__ccEmitSig || '';
   if (
     _collapseCache &&
     events.length === _collapseLastLen &&
     firstId === _collapseLastFirstId &&
-    lastId === _collapseLastLastId
+    lastId === _collapseLastLastId &&
+    emitSig === _collapseLastEmitSig
   ) {
     if (!window._pipelineLog) window._pipelineLog = [];
     window._pipelineLog.push(
@@ -1388,6 +1451,7 @@ function collapseLongRunningEvents(events) {
   _collapseLastLen = events.length;
   _collapseLastFirstId = firstId;
   _collapseLastLastId = lastId;
+  _collapseLastEmitSig = emitSig;
 
   const MIN_OCCURRENCES = 5; // Need at least this many to consider "long-running"
 
@@ -1528,6 +1592,7 @@ function clearDedupeCache() {
   _collapseLastLen = 0;
   _collapseLastFirstId = null;
   _collapseLastLastId = null;
+  _collapseLastEmitSig = null;
   // Also reset the issue-82 memo layer on collapseLongRunningEvents: in the
   // browser the global identifier is rebound to the memoized wrapper, so the
   // inner call inside dedupeEvents hits that cache (keyed len + endpoint
@@ -2375,8 +2440,11 @@ if (typeof window !== 'undefined') {
   // stable, yet ref-keyed memos still missed at engine-mediated stage
   // boundaries — the engine gives intermediate expression results fresh
   // identities per evaluation. Signatures sidestep identity entirely.
-  // (Known tradeoff, same as shell.js rowsSig: a mid-array content change
-  // with identical length and endpoint ids would falsely hit.)
+  // ccArraySig alone is blind to a mid-array content change with identical
+  // length and endpoint ids (#86), so the key also carries the emission
+  // signature shell.js publishes. That is constant between emissions, so the
+  // within-emission reuse this memo exists for still hits; it changes on a new
+  // emission, so a genuinely different payload is never served the stale array.
   window.__ccMemoStats = {};
   window.__ccMemoClear = {};
   function memoizeIngest(name, extraKey) {
@@ -2390,7 +2458,7 @@ if (typeof window !== 'undefined') {
       lastResult = null;
     };
     window[name] = function () {
-      var key = [ccArraySig(arguments[0])];
+      var key = [ccArraySig(arguments[0]), window.__ccEmitSig || ''];
       if (extraKey) key = key.concat(extraKey.apply(null, arguments));
       if (
         lastKey !== null &&
@@ -2432,9 +2500,9 @@ if (typeof window !== 'undefined') {
   // full-price chain runs even after ref memoization, i.e. the engine
   // presents a different events.value/enrichments.value identity per
   // binding evaluation. So the boundary memo keys on a cheap content
-  // signature instead (length + first/last ids — the same identity test
-  // shell.js uses to skip identical emissions), and __ccRefStats counts
-  // the identity churn as evidence for the upstream XMLUI finding.
+  // signature instead (the ccArraySig length + first/last id test) plus the
+  // emission signature shell.js publishes (#86), and __ccRefStats counts the
+  // identity churn as evidence for the upstream XMLUI finding.
   function ccArraySig(a) {
     if (!Array.isArray(a)) return 'na';
     if (!a.length) return '0';
@@ -2445,6 +2513,7 @@ if (typeof window !== 'undefined') {
     _combineLastBRef = null;
   var _combineLastASig = null,
     _combineLastBSig = null,
+    _combineLastEmitSig = null,
     _combineResult = null;
   window.combineEvents = function (events, enrichments) {
     var s = window.__ccRefStats;
@@ -2458,12 +2527,19 @@ if (typeof window !== 'undefined') {
       _combineLastBRef = enrichments;
     }
     var aSig = ccArraySig(events),
-      bSig = ccArraySig(enrichments);
-    if (aSig === _combineLastASig && bSig === _combineLastBSig && _combineResult !== null) {
+      bSig = ccArraySig(enrichments),
+      emitSig = window.__ccEmitSig || '';
+    if (
+      aSig === _combineLastASig &&
+      bSig === _combineLastBSig &&
+      emitSig === _combineLastEmitSig &&
+      _combineResult !== null
+    ) {
       return _combineResult;
     }
     _combineLastASig = aSig;
     _combineLastBSig = bSig;
+    _combineLastEmitSig = emitSig;
     _combineResult = (Array.isArray(events) ? events : []).concat(
       Array.isArray(enrichments) ? enrichments : []
     );
