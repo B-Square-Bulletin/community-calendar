@@ -684,6 +684,17 @@ window._xsLogs = [];
       var lastEmitCity = null;
       var lastEmitSig = null;
 
+      // #86: the ingest memos in helpers.js key on ccArraySig (length +
+      // endpoint ids), which falsely HITs on a mid-only payload change and
+      // returns the previous array BY REFERENCE — so fresh data the #85
+      // emission fix correctly lets through never reaches the list. Each emit
+      // site below publishes the strong eventsSignature it already computed
+      // into window.__ccEmitSig, and the memo keys carry it, so an emission
+      // whose content changed invalidates the chain while repeat evaluations
+      // within one emission still hit. (Upstream folds in an emit sequence for
+      // its transient cached slice, which has no payload signature; the fork
+      // has no sliced emit, so the signature alone identifies an emission.)
+
       function eventsUrl(city) {
         return (
           window.SUPABASE_URL +
@@ -759,6 +770,7 @@ window._xsLogs = [];
               lastEmitFn = currentEmit;
               lastEmitCity = city;
               lastEmitSig = freshSig;
+              window.__ccEmitSig = freshSig;
               currentEmit(rows);
             }
             return true;
@@ -801,6 +813,7 @@ window._xsLogs = [];
             lastEmitFn = emit;
             lastEmitCity = city;
             lastEmitSig = window.eventsSignature(cached);
+            window.__ccEmitSig = lastEmitSig;
             emit(cached);
           }
         });

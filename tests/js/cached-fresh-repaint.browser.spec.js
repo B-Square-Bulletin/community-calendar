@@ -9,17 +9,18 @@
 // cached paint is observed, then releases a fresh payload and asserts the
 // rendered list replaces the cached row.
 //
-// SCOPE / KNOWN GAP: the passing case changes an endpoint id, which also
-// changes the ingest memos' ccArraySig key (length + first/last id). This spec
-// therefore does not isolate the eventsEpoch nudge — it also passes with
-// eventsEpoch threaded out of the getPagedEvents bindings. A change confined
-// to the middle (same length + same endpoint ids) is the case eventsSignature
-// was added for, but it cannot pass yet: combineEvents and the downstream
-// memoizeIngest wrappers still key on ccArraySig (the same weak key the
-// retired rowsSig used), so every stage HITs and serves the stale paint even
-// after cc-events-emit-fresh fires. That gap is documented in the fixme below
-// and belongs upstream (see docs/adr/0010 §4); un-skip it once the ingest memos
-// key on content (or the emission signature is threaded into their keys).
+// SCOPE: two cases guard the same repaint contract from opposite sides. The
+// endpoint-changing case (id 3 -> 4) is the older guard: it flips the ingest
+// memos' ccArraySig key (length + first/last id), so it also passes with the
+// eventsEpoch nudge threaded out. The mid-only case (same length, same endpoint
+// ids) is the one #85/#86 target: ccArraySig cannot see it, so the whole chain
+// — combineEvents, the memoizeIngest wrappers, and collapseLongRunningEvents's
+// inner cache — would HIT and serve the stale paint even after
+// cc-events-emit-fresh fires. shell.js now publishes window.__ccEmitSig (the
+// full-payload eventsSignature plus an emit sequence) at every emit and the
+// memo keys carry it, so a mid-only emission invalidates the chain and repaints.
+// This DOM assertion is the end-to-end proof; the emission-keyed memo contract
+// itself is pinned at the node seam in emission-keyed-ingest-memos.test.js.
 import { test, expect } from '@playwright/test';
 
 const CITY = 'bloomington';
@@ -43,7 +44,7 @@ const CACHED = [
 const FRESH = [event(1, 'Cached Alpha', 1), event(2, 'Fresh Beta', 2), event(4, 'Fresh Gamma', 3)];
 
 // Same length (3) and same endpoint ids (1 … 3): a mid-only change. This is
-// the payload shape the upstream #85 fix targets end-to-end.
+// the payload shape ccArraySig cannot see and eventsSignature was added for.
 const FRESH_MID = [
   event(1, 'Cached Alpha', 1),
   event(2, 'Fresh Beta', 2),
@@ -109,7 +110,7 @@ test('cached paint is replaced by the fresh emission', async ({ page }) => {
   await expect(page.getByText('Cached Gamma', { exact: true })).toHaveCount(0);
 });
 
-test.fixme('mid-only fresh change repaints', async ({ page }) => {
+test('mid-only fresh change repaints', async ({ page }) => {
   const releaseFresh = await bootCachedThenFresh(page, CACHED, FRESH_MID);
   releaseFresh();
   await expect(page.getByText('Fresh Beta', { exact: true })).toBeVisible({ timeout: 45000 });

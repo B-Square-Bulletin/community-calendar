@@ -1407,6 +1407,7 @@ var _collapseCache = null;
 var _collapseLastLen = 0;
 var _collapseLastFirstId = null;
 var _collapseLastLastId = null;
+var _collapseLastEmitSig = null;
 var _collapseRun = 0;
 
 function collapseLongRunningEvents(events) {
@@ -1417,13 +1418,23 @@ function collapseLongRunningEvents(events) {
   // network emit has different object *references* than the cached emit but the
   // same content, so an identity check always missed on the 2nd pipeline run
   // and recomputed (~300ms spike). See issue #77.
+  //
+  // The id triple alone is too weak (#86): a payload differing only in the
+  // middle matches it, and this returns _collapseCache BY REFERENCE, so the
+  // fresh rows are swallowed here even after the outer memoizeIngest key is
+  // fixed — the outer memo misses, calls through, and gets the stale array
+  // back. The emission signature shell.js publishes closes that: it changes
+  // iff the emitted content changed, and stays constant within one emission,
+  // so the repeated pipeline runs this cache exists for still hit.
   var firstId = events[0] && events[0].id;
   var lastId = events[events.length - 1] && events[events.length - 1].id;
+  var emitSig = window.__ccEmitSig || '';
   if (
     _collapseCache &&
     events.length === _collapseLastLen &&
     firstId === _collapseLastFirstId &&
-    lastId === _collapseLastLastId
+    lastId === _collapseLastLastId &&
+    emitSig === _collapseLastEmitSig
   ) {
     if (!window._pipelineLog) window._pipelineLog = [];
     window._pipelineLog.push(
@@ -1440,6 +1451,7 @@ function collapseLongRunningEvents(events) {
   _collapseLastLen = events.length;
   _collapseLastFirstId = firstId;
   _collapseLastLastId = lastId;
+  _collapseLastEmitSig = emitSig;
 
   const MIN_OCCURRENCES = 5; // Need at least this many to consider "long-running"
 
@@ -1580,6 +1592,7 @@ function clearDedupeCache() {
   _collapseLastLen = 0;
   _collapseLastFirstId = null;
   _collapseLastLastId = null;
+  _collapseLastEmitSig = null;
   // Also reset the issue-82 memo layer on collapseLongRunningEvents: in the
   // browser the global identifier is rebound to the memoized wrapper, so the
   // inner call inside dedupeEvents hits that cache (keyed len + endpoint
@@ -2427,9 +2440,11 @@ if (typeof window !== 'undefined') {
   // stable, yet ref-keyed memos still missed at engine-mediated stage
   // boundaries — the engine gives intermediate expression results fresh
   // identities per evaluation. Signatures sidestep identity entirely.
-  // (Known ccArraySig tradeoff: a mid-array content change with identical
-  // length and endpoint ids would falsely hit. The emission coalescing in
-  // shell.js keys on eventsSignature, a full-payload hash, instead.)
+  // ccArraySig alone is blind to a mid-array content change with identical
+  // length and endpoint ids (#86), so the key also carries the emission
+  // signature shell.js publishes. That is constant between emissions, so the
+  // within-emission reuse this memo exists for still hits; it changes on a new
+  // emission, so a genuinely different payload is never served the stale array.
   window.__ccMemoStats = {};
   window.__ccMemoClear = {};
   function memoizeIngest(name, extraKey) {
@@ -2443,7 +2458,7 @@ if (typeof window !== 'undefined') {
       lastResult = null;
     };
     window[name] = function () {
-      var key = [ccArraySig(arguments[0])];
+      var key = [ccArraySig(arguments[0]), window.__ccEmitSig || ''];
       if (extraKey) key = key.concat(extraKey.apply(null, arguments));
       if (
         lastKey !== null &&
@@ -2485,9 +2500,9 @@ if (typeof window !== 'undefined') {
   // full-price chain runs even after ref memoization, i.e. the engine
   // presents a different events.value/enrichments.value identity per
   // binding evaluation. So the boundary memo keys on a cheap content
-  // signature instead (the ccArraySig length + first/last id test), and
-  // __ccRefStats counts the identity churn as evidence for the upstream
-  // XMLUI finding.
+  // signature instead (the ccArraySig length + first/last id test) plus the
+  // emission signature shell.js publishes (#86), and __ccRefStats counts the
+  // identity churn as evidence for the upstream XMLUI finding.
   function ccArraySig(a) {
     if (!Array.isArray(a)) return 'na';
     if (!a.length) return '0';
@@ -2498,6 +2513,7 @@ if (typeof window !== 'undefined') {
     _combineLastBRef = null;
   var _combineLastASig = null,
     _combineLastBSig = null,
+    _combineLastEmitSig = null,
     _combineResult = null;
   window.combineEvents = function (events, enrichments) {
     var s = window.__ccRefStats;
@@ -2511,12 +2527,19 @@ if (typeof window !== 'undefined') {
       _combineLastBRef = enrichments;
     }
     var aSig = ccArraySig(events),
-      bSig = ccArraySig(enrichments);
-    if (aSig === _combineLastASig && bSig === _combineLastBSig && _combineResult !== null) {
+      bSig = ccArraySig(enrichments),
+      emitSig = window.__ccEmitSig || '';
+    if (
+      aSig === _combineLastASig &&
+      bSig === _combineLastBSig &&
+      emitSig === _combineLastEmitSig &&
+      _combineResult !== null
+    ) {
       return _combineResult;
     }
     _combineLastASig = aSig;
     _combineLastBSig = bSig;
+    _combineLastEmitSig = emitSig;
     _combineResult = (Array.isArray(events) ? events : []).concat(
       Array.isArray(enrichments) ? enrichments : []
     );
