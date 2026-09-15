@@ -1,0 +1,84 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Lighthouse Christian Athletics//maxpreps.com//
+X-WR-CALNAME:Lighthouse Christian Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:LCA Boys Varsity Soccer @ Mitchell
+DTSTART;TZID=America/Indiana/Indianapolis:20260914T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260914T194500
+UID:eb3a309e57c8d36268e72db10ce4149b@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nOn 9/14\, the Lighthouse Christian Academ
+ y varsity soccer team won their away non-conference match against Mitchell
+  (IN) by a score of 9-0.
+URL:https://www.maxpreps.com/in/soccer/match/lighthouse-christian-academy-
+ bloomington-vs-mitchell/9-14-2026/?c=4892b181-e09a-4e8c-9686-6ac608074753
+X-SOURCE:Lighthouse Christian Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LCA Girls Varsity Volleyball @ MCHS
+DTSTART;TZID=America/Indiana/Indianapolis:20260915T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260915T203000
+UID:647a2961064c504959514592d1c0788f@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Lighthouse Christian Academy var
+ sity volleyball team has an away conference match @  Mooresville Christian
+  (Mooresville\, IN) today @ 7:30p.
+LOCATION:JV 6 pm
+URL:https://www.maxpreps.com/in/volleyball/match/lighthouse-christian-acad
+ emy-bloomington-vs-mooresville-christian/9-15-2026/?c=bf7d7c9e-1511-439f-b
+ a27-38bce067b0fe
+X-SOURCE:Lighthouse Christian Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LCA Boys Varsity Soccer @ CCA
+DTSTART;TZID=America/Indiana/Indianapolis:20260917T173000
+DTEND;TZID=America/Indiana/Indianapolis:20260917T191500
+UID:3c416ca9ff939668c838339a81f00f43@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nThe Lighthouse Christian Academy varsity 
+ soccer team has an away non-conference match @  Crosspointe Christian Acad
+ emy (Indianapolis\, IN) on Thursday\, September 17 @ 5:30p.
+URL:https://www.maxpreps.com/in/soccer/match/crosspointe-christian-academy
+ -indianapolis-vs-lighthouse-christian-academy-bloomington/9-17-2026/?c=00e
+ 4ef86-a594-48ad-a696-0f3b16b72774
+X-SOURCE:Lighthouse Christian Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LCA Girls JV Volleyball @ CCA
+DTSTART;TZID=America/Indiana/Indianapolis:20260917T173000
+DTEND;TZID=America/Indiana/Indianapolis:20260917T183000
+UID:96c195b322c8b202a28003ce4d4c1d0a@maxpreps.com
+DESCRIPTION:Girls JV Volleyball\nThe Lighthouse Christian Academy JV volle
+ yball team has an away non-conference match @  Crosspointe Christian Acade
+ my (Indianapolis\, IN) on Thursday\, September 17 @ 5:30p.
+URL:https://www.maxpreps.com/in/volleyball/match/crosspointe-christian-aca
+ demy-indianapolis-vs-lighthouse-christian-academy-bloomington/jv/9-17-2026
+ /?c=925f79e5-d519-40a9-846b-a8cce1b4d2ab
+X-SOURCE:Lighthouse Christian Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LCA Girls Varsity Volleyball @ CCA
+DTSTART;TZID=America/Indiana/Indianapolis:20260917T183000
+DTEND;TZID=America/Indiana/Indianapolis:20260917T193000
+UID:721d1916df3884297673e8f7cd63fefa@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Lighthouse Christian Academy var
+ sity volleyball team has an away non-conference match @  Crosspointe Chris
+ tian Academy (Indianapolis\, IN) on Thursday\, September 17 @ 6:30p.
+URL:https://www.maxpreps.com/in/volleyball/match/crosspointe-christian-aca
+ demy-indianapolis-vs-lighthouse-christian-academy-bloomington/9-17-2026/?c
+ =8b2ce76a-6d23-455f-a962-8518f7d44505
+X-SOURCE:Lighthouse Christian Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:LCA Girls Varsity Volleyball @ Medora
+DTSTART;TZID=America/Indiana/Indianapolis:20260918T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260918T200000
+UID:ff98f2ab6f51d923ec59e113590be5b1@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Lighthouse Christian Academy var
+ sity volleyball team has an away conference match @  Medora (IN) on Friday
+ \, September 18 @ 7p.
+URL:https://www.maxpreps.com/in/volleyball/match/lighthouse-christian-acad
+ emy-bloomington-vs-medora/9-18-2026/?c=02fdae12-e6e8-479a-a414-8eec1fbdf9b
+ 9
+X-SOURCE:Lighthouse Christian Athletics
+END:VEVENT
+END:VCALENDAR

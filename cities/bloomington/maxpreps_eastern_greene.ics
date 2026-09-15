@@ -1,0 +1,115 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Eastern Greene Athletics//maxpreps.com//
+X-WR-CALNAME:Eastern Greene Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:North Knox Boys Varsity Soccer @ Eastern Greene
+DTSTART;TZID=America/Indiana/Indianapolis:20260914T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260914T194500
+UID:f1caab09d40962a6cdd98765da166f48@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nOn 9/14\, the North Knox varsity soccer t
+ eam lost their away non-conference match against Eastern Greene (Bloomfiel
+ d\, IN) by a score of 8-6.
+URL:https://www.maxpreps.com/in/soccer/match/eastern-greene-bloomfield-vs-
+ north-knox-bicknell/9-14-2026/?c=3000385d-0717-44e0-afda-c8cbdafa2c2a
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Eastern Greene JV Football @ Mitchell
+DTSTART;TZID=America/Indiana/Indianapolis:20260914T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260914T200000
+UID:050be372e9ff011efb7006de5e7b62bc@maxpreps.com
+DESCRIPTION:Boys JV Football\nNo result has been reported for the Eastern 
+ Greene JV football away non-conference game @ Mitchell (IN).
+URL:https://www.maxpreps.com/in/football/game/eastern-greene-bloomfield-vs
+ -mitchell/jv/9-14-2026/?c=b91a5a98-32c4-481b-91e4-0d5d95ae0ae5
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Eastern Greene Girls Varsity Volleyball @ Mitchell
+DTSTART;TZID=America/Indiana/Indianapolis:20260915T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260915T203000
+UID:a395ac6827bf765a06489e438611ca53@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Eastern Greene varsity volleybal
+ l team has an away non-conference match @  Mitchell (IN) today @ 7:30p.
+URL:https://www.maxpreps.com/in/volleyball/match/eastern-greene-bloomfield
+ -vs-mitchell/9-15-2026/?c=3162e432-5f79-402a-a3f9-e66579379cc4
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Owen Valley Girls JV Volleyball @ Eastern Greene
+DTSTART;TZID=America/Indiana/Indianapolis:20260916T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260916T200000
+UID:9fd80333ee9a0c0700cd73ef6c2084a0@maxpreps.com
+DESCRIPTION:Girls JV Volleyball\nThe Owen Valley JV volleyball team has an
+  away non-conference match @  Eastern Greene (Bloomfield\, IN) on Wednesda
+ y\, September 16 @ 7p.
+URL:https://www.maxpreps.com/in/volleyball/match/eastern-greene-bloomfield
+ -vs-owen-valley-spencer/jv/9-16-2026/?c=fd0c88a5-bef8-4b8c-9fb9-96a319b213
+ 9d
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Eastern Greene Girls Varsity Volleyball @ Owen Valley
+DTSTART;TZID=America/Indiana/Indianapolis:20260916T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260916T203000
+UID:d79ab39f2b1ba93ec8408104b7627f34@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Eastern Greene varsity volleybal
+ l team has an away non-conference match @  Owen Valley (Spencer\, IN) on W
+ ednesday\, September 16 @ 7:30p.
+URL:https://www.maxpreps.com/in/volleyball/match/eastern-greene-bloomfield
+ -vs-owen-valley-spencer/9-16-2026/?c=91af80f4-abd0-4c00-897d-24d071ba4846
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:White River Valley Boys Varsity Soccer @ Eastern Greene
+DTSTART;TZID=America/Indiana/Indianapolis:20260917T173000
+DTEND;TZID=America/Indiana/Indianapolis:20260917T191500
+UID:f4d8f6fcc3ebcb5dcf233ea617704ab3@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nThe White River Valley varsity soccer tea
+ m has an away conference match @  Eastern Greene (Bloomfield\, IN) on Thur
+ sday\, September 17 @ 5:30p.
+URL:https://www.maxpreps.com/in/soccer/match/eastern-greene-bloomfield-vs-
+ white-river-valley-switz-city/9-17-2026/?c=aef61e49-a4ac-479d-b0db-b854b6b
+ 837ce
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:White River Valley Girls Varsity Soccer @ Eastern Greene
+DTSTART;TZID=America/Indiana/Indianapolis:20260917T173000
+DTEND;TZID=America/Indiana/Indianapolis:20260917T191500
+UID:c9c3faa42bf21f9c81be8561135bc727@maxpreps.com
+DESCRIPTION:Girls Varsity Soccer\nThe White River Valley varsity soccer te
+ am has an away non-conference match @  Eastern Greene (Bloomfield\, IN) on
+  Thursday\, September 17 @ 5:30p.
+URL:https://www.maxpreps.com/in/soccer/girls/match/eastern-greene-bloomfie
+ ld-vs-white-river-valley-switz-city/9-17-2026/?c=c2a1530a-7d8f-4cc8-b936-6
+ 87aa82cb653
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Eastern Greene Girls Varsity Volleyball @ Linton-Stockton
+DTSTART;TZID=America/Indiana/Indianapolis:20260917T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260917T190000
+UID:c09ff829d1201f615c34f1d811093f6e@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Eastern Greene varsity volleybal
+ l team has an away conference match @  Linton-Stockton (Linton\, IN) on Th
+ ursday\, September 17 @ 6p.
+URL:https://www.maxpreps.com/in/volleyball/match/eastern-greene-bloomfield
+ -vs-linton-stockton/9-17-2026/?c=9db2becf-aea2-4279-8cf5-dc40fef135a2
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Eastern Greene Varsity Football @ Eastern
+DTSTART;TZID=America/Indiana/Indianapolis:20260918T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260918T213000
+UID:640355ba1eeabdcc1c70f946d984f5cc@maxpreps.com
+DESCRIPTION:Boys Varsity Football\nThe Eastern Greene varsity football tea
+ m has an away non-conference game @  Eastern (Pekin\, IN) on Friday\, Sept
+ ember 18 @ 7:30p.
+URL:https://www.maxpreps.com/in/football/game/eastern-greene-bloomfield-vs
+ -eastern-pekin/9-18-2026/?c=86a3685d-ac64-413d-aa55-0b1d516e7f5d
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+END:VCALENDAR

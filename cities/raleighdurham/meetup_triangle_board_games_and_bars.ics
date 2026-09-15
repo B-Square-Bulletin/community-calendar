@@ -1,0 +1,261 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Meetup//Meetup Calendar 1.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+NAME:Triangle Board Games and Bars
+X-WR-CALNAME:Triangle Board Games and Bars
+BEGIN:VTIMEZONE
+TZID:America/New_York
+TZURL:http://tzurl.org/zoneinfo-outlook/America/New_York
+X-LIC-LOCATION:America/New_York
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+X-SOURCE:Meetup: Triangle Board Games & Bars
+UID:event_313874760@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031310Z
+DTSTART;TZID=America/New_York:20260409T183000
+DTEND;TZID=America/New_York:20260409T230000
+SUMMARY:Play Board Games at the Geekery
+DESCRIPTION:Triangle Board Games and Bars\nCome play games at Gamers Geeke
+ ry and Tavern every thursday night!\n\nStarting time is 6:30\, but feel fr
+ ee to come in anytime and just hang out for the night. Group is very casua
+ l and friendly.\n\nHow it works:\nCome on in\, grab a name tag and pay the
+  $2.50 meetup participant fee at the bar area\, find the tables that are r
+ eserved for the Meetup group\, play games with others who show up. Food an
+ d drinks are available at the bar.\n\nPlease RSVP by noon day of. If less 
+ than four people are able to attend a given Wednesday the event will be ca
+ nceled.
+URL;VALUE=URI:https://www.meetup.com/triangle-board-games-and-bars/events/
+ 313874760/
+STATUS:CONFIRMED
+CREATED:20260320T231915Z
+LAST-MODIFIED:20260320T231915Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Triangle Board Games & Bars
+UID:event_313990361@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031310Z
+DTSTART;TZID=America/New_York:20260416T183000
+DTEND;TZID=America/New_York:20260416T230000
+SUMMARY:Play Board Games at the Geekery
+DESCRIPTION:Triangle Board Games and Bars\nCome play games at Gamers Geeke
+ ry and Tavern every thursday night!\n\nStarting time is 6:30\, but feel fr
+ ee to come in anytime and just hang out for the night. Group is very casua
+ l and friendly.\n\nHow it works:\nCome on in\, grab a name tag and pay the
+  $2.50 meetup participant fee at the bar area\, find the tables that are r
+ eserved for the Meetup group\, play games with others who show up. Food an
+ d drinks are available at the bar.\n\nPlease RSVP by noon day of. If less 
+ than four people are able to attend a given Wednesday the event will be ca
+ nceled.
+URL;VALUE=URI:https://www.meetup.com/triangle-board-games-and-bars/events/
+ 313990361/
+STATUS:CONFIRMED
+CREATED:20260327T234220Z
+LAST-MODIFIED:20260327T234220Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Triangle Board Games & Bars
+UID:event_313259467@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031310Z
+DTSTART;TZID=America/New_York:20260418T160000
+DTEND;TZID=America/New_York:20260418T190000
+SUMMARY:Play Games at Gamers Geekery!
+DESCRIPTION:Triangle Board Games and Bars\nOfficial event times are 4pm un
+ til 7pm\, but you are welcome to stay as long as you want.\n\nHow it works
+ . Come on in\, grab a name tag at the bar area\, find the tables that are 
+ reserved for the Meetup group.\n\nThe $2.50 fee can be paid to the venue b
+ y talking to any of the bartenders. Food and drinks are available at the b
+ ar.
+URL;VALUE=URI:https://www.meetup.com/triangle-board-games-and-bars/events/
+ 313259467/
+STATUS:CONFIRMED
+CREATED:20260208T024915Z
+LAST-MODIFIED:20260208T024915Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Triangle Board Games & Bars
+UID:event_314112634@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031310Z
+DTSTART;TZID=America/New_York:20260423T183000
+DTEND;TZID=America/New_York:20260423T230000
+SUMMARY:Play Board Games at the Geekery
+DESCRIPTION:Triangle Board Games and Bars\nCome play games at Gamers Geeke
+ ry and Tavern every thursday night!\n\nStarting time is 6:30\, but feel fr
+ ee to come in anytime and just hang out for the night. Group is very casua
+ l and friendly.\n\nHow it works:\nCome on in\, grab a name tag and pay the
+  $2.50 meetup participant fee at the bar area\, find the tables that are r
+ eserved for the Meetup group\, play games with others who show up. Food an
+ d drinks are available at the bar.\n\nPlease RSVP by noon day of. If less 
+ than four people are able to attend a given Wednesday the event will be ca
+ nceled.
+URL;VALUE=URI:https://www.meetup.com/triangle-board-games-and-bars/events/
+ 314112634/
+STATUS:CONFIRMED
+CREATED:20260403T225843Z
+LAST-MODIFIED:20260403T225843Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Triangle Board Games & Bars
+UID:event_313703323@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031310Z
+DTSTART;TZID=America/New_York:20260430T183000
+DTEND;TZID=America/New_York:20260430T230000
+SUMMARY:Play Board Games at the Geekery
+DESCRIPTION:Triangle Board Games and Bars\nCome play games at Gamers Geeke
+ ry and Tavern every thursday night!\n\nStarting time is 6:30\, but feel fr
+ ee to come in anytime and just hang out for the night. Group is very casua
+ l and friendly.\n\nHow it works:\nCome on in\, grab a name tag and pay the
+  $2.50 meetup participant fee at the bar area\, find the tables that are r
+ eserved for the Meetup group\, play games with others who show up. Food an
+ d drinks are available at the bar.\n\nPlease RSVP by noon day of. If less 
+ than four people are able to attend a given Wednesday the event will be ca
+ nceled.
+URL;VALUE=URI:https://www.meetup.com/triangle-board-games-and-bars/events/
+ 313703323/
+STATUS:CONFIRMED
+CREATED:20260308T232357Z
+LAST-MODIFIED:20260308T232357Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Triangle Board Games & Bars
+UID:event_313217936@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031310Z
+DTSTART;TZID=America/New_York:20260502T160000
+DTEND;TZID=America/New_York:20260502T190000
+SUMMARY:Play Games at Gamers Geekery!
+DESCRIPTION:Triangle Board Games and Bars\nOfficial event times are 4pm un
+ til 7pm\, but you are welcome to stay as long as you want.\n\nHow it works
+ . Come on in\, grab a name tag at the bar area\, find the tables that are 
+ reserved for the Meetup group.\n\nThe $2.50 fee can be paid to the venue b
+ y talking to any of the bartenders. Food and drinks are available at the b
+ ar.
+URL;VALUE=URI:https://www.meetup.com/triangle-board-games-and-bars/events/
+ 313217936/
+STATUS:CONFIRMED
+CREATED:20260205T083242Z
+LAST-MODIFIED:20260205T083242Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Triangle Board Games & Bars
+UID:event_tpbrwtyjchbkb@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031310Z
+DTSTART;TZID=America/New_York:20260507T183000
+DTEND;TZID=America/New_York:20260507T230000
+SUMMARY:Play Board Games at the Geekery
+DESCRIPTION:Triangle Board Games and Bars\nCome play games at Gamers Geeke
+ ry and Tavern every thursday night!\n\nStarting time is 6:30\, but feel fr
+ ee to come in anytime and just hang out for the night. Group is very casua
+ l and friendly.\n\nHow it works:\nCome on in\, grab a name tag and pay the
+  $2.50 meetup participant fee at the bar area\, find the tables that are r
+ eserved for the Meetup group\, play games with others who show up. Food an
+ d drinks are available at the bar.\n\nPlease RSVP by noon day of. If less 
+ than four people are able to attend a given Wednesday the event will be ca
+ nceled.
+URL;VALUE=URI:https://www.meetup.com/triangle-board-games-and-bars/events/
+ tpbrwtyjchbkb/
+STATUS:CONFIRMED
+CREATED:20260326T183256Z
+LAST-MODIFIED:20260326T183256Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Triangle Board Games & Bars
+UID:event_tpbrwtyjchbsb@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031310Z
+DTSTART;TZID=America/New_York:20260514T183000
+DTEND;TZID=America/New_York:20260514T230000
+SUMMARY:Play Board Games at the Geekery
+DESCRIPTION:Triangle Board Games and Bars\nCome play games at Gamers Geeke
+ ry and Tavern every thursday night!\n\nStarting time is 6:30\, but feel fr
+ ee to come in anytime and just hang out for the night. Group is very casua
+ l and friendly.\n\nHow it works:\nCome on in\, grab a name tag and pay the
+  $2.50 meetup participant fee at the bar area\, find the tables that are r
+ eserved for the Meetup group\, play games with others who show up. Food an
+ d drinks are available at the bar.\n\nPlease RSVP by noon day of. If less 
+ than four people are able to attend a given Wednesday the event will be ca
+ nceled.
+URL;VALUE=URI:https://www.meetup.com/triangle-board-games-and-bars/events/
+ tpbrwtyjchbsb/
+STATUS:CONFIRMED
+CREATED:20260326T183256Z
+LAST-MODIFIED:20260326T183256Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Triangle Board Games & Bars
+UID:event_jdtcvtyjchbvb@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031310Z
+DTSTART;TZID=America/New_York:20260516T160000
+DTEND;TZID=America/New_York:20260516T190000
+SUMMARY:Play Games at Gamers Geekery!
+DESCRIPTION:Triangle Board Games and Bars\nOfficial event times are 4pm un
+ til 7pm\, but you are welcome to stay as long as you want.\n\nHow it works
+ . Come on in\, grab a name tag at the bar area\, find the tables that are 
+ reserved for the Meetup group.\n\nThe $2.50 fee can be paid to the venue b
+ y talking to any of the bartenders. Food and drinks are available at the b
+ ar.
+URL;VALUE=URI:https://www.meetup.com/triangle-board-games-and-bars/events/
+ jdtcvtyjchbvb/
+STATUS:CONFIRMED
+CREATED:20251204T152118Z
+LAST-MODIFIED:20251204T152118Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Triangle Board Games & Bars
+UID:event_tpbrwtyjchbcc@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031310Z
+DTSTART;TZID=America/New_York:20260521T183000
+DTEND;TZID=America/New_York:20260521T230000
+SUMMARY:Play Board Games at the Geekery
+DESCRIPTION:Triangle Board Games and Bars\nCome play games at Gamers Geeke
+ ry and Tavern every thursday night!\n\nStarting time is 6:30\, but feel fr
+ ee to come in anytime and just hang out for the night. Group is very casua
+ l and friendly.\n\nHow it works:\nCome on in\, grab a name tag and pay the
+  $2.50 meetup participant fee at the bar area\, find the tables that are r
+ eserved for the Meetup group\, play games with others who show up. Food an
+ d drinks are available at the bar.\n\nPlease RSVP by noon day of. If less 
+ than four people are able to attend a given Wednesday the event will be ca
+ nceled.
+URL;VALUE=URI:https://www.meetup.com/triangle-board-games-and-bars/events/
+ tpbrwtyjchbcc/
+STATUS:CONFIRMED
+CREATED:20260326T183256Z
+LAST-MODIFIED:20260326T183256Z
+CLASS:PUBLIC
+END:VEVENT
+X-ORIGINAL-URL:https://www.meetup.com/Triangle-Board-Games-and-Bars/events
+ /ical/
+X-WR-CALNAME:Triangle Board Games and Bars
+END:VCALENDAR

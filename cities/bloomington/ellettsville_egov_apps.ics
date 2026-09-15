@@ -1,0 +1,348 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+METHOD:PUBLISH
+PRODID:Data::ICal 0.24
+BEGIN:VEVENT
+X-SOURCE:Ellettsville Town Government
+CREATED:20250321T160441Z
+DESCRIPTION:[1]Town Hall Meeting Room\n\n   1. https://ellettsville.in.us/e
+ gov/apps/locations/facilities.egov?view=detail&id=7
+DTEND:20260914T220000Z
+DTSTAMP:20260915T074108Z
+DTSTART:20260914T210000Z
+LAST-MODIFIED:20260911T181355Z
+LOCATION:Town Hall Meeting Room
+SEQUENCE:0
+SUMMARY:Cancelled Redevelopment Commission Meeting
+UID:8412883.68677233
+URL:https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail\;
+ id=897
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Ellettsville Town Government
+CREATED:20231030T143148Z
+DESCRIPTION:
+DTEND:20260914T233000Z
+DTSTAMP:20260915T074108Z
+DTSTART:20260914T223000Z
+LAST-MODIFIED:20231030T143148Z
+LOCATION:
+SEQUENCE:0
+SUMMARY:Town Council Meeting
+UID:26861080.925049
+URL:https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail\;
+ id=571
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Ellettsville Town Government
+CREATED:20231030T143358Z
+DESCRIPTION:
+DTEND:20260928T233000Z
+DTSTAMP:20260915T074108Z
+DTSTART:20260928T223000Z
+LAST-MODIFIED:20231030T143358Z
+LOCATION:
+SEQUENCE:0
+SUMMARY:Town Council Meeting
+UID:31870813.1543271
+URL:https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail\;
+ id=611
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Ellettsville Town Government
+CREATED:20230330T190838Z
+DESCRIPTION:   First Thursday of every month beginning at 6:00 p.m. in Town
+  Hall.
+DTEND:20261001T223000Z
+DTSTAMP:20260915T074108Z
+DTSTART:20261001T220000Z
+LAST-MODIFIED:20230330T192032Z
+LOCATION:
+SEQUENCE:0
+SUMMARY:Plan Commission Meeting
+UID:43018472.286743
+URL:https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail\;
+ id=474
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Ellettsville Town Government
+CREATED:20250211T211105Z
+DESCRIPTION:[1]Town Hall Meeting Room\n\n   1. https://ellettsville.in.us/e
+ gov/apps/locations/facilities.egov?view=detail&id=7
+DTEND:20261005T213000Z
+DTSTAMP:20260915T074108Z
+DTSTART:20261005T210000Z
+LAST-MODIFIED:20250211T211105Z
+LOCATION:Town Hall Meeting Room
+SEQUENCE:0
+SUMMARY:Parks & Recreation Board Meeting
+UID:66353228.60208
+URL:https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail\;
+ id=852
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Ellettsville Town Government
+CREATED:20250321T160441Z
+DESCRIPTION:[1]Town Hall Meeting Room\n\n   1. https://ellettsville.in.us/e
+ gov/apps/locations/facilities.egov?view=detail&id=7
+DTEND:20261012T220000Z
+DTSTAMP:20260915T074108Z
+DTSTART:20261012T210000Z
+LAST-MODIFIED:20250321T160441Z
+LOCATION:Town Hall Meeting Room
+SEQUENCE:0
+SUMMARY:Redevelopment Commission Meeting
+UID:84183285.2102016
+URL:https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail\;
+ id=898
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Ellettsville Town Government
+CREATED:20231030T143148Z
+DESCRIPTION:
+DTEND:20261012T233000Z
+DTSTAMP:20260915T074108Z
+DTSTART:20261012T223000Z
+LAST-MODIFIED:20231030T143148Z
+LOCATION:
+SEQUENCE:0
+SUMMARY:Town Council Meeting
+UID:92639860.6958212
+URL:https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail\;
+ id=572
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Ellettsville Town Government
+CREATED:20250211T203516Z
+DESCRIPTION:[1]Town Hall\n\n   1. https://ellettsville.in.us/egov/apps/loca
+ tions/facilities.egov?view=detail&id=6
+DTEND:20261014T230000Z
+DTSTAMP:20260915T074108Z
+DTSTART:20261014T220000Z
+LAST-MODIFIED:20250211T203516Z
+LOCATION:Town Hall
+SEQUENCE:0
+SUMMARY:Board of Zoning Appeals Meeting
+UID:29397359.3958732
+URL:https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail\;
+ id=817
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Ellettsville Town Government
+CREATED:20231030T143358Z
+DESCRIPTION:
+DTEND:20261026T233000Z
+DTSTAMP:20260915T074108Z
+DTSTART:20261026T223000Z
+LAST-MODIFIED:20231030T143358Z
+LOCATION:
+SEQUENCE:0
+SUMMARY:Town Council Meeting
+UID:80460503.8046464
+URL:https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail\;
+ id=612
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Ellettsville Town Government
+CREATED:20250211T211105Z
+DESCRIPTION:[1]Town Hall Meeting Room\n\n   1. https://ellettsville.in.us/e
+ gov/apps/locations/facilities.egov?view=detail&id=7
+DTEND:20261102T223000Z
+DTSTAMP:20260915T074108Z
+DTSTART:20261102T220000Z
+LAST-MODIFIED:20250211T211105Z
+LOCATION:Town Hall Meeting Room
+SEQUENCE:0
+SUMMARY:Parks & Recreation Board Meeting
+UID:47572458.7892742
+URL:https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail\;
+ id=853
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Ellettsville Town Government
+CREATED:20260113T140635Z
+DESCRIPTION:[1]Town Hall Meeting Room\n\n   1. https://ellettsville.in.us/e
+ gov/apps/locations/facilities.egov?view=detail&id=7
+DTEND:20261106T000000Z
+DTSTAMP:20260915T074108Z
+DTSTART:20261105T230000Z
+LAST-MODIFIED:20260113T140635Z
+LOCATION:Town Hall Meeting Room
+SEQUENCE:0
+SUMMARY:Plan Commission Meeting
+UID:66991302.4165677
+URL:https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail\;
+ id=937
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Ellettsville Town Government
+CREATED:20241127T154843Z
+DESCRIPTION:[1]Town Hall\n\n   1. https://ellettsville.in.us/egov/apps/loca
+ tions/facilities.egov?view=detail&id=6
+DTEND:20261109T230000Z
+DTSTAMP:20260915T074108Z
+DTSTART:20261109T220000Z
+LAST-MODIFIED:20241127T154843Z
+LOCATION:Town Hall
+SEQUENCE:0
+SUMMARY:Redevelopment Commission Meeting
+UID:8443893.79047854
+URL:https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail\;
+ id=709
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Ellettsville Town Government
+CREATED:20231030T143148Z
+DESCRIPTION:
+DTEND:20261110T003000Z
+DTSTAMP:20260915T074108Z
+DTSTART:20261109T233000Z
+LAST-MODIFIED:20231030T143148Z
+LOCATION:
+SEQUENCE:0
+SUMMARY:Town Council Meeting
+UID:12269328.0397531
+URL:https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail\;
+ id=573
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Ellettsville Town Government
+CREATED:20210108T132612Z
+DESCRIPTION:
+DTEND:20261112T045959Z
+DTSTAMP:20260915T074108Z
+DTSTART:20261111T050000Z
+LAST-MODIFIED:20210108T132612Z
+LOCATION:
+SEQUENCE:0
+SUMMARY:Town Offices Closed - Veterans Day
+UID:48528152.9050809
+URL:https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail\;
+ id=197
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Ellettsville Town Government
+CREATED:20250211T203516Z
+DESCRIPTION:[1]Town Hall\n\n   1. https://ellettsville.in.us/egov/apps/loca
+ tions/facilities.egov?view=detail&id=6
+DTEND:20261119T000000Z
+DTSTAMP:20260915T074108Z
+DTSTART:20261118T230000Z
+LAST-MODIFIED:20260113T142025Z
+LOCATION:Town Hall
+SEQUENCE:0
+SUMMARY:Board of Zoning Appeals Meeting
+UID:71099347.1772507
+URL:https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail\;
+ id=818
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Ellettsville Town Government
+CREATED:20231030T143358Z
+DESCRIPTION:
+DTEND:20261124T003000Z
+DTSTAMP:20260915T074108Z
+DTSTART:20261123T233000Z
+LAST-MODIFIED:20231030T143358Z
+LOCATION:
+SEQUENCE:0
+SUMMARY:Town Council Meeting
+UID:35802805.2946118
+URL:https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail\;
+ id=613
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Ellettsville Town Government
+CREATED:20221102T151822Z
+DESCRIPTION:
+DTEND:20261127T045959Z
+DTSTAMP:20260915T074108Z
+DTSTART:20261126T050000Z
+LAST-MODIFIED:20221102T151822Z
+LOCATION:
+SEQUENCE:0
+SUMMARY:Thanksgiving Holiday - Town Offices Closed
+UID:62694722.0134884
+URL:https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail\;
+ id=341
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Ellettsville Town Government
+CREATED:20221102T151934Z
+DESCRIPTION:
+DTEND:20261128T045959Z
+DTSTAMP:20260915T074108Z
+DTSTART:20261127T050000Z
+LAST-MODIFIED:20221102T151934Z
+LOCATION:
+SEQUENCE:0
+SUMMARY:Thanksgiving Holiday - Town Offices Closed
+UID:73134834.7422497
+URL:https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail\;
+ id=361
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Ellettsville Town Government
+CREATED:20230330T190838Z
+DESCRIPTION:   First Thursday of every month beginning at 6:00 p.m. in Town
+  Hall.
+DTEND:20261203T233000Z
+DTSTAMP:20260915T074108Z
+DTSTART:20261203T230000Z
+LAST-MODIFIED:20230330T192032Z
+LOCATION:
+SEQUENCE:0
+SUMMARY:Plan Commission Meeting
+UID:11498784.8577496
+URL:https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail\;
+ id=476
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Ellettsville Town Government
+CREATED:20241127T154843Z
+DESCRIPTION:[1]Town Hall\n\n   1. https://ellettsville.in.us/egov/apps/loca
+ tions/facilities.egov?view=detail&id=6
+DTEND:20261207T230000Z
+DTSTAMP:20260915T074108Z
+DTSTART:20261207T220000Z
+LAST-MODIFIED:20260105T171130Z
+LOCATION:Town Hall
+SEQUENCE:0
+SUMMARY:Redevelopment Commission Meeting
+UID:50409554.7602809
+URL:https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail\;
+ id=710
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Ellettsville Town Government
+CREATED:20250211T211105Z
+DESCRIPTION:[1]Town Hall Meeting Room\n\n   1. https://ellettsville.in.us/e
+ gov/apps/locations/facilities.egov?view=detail&id=7
+DTEND:20261207T223000Z
+DTSTAMP:20260915T074108Z
+DTSTART:20261207T220000Z
+LAST-MODIFIED:20250211T211105Z
+LOCATION:Town Hall Meeting Room
+SEQUENCE:0
+SUMMARY:Parks & Recreation Board Meeting
+UID:79232446.8048239
+URL:https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail\;
+ id=854
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Ellettsville Town Government
+CREATED:20250211T203516Z
+DESCRIPTION:[1]Town Hall\n\n   1. https://ellettsville.in.us/egov/apps/loca
+ tions/facilities.egov?view=detail&id=6
+DTEND:20261210T000000Z
+DTSTAMP:20260915T074108Z
+DTSTART:20261209T230000Z
+LAST-MODIFIED:20250211T203516Z
+LOCATION:Town Hall
+SEQUENCE:0
+SUMMARY:Board of Zoning Appeals Meeting
+UID:92448500.8297381
+URL:https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail\;
+ id=819
+END:VEVENT
+END:VCALENDAR
