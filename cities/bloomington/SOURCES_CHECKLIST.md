@@ -171,7 +171,6 @@ These curate or aggregate events from multiple venues:
 | Source | Platform | Reason |
 |--------|----------|--------|
 | Amplify Bloomington | WordPress + Cloudflare | Cloudflare blocks all endpoints (ICS, REST API, RSS); request whitelisting of `?ical=1` |
-| Visit Bloomington | Simpleview CMS | No public API |
 | Winter Farmers' Market | Wix | No ICS export |
 | Gallery Walk Bloomington | Wix | No feed; recurring first Friday 5-8pm |
 | BARA (runners) | Wix | No ICS export |
@@ -342,6 +341,7 @@ Edgewood alone shows 84 aggregator-only events today. Also: third-party IU footb
 | IU Health Bloomington classes | Proprietary classes-events system | Low density; phone-register model |
 | Morgan County Public Library | Drupal 11 `librarycalendar.com`, no Views iCal | Scrape HTML |
 | Visit Morgan County | Simpleview | visitmorgancountyin.com/events |
+| Visit Bloomington | Simpleview | visitbloomington.com; **machine-readable surface verified 2026-09-15** (Simpleview REST API, not the RSS) — needs `visit_bloomington.py`; see spec issue #124 |
 | Ellettsville Farmers Market | Custom site, no feed | Saturdays May–Sep |
 | Bloomington Brewing Co | Squarespace: events collection empty BUT individual festival pages carry per-event `.ics` links | Springfest/Summerfest/Oktoberfest/Winterfest only |
 | Exodus Refugee Immigration | Eventbrite organizer `36028304013` | Bloomington office; World Refugee Day; currently 0 upcoming — wire and wait |
@@ -416,6 +416,11 @@ Annual events with reliable dates but no feeds — a once-a-season curator sweep
 ---
 
 ## Discovery Run Log
+
+### 2026-09-15: Visit Bloomington surface verified — dead end reversed
+- **Correction:** the earlier "Visit Bloomington — Simpleview CMS — No public API" entry (and the generic "Simpleview is a dead end" claim in `docs/search-pattern-tests.md`/`docs/platforms.md`) was wrong. The `/event/rss/` feed caps at 30 items and detail JSON-LD is date-only, but the same-origin Simpleview **REST API** (`/includes/rest_v2/plugins_events_events_by_date/find/` + `get_simple_token/`) returns clock times, full descriptions, geo, recurrence and `skip` paging over plain HTTP — 34 requests → 1,666 occurrences across 230 recids, empty cookie jar, no browser.
+- Also fixed the stale assumption in `scrapers/simpleview.py` reuse: its RSS + JSON-LD path emits all-day events and drops recurring series, so Visit Bloomington needs a dedicated `scrapers/visit_bloomington.py`.
+- Nothing built here — the surface decision, coverage bar, API mechanism, registration and dedup/geo contracts are locked in the spec issue #124 (see map #117).
 
 ### 2026-09-07: Master Gardeners URL fix (issue #13)
 - `Monroe County Master Gardeners` scraper 404s: DB `feeds` row id=14 still runs `squarespace.py --url "https://www.mcmga.net/events"` (404). Same stale-URL pattern as Sassafras (#8) — the pre-DB-first URL fix never reached the seeded DB row.

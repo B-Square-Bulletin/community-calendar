@@ -34,7 +34,7 @@
 | **Eventbrite** | ❌ No | Requires scraping |
 | **Squarespace** | ❌ No | No standard calendar export |
 | **Wix** | ❌ No | No standard calendar export |
-| **Simpleview CMS** | ❌ No | Tourism sites, no public feed |
+| **Simpleview CMS** | ⚠️ API | Tourism sites; no usable ICS/RSS, but a token+JSON REST API (`/includes/rest_v2/plugins_events_events_by_date/find/`) returns events over plain HTTP |
 | **Localist** | ✅ Yes | Check `/api/2/events` or ICS export |
 
 ---
@@ -201,6 +201,6 @@ curl -sL "https://aggielife.ucdavis.edu/ical/ucdavis/ical_ucdavis.ics" -A "Mozil
 
 4. **Many "community calendars" are Wix/Squarespace** - Look good but no feed export
 
-5. **Tourism sites (Simpleview) are dead ends** - visitbloomington.com, etc. have no public feeds
+5. **Tourism sites (Simpleview) are NOT dead ends** - sites like visitbloomington.com have no ICS/RSS worth using (RSS caps at 30 date-only items), but they expose a same-origin token+JSON REST API with clock times, descriptions, geo and recurrence over plain HTTP. Extraction is per-site (a dedicated scraper), not a drop-in feed; needs a realistic desktop-Chrome UA. See `docs/platforms.md`.
 
 6. **inurl: searches can have false positives** - `tribe_events` matches Native American content
