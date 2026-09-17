@@ -57,6 +57,9 @@ supabase test db supabase/tests/
 ## Test Files
 
 - `tests/test_timezone_pipeline.py` - Python/pytest tests for ICS timezone handling
+- `tests/test_visit_bloomington.py` - Visit Bloomington Simpleview REST API scraper (paging, occurrence expansion, geo prefilter, attribution)
+- `tests/test_base_scraper.py` - base scraper `X-SOURCE-URL` and `GEO` emission
+- `tests/test_validate_pr_feeds.py` - PR feed/scraper registration validation against the DB-first contract
 - `supabase/tests/test_refresh_source_names.sql` - pgTAP database tests for `refresh_source_names()`
 - `supabase/tests/README.md` - database-test-specific setup, workflow, and troubleshooting
 

@@ -43,8 +43,7 @@ from zoneinfo import ZoneInfo
 
 import requests
 from lib.base import BaseScraper
-
-from scripts.combine_ics import load_allowed_cities, location_matches_allowed_cities
+from lib.city_filter import load_allowed_cities, location_matches_allowed_cities
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -165,6 +164,24 @@ def _timed_span(
     return dtstart, dtend
 
 
+def _span(
+    start_date: date,
+    end_date: date,
+    start_time: dtime | None,
+    end_time: dtime | None,
+    default_duration: timedelta | None = None,
+) -> tuple[date | datetime, date | datetime]:
+    """A start/end span: all-day dates when there is no clock time.
+
+    With no `start_time` the span is all-day and `end_date` is exclusive (the
+    day after the last), whether the event is single- or multi-day. With a
+    `start_time`, the clock-time rule in `_timed_span` applies.
+    """
+    if start_time is None:
+        return start_date, end_date + timedelta(days=1)
+    return _timed_span(start_date, start_time, end_date, end_time, default_duration)
+
+
 def _plain_text(markup: str) -> str:
     """Strip the API's HTML to readable plain text, with no length cap."""
     if not markup:
@@ -219,6 +236,15 @@ def _event_url(recid: str, title: str) -> str:
     return f"{BASE_URL}/event/{_slugify(title)}/{recid}/"
 
 
+def _recid(doc: dict[str, Any]) -> str:
+    """The source's stable event id, tolerant of both `recid` and `recId`."""
+    return str(doc.get("recid") or doc.get("recId") or "").strip()
+
+
+def _title(doc: dict[str, Any]) -> str:
+    return (doc.get("title") or "").strip()
+
+
 def _raise_for_status(response: requests.Response, url: str) -> None:
     """The one non-200 error path: name the endpoint and status, then raise."""
     if response.status_code != 200:
@@ -239,12 +265,8 @@ class VisitBloomingtonScraper(BaseScraper):
         # re-fetching to one per run.
         self._token_refreshed = False
 
-    def _request(self, url: str, params: dict[str, Any] | None = None) -> requests.Response:
-        """Raw GET; the caller decides how to treat each status."""
-        return requests.get(url, headers=HEADERS, params=params, timeout=REQUEST_TIMEOUT)
-
     def _fetch_token(self) -> str:
-        response = self._request(TOKEN_URL)
+        response = requests.get(TOKEN_URL, headers=HEADERS, timeout=REQUEST_TIMEOUT)
         _raise_for_status(response, TOKEN_URL)
         token = response.text.strip()
         if not token:
@@ -262,7 +284,12 @@ class VisitBloomingtonScraper(BaseScraper):
         A single token re-fetch per run is the documented anti-bot answer; a
         second 403 after that means the retry failed and must surface.
         """
-        response = self._request(EVENTS_URL, params=self._events_params(token, options))
+        response = requests.get(
+            EVENTS_URL,
+            headers=HEADERS,
+            params=self._events_params(token, options),
+            timeout=REQUEST_TIMEOUT,
+        )
         if response.status_code == 403 and not self._token_refreshed:
             logger.warning(
                 "Visit Bloomington: events request returned HTTP 403; "
@@ -272,7 +299,12 @@ class VisitBloomingtonScraper(BaseScraper):
             time.sleep(CRAWL_DELAY)
             token = self._fetch_token()
             time.sleep(CRAWL_DELAY)
-            response = self._request(EVENTS_URL, params=self._events_params(token, options))
+            response = requests.get(
+                EVENTS_URL,
+                headers=HEADERS,
+                params=self._events_params(token, options),
+                timeout=REQUEST_TIMEOUT,
+            )
         _raise_for_status(response, EVENTS_URL)
         return response.json().get("docs", {}) or {}, token
 
@@ -309,8 +341,7 @@ class VisitBloomingtonScraper(BaseScraper):
             return []
         return [r for r in runs if isinstance(r, dict)]
 
-    def _record_run(self, fetched: int, emitted: int) -> None:
-        runs = self._load_runs()
+    def _record_run(self, fetched: int, emitted: int, runs: list[dict[str, Any]]) -> None:
         runs.append({"date": _now().date().isoformat(), "fetched": fetched, "emitted": emitted})
         try:
             RUN_HISTORY_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -331,16 +362,14 @@ class VisitBloomingtonScraper(BaseScraper):
             )
 
     def _parse_doc(self, doc: dict[str, Any], today, horizon) -> dict[str, Any] | None:
-        title = (doc.get("title") or "").strip()
-        recid = str(doc.get("recid") or doc.get("recId") or "").strip()
-        if not title or not recid:
+        if not _title(doc) or not _recid(doc):
             return None
 
         if (doc.get("recurrence") or "").strip():
             occurrence_date = _local_date(doc.get("date"))
             if occurrence_date is None or occurrence_date < today or occurrence_date > horizon:
                 return None
-            return self._single_day_event(doc, recid, title, occurrence_date)
+            return self._single_day_event(doc, occurrence_date)
 
         start_date = _local_date(doc.get("startDate"))
         if start_date is None:
@@ -349,48 +378,34 @@ class VisitBloomingtonScraper(BaseScraper):
         if end_date < today or start_date > horizon:
             return None
         if start_date == end_date:
-            return self._single_day_event(doc, recid, title, start_date)
-        return self._multi_day_event(doc, recid, title, start_date, end_date)
+            return self._single_day_event(doc, start_date)
+        return self._multi_day_event(doc, start_date, end_date)
 
-    def _single_day_event(
-        self, doc: dict[str, Any], recid: str, title: str, occurrence_date
-    ) -> dict[str, Any]:
-        start_time = _parse_clock(doc.get("startTime"))
-        if start_time is None:
-            # Genuinely no clock time: a true all-day event (exclusive DTEND).
-            dtstart: Any = occurrence_date
-            dtend: Any = occurrence_date + timedelta(days=1)
-        else:
-            dtstart, dtend = _timed_span(
-                occurrence_date,
-                start_time,
-                occurrence_date,
-                _parse_clock(doc.get("endTime")),
-                default_duration=DEFAULT_DURATION,
-            )
+    def _single_day_event(self, doc: dict[str, Any], occurrence_date) -> dict[str, Any]:
+        dtstart, dtend = _span(
+            occurrence_date,
+            occurrence_date,
+            _parse_clock(doc.get("startTime")),
+            _parse_clock(doc.get("endTime")),
+            default_duration=DEFAULT_DURATION,
+        )
+        return self._event(doc, dtstart, dtend, _uid(_recid(doc), occurrence_date))
 
-        return self._event(doc, recid, title, dtstart, dtend, _uid(recid, occurrence_date))
-
-    def _multi_day_event(
-        self, doc: dict[str, Any], recid: str, title: str, start_date, end_date
-    ) -> dict[str, Any]:
-        start_time = _parse_clock(doc.get("startTime"))
-        if start_time is None:
-            # All-day span; DTEND is exclusive, so it falls on the day after the last.
-            dtstart: Any = start_date
-            dtend: Any = end_date + timedelta(days=1)
-        else:
-            dtstart, dtend = _timed_span(
-                start_date, start_time, end_date, _parse_clock(doc.get("endTime"))
-            )
+    def _multi_day_event(self, doc: dict[str, Any], start_date, end_date) -> dict[str, Any]:
+        dtstart, dtend = _span(
+            start_date,
+            end_date,
+            _parse_clock(doc.get("startTime")),
+            _parse_clock(doc.get("endTime")),
+        )
 
         # UID keys on the span's first day; every per-day document of the span
         # shares it, so they collapse to one event across the dedupe in fetch_events.
-        return self._event(doc, recid, title, dtstart, dtend, _uid(recid, start_date))
+        return self._event(doc, dtstart, dtend, _uid(_recid(doc), start_date))
 
-    def _event(
-        self, doc: dict[str, Any], recid: str, title: str, dtstart: Any, dtend: Any, uid: str
-    ) -> dict[str, Any]:
+    def _event(self, doc: dict[str, Any], dtstart: Any, dtend: Any, uid: str) -> dict[str, Any]:
+        recid = _recid(doc)
+        title = _title(doc)
         return {
             "title": title,
             "dtstart": dtstart,
@@ -410,7 +425,7 @@ class VisitBloomingtonScraper(BaseScraper):
 
         now = _now()
         today = now.date()
-        horizon = (now + timedelta(days=self.months_ahead * 31)).date()
+        horizon = self.horizon_cutoff(now).date()
         allowed_cities, excluded_cities = load_allowed_cities(str(CITY_DIR))
 
         events = []
@@ -432,8 +447,9 @@ class VisitBloomingtonScraper(BaseScraper):
             f"Visit Bloomington: {len(docs)} occurrence docs fetched, {len(events)} events emitted"
             + (f", {out_of_area} dropped outside the allowed towns" if out_of_area else "")
         )
-        self._warn_if_degraded(len(docs), self._load_runs())
-        self._record_run(len(docs), len(events))
+        runs = self._load_runs()
+        self._warn_if_degraded(len(docs), runs)
+        self._record_run(len(docs), len(events), runs)
         return events
 
 

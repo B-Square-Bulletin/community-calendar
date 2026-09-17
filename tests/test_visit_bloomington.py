@@ -32,6 +32,13 @@ from scripts.process_pending_feeds import parse_pending_feeds
 TZ = ZoneInfo("America/Indiana/Indianapolis")
 BLOOMINGTON_DIR = Path(__file__).parent.parent / "cities" / "bloomington"
 FIXTURE = Path(__file__).parent / "fixtures" / "bloomington" / "visit_bloomington_events.json"
+# Reconstructed from the aggregate live-run evidence (see the fixture's note).
+EVIDENCE_FIXTURE = (
+    Path(__file__).parent
+    / "fixtures"
+    / "bloomington"
+    / "visit_bloomington_multiday_occurrences.json"
+)
 # Frozen "now" so the horizon filter is deterministic against the captured payloads.
 FROZEN_NOW = datetime(2026, 9, 15, 9, 0, tzinfo=TZ)
 RUN_HISTORY_FILE = "visit_bloomington.runs.json"
@@ -56,6 +63,10 @@ def _seed_run_history(tmp_path, fetched_counts: list[int]) -> None:
 
 def _fixture_docs() -> list[dict]:
     return json.loads(FIXTURE.read_text())["docs"]
+
+
+def _evidence_docs() -> list[dict]:
+    return json.loads(EVIDENCE_FIXTURE.read_text())["docs"]
 
 
 class _Resp:
@@ -276,11 +287,6 @@ class TestSingleEventMapping:
         # `linkUrl` is the origin site; the CVB page must be used, not it.
         assert "morgensternbooks.com" not in event["url"]
 
-    def test_result_context_is_preserved(self):
-        docs = _fixture_docs()
-        payload = {"docs": {"count": len(docs), "docs": docs}}
-        assert payload["docs"]["docs"] == docs
-
 
 class TestHorizon:
     """Only occurrences inside the Horizon are emitted (client-side on `date`)."""
@@ -449,6 +455,35 @@ class TestMultiDayEvents:
         ]
 
         assert len(_fetch([_events_payload(docs)])) == 1
+
+
+class TestLiveRunEvidence:
+    """Shapes the aggregate live run observed but the captured page did not.
+
+    The fixture is reconstructed (not a byte capture) from prd item 4's
+    2026-09-16 live-run note: a wide multi-day span emitted as multiple
+    per-day documents, and a recurring series emitted as multiple occurrences.
+    """
+
+    def test_multiday_span_documents_collapse_to_one_event(self):
+        events = _fetch([_events_payload(_evidence_docs())])
+        heist = [e for e in events if e["title"] == "Heist"]
+
+        assert len(heist) == 1
+        assert heist[0]["dtstart"] == date(2026, 9, 3)
+        assert heist[0]["dtend"] == date(2026, 9, 22)  # exclusive
+
+    def test_recurring_series_yields_one_event_per_occurrence(self):
+        starts = sorted(
+            e["dtstart"]
+            for e in _fetch([_events_payload(_evidence_docs())])
+            if e["title"] == "Downtown Shop Night"
+        )
+
+        assert starts == [
+            datetime(2026, 9, 16, 16, 0, tzinfo=TZ),
+            datetime(2026, 10, 21, 16, 0, tzinfo=TZ),
+        ]
 
 
 class TestFetchPaging:

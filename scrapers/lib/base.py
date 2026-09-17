@@ -43,6 +43,15 @@ class BaseScraper(ABC):
         self.logger = logging.getLogger(self.__class__.__name__)
         self.months_ahead = int(os.environ.get("SCRAPE_MONTHS", 6))
 
+    def horizon_cutoff(self, now: datetime | None = None) -> datetime:
+        """The Horizon boundary: `months_ahead` months' worth of days from `now`.
+
+        The single definition of the Horizon rule. `now` defaults to the host's
+        current local time; callers with their own clock (e.g. a source
+        timezone) pass it explicitly.
+        """
+        return (now or datetime.now().astimezone()) + timedelta(days=self.months_ahead * 31)
+
     @classmethod
     def setup_logging(cls, level: int = logging.INFO):
         """Configure logging for scrapers."""
@@ -168,7 +177,7 @@ class BaseScraper(ABC):
         self.logger.info(f"Scraping {self.name}")
 
         events = self.fetch_events()
-        cutoff = datetime.now().astimezone() + timedelta(days=self.months_ahead * 31)
+        cutoff = self.horizon_cutoff()
         before = len(events)
 
         # Handle both datetime and date objects

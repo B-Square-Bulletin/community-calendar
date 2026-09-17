@@ -97,6 +97,17 @@ python scrapers/legistar.py --client wake --source "Wake County" -o wake_legista
 
 **Note:** Not all `{city}.legistar.com` web UIs have working APIs. Test first. See [AGENTS.md](../AGENTS.md) for the Granicus vs Legistar distinction.
 
+### visit_bloomington.py
+Visit Bloomington (Monroe County CVB) events via the Simpleview REST API
+- URL: https://www.visitbloomington.com/events/
+- Events: Festivals, film, concerts, museum and nature programs, community gatherings
+- Method: Simpleview same-origin REST API (token + `skip` paging, desktop-Chrome UA, `Crawl-delay: 2`)
+- Primary source, deliberately not an aggregator (see [ADR 0011](../docs/adr/0011-visit-bloomington-primary-source.md))
+
+```bash
+python scrapers/visit_bloomington.py --output cities/bloomington/visit_bloomington.ics
+```
+
 ## Usage
 
 Each scraper accepts `--year` and `--month` arguments and outputs an ICS file:
@@ -132,37 +143,19 @@ Optional for cal_theatre.py with --use-selenium:
 
 ## Adding a New Scraper to the Pipeline
 
-Creating a scraper is not enough - you must also integrate it into the build.
-
-### Recommended: Use the add_scraper script
+Creating a scraper is not enough — you must also register it. Execution is
+DB-first: the build runs whatever active scraper rows exist in the `feeds`
+table, so `.github/workflows/generate-calendar.yml` carries no per-source
+lines.
 
 ```bash
-# After creating your scraper, run:
-python scripts/add_scraper.py myscraper santarosa "My Source Name"
+# After creating and testing your scraper:
+python scripts/add_scraper.py myscraper bloomington "My Source Name"
 
 # This automatically:
-# - Verifies the scraper exists
-# - Adds it to the GitHub workflow
-# - Adds the source name to combine_ics.py
-
-# Options:
-#   --test      Test the scraper first
-#   --dry-run   Preview changes without applying
+# - Tests the exact command being registered (aborts if it fails)
+# - Appends the pending_feeds.txt entry the build inserts into the feeds table
 ```
 
-### Manual steps (if not using the script)
-
-1. **Create & test the scraper locally**
-   ```bash
-   python scrapers/myscraper.py --output /tmp/test.ics
-   grep -c "BEGIN:VEVENT" /tmp/test.ics  # Verify events
-   ```
-
-2. **Add to GitHub workflow** (`.github/workflows/generate-calendar.yml`):
-   - Find the "Scrape {City} sources" step for your city
-   - Add a line: `python scrapers/myscraper.py --output cities/{city}/myscraper.ics || true`
-
-3. **Add source name mapping** (`scripts/combine_ics.py`):
-   - Add to `SOURCE_NAMES` dict: `'myscraper': 'Human Readable Name',`
-
-**All three steps are required or events won't appear in the calendar!**
+There are no manual workflow or `combine_ics.py` edits. See
+[CONTRIBUTING.md](../CONTRIBUTING.md) for the full registration contract.
