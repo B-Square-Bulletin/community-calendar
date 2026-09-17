@@ -2,7 +2,7 @@
 
 Prioritized list of potential event sources for the Bloomington, IN community calendar.
 
-## Currently Implemented (76 sources)
+## Currently Implemented (77 sources)
 
 ### University — IU LiveWhale (17 feeds)
 
@@ -123,6 +123,14 @@ Docs: https://documentation.events.iu.edu/feed-and-linked-calendars/ical-feed.ht
 | Hard Truth Distilling Co. | ICS | ~15 | TEC feed; Nashville, IN (16 mi) |
 | Upland Brewing | Scraper | 0 current | `tribe_rest.py` — valid REST calendar, dormant/seasonal as of 2026-08 |
 | People's Market | Scraper | ~10 | Squarespace — `peoples_market.py` |
+
+### Tourism & Visitor Events (1 source)
+
+| Source | Type | Events | Notes |
+|--------|------|--------|-------|
+| Visit Bloomington | Scraper | ~484 | `visit_bloomington.py` — Simpleview REST API (`/includes/rest_v2/plugins_events_events_by_date/find/`). Primary source, deliberately **not** an aggregator (ADR 0011): it outranks the Limestone Post echo in cross-source dedup |
+
+Visit Bloomington is pulled in full over the REST API (token + `skip` paging, Chrome UA, crawl-delay spacing). The sitemap fallback is a **contingency only**, triggered when either the API returns non-200 on **three consecutive nightly runs after** the in-run token re-fetch and retry, or the documented-safe request shape draws a WAF 403. Until then, the REST API is the source.
 
 ### Aggregators (10 sources)
 
@@ -341,7 +349,6 @@ Edgewood alone shows 84 aggregator-only events today. Also: third-party IU footb
 | IU Health Bloomington classes | Proprietary classes-events system | Low density; phone-register model |
 | Morgan County Public Library | Drupal 11 `librarycalendar.com`, no Views iCal | Scrape HTML |
 | Visit Morgan County | Simpleview | visitmorgancountyin.com/events |
-| Visit Bloomington | Simpleview | visitbloomington.com; **machine-readable surface verified 2026-09-15** (Simpleview REST API, not the RSS) — needs `visit_bloomington.py`; see spec issue #124 |
 | Ellettsville Farmers Market | Custom site, no feed | Saturdays May–Sep |
 | Bloomington Brewing Co | Squarespace: events collection empty BUT individual festival pages carry per-event `.ics` links | Springfest/Summerfest/Oktoberfest/Winterfest only |
 | Exodus Refugee Immigration | Eventbrite organizer `36028304013` | Bloomington office; World Refugee Day; currently 0 upcoming — wire and wait |
@@ -416,6 +423,12 @@ Annual events with reliable dates but no feeds — a once-a-season curator sweep
 ---
 
 ## Discovery Run Log
+
+### 2026-09-16: Visit Bloomington registered as a primary source
+- Registered via the standard DB-first path — `add_scraper.py visit_bloomington bloomington "Visit Bloomington"` wrote the `cities/bloomington/pending_feeds.txt` entry (`# Visit Bloomington`, `# cmd: python scrapers/visit_bloomington.py --output cities/bloomington/visit_bloomington.ics`). No workflow edit: the nightly pending-feeds processor inserts the active DB row and the DB-first runner executes it.
+- Verified live at registration: `add_scraper.py --test` produced 484 events (SCRAPE_MONTHS=2).
+- Deliberately left out of `source_priority.json`, so it ranks as a primary source and wins cross-source dedup over the Limestone Post CitySpark echo; shared events merge to `Visit Bloomington, Limestone Post` (ADR 0011).
+- Sitemap fallback recorded as contingency-only (see Tourism & Visitor Events above).
 
 ### 2026-09-15: Visit Bloomington surface verified — dead end reversed
 - **Correction:** the earlier "Visit Bloomington — Simpleview CMS — No public API" entry (and the generic "Simpleview is a dead end" claim in `docs/search-pattern-tests.md`/`docs/platforms.md`) was wrong. The `/event/rss/` feed caps at 30 items and detail JSON-LD is date-only, but the same-origin Simpleview **REST API** (`/includes/rest_v2/plugins_events_events_by_date/find/` + `get_simple_token/`) returns clock times, full descriptions, geo, recurrence and `skip` paging over plain HTTP — 34 requests → 1,666 occurrences across 230 recids, empty cookie jar, no browser.

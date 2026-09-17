@@ -26,8 +26,11 @@ from scrapers.visit_bloomington import (
     TOKEN_URL,
     VisitBloomingtonScraper,
 )
+from scripts.combine_ics import AGGREGATORS, dedupe_cross_source
+from scripts.process_pending_feeds import parse_pending_feeds
 
 TZ = ZoneInfo("America/Indiana/Indianapolis")
+BLOOMINGTON_DIR = Path(__file__).parent.parent / "cities" / "bloomington"
 FIXTURE = Path(__file__).parent / "fixtures" / "bloomington" / "visit_bloomington_events.json"
 # Frozen "now" so the horizon filter is deterministic against the captured payloads.
 FROZEN_NOW = datetime(2026, 9, 15, 9, 0, tzinfo=TZ)
@@ -651,3 +654,57 @@ class TestCalendarOutput:
         ics = VisitBloomingtonScraper().create_calendar(events).to_ical().decode()
 
         assert "GEO:39.15644580000001;-86.49563789999999" in ics
+
+
+def _registered_bloomington_entries() -> list[dict]:
+    """Parse the city's pending and active source inventories."""
+    entries: list[dict] = []
+    for name in ("pending_feeds.txt", "feeds.txt"):
+        entries.extend(parse_pending_feeds(BLOOMINGTON_DIR / name))
+    return entries
+
+
+def _dedupe_event(title: str, source: str) -> dict:
+    """An event dict as combine_ics.dedupe_cross_source consumes it."""
+    content = (
+        f"SUMMARY:{title}\r\n"
+        f"X-SOURCE:{source}\r\n"
+        f"URL:https://example.com/{source.replace(' ', '-')}\r\n"
+        "UID:shared-uid"
+    )
+    return {"dtstart": datetime(2026, 9, 16, 18, 0, tzinfo=TZ), "content": content}
+
+
+class TestRegistrationContract:
+    """The #124 registration: DB-first entry, primary-source dedup (ADR 0011)."""
+
+    def test_registers_visit_bloomington_through_the_db_first_path(self):
+        # The entry must satisfy the feeds-table insert-time trigger that the
+        # nightly pending-feeds processor and DB-first runner execute against.
+        entry = next(
+            (
+                e
+                for e in _registered_bloomington_entries()
+                if e["name"] == "Visit Bloomington" and e["feed_type"] == "scraper"
+            ),
+            None,
+        )
+        assert entry is not None, "Visit Bloomington is not registered for Bloomington"
+        assert entry["url"] == "cities/bloomington/visit_bloomington.ics"
+        assert entry["scraper_cmd"].startswith("python scrapers/")
+        assert "scrapers/visit_bloomington.py" in entry["scraper_cmd"]
+
+    def test_source_is_a_primary_not_an_aggregator(self):
+        # ADR 0011: absent from the aggregator list -> wins cross-source dedup.
+        assert "Visit Bloomington" not in AGGREGATORS
+
+    def test_dedupe_prefers_visit_bloomington_and_dual_credits_limestone_post(self):
+        # Limestone Post's CitySpark feed echoes CVB events; the CVB copy is
+        # kept and the merged attribution lists the primary source first.
+        limestone = _dedupe_event("Downtown Shop Night", "Limestone Post")
+        visit = _dedupe_event("Downtown Shop Night", "Visit Bloomington")
+
+        kept = dedupe_cross_source([limestone, visit], input_dir=None)
+
+        assert len(kept) == 1
+        assert "X-SOURCE:Visit Bloomington, Limestone Post" in kept[0]["content"]
