@@ -9,6 +9,7 @@ token/paging/mapping/horizon path against payloads captured from the live API
 import copy
 import hashlib
 import json
+import logging
 import sys
 from datetime import date, datetime
 from pathlib import Path
@@ -30,6 +31,24 @@ TZ = ZoneInfo("America/Indiana/Indianapolis")
 FIXTURE = Path(__file__).parent / "fixtures" / "bloomington" / "visit_bloomington_events.json"
 # Frozen "now" so the horizon filter is deterministic against the captured payloads.
 FROZEN_NOW = datetime(2026, 9, 15, 9, 0, tzinfo=TZ)
+RUN_HISTORY_FILE = "visit_bloomington.runs.json"
+
+
+@pytest.fixture(autouse=True)
+def _isolated_run_history(tmp_path, monkeypatch):
+    """Keep the degradation guard's on-disk history out of the repo during tests."""
+    monkeypatch.setattr(
+        "scrapers.visit_bloomington.RUN_HISTORY_PATH",
+        tmp_path / RUN_HISTORY_FILE,
+    )
+
+
+def _seed_run_history(tmp_path, fetched_counts: list[int]) -> None:
+    runs = [
+        {"date": f"2026-08-{i:02d}", "fetched": count, "emitted": count}
+        for i, count in enumerate(fetched_counts, start=1)
+    ]
+    (tmp_path / RUN_HISTORY_FILE).write_text(json.dumps({"runs": runs}))
 
 
 def _fixture_docs() -> list[dict]:
@@ -515,6 +534,106 @@ class TestFetchPaging:
             pytest.raises(RuntimeError, match="403"),
         ):
             scraper.fetch_events()
+
+
+class TestFetchRetry:
+    """A 403 burst re-fetches the token and retries the request once."""
+
+    def test_403_triggers_token_refetch_and_one_successful_retry(self):
+        docs = _fixture_docs()
+        token_calls: list[str] = []
+        events_calls = {"n": 0}
+
+        def _get(
+            url: str,
+            headers: dict[str, str] | None = None,
+            params: dict[str, str] | None = None,
+            timeout: int | None = None,
+        ):
+            if url == TOKEN_URL:
+                token_calls.append(url)
+                return _Resp(200, text="tok")
+            assert url == EVENTS_URL
+            events_calls["n"] += 1
+            if events_calls["n"] == 1:
+                return _Resp(403)
+            return _Resp(200, payload=_events_payload(docs))
+
+        scraper = VisitBloomingtonScraper()
+        with (
+            patch("scrapers.visit_bloomington.requests.get", side_effect=_get),
+            patch("scrapers.visit_bloomington._now", return_value=FROZEN_NOW),
+            patch("scrapers.visit_bloomington.time.sleep") as mock_sleep,
+        ):
+            events = scraper.fetch_events()
+
+        # The successful retry is not treated as a failure: the whole page is mapped.
+        assert len(events) == 5
+        assert len(token_calls) == 2  # initial token + one re-fetch
+        assert events_calls["n"] == 2  # initial request + one retry
+        mock_sleep.assert_any_call(CRAWL_DELAY)
+
+    def test_repeated_403_raises_after_a_single_retry(self):
+        token_calls: list[str] = []
+        events_calls = {"n": 0}
+
+        def _get(
+            url: str,
+            headers: dict[str, str] | None = None,
+            params: dict[str, str] | None = None,
+            timeout: int | None = None,
+        ):
+            if url == TOKEN_URL:
+                token_calls.append(url)
+                return _Resp(200, text="tok")
+            events_calls["n"] += 1
+            return _Resp(403)
+
+        scraper = VisitBloomingtonScraper()
+        with (
+            patch("scrapers.visit_bloomington.requests.get", side_effect=_get),
+            patch("scrapers.visit_bloomington._now", return_value=FROZEN_NOW),
+            patch("scrapers.visit_bloomington.time.sleep"),
+            pytest.raises(RuntimeError, match="403"),
+        ):
+            scraper.fetch_events()
+
+        # Only one re-fetch and one retry, then the failure surfaces.
+        assert len(token_calls) == 2
+        assert events_calls["n"] == 2
+
+
+class TestDegradationGuard:
+    """A fetch far below the trailing 7-run median warns rather than hiding."""
+
+    def test_fetch_below_half_trailing_median_warns(self, tmp_path, caplog):
+        _seed_run_history(tmp_path, [1000] * 7)
+
+        with caplog.at_level(logging.WARNING):
+            _fetch([_events_payload(_fixture_docs())])
+
+        assert any(
+            "median" in r.getMessage() and "50%" in r.getMessage() for r in caplog.records
+        ), caplog.text
+
+    def test_fetch_at_or_above_half_trailing_median_does_not_warn(self, tmp_path, caplog):
+        _seed_run_history(tmp_path, [8] * 7)
+
+        with caplog.at_level(logging.WARNING):
+            _fetch([_events_payload(_fixture_docs())])
+
+        # 5 occurrences is above half of the 8 median, so no warning.
+        assert not [r for r in caplog.records if r.levelno >= logging.WARNING]
+
+    def test_first_run_records_history_without_warning(self, tmp_path, caplog):
+        with caplog.at_level(logging.WARNING):
+            _fetch([_events_payload(_fixture_docs())])
+
+        assert not [r for r in caplog.records if r.levelno >= logging.WARNING]
+        recorded = json.loads((tmp_path / RUN_HISTORY_FILE).read_text())["runs"]
+        assert len(recorded) == 1
+        assert recorded[0]["fetched"] == 5
+        assert recorded[0]["emitted"] >= 1
 
 
 class TestCalendarOutput:

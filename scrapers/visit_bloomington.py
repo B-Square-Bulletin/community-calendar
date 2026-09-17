@@ -73,6 +73,16 @@ CRAWL_DELAY = 2.0
 REQUEST_TIMEOUT = 90
 MAX_PAGES = 60
 
+# Silent-degradation guard: each run appends its occurrence count to a history
+# file under the committed per-city report slice (`report/<city>/` is published
+# by the workflow's existing `git add report/`), so the next run can compare
+# against the trailing window and warn when a fetch collapses. The existing
+# nightly failure signal stays the only alarm -- this is a log line, not a system.
+RUN_HISTORY_PATH = ROOT_DIR / "report" / CITY / "visit_bloomington.runs.json"
+RUN_HISTORY_MAX = 30
+RUN_HISTORY_WINDOW = 7
+DEGRADATION_FRACTION = 0.5
+
 # A recurring-series document carries a human-readable `recurrence` and the
 # source pre-expands it into one document per occurrence, keyed on `date`.
 # Documents without a recurrence are the event itself: a start/end span on one
@@ -96,6 +106,18 @@ HEADERS = {
 def _now() -> datetime:
     """Current time in the source's timezone (a seam, patched in tests)."""
     return datetime.now(TIMEZONE)
+
+
+def _trailing_median(counts: list[int]) -> float | None:
+    """Median of the last RUN_HISTORY_WINDOW counts, or None when there are none."""
+    window = counts[-RUN_HISTORY_WINDOW:]
+    if not window:
+        return None
+    ordered = sorted(window)
+    mid = len(ordered) // 2
+    if len(ordered) % 2:
+        return float(ordered[mid])
+    return (ordered[mid - 1] + ordered[mid]) / 2
 
 
 def _local_date(value: str | None):
@@ -179,9 +201,14 @@ class VisitBloomingtonScraper(BaseScraper):
     domain = DOMAIN
     timezone = DEFAULT_TIMEZONE
     source_url = SOURCE_URL
+    # Reset per run in fetch_events(); bounds token re-fetching to one per run.
+    _token_refreshed = False
+
+    def _request(self, url: str, params: dict[str, Any] | None = None) -> requests.Response:
+        return requests.get(url, headers=HEADERS, params=params, timeout=REQUEST_TIMEOUT)
 
     def _get(self, url: str, params: dict[str, Any] | None = None) -> requests.Response:
-        response = requests.get(url, headers=HEADERS, params=params, timeout=REQUEST_TIMEOUT)
+        response = self._request(url, params)
         if response.status_code != 200:
             raise RuntimeError(
                 f"Visit Bloomington API returned HTTP {response.status_code} for {url}"
@@ -193,6 +220,33 @@ class VisitBloomingtonScraper(BaseScraper):
         if not token:
             raise RuntimeError("Visit Bloomington token endpoint returned an empty token")
         return token
+
+    @staticmethod
+    def _events_params(token: str, options: dict[str, Any]) -> dict[str, str]:
+        return {"json": json.dumps({"filter": {}, "options": options}), "token": token}
+
+    def _fetch_page(self, token: str, options: dict[str, Any]) -> tuple[dict, str]:
+        """Fetch one events page, refreshing the token and retrying once on a 403.
+
+        Returns the decoded `docs` payload and the token later pages should use.
+        A single token re-fetch per run is the documented anti-bot answer; a
+        second 403 after that means the retry failed and must surface.
+        """
+        response = self._request(EVENTS_URL, params=self._events_params(token, options))
+        if response.status_code == 403 and not self._token_refreshed:
+            logger.warning(
+                "Visit Bloomington: events request returned HTTP 403; "
+                "re-fetching token and retrying once"
+            )
+            self._token_refreshed = True
+            time.sleep(CRAWL_DELAY)
+            token = self._fetch_token()
+            response = self._request(EVENTS_URL, params=self._events_params(token, options))
+        if response.status_code != 200:
+            raise RuntimeError(
+                f"Visit Bloomington API returned HTTP {response.status_code} for {EVENTS_URL}"
+            )
+        return response.json().get("docs", {}) or {}, token
 
     def _fetch_docs(self, token: str) -> list[dict[str, Any]]:
         """Page the events endpoint to exhaustion using `skip`/`count`."""
@@ -206,8 +260,7 @@ class VisitBloomingtonScraper(BaseScraper):
                 "castDocs": False,
                 "sort": {"date": 1, "rank": 1, "title_sort": 1},
             }
-            params = {"json": json.dumps({"filter": {}, "options": options}), "token": token}
-            payload = self._get(EVENTS_URL, params=params).json().get("docs", {})
+            payload, token = self._fetch_page(token, options)
             page_docs: list[dict[str, Any]] = payload.get("docs") or []
             docs.extend(page_docs)
             count = payload.get("count") or 0
@@ -216,6 +269,38 @@ class VisitBloomingtonScraper(BaseScraper):
             skip += PAGE_LIMIT
             time.sleep(CRAWL_DELAY)
         return docs
+
+    def _load_runs(self) -> list[dict[str, Any]]:
+        """Prior runs' counts, or [] on a missing/corrupt history file."""
+        try:
+            data = json.loads(RUN_HISTORY_PATH.read_text())
+        except (OSError, ValueError):
+            return []
+        runs = data.get("runs") if isinstance(data, dict) else None
+        if not isinstance(runs, list):
+            return []
+        return [r for r in runs if isinstance(r, dict)]
+
+    def _record_run(self, fetched: int, emitted: int) -> None:
+        runs = self._load_runs()
+        runs.append({"date": _now().date().isoformat(), "fetched": fetched, "emitted": emitted})
+        try:
+            RUN_HISTORY_PATH.parent.mkdir(parents=True, exist_ok=True)
+            RUN_HISTORY_PATH.write_text(
+                json.dumps({"runs": runs[-RUN_HISTORY_MAX:]}, indent=2) + "\n"
+            )
+        except OSError as exc:
+            logger.warning(f"Visit Bloomington: could not write run history: {exc}")
+
+    def _warn_if_degraded(self, fetched: int, runs: list[dict[str, Any]]) -> None:
+        counts = [r["fetched"] for r in runs if isinstance(r.get("fetched"), int)]
+        median = _trailing_median(counts)
+        if median and fetched < median * DEGRADATION_FRACTION:
+            logger.warning(
+                f"Visit Bloomington: fetched {fetched} occurrences, below 50% of the "
+                f"trailing {min(len(counts), RUN_HISTORY_WINDOW)}-run median ({median:g}) "
+                "-- possible coverage degradation"
+            )
 
     def _parse_doc(self, doc: dict[str, Any], today, horizon) -> dict[str, Any] | None:
         title = (doc.get("title") or "").strip()
@@ -293,6 +378,7 @@ class VisitBloomingtonScraper(BaseScraper):
         }
 
     def fetch_events(self) -> list[dict[str, Any]]:
+        self._token_refreshed = False
         token = self._fetch_token()
         docs = self._fetch_docs(token)
 
@@ -320,6 +406,8 @@ class VisitBloomingtonScraper(BaseScraper):
             f"Visit Bloomington: {len(docs)} occurrence docs fetched, {len(events)} events emitted"
             + (f", {out_of_area} dropped outside the allowed towns" if out_of_area else "")
         )
+        self._warn_if_degraded(len(docs), self._load_runs())
+        self._record_run(len(docs), len(events))
         return events
 
 
