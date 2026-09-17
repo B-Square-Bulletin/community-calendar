@@ -130,7 +130,53 @@ class TestDbFirstScraperEntry:
         errors = vpf.validate("origin/main")
         assert len(errors) == 1
         assert "scrapers/visit_bloomington.py" in errors[0]
-        assert "doesn't exist" in errors[0]
+        assert "not a file" in errors[0]
+
+    def test_command_without_py_suffix_is_still_checked_for_file(self, tmp_path, monkeypatch):
+        # The DB trigger only checks the "python scrapers/" prefix, so a
+        # command can name a repo script without a .py suffix. The referenced
+        # file must still be validated, or the nightly runner fails first.
+        _setup(
+            tmp_path,
+            monkeypatch,
+            "# Visit Bloomington\n"
+            "# cmd: python scrapers/missing --output "
+            "cities/bloomington/visit_bloomington.ics\n"
+            "cities/bloomington/visit_bloomington.ics\n",
+        )
+        monkeypatch.setattr(
+            vpf,
+            "get_changed_file_statuses",
+            lambda base_ref: [("M", "cities/bloomington/pending_feeds.txt")],
+        )
+
+        errors = vpf.validate("origin/main")
+        assert len(errors) == 1
+        assert "scrapers/missing" in errors[0]
+        assert "not a file" in errors[0]
+
+    def test_command_naming_a_directory_is_flagged(self, tmp_path, monkeypatch):
+        # "Not a file" includes a repo directory: a command whose token names
+        # a directory must be rejected, or the nightly runner fails first.
+        _setup(
+            tmp_path,
+            monkeypatch,
+            "# Visit Bloomington\n"
+            "# cmd: python scrapers/lib --output "
+            "cities/bloomington/visit_bloomington.ics\n"
+            "cities/bloomington/visit_bloomington.ics\n",
+        )
+        (tmp_path / "scrapers" / "lib").mkdir(parents=True)
+        monkeypatch.setattr(
+            vpf,
+            "get_changed_file_statuses",
+            lambda base_ref: [("M", "cities/bloomington/pending_feeds.txt")],
+        )
+
+        errors = vpf.validate("origin/main")
+        assert len(errors) == 1
+        assert "scrapers/lib" in errors[0]
+        assert "not a file" in errors[0]
 
 
 class TestIcsUrlEntry:
@@ -169,7 +215,7 @@ class TestNewScraperRegistration:
             monkeypatch,
             "# empty\n",
             scraper_files=["scrapers/orphan.py"],
-            feeds="# Orphan\ncities/bloomington/orphan.ics\n",
+            feeds="# Orphan\n# cmd: python scrapers/orphan.py\ncities/bloomington/orphan.ics\n",
         )
         monkeypatch.setattr(
             vpf,
@@ -178,6 +224,31 @@ class TestNewScraperRegistration:
         )
 
         assert vpf.validate("origin/main") == []
+
+    def test_new_scraper_matching_template_comment_is_still_flagged(self, tmp_path, monkeypatch):
+        # The pending_feeds.txt template mentions "python scrapers/example.py"
+        # inside a comment. A real scrapers/example.py is not thereby
+        # registered; the check must match the exact script path of a
+        # '# cmd:' entry, not a substring of all feed content.
+        _setup(
+            tmp_path,
+            monkeypatch,
+            "# Display Name\n"
+            '#   # cmd: python scrapers/example.py --name "Source Name" '
+            "--output cities/bloomington/example.ics\n"
+            "#   cities/bloomington/example.ics\n",
+            scraper_files=["scrapers/example.py"],
+        )
+        monkeypatch.setattr(
+            vpf,
+            "get_changed_file_statuses",
+            lambda base_ref: [("A", "scrapers/example.py")],
+        )
+
+        errors = vpf.validate("origin/main")
+        assert len(errors) == 1
+        assert "scrapers/example.py" in errors[0]
+        assert "pending_feeds.txt" in errors[0]
 
 
 class TestRelevance:

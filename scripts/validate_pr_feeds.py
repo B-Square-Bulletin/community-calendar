@@ -88,6 +88,17 @@ def parse_pending_feeds(path: Path) -> list[dict]:
     return _parse_pending_feeds(path)
 
 
+def script_token(cmd: str | None) -> str | None:
+    """The repo-script path a command invokes, or None when it names none.
+
+    The DB trigger only guarantees the "python scrapers/"/"python scripts/"
+    prefix, so the token after "python" is whatever the author wrote — not
+    necessarily a `.py` file. Callers decide how to treat it.
+    """
+    match = re.match(r"python\s+(\S+)", cmd or "")
+    return match.group(1) if match else None
+
+
 def get_new_scraper_files(base_ref: str) -> list[str]:
     """Get newly added scraper .py files (not lib/ helpers).
 
@@ -159,31 +170,37 @@ def validate(base_ref: str) -> list[str]:
                     f"cities/<city>/<file>.ics."
                 )
 
-            # The referenced scraper .py file should exist
-            if cmd:
-                cmd_match = re.search(r"python\s+(\S+\.py)", cmd)
-                if cmd_match:
-                    scraper_file = ROOT / cmd_match.group(1)
-                    if not scraper_file.exists():
-                        errors.append(
-                            f"Scraper entry '{feed['name']}' references "
-                            f"'{cmd_match.group(1)}' but that file doesn't exist."
-                        )
+            # The referenced repo script must be an existing file. The DB
+            # trigger only checks the prefix, so validate whatever token the
+            # command names, or the nightly runner is the first place the
+            # mistake surfaces.
+            token = script_token(cmd)
+            if cmd and SCRAPER_CMD_RE.match(cmd) and token and not (ROOT / token).is_file():
+                errors.append(
+                    f"Scraper entry '{feed['name']}' references "
+                    f"'{token}', which is not a file in the repo."
+                )
 
     # Check new scraper files have corresponding feeds entries
     new_scrapers = get_new_scraper_files(base_ref)
     if new_scrapers:
-        # Collect content from both pending_feeds.txt and feeds.txt
-        # (pending entries move to feeds.txt once the build processes them)
-        all_feed_content = ""
-        for pending in ROOT.glob("cities/*/pending_feeds.txt"):
-            all_feed_content += pending.read_text()
-        for feeds_file in ROOT.glob("cities/*/feeds.txt"):
-            all_feed_content += feeds_file.read_text()
+        # The script paths named by '# cmd:' entries in both pending_feeds.txt
+        # and feeds.txt (pending entries move to feeds.txt once the build
+        # processes them). Match the exact path, not a substring of the file
+        # content: the pending template's commented "scrapers/example.py" must
+        # not register a real scrapers/example.py.
+        referenced_scripts: set[str] = set()
+        feed_files = list(ROOT.glob("cities/*/pending_feeds.txt")) + list(
+            ROOT.glob("cities/*/feeds.txt")
+        )
+        for feed_file in feed_files:
+            for feed in parse_pending_feeds(feed_file):
+                token = script_token(feed["scraper_cmd"])
+                if token:
+                    referenced_scripts.add(token)
 
         for scraper_file in new_scrapers:
-            scraper_basename = Path(scraper_file).stem
-            if scraper_basename not in all_feed_content:
+            if scraper_file not in referenced_scripts:
                 errors.append(
                     f"New scraper '{scraper_file}' has no entry in any "
                     f"feeds.txt or pending_feeds.txt. "
