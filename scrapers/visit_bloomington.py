@@ -13,11 +13,12 @@ required (the default python-requests UA is 403ed); `limit` must stay below 64
 (403 at >=64); the `date_range` filter is a deterministic 403.  Requests are
 spaced to honour the site's `robots.txt` `Crawl-delay: 2`.
 
-The endpoint already excludes past occurrences and pre-expands recurrence into
-one document per occurrence.  This module emits the non-recurring ("single")
-events; expanding recurring-series occurrences is a follow-up change
-(issue #124 item 04).  The pull is always full, and each occurrence is filtered
-client-side on its `date` field against the Horizon.
+The endpoint excludes past occurrences and pre-expands recurrence into one
+document per occurrence.  A recurring-series document carries a `recurrence`
+description and is emitted as its own occurrence; a document without one is
+the event itself, and a span wider than a single local day is emitted as one
+multi-day event.  The pull is always full, and each occurrence is filtered
+client-side against the Horizon (never a server-side date bound).
 
 Usage:
     python scrapers/visit_bloomington.py --output cities/bloomington/visit_bloomington.ics
@@ -60,9 +61,11 @@ CRAWL_DELAY = 2.0
 REQUEST_TIMEOUT = 90
 MAX_PAGES = 60
 
-# Single (non-recurring) events carry recurType 0. Every other value is a
-# recurring series the source pre-expands into per-occurrence documents.
-SINGLE_RECUR_TYPE = 0
+# A recurring-series document carries a human-readable `recurrence` and the
+# source pre-expands it into one document per occurrence, keyed on `date`.
+# Documents without a recurrence are the event itself: a start/end span on one
+# local day is a single-day event, a wider span is a genuinely multi-day event
+# (the source emits one document per day of the span; these collapse to one).
 
 # The source sometimes gives startTime without endTime; a one-hour duration
 # keeps the event usable without inventing more than the data supports.
@@ -208,10 +211,25 @@ class VisitBloomingtonScraper(BaseScraper):
         if not title or not recid:
             return None
 
-        occurrence_date = _local_date(doc.get("date") or doc.get("endDate"))
-        if occurrence_date is None or occurrence_date < today or occurrence_date > horizon:
-            return None
+        if (doc.get("recurrence") or "").strip():
+            occurrence_date = _local_date(doc.get("date"))
+            if occurrence_date is None or occurrence_date < today or occurrence_date > horizon:
+                return None
+            return self._single_day_event(doc, recid, title, occurrence_date)
 
+        start_date = _local_date(doc.get("startDate"))
+        if start_date is None:
+            return None
+        end_date = _local_date(doc.get("endDate")) or start_date
+        if end_date < today or start_date > horizon:
+            return None
+        if start_date == end_date:
+            return self._single_day_event(doc, recid, title, start_date)
+        return self._multi_day_event(doc, recid, title, start_date, end_date)
+
+    def _single_day_event(
+        self, doc: dict[str, Any], recid: str, title: str, occurrence_date
+    ) -> dict[str, Any]:
         start_time = _parse_clock(doc.get("startTime"))
         end_time = _parse_clock(doc.get("endTime"))
         if start_time is None:
@@ -227,6 +245,30 @@ class VisitBloomingtonScraper(BaseScraper):
                 if dtend <= dtstart:
                     dtend += timedelta(days=1)
 
+        return self._event(doc, recid, title, dtstart, dtend, _uid(recid, occurrence_date))
+
+    def _multi_day_event(
+        self, doc: dict[str, Any], recid: str, title: str, start_date, end_date
+    ) -> dict[str, Any]:
+        start_time = _parse_clock(doc.get("startTime"))
+        end_time = _parse_clock(doc.get("endTime"))
+        if start_time is None:
+            # All-day span; DTEND is exclusive, so it falls on the day after the last.
+            dtstart: Any = start_date
+            dtend: Any = end_date + timedelta(days=1)
+        else:
+            dtstart = datetime.combine(start_date, start_time).replace(tzinfo=TIMEZONE)
+            dtend = datetime.combine(end_date, end_time or start_time).replace(tzinfo=TIMEZONE)
+            if dtend <= dtstart:
+                dtend += timedelta(days=1)
+
+        # UID keys on the span's first day; every per-day document of the span
+        # shares it, so they collapse to one event across the dedupe in fetch_events.
+        return self._event(doc, recid, title, dtstart, dtend, _uid(recid, start_date))
+
+    def _event(
+        self, doc: dict[str, Any], recid: str, title: str, dtstart: Any, dtend: Any, uid: str
+    ) -> dict[str, Any]:
         return {
             "title": title,
             "dtstart": dtstart,
@@ -235,7 +277,7 @@ class VisitBloomingtonScraper(BaseScraper):
             "description": _plain_text(doc.get("description") or ""),
             "url": _event_url(recid, title),
             "geo": _geo(doc),
-            "uid": _uid(recid, occurrence_date),
+            "uid": uid,
         }
 
     def fetch_events(self) -> list[dict[str, Any]]:
@@ -247,15 +289,15 @@ class VisitBloomingtonScraper(BaseScraper):
         horizon = (now + timedelta(days=self.months_ahead * 31)).date()
 
         events = []
+        seen_uids: set[str] = set()
         for doc in docs:
-            if doc.get("recurType") != SINGLE_RECUR_TYPE:
-                continue
             parsed = self._parse_doc(doc, today, horizon)
-            if parsed:
+            if parsed and parsed["uid"] not in seen_uids:
+                seen_uids.add(parsed["uid"])
                 events.append(parsed)
 
         self.logger.info(
-            f"Visit Bloomington: {len(docs)} occurrence docs fetched, {len(events)} single events emitted"
+            f"Visit Bloomington: {len(docs)} occurrence docs fetched, {len(events)} events emitted"
         )
         return events
 

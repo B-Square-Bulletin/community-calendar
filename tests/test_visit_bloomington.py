@@ -87,21 +87,54 @@ def _by_title(events: list[dict], title: str) -> dict:
     return next(e for e in events if e["title"] == title)
 
 
+def _recurring_doc(
+    occurrence_iso: str, recid: str = "58704", title: str = "Downtown Shop Night"
+) -> dict:
+    """A recurring-series occurrence document (the source emits one per date)."""
+    doc = next(d for d in _fixture_docs() if d["recid"] == recid)
+    doc = copy.deepcopy(doc)
+    doc["title"] = title
+    doc["cms_title"] = title
+    doc["date"] = occurrence_iso
+    doc["dates"] = {"eventDate": occurrence_iso}
+    return doc
+
+
+def _multi_day_doc(
+    recid: str, title: str, start_iso: str, end_iso: str, occurrence_iso: str
+) -> dict:
+    """A multi-day event day-document (recurType 99, no recurrence description)."""
+    return {
+        "recid": recid,
+        "title": title,
+        "cms_title": title,
+        "recurType": 99,
+        "recurrence": None,
+        "startDate": start_iso,
+        "endDate": end_iso,
+        "date": occurrence_iso,
+        "dates": {"eventDate": occurrence_iso},
+        "description": "<p>A three-day festival.</p>",
+        "location": "Brown County Fairgrounds",
+        "city": "Nashville",
+        "state": "IN",
+        "loc": {"type": "Point", "coordinates": [-86.25, 39.2]},
+    }
+
+
 class TestSingleEventMapping:
     """fetch_events() maps the API's single (recurType 0) docs to events."""
 
-    def test_returns_one_event_per_single_event_and_skips_recurring(self):
+    def test_returns_one_event_per_single_event_document(self):
         events = _fetch([_events_payload(_fixture_docs())])
 
         titles = {e["title"] for e in events}
-        assert titles == {
+        assert {
             "Author event with Paul C. Gutjahr at Morgenstern Books",
             "IU Football vs Western Kentucky",
             "Resurrection/Kuang ye shi dai | Arthouse Now",
             "Free Riders w/Moxy",
-        }
-        # The recurring series doc (recurType 5) is deferred to occurrence expansion.
-        assert "Downtown Shop Night" not in titles
+        } <= titles
 
     def test_timed_event_keeps_clock_times(self):
         events = _fetch([_events_payload(_fixture_docs())])
@@ -224,6 +257,96 @@ class TestHorizon:
         assert "Author event with Paul C. Gutjahr at Morgenstern Books" not in {
             e["title"] for e in events
         }
+
+
+class TestRecurringExpansion:
+    """The source pre-expands a recurring series into one document per occurrence."""
+
+    def test_weekly_series_yields_one_event_per_occurrence(self):
+        docs = [
+            _recurring_doc("2026-09-17T03:59:59.000Z"),  # local 2026-09-16
+            _recurring_doc("2026-09-24T03:59:59.000Z"),  # local 2026-09-23
+        ]
+        starts = sorted(
+            e["dtstart"]
+            for e in _fetch([_events_payload(docs)])
+            if e["title"] == "Downtown Shop Night"
+        )
+
+        assert starts == [
+            datetime(2026, 9, 16, 16, 0, tzinfo=TZ),
+            datetime(2026, 9, 23, 16, 0, tzinfo=TZ),
+        ]
+
+    def test_occurrence_outside_the_horizon_is_dropped(self):
+        docs = [
+            _recurring_doc("2026-09-17T03:59:59.000Z"),
+            _recurring_doc("2027-06-24T03:59:59.000Z"),  # beyond the horizon
+        ]
+        starts = [
+            e["dtstart"]
+            for e in _fetch([_events_payload(docs)])
+            if e["title"] == "Downtown Shop Night"
+        ]
+
+        assert starts == [datetime(2026, 9, 16, 16, 0, tzinfo=TZ)]
+
+    def test_occurrences_of_a_series_have_distinct_uids(self):
+        docs = [
+            _recurring_doc("2026-09-17T03:59:59.000Z"),
+            _recurring_doc("2026-09-24T03:59:59.000Z"),
+        ]
+        uids = [
+            e["uid"] for e in _fetch([_events_payload(docs)]) if e["title"] == "Downtown Shop Night"
+        ]
+
+        assert len(uids) == 2
+        assert len(set(uids)) == 2
+
+    def test_editing_the_title_does_not_change_an_occurrence_uid(self):
+        before = _by_title(
+            _fetch([_events_payload([_recurring_doc("2026-09-17T03:59:59.000Z")])]),
+            "Downtown Shop Night",
+        )["uid"]
+
+        renamed = _recurring_doc("2026-09-17T03:59:59.000Z", title="Renamed Shop Night")
+        event = _by_title(_fetch([_events_payload([renamed])]), "Renamed Shop Night")
+
+        assert event["uid"] == before
+
+
+class TestMultiDayEvents:
+    """A genuinely multi-day event stays one span with an exclusive end date."""
+
+    def test_multi_day_event_emits_one_span_with_exclusive_end_date(self):
+        # Fri 2026-09-18 00:00 local .. Sun 2026-09-20 23:59 local.
+        docs = [
+            _multi_day_doc(
+                "70001",
+                "Brown County Music Festival",
+                "2026-09-18T04:00:00.000Z",
+                "2026-09-21T03:59:59.000Z",
+                "2026-09-19T03:59:59.000Z",
+            )
+        ]
+        events = _fetch([_events_payload(docs)])
+
+        assert len(events) == 1
+        assert events[0]["dtstart"] == date(2026, 9, 18)
+        assert events[0]["dtend"] == date(2026, 9, 21)  # exclusive
+
+    def test_day_documents_of_one_span_collapse_to_a_single_event(self):
+        span = ("2026-09-18T04:00:00.000Z", "2026-09-21T03:59:59.000Z")
+        docs = [
+            _multi_day_doc(
+                "70001", "Brown County Music Festival", *span, "2026-09-19T03:59:59.000Z"
+            ),
+            _multi_day_doc(
+                "70001", "Brown County Music Festival", *span, "2026-09-20T03:59:59.000Z"
+            ),
+        ]
+
+        assert len(_fetch([_events_payload(docs)])) == 1
 
 
 class TestFetchPaging:

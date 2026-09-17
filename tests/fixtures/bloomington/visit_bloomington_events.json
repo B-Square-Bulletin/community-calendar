@@ -1,6 +1,6 @@
 {
   "source": "https://www.visitbloomington.com/includes/rest_v2/plugins_events_events_by_date/find/",
-  "note": "Captured 2026-09-16 from the Visit Bloomington Simpleview events REST API (filter:{}, limit:50). recids 59452/58224/59353/59822 are recurType 0 (single events); 58704 is a recurring series occurrence (recurType 5), included to exercise the single-event filter.",
+  "note": "Captured 2026-09-16 from the Visit Bloomington Simpleview events REST API (filter:{}, limit:50). recids 59452/58224/59353/59822 are recurType 0 (single events); 58704 is a recurring-series occurrence (recurType 5), which the scraper expands as one occurrence.",
   "docs": [
     {
       "_id": "6aa6d357d1b87fd53872b19f",
