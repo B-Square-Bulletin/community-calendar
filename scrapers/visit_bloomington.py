@@ -201,8 +201,12 @@ class VisitBloomingtonScraper(BaseScraper):
     domain = DOMAIN
     timezone = DEFAULT_TIMEZONE
     source_url = SOURCE_URL
-    # Reset per run in fetch_events(); bounds token re-fetching to one per run.
-    _token_refreshed = False
+
+    def __init__(self):
+        super().__init__()
+        # Per-instance run state; reset per run in fetch_events() to bound token
+        # re-fetching to one per run.
+        self._token_refreshed = False
 
     def _request(self, url: str, params: dict[str, Any] | None = None) -> requests.Response:
         return requests.get(url, headers=HEADERS, params=params, timeout=REQUEST_TIMEOUT)

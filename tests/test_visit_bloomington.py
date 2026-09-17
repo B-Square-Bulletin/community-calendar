@@ -678,6 +678,18 @@ class TestFetchRetry:
         assert events_calls["n"] == 2
 
 
+class TestInstanceState:
+    """The token-refresh guard lives on the instance, not as shared class state."""
+
+    def test_token_refresh_flag_is_not_shared_class_state(self, monkeypatch):
+        # A class-level mutable default can leak across instances. Simulate a
+        # poisoned class default: a freshly constructed scraper must still start
+        # with its own per-run guard, independent of the class attribute.
+        monkeypatch.setattr(VisitBloomingtonScraper, "_token_refreshed", True, raising=False)
+
+        assert VisitBloomingtonScraper()._token_refreshed is False
+
+
 class TestDegradationGuard:
     """A fetch far below the trailing 7-run median warns rather than hiding."""
 

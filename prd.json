@@ -75,8 +75,8 @@
     {
       "title": "Make the Visit Bloomington token-refresh flag instance state (#124)",
       "description": "Standards finding (mutable class attribute). `_token_refreshed = False` is a mutable class-level attribute on VisitBloomingtonScraper (scrapers/visit_bloomington.py:205) reset in fetch_events() (:381); class-level shared state can leak across instances. BaseScraper.__init__ already holds per-instance run state (scrapers/lib/base.py:42-44). Move the flag to `__init__` (calling super().__init__()). Done when: the flag is per-instance with unchanged retry behavior, and make lint and make test pass. No blockers.",
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Moved `_token_refreshed` off the class body into a new VisitBloomingtonScraper.__init__ (calls super().__init__() then sets self._token_refreshed = False), with the per-run comment. fetch_events()'s existing reset at the top of the run is unchanged, so repeated runs on one instance still re-arm the guard. Test seam: construction + the retry path. Added tests/test_visit_bloomington.py::TestInstanceState (1 test): monkeypatches a poisoned class-level `_token_refreshed = True` and asserts a freshly constructed scraper starts False -- RED before (constructor read the class attr), GREEN after (its own instance attr wins). Existing TestFetchRetry (2 tests) prove retry behavior unchanged. Decision (unattended, pre-approved): no behavioral change intended, so the durable guard targets the exact defect (instance state independent of any class default) at construction rather than adding redundant retry tests. Checks: make lint clean (ruff/pyright/ty/pyrefly/zuban + JS), make test green (153 pytest + 211 vitest). No blockers.",
       "reference": ".scratch/visit-bloomington-ingestion/issues/03-visit-bloomington-api-scraper.md",
       "priority": 110
     },
