@@ -119,6 +119,10 @@ class BaseScraper(ABC):
         if data.get("location"):
             event.add("location", data["location"])
 
+        if data.get("geo"):
+            lat, lng = data["geo"]
+            event.add("geo", (lat, lng))
+
         event.add("description", data.get("description", ""))
 
         uid = data.get("uid") or generate_uid(title, dtstart, self.domain)

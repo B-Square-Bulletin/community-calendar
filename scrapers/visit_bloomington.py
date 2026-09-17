@@ -1,0 +1,264 @@
+#!/usr/bin/env python3
+"""Visit Bloomington (Monroe County CVB) events via the Simpleview REST API.
+
+The CVB's Simpleview CMS exposes a same-origin JSON API that pages the whole
+event inventory over plain HTTP (no browser, no cookie):
+
+    TOKEN:  GET {BASE}/plugins/core/get_simple_token/
+    EVENTS: GET {BASE}/includes/rest_v2/plugins_events_events_by_date/find/
+              ?json=<{filter,options}>&token=<token>
+
+Akamai rules, all avoided here: a realistic desktop-Chrome User-Agent is
+required (the default python-requests UA is 403ed); `limit` must stay below 64
+(403 at >=64); the `date_range` filter is a deterministic 403.  Requests are
+spaced to honour the site's `robots.txt` `Crawl-delay: 2`.
+
+The endpoint already excludes past occurrences and pre-expands recurrence into
+one document per occurrence.  This module emits the non-recurring ("single")
+events; expanding recurring-series occurrences is a follow-up change
+(issue #124 item 04).  The pull is always full, and each occurrence is filtered
+client-side on its `date` field against the Horizon.
+
+Usage:
+    python scrapers/visit_bloomington.py --output cities/bloomington/visit_bloomington.ics
+"""
+
+import sys
+
+sys.path.insert(0, __file__.rsplit("/", 1)[0])
+
+import hashlib
+import html as html_mod
+import json
+import logging
+import re
+import time
+from datetime import datetime, timedelta
+from datetime import time as dtime
+from typing import Any
+from zoneinfo import ZoneInfo
+
+import requests
+from lib.base import BaseScraper
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logger = logging.getLogger(__name__)
+
+BASE_URL = "https://www.visitbloomington.com"
+TOKEN_URL = f"{BASE_URL}/plugins/core/get_simple_token/"
+EVENTS_URL = f"{BASE_URL}/includes/rest_v2/plugins_events_events_by_date/find/"
+SOURCE_URL = f"{BASE_URL}/events/"
+
+DOMAIN = "visitbloomington.com"
+DEFAULT_TIMEZONE = "America/Indiana/Indianapolis"
+TIMEZONE = ZoneInfo(DEFAULT_TIMEZONE)
+
+# Akamai 403s limit >= 64; 50 leaves margin. `count` is in occurrences, not
+# distinct events. Bound the loop so a runaway source cannot hammer the site.
+PAGE_LIMIT = 50
+CRAWL_DELAY = 2.0
+REQUEST_TIMEOUT = 90
+MAX_PAGES = 60
+
+# Single (non-recurring) events carry recurType 0. Every other value is a
+# recurring series the source pre-expands into per-occurrence documents.
+SINGLE_RECUR_TYPE = 0
+
+# The source sometimes gives startTime without endTime; a one-hour duration
+# keeps the event usable without inventing more than the data supports.
+DEFAULT_DURATION = timedelta(hours=1)
+
+HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/120.0.0.0 Safari/537.36"
+    ),
+    "Accept": "application/json, text/javascript, */*; q=0.01",
+}
+
+
+def _now() -> datetime:
+    """Current time in the source's timezone (a seam, patched in tests)."""
+    return datetime.now(TIMEZONE)
+
+
+def _local_date(value: str | None):
+    """Parse an API UTC timestamp to the source's local calendar date."""
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(TIMEZONE).date()
+    except ValueError:
+        return None
+
+
+def _parse_clock(value: str | None) -> dtime | None:
+    """Parse an API `HH:MM:SS` clock time, or None when absent/unparseable."""
+    if not value:
+        return None
+    try:
+        return dtime.fromisoformat(value)
+    except ValueError:
+        return None
+
+
+def _plain_text(markup: str) -> str:
+    """Strip the API's HTML to readable plain text, with no length cap."""
+    if not markup:
+        return ""
+    text = html_mod.unescape(markup)
+    text = re.sub(r"(?i)<br\s*/?>", "\n", text)
+    text = re.sub(r"(?i)</p\s*>", "\n", text)
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = html_mod.unescape(text)
+    text = re.sub(r"[ \t\f\v]+", " ", text)
+    text = re.sub(r"\n\s*\n+", "\n", text)
+    return text.strip()
+
+
+def _build_location(doc: dict[str, Any]) -> str:
+    """Venue + postal address as a single location string."""
+    street = ", ".join(
+        part for part in (doc.get("location"), doc.get("address1"), doc.get("address2")) if part
+    )
+    state_zip = " ".join(part for part in (doc.get("state"), doc.get("zip")) if part)
+    city = ", ".join(part for part in (doc.get("city"), state_zip) if part)
+    return ", ".join(part for part in (street, city) if part)
+
+
+def _geo(doc: dict[str, Any]) -> tuple[float, float] | None:
+    """(lat, lng) from the GeoJSON `loc.coordinates` ([lng, lat]), or None."""
+    loc = doc.get("loc")
+    if not isinstance(loc, dict):
+        return None
+    coords = loc.get("coordinates")
+    if not isinstance(coords, (list, tuple)) or len(coords) != 2:
+        return None
+    lng, lat = coords
+    if lat is None or lng is None:
+        return None
+    return (float(lat), float(lng))
+
+
+def _uid(recid: str, occurrence_date) -> str:
+    """Stable per-occurrence UID: hash of the source recid plus the occurrence date."""
+    digest = hashlib.md5(f"{recid}-{occurrence_date.isoformat()}".encode()).hexdigest()
+    return f"{digest}@{DOMAIN}"
+
+
+def _slugify(text: str) -> str:
+    text = re.sub(r"[^a-z0-9\s-]", "", text.lower())
+    return re.sub(r"[\s_-]+", "-", text).strip("-") or "event"
+
+
+def _event_url(recid: str, title: str) -> str:
+    """The CVB event page. Any slug resolves; the canonical one is title-derived."""
+    return f"{BASE_URL}/event/{_slugify(title)}/{recid}/"
+
+
+class VisitBloomingtonScraper(BaseScraper):
+    """Visit Bloomington (Monroe County CVB) via the Simpleview events API."""
+
+    name = "Visit Bloomington"
+    domain = DOMAIN
+    timezone = DEFAULT_TIMEZONE
+    source_url = SOURCE_URL
+
+    def _get(self, url: str, params: dict[str, Any] | None = None) -> requests.Response:
+        response = requests.get(url, headers=HEADERS, params=params, timeout=REQUEST_TIMEOUT)
+        if response.status_code != 200:
+            raise RuntimeError(
+                f"Visit Bloomington API returned HTTP {response.status_code} for {url}"
+            )
+        return response
+
+    def _fetch_token(self) -> str:
+        token = self._get(TOKEN_URL).text.strip()
+        if not token:
+            raise RuntimeError("Visit Bloomington token endpoint returned an empty token")
+        return token
+
+    def _fetch_docs(self, token: str) -> list[dict[str, Any]]:
+        """Page the events endpoint to exhaustion using `skip`/`count`."""
+        docs: list[dict[str, Any]] = []
+        skip = 0
+        for _ in range(MAX_PAGES):
+            options = {
+                "limit": PAGE_LIMIT,
+                "skip": skip,
+                "count": True,
+                "castDocs": False,
+                "sort": {"date": 1, "rank": 1, "title_sort": 1},
+            }
+            params = {"json": json.dumps({"filter": {}, "options": options}), "token": token}
+            payload = self._get(EVENTS_URL, params=params).json().get("docs", {})
+            page_docs: list[dict[str, Any]] = payload.get("docs") or []
+            docs.extend(page_docs)
+            count = payload.get("count") or 0
+            if not page_docs or skip + PAGE_LIMIT >= count:
+                break
+            skip += PAGE_LIMIT
+            time.sleep(CRAWL_DELAY)
+        return docs
+
+    def _parse_doc(self, doc: dict[str, Any], today, horizon) -> dict[str, Any] | None:
+        title = (doc.get("title") or "").strip()
+        recid = str(doc.get("recid") or doc.get("recId") or "").strip()
+        if not title or not recid:
+            return None
+
+        occurrence_date = _local_date(doc.get("date") or doc.get("endDate"))
+        if occurrence_date is None or occurrence_date < today or occurrence_date > horizon:
+            return None
+
+        start_time = _parse_clock(doc.get("startTime"))
+        end_time = _parse_clock(doc.get("endTime"))
+        if start_time is None:
+            # Genuinely no clock time: a true all-day event (exclusive DTEND).
+            dtstart: Any = occurrence_date
+            dtend: Any = occurrence_date + timedelta(days=1)
+        else:
+            dtstart = datetime.combine(occurrence_date, start_time).replace(tzinfo=TIMEZONE)
+            if end_time is None:
+                dtend = dtstart + DEFAULT_DURATION
+            else:
+                dtend = datetime.combine(occurrence_date, end_time).replace(tzinfo=TIMEZONE)
+                if dtend <= dtstart:
+                    dtend += timedelta(days=1)
+
+        return {
+            "title": title,
+            "dtstart": dtstart,
+            "dtend": dtend,
+            "location": _build_location(doc),
+            "description": _plain_text(doc.get("description") or ""),
+            "url": _event_url(recid, title),
+            "geo": _geo(doc),
+            "uid": _uid(recid, occurrence_date),
+        }
+
+    def fetch_events(self) -> list[dict[str, Any]]:
+        token = self._fetch_token()
+        docs = self._fetch_docs(token)
+
+        now = _now()
+        today = now.date()
+        horizon = (now + timedelta(days=self.months_ahead * 31)).date()
+
+        events = []
+        for doc in docs:
+            if doc.get("recurType") != SINGLE_RECUR_TYPE:
+                continue
+            parsed = self._parse_doc(doc, today, horizon)
+            if parsed:
+                events.append(parsed)
+
+        self.logger.info(
+            f"Visit Bloomington: {len(docs)} occurrence docs fetched, {len(events)} single events emitted"
+        )
+        return events
+
+
+if __name__ == "__main__":
+    VisitBloomingtonScraper.main()

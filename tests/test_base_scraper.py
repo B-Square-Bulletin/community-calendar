@@ -27,7 +27,7 @@ class _ScraperWithSourceUrl(_Scraper):
     source_url = "https://www.visitbloomington.com/events/"
 
 
-def _sample_event():
+def _sample_event() -> dict[str, object]:
     return {
         "title": "Test Event",
         "dtstart": datetime(2026, 7, 15, 19, 0, tzinfo=TZ),
@@ -52,3 +52,17 @@ class TestSourceUrlHeader:
         cal = _Scraper().create_calendar([_sample_event()])
         ics = cal.to_ical().decode()
         assert "X-SOURCE-URL" not in ics
+
+
+class TestGeo:
+    """A `geo` (lat, lng) on an event dict becomes an ICS GEO property."""
+
+    def test_geo_set_emits_geostamp(self):
+        event = _sample_event()
+        event["geo"] = (39.168585, -86.517361)
+        ics = _Scraper().create_calendar([event]).to_ical().decode()
+        assert "GEO:39.168585;-86.517361" in ics
+
+    def test_geo_unset_omits_geostamp(self):
+        ics = _Scraper().create_calendar([_sample_event()]).to_ical().decode()
+        assert "GEO:" not in ics
