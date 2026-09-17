@@ -491,11 +491,11 @@ class TestFetchPaging:
 
     def test_paging_continues_until_count_is_exhausted(self):
         docs = _fixture_docs()
-        # count > PAGE_LIMIT so the loop advances to a second page, then stops
-        # once skip + limit reaches the reported count.
+        # The first page holds fewer docs than the reported count, so the loop
+        # advances to a second page and stops once the count is received.
         pages = [
-            _events_payload(docs[:2], count=52),
-            _events_payload(docs[2:4], count=52),
+            _events_payload(docs[:2], count=4),
+            _events_payload(docs[2:4], count=4),
         ]
         scraper = VisitBloomingtonScraper()
         calls: list[str] = []
@@ -524,6 +524,58 @@ class TestFetchPaging:
         # One wait before the first page and one between the two pages.
         assert mock_sleep.call_count == 2
         mock_sleep.assert_called_with(CRAWL_DELAY)
+
+    def test_empty_page_before_count_is_exhausted_raises(self):
+        # A page that returns nothing while the source still reports
+        # occurrences is an API failure, not a finished pull: the partial
+        # inventory must not be reported as a successful run.
+        docs = _fixture_docs()
+        pages = [
+            _events_payload(docs[:2], count=52),
+            _events_payload([], count=52),
+        ]
+        scraper = VisitBloomingtonScraper()
+        with (
+            patch("scrapers.visit_bloomington.requests.get", side_effect=_fake_get(pages)),
+            patch("scrapers.visit_bloomington._now", return_value=FROZEN_NOW),
+            patch("scrapers.visit_bloomington.time.sleep"),
+            pytest.raises(RuntimeError, match="empty page"),
+        ):
+            scraper.fetch_events()
+
+    def test_page_without_a_reported_count_does_not_complete(self):
+        # `count` is requested explicitly. A page that omits it cannot prove
+        # the inventory is exhausted, so it must not return a partial pull as
+        # a successful run.
+        docs = _fixture_docs()
+        pages = [{"docs": {"docs": docs}}]
+        scraper = VisitBloomingtonScraper()
+        with (
+            patch("scrapers.visit_bloomington.requests.get", side_effect=_fake_get(pages)),
+            patch("scrapers.visit_bloomington._now", return_value=FROZEN_NOW),
+            patch("scrapers.visit_bloomington.time.sleep"),
+            pytest.raises(RuntimeError, match="count"),
+        ):
+            scraper.fetch_events()
+
+    def test_pagination_beyond_max_pages_raises(self, monkeypatch):
+        # MAX_PAGES is a runaway guard, not a truncation point: hitting it
+        # while `count` still reports occurrences must fail loudly rather
+        # than return the capped prefix as a complete inventory.
+        monkeypatch.setattr("scrapers.visit_bloomington.MAX_PAGES", 2)
+        docs = _fixture_docs()
+        pages = [
+            _events_payload(docs, count=1000),
+            _events_payload(docs, count=1000),
+        ]
+        scraper = VisitBloomingtonScraper()
+        with (
+            patch("scrapers.visit_bloomington.requests.get", side_effect=_fake_get(pages)),
+            patch("scrapers.visit_bloomington._now", return_value=FROZEN_NOW),
+            patch("scrapers.visit_bloomington.time.sleep"),
+            pytest.raises(RuntimeError, match="MAX_PAGES"),
+        ):
+            scraper.fetch_events()
 
     def test_events_request_carries_a_desktop_chrome_user_agent(self):
         seen: dict[str, dict[str, str]] = {}

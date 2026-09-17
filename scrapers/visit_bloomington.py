@@ -309,9 +309,17 @@ class VisitBloomingtonScraper(BaseScraper):
         return response.json().get("docs", {}) or {}, token
 
     def _fetch_docs(self, token: str) -> list[dict[str, Any]]:
-        """Page the events endpoint to exhaustion using `skip`/`count`."""
+        """Page the events endpoint until the reported `count` is exhausted.
+
+        A pull that ends before the source reports no occurrences left is a
+        failure, not a short-but-successful run. The degradation guard compares
+        this run's fetched count to a trailing median, so a silently truncated
+        inventory (an empty page mid-stream, or the MAX_PAGES ceiling) could
+        not be told apart from healthy growth; both must surface here instead.
+        """
         docs: list[dict[str, Any]] = []
         skip = 0
+        count = 0
         for _ in range(MAX_PAGES):
             options = {
                 "limit": PAGE_LIMIT,
@@ -324,11 +332,28 @@ class VisitBloomingtonScraper(BaseScraper):
             page_docs: list[dict[str, Any]] = payload.get("docs") or []
             docs.extend(page_docs)
             count = payload.get("count") or 0
-            if not page_docs or skip + PAGE_LIMIT >= count:
-                break
+            if page_docs and not count:
+                raise RuntimeError(
+                    f"Visit Bloomington API returned {len(page_docs)} docs at "
+                    f"skip={skip} without a reported count; cannot confirm the "
+                    f"inventory is exhausted"
+                )
+            if not page_docs:
+                if count or docs:
+                    raise RuntimeError(
+                        f"Visit Bloomington API returned an empty page at skip={skip} "
+                        f"with {count} occurrences still reported"
+                    )
+                return docs
+            if len(docs) >= count:
+                return docs
             skip += PAGE_LIMIT
             time.sleep(CRAWL_DELAY)
-        return docs
+        raise RuntimeError(
+            f"Visit Bloomington API pagination did not exhaust the reported "
+            f"{count} occurrences within MAX_PAGES={MAX_PAGES} "
+            f"({MAX_PAGES * PAGE_LIMIT} max); inventory may be truncated"
+        )
 
     def _load_runs(self) -> list[dict[str, Any]]:
         """Prior runs' counts, or [] on a missing/corrupt history file."""
