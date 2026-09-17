@@ -36,7 +36,7 @@ import json
 import logging
 import re
 import time
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 from datetime import time as dtime
 from typing import Any
 from zoneinfo import ZoneInfo
@@ -138,6 +138,31 @@ def _parse_clock(value: str | None) -> dtime | None:
         return dtime.fromisoformat(value)
     except ValueError:
         return None
+
+
+def _timed_span(
+    start_date: date,
+    start_time: dtime,
+    end_date: date,
+    end_time: dtime | None,
+    default_duration: timedelta | None = None,
+) -> tuple[datetime, datetime]:
+    """A tz-aware datetime span from local dates and clock times.
+
+    The single definition of the combine-and-rollover rule: the end rolls forward
+    one day when it does not advance past the start (an overnight event, or one
+    ending exactly at midnight). `default_duration` supplies the end when the
+    source has no end time at all (single-day events); without it the start time
+    stands in on `end_date`, which is what the final day of a multi-day span
+    means when its clock end is absent.
+    """
+    dtstart = datetime.combine(start_date, start_time).replace(tzinfo=TIMEZONE)
+    if end_time is None and default_duration is not None:
+        return dtstart, dtstart + default_duration
+    dtend = datetime.combine(end_date, end_time or start_time).replace(tzinfo=TIMEZONE)
+    if dtend <= dtstart:
+        dtend += timedelta(days=1)
+    return dtstart, dtend
 
 
 def _plain_text(markup: str) -> str:
@@ -333,19 +358,18 @@ class VisitBloomingtonScraper(BaseScraper):
         self, doc: dict[str, Any], recid: str, title: str, occurrence_date
     ) -> dict[str, Any]:
         start_time = _parse_clock(doc.get("startTime"))
-        end_time = _parse_clock(doc.get("endTime"))
         if start_time is None:
             # Genuinely no clock time: a true all-day event (exclusive DTEND).
             dtstart: Any = occurrence_date
             dtend: Any = occurrence_date + timedelta(days=1)
         else:
-            dtstart = datetime.combine(occurrence_date, start_time).replace(tzinfo=TIMEZONE)
-            if end_time is None:
-                dtend = dtstart + DEFAULT_DURATION
-            else:
-                dtend = datetime.combine(occurrence_date, end_time).replace(tzinfo=TIMEZONE)
-                if dtend <= dtstart:
-                    dtend += timedelta(days=1)
+            dtstart, dtend = _timed_span(
+                occurrence_date,
+                start_time,
+                occurrence_date,
+                _parse_clock(doc.get("endTime")),
+                default_duration=DEFAULT_DURATION,
+            )
 
         return self._event(doc, recid, title, dtstart, dtend, _uid(recid, occurrence_date))
 
@@ -353,16 +377,14 @@ class VisitBloomingtonScraper(BaseScraper):
         self, doc: dict[str, Any], recid: str, title: str, start_date, end_date
     ) -> dict[str, Any]:
         start_time = _parse_clock(doc.get("startTime"))
-        end_time = _parse_clock(doc.get("endTime"))
         if start_time is None:
             # All-day span; DTEND is exclusive, so it falls on the day after the last.
             dtstart: Any = start_date
             dtend: Any = end_date + timedelta(days=1)
         else:
-            dtstart = datetime.combine(start_date, start_time).replace(tzinfo=TIMEZONE)
-            dtend = datetime.combine(end_date, end_time or start_time).replace(tzinfo=TIMEZONE)
-            if dtend <= dtstart:
-                dtend += timedelta(days=1)
+            dtstart, dtend = _timed_span(
+                start_date, start_time, end_date, _parse_clock(doc.get("endTime"))
+            )
 
         # UID keys on the span's first day; every per-day document of the span
         # shares it, so they collapse to one event across the dedupe in fetch_events.
