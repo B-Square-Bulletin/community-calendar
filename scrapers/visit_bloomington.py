@@ -241,6 +241,7 @@ class VisitBloomingtonScraper(BaseScraper):
             self._token_refreshed = True
             time.sleep(CRAWL_DELAY)
             token = self._fetch_token()
+            time.sleep(CRAWL_DELAY)
             response = self._request(EVENTS_URL, params=self._events_params(token, options))
         if response.status_code != 200:
             raise RuntimeError(
@@ -380,6 +381,7 @@ class VisitBloomingtonScraper(BaseScraper):
     def fetch_events(self) -> list[dict[str, Any]]:
         self._token_refreshed = False
         token = self._fetch_token()
+        time.sleep(CRAWL_DELAY)
         docs = self._fetch_docs(token)
 
         now = _now()

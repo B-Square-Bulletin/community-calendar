@@ -486,8 +486,8 @@ class TestFetchPaging:
 
         assert len(events) == 4
         assert calls.count(EVENTS_URL) == 2
-        # One wait between the two pages, none after the final page.
-        assert mock_sleep.call_count == 1
+        # One wait before the first page and one between the two pages.
+        assert mock_sleep.call_count == 2
         mock_sleep.assert_called_with(CRAWL_DELAY)
 
     def test_events_request_carries_a_desktop_chrome_user_agent(self):
@@ -537,6 +537,78 @@ class TestFetchPaging:
             pytest.raises(RuntimeError, match="403"),
         ):
             scraper.fetch_events()
+
+
+class TestRequestSpacing:
+    """Every request to the host is separated by the source's Crawl-delay."""
+
+    def test_crawl_delay_precedes_the_first_events_request(self):
+        order: list[object] = []
+
+        def _get(
+            url: str,
+            headers: dict[str, str] | None = None,
+            params: dict[str, str] | None = None,
+            timeout: int | None = None,
+        ):
+            order.append(url)
+            if url == TOKEN_URL:
+                return _Resp(200, text="tok")
+            return _Resp(200, payload=_events_payload(_fixture_docs()))
+
+        def _sleep(seconds: float) -> None:
+            order.append(("sleep", seconds))
+
+        scraper = VisitBloomingtonScraper()
+        with (
+            patch("scrapers.visit_bloomington.requests.get", side_effect=_get),
+            patch("scrapers.visit_bloomington._now", return_value=FROZEN_NOW),
+            patch("scrapers.visit_bloomington.time.sleep", side_effect=_sleep),
+        ):
+            scraper.fetch_events()
+
+        assert order == [TOKEN_URL, ("sleep", CRAWL_DELAY), EVENTS_URL]
+
+    def test_crawl_delay_precedes_the_retried_events_request(self):
+        order: list[object] = []
+        events_calls = {"n": 0}
+
+        def _get(
+            url: str,
+            headers: dict[str, str] | None = None,
+            params: dict[str, str] | None = None,
+            timeout: int | None = None,
+        ):
+            order.append(url)
+            if url == TOKEN_URL:
+                return _Resp(200, text="tok")
+            events_calls["n"] += 1
+            if events_calls["n"] == 1:
+                return _Resp(403)
+            return _Resp(200, payload=_events_payload(_fixture_docs()))
+
+        def _sleep(seconds: float) -> None:
+            order.append(("sleep", seconds))
+
+        scraper = VisitBloomingtonScraper()
+        with (
+            patch("scrapers.visit_bloomington.requests.get", side_effect=_get),
+            patch("scrapers.visit_bloomington._now", return_value=FROZEN_NOW),
+            patch("scrapers.visit_bloomington.time.sleep", side_effect=_sleep),
+        ):
+            scraper.fetch_events()
+
+        # The re-fetched token is itself a request, so the retried page is
+        # spaced from it as well as from the 403 it followed.
+        assert order == [
+            TOKEN_URL,
+            ("sleep", CRAWL_DELAY),
+            EVENTS_URL,
+            ("sleep", CRAWL_DELAY),
+            TOKEN_URL,
+            ("sleep", CRAWL_DELAY),
+            EVENTS_URL,
+        ]
 
 
 class TestFetchRetry:
