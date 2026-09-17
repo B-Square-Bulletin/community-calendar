@@ -219,6 +219,12 @@ def _event_url(recid: str, title: str) -> str:
     return f"{BASE_URL}/event/{_slugify(title)}/{recid}/"
 
 
+def _raise_for_status(response: requests.Response, url: str) -> None:
+    """The one non-200 error path: name the endpoint and status, then raise."""
+    if response.status_code != 200:
+        raise RuntimeError(f"Visit Bloomington API returned HTTP {response.status_code} for {url}")
+
+
 class VisitBloomingtonScraper(BaseScraper):
     """Visit Bloomington (Monroe County CVB) via the Simpleview events API."""
 
@@ -234,18 +240,13 @@ class VisitBloomingtonScraper(BaseScraper):
         self._token_refreshed = False
 
     def _request(self, url: str, params: dict[str, Any] | None = None) -> requests.Response:
+        """Raw GET; the caller decides how to treat each status."""
         return requests.get(url, headers=HEADERS, params=params, timeout=REQUEST_TIMEOUT)
 
-    def _get(self, url: str, params: dict[str, Any] | None = None) -> requests.Response:
-        response = self._request(url, params)
-        if response.status_code != 200:
-            raise RuntimeError(
-                f"Visit Bloomington API returned HTTP {response.status_code} for {url}"
-            )
-        return response
-
     def _fetch_token(self) -> str:
-        token = self._get(TOKEN_URL).text.strip()
+        response = self._request(TOKEN_URL)
+        _raise_for_status(response, TOKEN_URL)
+        token = response.text.strip()
         if not token:
             raise RuntimeError("Visit Bloomington token endpoint returned an empty token")
         return token
@@ -272,10 +273,7 @@ class VisitBloomingtonScraper(BaseScraper):
             token = self._fetch_token()
             time.sleep(CRAWL_DELAY)
             response = self._request(EVENTS_URL, params=self._events_params(token, options))
-        if response.status_code != 200:
-            raise RuntimeError(
-                f"Visit Bloomington API returned HTTP {response.status_code} for {EVENTS_URL}"
-            )
+        _raise_for_status(response, EVENTS_URL)
         return response.json().get("docs", {}) or {}, token
 
     def _fetch_docs(self, token: str) -> list[dict[str, Any]]:
