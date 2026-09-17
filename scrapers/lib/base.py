@@ -31,6 +31,9 @@ class BaseScraper(ABC):
     - url: str (optional)
     - location: str (optional)
     - description: str (optional)
+    - geo: tuple[float, float] (optional, (lat, lng) emitted as ICS GEO)
+    - uid: str (optional, defaults to a generated UID)
+    - image_url: str (optional, emitted as an ICS ATTACH)
     """
 
     name: str = "Unknown Source"
@@ -46,9 +49,10 @@ class BaseScraper(ABC):
     def horizon_cutoff(self, now: datetime | None = None) -> datetime:
         """The Horizon boundary: `months_ahead` months' worth of days from `now`.
 
-        The single definition of the Horizon rule. `now` defaults to the host's
-        current local time; callers with their own clock (e.g. a source
-        timezone) pass it explicitly.
+        Shared helper behind `run()` and any subclass that filters before
+        `run()`; pass `now` to use the source's own clock. Not every scraper
+        calls it -- several still inline the offset -- so treat it as the
+        shared helper, not a repo-wide guarantee.
         """
         return (now or datetime.now().astimezone()) + timedelta(days=self.months_ahead * 31)
 
