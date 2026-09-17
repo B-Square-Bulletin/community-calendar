@@ -37,6 +37,7 @@ class BaseScraper(ABC):
     domain: str = "example.com"
     timezone: str = "America/Los_Angeles"
     default_url: str | None = None
+    source_url: str | None = None
 
     def __init__(self):
         self.logger = logging.getLogger(self.__class__.__name__)
@@ -123,6 +124,8 @@ class BaseScraper(ABC):
         uid = data.get("uid") or generate_uid(title, dtstart, self.domain)
         event.add("uid", uid)
         event.add("x-source", self.name)
+        if self.source_url:
+            event.add("x-source-url", self.source_url)
 
         if data.get("image_url"):
             event.add("attach", data["image_url"], parameters={"fmttype": "image/jpeg"})

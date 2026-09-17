@@ -11,8 +11,8 @@
     {
       "title": "Emit X-SOURCE-URL from the base scraper (#124)",
       "description": "The base scraper gains an optional source_url class attribute. When a subclass sets it, every emitted VEVENT carries X-SOURCE-URL with that value; when it is unset (None), output is unchanged. The JSON stage already reads X-SOURCE-URL, so a scraper can point at its source page without special-casing. Done when: a subclass with source_url set produces VEVENTs carrying X-SOURCE-URL; a subclass without it produces output identical to today (no new header); the behavior is asserted at the scraper's calendar seam; make lint and make test pass. No blockers.",
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Added `source_url: str | None = None` class attribute to BaseScraper and emit `event.add(\"x-source-url\", self.source_url)` in create_event(), guarded by truthiness so unset subclasses are byte-for-byte unchanged. Test seam: create_calendar() -> to_ical() (the scraper's calendar output), tests/test_base_scraper.py (2 tests): a subclass with source_url set yields `X-SOURCE-URL:<value>` on the VEVENT; a subclass without it emits no X-SOURCE-URL header (red before the change). This is the fallback event URL the JSON stage already reads (scripts/ics_to_json.py:336), so the item-3 scraper can point at its CVB source page with no JSON special-casing. Checks: make lint clean (ruff/pyright/ty/pyrefly/zuban + JS), make test green (110 pytest + 211 vitest). No blockers. Decision (unattended, pre-approved): no new abstraction added; a plain optional class attribute was the smallest change satisfying current pressure.",
       "reference": ".scratch/visit-bloomington-ingestion/issues/02-base-source-url-header.md",
       "priority": 20
     },
