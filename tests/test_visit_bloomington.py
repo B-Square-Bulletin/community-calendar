@@ -122,6 +122,35 @@ def _multi_day_doc(
     }
 
 
+def _located_single_doc(
+    recid: str,
+    title: str,
+    location: str,
+    address1: str | None,
+    city: str | None,
+    state: str | None,
+    zip_code: str | None,
+) -> dict:
+    """A single-day document at an arbitrary address, for the geo prefilter."""
+    occurrence_iso = "2026-09-19T15:59:59.000Z"  # local 2026-09-19, in horizon
+    return {
+        "recid": recid,
+        "title": title,
+        "cms_title": title,
+        "recurType": 0,
+        "recurrence": None,
+        "startDate": occurrence_iso,
+        "endDate": occurrence_iso,
+        "date": occurrence_iso,
+        "description": "<p>Some event.</p>",
+        "location": location,
+        "address1": address1,
+        "city": city,
+        "state": state,
+        "zip": zip_code,
+    }
+
+
 class TestSingleEventMapping:
     """fetch_events() maps the API's single (recurType 0) docs to events."""
 
@@ -257,6 +286,57 @@ class TestHorizon:
         assert "Author event with Paul C. Gutjahr at Morgenstern Books" not in {
             e["title"] for e in events
         }
+
+
+class TestGeoPrefilter:
+    """Events outside the city's allowed towns are dropped before the ICS.
+
+    The scrape-time prefilter reuses the authoritative combine-time allowlist
+    (cities/bloomington/city.conf via combine_ics), so it is an optimization
+    over the same scope, not a Bloomington-only bound.
+    """
+
+    def test_event_outside_the_allowed_towns_is_dropped(self):
+        docs = [
+            _located_single_doc(
+                "80001",
+                "Indy Home Show",
+                "Indiana Convention Center",
+                "100 S Capitol Ave",
+                "Indianapolis",
+                "IN",
+                "46204",
+            )
+        ]
+        titles = {e["title"] for e in _fetch([_events_payload(docs)])}
+
+        assert "Indy Home Show" not in titles
+
+    def test_in_scope_surrounding_town_is_kept(self):
+        docs = [
+            _located_single_doc(
+                "80002",
+                "Brown County Jamboree",
+                "Brown County Music Center",
+                "114 E Gould St",
+                "Nashville",
+                "IN",
+                "47448",
+            )
+        ]
+        titles = {e["title"] for e in _fetch([_events_payload(docs)])}
+
+        assert "Brown County Jamboree" in titles
+
+    def test_venue_only_location_is_kept(self):
+        # No address indicator: nothing to geo-filter on, so it passes through
+        # exactly as the combine-time filter would allow it.
+        docs = [
+            _located_single_doc("80003", "Trivia Night", "The Bluebird", None, None, None, None)
+        ]
+        titles = {e["title"] for e in _fetch([_events_payload(docs)])}
+
+        assert "Trivia Night" in titles
 
 
 class TestRecurringExpansion:

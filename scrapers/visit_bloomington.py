@@ -25,8 +25,10 @@ Usage:
 """
 
 import sys
+from pathlib import Path
 
 sys.path.insert(0, __file__.rsplit("/", 1)[0])
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import hashlib
 import html as html_mod
@@ -42,8 +44,12 @@ from zoneinfo import ZoneInfo
 import requests
 from lib.base import BaseScraper
 
+from scripts.combine_ics import load_allowed_cities, location_matches_allowed_cities
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
 
 BASE_URL = "https://www.visitbloomington.com"
 TOKEN_URL = f"{BASE_URL}/plugins/core/get_simple_token/"
@@ -53,6 +59,12 @@ SOURCE_URL = f"{BASE_URL}/events/"
 DOMAIN = "visitbloomington.com"
 DEFAULT_TIMEZONE = "America/Indiana/Indianapolis"
 TIMEZONE = ZoneInfo(DEFAULT_TIMEZONE)
+
+# The city whose allowlist scopes the scrape-time prefilter. It is the same
+# cities/<city>/city.conf combine_ics reads, so the prefilter is an optimization
+# over the authoritative combine-time geo filter, not a second definition.
+CITY = "bloomington"
+CITY_DIR = ROOT_DIR / "cities" / CITY
 
 # Akamai 403s limit >= 64; 50 leaves margin. `count` is in occurrences, not
 # distinct events. Bound the loop so a runaway source cannot hammer the site.
@@ -287,17 +299,26 @@ class VisitBloomingtonScraper(BaseScraper):
         now = _now()
         today = now.date()
         horizon = (now + timedelta(days=self.months_ahead * 31)).date()
+        allowed_cities, excluded_cities = load_allowed_cities(str(CITY_DIR))
 
         events = []
         seen_uids: set[str] = set()
+        out_of_area = 0
         for doc in docs:
             parsed = self._parse_doc(doc, today, horizon)
-            if parsed and parsed["uid"] not in seen_uids:
-                seen_uids.add(parsed["uid"])
-                events.append(parsed)
+            if not parsed or parsed["uid"] in seen_uids:
+                continue
+            if not location_matches_allowed_cities(
+                parsed["location"], allowed_cities, excluded_cities
+            ):
+                out_of_area += 1
+                continue
+            seen_uids.add(parsed["uid"])
+            events.append(parsed)
 
         self.logger.info(
             f"Visit Bloomington: {len(docs)} occurrence docs fetched, {len(events)} events emitted"
+            + (f", {out_of_area} dropped outside the allowed towns" if out_of_area else "")
         )
         return events
 
