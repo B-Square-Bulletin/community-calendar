@@ -1026,7 +1026,7 @@ def combine_ics_files(
     Path(output_file).write_text("\r\n".join(output), encoding="utf-8")
 
     if geo_filtered_count > 0:
-        print(f"  (Geo-filtered {geo_filtered_count} events outside allowed cities)")
+        print(f"  (Geo-filtered {geo_filtered_count} events outside the allowed area)")
         # Write sidecar for report visibility. The tracked
         # cities/<city>/geo_filtered.json is CI-owned generated state;
         # local audit runs pass --geo-report to keep it out of the tree.

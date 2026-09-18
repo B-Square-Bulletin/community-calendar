@@ -18,12 +18,17 @@ Usage:
 
 import argparse
 import json
+import sys
 import time
 from math import asin, cos, radians, sin, sqrt
 from pathlib import Path
 from typing import Any
 
 import requests
+
+sys.path.insert(0, str(Path(__file__).parent.parent / "scrapers"))
+
+from lib.city_filter import parse_zips_directive
 
 CACHE_FILE = Path(__file__).parent.parent / ".geocode_cache.json"
 NOMINATIM_URL = "https://nominatim.openstreetmap.org/search"
@@ -112,8 +117,8 @@ def parse_allowed_cities_file(filepath):
             config["state"] = line.split(":", 1)[1].strip()
         elif line.startswith("# timezone:"):
             config["timezone"] = line.split(":", 1)[1].strip()
-        elif line.startswith("# zips:"):
-            config["zips"] = line.split(":", 1)[1].strip()
+        elif (directive_zips := parse_zips_directive(line)) is not None:
+            config["zips"] = ", ".join(sorted(directive_zips))
         elif not line.startswith("#"):
             # Strip trailing comment from city name
             city = line.split("#")[0].strip()
