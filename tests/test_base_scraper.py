@@ -2,7 +2,7 @@
 """Tests for the base scraper's optional source_url header (#124)."""
 
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -66,3 +66,48 @@ class TestGeo:
     def test_geo_unset_omits_geostamp(self):
         ics = _Scraper().create_calendar([_sample_event()]).to_ical().decode()
         assert "GEO:" not in ics
+
+
+class _FixedEventsScraper(_Scraper):
+    """A scraper whose fetch_events() returns a fixed set, for run() tests."""
+
+    def __init__(self, events):
+        super().__init__()
+        self._events = events
+
+    def fetch_events(self):
+        return self._events
+
+
+class TestRunHorizonFilter:
+    """run() drops events beyond the Horizon, reading dates and datetimes alike."""
+
+    def _run_ics(self, tmp_path, events) -> str:
+        scraper = _FixedEventsScraper(events)
+        scraper.months_ahead = 1  # a 31-day Horizon
+        out = tmp_path / "cal.ics"
+        scraper.run(str(out))
+        return out.read_text()
+
+    def test_drops_an_event_beyond_the_horizon(self, tmp_path):
+        now = datetime.now(TZ)
+        events = [
+            {"title": "Within", "dtstart": now + timedelta(days=10)},
+            {"title": "Beyond", "dtstart": now + timedelta(days=40)},
+        ]
+        ics = self._run_ics(tmp_path, events)
+
+        assert "Within" in ics
+        assert "Beyond" not in ics
+
+    def test_keeps_a_date_event_inside_the_horizon(self, tmp_path):
+        events = [{"title": "Date Event", "dtstart": datetime.now(TZ).date() + timedelta(days=5)}]
+        ics = self._run_ics(tmp_path, events)
+
+        assert "Date Event" in ics
+
+    def test_drops_an_event_without_a_start(self, tmp_path):
+        events = [{"title": "No Start"}]
+        ics = self._run_ics(tmp_path, events)
+
+        assert "No Start" not in ics

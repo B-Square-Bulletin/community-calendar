@@ -44,6 +44,7 @@ from zoneinfo import ZoneInfo
 import requests
 from lib.base import BaseScraper
 from lib.city_filter import load_allowed_cities, location_matches_allowed_cities
+from lib.horizon import within
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -392,7 +393,11 @@ class VisitBloomingtonScraper(BaseScraper):
 
         if (doc.get("recurrence") or "").strip():
             occurrence_date = _local_date(doc.get("date"))
-            if occurrence_date is None or occurrence_date < today or occurrence_date > horizon:
+            if (
+                occurrence_date is None
+                or occurrence_date < today
+                or not within(occurrence_date, horizon)
+            ):
                 return None
             return self._single_day_event(doc, occurrence_date)
 
@@ -400,7 +405,7 @@ class VisitBloomingtonScraper(BaseScraper):
         if start_date is None:
             return None
         end_date = _local_date(doc.get("endDate")) or start_date
-        if end_date < today or start_date > horizon:
+        if end_date < today or not within(start_date, horizon):
             return None
         if start_date == end_date:
             return self._single_day_event(doc, start_date)
@@ -450,7 +455,7 @@ class VisitBloomingtonScraper(BaseScraper):
 
         now = _now()
         today = now.date()
-        horizon = self.horizon_cutoff(now).date()
+        horizon = self.horizon_cutoff(now)
         allowed_cities, excluded_cities = load_allowed_cities(str(CITY_DIR))
 
         events = []
