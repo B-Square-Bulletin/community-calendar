@@ -36,7 +36,3 @@
 #   python scripts/add_scraper.py example bloomington "Source Name" --test
 #
 # See CONTRIBUTING.md for details.
-
-# Visit Bloomington
-# cmd: python scrapers/visit_bloomington.py --output cities/bloomington/visit_bloomington.ics
-cities/bloomington/visit_bloomington.ics
