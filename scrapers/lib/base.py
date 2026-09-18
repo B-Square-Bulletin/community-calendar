@@ -5,13 +5,14 @@ import logging
 import os
 import subprocess
 from abc import ABC, abstractmethod
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
 
 from icalendar import Calendar, Event
 
+from .horizon import horizon_end, within
 from .utils import generate_uid
 
 
@@ -31,16 +32,29 @@ class BaseScraper(ABC):
     - url: str (optional)
     - location: str (optional)
     - description: str (optional)
+    - geo: tuple[float, float] (optional, (lat, lng) emitted as ICS GEO)
+    - uid: str (optional, defaults to a generated UID)
+    - image_url: str (optional, emitted as an ICS ATTACH)
     """
 
     name: str = "Unknown Source"
     domain: str = "example.com"
     timezone: str = "America/Los_Angeles"
     default_url: str | None = None
+    source_url: str | None = None
 
     def __init__(self):
         self.logger = logging.getLogger(self.__class__.__name__)
         self.months_ahead = int(os.environ.get("SCRAPE_MONTHS", 6))
+
+    def horizon_cutoff(self, now: datetime | None = None) -> datetime:
+        """This scraper's Horizon boundary; see `lib/horizon.py`.
+
+        Pass `now` to key the boundary to the source's own clock. Not every
+        scraper calls it -- several still inline the offset -- so treat it as
+        the shared helper, not a repo-wide guarantee.
+        """
+        return horizon_end(now, self.months_ahead)
 
     @classmethod
     def setup_logging(cls, level: int = logging.INFO):
@@ -118,11 +132,17 @@ class BaseScraper(ABC):
         if data.get("location"):
             event.add("location", data["location"])
 
+        if data.get("geo"):
+            lat, lng = data["geo"]
+            event.add("geo", (lat, lng))
+
         event.add("description", data.get("description", ""))
 
         uid = data.get("uid") or generate_uid(title, dtstart, self.domain)
         event.add("uid", uid)
         event.add("x-source", self.name)
+        if self.source_url:
+            event.add("x-source-url", self.source_url)
 
         if data.get("image_url"):
             event.add("attach", data["image_url"], parameters={"fmttype": "image/jpeg"})
@@ -161,21 +181,10 @@ class BaseScraper(ABC):
         self.logger.info(f"Scraping {self.name}")
 
         events = self.fetch_events()
-        cutoff = datetime.now().astimezone() + timedelta(days=self.months_ahead * 31)
+        cutoff = self.horizon_cutoff()
         before = len(events)
 
-        # Handle both datetime and date objects
-        def is_before_cutoff(e):
-            dt = e.get("dtstart")
-            if not dt:
-                return False
-            if hasattr(dt, "tzinfo") and dt.tzinfo is None:
-                dt = dt.replace(tzinfo=cutoff.tzinfo)
-            elif not hasattr(dt, "hour"):  # date object, not datetime
-                dt = datetime.combine(dt, datetime.min.time()).replace(tzinfo=cutoff.tzinfo)
-            return dt <= cutoff
-
-        events = [e for e in events if is_before_cutoff(e)]
+        events = [e for e in events if within(e.get("dtstart"), cutoff)]
         if len(events) < before:
             self.logger.info(
                 f"Filtered {before - len(events)} events beyond {self.months_ahead} months out"

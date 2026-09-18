@@ -317,14 +317,20 @@ DO NOT manually edit `feeds.txt` or the legacy `SOURCE_NAMES`/`SOURCE_URLS` dict
 
 ### Adding a New Scraper (Workflow)
 
+Scraper execution is DB-first: the build runs whatever active scraper rows
+exist in the `feeds` table, so the workflow carries no per-source lines.
+
 1. Write scraper in `scrapers/` (inherit from `BaseScraper` or use helpers)
 2. Run `python scripts/add_scraper.py {scraper} {city} "Source Name"` — this:
-   - Adds workflow invocation line (GitHub Actions YAML)
-   - Adds metadata to `pending_feeds.txt` (staging for `feeds` table)
+   - Tests the exact command being registered (aborts if the test fails)
+   - Appends the entry to `pending_feeds.txt`, staging the `feeds` table row
+     (validated at insert time; the DB-first runner executes it that build)
 3. Update `cities/{city}/SOURCES_CHECKLIST.md`
 4. Commit and push
 
-**Do NOT** skip `add_scraper.py` — manual edits miss one half of the integration.
+**Do NOT** skip `add_scraper.py` — it tests the command and writes the
+registration metadata the DB-first runner consumes; hand-writing the entry
+skips that test. See `CONTRIBUTING.md` for the full contract.
 
 ### Adding a New City
 

@@ -1,0 +1,640 @@
+{
+  "source": "https://www.visitbloomington.com/includes/rest_v2/plugins_events_events_by_date/find/",
+  "note": "Captured 2026-09-16 from the Visit Bloomington Simpleview events REST API (filter:{}, limit:50). recids 59452/58224/59353/59822 are recurType 0 (single events); 58704 is a recurring-series occurrence (recurType 5), which the scraper expands as one occurrence.",
+  "docs": [
+    {
+      "_id": "6aa6d357d1b87fd53872b19f",
+      "recid": "59452",
+      "date": "2026-09-17T03:59:59.000Z",
+      "_media": [
+        {
+          "mediafile": "paul-c-gutjahr-sep-16-2026-website_09E5F259-9341-70AD-D4AA5AD2480EB7C1.png",
+          "mediaurl": "https://assets.simpleviewinc.com/simpleview/image/upload/crm/bloomington/paul-c-gutjahr-sep-16-2026-website_09E5F259-9341-70AD-D4AA5AD2480EB7C1_0a02409e-c73c-3643-02394485a8694a8e.png",
+          "sortorder": 1
+        }
+      ],
+      "accountId": 18536,
+      "active": true,
+      "address1": "849 S. Auto Mall Road",
+      "admission": "Free",
+      "calendarid": "1",
+      "categories": [
+        {
+          "catName": "Lecture, Talk, or Literary Event",
+          "catId": "27"
+        }
+      ],
+      "city": "Bloomington",
+      "cms_title": "Author event with Paul C. Gutjahr at Morgenstern Books (59452)",
+      "cms_title_sort": "author event with paul c. gutjahr at morgenstern books (59452)",
+      "dates": {
+        "eventDate": "2026-09-17T03:59:59.000Z"
+      },
+      "day": 0,
+      "dayMask": 0,
+      "description": "<p>Join us for an evening with author and Ruth N. Halls Professor of English at IU, Paul C. Gutjahr, who will be celebrating the release of his new book, Faith in Space: American Religious Belief in Extraterrestrial Life.<br>ABOUT THE BOOK:<br>A cultural history of the American faith in alien life, from the Puritans to Heaven\u2019s Gate<br><br>Over the past three centuries, belief in extraterrestrial life has had a profound influence on American religion. Faith in Space examines the key thinkers and religious leaders throughout American history who built faith communities around the notion that we are not alone in the universe, and that the path to spiritual truth leads heavenward to the stars.<br><br>Paul Gutjahr reveals the pivotal role Protestant Christianity played in the formation of extraterrestrial belief in many of these traditions, sharing new perspectives on prominent Americans such as Cotton Mather, Benjamin Franklin, John Adams, and Thomas Paine. He goes on to examine familiar religious movements such as Spiritualism, Mormonism, Seventh-day Adventism, Scientology, the Nation of Islam, and Heaven\u2019s Gate as well as lesser-known belief systems such as Swedenborgianism, Theosophy, the Nuwaubian Nation of Moors, and Ashtar Command. Gutjahr shows how prophetic figures in these traditions created rich cosmological tapestries for their followers, bridging the terrestrial and the extraterrestrial with their spiritual insights.<br><br>A panoramic work of scholarship, Faith in Space traces how these traditions have offered generations of Americans cosmically oriented religious thinking through the belief in alien life, propounding a view that humanity\u2019s salvation is inextricably tied to the actions and interventions of intelligent beings from other worlds.<br>https://www.eventbrite.com/e/paul-c-gutjahr-on-faith-in-space-tickets-1991994338690</p>",
+      "endDate": "2026-09-17T03:59:59.000Z",
+      "endTime": "19:00:00",
+      "endType": 0,
+      "eventTypeId": 9,
+      "expired": false,
+      "featured": false,
+      "filter_tags": [
+        "site_primary"
+      ],
+      "hostname": "Morgenstern Books",
+      "interval": 0,
+      "linkUrl": "http://www.morgensternbooks.com",
+      "listing_id": 2135,
+      "loc": {
+        "type": "Point",
+        "coordinates": [
+          -86.49563789999999,
+          39.15644580000001
+        ]
+      },
+      "location": "Morgenstern Books",
+      "media_raw": [
+        {
+          "mediaurl": "https://assets.simpleviewinc.com/simpleview/image/upload/crm/bloomington/paul-c-gutjahr-sep-16-2026-website_09E5F259-9341-70AD-D4AA5AD2480EB7C1_0a02409e-c73c-3643-02394485a8694a8e.png",
+          "sortorder": 1,
+          "mediatype": "Image"
+        }
+      ],
+      "month": 0,
+      "never_expire": false,
+      "nextDate": "2026-09-17T03:59:59.000Z",
+      "occurrences": 0,
+      "past": false,
+      "primary_site": "primary",
+      "primarycatid": "27",
+      "rank": 2,
+      "recId": "59452",
+      "recurType": 0,
+      "sites": [
+        "primary"
+      ],
+      "startDate": "2026-09-16T04:00:00.000Z",
+      "startTime": "18:00:00",
+      "state": "IN",
+      "times": "From: 06:00 PM to 07:00 PM",
+      "title": "Author event with Paul C. Gutjahr at Morgenstern Books",
+      "title_sort": "author event with paul c. gutjahr at morgenstern books",
+      "typeName": "Standard Events",
+      "udfs": [
+        {
+          "listid": 985,
+          "name": "Region",
+          "value": "Eastside",
+          "digits": 0,
+          "fieldid": 340,
+          "typeid": 7,
+          "type": "Dropdown",
+          "value_raw": {
+            "listid": 985,
+            "value": "Eastside"
+          },
+          "value_string": "Eastside"
+        },
+        {
+          "name": "Wheelchair Accessibility",
+          "value": true,
+          "digits": 0,
+          "fieldid": 348,
+          "typeid": 11,
+          "type": "Yes/No",
+          "value_raw": true,
+          "value_string": "Yes"
+        }
+      ],
+      "udfs_object": {
+        "340": {
+          "listid": 985,
+          "name": "Region",
+          "value": "Eastside",
+          "digits": 0,
+          "fieldid": 340,
+          "typeid": 7,
+          "type": "Dropdown",
+          "value_raw": {
+            "listid": 985,
+            "value": "Eastside"
+          },
+          "value_string": "Eastside"
+        },
+        "348": {
+          "name": "Wheelchair Accessibility",
+          "value": true,
+          "digits": 0,
+          "fieldid": 348,
+          "typeid": 11,
+          "type": "Yes/No",
+          "value_raw": true,
+          "value_string": "Yes"
+        }
+      },
+      "updated": "2026-09-13T16:46:13.801Z",
+      "week": 0,
+      "weekday": 0,
+      "zip": "47401"
+    },
+    {
+      "_id": "6aa6ef67d1b87fd538775b7a",
+      "recid": "58224",
+      "date": "2026-09-20T03:59:59.000Z",
+      "_media": [
+        {
+          "mediafile": "IMG_4127_096C874E-D9F5-4956-3D091EFE55283AE6.JPG",
+          "mediaurl": "https://assets.simpleviewinc.com/simpleview/image/upload/crm/bloomington/IMG_4127_096C874E-D9F5-4956-3D091EFE55283AE6_096db823-9c8e-ed50-49e00eb7eb25bc70.jpg",
+          "sortorder": 1
+        }
+      ],
+      "accountId": 210,
+      "active": true,
+      "address1": "1001 E. 17th Street",
+      "admission": "Ticket prices vary, see website for details",
+      "calendarid": "1",
+      "categories": [
+        {
+          "catName": "Sporting Event",
+          "catId": "24"
+        }
+      ],
+      "city": "Bloomington",
+      "cms_title": "IU Football vs Western Kentucky (58224)",
+      "cms_title_sort": "iu football vs western kentucky (58224)",
+      "dates": {
+        "eventDate": "2026-09-20T03:59:59.000Z"
+      },
+      "day": 0,
+      "dayMask": 0,
+      "description": "<p>For up-to-date information visit the IU Athletics website.</p>\r\n<p>Go Hoosiers!</p>",
+      "email": "iuticket@indiana.edu",
+      "endDate": "2026-09-20T03:59:59.000Z",
+      "endType": 0,
+      "eventTypeId": 9,
+      "expired": false,
+      "featured": true,
+      "filter_tags": [
+        "site_primary"
+      ],
+      "hostname": "Indiana University Athletics",
+      "interval": 0,
+      "linkUrl": "https://iuhoosiers.com/sports/football/schedule",
+      "listing_id": 218,
+      "loc": {
+        "type": "Point",
+        "coordinates": [
+          -86.5221551,
+          39.1807364
+        ]
+      },
+      "location": "Memorial Stadium Football Complex",
+      "media_raw": [
+        {
+          "mediaurl": "https://assets.simpleviewinc.com/simpleview/image/upload/crm/bloomington/IMG_4127_096C874E-D9F5-4956-3D091EFE55283AE6_096db823-9c8e-ed50-49e00eb7eb25bc70.jpg",
+          "sortorder": 1,
+          "mediatype": "Image"
+        }
+      ],
+      "month": 0,
+      "never_expire": false,
+      "nextDate": "2026-09-20T03:59:59.000Z",
+      "occurrences": 0,
+      "past": false,
+      "phone": "1-866-487-7678",
+      "primary_site": "primary",
+      "primarycatid": "24",
+      "rank": 2,
+      "recId": "58224",
+      "recurType": 0,
+      "sites": [
+        "primary"
+      ],
+      "startDate": "2026-09-19T04:00:00.000Z",
+      "state": "IN",
+      "times": "4:00 PM",
+      "title": "IU Football vs Western Kentucky",
+      "title_sort": "iu football vs western kentucky",
+      "typeName": "Standard Events",
+      "udfs": [
+        {
+          "listid": 982,
+          "name": "Region",
+          "value": "Campus",
+          "digits": 0,
+          "fieldid": 340,
+          "typeid": 7,
+          "type": "Dropdown",
+          "value_raw": {
+            "listid": 982,
+            "value": "Campus"
+          },
+          "value_string": "Campus"
+        }
+      ],
+      "udfs_object": {
+        "340": {
+          "listid": 982,
+          "name": "Region",
+          "value": "Campus",
+          "digits": 0,
+          "fieldid": 340,
+          "typeid": 7,
+          "type": "Dropdown",
+          "value_raw": {
+            "listid": 982,
+            "value": "Campus"
+          },
+          "value_string": "Campus"
+        }
+      },
+      "updated": "2026-09-13T18:45:57.816Z",
+      "week": 0,
+      "weekday": 0,
+      "zip": "47408-1590"
+    },
+    {
+      "_id": "6aa751fdd1b87fd538876274",
+      "recid": "59353",
+      "date": "2026-09-19T03:59:59.000Z",
+      "_media": [
+        {
+          "mediafile": "Resurrection-1920x1080_D404968E-900B-96FD-C749802647A12E7D.png",
+          "mediaurl": "https://assets.simpleviewinc.com/simpleview/image/upload/crm/bloomington/Resurrection-1920x1080_D404968E-900B-96FD-C749802647A12E7D_d40fc617-c30b-eba1-b7feb49277bad596.png",
+          "sortorder": 1
+        }
+      ],
+      "accountId": 17480,
+      "active": true,
+      "address1": "1213 E. 7th Street",
+      "admission": "$6 students/$9 general admission (+$1.00 fee for online tickets)",
+      "calendarid": "1",
+      "categories": [
+        {
+          "catName": "Film or Screening Event",
+          "catId": "29"
+        }
+      ],
+      "city": "Bloomington",
+      "cms_title": "Resurrection/Kuang ye shi dai | Arthouse Now (59353)",
+      "cms_title_sort": "resurrection/kuang ye shi dai | arthouse now (59353)",
+      "dates": {
+        "eventDate": "2026-09-19T03:59:59.000Z"
+      },
+      "day": 0,
+      "dayMask": 0,
+      "description": "<p>In a future where humanity has surrendered its ability to dream in exchange for immortality, an outcast finds illusion, nightmarish visions, and beauty in an intoxicating world of his own making. A work of staggering imagination unfolding in five chapters that encompass everything from silent-era expressionism to film noir to a delirious vampire love story shot in one of Bi Gan\u2019s signature long takes, Resurrection is visionary Chinese director Bi\u2019s (Long Day's Journey Into Night) work of breathtaking imagination wherein cinema is the ultimate portal to the unconscious mind. [160 min; drama, sci-fi; Chinese and Mandarin with English subtitles]</p>",
+      "email": "iucinema@iu.edu",
+      "endDate": "2026-09-19T03:59:59.000Z",
+      "endTime": "22:00:00",
+      "endType": 0,
+      "eventTypeId": 9,
+      "expired": false,
+      "featured": false,
+      "filter_tags": [
+        "site_primary"
+      ],
+      "host_id": 825,
+      "interval": 0,
+      "linkUrl": "https://cinema.indiana.edu/upcoming-films/screening/2026-fall-friday-september-18-700pm",
+      "listing_id": 825,
+      "location": "IU Cinema",
+      "media_raw": [
+        {
+          "mediaurl": "https://assets.simpleviewinc.com/simpleview/image/upload/crm/bloomington/Resurrection-1920x1080_D404968E-900B-96FD-C749802647A12E7D_d40fc617-c30b-eba1-b7feb49277bad596.png",
+          "sortorder": 1,
+          "mediatype": "Image"
+        }
+      ],
+      "month": 0,
+      "never_expire": false,
+      "nextDate": "2026-09-19T03:59:59.000Z",
+      "occurrences": 0,
+      "past": false,
+      "primary_site": "primary",
+      "primarycatid": "29",
+      "rank": 2,
+      "recId": "59353",
+      "recurType": 0,
+      "sites": [
+        "primary"
+      ],
+      "startDate": "2026-09-18T04:00:00.000Z",
+      "startTime": "19:00:00",
+      "state": "IN",
+      "times": "From: 07:00 PM to 10:00 PM",
+      "title": "Resurrection/Kuang ye shi dai | Arthouse Now",
+      "title_sort": "resurrection/kuang ye shi dai | arthouse now",
+      "typeName": "Standard Events",
+      "udfs": [
+        {
+          "listid": 982,
+          "name": "Region",
+          "value": "Campus",
+          "digits": 0,
+          "fieldid": 340,
+          "typeid": 7,
+          "type": "Dropdown",
+          "value_raw": {
+            "listid": 982,
+            "value": "Campus"
+          },
+          "value_string": "Campus"
+        },
+        {
+          "name": "Wheelchair Accessibility",
+          "value": true,
+          "digits": 0,
+          "fieldid": 348,
+          "typeid": 11,
+          "type": "Yes/No",
+          "value_raw": true,
+          "value_string": "Yes"
+        }
+      ],
+      "udfs_object": {
+        "340": {
+          "listid": 982,
+          "name": "Region",
+          "value": "Campus",
+          "digits": 0,
+          "fieldid": 340,
+          "typeid": 7,
+          "type": "Dropdown",
+          "value_raw": {
+            "listid": 982,
+            "value": "Campus"
+          },
+          "value_string": "Campus"
+        },
+        "348": {
+          "name": "Wheelchair Accessibility",
+          "value": true,
+          "digits": 0,
+          "fieldid": 348,
+          "typeid": 11,
+          "type": "Yes/No",
+          "value_raw": true,
+          "value_string": "Yes"
+        }
+      },
+      "updated": "2026-09-14T01:46:36.064Z",
+      "week": 0,
+      "weekday": 0,
+      "zip": "47405"
+    },
+    {
+      "_id": "6aa94c5acd72a125ab5e51e3",
+      "recid": "59822",
+      "date": "2026-09-17T03:59:59.000Z",
+      "_media": [
+        {
+          "mediafile": "VB_EventsCal_Venues_Bluebird_1_8582AEBF-5056-A36A-0698BD65D309F32C.jpg",
+          "mediaurl": "https://assets.simpleviewinc.com/simpleview/image/upload/crm/bloomington/VB_EventsCal_Venues_Bluebird_1_8582AEBF-5056-A36A-0698BD65D309F32C_85cd31be-5056-a36a-06f42957b57f3705.jpg",
+          "sortorder": 1
+        }
+      ],
+      "accountId": 13714,
+      "active": true,
+      "address1": "216 N. Walnut Street",
+      "admission": " $14.51",
+      "calendarid": "1",
+      "categories": [
+        {
+          "catName": "Live Music Event",
+          "catId": "28"
+        }
+      ],
+      "city": "Bloomington",
+      "cms_title": "Free Riders w/Moxy (59822)",
+      "cms_title_sort": "free riders w/moxy (59822)",
+      "dates": {
+        "eventDate": "2026-09-17T03:59:59.000Z"
+      },
+      "day": 0,
+      "dayMask": 0,
+      "description": "<p>Doors open at 9 show at 10, 21+ show.</p>",
+      "endDate": "2026-09-17T03:59:59.000Z",
+      "endType": 0,
+      "eventTypeId": 9,
+      "expired": false,
+      "featured": false,
+      "filter_tags": [
+        "site_primary"
+      ],
+      "interval": 0,
+      "linkUrl": "https://thebluebird.ws/tickets",
+      "listing_id": 1463,
+      "loc": {
+        "type": "Point",
+        "coordinates": [
+          -86.5333085,
+          39.1681261
+        ]
+      },
+      "location": "The Bluebird",
+      "media_raw": [
+        {
+          "mediaurl": "https://assets.simpleviewinc.com/simpleview/image/upload/crm/bloomington/VB_EventsCal_Venues_Bluebird_1_8582AEBF-5056-A36A-0698BD65D309F32C_85cd31be-5056-a36a-06f42957b57f3705.jpg",
+          "sortorder": 1,
+          "mediatype": "Image"
+        }
+      ],
+      "month": 0,
+      "never_expire": false,
+      "nextDate": "2026-09-17T03:59:59.000Z",
+      "occurrences": 0,
+      "past": false,
+      "phone": "(812) 336-3984",
+      "primary_site": "primary",
+      "primarycatid": "28",
+      "rank": 2,
+      "recId": "59822",
+      "recurType": 0,
+      "sites": [
+        "primary"
+      ],
+      "startDate": "2026-09-16T04:00:00.000Z",
+      "startTime": "22:00:00",
+      "state": "IN",
+      "times": "Starting: 10:00 PM",
+      "title": "Free Riders w/Moxy",
+      "title_sort": "free riders w/moxy",
+      "typeName": "Standard Events",
+      "udfs": [
+        {
+          "listid": 984,
+          "name": "Region",
+          "value": "Downtown",
+          "digits": 0,
+          "fieldid": 340,
+          "typeid": 7,
+          "type": "Dropdown",
+          "value_raw": {
+            "listid": 984,
+            "value": "Downtown"
+          },
+          "value_string": "Downtown"
+        }
+      ],
+      "udfs_object": {
+        "340": {
+          "listid": 984,
+          "name": "Region",
+          "value": "Downtown",
+          "digits": 0,
+          "fieldid": 340,
+          "typeid": 7,
+          "type": "Dropdown",
+          "value_raw": {
+            "listid": 984,
+            "value": "Downtown"
+          },
+          "value_string": "Downtown"
+        }
+      },
+      "updated": "2026-09-15T13:47:04.861Z",
+      "week": 0,
+      "weekday": 0,
+      "zip": "47404"
+    },
+    {
+      "_id": "6aa70b77d1b87fd5387c1191",
+      "date": "2026-09-17T03:59:59.000Z",
+      "recid": "58704",
+      "_media": [
+        {
+          "mediafile": "shop-night_EF99F751-0E4F-FD55-D0297E2D55A8E0E6.jpg",
+          "mediaurl": "https://assets.simpleviewinc.com/simpleview/image/upload/crm/bloomington/shop-night_EF99F751-0E4F-FD55-D0297E2D55A8E0E6_efd11197-d1d6-2bbe-f87330b2d542b9f3.jpg",
+          "sortorder": 1
+        }
+      ],
+      "accountId": 17838,
+      "active": true,
+      "admission": "Free",
+      "calendarid": "1",
+      "categories": [
+        {
+          "catName": "Festival or Special Event",
+          "catId": "25"
+        }
+      ],
+      "city": "Bloomington",
+      "cms_title": "Downtown Shop Night (58704)",
+      "cms_title_sort": "downtown shop night (58704)",
+      "contact": "Gather",
+      "dates": {
+        "eventDate": "2026-09-17T03:59:59.000Z"
+      },
+      "day": 0,
+      "dayMask": 0,
+      "description": "<p>Every third Wednesday from April through October, our downtown shops are staying open a little later and making the night feel like something more. Expect small surprises, special offerings, and a reason to wander from one door to the next.<br>This is your invitation to slow down, shop local, and be part of what\u2019s happening right here. Pop into your favorite spots, discover somewhere new, and run into people you know (or want to).<br>It\u2019s not just about shopping. It\u2019s about showing up for your community, keeping our downtown vibrant, and making a midweek night feel like something worth stepping out for.<br>Third Wednesdays. Downtown. See you out there.</p>",
+      "email": "gathershoppe@gmail.com",
+      "endDate": "2026-10-22T03:59:59.000Z",
+      "endTime": "19:00:00",
+      "endType": 3,
+      "eventTypeId": 9,
+      "expired": false,
+      "featured": false,
+      "filter_tags": [
+        "site_primary"
+      ],
+      "host_id": 1580,
+      "interval": 1,
+      "loc": {
+        "type": "Point",
+        "coordinates": [
+          -86.5385549,
+          39.169574
+        ]
+      },
+      "location": "Downtown Bloomington Shops",
+      "media_raw": [
+        {
+          "mediaurl": "https://assets.simpleviewinc.com/simpleview/image/upload/crm/bloomington/shop-night_EF99F751-0E4F-FD55-D0297E2D55A8E0E6_efd11197-d1d6-2bbe-f87330b2d542b9f3.jpg",
+          "sortorder": 1,
+          "mediatype": "Image"
+        }
+      ],
+      "month": 0,
+      "never_expire": false,
+      "nextDate": "2026-09-17T03:59:59.000Z",
+      "occurrences": 0,
+      "past": false,
+      "phone": "(812) 287-8046",
+      "primary_site": "primary",
+      "primarycatid": "25",
+      "rank": 2,
+      "recId": "58704",
+      "recurType": 5,
+      "recurrence": "Recurring monthly on the 3rd Wednesday",
+      "sites": [
+        "primary"
+      ],
+      "startDate": "2026-04-15T04:00:00.000Z",
+      "startTime": "16:00:00",
+      "state": "IN",
+      "times": "From: 04:00 PM to 07:00 PM",
+      "title": "Downtown Shop Night",
+      "title_sort": "downtown shop night",
+      "typeName": "Standard Events",
+      "udfs": [
+        {
+          "listid": 984,
+          "name": "Region",
+          "value": "Downtown",
+          "digits": 0,
+          "fieldid": 340,
+          "typeid": 7,
+          "type": "Dropdown",
+          "value_raw": {
+            "listid": 984,
+            "value": "Downtown"
+          },
+          "value_string": "Downtown"
+        },
+        {
+          "name": "Wheelchair Accessibility",
+          "value": true,
+          "digits": 0,
+          "fieldid": 348,
+          "typeid": 11,
+          "type": "Yes/No",
+          "value_raw": true,
+          "value_string": "Yes"
+        }
+      ],
+      "udfs_object": {
+        "340": {
+          "listid": 984,
+          "name": "Region",
+          "value": "Downtown",
+          "digits": 0,
+          "fieldid": 340,
+          "typeid": 7,
+          "type": "Dropdown",
+          "value_raw": {
+            "listid": 984,
+            "value": "Downtown"
+          },
+          "value_string": "Downtown"
+        },
+        "348": {
+          "name": "Wheelchair Accessibility",
+          "value": true,
+          "digits": 0,
+          "fieldid": 348,
+          "typeid": 11,
+          "type": "Yes/No",
+          "value_raw": true,
+          "value_string": "Yes"
+        }
+      },
+      "updated": "2026-09-13T20:45:41.722Z",
+      "week": 3,
+      "weekday": 4,
+      "zip": "47404"
+    }
+  ]
+}

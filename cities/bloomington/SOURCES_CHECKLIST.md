@@ -2,7 +2,7 @@
 
 Prioritized list of potential event sources for the Bloomington, IN community calendar.
 
-## Currently Implemented (76 sources)
+## Currently Implemented (77 sources)
 
 ### University — IU LiveWhale (17 feeds)
 
@@ -124,6 +124,14 @@ Docs: https://documentation.events.iu.edu/feed-and-linked-calendars/ical-feed.ht
 | Upland Brewing | Scraper | 0 current | `tribe_rest.py` — valid REST calendar, dormant/seasonal as of 2026-08 |
 | People's Market | Scraper | ~10 | Squarespace — `peoples_market.py` |
 
+### Tourism & Visitor Events (1 source)
+
+| Source | Type | Events | Notes |
+|--------|------|--------|-------|
+| Visit Bloomington | Scraper | ~484 | `visit_bloomington.py` — Simpleview REST API (`/includes/rest_v2/plugins_events_events_by_date/find/`). Primary source, deliberately **not** an aggregator (ADR 0011): it outranks the Limestone Post echo in cross-source dedup |
+
+Visit Bloomington is pulled in full over the REST API (token + `skip` paging, Chrome UA, crawl-delay spacing). The sitemap fallback is a **contingency only**, triggered when either the API returns non-200 on **three consecutive nightly runs after** the in-run token re-fetch and retry, or the documented-safe request shape draws a WAF 403. Until then, the REST API is the source.
+
 ### Aggregators (10 sources)
 
 These curate or aggregate events from multiple venues:
@@ -171,7 +179,6 @@ These curate or aggregate events from multiple venues:
 | Source | Platform | Reason |
 |--------|----------|--------|
 | Amplify Bloomington | WordPress + Cloudflare | Cloudflare blocks all endpoints (ICS, REST API, RSS); request whitelisting of `?ical=1` |
-| Visit Bloomington | Simpleview CMS | No public API |
 | Winter Farmers' Market | Wix | No ICS export |
 | Gallery Walk Bloomington | Wix | No feed; recurring first Friday 5-8pm |
 | BARA (runners) | Wix | No ICS export |
@@ -416,6 +423,17 @@ Annual events with reliable dates but no feeds — a once-a-season curator sweep
 ---
 
 ## Discovery Run Log
+
+### 2026-09-16: Visit Bloomington registered as a primary source
+- Registered via the standard DB-first path — `add_scraper.py visit_bloomington bloomington "Visit Bloomington"` wrote the `cities/bloomington/pending_feeds.txt` entry (`# Visit Bloomington`, `# cmd: python scrapers/visit_bloomington.py --output cities/bloomington/visit_bloomington.ics`). No workflow edit: the nightly pending-feeds processor inserts the active DB row and the DB-first runner executes it.
+- Verified live at registration: `add_scraper.py --test` produced 484 events (SCRAPE_MONTHS=2).
+- Deliberately left out of `source_priority.json`, so it ranks as a primary source and wins cross-source dedup over the Limestone Post CitySpark echo; shared events merge to `Visit Bloomington, Limestone Post` (ADR 0011).
+- Sitemap fallback recorded as contingency-only (see Tourism & Visitor Events above).
+
+### 2026-09-15: Visit Bloomington surface verified — dead end reversed
+- **Correction:** the earlier "Visit Bloomington — Simpleview CMS — No public API" entry (and the generic "Simpleview is a dead end" claim in `docs/search-pattern-tests.md`/`docs/platforms.md`) was wrong. The `/event/rss/` feed caps at 30 items and detail JSON-LD is date-only, but the same-origin Simpleview **REST API** (`/includes/rest_v2/plugins_events_events_by_date/find/` + `get_simple_token/`) returns clock times, full descriptions, geo, recurrence and `skip` paging over plain HTTP — 34 requests → 1,666 occurrences across 230 recids, empty cookie jar, no browser.
+- Also fixed the stale assumption in `scrapers/simpleview.py` reuse: its RSS + JSON-LD path emits all-day events and drops recurring series, so Visit Bloomington needs a dedicated `scrapers/visit_bloomington.py`.
+- Nothing built here — the surface decision, coverage bar, API mechanism, registration and dedup/geo contracts are locked in the spec issue #124 (see map #117).
 
 ### 2026-09-07: Master Gardeners URL fix (issue #13)
 - `Monroe County Master Gardeners` scraper 404s: DB `feeds` row id=14 still runs `squarespace.py --url "https://www.mcmga.net/events"` (404). Same stale-URL pattern as Sassafras (#8) — the pre-DB-first URL fix never reached the seeded DB row.
