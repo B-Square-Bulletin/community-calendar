@@ -1,11 +1,11 @@
 {
   "city": "bloomington",
-  "generated": "2026-09-18T03:23:51.769226+00:00",
+  "generated": "2026-09-18T03:31:06.743590+00:00",
   "build": {
-    "generated": "2026-09-18T03:23:51.769226+00:00",
+    "generated": "2026-09-18T03:31:06.743590+00:00",
     "total_events": 8351,
-    "prev_total_events": 7943,
-    "delta": 408
+    "prev_total_events": 8351,
+    "delta": 0
   },
   "problems": [
     {
@@ -16048,9 +16048,9 @@
         "location": "Allison Jukebox Community Center, 351 S Washington St, Blooming\rton, IN 47401, USA\r",
         "count": 3,
         "titles": [
+          "Sharpening and Maintaining Garden Tools",
           "Sensory-Friendly Photos with Santa",
-          "American Red Cross Adult and Pediatric First Aid/CPR/AED Certifica",
-          "Sharpening and Maintaining Garden Tools"
+          "American Red Cross Adult and Pediatric First Aid/CPR/AED Certifica"
         ]
       },
       {
@@ -16101,8 +16101,8 @@
         "location": "Leonard Springs Nature Park, 4685 S Leonard Springs Rd, Bloomin\rgton, IN 47403, USA\r",
         "count": 2,
         "titles": [
-          "Rooted in Nature",
-          "Wildcraft Tea Time"
+          "Wildcraft Tea Time",
+          "Rooted in Nature"
         ]
       },
       {
@@ -16234,19 +16234,19 @@
       {
         "source": "Gcal D1087E97D4Ace1C1Ca2Dd6336D417Bea870Ddac277Be6D1711Cbc0235Aa85228",
         "source_id": "gcal_d1087e97d4ace1c1ca2dd6336d417bea870ddac277be6d1711cbc0235aa85228",
-        "location": "Tibetan Mongolian Buddhist Cultural Center, 3655 S Snoddy Rd, B\rloomington, IN 47401, USA\r",
+        "location": "People & Animal Learning Services (PALS), 7644 W Elwren Rd, Blo\romington, IN 47403, USA\r",
         "count": 1,
         "titles": [
-          "Reiki 1 + 2 Certification Training \u2013 Awaken Your Healing Gifts!"
+          "PALS Homecoming Open House"
         ]
       },
       {
         "source": "Gcal D1087E97D4Ace1C1Ca2Dd6336D417Bea870Ddac277Be6D1711Cbc0235Aa85228",
         "source_id": "gcal_d1087e97d4ace1c1ca2dd6336d417bea870ddac277be6d1711cbc0235aa85228",
-        "location": "People & Animal Learning Services (PALS), 7644 W Elwren Rd, Blo\romington, IN 47403, USA\r",
+        "location": "Tibetan Mongolian Buddhist Cultural Center, 3655 S Snoddy Rd, B\rloomington, IN 47401, USA\r",
         "count": 1,
         "titles": [
-          "PALS Homecoming Open House"
+          "Reiki 1 + 2 Certification Training \u2013 Awaken Your Healing Gifts!"
         ]
       },
       {
@@ -16262,7 +16262,7 @@
     "categories": [
       {
         "category": "Community / Social",
-        "count": 980
+        "count": 988
       },
       {
         "category": "Religion / Spirituality",
@@ -16270,7 +16270,7 @@
       },
       {
         "category": "Education / Workshops",
-        "count": 796
+        "count": 804
       },
       {
         "category": "Music / Concerts",
@@ -16278,7 +16278,7 @@
       },
       {
         "category": "Arts / Culture",
-        "count": 648
+        "count": 649
       },
       {
         "category": "Sports / Fitness",
@@ -16342,11 +16342,11 @@
       },
       {
         "category": "(uncategorized)",
-        "count": 43
+        "count": 25
       },
       {
         "category": "Gardening / Horticulture",
-        "count": 23
+        "count": 24
       }
     ],
     "images": {
