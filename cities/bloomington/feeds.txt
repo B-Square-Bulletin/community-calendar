@@ -295,6 +295,9 @@ cities/bloomington/tmbcc.ics
 # Ticketmaster venues
 # cmd: python scrapers/ticketmaster.py --venue-id KovZpaoDke --name "IU Musical Arts Center" --default-url "https://events.iu.edu/musiciub/"
 cities/bloomington/tm_musical_arts_center.ics
+# Visit Bloomington
+# cmd: python scrapers/visit_bloomington.py --output cities/bloomington/visit_bloomington.ics
+cities/bloomington/visit_bloomington.ics
 # Visit Morgan County
 # cmd: python scrapers/simpleview.py --url "https://www.visitmorgancountyin.com" --name "Visit Morgan County" --towns Martinsville
 cities/bloomington/simpleview_morgan.ics
