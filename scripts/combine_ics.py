@@ -886,9 +886,11 @@ def combine_ics_files(
     now = datetime.now(timezone.utc) - timedelta(hours=24)
 
     # Load allowed cities for geo filtering
-    allowed_cities, excluded_cities = load_allowed_cities(input_dir)
+    allowed_cities, excluded_cities, allowed_zips = load_allowed_cities(input_dir)
     if allowed_cities:
         print(f"  Geo filter active: {len(allowed_cities)} allowed cities")
+    if allowed_zips:
+        print(f"  Allowed ZIP codes: {len(allowed_zips)}")
     if excluded_cities:
         print(f"  Excluded cities: {len(excluded_cities)}")
 
@@ -940,7 +942,9 @@ def combine_ics_files(
                         location = re.sub(r"\n[ \t]", "", location_match.group(1))
                     else:
                         location = ""
-                    if location_matches_allowed_cities(location, allowed_cities, excluded_cities):
+                    if location_matches_allowed_cities(
+                        location, allowed_cities, excluded_cities, allowed_zips
+                    ):
                         filtered_events.append(e)
                     else:
                         geo_filtered_count += 1

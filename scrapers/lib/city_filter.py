@@ -10,28 +10,42 @@ from pathlib import Path
 
 
 def load_allowed_cities(input_dir):
-    """Load allowed and excluded cities from city directory if file exists.
+    """Load allowed/excluded cities and allowed ZIP codes from city.conf.
 
-    Returns (allowed_cities, excluded_cities) tuple.
-    Lines starting with '!' are excluded cities (filtered even without address indicators).
+    Returns (allowed_cities, excluded_cities, allowed_zips) tuple.
+    Lines starting with '!' are excluded cities (filtered even without address
+    indicators). A `# zips:` header line lists the ZIP codes of the allowed
+    towns; a ZIP-only address that belongs to one of them is in-area even
+    without the town name spelled out.
     """
     cities_file = Path(input_dir) / "city.conf"
     if not cities_file.exists():
-        return None, None
+        return None, None, None
 
     allowed = set()
     excluded = set()
+    allowed_zips: set[str] = set()
     for line in cities_file.read_text().splitlines():
         line = line.strip()
-        if line and not line.startswith("#"):
-            # Strip trailing comment (e.g., "Petaluma  # 38.23, -122.63 (0.0 mi)")
-            city = line.split("#")[0].strip()
-            if city.startswith("!"):
-                # Excluded city
-                excluded.add(city[1:].strip().lower())
-            elif city:
-                allowed.add(city.lower())
-    return allowed if allowed else None, excluded if excluded else None
+        if not line:
+            continue
+        if line.startswith("#"):
+            zip_match = _CONF_ZIPS_RE.match(line)
+            if zip_match:
+                allowed_zips.update(re.findall(r"\d{5}", zip_match.group(1)))
+            continue
+        # Strip trailing comment (e.g., "Petaluma  # 38.23, -122.63 (0.0 mi)")
+        city = line.split("#")[0].strip()
+        if city.startswith("!"):
+            # Excluded city
+            excluded.add(city[1:].strip().lower())
+        elif city:
+            allowed.add(city.lower())
+    return (
+        allowed if allowed else None,
+        excluded if excluded else None,
+        allowed_zips if allowed_zips else None,
+    )
 
 
 # Locations that should always be allowed (virtual events, etc.)
@@ -62,6 +76,9 @@ _STREET_RE = re.compile(
     r"\d+\s+\w+\s+(?:street|st|avenue|ave|road|rd|drive|dr|boulevard|blvd|lane|ln|way|court|ct)\b",
     re.IGNORECASE,
 )
+# A city.conf directive listing the ZIP codes of the allowed towns, e.g.
+# "# zips: 47401, 47403, 47404". Comments elsewhere are ignored.
+_CONF_ZIPS_RE = re.compile(r"^#\s*zips\s*:\s*(.*)$", re.IGNORECASE)
 
 
 def _has_address_indicator(location):
@@ -75,11 +92,14 @@ def _has_address_indicator(location):
     )
 
 
-def location_matches_allowed_cities(location, allowed_cities, excluded_cities=None):
-    """Check if a location string contains any allowed city name.
+def location_matches_allowed_cities(
+    location, allowed_cities, excluded_cities=None, allowed_zips=None
+):
+    """Check if a location string is in the allowed area.
 
-    Only applies geo-filter to locations that look like real addresses,
-    UNLESS the location contains an explicitly excluded city name.
+    A location matches when it names an allowed town OR carries a ZIP code
+    belonging to one of them. Only locations that look like real addresses are
+    geo-filtered, UNLESS the location contains an explicitly excluded city name.
     Venue-only names ("Theater", "BiblioBus") are allowed through.
     """
     if not allowed_cities:
@@ -106,4 +126,9 @@ def location_matches_allowed_cities(location, allowed_cities, excluded_cities=No
         return True
 
     # Location has address info - check against allowed cities
-    return any(city in location_lower for city in allowed_cities)
+    if any(city in location_lower for city in allowed_cities):
+        return True
+
+    # A ZIP-only address (common in the US) carries no town name; accept it
+    # when its postal code belongs to an allowed town.
+    return bool(allowed_zips and set(_ZIP_RE.findall(location)) & allowed_zips)

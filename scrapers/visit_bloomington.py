@@ -456,7 +456,7 @@ class VisitBloomingtonScraper(BaseScraper):
         now = _now()
         today = now.date()
         horizon = self.horizon_cutoff(now)
-        allowed_cities, excluded_cities = load_allowed_cities(str(CITY_DIR))
+        allowed_cities, excluded_cities, allowed_zips = load_allowed_cities(str(CITY_DIR))
 
         events = []
         seen_uids: set[str] = set()
@@ -466,7 +466,7 @@ class VisitBloomingtonScraper(BaseScraper):
             if not parsed or parsed["uid"] in seen_uids:
                 continue
             if not location_matches_allowed_cities(
-                parsed["location"], allowed_cities, excluded_cities
+                parsed["location"], allowed_cities, excluded_cities, allowed_zips
             ):
                 out_of_area += 1
                 continue
@@ -475,7 +475,7 @@ class VisitBloomingtonScraper(BaseScraper):
 
         self.logger.info(
             f"Visit Bloomington: {len(docs)} occurrence docs fetched, {len(events)} events emitted"
-            + (f", {out_of_area} dropped outside the allowed towns" if out_of_area else "")
+            + (f", {out_of_area} dropped outside the allowed area" if out_of_area else "")
         )
         runs = self._load_runs()
         self._warn_if_degraded(len(docs), runs)

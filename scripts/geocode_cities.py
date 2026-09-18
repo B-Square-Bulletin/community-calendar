@@ -95,6 +95,7 @@ def parse_allowed_cities_file(filepath):
         "radius": None,
         "state": "CA",
         "timezone": None,
+        "zips": None,
         "cities": [],
     }
 
@@ -111,6 +112,8 @@ def parse_allowed_cities_file(filepath):
             config["state"] = line.split(":", 1)[1].strip()
         elif line.startswith("# timezone:"):
             config["timezone"] = line.split(":", 1)[1].strip()
+        elif line.startswith("# zips:"):
+            config["zips"] = line.split(":", 1)[1].strip()
         elif not line.startswith("#"):
             # Strip trailing comment from city name
             city = line.split("#")[0].strip()
@@ -129,6 +132,10 @@ def write_allowed_cities_file(filepath, config, city_coords):
         f"# center: {config['center'][0]}, {config['center'][1]}",
         f"# radius: {config['radius']}",
         f"# state: {config['state']}",
+    ]
+    if config.get("zips"):
+        lines.append(f"# zips: {config['zips']}")
+    lines += [
         "#",
         "# Cities within radius (auto-generated coordinates):",
     ]
