@@ -1,0 +1,163 @@
+# WFIU / IPM community-calendar free-text recurrence corpus
+# Source: https://www.ipm.org/community-calendar?p=1..28 (listing pages only)
+# Collected: 2026-09-18, browser UA, 2.5s spacing, plain HTTP, 28 requests
+# The '<br>' separators in the live HTML are rendered below as ' || '.
+# Fields are the text of the PromoEvent-time block. Lines prefixed with
+# 'recurring:' were on cards carrying the data-recurring attribute.
+# DISTINCT strings: 31 recurring, 111 one-off.
+
+## Observed: recurring series (data-recurring)
+recurring: 03:00 PM - 04:00 PM, every month on Friday through Sep 25, 2026.
+recurring: 04:00 AM - 05:00 AM, every day through Nov 08, 2026.
+recurring: 04:00 AM - 05:00 AM, every day through Oct 04, 2026.
+recurring: 05:30 PM - 06:30 PM, every day through Oct 27, 2026.
+recurring: 07:30 PM - 09:00 PM, every month on Monday through Nov 09, 2026.
+recurring: 07:30 PM - 09:30 PM, every day through Sep 20, 2026.
+recurring: 07:30 PM - 09:30 PM, every day through Sep 26, 2026.
+recurring: 09:00 AM - 06:00 PM, every day through Oct 20, 2026.
+recurring: 09:00 AM - 10:00 PM, every day through May 30, 2027.
+recurring: 09:00 AM - 10:00 PM, every day through Sep 20, 2026.
+recurring: 09:30 AM - 06:00 PM, every day through Oct 04, 2026.
+recurring: 10:00 AM - 05:00 PM, every day through Oct 11, 2026.
+recurring: 11:00 AM - 06:00 PM, every day through Sep 20, 2026.
+recurring: Every 4 weeks through Sep 24, 2026. || Monday: 06:00 PM - 08:00 PM || Thursday: 06:00 PM - 08:00 PM
+recurring: Every 7 weeks through Oct 14, 2026. || Wednesday: 12:30 PM - 02:30 PM
+recurring: Every week through Dec 17, 2026. || Thursday: 04:00 PM - 05:45 PM
+recurring: Every week through Dec 17, 2026. || Thursday: 10:00 AM - 10:30 AM
+recurring: Every week through Dec 18, 2026. || Friday: 03:00 PM - 04:00 PM
+recurring: Every week through Dec 26, 2026. || Saturday: 03:00 PM - 04:00 PM
+recurring: Every week through Dec 26, 2026. || Saturday: 10:00 AM - 11:00 AM
+recurring: Every week through Dec 29, 2026. || Tuesday: 10:00 AM - 10:30 AM
+recurring: Every week through Nov 14, 2026. || Saturday: 01:00 PM - 02:00 PM
+recurring: Every week through Nov 14, 2026. || Tuesday: 12:00 PM - 04:00 PM || Wednesday: 12:00 PM - 04:00 PM || Thursday: 12:00 PM - 04:00 PM || Friday: 12:00 PM - 04:00 PM || Saturday: 12:00 PM - 04:00 PM
+recurring: Every week through Oct 31, 2026. || Tuesday: 12:00 PM - 04:00 PM || Wednesday: 12:00 PM - 04:00 PM || Thursday: 12:00 PM - 04:00 PM || Friday: 12:00 PM - 04:00 PM || Saturday: 12:00 PM - 04:00 PM
+recurring: Every week through Sep 24, 2026. || Thursday: 04:00 PM - 05:45 PM
+recurring: Every week through Sep 24, 2026. || Thursday: 10:00 AM - 10:30 AM
+recurring: Every week through Sep 25, 2026. || Friday: 03:00 PM - 04:00 PM
+recurring: Every week through Sep 26, 2026. || Saturday: 03:00 PM - 04:00 PM
+recurring: Every week through Sep 26, 2026. || Saturday: 10:00 AM - 02:00 PM
+recurring: Every week through Sep 26, 2026. || Saturday: 11:00 AM - 02:00 PM
+recurring: Every week through Sep 29, 2026. || Tuesday: 10:00 AM - 10:30 AM
+
+## Observed: one-off timed events (no data-recurring)
+one-off: 01:00 PM - 03:00 PM on Sat, 19 Sep 2026
+one-off: 01:00 PM - 03:00 PM on Sun, 18 Oct 2026
+one-off: 01:00 PM - 05:00 PM on Sun, 11 Oct 2026
+one-off: 01:00 PM - 11:59 PM on Sat, 3 Oct 2026
+one-off: 02:00 PM - 04:00 PM on Sat, 19 Sep 2026
+one-off: 02:00 PM - 04:00 PM on Sun, 20 Sep 2026
+one-off: 02:00 PM - 04:00 PM on Sun, 27 Sep 2026
+one-off: 02:00 PM - 08:00 PM on Sat, 19 Sep 2026
+one-off: 02:00 PM - 11:59 PM on Sat, 3 Oct 2026
+one-off: 02:00 PM - 11:59 PM on Sun, 18 Oct 2026
+one-off: 03:00 PM - 11:59 PM on Sun, 11 Oct 2026
+one-off: 03:00 PM - 11:59 PM on Sun, 18 Oct 2026
+one-off: 03:30 PM - 05:00 PM on Sun, 11 Oct 2026
+one-off: 04:00 PM - 05:00 PM on Tue, 29 Sep 2026
+one-off: 04:00 PM - 05:10 PM on Thu, 1 Oct 2026
+one-off: 04:00 PM - 05:10 PM on Tue, 22 Sep 2026
+one-off: 04:00 PM - 05:30 PM on Sat, 17 Oct 2026
+one-off: 04:00 PM - 05:30 PM on Sun, 4 Oct 2026
+one-off: 04:00 PM - 06:00 PM on Sun, 27 Sep 2026
+one-off: 04:00 PM - 06:00 PM on Sun, 4 Oct 2026
+one-off: 04:00 PM - 07:00 PM on Sat, 26 Sep 2026
+one-off: 04:00 PM - 11:59 PM on Sat, 19 Sep 2026
+one-off: 04:00 PM - 11:59 PM on Wed, 23 Sep 2026
+one-off: 04:30 PM - 07:00 PM on Thu, 24 Sep 2026
+one-off: 04:30 PM - 11:59 PM on Fri, 25 Sep 2026
+one-off: 05:00 PM - 06:00 PM on Thu, 15 Oct 2026
+one-off: 05:00 PM - 07:00 PM on Wed, 30 Sep 2026
+one-off: 05:00 PM - 07:30 PM on Wed, 23 Sep 2026
+one-off: 05:00 PM - 08:00 PM on Fri, 2 Oct 2026
+one-off: 05:00 PM - 08:00 PM on Sat, 3 Oct 2026
+one-off: 05:00 PM - 11:59 PM on Sat, 19 Sep 2026
+one-off: 05:30 PM - 07:15 PM on Wed, 7 Oct 2026
+one-off: 05:30 PM - 08:30 PM on Fri, 2 Oct 2026
+one-off: 06:00 PM - 07:00 PM on Mon, 21 Sep 2026
+one-off: 06:00 PM - 07:00 PM on Mon, 28 Sep 2026
+one-off: 06:00 PM - 07:00 PM on Sun, 20 Sep 2026
+one-off: 06:00 PM - 07:00 PM on Tue, 29 Sep 2026
+one-off: 06:00 PM - 07:00 PM on Wed, 23 Sep 2026
+one-off: 06:00 PM - 08:00 PM on Fri, 2 Oct 2026
+one-off: 06:00 PM - 08:00 PM on Wed, 30 Sep 2026
+one-off: 06:00 PM - 09:00 PM on Sat, 10 Oct 2026
+one-off: 06:00 PM - 10:00 PM on Sat, 19 Sep 2026
+one-off: 06:30 PM - 08:00 PM on Tue, 29 Sep 2026
+one-off: 06:30 PM - 08:30 PM on Fri, 18 Sep 2026
+one-off: 06:30 PM - 08:30 PM on Tue, 22 Sep 2026
+one-off: 06:30 PM - 11:59 PM on Fri, 18 Sep 2026
+one-off: 06:30 PM - 11:59 PM on Fri, 2 Oct 2026
+one-off: 06:30 PM - 11:59 PM on Sat, 17 Oct 2026
+one-off: 06:30 PM - 11:59 PM on Sat, 3 Oct 2026
+one-off: 07:00 PM - 08:00 PM on Fri, 16 Oct 2026
+one-off: 07:00 PM - 08:00 PM on Mon, 19 Oct 2026
+one-off: 07:00 PM - 08:00 PM on Thu, 15 Oct 2026
+one-off: 07:00 PM - 08:30 PM on Thu, 24 Sep 2026
+one-off: 07:00 PM - 09:00 PM on Fri, 9 Oct 2026
+one-off: 07:00 PM - 09:00 PM on Thu, 24 Sep 2026
+one-off: 07:00 PM - 09:30 PM on Sun, 11 Oct 2026
+one-off: 07:00 PM - 10:00 PM on Sun, 18 Oct 2026
+one-off: 07:00 PM - 10:30 PM on Sat, 3 Oct 2026
+one-off: 07:00 PM - 11:00 PM on Fri, 16 Oct 2026
+one-off: 07:00 PM - 11:59 PM on Fri, 16 Oct 2026
+one-off: 07:00 PM - 11:59 PM on Fri, 25 Sep 2026
+one-off: 07:00 PM - 11:59 PM on Sat, 26 Sep 2026
+one-off: 07:00 PM - 11:59 PM on Thu, 1 Oct 2026
+one-off: 07:00 PM - 11:59 PM on Tue, 29 Sep 2026
+one-off: 07:30 PM - 09:30 PM on Fri, 16 Oct 2026
+one-off: 07:30 PM - 09:30 PM on Fri, 25 Sep 2026
+one-off: 07:30 PM - 09:30 PM on Mon, 12 Oct 2026
+one-off: 07:30 PM - 09:30 PM on Mon, 28 Sep 2026
+one-off: 07:30 PM - 09:30 PM on Mon, 5 Oct 2026
+one-off: 07:30 PM - 09:30 PM on Sat, 19 Sep 2026
+one-off: 07:30 PM - 09:30 PM on Sat, 26 Sep 2026
+one-off: 07:30 PM - 09:30 PM on Thu, 1 Oct 2026
+one-off: 07:30 PM - 09:30 PM on Thu, 24 Sep 2026
+one-off: 07:30 PM - 09:30 PM on Tue, 29 Sep 2026
+one-off: 07:30 PM - 09:30 PM on Tue, 6 Oct 2026
+one-off: 07:30 PM - 09:30 PM on Wed, 23 Sep 2026
+one-off: 07:30 PM - 10:00 PM on Sat, 26 Sep 2026
+one-off: 07:30 PM - 11:59 PM on Fri, 18 Sep 2026
+one-off: 07:30 PM - 11:59 PM on Fri, 2 Oct 2026
+one-off: 07:30 PM - 11:59 PM on Sat, 17 Oct 2026
+one-off: 07:30 PM - 11:59 PM on Sat, 3 Oct 2026
+one-off: 07:30 PM - 11:59 PM on Tue, 29 Sep 2026
+one-off: 07:30 PM - 11:59 PM on Tue, 6 Oct 2026
+one-off: 07:30 PM - 11:59 PM on Wed, 14 Oct 2026
+one-off: 07:30 PM - 11:59 PM on Wed, 30 Sep 2026
+one-off: 08:00 AM - 02:00 PM on Sat, 19 Sep 2026
+one-off: 08:00 AM - 12:30 PM on Sat, 10 Oct 2026
+one-off: 08:00 PM - 09:00 PM on Sat, 3 Oct 2026
+one-off: 08:00 PM - 09:30 PM on Fri, 25 Sep 2026
+one-off: 08:00 PM - 10:00 PM on Mon, 19 Oct 2026
+one-off: 08:00 PM - 10:00 PM on Thu, 8 Oct 2026
+one-off: 08:00 PM - 10:00 PM on Tue, 13 Oct 2026
+one-off: 08:00 PM - 10:00 PM on Wed, 14 Oct 2026
+one-off: 08:00 PM - 10:00 PM on Wed, 30 Sep 2026
+one-off: 08:30 PM - 09:30 PM on Mon, 19 Oct 2026
+one-off: 08:30 PM - 10:00 PM on Fri, 16 Oct 2026
+one-off: 09:00 AM - 02:00 PM on Sat, 19 Sep 2026
+one-off: 09:00 AM - 12:30 PM on Sat, 10 Oct 2026
+one-off: 09:30 AM - 11:00 AM on Sun, 4 Oct 2026
+one-off: 10:00 AM - 03:00 PM on Sat, 10 Oct 2026
+one-off: 10:00 AM - 04:00 PM on Sat, 3 Oct 2026
+one-off: 11:00 AM - 02:00 PM on Sat, 17 Oct 2026
+one-off: 11:00 AM - 02:00 PM on Sat, 19 Sep 2026
+one-off: 11:00 AM - 04:00 PM on Fri, 16 Oct 2026
+one-off: 11:00 AM - 04:00 PM on Thu, 15 Oct 2026
+one-off: 11:00 AM - 11:59 PM on Sat, 10 Oct 2026
+one-off: 12:00 PM - 01:00 PM on Sat, 26 Sep 2026
+one-off: 12:00 PM - 03:00 PM on Sat, 3 Oct 2026
+one-off: 12:00 PM - 05:00 PM on Tue, 13 Oct 2026
+one-off: 12:45 PM - 01:45 PM on Fri, 2 Oct 2026
+one-off: 12:45 PM - 01:45 PM on Fri, 25 Sep 2026
+
+## Not observed in the 28-page sample; synthetic representatives of the
+## same Brightspot template, added for grammar coverage:
+synthetic: Sep 18, 2026
+synthetic: Sep 18 - Sep 20, 2026
+synthetic: all day through Sep 20, 2026
+synthetic: Every month through Dec 31, 2026. || Monday: 07:00 PM - 09:00 PM
+synthetic: Every 2 months through Dec 31, 2026. || Tuesday: 12:00 PM - 01:00 PM
+synthetic: Every 2 weeks through Dec 17, 2026. || Thursday: 04:00 PM - 05:45 PM
+
