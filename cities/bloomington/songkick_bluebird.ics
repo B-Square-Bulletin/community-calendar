@@ -1,0 +1,61 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//The Bluebird//songkick.com//
+X-WR-CALNAME:The Bluebird
+X-WR-TIMEZONE:America/New_York
+BEGIN:VEVENT
+SUMMARY:Priscilla Block
+DTSTART:20260924T200000
+DTEND:20260924T200000
+UID:529d4e5282871c637654056cff3e1455@songkick.com
+DESCRIPTION:Priscilla Block at Bluebird at 2026-09-24T20:00:00-0400
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43312487-priscilla-block-at-bluebird?
+ utm_medium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Hank Ruff
+DTSTART:20260926T200000
+DTEND:20260926T200000
+UID:9e32713d09f35c8bcb15c543602b0641@songkick.com
+DESCRIPTION:Hank Ruff at Bluebird at 2026-09-26T20:00:00-0400
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43413185-hank-ruff-at-bluebird?utm_me
+ dium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Emo Nite
+DTSTART:20261009T210000
+DTEND:20261009T210000
+UID:efd85af93d6a1846b9b38d6a479a3dfb@songkick.com
+DESCRIPTION:Emo Nite at Bluebird at 2026-10-09T21:00:00-0400
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43353797-emo-nite-at-bluebird?utm_med
+ ium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Jake Dodds
+DTSTART:20261010T210000
+DTEND:20261010T210000
+UID:8110b7bb5a78efacc3ac9c0b00896063@songkick.com
+DESCRIPTION:Jake Dodds at Bluebird at 2026-10-10T21:00:00-0400
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43413186-jake-dodds-at-bluebird?utm_m
+ edium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Ratboys
+DTSTART:20261015T200000
+DTEND:20261015T200000
+UID:4cc02596877c21d590dbf972d9801b87@songkick.com
+DESCRIPTION:Ratboys at Bluebird at 2026-10-15T20:00:00-0400
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43292416-ratboys-at-bluebird?utm_medi
+ um=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+END:VCALENDAR

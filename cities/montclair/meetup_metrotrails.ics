@@ -1,0 +1,100 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Meetup//Meetup Calendar 1.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+NAME:Metrotrails: NJ, PA, NY Metropolitan Area Hiking and More!
+X-WR-CALNAME:Metrotrails: NJ, PA, NY Metropolitan Area Hiking and More!
+BEGIN:VTIMEZONE
+TZID:America/New_York
+TZURL:http://tzurl.org/zoneinfo-outlook/America/New_York
+X-LIC-LOCATION:America/New_York
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+X-SOURCE:Meetup: Metrotrails Hiking
+UID:event_314094515@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T030156Z
+DTSTART;TZID=America/New_York:20260412T090000
+DTEND;TZID=America/New_York:20260412T180000
+SUMMARY:Chester County Pastoral Hike
+DESCRIPTION:Metrotrails: NJ\, PA\, NY Metropolitan Area Hiking and More!\n
+ Join us for this excellent rural hike in Chester County PA\, which ties to
+ gether a different way the recent Chester County hikes we've been doing.\n
+ From the start\, we will do the easier back roads.\nThe only lined road we
+  will be on is the very beginning.\nWe will walk through the historic Shee
+ der-Hall Covered Bridge\, then out to the main road for under a half mile\
+ , We then turn onto some back roads including Sheeder Mill Road\, HIlltop 
+ Road\, Birchrun Road\, Green Lane\, and Bartlett Road.\nAt least half of t
+ his is unpaved\, and none of these named roads even have lines in them\, m
+ aking them narrow\, lightly used\, and very pleasant.\nWe'll soon get on t
+ he Horse-Shoe Trail from where we left off. This takes us through pleasant
+  woods\, and then out into cultivated farm fields.\nBits of the Horse-Shoe
+  Trail also follow these little used roads.\nWe'll continue on the HST to 
+ Art School Lane\, then make our way east and pass the historic Vincent Bap
+ tist Church and cemetery.\nWe'll continue to the intersection with Miller 
+ Road\, where we'll begin following the Bryn Coed Trail System.\nThis amazi
+ ng and long trail system weaves though woods and fields keeping with the o
+ verall theme of the hike.\nAmazing pastoral views will make for a relaxing
+  walk that will lead us almost all the way back to our stating point.\nWe'
+ ll get on one more dirt road before the end\, and then an abandoned road t
+ hat is now in the trail system right back to where we parked.\nDistance 15
+  mi\nIf needed\, contact me at 908 343 8374
+URL;VALUE=URI:https://www.meetup.com/metrotrails/events/314094515/
+STATUS:CONFIRMED
+CREATED:20260402T200609Z
+LAST-MODIFIED:20260402T200609Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Metrotrails Hiking
+UID:event_314134475@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T030156Z
+DTSTART;TZID=America/New_York:20260419T090000
+DTEND;TZID=America/New_York:20260419T230000
+SUMMARY:Passaic Watershed Mountain and Valley Hike
+DESCRIPTION:Metrotrails: NJ\, PA\, NY Metropolitan Area Hiking and More!\n
+ Join us for a very happy loop hike\, more in our Passaic River series\, bu
+ t this time filling in some gaps of interesting places we missed on previo
+ us trips\, and featuring Garrett Mountain and Rifle Camp Park this time!\n
+ We will meet at 9 am at West Falls Plaza\, which we've used a couple of ti
+ mes\, and make our way to the Passaic River. This time\, we'll cross the r
+ iver and follow a road upstream on the opposite side we did last time.\nWe
+ 'll get off of the road and walk through Laurel Grove and Mt Nebo Cemeteri
+ es\, and then Holy Sepulchre Cemetery after a few blocks of road walk.\nWe
+  will then take the West Side Park trails and Riverside Terrace to the eas
+ t for a bit. This will lead us around the Great Falls again covering a cou
+ ple of different trails from before. We then come up past the Reservoir\, 
+ cross Rt 80 at New Street\, and head up into Garrett Mountain Park. We'll 
+ make our way through there\, and loop in a roundabout way through that par
+ k south to Rifle Camp Park. We'll loop from the east side of that as far s
+ outh as we can\, then back to the north on the west side. This will then t
+ ake us back to Garrett Mountain\, and we'll descend west though Zekeriah P
+ ark.\nA few blocks on the road takes us through Diane Grimes Park\, then a
+  bit more to the Morris Canal Greenway. We will loop back to where we star
+ ted from here to close this very diverse 15 mile loop.\nIf needed\, contac
+ t me at 908 343 8374
+URL;VALUE=URI:https://www.meetup.com/metrotrails/events/314134475/
+STATUS:CONFIRMED
+CREATED:20260405T161226Z
+LAST-MODIFIED:20260405T161226Z
+CLASS:PUBLIC
+END:VEVENT
+X-ORIGINAL-URL:https://www.meetup.com/Metrotrails/events/ical/
+X-WR-CALNAME:Metrotrails: NJ\, PA\, NY Metropolitan Area Hiking and More!
+END:VCALENDAR

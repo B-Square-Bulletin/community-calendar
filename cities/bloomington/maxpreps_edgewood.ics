@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Edgewood Athletics//maxpreps.com//
+X-WR-CALNAME:Edgewood Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Edgewood JV Football @ West Vigo
+DTSTART;TZID=America/Indiana/Indianapolis:20260919T100000
+DTEND;TZID=America/Indiana/Indianapolis:20260919T120000
+UID:ad90b5eafdc21c440cb92e6f01345115@maxpreps.com
+DESCRIPTION:Boys JV Football\nThe Edgewood JV football team is at their aw
+ ay conference game @  West Vigo (West Terre Haute\, IN).
+URL:https://www.maxpreps.com/in/football/game/edgewood-ellettsville-vs-wes
+ t-vigo-west-terre-haute/jv/9-19-2026/?c=dbdcbe8a-5f95-48b0-ac55-6dbb196d45
+ 01
+X-SOURCE:Edgewood Athletics
+END:VEVENT
+END:VCALENDAR
