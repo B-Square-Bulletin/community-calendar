@@ -35,6 +35,7 @@ class SonomaCountyGovScraper(BaseScraper):
         now = utc_now()
         start_date = now.replace(day=1)
 
+        # Month cursor, not the Horizon boundary -- see lib/horizon.py.
         for i in range(self.months_ahead + 1):
             # Calculate month boundaries
             year = start_date.year + (start_date.month + i - 1) // 12

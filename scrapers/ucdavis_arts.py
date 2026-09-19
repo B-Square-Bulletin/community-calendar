@@ -27,6 +27,7 @@ class UCDavisArtsScraper(IcsScraper):
         urls = []
         now = utc_now()
 
+        # Month cursor, not the Horizon boundary -- see lib/horizon.py.
         for i in range(self.months_ahead + 1):
             year = now.year + (now.month + i - 1) // 12
             month = (now.month + i - 1) % 12 + 1
