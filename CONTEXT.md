@@ -114,7 +114,7 @@ Scraper/Feed ICS  →  combine_ics.py  →  ics_to_json.py  →  Supabase DB  �
 
 - **X-SOURCE** is an ICS header carrying the human-readable source name ("Bohemian Events", "Davis High Athletics", etc.)
 - For **feeds**, `download_feeds.py` injects `X-SOURCE` and `X-SOURCE-URL` into every VEVENT at download time
-- For **scrapers**, `BaseScraper.create_event()` sets `X-SOURCE` from the `--name` command-line argument
+- For **scrapers**, `BaseScraper.create_event()` sets `X-SOURCE` from the scraper class's `name` attribute (not a `--name` command-line argument)
 - `EventCard.xmlui` line 26 renders `source` as an italic line below the event description
 
 **Important:** Do NOT put "Source: X" text in event descriptions — it causes duplicate display.
@@ -263,9 +263,9 @@ load-events edge function (upserts to Supabase events table by source_uid)
 ### Data Flow: Scraper → Database
 
 ```
-Scraper (python scrapers/example.py --name "Source Name" -o cities/{city}/example.ics)
+Scraper (python scrapers/example.py -o cities/{city}/example.ics)
   ↓
-BaseScraper.create_event() (sets X-SOURCE from --name)
+BaseScraper.create_event() (sets X-SOURCE from the scraper class's `name` attribute)
   ↓
 cities/{city}/example.ics (with X-SOURCE headers)
   ↓

@@ -77,7 +77,7 @@ Scraper/Feed ICS  →  combine_ics.py  →  ics_to_json.py  →  Supabase DB  �
 ```
 
 - **Feeds:** `download_feeds.py` injects `X-SOURCE` and `X-SOURCE-URL` from the `feeds` table
-- **Scrapers:** `BaseScraper.create_event()` sets `X-SOURCE` from the `--name` argument
+- **Scrapers:** `BaseScraper.create_event()` sets `X-SOURCE` from the scraper class's `name` attribute (not a `--name` argument)
 - **Fallback:** `combine_ics.py` reads `feeds.txt` metadata for scrapers missing `X-SOURCE`
 
 ## Scraper Hygiene: Minimize Fetches

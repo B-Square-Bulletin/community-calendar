@@ -16,6 +16,7 @@
 | **CivicPlus**        | `https://www.{city}.org/common/modules/iCalendar/iCalendar.aspx?feed=calendar&catID={N}`            |
 | **Songkick**         | `https://www.songkick.com/venues/{ID}-{slug}` (JSON-LD MusicEvent, use `scrapers/songkick.py`)      |
 | **Guild.host**       | No ICS feeds. JSON-LD Event on individual pages. Tech-focused platform. Use `scrapers/guildhost.py` |
+| **Brightspot CMS**   | No ICS/RSS/iCal/JSON-LD/API. Scrape server-rendered HTML: occurrence-expanded listing cards + detail pages |
 
 ## Drupal
 
@@ -58,6 +59,17 @@ Wix event pages vary. Some use cross-origin iframes from `geteventviewer.com` (n
 ## Events Manager (EM)
 
 WordPress plugin. Use `scrapers/lib/em_events.py` — AJAX endpoint at `/wp-admin/admin-ajax.php?action=search_events` returns up to 50 events per POST with `pno` and `limit` params. HTML rendered, parse with `.em-event`, `.em-item-title`, `.em-event-date`, `.em-event-time`, `.em-event-location` selectors.
+
+## Brightspot CMS
+
+Public-media and publisher sites (e.g. `www.ipm.org`, WFIU's community calendar). Brightspot exposes **no** public event feed: no RSS/Atom, no iCal/ICS export, no JSON-LD, and no anonymous JSON/GraphQL/REST or Brightspot CMA endpoint — the listing's "ajax" web component re-fetches the same server-rendered HTML, and sitemaps carry only the most recently modified event URLs, not the inventory. **Scrape the HTML.**
+
+- The listing is **occurrence-expanded**: it renders one card per occurrence, so recurring events are already split into dated cards. Treat each card as one occurrence; do not re-expand recurrence.
+- Cards typically carry title, display date, time, venue *name*, price, category, and description. The **detail page alone** carries street/city/state/ZIP, ticket link, image, presenting org, and `meta[name="brightspot.contentId"]` (the stable UID). Geography filtering therefore requires a detail fetch; dedupe cards by detail URL first so each unique event is fetched once.
+- Date filtering is site-specific. On IPM the real filter is `?f1=<startMs>-<endMs>` (`?from=`/`?to=` are ignored) and page size is fixed, not configurable.
+- The description is the only recurrence signal — free text, no RRULE and no timezone — but because the listing is pre-expanded, there is nothing to parse for coverage.
+
+This pattern is the Brightspot analogue of the Simpleview tourism path above: a dedicated per-site scraper, not a drop-in feed. See spec #139 (map #130) for the WFIU implementation contract.
 
 ## Known Platform Limitations
 
