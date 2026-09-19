@@ -265,6 +265,7 @@ Create `cities/{cityname}/city.conf` with a radius, state, and the names of near
 ```
 # radius: 30
 # state: CA
+# zips: 95616, 95618, 95695
 #
 Davis
 Woodland
@@ -282,6 +283,10 @@ Winters
 **Syntax:**
 - Plain city names are **allowed** (events there will appear)
 - `!CityName` means **excluded** (events there are filtered out)
+- `# zips:` optionally lists the ZIP codes of the allowed towns. US addresses
+  often carry a ZIP but no town name (e.g. `2601 N Walnut St, IN 47404`), so a
+  ZIP from this list is treated as in-area even without the town spelled out.
+  Keep it in sync with the allowed town list.
 - Excluded cities catch venues like "Fairfield Library" that lack state/ZIP
 
 **Important:**
@@ -329,6 +334,11 @@ The filter only applies to events with **address-like locations** containing:
 - State abbreviation (", CA")
 - ZIP code
 - Street address pattern ("123 Main St")
+
+An address-like location passes when it names an allowed town **or** carries a
+ZIP code listed in the city's `# zips:` directive. Addresses with a ZIP and no
+town name are common in the US, so the ZIP list keeps them in-area while
+genuinely out-of-area addresses stay dropped.
 
 Events with just venue names ("Theater", "Community Center") pass through unfiltered.
 Virtual events (Zoom, online, webinar) always pass through.

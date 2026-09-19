@@ -340,6 +340,40 @@ class TestGeoPrefilter:
 
         assert "Indy Home Show" not in titles
 
+    def test_zip_only_in_area_address_is_kept(self):
+        # Sleeper's Bar: Bloomington ZIP, no town name in the address (#127).
+        docs = [
+            _located_single_doc(
+                "80004",
+                "Live Music at Sleeper's",
+                "Sleeper's Bar",
+                "2601 N Walnut St",
+                None,
+                "IN",
+                "47404",
+            )
+        ]
+        titles = {e["title"] for e in _fetch([_events_payload(docs)])}
+
+        assert "Live Music at Sleeper's" in titles
+
+    def test_zip_only_surrounding_town_address_is_kept(self):
+        # McGlocklin Park: Stinesville ZIP, an allowed town (#127).
+        docs = [
+            _located_single_doc(
+                "80005",
+                "McGlocklin Park Cleanup",
+                "McGlocklin Park",
+                "Market Street",
+                None,
+                "IN",
+                "47464",
+            )
+        ]
+        titles = {e["title"] for e in _fetch([_events_payload(docs)])}
+
+        assert "McGlocklin Park Cleanup" in titles
+
     def test_in_scope_surrounding_town_is_kept(self):
         docs = [
             _located_single_doc(

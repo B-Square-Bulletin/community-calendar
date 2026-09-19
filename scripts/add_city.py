@@ -73,6 +73,8 @@ def main():
 # state: {args.state}
 #
 # Add nearby city names below (one per line).
+# Optionally add a line starting with "# zips:" listing the ZIP codes of those
+# towns, so ZIP-only addresses match.
 # Run: python scripts/geocode_cities.py --city {city}
 # See docs/procedures.md section 5 for details.
 """)

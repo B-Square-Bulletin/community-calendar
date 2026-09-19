@@ -57,6 +57,7 @@ supabase test db supabase/tests/
 ## Test Files
 
 - `tests/test_timezone_pipeline.py` - Python/pytest tests for ICS timezone handling
+- `tests/test_city_filter.py` - shared geo-filter matcher (allowed town names and ZIP codes, out-of-area and venue-only cases)
 - `tests/test_visit_bloomington.py` - Visit Bloomington Simpleview REST API scraper (paging, occurrence expansion, geo prefilter, attribution)
 - `tests/test_base_scraper.py` - base scraper `X-SOURCE-URL` and `GEO` emission
 - `tests/test_validate_pr_feeds.py` - PR feed/scraper registration validation against the DB-first contract
