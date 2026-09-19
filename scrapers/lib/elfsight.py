@@ -97,6 +97,10 @@ def expand_recurring_events(
     # Naive UTC "now" so wall-clock comparisons against base_dt stay valid;
     # the ±1-day tolerance absorbs the UTC-vs-local offset shift.
     now = utc_now().replace(tzinfo=None)
+    # Deliberately * 30, not the shared horizon_end (* 31): this listing
+    # expansion is a separate rough ceiling and switching it would shift the
+    # window by up to `months_ahead` days. Behaviour-preserving refactor,
+    # so it stays local.
     cutoff = now + timedelta(days=months_ahead * 30)
 
     repeat_period = event.get("repeatPeriod", "noRepeat")

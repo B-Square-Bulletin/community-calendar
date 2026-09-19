@@ -50,9 +50,7 @@ class BaseScraper(ABC):
     def horizon_cutoff(self, now: datetime | None = None) -> datetime:
         """This scraper's Horizon boundary; see `lib/horizon.py`.
 
-        Pass `now` to key the boundary to the source's own clock. Not every
-        scraper calls it -- several still inline the offset -- so treat it as
-        the shared helper, not a repo-wide guarantee.
+        Pass `now` to key the boundary to the source's own clock.
         """
         return horizon_end(now, self.months_ahead)
 

@@ -16,7 +16,7 @@ sys.path.insert(0, __file__.rsplit("/", 1)[0])
 import argparse
 import json
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Any, ClassVar
 from urllib.request import Request, urlopen
 
@@ -49,7 +49,7 @@ class EssexCountyParksScraper(BaseScraper):
     def fetch_events(self) -> list[dict[str, Any]]:
         """Fetch events from the FullCalendar JSON endpoint."""
         start = utc_now().strftime("%Y-%m-%d")
-        end = (utc_now() + timedelta(days=self.months_ahead * 31)).strftime("%Y-%m-%d")
+        end = self.horizon_cutoff(utc_now()).strftime("%Y-%m-%d")
         url = f"{CALENDAR_URL}?start={start}&end={end}"
 
         self.logger.info(f"Fetching {url}")

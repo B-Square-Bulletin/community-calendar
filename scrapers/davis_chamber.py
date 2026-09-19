@@ -38,6 +38,8 @@ class DavisChamberScraper(BaseScraper):
         # Fetch current month plus next 6 months
         now = utc_now()
         for month_offset in range(self.months_ahead + 1):
+            # Month cursor step, not the Horizon boundary (see lib/horizon.py):
+            # this walks calendar months to build per-month API windows.
             month_date = now + timedelta(days=month_offset * 30)
             start = month_date.replace(day=1)
             # Get end of month (start of next month)

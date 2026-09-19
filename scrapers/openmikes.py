@@ -39,6 +39,7 @@ from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.horizon import within
 
 WEEKDAYS = {
     "sunday": 6,
@@ -84,7 +85,7 @@ class OpenMikesScraper(BaseScraper):
 
         tz = ZoneInfo(self.timezone)
         now = datetime.now(tz)
-        horizon = now + timedelta(days=self.months_ahead * 31)
+        horizon = self.horizon_cutoff(now)
 
         events: list[dict[str, Any]] = []
         for listing in listings:
@@ -148,7 +149,7 @@ class OpenMikesScraper(BaseScraper):
         if candidate < now:
             candidate += timedelta(days=7)
 
-        while candidate <= horizon:
+        while within(candidate, horizon):
             events.append(
                 {
                     "title": title,

@@ -4,7 +4,7 @@ Used by Bohemian and Press Democrat event calendars.
 """
 
 import re
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Any
 from zoneinfo import ZoneInfo
 
@@ -46,7 +46,7 @@ class CitySparkScraper(BaseScraper):
         # Fetch from today to N months ahead
         now = utc_now()
         start_date = now.replace(hour=0, minute=0, second=0, microsecond=0)
-        end_date = start_date + timedelta(days=self.months_ahead * 31)
+        end_date = self.horizon_cutoff(start_date)
 
         start_str = start_date.strftime("%Y-%m-%dT%H:%M:%S")
         end_str = end_date.strftime("%Y-%m-%dT%H:%M:%S")

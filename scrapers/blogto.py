@@ -99,8 +99,9 @@ class BlogToScraper(BaseScraper):
 
     def fetch_events(self) -> list[dict[str, Any]]:
         tz = ZoneInfo(self.timezone)
-        today = datetime.now(tz).date()
-        horizon_days = self.months_ahead * 31  # hard ceiling
+        now = datetime.now(tz)
+        today = now.date()
+        horizon_days = (self.horizon_cutoff(now).date() - today).days  # hard ceiling
 
         seen: dict[int, dict[str, Any]] = {}
         empty_streak = 0

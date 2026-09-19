@@ -15,7 +15,6 @@ import sys
 sys.path.insert(0, __file__.rsplit("/", 1)[0])
 
 import contextlib
-import os
 from datetime import timedelta
 from typing import Any
 
@@ -37,10 +36,9 @@ class CarolinaPerformingArtsScraper(BaseScraper):
 
     def fetch_events(self) -> list[dict[str, Any]]:
         """Fetch events from CPA REST API."""
-        months_ahead = int(os.environ.get("SCRAPE_MONTHS", 6))
         now = utc_now()
         start = now.strftime("%Y-%m-%d")
-        end = (now + timedelta(days=months_ahead * 31)).strftime("%Y-%m-%d")
+        end = self.horizon_cutoff(now).strftime("%Y-%m-%d")
 
         self.logger.info(f"Fetching {self.API_URL} (start={start}, end={end})")
         response = requests.get(

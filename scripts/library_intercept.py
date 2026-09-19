@@ -10,13 +10,13 @@ sys.path.insert(0, "scrapers")
 
 import argparse
 import re
-from datetime import datetime, timedelta
 from typing import Any, ClassVar
 from zoneinfo import ZoneInfo
 
 import requests
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.horizon import within
 from lib.timeutil import parse_naive_ics
 
 
@@ -65,7 +65,7 @@ class LibraryScraper(BaseScraper):
         """Fetch events from the library event pages up to months_ahead."""
         page = 1
         all_events: list[dict[str, Any]] = []
-        cutoff = datetime.now().astimezone() + timedelta(days=self.months_ahead * 31)
+        cutoff = self.horizon_cutoff()
 
         while True:
             url = self.base_url + str(page)
@@ -85,7 +85,7 @@ class LibraryScraper(BaseScraper):
                 break
 
             # Stop paginating if all events on this page are beyond the cutoff
-            if all(e["dtstart"] > cutoff for e in parsed_events):
+            if not any(within(e["dtstart"], cutoff) for e in parsed_events):
                 self.logger.info(
                     f"Stopping: page {page} events are beyond {self.months_ahead} months"
                 )

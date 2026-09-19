@@ -86,14 +86,13 @@ class TribeRestScraper(BaseScraper):
         """Fetch future events from the Tribe Events REST API."""
         all_events: list[dict[str, Any]] = []
         tz = ZoneInfo(self.timezone)
-        from datetime import timedelta
 
         now = datetime.now(tz)
         today = now.strftime("%Y-%m-%d")
         # Cap API fetch at SCRAPE_MONTHS (default 6) to avoid fetching thousands
         # of recurring events — the BaseScraper.run() cutoff will prune anything
         # beyond that window anyway.
-        end_date = (now + timedelta(days=self.months_ahead * 31)).strftime("%Y-%m-%d")
+        end_date = self.horizon_cutoff(now).strftime("%Y-%m-%d")
 
         for page in range(1, self.max_pages + 1):
             url = (

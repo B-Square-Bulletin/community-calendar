@@ -32,7 +32,6 @@ import argparse
 import json
 import logging
 import re
-from datetime import timedelta
 from typing import Any
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
@@ -65,8 +64,9 @@ class DrupalEventsScraper(BaseScraper):
 
     def fetch_events(self) -> list[dict[str, Any]]:
         """Fetch events from the Drupal JSON feed."""
-        start = utc_now().strftime("%Y-%m-%d")
-        end = (utc_now() + timedelta(days=self.months_ahead * 31)).strftime("%Y-%m-%d")
+        now = utc_now()
+        start = now.strftime("%Y-%m-%d")
+        end = self.horizon_cutoff(now).strftime("%Y-%m-%d")
         url = f"{self.feed_url}?start={start}&end={end}"
 
         self.logger.info(f"Fetching {url}")
