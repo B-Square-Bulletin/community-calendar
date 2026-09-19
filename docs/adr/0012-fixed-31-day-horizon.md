@@ -40,3 +40,16 @@ unifying them would change behaviour.
   source's window at once — treat it as deliberate.
 - The two `* 30` sites are exceptions by intent; their comments point back here
   so the next reader does not unify them.
+
+## Alternatives Considered
+
+- **Calendar-aware month addition** (`relativedelta(months=N)`): rejected. It
+  yields uneven windows (28–31 days per month) and month-end ambiguity, so the
+  same `SCRAPE_MONTHS` would prefetch different amounts depending on the
+  current date, making the calendar's coverage harder to reason about and test.
+- **Each scraper computes its boundary inline** (the status quo): rejected.
+  It gave the rule ~13 definitions that could drift; routing through one helper
+  makes the boundary changeable in one place.
+- **Unify the two `* 30` ceilings now**: rejected as a behaviour change outside
+  this refactor's scope. They can be migrated deliberately later if the
+  separate tolerances stop being useful.
