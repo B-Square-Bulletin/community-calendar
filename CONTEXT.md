@@ -263,9 +263,9 @@ load-events edge function (upserts to Supabase events table by source_uid)
 ### Data Flow: Scraper → Database
 
 ```
-Scraper (python scrapers/example.py --name "Source Name" -o cities/{city}/example.ics)
+Scraper (python scrapers/example.py -o cities/{city}/example.ics)
   ↓
-BaseScraper.create_event() (sets X-SOURCE from --name)
+BaseScraper.create_event() (sets X-SOURCE from the scraper class's `name` attribute)
   ↓
 cities/{city}/example.ics (with X-SOURCE headers)
   ↓

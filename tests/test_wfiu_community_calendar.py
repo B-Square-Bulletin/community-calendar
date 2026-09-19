@@ -274,6 +274,44 @@ class TestTimeBlocks:
         assert event["dtstart"] == date(2026, 9, 18)
         assert event["dtend"] == date(2026, 9, 19)
 
+    def test_weekly_schedule_selects_the_card_weekday_entry(self):
+        site = _Site(
+            pages=[
+                _listing_html(
+                    _card(
+                        "Weekly Pick",
+                        weekday="Friday",
+                        time_raw=(
+                            "Every week through Oct 27, 2026. "
+                            "Monday: 10:00 AM - 11:00 AM "
+                            "Friday: 05:30 PM - 06:30 PM"
+                        ),
+                    ),
+                )
+            ]
+        )
+        events, _ = _run(site)
+
+        assert events[0]["dtstart"] == datetime(2026, 9, 18, 17, 30, tzinfo=TZ)
+        assert events[0]["dtend"] == datetime(2026, 9, 18, 18, 30, tzinfo=TZ)
+
+    def test_weekly_schedule_without_a_matching_weekday_is_all_day(self):
+        site = _Site(
+            pages=[
+                _listing_html(
+                    _card(
+                        "Mismatched Pick",
+                        weekday="Friday",
+                        time_raw=("Every week through Oct 27, 2026. Monday: 10:00 AM - 11:00 AM"),
+                    ),
+                )
+            ]
+        )
+        events, _ = _run(site)
+
+        assert events[0]["dtstart"] == date(2026, 9, 18)
+        assert events[0]["dtend"] == date(2026, 9, 19)
+
 
 class TestTimeAndIdentity:
     """Clock-time hardening and per-occurrence identity (#141).

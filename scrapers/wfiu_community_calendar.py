@@ -233,7 +233,10 @@ def _time_range(raw: str, weekday: str | None) -> tuple[dtime, dtime] | None:
 
     One-off, daily, and monthly cards lead with `HH:MM AM - HH:MM PM`. Weekly
     cards instead list `Weekday: HH:MM AM - HH:MM PM` entries; the occurrence
-    card's own weekday selects the matching entry, falling back to the first.
+    card's own weekday selects the matching entry. A weekday mismatch or a
+    lone `HH:MM AM` without a matching entry means no usable clock for this
+    occurrence: mismatch returns None so the caller emits a date-only
+    all-day VEVENT with a warning, never another weekday's hours.
     A lone `HH:MM AM` is a start-only time and gets the one-hour default.
     """
     text = " ".join((raw or "").split())
@@ -247,9 +250,7 @@ def _time_range(raw: str, weekday: str | None) -> tuple[dtime, dtime] | None:
             if weekday and name.lower() == weekday.lower():
                 start, end = _parse_clock(start_raw), _parse_clock(end_raw)
                 return start, _resolve_end(start, end)
-        _, start_raw, end_raw = entries[0]
-        start, end = _parse_clock(start_raw), _parse_clock(end_raw)
-        return start, _resolve_end(start, end)
+        return None
     start_only = _START_ONLY.match(text)
     if start_only:
         start = _parse_clock(start_only.group(1))
