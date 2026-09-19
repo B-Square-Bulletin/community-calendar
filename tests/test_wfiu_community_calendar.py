@@ -107,6 +107,22 @@ class _Site:
         return self.pages[page - 1]
 
 
+class _RepeatingSite(_Site):
+    """A site that returns page 1's body for every listing request."""
+
+    def __init__(self):
+        self.pages = [_listing_html(_card("Heist"), page_counts="1 of 2")]
+        self.details = DETAIL_FILES
+        self.fail = set()
+        self.calls: list[str] = []
+
+    def fetch(self, url: str) -> str:
+        self.calls.append(url)
+        if "/event/" in urlparse(url).path:
+            return _fixture(self.details[HEIST_SLUG])
+        return self.pages[0]
+
+
 def _run(site: _Site | None = None, now: datetime = FROZEN_NOW, months: int = MONTHS_AHEAD):
     site = site or _Site()
     scraper = WFIUCommunityCalendarScraper()
@@ -209,6 +225,13 @@ class TestListingWalk:
         with pytest.raises(RuntimeError, match="page count"):
             _run(site)
 
+    def test_repeated_listing_page_raises_loud(self):
+        """A page that ignores the requested number must fail, not double-count."""
+        site = _RepeatingSite()
+
+        with pytest.raises(RuntimeError, match="page 2"):
+            _run(site)
+
     def test_detail_urls_are_fetched_once_per_unique_event(self):
         _, calls = _run()
 
@@ -234,6 +257,30 @@ class TestListingWalk:
             scraper.fetch_events()
 
         mock_sleep.assert_any_call(CRAWL_DELAY)
+
+    def test_crawl_delay_precedes_the_first_detail_fetch(self):
+        """The listing-to-detail transition must be spaced like every other gap."""
+        scraper = WFIUCommunityCalendarScraper()
+        scraper.months_ahead = MONTHS_AHEAD
+        site = _Site()
+        order: list[str] = []
+
+        def record_fetch(url: str) -> str:
+            order.append(url)
+            return site.fetch(url)
+
+        with (
+            patch("scrapers.wfiu_community_calendar._fetch_html", side_effect=record_fetch),
+            patch("scrapers.wfiu_community_calendar._now", return_value=FROZEN_NOW),
+            patch(
+                "scrapers.wfiu_community_calendar.time.sleep",
+                side_effect=lambda _seconds: order.append("sleep"),
+            ),
+        ):
+            scraper.fetch_events()
+
+        first_detail = next(i for i, entry in enumerate(order) if "/event/" in entry)
+        assert order[first_detail - 1] == "sleep"
 
 
 class TestTimeBlocks:
@@ -704,6 +751,26 @@ class TestDetailFailure:
 
         with pytest.raises(RuntimeError, match="detail"):
             _run(site)
+
+    def test_detail_failure_aborts_without_fetching_the_rest(self, monkeypatch):
+        """Once the threshold is crossed the run must not keep hitting the source."""
+        monkeypatch.setattr("scrapers.wfiu_community_calendar.DETAIL_ERROR_THRESHOLD", 1)
+        site = _Site(
+            pages=[
+                _listing_html(
+                    _card("Heist", slug=HEIST_SLUG),
+                    _card("Class", slug=UKULELE_SLUG),
+                    _card("Concert", slug=METZ_SLUG),
+                )
+            ],
+            fail={HEIST_SLUG, UKULELE_SLUG, METZ_SLUG},
+        )
+
+        with pytest.raises(RuntimeError, match="detail"):
+            _run(site)
+
+        detail_calls = [url for url in site.calls if "/event/" in url]
+        assert len(detail_calls) == 2
 
     def test_postal_less_emissions_are_counted_in_the_run_record(self, tmp_path):
         site = _Site(fail={HEIST_SLUG})

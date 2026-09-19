@@ -434,7 +434,12 @@ class WFIUCommunityCalendarScraper(BaseScraper):
             if page > PAGE_CAP:
                 raise RuntimeError(f"WFIU listing exceeded the hard page cap of {PAGE_CAP}")
             html = _fetch_html(f"{LISTING_URL}?f1={start_ms}-{end_ms}&p={page}")
-            page_cards, _current, reported_total = _parse_listing_page(html)
+            page_cards, current, reported_total = _parse_listing_page(html)
+            if current != page:
+                raise RuntimeError(
+                    f"WFIU listing requested page {page} but the page reports "
+                    f"{current} of {reported_total}; refusing to count a repeated page"
+                )
             if total is None:
                 total = reported_total
                 if test_cap is None and total > PAGE_CAP:
@@ -453,13 +458,14 @@ class WFIUCommunityCalendarScraper(BaseScraper):
         """Detail URLs in first-seen order, one per unique event."""
         return list(dict.fromkeys(c["url"] for c in cards if c.get("url")))
 
-    def _fetch_details(self, urls: list[str]) -> tuple[dict[str, str], int]:
-        """One fetch per unique detail URL; failures are left absent and counted.
+    def _fetch_details(self, urls: list[str]) -> dict[str, str]:
+        """One fetch per unique detail URL; failures are left absent.
 
         The cap raises rather than truncating the inventory. A per-URL failure
         is not retried (retry logic deliberately unchanged): the caller emits a
-        card-fallback event and the run raises once failures cross the small
-        threshold, so a page of address-less cards never ships silently.
+        card-fallback event. The loop raises as soon as failures cross the small
+        threshold, so a source outage never drives hundreds of remaining
+        requests before the run fails loud.
         """
         if len(urls) > DETAIL_CAP:
             raise RuntimeError(
@@ -468,9 +474,10 @@ class WFIUCommunityCalendarScraper(BaseScraper):
             )
         details: dict[str, str] = {}
         errors = 0
-        for index, url in enumerate(urls):
-            if index:
-                time.sleep(CRAWL_DELAY)
+        for url in urls:
+            # Delay before every fetch, including the first, so the transition
+            # from the last listing page to the first detail request stays spaced.
+            time.sleep(CRAWL_DELAY)
             try:
                 details[url] = _fetch_html(url)
             except Exception as exc:  # any detail failure degrades to a card fallback
@@ -479,7 +486,12 @@ class WFIUCommunityCalendarScraper(BaseScraper):
                     f"WFIU Community Calendar: detail fetch failed for {url} "
                     f"({exc}); emitting card fallback"
                 )
-        return details, errors
+                if errors > DETAIL_ERROR_THRESHOLD:
+                    raise RuntimeError(
+                        f"WFIU Community Calendar: {errors} detail fetches failed, "
+                        f"above the threshold of {DETAIL_ERROR_THRESHOLD}; failing loud"
+                    ) from exc
+        return details
 
     def _parse_card(
         self, card: dict[str, Any], today: date, horizon: date, detail: dict[str, Any] | None
@@ -581,12 +593,7 @@ class WFIUCommunityCalendarScraper(BaseScraper):
 
         cards, pages = self._walk_listing(start_ms, end_ms)
         urls = self._unique_urls(cards)
-        details, detail_errors = self._fetch_details(urls)
-        if detail_errors > DETAIL_ERROR_THRESHOLD:
-            raise RuntimeError(
-                f"WFIU Community Calendar: {detail_errors} detail fetches failed, "
-                f"above the threshold of {DETAIL_ERROR_THRESHOLD}; failing loud"
-            )
+        details = self._fetch_details(urls)
         # Parse each unique detail once, not once per occurrence card.
         parsed_details = {url: _parse_detail(html) for url, html in details.items()}
 
