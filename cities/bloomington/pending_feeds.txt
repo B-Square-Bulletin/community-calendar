@@ -36,7 +36,3 @@
 #   python scripts/add_scraper.py example bloomington "Source Name" --test
 #
 # See CONTRIBUTING.md for details.
-
-# WFIU Community Calendar
-# cmd: python scrapers/wfiu_community_calendar.py --output cities/bloomington/wfiu_community_calendar.ics
-cities/bloomington/wfiu_community_calendar.ics
