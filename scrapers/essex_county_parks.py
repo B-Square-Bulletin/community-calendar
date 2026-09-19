@@ -48,8 +48,9 @@ class EssexCountyParksScraper(BaseScraper):
 
     def fetch_events(self) -> list[dict[str, Any]]:
         """Fetch events from the FullCalendar JSON endpoint."""
-        start = utc_now().strftime("%Y-%m-%d")
-        end = self.horizon_cutoff(utc_now()).strftime("%Y-%m-%d")
+        now = utc_now()
+        start = now.strftime("%Y-%m-%d")
+        end = self.horizon_cutoff(now).strftime("%Y-%m-%d")
         url = f"{CALENDAR_URL}?start={start}&end={end}"
 
         self.logger.info(f"Fetching {url}")
