@@ -51,6 +51,11 @@ def test_zip_before_a_country_suffix_is_matched():
     assert _in_area("Bell Trace, 800 Bell Trace Ct, IN 47408, USA")
 
 
+def test_zip_before_an_escaped_comma_is_matched():
+    # Combine-time locations are still serialized ICS text: commas are "\,".
+    assert _in_area(r"Bell Trace\, 800 Bell Trace Ct\, IN 47408\, USA")
+
+
 def test_five_digit_house_number_is_not_mistaken_for_a_zip():
     # 47404 collides with a Bloomington ZIP but is a house number here.
     allowed = {"bloomington"}

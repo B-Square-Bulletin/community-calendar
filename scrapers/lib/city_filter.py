@@ -74,7 +74,9 @@ _ZIP_RE = re.compile(r"\b\d{5}\b")
 # A ZIP in postal position: a 5-digit (optionally ZIP+4) token at the end of the
 # location or immediately before a comma. Used when deciding whether an address
 # is in-area, so a 5-digit house number is not mistaken for a postal code.
-_POSTAL_ZIP_RE = re.compile(r"\b(\d{5})(?:-\d{4})?\b(?=\s*(?:,|$))")
+# Combine-time locations are still serialized ICS text, where commas appear as
+# "\," (e.g. "IN 47408\, USA"), so tolerate the optional ICS escape.
+_POSTAL_ZIP_RE = re.compile(r"\b(\d{5})(?:-\d{4})?\b(?=\s*(?:\\?,|$))")
 _CA_POSTAL_RE = re.compile(r"[A-Z]\d[A-Z]\s?\d[A-Z]\d")  # "M5V 3A8" or "K0K1E0"
 _STREET_RE = re.compile(
     r"\d+\s+\w+\s+(?:street|st|avenue|ave|road|rd|drive|dr|boulevard|blvd|lane|ln|way|court|ct)\b",
