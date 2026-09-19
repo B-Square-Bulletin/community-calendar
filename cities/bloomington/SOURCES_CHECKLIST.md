@@ -218,7 +218,6 @@ These curate or aggregate events from multiple venues:
 | Source | Reason |
 |--------|--------|
 | WCLS 97.7 | Site suspended |
-| Indiana Public Media | Brightspot CMS, no ICS/RSS for events |
 | ~~The Back Door (Tockify)~~ | RESOLVED 2026-07-17: ICS export now enabled — see Ready to Add |
 | Chamber of Commerce Atlas | No ICS; UPDATE 2026-07-17: WebLink/Atlas JSON API exists (api-internal.weblinkconnect.com) behind auth — needs scraper if wanted |
 | Bloomington Board Games Meetup | 403 private |
@@ -352,6 +351,7 @@ Edgewood alone shows 84 aggregator-only events today. Also: third-party IU footb
 | Ellettsville Farmers Market | Custom site, no feed | Saturdays May–Sep |
 | Bloomington Brewing Co | Squarespace: events collection empty BUT individual festival pages carry per-event `.ics` links | Springfest/Summerfest/Oktoberfest/Winterfest only |
 | Exodus Refugee Immigration | Eventbrite organizer `36028304013` | Bloomington office; World Refugee Day; currently 0 upcoming — wire and wait |
+| Indiana Public Media / WFIU | Brightspot CMS, server-rendered HTML only — no ICS/RSS/iCal/JSON-LD/API | Regional community calendar at `www.ipm.org/community-calendar` (aggregator). Occurrence-expanded listing with a real `?f1=<ms>-<ms>` date filter; detail pages carry street/city/state/ZIP and `brightspot.contentId`. Spec #139 — needs a dedicated scraper |
 
 ## Discovered 2026-07-17 — Manual / seasonal sweep list
 
@@ -423,6 +423,11 @@ Annual events with reliable dates but no feeds — a once-a-season curator sweep
 ---
 
 ## Discovery Run Log
+
+### 2026-09-18: Indiana Public Media / WFIU surface verified — dead end reversed
+- **Correction:** the "Indiana Public Media — Brightspot CMS, no ICS/RSS for events" entry (filed under Inactive / Suspended) was wrong. The site exposes **no** machine-readable surface — no RSS/Atom, iCal/ICS, JSON-LD, JSON/GraphQL/REST, and sitemaps carry only ~8 recent event URLs — so the listing must be scraped as server-rendered HTML. The real server-side date filter is `?f1=<startMs>-<endMs>` (`?from=`/`?to=` are ignored); pagination is fixed at 10/page.
+- Fresh 93-day measurement (2026-09-18): `?f1` window → **67 pages / 667 occurrence cards / 348 unique detail URLs**. The listing is **occurrence-expanded** (one card per occurrence; 58–62% carry `data-recurring`), so each card is taken as one occurrence and recurrence is **not** re-expanded. Detail pages alone carry street/city/state/ZIP, ticket link, image, presenting org, and `meta[brightspot.contentId]` (UID).
+- Nothing built here — the mechanism, coverage bar, field mapping, attribution/dedup, geo, and registration contracts are locked in spec #139 (see map #130). WFIU is an **aggregator** (loses cross-source dedup to primaries), so it is added to `source_priority.json`'s `aggregators` list when implemented.
 
 ### 2026-09-16: Visit Bloomington registered as a primary source
 - Registered via the standard DB-first path — `add_scraper.py visit_bloomington bloomington "Visit Bloomington"` wrote the `cities/bloomington/pending_feeds.txt` entry (`# Visit Bloomington`, `# cmd: python scrapers/visit_bloomington.py --output cities/bloomington/visit_bloomington.ics`). No workflow edit: the nightly pending-feeds processor inserts the active DB row and the DB-first runner executes it.
