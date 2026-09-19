@@ -132,13 +132,14 @@ Docs: https://documentation.events.iu.edu/feed-and-linked-calendars/ical-feed.ht
 
 Visit Bloomington is pulled in full over the REST API (token + `skip` paging, Chrome UA, crawl-delay spacing). The sitemap fallback is a **contingency only**, triggered when either the API returns non-200 on **three consecutive nightly runs after** the in-run token re-fetch and retry, or the documented-safe request shape draws a WAF 403. Until then, the REST API is the source.
 
-### Aggregators (10 sources)
+### Aggregators (11 sources)
 
 These curate or aggregate events from multiple venues:
 
 | Source | Type | Events | Notes |
 |--------|------|--------|-------|
 | WFHB Community Calendar | Scraper | ~349 | `wfhb_calendar.py` — ai1ec; covers Orbit Room, library events, and many venues not otherwise scrapable |
+| WFIU Community Calendar | Scraper | ~667 | `wfiu_community_calendar.py` — Brightspot server-rendered HTML; occurrence-expanded regional community calendar (Bloomington + surrounding towns) |
 | BloomingtonOnline: Events | Google Calendar | ~224 | Community events |
 | BloomingtonOnline: Food & Drink | Google Calendar | ~133 | Restaurant/brewery specials |
 | BloomingtonOnline: Shopping | Google Calendar | ~18 | Markets, deals |
@@ -218,7 +219,6 @@ These curate or aggregate events from multiple venues:
 | Source | Reason |
 |--------|--------|
 | WCLS 97.7 | Site suspended |
-| Indiana Public Media | Brightspot CMS, no ICS/RSS for events |
 | ~~The Back Door (Tockify)~~ | RESOLVED 2026-07-17: ICS export now enabled — see Ready to Add |
 | Chamber of Commerce Atlas | No ICS; UPDATE 2026-07-17: WebLink/Atlas JSON API exists (api-internal.weblinkconnect.com) behind auth — needs scraper if wanted |
 | Bloomington Board Games Meetup | 403 private |
@@ -423,6 +423,13 @@ Annual events with reliable dates but no feeds — a once-a-season curator sweep
 ---
 
 ## Discovery Run Log
+
+### 2026-09-19: WFIU Community Calendar built and registered as an aggregator
+- Built `scrapers/wfiu_community_calendar.py` (Pattern A, `name = "WFIU Community Calendar"`): walks the `?f1` date-filtered listing across the Horizon, emits one event per occurrence card, and fetches each unique detail page once for street/city/state/ZIP, ticket link, image, presenting org, and `brightspot.contentId` (the UID). Hard page cap 80 and detail cap 500 both raise rather than truncate; unparseable dates raise after a small threshold.
+- Registered via the standard DB-first path — the `cities/bloomington/pending_feeds.txt` entry (`# WFIU Community Calendar`, `# cmd: python scrapers/wfiu_community_calendar.py --output cities/bloomington/wfiu_community_calendar.ics`). No workflow edit: the nightly pending-feeds processor inserts the active DB row and the DB-first runner executes it. `add_scraper.py`'s live smoke test honors the test-only `SCRAPER_TEST_PAGE_CAP` bound so the 120s registration test validates end to end while the registered command stays unbounded.
+- Added `"WFIU Community Calendar"` to `source_priority.json`'s `aggregators` list, so it loses cross-source dedup to primaries and merges with fellow aggregators under the existing single-tier sort (no new ADR). Shared events merge to `Visit Bloomington, WFIU Community Calendar`; fellow-aggregator echoes merge alphabetically.
+- Earlier (2026-09-18) surface verification reversed the stale "Indiana Public Media — Brightspot CMS, no ICS/RSS for events" dead end recorded under Inactive / Suspended.
+- Calibration (research-time, 93-day window): `?f1` returns **67 pages / 667 occurrence cards / 348 unique detail URLs**. The listing is occurrence-expanded (one card per occurrence; 58–62% carry `data-recurring`), so each card is one emitted occurrence and recurrence is not re-expanded. Future runs compare against these counts through the degradation guard (warn below 50% of the trailing 7-run card median).
 
 ### 2026-09-16: Visit Bloomington registered as a primary source
 - Registered via the standard DB-first path — `add_scraper.py visit_bloomington bloomington "Visit Bloomington"` wrote the `cities/bloomington/pending_feeds.txt` entry (`# Visit Bloomington`, `# cmd: python scrapers/visit_bloomington.py --output cities/bloomington/visit_bloomington.ics`). No workflow edit: the nightly pending-feeds processor inserts the active DB row and the DB-first runner executes it.

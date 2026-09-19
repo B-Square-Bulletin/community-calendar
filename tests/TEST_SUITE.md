@@ -59,9 +59,10 @@ supabase test db supabase/tests/
 - `tests/test_timezone_pipeline.py` - Python/pytest tests for ICS timezone handling
 - `tests/test_city_filter.py` - shared geo-filter matcher (allowed town names and ZIP codes, out-of-area and venue-only cases)
 - `tests/test_visit_bloomington.py` - Visit Bloomington Simpleview REST API scraper (paging, occurrence expansion, geo prefilter, attribution)
-- `tests/test_wfiu_community_calendar.py` - WFIU Community Calendar HTML scraper (Horizon date-filtered paging, occurrence cards, detail enrichment and postal geography, detail-failure fallback, run-history degradation guard, aggregator registration contract)
+- `tests/test_wfiu_community_calendar.py` - WFIU Community Calendar HTML scraper (Horizon date-filtered paging, occurrence cards, detail enrichment and postal geography, detail-failure fallback, run-history degradation guard, registration smoke-test page cap, aggregator registration contract)
 - `tests/test_base_scraper.py` - base scraper `X-SOURCE-URL` and `GEO` emission
 - `tests/test_validate_pr_feeds.py` - PR feed/scraper registration validation against the DB-first contract
+- `tests/test_add_scraper.py` - DB-first registration helper: smoke-test bounds are environment-only (the registered command stays unbounded)
 - `supabase/tests/test_refresh_source_names.sql` - pgTAP database tests for `refresh_source_names()`
 - `supabase/tests/README.md` - database-test-specific setup, workflow, and troubleshooting
 

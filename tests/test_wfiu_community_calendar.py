@@ -650,3 +650,44 @@ class TestDetailFailure:
 
         runs = json.loads((tmp_path / RUN_HISTORY_FILE).read_text())["runs"]
         assert runs[-1]["postal_less"] == 0
+
+
+class TestRegistrationSmokeTest:
+    """The registration smoke test gets a bounded crawl; production stays unbounded.
+
+    `add_scraper.py` runs the exact registered command under a 120s timeout,
+    which a full Horizon crawl can exceed. `SCRAPER_TEST_PAGE_CAP` (armed only
+    by that harness) stops the walk cleanly and skips run history, so a smoke
+    test cannot masquerade as a coverage run or drag down the trailing median.
+    """
+
+    def test_test_page_cap_bounds_the_smoke_crawl_without_raising(self, monkeypatch):
+        monkeypatch.setenv("SCRAPER_TEST_PAGE_CAP", "1")
+
+        events, calls = _run()
+
+        listing_calls = [url for url in calls if "/event/" not in url]
+        assert len(listing_calls) == 1
+        assert len(events) == 2  # the fixture's first page still emits
+
+    def test_smoke_crawl_does_not_record_run_history(self, monkeypatch, tmp_path):
+        monkeypatch.setenv("SCRAPER_TEST_PAGE_CAP", "1")
+
+        _run()
+
+        assert not (tmp_path / RUN_HISTORY_FILE).exists()
+
+    def test_registered_command_walks_every_page_when_the_cap_is_unset(self):
+        # No env var: the production path is unchanged (the fixture has 2 pages).
+        _, calls = _run()
+
+        listing_calls = [url for url in calls if "/event/" not in url]
+        assert len(listing_calls) == 2
+
+    def test_an_invalid_cap_is_ignored(self, monkeypatch):
+        monkeypatch.setenv("SCRAPER_TEST_PAGE_CAP", "not-a-number")
+
+        _, calls = _run()
+
+        listing_calls = [url for url in calls if "/event/" not in url]
+        assert len(listing_calls) == 2

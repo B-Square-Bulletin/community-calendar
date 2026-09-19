@@ -50,7 +50,14 @@ def find_scraper(name: str) -> Path | None:
 
 
 def test_scraper(scraper_path: Path, extra_args: str) -> bool:
-    """Run the scraper with the same arguments that will be registered."""
+    """Run the scraper with the same arguments that will be registered.
+
+    `SCRAPE_MONTHS` and `SCRAPER_TEST_PAGE_CAP` are environment-only smoke-test
+    bounds, never part of the registered command: a scraper that honors the page
+    cap (e.g. wfiu_community_calendar) stops its crawl cleanly so a slow source
+    can validate end to end inside the 120s timeout. Scrapers that ignore it are
+    unaffected.
+    """
     output_file = Path("/tmp/scraper_test.ics")
     cmd = [sys.executable, str(scraper_path)]
     if extra_args:
@@ -62,7 +69,7 @@ def test_scraper(scraper_path: Path, extra_args: str) -> bool:
     try:
         result = subprocess.run(
             cmd,
-            env={**os.environ, "SCRAPE_MONTHS": "2"},
+            env={**os.environ, "SCRAPE_MONTHS": "2", "SCRAPER_TEST_PAGE_CAP": "1"},
             capture_output=True,
             text=True,
             timeout=120,

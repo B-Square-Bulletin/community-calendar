@@ -36,6 +36,7 @@ import hashlib
 import html
 import json
 import logging
+import os
 import re
 import time
 from datetime import date, datetime, timedelta
@@ -68,6 +69,13 @@ CITY_DIR = ROOT_DIR / "cities" / CITY
 # The listing reports `1 of N`; walk at most this many pages and raise if the
 # source claims more, so a runaway crawl surfaces instead of quietly stopping.
 PAGE_CAP = 80
+# The registration flow (`scripts/add_scraper.py`) smoke-tests the exact
+# registered command under a 120s timeout, which a full Horizon crawl can
+# exceed. When this env var is set the walk stops cleanly after that many pages
+# and the run is not recorded; the registered command never sets it, so
+# production crawls still fail loud at PAGE_CAP. This is a test harness bound,
+# never a coverage policy.
+TEST_PAGE_CAP_ENV = "SCRAPER_TEST_PAGE_CAP"
 # One detail fetch per unique event URL, for the stable content id. Raise on
 # cap-hit rather than truncate the inventory.
 DETAIL_CAP = 500
@@ -129,6 +137,23 @@ _MONTHS = {
 def _now() -> datetime:
     """Current time in the source's timezone (a seam, patched in tests)."""
     return datetime.now(TIMEZONE)
+
+
+def _test_page_cap() -> int | None:
+    """The registration smoke test's page bound, or None outside it.
+
+    Read at call time so a test can arm it through the environment. A missing
+    or unparseable value means "not a smoke test", so a stray env var can never
+    silently truncate a production crawl.
+    """
+    raw = os.environ.get(TEST_PAGE_CAP_ENV)
+    if not raw:
+        return None
+    try:
+        cap = int(raw)
+    except ValueError:
+        return None
+    return cap if cap > 0 else None
 
 
 def _fetch_html(url: str) -> str:
@@ -382,18 +407,31 @@ class WFIUCommunityCalendarScraper(BaseScraper):
     source_url = SOURCE_URL
 
     def _walk_listing(self, start_ms: int, end_ms: int) -> tuple[list[dict[str, Any]], int]:
-        """Fetch every listing page inside the Horizon, capped and loud."""
+        """Fetch every listing page inside the Horizon, capped and loud.
+
+        Under the registration smoke test (`TEST_PAGE_CAP_ENV`) the walk stops
+        cleanly after the test cap instead of raising, so the harness proves the
+        pipeline end to end without a full crawl. Production carries no cap env
+        and keeps the loud PAGE_CAP ceiling.
+        """
+        test_cap = _test_page_cap()
         cards: list[dict[str, Any]] = []
         total: int | None = None
         page = 1
         while True:
+            if test_cap is not None and page > test_cap:
+                self.logger.info(
+                    f"WFIU Community Calendar: test page cap {test_cap} reached; "
+                    f"stopping the registration smoke crawl"
+                )
+                return cards, page - 1
             if page > PAGE_CAP:
                 raise RuntimeError(f"WFIU listing exceeded the hard page cap of {PAGE_CAP}")
             html = _fetch_html(f"{LISTING_URL}?f1={start_ms}-{end_ms}&p={page}")
             page_cards, _current, reported_total = _parse_listing_page(html)
             if total is None:
                 total = reported_total
-                if total > PAGE_CAP:
+                if test_cap is None and total > PAGE_CAP:
                     raise RuntimeError(
                         f"WFIU listing reports {total} pages, above the hard page cap "
                         f"of {PAGE_CAP}; refusing to truncate the crawl"
@@ -572,6 +610,13 @@ class WFIUCommunityCalendarScraper(BaseScraper):
             f"{len(urls)} unique detail URLs, {len(details)} details, "
             f"{len(events)} events emitted, {postal_less} postal-less"
         )
+        if _test_page_cap() is not None:
+            # A smoke test is not a coverage run: recording it would drag down
+            # the trailing median the degradation guard depends on.
+            self.logger.info(
+                "WFIU Community Calendar: registration smoke test; not recording run history"
+            )
+            return events
         runs = self._load_runs()
         self._warn_if_degraded(len(cards), runs)
         self._record_run(
