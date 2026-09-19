@@ -1,0 +1,114 @@
+# WFIU Community Calendar — raw recurrence/date-time corpus
+# Source: https://www.ipm.org/community-calendar (listing cards .PromoEvent-time)
+#         https://www.ipm.org/community-calendar/event/<slug> (.EventPage-information-time)
+# Harvested: 2026-09-18 (America/Indiana/Indianapolis)
+# These are the RAW strings the site renders into .PromoEvent-time / .EventPage-information-time.
+# They are unstructured English, not RRULE, and carry NO timezone marker.
+# Recurring cards also carry a boolean `data-recurring` attribute (no value) on the time element.
+
+# TOTAL captured unique strings: 73
+
+==============================================================================
+ONE-OFF — `<time> on <Ddd, D Mon YYYY>` (single occurrence, no recurrence)
+==============================================================================
+01:00 PM - 03:00 PM on Sat, 19 Sep 2026
+02:00 PM - 03:00 PM on Sat, 5 Dec 2026
+02:00 PM - 04:00 PM on Sat, 19 Sep 2026
+02:00 PM - 04:00 PM on Sun, 20 Sep 2026
+02:00 PM - 05:00 PM on Wed, 21 Oct 2026
+02:00 PM - 08:00 PM on Sat, 19 Sep 2026
+02:00 PM - 11:59 PM on Sat, 5 Dec 2026
+03:00 PM - 04:00 PM on Fri, 30 Oct 2026
+03:00 PM - 04:00 PM on Sat, 5 Dec 2026
+04:00 PM - 05:10 PM on Tue, 22 Sep 2026
+04:00 PM - 06:00 PM on Sat, 5 Dec 2026
+04:00 PM - 07:00 PM on Sat, 26 Sep 2026
+04:00 PM - 11:59 PM on Sat, 19 Sep 2026
+04:00 PM - 11:59 PM on Sat, 5 Dec 2026
+04:00 PM - 11:59 PM on Wed, 23 Sep 2026
+05:00 PM - 07:30 PM on Wed, 23 Sep 2026
+05:00 PM - 10:00 PM on Mon, 9 Nov 2026
+05:00 PM - 11:59 PM on Sat, 19 Sep 2026
+06:00 PM - 07:00 PM on Mon, 21 Sep 2026
+06:00 PM - 07:00 PM on Sun, 20 Sep 2026
+06:00 PM - 07:00 PM on Wed, 23 Sep 2026
+06:00 PM - 10:00 PM on Sat, 19 Sep 2026
+06:30 PM - 08:30 PM on Fri, 18 Sep 2026
+06:30 PM - 08:30 PM on Tue, 22 Sep 2026
+06:30 PM - 11:59 PM on Fri, 18 Sep 2026
+07:00 PM - 08:00 PM on Wed, 21 Oct 2026
+07:00 PM - 09:00 PM on Fri, 9 Oct 2026
+07:00 PM - 11:59 PM on Sat, 26 Sep 2026
+07:00 PM - 11:59 PM on Wed, 21 Oct 2026
+07:30 PM - 09:30 PM on Fri, 30 Oct 2026
+07:30 PM - 09:30 PM on Sat, 19 Sep 2026
+07:30 PM - 09:30 PM on Wed, 23 Sep 2026
+07:30 PM - 10:00 PM on Sat, 26 Sep 2026
+07:30 PM - 11:59 PM on Fri, 18 Sep 2026
+07:30 PM - 11:59 PM on Fri, 4 Dec 2026
+07:30 PM - 11:59 PM on Wed, 21 Oct 2026
+08:00 AM - 02:00 PM on Sat, 19 Sep 2026
+08:00 PM - 09:30 PM on Fri, 4 Dec 2026
+08:00 PM - 10:00 PM on Fri, 30 Oct 2026
+08:00 PM - 10:00 PM on Thu, 8 Oct 2026
+08:30 PM - 10:00 PM on Fri, 30 Oct 2026
+09:00 AM - 02:00 PM on Sat, 19 Sep 2026
+11:00 AM - 02:00 PM on Sat, 19 Sep 2026
+11:00 AM - 03:00 PM on Sat, 5 Dec 2026
+12:00 PM - 01:00 PM on Sat, 26 Sep 2026
+
+==============================================================================
+DAILY — `<time>, every day through <Mon DD, YYYY>.`
+==============================================================================
+04:00 AM - 05:00 AM, every day through Nov 08, 2026.
+04:00 AM - 05:00 AM, every day through Oct 04, 2026.
+05:30 PM - 06:30 PM, every day through Oct 27, 2026.
+07:30 PM - 09:30 PM, every day through Sep 20, 2026.
+07:30 PM - 09:30 PM, every day through Sep 26, 2026.
+08:30 PM - 10:00 PM, every day through Nov 10, 2026.
+09:00 AM - 08:00 PM, every day through Nov 15, 2026.
+09:00 AM - 09:00 PM, every day through Dec 27, 2026.
+09:00 AM - 09:30 PM, every day through Jan 03, 2027.
+09:00 AM - 10:00 PM, every day through May 30, 2027.
+09:00 AM - 10:00 PM, every day through Sep 20, 2026.
+09:30 AM - 06:00 PM, every day through Oct 04, 2026.
+11:00 AM - 06:00 PM, every day through Sep 20, 2026.
+
+==============================================================================
+WEEKLY — `Every week through <Mon DD, YYYY>. <Weekday>: <time> [...]`
+==============================================================================
+Every week through Dec 17, 2026. Thursday: 04:00 PM - 05:45 PM
+Every week through Dec 17, 2026. Thursday: 10:00 AM - 10:30 AM
+Every week through Dec 18, 2026. Friday: 03:00 PM - 04:00 PM
+Every week through Dec 26, 2026. Saturday: 03:00 PM - 04:00 PM
+Every week through Dec 26, 2026. Saturday: 10:00 AM - 11:00 AM
+Every week through Dec 29, 2026. Tuesday: 10:00 AM - 10:30 AM
+Every week through Nov 14, 2026. Saturday: 01:00 PM - 02:00 PM
+Every week through Nov 14, 2026. Tuesday: 12:00 PM - 04:00 PM Wednesday: 12:00 PM - 04:00 PM Thursday: 12:00 PM - 04:00 PM Friday: 12:00 PM - 04:00 PM Saturday: 12:00 PM - 04:00 PM
+Every week through Oct 30, 2026. Thursday: 06:00 PM - 08:00 PM Friday: 06:00 PM - 08:00 PM Friday: 06:00 PM - 08:00 PM Saturday: 06:00 PM - 08:00 PM
+Every week through Oct 31, 2026. Tuesday: 12:00 PM - 04:00 PM Wednesday: 12:00 PM - 04:00 PM Thursday: 12:00 PM - 04:00 PM Friday: 12:00 PM - 04:00 PM Saturday: 12:00 PM - 04:00 PM
+Every week through Sep 26, 2026. Saturday: 03:00 PM - 04:00 PM
+Every week through Sep 26, 2026. Saturday: 10:00 AM - 02:00 PM
+Every week through Sep 26, 2026. Saturday: 11:00 AM - 02:00 PM
+Every week through Sep 29, 2026. Tuesday: 10:00 AM - 10:30 AM
+
+==============================================================================
+EVERY N WEEKS — `Every N weeks through <Mon DD, YYYY>. <Weekday>: <time>`
+==============================================================================
+Every 7 weeks through Oct 14, 2026. Wednesday: 12:30 PM - 02:30 PM
+
+==============================================================================
+PATTERN GAPS OBSERVED IN THIS CORPUS (explicit unknowns)
+==============================================================================
+# - MONTHLY: zero monthly expressions found in 764 listed events (45 unique
+#   one-off/weekly strings sampled across all 77 listing pages). The site's
+#   date grammar appears not to render a monthly form at all. A 'monthly'
+#   event (e.g. Morgenstern 'third Friday of each month') renders as a ONE-OFF
+#   single date with the cadence only in the free-text description.
+# - ALL-DAY / DATE-ONLY: no date-only or all-day string observed. Every time
+#   string carries a clock range. Rendered times include 11:59 PM end times,
+#   which may proxy an all-day/midnight cap (see e.g. '... - 11:59 PM').
+# - CONTINUOUS MULTI-DAY: no '<start> - <end>' date-range string observed.
+#   Multi-day runs (e.g. Heist Sep 3-20) render as 'every day through' (daily).
+# - IRREGULAR: no explicit irregular cadence observed; the only non-weekly
+#   cadence is the single 'Every 7 weeks' string.
