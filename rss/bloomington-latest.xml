@@ -5,829 +5,940 @@
     <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
     <atom:link href="https://b-square-bulletin.github.io/community-calendar/rss/bloomington-latest.xml" rel="self" type="application/rss+xml"/>
     <description>Events newly added to the calendar, most recent first.</description>
-    <lastBuildDate>Fri, 18 Sep 2026 03:31:02 +0000</lastBuildDate>
-    <item>
-      <title>Sun AM Bible Study — Sun Sep 20, 9:45 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">65323034-3862-4265-a639-366666363730</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Worship — Sun Sep 20, 10:30 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">62373837-6133-4665-b863-653464393535</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun PM Worship — Sun Sep 20, 4:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">62356133-6238-4333-a338-323963373666</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Wed PM Bible Study — Wed Sep 23, 7:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">35376332-3531-4365-b563-653133396161</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Bible Study — Sun Sep 27, 9:45 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">35376234-6230-4439-a233-333337373234</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Worship — Sun Sep 27, 10:30 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">65616335-3834-4132-b264-346536363861</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun PM Worship — Sun Sep 27, 4:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">35663732-3836-4665-a439-336631653939</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Town Council Meeting — Mon Sep 28, 6:30 PM</title>
-      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=611</link>
-      <guid isPermaLink="false">81410464.3115968</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Town Government, Limestone Post</description>
-    </item>
-    <item>
-      <title>Wed PM Bible Study — Wed Sep 30, 7:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">38333663-6166-4130-a561-366330353532</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Plan Commission Meeting — Thu Oct 1, 6:00 PM</title>
-      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=474</link>
-      <guid isPermaLink="false">55270795.6743443</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>First Thursday of every month beginning at 6:00 p.m. in Town Hall.
-
-Source: Ellettsville Town Government, Limestone Post</description>
-    </item>
-    <item>
-      <title>Sun AM Bible Study — Sun Oct 4, 9:45 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">65336665-6133-4263-b238-373233613866</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Worship — Sun Oct 4, 10:30 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">37323632-6565-4265-b636-333031643832</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun PM Worship — Sun Oct 4, 4:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">38303462-6130-4462-b765-623165373531</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Parks &amp; Recreation Board Meeting — Mon Oct 5, 5:00 PM — Town Hall Meeting Room</title>
-      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=852</link>
-      <guid isPermaLink="false">44731800.9399773</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>[1]Town Hall Meeting Room
-
-   1. https://ellettsville.in.us/egov/apps/locations/facilities.egov?view=detail&amp;id=7
-
-Source: Ellettsville Town Government</description>
-    </item>
-    <item>
-      <title>Wed PM Bible Study — Wed Oct 7, 7:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">39303130-6266-4561-b635-333261386266</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Bible Study — Sun Oct 11, 9:45 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">34613432-3535-4233-a161-353830333362</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Worship — Sun Oct 11, 10:30 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">66323863-3163-4930-a265-333833663333</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun PM Worship — Sun Oct 11, 4:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">33306565-6665-4561-b630-363633616632</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Redevelopment Commission Meeting — Mon Oct 12, 5:00 PM — Town Hall Meeting Room</title>
-      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=898</link>
-      <guid isPermaLink="false">35896946.3192285</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>[1]Town Hall Meeting Room
-
-   1. https://ellettsville.in.us/egov/apps/locations/facilities.egov?view=detail&amp;id=7
-
-Source: Ellettsville Town Government</description>
-    </item>
-    <item>
-      <title>Town Council Meeting — Mon Oct 12, 6:30 PM</title>
-      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=572</link>
-      <guid isPermaLink="false">53052482.1799602</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Town Government</description>
-    </item>
-    <item>
-      <title>Board of Zoning Appeals Meeting — Wed Oct 14, 6:00 PM — Town Hall</title>
-      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=817</link>
-      <guid isPermaLink="false">26052063.9103046</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>[1]Town Hall
-
-   1. https://ellettsville.in.us/egov/apps/locations/facilities.egov?view=detail&amp;id=6
-
-Source: Ellettsville Town Government</description>
-    </item>
-    <item>
-      <title>Wed PM Bible Study — Wed Oct 14, 7:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">39373231-3766-4434-b630-666633656134</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Bible Study — Sun Oct 18, 9:45 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">63653465-3138-4131-a263-383233303638</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Worship — Sun Oct 18, 10:30 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">62363961-6132-4532-b139-383933303863</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun PM Worship — Sun Oct 18, 4:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">32313731-3737-4138-b137-386135316335</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Wed PM Bible Study — Wed Oct 21, 7:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">66613866-6463-4732-b335-366435313337</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Bible Study — Sun Oct 25, 9:45 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">30343230-6664-4632-b735-343537373732</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Worship — Sun Oct 25, 10:30 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">37303334-3964-4561-a163-633134396438</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun PM Worship — Sun Oct 25, 4:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">66663733-3038-4461-b537-323238653837</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Town Council Meeting — Mon Oct 26, 6:30 PM</title>
-      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=612</link>
-      <guid isPermaLink="false">37872991.8438971</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Town Government</description>
-    </item>
-    <item>
-      <title>Wed PM Bible Study — Wed Oct 28, 7:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">34613664-3862-4635-a631-353364333365</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Bible Study — Sun Nov 1, 9:45 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">64323765-3235-4263-b339-303762656532</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Worship — Sun Nov 1, 10:30 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">65353864-3663-4835-b732-653531663633</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun PM Worship — Sun Nov 1, 4:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">33623337-6364-4533-b837-646230363739</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Parks &amp; Recreation Board Meeting — Mon Nov 2, 5:00 PM — Town Hall Meeting Room</title>
-      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=853</link>
-      <guid isPermaLink="false">93189962.2245741</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>[1]Town Hall Meeting Room
-
-   1. https://ellettsville.in.us/egov/apps/locations/facilities.egov?view=detail&amp;id=7
-
-Source: Ellettsville Town Government</description>
-    </item>
-    <item>
-      <title>Wed PM Bible Study — Wed Nov 4, 7:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">34316166-3236-4438-b634-663364613833</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Plan Commission Meeting — Thu Nov 5, 6:00 PM — Town Hall Meeting Room</title>
-      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=937</link>
-      <guid isPermaLink="false">21494862.5471806</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>[1]Town Hall Meeting Room
-
-   1. https://ellettsville.in.us/egov/apps/locations/facilities.egov?view=detail&amp;id=7
-
-Source: Ellettsville Town Government</description>
-    </item>
-    <item>
-      <title>Sun AM Bible Study — Sun Nov 8, 9:45 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">65613637-6464-4762-b466-636634336337</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Worship — Sun Nov 8, 10:30 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">62633833-3739-4138-a131-613761323963</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun PM Worship — Sun Nov 8, 4:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">61323436-3739-4665-a265-623831653262</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Redevelopment Commission Meeting — Mon Nov 9, 5:00 PM — Town Hall</title>
-      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=709</link>
-      <guid isPermaLink="false">36279696.7840392</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>[1]Town Hall
-
-   1. https://ellettsville.in.us/egov/apps/locations/facilities.egov?view=detail&amp;id=6
-
-Source: Ellettsville Town Government</description>
-    </item>
-    <item>
-      <title>Town Council Meeting — Mon Nov 9, 6:30 PM</title>
-      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=573</link>
-      <guid isPermaLink="false">47442757.0787334</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Town Government</description>
-    </item>
-    <item>
-      <title>Town Offices Closed - Veterans Day — Wed Nov 11, 12:00 AM</title>
-      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=197</link>
-      <guid isPermaLink="false">97834835.9890635</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Town Government</description>
-    </item>
-    <item>
-      <title>Wed PM Bible Study — Wed Nov 11, 7:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">37313462-6438-4862-a561-363035326434</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Bible Study — Sun Nov 15, 9:45 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">63356139-6232-4839-b230-313630636461</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Worship — Sun Nov 15, 10:30 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">66613034-6561-4132-a261-396438383734</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun PM Worship — Sun Nov 15, 4:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">66303761-3238-4035-a264-343664323834</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Board of Zoning Appeals Meeting — Wed Nov 18, 6:00 PM — Town Hall</title>
-      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=818</link>
-      <guid isPermaLink="false">99689982.862877</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>[1]Town Hall
-
-   1. https://ellettsville.in.us/egov/apps/locations/facilities.egov?view=detail&amp;id=6
-
-Source: Ellettsville Town Government</description>
-    </item>
-    <item>
-      <title>Wed PM Bible Study — Wed Nov 18, 7:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">36656233-3330-4934-a632-666138343436</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Bible Study — Sun Nov 22, 9:45 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">38316233-3739-4163-b531-633135386664</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Worship — Sun Nov 22, 10:30 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">39303662-6336-4138-a537-626535316535</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun PM Worship — Sun Nov 22, 4:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">34303165-6133-4937-b165-393061363562</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Town Council Meeting — Mon Nov 23, 6:30 PM</title>
-      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=613</link>
-      <guid isPermaLink="false">74820201.4458538</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Town Government</description>
-    </item>
-    <item>
-      <title>Wed PM Bible Study — Wed Nov 25, 7:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">30376665-3631-4238-a434-326439393461</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Thanksgiving Holiday - Town Offices Closed — Thu Nov 26, 12:00 AM</title>
-      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=341</link>
-      <guid isPermaLink="false">7789054.32310566</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Town Government, B-Square: Government</description>
-    </item>
-    <item>
-      <title>Thanksgiving Holiday - Town Offices Closed — Fri Nov 27, 12:00 AM</title>
-      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=361</link>
-      <guid isPermaLink="false">61402682.5031633</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Town Government</description>
-    </item>
-    <item>
-      <title>Sun AM Bible Study — Sun Nov 29, 9:45 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">32353864-3236-4665-b535-613339636233</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Worship — Sun Nov 29, 10:30 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">62656234-6135-4863-a233-623363363563</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun PM Worship — Sun Nov 29, 4:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">65326463-3961-4333-b061-316139626462</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Wed PM Bible Study — Wed Dec 2, 7:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">33386339-3562-4636-b064-333137373130</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Plan Commission Meeting — Thu Dec 3, 6:00 PM</title>
-      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=476</link>
-      <guid isPermaLink="false">63320148.2005461</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>First Thursday of every month beginning at 6:00 p.m. in Town Hall.
-
-Source: Ellettsville Town Government</description>
-    </item>
-    <item>
-      <title>Sun AM Bible Study — Sun Dec 6, 9:45 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">62343033-6163-4439-a136-363930376135</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Worship — Sun Dec 6, 10:30 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">31373837-3636-4535-a638-303030643539</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun PM Worship — Sun Dec 6, 4:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">66343633-3130-4638-b263-313738666232</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Parks &amp; Recreation Board Meeting — Mon Dec 7, 5:00 PM — Town Hall Meeting Room</title>
-      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=854</link>
-      <guid isPermaLink="false">81873892.4823926</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>[1]Town Hall Meeting Room
-
-   1. https://ellettsville.in.us/egov/apps/locations/facilities.egov?view=detail&amp;id=7
-
-Source: Ellettsville Town Government</description>
-    </item>
-    <item>
-      <title>Redevelopment Commission Meeting — Mon Dec 7, 5:00 PM — Town Hall</title>
-      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=710</link>
-      <guid isPermaLink="false">86970365.2371793</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>[1]Town Hall
-
-   1. https://ellettsville.in.us/egov/apps/locations/facilities.egov?view=detail&amp;id=6
-
-Source: Ellettsville Town Government</description>
-    </item>
-    <item>
-      <title>Board of Zoning Appeals Meeting — Wed Dec 9, 6:00 PM — Town Hall</title>
-      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=819</link>
-      <guid isPermaLink="false">54317087.7251431</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>[1]Town Hall
-
-   1. https://ellettsville.in.us/egov/apps/locations/facilities.egov?view=detail&amp;id=6
-
-Source: Ellettsville Town Government</description>
-    </item>
-    <item>
-      <title>Wed PM Bible Study — Wed Dec 9, 7:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">35633063-3837-4261-a663-363166386134</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Bible Study — Sun Dec 13, 9:45 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">64633638-3461-4663-b331-383236353765</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun AM Worship — Sun Dec 13, 10:30 AM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">63366361-6631-4165-a162-663039363339</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Sun PM Worship — Sun Dec 13, 4:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">62626531-6163-4931-b033-633933623964</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>Town Council Meeting — Mon Dec 14, 6:30 PM</title>
-      <link>https://ellettsville.in.us/egov/apps/events/calendar.egov?view=detail;id=574</link>
-      <guid isPermaLink="false">40742210.2910473</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Town Government</description>
-    </item>
-    <item>
-      <title>Area 10 Grocery Set Up — Tue Dec 15 — First United Church - Bloomington</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">8nn0a9mbq7rpp05uq8fomf8vl6@google.com__20261215</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: First Presbyterian Church</description>
-    </item>
-    <item>
-      <title>Wed PM Bible Study — Wed Dec 16, 7:00 PM</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">37343830-6635-4430-b465-366338366462</guid>
-      <pubDate>Fri, 18 Sep 2026 03:31:02 +0000</pubDate>
-      <description>Source: Ellettsville Church of Christ</description>
-    </item>
-    <item>
-      <title>One Love Event — Thu Sep 17, 5:00 PM — Boys &amp; Girls Clubs of Bloomington</title>
-      <link>https://www.visitbloomington.com/event/one-love-event/59303/</link>
-      <guid isPermaLink="false">c4f9e3f92ce82006762067adcaa81a45@visitbloomington.com</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
-      <description>The One Love event will feature live entertainment "an intimate evening with Elvis", dinner and drinks, a silent auction, and an opportunity to help us raise support for the One Love Needs &amp; Scholarship Fund!
+    <lastBuildDate>Sat, 19 Sep 2026 03:27:56 +0000</lastBuildDate>
+    <item>
+      <title>The 3 Jays at Sleeper's Bar — Fri Sep 18, 7:00 PM — Sleeper's Bar</title>
+      <link>https://www.visitbloomington.com/event/the-3-jays-at-sleepers-bar/59597/</link>
+      <guid isPermaLink="false">c92b7e98115f9ff7fea0a36b3da092b6@visitbloomington.com</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>We're a cover band playing danceable classic rock tunes from the '60s and '70s, at Bloomington's coolest and most laid-back venue. No cover.
 
 Source: Visit Bloomington</description>
     </item>
     <item>
-      <title>Author event with Associate Professor of Anthropology at IU, Keitlyn Alcántara — Thu Sep 17, 6:00 PM — Morgenstern Books</title>
-      <link>https://www.visitbloomington.com/event/author-event-with-associate-professor-of-anthropology-at-iu-keitlyn-alcntara/59453/</link>
-      <guid isPermaLink="false">0100059175da1298dc79d87d36d3c8f3@visitbloomington.com</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
-      <description>Join us for an evening with author and Associate Professor of Anthropology at IU, Keitlyn Alcántara, who will be discussing her new book, An Archaeology of Milpa Cultures: Maize and Ecological Worldbuilding in Central Mexico. For this event, she will be joined in conversation by Annie Shattuck, Associate Professor of Geography at IU.
-ABOUT THE BOOK:
-This book draws on research from the state of Tlaxcala in Mexico to describe how its people resisted imperial domination and survived centuries of upheaval through farming traditions that have supported food sovereignty and community resistance.
-Inside the farming traditions that have supported food sovereignty and community resistance in past and present Tlaxcala
-In this book, Keitlyn Alcántara draws on research from the state of Tlaxcala in Mexico to describe how its people resisted imperial domination and survived centuries of upheaval. Threatened by embargoes from the Aztec Empire and later colonial pressures, the Tlaxcalteca relied on </description>
-    </item>
-    <item>
-      <title>Ian Asher Concert September 17th Bloomington Speedway — Thu Sep 17, 6:00 PM — Bloomington Speedway</title>
-      <link>https://www.visitbloomington.com/event/ian-asher-concert-september-17th-bloomington-speedway/59513/</link>
-      <guid isPermaLink="false">387b3ccfe6b8cda1c9d71c3f6dc6a407@visitbloomington.com</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
-      <description>Electronic artist and DJ Ian Asher is coming to Bloomington Speedway on Thursday, September 17, 2026, for one of Bloomington’s biggest EDM events of the year.
- Presented by The 90210 Group and MyPlots App, the event will bring a full-scale concert experience to one of Bloomington’s most unique venues. Expect a massive night of electronic music, large-scale production, lighting, visuals, and high-energy performances at the historic Bloomington Speedway.
- The event has already generated major interest throughout Indiana University and the greater Bloomington community and is expected to be one of the largest EDM music events in Bloomington this semester.
- Gates Open: 6:00 PM
- Tickets available exclusively through MyPlots.
-
-Source: Visit Bloomington</description>
-    </item>
-    <item>
-      <title>Revolution for the Republic:An Evening with Rick Atkinson — Thu Sep 17, 6:00 PM — Whittenberger Auditorium</title>
-      <link>https://www.visitbloomington.com/event/revolution-for-the-republican-evening-with-rick-atkinson/59684/</link>
-      <guid isPermaLink="false">f5bc46e2620f5dfa4093add272c0dd8b@visitbloomington.com</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
-      <description>Join bestselling author and journalist Rick Atkinson for a conversation inspired by his latest book, The Fate of the Day. 
-This is a free, ticketed event. A ticket will be distributed closer to the event.
-
-Source: Visit Bloomington</description>
-    </item>
-    <item>
-      <title>Hackers | Soundtracks of a Generation — Thu Sep 17, 7:00 PM — IU Cinema</title>
-      <link>https://www.visitbloomington.com/event/hackers-soundtracks-of-a-generation/59360/</link>
-      <guid isPermaLink="false">195d9db437fdbae237c4a74ad2da2845@visitbloomington.com</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
-      <description>While practicing the tricks of the trade, hacker Zero Cool (Jonny Lee Miller) accomplishes the nearly impossible: he hacks the highly secured computer at the Ellingson Mineral Corporation. But in doing so, he unknowingly taps into a high-tech embezzling scheme masked by a computer virus with the potential to destroy the world's ecosystem! And when the young hacker and his pals—Acid Burn (Angelina Jolie), The Phantom Phreak (Renoly Santiago), and Cereal Killer (Matthew Lillard)—are targeted for the crime, the group must launch a massive cyberspace attack, one that will hopefully clear their names and prevent ecological disaster. [105 min; crime, drama, romance, thriller; English, Italian, Spanish, Japanese, Russian with English subtitles]
-
-Source: Pillar Arts Community Calendar, Visit Bloomington</description>
-    </item>
-    <item>
-      <title>Karaoke at the Pottery House Studio — Thu Sep 17, 7:00 PM — Pottery House Studio</title>
-      <link>https://www.visitbloomington.com/event/karaoke-at-the-pottery-house-studio/57313/</link>
-      <guid isPermaLink="false">db2dba217d3df595c90ce268e062563e@visitbloomington.com</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
-      <description>Enjoy a relaxed evening of creative pursuits and lively entertainment! We'll provide the karaoke and light refreshments - you bring your enthusiasm. Lots of fun bisque available for purchase.
-
-Source: Visit Bloomington</description>
-    </item>
-    <item>
-      <title>Splash and Glow Party — Thu Sep 17, 7:00 PM — Switchyard Park</title>
-      <link>https://www.visitbloomington.com/event/splash-and-glow-party/59505/</link>
-      <guid isPermaLink="false">9b3731e808e17be09a72cc7b38f1cf83@visitbloomington.com</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
-      <description>Light up the spray pad at Splash &amp; Glow Party! 
- Colored lights will transform the Community Foundation Switchyard Plaza Spray Pad for a nighttime kids' dance party with a DJ. 
- Thursday, Sept. 17 7–8:30 p.m. Switchyard Park, Community Foundation Switchyard Plaza Spray Pad 1601 S. Rogers St. $5/person For ages 1–12 yrs. with parent 
+      <title>Glow in the Dark Scavenger Hunt — Fri Sep 18, 8:00 PM — Switchyard Park</title>
+      <link>https://www.visitbloomington.com/event/glow-in-the-dark-scavenger-hunt/59507/</link>
+      <guid isPermaLink="false">55534cdcff060f48a01290b4d616fcd2@visitbloomington.com</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Grab your team and search Switchyard Park after dark! 
+ Follow glowing clues throughout the park and work together to complete a luminous scavenger hunt for prizes. 
+ Friday, Sept. 18 8–10 p.m. Switchyard Park, near the picnic shelter $5/person For all ages. 
  Community Events Hotline: 812-349-3754
 
 Source: Visit Bloomington</description>
     </item>
     <item>
-      <title>Trivia — Thu Sep 17, 7:00 PM — The Tap</title>
-      <link>https://www.visitbloomington.com/event/trivia/58304/</link>
-      <guid isPermaLink="false">63c16fc6e47bbb293e7da9e21fdaad84@visitbloomington.com</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
-      <description>Tuesday, Wednesday, &amp; Thursday we host live trivia from 7-9 p.m.! Tuesdays are themed trivia, which changes weekly! One Tuesday a month, it is specifically Indiana-themed trivia!
+      <title>Rod Tuffcurls &amp; The Benchpress — Fri Sep 18, 9:00 PM — The Bluebird</title>
+      <link>https://www.visitbloomington.com/event/rod-tuffcurls-the-benchpress/59058/</link>
+      <guid isPermaLink="false">fe7977322e47388a1de9589dc5754d37@visitbloomington.com</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Doors open at 8 show at 9, 21+ show.
 
 Source: Visit Bloomington</description>
     </item>
     <item>
-      <title>New Music Ensemble – David Dzubay, director; Shawn E. Okpebholo, guest composer; Texu Kim, composer — Thu Sep 17, 7:30 PM — Auer Hall</title>
-      <link>https://www.visitbloomington.com/event/new-music-ensemble-8211-david-dzubay-director-shawn-e-okpebholo-guest-composer-texu-kim-composer/59514/</link>
-      <guid isPermaLink="false">1026ae485407d92784f6745dc0384a2f@visitbloomington.com</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
-      <description>Five Friends Master Class Series – Honoring Robert Samels
-Enjoy this performance from almost anywhere in the world via LIVE@jacobs!
-Repertoire
-Shawn E. Okpebholo: City of Big Shoulders (2026)
-Texu Kim: Līlā (2023)
-Five Friends Master Class Series – Honoring Robert Samels
-The Five Friends Master Class Series honoring the lives of five talented Jacobs School of Music students—Chris Carducci, Garth Eppley, Georgina Joshi, Zachary Novak, and Robert Samels—was established in 2012 with a gift of $1 million from the Georgina Joshi Foundation, Inc. This annual series of lectures, master classes, and residencies by a number of the world’s leading musicians and teachers focuses on areas of interest most relevant to the lives of the five friends—voice performance, choral conducting, early music, music theory, composition, and opera. The Georgina Joshi Foundation was established in 2007 as the vision of Georgina Joshi’s mother, Louise Addicott-Joshi, to provide educational and career development o</description>
-    </item>
-    <item>
-      <title>The Wilder Blue — Thu Sep 17, 8:00 PM — The Bluebird</title>
-      <link>https://www.visitbloomington.com/event/the-wilder-blue/59372/</link>
-      <guid isPermaLink="false">4d36ad92b3f9f632f2d20f6e667c14e2@visitbloomington.com</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
-      <description>Doors open at 7 show at 8, 21+ show.
-
-Source: Visit Bloomington</description>
-    </item>
-    <item>
-      <title>1st 6-wk Grading Period Ends — Fri Sep 18</title>
-      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
-      <guid isPermaLink="false">26726aab55ca5deec</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
-      <description>Source: MCCSC</description>
-    </item>
-    <item>
-      <title>Be a Part of the"Day in My Life"Series — Fri Sep 18</title>
-      <link>https://events.iu.edu/hls/event/2421318-be-a-part-of-theday-in-my-lifeseries</link>
-      <guid isPermaLink="false">20260918T123000Z-2421318@events.iu.edu</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
-      <description>Source: IU Hamilton Lugar School</description>
-    </item>
-    <item>
-      <title>IU Research Data Commons Virtual Resource Fair — Fri Sep 18</title>
-      <link>https://events.iu.edu/live/events/2375535-research-data-commons-virtual-resource-fair</link>
-      <guid isPermaLink="false">20260918T040000Z-2394292@events.iu.edu__20260918</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
-      <description>Whether you're a faculty member, staff member, postdoc, or student, this virtual fair is your gateway to the resources that power successful research workflows—from planning and data discovery to analysis, sharing, and compliance.Connect personally — Join a drop-in Zoom session on Tuesday, September 15th, 11 AM - 1 PM ET to speak with research data experts about a project, ask questions, and get individualized guidance.Address real challenges — Discover resources tailored to your needs, from managing complex datasets to preparing data sharing plans and meeting funder requirements.Stay productive and efficient — All resources are curated to help you get your research done smarter and faster.  For more information, visit the fair website. (https://researchdata.iu.edu/virtual-resource-fair/)
-
-Source: IU Bloomington Libraries</description>
-    </item>
-    <item>
-      <title>Live Music: Randy Warriner &amp; Co — Fri Sep 18 — Cedar Creek Distillery</title>
-      <link>https://www.visitmorgancountyin.com/event/live-music%3a-randy-warriner-%26-co/11867/</link>
-      <guid isPermaLink="false">7e6d477c4f518d1c59708c4178f9f1f5@visitmorgancountyin.com</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
-      <description>Join Cedar Creek Distillery on Friday, September 18 for an evening of live music with Randy Warriner &amp; Company! Indulge in your favorite...
-
-Source: Visit Morgan County</description>
-    </item>
-    <item>
-      <title>Micro-mythologies: World Mythology Made Miniature — Fri Sep 18 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2236870-micro-mythologies-world-mythology-made-miniature</link>
-      <guid isPermaLink="false">20260918T040000Z-2236870@events.iu.edu__20260918</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
+      <title>Micro-mythologies: World Mythology Made Miniature — Sat Sep 19 — LILLY LIBRARY</title>
+      <link>https://events.iu.edu/libraries/event/2236871-micro-mythologies-world-mythology-made-miniature</link>
+      <guid isPermaLink="false">20260919T040000Z-2236871@events.iu.edu__20260919</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
       <description>"Myths are the world's dreams."- Joseph Campbell.To believe is to be human.One of the greatest forces known to humankind,belief is a universal impetus, one that has raised and toppled temples, instigated and eased wars, and inspired written works, both monumental and miniature. This exhibition showcases a selection of minute materials that pertain to mythologies and belief systems from across the world. From ancient Mesopotamian myth to modern Native American spirituality, belief transcends time and history and intertwines human existence within our world.Micro-Mythologies: World Mythology Made Miniature is a miniature book exhibition which seeks to highlight some of our oldest and most powerful stories, as well as those who preserved them.Mythological influence has shaped the world around us. Whether that be through architecture, art, or literature, myths serve as a testament to human cultural memory and the preservation of intangible tradition. Myths pull back the curtain of the past</description>
     </item>
     <item>
-      <title>The Declaration of Independence: The Motives, the Moment — Fri Sep 18 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2299747-the-declaration-of-independence-the-motives-the</link>
-      <guid isPermaLink="false">20260918T040000Z-2299747@events.iu.edu__20260918</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
+      <title>Osamu James Nakagawa: TRACE | Exhibition — Sat Sep 19 — FAR Center for Contemporary Arts</title>
+      <link>https://events.iu.edu/soaadiub/event/2393932-osamu-james-nakagawa-trace-exhibition</link>
+      <guid isPermaLink="false">20260919T040000Z-2393932@events.iu.edu</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Opening reception and artist talk: Friday, September 4, 58 pm  Nakagawa combines photographs taken at the sites of Japanese-American incarceration camps with photograms of found objects and rubbings of the memorials.  Using diptychs, Nakagawa pairs the past and the present, flattening the boundaries between them. TRACE seeks to reveal what can't be seen anymore, things that happened eighty years ago and have been quietly buried. Through a direct and immersive process, using actual objects and surfaces from the sites, Nakagawa unearths this history of forced incarceration.About the artist:  Osamu James Nakagawa was born in New York City in 1962, raised in Tokyo, and then returned to the US at the age of 15. He is the Distinguished Professor and the Ruth N. Halls Professor of Photography at Indiana University. Nakagawa is a recipient of the 2010 Guggenheim Fellowship, the 2010 Higashikawa New Photographer of the Year and 2015 Sagamihara Photographer of the Year in Japan.  Nakagawa's work</description>
+    </item>
+    <item>
+      <title>The Declaration of Independence: The Motives, the Moment — Sat Sep 19 — LILLY LIBRARY</title>
+      <link>https://events.iu.edu/libraries/event/2299748-the-declaration-of-independence-the-motives-the</link>
+      <guid isPermaLink="false">20260919T040000Z-2299748@events.iu.edu__20260919</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
       <description>The Declaration of Independence: The Motives, The Moment examines a crucial time in American history through the collections of the Lilly Library. The first printing of the Declaration of Independence, one of only twenty-six copies known today, is the centerpiece of the exhibition. Printed immediately for distribution, it is the source of all revolutionary era reprintings. The famous hand-written version was an official formality created later, signed in August, and stored away.Books, pamphlets, newspapers, prints, and letters allow viewers to explore key questions about this moment in time. How did a people proud to be in the British empire come to believe independence was possible or even desirable? What ideas and historical events did they draw on to justify resistance to Great Britain? What kinds of communication networks would be crucial for circulating the Declaration and countless other revolutionary documents throughout the colonies?This exhibition is part of America 250 at IU </description>
     </item>
     <item>
-      <title>The Declaration of Independence: The Signers — Fri Sep 18 — LILLY LIBRARY</title>
-      <link>https://events.iu.edu/live/events/2379010-the-declaration-of-independence-the-signers</link>
-      <guid isPermaLink="false">20260918T040000Z-2416964@events.iu.edu__20260918</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
+      <title>The Declaration of Independence: The Signers — Sat Sep 19 — LILLY LIBRARY</title>
+      <link>https://events.iu.edu/live/events/2379011-the-declaration-of-independence-the-signers</link>
+      <guid isPermaLink="false">20260919T040000Z-2416965@events.iu.edu__20260919</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
       <description>IU Libraries Lilly Library invites you to The Declaration of Independence: The Signers, an exhibition of letters and documents bearing the autographs of the fifty-six men who signed the August 2, 1776 handwritten copy of the Declaration. Though the length and content of these letters and documents vary widely, from brief notes or orders to long and detailed personal letters, they all offer insight into the daily lives, activities, and concerns of the signers. One aspect of their lives that these documents don't reveal, however, is the ownership of slaves by a great many of the signers, which is discussed in the "Race, Slavery, and Native Americans" section of the exhibition in the Lilly Library's North Gallery, The Declaration of Independence: The Motives, The Moment. (https://libraries.indiana.edu/lilly-library/declaration-independence)  Documents signed by fifty-four of the fifty-six signers are displayed in the Lilly Library's South Gallery. Documents signed by the two other signers</description>
     </item>
     <item>
-      <title>Home Away from Home: Student Life on Campus — Fri Sep 18, 9:00 AM — HERMAN B WELLS LIBRARY</title>
-      <link>https://events.iu.edu/libraries/event/2354128-home-away-from-home-student-life-on-campus</link>
-      <guid isPermaLink="false">20260918T130000Z-2354128@events.iu.edu__20260918</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
+      <title>Saturday Training Ride - Spiderland — Sat Sep 19, 9:00 AM — Sample Gates</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">3ege0n0nc2k168at8h8hmbk2ml@google.com</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Spiderland
+
+Source: Bloomington Velo Club</description>
+    </item>
+    <item>
+      <title>Bloomington South Girls Varsity Volleyball @ Greenwood — Sat Sep 19, 10:00 AM</title>
+      <link>https://www.maxpreps.com/in/volleyball/match/bloomington-south-vs-greenwood/9-19-2026/?c=edda3659-8db5-4fcd-9fab-e81fa8071c8e</link>
+      <guid isPermaLink="false">03a6dbb441d7cc193f60a055acc83b25@maxpreps.com</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Girls Varsity Volleyball
+The Bloomington South varsity volleyball team has an away tournament match @  Greenwood (IN) today @ 10a.
+
+Source: Bloomington South Athletics</description>
+    </item>
+    <item>
+      <title>Pendleton Heights Girls Varsity Volleyball vs. Bloomington South — Sat Sep 19, 10:00 AM</title>
+      <link>https://www.maxpreps.com/in/volleyball/match/bloomington-south-vs-pendleton-heights/9-19-2026/?c=a59bfd92-a7d2-43dc-bd10-7e30de9aad13</link>
+      <guid isPermaLink="false">700717dc62cfd9c2f5bca5f271185352@maxpreps.com</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Girls Varsity Volleyball
+The Pendleton Heights varsity volleyball team has a neutral tournament match vs.  Bloomington South (Bloomington, IN) today @ 10a.
+
+Source: Bloomington South Athletics</description>
+    </item>
+    <item>
+      <title>Family Weekend Tailgate — Sat Sep 19, 12:00 PM — Assembly Hall</title>
+      <link>https://beinvolved.indiana.edu/event/12784407</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12784407</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Get ready for the ultimate game-day experience at our Family Weekend Tailgate! Bring your team spirit for an unforgettable afternoon of high-energy fun, delicious food, guest appearances from Hoosier-the-Bison, the Marching Hundred, and great music before the big game. It’s the perfect opportunity to mingle with other families, play lawn games, and show your school pride alongside your student.
+Register for the TailgateCost: $50 per person
+
+Hosted by: First Year &amp; Family Experience Programs
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12784407
+
+Source: IU beINvolved Student Orgs</description>
+    </item>
+    <item>
+      <title>Bloomington South Girls Varsity Volleyball @ Danville — Sat Sep 19, 1:30 PM — Danville Invite</title>
+      <link>https://www.maxpreps.com/in/volleyball/match/bloomington-south-vs-danville/9-19-2026/?c=d68147aa-a690-4412-921a-9a7a3ffdf421</link>
+      <guid isPermaLink="false">7ffc967a055551993738485b06559ef4@maxpreps.com</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Girls Varsity Volleyball
+The Bloomington South varsity volleyball team has an away non-conference match @  Danville (IN) today @ 1:30p.
+
+Source: Bloomington South Athletics</description>
+    </item>
+    <item>
+      <title>2010s Trivia Night — Sat Sep 19, 6:30 PM — Pottery House Studio</title>
+      <link>https://www.visitbloomington.com/event/2010s-trivia-night/59625/</link>
+      <guid isPermaLink="false">f2155f62d27eacdbdba1a94043e4ea27@visitbloomington.com</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Join us for a fun evening of trivia, with fun prizes and light refreshments while painting pottery! $5 registration fee
+
+Source: Visit Bloomington</description>
+    </item>
+    <item>
+      <title>Osamu James Nakagawa: TRACE | Exhibition — Sun Sep 20 — FAR Center for Contemporary Arts</title>
+      <link>https://events.iu.edu/soaadiub/event/2393932-osamu-james-nakagawa-trace-exhibition</link>
+      <guid isPermaLink="false">20260920T040000Z-2393932@events.iu.edu</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Opening reception and artist talk: Friday, September 4, 58 pm  Nakagawa combines photographs taken at the sites of Japanese-American incarceration camps with photograms of found objects and rubbings of the memorials.  Using diptychs, Nakagawa pairs the past and the present, flattening the boundaries between them. TRACE seeks to reveal what can't be seen anymore, things that happened eighty years ago and have been quietly buried. Through a direct and immersive process, using actual objects and surfaces from the sites, Nakagawa unearths this history of forced incarceration.About the artist:  Osamu James Nakagawa was born in New York City in 1962, raised in Tokyo, and then returned to the US at the age of 15. He is the Distinguished Professor and the Ruth N. Halls Professor of Photography at Indiana University. Nakagawa is a recipient of the 2010 Guggenheim Fellowship, the 2010 Higashikawa New Photographer of the Year and 2015 Sagamihara Photographer of the Year in Japan.  Nakagawa's work</description>
+    </item>
+    <item>
+      <title>Sun AM Bible Study — Sun Sep 20, 9:45 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">37646463-3261-4334-b862-643063313338</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Worship — Sun Sep 20, 10:30 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">35373639-6238-4237-b931-386230383563</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>BarberShop Talk — Sun Sep 20, 3:30 PM — Online</title>
+      <link>https://beinvolved.indiana.edu/event/12784542</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12784542</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Barber Shop TalkA Black Men Evolve Community Conversation Series
+Barber Shop Talk is a facilitated discussion series created for men to engage in open, honest dialogue about mental health and the everyday challenges of manhood, fatherhood, relationships, career, and identity.
+Drawing on the barbershop as a longstanding space of trust and community, this event offers a supportive, confidential environment where participants can speak candidly and be heard without judgment. The goal is simple: to normalize conversations about mental wellness among Black men and to reduce the isolation that often surrounds these struggles.
+
+Hosted by: Black Men Evolve
+
+Online Location: https://culturecenters.indiana.edu/neal-marshall/
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12784542
+
+Source: IU beINvolved Student Orgs</description>
+    </item>
+    <item>
+      <title>Sun PM Worship — Sun Sep 20, 4:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">32346263-3366-4731-b932-653336323461</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Micro-mythologies: World Mythology Made Miniature — Mon Sep 21 — LILLY LIBRARY</title>
+      <link>https://events.iu.edu/libraries/event/2236871-micro-mythologies-world-mythology-made-miniature</link>
+      <guid isPermaLink="false">20260919T040000Z-2236871@events.iu.edu__20260921</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>"Myths are the world's dreams."- Joseph Campbell.To believe is to be human.One of the greatest forces known to humankind,belief is a universal impetus, one that has raised and toppled temples, instigated and eased wars, and inspired written works, both monumental and miniature. This exhibition showcases a selection of minute materials that pertain to mythologies and belief systems from across the world. From ancient Mesopotamian myth to modern Native American spirituality, belief transcends time and history and intertwines human existence within our world.Micro-Mythologies: World Mythology Made Miniature is a miniature book exhibition which seeks to highlight some of our oldest and most powerful stories, as well as those who preserved them.Mythological influence has shaped the world around us. Whether that be through architecture, art, or literature, myths serve as a testament to human cultural memory and the preservation of intangible tradition. Myths pull back the curtain of the past</description>
+    </item>
+    <item>
+      <title>Osamu James Nakagawa: TRACE | Exhibition — Mon Sep 21 — FAR Center for Contemporary Arts</title>
+      <link>https://events.iu.edu/soaadiub/event/2393932-osamu-james-nakagawa-trace-exhibition</link>
+      <guid isPermaLink="false">20260921T040000Z-2393932@events.iu.edu</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Opening reception and artist talk: Friday, September 4, 58 pm  Nakagawa combines photographs taken at the sites of Japanese-American incarceration camps with photograms of found objects and rubbings of the memorials.  Using diptychs, Nakagawa pairs the past and the present, flattening the boundaries between them. TRACE seeks to reveal what can't be seen anymore, things that happened eighty years ago and have been quietly buried. Through a direct and immersive process, using actual objects and surfaces from the sites, Nakagawa unearths this history of forced incarceration.About the artist:  Osamu James Nakagawa was born in New York City in 1962, raised in Tokyo, and then returned to the US at the age of 15. He is the Distinguished Professor and the Ruth N. Halls Professor of Photography at Indiana University. Nakagawa is a recipient of the 2010 Guggenheim Fellowship, the 2010 Higashikawa New Photographer of the Year and 2015 Sagamihara Photographer of the Year in Japan.  Nakagawa's work</description>
+    </item>
+    <item>
+      <title>The Declaration of Independence: The Motives, the Moment — Mon Sep 21 — LILLY LIBRARY</title>
+      <link>https://events.iu.edu/libraries/event/2299748-the-declaration-of-independence-the-motives-the</link>
+      <guid isPermaLink="false">20260919T040000Z-2299748@events.iu.edu__20260921</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>The Declaration of Independence: The Motives, The Moment examines a crucial time in American history through the collections of the Lilly Library. The first printing of the Declaration of Independence, one of only twenty-six copies known today, is the centerpiece of the exhibition. Printed immediately for distribution, it is the source of all revolutionary era reprintings. The famous hand-written version was an official formality created later, signed in August, and stored away.Books, pamphlets, newspapers, prints, and letters allow viewers to explore key questions about this moment in time. How did a people proud to be in the British empire come to believe independence was possible or even desirable? What ideas and historical events did they draw on to justify resistance to Great Britain? What kinds of communication networks would be crucial for circulating the Declaration and countless other revolutionary documents throughout the colonies?This exhibition is part of America 250 at IU </description>
+    </item>
+    <item>
+      <title>The Declaration of Independence: The Signers — Mon Sep 21 — LILLY LIBRARY</title>
+      <link>https://events.iu.edu/live/events/2379011-the-declaration-of-independence-the-signers</link>
+      <guid isPermaLink="false">20260919T040000Z-2416965@events.iu.edu__20260921</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>IU Libraries Lilly Library invites you to The Declaration of Independence: The Signers, an exhibition of letters and documents bearing the autographs of the fifty-six men who signed the August 2, 1776 handwritten copy of the Declaration. Though the length and content of these letters and documents vary widely, from brief notes or orders to long and detailed personal letters, they all offer insight into the daily lives, activities, and concerns of the signers. One aspect of their lives that these documents don't reveal, however, is the ownership of slaves by a great many of the signers, which is discussed in the "Race, Slavery, and Native Americans" section of the exhibition in the Lilly Library's North Gallery, The Declaration of Independence: The Motives, The Moment. (https://libraries.indiana.edu/lilly-library/declaration-independence)  Documents signed by fifty-four of the fifty-six signers are displayed in the Lilly Library's South Gallery. Documents signed by the two other signers</description>
+    </item>
+    <item>
+      <title>Weather Balloon Launch — Mon Sep 21, 7:00 AM — Northwest Quad Stairs (between 11th and Cottage Grove)</title>
+      <link>https://beinvolved.indiana.edu/event/12787200</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12787200</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>The Department of Earth &amp; Atmospheric Sciences occasionally launches balloons to support weather forecast operations around the country. Depending on the day, we may launch at 8 a.m., 2 p.m., or 8 p.m.  Normally no more than 1 launch per day.  More information about our program is available at go.iu.edu/weatherballoon .
+
+Hosted by: Earth and Atmospheric Sciences Department
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12787200
+
+Source: IU beINvolved Student Orgs</description>
+    </item>
+    <item>
+      <title>Home Away from Home: Student Life on Campus — Mon Sep 21, 9:00 AM — HERMAN B WELLS LIBRARY</title>
+      <link>https://events.iu.edu/libraries/event/2354129-home-away-from-home-student-life-on-campus</link>
+      <guid isPermaLink="false">20260921T130000Z-2354129@events.iu.edu__20260921</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
       <description>Spanning across four decades—1970s to the 2000s—items including scrapbooks, photographs, student papers, and handbooks demonstrate life on and off campus. From decorating dorm rooms to chasing campus ghosts, students have always found ways to build community and make new memories. This exhibit highlights the student experience and the multitude of ways students found a sense of home, identity and belonging at Indiana University.
 
 Source: IU Bloomington Libraries</description>
     </item>
     <item>
-      <title>Join or Die: Revolutionary War Veterans Buried in Monroe County — Fri Sep 18, 10:00 AM — Monroe County History Center</title>
-      <link>https://www.visitbloomington.com/event/join-or-die-revolutionary-war-veterans-buried-in-monroe-county/58393/</link>
-      <guid isPermaLink="false">3923d61edb3837b6cbea045c7453b02e@visitbloomington.com</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
-      <description>Join or Die: Revolutionary War Veterans Buried in Monroe County 
- Discover the stories of the American Revolutionary War veterans who later settled in Monroe County. Study the comprehensive battle maps that detail the movements of these soldiers as they fought in some of the Revolution’s most famous battles.
- Open March-December
+      <title>Tabling with Justice For All — Mon Sep 21, 10:30 AM — 10th St and Fee at Arboretum - Table 1</title>
+      <link>https://beinvolved.indiana.edu/event/12784724</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12784724</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>We will be tabling with JFA to discuss pro-life topics on campus.
 
-Source: Visit Bloomington</description>
-    </item>
-    <item>
-      <title>Bloomington Food Truck Friday — Fri Sep 18, 11:00 AM — Switchyard Park</title>
-      <link>https://www.visitbloomington.com/event/bloomington-food-truck-friday/58058/</link>
-      <guid isPermaLink="false">f2fa520ca42859c5bf2c9466dd6c96e3@visitbloomington.com</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
-      <description>Every Friday from 11 am - 9 pm, enjoy Bloomington's best food trucks in one place: Switchyard Park! This family-friendly event is one of the most beloved B-Town traditions and a must-attend event for visitors.  Enjoy live music and all of the amenities the park offers while indulging in some locally-made food. Learn more about Food Truck Friday here .
- Check out the #BTownFTF Facebook page weekly for up-to-date info on live music and participating food trucks.
+Hosted by: Students for Life at Indiana University
 
-Source: Visit Bloomington, Limestone Post</description>
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12784724
+
+Source: IU beINvolved Student Orgs</description>
     </item>
     <item>
-      <title>McCalla Center Open Gallery Hours — Fri Sep 18, 11:00 AM — McCalla Center</title>
-      <link>https://events.iu.edu/live/events/2338215-mccalla-open-gallery-hours</link>
-      <guid isPermaLink="false">20260918T150000Z-2352850@events.iu.edu__20260918</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
-      <description>Outfitting IU Athletics: Hoosier Champions                  This exhibit showcases objects from IU's championship teams and athletes, connecting them to historic achievements in the Big Ten and the national stage. The items featured in the exhibit are from the IU Athletics Sports Memorabilia Collection and feature photos and videos provided by IU Athletics and Indiana University Archives.                Dates: November 14, 2025 - October 2026                                      By Their Own Hands: The Black Filmmakers Hall of Fame!          Founded in 1974 by the Culture and Ethnic Affairs Guild of the Oakland Museum of California, the Black Filmmakers Hall of Fame began as a film lecture series and awards ceremony celebrating achievements of Black film industry figures. When that organization closed, they donated their materials to IU. In collaboration with the IU Black Film Center and Archive, this exhibit features objects from that collection, including founding documents, costumes</description>
+      <title>Club Rowing at IU Recruiting Tabling @ Ballantine — Mon Sep 21, 11:00 AM — Outside Ballantine Hall - Table 2</title>
+      <link>https://beinvolved.indiana.edu/event/12784314</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12784314</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Tabling outside Ballantine hall to recruit new members
+
+Hosted by: Rowing Club at Indiana University
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12784314
+
+Source: IU beINvolved Student Orgs</description>
     </item>
     <item>
-      <title>CSO Drop-in Advising — Fri Sep 18, 12:00 PM — LOWELL E. BAIER HALL/IU MAURER SCHOOL OF LAW</title>
-      <link>https://events.iu.edu/lawiub/event/2330714-cso-drop-in-advising</link>
-      <guid isPermaLink="false">20260918T160000Z-2330714@events.iu.edu__20260918</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
+      <title>Girls Needs Brunch too Promo — Mon Sep 21, 11:00 AM — Indiana Memorial Union – Table 2</title>
+      <link>https://beinvolved.indiana.edu/event/12787025</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12787025</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Ainteractive table to build excitement for our upcoming brunch event and encourage students to get involved with You See Me. Students can participate in a brunch themed activity, scan the QR code to become a member, and learn more about and our upcoming Girls Need Brunch Too event.
+
+Hosted by: You See Me
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12787025
+
+Source: IU beINvolved Student Orgs</description>
+    </item>
+    <item>
+      <title>CSO Drop-in Advising — Mon Sep 21, 12:00 PM — LOWELL E. BAIER HALL/IU MAURER SCHOOL OF LAW</title>
+      <link>https://events.iu.edu/lawiub/event/2330715-cso-drop-in-advising</link>
+      <guid isPermaLink="false">20260921T160000Z-2330715@events.iu.edu__20260921</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
       <description>CSO drop-in advising will be held Monday through Thursday from 12-1 in the main floor lobby. Please reserve a 15 minute time slot in CSO during the morning hours.  Drop-ins are intended for basic questions. Schedule a regular appointment on CareerNet with your advisor for more substantive questions.
 
 Source: IU Maurer School of Law</description>
     </item>
     <item>
-      <title>OKTOBERFEST at Heartwork Brewing — Fri Sep 18, 12:00 PM — Heartwork Brewing</title>
-      <link>https://www.visitbloomington.com/event/oktoberfest-at-heartwork-brewing/59249/</link>
-      <guid isPermaLink="false">907076f1a93abf5b758f8c2369e753bf@visitbloomington.com</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
-      <description>Join us for our 3rd annual Oktoberfest celebration!
-Featuring two days of German food, masskrugstemmen, steins, bierstacheln, lederhosen, festbiers, and more!
-German food specials 12pm until sold out on Friday &amp; Saturday. Specialty in-house pizza offerings. More details TBA.
-Additional beer and merch specials all weekend!
-1703 N College Ave
-Walking, biking, carpooling, and ridesharing encouraged.
+      <title>Dance Workshop — Mon Sep 21, 5:30 PM — Lee Norvelle Theatre Room A201</title>
+      <link>https://beinvolved.indiana.edu/event/12784331</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12784331</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Pop Off Pop Off - KiiiKiii
 
-Source: Visit Bloomington, Limestone Post</description>
+Hosted by: OneTwoOne Team
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12784331
+
+Source: IU beINvolved Student Orgs</description>
     </item>
     <item>
-      <title>Musicology Colloquium and Professional Development Series — Fri Sep 18, 12:45 PM — Simon Music Center - SM344</title>
-      <link>https://www.visitbloomington.com/event/musicology-colloquium-and-professional-development-series/59515/</link>
-      <guid isPermaLink="false">1e92940a758aff56c164580a9561c424@visitbloomington.com</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
-      <description>Sergio Ospina Romero, “Do Imperialism and Colonialism Go Hand in Hand? A Look from the Early Sound Recording Industry”
+      <title>Book Club — Mon Sep 21, 6:15 PM — Fine Arts</title>
+      <link>https://beinvolved.indiana.edu/event/12782837</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12782837</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>A Book Club that cover the Aristotelian and Thomistic philosophy in regard to the soul and death.  
 
-Source: IU Jacobs School of Music, Visit Bloomington</description>
+Hosted by: The Thomistic Institute at Indiana University
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12782837
+
+Source: IU beINvolved Student Orgs</description>
     </item>
     <item>
-      <title>IU Home Game Happy Hour: Southern Social (IU v. Western Kentucky) — Fri Sep 18, 4:00 PM — Oliver Winery</title>
-      <link>https://www.visitbloomington.com/event/iu-home-game-happy-hour-southern-social-iu-v-western-kentucky/59874/</link>
-      <guid isPermaLink="false">fac1a19b89fe29c9a6d8d5b0c9734cea@visitbloomington.com</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
-      <description>Toast game day at Oliver before IU takes on Western Kentucky! Enjoy happy hour specials, BOGO flights, yard games, and Southern Social Triva (think bourbon, barrels, derby) with Hambone's from 4-6pm. Ticketed tailgate tastings also available. Grab your cream &amp; crimson! Go Hoosiers!
+      <title>WE ARE SAATH Callout Meeting — Mon Sep 21, 6:30 PM — Psychology</title>
+      <link>https://beinvolved.indiana.edu/event/12784184</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12784184</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Callout Meeting for We are Saath - A South Asian Mental Health club dedicated to increasing access to mental health resources for the South Asian community through activism, education, and storytelling.
+
+Hosted by: WE ARE SAATH at Indiana University
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12784184
+
+Source: IU beINvolved Student Orgs</description>
+    </item>
+    <item>
+      <title>Medline Panel + Networking Event — Mon Sep 21, 7:00 PM — Hodge Hall</title>
+      <link>https://beinvolved.indiana.edu/event/12784068</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12784068</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Come listen to a panel of two Medline representatives to learn more about them, their work within the healthcare industry, and Medline as a whole! Opportunities to network will occur after the panel. This event is open to everyone.
+
+Hosted by: Future Professionals in Healthcare
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12784068
+
+Source: IU beINvolved Student Orgs</description>
+    </item>
+    <item>
+      <title>Next Step Networking (NSN) Meeting (#2) — Mon Sep 21, 7:00 PM — Geological Sciences Building</title>
+      <link>https://beinvolved.indiana.edu/event/12784445</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12784445</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Next Step Networking Meeting #2 for the year 2026-27
+
+Hosted by: Next Step Networking
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12784445
+
+Source: IU beINvolved Student Orgs</description>
+    </item>
+    <item>
+      <title>Micro-mythologies: World Mythology Made Miniature — Tue Sep 22 — LILLY LIBRARY</title>
+      <link>https://events.iu.edu/libraries/event/2236871-micro-mythologies-world-mythology-made-miniature</link>
+      <guid isPermaLink="false">20260919T040000Z-2236871@events.iu.edu__20260922</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>"Myths are the world's dreams."- Joseph Campbell.To believe is to be human.One of the greatest forces known to humankind,belief is a universal impetus, one that has raised and toppled temples, instigated and eased wars, and inspired written works, both monumental and miniature. This exhibition showcases a selection of minute materials that pertain to mythologies and belief systems from across the world. From ancient Mesopotamian myth to modern Native American spirituality, belief transcends time and history and intertwines human existence within our world.Micro-Mythologies: World Mythology Made Miniature is a miniature book exhibition which seeks to highlight some of our oldest and most powerful stories, as well as those who preserved them.Mythological influence has shaped the world around us. Whether that be through architecture, art, or literature, myths serve as a testament to human cultural memory and the preservation of intangible tradition. Myths pull back the curtain of the past</description>
+    </item>
+    <item>
+      <title>Osamu James Nakagawa: TRACE | Exhibition — Tue Sep 22 — FAR Center for Contemporary Arts</title>
+      <link>https://events.iu.edu/soaadiub/event/2393932-osamu-james-nakagawa-trace-exhibition</link>
+      <guid isPermaLink="false">20260922T040000Z-2393932@events.iu.edu</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Opening reception and artist talk: Friday, September 4, 58 pm  Nakagawa combines photographs taken at the sites of Japanese-American incarceration camps with photograms of found objects and rubbings of the memorials.  Using diptychs, Nakagawa pairs the past and the present, flattening the boundaries between them. TRACE seeks to reveal what can't be seen anymore, things that happened eighty years ago and have been quietly buried. Through a direct and immersive process, using actual objects and surfaces from the sites, Nakagawa unearths this history of forced incarceration.About the artist:  Osamu James Nakagawa was born in New York City in 1962, raised in Tokyo, and then returned to the US at the age of 15. He is the Distinguished Professor and the Ruth N. Halls Professor of Photography at Indiana University. Nakagawa is a recipient of the 2010 Guggenheim Fellowship, the 2010 Higashikawa New Photographer of the Year and 2015 Sagamihara Photographer of the Year in Japan.  Nakagawa's work</description>
+    </item>
+    <item>
+      <title>The Declaration of Independence: The Motives, the Moment — Tue Sep 22 — LILLY LIBRARY</title>
+      <link>https://events.iu.edu/libraries/event/2299748-the-declaration-of-independence-the-motives-the</link>
+      <guid isPermaLink="false">20260919T040000Z-2299748@events.iu.edu__20260922</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>The Declaration of Independence: The Motives, The Moment examines a crucial time in American history through the collections of the Lilly Library. The first printing of the Declaration of Independence, one of only twenty-six copies known today, is the centerpiece of the exhibition. Printed immediately for distribution, it is the source of all revolutionary era reprintings. The famous hand-written version was an official formality created later, signed in August, and stored away.Books, pamphlets, newspapers, prints, and letters allow viewers to explore key questions about this moment in time. How did a people proud to be in the British empire come to believe independence was possible or even desirable? What ideas and historical events did they draw on to justify resistance to Great Britain? What kinds of communication networks would be crucial for circulating the Declaration and countless other revolutionary documents throughout the colonies?This exhibition is part of America 250 at IU </description>
+    </item>
+    <item>
+      <title>The Declaration of Independence: The Signers — Tue Sep 22 — LILLY LIBRARY</title>
+      <link>https://events.iu.edu/live/events/2379011-the-declaration-of-independence-the-signers</link>
+      <guid isPermaLink="false">20260919T040000Z-2416965@events.iu.edu__20260922</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>IU Libraries Lilly Library invites you to The Declaration of Independence: The Signers, an exhibition of letters and documents bearing the autographs of the fifty-six men who signed the August 2, 1776 handwritten copy of the Declaration. Though the length and content of these letters and documents vary widely, from brief notes or orders to long and detailed personal letters, they all offer insight into the daily lives, activities, and concerns of the signers. One aspect of their lives that these documents don't reveal, however, is the ownership of slaves by a great many of the signers, which is discussed in the "Race, Slavery, and Native Americans" section of the exhibition in the Lilly Library's North Gallery, The Declaration of Independence: The Motives, The Moment. (https://libraries.indiana.edu/lilly-library/declaration-independence)  Documents signed by fifty-four of the fifty-six signers are displayed in the Lilly Library's South Gallery. Documents signed by the two other signers</description>
+    </item>
+    <item>
+      <title>Weather Balloon Launch — Tue Sep 22, 7:00 AM — Northwest Quad Stairs (between 11th and Cottage Grove)</title>
+      <link>https://beinvolved.indiana.edu/event/12787201</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12787201</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>The Department of Earth &amp; Atmospheric Sciences occasionally launches balloons to support weather forecast operations around the country. Depending on the day, we may launch at 8 a.m., 2 p.m., or 8 p.m.  Normally no more than 1 launch per day.  More information about our program is available at go.iu.edu/weatherballoon .
+
+Hosted by: Earth and Atmospheric Sciences Department
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12787201
+
+Source: IU beINvolved Student Orgs</description>
+    </item>
+    <item>
+      <title>Home Away from Home: Student Life on Campus — Tue Sep 22, 9:00 AM — HERMAN B WELLS LIBRARY</title>
+      <link>https://events.iu.edu/libraries/event/2354129-home-away-from-home-student-life-on-campus</link>
+      <guid isPermaLink="false">20260921T130000Z-2354129@events.iu.edu__20260922</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Spanning across four decades—1970s to the 2000s—items including scrapbooks, photographs, student papers, and handbooks demonstrate life on and off campus. From decorating dorm rooms to chasing campus ghosts, students have always found ways to build community and make new memories. This exhibit highlights the student experience and the multitude of ways students found a sense of home, identity and belonging at Indiana University.
+
+Source: IU Bloomington Libraries</description>
+    </item>
+    <item>
+      <title>Tabling with Justice For All — Tue Sep 22, 10:30 AM — 10th St and Fee at Arboretum - Table 1</title>
+      <link>https://beinvolved.indiana.edu/event/12784726</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12784726</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>We will be tabling with JFA to discuss pro-life topics on campus.
+
+Hosted by: Students for Life at Indiana University
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12784726
+
+Source: IU beINvolved Student Orgs</description>
+    </item>
+    <item>
+      <title>McCalla Center Open Gallery Hours — Tue Sep 22, 11:00 AM — McCalla Center</title>
+      <link>https://events.iu.edu/live/events/2338215-mccalla-open-gallery-hours</link>
+      <guid isPermaLink="false">20260922T150000Z-2387756@events.iu.edu__20260922</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Outfitting IU Athletics: Hoosier Champions                  This exhibit showcases objects from IU's championship teams and athletes, connecting them to historic achievements in the Big Ten and the national stage. The items featured in the exhibit are from the IU Athletics Sports Memorabilia Collection and feature photos and videos provided by IU Athletics and Indiana University Archives.                Dates: November 14, 2025 - October 2026                                      By Their Own Hands: The Black Filmmakers Hall of Fame!          Founded in 1974 by the Culture and Ethnic Affairs Guild of the Oakland Museum of California, the Black Filmmakers Hall of Fame began as a film lecture series and awards ceremony celebrating achievements of Black film industry figures. When that organization closed, they donated their materials to IU. In collaboration with the IU Black Film Center and Archive, this exhibit features objects from that collection, including founding documents, costumes</description>
+    </item>
+    <item>
+      <title>CSO Drop-in Advising — Tue Sep 22, 12:00 PM — LOWELL E. BAIER HALL/IU MAURER SCHOOL OF LAW</title>
+      <link>https://events.iu.edu/lawiub/event/2330715-cso-drop-in-advising</link>
+      <guid isPermaLink="false">20260921T160000Z-2330715@events.iu.edu__20260922</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>CSO drop-in advising will be held Monday through Thursday from 12-1 in the main floor lobby. Please reserve a 15 minute time slot in CSO during the morning hours.  Drop-ins are intended for basic questions. Schedule a regular appointment on CareerNet with your advisor for more substantive questions.
+
+Source: IU Maurer School of Law</description>
+    </item>
+    <item>
+      <title>Hoosiers Not Hazers Tailgate — Tue Sep 22, 1:00 PM — Wellness House</title>
+      <link>https://beinvolved.indiana.edu/event/12783846</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12783846</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Huddle up with Health Promotion during National Hazing Prevention Week (Sept. 21-25)! Join us for a tailgate-themed experience where we’ll tackle hazing, highlight healthy team traditions, and explore what it means to create communities where everyone belongs. Discover ways to build connection and belonging without the pressure. Bring your spirit and help us create a campus culture where Hoosiers look out for one another!
+
+Hosted by: Health Promotion
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12783846
+
+Source: IU beINvolved Student Orgs</description>
+    </item>
+    <item>
+      <title>Board of Health Meeting — Tue Sep 22, 4:30 PM — Health Services Board Meeting Room</title>
+      <link>https://events.in.gov/event/board-of-health-meeting-2862</link>
+      <guid isPermaLink="false">tag:localist.com,2008:EventInstance_54008571553661</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Microsoft Teams meeting 
+
+Join: https://teams.microsoft.com/meet/276249482236415?p=gbJ8leeFurIwQm451K 
+
+Meeting ID: 276 249 482 236 415 
+
+Passcode: HY3Wg9kP
+
+Source: Monroe County Government</description>
+    </item>
+    <item>
+      <title>Rotaract Meeting 22nd — Tue Sep 22, 6:00 PM — Woodburn Hall</title>
+      <link>https://beinvolved.indiana.edu/event/12782830</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12782830</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>We will be going over community service events that we have planned for the year, signing people up through Rotary and the Rotaract club, and providing an opportunity to volunteer. There will be Pizza present!
+
+Hosted by: Rotaract Club at Indiana University
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12782830
+
+Source: IU beINvolved Student Orgs</description>
+    </item>
+    <item>
+      <title>Micro-mythologies: World Mythology Made Miniature — Wed Sep 23 — LILLY LIBRARY</title>
+      <link>https://events.iu.edu/libraries/event/2236871-micro-mythologies-world-mythology-made-miniature</link>
+      <guid isPermaLink="false">20260919T040000Z-2236871@events.iu.edu__20260923</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>"Myths are the world's dreams."- Joseph Campbell.To believe is to be human.One of the greatest forces known to humankind,belief is a universal impetus, one that has raised and toppled temples, instigated and eased wars, and inspired written works, both monumental and miniature. This exhibition showcases a selection of minute materials that pertain to mythologies and belief systems from across the world. From ancient Mesopotamian myth to modern Native American spirituality, belief transcends time and history and intertwines human existence within our world.Micro-Mythologies: World Mythology Made Miniature is a miniature book exhibition which seeks to highlight some of our oldest and most powerful stories, as well as those who preserved them.Mythological influence has shaped the world around us. Whether that be through architecture, art, or literature, myths serve as a testament to human cultural memory and the preservation of intangible tradition. Myths pull back the curtain of the past</description>
+    </item>
+    <item>
+      <title>Osamu James Nakagawa: TRACE | Exhibition — Wed Sep 23 — FAR Center for Contemporary Arts</title>
+      <link>https://events.iu.edu/soaadiub/event/2393932-osamu-james-nakagawa-trace-exhibition</link>
+      <guid isPermaLink="false">20260923T040000Z-2393932@events.iu.edu</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Opening reception and artist talk: Friday, September 4, 58 pm  Nakagawa combines photographs taken at the sites of Japanese-American incarceration camps with photograms of found objects and rubbings of the memorials.  Using diptychs, Nakagawa pairs the past and the present, flattening the boundaries between them. TRACE seeks to reveal what can't be seen anymore, things that happened eighty years ago and have been quietly buried. Through a direct and immersive process, using actual objects and surfaces from the sites, Nakagawa unearths this history of forced incarceration.About the artist:  Osamu James Nakagawa was born in New York City in 1962, raised in Tokyo, and then returned to the US at the age of 15. He is the Distinguished Professor and the Ruth N. Halls Professor of Photography at Indiana University. Nakagawa is a recipient of the 2010 Guggenheim Fellowship, the 2010 Higashikawa New Photographer of the Year and 2015 Sagamihara Photographer of the Year in Japan.  Nakagawa's work</description>
+    </item>
+    <item>
+      <title>The Declaration of Independence: The Motives, the Moment — Wed Sep 23 — LILLY LIBRARY</title>
+      <link>https://events.iu.edu/libraries/event/2299748-the-declaration-of-independence-the-motives-the</link>
+      <guid isPermaLink="false">20260919T040000Z-2299748@events.iu.edu__20260923</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>The Declaration of Independence: The Motives, The Moment examines a crucial time in American history through the collections of the Lilly Library. The first printing of the Declaration of Independence, one of only twenty-six copies known today, is the centerpiece of the exhibition. Printed immediately for distribution, it is the source of all revolutionary era reprintings. The famous hand-written version was an official formality created later, signed in August, and stored away.Books, pamphlets, newspapers, prints, and letters allow viewers to explore key questions about this moment in time. How did a people proud to be in the British empire come to believe independence was possible or even desirable? What ideas and historical events did they draw on to justify resistance to Great Britain? What kinds of communication networks would be crucial for circulating the Declaration and countless other revolutionary documents throughout the colonies?This exhibition is part of America 250 at IU </description>
+    </item>
+    <item>
+      <title>The Declaration of Independence: The Signers — Wed Sep 23 — LILLY LIBRARY</title>
+      <link>https://events.iu.edu/live/events/2379011-the-declaration-of-independence-the-signers</link>
+      <guid isPermaLink="false">20260919T040000Z-2416965@events.iu.edu__20260923</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>IU Libraries Lilly Library invites you to The Declaration of Independence: The Signers, an exhibition of letters and documents bearing the autographs of the fifty-six men who signed the August 2, 1776 handwritten copy of the Declaration. Though the length and content of these letters and documents vary widely, from brief notes or orders to long and detailed personal letters, they all offer insight into the daily lives, activities, and concerns of the signers. One aspect of their lives that these documents don't reveal, however, is the ownership of slaves by a great many of the signers, which is discussed in the "Race, Slavery, and Native Americans" section of the exhibition in the Lilly Library's North Gallery, The Declaration of Independence: The Motives, The Moment. (https://libraries.indiana.edu/lilly-library/declaration-independence)  Documents signed by fifty-four of the fifty-six signers are displayed in the Lilly Library's South Gallery. Documents signed by the two other signers</description>
+    </item>
+    <item>
+      <title>Weather Balloon Launch — Wed Sep 23, 7:00 AM — Northwest Quad Stairs (between 11th and Cottage Grove)</title>
+      <link>https://beinvolved.indiana.edu/event/12787202</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12787202</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>The Department of Earth &amp; Atmospheric Sciences occasionally launches balloons to support weather forecast operations around the country. Depending on the day, we may launch at 8 a.m., 2 p.m., or 8 p.m.  Normally no more than 1 launch per day.  More information about our program is available at go.iu.edu/weatherballoon .
+
+Hosted by: Earth and Atmospheric Sciences Department
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12787202
+
+Source: IU beINvolved Student Orgs</description>
+    </item>
+    <item>
+      <title>Home Away from Home: Student Life on Campus — Wed Sep 23, 9:00 AM — HERMAN B WELLS LIBRARY</title>
+      <link>https://events.iu.edu/libraries/event/2354129-home-away-from-home-student-life-on-campus</link>
+      <guid isPermaLink="false">20260921T130000Z-2354129@events.iu.edu__20260923</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Spanning across four decades—1970s to the 2000s—items including scrapbooks, photographs, student papers, and handbooks demonstrate life on and off campus. From decorating dorm rooms to chasing campus ghosts, students have always found ways to build community and make new memories. This exhibit highlights the student experience and the multitude of ways students found a sense of home, identity and belonging at Indiana University.
+
+Source: IU Bloomington Libraries</description>
+    </item>
+    <item>
+      <title>McCalla Center Open Gallery Hours — Wed Sep 23, 11:00 AM — McCalla Center</title>
+      <link>https://events.iu.edu/live/events/2338215-mccalla-open-gallery-hours</link>
+      <guid isPermaLink="false">20260922T150000Z-2387756@events.iu.edu__20260923</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Outfitting IU Athletics: Hoosier Champions                  This exhibit showcases objects from IU's championship teams and athletes, connecting them to historic achievements in the Big Ten and the national stage. The items featured in the exhibit are from the IU Athletics Sports Memorabilia Collection and feature photos and videos provided by IU Athletics and Indiana University Archives.                Dates: November 14, 2025 - October 2026                                      By Their Own Hands: The Black Filmmakers Hall of Fame!          Founded in 1974 by the Culture and Ethnic Affairs Guild of the Oakland Museum of California, the Black Filmmakers Hall of Fame began as a film lecture series and awards ceremony celebrating achievements of Black film industry figures. When that organization closed, they donated their materials to IU. In collaboration with the IU Black Film Center and Archive, this exhibit features objects from that collection, including founding documents, costumes</description>
+    </item>
+    <item>
+      <title>College Dems Voter Registration Tabling — Wed Sep 23, 12:00 PM — Outside Ballantine Hall - Table 1</title>
+      <link>https://beinvolved.indiana.edu/event/12787272</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12787272</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Join College Democrats to register and help register students to vote this election! And learn about who is on your ballot! 
+
+Hosted by: College Democrats at Indiana University
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12787272
+
+Source: IU beINvolved Student Orgs</description>
+    </item>
+    <item>
+      <title>CSO Drop-in Advising — Wed Sep 23, 12:00 PM — LOWELL E. BAIER HALL/IU MAURER SCHOOL OF LAW</title>
+      <link>https://events.iu.edu/lawiub/event/2330715-cso-drop-in-advising</link>
+      <guid isPermaLink="false">20260921T160000Z-2330715@events.iu.edu__20260923</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>CSO drop-in advising will be held Monday through Thursday from 12-1 in the main floor lobby. Please reserve a 15 minute time slot in CSO during the morning hours.  Drop-ins are intended for basic questions. Schedule a regular appointment on CareerNet with your advisor for more substantive questions.
+
+Source: IU Maurer School of Law</description>
+    </item>
+    <item>
+      <title>Speed Friending — Wed Sep 23, 6:00 PM — Ernie Pyle Hall</title>
+      <link>https://beinvolved.indiana.edu/event/12782843</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12782843</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>A social MAPS event I am making a speed friendly series of games to which the goal is to bring people together
+
+Hosted by: Minority Association of Pre-Medical Students
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12782843
+
+Source: IU beINvolved Student Orgs</description>
+    </item>
+    <item>
+      <title>Wed PM Bible Study — Wed Sep 23, 7:00 PM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">37333436-3434-4065-a537-323363366663</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Pan-am Board Game Night — Wed Sep 23, 8:00 PM — Swain West</title>
+      <link>https://beinvolved.indiana.edu/event/12782850</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12782850</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Come out and play the pan am board game with us.
+
+Hosted by: Aviation Club at IU
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12782850
+
+Source: IU beINvolved Student Orgs</description>
+    </item>
+    <item>
+      <title>Micro-mythologies: World Mythology Made Miniature — Thu Sep 24 — LILLY LIBRARY</title>
+      <link>https://events.iu.edu/libraries/event/2236871-micro-mythologies-world-mythology-made-miniature</link>
+      <guid isPermaLink="false">20260919T040000Z-2236871@events.iu.edu__20260924</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>"Myths are the world's dreams."- Joseph Campbell.To believe is to be human.One of the greatest forces known to humankind,belief is a universal impetus, one that has raised and toppled temples, instigated and eased wars, and inspired written works, both monumental and miniature. This exhibition showcases a selection of minute materials that pertain to mythologies and belief systems from across the world. From ancient Mesopotamian myth to modern Native American spirituality, belief transcends time and history and intertwines human existence within our world.Micro-Mythologies: World Mythology Made Miniature is a miniature book exhibition which seeks to highlight some of our oldest and most powerful stories, as well as those who preserved them.Mythological influence has shaped the world around us. Whether that be through architecture, art, or literature, myths serve as a testament to human cultural memory and the preservation of intangible tradition. Myths pull back the curtain of the past</description>
+    </item>
+    <item>
+      <title>Osamu James Nakagawa: TRACE | Exhibition — Thu Sep 24 — FAR Center for Contemporary Arts</title>
+      <link>https://events.iu.edu/soaadiub/event/2393932-osamu-james-nakagawa-trace-exhibition</link>
+      <guid isPermaLink="false">20260924T040000Z-2393932@events.iu.edu</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Opening reception and artist talk: Friday, September 4, 58 pm  Nakagawa combines photographs taken at the sites of Japanese-American incarceration camps with photograms of found objects and rubbings of the memorials.  Using diptychs, Nakagawa pairs the past and the present, flattening the boundaries between them. TRACE seeks to reveal what can't be seen anymore, things that happened eighty years ago and have been quietly buried. Through a direct and immersive process, using actual objects and surfaces from the sites, Nakagawa unearths this history of forced incarceration.About the artist:  Osamu James Nakagawa was born in New York City in 1962, raised in Tokyo, and then returned to the US at the age of 15. He is the Distinguished Professor and the Ruth N. Halls Professor of Photography at Indiana University. Nakagawa is a recipient of the 2010 Guggenheim Fellowship, the 2010 Higashikawa New Photographer of the Year and 2015 Sagamihara Photographer of the Year in Japan.  Nakagawa's work</description>
+    </item>
+    <item>
+      <title>Stinesville Stone Quarry Festival — Thu Sep 24 — McGlocklin Park</title>
+      <link>https://www.visitbloomington.com/event/stinesville-stone-quarry-festival/59395/</link>
+      <guid isPermaLink="false">a3d6fb0716d6006f74d97f2924215bb7@visitbloomington.com</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Celebrating over 50 years at McGlocklin Park,  Stinesville’s Stone Quarry Festival is the perfect way to get connected with Monroe County’s rich limestone history. Local bands, games for the family, dance companies, and food judging contests all ensure a variety of entertainment in this small-town favorite. Keep checking our website &amp; facebook page for updates and more info.
 
 Source: Visit Bloomington</description>
     </item>
     <item>
-      <title>Fuerza: Hispanic Heritage Month Exhibition — Fri Sep 18, 5:00 PM — FAR Center for Contemporary Arts</title>
-      <link>https://www.visitbloomington.com/event/fuerza-hispanic-heritage-month-exhibition/59413/</link>
-      <guid isPermaLink="false">6596d55f207b2bcd55a0f9fe7753da80@visitbloomington.com</guid>
-      <pubDate>Fri, 18 Sep 2026 03:22:57 +0000</pubDate>
-      <description>Closing Reception Artist Market + Dance Party 
-Friday, September 18 | 5pm-9:30pm
- Music by:  Salsoteca
- Food for sale by:  Pilis Party Taco and Midnight Mariposa Bakery
- On View:  Sept 15 - Sept 18 | 11am - 5pm
- Exhibiting Artists 
- Aby Cortes 
-Bryan Castillo
- Dama Mora 
-Gloria Manzanares Romero
- Jonathan Michael Castillo 
- Liliana Guzmán 
-Ricardo Andres
-Simone Cabral Vilaca
-Tatum Hernandez
- FAR Center for Contemporary Arts
-505 W 4th St, Bloomington IN
-FREE and open to the public!
+      <title>The Declaration of Independence: The Motives, the Moment — Thu Sep 24 — LILLY LIBRARY</title>
+      <link>https://events.iu.edu/libraries/event/2299748-the-declaration-of-independence-the-motives-the</link>
+      <guid isPermaLink="false">20260919T040000Z-2299748@events.iu.edu__20260924</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>The Declaration of Independence: The Motives, The Moment examines a crucial time in American history through the collections of the Lilly Library. The first printing of the Declaration of Independence, one of only twenty-six copies known today, is the centerpiece of the exhibition. Printed immediately for distribution, it is the source of all revolutionary era reprintings. The famous hand-written version was an official formality created later, signed in August, and stored away.Books, pamphlets, newspapers, prints, and letters allow viewers to explore key questions about this moment in time. How did a people proud to be in the British empire come to believe independence was possible or even desirable? What ideas and historical events did they draw on to justify resistance to Great Britain? What kinds of communication networks would be crucial for circulating the Declaration and countless other revolutionary documents throughout the colonies?This exhibition is part of America 250 at IU </description>
+    </item>
+    <item>
+      <title>The Declaration of Independence: The Signers — Thu Sep 24 — LILLY LIBRARY</title>
+      <link>https://events.iu.edu/live/events/2379011-the-declaration-of-independence-the-signers</link>
+      <guid isPermaLink="false">20260919T040000Z-2416965@events.iu.edu__20260924</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>IU Libraries Lilly Library invites you to The Declaration of Independence: The Signers, an exhibition of letters and documents bearing the autographs of the fifty-six men who signed the August 2, 1776 handwritten copy of the Declaration. Though the length and content of these letters and documents vary widely, from brief notes or orders to long and detailed personal letters, they all offer insight into the daily lives, activities, and concerns of the signers. One aspect of their lives that these documents don't reveal, however, is the ownership of slaves by a great many of the signers, which is discussed in the "Race, Slavery, and Native Americans" section of the exhibition in the Lilly Library's North Gallery, The Declaration of Independence: The Motives, The Moment. (https://libraries.indiana.edu/lilly-library/declaration-independence)  Documents signed by fifty-four of the fifty-six signers are displayed in the Lilly Library's South Gallery. Documents signed by the two other signers</description>
+    </item>
+    <item>
+      <title>Weather Balloon Launch — Thu Sep 24, 7:00 AM — Northwest Quad Stairs (between 11th and Cottage Grove)</title>
+      <link>https://beinvolved.indiana.edu/event/12787203</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12787203</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>The Department of Earth &amp; Atmospheric Sciences occasionally launches balloons to support weather forecast operations around the country. Depending on the day, we may launch at 8 a.m., 2 p.m., or 8 p.m.  Normally no more than 1 launch per day.  More information about our program is available at go.iu.edu/weatherballoon .
 
-Source: Pillar Arts Community Calendar, Visit Bloomington, Limestone Post</description>
+Hosted by: Earth and Atmospheric Sciences Department
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12787203
+
+Source: IU beINvolved Student Orgs</description>
+    </item>
+    <item>
+      <title>Home Away from Home: Student Life on Campus — Thu Sep 24, 9:00 AM — HERMAN B WELLS LIBRARY</title>
+      <link>https://events.iu.edu/libraries/event/2354129-home-away-from-home-student-life-on-campus</link>
+      <guid isPermaLink="false">20260921T130000Z-2354129@events.iu.edu__20260924</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Spanning across four decades—1970s to the 2000s—items including scrapbooks, photographs, student papers, and handbooks demonstrate life on and off campus. From decorating dorm rooms to chasing campus ghosts, students have always found ways to build community and make new memories. This exhibit highlights the student experience and the multitude of ways students found a sense of home, identity and belonging at Indiana University.
+
+Source: IU Bloomington Libraries</description>
+    </item>
+    <item>
+      <title>College Dems Voter Registration Tabling — Thu Sep 24, 10:30 AM — Outside Ballantine Hall - Table 2</title>
+      <link>https://beinvolved.indiana.edu/event/12787274</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12787274</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Join College Democrats to register and help register students to vote this election! And learn about who is on your ballot! 
+
+Hosted by: College Democrats at Indiana University
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12787274
+
+Source: IU beINvolved Student Orgs</description>
+    </item>
+    <item>
+      <title>McCalla Center Open Gallery Hours — Thu Sep 24, 11:00 AM — McCalla Center</title>
+      <link>https://events.iu.edu/live/events/2338215-mccalla-open-gallery-hours</link>
+      <guid isPermaLink="false">20260922T150000Z-2387756@events.iu.edu__20260924</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Outfitting IU Athletics: Hoosier Champions                  This exhibit showcases objects from IU's championship teams and athletes, connecting them to historic achievements in the Big Ten and the national stage. The items featured in the exhibit are from the IU Athletics Sports Memorabilia Collection and feature photos and videos provided by IU Athletics and Indiana University Archives.                Dates: November 14, 2025 - October 2026                                      By Their Own Hands: The Black Filmmakers Hall of Fame!          Founded in 1974 by the Culture and Ethnic Affairs Guild of the Oakland Museum of California, the Black Filmmakers Hall of Fame began as a film lecture series and awards ceremony celebrating achievements of Black film industry figures. When that organization closed, they donated their materials to IU. In collaboration with the IU Black Film Center and Archive, this exhibit features objects from that collection, including founding documents, costumes</description>
+    </item>
+    <item>
+      <title>CSO Drop-in Advising — Thu Sep 24, 12:00 PM — LOWELL E. BAIER HALL/IU MAURER SCHOOL OF LAW</title>
+      <link>https://events.iu.edu/lawiub/event/2330715-cso-drop-in-advising</link>
+      <guid isPermaLink="false">20260921T160000Z-2330715@events.iu.edu__20260924</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>CSO drop-in advising will be held Monday through Thursday from 12-1 in the main floor lobby. Please reserve a 15 minute time slot in CSO during the morning hours.  Drop-ins are intended for basic questions. Schedule a regular appointment on CareerNet with your advisor for more substantive questions.
+
+Source: IU Maurer School of Law</description>
+    </item>
+    <item>
+      <title>Common Council Interview Committee Team C Meeting — Thu Sep 24, 4:00 PM — City Hall-1-Cityhall Kelly Conference Room (RM #155) (14)</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">3utvr2fkr84pei3lkgqrgqv4n5@google.com</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>City Clerk is inviting you to a scheduled Zoom meeting.Topic: Common Council Interview Committee Team C Meeting Time: Sep 24, 2026 04:00 PM Eastern Time (US and Canada)Join Zoom Meetinghttps://bloomington.zoom.us/j/87233094924?pwd=hBFOESSSrgF2qotP7DkiNQ1FjqnEvt.1Meeting ID: 872 3309 4924Passcode: 252931---One tap mobile+13017158592,,87233094924#,,,,*252931# US (Washington DC)+13052241968,,87233094924#,,,,*252931# US---Join by SIP• 87233094924@zoomcrc.comJoin instructionshttps://bloomington.zoom.us/meetings/87233094924/invitations?signature=Eq3O0-Bvur6rgtL4h7zI5-TdvLEEUT95pY2IyKVnQeY
+
+Source: B-Square: Government</description>
+    </item>
+    <item>
+      <title>Community Art Club — Thu Sep 24, 5:00 PM — 105 S. Rogers Street</title>
+      <link>https://www.lotusfest.org/event/community-art-club-3/</link>
+      <guid isPermaLink="false">28257-1790269200-1790272800@www.lotusfest.org</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Looking for a fun, welcoming space to make art, get creative, and connect with others? Community Art Club is a free, drop-in art space led by Lotus Teen Engagement Lead Noga Gordon. 
+Each week, participants can explore different crafts, creative projects, and hands-on activities in a relaxed environment. All ages and experience levels are welcome, whether you love making art or just want to try something new. 
+Thursdays | 5–6 PM
+Lotus Education &amp; Arts Foundation
+105 S. Rogers St., Bloomington, IN
+Free • Drop-ins welcome
+Parking is available in the Regions Bank lot. 
+Come create, connect, and share your ideas!
+
+Source: Lotus Festival</description>
+    </item>
+    <item>
+      <title>Volleyball (Girls V) - Bloomfield — Thu Sep 24, 6:00 PM — Edgewood High School</title>
+      <link>https://www.rbbschools.net/calendar1</link>
+      <guid isPermaLink="false">260918dxgcyop19E2lzQ3NUpa5gw</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Source: Limestone Post</description>
+    </item>
+    <item>
+      <title>Art Sanctuary's Board Meeting — Thu Sep 24, 6:30 PM — Art Sanctuary of Indiana</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">6phm6p9l64s34b9o6cq3gb9k74r62b9pcks3cb9k69imacj16gp66e1pcc@google.com__20260924</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>This is a Private Event 
+
+Art Sanctuary's Board Meeting
+
+Source: Art Sanctuary of Indiana</description>
+    </item>
+    <item>
+      <title>Bee Campus presents free screening of "The Little Things That Run the World" — Thu Sep 24, 7:00 PM — Indiana Memorial Union</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">1dbihpuquqqq7990fdjkpmgacj@google.com</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>More information at https://events.iu.edu/event/2393936-iu-bee-campusbloomington-bee-city-film-screeningJoin IU Sustainability at the Indiana Memorial Union for a screening of “The Little Things That Run the World”! This film explores the role pollinators play in our ecosystem. Learn from leading insect biologist E.O Wilson.
+
+Source: Parks and Recreation</description>
+    </item>
+    <item>
+      <title>Indiana Hoosiers Womens Volleyball vs. UCLA Bruins Womens Volleyball — Thu Sep 24, 7:00 PM — Wilkinson Hall</title>
+      <link>https://limestonepost.org/calendar/#/details/indiana-hoosiers-womens-volleyball-vs-ucla-bruins-womens-volleyball/19676833/2026-09-24T19</link>
+      <guid isPermaLink="false">260918n4KLCuSLR02I2crzWVlypw</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Source: Limestone Post</description>
+    </item>
+    <item>
+      <title>Live Music: Jack McDivitt — Fri Sep 25 — Cedar Creek Winery</title>
+      <link>https://www.visitmorgancountyin.com/event/live-music%3a-jack-mcdivitt/11846/</link>
+      <guid isPermaLink="false">e61c2bed89f30502ce49cf8b72d62e60@visitmorgancountyin.com</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Join Cedar Creek Winery and Brewing Company on Friday, September 25 for live music from TJack McDivitt! Indulge in your favorite locally-crafted...
+
+Source: Visit Morgan County</description>
+    </item>
+    <item>
+      <title>Live Music: Landon Keller — Fri Sep 25 — 1915 Steakhouse &amp; Bar</title>
+      <link>https://www.visitmorgancountyin.com/event/live-music%3a-landon-keller/11832/</link>
+      <guid isPermaLink="false">9dc3d2f1a044e5c355790690a183b1d2@visitmorgancountyin.com</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Enjoy live music at 1915 Steakhouse and Bar in Martinsville on Friday, September 25! Music begins at 6 pm with Landon Keller at the microphone.
+
+Source: Visit Morgan County</description>
+    </item>
+    <item>
+      <title>Micro-mythologies: World Mythology Made Miniature — Fri Sep 25 — LILLY LIBRARY</title>
+      <link>https://events.iu.edu/libraries/event/2236871-micro-mythologies-world-mythology-made-miniature</link>
+      <guid isPermaLink="false">20260919T040000Z-2236871@events.iu.edu__20260925</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>"Myths are the world's dreams."- Joseph Campbell.To believe is to be human.One of the greatest forces known to humankind,belief is a universal impetus, one that has raised and toppled temples, instigated and eased wars, and inspired written works, both monumental and miniature. This exhibition showcases a selection of minute materials that pertain to mythologies and belief systems from across the world. From ancient Mesopotamian myth to modern Native American spirituality, belief transcends time and history and intertwines human existence within our world.Micro-Mythologies: World Mythology Made Miniature is a miniature book exhibition which seeks to highlight some of our oldest and most powerful stories, as well as those who preserved them.Mythological influence has shaped the world around us. Whether that be through architecture, art, or literature, myths serve as a testament to human cultural memory and the preservation of intangible tradition. Myths pull back the curtain of the past</description>
+    </item>
+    <item>
+      <title>Osamu James Nakagawa: TRACE | Exhibition — Fri Sep 25 — FAR Center for Contemporary Arts</title>
+      <link>https://events.iu.edu/soaadiub/event/2393932-osamu-james-nakagawa-trace-exhibition</link>
+      <guid isPermaLink="false">20260925T040000Z-2393932@events.iu.edu</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Opening reception and artist talk: Friday, September 4, 58 pm  Nakagawa combines photographs taken at the sites of Japanese-American incarceration camps with photograms of found objects and rubbings of the memorials.  Using diptychs, Nakagawa pairs the past and the present, flattening the boundaries between them. TRACE seeks to reveal what can't be seen anymore, things that happened eighty years ago and have been quietly buried. Through a direct and immersive process, using actual objects and surfaces from the sites, Nakagawa unearths this history of forced incarceration.About the artist:  Osamu James Nakagawa was born in New York City in 1962, raised in Tokyo, and then returned to the US at the age of 15. He is the Distinguished Professor and the Ruth N. Halls Professor of Photography at Indiana University. Nakagawa is a recipient of the 2010 Guggenheim Fellowship, the 2010 Higashikawa New Photographer of the Year and 2015 Sagamihara Photographer of the Year in Japan.  Nakagawa's work</description>
+    </item>
+    <item>
+      <title>Stinesville Stone Quarry Festival — Fri Sep 25 — McGlocklin Park</title>
+      <link>https://www.visitbloomington.com/event/stinesville-stone-quarry-festival/59395/</link>
+      <guid isPermaLink="false">366a917f580b1d973ad7ea9b1d3309f6@visitbloomington.com</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Celebrating over 50 years at McGlocklin Park,  Stinesville’s Stone Quarry Festival is the perfect way to get connected with Monroe County’s rich limestone history. Local bands, games for the family, dance companies, and food judging contests all ensure a variety of entertainment in this small-town favorite. Keep checking our website &amp; facebook page for updates and more info.
+
+Source: Visit Bloomington</description>
+    </item>
+    <item>
+      <title>The Declaration of Independence: The Motives, the Moment — Fri Sep 25 — LILLY LIBRARY</title>
+      <link>https://events.iu.edu/libraries/event/2299748-the-declaration-of-independence-the-motives-the</link>
+      <guid isPermaLink="false">20260919T040000Z-2299748@events.iu.edu__20260925</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>The Declaration of Independence: The Motives, The Moment examines a crucial time in American history through the collections of the Lilly Library. The first printing of the Declaration of Independence, one of only twenty-six copies known today, is the centerpiece of the exhibition. Printed immediately for distribution, it is the source of all revolutionary era reprintings. The famous hand-written version was an official formality created later, signed in August, and stored away.Books, pamphlets, newspapers, prints, and letters allow viewers to explore key questions about this moment in time. How did a people proud to be in the British empire come to believe independence was possible or even desirable? What ideas and historical events did they draw on to justify resistance to Great Britain? What kinds of communication networks would be crucial for circulating the Declaration and countless other revolutionary documents throughout the colonies?This exhibition is part of America 250 at IU </description>
+    </item>
+    <item>
+      <title>The Declaration of Independence: The Signers — Fri Sep 25 — LILLY LIBRARY</title>
+      <link>https://events.iu.edu/live/events/2379011-the-declaration-of-independence-the-signers</link>
+      <guid isPermaLink="false">20260919T040000Z-2416965@events.iu.edu__20260925</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>IU Libraries Lilly Library invites you to The Declaration of Independence: The Signers, an exhibition of letters and documents bearing the autographs of the fifty-six men who signed the August 2, 1776 handwritten copy of the Declaration. Though the length and content of these letters and documents vary widely, from brief notes or orders to long and detailed personal letters, they all offer insight into the daily lives, activities, and concerns of the signers. One aspect of their lives that these documents don't reveal, however, is the ownership of slaves by a great many of the signers, which is discussed in the "Race, Slavery, and Native Americans" section of the exhibition in the Lilly Library's North Gallery, The Declaration of Independence: The Motives, The Moment. (https://libraries.indiana.edu/lilly-library/declaration-independence)  Documents signed by fifty-four of the fifty-six signers are displayed in the Lilly Library's South Gallery. Documents signed by the two other signers</description>
+    </item>
+    <item>
+      <title>Weather Balloon Launch — Fri Sep 25, 7:00 AM — Northwest Quad Stairs (between 11th and Cottage Grove)</title>
+      <link>https://beinvolved.indiana.edu/event/12787204</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12787204</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>The Department of Earth &amp; Atmospheric Sciences occasionally launches balloons to support weather forecast operations around the country. Depending on the day, we may launch at 8 a.m., 2 p.m., or 8 p.m.  Normally no more than 1 launch per day.  More information about our program is available at go.iu.edu/weatherballoon .
+
+Hosted by: Earth and Atmospheric Sciences Department
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12787204
+
+Source: IU beINvolved Student Orgs</description>
+    </item>
+    <item>
+      <title>Embedded Accessible Educational Services (AES) — Fri Sep 25, 8:00 AM — LGBTQ+ CULTURE CENTER</title>
+      <link>https://events.iu.edu/lgbtq/event/2376567-embedded-accessible-educational-services-aes</link>
+      <guid isPermaLink="false">20260925T120000Z-2376567@events.iu.edu__20260925</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>At the LGBTQ+ Culture Center, we want every student to have the resources they need to thrive. Disabilities come in all shapes and sizes, and many are not visible to others. Accessible Educational Services (AES) partners with students to provide accommodations, support services, and tools that help create equal access and opportunity at IU.  Kade Padgett, M.A., an AES Access Coordinator, is available at the LGBTQ+ Culture Center every Friday from 8:00 a.m. to 5:00 p.m. during drop-in advising hours. Whether you're curious about accommodations, have questions about the process, or simply want to learn more about available resources, we invite you to stop by and chat with Kade about the support options that may be available to you.  All Indiana University events, groups, activities, educational, cultural, and historical observances welcome all members of the Indiana University community.
+
+Source: IU LGBTQ+ Culture Center</description>
+    </item>
+    <item>
+      <title>Home Away from Home: Student Life on Campus — Fri Sep 25, 9:00 AM — HERMAN B WELLS LIBRARY</title>
+      <link>https://events.iu.edu/libraries/event/2354129-home-away-from-home-student-life-on-campus</link>
+      <guid isPermaLink="false">20260921T130000Z-2354129@events.iu.edu__20260925</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Spanning across four decades—1970s to the 2000s—items including scrapbooks, photographs, student papers, and handbooks demonstrate life on and off campus. From decorating dorm rooms to chasing campus ghosts, students have always found ways to build community and make new memories. This exhibit highlights the student experience and the multitude of ways students found a sense of home, identity and belonging at Indiana University.
+
+Source: IU Bloomington Libraries</description>
+    </item>
+    <item>
+      <title>McCalla Center Open Gallery Hours — Fri Sep 25, 11:00 AM — McCalla Center</title>
+      <link>https://events.iu.edu/live/events/2338215-mccalla-open-gallery-hours</link>
+      <guid isPermaLink="false">20260922T150000Z-2387756@events.iu.edu__20260925</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Outfitting IU Athletics: Hoosier Champions                  This exhibit showcases objects from IU's championship teams and athletes, connecting them to historic achievements in the Big Ten and the national stage. The items featured in the exhibit are from the IU Athletics Sports Memorabilia Collection and feature photos and videos provided by IU Athletics and Indiana University Archives.                Dates: November 14, 2025 - October 2026                                      By Their Own Hands: The Black Filmmakers Hall of Fame!          Founded in 1974 by the Culture and Ethnic Affairs Guild of the Oakland Museum of California, the Black Filmmakers Hall of Fame began as a film lecture series and awards ceremony celebrating achievements of Black film industry figures. When that organization closed, they donated their materials to IU. In collaboration with the IU Black Film Center and Archive, this exhibit features objects from that collection, including founding documents, costumes</description>
+    </item>
+    <item>
+      <title>CSO Drop-in Advising — Fri Sep 25, 12:00 PM — LOWELL E. BAIER HALL/IU MAURER SCHOOL OF LAW</title>
+      <link>https://events.iu.edu/lawiub/event/2330715-cso-drop-in-advising</link>
+      <guid isPermaLink="false">20260921T160000Z-2330715@events.iu.edu__20260925</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>CSO drop-in advising will be held Monday through Thursday from 12-1 in the main floor lobby. Please reserve a 15 minute time slot in CSO during the morning hours.  Drop-ins are intended for basic questions. Schedule a regular appointment on CareerNet with your advisor for more substantive questions.
+
+Source: IU Maurer School of Law</description>
+    </item>
+    <item>
+      <title>PRSA Tabling — Fri Sep 25, 12:00 PM — Indiana Memorial Union – Table 2</title>
+      <link>https://beinvolved.indiana.edu/event/12786409</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12786409</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Meet us in the IMU to learn about PRSA and how to be involved with us this semester!
+
+Hosted by: Puerto Rican Student Association
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12786409
+
+Source: IU beINvolved Student Orgs</description>
+    </item>
+    <item>
+      <title>Weekly Lilly Library puzzle tour — Fri Sep 25, 1:00 PM — Lilly Library</title>
+      <link>https://events.iu.edu/live/events/2361649-weekly-lilly-library-puzzle-tour</link>
+      <guid isPermaLink="false">20260925T170000Z-2361734@events.iu.edu__20260925</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Your expert guide, our Curator of Puzzles Andrew Rhoda (https://libraries.indiana.edu/andrew-rhoda), will introduce you to the collection, mechanical puzzles and the collection's donor, Jerry Slocum. You will learn about the various categories of mechanical puzzles and their history. You will also see highlights from the collection on exhibition in the Slocum Room. In addition, there will be a group of puzzles from the collection selected by the Curator for visitors to try as part of the tour.  Non-flash photography is permitted, seating is available in the Slocum Room throughout the tour, and the building is wheelchair accessible. The tour generally lasts a little less than one hour and is open to all. No reservation or RSVP is required for this free tour - just drop in!
+
+Source: IU Arts &amp; Humanities Institute, IU Bloomington Libraries</description>
+    </item>
+    <item>
+      <title>Guided tours of the Lilly Library — Fri Sep 25, 2:00 PM — Lilly Library (1200 E. Seventh St.)</title>
+      <link>https://events.iu.edu/live/events/2361629-guided-tours-of-the-lilly-library</link>
+      <guid isPermaLink="false">20260925T180000Z-2361717@events.iu.edu__20260925</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>You'll visit the Lilly's main galleries, and your expert guide will talk about some of the Lilly's highlights including the Gutenberg Bible and our current exhibitions from the Lilly Library collections: The Declaration of Independence: The Motives, the Moment (https://libraries.indiana.edu/lilly-library/declaration-independence) and The Signers (https://libraries.indiana.edu/lilly-library/the-signers). Additional hands-on time with rotating selections from the collections will follow. These selections include medieval manuscripts, artists books, and one of the John Ford's Best Director Oscars. Non-flash photography is permitted, seating is available throughout the tour, and the building is wheelchair accessible. The tour generally lasts a little less than one hour and is open to all.
+
+Source: IU Arts &amp; Humanities Institute, IU Bloomington Libraries</description>
+    </item>
+    <item>
+      <title>Soccer Watch Party with Club Italiano! — Fri Sep 25, 2:45 PM — Ballantine Hall</title>
+      <link>https://beinvolved.indiana.edu/event/12784330</link>
+      <guid isPermaLink="false">https://beinvolved.indiana.edu/event/12784330</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Come join us in watching the Italy vs. Belgium soccer match!
+
+Hosted by: Club Italiano
+
+Additional Information can be found at: https://beinvolved.indiana.edu/event/12784330
+
+Source: IU beINvolved Student Orgs</description>
+    </item>
+    <item>
+      <title>Bee Campus Guided BioBlitz — Fri Sep 25, 3:00 PM — Hilltop Garden and Nature Center</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">6olqkdfrj4pgn4a2au65quqk6c@google.com</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>More information at https://events.iu.edu/sustainiu/event/2417495-iu-vs-purdue-pollinator-week-identification-competitAs part of the Parks for Pollinators Week, IU Bee Campus is hosting a guided Bioblitz on Friday, September 25, from 3-4 PM. This is a dedicated time for individuals to gather; and identify and observe pollinators!
+
+Source: Parks and Recreation</description>
+    </item>
+    <item>
+      <title>Micro-mythologies: World Mythology Made Miniature — Sat Sep 26 — LILLY LIBRARY</title>
+      <link>https://events.iu.edu/libraries/event/2236871-micro-mythologies-world-mythology-made-miniature</link>
+      <guid isPermaLink="false">20260919T040000Z-2236871@events.iu.edu__20260926</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>"Myths are the world's dreams."- Joseph Campbell.To believe is to be human.One of the greatest forces known to humankind,belief is a universal impetus, one that has raised and toppled temples, instigated and eased wars, and inspired written works, both monumental and miniature. This exhibition showcases a selection of minute materials that pertain to mythologies and belief systems from across the world. From ancient Mesopotamian myth to modern Native American spirituality, belief transcends time and history and intertwines human existence within our world.Micro-Mythologies: World Mythology Made Miniature is a miniature book exhibition which seeks to highlight some of our oldest and most powerful stories, as well as those who preserved them.Mythological influence has shaped the world around us. Whether that be through architecture, art, or literature, myths serve as a testament to human cultural memory and the preservation of intangible tradition. Myths pull back the curtain of the past</description>
+    </item>
+    <item>
+      <title>Osamu James Nakagawa: TRACE | Exhibition — Sat Sep 26 — FAR Center for Contemporary Arts</title>
+      <link>https://events.iu.edu/soaadiub/event/2393932-osamu-james-nakagawa-trace-exhibition</link>
+      <guid isPermaLink="false">20260926T040000Z-2393932@events.iu.edu</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Opening reception and artist talk: Friday, September 4, 58 pm  Nakagawa combines photographs taken at the sites of Japanese-American incarceration camps with photograms of found objects and rubbings of the memorials.  Using diptychs, Nakagawa pairs the past and the present, flattening the boundaries between them. TRACE seeks to reveal what can't be seen anymore, things that happened eighty years ago and have been quietly buried. Through a direct and immersive process, using actual objects and surfaces from the sites, Nakagawa unearths this history of forced incarceration.About the artist:  Osamu James Nakagawa was born in New York City in 1962, raised in Tokyo, and then returned to the US at the age of 15. He is the Distinguished Professor and the Ruth N. Halls Professor of Photography at Indiana University. Nakagawa is a recipient of the 2010 Guggenheim Fellowship, the 2010 Higashikawa New Photographer of the Year and 2015 Sagamihara Photographer of the Year in Japan.  Nakagawa's work</description>
+    </item>
+    <item>
+      <title>Stinesville Stone Quarry Festival — Sat Sep 26 — McGlocklin Park</title>
+      <link>https://www.visitbloomington.com/event/stinesville-stone-quarry-festival/59395/</link>
+      <guid isPermaLink="false">839980b7b44eb35860a33f602945e4c6@visitbloomington.com</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Celebrating over 50 years at McGlocklin Park,  Stinesville’s Stone Quarry Festival is the perfect way to get connected with Monroe County’s rich limestone history. Local bands, games for the family, dance companies, and food judging contests all ensure a variety of entertainment in this small-town favorite. Keep checking our website &amp; facebook page for updates and more info.
+
+Source: Visit Bloomington</description>
+    </item>
+    <item>
+      <title>The Declaration of Independence: The Motives, the Moment — Sat Sep 26 — LILLY LIBRARY</title>
+      <link>https://events.iu.edu/libraries/event/2299748-the-declaration-of-independence-the-motives-the</link>
+      <guid isPermaLink="false">20260919T040000Z-2299748@events.iu.edu__20260926</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>The Declaration of Independence: The Motives, The Moment examines a crucial time in American history through the collections of the Lilly Library. The first printing of the Declaration of Independence, one of only twenty-six copies known today, is the centerpiece of the exhibition. Printed immediately for distribution, it is the source of all revolutionary era reprintings. The famous hand-written version was an official formality created later, signed in August, and stored away.Books, pamphlets, newspapers, prints, and letters allow viewers to explore key questions about this moment in time. How did a people proud to be in the British empire come to believe independence was possible or even desirable? What ideas and historical events did they draw on to justify resistance to Great Britain? What kinds of communication networks would be crucial for circulating the Declaration and countless other revolutionary documents throughout the colonies?This exhibition is part of America 250 at IU </description>
+    </item>
+    <item>
+      <title>The Declaration of Independence: The Signers — Sat Sep 26 — LILLY LIBRARY</title>
+      <link>https://events.iu.edu/live/events/2379011-the-declaration-of-independence-the-signers</link>
+      <guid isPermaLink="false">20260919T040000Z-2416965@events.iu.edu__20260926</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>IU Libraries Lilly Library invites you to The Declaration of Independence: The Signers, an exhibition of letters and documents bearing the autographs of the fifty-six men who signed the August 2, 1776 handwritten copy of the Declaration. Though the length and content of these letters and documents vary widely, from brief notes or orders to long and detailed personal letters, they all offer insight into the daily lives, activities, and concerns of the signers. One aspect of their lives that these documents don't reveal, however, is the ownership of slaves by a great many of the signers, which is discussed in the "Race, Slavery, and Native Americans" section of the exhibition in the Lilly Library's North Gallery, The Declaration of Independence: The Motives, The Moment. (https://libraries.indiana.edu/lilly-library/declaration-independence)  Documents signed by fifty-four of the fifty-six signers are displayed in the Lilly Library's South Gallery. Documents signed by the two other signers</description>
+    </item>
+    <item>
+      <title>Rooted in Nature — Sat Sep 26, 10:00 AM — Leonard Springs Nature Park</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">4oulli4e4er447i8rsaiom6dfm@google.com</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Source: Parks and Recreation</description>
+    </item>
+    <item>
+      <title>Indiana Hoosiers Womens Volleyball vs. Maryland Terrapins Womens Volleyball — Sat Sep 26, 7:00 PM — Wilkinson Hall</title>
+      <link>https://limestonepost.org/calendar/#/details/indiana-hoosiers-womens-volleyball-vs-maryland-terrapins-womens-volleyball/19676834/2026-09-26T19</link>
+      <guid isPermaLink="false">260918vKf2OpACsESnuHSI6KDB6A</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Source: Limestone Post</description>
+    </item>
+    <item>
+      <title>Osamu James Nakagawa: TRACE | Exhibition — Sun Sep 27 — FAR Center for Contemporary Arts</title>
+      <link>https://events.iu.edu/soaadiub/event/2393932-osamu-james-nakagawa-trace-exhibition</link>
+      <guid isPermaLink="false">20260927T040000Z-2393932@events.iu.edu</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Opening reception and artist talk: Friday, September 4, 58 pm  Nakagawa combines photographs taken at the sites of Japanese-American incarceration camps with photograms of found objects and rubbings of the memorials.  Using diptychs, Nakagawa pairs the past and the present, flattening the boundaries between them. TRACE seeks to reveal what can't be seen anymore, things that happened eighty years ago and have been quietly buried. Through a direct and immersive process, using actual objects and surfaces from the sites, Nakagawa unearths this history of forced incarceration.About the artist:  Osamu James Nakagawa was born in New York City in 1962, raised in Tokyo, and then returned to the US at the age of 15. He is the Distinguished Professor and the Ruth N. Halls Professor of Photography at Indiana University. Nakagawa is a recipient of the 2010 Guggenheim Fellowship, the 2010 Higashikawa New Photographer of the Year and 2015 Sagamihara Photographer of the Year in Japan.  Nakagawa's work</description>
+    </item>
+    <item>
+      <title>Sun AM Bible Study — Sun Sep 27, 9:45 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">38666632-3464-4862-b664-643834636362</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
+    </item>
+    <item>
+      <title>Sun AM Worship — Sun Sep 27, 10:30 AM</title>
+      <link>https://b-square-bulletin.github.io/community-calendar/xmlui/index.html?city=bloomington</link>
+      <guid isPermaLink="false">31326336-6239-4238-b937-316434393266</guid>
+      <pubDate>Sat, 19 Sep 2026 03:27:56 +0000</pubDate>
+      <description>Source: Ellettsville Church of Christ</description>
     </item>
   </channel>
 </rss>
