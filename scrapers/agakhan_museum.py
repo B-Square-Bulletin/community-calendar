@@ -12,6 +12,7 @@ from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.horizon import within
 from lib.timeutil import parse_naive_ics
 
 if TYPE_CHECKING:
@@ -336,13 +337,13 @@ class AgaKhanMuseumScraper(BaseScraper):
         image_url: str | None,
     ) -> list[dict]:
         now = datetime.now(self.tz)
-        cutoff = now + timedelta(days=self.months_ahead * 31)
+        cutoff = self.horizon_cutoff(now)
         current = now.date()
         while current.weekday() != 2:
             current += timedelta(days=1)
 
         events: list[dict] = []
-        while current <= cutoff.date():
+        while within(current, cutoff):
             start = self.combine_dt(current, time(16, 0))
             end = self.combine_dt(current, time(20, 0))
             if end >= now:

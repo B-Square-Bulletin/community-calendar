@@ -1,6 +1,6 @@
 """Generic Bibliocommons events scraper base."""
 
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Any, ClassVar
 from zoneinfo import ZoneInfo
 
@@ -8,6 +8,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from .base import BaseScraper
+from .horizon import within
 
 
 class BibliocommonsEventsScraper(BaseScraper):
@@ -44,7 +45,7 @@ class BibliocommonsEventsScraper(BaseScraper):
             return []
 
         tz = ZoneInfo(self.timezone)
-        horizon = datetime.now(tz) + timedelta(days=self.months_ahead * 31)
+        horizon = self.horizon_cutoff(datetime.now(tz))
         base_url = f"{self.gateway_url}/libraries/{self.library_slug}/events"
 
         events: list[dict[str, Any]] = []
@@ -92,7 +93,7 @@ class BibliocommonsEventsScraper(BaseScraper):
 
             # Heuristic early stop: listings are chronological; once an entire
             # page starts after our horizon, remaining pages are out-of-range.
-            if page_starts and min(page_starts) > horizon:
+            if page_starts and not any(within(s, horizon) for s in page_starts):
                 break
 
         self.logger.info(f"Collected {len(events)} Bibliocommons events ({self.library_slug})")

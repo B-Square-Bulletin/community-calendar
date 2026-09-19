@@ -18,6 +18,7 @@ from lib.timeutil import parse_naive_ics, utc_now
 
 def fetch_events(client, months_ahead=12):
     """Fetch future events from Legistar WebAPI."""
+    # `months_ahead` is unused (no upper bound); not a Horizon boundary -- see lib/horizon.py.
     today = utc_now().strftime("%Y-%m-%d")
 
     # OData filter for future events - use literal $ (some Legistar instances reject %24)

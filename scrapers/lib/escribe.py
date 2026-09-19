@@ -5,7 +5,7 @@ from __future__ import annotations
 import html as html_mod
 import json
 import re
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Any, ClassVar
 from urllib.parse import urljoin
 from urllib.request import Request, urlopen
@@ -32,8 +32,9 @@ class EScribeScraper(BaseScraper):
     }
 
     def build_request_body(self) -> bytes:
-        today = datetime.now(ZoneInfo(self.timezone)).date()
-        cutoff = today + timedelta(days=self.months_ahead * 31)
+        now = datetime.now(ZoneInfo(self.timezone))
+        today = now.date()
+        cutoff = self.horizon_cutoff(now).date()
         return json.dumps(
             {
                 "calendarStartDate": today.isoformat(),

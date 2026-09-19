@@ -6,9 +6,10 @@ definition of the boundary instant; `within` answers "is this event inside it?',
 normalising the `date` / naive-datetime / aware-datetime shapes scraper events
 arrive in.
 
-Only `BaseScraper.run()` and `visit_bloomington.py` route through here today;
-the rest of the scrapers still inline the `months_ahead * 31` offset. This
-module is the shared definition they can adopt incrementally.
+Scrapers reach it through `BaseScraper.horizon_cutoff()` (and `horizon_end`
+directly where there is no `self`). Two inline `* 30` ceilings stay local, each
+with a comment: `elfsight.py`'s listing expansion and `davis_chamber.py`'s month
+cursor — neither is a day-offset Horizon boundary.
 """
 
 from datetime import date, datetime, timedelta

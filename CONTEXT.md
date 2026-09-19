@@ -73,7 +73,7 @@ The moment a chosen window becomes active: the list re-filters, the pager resets
 _Avoid_: Apply, select (when meaning the committed state)
 
 **Horizon**:
-The end of the prefetched event set (about 90 days out). Windows past it clamp and label the truncation; the calendar running out is distinct from the filter matching nothing.
+The end of the prefetched event set: the configured scrape window, about 90 days out in production. Windows past it clamp and label the truncation; the calendar running out is distinct from the filter matching nothing.
 _Avoid_: Max date, data end
 
 **Clamping**:

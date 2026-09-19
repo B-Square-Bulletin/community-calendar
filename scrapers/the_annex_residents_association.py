@@ -45,6 +45,7 @@ class TheAnnexResidentsAssociationScraper(BaseScraper):
         start_month = date(today.year, today.month, 1)
         events = []
 
+        # Month cursor, not the Horizon boundary -- see lib/horizon.py.
         for offset in range(self.months_ahead + 1):
             year = start_month.year + ((start_month.month - 1 + offset) // 12)
             month = ((start_month.month - 1 + offset) % 12) + 1
