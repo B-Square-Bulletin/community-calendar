@@ -140,16 +140,18 @@ def _card(
     display_date: str = "Sep 18",
     weekday: str = "Friday",
     time_raw: str = "09:00 AM - 10:00 PM on Fri, 18 Sep 2026",
+    href_prefix: str = "https://www.ipm.org",
 ) -> str:
+    href = f"{href_prefix}/community-calendar/event/{slug}"
     return f"""
 <ps-promo class="PromoEvent" data-no-media="">
- <div class="PromoEvent-link" data-href="https://www.ipm.org/community-calendar/event/{slug}">
-  <a class="PromoEvent-link-link" href="https://www.ipm.org/community-calendar/event/{slug}">
+ <div class="PromoEvent-link" data-href="{href}">
+  <a class="PromoEvent-link-link" href="{href}">
    <div class="PromoEvent-date"><p class="PromoEvent-date-date">{display_date}
     <span class="PromoEvent-date-day">{weekday}</span></p></div>
   </a>
   <div class="PromoEvent-content">
-   <h3 class="PromoEvent-title"><a class="Link" href="https://www.ipm.org/community-calendar/event/{slug}">{title}</a></h3>
+   <h3 class="PromoEvent-title"><a class="Link" href="{href}">{title}</a></h3>
    <div class="PromoEvent-venue PromoEvent-content-item">Somewhere</div>
    <div class="PromoEvent-time PromoEvent-content-item">{time_raw}</div>
   </div>
@@ -696,6 +698,30 @@ class TestDetailFailure:
         assert events[0]["location"] == "Waldron Auditorium, 122 S Walnut St, Bloomington, IN"
         runs = json.loads((tmp_path / RUN_HISTORY_FILE).read_text())["runs"]
         assert runs[-1]["postal_less"] == 0
+
+
+class TestRelativeHrefNormalization:
+    """A relative card href is resolved against BASE_URL before it leaves the scraper.
+
+    Brightspot could serve relative `href`s; emitting one verbatim would produce a
+    relative `URL:` line and, when the detail lacks a content id, seed the
+    fallback identity (and therefore the UID) with that relative string. Both the
+    event url and the fallback UID must be absolute.
+    """
+
+    def test_relative_card_href_emits_absolute_url_and_uid(self):
+        site = _Site(
+            pages=[_listing_html(_card("Heist", href_prefix=""))],
+            details={HEIST_SLUG: "wfiu_detail_no_meta.html"},
+        )
+
+        events, calls = _run(site)
+
+        absolute = f"https://www.ipm.org/community-calendar/event/{HEIST_SLUG}"
+        assert events[0]["url"] == absolute
+        expected = hashlib.md5(f"{absolute}-2026-09-18-0900-2200".encode()).hexdigest()
+        assert events[0]["uid"] == f"{expected}@ipm.org"
+        assert [url for url in calls if "/event/" in url] == [absolute]
 
 
 class TestRegistrationSmokeTest:

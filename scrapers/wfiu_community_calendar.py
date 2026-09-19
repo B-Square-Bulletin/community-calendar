@@ -42,6 +42,7 @@ import time
 from datetime import date, datetime, timedelta
 from datetime import time as dtime
 from typing import Any
+from urllib.parse import urljoin
 from zoneinfo import ZoneInfo
 
 import requests
@@ -376,9 +377,12 @@ def _parse_cards(soup: BeautifulSoup) -> list[dict[str, Any]]:
     cards: list[dict[str, Any]] = []
     for node in soup.select("ps-promo.PromoEvent"):
         link = node.select_one("a.PromoEvent-link-link") or node.select_one("h3.PromoEvent-title a")
+        href = link.get("href") if link else None
         cards.append(
             {
-                "url": (link.get("href") if link else None),
+                # Resolve against BASE_URL so a relative href never becomes a
+                # relative URL: line or a relative content-id fallback UID.
+                "url": urljoin(BASE_URL, href) if isinstance(href, str) and href else None,
                 "title": _text(node.select_one(".PromoEvent-title")),
                 "venue": _text(node.select_one(".PromoEvent-venue")),
                 "date_display": _text(node.select_one(".PromoEvent-date-date")),
