@@ -263,6 +263,111 @@ class TestTimeBlocks:
         assert event["dtend"] == date(2026, 9, 19)
 
 
+class TestTimeAndIdentity:
+    """Clock-time hardening and per-occurrence identity (#141).
+
+    These are regression guards for the visitor-facing contract: a parseable
+    time is never silently coerced to all-day, a start-only time gets a sane
+    duration, and two showings of the same work on one date stay distinct.
+    """
+
+    def test_start_only_time_becomes_a_one_hour_event(self):
+        site = _Site(pages=[_listing_html(_card("Doors", time_raw="07:30 PM"))])
+
+        events, _ = _run(site)
+
+        assert events[0]["dtstart"] == datetime(2026, 9, 18, 19, 30, tzinfo=TZ)
+        assert events[0]["dtend"] == datetime(2026, 9, 18, 20, 30, tzinfo=TZ)
+
+    def test_zero_duration_block_becomes_a_one_hour_event(self):
+        site = _Site(pages=[_listing_html(_card("Marker", time_raw="09:00 AM - 09:00 AM"))])
+
+        events, _ = _run(site)
+
+        assert events[0]["dtend"] - events[0]["dtstart"] == timedelta(hours=1)
+
+    def test_late_ending_rolls_past_midnight_and_stays_timed(self):
+        site = _Site(pages=[_listing_html(_card("Late", time_raw="10:00 PM - 01:00 AM"))])
+
+        events, _ = _run(site)
+
+        assert events[0]["dtstart"] == datetime(2026, 9, 18, 22, 0, tzinfo=TZ)
+        assert events[0]["dtend"] == datetime(2026, 9, 19, 1, 0, tzinfo=TZ)
+
+    def test_multi_day_run_emits_one_timed_event_with_no_span(self):
+        # The Heist card reads "every day through Sep 20, 2026" but the listing
+        # already expands occurrences, so this card is only its own day.
+        events, _ = _run()
+        heist = [e for e in events if e["title"] == "Heist"]
+
+        assert len(heist) == 1
+        assert heist[0]["dtstart"] == datetime(2026, 9, 18, 9, 0, tzinfo=TZ)
+        assert heist[0]["dtend"] == datetime(2026, 9, 18, 22, 0, tzinfo=TZ)
+
+    def test_yearless_date_binds_to_the_in_horizon_year(self):
+        site = _Site(
+            pages=[_listing_html(_card("Winter", display_date="Dec 10", weekday="Thursday"))]
+        )
+
+        events, _ = _run(site)
+
+        assert events[0]["dtstart"] == datetime(2026, 12, 10, 9, 0, tzinfo=TZ)
+
+    def test_yearless_date_resolves_the_year_end_rollover(self):
+        now = datetime(2026, 12, 20, 9, 0, tzinfo=TZ)
+        site = _Site(
+            pages=[_listing_html(_card("New Year", display_date="Jan 5", weekday="Tuesday"))]
+        )
+
+        events, _ = _run(site, now=now)
+
+        assert events[0]["dtstart"] == datetime(2027, 1, 5, 9, 0, tzinfo=TZ)
+
+    def test_weekday_disagreement_falls_back_with_a_warning(self, caplog):
+        # Dec 10 2026 is a Thursday; the card says Monday, so binding must
+        # still land in-window but announce the mismatch.
+        site = _Site(pages=[_listing_html(_card("Odd", display_date="Dec 10", weekday="Monday"))])
+
+        with caplog.at_level("WARNING"):
+            events, _ = _run(site)
+
+        assert events[0]["dtstart"] == datetime(2026, 12, 10, 9, 0, tzinfo=TZ)
+        assert any("weekday" in r.getMessage().lower() for r in caplog.records)
+
+    def test_unparseable_dates_raise_after_a_small_threshold(self):
+        bad = [_card(f"Bad {i}", display_date="Sep 1", weekday="Tuesday") for i in range(4)]
+        site = _Site(pages=[_listing_html(*bad)])
+
+        with pytest.raises(RuntimeError, match="date"):
+            _run(site)
+
+    def test_dates_below_the_threshold_degrade_without_raising(self):
+        bad = [_card(f"Bad {i}", display_date="Sep 1", weekday="Tuesday") for i in range(3)]
+        site = _Site(pages=[_listing_html(*bad)])
+
+        events, _ = _run(site)
+
+        assert events == []
+
+    def test_same_day_repeat_showings_get_distinct_uids(self):
+        matinee = _card("Movie", time_raw="02:00 PM - 04:00 PM")
+        evening = _card("Movie", time_raw="07:00 PM - 09:00 PM")
+        site = _Site(pages=[_listing_html(matinee, evening)])
+
+        events, _ = _run(site)
+
+        assert len(events) == 2
+        assert len({e["uid"] for e in events}) == 2
+
+    def test_duplicate_cards_collapse_to_one_event(self):
+        card = _card("Movie", time_raw="02:00 PM - 04:00 PM")
+        site = _Site(pages=[_listing_html(card, card)])
+
+        events, _ = _run(site)
+
+        assert len(events) == 1
+
+
 class TestHorizonGuard:
     """Every emitted occurrence passes the shared Horizon predicate."""
 
@@ -324,11 +429,13 @@ class TestCalendarOutput:
         assert "X-SOURCE:WFIU Community Calendar" in ics
         assert "X-SOURCE-URL:https://www.ipm.org/community-calendar/" in ics
 
-    def test_uid_keys_on_the_detail_content_id_and_occurrence_date(self):
+    def test_uid_keys_on_content_id_date_and_time_block(self):
         events, _ = _run()
         event = _by_title(events, "Heist")
 
-        expected = hashlib.md5(b"000001a0-3430-d25b-a9ea-3e3853560000-2026-09-18").hexdigest()
+        expected = hashlib.md5(
+            b"000001a0-3430-d25b-a9ea-3e3853560000-2026-09-18-0900-2200"
+        ).hexdigest()
         assert event["uid"] == f"{expected}@ipm.org"
 
 

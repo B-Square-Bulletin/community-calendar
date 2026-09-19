@@ -70,6 +70,10 @@ PAGE_CAP = 80
 # One detail fetch per unique event URL, for the stable content id. Raise on
 # cap-hit rather than truncate the inventory.
 DETAIL_CAP = 500
+# A card whose month/day cannot be bound to an in-Horizon year is a data-drift
+# signal. A few are tolerated (a lone malformed card should not lose the run);
+# more than this and the run fails loud rather than silently dropping events.
+DATE_ERROR_THRESHOLD = 3
 # robots.txt allows all and sets no Crawl-delay; this is voluntary citizenship.
 CRAWL_DELAY = 2.0
 REQUEST_TIMEOUT = 90
@@ -96,6 +100,7 @@ _LEADING_TIME = re.compile(r"^(\d{1,2}:\d{2}\s*[AP]M)\s*-\s*(\d{1,2}:\d{2}\s*[AP
 _SCHEDULE_ENTRY = re.compile(
     r"([A-Z][a-z]+):\s*(\d{1,2}:\d{2}\s*[AP]M)\s*-\s*(\d{1,2}:\d{2}\s*[AP]M)"
 )
+_START_ONLY = re.compile(r"^(\d{1,2}:\d{2}\s*[AP]M)\b", re.I)
 _PAGE_COUNT = re.compile(r"(\d+)\s+of\s+(\d+)")
 _MONTH_DAY = re.compile(r"([A-Z][a-z]{2})\s+(\d{1,2})")
 _CLOCK = re.compile(r"(\d{1,2}):(\d{2})(AM|PM)")
@@ -166,61 +171,102 @@ def _parse_clock(value: str) -> dtime:
     return dtime(hour, int(match.group(2)))
 
 
+def _plus_hour(value: dtime) -> dtime:
+    """One hour after a wall-clock time, wrapping past midnight."""
+    return (datetime.combine(date.min, value) + timedelta(hours=1)).time()
+
+
+def _resolve_end(start: dtime, end: dtime) -> dtime:
+    """The wall-clock end, never equal to the start.
+
+    A block that ends where it starts is a start-only marker, so it gets the
+    one-hour default rather than emitting a zero-duration event. A genuinely
+    earlier end (a past-midnight show) is left literal; `_parse_card` rolls the
+    date forward, never coercing it to all-day.
+    """
+    return _plus_hour(start) if end == start else end
+
+
 def _time_range(raw: str, weekday: str | None) -> tuple[dtime, dtime] | None:
     """The card's clock range, or None when the text carries no parseable time.
 
     One-off, daily, and monthly cards lead with `HH:MM AM - HH:MM PM`. Weekly
     cards instead list `Weekday: HH:MM AM - HH:MM PM` entries; the occurrence
     card's own weekday selects the matching entry, falling back to the first.
+    A lone `HH:MM AM` is a start-only time and gets the one-hour default.
     """
     text = " ".join((raw or "").split())
     head = _LEADING_TIME.match(text)
     if head:
-        return _parse_clock(head.group(1)), _parse_clock(head.group(2))
+        start, end = _parse_clock(head.group(1)), _parse_clock(head.group(2))
+        return start, _resolve_end(start, end)
     entries = _SCHEDULE_ENTRY.findall(text)
     if entries:
-        for name, start, end in entries:
+        for name, start_raw, end_raw in entries:
             if weekday and name.lower() == weekday.lower():
-                return _parse_clock(start), _parse_clock(end)
-        _, start, end = entries[0]
-        return _parse_clock(start), _parse_clock(end)
+                start, end = _parse_clock(start_raw), _parse_clock(end_raw)
+                return start, _resolve_end(start, end)
+        _, start_raw, end_raw = entries[0]
+        start, end = _parse_clock(start_raw), _parse_clock(end_raw)
+        return start, _resolve_end(start, end)
+    start_only = _START_ONLY.match(text)
+    if start_only:
+        start = _parse_clock(start_only.group(1))
+        return start, _plus_hour(start)
     return None
 
 
-def _bind_year(display: str, weekday: str | None, today: date) -> date | None:
-    """Bind the card's year-less month/day to the first on/after `today`.
+def _time_key(start: dtime | None, end: dtime | None) -> str:
+    """The occurrence's time block as an identity component (`all-day` if none)."""
+    if start is None or end is None:
+        return "all-day"
+    return f"{start:%H%M}-{end:%H%M}"
 
-    The card renders `Sep 18 Friday` with no year; the candidate year whose
-    weekday agrees is preferred, so a Dec->Jan rollover lands on the right date.
-    The Horizon predicate is the authoritative guard downstream, not this binder.
+
+def _bind_year(
+    display: str, weekday: str | None, today: date, horizon: date
+) -> tuple[date | None, bool]:
+    """Bind the card's year-less month/day inside `[today, horizon]`.
+
+    The candidate year whose weekday agrees is preferred, which resolves the
+    Dec->Jan rollover. When no in-window candidate agrees, the earliest is used
+    with `agreed=False` so the caller can warn; when nothing lands in-window the
+    date is unbindable. The Horizon predicate remains the authoritative guard.
     """
     match = _MONTH_DAY.match(display)
     if not match:
-        return None
+        return None, False
     month = _MONTHS.get(match.group(1).lower())
     if month is None:
-        return None
+        return None, False
     day = int(match.group(2))
     candidates: list[date] = []
-    for year in range(today.year, today.year + 3):
+    for year in range(today.year, horizon.year + 2):
         try:
             candidate = date(year, month, day)
         except ValueError:
             continue
-        if candidate >= today:
+        if today <= candidate <= horizon:
             candidates.append(candidate)
     if not candidates:
-        return None
+        return None, False
     if weekday:
         for candidate in candidates:
             if candidate.strftime("%A").lower() == weekday.lower():
-                return candidate
-    return candidates[0]
+                return candidate, True
+        return candidates[0], False
+    return candidates[0], True
 
 
-def _uid(identity: str, occurrence_date: date) -> str:
-    """Stable per-occurrence UID: hash of the content id plus occurrence date."""
-    digest = hashlib.md5(f"{identity}-{occurrence_date.isoformat()}".encode()).hexdigest()
+def _uid(identity: str, occurrence_date: date, time_key: str) -> str:
+    """Stable per-occurrence UID: content id + occurrence date + time block.
+
+    The time block is part of the key so a matinee and an evening showing of the
+    same work on the same date never collapse into one VEVENT.
+    """
+    digest = hashlib.md5(
+        f"{identity}-{occurrence_date.isoformat()}-{time_key}".encode()
+    ).hexdigest()
     return f"{digest}@{DOMAIN}"
 
 
@@ -313,16 +359,23 @@ class WFIUCommunityCalendarScraper(BaseScraper):
         return details
 
     def _parse_card(
-        self, card: dict[str, Any], today: date, detail_html: str | None
+        self, card: dict[str, Any], today: date, horizon: date, detail_html: str | None
     ) -> dict[str, Any] | None:
         """One event from one occurrence card, or None when its date is unusable."""
-        occurrence = _bind_year(card["date_display"], card["weekday"], today)
+        occurrence, weekday_agreed = _bind_year(
+            card["date_display"], card["weekday"], today, horizon
+        )
         if occurrence is None:
-            self.logger.warning(
-                f"WFIU Community Calendar: could not read a date from "
+            self.logger.error(
+                f"WFIU Community Calendar: could not bind a date from "
                 f"{card['date_display']!r} for {card['title']!r}"
             )
             return None
+        if not weekday_agreed:
+            self.logger.warning(
+                f"WFIU Community Calendar: the weekday {card['weekday']!r} does not "
+                f"match {occurrence.isoformat()} for {card['title']!r}; binding anyway"
+            )
 
         clock = _time_range(card["time_raw"], card["weekday"])
         if clock is None:
@@ -332,12 +385,14 @@ class WFIUCommunityCalendarScraper(BaseScraper):
             )
             dtstart: Any = occurrence
             dtend: Any = occurrence + timedelta(days=1)
+            time_key = _time_key(None, None)
         else:
             start, end = clock
             dtstart = datetime.combine(occurrence, start, tzinfo=TIMEZONE)
             dtend = datetime.combine(occurrence, end, tzinfo=TIMEZONE)
             if dtend <= dtstart:
                 dtend += timedelta(days=1)
+            time_key = _time_key(start, end)
 
         identity = (_content_id(detail_html) if detail_html else None) or card["url"]
         return {
@@ -347,7 +402,7 @@ class WFIUCommunityCalendarScraper(BaseScraper):
             "url": card["url"],
             "location": card["venue"],
             "description": _plain_text(card["description"]),
-            "uid": _uid(identity, occurrence),
+            "uid": _uid(identity, occurrence, time_key),
         }
 
     def _load_runs(self) -> list[dict[str, Any]]:
@@ -393,11 +448,24 @@ class WFIUCommunityCalendarScraper(BaseScraper):
         details = self._fetch_details(urls)
 
         events: list[dict[str, Any]] = []
+        seen_uids: set[str] = set()
+        date_errors = 0
         for card in cards:
             detail = details.get(str(card.get("url") or ""))
-            parsed = self._parse_card(card, today, detail)
-            if parsed is None or not within(parsed["dtstart"], horizon):
+            parsed = self._parse_card(card, today, horizon.date(), detail)
+            if parsed is None:
+                date_errors += 1
+                if date_errors > DATE_ERROR_THRESHOLD:
+                    raise RuntimeError(
+                        f"WFIU Community Calendar: {date_errors} cards had unbindable "
+                        f"dates, above the threshold of {DATE_ERROR_THRESHOLD}; failing loud"
+                    )
                 continue
+            if not within(parsed["dtstart"], horizon):
+                continue
+            if parsed["uid"] in seen_uids:
+                continue
+            seen_uids.add(parsed["uid"])
             events.append(parsed)
 
         self.logger.info(
