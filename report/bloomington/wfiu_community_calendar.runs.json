@@ -1,0 +1,13 @@
+{
+  "runs": [
+    {
+      "date": "2026-09-19",
+      "pages": 67,
+      "cards_fetched": 662,
+      "unique_detail_urls": 346,
+      "details_fetched": 346,
+      "postal_less": 8,
+      "emitted": 654
+    }
+  ]
+}

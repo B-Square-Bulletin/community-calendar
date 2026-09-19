@@ -304,6 +304,9 @@ cities/bloomington/simpleview_morgan.ics
 # Wells Metz Theatre
 # cmd: python scrapers/ticketmaster.py --venue-id KovZpZAF7JFA --name "Wells Metz Theatre" --default-url "https://events.iu.edu/theatre/"
 cities/bloomington/tm_wells_metz.ics
+# WFIU Community Calendar
+# cmd: python scrapers/wfiu_community_calendar.py --output cities/bloomington/wfiu_community_calendar.ics
+cities/bloomington/wfiu_community_calendar.ics
 # Writers Guild at Bloomington
 # cmd: python scrapers/writers_guild.py --output cities/bloomington/writersguildbloomington.ics
 cities/bloomington/writersguildbloomington.ics
