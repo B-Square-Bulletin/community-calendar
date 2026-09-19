@@ -25,7 +25,12 @@ from scrapers.wfiu_community_calendar import (
     PAGE_CAP,
     WFIUCommunityCalendarScraper,
 )
-from scripts.combine_ics import AGGREGATORS, dedupe_cross_source
+from scripts.combine_ics import (
+    AGGREGATORS,
+    _url_predates_window,
+    dedupe_cross_source,
+    extract_events,
+)
 from scripts.process_pending_feeds import parse_pending_feeds
 
 TZ = ZoneInfo("America/Indiana/Indianapolis")
@@ -441,6 +446,28 @@ class TestCalendarOutput:
             b"000001a0-3430-d25b-a9ea-3e3853560000-2026-09-18-0900-2200"
         ).hexdigest()
         assert event["uid"] == f"{expected}@ipm.org"
+
+
+class TestStaleUrlGuard:
+    """The pipeline's stale-URL guard is a verified no-op for WFIU (#143, spec Q15).
+
+    WFIU slugs embed DD-MM-YYYY (e.g. heist-24-08-2026-10-32-57) and carry no
+    /YYYY/MM/ path, so the guard that drops stale WordPress-style URLs can never
+    read a WFIU event as stale -- even when the slug's date predates the build
+    window.
+    """
+
+    def test_no_wfiu_event_is_dropped_by_the_stale_url_guard(self):
+        events, _ = _run()
+        ics = WFIUCommunityCalendarScraper().create_calendar(events).to_ical().decode()
+        pipeline_events = extract_events(ics, source_name="WFIU Community Calendar")
+
+        # The Heist slug embeds 24-08-2026, a month before the frozen clock, so a
+        # /YYYY/MM/ read would call it stale. The guard must keep it anyway.
+        kept = [e for e in pipeline_events if not _url_predates_window(e["content"], FROZEN_NOW)]
+
+        assert len(kept) == len(pipeline_events) == 3
+        assert any("heist-24-08-2026-10-32-57" in e["content"] for e in kept)
 
 
 def _registered_bloomington_entries() -> list[dict]:
