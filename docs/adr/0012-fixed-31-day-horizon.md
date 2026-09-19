@@ -8,9 +8,11 @@ Accepted
 
 ## Context
 
-Every source caps its fetch at a Horizon of `SCRAPE_MONTHS` months
-(`BaseScraper.months_ahead`), so the calendar has a predictable amount of
-prefetched data. The boundary could be computed two ways: add calendar months
+The calendar holds a predictable amount of prefetched data: `BaseScraper.run()`
+drops any emitted event whose start is beyond a Horizon of `SCRAPE_MONTHS`
+months (`BaseScraper.months_ahead`). Upstream fetches may also be bounded, but
+that is per-source — Legistar, for example, applies no upper bound and relies on
+the `run()` filter. The boundary could be computed two ways: add calendar months
 (`now + relativedelta(months=N)`), or add a fixed number of days
 (`now + timedelta(days=N * 31)`). The helper `scrapers/lib/horizon.py` uses the
 fixed day offset; a reader encountering `* 31` would reasonably assume the
@@ -22,10 +24,13 @@ calendar-aware form was intended and "fix" it.
 calendar-aware.** `horizon_end()` is the single definition; `within()` is the
 single predicate. Scrapers route through `BaseScraper.horizon_cutoff()`.
 
-A fixed offset keeps the window uniform regardless of which months it spans, is
-trivial to test and reproduce, and is stable across time zones and DST. A
-calendar-aware add would produce uneven windows (28–31 days per month) and
-month-end ambiguity. The trade-off is that "6 months" is really 186 days.
+A fixed offset keeps the window uniform regardless of which months it spans and
+is trivial to test and reproduce. It is a fixed count of *civil* days: aware
+`datetime + timedelta` preserves local wall-clock time, so the boundary is the
+same time-of-day N×31 days later, and the absolute duration can shift by an hour
+across a DST transition. A calendar-aware add would produce uneven windows
+(28–31 days per month) and month-end ambiguity. The trade-off is that "6 months"
+is really 186 days.
 
 Two inline `* 30` ceilings deliberately stay local, each commented: Elfsight's
 listing expansion (`scrapers/lib/elfsight.py`) and Davis Chamber's month cursor
