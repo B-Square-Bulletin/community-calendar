@@ -75,6 +75,7 @@ class _Site:
         self,
         pages: list[str] | None = None,
         details: dict[str, str] | None = None,
+        fail: set[str] | None = None,
     ):
         self.pages = (
             pages
@@ -85,6 +86,7 @@ class _Site:
             ]
         )
         self.details = details if details is not None else DETAIL_FILES
+        self.fail = fail or set()
         self.calls: list[str] = []
 
     def fetch(self, url: str) -> str:
@@ -92,6 +94,8 @@ class _Site:
         path = urlparse(url).path
         if "/event/" in path:
             slug = path.rsplit("/", 1)[1]
+            if slug in self.fail:
+                raise RuntimeError(f"simulated detail failure for {url}")
             return _fixture(self.details[slug])
         page = int(parse_qs(urlparse(url).query)["p"][0])
         return self.pages[page - 1]
@@ -501,3 +505,148 @@ class TestRegistrationContract:
 
         assert len(kept) == 1
         assert "X-SOURCE:Limestone Post, WFIU Community Calendar" in kept[0]["content"]
+
+
+HEIST_IMAGE_SUFFIX = "sq-heist-2.jpg"
+HEIST_LOCATION = "Waldron Auditorium, 122 S Walnut St, Bloomington, Indiana 47404"
+
+
+class TestDetailEnrichment:
+    """Canonical fields come from the detail page; the card is the fallback (#142).
+
+    The visitor contract: a card shows the detail's title, venue, postal
+    address, rich description, image, and ticket link -- not the thin listing
+    text -- so the event can be placed geographically and acted on.
+    """
+
+    def test_detail_title_and_venue_win_over_the_card(self):
+        site = _Site(pages=[_listing_html(_card("HEIST CARD TITLE"))])
+
+        events, _ = _run(site)
+
+        assert events[0]["title"] == "Heist"
+        assert events[0]["location"].startswith("Waldron Auditorium")
+
+    def test_location_carries_venue_street_city_state_and_zip(self):
+        events, _ = _run()
+
+        assert _by_title(events, "Heist")["location"] == HEIST_LOCATION
+
+    def test_shared_city_filter_can_act_on_the_postal_location(self):
+        from scrapers.lib.city_filter import (
+            load_allowed_cities,
+            location_matches_allowed_cities,
+        )
+
+        allowed, excluded, zips = load_allowed_cities(BLOOMINGTON_DIR)
+        events, _ = _run()
+        heist = _by_title(events, "Heist")["location"]
+        ukulele = _by_title(events, "Adult Ukulele Class")["location"]
+
+        assert location_matches_allowed_cities(heist, allowed, excluded, zips)
+        assert not location_matches_allowed_cities(ukulele, allowed, excluded, zips)
+
+    def test_description_is_plain_text_with_org_prefix_and_ticket_suffix(self):
+        events, _ = _run()
+        event = _by_title(events, "Heist")
+
+        assert event["description"].startswith("Presented by Constellation Stage + Screen")
+        assert "A band of criminals" in event["description"]
+        assert "Constellation Stage & Screen presents" in event["description"]
+        assert "Tickets: https://seeconstellation.org/mainstage/heist/" in event["description"]
+        assert "<" not in event["description"]
+        assert "&amp;" not in event["description"]
+
+    def test_event_url_stays_on_the_credited_detail_page(self):
+        events, _ = _run()
+        event = _by_title(events, "Heist")
+
+        assert event["url"] == (
+            "https://www.ipm.org/community-calendar/event/heist-24-08-2026-10-32-57"
+        )
+        assert event["url"] != "https://seeconstellation.org/mainstage/heist/"
+
+    def test_detail_image_is_attached(self):
+        events, _ = _run()
+        event = _by_title(events, "Heist")
+
+        assert event["image_url"].startswith("https://")
+        assert event["image_url"].endswith(HEIST_IMAGE_SUFFIX)
+
+    def test_card_fields_backfill_a_detail_without_them(self):
+        site = _Site(
+            pages=[_listing_html(_card("The Card Title"))],
+            details={HEIST_SLUG: "wfiu_detail_minimal.html"},
+        )
+
+        events, _ = _run(site)
+
+        assert events[0]["title"] == "The Card Title"
+        assert events[0]["location"] == "Somewhere"
+        assert not events[0].get("image_url")
+
+    def test_shared_detail_url_is_fetched_once(self):
+        card = _card("Movie", time_raw="02:00 PM - 04:00 PM")
+
+        _, calls = _run(_Site(pages=[_listing_html(card, card)]))
+
+        detail_calls = [url for url in calls if "/event/" in url]
+        assert len(detail_calls) == 1
+
+    def test_missing_content_id_falls_back_to_the_card_url(self):
+        site = _Site(
+            pages=[_listing_html(_card("Heist"))],
+            details={HEIST_SLUG: "wfiu_detail_no_meta.html"},
+        )
+
+        events, _ = _run(site)
+
+        expected = hashlib.md5(
+            b"https://www.ipm.org/community-calendar/event/heist-24-08-2026-10-32-57"
+            b"-2026-09-18-0900-2200"
+        ).hexdigest()
+        assert events[0]["uid"] == f"{expected}@ipm.org"
+
+
+class TestDetailFailure:
+    """A failed detail fetch degrades to a card event, loudly and boundedly (#142)."""
+
+    def test_failed_detail_emits_a_card_fallback_and_warns(self, caplog):
+        site = _Site(fail={HEIST_SLUG})
+
+        with caplog.at_level("WARNING"):
+            events, _ = _run(site)
+
+        heist = _by_title(events, "Heist")
+        assert heist["title"] == "Heist"
+        assert heist["location"] == "Waldron Auditorium"
+        assert any("detail" in r.getMessage().lower() for r in caplog.records)
+
+    def test_failed_details_above_the_threshold_raise(self, monkeypatch):
+        monkeypatch.setattr("scrapers.wfiu_community_calendar.DETAIL_ERROR_THRESHOLD", 1)
+        site = _Site(
+            pages=[
+                _listing_html(
+                    _card("Heist", slug=HEIST_SLUG),
+                    _card("Class", slug=UKULELE_SLUG),
+                )
+            ],
+            fail={HEIST_SLUG, UKULELE_SLUG},
+        )
+
+        with pytest.raises(RuntimeError, match="detail"):
+            _run(site)
+
+    def test_postal_less_emissions_are_counted_in_the_run_record(self, tmp_path):
+        site = _Site(fail={HEIST_SLUG})
+
+        _run(site)
+
+        runs = json.loads((tmp_path / RUN_HISTORY_FILE).read_text())["runs"]
+        assert runs[-1]["postal_less"] == 1
+
+    def test_postal_less_is_zero_when_every_detail_has_an_address(self, tmp_path):
+        _run()
+
+        runs = json.loads((tmp_path / RUN_HISTORY_FILE).read_text())["runs"]
+        assert runs[-1]["postal_less"] == 0

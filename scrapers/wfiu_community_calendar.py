@@ -33,6 +33,7 @@ sys.path.insert(0, __file__.rsplit("/", 1)[0])
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import hashlib
+import html
 import json
 import logging
 import re
@@ -74,6 +75,11 @@ DETAIL_CAP = 500
 # signal. A few are tolerated (a lone malformed card should not lose the run);
 # more than this and the run fails loud rather than silently dropping events.
 DATE_ERROR_THRESHOLD = 3
+# A detail fetch that fails degrades to a card-fallback event. A few failures
+# are tolerated; more than this and the run fails loud rather than emitting a
+# page of address-less cards. Retry logic is deliberately unchanged: one
+# attempt per URL, no new retry or backoff layer.
+DETAIL_ERROR_THRESHOLD = 3
 # robots.txt allows all and sets no Crawl-delay; this is voluntary citizenship.
 CRAWL_DELAY = 2.0
 REQUEST_TIMEOUT = 90
@@ -151,10 +157,18 @@ def _text(element) -> str:
 
 
 def _plain_text(markup: str) -> str:
-    """Strip card HTML to readable plain text, with no length cap."""
-    text = re.sub(r"(?i)<br\s*/?>", "\n", markup or "")
+    """Strip card/detail HTML to readable plain text, with no length cap.
+
+    Entities are decoded so the published text reads as written (a detail
+    paragraph's `&amp;` must not survive as a literal entity into the ICS).
+    """
+    if not markup:
+        return ""
+    text = html.unescape(markup)
+    text = re.sub(r"(?i)<br\s*/?>", "\n", text)
     text = re.sub(r"(?i)</p\s*>", "\n", text)
     text = re.sub(r"<[^>]+>", " ", text)
+    text = html.unescape(text)
     text = re.sub(r"[ \t\f\v]+", " ", text)
     text = re.sub(r"\n\s*\n+", "\n", text)
     return text.strip()
@@ -270,14 +284,65 @@ def _uid(identity: str, occurrence_date: date, time_key: str) -> str:
     return f"{digest}@{DOMAIN}"
 
 
-def _content_id(html: str) -> str | None:
-    """The Brightspot content id meta on a detail page, or None."""
-    soup = BeautifulSoup(html, "html.parser")
+def _parse_detail(markup: str) -> dict[str, Any]:
+    """Canonical fields from one detail page, empty strings when absent.
+
+    Card fallback is the caller's job: this reports only what the detail
+    actually carries, so the caller can tell "detail missing" from "detail
+    present but fieldless".
+    """
+    soup = BeautifulSoup(markup, "html.parser")
     meta = soup.select_one("meta[name='brightspot.contentId']")
+    image = soup.select_one(".EventPage-image img[src]")
+    ticket = soup.select_one(".EventPage-ticketing a[href]")
+    description = soup.select_one(".EventPage-description")
     content = meta.get("content") if meta else None
-    if not isinstance(content, str):
-        return None
-    return content.strip() or None
+    return {
+        "content_id": content.strip() if isinstance(content, str) and content.strip() else None,
+        "title": _text(soup.select_one(".EventPage-name")),
+        "venue": _text(soup.select_one(".EventPage-information-venueName"))
+        or _text(soup.select_one(".VenueInformation-name")),
+        "description": _plain_text(description.decode_contents()) if description else "",
+        "presenting_org": _text(soup.select_one(".PresentingOrganizationInformation-name")),
+        "street": _text(soup.select_one(".VenueInformation-address-streetAddress")),
+        "city": _text(soup.select_one(".VenueInformation-address-city")),
+        "state": _text(soup.select_one(".VenueInformation-address-state")),
+        "zip": _text(soup.select_one(".VenueInformation-address-zip")),
+        "ticket_url": (ticket.get("href") if ticket else None) or "",
+        "image_url": (image.get("src") if image else None) or "",
+    }
+
+
+def _build_location(detail: dict[str, Any], card_venue: str) -> str:
+    """Venue + street + city + state + ZIP as one location string.
+
+    Mirrors Visit Bloomington's `_build_location`. The postal address is
+    load-bearing: the shared combine-time city filter only geo-filters a
+    location carrying an address indicator (state, ZIP, city+state, or a
+    street), and fails open on a bare venue name.
+    """
+    venue = detail["venue"] or card_venue
+    street = ", ".join(part for part in (venue, detail["street"]) if part)
+    state_zip = " ".join(part for part in (detail["state"], detail["zip"]) if part)
+    city = ", ".join(part for part in (detail["city"], state_zip) if part)
+    return ", ".join(part for part in (street, city) if part)
+
+
+def _assemble_description(detail: dict[str, Any], card_description: str) -> str:
+    """Plain-text body with the presenting-org line prepended and tickets appended.
+
+    The body is stripped first so the two synthetic lines are never eaten by
+    the stripper; ticket and org are detail-only (the card carries neither).
+    """
+    body = detail["description"] or _plain_text(card_description)
+    parts: list[str] = []
+    if detail["presenting_org"]:
+        parts.append(f"Presented by {detail['presenting_org']}")
+    if body:
+        parts.append(body)
+    if detail["ticket_url"]:
+        parts.append(f"Tickets: {detail['ticket_url']}")
+    return "\n".join(parts)
 
 
 def _parse_cards(soup: BeautifulSoup) -> list[dict[str, Any]]:
@@ -344,24 +409,43 @@ class WFIUCommunityCalendarScraper(BaseScraper):
         """Detail URLs in first-seen order, one per unique event."""
         return list(dict.fromkeys(c["url"] for c in cards if c.get("url")))
 
-    def _fetch_details(self, urls: list[str]) -> dict[str, str]:
-        """One fetch per unique detail URL, capped and loud."""
+    def _fetch_details(self, urls: list[str]) -> tuple[dict[str, str], int]:
+        """One fetch per unique detail URL; failures are left absent and counted.
+
+        The cap raises rather than truncating the inventory. A per-URL failure
+        is not retried (retry logic deliberately unchanged): the caller emits a
+        card-fallback event and the run raises once failures cross the small
+        threshold, so a page of address-less cards never ships silently.
+        """
         if len(urls) > DETAIL_CAP:
             raise RuntimeError(
                 f"WFIU listing yields {len(urls)} unique detail URLs, above the "
                 f"detail-fetch cap of {DETAIL_CAP}; refusing to truncate"
             )
         details: dict[str, str] = {}
+        errors = 0
         for index, url in enumerate(urls):
             if index:
                 time.sleep(CRAWL_DELAY)
-            details[url] = _fetch_html(url)
-        return details
+            try:
+                details[url] = _fetch_html(url)
+            except Exception as exc:  # any detail failure degrades to a card fallback
+                errors += 1
+                self.logger.warning(
+                    f"WFIU Community Calendar: detail fetch failed for {url} "
+                    f"({exc}); emitting card fallback"
+                )
+        return details, errors
 
     def _parse_card(
-        self, card: dict[str, Any], today: date, horizon: date, detail_html: str | None
-    ) -> dict[str, Any] | None:
-        """One event from one occurrence card, or None when its date is unusable."""
+        self, card: dict[str, Any], today: date, horizon: date, detail: dict[str, Any] | None
+    ) -> tuple[dict[str, Any], bool] | None:
+        """One event from one occurrence card, or None when its date is unusable.
+
+        Returns the event plus whether the detail carried postal geography, so
+        the run record can keep postal-less pass-through visible. Canonical
+        fields come from the detail with the card as fallback.
+        """
         occurrence, weekday_agreed = _bind_year(
             card["date_display"], card["weekday"], today, horizon
         )
@@ -394,16 +478,20 @@ class WFIUCommunityCalendarScraper(BaseScraper):
                 dtend += timedelta(days=1)
             time_key = _time_key(start, end)
 
-        identity = (_content_id(detail_html) if detail_html else None) or card["url"]
-        return {
-            "title": card["title"],
+        detail = detail or _parse_detail("")
+        identity = detail["content_id"] or card["url"]
+        event: dict[str, Any] = {
+            "title": detail["title"] or card["title"],
             "dtstart": dtstart,
             "dtend": dtend,
             "url": card["url"],
-            "location": card["venue"],
-            "description": _plain_text(card["description"]),
+            "location": _build_location(detail, card["venue"]),
+            "description": _assemble_description(detail, card["description"]),
             "uid": _uid(identity, occurrence, time_key),
         }
+        if detail["image_url"]:
+            event["image_url"] = detail["image_url"]
+        return event, bool(detail["zip"])
 
     def _load_runs(self) -> list[dict[str, Any]]:
         """Prior runs' records, or [] on a missing/corrupt history file."""
@@ -445,13 +533,21 @@ class WFIUCommunityCalendarScraper(BaseScraper):
 
         cards, pages = self._walk_listing(start_ms, end_ms)
         urls = self._unique_urls(cards)
-        details = self._fetch_details(urls)
+        details, detail_errors = self._fetch_details(urls)
+        if detail_errors > DETAIL_ERROR_THRESHOLD:
+            raise RuntimeError(
+                f"WFIU Community Calendar: {detail_errors} detail fetches failed, "
+                f"above the threshold of {DETAIL_ERROR_THRESHOLD}; failing loud"
+            )
+        # Parse each unique detail once, not once per occurrence card.
+        parsed_details = {url: _parse_detail(html) for url, html in details.items()}
 
         events: list[dict[str, Any]] = []
         seen_uids: set[str] = set()
         date_errors = 0
+        postal_less = 0
         for card in cards:
-            detail = details.get(str(card.get("url") or ""))
+            detail = parsed_details.get(str(card.get("url") or ""))
             parsed = self._parse_card(card, today, horizon.date(), detail)
             if parsed is None:
                 date_errors += 1
@@ -461,16 +557,20 @@ class WFIUCommunityCalendarScraper(BaseScraper):
                         f"dates, above the threshold of {DATE_ERROR_THRESHOLD}; failing loud"
                     )
                 continue
-            if not within(parsed["dtstart"], horizon):
+            event, has_postal = parsed
+            if not within(event["dtstart"], horizon):
                 continue
-            if parsed["uid"] in seen_uids:
+            if event["uid"] in seen_uids:
                 continue
-            seen_uids.add(parsed["uid"])
-            events.append(parsed)
+            seen_uids.add(event["uid"])
+            if not has_postal:
+                postal_less += 1
+            events.append(event)
 
         self.logger.info(
             f"WFIU Community Calendar: {pages} pages, {len(cards)} cards, "
-            f"{len(urls)} unique detail URLs, {len(events)} events emitted"
+            f"{len(urls)} unique detail URLs, {len(details)} details, "
+            f"{len(events)} events emitted, {postal_less} postal-less"
         )
         runs = self._load_runs()
         self._warn_if_degraded(len(cards), runs)
@@ -481,6 +581,7 @@ class WFIUCommunityCalendarScraper(BaseScraper):
                 "cards_fetched": len(cards),
                 "unique_detail_urls": len(urls),
                 "details_fetched": len(details),
+                "postal_less": postal_less,
                 "emitted": len(events),
             },
             runs,
