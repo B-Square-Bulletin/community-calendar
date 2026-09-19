@@ -47,6 +47,7 @@ from zoneinfo import ZoneInfo
 import requests
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
+from lib.city_filter import has_address_indicator
 from lib.horizon import within
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -480,9 +481,12 @@ class WFIUCommunityCalendarScraper(BaseScraper):
     ) -> tuple[dict[str, Any], bool] | None:
         """One event from one occurrence card, or None when its date is unusable.
 
-        Returns the event plus whether the detail carried postal geography, so
-        the run record can keep postal-less pass-through visible. Canonical
-        fields come from the detail with the card as fallback.
+        Returns the event plus whether the emitted location carries an address
+        indicator the shared city filter can geo-check, so the run record can
+        keep pass-through visible. The indicator set is the city filter's own
+        `has_address_indicator`, not ZIP alone: a location the filter can
+        geo-check is not postal-less. Canonical fields come from the detail
+        with the card as fallback.
         """
         occurrence, weekday_agreed = _bind_year(
             card["date_display"], card["weekday"], today, horizon
@@ -518,18 +522,19 @@ class WFIUCommunityCalendarScraper(BaseScraper):
 
         detail = detail or _parse_detail("")
         identity = detail["content_id"] or card["url"]
+        location = _build_location(detail, card["venue"])
         event: dict[str, Any] = {
             "title": detail["title"] or card["title"],
             "dtstart": dtstart,
             "dtend": dtend,
             "url": card["url"],
-            "location": _build_location(detail, card["venue"]),
+            "location": location,
             "description": _assemble_description(detail, card["description"]),
             "uid": _uid(identity, occurrence, time_key),
         }
         if detail["image_url"]:
             event["image_url"] = detail["image_url"]
-        return event, bool(detail["zip"])
+        return event, has_address_indicator(location)
 
     def _load_runs(self) -> list[dict[str, Any]]:
         """Prior runs' records, or [] on a missing/corrupt history file."""

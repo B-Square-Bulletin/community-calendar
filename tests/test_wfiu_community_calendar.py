@@ -46,6 +46,7 @@ RUN_HISTORY_FILE = "wfiu_community_calendar.runs.json"
 HEIST_SLUG = "heist-24-08-2026-10-32-57"
 UKULELE_SLUG = "adult-ukulele-class-04-08-2026-11-29-41"
 METZ_SLUG = "meet-me-at-the-metz-carillon-series-01-09-2026-09-00-00"
+NO_ZIP_SLUG = "no-zip-concert-01-09-2026-09-00-00"
 
 DETAIL_FILES = {
     HEIST_SLUG: "wfiu_detail_heist.html",
@@ -675,6 +676,24 @@ class TestDetailFailure:
     def test_postal_less_is_zero_when_every_detail_has_an_address(self, tmp_path):
         _run()
 
+        runs = json.loads((tmp_path / RUN_HISTORY_FILE).read_text())["runs"]
+        assert runs[-1]["postal_less"] == 0
+
+    def test_address_without_a_zip_is_not_postal_less(self, tmp_path):
+        """ZIP alone was never the indicator set: a 2-letter state also counts.
+
+        The shared city filter geo-checks the emitted location via its ", IN"
+        state indicator, so this event is not postal-less even though the
+        detail carries no ZIP. Regression guard for the old bool(zip) check.
+        """
+        site = _Site(
+            pages=[_listing_html(_card("No Zip", slug=NO_ZIP_SLUG))],
+            details={NO_ZIP_SLUG: "wfiu_detail_no_zip.html"},
+        )
+
+        events, _ = _run(site)
+
+        assert events[0]["location"] == "Waldron Auditorium, 122 S Walnut St, Bloomington, IN"
         runs = json.loads((tmp_path / RUN_HISTORY_FILE).read_text())["runs"]
         assert runs[-1]["postal_less"] == 0
 

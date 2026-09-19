@@ -105,8 +105,13 @@ def _postal_zips(location):
     return set(_POSTAL_ZIP_RE.findall(location))
 
 
-def _has_address_indicator(location):
-    """Check if a location string looks like a real address."""
+def has_address_indicator(location):
+    """Check if a location string looks like a real address.
+
+    Public so callers that need to know whether this filter can geo-check a
+    location (rather than filtering it) share the one indicator definition
+    instead of re-listing the indicator set and drifting from it.
+    """
     return bool(
         _STATE_RE.search(location)
         or _ZIP_RE.search(location)
@@ -146,7 +151,7 @@ def location_matches_allowed_cities(
 
     # Check if location looks like an address
     # If not, allow it through (venue name only, no geo info to filter on)
-    if not _has_address_indicator(location):
+    if not has_address_indicator(location):
         return True
 
     # Location has address info - check against allowed cities
