@@ -15,12 +15,16 @@ var picksCounter = 0;
 var eventsCounter = 0;
 var activePanel = '';
 
-function moreHasMore(events, startIndex, pageSize) {
-  return Array.isArray(events) && (startIndex + pageSize) < events.length;
+// The pager guards delegate to helpers.js so the Earlier/Later controls read
+// the same date + search + category predicate the list renders through
+// (#146). They stay here as global call targets so XMLUI reactivity tracks the
+// arguments passed from the `when` bindings (d86627969).
+function moreHasMore(events, term, startIndex, pageSize, category) {
+  return window.moreHasMore(events, term, startIndex, pageSize, category);
 }
 
-function moreHasPrev(startIndex) {
-  return startIndex > 0;
+function moreHasPrev(events, term, startIndex, category) {
+  return window.moreHasPrev(events, term, startIndex, category);
 }
 
 function moreNextIndex(startIndex, pageSize) {
@@ -54,6 +58,12 @@ var dashboardTiles = null;
 var dashboardGridLayout = null;
 
 
+// Single category-commit path: the dropdown and every EventCard category badge
+// funnel through here. Paging is reset by the app-scope ChangeListener on
+// categoryFilter in Main.xmlui, not here: an assignment made from a call
+// originating in a child component (the badge) does not repaint the list's
+// displayStartIndex binding, while the listener runs in the app scope where it
+// does (#146).
 function setCategoryFilter(category) {
   categoryFilter = category || '';
   window.syncCategoryParam(categoryFilter);

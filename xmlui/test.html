@@ -1527,12 +1527,28 @@
           test('single committed window feeds list and pager; commit resets paging', () => {
             assert(main.includes('name="dateFilteredEvents"'), 'Missing dateFilteredEvents variable');
             assert(main.includes('moreHasMore(dateFilteredEvents'), 'Pager guard must read the same window');
+            assert(
+              main.includes('moreHasMore(dateFilteredEvents, filterTerm, displayStartIndex, pageSizeFor(filterTerm), categoryFilter)'),
+              'Later guard must read the same search + category predicate as the list (#146)'
+            );
+            assert(
+              main.includes('moreHasPrev(dateFilteredEvents, filterTerm, displayStartIndex, categoryFilter)'),
+              'Earlier guard must read the same search + category predicate as the list (#146)'
+            );
             assert(/commitDatePreset\('today'\)/.test(main), 'Today tab must route through the shared commit');
             const cbAt = globalsText.indexOf('function commitDatePreset(');
             const cb = cbAt < 0 ? '' : globalsText.substring(cbAt, cbAt + 2500);
             assert(/displayStartIndex = 0/.test(cb), 'Commit must reset paging');
             assert(cb.includes('scrollRequest = scrollRequest + 1'), 'Commit must scroll to top');
             assert(main.includes('getActiveCategories(dateFilteredEvents)'), 'Category counts must reflect the window');
+            assert(
+              main.includes('onDidChange="(val) => setCategoryFilter(val)"'),
+              'Category changes must funnel through the shared setCategoryFilter commit'
+            );
+            assert(
+              /<ChangeListener[\s\S]{0,140}?listenTo="\{categoryFilter\}"[\s\S]{0,180}?displayStartIndex = 0/.test(main),
+              'Category changes must reset paging from the app-scope listener (#146)'
+            );
           });
 
           test('date seam, boot seed, and engine load are wired', () => {
