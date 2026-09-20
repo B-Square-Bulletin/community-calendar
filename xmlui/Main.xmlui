@@ -107,6 +107,16 @@
 
   <!-- filterTerm ChangeListener removed: TextBox onDidChange already sets displayStartIndex -->
 
+  <!-- #146: a category change is a list-filter change, so reset paging to page
+       1. This runs in the app scope where the assignment repaints the list's
+       displayStartIndex binding; the same reset inside setCategoryFilter did
+       not repaint when a child component (an EventCard category badge)
+       triggered the change. -->
+  <ChangeListener
+    listenTo="{categoryFilter}"
+    onDidChange="() => { displayStartIndex = 0; browseStartIndex = 0 }"
+  />
+
 
 
   <ChangeListener
@@ -279,7 +289,7 @@
         fontSize="$fontSize-sm"
         dropdownHeight="520px"
         value="{categoryFilter || undefined}"
-        onDidChange="(val) => { categoryFilter = val || ''; window.syncCategoryParam(categoryFilter); }"
+        onDidChange="(val) => setCategoryFilter(val)"
         width="*"
       >
         <Items data="{window.getActiveCategories(dateFilteredEvents)}">
@@ -372,7 +382,7 @@
     </VStack>
     <Spinner when="{!events.value && viewMode === 'all'}" />
     <Button
-      when="{!!events.value && viewMode === 'all' && !filterTerm && moreHasPrev(displayStartIndex)}"
+      when="{!!events.value && viewMode === 'all' && !filterTerm && moreHasPrev(dateFilteredEvents, filterTerm, displayStartIndex, categoryFilter)}"
       label="Earlier"
       variant="outlined"
       width="100%"
@@ -388,7 +398,7 @@
       </Items>
     </VStack>
     <Button
-      when="{!!events.value && viewMode === 'all' && !filterTerm && moreHasMore(dateFilteredEvents, displayStartIndex, pageSizeFor(filterTerm))}"
+      when="{!!events.value && viewMode === 'all' && !filterTerm && moreHasMore(dateFilteredEvents, filterTerm, displayStartIndex, pageSizeFor(filterTerm), categoryFilter)}"
       label="Later"
       variant="outlined"
       width="100%"

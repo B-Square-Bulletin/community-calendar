@@ -169,6 +169,29 @@ describe('single committed window', () => {
   it('pager guard reads the same window (not a second filter)', () => {
     expect(!!main && /moreHasMore\(dateFilteredEvents/.test(main)).toBe(true);
   });
+  it('pager guards read the same search + category predicate as the list (#146)', () => {
+    expect(
+      !!main &&
+        /moreHasMore\(dateFilteredEvents, filterTerm, displayStartIndex, pageSizeFor\(filterTerm\), categoryFilter\)/.test(
+          main
+        )
+    ).toBe(true);
+    expect(
+      !!main &&
+        /moreHasPrev\(dateFilteredEvents, filterTerm, displayStartIndex, categoryFilter\)/.test(
+          main
+        )
+    ).toBe(true);
+  });
+  it('category changes reset paging from the app-scope listener (#146)', () => {
+    expect(
+      !!main &&
+        /<ChangeListener[\s\S]{0,140}?listenTo="\{categoryFilter\}"[\s\S]{0,180}?displayStartIndex = 0/.test(
+          main
+        )
+    ).toBe(true);
+    expect(!!main && main.includes('onDidChange="(val) => setCategoryFilter(val)"')).toBe(true);
+  });
   it('commit resets paging and scrolls on commit only', () => {
     expect(
       !!main &&

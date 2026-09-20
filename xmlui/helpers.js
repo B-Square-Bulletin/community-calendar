@@ -837,6 +837,36 @@ function getPagedEvents(events, term, startIndex, pageSize, category) {
   return page;
 }
 
+// Pager guards (#146). The Earlier/Later controls must read the SAME list the
+// rendered list reads — the date window (filtered upstream) plus search and
+// category — or the un-categorized list claims a next page the filtered slice
+// does not have (#146: 245 events in the window, 4 in the selected category,
+// yet "Later" paged that category into an empty list). Pure functions with
+// explicit arguments, because XMLUI reactivity tracks the arguments, not
+// mutations of globals (d86627969). The term branch matches getPagedEvents'
+// search first-N behavior, where the controls are hidden by markup anyway.
+function moreHasMore(events, term, startIndex, pageSize, category) {
+  if (term) return false;
+  const filtered = filterEvents(events, term, category) || [];
+  const size = pageSize || 50;
+  const index = Number.isFinite(startIndex) ? Math.max(0, startIndex) : 0;
+  return index + size < filtered.length;
+}
+
+function moreHasPrev(events, term, startIndex, category) {
+  if (term) return false;
+  const filtered = filterEvents(events, term, category) || [];
+  const index = Number.isFinite(startIndex) ? Math.max(0, startIndex) : 0;
+  // "Earlier" is available whenever a nonempty filtered list sits behind a
+  // positive index. It deliberately does NOT require the page start to be
+  // inside the filtered list: a filtered-input shrink that repaints without
+  // resetting paging — a smaller fresh PushSource payload, or a hidden-source
+  // toggle — can leave the index past the end, and hiding "Earlier" there
+  // would strand the user on an empty page with no controls. Category and date
+  // changes reset paging, so the reported case never reaches that state.
+  return index > 0 && filtered.length > 0;
+}
+
 // Get description snippet with context around search term (returns null if no match in description)
 function getDescriptionSnippet(description, term) {
   if (!description || !term) return null;
@@ -2275,6 +2305,8 @@ if (typeof window !== 'undefined') {
       : _buildSearchIndex(events);
   };
   window.getPagedEvents = getPagedEvents;
+  window.moreHasMore = moreHasMore;
+  window.moreHasPrev = moreHasPrev;
   window.getDescriptionSnippet = getDescriptionSnippet;
   window.formatDayOfWeek = formatDayOfWeek;
   window.formatMonthDay = formatMonthDay;
