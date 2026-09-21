@@ -659,8 +659,8 @@ class WFIUCommunityCalendarScraper(BaseScraper):
                     date_errors += 1
                     if date_errors > DATE_ERROR_THRESHOLD:
                         raise RuntimeError(
-                            f"WFIU Community Calendar: {date_errors} cards had unreadable "
-                            f"dates, above the threshold of {DATE_ERROR_THRESHOLD}; failing loud"
+                            f"WFIU Community Calendar: {date_errors} date-drift cards, above "
+                            f"the threshold of {DATE_ERROR_THRESHOLD}; failing loud"
                         )
                 # A real date ahead of the Horizon (the listing's leak) drops
                 # silently; the Horizon guard would discard it anyway.
