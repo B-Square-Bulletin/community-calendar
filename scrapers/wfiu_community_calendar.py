@@ -81,9 +81,12 @@ TEST_PAGE_CAP_ENV = "SCRAPER_TEST_PAGE_CAP"
 # One detail fetch per unique event URL, for the stable content id. Raise on
 # cap-hit rather than truncate the inventory.
 DETAIL_CAP = 500
-# A card whose month/day cannot be bound to an in-Horizon year is a data-drift
-# signal. A few are tolerated (a lone malformed card should not lose the run);
-# more than this and the run fails loud rather than silently dropping events.
+# A card whose month/day names no real calendar date (a format change, a typo),
+# or whose date has already passed, is a data-drift signal. A few are tolerated
+# (a lone bad card should not lose the run); more than this and the run fails
+# loud rather than silently dropping events. A real date merely ahead of the
+# Horizon is not drift: the listing's inclusive end filter leaks the day past
+# the Horizon for a series that starts in-window, and that drop is normal.
 DATE_ERROR_THRESHOLD = 3
 # A detail fetch that fails degrades to a card-fallback event. A few failures
 # are tolerated; more than this and the run fails loud rather than emitting a
@@ -265,23 +268,48 @@ def _time_key(start: dtime | None, end: dtime | None) -> str:
     return f"{start:%H%M}-{end:%H%M}"
 
 
+def _is_real_month_day(month: int, day: int) -> bool:
+    """Does month/day name a real calendar date on some year?
+
+    `date` is asked about a leap year so Feb 29 counts as real while Feb 30 and
+    Apr 31 do not. This is the line between date drift and a well-formed date
+    that merely fell outside the Horizon.
+    """
+    try:
+        date(2000, month, day)
+    except ValueError:
+        return False
+    return True
+
+
 def _bind_year(
     display: str, weekday: str | None, today: date, horizon: date
-) -> tuple[date | None, bool]:
+) -> tuple[date | None, bool, bool]:
     """Bind the card's year-less month/day inside `[today, horizon]`.
 
-    The candidate year whose weekday agrees is preferred, which resolves the
-    Dec->Jan rollover. When no in-window candidate agrees, the earliest is used
-    with `agreed=False` so the caller can warn; when nothing lands in-window the
-    date is unbindable. The Horizon predicate remains the authoritative guard.
+    Returns `(occurrence, weekday_agreed, drift)`. The candidate year whose
+    weekday agrees is preferred, which resolves the Dec->Jan rollover; when no
+    in-window candidate agrees, the earliest is used with `agreed=False` so the
+    caller can warn.
+
+    `occurrence` is None when no year lands in-window, and `drift` then says
+    which kind of miss it is. A month/day that names no real calendar date, or
+    that has already passed this year, is drift -- the caller logs it and counts
+    it toward `DATE_ERROR_THRESHOLD`. A well-formed date ahead of the Horizon is
+    not drift: the listing's inclusive end filter leaks the day past the Horizon
+    for a series that starts in-window, and the Horizon guard would drop it
+    anyway. For a bound date `drift` is always False.
     """
     match = _MONTH_DAY.match(display)
     if not match:
-        return None, False
+        return None, False, True
     month = _MONTHS.get(match.group(1).lower())
     if month is None:
-        return None, False
+        return None, False, True
     day = int(match.group(2))
+    if not _is_real_month_day(month, day):
+        return None, False, True
+
     candidates: list[date] = []
     for year in range(today.year, horizon.year + 2):
         try:
@@ -290,14 +318,23 @@ def _bind_year(
             continue
         if today <= candidate <= horizon:
             candidates.append(candidate)
-    if not candidates:
-        return None, False
-    if weekday:
-        for candidate in candidates:
-            if candidate.strftime("%A").lower() == weekday.lower():
-                return candidate, True
-        return candidates[0], False
-    return candidates[0], True
+    if candidates:
+        if weekday:
+            for candidate in candidates:
+                if candidate.strftime("%A").lower() == weekday.lower():
+                    return candidate, True, False
+            return candidates[0], False, False
+        return candidates[0], True, False
+
+    # Nothing lands in-window. The card is stale (drift) when this year's
+    # occurrence is already behind us; otherwise it is the horizon leak.
+    try:
+        this_year = date(today.year, month, day)
+    except ValueError:
+        # Feb 29 in a non-leap year: every occurrence is a future leap year,
+        # beyond the Horizon here, so read the card as the leak.
+        return None, False, False
+    return None, False, this_year < today
 
 
 def _uid(identity: str, occurrence_date: date, time_key: str) -> str:
@@ -494,26 +531,22 @@ class WFIUCommunityCalendarScraper(BaseScraper):
         return details
 
     def _parse_card(
-        self, card: dict[str, Any], today: date, horizon: date, detail: dict[str, Any] | None
-    ) -> tuple[dict[str, Any], bool] | None:
-        """One event from one occurrence card, or None when its date is unusable.
+        self,
+        card: dict[str, Any],
+        occurrence: date,
+        weekday_agreed: bool,
+        detail: dict[str, Any] | None,
+    ) -> tuple[dict[str, Any], bool]:
+        """One event from one occurrence card already bound to `occurrence`.
 
-        Returns the event plus whether the emitted location carries an address
-        indicator the shared city filter can geo-check, so the run record can
-        keep pass-through visible. The indicator set is the city filter's own
-        `has_address_indicator`, not ZIP alone: a location the filter can
-        geo-check is not postal-less. Canonical fields come from the detail
-        with the card as fallback.
+        `occurrence` and `weekday_agreed` come from `_bind_year`; the caller
+        owns the Horizon and drift policy. Returns the event plus whether the
+        emitted location carries an address indicator the shared city filter
+        can geo-check, so the run record can keep pass-through visible. The
+        indicator set is the city filter's own `has_address_indicator`, not ZIP
+        alone: a location the filter can geo-check is not postal-less. Canonical
+        fields come from the detail with the card as fallback.
         """
-        occurrence, weekday_agreed = _bind_year(
-            card["date_display"], card["weekday"], today, horizon
-        )
-        if occurrence is None:
-            self.logger.error(
-                f"WFIU Community Calendar: could not bind a date from "
-                f"{card['date_display']!r} for {card['title']!r}"
-            )
-            return None
         if not weekday_agreed:
             self.logger.warning(
                 f"WFIU Community Calendar: the weekday {card['weekday']!r} does not "
@@ -602,17 +635,26 @@ class WFIUCommunityCalendarScraper(BaseScraper):
         date_errors = 0
         postal_less = 0
         for card in cards:
-            detail = parsed_details.get(str(card.get("url") or ""))
-            parsed = self._parse_card(card, today, horizon.date(), detail)
-            if parsed is None:
-                date_errors += 1
-                if date_errors > DATE_ERROR_THRESHOLD:
-                    raise RuntimeError(
-                        f"WFIU Community Calendar: {date_errors} cards had unbindable "
-                        f"dates, above the threshold of {DATE_ERROR_THRESHOLD}; failing loud"
+            occurrence, weekday_agreed, drift = _bind_year(
+                card["date_display"], card["weekday"], today, horizon.date()
+            )
+            if occurrence is None:
+                if drift:
+                    self.logger.error(
+                        f"WFIU Community Calendar: could not bind a date from "
+                        f"{card['date_display']!r} for {card['title']!r}"
                     )
+                    date_errors += 1
+                    if date_errors > DATE_ERROR_THRESHOLD:
+                        raise RuntimeError(
+                            f"WFIU Community Calendar: {date_errors} cards had unreadable "
+                            f"dates, above the threshold of {DATE_ERROR_THRESHOLD}; failing loud"
+                        )
+                # A real date ahead of the Horizon (the listing's leak) drops
+                # silently; the Horizon guard would discard it anyway.
                 continue
-            event, has_postal = parsed
+            detail = parsed_details.get(str(card.get("url") or ""))
+            event, has_postal = self._parse_card(card, occurrence, weekday_agreed, detail)
             if not within(event["dtstart"], horizon):
                 continue
             if event["uid"] in seen_uids:

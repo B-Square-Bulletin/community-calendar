@@ -38,7 +38,7 @@ BLOOMINGTON_DIR = Path(__file__).parent.parent / "cities" / "bloomington"
 FIXTURES = Path(__file__).parent / "fixtures" / "bloomington"
 
 # Frozen "now" so the Horizon window is deterministic against the captured pages.
-# 3 months ahead -> Horizon 2026-12-15 (see BaseScraper.horizon_cutoff).
+# 3 months ahead -> Horizon 2026-12-17 (see BaseScraper.horizon_cutoff).
 FROZEN_NOW = datetime(2026, 9, 15, 9, 0, tzinfo=TZ)
 MONTHS_AHEAD = 3
 RUN_HISTORY_FILE = "wfiu_community_calendar.runs.json"
@@ -431,20 +431,44 @@ class TestTimeAndIdentity:
         assert events[0]["dtstart"] == datetime(2026, 12, 10, 9, 0, tzinfo=TZ)
         assert any("weekday" in r.getMessage().lower() for r in caplog.records)
 
+    def test_occurrence_one_day_past_the_horizon_drops_without_a_date_error(self, caplog):
+        # The listing's `f1` filter clips to its end date inclusively, so a
+        # multi-day series that starts in-window leaks its horizon+1 occurrence
+        # (2026-12-18 here). That is a normal out-of-window drop -- the Horizon
+        # guard would discard it anyway -- not date drift, so it must not log an
+        # ERROR or count toward DATE_ERROR_THRESHOLD.
+        leaked = _listing_html(_card("Late Run", display_date="Dec 18", weekday="Friday"))
+
+        with caplog.at_level("ERROR"):
+            events, _ = _run(_Site(pages=[leaked]))
+
+        assert events == []
+        assert not [r for r in caplog.records if "could not bind a date" in r.getMessage()]
+
     def test_unparseable_dates_raise_after_a_small_threshold(self):
-        bad = [_card(f"Bad {i}", display_date="Sep 1", weekday="Tuesday") for i in range(4)]
+        bad = [_card(f"Bad {i}", display_date="Feb 30", weekday="Monday") for i in range(4)]
         site = _Site(pages=[_listing_html(*bad)])
 
         with pytest.raises(RuntimeError, match="date"):
             _run(site)
 
     def test_dates_below_the_threshold_degrade_without_raising(self):
-        bad = [_card(f"Bad {i}", display_date="Sep 1", weekday="Tuesday") for i in range(3)]
+        bad = [_card(f"Bad {i}", display_date="Feb 30", weekday="Monday") for i in range(3)]
         site = _Site(pages=[_listing_html(*bad)])
 
         events, _ = _run(site)
 
         assert events == []
+
+    def test_past_real_dates_still_count_as_date_errors(self):
+        # The listing is filtered from today, so a card already behind us is
+        # stale -- drift, not the horizon leak -- and must keep counting toward
+        # DATE_ERROR_THRESHOLD. Sep 1 is before the frozen clock.
+        past = [_card(f"Stale {i}", display_date="Sep 1", weekday="Tuesday") for i in range(4)]
+        site = _Site(pages=[_listing_html(*past)])
+
+        with pytest.raises(RuntimeError, match="date"):
+            _run(site)
 
     def test_same_day_repeat_showings_get_distinct_uids(self):
         matinee = _card("Movie", time_raw="02:00 PM - 04:00 PM")
@@ -466,7 +490,13 @@ class TestTimeAndIdentity:
 
 
 class TestHorizonGuard:
-    """Every emitted occurrence passes the shared Horizon predicate."""
+    """Every emitted occurrence passes the shared Horizon predicate.
+
+    A real date ahead of the Horizon is a normal drop, never date drift: the
+    listing's inclusive end filter leaks it for a series that starts in-window.
+    A month/day that names no real calendar date, or one already past, still
+    counts toward `DATE_ERROR_THRESHOLD` -- see `TestTimeAndIdentity`.
+    """
 
     def test_occurrence_beyond_the_horizon_is_dropped(self):
         beyond = _listing_html(_card("Far Away Event", display_date="Dec 20", weekday="Sunday"))
@@ -479,6 +509,20 @@ class TestHorizonGuard:
         events, _ = _run(_Site(pages=[past]))
 
         assert events == []
+
+    def test_many_occurrences_past_the_horizon_do_not_trip_the_date_threshold(self, caplog):
+        """A busy season of horizon+1 leaks must not abort the run.
+
+        Before #148 four such cards exceeded DATE_ERROR_THRESHOLD and raised;
+        they are valid dates, so they drop silently instead.
+        """
+        leaked = [_card(f"Late {i}", display_date="Dec 18", weekday="Friday") for i in range(5)]
+
+        with caplog.at_level("ERROR"):
+            events, _ = _run(_Site(pages=[_listing_html(*leaked)]))
+
+        assert events == []
+        assert not [r for r in caplog.records if "could not bind a date" in r.getMessage()]
 
 
 class TestRunHistory:
