@@ -293,12 +293,13 @@ def _bind_year(
     caller can warn.
 
     `occurrence` is None when no year lands in-window, and `drift` then says
-    which kind of miss it is. A month/day that names no real calendar date, or
-    that has already passed this year, is drift -- the caller logs it and counts
-    it toward `DATE_ERROR_THRESHOLD`. A well-formed date ahead of the Horizon is
-    not drift: the listing's inclusive end filter leaks the day past the Horizon
-    for a series that starts in-window, and the Horizon guard would drop it
-    anyway. For a bound date `drift` is always False.
+    which kind of miss it is. A month/day that names no real calendar date is
+    drift. Otherwise the card's nearest occurrence decides: one behind `today`
+    is stale drift (the listing is filtered from today, so a past card is
+    anomalous), while one ahead of the Horizon is the listing's leak -- its
+    inclusive end filter returns the next occurrence of a series that starts
+    in-window, which crosses New Year when the Horizon does. The caller logs
+    and counts only drift. For a bound date `drift` is always False.
     """
     match = _MONTH_DAY.match(display)
     if not match:
@@ -310,31 +311,35 @@ def _bind_year(
     if not _is_real_month_day(month, day):
         return None, False, True
 
-    candidates: list[date] = []
+    occurrences: list[date] = []
     for year in range(today.year, horizon.year + 2):
         try:
-            candidate = date(year, month, day)
+            occurrences.append(date(year, month, day))
         except ValueError:
             continue
-        if today <= candidate <= horizon:
-            candidates.append(candidate)
-    if candidates:
+    in_window = [candidate for candidate in occurrences if today <= candidate <= horizon]
+    if in_window:
         if weekday:
-            for candidate in candidates:
+            for candidate in in_window:
                 if candidate.strftime("%A").lower() == weekday.lower():
                     return candidate, True, False
-            return candidates[0], False, False
-        return candidates[0], True, False
+            return in_window[0], False, False
+        return in_window[0], True, False
 
-    # Nothing lands in-window. The card is stale (drift) when this year's
-    # occurrence is already behind us; otherwise it is the horizon leak.
-    try:
-        this_year = date(today.year, month, day)
-    except ValueError:
-        # Feb 29 in a non-leap year: every occurrence is a future leap year,
-        # beyond the Horizon here, so read the card as the leak.
+    if not occurrences:
+        # Feb 29 with no leap year in range: the next occurrence is a future
+        # leap year beyond the Horizon, so read the card as the leak.
         return None, False, False
-    return None, False, this_year < today
+
+    # Nothing lands in-window. Read the card as its occurrence nearest `today`:
+    # stale when that is behind us, the Horizon leak when it is ahead.
+    previous = max((candidate for candidate in occurrences if candidate < today), default=None)
+    upcoming = min((candidate for candidate in occurrences if candidate >= today), default=None)
+    if upcoming is None:
+        return None, False, True
+    if previous is not None and (today - previous) < (upcoming - today):
+        return None, False, True
+    return None, False, False
 
 
 def _uid(identity: str, occurrence_date: date, time_key: str) -> str:

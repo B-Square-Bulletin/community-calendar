@@ -524,6 +524,25 @@ class TestHorizonGuard:
         assert events == []
         assert not [r for r in caplog.records if "could not bind a date" in r.getMessage()]
 
+    def test_cross_year_horizon_leak_drops_without_a_date_error(self, caplog):
+        # When the Horizon crosses New Year, the leak's month/day also occurs in
+        # `today.year`, far in the past. Classification must read the occurrence
+        # nearest today (the future one), not that current-year date.
+        now = datetime(2026, 12, 20, 9, 0, tzinfo=TZ)
+        leak = (now + timedelta(days=MONTHS_AHEAD * 31)).date() + timedelta(days=1)
+        assert leak.year > now.year  # the case under test
+        card = _card(
+            "Cross-Year Leak",
+            display_date=f"{leak:%b} {leak.day}",
+            weekday=leak.strftime("%A"),
+        )
+
+        with caplog.at_level("ERROR"):
+            events, _ = _run(_Site(pages=[_listing_html(card)]), now=now)
+
+        assert events == []
+        assert not [r for r in caplog.records if "could not bind a date" in r.getMessage()]
+
 
 class TestRunHistory:
     """Each run records its fetch/emit counts and warns on a collapsed card count."""
