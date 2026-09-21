@@ -282,6 +282,11 @@ def _is_real_month_day(month: int, day: int) -> bool:
     return True
 
 
+def _weekday_agrees(candidate: date, weekday: str | None) -> bool:
+    """Does `candidate` fall on the card's stated weekday (when it states one)?"""
+    return weekday is not None and candidate.strftime("%A").lower() == weekday.lower()
+
+
 def _bind_year(
     display: str, weekday: str | None, today: date, horizon: date
 ) -> tuple[date | None, bool, bool]:
@@ -294,12 +299,13 @@ def _bind_year(
 
     `occurrence` is None when no year lands in-window, and `drift` then says
     which kind of miss it is. A month/day that names no real calendar date is
-    drift. Otherwise the card's nearest occurrence decides: one behind `today`
-    is stale drift (the listing is filtered from today, so a past card is
-    anomalous), while one ahead of the Horizon is the listing's leak -- its
-    inclusive end filter returns the next occurrence of a series that starts
-    in-window, which crosses New Year when the Horizon does. The caller logs
-    and counts only drift. For a bound date `drift` is always False.
+    drift. Otherwise the card is the occurrence just outside the window: the
+    adjacent past one is stale drift (the listing is filtered from today, so a
+    past card is anomalous) and the adjacent future one is the listing's leak
+    (its inclusive end filter returns the next occurrence of a series that
+    starts in-window). The card's weekday picks between those two, exactly as it
+    picks between in-window years; only drift is logged and counted. For a bound
+    date `drift` is always False.
     """
     match = _MONTH_DAY.match(display)
     if not match:
@@ -311,8 +317,10 @@ def _bind_year(
     if not _is_real_month_day(month, day):
         return None, False, True
 
+    # Four years either side bracket the window and a whole leap-year cycle, so
+    # a Feb 29 card resolves to the leap year the weekday names.
     occurrences: list[date] = []
-    for year in range(today.year, horizon.year + 2):
+    for year in range(today.year - 4, horizon.year + 5):
         try:
             occurrences.append(date(year, month, day))
         except ValueError:
@@ -321,23 +329,22 @@ def _bind_year(
     if in_window:
         if weekday:
             for candidate in in_window:
-                if candidate.strftime("%A").lower() == weekday.lower():
+                if _weekday_agrees(candidate, weekday):
                     return candidate, True, False
             return in_window[0], False, False
         return in_window[0], True, False
 
-    if not occurrences:
-        # Feb 29 with no leap year in range: the next occurrence is a future
-        # leap year beyond the Horizon, so read the card as the leak.
-        return None, False, False
-
-    # Nothing lands in-window. Read the card as its occurrence nearest `today`:
-    # stale when that is behind us, the Horizon leak when it is ahead.
     previous = max((candidate for candidate in occurrences if candidate < today), default=None)
-    upcoming = min((candidate for candidate in occurrences if candidate >= today), default=None)
-    if upcoming is None:
+    upcoming = min((candidate for candidate in occurrences if candidate > today), default=None)
+    previous_agrees = previous is not None and _weekday_agrees(previous, weekday)
+    upcoming_agrees = upcoming is not None and _weekday_agrees(upcoming, weekday)
+    if upcoming_agrees and not previous_agrees:
+        return None, False, False
+    if previous_agrees and not upcoming_agrees:
         return None, False, True
-    if previous is not None and (today - previous) < (upcoming - today):
+    # Weekday absent or wrong: whichever adjacent occurrence sits nearer the
+    # window boundary decides.
+    if upcoming is None or (previous is not None and (today - previous) < (upcoming - horizon)):
         return None, False, True
     return None, False, False
 

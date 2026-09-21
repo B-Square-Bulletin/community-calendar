@@ -543,6 +543,48 @@ class TestHorizonGuard:
         assert events == []
         assert not [r for r in caplog.records if "could not bind a date" in r.getMessage()]
 
+    def test_six_month_horizon_leak_drops_without_a_date_error(self, caplog):
+        # With a months-long Horizon the leak's previous-year occurrence can sit
+        # nearer today than the leak sits past the Horizon; the card's weekday
+        # must decide, not raw proximity to today.
+        now = datetime(2026, 9, 21, 9, 0, tzinfo=TZ)
+        months = 6
+        leak = (now + timedelta(days=months * 31)).date() + timedelta(days=1)
+        assert leak.strftime("%A") == "Saturday"  # 2027-03-27
+        card = _card(
+            "Six-Month Leak",
+            display_date=f"{leak:%b} {leak.day}",
+            weekday=leak.strftime("%A"),
+        )
+
+        with caplog.at_level("ERROR"):
+            events, _ = _run(_Site(pages=[_listing_html(card)]), now=now, months=months)
+
+        assert events == []
+        assert not [r for r in caplog.records if "could not bind a date" in r.getMessage()]
+
+    def test_weekday_disambiguates_a_stale_cross_year_card(self, caplog):
+        # Jan 1 2026 is a Thursday and Jan 1 2027 a Friday: the card names the
+        # already-past occurrence, so it is stale drift, not the next-year leak.
+        card = _card("Stale New Year", display_date="Jan 1", weekday="Thursday")
+
+        with caplog.at_level("ERROR"):
+            events, _ = _run(_Site(pages=[_listing_html(card)]))
+
+        assert events == []
+        assert [r for r in caplog.records if "could not bind a date" in r.getMessage()]
+
+    def test_leap_day_card_resolves_to_its_stated_year(self, caplog):
+        # Feb 29 has no occurrence inside the window's own years; the weekday
+        # names 2024 (Thursday), a past leap year, so the card is stale drift.
+        card = _card("Old Leap Day", display_date="Feb 29", weekday="Thursday")
+
+        with caplog.at_level("ERROR"):
+            events, _ = _run(_Site(pages=[_listing_html(card)]))
+
+        assert events == []
+        assert [r for r in caplog.records if "could not bind a date" in r.getMessage()]
+
 
 class TestRunHistory:
     """Each run records its fetch/emit counts and warns on a collapsed card count."""
