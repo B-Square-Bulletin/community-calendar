@@ -31,6 +31,9 @@ It is one self-contained file. No server, no build, no dependencies.
   at 0.80. The **timed-only guard** drops them; exact-title Merge still catches real all-day duplicates.
 - **The start-time and location guards are load-bearing.** With either off, genuinely different sessions and
   different venues collapse.
+- **Title normalisation does not truncate.** The old 40-character cap fed a prefix-merge pass this design retires; kept for the
+  Merge equality test it made unrelated titles with a shared 40-character prefix compare equal and delete each other. The
+  "truncation collision" trap pins that: those two events must never Merge (they Group, which is non-destructive).
 - **Grouping is transitive** (union-find): A~B and B~C pulls in A and C even when they score below threshold.
 
 ## Verdict (in progress)

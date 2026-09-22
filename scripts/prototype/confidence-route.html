@@ -175,7 +175,10 @@ var ConfidenceRoute = (function () {
     for (var i = 0; i < ARTICLES.length; i++) {
       if (lower.indexOf(ARTICLES[i]) === 0) { t = t.slice(ARTICLES[i].length); break; }
     }
-    return t.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 40);
+    // No truncation. The old 40-char cap existed to feed a prefix-merge pass this
+    // design retires; here it would make two unrelated titles with a shared
+    // 40-char prefix compare EQUAL on the destructive Merge path.
+    return t.toLowerCase().replace(/[^a-z0-9]/g, '');
   }
 
   /* --- location normalisation + compatibility --- */
@@ -396,11 +399,18 @@ var TRAPS = [
     location: 'The Back Door, 207 S College Ave, Bloomington', source: 'Bloomington Pride' },
   { source_uid: 'trivia-b', title: 'Trivia Night w/Bloomington Pub Quiz!', start_time: '2026-09-21T19:00:00-04:00',
     location: '', source: 'The Back Door' },
-  // Constructed: identical normalised 40-char prefix, DIFFERENT events at different venues, same time.
+  // Constructed: same normalised prefix, DIFFERENT events at different venues, same time.
   { source_uid: 'collision-a', title: 'Bloomington Community Band Spring Concert', start_time: '2026-10-10T19:00:00-04:00',
     location: 'Buskirk-Chumley Theater, 114 E Kirkwood Ave, Bloomington', source: 'Bloomington Community Band' },
   { source_uid: 'collision-b', title: 'Bloomington Community Band Spring Concert Series Finale', start_time: '2026-10-10T19:00:00-04:00',
     location: 'First United Methodist Church, 219 E 4th St, Bloomington', source: 'Limestone Post' },
+  // Constructed truncation collision: identical first 40 alphanumerics, EMPTY locations.
+  // Under the retired 40-char truncation these Merged and deleted a real event; with
+  // full-title equality for Merge they must not Merge (Grouping is acceptable).
+  { source_uid: 'trunc-a', title: 'Spring Concert And Community Band Celebration Tonight Downtown', start_time: '2026-10-17T19:00:00-04:00',
+    location: '', source: 'Bloomington Community Band' },
+  { source_uid: 'trunc-b', title: 'Spring Concert And Community Band Celebration Tonight Downtown Encore', start_time: '2026-10-17T19:00:00-04:00',
+    location: '', source: 'Limestone Post' },
   // Different programs that share common words — must stay below threshold.
   { source_uid: 'coffee', title: 'Community Coffee Tasting', start_time: '2026-10-11T10:00:00-04:00',
     location: 'BloomingTea, 208 S Rogers St', source: 'Bloomington Arts' },
