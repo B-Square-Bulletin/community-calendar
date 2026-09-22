@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PROTOTYPE — Confidence Route for Duplicate Events</title>
+<style>
+  :root {
+    --bg: #fbfbfa; --panel: #ffffff; --ink: #1d1d1b; --muted: #6b6b66;
+    --line: #e6e6e0; --accent: #2f6df0; --accent-soft: #eaf0fe;
+    --merge: #b3261e; --merge-soft: #fdecea;
+    --group: #8a6100; --group-soft: #fdf4e3;
+    --sep: #4a6b4a; --sep-soft: #eef5ee;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+    font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 28px 20px 80px; }
+  .proto-banner { background: #1d1d1b; color: #fff; font-size: 12px; letter-spacing: .06em;
+    text-transform: uppercase; padding: 6px 10px; border-radius: 4px; display: inline-block; margin-bottom: 14px; }
+  h1 { font-size: 26px; margin: 0 0 8px; letter-spacing: -.01em; }
+  h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted);
+    margin: 34px 0 12px; font-weight: 600; }
+  .lede { color: var(--ink); max-width: 78ch; margin: 0 0 6px; }
+  .lede strong { font-weight: 650; }
+  .quiet { color: var(--muted); font-size: 13.5px; max-width: 82ch; }
+  section { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; margin-bottom: 18px; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .row + .row { margin-top: 10px; }
+  .rowlabel { font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted);
+    width: 108px; flex: 0 0 auto; }
+  button { font: inherit; font-size: 13.5px; padding: 6px 12px; border-radius: 7px; border: 1px solid var(--line);
+    background: #fff; color: var(--ink); cursor: pointer; }
+  button:hover { border-color: #c9c9c2; }
+  button.on { background: var(--accent-soft); border-color: var(--accent); color: #12336e; font-weight: 600; }
+  button.on.guard-on { background: var(--sep-soft); border-color: var(--sep); color: #2f4a2f; }
+  button.on.guard-off { background: var(--merge-soft); border-color: var(--merge); color: #7d1b16; }
+  .stats { display: flex; gap: 22px; flex-wrap: wrap; padding: 4px 0 2px; }
+  .stat b { display: block; font-size: 22px; line-height: 1.2; }
+  .stat span { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+  .stat.merge b { color: var(--merge); } .stat.group b { color: var(--group); } .stat.sep b { color: var(--sep); }
+  .grp { border: 1px solid var(--line); border-left: 4px solid var(--line); border-radius: 8px; padding: 12px 14px; margin: 10px 0; }
+  .grp.merge { border-left-color: var(--merge); background: var(--merge-soft); }
+  .grp.group { border-left-color: var(--group); background: var(--group-soft); }
+  .grp.sep   { border-left-color: var(--sep); background: var(--sep-soft); }
+  .badge { font-size: 11px; text-transform: uppercase; letter-spacing: .07em; font-weight: 700; padding: 2px 7px; border-radius: 20px; }
+  .badge.merge { background: var(--merge); color: #fff; }
+  .badge.group { background: var(--group); color: #fff; }
+  .badge.sep   { background: var(--sep); color: #fff; }
+  .grphead { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+  .grphead .why { color: var(--muted); font-size: 12.5px; }
+  .member { margin: 8px 0 0 2px; padding-left: 10px; border-left: 2px solid rgba(0,0,0,.08); }
+  .member .t { font-weight: 550; }
+  .member .m { color: var(--muted); font-size: 12.5px; }
+  .outcome { margin-top: 8px; font-size: 13px; }
+  .gid { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; background: rgba(0,0,0,.06); padding: 1px 5px; border-radius: 4px; }
+  .collapsible { margin-top: 8px; }
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .tab { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: #fff; cursor: pointer; font-size: 13px; }
+  .tab.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .steps { margin: 12px 0 0; padding: 0; list-style: none; }
+  .steps li { margin: 6px 0; }
+  .step-done { color: var(--sep); font-weight: 700; margin-left: 6px; }
+  .scen-desc { max-width: 80ch; }
+  details > summary { cursor: pointer; color: var(--accent); font-size: 13.5px; }
+  .legend { font-size: 12.5px; color: var(--muted); margin-top: 8px; }
+  .foot { color: var(--muted); font-size: 12.5px; margin-top: 26px; }
+  .warn { background: var(--merge-soft); border: 1px solid #f3c9c5; border-radius: 8px; padding: 10px 12px; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="proto-banner">Prototype · throwaway</div>
+  <h1>Confidence Route: merge, group, or leave alone</h1>
+  <p class="lede">
+    <strong>The question:</strong> if we score every pair of listings that share a start time, and route them by a
+    confidence band — <strong>Merge</strong> the near-certain ones, <strong>Group</strong> the "looks like the same
+    event" ones without deleting anything, and leave the rest <strong>Separate</strong> — does it get the known
+    pairs right, and can we make it <em>never</em> silently merge two listings that are actually different events?
+  </p>
+  <p class="quiet">
+    Domain language: a <em>listing</em> is one row from one source. <em>Merge</em> means one row survives and the
+    other source is folded in (destructive — the thing we are most afraid of). <em>Group</em> means both rows stay
+    in the database, but every consumer renders them as one card, with every listing still visible. The whole point
+    of the prototype is to feel where the line between the two should sit, and how hard the start-time and location
+    guards have to work.
+  </p>
+  <p class="quiet" style="border-left:3px solid var(--accent); padding-left:10px">
+    <strong>Invariant worth checking as you click:</strong> the threshold and every guard only move the <em>Group</em>
+    band. The <em>Merge</em> band is driven entirely by "identical normalised title, same instant, compatible location"
+    and ignores all of them. Deletions can only ever come from that narrow, exact path.
+  </p>
+
+  <h2>Controls (free play)</h2>
+  <section>
+    <div class="row">
+      <span class="rowlabel">Listings</span>
+      <button id="ds-reported" onclick="setDataset('reported')">The 4 reported pairs</button>
+      <button id="ds-traps" onclick="setDataset('traps')">Traps (must not merge)</button>
+      <button id="ds-live" onclick="setDataset('live')">Live sample (122 real)</button>
+    </div>
+    <div class="row">
+      <span class="rowlabel">Threshold</span>
+      <button id="th-0.80" onclick="setThreshold(0.80)">0.80</button>
+      <button id="th-0.85" onclick="setThreshold(0.85)">0.85</button>
+      <button id="th-0.90" onclick="setThreshold(0.90)">0.90</button>
+      <button id="th-0.95" onclick="setThreshold(0.95)">0.95</button>
+      <span class="quiet" style="margin-left:8px">token-set similarity needed to Group</span>
+    </div>
+    <div class="row">
+      <span class="rowlabel">Guards</span>
+      <button id="g-time" onclick="toggleGuard('startTimeGuard')">Same start time</button>
+      <button id="g-loc" onclick="toggleGuard('locationGuard')">Compatible location</button>
+      <button id="g-variant" onclick="toggleGuard('variantGuard')">Squad / gender variants</button>
+      <button id="g-allday" onclick="toggleGuard('timedOnly')">Timed only (skip all-day)</button>
+      <button id="g-clean" onclick="toggleGuard('cleanTitle')">Clean titles first</button>
+      <span class="quiet" style="margin-left:8px">
+        turning a guard <em>off</em> shows what breaks without it
+      </span>
+    </div>
+    <div class="row">
+      <span class="rowlabel">Re-run</span>
+      <button onclick="render()">Recompute route</button>
+    </div>
+    <div class="legend" id="opts-line"></div>
+  </section>
+
+  <h2>Current state</h2>
+  <section>
+    <div class="stats" id="stats"></div>
+    <div id="groups"></div>
+  </section>
+
+  <h2>Guided walkthroughs</h2>
+  <section>
+    <div class="tabs" id="tabs"></div>
+    <div class="scen-desc" id="scen-desc"></div>
+    <ol class="steps" id="steps"></ol>
+  </section>
+
+  <p class="foot">
+    Pure routing module is <code>ConfidenceRoute</code> at the top of this file — no DOM inside it, so it lifts into
+    <code>scripts/ics_to_json.py</code> (the merge/group decision at build) and <code>xmlui/helpers.js</code> (the
+    render-time grouping). Scores are a faithful JS port of the Python <code>token_set_similarity</code> in
+    <code>scripts/similarity_test.py</code>. Real listings come from the <code>archive</code> branch
+    <code>cities/bloomington/events.json</code>; the four reported pairs are the rows from issue #145.
+  </p>
+</div>
+
+<script>
+/* ============================================================================
+ * ConfidenceRoute — PURE MODULE. No DOM, no globals, no side effects.
+ * Everything the demo does is a call into this. This is the bit worth lifting.
+ * ==========================================================================*/
+var ConfidenceRoute = (function () {
+  var ARTICLES = ['the ', 'a ', 'an '];
+
+  /* --- title cleaning (root cause 1: raw ICS SUMMARY can carry entities) --- */
+  function decodeEntities(s) {
+    if (!s) return '';
+    return s
+      .replace(/&#x([0-9a-fA-F]+);/g, function (_, h) { return String.fromCharCode(parseInt(h, 16)); })
+      .replace(/&#(\d+);/g, function (_, d) { return String.fromCharCode(Number(d)); })
+      .replace(/&quot;/g, '"').replace(/&apos;/g, "'")
+      .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+  }
+  function stripTags(s) { return (s || '').replace(/<[^>]+>/g, ' '); }
+  function cleanTitle(s) { return stripTags(decodeEntities(s)); }
+
+  function normTitle(raw, clean) {
+    var t = clean ? cleanTitle(raw) : (raw || '');
+    if (!t) return '';
+    var lower = t.toLowerCase();
+    for (var i = 0; i < ARTICLES.length; i++) {
+      if (lower.indexOf(ARTICLES[i]) === 0) { t = t.slice(ARTICLES[i].length); break; }
+    }
+    return t.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 40);
+  }
+
+  /* --- location normalisation + compatibility --- */
+  var LOC_MAP = {
+    e: 'east', w: 'west', n: 'north', s: 'south',
+    st: 'street', ave: 'avenue', av: 'avenue', rd: 'road',
+    dr: 'drive', blvd: 'boulevard', ln: 'lane', ct: 'court', pl: 'place', in: 'indiana'
+  };
+  function normLocation(s) {
+    if (!s) return '';
+    return s.toLowerCase().replace(/[.,]/g, ' ').split(/\s+/).filter(Boolean)
+      .map(function (tok) { return LOC_MAP[tok] || tok; }).join(' ');
+  }
+  function isNum(x) { return /^\d+$/.test(x); }
+  function locationsCompatible(a, b) {
+    var A = normLocation(a), B = normLocation(b);
+    if (!A || !B) return true;               // a missing location must never disqualify
+    if (A === B) return true;
+    var ta = A.split(' ');
+    var tbSet = {}; B.split(' ').forEach(function (x) { tbSet[x] = true; });
+    var shared = ta.filter(function (x) { return tbSet[x] && !isNum(x); });
+    var na = ta.find(isNum), nb = B.split(' ').find(isNum);
+    if (na && nb && na !== nb) return false;  // different street numbers = different venue
+    return shared.length >= 2;
+  }
+
+  /* --- token-set similarity: faithful port of similarity_test.py --- */
+  function longestMatch(a, alo, ahi, b, blo, bhi) {
+    var besti = alo, bestj = blo, bestsize = 0, j2len = {};
+    for (var i = alo; i < ahi; i++) {
+      var newj2len = {};
+      for (var j = blo; j < bhi; j++) {
+        if (a[i] === b[j]) {
+          var k = (j2len[j - 1] || 0) + 1;
+          newj2len[j] = k;
+          if (k > bestsize) { besti = i - k + 1; bestj = j - k + 1; bestsize = k; }
+        }
+      }
+      j2len = newj2len;
+    }
+    while (besti > alo && bestj > blo && a[besti - 1] === b[bestj - 1]) { besti--; bestj--; bestsize++; }
+    while (besti + bestsize < ahi && bestj + bestsize < bhi &&
+           a[besti + bestsize] === b[bestj + bestsize]) { bestsize++; }
+    return [besti, bestj, bestsize];
+  }
+  function seqRatio(a, b) {
+    if (!a && !b) return 1;
+    if (!a || !b) return 0;
+    var total = 0, queue = [[0, a.length, 0, b.length]];
+    while (queue.length) {
+      var r = queue.pop(), alo = r[0], ahi = r[1], blo = r[2], bhi = r[3];
+      var m = longestMatch(a, alo, ahi, b, blo, bhi), i = m[0], j = m[1], k = m[2];
+      if (k) {
+        total += k;
+        if (alo < i && blo < j) queue.push([alo, i, blo, j]);
+        if (i + k < ahi && j + k < bhi) queue.push([i + k, ahi, j + k, bhi]);
+      }
+    }
+    return 2 * total / (a.length + b.length);
+  }
+  function tokenSetSimilarity(a, b) {
+    var wa = {}, wb = {};
+    (a || '').toLowerCase().split(/\s+/).filter(Boolean).forEach(function (w) { wa[w] = true; });
+    (b || '').toLowerCase().split(/\s+/).filter(Boolean).forEach(function (w) { wb[w] = true; });
+    var A = Object.keys(wa), B = Object.keys(wb);
+    if (!A.length && !B.length) return 1;
+    if (!A.length || !B.length) return 0;
+    var inter = A.filter(function (w) { return wb[w]; }).sort();
+    var remA = A.filter(function (w) { return !wb[w]; }).sort();
+    var remB = B.filter(function (w) { return !wa[w]; }).sort();
+    var si = inter.join(' ');
+    var combA = (si + ' ' + remA.join(' ')).trim();
+    var combB = (si + ' ' + remB.join(' ')).trim();
+    return Math.max(si && combA ? seqRatio(si, combA) : 1,
+                    si && combB ? seqRatio(si, combB) : 1,
+                    seqRatio(combA, combB));
+  }
+
+  /* --- squad/gender variant guard -------------------------------------------
+   * Token-set similarity happily groups "Girls JV Soccer" with "Girls Varsity
+   * Soccer" and "Boys Varsity Soccer" with "Girls Varsity Soccer". Those are
+   * different teams, not different titles for one event. If the two titles name
+   * a different squad/gender designation (or only one names one), refuse to group.
+   */
+  var VARIANT_TOKENS = ['jv', 'varsity', 'freshman', 'freshmen', 'fr', 'sophomore', 'boys', 'girls'];
+  function variantKey(s) {
+    var ws = {};
+    (s || '').toLowerCase().split(/[^a-z0-9]+/).filter(Boolean).forEach(function (w) { ws[w] = true; });
+    return VARIANT_TOKENS.filter(function (t) { return ws[t]; }).sort().join(',');
+  }
+  function variantConflict(a, b) { return variantKey(a) !== variantKey(b); }
+
+  /* --- all-day guard --------------------------------------------------------
+   * An all-day listing starts at midnight, so "same start instant" is almost
+   * no evidence: every all-day event in the city shares midnight. Two unrelated
+   * concurrent exhibitions then look like the same event. All-day listings may
+   * still Merge on an identical title, but never Group on similarity alone.
+   */
+  function isAllDay(l) {
+    if (l.all_day === true) return true;
+    return typeof l.start_time === 'string' && l.start_time.slice(11, 16) === '00:00';
+  }
+
+  function stableId(listing) { return listing.source_uid || listing.id || listing.url || listing.title; }
+  function hashGroup(members) {
+    var key = members.map(stableId).sort().join('|');
+    var h = 5381;
+    for (var i = 0; i < key.length; i++) h = ((h << 5) + h + key.charCodeAt(i)) >>> 0;
+    return 'g' + h.toString(36);
+  }
+  function instant(l) { return new Date(l.start_time).toISOString(); }
+
+  /* --- the router ---------------------------------------------------------- */
+  var DEFAULTS = { threshold: 0.90, startTimeGuard: true, locationGuard: true, cleanTitle: true, variantGuard: true, timedOnly: true };
+
+  function route(listings, opts) {
+    opts = Object.assign({}, DEFAULTS, opts || {});
+    var n = listings.length;
+    var parent = []; for (var z = 0; z < n; z++) parent.push(z);
+    function find(x) { while (parent[x] !== x) { parent[x] = parent[parent[x]]; x = parent[x]; } return x; }
+    function union(a, b) { parent[find(a)] = find(b); }
+
+    var tit = listings.map(function (l) { return normTitle(l.raw_title || l.title, opts.cleanTitle); });
+    var scoreTitle = listings.map(function (l) { return opts.cleanTitle ? cleanTitle(l.raw_title || l.title) : (l.raw_title || l.title || ''); });
+    var links = [];
+
+    for (var i = 0; i < n; i++) {
+      for (var j = i + 1; j < n; j++) {
+        var sameTime = !opts.startTimeGuard || instant(listings[i]) === instant(listings[j]);
+        if (!sameTime) { links.push({ i: i, j: j, band: 'blocked-time', score: null }); continue; }
+        var locOk = !opts.locationGuard || locationsCompatible(listings[i].location, listings[j].location);
+        var exact = !!tit[i] && tit[i] === tit[j];
+        var band, score = null;
+        if (exact && locOk) { band = 'merge'; }
+        else {
+          score = tokenSetSimilarity(scoreTitle[i], scoreTitle[j]);
+          if (!locOk) band = 'blocked-location';
+          else if (score < opts.threshold) band = 'below';
+          else if (opts.variantGuard && variantConflict(scoreTitle[i], scoreTitle[j])) band = 'blocked-variant';
+          else if (opts.timedOnly && (isAllDay(listings[i]) || isAllDay(listings[j]))) band = 'blocked-allday';
+          else band = 'group';
+        }
+        links.push({ i: i, j: j, band: band, score: score, exact: exact, locOk: locOk, sameTime: sameTime });
+        if (band === 'merge' || band === 'group') union(i, j);
+      }
+    }
+
+    var byRoot = {};
+    for (var k = 0; k < n; k++) { var r = find(k); (byRoot[r] = byRoot[r] || []).push(k); }
+    var groups = Object.keys(byRoot).map(function (r) {
+      var idx = byRoot[r];
+      var mine = links.filter(function (L) { return idx.indexOf(L.i) >= 0 && idx.indexOf(L.j) >= 0; });
+      var hasMerge = mine.some(function (L) { return L.band === 'merge'; });
+      var hasGroup = mine.some(function (L) { return L.band === 'group'; });
+      var band = hasMerge ? 'merge' : (hasGroup ? 'group' : 'separate');
+      var scores = mine.filter(function (L) { return L.score != null; }).map(function (L) { return L.score; });
+      return {
+        band: band, indices: idx, members: idx.map(function (x) { return listings[x]; }),
+        maxScore: scores.length ? Math.max.apply(null, scores) : null,
+        duplicate_group: hashGroup(idx.map(function (x) { return listings[x]; })),
+        links: mine
+      };
+    });
+    groups.sort(function (a, b) {
+      if (a.band !== b.band) return ({ merge: 0, group: 1, separate: 2 })[a.band] - ({ merge: 0, group: 1, separate: 2 })[b.band];
+      return (a.members[0].start_time || '').localeCompare(b.members[0].start_time || '');
+    });
+    var stats = { input: n, merge: 0, group: 0, separate: 0 };
+    groups.forEach(function (g) { stats[g.band === 'merge' ? 'merge' : g.band === 'group' ? 'group' : 'separate']++; });
+    return { opts: opts, groups: groups, links: links, stats: stats };
+  }
+
+  return {
+    decodeEntities: decodeEntities, cleanTitle: cleanTitle, normTitle: normTitle,
+    normLocation: normLocation, locationsCompatible: locationsCompatible,
+    tokenSetSimilarity: tokenSetSimilarity, route: route, DEFAULTS: DEFAULTS
+  };
+})();
+
+/* ============================================================================
+ * Everything below is the throwaway page: datasets, buttons, rendering.
+ * ==========================================================================*/
+var REPORTED = [
+  { source_uid: 'wfiu-tibet', title: 'Taste of Tibet (6pm) and Open House (2-5pm)', start_time: '2026-09-19T18:00:00+00:00',
+    location: 'Gaden KhachoeShing Monastery, 2150 East Dolan Road, Bloomington, Indiana 47408', source: 'WFIU Community Calendar' },
+  { source_uid: 'vb-tibet', title: 'Taste of Tibet and Open House', start_time: '2026-09-19T18:00:00+00:00',
+    location: 'Gaden KhachoeShing Monastery, 2150 E. Dolan Road, Bloomington, IN 47408', source: 'Visit Bloomington, BloomingtonOnline Events' },
+  { source_uid: 'bc-wine1', title: 'Wine & Paint Saturday Night', start_time: '2026-09-19T20:00:00+00:00',
+    location: '20 N Van Buren St, Nashville, IN 47448', source: 'Brown County Events' },
+  { source_uid: 'bc-wine2', title: 'Wine & Paint Saturdays', start_time: '2026-09-19T20:00:00+00:00',
+    location: '20 N Van Buren St, Nashville, IN 47448', source: 'Brown County Events' },
+  { source_uid: 'iu-cookoff', title: '"The Cook-Off" \u2013 Music by Shawn E. Okpebholo; Libretto by Mark Campbell', start_time: '2026-09-19T21:00:00+00:00',
+    location: 'Musical Arts Center & LIVE@jacobs', source: 'IU Jacobs School of Music, WFIU Community Calendar' },
+  { source_uid: 'vb-cookoff', title: '\u201cThe Cook-Off\u201d \u2013 Music by Shawn E. Okpebholo; Libretto by Mark Campbell', start_time: '2026-09-19T21:00:00+00:00',
+    raw_title: '&#8220;The Cook-Off&#8221; &#8211; Music by Shawn E. Okpebholo; Libretto by Mark Campbell',
+    location: 'Musical Arts Center, 101 N Eagleson Ave, Bloomington, IN 47406', source: 'Visit Bloomington' },
+  { source_uid: 'wfiu-dancers', title: 'INDY DANCERS National Dance Day Celebration', start_time: '2026-09-19T22:00:00+00:00',
+    location: "Mike's Music & Dance Barn, 2277 W. State Road 46, Nashville, Indiana 47448", source: 'WFIU Community Calendar' },
+  { source_uid: 'pillar-dancers', title: 'INDY DANCERS National Dance Day Celebration with STEP N TIME BAND', start_time: '2026-09-19T22:00:00+00:00',
+    location: 'Mike\u2019s Music & Dance Barn,2277 State Road 46, Nashville, IN 47448', source: 'Pillar Arts Community Calendar, Brown County Events' },
+  { source_uid: 'bc-dancers', title: 'Indy Dancers Swing Meets Ballroom Dance Party', start_time: '2026-09-19T22:00:00+00:00',
+    location: '2277 State Road 46, Nashville, IN', source: 'Brown County Events' }
+];
+
+var TRAPS = [
+  // Real: same title, same day, DIFFERENT times, same source, same location = two sessions, not one event.
+  { source_uid: 'iu-itsonus-1800', title: "It's On Us: Bystander Intervention Workshop", start_time: '2026-09-21T18:00:00-04:00',
+    location: 'Global & International Studies Building, Room 1112', source: 'IU beINvolved Student Orgs' },
+  { source_uid: 'iu-itsonus-2000', title: "It's On Us: Bystander Intervention Workshop", start_time: '2026-09-21T20:00:00-04:00',
+    location: 'Global & International Studies Building, Room 1112', source: 'IU beINvolved Student Orgs' },
+  // Real: same title, same day, different times, same venue = two screenings.
+  { source_uid: 'bc-rocky-1900', title: 'Rocky Horror Picture Show 2026', start_time: '2026-10-24T19:00:00-04:00',
+    location: 'Buskirk-Chumley Theater, 114 E Kirkwood Ave, Bloomington, IN', source: 'Buskirk-Chumley Theater, Pillar Arts' },
+  { source_uid: 'bc-rocky-2230', title: 'Rocky Horror Picture Show 2026', start_time: '2026-10-24T22:30:00-04:00',
+    location: 'Buskirk-Chumley Theater, 114 East Kirkwood Ave', source: 'Pillar Arts Community Calendar' },
+  // Real: same title, same time, one row just missing its location = same event, safe to group.
+  { source_uid: 'trivia-a', title: 'Trivia Night w/Bloomington Pub Quiz', start_time: '2026-09-21T19:00:00-04:00',
+    location: 'The Back Door, 207 S College Ave, Bloomington', source: 'Bloomington Pride' },
+  { source_uid: 'trivia-b', title: 'Trivia Night w/Bloomington Pub Quiz!', start_time: '2026-09-21T19:00:00-04:00',
+    location: '', source: 'The Back Door' },
+  // Constructed: identical normalised 40-char prefix, DIFFERENT events at different venues, same time.
+  { source_uid: 'collision-a', title: 'Bloomington Community Band Spring Concert', start_time: '2026-10-10T19:00:00-04:00',
+    location: 'Buskirk-Chumley Theater, 114 E Kirkwood Ave, Bloomington', source: 'Bloomington Community Band' },
+  { source_uid: 'collision-b', title: 'Bloomington Community Band Spring Concert Series Finale', start_time: '2026-10-10T19:00:00-04:00',
+    location: 'First United Methodist Church, 219 E 4th St, Bloomington', source: 'Limestone Post' },
+  // Different programs that share common words — must stay below threshold.
+  { source_uid: 'coffee', title: 'Community Coffee Tasting', start_time: '2026-10-11T10:00:00-04:00',
+    location: 'BloomingTea, 208 S Rogers St', source: 'Bloomington Arts' },
+  { source_uid: 'yoga', title: 'Community Yoga', start_time: '2026-10-11T10:00:00-04:00',
+    location: 'BloomingTea, 208 S Rogers St', source: 'Bloomington Arts' },
+  { source_uid: 'dancers-c', title: 'Indy Dancers Swing Meets Ballroom Dance Party', start_time: '2026-09-19T22:00:00+00:00',
+    location: '2277 State Road 46, Nashville, IN', source: 'Brown County Events' },
+  // Constructed: a transitivity chain. A matches B (1.000) and B matches C (1.000),
+  // but A and C only score 0.743 against each other — yet all three land on one card.
+  { source_uid: 'chain-a', title: 'Beginner Pottery Class', start_time: '2026-10-15T18:00:00-04:00',
+    location: 'Bloomington Clay Studio, 123 W 6th St, Bloomington', source: 'Bloomington Parks & Rec' },
+  { source_uid: 'chain-b', title: 'Beginner Pottery Class for Adults', start_time: '2026-10-15T18:00:00-04:00',
+    location: 'Bloomington Clay Studio, 123 W 6th St, Bloomington', source: 'Bloomington Parks & Rec' },
+  { source_uid: 'chain-c', title: 'Pottery Class for Adults', start_time: '2026-10-15T18:00:00-04:00',
+    location: 'Bloomington Clay Studio, 123 W 6th St, Bloomington', source: 'Bloomington Parks & Rec' }
+];
+
+var LIVE = [{"source_uid": "20260921T040000Z-2300358@events.iu.edu__20260921", "title": "The Declaration of Independence: The Motives, the Moment", "start_time": "2026-09-21T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2143431-the-declaration-of-independence-the-motives-the", "all_day": true}, {"source_uid": "20260921T040000Z-2416967@events.iu.edu__20260921", "title": "The Declaration of Independence: The Signers", "start_time": "2026-09-21T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2379012-the-declaration-of-independence-the-signers", "all_day": true}, {"source_uid": "17165368", "title": "Friends of the Library Big Fall Book Sale", "start_time": "2026-09-21T09:00:00-04:00", "location": "Downtown Library - Meeting Room 1B/C Combo", "source": "Monroe County Public Library", "url": "", "all_day": false}, {"source_uid": "260820LLwGac_BvkWN1qGA_qFNsQ", "title": "Friends of the Library Big Fall Book Sale September 17-21", "start_time": "2026-09-21T09:00:00-04:00", "location": "Monroe County Public Library- Downtown Branch", "source": "Limestone Post", "url": "http://mcpl.info/bigsale", "all_day": false}, {"source_uid": "f09902f9ad1154d15337e4da963c8e12@maxpreps.com", "title": "Greencastle Girls JV Soccer @ Martinsville", "start_time": "2026-09-21T17:30:00-04:00", "location": "", "source": "Martinsville Athletics", "url": "https://www.maxpreps.com/in/soccer/girls/match/greencastle-vs-martinsville/jv/9-21-2026/?c=c6a9aeb1-89b9-434a-8c6c-e3976a6e5dc6", "all_day": false}, {"source_uid": "fe838e1a890932fa70e184f9596e63a1@maxpreps.com", "title": "Greencastle Girls Varsity Soccer @ Martinsville", "start_time": "2026-09-21T17:30:00-04:00", "location": "", "source": "Martinsville Athletics", "url": "https://www.maxpreps.com/in/soccer/girls/match/greencastle-vs-martinsville/9-21-2026/?c=6e857dda-5ade-41dd-b3f1-43dcf34a9861", "all_day": false}, {"source_uid": "3one5b4c9sfvuqbjerbn45jeer@google.com__20260921", "title": "Trivia Night w/Bloomington Pub Quiz", "start_time": "2026-09-21T20:30:00-04:00", "location": "The Back Door, 207 S College Ave, Bloomington, IN 47404, USA", "source": "Bloomington Pride", "url": "https://bloomingtonpride.org/community-calendar", "all_day": false}, {"source_uid": "TKF/56e47e8bfc66f1c00bbd6f6e/794/29833950/0/0", "title": "Trivia Night w/Bloomington Pub Quiz!", "start_time": "2026-09-21T20:30:00-04:00", "location": "", "source": "The Back Door", "url": "https://tockify.com/thebackdoor/detail/794/1790037000000", "all_day": false}, {"source_uid": "20260921T040000Z-2300358@events.iu.edu__20260922", "title": "The Declaration of Independence: The Motives, the Moment", "start_time": "2026-09-22T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2143431-the-declaration-of-independence-the-motives-the", "all_day": true}, {"source_uid": "20260921T040000Z-2416967@events.iu.edu__20260922", "title": "The Declaration of Independence: The Signers", "start_time": "2026-09-22T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2379012-the-declaration-of-independence-the-signers", "all_day": true}, {"source_uid": "3a3a4798a63e245c442f3e575e43c205@maxpreps.com", "title": "Bloomington North Boys Varsity Soccer @ BNLHS", "start_time": "2026-09-22T18:00:00-04:00", "location": "", "source": "Bloomington North Athletics", "url": "https://www.maxpreps.com/in/soccer/match/bedford-north-lawrence-vs-bloomington-north/9-22-2026/?c=a5ed34b7-8be9-4a8b-908b-b48f9bc1d9ea", "all_day": false}, {"source_uid": "83de9b2489601a5c1aa10bed736e2589@maxpreps.com", "title": "Bloomington North Girls Freshman Volleyball @ Perry Meridian", "start_time": "2026-09-22T18:00:00-04:00", "location": "", "source": "Bloomington North Athletics", "url": "https://www.maxpreps.com/in/volleyball/match/bloomington-north-vs-perry-meridian-indianapolis/freshman/9-22-2026/?c=6041df81-c321-4d59-81d1-f3312d3bf9cb", "all_day": false}, {"source_uid": "8e3ff2f13a38d89cf9971530da4d6f49@maxpreps.com", "title": "Bloomington North Girls JV Volleyball @ Perry Meridian", "start_time": "2026-09-22T18:00:00-04:00", "location": "", "source": "Bloomington North Athletics", "url": "https://www.maxpreps.com/in/volleyball/match/bloomington-north-vs-perry-meridian-indianapolis/jv/9-22-2026/?c=710c3ab9-a8c5-4b76-976a-e1a7eae91eed", "all_day": false}, {"source_uid": "7spf7g77bp9ob1aujmcdce10b2@google.com__20260922", "title": "Country Line Dancing w/Wall to Wall Line Dance Club", "start_time": "2026-09-22T19:30:00-04:00", "location": "The Back Door, 207 S College Ave, Bloomington, IN 47404, USA", "source": "Bloomington Pride", "url": "https://bloomingtonpride.org/community-calendar", "all_day": false}, {"source_uid": "TKF/56e47e8bfc66f1c00bbd6f6e/1623/29835330/0/0", "title": "Country Line Dancing!", "start_time": "2026-09-22T19:30:00-04:00", "location": "", "source": "The Back Door", "url": "https://tockify.com/thebackdoor/detail/1623/1790119800000", "all_day": false}, {"source_uid": "20260921T040000Z-2300358@events.iu.edu__20260923", "title": "The Declaration of Independence: The Motives, the Moment", "start_time": "2026-09-23T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2143431-the-declaration-of-independence-the-motives-the", "all_day": true}, {"source_uid": "20260921T040000Z-2416967@events.iu.edu__20260923", "title": "The Declaration of Independence: The Signers", "start_time": "2026-09-23T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2379012-the-declaration-of-independence-the-signers", "all_day": true}, {"source_uid": "MEC-3a41d6c90db7829c7dedd2419cd59b7d@browncounty.com", "title": "The FIXX, Colin Blunstone (The Voice of The Zombies) & Peter Asher", "start_time": "2026-09-23T19:00:00-04:00", "location": "200 Maple Leaf Boulevard, Nashville, IN 47448", "source": "Brown County Events", "url": "https://browncounty.com/events/the-fixx-colin-blunstone-the-voice-of-the-zombies-peter-asher/", "all_day": false}, {"source_uid": "260908vq30B6gkfE-Sm-ikULRznA", "title": "The FIXX, Colin Blunstone of the Zombies, and Peter Asher", "start_time": "2026-09-23T19:00:00-04:00", "location": "Brown County Music Center", "source": "Limestone Post", "url": "https://www.facebook.com/share/1DJYQhymkx/", "all_day": false}, {"source_uid": "8ae6837d7bbc3778c4ce4491f82aaf66@ticketmaster.com", "title": "The Fixx, Colin Blunstone, Peter Asher", "start_time": "2026-09-23T19:00:00-04:00", "location": "Brown County Music Center, 200 Maple Leaf Boulevard, Nashville, IN", "source": "Brown County Music Center", "url": "https://www.ticketmaster.com/the-fixx-colin-blunstone-peter-asher-nashville-indiana-09-23-2026/event/050064D2D42C757C", "all_day": false}, {"source_uid": "20260921T040000Z-2300358@events.iu.edu__20260924", "title": "The Declaration of Independence: The Motives, the Moment", "start_time": "2026-09-24T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2143431-the-declaration-of-independence-the-motives-the", "all_day": true}, {"source_uid": "20260921T040000Z-2416967@events.iu.edu__20260924", "title": "The Declaration of Independence: The Signers", "start_time": "2026-09-24T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2379012-the-declaration-of-independence-the-signers", "all_day": true}, {"source_uid": "17398267", "title": "High Noon Toastmasters Club #6754", "start_time": "2026-09-24T11:45:00-04:00", "location": "Southwest Branch -", "source": "Monroe County Public Library", "url": "", "all_day": false}, {"source_uid": "17207227", "title": "High Noon Toastmasters Club #6754 - Sergeant of Arms", "start_time": "2026-09-24T11:45:00-04:00", "location": "Southwest Branch -", "source": "Monroe County Public Library", "url": "", "all_day": false}, {"source_uid": "ea3239c36f29620f7ea717a0665da63f@maxpreps.com", "title": "Columbus East Girls JV Soccer @ Martinsville", "start_time": "2026-09-24T17:30:00-04:00", "location": "", "source": "Martinsville Athletics", "url": "https://www.maxpreps.com/in/soccer/girls/match/columbus-east-vs-martinsville/jv/9-24-2026/?c=a43ca985-7c23-465a-b353-7f8364b6d73b", "all_day": false}, {"source_uid": "41b952aa037a5dc1a3c36d07f6b5d58c@maxpreps.com", "title": "Columbus East Girls Varsity Soccer @ Martinsville", "start_time": "2026-09-24T17:30:00-04:00", "location": "", "source": "Martinsville Athletics", "url": "https://www.maxpreps.com/in/soccer/girls/match/columbus-east-vs-martinsville/9-24-2026/?c=59ea55c9-67f6-484e-bda5-26e484f6ac17", "all_day": false}, {"source_uid": "93d3de1bf210651b613a7f9e332fd5d7@maxpreps.com", "title": "Eastern Greene Boys Varsity Soccer @ Owen Valley", "start_time": "2026-09-24T17:30:00-04:00", "location": "", "source": "Eastern Greene Athletics", "url": "https://www.maxpreps.com/in/soccer/match/eastern-greene-bloomfield-vs-owen-valley-spencer/9-24-2026/?c=ff5fb089-889b-438e-b623-6c3d819a4ab4", "all_day": false}, {"source_uid": "3d631338e5add5cd0570457772ca066b@maxpreps.com", "title": "Eastern Greene Girls Varsity Soccer @ Owen Valley", "start_time": "2026-09-24T17:30:00-04:00", "location": "", "source": "Eastern Greene Athletics", "url": "https://www.maxpreps.com/in/soccer/girls/match/eastern-greene-bloomfield-vs-owen-valley-spencer/9-24-2026/?c=945bc5f5-cc70-4689-870c-5e22e4532399", "all_day": false}, {"source_uid": "3cf98a6bc4f06d3d7974b6ab3c43b923@maxpreps.com", "title": "Center Grove Girls Freshman Volleyball @ Bloomington South", "start_time": "2026-09-24T18:00:00-04:00", "location": "", "source": "Bloomington South Athletics", "url": "https://www.maxpreps.com/in/volleyball/match/bloomington-south-vs-center-grove-greenwood/freshman/9-24-2026/?c=76aaa6dc-6f20-48b9-b6f4-1398534f7630", "all_day": false}, {"source_uid": "54ead4db02c4a8d4bd380e7c7e8e0151@maxpreps.com", "title": "Center Grove Girls JV Volleyball @ Bloomington South", "start_time": "2026-09-24T18:00:00-04:00", "location": "", "source": "Bloomington South Athletics", "url": "https://www.maxpreps.com/in/volleyball/match/bloomington-south-vs-center-grove-greenwood/jv/9-24-2026/?c=dd771992-268d-4a11-a780-a774c0da6c65", "all_day": false}, {"source_uid": "3d6173b8a68cef2cd7c31dc6ee790581@maxpreps.com", "title": "Center Grove Girls Varsity Volleyball @ Bloomington South", "start_time": "2026-09-24T18:00:00-04:00", "location": "", "source": "Bloomington South Athletics", "url": "https://www.maxpreps.com/in/volleyball/match/bloomington-south-vs-center-grove-greenwood/9-24-2026/?c=45c02f95-97a7-45c9-9c7c-51d5ebf5d555", "all_day": false}, {"source_uid": "1b953378812670c16ed45befe4a7a412@maxpreps.com", "title": "Owen Valley Girls JV Volleyball @ Mitchell", "start_time": "2026-09-24T18:00:00-04:00", "location": "", "source": "Owen Valley Athletics", "url": "https://www.maxpreps.com/in/volleyball/match/mitchell-vs-owen-valley-spencer/jv/9-24-2026/?c=a7bea05e-fb7c-474f-b20a-e5192f93f41c", "all_day": false}, {"source_uid": "dc07983afdf60f60c232b80e35505e32@maxpreps.com", "title": "Owen Valley Girls Varsity Volleyball @ Mitchell", "start_time": "2026-09-24T18:00:00-04:00", "location": "", "source": "Owen Valley Athletics", "url": "https://www.maxpreps.com/in/volleyball/match/mitchell-vs-owen-valley-spencer/9-24-2026/?c=126d913f-0db7-451d-8e7b-306e1ddc7113", "all_day": false}, {"source_uid": "20260921T040000Z-2300358@events.iu.edu__20260925", "title": "The Declaration of Independence: The Motives, the Moment", "start_time": "2026-09-25T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2143431-the-declaration-of-independence-the-motives-the", "all_day": true}, {"source_uid": "20260921T040000Z-2416967@events.iu.edu__20260925", "title": "The Declaration of Independence: The Signers", "start_time": "2026-09-25T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2379012-the-declaration-of-independence-the-signers", "all_day": true}, {"source_uid": "20260925T210000Z-2408088@events.iu.edu", "title": "Doctoral Recital – Lillie Judge, soprano", "start_time": "2026-09-25T17:00:00-04:00", "location": "Ford-Crawford Hall & LIVE@jacobs", "source": "IU Jacobs School of Music", "url": "https://events.iu.edu/musiciub/event/2408088-doctoral-recital-lillie-judge-soprano", "all_day": false}, {"source_uid": "20260925T210000Z-2417467@events.iu.edu", "title": "Doctoral Recital – Stephanie Conklin, soprano", "start_time": "2026-09-25T17:00:00-04:00", "location": "St. Mark's United Methodist", "source": "IU Jacobs School of Music", "url": "https://events.iu.edu/musiciub/event/2417467-doctoral-recital-stephanie-conklin-soprano", "all_day": false}, {"source_uid": "bae289f059a1b67fefb0965d4a79e882@ipm.org", "title": "Jiji Kim, guitar; Roger Neill, composer/conductor", "start_time": "2026-09-25T20:00:00-04:00", "location": "Auer Hall, Simon Musica Center, 200 S. Eagleson Ave, Bloomington, Indiana 47405", "source": "WFIU Community Calendar", "url": "https://www.ipm.org/community-calendar/event/jiji-kim-guitar-roger-neill-composer-conductor-01-09-2026-10-53-13", "all_day": false}, {"source_uid": "20260926T000000Z-2388123@events.iu.edu", "title": "Jiji Kim, guitar; Roger Neill, composer/conductor", "start_time": "2026-09-25T20:00:00-04:00", "location": "Auer Hall & LIVE@jacobs", "source": "IU Jacobs School of Music", "url": "https://events.iu.edu/musiciub/event/2388123-jiji-kim-guitar", "all_day": false}, {"source_uid": "87ac47baad96057f1f6f2d651f548ced@visitbloomington.com", "title": "Cronos | Friday Night Frights", "start_time": "2026-09-25T22:00:00-04:00", "location": "IU Cinema, 1213 E. 7th Street, Bloomington, IN 47405", "source": "Visit Bloomington", "url": "https://www.visitbloomington.com/event/cronos-friday-night-frights/59366/", "all_day": false}, {"source_uid": "20260926T020000Z-2365713@events.iu.edu", "title": "Cronos | Friday Night Frights", "start_time": "2026-09-25T22:00:00-04:00", "location": "IU CINEMA", "source": "IU Cinema, Pillar Arts Community Calendar", "url": "https://events.iu.edu/cinemaiub/event/2365713-cronos-friday-night-frights", "all_day": false}, {"source_uid": "20260921T040000Z-2300358@events.iu.edu__20260926", "title": "The Declaration of Independence: The Motives, the Moment", "start_time": "2026-09-26T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2143431-the-declaration-of-independence-the-motives-the", "all_day": true}, {"source_uid": "20260921T040000Z-2416967@events.iu.edu__20260926", "title": "The Declaration of Independence: The Signers", "start_time": "2026-09-26T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2379012-the-declaration-of-independence-the-signers", "all_day": true}, {"source_uid": "e1f471a44bf064608032283053b7da83@maxpreps.com", "title": "Bloomington South Girls Varsity Soccer vs. Evansville Mater Dei", "start_time": "2026-09-26T10:00:00-04:00", "location": "", "source": "Bloomington South Athletics", "url": "https://www.maxpreps.com/in/soccer/girls/match/bloomington-south-vs-evansville-mater-dei/9-26-2026/?c=61e43166-1b36-4dfd-a1ef-8e8532eba02a", "all_day": false}, {"source_uid": "d4f40b8e310c9df52ad1eba3b7c1d9e8@maxpreps.com", "title": "Bloomington South JV Football @ Columbus North", "start_time": "2026-09-26T10:00:00-04:00", "location": "", "source": "Bloomington South Athletics", "url": "https://www.maxpreps.com/in/football/game/bloomington-south-vs-columbus-north/jv/9-26-2026/?c=802a1493-f7fb-444c-bdda-be86961864f6", "all_day": false}, {"source_uid": "TKF/56e47e8bfc66f1c00bbd6f6e/1791/29842140/0/0", "title": "LESBIAN TEA DANCE", "start_time": "2026-09-27T13:00:00-04:00", "location": "", "source": "The Back Door", "url": "https://tockify.com/thebackdoor/detail/1791/1790528400000", "all_day": false}, {"source_uid": "0q0rtvgbfej90vq5cqnem2k1cq@google.com", "title": "Lesbian Tea Dance: Dykes on Bikes", "start_time": "2026-09-27T13:00:00-04:00", "location": "", "source": "Bloomington Pride", "url": "https://bloomingtonpride.org/community-calendar", "all_day": false}, {"source_uid": "7f6cca595d493af7783ba58f4b6b0705@ipm.org", "title": "Concentus – Joanna Blendulf and Dana Marsh, directors", "start_time": "2026-09-27T16:00:00-04:00", "location": "Auer Hall, Simon Music Center, 200 S. Eagleson Ave, Bloomington, Indiana 47405", "source": "WFIU Community Calendar", "url": "https://www.ipm.org/community-calendar/event/concentus-joanna-blendulf-and-dana-marsh-directors-01-09-2026-11-00-01", "all_day": false}, {"source_uid": "20260927T200000Z-2386287@events.iu.edu", "title": "Concentus – Joanna Blendulf, director", "start_time": "2026-09-27T16:00:00-04:00", "location": "Auer Hall & LIVE@jacobs", "source": "IU Jacobs School of Music", "url": "https://events.iu.edu/musiciub/event/2386287-concentus-joanna-blendulf-and-dana-marsh", "all_day": false}, {"source_uid": "20260921T040000Z-2300358@events.iu.edu__20260928", "title": "The Declaration of Independence: The Motives, the Moment", "start_time": "2026-09-28T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2143431-the-declaration-of-independence-the-motives-the", "all_day": true}, {"source_uid": "20260921T040000Z-2416967@events.iu.edu__20260928", "title": "The Declaration of Independence: The Signers", "start_time": "2026-09-28T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2379012-the-declaration-of-independence-the-signers", "all_day": true}, {"source_uid": "https://beinvolved.indiana.edu/event/12537705", "title": "Accelerate: Get ready, get set, go interview (in person)", "start_time": "2026-09-28T18:00:00-04:00", "location": "Wells Library 009", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12537705", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12537703", "title": "Accelerate: Get ready, get set, go interview (online)", "start_time": "2026-09-28T18:00:00-04:00", "location": "Online", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12537703", "all_day": false}, {"source_uid": "3one5b4c9sfvuqbjerbn45jeer@google.com__20260928", "title": "Trivia Night w/Bloomington Pub Quiz", "start_time": "2026-09-28T20:30:00-04:00", "location": "The Back Door, 207 S College Ave, Bloomington, IN 47404, USA", "source": "Bloomington Pride", "url": "https://bloomingtonpride.org/community-calendar", "all_day": false}, {"source_uid": "TKF/56e47e8bfc66f1c00bbd6f6e/794/29844030/0/0", "title": "Trivia Night w/Bloomington Pub Quiz!", "start_time": "2026-09-28T20:30:00-04:00", "location": "", "source": "The Back Door", "url": "https://tockify.com/thebackdoor/detail/794/1790641800000", "all_day": false}, {"source_uid": "20260921T040000Z-2300358@events.iu.edu__20260929", "title": "The Declaration of Independence: The Motives, the Moment", "start_time": "2026-09-29T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2143431-the-declaration-of-independence-the-motives-the", "all_day": true}, {"source_uid": "20260921T040000Z-2416967@events.iu.edu__20260929", "title": "The Declaration of Independence: The Signers", "start_time": "2026-09-29T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2379012-the-declaration-of-independence-the-signers", "all_day": true}, {"source_uid": "bdf27f37-a177-4b0b-a5b8-b4387bb73d01", "title": "Volleyball (Girls Fr) - Decatur Central", "start_time": "2026-09-29T18:00:00-04:00", "location": "Bloomington High School North", "source": "BHSN", "url": "", "all_day": false}, {"source_uid": "251220qbazW8tKpUaNAUuLPzP3dQ", "title": "Volleyball (Girls V) - Cloverdale", "start_time": "2026-09-29T18:00:00-04:00", "location": "Edgewood High School", "source": "Limestone Post", "url": "https://www.rbbschools.net/calendar1", "all_day": false}, {"source_uid": "b3617b0d8342e0bbec79ec9ff26a933a@visitbloomington.com", "title": "Dr. Jekyll and Mr. Hyde (1920) w/Q&A | IU Cinema Jon Vickers Scoring Award", "start_time": "2026-09-29T19:00:00-04:00", "location": "IU Cinema, 1213 E. 7th Street, Bloomington, IN 47405", "source": "Pillar Arts Community Calendar, Visit Bloomington", "url": "https://www.visitbloomington.com/event/dr-jekyll-and-mr-hyde-1920-wqa-iu-cinema-jon-vickers-scoring-award/59368/", "all_day": false}, {"source_uid": "20260929T230000Z-2400115@events.iu.edu", "title": "Dr. Jekyll and Mr. Hyde (1920) | IU Cinema Jon Vickers Scoring Award", "start_time": "2026-09-29T19:00:00-04:00", "location": "IU CINEMA", "source": "IU Cinema, IU Jacobs School of Music, WFIU Community Calendar", "url": "https://cinema.indiana.edu/upcoming-films/screening/2026-fall-tuesday-september-29-700pm", "all_day": false}, {"source_uid": "7spf7g77bp9ob1aujmcdce10b2@google.com__20260929", "title": "Country Line Dancing w/Wall to Wall Line Dance Club", "start_time": "2026-09-29T19:30:00-04:00", "location": "The Back Door, 207 S College Ave, Bloomington, IN 47404, USA", "source": "Bloomington Pride", "url": "https://bloomingtonpride.org/community-calendar", "all_day": false}, {"source_uid": "TKF/56e47e8bfc66f1c00bbd6f6e/1623/29845410/0/0", "title": "Country Line Dancing!", "start_time": "2026-09-29T19:30:00-04:00", "location": "", "source": "The Back Door", "url": "https://tockify.com/thebackdoor/detail/1623/1790724600000", "all_day": false}, {"source_uid": "20260921T040000Z-2300358@events.iu.edu__20260930", "title": "The Declaration of Independence: The Motives, the Moment", "start_time": "2026-09-30T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2143431-the-declaration-of-independence-the-motives-the", "all_day": true}, {"source_uid": "20260921T040000Z-2416967@events.iu.edu__20260930", "title": "The Declaration of Independence: The Signers", "start_time": "2026-09-30T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2379012-the-declaration-of-independence-the-signers", "all_day": true}, {"source_uid": "500f6bdb46d10406b1cbc7ad4d277907@ipm.org", "title": "Student Composition Recital", "start_time": "2026-09-30T20:00:00-04:00", "location": "Auer Hall, Simon Music Center, 200 S. Eagleson Ave, Bloomington, Indiana 47405", "source": "WFIU Community Calendar", "url": "https://www.ipm.org/community-calendar/event/student-composition-recital-01-09-2026-11-11-35", "all_day": false}, {"source_uid": "20261001T000000Z-2386284@events.iu.edu", "title": "Student Composition Recital", "start_time": "2026-09-30T20:00:00-04:00", "location": "Auer Hall & LIVE@jacobs", "source": "IU Jacobs School of Music", "url": "https://events.iu.edu/musiciub/event/2386284-student-composition-recital", "all_day": false}, {"source_uid": "20260921T040000Z-2300358@events.iu.edu__20261001", "title": "The Declaration of Independence: The Motives, the Moment", "start_time": "2026-10-01T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2143431-the-declaration-of-independence-the-motives-the", "all_day": true}, {"source_uid": "20260921T040000Z-2416967@events.iu.edu__20261001", "title": "The Declaration of Independence: The Signers", "start_time": "2026-10-01T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2379012-the-declaration-of-independence-the-signers", "all_day": true}, {"source_uid": "20261001-lotus-festival-opening-concert@buskirkchumley.org", "title": "Lotus Festival Opening Concert", "start_time": "2026-10-01T19:00:00-04:00", "location": "Buskirk-Chumley Theater, 114 E Kirkwood Ave, Bloomington, IN 47408", "source": "Buskirk-Chumley Theater", "url": "https://buskirkchumley.org/events/lotus-festival-opening-concert-october-1-2026", "all_day": false}, {"source_uid": "20261001-lotus-festival-all-inclusive-f@buskirkchumley.org", "title": "Lotus Festival: All Inclusive Four-Day Pass", "start_time": "2026-10-01T19:00:00-04:00", "location": "Buskirk-Chumley Theater, 114 E Kirkwood Ave, Bloomington, IN 47408", "source": "Buskirk-Chumley Theater, Pillar Arts Community Calendar, Limestone Post, WFIU Community Calendar", "url": "https://buskirkchumley.org/events/lotus-festival-all-inclusive-four-day-pass-october-1-2026", "all_day": false}, {"source_uid": "5bef5ee9b678fe5790e0a71e52e761a2@ticketmaster.com", "title": "The Carpenters Songbook Tour", "start_time": "2026-10-01T19:30:00-04:00", "location": "Brown County Music Center, 200 Maple Leaf Boulevard, Nashville, IN", "source": "Brown County Music Center, Limestone Post", "url": "https://www.ticketmaster.com/the-carpenters-songbook-tour-nashville-indiana-10-01-2026/event/050064D2C6F04422", "all_day": false}, {"source_uid": "MEC-dbc970280aedf26d2f5b564f04e44d1a@browncounty.com", "title": "The Carpenters Songbook: A Live Celebration", "start_time": "2026-10-01T19:30:00-04:00", "location": "200 Maple Leaf Boulevard, Nashville, IN 47448", "source": "Brown County Events", "url": "https://browncounty.com/events/the-carpenters-songbook-a-live-celebration/", "all_day": false}, {"source_uid": "20260921T040000Z-2300358@events.iu.edu__20261002", "title": "The Declaration of Independence: The Motives, the Moment", "start_time": "2026-10-02T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2143431-the-declaration-of-independence-the-motives-the", "all_day": true}, {"source_uid": "20260921T040000Z-2416967@events.iu.edu__20261002", "title": "The Declaration of Independence: The Signers", "start_time": "2026-10-02T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2379012-the-declaration-of-independence-the-signers", "all_day": true}, {"source_uid": "20261002-lotus-festival-friday-showcase@buskirkchumley.org", "title": "Lotus Festival Friday Showcase", "start_time": "2026-10-02T18:00:00-04:00", "location": "Buskirk-Chumley Theater, 114 E Kirkwood Ave, Bloomington, IN 47408", "source": "Buskirk-Chumley Theater", "url": "https://buskirkchumley.org/events/lotus-festival-friday-showcase-october-2-2026", "all_day": false}, {"source_uid": "260719-AxIuTOsAUi8vuYE4uaeoA", "title": "Lotus Festival: All Inclusive Four-Day Pass", "start_time": "2026-10-02T18:00:00-04:00", "location": "Buskirk Chumley Theater", "source": "Limestone Post", "url": "https://buskirkchumley.org/events/lotus-festival-all-inclusive-four-day-pass-october-1-2026/#buy", "all_day": false}, {"source_uid": "20261002-lotus-festival-two-day-weekend@buskirkchumley.org", "title": "Lotus Festival: Two-Day Weekend Pass", "start_time": "2026-10-02T18:00:00-04:00", "location": "Buskirk-Chumley Theater, 114 E Kirkwood Ave, Bloomington, IN 47408", "source": "Buskirk-Chumley Theater", "url": "https://buskirkchumley.org/events/lotus-festival-two-day-weekend-pass-october-2-2026", "all_day": false}, {"source_uid": "20260921T040000Z-2300358@events.iu.edu__20261003", "title": "The Declaration of Independence: The Motives, the Moment", "start_time": "2026-10-03T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2143431-the-declaration-of-independence-the-motives-the", "all_day": true}, {"source_uid": "20260921T040000Z-2416967@events.iu.edu__20261003", "title": "The Declaration of Independence: The Signers", "start_time": "2026-10-03T00:00:00-04:00", "location": "LILLY LIBRARY", "source": "IU Arts & Humanities Institute, IU Bloomington Libraries", "url": "https://events.iu.edu/live/events/2379012-the-declaration-of-independence-the-signers", "all_day": true}, {"source_uid": "f937863b-d0f8-4ef0-86a4-3050dca18413", "title": "Volleyball (Girls Fr) - Columbus East", "start_time": "2026-10-03T10:00:00-04:00", "location": "Bloomington High School North", "source": "BHSN", "url": "", "all_day": false}, {"source_uid": "1e9e031d-24da-48a0-b6ad-651d6a9b4329", "title": "Volleyball (Girls JV) - Columbus East", "start_time": "2026-10-03T10:00:00-04:00", "location": "Bloomington North High School", "source": "BHSN", "url": "", "all_day": false}, {"source_uid": "7e29a778f1e923e83746651a74442735@ipm.org", "title": "Voice Class Recital: Solo Vocal Literature After 1900 – Allan Armstrong, instructor", "start_time": "2026-10-03T20:00:00-04:00", "location": "Auer Hall, Simon Music Center, 200 S. Eagleson Ave, Bloomington, Indiana 47405", "source": "WFIU Community Calendar", "url": "https://www.ipm.org/community-calendar/event/voice-class-recital-solo-vocal-literature-after-1900-allan-armstrong-instructor-01-09-2026-11-26-28", "all_day": false}, {"source_uid": "20261004T000000Z-2386282@events.iu.edu", "title": "Voice Class Recital: Solo Vocal Literature After 1900 – Allan Armstrong, instructor", "start_time": "2026-10-03T20:00:00-04:00", "location": "Auer Hall", "source": "IU Jacobs School of Music", "url": "https://events.iu.edu/musiciub/event/2386282-voice-class-recital-solo-vocal-literature-after", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12492139", "title": "It's On Us: Bystander Intervention Workshop", "start_time": "2026-09-21T18:00:00-04:00", "location": "Global & International Studies Building, Room 1134", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12492139", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12492140", "title": "It's On Us: Bystander Intervention Workshop", "start_time": "2026-09-21T20:00:00-04:00", "location": "Global & International Studies Building, Room 1134", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12492140", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12491865", "title": "It's On Us: Bystander Intervention Workshop", "start_time": "2026-09-27T14:00:00-04:00", "location": "Global & International Studies Building, Room 1134", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12491865", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12491868", "title": "It's On Us: Bystander Intervention Workshop", "start_time": "2026-09-27T20:00:00-04:00", "location": "Global & International Studies Building, Room 1134", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12491868", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12491889", "title": "It's On Us: Bystander Intervention Workshop", "start_time": "2026-10-04T14:00:00-04:00", "location": "Global & International Studies Building, Room 1134", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12491889", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12491892", "title": "It's On Us: Bystander Intervention Workshop", "start_time": "2026-10-04T20:00:00-04:00", "location": "Global & International Studies Building, Room 1134", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12491892", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12492180", "title": "It's On Us: Bystander Intervention Workshop", "start_time": "2026-10-12T18:00:00-04:00", "location": "Global & International Studies Building, Room 1134", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12492180", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12492181", "title": "It's On Us: Bystander Intervention Workshop", "start_time": "2026-10-12T20:00:00-04:00", "location": "Global & International Studies Building, Room 1134", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12492181", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12491893", "title": "It's On Us: Bystander Intervention Workshop", "start_time": "2026-10-18T14:00:00-04:00", "location": "Global & International Studies Building, Room 1134", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12491893", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12491896", "title": "It's On Us: Bystander Intervention Workshop", "start_time": "2026-10-18T20:00:00-04:00", "location": "Global & International Studies Building, Room 1134", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12491896", "all_day": false}, {"source_uid": "20261024-rocky-horror-picture-show-2026@buskirkchumley.org", "title": "Rocky Horror Picture Show 2026", "start_time": "2026-10-24T19:00:00-04:00", "location": "Buskirk-Chumley Theater, 114 E Kirkwood Ave, Bloomington, IN 47408", "source": "Buskirk-Chumley Theater, Pillar Arts Community Calendar, Limestone Post, WFIU Community Calendar", "url": "https://buskirkchumley.org/events/rocky-horror-picture-show-2026-october-24-2026", "all_day": false}, {"source_uid": "TKF/62fb9575b27fd5064283290f/2428/29881590/0/0", "title": "Rocky Horror Picture Show 2026", "start_time": "2026-10-24T22:30:00-04:00", "location": "Buskirk-Chumley Theater,114 East Kirkwood Avenue, Bloomington, IN 47408, USA", "source": "Pillar Arts Community Calendar", "url": "https://tockify.com/bloomington.arts.calendar/detail/2428/1792895400000", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12491897", "title": "It's On Us: Bystander Intervention Workshop", "start_time": "2026-10-25T14:00:00-04:00", "location": "Global & International Studies Building, Room 1134", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12491897", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12491900", "title": "It's On Us: Bystander Intervention Workshop", "start_time": "2026-10-25T20:00:00-04:00", "location": "Global & International Studies Building, Room 1134", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12491900", "all_day": false}, {"source_uid": "20261102T220000Z-2386535@events.iu.edu", "title": "Electronic Music Resources I Class Recital, Part 1 – John Gibson and Oliver Kwapis, instructors", "start_time": "2026-11-02T17:00:00-05:00", "location": "Ford-Crawford Hall", "source": "IU Jacobs School of Music, WFIU Community Calendar", "url": "https://events.iu.edu/musiciub/event/2386535-electronic-music-resources-i-class-recital-part-1", "all_day": false}, {"source_uid": "20261103T000000Z-2386534@events.iu.edu", "title": "Electronic Music Resources I Class Recital, Part 2 – John Gibson and Oliver Kwapis, instructors", "start_time": "2026-11-02T19:00:00-05:00", "location": "Ford-Crawford Hall", "source": "IU Jacobs School of Music", "url": "https://events.iu.edu/musiciub/event/2386534-electronic-music-resources-i-class-recital-part-2", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12717423", "title": "General Body Meeting", "start_time": "2026-11-02T17:00:00-05:00", "location": "IMU Persimmon Room", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12717423", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12759341", "title": "General Body Meeting", "start_time": "2026-11-02T19:00:00-05:00", "location": "Ballentine Hall, BH 209", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12759341", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12492192", "title": "It's On Us: Bystander Intervention Workshop", "start_time": "2026-11-02T18:00:00-05:00", "location": "Global & International Studies Building, Room 1134", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12492192", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12492193", "title": "It's On Us: Bystander Intervention Workshop", "start_time": "2026-11-02T20:00:00-05:00", "location": "Global & International Studies Building, Room 1134", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12492193", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12491901", "title": "It's On Us: Bystander Intervention Workshop", "start_time": "2026-11-08T14:00:00-05:00", "location": "Global & International Studies Building, Room 1134", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12491901", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12491904", "title": "It's On Us: Bystander Intervention Workshop", "start_time": "2026-11-08T20:00:00-05:00", "location": "Global & International Studies Building, Room 1134", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12491904", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12491918", "title": "It's On Us: Bystander Intervention Workshop", "start_time": "2026-11-15T14:00:00-05:00", "location": "Global & International Studies Building, Room 1134", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12491918", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12491921", "title": "It's On Us: Bystander Intervention Workshop", "start_time": "2026-11-15T20:00:00-05:00", "location": "Global & International Studies Building, Room 1134", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12491921", "all_day": false}, {"source_uid": "20261115T220000Z-2410959@events.iu.edu", "title": "Doctoral Recital – Hyunjoo Choo, violin", "start_time": "2026-11-15T17:00:00-05:00", "location": "Recital Hall", "source": "IU Jacobs School of Music, WFIU Community Calendar", "url": "https://events.iu.edu/musiciub/event/2410959-doctoral-recital-hyunjoo-choo-violin", "all_day": false}, {"source_uid": "20261116T000000Z-2410958@events.iu.edu", "title": "Doctoral Recital – Hyunjoo Choo, violin", "start_time": "2026-11-15T19:00:00-05:00", "location": "Recital Hall", "source": "IU Jacobs School of Music", "url": "https://events.iu.edu/musiciub/event/2410958-doctoral-recital-hyunjoo-choo-violin", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12717424", "title": "General Body Meeting", "start_time": "2026-11-16T17:00:00-05:00", "location": "IMU Persimmon Room", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12717424", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12759343", "title": "General Body Meeting", "start_time": "2026-11-16T19:00:00-05:00", "location": "Ballentine Hall, BH 209", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12759343", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12717425", "title": "General Body Meeting", "start_time": "2026-11-30T17:00:00-05:00", "location": "IMU Persimmon Room", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12717425", "all_day": false}, {"source_uid": "https://beinvolved.indiana.edu/event/12759344", "title": "General Body Meeting", "start_time": "2026-11-30T19:00:00-05:00", "location": "Ballentine Hall, BH 209", "source": "IU beINvolved Student Orgs", "url": "https://beinvolved.indiana.edu/event/12759344", "all_day": false}, {"source_uid": "3one5b4c9sfvuqbjerbn45jeer@google.com__20261005", "title": "Trivia Night w/Bloomington Pub Quiz", "start_time": "2026-10-05T20:30:00-04:00", "location": "The Back Door, 207 S College Ave, Bloomington, IN 47404, USA", "source": "Bloomington Pride", "url": "https://bloomingtonpride.org/community-calendar", "all_day": false}, {"source_uid": "TKF/56e47e8bfc66f1c00bbd6f6e/794/29854110/0/0", "title": "Trivia Night w/Bloomington Pub Quiz!", "start_time": "2026-10-05T20:30:00-04:00", "location": "", "source": "The Back Door", "url": "https://tockify.com/thebackdoor/detail/794/1791246600000", "all_day": false}, {"source_uid": "1931121a2255cf0cbc92b6e4b1afb902@ipm.org", "title": "Salón Latino Chamber Music Series", "start_time": "2026-10-08T20:00:00-04:00", "location": "Auer Hall, Simon Music Center, 200 S. Eagleson Ave, Bloomington, Indiana 47405", "source": "WFIU Community Calendar", "url": "https://www.ipm.org/community-calendar/event/salon-latino-chamber-music-series-01-09-2026-11-32-43", "all_day": false}, {"source_uid": "20261009T000000Z-2386278@events.iu.edu", "title": "Salón Latino Chamber Music Series", "start_time": "2026-10-08T20:00:00-04:00", "location": "Auer Hall & LIVE@jacobs", "source": "IU Jacobs School of Music", "url": "https://events.iu.edu/musiciub/event/2386278-salon-latino-chamber-music-series", "all_day": false}, {"source_uid": "3one5b4c9sfvuqbjerbn45jeer@google.com__20261012", "title": "Trivia Night w/Bloomington Pub Quiz", "start_time": "2026-10-12T20:30:00-04:00", "location": "The Back Door, 207 S College Ave, Bloomington, IN 47404, USA", "source": "Bloomington Pride", "url": "https://bloomingtonpride.org/community-calendar", "all_day": false}, {"source_uid": "TKF/56e47e8bfc66f1c00bbd6f6e/794/29864190/0/0", "title": "Trivia Night w/Bloomington Pub Quiz!", "start_time": "2026-10-12T20:30:00-04:00", "location": "", "source": "The Back Door", "url": "https://tockify.com/thebackdoor/detail/794/1791851400000", "all_day": false}, {"source_uid": "e1dcda0a3b535163c0e88b90ff1c04fa@ipm.org", "title": "Student Composition Recital", "start_time": "2026-10-13T20:00:00-04:00", "location": "Auer Hall, Simon Music Center, 200 S. Eagleson Ave, Bloomington, Indiana 47405", "source": "WFIU Community Calendar", "url": "https://www.ipm.org/community-calendar/event/student-composition-recital-01-09-2026-12-10-53", "all_day": false}, {"source_uid": "20261014T000000Z-2386454@events.iu.edu", "title": "Student Composition Recital", "start_time": "2026-10-13T20:00:00-04:00", "location": "Auer Hall & LIVE@jacobs", "source": "IU Jacobs School of Music", "url": "https://events.iu.edu/musiciub/event/2386454-student-composition-recital", "all_day": false}];
+
+var DATASETS = { reported: REPORTED, traps: TRAPS, live: LIVE };
+var DATASET_LABEL = { reported: 'The 4 reported pairs', traps: 'Traps — must not merge', live: 'Live sample (122 real listings)' };
+
+var state = { dataset: 'reported', opts: Object.assign({}, ConfidenceRoute.DEFAULTS) };
+
+function setDataset(d) { state.dataset = d; render(); }
+function setThreshold(t) { state.opts.threshold = t; render(); }
+function toggleGuard(g) { state.opts[g] = !state.opts[g]; render(); }
+
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+  });
+}
+
+function render() {
+  var listings = DATASETS[state.dataset];
+  var res = ConfidenceRoute.route(listings, state.opts);
+
+  document.getElementById('opts-line').textContent =
+    'Routing ' + listings.length + ' listings · threshold ' + state.opts.threshold.toFixed(2) +
+    ' · guards: same-start-time ' + (state.opts.startTimeGuard ? 'ON' : 'OFF') +
+    ', location ' + (state.opts.locationGuard ? 'ON' : 'OFF') +
+    ', squad-variants ' + (state.opts.variantGuard ? 'ON' : 'OFF') +
+    ', timed-only ' + (state.opts.timedOnly ? 'ON' : 'OFF') +
+    ', clean-titles ' + (state.opts.cleanTitle ? 'ON' : 'OFF');
+
+  document.querySelectorAll('[id^=ds-]').forEach(function (b) { b.classList.remove('on'); });
+  var dsb = document.getElementById('ds-' + state.dataset); if (dsb) dsb.classList.add('on');
+  document.querySelectorAll('[id^=th-]').forEach(function (b) { b.classList.remove('on'); });
+  var tb = document.getElementById('th-' + state.opts.threshold.toFixed(2)); if (tb) tb.classList.add('on');
+  setGuardBtn('g-time', state.opts.startTimeGuard);
+  setGuardBtn('g-loc', state.opts.locationGuard);
+  setGuardBtn('g-variant', state.opts.variantGuard);
+  setGuardBtn('g-allday', state.opts.timedOnly);
+  setGuardBtn('g-clean', state.opts.cleanTitle);
+
+  document.getElementById('stats').innerHTML =
+    stat('merge', res.stats.merge, 'Merged') +
+    stat('group', res.stats.group, 'Grouped') +
+    stat('sep', res.stats.separate, 'Separate') +
+    stat('', res.stats.input, 'Listings in');
+
+  var html = '';
+  var multi = res.groups.filter(function (g) { return g.members.length > 1; });
+  var singles = res.groups.filter(function (g) { return g.members.length === 1; });
+  if (!multi.length) html += '<p class="quiet">No listing pairs qualified — everything stays separate.</p>';
+  multi.forEach(function (g) { html += groupCard(g); });
+  if (singles.length) {
+    html += '<details class="collapsible"><summary>' + singles.length + ' separate listing(s) — click to show</summary>';
+    singles.forEach(function (g) { html += groupCard(g); });
+    html += '</details>';
+  }
+  if (state.dataset === 'live') {
+    html += '<p class="warn" style="margin-top:14px">On the live sample, every red <strong>Merged</strong> card is a row that ' +
+      'would be <em>deleted</em> at build time. Read each one and ask: were those two listings truly the same event? ' +
+      'That is the whole risk budget.</p>';
+  }
+  document.getElementById('groups').innerHTML = html;
+
+  renderScenario(res);
+}
+
+function setGuardBtn(id, on) {
+  var b = document.getElementById(id); if (!b) return;
+  b.classList.toggle('on', on);
+  b.classList.toggle('guard-on', on);
+  b.classList.toggle('guard-off', !on);
+  b.setAttribute('aria-pressed', on ? 'true' : 'false');
+}
+function stat(cls, n, label) { return '<div class="stat ' + cls + '"><b>' + n + '</b><span>' + label + '</span></div>'; }
+
+function groupCard(g) {
+  var band = g.band;
+  var title = band === 'merge' ? 'Merged into one' : band === 'group' ? 'Grouped (nothing deleted)' : 'Separate';
+  var why = [];
+  if (band === 'merge') why.push('identical normalised title at the same instant');
+  if (band === 'group') why.push('best title score ' + (g.maxScore == null ? 'n/a' : g.maxScore.toFixed(3)) + ' \u2265 threshold');
+  if (band === 'separate' && g.maxScore != null) why.push('best title score ' + g.maxScore.toFixed(3) + ' < threshold');
+  var blocked = g.links.filter(function (L) { return L.band && L.band.indexOf('blocked') === 0; });
+  if (blocked.length) why.push(blocked.map(function (L) {
+    return L.band === 'blocked-time' ? 'start-time guard' : L.band === 'blocked-location' ? 'location guard'
+      : L.band === 'blocked-variant' ? 'squad-variant guard' : 'all-day guard';
+  }).filter(function (v, i, arr) { return arr.indexOf(v) === i; }).join(' + ') + ' blocked a pair');
+  var body = g.members.map(function (m) {
+    var shown = (m.title || '').length > 78 ? m.title.slice(0, 78) + '\u2026' : m.title;
+    return '<div class="member"><div class="t">' + esc(shown) + '</div>' +
+      '<div class="m">' + esc(m.start_time) + ' \u00b7 ' + esc(m.source || 'unknown source') +
+      (m.location ? ' \u00b7 ' + esc(m.location) : ' \u00b7 (no location)') + '</div></div>';
+  }).join('');
+  var outcome = '';
+  if (band === 'merge') {
+    outcome = '<div class="outcome">\u2192 One row survives; the other source is folded in. ' +
+      'Source becomes <em>' + esc(g.members.map(function (m) { return m.source || 'unknown'; }).join(', ')) + '</em>.</div>';
+  } else if (band === 'group') {
+    outcome = '<div class="outcome">\u2192 Both rows stay in the database, every consumer renders one card. ' +
+      'Group id <span class="gid">' + g.duplicate_group + '</span> is stamped on all members so every consumer agrees. ' +
+      'All ' + g.members.length + ' listings still shown.</div>';
+  }
+  return '<div class="grp ' + band + '"><div class="grphead"><span class="badge ' + band + '">' + title + '</span>' +
+    '<span class="why">' + why.join(' \u00b7 ') + '</span></div>' + body + outcome + '</div>';
+}
+
+/* --- guided walkthroughs --- */
+var SCENARIOS = [
+  {
+    id: 'reported', name: 'The 4 reported pairs',
+    desc: 'Start with the rows from issue #145. At 0.80, all four pairs land right: Cook-Off Merges (the raw Visit ' +
+          'Bloomington title was HTML-entity encoded, so cleaning first is what makes the two titles identical), and ' +
+          'Tibet, Wine and the two Dance Day listings Group. The third dance listing stays Separate. Raise it to 0.90 ' +
+          'and the Wine pair (0.857) drops to Separate — that is what the threshold is buying you.',
+    steps: [
+      { label: 'Load the 4 reported pairs', apply: function () { state.dataset = 'reported'; } },
+      { label: 'Set threshold to 0.80 — all four pairs resolved', apply: function () { state.opts.threshold = 0.80; } },
+      { label: 'Raise to 0.90 — the Wine pair drops out', apply: function () { state.opts.threshold = 0.90; } },
+      { label: 'Back to 0.80, then turn OFF “Clean titles first” — Cook-Off stops merging', apply: function () { state.opts.threshold = 0.80; state.opts.cleanTitle = false; } },
+      { label: 'Turn cleaning back ON', apply: function () { state.opts.cleanTitle = true; } }
+    ]
+  },
+  {
+    id: 'traps', name: 'Traps — must not merge',
+    desc: 'These pairs are the false-merge budget. The two workshops and the two Rocky Horror screenings are the same ' +
+          'title on the same day but genuinely different sessions. They must never Merge. Now turn OFF the Same start time ' +
+          'guard and watch how quickly the model would destroy them — that is the failure the guard is there to prevent.',
+    steps: [
+      { label: 'Load the traps', apply: function () { state.dataset = 'traps'; } },
+      { label: 'Set threshold to 0.80', apply: function () { state.opts.threshold = 0.80; } },
+      { label: 'Turn OFF “Same start time” — sessions collapse', apply: function () { state.opts.startTimeGuard = false; } },
+      { label: 'Turn it back ON', apply: function () { state.opts.startTimeGuard = true; } },
+      { label: 'Turn OFF “Compatible location” — the two-venue collision groups', apply: function () { state.opts.locationGuard = false; } },
+      { label: 'Turn it back ON', apply: function () { state.opts.locationGuard = true; } }
+    ]
+  },
+  {
+    id: 'dial', name: 'Turn the dial',
+    desc: 'The payoff scenario. At threshold 0.80 with all guards on, the live sample gives 10 red Merges and just 4 ' +
+          'group cards — The FIXX, Toastmasters, Concentus and Dr. Jekyll — all genuine same-event duplicates. The ' +
+          'threshold is doing real work now: at 0.90 you only keep two of those four. Then break it on purpose: turn ' +
+          'off the squad/gender guard and the JV/Varsity/Freshman team noise comes back (seven cards, at any ' +
+          'threshold); turn off Timed only and twelve concurrent Lilly Library all-day exhibitions collapse onto one card.',
+    steps: [
+      { label: 'Load the live sample', apply: function () { state.dataset = 'live'; } },
+      { label: 'Threshold 0.80 — all guards ON (the clean result)', apply: function () { state.opts.threshold = 0.80; state.opts.variantGuard = true; state.opts.timedOnly = true; } },
+      { label: 'Threshold 0.90 — notice you lose three of the four groups', apply: function () { state.opts.threshold = 0.90; } },
+      { label: 'Back to 0.80, then turn OFF the squad/gender guard', apply: function () { state.opts.threshold = 0.80; state.opts.variantGuard = false; } },
+      { label: 'Turn it back ON, then turn OFF Timed only', apply: function () { state.opts.variantGuard = true; state.opts.timedOnly = false; } },
+      { label: 'Turn it back ON. Which red Merges would you refuse to delete?', apply: function () { state.opts.timedOnly = true; } }
+    ]
+  },
+  {
+    id: 'chain', name: 'Chains (transitivity)',
+    desc: 'Grouping is transitive: if A matches B and B matches C, A and C end up on one card even though they never ' +
+          'matched each other directly. This is the least obvious behaviour in the whole model. The Traps dataset ends ' +
+          'with a constructed three-listing chain — "Beginner Pottery Class" / "… for Adults" / "Pottery Class for Adults" ' +
+          '— where the outer two only score 0.743. Check whether grouping all three feels right.',
+    steps: [
+      { label: 'Load the traps', apply: function () { state.dataset = 'traps'; } },
+      { label: 'Threshold 0.90, all guards ON', apply: function () { state.opts.threshold = 0.90; state.opts.startTimeGuard = true; state.opts.locationGuard = true; state.opts.cleanTitle = true; } },
+      { label: 'Find the 3-listing card and note the outer two never matched directly', apply: function () {} }
+    ]
+  }
+];
+var scen = { id: 'reported', done: {} };
+
+function selectScenario(id) { scen.id = id; scen.done = {}; render(); }
+function runStep(i) {
+  var s = SCENARIOS.find(function (x) { return x.id === scen.id; });
+  s.steps[i].apply(); scen.done[i] = true; render();
+}
+
+function renderScenario(res) {
+  document.getElementById('tabs').innerHTML = SCENARIOS.map(function (s) {
+    return '<button class="tab' + (s.id === scen.id ? ' on' : '') + '" onclick="selectScenario(\'' + s.id + '\')">' + esc(s.name) + '</button>';
+  }).join('');
+  var s = SCENARIOS.find(function (x) { return x.id === scen.id; });
+  document.getElementById('scen-desc').innerHTML = '<p>' + esc(s.desc) + '</p>';
+  document.getElementById('steps').innerHTML = s.steps.map(function (st, i) {
+    return '<li><button onclick="runStep(' + i + ')">' + esc(st.label) + '</button>' +
+      (scen.done[i] ? '<span class="step-done">\u2713 done</span>' : '') + '</li>';
+  }).join('');
+}
+
+render();
+</script>
+</body>
+</html>
