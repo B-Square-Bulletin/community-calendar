@@ -457,6 +457,24 @@ def _region_tokens(tokens):
     return {_US_STATE_TOKENS[token] for token in tokens if token in _US_STATE_TOKENS}
 
 
+def _city_token(tokens):
+    """The town a location names, or ``None`` when it cannot be identified.
+
+    The city is the token immediately before the last recognised US-state token
+    (``"..., Bloomington, IN 47401"`` -> ``"bloomington"``). Read positionally
+    and text-only: no gazetteer and no geocoding. A location that names no state
+    has no extractable city, so the city rule cannot fire and the pair falls
+    back to the shared-token/street-number rules — that keeps a venue spelling
+    without a state (``"Musical Arts Center & LIVE@jacobs"``) mergeable with one
+    that carries one. The last occurrence, not the first, because a state code
+    like ``or``/``in`` can appear earlier in ordinary venue wording.
+    """
+    for index in range(len(tokens) - 1, -1, -1):
+        if tokens[index] in _US_STATE_TOKENS:
+            return tokens[index - 1] if index > 0 else None
+    return None
+
+
 def _locations_compatible(a, b):
     """Core location rule; both inputs are non-empty."""
     norm_a, norm_b = normalize_location(a), normalize_location(b)
@@ -465,6 +483,13 @@ def _locations_compatible(a, b):
     tokens_a, tokens_b = norm_a.split(), norm_b.split()
     regions_a, regions_b = _region_tokens(tokens_a), _region_tokens(tokens_b)
     if regions_a and regions_b and regions_a != regions_b:
+        return False
+    # Explicit city-token incompatibility: the same street number and shared
+    # street tokens in two towns of one state are two venues. Only fires when
+    # both sides name an extractable city, so unknown formats still fall back to
+    # the shared-token/street-number rules below.
+    city_a, city_b = _city_token(tokens_a), _city_token(tokens_b)
+    if city_a and city_b and city_a != city_b:
         return False
     shared = [t for t in tokens_a if t in set(tokens_b) and not t.isdigit()]
     number_a = next((t for t in tokens_a if t.isdigit()), None)

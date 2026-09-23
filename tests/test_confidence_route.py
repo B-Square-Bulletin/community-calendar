@@ -139,6 +139,24 @@ class TestMerge:
         assert outcomes["b"].outcome == "separate"
         assert outcomes["a"].duplicate_group is None
 
+    def test_merge_requires_matching_city_tokens(self):
+        """Same street number in two towns of one state stays two rows.
+
+        The street-number and shared-token rules alone call these compatible;
+        the city token is what keeps an exact-title Merge from deleting one.
+        """
+        events = [
+            ev("a", "Exact Title", location="100 Main St, Bloomington, IN"),
+            ev("b", "Exact Title", location="100 Main St, Indianapolis, IN"),
+        ]
+        result = confidence_route(events)
+        outcomes = by_uid(result)
+        assert len(result.events) == 2
+        assert result.diagnostics["merge_deleted"] == 0
+        assert outcomes["a"].outcome == "separate"
+        assert outcomes["b"].outcome == "separate"
+        assert outcomes["a"].duplicate_group is None
+
     def test_merge_survivor_is_input_order_independent(self):
         events = [
             ev("b", "Exact Title", location="Venue, 1 Main St"),
@@ -676,6 +694,34 @@ class TestPrimitives:
         assert locations_compatible_both("", "Bloomington") is False
         assert locations_compatible_or_empty("", "Bloomington") is True
 
+    def test_location_differing_city_tokens_are_incompatible(self):
+        """Same street and number, same state, different towns: two venues.
+
+        Without the city-token rule these share "main" and "street" and compare
+        compatible, so an exact-title Merge could delete one of two real events.
+        """
+        assert (
+            locations_compatible_both(
+                "100 Main St, Bloomington, IN", "100 Main St, Indianapolis, IN"
+            )
+            is False
+        )
+        assert (
+            locations_compatible_or_empty(
+                "100 Main St, Bloomington, IN", "100 Main St, Indianapolis, IN"
+            )
+            is False
+        )
+
+    def test_location_same_city_spelled_differently_stays_compatible(self):
+        """A state code vs name, or a trailing ZIP, is still the same town."""
+        assert (
+            locations_compatible_both(
+                "100 Main St, Bloomington, IN", "100 Main St, Bloomington, Indiana 47401"
+            )
+            is True
+        )
+
     def test_source_name_containing_comma_is_not_split(self):
         event = ev("a", "Title", source="Taste, Inc.", source_urls=None)
         assert structured_source_names(event) == ["Taste, Inc."]
@@ -751,6 +797,28 @@ class TestIcsBoundary:
         assert diagnostics["version"] == ROUTE_VERSION
         assert diagnostics["merge_deleted"] == 1
         assert diagnostics["threshold"] == ROUTE_THRESHOLD
+
+    def test_same_street_number_across_cities_is_not_merged(self, tmp_path):
+        """Same-state, same-street-number listings in two towns stay separate.
+
+        The route's city-token rule, not the street-number/shared-token rule,
+        is what stops the exact-title Merge from deleting a real listing.
+        """
+        fields = ("DTSTART:20261003T190000Z", "DTEND:20261003T210000Z")
+        event_a = make_vevent("City-Wide Concert", *fields, "uid-a").replace(
+            "END:VEVENT", "LOCATION:100 Main St, Bloomington, IN\r\nEND:VEVENT"
+        )
+        event_b = make_vevent("City-Wide Concert", *fields, "uid-b").replace(
+            "END:VEVENT", "LOCATION:100 Main St, Indianapolis, IN\r\nEND:VEVENT"
+        )
+        ics_path = self._write_ics(tmp_path, event_a + event_b)
+        out_path = tmp_path / "events.json"
+
+        events = ics_to_json(ics_path, out_path, future_only=False, city="bloomington")
+
+        assert len(events) == 2
+        diagnostics = json.loads((tmp_path / "events.route.json").read_text())
+        assert diagnostics["merge_deleted"] == 0
 
     def test_artifact_carries_duplicate_group_for_groups(self, tmp_path):
         event_a = make_vevent(
