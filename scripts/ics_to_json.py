@@ -245,7 +245,7 @@ def token_set_similarity(a, b):
 
 # Algorithm namespace. Bump when the decision rules change. A version change
 # intentionally changes every duplicate_group id; group ids are not identity.
-ROUTE_VERSION = "cr1"
+ROUTE_VERSION = "cr2"
 
 # Title similarity needed to Group. 0.80 recovers the low-scoring true
 # duplicates (e.g. the Wine & Paint pair at 0.857) without gathering the
@@ -457,18 +457,32 @@ def _region_tokens(tokens):
     return {_US_STATE_TOKENS[token] for token in tokens if token in _US_STATE_TOKENS}
 
 
-def _city_token(tokens):
+def _city_token(location):
     """The town a location names, or ``None`` when it cannot be identified.
 
-    The city is the token immediately before the last recognised US-state token
-    (``"..., Bloomington, IN 47401"`` -> ``"bloomington"``). Read positionally
-    and text-only: no gazetteer and no geocoding. A location that names no state
-    has no extractable city, so the city rule cannot fire and the pair falls
-    back to the shared-token/street-number rules — that keeps a venue spelling
-    without a state (``"Musical Arts Center & LIVE@jacobs"``) mergeable with one
-    that carries one. The last occurrence, not the first, because a state code
-    like ``or``/``in`` can appear earlier in ordinary venue wording.
+    The city is the full comma segment before the last state-bearing segment
+    (``"100 Main St, Salt Lake City, UT"`` -> ``"salt lake city"``), so two
+    towns in one state that share a last word still compare incompatible. Read
+    positionally and text-only: no gazetteer and no geocoding. A location that
+    names no state (``"Musical Arts Center & LIVE@jacobs"``) has no extractable
+    city, so the city rule cannot fire and the pair falls back to the
+    shared-token/street-number rules. A comma-less location falls back to the
+    single token before the state token.
     """
+    if not location:
+        return None
+    segments = [seg.strip() for seg in str(location).split(",")]
+    if len(segments) >= 2:
+        state_idx = None
+        for index in range(len(segments) - 1, -1, -1):
+            seg_tokens = normalize_location(segments[index]).split()
+            if any(token in _US_STATE_TOKENS for token in seg_tokens):
+                state_idx = index
+                break
+        if state_idx is not None and state_idx > 0:
+            return normalize_location(segments[state_idx - 1]) or None
+        return None
+    tokens = normalize_location(location).split()
     for index in range(len(tokens) - 1, -1, -1):
         if tokens[index] in _US_STATE_TOKENS:
             return tokens[index - 1] if index > 0 else None
@@ -488,7 +502,7 @@ def _locations_compatible(a, b):
     # street tokens in two towns of one state are two venues. Only fires when
     # both sides name an extractable city, so unknown formats still fall back to
     # the shared-token/street-number rules below.
-    city_a, city_b = _city_token(tokens_a), _city_token(tokens_b)
+    city_a, city_b = _city_token(a), _city_token(b)
     if city_a and city_b and city_a != city_b:
         return False
     shared = [t for t in tokens_a if t in set(tokens_b) and not t.isdigit()]

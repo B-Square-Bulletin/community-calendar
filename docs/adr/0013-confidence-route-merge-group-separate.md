@@ -40,7 +40,7 @@ exactly one outcome:
 - **Separate** — everything else. Separate is authoritative: a NULL
   `duplicate_group` means one row is one group, and no consumer re-collapses it.
 
-The route is versioned (`cr1`) and fails closed: missing `source_uid`,
+The route is versioned (`cr2`: `cr1` plus multi-word city-token extraction) and fails closed: missing `source_uid`,
 deletion without an exact-title survivor, duplicate survivors, malformed group
 membership, excessive component size (25), or excessive comparison work
 (250,000) all raise and fail the build with an actionable diagnostic.

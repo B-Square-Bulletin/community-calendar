@@ -1,13 +1,14 @@
-.PHONY: help test test-python test-node test-browser test-sql test-all setup-python setup-node setup-local teardown-local format format-python format-js lint lint-python lint-js check clean
+.PHONY: help test test-python test-node test-deno test-browser test-sql test-all setup-python setup-node setup-local teardown-local format format-python format-js lint lint-python lint-js check clean
 
 # Default target
 help:
 	@echo "Community Calendar Test Suite"
 	@echo ""
 	@echo "Targets:"
-	@echo "  make test            - Run Python + node (vitest) tests"
+	@echo "  make test            - Run Python + node (vitest) + Deno tests"
 	@echo "  make test-python     - Run Python tests (pytest via uv)"
 	@echo "  make test-node       - Run node seam tests (vitest via pnpm)"
+	@echo "  make test-deno       - Run edge-function tests (Deno: my-picks dedupe)"
 	@echo "  make test-browser    - Run browser groups (Playwright over xmlui/test.html)"
 	@echo "  make test-sql        - Run database tests (local Supabase via pgTAP)"
 	@echo "  make format          - Auto-format Python + JS code"
@@ -29,7 +30,7 @@ help:
 	@echo "  - PostgreSQL client (psql) for local database access"
 
 # Run default tests
-test: test-python test-node
+test: test-python test-node test-deno
 
 # Alias for test
 test-all: test
@@ -57,6 +58,11 @@ setup-node:
 test-node:
 	@echo "Running node tests..."
 	@pnpm vitest run
+
+# Run edge-function tests (Deno; not covered by pytest or vitest)
+test-deno:
+	@echo "Running Deno tests..."
+	@deno test supabase/functions/my-picks/dedupe_test.ts
 
 # Run browser groups (requires playwright browsers: pnpm exec playwright install chromium)
 test-browser:
@@ -120,7 +126,7 @@ lint-python:
 	exit $$status
 
 # Lint + tests
-check: lint test-python test-node
+check: lint test-python test-node test-deno
 
 # Run database tests (requires prepared local Supabase project DB)
 test-sql:

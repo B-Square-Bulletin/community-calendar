@@ -170,6 +170,20 @@ class TestMerge:
         assert outcomes["b"].outcome == "separate"
         assert outcomes["a"].duplicate_group is None
 
+    def test_merge_requires_matching_multiword_city_tokens(self):
+        """Same street number in two same-state multi-word towns stays two rows."""
+        events = [
+            ev("a", "Exact Title", location="100 Main St, Salt Lake City, UT"),
+            ev("b", "Exact Title", location="100 Main St, Cedar City, UT"),
+        ]
+        result = confidence_route(events)
+        outcomes = by_uid(result)
+        assert len(result.events) == 2
+        assert result.diagnostics["merge_deleted"] == 0
+        assert outcomes["a"].outcome == "separate"
+        assert outcomes["b"].outcome == "separate"
+        assert outcomes["a"].duplicate_group is None
+
     def test_merge_survivor_is_input_order_independent(self):
         events = [
             ev("b", "Exact Title", location="Venue, 1 Main St"),
@@ -731,6 +745,35 @@ class TestPrimitives:
         assert (
             locations_compatible_both(
                 "100 Main St, Bloomington, IN", "100 Main St, Bloomington, Indiana 47401"
+            )
+            is True
+        )
+
+    def test_location_differing_multiword_city_tokens_are_incompatible(self):
+        """Salt Lake City vs Cedar City share a state and a last word, not a town.
+
+        A single-token city rule reads both as "city" and calls them compatible,
+        so an exact-title Merge could delete one of two real events. The city is
+        the full comma segment before the state, not the last word.
+        """
+        assert (
+            locations_compatible_both(
+                "100 Main St, Salt Lake City, UT", "100 Main St, Cedar City, UT"
+            )
+            is False
+        )
+        assert (
+            locations_compatible_or_empty(
+                "100 Main St, Salt Lake City, UT", "100 Main St, Cedar City, UT"
+            )
+            is False
+        )
+
+    def test_location_same_multiword_city_stays_compatible(self):
+        """A state code vs name is still the same town, even with several words."""
+        assert (
+            locations_compatible_both(
+                "100 Main St, Salt Lake City, UT", "100 Main St, Salt Lake City, Utah"
             )
             is True
         )

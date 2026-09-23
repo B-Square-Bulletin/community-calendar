@@ -997,16 +997,14 @@ function uniqueSourceNames(source) {
     });
 }
 
-// Extract a short readable snippet from an event description (for always-visible preview)
-// Junk line patterns are hardcoded here; see docs/admin-interface.md for plan to make configurable
-function formatSourceLinks(source, sourceUrls, hiddenSources, sourceNames) {
-  // Prefer the view's structured `source_names`: a human source name may contain
-  // a comma, so splitting the compatibility `source` string would fabricate
-  // names and reorder them (spec amendment L402).
-  var sources;
-  if (Array.isArray(sourceNames) && sourceNames.length) {
+// Structured source names from the view, falling back to the legacy split.
+// The view's `source_names` is authoritative: a human source name may contain
+// a comma, so splitting the compatibility `source` string would fabricate
+// names (spec amendment L402). Every client site that derives names uses this.
+function eventSourceNames(e) {
+  if (e && Array.isArray(e.source_names) && e.source_names.length) {
     var seen = new Set();
-    sources = sourceNames
+    return e.source_names
       .map(function (s) {
         return String(s).trim();
       })
@@ -1015,9 +1013,14 @@ function formatSourceLinks(source, sourceUrls, hiddenSources, sourceNames) {
         seen.add(s);
         return true;
       });
-  } else {
-    sources = uniqueSourceNames(source);
   }
+  return uniqueSourceNames((e && e.source) || '');
+}
+
+// Extract a short readable snippet from an event description (for always-visible preview)
+// Junk line patterns are hardcoded here; see docs/admin-interface.md for plan to make configurable
+function formatSourceLinks(source, sourceUrls, hiddenSources, sourceNames) {
+  var sources = eventSourceNames({ source: source, source_names: sourceNames });
   if (!sources.length) return '';
   // Filter out hidden sources, but keep all if all would be removed
   if (hiddenSources && hiddenSources.length) {
@@ -1250,13 +1253,8 @@ function filterHiddenSources(events, hiddenSources) {
   if (!hiddenSources || !hiddenSources.length) return events;
   if (!events) return [];
   return events.filter(function (e) {
-    if (!e.source) return true;
-    var sources = e.source
-      .split(',')
-      .map(function (s) {
-        return s.trim();
-      })
-      .filter(Boolean);
+    var sources = eventSourceNames(e);
+    if (!sources.length) return true;
     if (
       sources.some(function (s) {
         return hiddenSources.indexOf(s) >= 0 && AGGREGATOR_SOURCES.has(s);
@@ -1274,7 +1272,8 @@ function getSourceCounts(events) {
   if (!events || !events.length) return [];
   const counts = {};
   events.forEach((e) => {
-    const sources = uniqueSourceNames(e.source || 'Unknown');
+    var sources = eventSourceNames(e);
+    if (!sources.length) sources = ['Unknown'];
     sources.forEach((src) => {
       counts[src] = (counts[src] || 0) + 1;
     });
@@ -1301,7 +1300,8 @@ function getVisibleSourceCounts(events, hiddenSources) {
   var counts = {};
   var aggHidden = {};
   (events || []).forEach(function (e) {
-    var sources = uniqueSourceNames(e.source || 'Unknown');
+    var sources = eventSourceNames(e);
+    if (!sources.length) sources = ['Unknown'];
     var viaAgg = sources.some(function (s) {
       return hiddenSources.indexOf(s) >= 0 && AGGREGATOR_SOURCES.has(s);
     });
@@ -1394,11 +1394,8 @@ function dedupeEvents(events) {
     // The view's `source_names` is structured and already ordered by the route's
     // representative rule. Only a raw row without it falls back to splitting the
     // legacy comma-joined `source` string (spec amendment L402).
-    const structured =
-      Array.isArray(e.source_names) && e.source_names.length
-        ? e.source_names.map((s) => String(s).trim()).filter(Boolean)
-        : null;
-    const names = structured || uniqueSourceNames(e.source);
+    const names = eventSourceNames(e);
+    const structured = Array.isArray(e.source_names) && e.source_names.length ? names : null;
     if (!groups[key]) {
       groups[key] = {
         ...e,
@@ -1644,6 +1641,9 @@ function collapseLongRunningEvents(events) {
 function sortSourcesForDisplay(events) {
   if (!events) return [];
   return events.map(function (e) {
+    // A structured row already carries the view's representative ordering;
+    // re-sorting the compatibility string would undo it (spec amendment L402).
+    if (e && Array.isArray(e.source_names) && e.source_names.length) return e;
     if (!e.source) return e;
     var sourcesArr = uniqueSourceNames(e.source);
     if (sourcesArr.length <= 1) return e;

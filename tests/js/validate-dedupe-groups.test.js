@@ -293,3 +293,29 @@ describe('consumers read the stored decision from the view', () => {
     expect(globals).toContain('id=in.(');
   });
 });
+
+// Spec amendment L402, extended beyond the card path: every client site that
+// derives source names must prefer the view's structured `source_names`.
+// Splitting "Taste, Inc." fabricates two sources, so hide/count/sort would
+// disagree with the view for comma-containing human source names.
+describe('structured source_names outside the card path', () => {
+  it('filterHiddenSources matches a comma-containing name exactly', () => {
+    const events = [row({ id: 1, source: 'Taste, Inc.', source_names: ['Taste, Inc.'] })];
+    expect(window.filterHiddenSources(events, ['Taste, Inc.'])).toHaveLength(0);
+    expect(window.filterHiddenSources(events, ['Taste'])).toHaveLength(1);
+  });
+
+  it('getSourceCounts counts a comma-containing name once', () => {
+    const counts = window.getSourceCounts([
+      row({ id: 1, source: 'Taste, Inc.', source_names: ['Taste, Inc.'] }),
+    ]);
+    expect(counts).toEqual([{ source: 'Taste, Inc.', count: 1 }]);
+  });
+
+  it('sortSourcesForDisplay leaves a structured row in view order', () => {
+    const out = window.sortSourcesForDisplay([
+      row({ id: 1, source: 'Taste, Inc.', source_names: ['Taste, Inc.'] }),
+    ]);
+    expect(out[0].source).toBe('Taste, Inc.');
+  });
+});
