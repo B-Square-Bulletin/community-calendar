@@ -101,7 +101,7 @@ The route's default and its authoritative outcome: listings left apart are never
 _Avoid_: Unmatched, rejected
 
 **Duplicate group**:
-The stable, opaque, versioned id (format `cr1:<hash>`) the route assigns to every surviving member of one Group. Deterministic over the sorted member `source_uid`s, so it changes only when membership changes; no consumer may persist it as identity (picks stay on `event_id` plus the `merged_ids` union).
+The stable, opaque, versioned id (format `cr1-<hash>`) the route assigns to every surviving member of one Group. Deterministic over the sorted member `source_uid`s, so it changes only when membership changes; no consumer may persist it as identity (picks stay on `event_id` plus the `merged_ids` union).
 _Avoid_: Cluster id, dedupe key
 
 ## Key Concepts

@@ -1,24 +1,30 @@
 # Test Fixtures
 
-This directory contains minimal ICS test fixtures for timezone pipeline tests.
+This directory contains minimal ICS fixtures for the timezone pipeline plus a
+production-scale JSON fixture for the confidence route.
 
 ## Purpose
 
-These fixtures test the timezone handling pipeline (`ics_to_json.py`, `combine_ics.py`) across different scenarios:
+The per-city ICS fixtures test the timezone handling pipeline
+(`ics_to_json.py`, `combine_ics.py`) across different scenarios:
 - Bare datetimes (no TZID)
 - TZID matching city timezone
 - Cross-timezone events (TZID differs from city)
 - UTC events
 - Recurring events (RRULE)
 
+The `confidence_route/` fixture is different: it is a real production artifact
+used to measure the route's blast radius, not a hand-written timezone case.
+
 ## Structure
 
 ```
 fixtures/
 ├── santarosa/          # America/Los_Angeles
-├── bloomington/        # America/Indiana/Indianapolis  
+├── bloomington/        # America/Indiana/Indianapolis
 ├── montclair/          # America/New_York
-└── toronto/            # America/Toronto
+├── toronto/            # America/Toronto
+└── confidence_route/   # Full production artifact for blast-radius checks
 ```
 
 ## Fixtures by Scenario
@@ -41,6 +47,18 @@ fixtures/
 
 ### Recurring Events (RRULE)
 - `santarosa/new_world_ballet.ics` - RRULE with TZID preservation
+
+### Confidence Route Blast Radius
+- `confidence_route/bloomington_production_events.json.gz` - The complete
+  Bloomington production `events.json` (8,545 listings), projected to the
+  fields the confidence route reads (`title`, `start_time`, `location`,
+  `source_uid`, `source`, `source_urls`, `url`, `all_day`) and gzipped. This is
+  a full-size artifact, not a minimal fixture: it exists so
+  `tests/test_confidence_route.py::TestBlastRadius` can measure the real merge
+  and group counts and assert that no group grows past the observed maximum
+  (a chain or all-day explosion fails loudly). Regenerate it from a fresh
+  `cities/bloomington/events.json` by keeping only those eight fields per
+  event.
 
 ## Maintenance
 
@@ -86,6 +104,6 @@ python -m pytest tests/test_timezone_pipeline.py::TestRealIcsFiles -v
 
 ## Related
 
-- Tests: `tests/test_timezone_pipeline.py`
+- Tests: `tests/test_timezone_pipeline.py`, `tests/test_confidence_route.py`
 - Pipeline: `scripts/ics_to_json.py`, `scripts/combine_ics.py`
 - Issue #14: Missing test fixtures

@@ -1348,7 +1348,8 @@ function sourceCountTooltip(row, hiddenSources) {
   );
 }
 
-// Deduplicate events: merge events with same title + start_time, combine sources
+// Deduplicate events: collapse rows sharing the route's stored duplicate_group
+// (a NULL group is one row is one group), combining membership, sources, and links
 // Cache variables (module-level for browser, will be on window)
 let _dedupedEventsCache = null;
 let _dedupedEventsLastLen = 0;
