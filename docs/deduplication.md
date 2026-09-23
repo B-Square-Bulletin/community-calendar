@@ -1,5 +1,13 @@
 # Deduplication and Event Ordering
 
+> **Superseded (2026-09-22).** Grouping is now decided once, at build time, by
+> the confidence route and stored as `events.duplicate_group`. Every consumer
+> reads that stored decision. See
+> [ADR 0013](adr/0013-confidence-route-merge-group-separate.md) and the
+> Deduplication entry in [CONTEXT.md](../CONTEXT.md) for the current model.
+> The stage-by-stage description below documents the pre-route pipeline and is
+> retained for history.
+
 ## For Curators
 
 See the [Curator Guide](curator-guide.md#duplicates-and-event-ordering) for what you need to know about deduplication, event ordering, and adding your city. The rest of this document covers the technical implementation.

@@ -196,6 +196,14 @@ describe('consumers read the stored decision from the view', () => {
     expect(tile).toMatch(/select=[^&']*\bmerged_ids\b/);
   });
 
+  it('no longer carries the retired cluster_id field (#155)', () => {
+    // cluster_id was the legacy per-timeslot similarity index. The route's
+    // duplicate_group is the only grouping authority, so a projection that
+    // still selected cluster_id would keep a competing field alive.
+    const shell = readShipped('shell.js');
+    expect(shell).not.toMatch(/\bcluster_id\b/);
+  });
+
   it('the event card borders on duplicate_group and picks through the membership helper', () => {
     const card = readShipped('components/EventCard.xmlui');
     expect(card).toContain('window.clusterBorder($props.event.duplicate_group');

@@ -84,6 +84,26 @@ _Avoid_: Snapping, correcting
 Labeling when a window extends past the horizon so the visitor knows the calendar ended, not the filter.
 _Avoid_: Cutoff (when meaning horizon), capping
 
+**Listing**:
+One row from one source: a single source's rendering of an event. Two sources carrying one real-world event produce two listings.
+_Avoid_: Event (when the source's copy is meant), record
+
+**Merge**:
+The destructive band of the confidence route: listings that are certainly one event (identical cleaned full title, same start instant, compatible locations present on both sides) collapse to one surviving row; the other sources fold into it. Merge is an equivalence class over the exact-title relation alone — it never propagates through a similarity edge, so no threshold change can delete a row.
+_Avoid_: Dedupe, fuzzy match
+
+**Group**:
+The non-destructive band: listings that look like one event (similarity at or above the threshold, same start instant, compatible locations) but are not certain. Every row is kept; the members share a `duplicate_group` id so consumers render one card from one decision.
+_Avoid_: Cluster, collapse
+
+**Separate**:
+The route's default and its authoritative outcome: listings left apart are never re-collapsed by a downstream fallback. A NULL `duplicate_group` means the route left the row alone — one row is one group.
+_Avoid_: Unmatched, rejected
+
+**Duplicate group**:
+The stable, opaque, versioned id (format `cr1:<hash>`) the route assigns to every surviving member of one Group. Deterministic over the sorted member `source_uid`s, so it changes only when membership changes; no consumer may persist it as identity (picks stay on `event_id` plus the `merged_ids` union).
+_Avoid_: Cluster id, dedupe key
+
 ## Key Concepts
 
 ### Event Sources
@@ -167,7 +187,7 @@ Events flow through the pipeline as **wall-clock times** and become **absolute i
 
 ### Deduplication
 
-Events are deduplicated by `source_uid` (a unique ID from the source, stored in the `events` table with a unique index). When the same event appears in multiple sources (e.g., a concert on both the venue's calendar and Songkick), the first-seen version is kept.
+One build-time **confidence route** (in `scripts/ics_to_json.py`) decides Merge / Group / Separate for every cleaned listing and stores the result as `events.duplicate_group`. Consumers do not recompute grouping: the `deduplicated_events` materialized view, the main calendar, the dashboard tiles, saved picks, and the RSS feed all collapse from that one stored id. `source_uid` (unique per source, enforced by a unique index) drives UID-level de-duplication upstream in `combine_ics.py`; the route is the only authority on whether two *different* listings are one event. See [ADR 0013](docs/adr/0013-confidence-route-merge-group-separate.md).
 
 ## Business Rules
 

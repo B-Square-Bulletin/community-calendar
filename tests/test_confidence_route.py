@@ -777,6 +777,29 @@ class TestIcsBoundary:
         assert len(group_ids) == 1
         assert None not in group_ids
 
+    def test_artifact_omits_retired_cluster_id(self, tmp_path):
+        """#155: the build emits one grouping authority, not the dead column.
+
+        ``cluster_id`` was the legacy per-timeslot similarity index. Every
+        consumer now reads ``duplicate_group``, so the build must not write a
+        competing field into the artifact the loader upserts.
+        """
+        event = make_vevent(
+            "Solo Show",
+            "DTSTART:20261002T190000Z",
+            "DTEND:20261002T210000Z",
+            "uid-solo",
+        )
+        ics_path = self._write_ics(tmp_path, event)
+        out_path = tmp_path / "events.json"
+
+        events = ics_to_json(ics_path, out_path, future_only=False, city="bloomington")
+
+        assert events
+        for artifact_event in events:
+            assert "cluster_id" not in artifact_event
+            assert "duplicate_group" in artifact_event
+
 
 # ===========================================================================
 # Blast radius over the real built artifact

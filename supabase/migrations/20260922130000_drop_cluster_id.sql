@@ -1,27 +1,28 @@
--- Materialized view: deduplicated_events
--- Authoritative deduplicated read model. The confidence route (#150) stores one
--- Merge/Group/Separate decision per listing as events.duplicate_group; this view
--- groups by that stored decision and never recomputes similarity, location, or
--- grouping.
+-- #155: retire the legacy cluster_id column now that no consumer reads it.
 --
--- NULL isolation: a NULL duplicate_group means the route left the row alone and
--- it is its own group. PostgreSQL groups all NULLs together, so each NULL row is
--- keyed by a per-row value ('row:<id>') instead of by the NULL itself.
+-- `cluster_id` was the old per-timeslot similarity index produced by
+-- `ics_to_json.cluster_by_title_similarity` (retired in the same change). #153
+-- moved the client sort and the card border onto `duplicate_group`, #154 moved
+-- RSS, and the view has presented `duplicate_group` since #152. The column
+-- persisted only for the one-compatibility-build window; no consumer reads it,
+-- so this cleanup migration drops the column and recreates the authoritative
+-- view without it. Nothing downstream can fall back to a competing grouping
+-- key once the field is gone from storage and from the read model.
 --
--- Representative: the route persists duplicate_group_representative, so the
--- view presents that member's fields and id. There is no database-assigned
--- min(id) competing rule.
---
--- Refreshed after load-events runs so the app can query pre-deduplicated rows.
+-- The view is dropped before the column because the existing view definition
+-- selects `b.cluster_id`. Recreating it here keeps a single source of truth for
+-- the read model (the previous definition plus the column removal).
 
-DROP VIEW IF EXISTS deduplicated_events;
 DROP MATERIALIZED VIEW IF EXISTS deduplicated_events;
+
+ALTER TABLE events DROP COLUMN IF EXISTS cluster_id;
 
 CREATE MATERIALIZED VIEW deduplicated_events AS
 WITH base AS (
     SELECT
         e.*,
         COALESCE(e.duplicate_group, 'row:' || e.id::text) AS group_key,
+        -- The route representative sorts first so representative fields win.
         CASE
             WHEN e.duplicate_group IS NOT NULL
                 AND e.source_uid IS NOT DISTINCT FROM e.duplicate_group_representative
@@ -38,6 +39,9 @@ WITH base AS (
     WHERE e.source IS DISTINCT FROM 'poster_capture'
 ),
 name_union AS (
+    -- One entry per (group, name); the lowest position and the most
+    -- representative-contributing member win, so the representative's own
+    -- primary-first order leads the union.
     SELECT
         b.city,
         b.start_time,
@@ -136,12 +140,14 @@ LEFT JOIN name_agg n USING (city, start_time, group_key)
 LEFT JOIN url_agg u USING (city, start_time, group_key)
 ORDER BY r.start_time;
 
+-- Unique index required for REFRESH MATERIALIZED VIEW CONCURRENTLY.
 CREATE UNIQUE INDEX deduplicated_events_id_idx ON deduplicated_events (id);
 CREATE INDEX deduplicated_events_city_start_time_idx ON deduplicated_events (city, start_time);
 
 GRANT SELECT ON deduplicated_events TO anon, authenticated, service_role;
 
--- RPC used by the nightly build after load-events completes.
+-- RPC used by the nightly build after load-events completes. A failure here
+-- must fail the pipeline so consumers never read a stale group decision.
 CREATE OR REPLACE FUNCTION public.refresh_deduplicated_events()
 RETURNS void
 LANGUAGE plpgsql

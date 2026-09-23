@@ -957,92 +957,6 @@ def validate_route_result(result):
         )
 
 
-def cluster_by_title_similarity(events, threshold=0.85):
-    """Cluster events within same timeslot by title similarity.
-    Uses union-find to group similar titles, sorts clusters alphabetically.
-
-    Tuning
-    ------
-    Threshold controls how similar titles must be to cluster together.
-    Genuine duplicates (same event from different sources) score 0.98-1.0:
-      "One-On-One Tech Help" vs "Tech Help"                          → 1.000
-      "Vineyard Garden Wine Tasting" vs "Picnic Lunch and ..."       → 1.000
-      "Bilingual Family Storytime" vs "Family Storytime"             → 1.000
-
-    False matches (different events sharing common words) score 0.56-0.78:
-      "Community Coffee Tasting" vs "Community Yoga"                 → 0.783
-      "BiblioBus at ... Farmers Market" vs "VALLEJO FARMERS MARKET"  → 0.778
-      "Mushroom Hike" vs "Mushroom Identification"                   → 0.762
-      "Karaoke Sundays" vs "Sabroso Sundays"                        → 0.733
-      "Honky Tonk Open Mic" vs "Open Mic Night"                     → 0.727
-
-    Threshold of 0.85 cleanly separates the two groups.
-    """
-    from collections import defaultdict
-
-    # Group by timeslot
-    slots = defaultdict(list)
-    slot_order = []
-    for e in events:
-        key = e.get("start_time", "") or ""
-        if key not in slots:
-            slot_order.append(key)
-        slots[key].append(e)
-
-    result = []
-    for key in slot_order:
-        group = slots[key]
-        if len(group) <= 1:
-            result.extend(group)
-            continue
-
-        # Union-find
-        parent = list(range(len(group)))
-
-        def find(x, parent=parent):
-            while parent[x] != x:
-                parent[x] = parent[parent[x]]
-                x = parent[x]
-            return x
-
-        def union(a, b, parent=parent):
-            parent[find(a, parent)] = find(b, parent)
-
-        for i in range(len(group)):
-            for j in range(i + 1, len(group)):
-                ta = group[i].get("title", "")
-                tb = group[j].get("title", "")
-                if not ta or not tb or token_set_similarity(ta, tb) < threshold:
-                    continue
-                # Don't cluster events at different locations
-                la = group[i].get("location", "") or ""
-                lb = group[j].get("location", "") or ""
-                if la and lb and la != lb:
-                    continue
-                union(i, j)
-
-        clusters = defaultdict(list)
-        for i in range(len(group)):
-            clusters[find(i)].append(group[i])
-
-        for c in clusters.values():
-            c.sort(key=lambda e: (e.get("title", "") or "").lower())
-
-        sorted_clusters = sorted(
-            clusters.values(), key=lambda c: (c[0].get("title", "") or "").lower()
-        )
-
-        cluster_idx = 0
-        for cluster in sorted_clusters:
-            if len(cluster) > 1:
-                for e in cluster:
-                    e["cluster_id"] = cluster_idx
-                cluster_idx += 1
-            result.extend(cluster)
-
-    return result
-
-
 def ics_to_json(ics_file, output_file=None, future_only=True, city=None, diagnostics_file=None):
     """Convert an ICS file to JSON format for Supabase.
 
@@ -1124,9 +1038,6 @@ def ics_to_json(ics_file, output_file=None, future_only=True, city=None, diagnos
             "source_id": source_id or "",
             "source_uid": uid or "",
             "source_urls": source_urls if source_urls else None,
-            # Kept as an unused passthrough for the one compatibility build;
-            # duplicate_group is the only active grouping authority.
-            "cluster_id": None,
             "ics_categories": ics_categories if ics_categories else None,
             "image_url": image_url,
             "all_day": all_day,
