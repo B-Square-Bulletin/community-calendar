@@ -523,19 +523,18 @@ def instant_epoch(event):
 def structured_source_names(event):
     """Structured source names for a listing.
 
-    Prefers the per-source URL map (already structured). A single source string
-    is accepted as one opaque name; a comma-joined legacy string is never split
-    back into names, because that text is ambiguous.
+    A single, unambiguous ``source`` string is the name. Only a comma-joined
+    (ambiguous) string defers to the per-source URL map's keys, because that
+    text can never be split safely. The URL map keys come from ICS assembly and
+    can be slug fallbacks, so they never override a lone human-readable name.
     """
-    names: list[str] = []
-    urls = event.get("source_urls")
-    if isinstance(urls, dict):
-        names = [name for name in urls if name]
-    if names:
-        return names
     source = (event.get("source") or "").strip()
-    # A lone source string is one opaque name. A comma-joined legacy string is
-    # never split back into names, because that text is ambiguous.
+    if source and "," not in source:
+        return [source]
+    urls = event.get("source_urls")
+    url_names = [name for name in urls if name] if isinstance(urls, dict) else []
+    if url_names:
+        return url_names
     return [source] if source else []
 
 
@@ -558,7 +557,12 @@ def _group_id(source_uids):
 
 
 def _fold_sources(members):
-    """Union member sources and URLs, primaries before aggregators."""
+    """Union member sources and URLs into ordered names, primaries first.
+
+    Returns the compatibility ``source`` string, the per-name URL map (or None
+    when no member has a URL), and the ordered structured names list so callers
+    can persist the structured decision instead of re-splitting it later.
+    """
     names: list[str] = []
     urls: dict[str, str] = {}
     for member in members:
@@ -578,7 +582,11 @@ def _fold_sources(members):
     primaries = sorted(name for name in names if not is_aggregator(name))
     aggregators = sorted(name for name in names if is_aggregator(name))
     ordered = primaries + aggregators
-    return ", ".join(ordered), ({name: urls[name] for name in ordered if name in urls} or None)
+    return (
+        ", ".join(ordered),
+        ({name: urls[name] for name in ordered if name in urls} or None),
+        ordered,
+    )
 
 
 def confidence_route(
@@ -711,6 +719,7 @@ def confidence_route(
         components[group_find(position)].append(position)
 
     survivor_group: dict[int, str | None] = dict.fromkeys(survivors)
+    group_representative: dict[str, str] = {}
     group_members: dict[str, list[str]] = {}
     observed_max_group_size = 0
     for component in components.values():
@@ -720,6 +729,12 @@ def confidence_route(
         group_id = _group_id(member_uids)
         group_members[group_id] = sorted(member_uids)
         observed_max_group_size = max(observed_max_group_size, len(component))
+        representative_position = min(
+            component, key=lambda position: _survivor_sort_key(identified[survivors[position]])
+        )
+        group_representative[group_id] = identified[survivors[representative_position]][
+            "source_uid"
+        ]
         for position in component:
             survivor_group[survivors[position]] = group_id
 
@@ -732,6 +747,8 @@ def confidence_route(
         if not (event.get("source_uid") or "").strip():
             surfaced = dict(event)
             surfaced["duplicate_group"] = None
+            surfaced["duplicate_group_representative"] = None
+            surfaced["source_names"] = structured_source_names(event)
             result_events.append(surfaced)
             outcomes.append(
                 RouteOutcome(
@@ -751,14 +768,23 @@ def confidence_route(
             surfaced = dict(identified[index])
             if merged_members:
                 members = [identified[member] for member in merge_classes[merge_find(index)]]
-                source, source_urls = _fold_sources(members)
+                source, source_urls, source_names = _fold_sources(members)
                 surfaced["source"] = source
                 surfaced["source_urls"] = source_urls
-            surfaced["duplicate_group"] = survivor_group.get(index)
+            else:
+                source_names = structured_source_names(identified[index])
+            surfaced["source_names"] = source_names
+            group_id = survivor_group.get(index)
+            surfaced["duplicate_group"] = group_id
+            # The route's canonical representative for the group; None for a
+            # Separate row, where the row is its own group.
+            surfaced["duplicate_group_representative"] = (
+                group_representative.get(group_id) if group_id else None
+            )
             result_events.append(surfaced)
             if merged_members:
                 outcome = "merge"
-            elif survivor_group.get(index):
+            elif group_id:
                 outcome = "group"
             else:
                 outcome = "separate"
@@ -766,7 +792,7 @@ def confidence_route(
                 RouteOutcome(
                     source_uid=source_uid,
                     outcome=outcome,
-                    duplicate_group=survivor_group.get(index),
+                    duplicate_group=group_id,
                     survivor_uid=None,
                     normalized_title=normalized[index],
                     merged_from=tuple(sorted(merged_members)),
@@ -908,6 +934,22 @@ def validate_route_result(result):
         instants = {instant_epoch(input_by_uid[uid]) for uid in members if uid in input_by_uid}
         if len(instants) > 1:
             violations.append(f"group {group_id} spans multiple instants")
+        member_set = set(members)
+        representatives = {
+            event.get("duplicate_group_representative")
+            for event in result.events
+            if event.get("duplicate_group") == group_id
+        }
+        if len(representatives) != 1 or not representatives <= member_set:
+            violations.append(
+                f"group {group_id} has no single member representative "
+                f"(declared {sorted(str(rep) for rep in representatives)})"
+            )
+    for event in result.events:
+        if event.get("duplicate_group") is None and event.get("duplicate_group_representative"):
+            violations.append(
+                f"separate row {event.get('source_uid')} declares a group representative"
+            )
 
     if violations:
         raise RouteInvariantError(
@@ -1089,6 +1131,11 @@ def ics_to_json(ics_file, output_file=None, future_only=True, city=None, diagnos
             "image_url": image_url,
             "all_day": all_day,
             "duplicate_group": None,
+            # The route fills these in; they persist the structured decision so
+            # the view never re-splits ambiguous comma-joined source text and can
+            # pick the route's canonical representative.
+            "source_names": None,
+            "duplicate_group_representative": None,
         }
         events.append(event)
 

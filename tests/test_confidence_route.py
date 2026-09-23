@@ -377,6 +377,107 @@ class TestGroup:
 
 
 # ===========================================================================
+# Pure route: persisted representative and structured source names (#152)
+# ===========================================================================
+
+
+class TestRoutePersistedContract:
+    """The route persists the structured decision the view and RSS consume.
+
+    ``duplicate_group_representative`` and ``source_names`` are what let the
+    database view pick the route's canonical representative and union source
+    names without splitting ambiguous comma-joined text.
+    """
+
+    def test_group_representative_is_the_route_priority_survivor(self):
+        events = [
+            ev(
+                "zzz-aggregator",
+                "Wine & Paint Saturday Night",
+                source="WFIU Community Calendar",
+                url="http://agg",
+                source_urls={"WFIU Community Calendar": "http://agg"},
+            ),
+            ev(
+                "aaa-primary",
+                "Wine & Paint Saturdays",
+                source="IU Jacobs School of Music",
+                url="http://primary",
+                source_urls={"IU Jacobs School of Music": "http://primary"},
+            ),
+        ]
+        result = confidence_route(events)
+        reps = {e["source_uid"]: e.get("duplicate_group_representative") for e in result.events}
+        assert reps == {"aaa-primary": "aaa-primary", "zzz-aggregator": "aaa-primary"}
+
+    def test_group_representative_is_input_order_independent(self):
+        forward = [
+            ev("a", "Wine & Paint Saturday Night", source="Source A"),
+            ev("b", "Wine & Paint Saturdays", source="Source B"),
+        ]
+        backward = [forward[1], forward[0]]
+        first = {
+            e["source_uid"]: e["duplicate_group_representative"]
+            for e in confidence_route(forward).events
+        }
+        second = {
+            e["source_uid"]: e["duplicate_group_representative"]
+            for e in confidence_route(backward).events
+        }
+        assert first == second
+        assert first["a"] == first["b"] == "a"
+
+    def test_separate_rows_carry_no_representative(self):
+        events = [
+            ev("a", "Trivia Night", location="The Back Door"),
+            ev("b", "Yoga in the Park", location="Schulz Museum"),
+        ]
+        result = confidence_route(events)
+        assert all(e["duplicate_group"] is None for e in result.events)
+        assert all(e["duplicate_group_representative"] is None for e in result.events)
+
+    def test_merged_survivor_carries_ordered_structured_source_names(self):
+        events = [
+            ev(
+                "iu",
+                "The Cook-Off",
+                location="Musical Arts Center",
+                source="IU Jacobs School of Music",
+                source_urls={"IU Jacobs School of Music": "http://iu"},
+            ),
+            ev(
+                "wfiu",
+                "The Cook-Off",
+                location="Musical Arts Center",
+                source="WFIU Community Calendar",
+                source_urls={"WFIU Community Calendar": "http://wfiu"},
+            ),
+        ]
+        result = confidence_route(events)
+        assert len(result.events) == 1
+        survivor = result.events[0]
+        assert survivor["source_uid"] == "iu"
+        # Primaries keep the route order ahead of aggregators, and the merged
+        # survivor's names come from the folded component, not the source text.
+        assert survivor["source_names"] == ["IU Jacobs School of Music", "WFIU Community Calendar"]
+
+    def test_grouped_member_carries_its_structured_source_names_unsplit(self):
+        events = [
+            ev(
+                "a",
+                "Wine & Paint Saturday Night",
+                source="Taste, Inc.",
+                source_urls={"Taste, Inc.": "http://t"},
+            ),
+            ev("b", "Wine & Paint Saturdays", source="Other"),
+        ]
+        result = confidence_route(events)
+        by = {e["source_uid"]: e for e in result.events}
+        assert by["a"]["duplicate_group"] is not None
+        assert by["a"]["source_names"] == ["Taste, Inc."]
+
+
+# ===========================================================================
 # Pure route: Separate authority and no propagation
 # ===========================================================================
 
@@ -530,6 +631,30 @@ class TestInvariants:
         ]
         validate_route_result(confidence_route(events))
 
+    def test_group_without_a_single_member_representative_fails_closed(self):
+        events = [
+            ev("a", "Wine & Paint Saturday Night", location="Venue"),
+            ev("b", "Wine & Paint Saturdays", location="Venue"),
+        ]
+        result = confidence_route(events)
+        for event in result.events:
+            event["duplicate_group_representative"] = None
+        with pytest.raises(RouteInvariantError) as excinfo:
+            validate_route_result(result)
+        assert "representative" in str(excinfo.value)
+
+    def test_representative_that_is_not_a_member_fails_closed(self):
+        events = [
+            ev("a", "Wine & Paint Saturday Night", location="Venue"),
+            ev("b", "Wine & Paint Saturdays", location="Venue"),
+        ]
+        result = confidence_route(events)
+        for event in result.events:
+            event["duplicate_group_representative"] = "ghost"
+        with pytest.raises(RouteInvariantError) as excinfo:
+            validate_route_result(result)
+        assert "representative" in str(excinfo.value)
+
 
 # ===========================================================================
 # Location and source primitives
@@ -563,6 +688,21 @@ class TestPrimitives:
             source_urls={"Primary": "http://p", "Secondary": "http://s"},
         )
         assert structured_source_names(event) == ["Primary", "Secondary"]
+
+    def test_single_source_name_wins_over_a_divergent_url_map_key(self):
+        """A lone source string is the name; only a comma-joined string defers.
+
+        The URL map's keys come from the ICS-assembly fallback name, which can
+        be a slug ("Events Livewhale 135") while the stored ``source`` is the
+        human name. Preferring the map key would surface the slug in the view.
+        """
+        event = ev(
+            "a",
+            "Title",
+            source="IU Hamilton Lugar School",
+            source_urls={"Events Livewhale 135": "http://x"},
+        )
+        assert structured_source_names(event) == ["IU Hamilton Lugar School"]
 
 
 # ===========================================================================

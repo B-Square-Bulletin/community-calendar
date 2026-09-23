@@ -64,6 +64,7 @@ supabase test db supabase/tests/
 - `tests/test_validate_pr_feeds.py` - PR feed/scraper registration validation against the DB-first contract
 - `tests/test_add_scraper.py` - DB-first registration helper: smoke-test bounds are environment-only (the registered command stays unbounded)
 - `supabase/tests/test_refresh_source_names.sql` - pgTAP database tests for `refresh_source_names()`
+- `supabase/tests/test_deduplicated_events.sql` - pgTAP tests for route persistence columns and the `deduplicated_events` view (group collapse, NULL isolation, structured source names, representative)
 - `supabase/tests/README.md` - database-test-specific setup, workflow, and troubleshooting
 
 ## Continuous Integration
