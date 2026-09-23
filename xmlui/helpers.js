@@ -999,9 +999,26 @@ function uniqueSourceNames(source) {
 
 // Extract a short readable snippet from an event description (for always-visible preview)
 // Junk line patterns are hardcoded here; see docs/admin-interface.md for plan to make configurable
-function formatSourceLinks(source, sourceUrls, hiddenSources) {
-  if (!source) return '';
-  var sources = uniqueSourceNames(source);
+function formatSourceLinks(source, sourceUrls, hiddenSources, sourceNames) {
+  // Prefer the view's structured `source_names`: a human source name may contain
+  // a comma, so splitting the compatibility `source` string would fabricate
+  // names and reorder them (spec amendment L402).
+  var sources;
+  if (Array.isArray(sourceNames) && sourceNames.length) {
+    var seen = new Set();
+    sources = sourceNames
+      .map(function (s) {
+        return String(s).trim();
+      })
+      .filter(function (s) {
+        if (!s || seen.has(s)) return false;
+        seen.add(s);
+        return true;
+      });
+  } else {
+    sources = uniqueSourceNames(source);
+  }
+  if (!sources.length) return '';
   // Filter out hidden sources, but keep all if all would be removed
   if (hiddenSources && hiddenSources.length) {
     var visible = sources.filter(function (s) {
@@ -1373,15 +1390,19 @@ function dedupeEvents(events) {
     // up every member; fall back to the row id for raw rows.
     const seedIds =
       Array.isArray(e.merged_ids) && e.merged_ids.length ? e.merged_ids.slice() : [e.id];
+    // The view's `source_names` is structured and already ordered by the route's
+    // representative rule. Only a raw row without it falls back to splitting the
+    // legacy comma-joined `source` string (spec amendment L402).
+    const structured =
+      Array.isArray(e.source_names) && e.source_names.length
+        ? e.source_names.map((s) => String(s).trim()).filter(Boolean)
+        : null;
+    const names = structured || uniqueSourceNames(e.source);
     if (!groups[key]) {
       groups[key] = {
         ...e,
-        sources: new Set(
-          (e.source || '')
-            .split(',')
-            .map((s) => s.trim())
-            .filter(Boolean)
-        ),
+        sourceNames: names.slice(),
+        structuredSources: structured != null,
         source_urls: Object.assign({}, e.source_urls || {}),
         mergedIds: seedIds,
       };
@@ -1390,12 +1411,11 @@ function dedupeEvents(events) {
       seedIds.forEach((id) => {
         if (groups[key].mergedIds.indexOf(id) < 0) groups[key].mergedIds.push(id);
       });
-      // Add individual sources (split comma-separated values before deduping)
-      (e.source || '')
-        .split(',')
-        .map((s) => s.trim())
-        .filter(Boolean)
-        .forEach((s) => groups[key].sources.add(s));
+      // Union member source names, representative row's order first
+      names.forEach((s) => {
+        if (groups[key].sourceNames.indexOf(s) < 0) groups[key].sourceNames.push(s);
+      });
+      groups[key].structuredSources = groups[key].structuredSources || structured != null;
       // Union per-source links so every member source stays reachable
       Object.assign(groups[key].source_urls, e.source_urls || {});
       // Prefer non-empty values for other fields
@@ -1405,33 +1425,42 @@ function dedupeEvents(events) {
       if (!groups[key].rrule && e.rrule) groups[key].rrule = e.rrule;
     }
   });
-  // Convert sources Set to comma-separated string, with authoritative source first.
-  // Known aggregators sort to the end; among non-aggregators, a source whose name
-  // appears in the event location is promoted to the front.
-  // Filter mergedIds to only include numeric IDs (exclude synthetic enrichment IDs)
+  // Render the ordered names as the compatibility comma string. When the names
+  // are structured the view's order is authoritative; only the raw-row fallback
+  // applies the legacy aggregator/location ordering. Filter mergedIds to only
+  // include numeric IDs (exclude synthetic enrichment IDs).
   let result = Object.values(groups)
     .map((e) => {
-      const sourcesArr = Array.from(e.sources).sort((a, b) => {
-        var aAgg = AGGREGATOR_SOURCES.has(a) ? 1 : 0;
-        var bAgg = AGGREGATOR_SOURCES.has(b) ? 1 : 0;
-        if (aAgg !== bAgg) return aAgg - bAgg;
-        return a.localeCompare(b);
-      });
-      if (e.location) {
-        // Among non-aggregators, promote a source whose name appears in the location
-        const authIdx = sourcesArr.findIndex(
-          (s) => !AGGREGATOR_SOURCES.has(s) && sourceMatchesLocation(s, e.location)
-        );
-        if (authIdx > 0) {
-          const [auth] = sourcesArr.splice(authIdx, 1);
-          sourcesArr.unshift(auth);
+      let sourcesArr;
+      if (e.structuredSources) {
+        sourcesArr = e.sourceNames.slice();
+      } else {
+        sourcesArr = e.sourceNames.slice().sort((a, b) => {
+          var aAgg = AGGREGATOR_SOURCES.has(a) ? 1 : 0;
+          var bAgg = AGGREGATOR_SOURCES.has(b) ? 1 : 0;
+          if (aAgg !== bAgg) return aAgg - bAgg;
+          return a.localeCompare(b);
+        });
+        if (e.location) {
+          // Among non-aggregators, promote a source whose name appears in the location
+          const authIdx = sourcesArr.findIndex(
+            (s) => !AGGREGATOR_SOURCES.has(s) && sourceMatchesLocation(s, e.location)
+          );
+          if (authIdx > 0) {
+            const [auth] = sourcesArr.splice(authIdx, 1);
+            sourcesArr.unshift(auth);
+          }
         }
       }
-      return {
+      const out = {
         ...e,
         source: sourcesArr.join(', '),
+        source_names: sourcesArr,
         mergedIds: e.mergedIds.filter((id) => typeof id === 'number' || /^\d+$/.test(id)),
       };
+      delete out.sourceNames;
+      delete out.structuredSources;
+      return out;
     })
     .sort((a, b) => {
       const timeCmp = (a.start_time || '').localeCompare(b.start_time || '');

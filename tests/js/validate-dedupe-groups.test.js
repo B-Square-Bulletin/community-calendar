@@ -109,6 +109,63 @@ describe('dedupeEvents groups by the stored duplicate_group', () => {
   });
 });
 
+// The route keeps source names structured: a human source name may contain a
+// comma, so the client must fold the view's ordered `source_names` array rather
+// than re-splitting the compatibility `source` string. Splitting "Taste, Inc."
+// would fabricate two sources and let the client disagree with the view's
+// representative ordering (spec amendment L402).
+describe('dedupeEvents folds structured source_names', () => {
+  it('does not split a comma-containing source name', () => {
+    const out = window.dedupeEvents([
+      row({
+        id: 1,
+        source: 'Taste, Inc.',
+        source_names: ['Taste, Inc.'],
+        source_urls: { 'Taste, Inc.': 'https://taste.example/1' },
+      }),
+    ]);
+    expect(out).toHaveLength(1);
+    expect(out[0].source).toBe('Taste, Inc.');
+    expect(out[0].source_names).toEqual(['Taste, Inc.']);
+  });
+
+  it("preserves the view's representative order instead of re-sorting", () => {
+    const out = window.dedupeEvents([
+      row({
+        id: 1,
+        source: 'Zeta, Alpha',
+        source_names: ['Zeta', 'Alpha'],
+        source_urls: { Zeta: 'https://z.example', Alpha: 'https://a.example' },
+      }),
+    ]);
+    expect(out[0].source_names).toEqual(['Zeta', 'Alpha']);
+    expect(out[0].source).toBe('Zeta, Alpha');
+  });
+
+  it('keeps a comma-containing name intact through the card path', () => {
+    const out = window.dedupeEvents([
+      row({
+        id: 1,
+        source: 'Taste, Inc.',
+        source_names: ['Taste, Inc.'],
+        source_urls: { 'Taste, Inc.': 'https://taste.example/1' },
+      }),
+    ]);
+    const links = window.formatSourceLinks(
+      out[0].source,
+      out[0].source_urls,
+      [],
+      out[0].source_names
+    );
+    expect(links).toBe('Source: [Taste, Inc.](https://taste.example/1)');
+  });
+
+  it('falls back to splitting source for raw rows without source_names', () => {
+    const out = window.dedupeEvents([row({ id: 1, source: 'WFIU, Visit Bloomington' })]);
+    expect(out[0].source.split(', ').sort()).toEqual(['Visit Bloomington', 'WFIU']);
+  });
+});
+
 describe('clusterBorder derives its colour from the group id', () => {
   it('renders no border for a NULL group', () => {
     expect(window.clusterBorder(null, false)).toEqual('none');
@@ -194,6 +251,19 @@ describe('consumers read the stored decision from the view', () => {
     expect(tile).not.toContain('/rest/v1/events?');
     expect(tile).toMatch(/select=[^&']*\bduplicate_group\b/);
     expect(tile).toMatch(/select=[^&']*\bmerged_ids\b/);
+  });
+
+  it('the calendar and dashboard projections select structured source_names', () => {
+    // A consumer that only reads the comma-joined `source` must split it to get
+    // names back; selecting `source_names` lets the card render the view's
+    // ordered names without recovering them from ambiguous text (L402).
+    expect(readShipped('shell.js')).toMatch(/select=[^']*\bsource_names\b/);
+    expect(readShipped('components/FeedTile.xmlui')).toMatch(/select=[^&']*\bsource_names\b/);
+  });
+
+  it('the event card and pick editor pass structured source_names to the renderer', () => {
+    expect(readShipped('components/EventCard.xmlui')).toContain('$props.event.source_names');
+    expect(readShipped('components/PickEditor.xmlui')).toContain('$props.event.source_names');
   });
 
   it('no longer carries the retired cluster_id field (#155)', () => {

@@ -704,7 +704,7 @@ window._xsLogs = [];
         return (
           window.SUPABASE_URL +
           '/rest/v1/deduplicated_events' +
-          '?select=id,title,start_time,end_time,url,location,description,source,transcript,source_urls,category,image_url,all_day,merged_ids,duplicate_group,city' +
+          '?select=id,title,start_time,end_time,url,location,description,source,source_names,transcript,source_urls,category,image_url,all_day,merged_ids,duplicate_group,city' +
           '&order=start_time.asc&limit=6000' +
           '&start_time=gte.' +
           window.fromDate +
