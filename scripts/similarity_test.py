@@ -20,9 +20,20 @@ Usage:
 
 import argparse
 import json
+import sys
 from collections import defaultdict
 from difflib import SequenceMatcher
 from pathlib import Path
+
+# The route's token-set similarity is the canonical implementation; this
+# harness imports it rather than keeping a second copy that could drift.
+_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(_ROOT))
+sys.path.insert(0, str(_ROOT / "scrapers"))
+
+from scripts.ics_to_json import (  # noqa: E402
+    token_set_similarity as _canonical_token_set_similarity,
+)
 
 
 def similarity_sequencematcher(a, b):
@@ -53,24 +64,7 @@ def similarity_levenshtein(a, b):
 
 def similarity_token_set(a, b):
     """Token set ratio: compare word sets, ignore order. 0-1 similarity."""
-    words_a = set(a.lower().split())
-    words_b = set(b.lower().split())
-    if not words_a and not words_b:
-        return 1.0
-    if not words_a or not words_b:
-        return 0.0
-    intersection = words_a & words_b
-    sorted_inter = " ".join(sorted(intersection))
-    remaining_a = " ".join(sorted(words_a - intersection))
-    remaining_b = " ".join(sorted(words_b - intersection))
-    combined_a = (sorted_inter + " " + remaining_a).strip()
-    combined_b = (sorted_inter + " " + remaining_b).strip()
-    ratios = [
-        SequenceMatcher(None, sorted_inter, combined_a).ratio() if combined_a else 1.0,
-        SequenceMatcher(None, sorted_inter, combined_b).ratio() if combined_b else 1.0,
-        SequenceMatcher(None, combined_a, combined_b).ratio(),
-    ]
-    return max(ratios)
+    return _canonical_token_set_similarity(a, b)
 
 
 ALGORITHMS = {
