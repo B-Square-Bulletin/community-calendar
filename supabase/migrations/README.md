@@ -66,3 +66,20 @@ Prefer staged rollouts:
 3. Remove old structure in a later migration.
 
 This keeps upstream and forked instances easier to sync.
+
+### Verified ordering: `cluster_id` retirement (#155)
+
+The `cluster_id` → `duplicate_group` transition ships as one deploy. The
+ordering is verified rather than staged across builds:
+
+1. `20260922120000_add_duplicate_group_and_route_view.sql` adds
+   `duplicate_group` and recreates the view around it.
+2. `20260922130000_drop_cluster_id.sql` then drops `cluster_id` and rebuilds
+   the view without it.
+
+Apply migrations **before** the scheduled build runs. The build emits only
+`duplicate_group`; the dropped column means a stale artifact carrying
+`cluster_id` fails closed at load rather than silently writing a competing
+key. `tests/test_cluster_id_transition.py` pins the ordering and the
+no-producer/no-loader path; `supabase/tests/test_cluster_id_retired.sql`
+pins the dropped column and view field.
