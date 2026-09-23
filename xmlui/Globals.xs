@@ -175,7 +175,7 @@ function togglePick(event) {
     apikey: appGlobals.supabasePublishableKey,
     Authorization: 'Bearer ' + authSession?.access_token
   };
-  const ids = event.mergedIds || [event.id];
+  const ids = window.eventMergedIds(event);
   const existing = Actions.callApi({
     method: 'get',
     url: appGlobals.supabaseUrl + '/rest/v1/picks?select=id&user_id=eq.' + authUser.id + '&event_id=in.(' + ids.join(',') + ')',
@@ -183,12 +183,14 @@ function togglePick(event) {
     invalidates: []
   });
   if (existing?.length > 0) {
-    // Unpicking: one-click remove pick + any enrichment for this event
-    Actions.callApi({
-      method: 'delete',
-      url: appGlobals.supabaseUrl + '/rest/v1/picks?id=eq.' + existing[0].id,
-      headers,
-      invalidates: []
+    // Unpicking: clear every pick in the group so the card goes dark everywhere
+    existing.forEach(function(pick) {
+      Actions.callApi({
+        method: 'delete',
+        url: appGlobals.supabaseUrl + '/rest/v1/picks?id=eq.' + pick.id,
+        headers,
+        invalidates: []
+      });
     });
     // Also delete any enrichment the user created for these event IDs
     ids.forEach(function(eid) {

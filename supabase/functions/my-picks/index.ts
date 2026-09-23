@@ -1,4 +1,5 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { dedupePickedEvents } from "./dedupe.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -174,7 +175,10 @@ Deno.serve(async (req) => {
           url,
           source,
           image_url,
-          city
+          city,
+          source_uid,
+          duplicate_group,
+          duplicate_group_representative
         )
       `)
       .eq("user_id", userId);
@@ -200,8 +204,9 @@ Deno.serve(async (req) => {
       });
     }
 
-    // Extract events from picks and merge with enrichments
-    const events = (picks || [])
+    // Extract events from picks and merge with enrichments. The feed renders
+    // one entry per stored duplicate group; NULL groups stay separate.
+    const pickedEvents = (picks || [])
       .map((p: any) => {
         const event = p.events;
         if (!event) return null;
@@ -217,8 +222,10 @@ Deno.serve(async (req) => {
           location: enrichment?.location || event.location,
         };
       })
-      .filter((e: any) => e !== null)
-      .sort((a: any, b: any) => a.start_time.localeCompare(b.start_time));
+      .filter((e: any) => e !== null);
+    const events = dedupePickedEvents(pickedEvents).sort((a: any, b: any) =>
+      a.start_time.localeCompare(b.start_time)
+    );
 
     // Return JSON or ICS based on format parameter
     if (format === "json") {

@@ -356,22 +356,32 @@
           assertDeepEqual(dedupeEvents([]), []);
         });
 
-        it('merges events with same title and start_time', () => {
+        it('merges events that share a stored duplicate_group', () => {
           clearDedupeCache();
           const events = [
-            { id: 1, title: 'Concert', start_time: '2026-02-01T19:00:00Z', source: 'Venue A' },
-            { id: 2, title: 'Concert', start_time: '2026-02-01T19:00:00Z', source: 'Venue B' }
+            { id: 1, title: 'Concert', start_time: '2026-02-01T19:00:00Z', source: 'Venue A', duplicate_group: 'cr1:x' },
+            { id: 2, title: 'Concert', start_time: '2026-02-01T19:00:00Z', source: 'Venue B', duplicate_group: 'cr1:x' }
           ];
           const result = dedupeEvents(events);
           assertEqual(result.length, 1);
           assertEqual(result[0].source, 'Venue A, Venue B');
         });
 
+        it('keeps same-title rows without a stored group separate', () => {
+          clearDedupeCache();
+          const events = [
+            { id: 1, title: 'Concert', start_time: '2026-02-01T19:00:00Z', source: 'Venue A', duplicate_group: null },
+            { id: 2, title: 'Concert', start_time: '2026-02-01T19:00:00Z', source: 'Venue B', duplicate_group: null }
+          ];
+          const result = dedupeEvents(events);
+          assertEqual(result.length, 2, 'A NULL group is one row is one group');
+        });
+
         it('tracks merged IDs', () => {
           clearDedupeCache();
           const events = [
-            { id: 1, title: 'Show', start_time: '2026-02-01T20:00:00Z', source: 'A' },
-            { id: 2, title: 'Show', start_time: '2026-02-01T20:00:00Z', source: 'B' }
+            { id: 1, title: 'Show', start_time: '2026-02-01T20:00:00Z', source: 'A', duplicate_group: 'cr1:y' },
+            { id: 2, title: 'Show', start_time: '2026-02-01T20:00:00Z', source: 'B', duplicate_group: 'cr1:y' }
           ];
           const result = dedupeEvents(events);
           assertDeepEqual(result[0].mergedIds, [1, 2]);
@@ -390,8 +400,8 @@
         it('prefers non-empty values for optional fields', () => {
           clearDedupeCache();
           const events = [
-            { id: 1, title: 'Show', start_time: '2026-02-01T20:00:00Z', source: 'A', url: null, location: 'Place' },
-            { id: 2, title: 'Show', start_time: '2026-02-01T20:00:00Z', source: 'B', url: 'http://example.com', location: null }
+            { id: 1, title: 'Show', start_time: '2026-02-01T20:00:00Z', source: 'A', url: null, location: 'Place', duplicate_group: 'cr1:z' },
+            { id: 2, title: 'Show', start_time: '2026-02-01T20:00:00Z', source: 'B', url: 'http://example.com', location: null, duplicate_group: 'cr1:z' }
           ];
           const result = dedupeEvents(events);
           assertEqual(result[0].url, 'http://example.com');
@@ -852,8 +862,8 @@
         it('carries rrule from enrichment event to merged result', () => {
           clearDedupeCache();
           const events = [
-            { id: 1, title: 'Circus jam', start_time: '2026-02-11T18:00:00Z', source: 'Bohemian' },
-            { id: 'enrichment-5-2026-02-11T18:00:00.000Z', title: 'Circus jam', start_time: '2026-02-11T18:00:00.000Z', source: 'Picks: jon', rrule: 'FREQ=WEEKLY;BYDAY=WE' }
+            { id: 1, title: 'Circus jam', start_time: '2026-02-11T18:00:00Z', source: 'Bohemian', duplicate_group: 'cr1:r' },
+            { id: 'enrichment-5-2026-02-11T18:00:00.000Z', title: 'Circus jam', start_time: '2026-02-11T18:00:00.000Z', source: 'Picks: jon', rrule: 'FREQ=WEEKLY;BYDAY=WE', duplicate_group: 'cr1:r' }
           ];
           const result = dedupeEvents(events);
           assertEqual(result.length, 1, 'Should merge into one event');
@@ -865,8 +875,8 @@
         it('does not overwrite existing rrule', () => {
           clearDedupeCache();
           const events = [
-            { id: 1, title: 'Test', start_time: '2026-02-11T18:00:00Z', source: 'A', rrule: 'FREQ=DAILY' },
-            { id: 2, title: 'Test', start_time: '2026-02-11T18:00:00Z', source: 'B', rrule: 'FREQ=WEEKLY;BYDAY=MO' }
+            { id: 1, title: 'Test', start_time: '2026-02-11T18:00:00Z', source: 'A', rrule: 'FREQ=DAILY', duplicate_group: 'cr1:s' },
+            { id: 2, title: 'Test', start_time: '2026-02-11T18:00:00Z', source: 'B', rrule: 'FREQ=WEEKLY;BYDAY=MO', duplicate_group: 'cr1:s' }
           ];
           const result = dedupeEvents(events);
           assertEqual(result[0].rrule, 'FREQ=DAILY', 'Should keep first rrule');
@@ -875,8 +885,8 @@
         it('merged event without rrule has no rrule', () => {
           clearDedupeCache();
           const events = [
-            { id: 1, title: 'Show', start_time: '2026-02-11T18:00:00Z', source: 'A' },
-            { id: 2, title: 'Show', start_time: '2026-02-11T18:00:00Z', source: 'B' }
+            { id: 1, title: 'Show', start_time: '2026-02-11T18:00:00Z', source: 'A', duplicate_group: 'cr1:t' },
+            { id: 2, title: 'Show', start_time: '2026-02-11T18:00:00Z', source: 'B', duplicate_group: 'cr1:t' }
           ];
           const result = dedupeEvents(events);
           assert(!result[0].rrule, 'Should have no rrule');

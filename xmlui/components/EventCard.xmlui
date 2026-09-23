@@ -14,7 +14,7 @@
     borderBottom="{layoutMode === 'multicol' ? '1px solid $color-surface-200' : 'none'}"
     borderRight="{layoutMode === 'multicol' ? '1px solid $color-surface-200' : 'none'}"
     border="{layoutMode === 'multicol' ? '1px solid $color-surface-200' : undefined}"
-    borderLeft="{window.clusterBorder($props.event.cluster_id, $props.filterTerm) || (layoutMode === 'multicol' ? '1px solid $color-surface-200' : 'none')}"
+    borderLeft="{window.clusterBorder($props.event.duplicate_group, $props.filterTerm) || (layoutMode === 'multicol' ? '1px solid $color-surface-200' : 'none')}"
   >
     <VStack gap="$space-0" padding="{layoutMode === 'multicol' ? '$space-1_5' : '$space-0_5 $space-1_5'}">
       <Text
@@ -143,8 +143,8 @@
           name="l-bookmark-filled"
           width="$space-4"
           height="$space-4"
-          tooltip="{(window.isEventPicked($props.event.mergedIds || $props.event.id, picksData) ? 'Remove from my picks' : 'Add to my picks') + ': ' + $props.event.title}"
-          color="{window.isEventPicked($props.event.mergedIds || $props.event.id, picksData) ? '$color-primary-500' : '$color-surface-300'}"
+          tooltip="{(window.isEventPicked(window.eventMergedIds($props.event), picksData) ? 'Remove from my picks' : 'Add to my picks') + ': ' + $props.event.title}"
+          color="{window.isEventPicked(window.eventMergedIds($props.event), picksData) ? '$color-primary-500' : '$color-surface-300'}"
           cursor="pointer"
           onClick="togglePick($props.event)"
         />

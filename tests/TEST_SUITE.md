@@ -65,6 +65,7 @@ supabase test db supabase/tests/
 - `tests/test_add_scraper.py` - DB-first registration helper: smoke-test bounds are environment-only (the registered command stays unbounded)
 - `supabase/tests/test_refresh_source_names.sql` - pgTAP database tests for `refresh_source_names()`
 - `supabase/tests/test_deduplicated_events.sql` - pgTAP tests for route persistence columns and the `deduplicated_events` view (group collapse, NULL isolation, structured source names, representative)
+- `supabase/functions/my-picks/dedupe_test.ts` - Deno tests for the saved-picks group collapse (one ICS entry per stored group, NULL isolation, canonical representative). Run with `deno test supabase/functions/my-picks/dedupe_test.ts`; edge-function tests are not yet wired into `make test` or CI.
 - `supabase/tests/README.md` - database-test-specific setup, workflow, and troubleshooting
 
 ## Continuous Integration

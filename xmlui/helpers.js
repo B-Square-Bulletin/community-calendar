@@ -472,10 +472,22 @@ function filterByDateWindow(events, windowOrStartISO, endISOOrOpts, maybeOpts) {
 window.filterByDateWindow = filterByDateWindow;
 
 // --- Cluster Colors ---
+// The border colour is derived from the route's opaque duplicate_group id, not
+// a positional cluster index: the id is stable across a build, so a grouped
+// card keeps the same colour while membership is unchanged. A NULL group is a
+// Separate row and gets no border.
 const CLUSTER_COLORS = ['#6b9bd2', '#7bc47f', '#d4a04a'];
-window.clusterBorder = function (clusterId, filtered) {
-  if (clusterId == null || filtered) return 'none';
-  return '3px solid ' + CLUSTER_COLORS[clusterId % CLUSTER_COLORS.length];
+function duplicateGroupColor(duplicateGroup) {
+  var s = String(duplicateGroup);
+  var h = 0;
+  for (var i = 0; i < s.length; i++) {
+    h = (h * 31 + s.charCodeAt(i)) | 0;
+  }
+  return CLUSTER_COLORS[Math.abs(h) % CLUSTER_COLORS.length];
+}
+window.clusterBorder = function (duplicateGroup, filtered) {
+  if (duplicateGroup == null || duplicateGroup === '' || filtered) return 'none';
+  return '3px solid ' + duplicateGroupColor(duplicateGroup);
 };
 
 // --- Image Resize (client-side, before upload) ---
@@ -1349,7 +1361,18 @@ function dedupeEvents(events) {
     // Normalize start_time to ISO string for consistent dedup across formats
     // e.g. '2026-02-11T18:00:00+00:00' and '2026-02-11T18:00:00.000Z' are the same instant
     const normalizedTime = e.start_time ? new Date(e.start_time).toISOString() : '';
-    const key = (e.title || '').trim().toLowerCase() + '|' + normalizedTime;
+    // The route's stored decision is authoritative. Two rows collapse only when
+    // they share a non-NULL duplicate_group; a NULL group means the route left
+    // the row alone, so the row id is its own key (never fall back to title).
+    const group =
+      e.duplicate_group != null && e.duplicate_group !== ''
+        ? 'g:' + e.duplicate_group
+        : 'r:' + e.id;
+    const key = group + '|' + normalizedTime;
+    // Seed membership from the view's merged_ids so a pick on the card lights
+    // up every member; fall back to the row id for raw rows.
+    const seedIds =
+      Array.isArray(e.merged_ids) && e.merged_ids.length ? e.merged_ids.slice() : [e.id];
     if (!groups[key]) {
       groups[key] = {
         ...e,
@@ -1359,23 +1382,27 @@ function dedupeEvents(events) {
             .map((s) => s.trim())
             .filter(Boolean)
         ),
-        mergedIds: [e.id],
+        source_urls: Object.assign({}, e.source_urls || {}),
+        mergedIds: seedIds,
       };
     } else {
       // Track all merged event IDs (for picks to work across sources)
-      groups[key].mergedIds.push(e.id);
+      seedIds.forEach((id) => {
+        if (groups[key].mergedIds.indexOf(id) < 0) groups[key].mergedIds.push(id);
+      });
       // Add individual sources (split comma-separated values before deduping)
       (e.source || '')
         .split(',')
         .map((s) => s.trim())
         .filter(Boolean)
         .forEach((s) => groups[key].sources.add(s));
+      // Union per-source links so every member source stays reachable
+      Object.assign(groups[key].source_urls, e.source_urls || {});
       // Prefer non-empty values for other fields
       if (!groups[key].url && e.url) groups[key].url = e.url;
       if (!groups[key].location && e.location) groups[key].location = e.location;
       if (!groups[key].description && e.description) groups[key].description = e.description;
       if (!groups[key].rrule && e.rrule) groups[key].rrule = e.rrule;
-      if (!groups[key].cluster_id && e.cluster_id) groups[key].cluster_id = e.cluster_id;
     }
   });
   // Convert sources Set to comma-separated string, with authoritative source first.
@@ -1409,15 +1436,16 @@ function dedupeEvents(events) {
     .sort((a, b) => {
       const timeCmp = (a.start_time || '').localeCompare(b.start_time || '');
       if (timeCmp !== 0) return timeCmp;
-      // Within same timeslot, group clustered events together by cluster_id, then title
-      const ca = a.cluster_id != null ? a.cluster_id : null;
-      const cb = b.cluster_id != null ? b.cluster_id : null;
-      if (ca != null && cb != null) {
-        if (ca !== cb) return ca - cb;
+      // Within the same instant, keep a group's row ahead of Separate rows and
+      // order deterministically by group id then title.
+      const ga = a.duplicate_group || '';
+      const gb = b.duplicate_group || '';
+      if (ga && gb) {
+        if (ga !== gb) return ga.localeCompare(gb);
         return (a.title || '').localeCompare(b.title || '');
       }
-      if (ca != null) return -1;
-      if (cb != null) return 1;
+      if (ga) return -1;
+      if (gb) return 1;
       return (a.title || '').localeCompare(b.title || '');
     });
 
@@ -1644,6 +1672,63 @@ function isEventPicked(mergedIds, picks) {
   // mergedIds can be an array (from dedupe) or a single ID
   const ids = Array.isArray(mergedIds) ? mergedIds : [mergedIds];
   return picks.some((p) => ids.some((id) => p.event_id == id));
+}
+
+// The complete membership of the card an event belongs to. Prefers the
+// client-computed camelCase `mergedIds`; otherwise reads the view's `merged_ids`
+// column; otherwise the event is its own single-member group. Picks and
+// unpicks route through here so one card covers every stored member.
+function eventMergedIds(event) {
+  if (!event) return [];
+  if (Array.isArray(event.mergedIds) && event.mergedIds.length) return event.mergedIds;
+  if (Array.isArray(event.merged_ids) && event.merged_ids.length) return event.merged_ids;
+  return event.id != null ? [event.id] : [];
+}
+
+// My Picks shows one row per stored Group, not one per picked member. Rows
+// without a group (NULL) stay separate. When several members of one group are
+// picked, the route's canonical representative wins so the displayed fields
+// match the card; ties fall back to the smallest pick id for determinism.
+// Cached by input identity so the List binding returns a stable reference
+// between renders (picks are replaced wholesale on refetch).
+var _dedupePicksLast = null;
+var _dedupePicksResult = null;
+function dedupePicks(picks) {
+  if (!Array.isArray(picks)) return [];
+  if (picks === _dedupePicksLast) return _dedupePicksResult;
+  var best = {};
+  var order = [];
+  picks.forEach(function (p) {
+    var ev = (p && p.events) || {};
+    var key =
+      ev.duplicate_group != null && ev.duplicate_group !== ''
+        ? 'g:' + ev.duplicate_group
+        : 'r:' + (ev.id != null ? ev.id : 'p:' + (p && p.id));
+    var candidate = {
+      isRep:
+        ev.duplicate_group_representative != null &&
+        ev.source_uid === ev.duplicate_group_representative
+          ? 0
+          : 1,
+      pickId: p && p.id != null ? Number(p.id) : 0,
+    };
+    if (!best[key]) {
+      best[key] = { pick: p, rank: candidate };
+      order.push(key);
+      return;
+    }
+    var cur = best[key].rank;
+    if (
+      candidate.isRep !== cur.isRep ? candidate.isRep < cur.isRep : candidate.pickId < cur.pickId
+    ) {
+      best[key] = { pick: p, rank: candidate };
+    }
+  });
+  _dedupePicksLast = picks;
+  _dedupePicksResult = order.map(function (key) {
+    return best[key].pick;
+  });
+  return _dedupePicksResult;
 }
 
 // Build Google Calendar URL for an event
@@ -2653,6 +2738,8 @@ if (typeof window !== 'undefined') {
 
   window.clearDedupeCache = clearDedupeCache;
   window.isEventPicked = isEventPicked;
+  window.eventMergedIds = eventMergedIds;
+  window.dedupePicks = dedupePicks;
   window.buildGoogleCalendarUrl = buildGoogleCalendarUrl;
   window.downloadEventICS = downloadEventICS;
   // Enrichment helpers
