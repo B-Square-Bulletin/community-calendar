@@ -35,6 +35,15 @@
       "details_fetched": 338,
       "postal_less": 8,
       "emitted": 642
+    },
+    {
+      "date": "2026-09-22",
+      "pages": 65,
+      "cards_fetched": 647,
+      "unique_detail_urls": 340,
+      "details_fetched": 340,
+      "postal_less": 8,
+      "emitted": 640
     }
   ]
 }
