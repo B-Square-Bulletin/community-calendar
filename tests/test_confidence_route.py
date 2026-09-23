@@ -11,6 +11,7 @@ trap set) and from independently computed token-set scores, so a change in the
 route's internals cannot make a test pass by construction.
 """
 
+import gzip
 import json
 import sys
 from pathlib import Path
@@ -36,7 +37,19 @@ from scripts.ics_to_json import (
 )
 from tests.helpers import VTIMEZONE_LA, make_ics, make_vevent
 
-FIXTURE = Path(__file__).parent / "fixtures/confidence_route/bloomington_2026-09-21_27.json"
+# The complete production Bloomington artifact (``origin/archive``,
+# ``cities/bloomington/events.json``) projected to the fields the route reads
+# and gzipped to keep the repo small. The spec's blast-radius decision
+# (spec-150 L311) asks for the full artifact, not a one-week slice, so the
+# deletion and chain-explosion invariants are credible over the real corpus.
+FIXTURE = Path(__file__).parent / "fixtures/confidence_route/bloomington_production_events.json.gz"
+
+# Frozen-fixture facts. The input count proves the fixture is the whole
+# artifact (not a slice). The observed component ceiling pins the structural
+# blast radius: merge/group *volumes* are recorded, not pinned (spec amendment
+# L408), but a chain explosion must fail loudly rather than drift unnoticed.
+FIXTURE_INPUT_COUNT = 8545
+FIXTURE_OBSERVED_MAX_GROUP_SIZE = 4
 
 
 # ---------------------------------------------------------------------------
@@ -875,25 +888,40 @@ class TestIcsBoundary:
 
 
 class TestBlastRadius:
-    def test_real_fixture_route_invariants(self):
-        """Route the real (sliced) artifact; fail loudly on any invariant breach.
+    def test_full_artifact_route_invariants(self):
+        """Route the whole production artifact; fail loudly on any invariant breach.
 
-        The fixture is a one-week slice of the production Bloomington
-        ``events.json`` (1,029 listings) kept small enough to commit. It
-        exercises real merge/group pairs, so a regression that deletes a row
-        without an exact-title survivor or explodes a similarity chain fails
-        here rather than in production.
+        The spec's blast-radius decision (spec-150 L311) runs over the built
+        ``events.json``, not a sampled slice: over the full corpus a regression
+        that deletes a row without an exact-title survivor, or that lets a
+        similarity chain explode, is real rather than extrapolated. The fixture
+        is the production Bloomington artifact from ``origin/archive`` (all
+        8,545 listings) projected to the fields the route reads and gzipped.
+
+        Baseline recorded 2026-09-22 (see the ticket notes): 90 merge classes,
+        91 deleted rows, 140 groups, 285 grouped members, 8,082 separate, 0
+        missing identity, 0 unparseable starts, 16,655 comparisons, maximum
+        component size 4.
         """
-        events = json.loads(FIXTURE.read_text())
-        assert events and all(event.get("source_uid") for event in events)
+        with gzip.open(FIXTURE, "rt", encoding="utf-8") as handle:
+            events = json.load(handle)
+
+        # Prove the fixture is the full artifact rather than a slice.
+        assert len(events) == FIXTURE_INPUT_COUNT
+        assert all(event.get("source_uid") for event in events)
 
         result = confidence_route(events)
         validate_route_result(result)
 
         diagnostics = result.diagnostics
         assert diagnostics["version"] == ROUTE_VERSION
+        assert diagnostics["missing_identity"] == 0
         assert diagnostics["merge_deleted"] >= 1
         assert diagnostics["groups"] >= 1
+        # A component larger than the recorded baseline means a chain (or an
+        # all-day bucket) grew; fail loudly instead of silently widening the
+        # blast radius. The hard build budget still bounds it below.
+        assert diagnostics["max_group_size"] <= FIXTURE_OBSERVED_MAX_GROUP_SIZE
         assert diagnostics["max_group_size"] <= ROUTE_MAX_GROUP_SIZE
         assert diagnostics["comparisons"] <= ROUTE_MAX_COMPARISONS
 
