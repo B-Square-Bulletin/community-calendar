@@ -44,10 +44,52 @@
     {
       "title": "Review the work against the spec",
       "description": "Run the `code-review` skill over `git diff b188ccd379923e2286e152c0dfdbc8ce98cc22cf...HEAD` (the diff since this scope was seeded) against the spec at `.scratch/150-dedup-confidence-route/spec-150.md`, reviewing the implementation of #150 and its sub-tickets. Run the findings through `receiving-code-review`, then append each worthwhile finding as a new item with no `reference`, `hand_off: false`, and a `priority` greater than this item's. Write every remaining finding and every outstanding hand-off item into this item's `notes`. The HITL item (#156) is placed after this review by design, not by oversight: a person approves the production build only once the review findings are resolved, so this review is the last gating item before the hand-off.",
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "Ran the code-review skill over `git diff b188ccd379923e2286e152c0dfdbc8ce98cc22cf...HEAD` (5 commits, 31 files) against `.scratch/150-dedup-confidence-route/spec-150.md`, with the Standards and Spec axes as parallel sub-agents; verified every finding against the code (read/grep) and ran the set through receiving-code-review. Gate green on this commit: `make check` = 305 pytest, 240 vitest, ruff + all four type checkers clean. Accepted findings appended as new items with no reference, hand_off false, priorities 7-12: (7) combine_ics.dedupe_cross_source still runs a title+date pre-route merge, so a destructive fuzzy layer survives upstream of the audited exact-title band (spec L105); (8) the location guard implements only US-state incompatibility, not the amendment's city-token rule, so two same-state cities sharing a street number and tokens compare compatible and could Merge (spec amendment L401); (9) the client still splits and reorders comma-joined source text and shell.js omits source_names, violating \"source names are never recovered by splitting ambiguous comma-separated text\" and the single-representative rule (L402/L388); (10) the cluster_id consumer switch and drop migration ship together, collapsing the one-compatibility-build window the spec required (L409); (11) the blast-radius test uses a 1,029-listing slice, not the spec's 8,573-event full artifact, and records no full-artifact baseline (L311); (12) docs contradict the code (CONTEXT.md group-id format `cr1:<hash>` vs the emitted `cr1-<hash>`; dedupeEvents header still says same title + start_time; fixtures README omits the confidence_route fixture). Findings evaluated and NOT ticketed, with reasoning: RSS render_item still appends `Source: {source}` to its description but the line is identical at the fixed point b188ccd (pre-existing, not introduced here) and AGENTS.md's rule addresses stored event descriptions feeding a UI that renders source separately, while the RSS reader has no separate source element; Speculative Generality on the guard options is rejected because Testing Decisions explicitly require each guard to change the outcome when disabled and the amendments require explicit guard defaults; Divergent Change / moving the route to its own module is rejected because spec L126 says \"No new module\"; Middle Man (clean_title is a pass-through of clean_text) and Primitive Obsession (stringly outcome/group id) are minor judgement calls recorded here; the full deduplicated_events definition repeated across migrations and DDL is accepted as inherent to self-contained migrations plus DDL-as-documentation; and the duplicated group-key literal across client/RSS/SQL is inherent to three runtimes, with its substantive part (the client's competing source ordering) covered by item 9. Outstanding hand-off item for the human: #156 \"HITL: Deploy, observe, and approve the first production build\" (priority 100, hand_off true) gates production rollout, not completion of this scope.",
       "reference": ".scratch/150-dedup-confidence-route/spec-150.md",
       "priority": 6
+    },
+    {
+      "title": "Retire the pre-route title-based merge in combine_ics",
+      "description": "Spec-150 line 105: \"combine_ics.dedupe_cross_source's title-based passes are retired; combine_ics keeps only UID-level de-duplication and ICS assembly\", and L63/L190 make the route the one place that decides whether two different listings are one event. scripts/combine_ics.py is untouched: dedupe_cross_source(uid_deduped, input_dir) still runs its title+date merge (combine_ics.py:999, invoked by generate-calendar.yml) before the route, so a destructive fuzzy merge survives upstream of the audited exact-title band. Done when: combine_ics keeps only UID-level de-duplication and ICS assembly; its tests cover UID-level dedup only; and an integration test demonstrates no title-based deletion happens before the confidence route. Record the decision and evidence in the item notes.",
+      "passes": false,
+      "notes": "",
+      "priority": 7
+    },
+    {
+      "title": "Add the amendment's city-token location incompatibility",
+      "description": "Spec-150 review amendment line 401 requires location comparison to include \"explicit incompatibility for differing city tokens.\" scripts/ics_to_json.py::_locations_compatible implements only US-state incompatibility (_US_STATE_TOKENS) plus shared-token/street-number matching, so two same-state cities whose locations share a street name and number (e.g. \"100 Main St, Bloomington, IN\" vs \"100 Main St, Indianapolis, IN\") still compare compatible and an exact-title Merge could delete one. Done when: differing city/town tokens are explicitly incompatible; a fixture pins two same-state, same-street-number listings as Separate (not Merge); and the existing both-present vs or-empty location tests still pass. Keep the rule deterministic text-only, with no geocoding or network lookup.",
+      "passes": false,
+      "notes": "",
+      "priority": 8
+    },
+    {
+      "title": "Consume structured source_names in the client",
+      "description": "Spec-150 amendment line 402: source names stay structured while routing and aggregating and \"source names are never recovered by splitting ambiguous comma-separated text\"; L388 requires all consumers to use the same deterministic representative rather than a competing rule. xmlui/helpers.js::dedupeEvents still does (e.source || '').split(',') and re-sorts sources with its own aggregator/location heuristic, and xmlui/shell.js's deduplicated_events projection omits source_names, so a human source name containing a comma is split and re-ordered and the card can disagree with the view. Done when: shell.js selects source_names; dedupeEvents folds the view's ordered source_names instead of splitting source; the client's source order matches the view's representative ordering; and a vitest pins a comma-containing source name surviving unmangled through the card path.",
+      "passes": false,
+      "notes": "",
+      "priority": 9
+    },
+    {
+      "title": "Verify the cluster_id compatibility window and drop ordering",
+      "description": "Spec-150 review amendment line 409: \"cluster_id remains readable for one compatibility build while all consumers move to duplicate_group; a separately verified cleanup migration then removes the legacy column.\" The consumer switch (a6beece24) and the drop migration (supabase/migrations/20260922130000_drop_cluster_id.sql, 8417fa6e7) ship in the same branch, so a normal deploy applies both together and no compatibility build reads the column. Done when: either the one-build compatibility window is restored, or the combined deployment ordering is verified (the drop migration lands before any build emits the retired field and load-events cannot receive cluster_id) and a durable test or documented check pins that ordering. Record the decision and evidence in notes.",
+      "passes": false,
+      "notes": "",
+      "priority": 10
+    },
+    {
+      "title": "Run the full-artifact blast-radius check and record the baseline",
+      "description": "Spec-150 testing decisions line 311: \"A fixture over the built events.json (8,573 events): record the merge/group counts as a baseline, assert every deleted row has an exact-title survivor in its bucket, and assert no group exceeds the observed max size.\" tests/test_confidence_route.py::TestBlastRadius uses only a 1,029-listing slice (tests/fixtures/confidence_route/bloomington_2026-09-21_27.json), and no full-artifact merge/group count is recorded. Done when: the blast-radius check runs against the real built events.json (or a fixture at the full event count), records the merge and group counts plus observed max group size, and asserts the deletion and size invariants; the resulting baseline is recorded in notes.",
+      "passes": false,
+      "notes": "",
+      "priority": 11
+    },
+    {
+      "title": "Correct docs that contradict the route code",
+      "description": "The review found three documentation defects from this scope: (1) CONTEXT.md line 104 documents the duplicate-group id format as `cr1:<hash>` while scripts/ics_to_json.py::_group_id emits `cr1-<hash>` (ROUTE_VERSION + '-' + sha1 hex); (2) xmlui/helpers.js line 1334 still heads dedupeEvents with \"merge events with same title + start_time\", contradicting the stored-group key; (3) tests/fixtures/README.md scopes the directory to minimal ICS fixtures and omits the new tests/fixtures/confidence_route/ JSON fixture. Done when: all three read true against the code, and the fixtures README documents the route fixture's purpose.",
+      "passes": false,
+      "notes": "",
+      "priority": 12
     },
     {
       "title": "HITL: Deploy, observe, and approve the first production build",
