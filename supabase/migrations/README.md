@@ -71,10 +71,11 @@ This keeps upstream and forked instances easier to sync.
 
 The consumer switch and schema cleanup are staged across builds:
 
-1. `20260922120000_add_duplicate_group_and_route_view.sql` adds
+1. `20260923120000_add_duplicate_group_and_route_view.sql` adds
    `duplicate_group`, recreates the view, and keeps `cluster_id` readable.
 2. Consumers use `duplicate_group` while one compatibility build completes.
-3. A later, separately verified cleanup migration may remove `cluster_id`.
+3. Promote `post-compatibility/20260923130000_drop_cluster_id.sql` into the
+   active migration sequence only after that build is verified.
 
 Apply the additive migration before the scheduled build runs. The artifact emits
 only `duplicate_group`, while the database remains readable by older consumers.

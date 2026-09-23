@@ -23,6 +23,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
 MIGRATIONS = ROOT / "supabase" / "migrations"
+POST_COMPATIBILITY = MIGRATIONS / "post-compatibility"
 
 
 def _migration_files():
@@ -48,13 +49,22 @@ def test_compatibility_build_keeps_cluster_id_in_the_view():
 
 
 def test_cluster_id_cleanup_is_deferred_to_a_later_deploy():
-    """A cleanup migration would close the required compatibility window."""
+    """The cleanup migration stays outside the active deployment sequence."""
     cleanup = [
         path.name
         for path in _migration_files()
         if "DROP COLUMN IF EXISTS cluster_id" in path.read_text()
     ]
     assert cleanup == []
+
+
+def test_separately_verified_cleanup_migration_is_preserved():
+    """The later cleanup artifact exists for promotion after the compatibility build."""
+    cleanup = POST_COMPATIBILITY / "20260923130000_drop_cluster_id.sql"
+    assert cleanup.is_file()
+    sql = cleanup.read_text()
+    assert "DROP COLUMN IF EXISTS cluster_id" in sql
+    assert "duplicate_group" in sql
 
 
 def test_new_migration_ddl_is_rerunnable():
