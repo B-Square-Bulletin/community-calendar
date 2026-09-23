@@ -1,0 +1,62 @@
+{
+  "loop": "ship-features",
+  "items": [
+    {
+      "title": "Implement the confidence route and build artifact",
+      "description": "Implement the build-time confidence route so the calendar artifact makes one deterministic Merge/Group/Separate decision for every event listing. The route operates on cleaned events, never deletes a row because of similarity, and emits versioned duplicate-group IDs and diagnostics downstream consumers can trust. Done when: exact-title Merge uses the full cleaned title, compatible non-empty locations, deterministic survivor selection, and no similarity-edge propagation; Group uses same-instant connected components, the agreed guards and threshold, versioned IDs, bounded comparisons, and structured source aggregation; Separate stays authoritative and NULL group membership means one row is one group downstream; missing source_uid and route invariants fail closed with actionable diagnostics; the pure-route, ICS-boundary, false-merge, chain, truncation, instant, all-day, location, source-name, determinism, and blast-radius tests pass; and the generated event artifact contains the route output and per-event outcomes needed by later tickets. See the issue for the full acceptance criteria.",
+      "passes": false,
+      "notes": "",
+      "reference": ".scratch/150-dedup-confidence-route/issues/01-151-confidence-route.md",
+      "priority": 1
+    },
+    {
+      "title": "Persist duplicate groups and expose the authoritative view",
+      "description": "Persist the route's duplicate-group decision and expose it through the authoritative deduplicated read model. Done when: the database stores nullable duplicate_group and stores the route output; the materialized view groups by stored group ID and isolates every NULL row instead of collapsing NULLs together; grouped rows aggregate member IDs, structured source URLs, source names, and representative fields deterministically; the event loader persists the field without breaking existing upsert and stale-event behavior; migration, grants, indexes, refresh behavior, and database tests are complete; and materialized-view refresh failures fail the pipeline.",
+      "passes": false,
+      "notes": "",
+      "reference": ".scratch/150-dedup-confidence-route/issues/02-152-persist-and-view.md",
+      "priority": 2
+    },
+    {
+      "title": "Switch calendar, dashboard, and picks to stored groups",
+      "description": "Switch the main calendar, dashboard tiles, and saved-picks experience to the stored deduplicated read model so each Group renders once while every member source and pick remains available. Done when: all relevant REST projections include duplicate_group and merged_ids; the main calendar and dashboard consume the authoritative deduplicated view rather than raw-event fallback logic; NULL groups remain separate in the client; grouped cards retain deterministic representative presentation and every member source link; picking or unpicking a Group covers all IDs in merged_ids; My Picks and the Pick Editor show no duplicate representations of one Group; and client, browser, and database seam tests pass.",
+      "passes": false,
+      "notes": "",
+      "reference": ".scratch/150-dedup-confidence-route/issues/03-153-switch-consumers.md",
+      "priority": 3
+    },
+    {
+      "title": "Make RSS consume stored group decisions",
+      "description": "Make RSS consume the stored route decisions so each Group renders once, uses the same canonical representative as the app, and does not repeatedly announce suppressed members as new. Done when: RSS does not recompute similarity, location, or grouping; full and latest feeds render one item per stored Group; new-item state considers all current member UIDs, including members suppressed from rendering; repeated builds with unchanged membership produce no false new-item announcements; and RSS uses the route's canonical representative with tests covering representative and membership changes.",
+      "passes": false,
+      "notes": "",
+      "reference": ".scratch/150-dedup-confidence-route/issues/04-154-rss.md",
+      "priority": 4
+    },
+    {
+      "title": "Complete compatibility transition and integration verification",
+      "description": "Complete the compatibility transition so duplicate_group is the only active grouping authority, legacy cluster_id has a bounded compatibility window, and the full repository passes the integrated route, database, frontend, RSS, and performance checks. Done when: all active consumers use duplicate_group; cluster_id remains only for the explicitly allowed compatibility build and has no competing producer; performance, pipeline, frontend, database, RSS, and full-artifact checks pass together; a separately verified cleanup migration removes unused cluster_id behavior after no consumer remains; and the domain glossary and ADR documentation record the final Merge/Group/Separate model.",
+      "passes": false,
+      "notes": "",
+      "reference": ".scratch/150-dedup-confidence-route/issues/05-155-compatibility-and-verification.md",
+      "priority": 5
+    },
+    {
+      "title": "HITL: Deploy, observe, and approve the first production build",
+      "description": "Human-verify the production migration and first scheduled build before destructive Merge behavior is considered live. Done when: the Supabase migration, materialized-view contract, grants, and refresh permissions are verified in production; one production build completes with route diagnostics and expected refresh behavior; Merge/group counts, maximum group size, and invariant diagnostics are reviewed against the agreed safety budget; the main calendar, dashboard, saved picks, source links, and RSS are spot-checked for parity; and a human approves the observed blast radius or records required follow-up changes.",
+      "passes": false,
+      "notes": "",
+      "reference": ".scratch/150-dedup-confidence-route/issues/06-156-hitl-production-build.md",
+      "priority": 6,
+      "hand_off": true
+    },
+    {
+      "title": "Review the work against the spec",
+      "description": "Run the `code-review` skill over `git diff b188ccd379923e2286e152c0dfdbc8ce98cc22cf...HEAD` (the diff since this scope was seeded) against the spec at `.scratch/150-dedup-confidence-route/spec-150.md`, reviewing the implementation of #150 and its sub-tickets. Run the findings through `receiving-code-review`, then append each worthwhile finding as a new item with no `reference`, `hand_off: false`, and a `priority` greater than this item's. Write every remaining finding and every outstanding hand-off item into this item's `notes`.",
+      "passes": false,
+      "notes": "",
+      "reference": ".scratch/150-dedup-confidence-route/spec-150.md",
+      "priority": 100
+    }
+  ]
+}
