@@ -26,7 +26,7 @@ from scrapers.visit_bloomington import (
     TOKEN_URL,
     VisitBloomingtonScraper,
 )
-from scripts.combine_ics import AGGREGATORS, dedupe_cross_source
+from scripts.combine_ics import AGGREGATORS
 from scripts.process_pending_feeds import parse_pending_feeds
 
 TZ = ZoneInfo("America/Indiana/Indianapolis")
@@ -869,17 +869,6 @@ def _registered_bloomington_entries() -> list[dict]:
     return entries
 
 
-def _dedupe_event(title: str, source: str) -> dict:
-    """An event dict as combine_ics.dedupe_cross_source consumes it."""
-    content = (
-        f"SUMMARY:{title}\r\n"
-        f"X-SOURCE:{source}\r\n"
-        f"URL:https://example.com/{source.replace(' ', '-')}\r\n"
-        "UID:shared-uid"
-    )
-    return {"dtstart": datetime(2026, 9, 16, 18, 0, tzinfo=TZ), "content": content}
-
-
 class TestRegistrationContract:
     """The #124 registration: DB-first entry, primary-source dedup (ADR 0011)."""
 
@@ -900,16 +889,6 @@ class TestRegistrationContract:
         assert "scrapers/visit_bloomington.py" in entry["scraper_cmd"]
 
     def test_source_is_a_primary_not_an_aggregator(self):
-        # ADR 0011: absent from the aggregator list -> wins cross-source dedup.
+        # ADR 0011: absent from the aggregator list -> the confidence route keeps
+        # it as the survivor's primary source when a duplicate pair merges.
         assert "Visit Bloomington" not in AGGREGATORS
-
-    def test_dedupe_prefers_visit_bloomington_and_dual_credits_limestone_post(self):
-        # Limestone Post's CitySpark feed echoes CVB events; the CVB copy is
-        # kept and the merged attribution lists the primary source first.
-        limestone = _dedupe_event("Downtown Shop Night", "Limestone Post")
-        visit = _dedupe_event("Downtown Shop Night", "Visit Bloomington")
-
-        kept = dedupe_cross_source([limestone, visit], input_dir=None)
-
-        assert len(kept) == 1
-        assert "X-SOURCE:Visit Bloomington, Limestone Post" in kept[0]["content"]
