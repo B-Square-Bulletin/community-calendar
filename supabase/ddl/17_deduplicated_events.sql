@@ -17,7 +17,7 @@
 DROP VIEW IF EXISTS deduplicated_events;
 DROP MATERIALIZED VIEW IF EXISTS deduplicated_events;
 
-CREATE MATERIALIZED VIEW deduplicated_events AS
+CREATE MATERIALIZED VIEW IF NOT EXISTS deduplicated_events AS
 WITH base AS (
     SELECT
         e.*,
@@ -97,6 +97,7 @@ rolled AS (
         b.city,
         (array_agg(b.transcript ORDER BY b.rep_rank, b.id) FILTER (WHERE b.transcript IS NOT NULL))[1] AS transcript,
         (array_agg(b.source_id ORDER BY b.rep_rank, b.id))[1] AS source_id,
+        (array_agg(b.cluster_id ORDER BY b.rep_rank, b.id) FILTER (WHERE b.cluster_id IS NOT NULL))[1] AS cluster_id,
         (array_agg(b.category ORDER BY b.rep_rank, b.id) FILTER (WHERE b.category IS NOT NULL))[1] AS category,
         (array_agg(b.ics_categories ORDER BY b.rep_rank, b.id) FILTER (WHERE b.ics_categories IS NOT NULL))[1] AS ics_categories,
         (array_agg(b.image_url ORDER BY b.rep_rank, b.id) FILTER (WHERE b.image_url IS NOT NULL))[1] AS image_url,
@@ -122,6 +123,7 @@ SELECT
     r.city,
     r.transcript,
     r.source_id,
+    r.cluster_id,
     u.source_urls,
     r.category,
     r.ics_categories,
@@ -136,8 +138,8 @@ LEFT JOIN name_agg n USING (city, start_time, group_key)
 LEFT JOIN url_agg u USING (city, start_time, group_key)
 ORDER BY r.start_time;
 
-CREATE UNIQUE INDEX deduplicated_events_id_idx ON deduplicated_events (id);
-CREATE INDEX deduplicated_events_city_start_time_idx ON deduplicated_events (city, start_time);
+CREATE UNIQUE INDEX IF NOT EXISTS deduplicated_events_id_idx ON deduplicated_events (id);
+CREATE INDEX IF NOT EXISTS deduplicated_events_city_start_time_idx ON deduplicated_events (city, start_time);
 
 GRANT SELECT ON deduplicated_events TO anon, authenticated, service_role;
 

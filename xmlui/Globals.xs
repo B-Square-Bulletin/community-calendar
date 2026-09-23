@@ -309,14 +309,27 @@ function persistDashboard(tiles, layout) {
   window.saveDashboardConfig(tiles, layout, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey);
 }
 
-function removePick(pickId) {
+function removePick(pickId, duplicateGroup) {
+  const headers = {
+    apikey: appGlobals.supabasePublishableKey,
+    Authorization: 'Bearer ' + authSession?.access_token
+  };
+  let pickIds = [pickId];
+  if (duplicateGroup) {
+    const groupPicks = Actions.callApi({
+      method: 'get',
+      url: appGlobals.supabaseUrl + '/rest/v1/picks?select=id,events!inner(duplicate_group)&user_id=eq.' + authUser.id + '&events.duplicate_group=eq.' + encodeURIComponent(duplicateGroup),
+      headers,
+      invalidates: []
+    });
+    if (Array.isArray(groupPicks) && groupPicks.length) {
+      pickIds = groupPicks.map(function(pick) { return pick.id; });
+    }
+  }
   Actions.callApi({
     method: 'delete',
-    url: appGlobals.supabaseUrl + '/rest/v1/picks?id=eq.' + pickId,
-    headers: {
-      apikey: appGlobals.supabasePublishableKey,
-      Authorization: 'Bearer ' + authSession?.access_token
-    },
+    url: appGlobals.supabaseUrl + '/rest/v1/picks?id=in.(' + pickIds.join(',') + ')',
+    headers,
     invalidates: []
   });
   picksCounter = picksCounter + 1;

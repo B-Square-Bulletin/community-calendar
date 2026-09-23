@@ -67,19 +67,16 @@ Prefer staged rollouts:
 
 This keeps upstream and forked instances easier to sync.
 
-### Verified ordering: `cluster_id` retirement (#155)
+### Verified compatibility window: `cluster_id` transition (#155)
 
-The `cluster_id` → `duplicate_group` transition ships as one deploy. The
-ordering is verified rather than staged across builds:
+The consumer switch and schema cleanup are staged across builds:
 
 1. `20260922120000_add_duplicate_group_and_route_view.sql` adds
-   `duplicate_group` and recreates the view around it.
-2. `20260922130000_drop_cluster_id.sql` then drops `cluster_id` and rebuilds
-   the view without it.
+   `duplicate_group`, recreates the view, and keeps `cluster_id` readable.
+2. Consumers use `duplicate_group` while one compatibility build completes.
+3. A later, separately verified cleanup migration may remove `cluster_id`.
 
-Apply migrations **before** the scheduled build runs. The build emits only
-`duplicate_group`; the dropped column means a stale artifact carrying
-`cluster_id` fails closed at load rather than silently writing a competing
-key. `tests/test_cluster_id_transition.py` pins the ordering and the
-no-producer/no-loader path; `supabase/tests/test_cluster_id_retired.sql`
-pins the dropped column and view field.
+Apply the additive migration before the scheduled build runs. The artifact emits
+only `duplicate_group`, while the database remains readable by older consumers.
+`tests/test_cluster_id_transition.py` and
+`supabase/tests/test_cluster_id_compatibility.sql` pin this window.

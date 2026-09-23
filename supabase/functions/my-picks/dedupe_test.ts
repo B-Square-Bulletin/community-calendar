@@ -5,7 +5,7 @@
 // member. These tests pin the public collapse behavior (one entry per stored
 // group, NULL rows separate, canonical representative preferred) without
 // booting Deno.serve or touching the network.
-import { dedupePickedEvents } from "./dedupe.ts";
+import { dedupePickedEvents, withGroupMembership, type PickedEvent } from "./dedupe.ts";
 
 function assert(condition: boolean, message: string): void {
   if (!condition) throw new Error(message);
@@ -44,4 +44,16 @@ Deno.test("prefers the canonical representative of a group", () => {
   ]);
   assert(out.length === 1, `expected 1 entry, got ${out.length}`);
   assert(out[0].id === 2, `expected representative id 2, got ${out[0].id}`);
+});
+
+Deno.test("carries the complete stored membership into each picked group", () => {
+  const picked: PickedEvent[] = [{ id: 2, duplicate_group: "cr1:g" }];
+  const out = withGroupMembership(
+    picked,
+    new Map([["cr1:g", [1, 2, 3]]]),
+  );
+  assert(
+    JSON.stringify(out[0].merged_ids) === JSON.stringify([1, 2, 3]),
+    "expected the view membership to be carried into the picked event",
+  );
 });

@@ -284,4 +284,12 @@ describe('consumers read the stored decision from the view', () => {
     const main = readShipped('Main.xmlui');
     expect(main).toContain('window.dedupePicks(picks.value');
   });
+
+  it('removing a saved Group targets every picked member', () => {
+    const item = readShipped('components/PickItem.xmlui');
+    const globals = readShipped('Globals.xs');
+    expect(item).toContain('removePick($props.pick.id, $props.pick.events?.duplicate_group)');
+    expect(globals).toContain('events!inner(duplicate_group)');
+    expect(globals).toContain('id=in.(');
+  });
 });

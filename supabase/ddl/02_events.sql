@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS events (
   ics_categories text[],    -- CATEGORIES values from ICS source
   image_url text,           -- event image URL from ICS ATTACH or scraper
   all_day boolean DEFAULT false,  -- true for all-day events (VALUE=DATE in ICS)
+  cluster_id text,             -- legacy compatibility field; removed after the transition build
   duplicate_group text,     -- opaque route group id; NULL = Separate (one row is one group)
   source_names text[],      -- structured, priority-ordered source names from the route
   duplicate_group_representative text, -- route's canonical member source_uid for the group

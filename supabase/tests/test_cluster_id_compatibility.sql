@@ -1,12 +1,8 @@
--- Test suite for the #155 cluster_id cleanup migration.
+-- Test suite for the #155 cluster_id compatibility window.
 --
--- `cluster_id` was the legacy per-timeslot similarity index produced by
--- `cluster_by_title_similarity`. Every consumer now reads the route's stored
--- `duplicate_group`, so the cleanup migration drops the column and recreates
--- the authoritative view without it. This is the *separately verified* half of
--- the transition: it fails if the dead column or view field is ever
--- reintroduced, and it proves the view still collapses a stored Group once the
--- column is gone (the view must not depend on retired behavior).
+-- `cluster_id` remains readable for one compatibility build while every active
+-- consumer uses the route's stored `duplicate_group`. A later, separately
+-- verified cleanup migration can remove it after that build.
 --
 -- Run: supabase test db supabase/tests/
 -- Or:  make test-sql
@@ -15,12 +11,12 @@ BEGIN;
 SELECT plan(4);
 
 -- ============================================================================
--- The dead column is gone from storage and from the read model
+-- The compatibility field remains available in storage and the read model
 -- ============================================================================
-SELECT hasnt_column('public', 'events', 'cluster_id', 'events.cluster_id is dropped');
-SELECT hasnt_column(
+SELECT has_column('public', 'events', 'cluster_id', 'events.cluster_id remains for compatibility');
+SELECT has_column(
     'public', 'deduplicated_events', 'cluster_id',
-    'the view no longer exposes cluster_id'
+    'the view exposes cluster_id during compatibility'
 );
 
 -- ============================================================================
@@ -45,13 +41,13 @@ REFRESH MATERIALIZED VIEW deduplicated_events;
 SELECT is(
     (SELECT count(*)::int FROM deduplicated_events WHERE duplicate_group = 'cr1-retire'),
     1,
-    'the view still collapses a stored Group after cluster_id is dropped'
+    'the view still collapses a stored Group during compatibility'
 );
 
 SELECT is(
     (SELECT source FROM deduplicated_events WHERE duplicate_group = 'cr1-retire'),
     'Source A, Source B',
-    'the view still unions member sources after cluster_id is dropped'
+    'the view still unions member sources during compatibility'
 );
 
 SELECT * FROM finish();  -- noqa: AM04

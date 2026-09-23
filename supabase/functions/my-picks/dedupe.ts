@@ -8,8 +8,23 @@ export interface PickedEvent {
   id: number | string;
   duplicate_group?: string | null;
   duplicate_group_representative?: string | null;
+  merged_ids?: Array<number | string>;
   source_uid?: string | null;
   [key: string]: unknown;
+}
+
+export function withGroupMembership<T extends PickedEvent>(
+  events: T[],
+  memberships: ReadonlyMap<string, Array<number | string>>,
+): T[] {
+  return events.map((event) => {
+    const group = event.duplicate_group;
+    const mergedIds = group ? memberships.get(group) : undefined;
+    return {
+      ...event,
+      merged_ids: mergedIds?.length ? [...mergedIds] : [event.id],
+    };
+  });
 }
 
 export function dedupePickedEvents<T extends PickedEvent>(events: T[]): T[] {

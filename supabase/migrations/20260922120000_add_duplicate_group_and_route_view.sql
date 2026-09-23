@@ -20,7 +20,7 @@ ALTER TABLE events ADD COLUMN IF NOT EXISTS duplicate_group_representative text;
 
 DROP MATERIALIZED VIEW IF EXISTS deduplicated_events;
 
-CREATE MATERIALIZED VIEW deduplicated_events AS
+CREATE MATERIALIZED VIEW IF NOT EXISTS deduplicated_events AS
 WITH base AS (
     SELECT
         e.*,
@@ -147,8 +147,8 @@ LEFT JOIN url_agg u USING (city, start_time, group_key)
 ORDER BY r.start_time;
 
 -- Unique index required for REFRESH MATERIALIZED VIEW CONCURRENTLY.
-CREATE UNIQUE INDEX deduplicated_events_id_idx ON deduplicated_events (id);
-CREATE INDEX deduplicated_events_city_start_time_idx ON deduplicated_events (city, start_time);
+CREATE UNIQUE INDEX IF NOT EXISTS deduplicated_events_id_idx ON deduplicated_events (id);
+CREATE INDEX IF NOT EXISTS deduplicated_events_city_start_time_idx ON deduplicated_events (city, start_time);
 
 GRANT SELECT ON deduplicated_events TO anon, authenticated, service_role;
 
