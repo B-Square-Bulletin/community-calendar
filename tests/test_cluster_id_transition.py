@@ -65,6 +65,9 @@ def test_separately_verified_cleanup_migration_is_preserved():
     sql = cleanup.read_text()
     assert "DROP COLUMN IF EXISTS cluster_id" in sql
     assert "duplicate_group" in sql
+    assert "CREATE MATERIALIZED VIEW IF NOT EXISTS deduplicated_events" in sql
+    assert "CREATE UNIQUE INDEX IF NOT EXISTS deduplicated_events_id_idx" in sql
+    assert "CREATE INDEX IF NOT EXISTS deduplicated_events_city_start_time_idx" in sql
 
 
 def test_new_migration_ddl_is_rerunnable():

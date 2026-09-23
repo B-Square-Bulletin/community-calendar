@@ -77,6 +77,10 @@ The consumer switch and schema cleanup are staged across builds:
 3. Promote `post-compatibility/20260923130000_drop_cluster_id.sql` into the
    active migration sequence only after that build is verified.
 
+Verify the promoted cleanup with `make setup-local` and `make test-sql` before
+applying it to production. The database tests must confirm that the view drops
+`cluster_id`, keeps one row per stored Group, and remains refreshable.
+
 Apply the additive migration before the scheduled build runs. The artifact emits
 only `duplicate_group`, while the database remains readable by older consumers.
 `tests/test_cluster_id_transition.py` and
