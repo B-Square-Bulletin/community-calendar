@@ -14,7 +14,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from html import unescape as html_unescape
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 from zoneinfo import ZoneInfo
 
 sys.path.insert(0, "scrapers")
@@ -410,7 +410,7 @@ class RouteOutcome:
     """The route's public decision for one input listing."""
 
     source_uid: str
-    outcome: str  # "merge" | "group" | "separate"
+    outcome: Literal["merge", "group", "separate"]
     duplicate_group: str | None
     survivor_uid: str | None
     normalized_title: str
@@ -465,9 +465,10 @@ def _city_token(location):
     towns in one state that share a last word still compare incompatible. Read
     positionally and text-only: no gazetteer and no geocoding. A location that
     names no state (``"Musical Arts Center & LIVE@jacobs"``) has no extractable
-    city, so the city rule cannot fire and the pair falls back to the
-    shared-token/street-number rules. A comma-less location falls back to the
-    single token before the state token.
+    city, so the city rule cannot fire: the Group predicate falls back to the
+    shared-token/street-number rules, while the stricter Merge predicate
+    refuses (see ``_locations_compatible``). A comma-less location falls back
+    to the single token before the state token.
     """
     if not location:
         return None
@@ -489,8 +490,23 @@ def _city_token(location):
     return None
 
 
-def _locations_compatible(a, b):
-    """Core location rule; both inputs are non-empty."""
+def _locations_compatible(a, b, *, strict=False):
+    """Core location rule; both inputs are non-empty.
+
+    ``strict`` is the destructive Merge variant. Because Merge deletes a row it
+    demands more evidence than the non-destructive Group band:
+
+    - the city and state tokens every listing in a town shares cannot count
+      toward the shared-token match, so two same-town venues that share only
+      their town and a common word ("Community Center" vs "Community Church")
+      do not merge; and
+    - a pair where neither side names an identifiable city is not "the same
+      venue spelled differently" — unknown formats stay apart unless their
+      normalized text is exactly equal (spec amendment L401).
+
+    Group keeps every row, so it stays permissive: a false positive there only
+    over-collapses a card, and never deletes a listing.
+    """
     norm_a, norm_b = normalize_location(a), normalize_location(b)
     if norm_a == norm_b:
         return True
@@ -505,7 +521,17 @@ def _locations_compatible(a, b):
     city_a, city_b = _city_token(a), _city_token(b)
     if city_a and city_b and city_a != city_b:
         return False
-    shared = [t for t in tokens_a if t in set(tokens_b) and not t.isdigit()]
+    excluded: set[str] = set()
+    if strict:
+        if not city_a and not city_b:
+            return False
+        # The town/state every listing in a town shares is not evidence of a
+        # match; only the distinctive venue tokens count.
+        excluded = {t for t in tokens_a + tokens_b if t in _US_STATE_TOKENS}
+        for city in (city_a, city_b):
+            if city:
+                excluded |= set(city.split())
+    shared = [t for t in tokens_a if t in set(tokens_b) and not t.isdigit() and t not in excluded]
     number_a = next((t for t in tokens_a if t.isdigit()), None)
     number_b = next((t for t in tokens_b if t.isdigit()), None)
     if number_a and number_b and number_a != number_b:
@@ -514,10 +540,14 @@ def _locations_compatible(a, b):
 
 
 def locations_compatible_both(a, b):
-    """Merge predicate: a missing location on either side is disqualifying."""
+    """Merge predicate: a missing location on either side is disqualifying.
+
+    The strict variant is used here because Merge deletes a row (see
+    ``_locations_compatible``).
+    """
     if not a or not b:
         return False
-    return _locations_compatible(a, b)
+    return _locations_compatible(a, b, strict=True)
 
 
 def locations_compatible_or_empty(a, b):
@@ -821,6 +851,7 @@ def confidence_route(
                 group_representative.get(group_id) if group_id else None
             )
             result_events.append(surfaced)
+            outcome: Literal["merge", "group", "separate"]
             if merged_members:
                 outcome = "merge"
             elif group_id:

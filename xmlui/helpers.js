@@ -1718,7 +1718,11 @@ function eventMergedIds(event) {
 // My Picks shows one row per stored Group, not one per picked member. Rows
 // without a group (NULL) stay separate. When several members of one group are
 // picked, the route's canonical representative wins so the displayed fields
-// match the card; ties fall back to the smallest pick id for determinism.
+// match the card; otherwise the smallest member event id wins for determinism.
+// When the representative is not among the picked events (a pick stored before
+// the route, or a representative that changed between builds), that fallback
+// runs — the same ordering as the my-picks ICS feed (ADR 0013), so the list and
+// the feed cannot pick different members.
 // Cached by input identity so the List binding returns a stable reference
 // between renders (picks are replaced wholesale on refetch).
 var _dedupePicksLast = null;
@@ -1740,7 +1744,7 @@ function dedupePicks(picks) {
         ev.source_uid === ev.duplicate_group_representative
           ? 0
           : 1,
-      pickId: p && p.id != null ? Number(p.id) : 0,
+      eventId: ev.id != null ? Number(ev.id) : 0,
     };
     if (!best[key]) {
       best[key] = { pick: p, rank: candidate };
@@ -1749,7 +1753,7 @@ function dedupePicks(picks) {
     }
     var cur = best[key].rank;
     if (
-      candidate.isRep !== cur.isRep ? candidate.isRep < cur.isRep : candidate.pickId < cur.pickId
+      candidate.isRep !== cur.isRep ? candidate.isRep < cur.isRep : candidate.eventId < cur.eventId
     ) {
       best[key] = { pick: p, rank: candidate };
     }

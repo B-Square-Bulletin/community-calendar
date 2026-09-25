@@ -89,7 +89,7 @@ One row from one source: a single source's rendering of an event. Two sources ca
 _Avoid_: Event (when the source's copy is meant), record
 
 **Merge**:
-The destructive band of the confidence route: listings that are certainly one event (identical cleaned full title, same start instant, compatible locations present on both sides) collapse to one surviving row; the other sources fold into it. Merge is an equivalence class over the exact-title relation alone — it never propagates through a similarity edge, so no threshold change can delete a row.
+The destructive band of the confidence route: listings that are certainly one event (identical cleaned full title, same start instant, compatible locations present on both sides — a stricter location test than Group's, since a shared town or state is not evidence and neither is a shared generic token when neither side names a town) collapse to one surviving row; the other sources fold into it. Merge is an equivalence class over the exact-title relation alone — it never propagates through a similarity edge, so no threshold change can delete a row.
 _Avoid_: Dedupe, fuzzy match
 
 **Group**:

@@ -184,6 +184,40 @@ class TestMerge:
         assert outcomes["b"].outcome == "separate"
         assert outcomes["a"].duplicate_group is None
 
+    def test_merge_refuses_unknown_locations_with_identical_title(self):
+        """Identical title + instant at two unidentifiable venues => no deletion.
+
+        "Community Center" and "Community Church" share the town and the word
+        "community"; neither names a state, so no city is extractable. The
+        shared-token rule alone would call them the same venue and delete one.
+        They may still Group (non-destructive, accepted budget), never Merge.
+        """
+        events = [
+            ev("a", "Community Gathering", location="Community Center, Bloomington"),
+            ev("b", "Community Gathering", location="Community Church, Bloomington"),
+        ]
+        result = confidence_route(events)
+        outcomes = by_uid(result)
+        assert len(result.events) == 2
+        assert result.diagnostics["merge_deleted"] == 0
+        assert outcomes["a"].outcome != "merge"
+        assert outcomes["b"].outcome != "merge"
+
+    def test_merge_ignores_shared_city_and_state_tokens(self):
+        """Two venues in one town: the shared town/state tokens are not evidence.
+
+        The experienced case has an identifiable city, so the unknown-format
+        rule cannot fire. What keeps the two apart is excluding the shared
+        town/state tokens from the compatibility count.
+        """
+        events = [
+            ev("a", "Community Gathering", location="Community Center, Bloomington, IN"),
+            ev("b", "Community Gathering", location="Community Church, Bloomington, IN"),
+        ]
+        result = confidence_route(events)
+        assert len(result.events) == 2
+        assert result.diagnostics["merge_deleted"] == 0
+
     def test_merge_survivor_is_input_order_independent(self):
         events = [
             ev("b", "Exact Title", location="Venue, 1 Main St"),
@@ -325,6 +359,78 @@ class TestGroup:
         result = confidence_route(events)
         assert result.diagnostics["groups"] == 1
         assert by_uid(result)["a"].duplicate_group is not None
+
+    def test_taste_of_tibet_pair_groups(self):
+        """#145 pair 1: the WFIU and Visit Bloomington copies share one group.
+
+        The WFIU title embeds show times in parentheses and the Visit
+        Bloomington location abbreviates the street; both are the same event.
+        """
+        events = [
+            ev(
+                "tibet-wfiu",
+                "Taste of Tibet (6pm) and Open House (2-5pm)",
+                start_time="2026-09-19T18:00:00+00:00",
+                location=(
+                    "Gaden KhachoeShing Monastery, 2150 East Dolan Road, Bloomington, Indiana 47408"
+                ),
+                source="WFIU Community Calendar",
+            ),
+            ev(
+                "tibet-vb",
+                "Taste of Tibet and Open House",
+                start_time="2026-09-19T18:00:00+00:00",
+                location=(
+                    "Gaden KhachoeShing Monastery, 2150 E. Dolan Road, Bloomington, IN 47408"
+                ),
+                source="Visit Bloomington, BloomingtonOnline Events",
+            ),
+        ]
+        result = confidence_route(events)
+        outcomes = by_uid(result)
+        assert len(result.events) == 2
+        assert outcomes["tibet-wfiu"].outcome == "group"
+        assert outcomes["tibet-wfiu"].duplicate_group == outcomes["tibet-vb"].duplicate_group
+
+    def test_national_dance_day_pair_groups_and_the_party_stays_separate(self):
+        """#145 pair 4: the two Dance Day listings group; the third stays separate.
+
+        The three rows share an instant and venue tokens, but "Swing Meets
+        Ballroom Dance Party" is a distinct event only ~0.59 similar to the
+        Dance Day titles, below the threshold.
+        """
+        start = "2026-09-19T22:00:00+00:00"
+        events = [
+            ev(
+                "dance-wfiu",
+                "INDY DANCERS National Dance Day Celebration",
+                start_time=start,
+                location=(
+                    "Mike's Music & Dance Barn, 2277 W. State Road 46, Nashville, Indiana 47448"
+                ),
+                source="WFIU Community Calendar",
+            ),
+            ev(
+                "dance-pillar",
+                "INDY DANCERS National Dance Day Celebration with STEP N TIME BAND",
+                start_time=start,
+                location="Mike\u2019s Music & Dance Barn,2277 State Road 46, Nashville, IN 47448",
+                source="Pillar Arts Community Calendar, Brown County Events",
+            ),
+            ev(
+                "dance-party",
+                "Indy Dancers Swing Meets Ballroom Dance Party",
+                start_time=start,
+                location="2277 State Road 46, Nashville, IN",
+                source="Brown County Events",
+            ),
+        ]
+        result = confidence_route(events)
+        outcomes = by_uid(result)
+        assert outcomes["dance-wfiu"].outcome == "group"
+        assert outcomes["dance-wfiu"].duplicate_group == outcomes["dance-pillar"].duplicate_group
+        assert outcomes["dance-party"].outcome == "separate"
+        assert outcomes["dance-party"].duplicate_group is None
 
     def test_group_is_transitive_over_a_chain(self):
         events = [
@@ -777,6 +883,42 @@ class TestPrimitives:
             )
             is True
         )
+
+    def test_merge_unknown_locations_need_exact_normalized_text(self):
+        """No extractable city on either side => not enough evidence to Merge.
+
+        "Community Center" and "Community Church" share the town and the word
+        "community"; treating that as one venue could delete a real listing.
+        """
+        assert (
+            locations_compatible_both(
+                "Community Center, Bloomington", "Community Church, Bloomington"
+            )
+            is False
+        )
+
+    def test_merge_shared_town_and_state_tokens_are_not_evidence(self):
+        """The city/state every listing in a town shares cannot make a match.
+
+        Only a *differing* city is rejected outright; the same city must still
+        be excluded from the shared-token count, or "Community Center" and
+        "Community Church" would merge on "community" + "bloomington" + "in".
+        """
+        assert (
+            locations_compatible_both(
+                "Community Center, Bloomington, IN", "Community Church, Bloomington, IN"
+            )
+            is False
+        )
+
+    def test_group_predicate_stays_permissive_for_unknown_locations(self):
+        """The two bands are asymmetric by design (spec L137-141).
+
+        Group keeps every row, so shared venue tokens may still collapse a card
+        even when no city is extractable; only the destructive Merge band needs
+        the stricter rule.
+        """
+        assert locations_compatible_or_empty("Wells Library", "Herman B Wells Library") is True
 
     def test_source_name_containing_comma_is_not_split(self):
         event = ev("a", "Title", source="Taste, Inc.", source_urls=None)

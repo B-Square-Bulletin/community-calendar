@@ -28,9 +28,12 @@ It runs once per build before the JSON is written and assigns every listing
 exactly one outcome:
 
 - **Merge** — identical cleaned full title, same start instant, and compatible
-  locations present on *both* sides. One representative survives (primary
-  source first, then smallest `source_uid`, then smallest URL); the other
-  sources fold into it. Merge is computed as equivalence classes over the
+  locations present on *both* sides (the Merge variant of location
+  compatibility is stricter than Group: with no identifiable city, shared
+  generic tokens are not enough, and the town/state every listing shares does
+  not count — see `_locations_compatible`). One representative survives
+  (primary source first, then smallest `source_uid`, then smallest URL); the
+  other sources fold into it. Merge is computed as equivalence classes over the
   exact-title relation alone, over merge edges only, so it can never propagate
   through a similarity edge. No threshold change can cause a deletion.
 - **Group** — similarity at or above the threshold (0.80), same start instant,
@@ -83,8 +86,17 @@ listing duplicated, and merging it is correct.
 - `duplicate_group` is stable for the same membership but opaque and
   version-namespaced; it intentionally changes when membership changes, so no
   consumer may persist it as identity.
+- Saved picks collapse to the route's representative when it is among the
+  picked members; otherwise they fall back deterministically to the smallest
+  member event id. The normal UI picks the card's (representative) id, so the
+  fallback only covers picks stored before the route existed or a group whose
+  representative changed between builds. The list and the ICS feed rank on the
+  same key, so they stay consistent with each other.
 - Empty-location pairs can Group (the accepted false-positive budget); the
-  threshold and guards are the tuning surface.
+  threshold and guards are the tuning surface. The destructive Merge band is
+  stricter than Group about locations: a pair with no identifiable city does
+  not Merge on shared tokens, and the town/state tokens every listing in a town
+  shares do not count as compatibility.
 
 ## Alternatives Considered
 

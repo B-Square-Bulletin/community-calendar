@@ -235,6 +235,38 @@ describe('dedupePicks shows one representation per stored group', () => {
     ];
     expect(window.dedupePicks(picks).map((p) => p.id)).toEqual([11]);
   });
+  it('falls back to the smallest member event id when the representative is not picked', () => {
+    // A pick stored before the route, or a representative that changed between
+    // builds, can leave the route's representative out of the picked set. The
+    // collapse stays deterministic: one entry per group, smallest member event
+    // id wins. The normal UI always picks the card's representative id. The
+    // my-picks ICS feed ranks on the same key (ADR 0013).
+    const picks = [
+      {
+        id: 11,
+        event_id: 2,
+        events: row({
+          id: 2,
+          source_uid: 'member-b',
+          duplicate_group_representative: 'rep',
+          duplicate_group: 'cr1:g',
+          merged_ids: [1, 2],
+        }),
+      },
+      {
+        id: 10,
+        event_id: 1,
+        events: row({
+          id: 1,
+          source_uid: 'member-a',
+          duplicate_group_representative: 'rep',
+          duplicate_group: 'cr1:g',
+          merged_ids: [1, 2],
+        }),
+      },
+    ];
+    expect(window.dedupePicks(picks).map((p) => p.id)).toEqual([10]);
+  });
 });
 
 describe('consumers read the stored decision from the view', () => {

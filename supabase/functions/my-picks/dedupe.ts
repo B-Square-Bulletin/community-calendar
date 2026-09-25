@@ -3,7 +3,12 @@
 // The confidence route's `duplicate_group` is authoritative: a NULL value means
 // the route left the row alone, so the row is its own group. When several
 // members of one group are picked, the route's canonical representative wins so
-// the ICS feed matches the app's collapsed card. Ordering is left to the caller.
+// the ICS feed matches the app's collapsed card. When the representative is not
+// among the picked events (a pick stored before the route, or a representative
+// that changed between builds), the smallest member event id wins so the
+// collapse stays deterministic; the client twin in xmlui/helpers.js ranks on
+// the same key, so the feed and the list cannot pick different members.
+// Ordering is left to the caller.
 export interface PickedEvent {
   id: number | string;
   duplicate_group?: string | null;
