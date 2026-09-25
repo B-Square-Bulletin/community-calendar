@@ -11,7 +11,7 @@
 -- Or:  make test-sql
 
 BEGIN;
-SELECT plan(22);
+SELECT plan(23);
 
 -- ============================================================================
 -- Storage columns exist (migration contract)
@@ -49,6 +49,22 @@ VALUES
         'test_dedup', 'Grouped Event (Aggregator)', '2030-01-01T18:00:00+00:00', 'Aggregator X',
         'tdd-g1-agg', 'http://agg', 'cr1-group1', 'tdd-g1-primary',
         ARRAY['Aggregator X'], '{"Aggregator X":"http://agg"}'::jsonb
+    );
+
+-- Rank and position must come from the same occurrence. Alpha is second on
+-- the representative and first on the member, so it must remain after Zeta.
+INSERT INTO events (
+    city, title, start_time, source, source_uid,
+    duplicate_group, duplicate_group_representative, source_names
+)
+VALUES
+    (
+        'test_dedup', 'Ordered Sources', '2030-01-04T18:00:00+00:00', 'Zeta, Alpha',
+        'tdd-g2-primary', 'cr1-ordering', 'tdd-g2-primary', ARRAY['Zeta', 'Alpha']
+    ),
+    (
+        'test_dedup', 'Ordered Sources (member)', '2030-01-04T18:00:00+00:00', 'Alpha',
+        'tdd-g2-member', 'cr1-ordering', 'tdd-g2-primary', ARRAY['Alpha']
     );
 
 -- Two Separate rows sharing a title and instant must stay two rows: a NULL
@@ -122,6 +138,12 @@ SELECT is(
     (SELECT source_names FROM deduplicated_events WHERE duplicate_group = 'cr1-group1'),
     ARRAY['Primary Venue', 'Aggregator X'],
     'Grouped source names are aggregated as a structured, ordered array'
+);
+
+SELECT is(
+    (SELECT source_names FROM deduplicated_events WHERE duplicate_group = 'cr1-ordering'),
+    ARRAY['Zeta', 'Alpha'],
+    'A member occurrence cannot promote a source ahead of the representative order'
 );
 
 SELECT is(

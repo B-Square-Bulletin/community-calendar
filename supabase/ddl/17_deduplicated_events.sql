@@ -37,17 +37,25 @@ WITH base AS (
     FROM events e
     WHERE e.source IS DISTINCT FROM 'poster_capture'
 ),
-name_union AS (
+name_occurrences AS (
     SELECT
         b.city,
         b.start_time,
         b.group_key,
         n.name,
-        MIN(b.rep_rank) AS rep_rank,
-        MIN(n.pos) AS pos
+        b.rep_rank,
+        n.pos,
+        ROW_NUMBER() OVER (
+            PARTITION BY b.city, b.start_time, b.group_key, n.name
+            ORDER BY b.rep_rank, n.pos, b.id
+        ) AS occurrence_rank
     FROM base b
     CROSS JOIN LATERAL unnest(b.structured_names) WITH ORDINALITY AS n(name, pos)
-    GROUP BY b.city, b.start_time, b.group_key, n.name
+),
+name_union AS (
+    SELECT city, start_time, group_key, name, rep_rank, pos
+    FROM name_occurrences
+    WHERE occurrence_rank = 1
 ),
 name_agg AS (
     SELECT

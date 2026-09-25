@@ -57,11 +57,12 @@ NULL row — and unions member ids, structured source names, and source URLs.
 Main calendar, dashboard tiles, saved picks, and RSS all read that stored
 decision rather than recomputing grouping.
 
-**`cluster_id` is retired.** It was an integer index scoped to a timeslot,
-produced only by the superseded `cluster_by_title_similarity`. Rather than
-invent a second producer for a dead column, consumers moved to
-`duplicate_group`, the column stayed readable for one compatibility build, and
-a cleanup migration then dropped it.
+**`cluster_id` cleanup is deferred.** It was an integer index scoped to a
+timeslot, produced only by the superseded `cluster_by_title_similarity`.
+Consumers moved to `duplicate_group`, but the column remains readable through
+one compatibility build. The cleanup migration is staged under
+`supabase/migrations/post-compatibility/` and must not be promoted into the
+active migration sequence until that build has been verified.
 
 **No same-source guard.** There is no rule refusing to merge two listings from
 one source. Two sessions of one workshop differ in start time (the instant

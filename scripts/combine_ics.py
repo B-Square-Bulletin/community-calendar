@@ -851,11 +851,8 @@ def combine_ics_files(
     # the confidence route's decision (scripts/ics_to_json.py), not this step's.
     unique_events = dedupe_by_uid(all_events)
 
-    # Fuzzy deduplication: use LLM to find duplicates with different titles
-    import os
-
-    if os.environ.get("ENABLE_FUZZY_DEDUP"):
-        unique_events = dedupe_fuzzy(unique_events, input_dir)
+    # Do not call the legacy model-based deduper here. Cross-UID deletion is
+    # exclusively owned by confidence_route after events have been cleaned.
 
     # Build combined ICS
     output = [

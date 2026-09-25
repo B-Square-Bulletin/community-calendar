@@ -453,8 +453,41 @@ def normalize_location(location):
     return " ".join(_LOCATION_ABBREVIATIONS.get(token, token) for token in text.split() if token)
 
 
-def _region_tokens(tokens):
-    return {_US_STATE_TOKENS[token] for token in tokens if token in _US_STATE_TOKENS}
+def _state_marker(location):
+    """Return an address-position state marker, not a prose token.
+
+    Full state names and postal codes are accepted at the end of the final
+    comma-separated address segment, optionally before a ZIP code. This keeps
+    ordinary words such as ``in`` and ``or`` from being interpreted as state
+    codes while retaining the common ``Bloomington, IN 47401`` format.
+    """
+    if not location:
+        return None
+    segments = [normalize_location(segment).split() for segment in str(location).split(",")]
+    if not segments:
+        return None
+    tokens = segments[-1]
+    if tokens and re.fullmatch(r"\d{5}(?:-\d{4})?", tokens[-1]):
+        tokens = tokens[:-1]
+    if not tokens:
+        return None
+
+    for name, state in _US_STATE_TOKENS.items():
+        if len(name) <= 2:
+            continue
+        name_tokens = name.split()
+        if len(tokens) >= len(name_tokens) and tokens[-len(name_tokens) :] == name_tokens:
+            return state, tuple(name_tokens)
+
+    code = tokens[-1]
+    if len(code) == 2 and code in _US_STATE_TOKENS:
+        return _US_STATE_TOKENS[code], (code,)
+    return None
+
+
+def _region_tokens(location):
+    marker = _state_marker(location)
+    return {marker[0]} if marker else set()
 
 
 def _city_token(location):
@@ -472,21 +505,21 @@ def _city_token(location):
     """
     if not location:
         return None
-    segments = [seg.strip() for seg in str(location).split(",")]
-    if len(segments) >= 2:
-        state_idx = None
-        for index in range(len(segments) - 1, -1, -1):
-            seg_tokens = normalize_location(segments[index]).split()
-            if any(token in _US_STATE_TOKENS for token in seg_tokens):
-                state_idx = index
-                break
-        if state_idx is not None and state_idx > 0:
-            return normalize_location(segments[state_idx - 1]) or None
+    segments = [normalize_location(segment).split() for segment in str(location).split(",")]
+    marker = _state_marker(location)
+    if not marker:
         return None
-    tokens = normalize_location(location).split()
-    for index in range(len(tokens) - 1, -1, -1):
-        if tokens[index] in _US_STATE_TOKENS:
-            return tokens[index - 1] if index > 0 else None
+    state_tokens = marker[1]
+    tokens = segments[-1]
+    if len(tokens) and re.fullmatch(r"\d{5}(?:-\d{4})?", tokens[-1]):
+        tokens = tokens[:-1]
+    prefix = tokens[: -len(state_tokens)]
+    if prefix:
+        if len(segments) == 1:
+            return prefix[-1]
+        return " ".join(prefix)
+    if len(segments) > 1 and segments[-2]:
+        return " ".join(segments[-2])
     return None
 
 
@@ -514,7 +547,7 @@ def _locations_compatible(a, b, *, strict=False):
     if norm_a == norm_b:
         return True
     tokens_a, tokens_b = norm_a.split(), norm_b.split()
-    regions_a, regions_b = _region_tokens(tokens_a), _region_tokens(tokens_b)
+    regions_a, regions_b = _region_tokens(a), _region_tokens(b)
     if regions_a and regions_b and regions_a != regions_b:
         return False
     # Explicit city-token incompatibility: the same street number and shared
@@ -530,7 +563,11 @@ def _locations_compatible(a, b, *, strict=False):
             return False
         # The town/state every listing in a town shares is not evidence of a
         # match; the remaining shared tokens are all that count.
-        excluded = {t for t in tokens_a + tokens_b if t in _US_STATE_TOKENS}
+        excluded = set()
+        for location in (a, b):
+            marker = _state_marker(location)
+            if marker:
+                excluded.update(marker[1])
         for city in (city_a, city_b):
             if city:
                 excluded |= set(city.split())
@@ -711,7 +748,17 @@ def confidence_route(
 
     comparisons = 0
 
-    # Merge: union-find over exact-title edges alone.
+    def record_comparison():
+        nonlocal comparisons
+        if comparisons >= max_comparisons:
+            raise RouteInvariantError(
+                f"comparison budget exceeded: {comparisons + 1} > {max_comparisons}"
+            )
+        comparisons += 1
+
+    # Merge: partition each exact-title bucket around a selected survivor.
+    # Location compatibility is not transitive, so connected components can
+    # contain members incompatible with the survivor that wins priority.
     merge_parent = list(range(len(identified)))
 
     def merge_find(x):
@@ -728,15 +775,20 @@ def confidence_route(
             if normalized[index]:
                 by_title[normalized[index]].append(index)
         for indices in by_title.values():
-            for position_a in range(len(indices)):
-                for position_b in range(position_a + 1, len(indices)):
-                    comparisons += 1
-                    a, b = indices[position_a], indices[position_b]
+            leaders: list[int] = []
+            for index in sorted(
+                indices, key=lambda candidate: _survivor_sort_key(identified[candidate])
+            ):
+                for leader in leaders:
+                    record_comparison()
                     loc_ok = (not location_guard) or locations_compatible_both(
-                        identified[a].get("location"), identified[b].get("location")
+                        identified[leader].get("location"), identified[index].get("location")
                     )
                     if loc_ok:
-                        merge_parent[merge_find(a)] = merge_find(b)
+                        merge_parent[index] = leader
+                        break
+                else:
+                    leaders.append(index)
 
     merge_classes: dict[int, list[int]] = defaultdict(list)
     for index in range(len(identified)):
@@ -782,7 +834,7 @@ def confidence_route(
             positions.append(survivor_position[index])
         for position_a in range(len(positions)):
             for position_b in range(position_a + 1, len(positions)):
-                comparisons += 1
+                record_comparison()
                 a = survivors[positions[position_a]]
                 b = survivors[positions[position_b]]
                 if location_guard and not locations_compatible_or_empty(

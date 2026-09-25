@@ -27,6 +27,7 @@ from scripts.ics_to_json import (
     ROUTE_THRESHOLD,
     ROUTE_VERSION,
     RouteInvariantError,
+    _city_token,
     confidence_route,
     ics_to_json,
     locations_compatible_both,
@@ -151,6 +152,27 @@ class TestMerge:
         assert outcomes["a"].outcome == "separate"
         assert outcomes["b"].outcome == "separate"
         assert outcomes["a"].duplicate_group is None
+
+    def test_merge_members_must_match_the_selected_survivor(self):
+        # Compatibility is not transitive: the full address bridges the venue
+        # name and street-address-only spelling, but those endpoints differ.
+        events = [
+            ev("a-venue", "Exact Event", location="Auer Hall, Bloomington, IN"),
+            ev(
+                "b-full-address",
+                "Exact Event",
+                location="Auer Hall, 200 S Eagleson Ave, Bloomington, IN",
+            ),
+            ev("c-address-only", "Exact Event", location="200 S Eagleson Ave, Bloomington, IN"),
+        ]
+
+        result = confidence_route(events)
+
+        assert {event["source_uid"] for event in result.events} == {
+            "a-venue",
+            "c-address-only",
+        }
+        assert by_uid(result)["b-full-address"].survivor_uid == "a-venue"
 
     def test_merge_requires_matching_city_tokens(self):
         """Same street number in two towns of one state stays two rows.
@@ -783,16 +805,49 @@ class TestInvariants:
             validate_route_result(result)
         assert "component size" in str(excinfo.value)
 
-    def test_excessive_comparisons_fails_closed(self):
-        events = [
-            ev("a", "Beginner Pottery Class", location="Clay Studio, 123 W 6th St"),
-            ev("b", "Beginner Pottery Class for Adults", location="Clay Studio, 123 W 6th St"),
-            ev("c", "Pottery Class for Adults", location="Clay Studio, 123 W 6th St"),
-        ]
-        result = confidence_route(events, max_comparisons=1)
+    @pytest.mark.parametrize(
+        "events",
+        [
+            pytest.param(
+                [
+                    ev("a", "Beginner Pottery Class", location="Clay Studio, 123 W 6th St"),
+                    ev("b", "Beginner Pottery Class", location="Clay Studio, 123 W 6th St"),
+                    ev("c", "Beginner Pottery Class", location="Clay Studio, 123 W 6th St"),
+                ],
+                id="merge-pass",
+            ),
+            pytest.param(
+                [
+                    ev("a", "Beginner Pottery Class", location="Clay Studio, 123 W 6th St"),
+                    ev(
+                        "b",
+                        "Beginner Pottery Class for Adults",
+                        location="Clay Studio, 123 W 6th St",
+                    ),
+                    ev("c", "Pottery Class for Adults", location="Clay Studio, 123 W 6th St"),
+                ],
+                id="group-pass",
+            ),
+            pytest.param(
+                [
+                    ev("a", "Pottery Class", location="Clay Studio, 123 W 6th St"),
+                    ev("b", "Pottery Class", location=""),
+                ],
+                id="budget-spans-both-passes",
+            ),
+        ],
+    )
+    def test_excessive_comparisons_stop_before_next_pair(self, events):
         with pytest.raises(RouteInvariantError) as excinfo:
-            validate_route_result(result)
-        assert "comparison" in str(excinfo.value)
+            confidence_route(events, max_comparisons=1)
+        assert "2 > 1" in str(excinfo.value)
+
+    def test_comparison_budget_allows_exact_limit(self):
+        events = [
+            ev("a", "Wine & Paint Saturday Night", location="Venue"),
+            ev("b", "Wine & Paint Saturdays", location="Venue"),
+        ]
+        validate_route_result(confidence_route(events, max_comparisons=1))
 
     def test_clean_route_passes_validation(self):
         events = [
@@ -873,6 +928,14 @@ class TestPrimitives:
             )
             is True
         )
+
+    def test_state_abbreviation_inside_prose_is_not_a_state_marker(self):
+        assert (
+            locations_compatible_or_empty("Venue in Bloomington", "Venue, Bloomington, IN") is True
+        )
+
+    def test_comma_less_address_uses_the_token_before_the_state_as_city(self):
+        assert _city_token("100 Main St Bloomington IN") == "bloomington"
 
     def test_location_differing_multiword_city_tokens_are_incompatible(self):
         """Salt Lake City vs Cedar City share a state and a last word, not a town.

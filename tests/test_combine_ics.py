@@ -20,6 +20,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
+from scripts import combine_ics
 from scripts.combine_ics import combine_ics_files, dedupe_by_uid
 from scripts.ics_to_json import ics_to_json
 from tests.helpers import VTIMEZONE_LA, make_ics, make_vevent
@@ -76,6 +77,36 @@ def _combine(tmp_path):
 
 
 class TestNoTitleDeletionBeforeRoute:
+    def test_legacy_fuzzy_flag_cannot_delete_before_the_confidence_route(
+        self, tmp_path, monkeypatch
+    ):
+        _write_source_ics(
+            tmp_path,
+            "alpha",
+            "Different Listing A",
+            "Waldron Auditorium",
+            "uid-alpha",
+            "DTSTART:20990601T180000Z",
+        )
+        _write_source_ics(
+            tmp_path,
+            "beta",
+            "Different Listing B",
+            "Waldron Auditorium",
+            "uid-beta",
+            "DTSTART:20990601T180000Z",
+        )
+        monkeypatch.setenv("ENABLE_FUZZY_DEDUP", "1")
+
+        def destructive_legacy_path(events, _input_dir):
+            return events[:1]
+
+        monkeypatch.setattr(combine_ics, "dedupe_fuzzy", destructive_legacy_path)
+        combined = _combine(tmp_path)
+
+        assert "UID:uid-alpha" in combined
+        assert "UID:uid-beta" in combined
+
     def test_combine_keeps_same_title_listings_the_route_will_separate(self, tmp_path):
         # Two different venues (incompatible locations) carrying an identical
         # title at the same instant. The old title+date merge would have deleted
