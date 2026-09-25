@@ -238,6 +238,25 @@ describe('dedupeEvents attaches recurring enrichments by explicit event linkage'
     expect(attached).toHaveLength(1);
     expect(detached).toHaveLength(2);
   });
+
+  it('links enrichments in the main calendar processing path', () => {
+    const routeRow = row({ id: 37, duplicate_group: 'cr2:production', merged_ids: [37, 38] });
+    const originalOccurrence = {
+      id: 'enrichment-42-2026-09-19T18:00:00.000Z',
+      _enrichment_id: 42,
+      _enrichment_event_id: 38,
+      _enrichment_is_original_occurrence: true,
+      title: 'Concert',
+      start_time: '2026-09-19T18:00:00.000Z',
+      source: 'Picks: curator',
+      rrule: 'FREQ=WEEKLY;BYDAY=SA',
+    };
+
+    const out = window.processEvents(window.combineEvents([routeRow], [originalOccurrence]), []);
+
+    expect(out).toHaveLength(1);
+    expect(out[0].rrule).toBe('FREQ=WEEKLY;BYDAY=SA');
+  });
 });
 
 describe('clusterBorder derives its colour from the group id', () => {

@@ -2732,9 +2732,15 @@ if (typeof window !== 'undefined') {
     _combineLastASig = aSig;
     _combineLastBSig = bSig;
     _combineLastEmitSig = emitSig;
-    _combineResult = (Array.isArray(events) ? events : []).concat(
+    var combined = (Array.isArray(events) ? events : []).concat(
       Array.isArray(enrichments) ? enrichments : []
     );
+    var hasLinkedEnrichment =
+      Array.isArray(enrichments) &&
+      enrichments.some(function (event) {
+        return event && event._enrichment_event_id != null;
+      });
+    _combineResult = hasLinkedEnrichment ? dedupeEvents(combined) : combined;
     return _combineResult;
   };
 

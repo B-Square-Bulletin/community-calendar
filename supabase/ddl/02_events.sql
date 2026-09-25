@@ -64,7 +64,7 @@ CREATE INDEX IF NOT EXISTS events_category_idx ON events (category);
 CREATE INDEX IF NOT EXISTS events_city_source_uid_idx ON events (city, source_uid);
 
 -- Index for source filtering (kept for general source-column lookups;
--- refresh_source_names() now splits sources with string_to_array, not LIKE)
+-- refresh_source_names() prefers structured source_names, then falls back to source)
 CREATE INDEX IF NOT EXISTS events_source_idx ON events (source);
 
 -- Enable Row Level Security (public read access)

@@ -5,7 +5,7 @@
 -- Run: supabase test db supabase/tests/
 
 BEGIN;
-SELECT plan(11);
+SELECT plan(13);
 
 -- Use a test-only city to avoid collisions with real data
 CREATE TEMP TABLE _test_const AS SELECT 'test_city_pgtap' AS city;
@@ -175,10 +175,38 @@ SELECT is(
 );
 
 -- ============================================================================
--- Cleanup & finish
+-- Test 7: Structured names preserve embedded commas
 -- ============================================================================
 DELETE FROM events WHERE city = 'test_city_pgtap';
 DELETE FROM source_names WHERE city = 'test_city_pgtap';
 
+INSERT INTO events (city, title, start_time, source, source_names, source_uid)
+VALUES (
+  'test_city_pgtap', 'Taste event', now(), 'Taste, Inc.', ARRAY['Taste, Inc.'],
+  'uid-structured-source'
+);
+
+SELECT refresh_source_names('test_city_pgtap');
+
+SELECT is(
+  (SELECT event_count FROM source_names
+   WHERE city = 'test_city_pgtap' AND name = 'Taste, Inc.'),
+  1,
+  'A structured comma-bearing source remains one source name'
+);
+
+SELECT is(
+  (SELECT count(*)::int FROM source_names
+   WHERE city = 'test_city_pgtap' AND name IN ('Taste', 'Inc.')),
+  0,
+  'A structured comma-bearing source does not create fragments'
+);
+
+DELETE FROM events WHERE city = 'test_city_pgtap';
+DELETE FROM source_names WHERE city = 'test_city_pgtap';
+
+-- ============================================================================
+-- Cleanup & finish
+-- ============================================================================
 SELECT * FROM finish();
 ROLLBACK;

@@ -18,6 +18,35 @@ ALTER TABLE events ADD COLUMN IF NOT EXISTS duplicate_group text;
 ALTER TABLE events ADD COLUMN IF NOT EXISTS source_names text[];
 ALTER TABLE events ADD COLUMN IF NOT EXISTS duplicate_group_representative text;
 
+-- Refresh source counts from the route's structured names. The comma-joined
+-- source field remains a fallback for rows written before this route migration.
+CREATE OR REPLACE FUNCTION public.refresh_source_names(target_city text)
+RETURNS void
+SET statement_timeout TO '0'
+AS $function$
+BEGIN
+    DELETE FROM source_names WHERE city = target_city;
+
+    INSERT INTO source_names (city, name, event_count)
+    SELECT target_city, source_name, COUNT(DISTINCT event_id)
+    FROM (
+        SELECT e.id AS event_id, trim(source_entry.name) AS source_name
+        FROM events e
+        CROSS JOIN LATERAL unnest(
+            CASE
+                WHEN COALESCE(cardinality(e.source_names), 0) > 0
+                    THEN e.source_names
+                ELSE string_to_array(e.source, ',')
+            END
+        ) AS source_entry(name)
+        WHERE e.city = target_city
+          AND (COALESCE(cardinality(e.source_names), 0) > 0 OR e.source IS NOT NULL)
+    ) entries
+    WHERE source_name <> ''
+    GROUP BY source_name;
+END;
+$function$ LANGUAGE plpgsql SECURITY DEFINER;
+
 DROP MATERIALIZED VIEW IF EXISTS deduplicated_events;
 
 CREATE MATERIALIZED VIEW IF NOT EXISTS deduplicated_events AS

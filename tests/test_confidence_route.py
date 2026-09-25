@@ -369,6 +369,32 @@ class TestMerge:
             "WFIU Community Calendar": "http://agg",
         }
 
+    def test_same_source_url_selection_is_input_order_independent(self):
+        events = [
+            ev(
+                "b-source",
+                "Exact Title",
+                location="Venue, 1 Main St",
+                source="Venue",
+                url="https://venue.example/b",
+            ),
+            ev(
+                "a-source",
+                "Exact Title",
+                location="Venue, 1 Main St",
+                source="Venue",
+                url="https://venue.example/a",
+            ),
+        ]
+
+        forward = confidence_route(events)
+        reverse = confidence_route(list(reversed(events)))
+        forward_survivor = next(e for e in forward.events if e["source_uid"] == "a-source")
+        reverse_survivor = next(e for e in reverse.events if e["source_uid"] == "a-source")
+
+        assert forward_survivor["source_urls"] == reverse_survivor["source_urls"]
+        assert forward_survivor["source_urls"] == {"Venue": "https://venue.example/a"}
+
 
 # ===========================================================================
 # Pure route: Group

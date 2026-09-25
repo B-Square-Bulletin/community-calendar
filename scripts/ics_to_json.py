@@ -707,7 +707,7 @@ def _fold_sources(members):
     """
     names: list[str] = []
     urls: dict[str, str] = {}
-    for member in members:
+    for member in sorted(members, key=_survivor_sort_key):
         member_names = structured_source_names(member)
         for name in member_names:
             if name not in names:
