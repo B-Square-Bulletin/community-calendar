@@ -444,4 +444,17 @@ describe('structured source_names outside the card path', () => {
     ]);
     expect(out[0].source).toBe('Taste, Inc.');
   });
+
+  it('filterExternalExclusions excludes a comma-containing name exactly', () => {
+    const events = [row({ id: 1, source: 'Taste, Inc.', source_names: ['Taste, Inc.'] })];
+    const previous = window.externalExclusions;
+    try {
+      window.externalExclusions = { excludedSources: ['Taste, Inc.'] };
+      expect(window.filterExternalExclusions(events)).toHaveLength(0);
+      window.externalExclusions = { excludedSources: ['Taste'] };
+      expect(window.filterExternalExclusions(events)).toHaveLength(1);
+    } finally {
+      window.externalExclusions = previous;
+    }
+  });
 });

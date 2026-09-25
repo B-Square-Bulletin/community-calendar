@@ -2506,11 +2506,12 @@ if (typeof window !== 'undefined') {
     var requireApproval = exc.requireApproval && exc.lastReviewed;
     var lastReviewed = exc.lastReviewed || null;
     return events.filter(function (e) {
-      if (e.source) {
-        var parts = e.source.split(', ');
-        for (var i = 0; i < parts.length; i++) {
-          if (exSources.indexOf(parts[i]) >= 0) return false;
-        }
+      // Structured source_names first (spec amendment L402): splitting the
+      // legacy comma-joined `source` would fabricate names for a human source
+      // such as "Taste, Inc." and fail to exclude it.
+      var parts = eventSourceNames(e);
+      for (var i = 0; i < parts.length; i++) {
+        if (exSources.indexOf(parts[i]) >= 0) return false;
       }
       if (e.category && exCategories.indexOf(e.category) >= 0) return false;
       if (e.source_uid && rejSet[e.source_uid]) return false;
