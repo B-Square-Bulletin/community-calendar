@@ -499,10 +499,13 @@ def _locations_compatible(a, b, *, strict=False):
     - the city and state tokens every listing in a town shares cannot count
       toward the shared-token match, so two same-town venues that share only
       their town and a common word ("Community Center" vs "Community Church")
-      do not merge; and
+      do not merge;
     - a pair where neither side names an identifiable city is not "the same
       venue spelled differently" — unknown formats stay apart unless their
-      normalized text is exactly equal (spec amendment L401).
+      normalized text is exactly equal (spec amendment L401); and
+    - when neither side has a street number to corroborate the match, two
+      shared tokens are not enough, because generic venue words ("first",
+      "church") are weak evidence on their own.
 
     Group keeps every row, so it stays permissive: a false positive there only
     over-collapses a card, and never deletes a listing.
@@ -526,7 +529,7 @@ def _locations_compatible(a, b, *, strict=False):
         if not city_a and not city_b:
             return False
         # The town/state every listing in a town shares is not evidence of a
-        # match; only the distinctive venue tokens count.
+        # match; the remaining shared tokens are all that count.
         excluded = {t for t in tokens_a + tokens_b if t in _US_STATE_TOKENS}
         for city in (city_a, city_b):
             if city:
@@ -536,7 +539,11 @@ def _locations_compatible(a, b, *, strict=False):
     number_b = next((t for t in tokens_b if t.isdigit()), None)
     if number_a and number_b and number_a != number_b:
         return False
-    return len(shared) >= 2
+    # Two shared tokens are enough when a street number corroborates the match.
+    # Without one, the words may be generic ("first", "church"), so the
+    # destructive Merge band demands a third.
+    required = 3 if (strict and not number_a and not number_b) else 2
+    return len(shared) >= required
 
 
 def locations_compatible_both(a, b):

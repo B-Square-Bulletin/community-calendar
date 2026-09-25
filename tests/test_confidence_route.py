@@ -206,13 +206,32 @@ class TestMerge:
     def test_merge_ignores_shared_city_and_state_tokens(self):
         """Two venues in one town: the shared town/state tokens are not evidence.
 
-        The experienced case has an identifiable city, so the unknown-format
+        The state-bearing case has an identifiable city, so the unknown-format
         rule cannot fire. What keeps the two apart is excluding the shared
         town/state tokens from the compatibility count.
         """
         events = [
             ev("a", "Community Gathering", location="Community Center, Bloomington, IN"),
             ev("b", "Community Gathering", location="Community Church, Bloomington, IN"),
+        ]
+        result = confidence_route(events)
+        assert len(result.events) == 2
+        assert result.diagnostics["merge_deleted"] == 0
+
+    def test_merge_refuses_generic_shared_words_without_an_address(self):
+        """No street number => two shared words are not enough to delete a row.
+
+        "First Presbyterian Church" and "First United Methodist Church" share
+        "first" and "church". With an address present those two tokens pass; with
+        none they do not, so a real listing is not deleted.
+        """
+        events = [
+            ev("a", "Community Gathering", location="First Presbyterian Church, Bloomington, IN"),
+            ev(
+                "b",
+                "Community Gathering",
+                location="First United Methodist Church, Bloomington, IN",
+            ),
         ]
         result = confidence_route(events)
         assert len(result.events) == 2
@@ -909,6 +928,27 @@ class TestPrimitives:
                 "Community Center, Bloomington, IN", "Community Church, Bloomington, IN"
             )
             is False
+        )
+
+    def test_merge_without_a_street_number_needs_three_shared_tokens(self):
+        """Generic shared words are weaker evidence when no address corroborates.
+
+        The Merge band rejects the two-token "first" + "church" match because
+        neither side has a street number. When a matching street number is
+        present, the same two-token overlap is accepted.
+        """
+        assert (
+            locations_compatible_both(
+                "First Presbyterian Church, Bloomington, IN",
+                "First United Methodist Church, Bloomington, IN",
+            )
+            is False
+        )
+        assert (
+            locations_compatible_both(
+                "100 Main St, Bloomington, IN", "100 Main St, Bloomington, IN 47401"
+            )
+            is True
         )
 
     def test_group_predicate_stays_permissive_for_unknown_locations(self):

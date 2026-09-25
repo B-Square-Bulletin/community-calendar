@@ -29,11 +29,12 @@ exactly one outcome:
 
 - **Merge** — identical cleaned full title, same start instant, and compatible
   locations present on *both* sides (the Merge variant of location
-  compatibility is stricter than Group: with no identifiable city, shared
-  generic tokens are not enough, and the town/state every listing shares does
-  not count — see `_locations_compatible`). One representative survives
-  (primary source first, then smallest `source_uid`, then smallest URL); the
-  other sources fold into it. Merge is computed as equivalence classes over the
+  compatibility is stricter than Group: a pair with no identifiable city does
+  not match on shared tokens, a pair with no street number needs three shared
+  tokens rather than two, and the town/state every listing shares does not
+  count — see `_locations_compatible`). One representative survives (primary
+  source first, then smallest `source_uid`, then smallest URL); the other
+  sources fold into it. Merge is computed as equivalence classes over the
   exact-title relation alone, over merge edges only, so it can never propagate
   through a similarity edge. No threshold change can cause a deletion.
 - **Group** — similarity at or above the threshold (0.80), same start instant,
@@ -95,7 +96,8 @@ listing duplicated, and merging it is correct.
 - Empty-location pairs can Group (the accepted false-positive budget); the
   threshold and guards are the tuning surface. The destructive Merge band is
   stricter than Group about locations: a pair with no identifiable city does
-  not Merge on shared tokens, and the town/state tokens every listing in a town
+  not Merge on shared tokens, a pair with no street number needs three shared
+  tokens rather than two, and the town/state tokens every listing in a town
   shares do not count as compatibility.
 
 ## Alternatives Considered
