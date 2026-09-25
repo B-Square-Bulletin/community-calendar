@@ -539,9 +539,14 @@ def _locations_compatible(a, b, *, strict=False):
     number_b = next((t for t in tokens_b if t.isdigit()), None)
     if number_a and number_b and number_a != number_b:
         return False
-    # Two shared tokens are enough when a street number corroborates the match.
-    # Without one, the words may be generic ("first", "church"), so the
-    # destructive Merge band demands a third.
+    # The destructive band demands a third shared token when neither side has a
+    # street number: two generic words ("first", "church") are weak evidence on
+    # their own. A number on either side keeps the two-token threshold, which is
+    # what lets a venue name match its own address spelling ("Auer Hall" vs
+    # "Auer Hall, 200 S Eagleson Ave, Bloomington, IN"). This also keeps a
+    # one-sided-number false match possible; requiring both numbers to match
+    # would delete 61 genuine venue-name/address merges on the production
+    # artifact, so the residual is accepted (ADR 0013).
     required = 3 if (strict and not number_a and not number_b) else 2
     return len(shared) >= required
 

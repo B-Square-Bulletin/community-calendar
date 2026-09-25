@@ -99,6 +99,12 @@ listing duplicated, and merging it is correct.
   not Merge on shared tokens, a pair with no street number needs three shared
   tokens rather than two, and the town/state tokens every listing in a town
   shares do not count as compatibility.
+- A street number on *either* side keeps the two-token threshold, so a number
+  on one venue name can still match two shared generic words ("100 First
+  Presbyterian Church" vs "First United Methodist Church"). Requiring matching
+  numbers on both sides would remove that residual, but it also drops 61
+  genuine venue-name/address merges on the production artifact ("Auer Hall" vs
+  "Auer Hall, 200 S Eagleson Ave"), so the residual is accepted.
 
 ## Alternatives Considered
 

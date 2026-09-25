@@ -951,6 +951,28 @@ class TestPrimitives:
             is True
         )
 
+    def test_merge_one_sided_number_keeps_the_two_token_threshold(self):
+        """A number on either side keeps the two-token threshold (accepted).
+
+        The two-token rule lets a venue name match its own address spelling,
+        and most such pairs carry a number on only one side ("Auer Hall" vs the
+        full address). Requiring matching numbers on both sides would drop 61
+        genuine merges on the production artifact, so a number on either side is
+        enough. The residual: a number prefixed to one venue name can still
+        match two shared generic words; ADR 0013 records the trade.
+        """
+        assert (
+            locations_compatible_both("Auer Hall", "Auer Hall, 200 S Eagleson Ave, Bloomington, IN")
+            is True
+        )
+        assert (
+            locations_compatible_both(
+                "100 First Presbyterian Church, Bloomington, IN",
+                "First United Methodist Church, Bloomington, IN",
+            )
+            is True
+        )
+
     def test_group_predicate_stays_permissive_for_unknown_locations(self):
         """The two bands are asymmetric by design (spec L137-141).
 
