@@ -166,6 +166,80 @@ describe('dedupeEvents folds structured source_names', () => {
   });
 });
 
+describe('dedupeEvents attaches recurring enrichments by explicit event linkage', () => {
+  it('carries the enrichment rrule onto its linked route row', () => {
+    const out = window.dedupeEvents([
+      row({
+        id: 7,
+        start_time: '2026-09-20T01:00:00+00:00',
+        duplicate_group: 'cr2:group',
+        merged_ids: [7, 8],
+      }),
+      {
+        id: 'enrichment-12-2026-09-19T18:00:00.000Z',
+        _enrichment_id: 12,
+        _enrichment_event_id: 8,
+        title: 'Concert',
+        start_time: '2026-09-19T18:00:00.000Z',
+        source: 'Picks: curator',
+        rrule: 'FREQ=WEEKLY;BYDAY=SA',
+        _enrichment_is_original_occurrence: true,
+      },
+    ]);
+
+    expect(out).toHaveLength(1);
+    expect(out[0].rrule).toBe('FREQ=WEEKLY;BYDAY=SA');
+    expect(out[0].source).toContain('Picks: curator');
+    expect(out[0].mergedIds).toEqual([7, 8]);
+  });
+
+  it('does not attach an enrichment to a different occurrence time', () => {
+    const out = window.dedupeEvents([
+      row({
+        id: 7,
+        start_time: '2026-09-20T01:00:00+00:00',
+        duplicate_group: 'cr2:group',
+        merged_ids: [7, 8],
+      }),
+      {
+        id: 'enrichment-12-2026-09-26T18:00:00.000Z',
+        _enrichment_id: 12,
+        _enrichment_event_id: 8,
+        title: 'Concert',
+        start_time: '2026-09-26T18:00:00.000Z',
+        source: 'Picks: curator',
+        rrule: 'FREQ=WEEKLY;BYDAY=SA',
+        _enrichment_is_original_occurrence: false,
+      },
+    ]);
+
+    expect(out).toHaveLength(2);
+  });
+
+  it('invalidates the combine cache when the enrichment event link changes', () => {
+    const routeRow = row({ id: 17, duplicate_group: 'cr2:linked', merged_ids: [17, 18] });
+    const linkedOccurrence = {
+      id: 'enrichment-22-2026-09-19T18:00:00.000Z',
+      _enrichment_id: 22,
+      _enrichment_is_original_occurrence: true,
+      title: 'Concert',
+      start_time: '2026-09-19T18:00:00.000Z',
+      source: 'Picks: curator',
+      rrule: 'FREQ=WEEKLY;BYDAY=SA',
+    };
+
+    const attached = window.dedupeEvents(
+      window.combineEvents([routeRow], [{ ...linkedOccurrence, _enrichment_event_id: 18 }])
+    );
+    const detached = window.dedupeEvents(
+      window.combineEvents([routeRow], [{ ...linkedOccurrence, _enrichment_event_id: 19 }])
+    );
+
+    expect(attached).toHaveLength(1);
+    expect(detached).toHaveLength(2);
+  });
+});
+
 describe('clusterBorder derives its colour from the group id', () => {
   it('renders no border for a NULL group', () => {
     expect(window.clusterBorder(null, false)).toEqual('none');
@@ -283,6 +357,7 @@ describe('consumers read the stored decision from the view', () => {
     expect(tile).not.toContain('/rest/v1/events?');
     expect(tile).toMatch(/select=[^&']*\bduplicate_group\b/);
     expect(tile).toMatch(/select=[^&']*\bmerged_ids\b/);
+    expect(tile).toMatch(/select=[^&']*\btranscript\b/);
   });
 
   it('the calendar and dashboard projections select structured source_names', () => {

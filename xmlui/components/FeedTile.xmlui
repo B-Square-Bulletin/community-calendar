@@ -2,7 +2,7 @@
 
   <DataSource
     id="tileEvents"
-    url="{appGlobals.supabaseUrl + '/rest/v1/deduplicated_events?select=id,title,start_time,end_time,url,location,description,source,source_names,source_urls,category,image_url,all_day,merged_ids,duplicate_group,city&order=start_time.asc&limit=200&start_time=gte.' + window.getFromDate() + '&start_time=lte.' + window.getToDate() + '&city=eq.' + ($props.city || 'none')}"
+    url="{appGlobals.supabaseUrl + '/rest/v1/deduplicated_events?select=id,title,start_time,end_time,url,location,description,source,source_names,source_urls,category,image_url,all_day,merged_ids,duplicate_group,transcript,city&order=start_time.asc&limit=200&start_time=gte.' + window.getFromDate() + '&start_time=lte.' + window.getToDate() + '&city=eq.' + ($props.city || 'none')}"
     headers="{{
       apikey: appGlobals.supabasePublishableKey,
       'Cache-Control': 'no-cache, no-store, must-revalidate'

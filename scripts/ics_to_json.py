@@ -449,8 +449,26 @@ def normalize_location(location):
     """Lowercase, strip punctuation, and expand known abbreviations."""
     if not location:
         return ""
-    text = re.sub(r"[.,]", " ", location.lower())
-    return " ".join(_LOCATION_ABBREVIATIONS.get(token, token) for token in text.split() if token)
+    segments = _raw_location_segments(location)
+    marker = _state_marker(location)
+    normalized_segments = []
+    for segment_index, tokens in enumerate(segments):
+        normalized_tokens = []
+        for token_index, token in enumerate(tokens):
+            is_state_token = (
+                marker
+                and segment_index == len(segments) - 1
+                and marker[2] <= token_index < marker[2] + len(marker[1])
+            )
+            normalized_tokens.append(
+                token if is_state_token else _LOCATION_ABBREVIATIONS.get(token, token)
+            )
+        normalized_segments.append(" ".join(normalized_tokens))
+    return " ".join(segment for segment in normalized_segments if segment)
+
+
+def _raw_location_segments(location):
+    return [re.sub(r"[.,]", " ", segment.lower()).split() for segment in location.split(",")]
 
 
 def _state_marker(location):
@@ -463,7 +481,7 @@ def _state_marker(location):
     """
     if not location:
         return None
-    segments = [normalize_location(segment).split() for segment in str(location).split(",")]
+    segments = _raw_location_segments(location)
     if not segments:
         return None
     tokens = segments[-1]
@@ -472,17 +490,23 @@ def _state_marker(location):
     if not tokens:
         return None
 
-    for name, state in _US_STATE_TOKENS.items():
-        if len(name) <= 2:
-            continue
-        name_tokens = name.split()
-        if len(tokens) >= len(name_tokens) and tokens[-len(name_tokens) :] == name_tokens:
-            return state, tuple(name_tokens)
+    for token_count in range(min(3, len(tokens)), 0, -1):
+        name_tokens = tokens[-token_count:]
+        name = " ".join(name_tokens)
+        if len(name) > 2 and name in _US_STATE_TOKENS:
+            return _US_STATE_TOKENS[name], tuple(name_tokens), len(tokens) - token_count
 
     code = tokens[-1]
     if len(code) == 2 and code in _US_STATE_TOKENS:
-        return _US_STATE_TOKENS[code], (code,)
-    return None
+        prefix = tokens[:-1]
+        if any(token.isdigit() for token in prefix):
+            street_suffixes = set(_LOCATION_ABBREVIATIONS) | set(_LOCATION_ABBREVIATIONS.values())
+            suffix_positions = [
+                index for index, token in enumerate(prefix) if token in street_suffixes
+            ]
+            if not suffix_positions or suffix_positions[-1] == len(prefix) - 1:
+                return None
+        return _US_STATE_TOKENS[code], (code,), len(tokens) - 1
 
 
 def _region_tokens(location):
@@ -840,6 +864,8 @@ def confidence_route(
                 if location_guard and not locations_compatible_or_empty(
                     identified[a].get("location"), identified[b].get("location")
                 ):
+                    continue
+                if not cleaned[a] or not cleaned[b]:
                     continue
                 if token_set_similarity(cleaned[a], cleaned[b]) < threshold:
                     continue

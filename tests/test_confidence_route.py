@@ -32,6 +32,7 @@ from scripts.ics_to_json import (
     ics_to_json,
     locations_compatible_both,
     locations_compatible_or_empty,
+    normalize_location,
     normalize_route_title,
     structured_source_names,
     validate_route_result,
@@ -191,6 +192,17 @@ class TestMerge:
         assert outcomes["a"].outcome == "separate"
         assert outcomes["b"].outcome == "separate"
         assert outcomes["a"].duplicate_group is None
+
+    def test_connecticut_postal_code_stays_a_state_marker(self):
+        events = [
+            ev("hartford", "Exact Event", location="100 Main St, Hartford, CT"),
+            ev("bridgeport", "Exact Event", location="100 Main St, Bridgeport, Connecticut"),
+        ]
+
+        result = confidence_route(events)
+
+        assert len(result.events) == 2
+        assert result.diagnostics["merge_deleted"] == 0
 
     def test_merge_requires_matching_multiword_city_tokens(self):
         """Same street number in two same-state multi-word towns stays two rows."""
@@ -496,6 +508,12 @@ class TestGroup:
         result = confidence_route(events)
         assert result.diagnostics["groups"] == 1
         assert by_uid(result)["trivia-a"].outcome == "group"
+
+    def test_empty_titles_stay_separate(self):
+        result = confidence_route([ev("empty-a", "", location=""), ev("empty-b", "", location="")])
+
+        assert len(result.events) == 2
+        assert result.diagnostics["groups"] == 0
 
     def test_variant_guard_blocks_squad_variants(self):
         events = [
@@ -936,6 +954,9 @@ class TestPrimitives:
 
     def test_comma_less_address_uses_the_token_before_the_state_as_city(self):
         assert _city_token("100 Main St Bloomington IN") == "bloomington"
+
+    def test_comma_less_court_suffix_is_not_a_connecticut_code(self):
+        assert normalize_location("100 Main Ct") == "100 main court"
 
     def test_location_differing_multiword_city_tokens_are_incompatible(self):
         """Salt Lake City vs Cedar City share a state and a last word, not a town.

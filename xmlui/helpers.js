@@ -1348,8 +1348,8 @@ function sourceCountTooltip(row, hiddenSources) {
   );
 }
 
-// Deduplicate events: collapse rows sharing the route's stored duplicate_group
-// (a NULL group is one row is one group), combining membership, sources, and links
+// Deduplicate route rows by stored duplicate_group. Attach each enrichment's
+// original occurrence through its event_id; titles never provide a fallback key.
 // Cache variables (module-level for browser, will be on window)
 let _dedupedEventsCache = null;
 let _dedupedEventsLastLen = 0;
@@ -1374,18 +1374,41 @@ function dedupeEvents(events) {
   _dedupedEventsLastFirst = events[0];
   _dedupedEventsLastLast = events[events.length - 1];
 
+  // Recurring enrichment occurrences have synthetic ids. Link only the
+  // original RRULE occurrence to its stored event; future occurrences remain
+  // separate virtual rows. The event_id comes from the enrichment foreign key.
+  const routeGroupByMember = new Map();
+  events.forEach((e) => {
+    if (e._enrichment_event_id != null) return;
+    const normalizedTime = e.start_time ? new Date(e.start_time).toISOString() : '';
+    const routeGroup =
+      e.duplicate_group != null && e.duplicate_group !== ''
+        ? 'g:' + e.duplicate_group
+        : 'r:' + e.id;
+    const memberIds = Array.isArray(e.merged_ids) && e.merged_ids.length ? e.merged_ids : [e.id];
+    memberIds.forEach((id) => {
+      routeGroupByMember.set(String(id), { group: routeGroup, startTime: normalizedTime });
+    });
+  });
+
   const groups = {};
   events.forEach((e) => {
     // Normalize start_time to ISO string for consistent dedup across formats
     // e.g. '2026-02-11T18:00:00+00:00' and '2026-02-11T18:00:00.000Z' are the same instant
-    const normalizedTime = e.start_time ? new Date(e.start_time).toISOString() : '';
-    // The route's stored decision is authoritative. Two rows collapse only when
-    // they share a non-NULL duplicate_group; a NULL group means the route left
-    // the row alone, so the row id is its own key (never fall back to title).
+    const virtualTime = e.start_time ? new Date(e.start_time).toISOString() : '';
+    // The route's stored decision is authoritative for calendar rows. The
+    // original recurrence uses its linked row's stored time; other NULL-group
+    // rows keep their own row key and virtual occurrence time.
+    const linkedRoute =
+      e._enrichment_event_id != null && e._enrichment_is_original_occurrence
+        ? routeGroupByMember.get(String(e._enrichment_event_id))
+        : null;
+    const normalizedTime = linkedRoute ? linkedRoute.startTime : virtualTime;
     const group =
-      e.duplicate_group != null && e.duplicate_group !== ''
+      (linkedRoute && linkedRoute.group) ||
+      (e.duplicate_group != null && e.duplicate_group !== ''
         ? 'g:' + e.duplicate_group
-        : 'r:' + e.id;
+        : 'r:' + e.id);
     const key = group + '|' + normalizedTime;
     // Seed membership from the view's merged_ids so a pick on the card lights
     // up every member; fall back to the row id for raw rows.
@@ -1458,6 +1481,8 @@ function dedupeEvents(events) {
       };
       delete out.sourceNames;
       delete out.structuredSources;
+      delete out._enrichment_event_id;
+      delete out._enrichment_is_original_occurrence;
       return out;
     })
     .sort((a, b) => {
@@ -2274,6 +2299,8 @@ function expandEnrichments(enrichments, fromDateStr, toDateStr) {
           city: enrichment.city || null,
           rrule: enrichment.rrule,
           _enrichment_id: enrichment.id,
+          _enrichment_event_id: enrichment.event_id,
+          _enrichment_is_original_occurrence: date.getTime() === dtstart.getTime(),
         });
       });
     } catch (e) {
@@ -2654,10 +2681,24 @@ if (typeof window !== 'undefined') {
   // signature instead (the ccArraySig length + first/last id test) plus the
   // emission signature shell.js publishes (#86), and __ccRefStats counts the
   // identity churn as evidence for the upstream XMLUI finding.
-  function ccArraySig(a) {
+  function ccArraySig(a, includeEnrichmentLinkage) {
     if (!Array.isArray(a)) return 'na';
     if (!a.length) return '0';
-    return a.length + ':' + a[0].id + ':' + a[a.length - 1].id;
+    var signature = a.length + ':' + a[0].id + ':' + a[a.length - 1].id;
+    if (includeEnrichmentLinkage) {
+      signature +=
+        ':' +
+        a
+          .map(function (e) {
+            return [
+              e._enrichment_id,
+              e._enrichment_event_id,
+              e._enrichment_is_original_occurrence,
+            ].join('|');
+          })
+          .join(',');
+    }
+    return signature;
   }
   window.__ccRefStats = { combineCalls: 0, eventsRefChanges: 0, enrichRefChanges: 0 };
   var _combineLastARef = null,
@@ -2678,7 +2719,7 @@ if (typeof window !== 'undefined') {
       _combineLastBRef = enrichments;
     }
     var aSig = ccArraySig(events),
-      bSig = ccArraySig(enrichments),
+      bSig = ccArraySig(enrichments, true),
       emitSig = window.__ccEmitSig || '';
     if (
       aSig === _combineLastASig &&
@@ -2816,6 +2857,7 @@ if (typeof window !== 'undefined') {
           enrichments.map(function (e) {
             return [
               e.id,
+              e.event_id,
               e.rrule,
               e.start_time,
               e.title,

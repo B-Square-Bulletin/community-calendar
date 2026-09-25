@@ -862,8 +862,8 @@
         it('carries rrule from enrichment event to merged result', () => {
           clearDedupeCache();
           const events = [
-            { id: 1, title: 'Circus jam', start_time: '2026-02-11T18:00:00Z', source: 'Bohemian', duplicate_group: 'cr1:r' },
-            { id: 'enrichment-5-2026-02-11T18:00:00.000Z', title: 'Circus jam', start_time: '2026-02-11T18:00:00.000Z', source: 'Picks: jon', rrule: 'FREQ=WEEKLY;BYDAY=WE', duplicate_group: 'cr1:r' }
+            { id: 1, title: 'Circus jam', start_time: '2026-02-12T02:00:00Z', source: 'Bohemian', duplicate_group: 'cr1:r', merged_ids: [1, 5] },
+            { id: 'enrichment-5-2026-02-11T18:00:00.000Z', title: 'Circus jam', start_time: '2026-02-11T18:00:00.000Z', source: 'Picks: jon', rrule: 'FREQ=WEEKLY;BYDAY=WE', _enrichment_id: 5, _enrichment_event_id: 5, _enrichment_is_original_occurrence: true }
           ];
           const result = dedupeEvents(events);
           assertEqual(result.length, 1, 'Should merge into one event');
@@ -960,6 +960,7 @@
         it('copies fields from enrichment', () => {
           const enrichments = [{
             id: 1,
+            event_id: 77,
             title: 'Weekly Jam',
             start_time: '2026-02-04T19:00:00Z',
             rrule: 'FREQ=WEEKLY;BYDAY=WE',
@@ -972,6 +973,26 @@
           assertEqual(result[0].location, 'Cafe');
           assertEqual(result[0].description, 'Fun times');
           assertEqual(result[0].url, 'http://example.com');
+          assertEqual(result[0]._enrichment_event_id, 77);
+          assertEqual(result[0]._enrichment_is_original_occurrence, true);
+        });
+
+        it('refreshes occurrence linkage when event_id changes', () => {
+          const enrichment = {
+            id: 901,
+            event_id: 77,
+            title: 'Linked Jam',
+            start_time: '2026-02-04T19:00:00Z',
+            rrule: 'FREQ=WEEKLY;BYDAY=WE'
+          };
+          expandEnrichments([enrichment], '2026-02-01T00:00:00Z', '2026-02-28T23:59:59Z');
+          const result = expandEnrichments(
+            [{ ...enrichment, event_id: 78 }],
+            '2026-02-01T00:00:00Z',
+            '2026-02-28T23:59:59Z'
+          );
+
+          assertEqual(result[0]._enrichment_event_id, 78);
         });
 
         it('expands on correct local day when UTC day differs (Taco Tuesday bug)', () => {
