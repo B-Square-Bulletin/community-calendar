@@ -320,17 +320,19 @@ class TestBoundedTimeouts:
 
     def test_curl_run_passes_a_hard_timeout(self, monkeypatch, tmp_path):
         outfile = tmp_path / "x.ics"
-        seen: dict[str, float | None] = {}
+        seen: dict[str, object] = {}
         monkeypatch.setattr(df, "_download_body", _raise_urlerror)
 
         def fake_run(cmd, *args, **kwargs):
             seen["timeout"] = kwargs.get("timeout")
+            seen["check"] = kwargs.get("check")
             outfile.write_bytes(b"BEGIN:VEVENT\r\nEND:VEVENT\r\n")
 
         monkeypatch.setattr(df.subprocess, "run", fake_run)
 
         assert df.fetch_with_curl_fallback("https://fake.example/ics", outfile) is True
         assert seen["timeout"] == df._CURL_HARD_TIMEOUT_SECONDS
+        assert seen["check"] is True
 
     def test_curl_timeout_discards_partial_file(self, monkeypatch, tmp_path, capsys):
         """A curl killed by the backstop must not leave a truncated file as success."""
@@ -347,6 +349,24 @@ class TestBoundedTimeouts:
         assert not outfile.exists()
         # The timeout reason is visible in the log, not just a generic failure.
         assert "timed out after" in capsys.readouterr().out
+
+    def test_curl_nonzero_exit_discards_partial_file(self, monkeypatch, tmp_path):
+        """curl's own --max-time exits 28 leaving a partial file behind.
+
+        It does not raise TimeoutExpired (that is only the subprocess backstop),
+        so the non-zero exit must itself discard the truncated output.
+        """
+        outfile = tmp_path / "x.ics"
+        monkeypatch.setattr(df, "_download_body", _raise_urlerror)
+
+        def fake_run(cmd, *args, **kwargs):
+            outfile.write_bytes(b"BEGIN:VEVENT\r\n")  # partial download
+            raise subprocess.CalledProcessError(28, cmd)
+
+        monkeypatch.setattr(df.subprocess, "run", fake_run)
+
+        assert df.fetch_with_curl_fallback("https://fake.example/ics", outfile) is False
+        assert not outfile.exists()
 
     def test_stalled_server_returns_instead_of_hanging(self, monkeypatch, tmp_path):
         """A reachable-but-silent source must fail fast, not hang the build."""

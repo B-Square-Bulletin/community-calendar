@@ -267,11 +267,18 @@ def fetch_with_curl_fallback(url: str, outfile: Path) -> bool:
         # falls through to curl. curl's own flags are the primary bound; the
         # subprocess backstop catches a curl that ignores them.
         try:
-            subprocess.run(_curl_command(url, outfile), timeout=_CURL_HARD_TIMEOUT_SECONDS)
+            subprocess.run(
+                _curl_command(url, outfile),
+                timeout=_CURL_HARD_TIMEOUT_SECONDS,
+                check=True,
+            )
+        except subprocess.CalledProcessError as e:
+            # curl's own --max-time exits 28 having written a partial file;
+            # without this the truncated feed counts as a success below.
+            print(f"  ⚠️  curl failed (exit {e.returncode}): {url}")
+            outfile.unlink(missing_ok=True)
         except subprocess.TimeoutExpired:
             print(f"  ⏱ curl timed out after {_CURL_HARD_TIMEOUT_SECONDS}s: {url}")
-            # Discard the partial file so a truncated download is not
-            # reported as success.
             outfile.unlink(missing_ok=True)
 
     return outfile.exists() and outfile.stat().st_size > 0
