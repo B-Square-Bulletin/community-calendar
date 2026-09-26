@@ -94,6 +94,19 @@ url_agg AS (
     WHERE rn = 1
     GROUP BY city, start_time, group_key
 ),
+ics_categories_pick AS (
+    -- Pick one member's categories. A `text[]` column cannot go through
+    -- `array_agg` (2202E when members differ), so select the first non-NULL
+    -- value in the same deterministic order the rolled columns use.
+    SELECT DISTINCT ON (b.city, b.start_time, b.group_key)
+        b.city,
+        b.start_time,
+        b.group_key,
+        b.ics_categories
+    FROM base b
+    WHERE b.ics_categories IS NOT NULL
+    ORDER BY b.city, b.start_time, b.group_key, b.rep_rank, b.id
+),
 rolled AS (
     SELECT
         (array_agg(b.id ORDER BY b.rep_rank, b.id))[1] AS id,
@@ -109,7 +122,6 @@ rolled AS (
         (array_agg(b.transcript ORDER BY b.rep_rank, b.id) FILTER (WHERE b.transcript IS NOT NULL))[1] AS transcript,
         (array_agg(b.source_id ORDER BY b.rep_rank, b.id))[1] AS source_id,
         (array_agg(b.category ORDER BY b.rep_rank, b.id) FILTER (WHERE b.category IS NOT NULL))[1] AS category,
-        (array_agg(b.ics_categories ORDER BY b.rep_rank, b.id) FILTER (WHERE b.ics_categories IS NOT NULL))[1] AS ics_categories,
         (array_agg(b.image_url ORDER BY b.rep_rank, b.id) FILTER (WHERE b.image_url IS NOT NULL))[1] AS image_url,
         bool_or(b.all_day) AS all_day,
         max(b.duplicate_group) AS duplicate_group,
@@ -135,7 +147,7 @@ SELECT
     r.source_id,
     u.source_urls,
     r.category,
-    r.ics_categories,
+    ic.ics_categories,
     r.image_url,
     r.all_day,
     r.duplicate_group,
@@ -145,6 +157,7 @@ SELECT
 FROM rolled r
 LEFT JOIN name_agg n USING (city, start_time, group_key)
 LEFT JOIN url_agg u USING (city, start_time, group_key)
+LEFT JOIN ics_categories_pick ic USING (city, start_time, group_key)
 ORDER BY r.start_time;
 
 -- Unique index required for REFRESH MATERIALIZED VIEW CONCURRENTLY.

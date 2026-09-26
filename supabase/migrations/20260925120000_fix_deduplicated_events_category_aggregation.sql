@@ -1,20 +1,23 @@
--- Materialized view: deduplicated_events
--- Authoritative deduplicated read model. The confidence route (#150) stores one
--- Merge/Group/Separate decision per listing as events.duplicate_group; this view
--- groups by that stored decision and never recomputes similarity, location, or
--- grouping.
+-- Fix REFRESH MATERIALIZED VIEW deduplicated_events failing with
+--   2202E: cannot accumulate arrays of different dimensionality
 --
--- NULL isolation: a NULL duplicate_group means the route left the row alone and
--- it is its own group. PostgreSQL groups all NULLs together, so each NULL row is
--- keyed by a per-row value ('row:<id>') instead of by the NULL itself.
+-- The #150 view aggregated the `ics_categories text[]` column with
+-- `array_agg`. PostgreSQL builds a rectangular array from the inputs, so a
+-- stored duplicate group whose members carry category arrays of different
+-- lengths (for example `{Music}` and `{Music,Festival}`) makes the refresh
+-- fail. Every consumer then reads a stale or missing decision, and the
+-- Generate Calendar workflow fails at the refresh step.
 --
--- Representative: the route persists duplicate_group_representative, so the
--- view presents that member's fields and id. There is no database-assigned
--- min(id) competing rule.
+-- The view presents one representative per group, so it presents that
+-- representative's categories instead of accumulating member arrays. The pick
+-- follows the same (rep_rank, id) ordering and "first non-NULL wins" rule the
+-- other rolled columns use; it just cannot use `array_agg` over an array.
 --
--- Refreshed after load-events runs so the app can query pre-deduplicated rows.
+-- This migration supersedes the view definition in
+-- 20260923120000_add_duplicate_group_and_route_view.sql. That migration is
+-- already applied; the CLI will not re-run it, so the corrected definition
+-- ships here.
 
-DROP VIEW IF EXISTS deduplicated_events;
 DROP MATERIALIZED VIEW IF EXISTS deduplicated_events;
 
 CREATE MATERIALIZED VIEW IF NOT EXISTS deduplicated_events AS
@@ -22,6 +25,7 @@ WITH base AS (
     SELECT
         e.*,
         COALESCE(e.duplicate_group, 'row:' || e.id::text) AS group_key,
+        -- The route representative sorts first so representative fields win.
         CASE
             WHEN e.duplicate_group IS NOT NULL
                 AND e.source_uid IS NOT DISTINCT FROM e.duplicate_group_representative
@@ -38,6 +42,8 @@ WITH base AS (
     WHERE e.source IS DISTINCT FROM 'poster_capture'
 ),
 name_occurrences AS (
+    -- Rank whole occurrences so the representative rank and source position
+    -- always come from the same member row.
     SELECT
         b.city,
         b.start_time,
@@ -118,6 +124,7 @@ rolled AS (
         b.city,
         (array_agg(b.transcript ORDER BY b.rep_rank, b.id) FILTER (WHERE b.transcript IS NOT NULL))[1] AS transcript,
         (array_agg(b.source_id ORDER BY b.rep_rank, b.id))[1] AS source_id,
+        -- cluster_id stays readable for the one-compatibility-build window.
         (array_agg(b.cluster_id ORDER BY b.rep_rank, b.id) FILTER (WHERE b.cluster_id IS NOT NULL))[1] AS cluster_id,
         (array_agg(b.category ORDER BY b.rep_rank, b.id) FILTER (WHERE b.category IS NOT NULL))[1] AS category,
         (array_agg(b.image_url ORDER BY b.rep_rank, b.id) FILTER (WHERE b.image_url IS NOT NULL))[1] AS image_url,
@@ -159,12 +166,14 @@ LEFT JOIN url_agg u USING (city, start_time, group_key)
 LEFT JOIN ics_categories_pick ic USING (city, start_time, group_key)
 ORDER BY r.start_time;
 
+-- Unique index required for REFRESH MATERIALIZED VIEW CONCURRENTLY.
 CREATE UNIQUE INDEX IF NOT EXISTS deduplicated_events_id_idx ON deduplicated_events (id);
 CREATE INDEX IF NOT EXISTS deduplicated_events_city_start_time_idx ON deduplicated_events (city, start_time);
 
 GRANT SELECT ON deduplicated_events TO anon, authenticated, service_role;
 
--- RPC used by the nightly build after load-events completes.
+-- RPC used by the nightly build after load-events completes. A failure here
+-- must fail the pipeline so consumers never read a stale group decision.
 CREATE OR REPLACE FUNCTION public.refresh_deduplicated_events()
 RETURNS void
 LANGUAGE plpgsql

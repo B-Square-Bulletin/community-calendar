@@ -11,7 +11,7 @@
 -- Or:  make test-sql
 
 BEGIN;
-SELECT plan(23);
+SELECT plan(24);
 
 -- ============================================================================
 -- Storage columns exist (migration contract)
@@ -65,6 +65,25 @@ VALUES
     (
         'test_dedup', 'Ordered Sources (member)', '2030-01-04T18:00:00+00:00', 'Alpha',
         'tdd-g2-member', 'cr1-ordering', 'tdd-g2-primary', ARRAY['Alpha']
+    );
+
+-- Members of one group can carry `ics_categories` arrays of different lengths.
+-- The view must not try to accumulate those arrays into one rectangular array
+-- (PostgreSQL error 2202E); it presents the representative's categories.
+INSERT INTO events (
+    city, title, start_time, source, source_uid,
+    duplicate_group, duplicate_group_representative, source_names, ics_categories
+)
+VALUES
+    (
+        'test_dedup', 'Categorized Event', '2030-01-05T18:00:00+00:00', 'Cat Primary',
+        'tdd-c1-primary', 'cr1-cats', 'tdd-c1-primary', ARRAY['Cat Primary'],
+        ARRAY['Music']
+    ),
+    (
+        'test_dedup', 'Categorized Event (member)', '2030-01-05T18:00:00+00:00', 'Cat Member',
+        'tdd-c1-member', 'cr1-cats', 'tdd-c1-primary', ARRAY['Cat Member'],
+        ARRAY['Music', 'Festival']
     );
 
 -- Two Separate rows sharing a title and instant must stay two rows: a NULL
@@ -195,6 +214,15 @@ SELECT is(
     ),
     ARRAY['Taste, Inc.'],
     'A comma-bearing source name stays one structured name'
+);
+
+SELECT is(
+    (
+        SELECT ics_categories FROM deduplicated_events
+        WHERE duplicate_group = 'cr1-cats'
+    ),
+    ARRAY['Music'],
+    'Differing-length member category arrays do not break the refresh; the representative value wins'
 );
 
 SELECT * FROM finish();  -- noqa: AM04
