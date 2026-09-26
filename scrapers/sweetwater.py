@@ -99,15 +99,6 @@ class SweetwaterScraper(BaseScraper):
         )
         return urls
 
-    @staticmethod
-    def _normalize_iso(value: str) -> str:
-        """Make JSON-LD datetimes parseable by Python 3.10's fromisoformat:
-        map 'Z' to '+00:00' and insert the colon into colon-less UTC
-        offsets ('2026-12-31T20:00:00-0800' -> '...-08:00'), which 3.10
-        rejects (3.11+ accepts them)."""
-        value = value.strip().replace("Z", "+00:00")
-        return re.sub(r"([+-]\d{2})(\d{2})$", r"\1:\2", value)
-
     def _fetch_event_jsonld(self, url: str) -> dict[str, Any] | None:
         """Fetch an individual event page and extract JSON-LD Event data."""
         html = self._fetch_page(url)
@@ -129,7 +120,7 @@ class SweetwaterScraper(BaseScraper):
             return None
 
         try:
-            dtstart = datetime.fromisoformat(self._normalize_iso(start_str))
+            dtstart = datetime.fromisoformat(start_str.strip())
         except ValueError:
             self.logger.debug(f"Skipping {title}: bad startDate {start_str}")
             return None
@@ -145,7 +136,7 @@ class SweetwaterScraper(BaseScraper):
         end_str = item.get("endDate", "")
         if end_str:
             with contextlib.suppress(ValueError):
-                dtend = datetime.fromisoformat(self._normalize_iso(end_str))
+                dtend = datetime.fromisoformat(end_str.strip())
 
         # Location
         location = parse_location(item.get("location"), DEFAULT_LOCATION)
