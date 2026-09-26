@@ -11,6 +11,7 @@ import socket
 import subprocess
 import sys
 import threading
+import time
 from contextlib import contextmanager, suppress
 from pathlib import Path
 
@@ -74,6 +75,7 @@ class _Resp:
 
     def __init__(self, body=b""):
         self._body = body
+        self._pos = 0
 
     def __enter__(self):
         return self
@@ -81,8 +83,14 @@ class _Resp:
     def __exit__(self, *exc):
         return False
 
-    def read(self):
-        return self._body
+    def read(self, size=-1):
+        if size is None or size < 0:
+            data = self._body[self._pos :]
+            self._pos = len(self._body)
+            return data
+        data = self._body[self._pos : self._pos + size]
+        self._pos += len(data)
+        return data
 
 
 class TestRateLimitRetry:
@@ -431,10 +439,54 @@ class TestBoundedTimeouts:
             def __exit__(self, *exc):
                 return False
 
-            def read(self):
+            def read(self, size=-1):
                 raise TimeoutError("read timed out")
 
         monkeypatch.setattr(df.urllib.request, "urlopen", lambda req, timeout=None: _HangingResp())
+        monkeypatch.setenv("SUPABASE_URL", "https://fake.supabase.co")
+        monkeypatch.setenv("SUPABASE_SERVICE_KEY", "service-key")
+
+        assert df.fetch_feeds_from_db("bloomington") is None
+
+    def test_slow_drip_feed_response_hits_overall_deadline(self, monkeypatch):
+        """A trickling body must hit the wall-clock deadline, not the idle timeout.
+
+        urlopen(timeout=...) only bounds idle socket operations, so a host that
+        sends a byte at a time keeps read() alive without ever going idle.
+        """
+        monkeypatch.setattr(df, "_URLLIB_TOTAL_TIMEOUT_SECONDS", 0.05)
+
+        class _Drip:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *exc):
+                return False
+
+            def read(self, size=-1):
+                time.sleep(0.02)  # never reaches EOF
+                return b"x"
+
+        monkeypatch.setattr(df.urllib.request, "urlopen", lambda req, timeout=None: _Drip())
+
+        with pytest.raises(TimeoutError):
+            df._download_body("https://fake.example/ics")
+
+    def test_slow_drip_db_response_degrades_to_feeds_txt(self, monkeypatch):
+        monkeypatch.setattr(df, "_DB_TOTAL_TIMEOUT_SECONDS", 0.05)
+
+        class _Drip:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *exc):
+                return False
+
+            def read(self, size=-1):
+                time.sleep(0.02)  # never reaches EOF
+                return b"x"
+
+        monkeypatch.setattr(df.urllib.request, "urlopen", lambda req, timeout=None: _Drip())
         monkeypatch.setenv("SUPABASE_URL", "https://fake.supabase.co")
         monkeypatch.setenv("SUPABASE_SERVICE_KEY", "service-key")
 

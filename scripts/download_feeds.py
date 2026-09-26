@@ -118,7 +118,7 @@ def fetch_feeds_from_db(city: str):
     req = urllib.request.Request(query_url, headers=headers)
     try:
         with urllib.request.urlopen(req, timeout=_DB_TIMEOUT_SECONDS) as resp:
-            feeds = json.loads(resp.read().decode())
+            feeds = json.loads(_read_within(resp, _DB_TOTAL_TIMEOUT_SECONDS).decode())
     except OSError as e:
         # URLError, TimeoutError and socket errors are all OSError: a slow or
         # stalled query must degrade to feeds.txt, not crash the whole city.
@@ -164,7 +164,12 @@ USER_AGENT = "Mozilla/5.0 (compatible; CommunityCalendar/1.0)"
 # cannot hang the build. curl defaults to no overall timeout: a feed whose
 # host accepts the connection and then stalls would spin the "Download live
 # feeds" step until the job was cancelled (see _curl_command below).
-_URLLIB_TIMEOUT_SECONDS = 60
+#
+# urlopen(timeout=...) only bounds each idle socket operation, so a host that
+# trickles bytes can keep read() alive forever; body reads also get an overall
+# deadline via _read_within.
+_URLLIB_TIMEOUT_SECONDS = 60  # per idle socket operation
+_URLLIB_TOTAL_TIMEOUT_SECONDS = 120  # overall response body deadline
 _CURL_CONNECT_TIMEOUT_SECONDS = 15
 _CURL_MAX_TIME_SECONDS = 90  # per curl attempt
 _CURL_RETRIES = 3
@@ -172,7 +177,9 @@ _CURL_RETRY_MAX_TIME_SECONDS = 180  # caps curl's total retry window
 # curl can overshoot --retry-max-time by one in-flight --max-time, so the
 # subprocess backstop must clear 180 + 90 before it is allowed to fire.
 _CURL_HARD_TIMEOUT_SECONDS = _CURL_RETRY_MAX_TIME_SECONDS + _CURL_MAX_TIME_SECONDS + 30
-_DB_TIMEOUT_SECONDS = 30
+_DB_TIMEOUT_SECONDS = 30  # per idle socket operation
+_DB_TOTAL_TIMEOUT_SECONDS = 60  # overall response body deadline
+_READ_CHUNK_BYTES = 1 << 16  # chunk size for deadline-bounded body reads
 
 # Seconds to wait between consecutive requests to the same host. Localist
 # (events.in.gov) throttles when two requests land within the same second,
@@ -205,6 +212,24 @@ def _wait_for_host(host: str, last_request_at: dict[str, float]) -> None:
     last_request_at[host] = time.monotonic()
 
 
+def _read_within(resp, total_seconds: float) -> bytes:
+    """Read a response body under an overall deadline.
+
+    urlopen(timeout=...) only bounds each idle socket operation, so a host
+    that trickles bytes can keep read() alive indefinitely. Reading in chunks
+    lets us enforce a wall-clock total instead.
+    """
+    deadline = time.monotonic() + total_seconds
+    chunks: list[bytes] = []
+    while True:
+        if time.monotonic() >= deadline:
+            raise TimeoutError(f"response exceeded {total_seconds:g}s deadline")
+        chunk = resp.read(_READ_CHUNK_BYTES)
+        if not chunk:
+            return b"".join(chunks)
+        chunks.append(chunk)
+
+
 @retry(
     retry=retry_if_exception_type(_RateLimited),
     stop=stop_after_attempt(4),
@@ -216,7 +241,7 @@ def _download_body(url: str) -> bytes:
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     try:
         with urllib.request.urlopen(req, timeout=_URLLIB_TIMEOUT_SECONDS) as resp:
-            return resp.read()
+            return _read_within(resp, _URLLIB_TOTAL_TIMEOUT_SECONDS)
     except urllib.error.HTTPError as e:
         if e.code in (429, 503):
             raise _RateLimited() from e
