@@ -404,7 +404,7 @@ def update_report(cities: list[str], report_path: str = "report.json"):
             # judged by its hour in the city's timezone, not the raw
             # string hour. Naive timestamps keep the raw-hour reading.
             try:
-                dt = datetime.fromisoformat(st.replace("Z", "+00:00"))
+                dt = datetime.fromisoformat(st)
                 if dt.tzinfo is not None:
                     dt = dt.astimezone(tz)
                 hour, minute = dt.hour, dt.minute

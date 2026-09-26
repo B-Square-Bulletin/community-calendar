@@ -152,7 +152,7 @@ class SidearmScraper(BaseScraper):
     def _parse_api_datetime(self, day_date: str, time_str: str) -> datetime | None:
         """Parse date from API and time string like '7 p.m.'."""
         try:
-            dt = datetime.fromisoformat(day_date.replace("Z", "+00:00"))
+            dt = datetime.fromisoformat(day_date)
             dt = dt.replace(tzinfo=None)
         except ValueError, AttributeError:
             return None

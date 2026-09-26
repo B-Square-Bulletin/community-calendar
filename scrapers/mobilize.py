@@ -135,7 +135,7 @@ class MobilizeScraper(BaseScraper):
                 continue
 
             try:
-                dtstart = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
+                dtstart = datetime.fromisoformat(start_str)
             except ValueError:
                 continue
 
@@ -146,7 +146,7 @@ class MobilizeScraper(BaseScraper):
             dtend = None
             if end_str:
                 with contextlib.suppress(ValueError):
-                    dtend = datetime.fromisoformat(end_str.replace("Z", "+00:00"))
+                    dtend = datetime.fromisoformat(end_str)
 
             events.append(
                 {

@@ -111,7 +111,7 @@ class IsMyRotaryClubScraper(BaseScraper):
             return None
 
         try:
-            dtstart = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
+            dtstart = datetime.fromisoformat(start_str)
         except ValueError, TypeError:
             return None
 
@@ -119,7 +119,7 @@ class IsMyRotaryClubScraper(BaseScraper):
         end_str = item.get("end")
         if end_str:
             with contextlib.suppress(ValueError, TypeError):
-                dtend = datetime.fromisoformat(end_str.replace("Z", "+00:00"))
+                dtend = datetime.fromisoformat(end_str)
 
         # Build description from Speaker and Topic
         parts = []

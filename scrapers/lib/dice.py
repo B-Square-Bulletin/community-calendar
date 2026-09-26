@@ -112,7 +112,7 @@ class DiceVenueScraper(BaseScraper):
             return None
 
         try:
-            dtstart = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
+            dtstart = datetime.fromisoformat(start_str)
         except ValueError:
             self.logger.debug(f"Bad startDate {start_str!r} on {dice_url}")
             return None
@@ -127,7 +127,7 @@ class DiceVenueScraper(BaseScraper):
         end_str = item.get("endDate", "")
         if end_str:
             with contextlib.suppress(ValueError):
-                dtend = datetime.fromisoformat(end_str.replace("Z", "+00:00"))
+                dtend = datetime.fromisoformat(end_str)
 
         location = parse_location(item.get("location"), self.default_location)
 

@@ -93,7 +93,7 @@ class OwenCountyLibraryScraper(BaseScraper):
 
                 try:
                     # Dates come in as ISO 8601 UTC strings
-                    dtstart = datetime.fromisoformat(date_str.replace("Z", "+00:00"))
+                    dtstart = datetime.fromisoformat(date_str)
                 except ValueError:
                     self.logger.debug(f"Bad date: {date_str}")
                     continue
@@ -111,9 +111,7 @@ class OwenCountyLibraryScraper(BaseScraper):
                 end_str = doc.get("endDate")
                 if end_str:
                     with contextlib.suppress(ValueError):
-                        dtend = datetime.fromisoformat(end_str.replace("Z", "+00:00")).astimezone(
-                            TZ
-                        )
+                        dtend = datetime.fromisoformat(end_str).astimezone(TZ)
 
                 # Location: use the room field if available, fall back to default
                 location = doc.get("location") or ""

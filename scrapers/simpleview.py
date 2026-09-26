@@ -264,7 +264,7 @@ def _parse_date_or_datetime(s: str):
     """
     s = s.strip()
     if "T" in s or " " in s:
-        return datetime.fromisoformat(s.replace("Z", "+00:00"))
+        return datetime.fromisoformat(s)
     # date-only
     return date.fromisoformat(s)
 

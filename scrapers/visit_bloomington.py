@@ -125,7 +125,7 @@ def _local_date(value: str | None):
     if not value:
         return None
     try:
-        return datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(TIMEZONE).date()
+        return datetime.fromisoformat(value).astimezone(TIMEZONE).date()
     except ValueError:
         return None
 

@@ -83,7 +83,7 @@ class SongkickScraper(BaseScraper):
                     continue
 
                 try:
-                    dtstart = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
+                    dtstart = datetime.fromisoformat(start_str)
                 except ValueError:
                     continue
 
