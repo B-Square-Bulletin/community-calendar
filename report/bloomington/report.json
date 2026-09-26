@@ -1,11 +1,11 @@
 {
   "city": "bloomington",
-  "generated": "2026-09-26T03:36:39.272791+00:00",
+  "generated": "2026-09-26T04:08:00.895771+00:00",
   "build": {
-    "generated": "2026-09-26T03:36:39.272791+00:00",
-    "total_events": 9199,
-    "prev_total_events": 8478,
-    "delta": 721
+    "generated": "2026-09-26T04:08:00.895771+00:00",
+    "total_events": 9204,
+    "prev_total_events": 9199,
+    "delta": 5
   },
   "problems": [
     {
@@ -167,7 +167,7 @@
     {
       "severity": 3,
       "kind": "tz_anomaly",
-      "title": "WFIU Community Calendar: 31/225 events at suspicious hours",
+      "title": "WFIU Community Calendar: 31/226 events at suspicious hours",
       "detail": "likely a -4h offset error",
       "feed": "wfiu_community_calendar",
       "repro": {
@@ -762,7 +762,7 @@
     {
       "source": "WFIU Community Calendar",
       "count": 31,
-      "total": 225,
+      "total": 226,
       "offset": -4,
       "samples": [
         {
@@ -3890,7 +3890,7 @@
         ]
       },
       "events_livewhale_11": {
-        "count": 204,
+        "count": 203,
         "error": null,
         "content": null,
         "history": [
@@ -4012,12 +4012,12 @@
           },
           {
             "date": "2026-09-26",
-            "count": 204
+            "count": 203
           }
         ]
       },
       "events_livewhale_130": {
-        "count": 85,
+        "count": 86,
         "error": null,
         "content": null,
         "history": [
@@ -4139,12 +4139,12 @@
           },
           {
             "date": "2026-09-26",
-            "count": 85
+            "count": 86
           }
         ]
       },
       "events_livewhale_135": {
-        "count": 104,
+        "count": 103,
         "error": null,
         "content": null,
         "history": [
@@ -4266,7 +4266,7 @@
           },
           {
             "date": "2026-09-26",
-            "count": 104
+            "count": 103
           }
         ]
       },
@@ -5541,7 +5541,7 @@
         ]
       },
       "events_livewhale_378": {
-        "count": 25,
+        "count": 26,
         "error": null,
         "content": null,
         "history": [
@@ -5663,7 +5663,7 @@
           },
           {
             "date": "2026-09-26",
-            "count": 25
+            "count": 26
           }
         ]
       },
@@ -15883,7 +15883,7 @@
         ]
       },
       "wfiu_community_calendar": {
-        "count": 632,
+        "count": 631,
         "error": null,
         "content": null,
         "history": [
@@ -15917,7 +15917,7 @@
           },
           {
             "date": "2026-09-26",
-            "count": 632
+            "count": 631
           }
         ]
       },
@@ -16085,9 +16085,9 @@
       }
     },
     "url_quality": {
-      "total_with_url": 6410,
-      "total_events": 9199,
-      "unique_urls": 3684,
+      "total_with_url": 6415,
+      "total_events": 9204,
+      "unique_urls": 3685,
       "generic_count": 285,
       "generic_domains": [
         {
@@ -16138,7 +16138,7 @@
         },
         {
           "source": "Visit Bloomington",
-          "events": 565,
+          "events": 566,
           "unique_urls": 137,
           "specificity_pct": 24
         },
@@ -16155,16 +16155,10 @@
           "specificity_pct": 100
         },
         {
-          "source": "IU Bloomington Libraries",
-          "events": 272,
-          "unique_urls": 34,
-          "specificity_pct": 12
-        },
-        {
           "source": "WFIU Community Calendar",
-          "events": 225,
+          "events": 226,
           "unique_urls": 71,
-          "specificity_pct": 32
+          "specificity_pct": 31
         },
         {
           "source": "The Back Door",
@@ -16174,21 +16168,33 @@
         },
         {
           "source": "IU Eskenazi School of Art, Architecture + Design",
-          "events": 209,
-          "unique_urls": 22,
-          "specificity_pct": 11
+          "events": 208,
+          "unique_urls": 21,
+          "specificity_pct": 10
+        },
+        {
+          "source": "IU Bloomington Libraries",
+          "events": 205,
+          "unique_urls": 33,
+          "specificity_pct": 16
         },
         {
           "source": "IU Jacobs School of Music",
-          "events": 174,
-          "unique_urls": 157,
+          "events": 175,
+          "unique_urls": 158,
           "specificity_pct": 90
         },
         {
           "source": "IU Jacobs School of Music, WFIU Community Calendar",
-          "events": 168,
-          "unique_urls": 153,
+          "events": 167,
+          "unique_urls": 152,
           "specificity_pct": 91
+        },
+        {
+          "source": "IU Arts & Humanities Institute, IU Bloomington Libraries",
+          "events": 165,
+          "unique_urls": 6,
+          "specificity_pct": 4
         },
         {
           "source": "IU Maurer School of Law",
@@ -16207,12 +16213,6 @@
           "events": 128,
           "unique_urls": 128,
           "specificity_pct": 100
-        },
-        {
-          "source": "Monroe County Government",
-          "events": 106,
-          "unique_urls": 88,
-          "specificity_pct": 83
         }
       ]
     },
@@ -16222,7 +16222,7 @@
       "tzids": [
         {
           "tzid": "UTC (Z suffix)",
-          "count": 27505,
+          "count": 27498,
           "files": 57,
           "matches_city": false,
           "sample_files": [
@@ -16248,7 +16248,7 @@
         },
         {
           "tzid": "America/Indiana/Indianapolis",
-          "count": 4015,
+          "count": 4013,
           "files": 46,
           "matches_city": true,
           "sample_files": [
@@ -16714,14 +16714,14 @@
       },
       {
         "category": "Music / Concerts",
-        "count": 875
-      },
-      {
-        "category": "Education / Workshops",
-        "count": 846
+        "count": 877
       },
       {
         "category": "Arts / Culture",
+        "count": 850
+      },
+      {
+        "category": "Education / Workshops",
         "count": 845
       },
       {
@@ -16746,7 +16746,7 @@
       },
       {
         "category": "Government / Civic",
-        "count": 442
+        "count": 439
       },
       {
         "category": "History / Heritage",
@@ -16778,7 +16778,7 @@
       },
       {
         "category": "(uncategorized)",
-        "count": 74
+        "count": 77
       },
       {
         "category": "LGBTQ+ / Gender",
@@ -16786,7 +16786,7 @@
       },
       {
         "category": "Technology / Careers",
-        "count": 44
+        "count": 43
       },
       {
         "category": "Gardening / Horticulture",
@@ -16794,8 +16794,8 @@
       }
     ],
     "images": {
-      "total": 9199,
-      "with_image": 2478,
+      "total": 9204,
+      "with_image": 2484,
       "by_source": [
         {
           "source": "Brown County Events",
@@ -16814,27 +16814,27 @@
         },
         {
           "source": "IU Eskenazi School of Art, Architecture + Design",
-          "total": 209,
+          "total": 208,
           "with_image": 204
         },
         {
           "source": "WFIU Community Calendar",
-          "total": 225,
+          "total": 226,
           "with_image": 189
         },
         {
-          "source": "IU Bloomington Libraries",
-          "total": 272,
-          "with_image": 178
+          "source": "IU Arts & Humanities Institute, IU Bloomington Libraries",
+          "total": 165,
+          "with_image": 165
         },
         {
-          "source": "IU Arts & Humanities Institute, IU Bloomington Libraries",
-          "total": 98,
-          "with_image": 98
+          "source": "IU Bloomington Libraries",
+          "total": 205,
+          "with_image": 111
         },
         {
           "source": "IU Hamilton Lugar School",
-          "total": 84,
+          "total": 83,
           "with_image": 67
         },
         {
@@ -16844,18 +16844,23 @@
         },
         {
           "source": "IU Jacobs School of Music, WFIU Community Calendar",
-          "total": 168,
+          "total": 167,
           "with_image": 36
         },
         {
           "source": "IU Auditorium",
-          "total": 25,
-          "with_image": 25
+          "total": 26,
+          "with_image": 26
         },
         {
           "source": "Eskenazi Museum of Art",
           "total": 25,
           "with_image": 23
+        },
+        {
+          "source": "IU Arts & Humanities Institute",
+          "total": 55,
+          "with_image": 22
         },
         {
           "source": "IU Cinema, Visit Bloomington",
@@ -16879,18 +16884,13 @@
         },
         {
           "source": "IU Jacobs School of Music",
-          "total": 174,
+          "total": 175,
           "with_image": 19
         },
         {
           "source": "Brown County Playhouse",
           "total": 19,
           "with_image": 19
-        },
-        {
-          "source": "IU Arts & Humanities Institute",
-          "total": 50,
-          "with_image": 17
         },
         {
           "source": "IU Asian Culture Center, IU beINvolved Student Orgs",
