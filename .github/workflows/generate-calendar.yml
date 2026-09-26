@@ -131,6 +131,9 @@ jobs:
       env:
         SUPABASE_URL: ${{ vars.SUPABASE_URL }}
         SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        # Without this, progress lines are block-buffered into the log pipe and
+        # lost if the step hangs — the reason a stalled feed was undiagnosable.
+        PYTHONUNBUFFERED: "1"
       run: |
         IFS=',' read -ra CITIES <<< "${{ steps.locations.outputs.list }}"
         for city in "${CITIES[@]}"; do

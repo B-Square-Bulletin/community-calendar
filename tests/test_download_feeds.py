@@ -7,7 +7,12 @@ sources (events.in.gov / Localist) stop flapping between "a good build" and
 """
 
 import email.message
+import socket
+import subprocess
 import sys
+import threading
+import time
+from contextlib import contextmanager, suppress
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -19,6 +24,43 @@ import download_feeds as df
 import pytest
 
 from tests.helpers import make_ics, make_vevent
+
+
+def _raise_urlerror(_url):
+    """Force the urllib attempt to fail so the curl fallback is exercised."""
+    raise urllib.error.URLError("connection refused")
+
+
+@contextmanager
+def _stalled_http_server():
+    """Yield a URL whose server accepts the connection but never responds.
+
+    Reproduces a source that is reachable enough to connect but stalls
+    forever — the shape that hung the Download live feeds step.
+    """
+    srv = socket.socket()
+    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    srv.bind(("127.0.0.1", 0))
+    srv.listen(1)
+    port = srv.getsockname()[1]
+    held: list[socket.socket] = []
+
+    def serve():
+        try:
+            conn, _ = srv.accept()
+        except OSError:
+            return
+        with suppress(OSError):
+            conn.recv(65536)  # read the request, then never respond
+        held.append(conn)
+
+    threading.Thread(target=serve, daemon=True).start()
+    try:
+        yield f"http://127.0.0.1:{port}/feed.ics"
+    finally:
+        for conn in held:
+            conn.close()
+        srv.close()
 
 
 def _rate_limited(req) -> urllib.error.HTTPError:
@@ -33,6 +75,7 @@ class _Resp:
 
     def __init__(self, body=b""):
         self._body = body
+        self._pos = 0
 
     def __enter__(self):
         return self
@@ -40,8 +83,14 @@ class _Resp:
     def __exit__(self, *exc):
         return False
 
-    def read(self):
-        return self._body
+    def read(self, size=-1):
+        if size is None or size < 0:
+            data = self._body[self._pos :]
+            self._pos = len(self._body)
+            return data
+        data = self._body[self._pos : self._pos + size]
+        self._pos += len(data)
+        return data
 
 
 class TestRateLimitRetry:
@@ -245,3 +294,235 @@ class TestCurlFallback:
 
         assert df.fetch_with_curl_fallback("https://fake.example/ics", outfile) is False
         assert not outfile.exists()
+
+
+class TestBoundedTimeouts:
+    """Every network call in the download path must be time-bounded.
+
+    Regression: the curl fallback ran with curl's default of no overall
+    timeout, so a source that accepted the connection and then stalled made
+    the Download live feeds step spin until the job was cancelled.
+    """
+
+    def test_curl_command_bounds_each_attempt(self, tmp_path):
+        cmd = df._curl_command("https://fake.example/ics", tmp_path / "x.ics")
+
+        for flag, value in (
+            ("--connect-timeout", df._CURL_CONNECT_TIMEOUT_SECONDS),
+            ("--max-time", df._CURL_MAX_TIME_SECONDS),
+            ("--retry-max-time", df._CURL_RETRY_MAX_TIME_SECONDS),
+        ):
+            assert flag in cmd, f"curl is missing {flag}"
+            assert int(cmd[cmd.index(flag) + 1]) == value
+            assert value > 0
+
+    def test_hard_timeout_clears_curls_worst_case(self):
+        """The backstop must not fire while curl is still within its own bounds.
+
+        curl can overshoot --retry-max-time by one in-flight --max-time, so
+        sizing the backstop below that sum would kill a legitimate retry.
+        """
+        assert df._CURL_HARD_TIMEOUT_SECONDS >= (
+            df._CURL_RETRY_MAX_TIME_SECONDS + df._CURL_MAX_TIME_SECONDS
+        )
+
+    def test_curl_run_passes_a_hard_timeout(self, monkeypatch, tmp_path):
+        outfile = tmp_path / "x.ics"
+        seen: dict[str, object] = {}
+        monkeypatch.setattr(df, "_download_body", _raise_urlerror)
+
+        def fake_run(cmd, *args, **kwargs):
+            seen["timeout"] = kwargs.get("timeout")
+            seen["check"] = kwargs.get("check")
+            outfile.write_bytes(b"BEGIN:VEVENT\r\nEND:VEVENT\r\n")
+
+        monkeypatch.setattr(df.subprocess, "run", fake_run)
+
+        assert df.fetch_with_curl_fallback("https://fake.example/ics", outfile) is True
+        assert seen["timeout"] == df._CURL_HARD_TIMEOUT_SECONDS
+        assert seen["check"] is True
+
+    def test_curl_timeout_discards_partial_file(self, monkeypatch, tmp_path, capsys):
+        """A curl killed by the backstop must not leave a truncated file as success."""
+        outfile = tmp_path / "x.ics"
+        monkeypatch.setattr(df, "_download_body", _raise_urlerror)
+
+        def fake_run(cmd, *args, **kwargs):
+            outfile.write_bytes(b"BEGIN:VEVENT\r\n")  # partial download
+            raise subprocess.TimeoutExpired(cmd, kwargs.get("timeout", 0))
+
+        monkeypatch.setattr(df.subprocess, "run", fake_run)
+
+        assert df.fetch_with_curl_fallback("https://fake.example/ics", outfile) is False
+        assert not outfile.exists()
+        # The timeout reason is visible in the log, not just a generic failure.
+        assert "timed out after" in capsys.readouterr().out
+
+    def test_curl_nonzero_exit_discards_partial_file(self, monkeypatch, tmp_path):
+        """curl's own --max-time exits 28 leaving a partial file behind.
+
+        It does not raise TimeoutExpired (that is only the subprocess backstop),
+        so the non-zero exit must itself discard the truncated output.
+        """
+        outfile = tmp_path / "x.ics"
+        monkeypatch.setattr(df, "_download_body", _raise_urlerror)
+
+        def fake_run(cmd, *args, **kwargs):
+            outfile.write_bytes(b"BEGIN:VEVENT\r\n")  # partial download
+            raise subprocess.CalledProcessError(28, cmd)
+
+        monkeypatch.setattr(df.subprocess, "run", fake_run)
+
+        assert df.fetch_with_curl_fallback("https://fake.example/ics", outfile) is False
+        assert not outfile.exists()
+
+    def test_stalled_server_returns_instead_of_hanging(self, monkeypatch, tmp_path):
+        """A reachable-but-silent source must fail fast, not hang the build."""
+        monkeypatch.setattr(df, "_CURL_CONNECT_TIMEOUT_SECONDS", 1)
+        monkeypatch.setattr(df, "_CURL_MAX_TIME_SECONDS", 2)
+        monkeypatch.setattr(df, "_CURL_RETRIES", 0)
+        monkeypatch.setattr(df, "_CURL_RETRY_MAX_TIME_SECONDS", 2)
+        monkeypatch.setattr(df, "_CURL_HARD_TIMEOUT_SECONDS", 3)
+        monkeypatch.setattr(df, "_download_body", _raise_urlerror)
+
+        result: dict[str, bool] = {}
+        with _stalled_http_server() as url:
+            outfile = tmp_path / "x.ics"
+            worker = threading.Thread(
+                target=lambda: result.update(ok=df.fetch_with_curl_fallback(url, outfile)),
+                daemon=True,
+            )
+            worker.start()
+            worker.join(10)
+
+            assert not worker.is_alive(), "fetch hung on a stalled server"
+        assert result["ok"] is False
+
+    def test_urllib_attempt_uses_configured_timeout(self, monkeypatch):
+        seen: dict[str, float | None] = {}
+
+        def fake_urlopen(req, timeout=None):
+            seen["timeout"] = timeout
+            return _Resp(b"BEGIN:VEVENT\r\nEND:VEVENT\r\n")
+
+        monkeypatch.setattr(df.urllib.request, "urlopen", fake_urlopen)
+
+        df._download_body("https://fake.example/ics")
+
+        assert seen["timeout"] == df._URLLIB_TIMEOUT_SECONDS
+
+    def test_feeds_query_uses_configured_timeout(self, monkeypatch):
+        seen: dict[str, float | None] = {}
+
+        def fake_urlopen(req, timeout=None):
+            seen["timeout"] = timeout
+            return _Resp(b"[]")
+
+        monkeypatch.setattr(df.urllib.request, "urlopen", fake_urlopen)
+        monkeypatch.setenv("SUPABASE_URL", "https://fake.supabase.co")
+        monkeypatch.setenv("SUPABASE_SERVICE_KEY", "service-key")
+
+        assert df.fetch_feeds_from_db("bloomington") == []
+        assert seen["timeout"] == df._DB_TIMEOUT_SECONDS
+
+    def test_feeds_query_read_timeout_degrades_to_feeds_txt(self, monkeypatch):
+        """A stalled DB read must return None (feeds.txt fallback), not crash.
+
+        urlopen(timeout=...) can raise TimeoutError from resp.read(), which is
+        not a URLError — it must still be caught.
+        """
+
+        class _HangingResp:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *exc):
+                return False
+
+            def read(self, size=-1):
+                raise TimeoutError("read timed out")
+
+        monkeypatch.setattr(df.urllib.request, "urlopen", lambda req, timeout=None: _HangingResp())
+        monkeypatch.setenv("SUPABASE_URL", "https://fake.supabase.co")
+        monkeypatch.setenv("SUPABASE_SERVICE_KEY", "service-key")
+
+        assert df.fetch_feeds_from_db("bloomington") is None
+
+    def test_slow_drip_feed_response_hits_overall_deadline(self, monkeypatch):
+        """A trickling body must hit the wall-clock deadline, not the idle timeout.
+
+        urlopen(timeout=...) only bounds idle socket operations, so a host that
+        sends a byte at a time keeps read() alive without ever going idle.
+        """
+        monkeypatch.setattr(df, "_URLLIB_TOTAL_TIMEOUT_SECONDS", 0.05)
+
+        class _Drip:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *exc):
+                return False
+
+            def read(self, size=-1):
+                time.sleep(0.02)  # never reaches EOF
+                return b"x"
+
+        monkeypatch.setattr(df.urllib.request, "urlopen", lambda req, timeout=None: _Drip())
+
+        with pytest.raises(TimeoutError):
+            df._download_body("https://fake.example/ics")
+
+    def test_slow_drip_db_response_degrades_to_feeds_txt(self, monkeypatch):
+        monkeypatch.setattr(df, "_DB_TOTAL_TIMEOUT_SECONDS", 0.05)
+
+        class _Drip:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *exc):
+                return False
+
+            def read(self, size=-1):
+                time.sleep(0.02)  # never reaches EOF
+                return b"x"
+
+        monkeypatch.setattr(df.urllib.request, "urlopen", lambda req, timeout=None: _Drip())
+        monkeypatch.setenv("SUPABASE_URL", "https://fake.supabase.co")
+        monkeypatch.setenv("SUPABASE_SERVICE_KEY", "service-key")
+
+        assert df.fetch_feeds_from_db("bloomington") is None
+
+
+class TestDownloadProgressLog:
+    def test_logs_in_flight_feed_before_fetch(self, monkeypatch, capsys, tmp_path):
+        """A hang must name the feed it is stuck on in the log."""
+        monkeypatch.chdir(tmp_path)
+        url = "https://calendar.google.com/calendar/ical/example.ics"
+        monkeypatch.setattr(
+            df,
+            "fetch_feeds_from_db",
+            lambda city: [
+                {
+                    "id": 1,
+                    "url": url,
+                    "name": "Example",
+                    "fallback_url": None,
+                    "status": "active",
+                }
+            ],
+        )
+        log_before_fetch: dict[str, str] = {}
+
+        def fake_fetch(feed_url, outfile):
+            log_before_fetch["log"] = capsys.readouterr().out
+            outfile.write_text(
+                "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nEND:VCALENDAR\r\n", encoding="utf-8"
+            )
+            return True
+
+        monkeypatch.setattr(df, "fetch_with_curl_fallback", fake_fetch)
+
+        df.download_feeds("bloomington")
+
+        assert "calendar.google.com" in log_before_fetch["log"]
+        assert ".ics" in log_before_fetch["log"]
