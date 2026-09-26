@@ -17,11 +17,13 @@ import argparse
 import logging
 import re
 import subprocess
-from datetime import datetime
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from lib.base import BaseScraper
 from lib.timeutil import utc_now, wall_clock
+
+if TYPE_CHECKING:
+    from datetime import datetime
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)

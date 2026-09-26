@@ -32,7 +32,7 @@ import html as html_mod
 import logging
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any, ClassVar
 
 from .base import BaseScraper
@@ -41,6 +41,7 @@ from .jsonld import (
     extract_jsonld_blocks,
     parse_location,
 )
+from .timeutil import assume_utc
 
 logger = logging.getLogger(__name__)
 
@@ -111,14 +112,14 @@ class DiceVenueScraper(BaseScraper):
             return None
 
         try:
-            dtstart = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
+            dtstart = datetime.fromisoformat(start_str)
         except ValueError:
             self.logger.debug(f"Bad startDate {start_str!r} on {dice_url}")
             return None
 
         # Skip past events
-        now = datetime.now(timezone.utc)
-        start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=timezone.utc)
+        now = datetime.now(UTC)
+        start_aware = assume_utc(dtstart)
         if start_aware < now:
             return None
 
@@ -126,7 +127,7 @@ class DiceVenueScraper(BaseScraper):
         end_str = item.get("endDate", "")
         if end_str:
             with contextlib.suppress(ValueError):
-                dtend = datetime.fromisoformat(end_str.replace("Z", "+00:00"))
+                dtend = datetime.fromisoformat(end_str)
 
         location = parse_location(item.get("location"), self.default_location)
 

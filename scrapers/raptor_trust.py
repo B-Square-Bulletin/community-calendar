@@ -17,13 +17,14 @@ import argparse
 import logging
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any, cast
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 from icalendar import Calendar as ICalendar
 from lib.base import BaseScraper
+from lib.timeutil import assume_utc
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
@@ -67,7 +68,7 @@ class RaptorTrustScraper(BaseScraper):
         if not data:
             return []
 
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         events = []
         try:
             # icalendar accepts bytes (decodes with utf-8-sig) though stubs say str
@@ -81,9 +82,9 @@ class RaptorTrustScraper(BaseScraper):
                 continue
             dt = dtstart.dt
             if hasattr(dt, "hour"):
-                start_aware = dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
+                start_aware = assume_utc(dt)
             else:
-                start_aware = datetime.combine(dt, datetime.min.time()).replace(tzinfo=timezone.utc)
+                start_aware = datetime.combine(dt, datetime.min.time()).replace(tzinfo=UTC)
 
             if start_aware < now:
                 continue

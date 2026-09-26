@@ -21,7 +21,7 @@ import contextlib
 import json
 import logging
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -125,7 +125,7 @@ class MobilizeScraper(BaseScraper):
 
         # Each timeslot becomes a separate event
         times: list[dict[str, Any]] = item.get("times") or []
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         events = []
 
         for slot in times:
@@ -135,7 +135,7 @@ class MobilizeScraper(BaseScraper):
                 continue
 
             try:
-                dtstart = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
+                dtstart = datetime.fromisoformat(start_str)
             except ValueError:
                 continue
 
@@ -146,7 +146,7 @@ class MobilizeScraper(BaseScraper):
             dtend = None
             if end_str:
                 with contextlib.suppress(ValueError):
-                    dtend = datetime.fromisoformat(end_str.replace("Z", "+00:00"))
+                    dtend = datetime.fromisoformat(end_str)
 
             events.append(
                 {
@@ -177,7 +177,7 @@ class MobilizeScraper(BaseScraper):
         raw_events = []
         try:
             raw_events = data["data"]["events"]
-        except (KeyError, TypeError):
+        except KeyError, TypeError:
             self.logger.error(
                 f"Unexpected data structure, top keys: {list(data.keys()) if isinstance(data, dict) else type(data)}"
             )

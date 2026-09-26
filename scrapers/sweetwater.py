@@ -22,7 +22,7 @@ import logging
 import re
 import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from email.utils import parsedate_to_datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
@@ -30,6 +30,7 @@ from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
 from lib.jsonld import extract_events_from_blocks, extract_jsonld_blocks, parse_location
+from lib.timeutil import assume_utc
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -75,7 +76,7 @@ class SweetwaterScraper(BaseScraper):
 
         # Only fetch items published recently — older ones are almost certainly past events.
         # pubDate is publish date, not event date, but recently published = likely upcoming.
-        cutoff = datetime.now(timezone.utc) - timedelta(days=60)
+        cutoff = datetime.now(UTC) - timedelta(days=60)
         urls = []
         skipped = 0
         for item in root.findall(".//item"):
@@ -89,7 +90,7 @@ class SweetwaterScraper(BaseScraper):
                     if pub_dt < cutoff:
                         skipped += 1
                         continue
-                except (ValueError, TypeError):
+                except ValueError, TypeError:
                     pass
             urls.append(link.text.strip())
 
@@ -97,15 +98,6 @@ class SweetwaterScraper(BaseScraper):
             f"Discovered {len(urls)} recent event URLs from RSS feed (skipped {skipped} older)"
         )
         return urls
-
-    @staticmethod
-    def _normalize_iso(value: str) -> str:
-        """Make JSON-LD datetimes parseable by Python 3.10's fromisoformat:
-        map 'Z' to '+00:00' and insert the colon into colon-less UTC
-        offsets ('2026-12-31T20:00:00-0800' -> '...-08:00'), which 3.10
-        rejects (3.11+ accepts them)."""
-        value = value.strip().replace("Z", "+00:00")
-        return re.sub(r"([+-]\d{2})(\d{2})$", r"\1:\2", value)
 
     def _fetch_event_jsonld(self, url: str) -> dict[str, Any] | None:
         """Fetch an individual event page and extract JSON-LD Event data."""
@@ -128,14 +120,14 @@ class SweetwaterScraper(BaseScraper):
             return None
 
         try:
-            dtstart = datetime.fromisoformat(self._normalize_iso(start_str))
+            dtstart = datetime.fromisoformat(start_str.strip())
         except ValueError:
             self.logger.debug(f"Skipping {title}: bad startDate {start_str}")
             return None
 
         # Skip past events
-        now = datetime.now(timezone.utc)
-        start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=timezone.utc)
+        now = datetime.now(UTC)
+        start_aware = assume_utc(dtstart)
         if start_aware < now:
             return None
 
@@ -144,7 +136,7 @@ class SweetwaterScraper(BaseScraper):
         end_str = item.get("endDate", "")
         if end_str:
             with contextlib.suppress(ValueError):
-                dtend = datetime.fromisoformat(self._normalize_iso(end_str))
+                dtend = datetime.fromisoformat(end_str.strip())
 
         # Location
         location = parse_location(item.get("location"), DEFAULT_LOCATION)

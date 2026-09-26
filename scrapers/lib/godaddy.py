@@ -27,7 +27,7 @@ Usage:
 
 import html as html_mod
 import re
-from datetime import datetime, timezone, tzinfo
+from datetime import UTC, datetime, tzinfo
 from typing import Any, cast
 from zoneinfo import ZoneInfo
 
@@ -93,7 +93,7 @@ class GoDaddyScraper(BaseScraper):
 
         try:
             dtstart = datetime.fromisoformat(start_str)
-        except (ValueError, TypeError):
+        except ValueError, TypeError:
             return None
 
         # Localize naive datetimes to the scraper's configured timezone
@@ -102,7 +102,7 @@ class GoDaddyScraper(BaseScraper):
             dtstart = dtstart.replace(tzinfo=cast("tzinfo", tz))
 
         # Skip past events
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         if dtstart < now:
             return None
 
@@ -116,7 +116,7 @@ class GoDaddyScraper(BaseScraper):
                         ZoneInfo(self.timezone) if isinstance(self.timezone, str) else self.timezone
                     )
                     dtend = dtend.replace(tzinfo=cast("tzinfo", tz))
-            except (ValueError, TypeError):
+            except ValueError, TypeError:
                 pass
 
         # Clean description: strip HTML tags, unescape entities

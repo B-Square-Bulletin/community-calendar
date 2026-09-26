@@ -602,7 +602,7 @@ class WFIUCommunityCalendarScraper(BaseScraper):
         """Prior runs' records, or [] on a missing/corrupt history file."""
         try:
             data = json.loads(RUN_HISTORY_PATH.read_text())
-        except (OSError, ValueError):
+        except OSError, ValueError:
             return []
         runs = data.get("runs") if isinstance(data, dict) else None
         if not isinstance(runs, list):

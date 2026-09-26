@@ -25,7 +25,6 @@ import contextlib
 import importlib.metadata
 import json
 import os
-import re
 import shlex
 import subprocess
 import sys
@@ -34,7 +33,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from contextlib import contextmanager
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -54,11 +53,10 @@ from validate_pipeline import (  # noqa: E402
 
 from report import parse_build_errors, update_report  # noqa: E402
 
-WORKFLOW_PYTHON_VERSION = "3.10"
+WORKFLOW_PYTHON_VERSION = "3.14"
 RUNTIME_PACKAGES = {
     "icalendar": "icalendar",
     "recurring-ical-events": "recurring_ical_events",
-    "lxml": "lxml",
 }
 
 
@@ -134,54 +132,13 @@ def load_dotenv(path: Path) -> list[str]:
     return loaded
 
 
-def _parse_requirement_spec(line: str) -> tuple[str, list[tuple[str, str]]] | None:
-    line = line.strip()
-    if not line or line.startswith(("#", "-r ")):
-        return None
-    match = re.match(r"^([A-Za-z0-9_.-]+)(.*)$", line)
-    if not match:
-        return None
-    name = match.group(1)
-    remainder = match.group(2).strip()
-    constraints: list[tuple[str, str]] = []
-    if remainder:
-        for part in remainder.split(","):
-            part = part.strip()
-            op_match = re.match(r"^(==|!=|<=|>=|<|>)(.+)$", part)
-            if op_match:
-                constraints.append((op_match.group(1), op_match.group(2).strip()))
-    return name, constraints
-
-
-def _version_tuple(version: str) -> tuple[Any, ...]:
-    parts = re.findall(r"\d+|[A-Za-z]+", version)
-    normalized: list[int | str] = []
-    for part in parts:
-        normalized.append(int(part) if part.isdigit() else part.lower())
-    return tuple(normalized)
-
-
-def _version_matches(installed: str, constraints: list[tuple[str, str]]) -> bool:
-    current = _version_tuple(installed)
-    for op, expected in constraints:
-        target = _version_tuple(expected)
-        if op == "==" and current != target:
-            return False
-        if op == "!=" and current == target:
-            return False
-        if op == "<" and not (current < target):
-            return False
-        if op == "<=" and not (current <= target):
-            return False
-        if op == ">" and not (current > target):
-            return False
-        if op == ">=" and not (current >= target):
-            return False
-    return True
-
-
 def collect_runtime_info() -> dict:
-    requirements_path = ROOT / "requirements.txt"
+    """Summarize the local interpreter and confirm runtime deps are installed.
+
+    The retired ``requirements*.txt`` files once supplied version constraints
+    here; ``uv.lock`` is now the single source of truth, so this only confirms
+    each runtime package resolves (a missing dependency is an error).
+    """
     requirement_checks: list[dict] = []
     issues: list[dict] = []
 
@@ -198,27 +155,16 @@ def collect_runtime_info() -> dict:
             }
         )
 
-    requirements_by_name: dict[str, list[tuple[str, str]]] = {}
-    if requirements_path.exists():
-        for line in requirements_path.read_text().splitlines():
-            parsed = _parse_requirement_spec(line)
-            if parsed:
-                requirements_by_name[parsed[0]] = parsed[1]
-
     for requirement_name, importlib_name in RUNTIME_PACKAGES.items():
         try:
             installed = importlib.metadata.version(importlib_name)
         except importlib.metadata.PackageNotFoundError:
             installed = None
 
-        constraints = requirements_by_name.get(requirement_name, [])
-        matches = installed is not None and _version_matches(installed, constraints)
         requirement_checks.append(
             {
                 "package": requirement_name,
                 "installed_version": installed,
-                "constraints": "".join(f"{op}{version}" for op, version in constraints) or None,
-                "matches_requirements": matches,
             }
         )
         if installed is None:
@@ -227,17 +173,6 @@ def collect_runtime_info() -> dict:
                     "level": "error",
                     "type": "missing_dependency",
                     "message": f"Local runner is missing required package {requirement_name}.",
-                }
-            )
-        elif constraints and not matches:
-            issues.append(
-                {
-                    "level": "warning",
-                    "type": "dependency_version_mismatch",
-                    "message": (
-                        f"{requirement_name} {installed} does not satisfy "
-                        f"requirements.txt ({''.join(f'{op}{version}' for op, version in constraints)})."
-                    ),
                 }
             )
 
@@ -1148,7 +1083,7 @@ def main() -> int:
     logger = BuildLogger(ROOT / args.build_log)
     runtime = collect_runtime_info()
 
-    build_started = datetime.now(timezone.utc).isoformat()
+    build_started = datetime.now(UTC).isoformat()
     results = []
     validation_errors = []
     city_validation_errors: dict[str, list] = {}
@@ -1193,7 +1128,7 @@ def main() -> int:
     validation_summary = build_validation_summary(validation_errors)
 
     audit = {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": datetime.now(UTC).isoformat(),
         "build_started_at": build_started,
         "runtime": runtime,
         "dotenv_loaded": dotenv_loaded,

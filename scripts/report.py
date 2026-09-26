@@ -16,7 +16,7 @@ import contextlib
 import json
 import re
 import sys
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
@@ -51,7 +51,7 @@ MAX_ANOMALY_DAYS = 180
 
 def count_future_events_in_ics(filepath: Path) -> tuple[int, str | None]:
     """Count VEVENT entries with future DTSTART in an ICS file."""
-    cutoff = datetime.now(timezone.utc) - timedelta(hours=24)
+    cutoff = datetime.now(UTC) - timedelta(hours=24)
     try:
         with filepath.open(encoding="utf-8", errors="ignore") as f:
             content = f.read()
@@ -69,11 +69,11 @@ def count_future_events_in_ics(filepath: Path) -> tuple[int, str | None]:
         dt_str = dt_match.group(1)
         try:
             if dt_str.endswith("Z"):
-                dt = datetime.strptime(dt_str, "%Y%m%dT%H%M%SZ").replace(tzinfo=timezone.utc)
+                dt = datetime.strptime(dt_str, "%Y%m%dT%H%M%SZ").replace(tzinfo=UTC)
             elif "T" in dt_str:
-                dt = datetime.strptime(dt_str, "%Y%m%dT%H%M%S").replace(tzinfo=timezone.utc)
+                dt = datetime.strptime(dt_str, "%Y%m%dT%H%M%S").replace(tzinfo=UTC)
             else:
-                dt = datetime.strptime(dt_str, "%Y%m%d").replace(tzinfo=timezone.utc)
+                dt = datetime.strptime(dt_str, "%Y%m%d").replace(tzinfo=UTC)
             if dt >= cutoff:
                 count += 1
         except ValueError:
@@ -148,7 +148,7 @@ def load_report(report_path: str) -> dict:
     try:
         with Path(report_path).open() as f:
             return json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
+    except FileNotFoundError, json.JSONDecodeError:
         return {"generated": None, "cities": {}, "anomalies": []}
 
 
@@ -251,7 +251,7 @@ def update_report(cities: list[str], report_path: str = "report.json"):
         try:
             with Path(events_json).open() as f:
                 events = json.load(f)
-        except (FileNotFoundError, json.JSONDecodeError):
+        except FileNotFoundError, json.JSONDecodeError:
             continue
 
         urls_with_url = [e for e in events if e.get("url")]
@@ -358,7 +358,7 @@ def update_report(cities: list[str], report_path: str = "report.json"):
                 report["cities"][city]["geo_filtered"] = geo_filtered
             else:
                 report["cities"][city].pop("geo_filtered", None)
-        except (FileNotFoundError, json.JSONDecodeError):
+        except FileNotFoundError, json.JSONDecodeError:
             report["cities"][city].pop("geo_filtered", None)
 
         prev_build: dict[str, Any] = report["cities"][city].get("build") or {}
@@ -385,7 +385,7 @@ def update_report(cities: list[str], report_path: str = "report.json"):
         try:
             with Path(events_json).open() as f:
                 events = json.load(f)
-        except (FileNotFoundError, json.JSONDecodeError):
+        except FileNotFoundError, json.JSONDecodeError:
             continue
 
         tz_name = get_city_timezone(city)
@@ -404,7 +404,7 @@ def update_report(cities: list[str], report_path: str = "report.json"):
             # judged by its hour in the city's timezone, not the raw
             # string hour. Naive timestamps keep the raw-hour reading.
             try:
-                dt = datetime.fromisoformat(st.replace("Z", "+00:00"))
+                dt = datetime.fromisoformat(st)
                 if dt.tzinfo is not None:
                     dt = dt.astimezone(tz)
                 hour, minute = dt.hour, dt.minute
@@ -512,7 +512,7 @@ def update_report(cities: list[str], report_path: str = "report.json"):
     cities_json = Path(__file__).parent.parent / "cities.json"
     try:
         active_cities = set(json.loads(cities_json.read_text()).keys())
-    except (OSError, json.JSONDecodeError):
+    except OSError, json.JSONDecodeError:
         active_cities = None
     if active_cities:
         for stale in [c for c in report["cities"] if c not in active_cities]:

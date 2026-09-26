@@ -38,16 +38,18 @@ import sys
 sys.path.insert(0, __file__.rsplit("/", 1)[0])
 
 import argparse
+import contextlib
 import json
 import logging
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
+from lib.timeutil import assume_utc
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -127,26 +129,21 @@ class DiceApiScraper(BaseScraper):
             return None
 
         try:
-            dtstart = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
+            dtstart = datetime.fromisoformat(start_str)
         except ValueError:
             self.logger.debug(f"Bad date {start_str!r} for {title}")
             return None
-        if dtstart.tzinfo is None:
-            dtstart = dtstart.replace(tzinfo=timezone.utc)
+        dtstart = assume_utc(dtstart)
 
         # Skip past events
-        if dtstart < datetime.now(timezone.utc):
+        if dtstart < datetime.now(UTC):
             return None
 
         dtend = None
         end_str = item.get("date_end") or ""
         if end_str:
-            try:
-                dtend = datetime.fromisoformat(end_str.replace("Z", "+00:00"))
-                if dtend.tzinfo is None:
-                    dtend = dtend.replace(tzinfo=timezone.utc)
-            except ValueError:
-                pass
+            with contextlib.suppress(ValueError):
+                dtend = assume_utc(datetime.fromisoformat(end_str))
 
         # Location: "<venue name>, <full address>"
         venue_name = item.get("venue") or ""

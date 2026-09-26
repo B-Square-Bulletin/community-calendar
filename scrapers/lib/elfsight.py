@@ -26,7 +26,7 @@ import hashlib
 import json
 import logging
 import re
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -136,9 +136,9 @@ def expand_recurring_events(
                 try:
                     # Epoch milliseconds are UTC-based instants, so UTC is the
                     # correct tz for the skip date.
-                    exc_dt = datetime.fromtimestamp(orig / 1000, tz=timezone.utc)
+                    exc_dt = datetime.fromtimestamp(orig / 1000, tz=UTC)
                     exceptions.add(exc_dt.date())
-                except (ValueError, TypeError):
+                except ValueError, TypeError:
                     pass
 
     # Day name to weekday number mapping
@@ -322,7 +322,7 @@ class ElfsightCalendarScraper(BaseScraper):
                     end_dt = occ_dt.replace(hour=end_h, minute=end_m)
                     if end_dt < occ_dt:
                         end_dt += timedelta(days=1)
-                except (ValueError, AttributeError):
+                except ValueError, AttributeError:
                     end_dt = occ_dt + timedelta(hours=1)
 
                 # Generate unique ID

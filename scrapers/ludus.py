@@ -44,7 +44,7 @@ import argparse
 import html as html_mod
 import logging
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 from urllib.parse import urlparse
 
@@ -173,7 +173,7 @@ class LudusScraper(BaseScraper):
             return []
 
         self.logger.info(f"Found {len(show_items)} production(s) on page")
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         events: list[dict[str, Any]] = []
 
         for show_div in show_items:

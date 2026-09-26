@@ -2,7 +2,7 @@
 """Tests for the shared timezone-safe datetime helpers (scrapers/lib/timeutil.py)."""
 
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
@@ -10,7 +10,13 @@ import pytest
 _proj_root = Path(__file__).parent.parent
 sys.path.insert(0, str(_proj_root))
 
-from scrapers.lib.timeutil import parse_naive_ics, utc_now, utc_today, wall_clock  # noqa: E402
+from scrapers.lib.timeutil import (  # noqa: E402
+    assume_utc,
+    parse_naive_ics,
+    utc_now,
+    utc_today,
+    wall_clock,
+)
 
 
 class TestWallClock:
@@ -71,18 +77,41 @@ class TestParseNaiveIcs:
 class TestUtcNow:
     """utc_now() returns the current absolute instant in UTC."""
 
-    def test_is_timezone_aware_utc(self):
+    def test_is_timezone_assume_utc(self):
         result = utc_now()
         assert result.tzinfo is not None
-        assert result.utcoffset() == timezone.utc.utcoffset(None)
+        assert result.utcoffset() == UTC.utcoffset(None)
 
     def test_close_to_now(self):
         from datetime import datetime as dt
 
-        before = dt.now(timezone.utc)
+        before = dt.now(UTC)
         result = utc_now()
-        after = dt.now(timezone.utc)
+        after = dt.now(UTC)
         assert before <= result <= after
+
+
+class TestAssumeUtc:
+    """assume_utc() treats a naive datetime as UTC and preserves aware values."""
+
+    def test_naive_datetime_is_stamped_utc(self):
+        naive = datetime(2026, 3, 14, 18, 30)  # noqa: DTZ001 - deliberately naive input
+        result = assume_utc(naive)
+        assert result.tzinfo is not None
+        assert result.utcoffset() == UTC.utcoffset(None)
+        assert (result.hour, result.minute) == (18, 30)
+
+    def test_aware_datetime_is_returned_unchanged(self):
+        aware = datetime(2026, 3, 14, 18, 30, tzinfo=UTC)
+        assert assume_utc(aware) is aware
+
+    def test_non_utc_aware_datetime_is_preserved(self):
+        from datetime import timedelta, timezone
+
+        aware = datetime(2026, 3, 14, 18, 30, tzinfo=timezone(timedelta(hours=-5)))
+        result = assume_utc(aware)
+        assert result is aware
+        assert result.utcoffset() == timedelta(hours=-5)
 
 
 class TestUtcToday:

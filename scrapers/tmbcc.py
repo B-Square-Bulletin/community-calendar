@@ -217,7 +217,7 @@ class TmbccScraper(BaseScraper):
                 continue
             try:
                 published = datetime.fromisoformat(item["date"]).date()
-            except (KeyError, ValueError, TypeError):
+            except KeyError, ValueError, TypeError:
                 continue
             posts.append(
                 {
@@ -250,7 +250,7 @@ class TmbccScraper(BaseScraper):
                 from email.utils import parsedate_to_datetime
 
                 published = parsedate_to_datetime(pub_el.text).date()
-            except (ValueError, TypeError):
+            except ValueError, TypeError:
                 continue
             enc = item.find("content:encoded", ns)
             link_el = item.find("link")

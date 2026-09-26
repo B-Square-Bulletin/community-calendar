@@ -34,7 +34,7 @@ import logging
 import re
 import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from email.utils import parsedate_to_datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
@@ -43,6 +43,7 @@ from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
 from lib.jsonld import extract_events_from_blocks, extract_jsonld_blocks, parse_location
+from lib.timeutil import assume_utc
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -51,20 +52,6 @@ HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 }
-
-# datetime.fromisoformat() on Python <3.11 rejects UTC offsets that omit the
-# colon (e.g. "-0400"), which is exactly what this platform's JSON-LD
-# startDate/endDate values use. Insert the colon before parsing so the
-# offset becomes "-04:00". Already-coloned offsets are left untouched
-# because the colon breaks the trailing \d{4} match.
-_TZ_OFFSET_NO_COLON_RE = re.compile(r"([+-]\d{2})(\d{2})$")
-
-
-def _normalize_iso_offset(value: str) -> str:
-    value = value.strip()
-    if value.endswith("Z"):
-        return value[:-1] + "+00:00"
-    return _TZ_OFFSET_NO_COLON_RE.sub(r"\1:\2", value)
 
 
 class RhpEventsScraper(BaseScraper):
@@ -109,7 +96,7 @@ class RhpEventsScraper(BaseScraper):
 
         # Only fetch items published recently — older ones are almost certainly past events.
         # pubDate is publish date, not event date, but recently published = likely upcoming.
-        cutoff = datetime.now(timezone.utc) - timedelta(days=60)
+        cutoff = datetime.now(UTC) - timedelta(days=60)
         urls = []
         skipped = 0
         for item in root.findall(".//item"):
@@ -123,7 +110,7 @@ class RhpEventsScraper(BaseScraper):
                     if pub_dt < cutoff:
                         skipped += 1
                         continue
-                except (ValueError, TypeError):
+                except ValueError, TypeError:
                     pass
             urls.append(link.text.strip())
 
@@ -153,14 +140,14 @@ class RhpEventsScraper(BaseScraper):
             return None
 
         try:
-            dtstart = datetime.fromisoformat(_normalize_iso_offset(start_str))
+            dtstart = datetime.fromisoformat(start_str.strip())
         except ValueError:
             self.logger.debug(f"Skipping {title}: bad startDate {start_str}")
             return None
 
         # Skip past events
-        now = datetime.now(timezone.utc)
-        start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=timezone.utc)
+        now = datetime.now(UTC)
+        start_aware = assume_utc(dtstart)
         if start_aware < now:
             return None
 
@@ -169,7 +156,7 @@ class RhpEventsScraper(BaseScraper):
         end_str = item.get("endDate", "")
         if end_str:
             with contextlib.suppress(ValueError):
-                dtend = datetime.fromisoformat(_normalize_iso_offset(end_str))
+                dtend = datetime.fromisoformat(end_str.strip())
 
         # Location
         location = parse_location(item.get("location"), self.default_location)

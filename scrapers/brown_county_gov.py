@@ -24,7 +24,7 @@ sys.path.insert(0, __file__.rsplit("/", 1)[0])
 import argparse
 import logging
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -32,6 +32,7 @@ from zoneinfo import ZoneInfo
 
 from icalendar import Calendar as ICalendar
 from lib.base import BaseScraper
+from lib.timeutil import assume_utc
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -84,7 +85,7 @@ class BrownCountyGovScraper(BaseScraper):
             self.logger.error(f"Failed to parse iCal: {e}")
             return []
 
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         events = []
 
         for comp in cal.walk("VEVENT"):
@@ -96,11 +97,11 @@ class BrownCountyGovScraper(BaseScraper):
 
             # Normalize to aware datetime for comparison
             if hasattr(dt, "hour"):
-                start_aware = dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
+                start_aware = assume_utc(dt)
             else:
                 import datetime as _dt
 
-                start_aware = _dt.datetime.combine(dt, _dt.time.min).replace(tzinfo=timezone.utc)
+                start_aware = _dt.datetime.combine(dt, _dt.time.min).replace(tzinfo=UTC)
 
             if start_aware < now:
                 continue
@@ -113,13 +114,11 @@ class BrownCountyGovScraper(BaseScraper):
             if dtend_prop:
                 end_dt = dtend_prop.dt
                 if hasattr(end_dt, "hour"):
-                    end_aware = end_dt if end_dt.tzinfo else end_dt.replace(tzinfo=timezone.utc)
+                    end_aware = assume_utc(end_dt)
                 else:
                     import datetime as _dt
 
-                    end_aware = _dt.datetime.combine(end_dt, _dt.time.min).replace(
-                        tzinfo=timezone.utc
-                    )
+                    end_aware = _dt.datetime.combine(end_dt, _dt.time.min).replace(tzinfo=UTC)
                 dtend = end_aware.astimezone(TZ)
 
             title = str(comp.get("summary", "Untitled"))

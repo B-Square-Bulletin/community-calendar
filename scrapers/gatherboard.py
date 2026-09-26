@@ -26,13 +26,14 @@ import argparse
 import logging
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 from icalendar import Calendar as ICalendar
 from lib.base import BaseScraper
+from lib.timeutil import assume_utc
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -179,7 +180,7 @@ class GatherBoardScraper(BaseScraper):
             self.logger.debug(f"Failed to parse ICS: {e}")
             return None
 
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
 
         # Extract calendar-level title (X-WR-CALNAME) which holds the real event name
         cal_name = str(cal.get("x-wr-calname", "")).strip()
@@ -195,11 +196,9 @@ class GatherBoardScraper(BaseScraper):
             dtstart = dtstart_raw.dt
             # Normalize to datetime for comparison
             if hasattr(dtstart, "hour"):
-                dt_for_compare = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=timezone.utc)
+                dt_for_compare = assume_utc(dtstart)
             else:
-                dt_for_compare = datetime(
-                    dtstart.year, dtstart.month, dtstart.day, tzinfo=timezone.utc
-                )
+                dt_for_compare = datetime(dtstart.year, dtstart.month, dtstart.day, tzinfo=UTC)
 
             if dt_for_compare < now:
                 return None

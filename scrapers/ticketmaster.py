@@ -28,7 +28,7 @@ import json
 import logging
 import os
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -91,7 +91,7 @@ class TicketmasterScraper(BaseScraper):
             params["classificationName"] = self.classification
         # Bound the API window to our horizon to save quota and keep results focused.
         # TM expects yyyy-MM-ddTHH:mm:ssZ (no fractional seconds).
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         end = self.horizon_cutoff(now)
         params["startDateTime"] = now.strftime("%Y-%m-%dT%H:%M:%SZ")
         params["endDateTime"] = end.strftime("%Y-%m-%dT%H:%M:%SZ")

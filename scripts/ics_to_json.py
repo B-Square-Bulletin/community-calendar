@@ -11,7 +11,7 @@ import re
 import sys
 from collections import defaultdict
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from html import unescape as html_unescape
 from pathlib import Path
 from typing import Any, Literal
@@ -90,7 +90,7 @@ def parse_ics_datetime(dt_str, local_tz=None):
         if dt_str.endswith("Z"):
             # UTC time - convert to city's local time
             dt = parse_naive_ics(dt_str, "%Y%m%dT%H%M%SZ")
-            dt = dt.replace(tzinfo=timezone.utc).astimezone(local_tz)
+            dt = dt.replace(tzinfo=UTC).astimezone(local_tz)
             return dt.isoformat()
         elif "T" in dt_str:
             # Local time (already in correct timezone) - attach tz so offset is included
@@ -397,7 +397,7 @@ _US_STATE_TOKENS = {
 _SOURCE_PRIORITY_PATH = Path(__file__).resolve().parent.parent / "source_priority.json"
 try:
     AGGREGATORS = set(json.loads(_SOURCE_PRIORITY_PATH.read_text())["aggregators"])
-except (OSError, json.JSONDecodeError, KeyError, TypeError):
+except OSError, json.JSONDecodeError, KeyError, TypeError:
     AGGREGATORS = set()
 
 
@@ -658,8 +658,8 @@ def instant_epoch(event):
     except ValueError:
         return None
     if parsed.tzinfo is None:
-        parsed = parsed.replace(tzinfo=timezone.utc)
-    return int(parsed.astimezone(timezone.utc).timestamp())
+        parsed = parsed.replace(tzinfo=UTC)
+    return int(parsed.astimezone(UTC).timestamp())
 
 
 def structured_source_names(event):
@@ -1135,7 +1135,7 @@ def ics_to_json(ics_file, output_file=None, future_only=True, city=None, diagnos
     # Use 24 hours ago to avoid filtering out same-day events due to timezone differences
     from datetime import timedelta
 
-    now = datetime.now(timezone.utc) - timedelta(hours=24)
+    now = datetime.now(UTC) - timedelta(hours=24)
 
     # Extract all VEVENT blocks
     pattern = r"BEGIN:VEVENT\r?\n(.*?)\r?\nEND:VEVENT"
@@ -1175,7 +1175,7 @@ def ics_to_json(ics_file, output_file=None, future_only=True, city=None, diagnos
             try:
                 event_dt = datetime.fromisoformat(start_time)
                 if event_dt.tzinfo is None:
-                    event_dt = event_dt.replace(tzinfo=timezone.utc)
+                    event_dt = event_dt.replace(tzinfo=UTC)
                 if event_dt < now:
                     continue
             except ValueError:

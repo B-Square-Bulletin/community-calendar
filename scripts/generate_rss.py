@@ -29,7 +29,7 @@ import json
 import os
 import re
 import sys
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from email.utils import format_datetime, parsedate_to_datetime
 from pathlib import Path
 
@@ -44,11 +44,11 @@ def parse_dt(value):
     if not value:
         return None
     try:
-        dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        dt = datetime.fromisoformat(value)
     except ValueError:
         return None
     if dt.tzinfo is None:
-        dt = dt.replace(tzinfo=timezone.utc)
+        dt = dt.replace(tzinfo=UTC)
     return dt
 
 
@@ -168,7 +168,7 @@ def render_item(ev, guid, pub_dt, app_link, member_guids=(), desc_cap=1000):
 
 
 def render_feed(title, description, app_link, self_url, items):
-    now = format_datetime(datetime.now(timezone.utc))
+    now = format_datetime(datetime.now(UTC))
     return (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n'
@@ -323,7 +323,7 @@ def main():
 
     events = json.loads(events_path.read_text())
     full_items, latest_items = generate(
-        args.city, events, Path(args.outdir), Path(args.state_dir), datetime.now(timezone.utc)
+        args.city, events, Path(args.outdir), Path(args.state_dir), datetime.now(UTC)
     )
 
     print(f"generate_rss: {args.city}: full={len(full_items)} latest={len(latest_items)}")

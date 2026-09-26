@@ -3,10 +3,9 @@
 
 import json
 import sys
-from collections.abc import Mapping, Sequence
 from datetime import datetime
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 from unittest.mock import Mock, patch
 
 # Add project root and scrapers/ to path so scraper imports resolve
@@ -17,6 +16,9 @@ sys.path.insert(0, str(_proj_root / "scrapers"))
 from zoneinfo import ZoneInfo  # noqa: E402
 
 from scrapers.comedy_attic import ComedyAtticScraper  # noqa: E402
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping, Sequence
 
 # Real JSON-LD captured from comedyattic.com/events/129480 (Gianmarco Soresi)
 # 6 showtimes across 3 days, with full location + description

@@ -26,13 +26,14 @@ import contextlib
 import html as html_mod
 import logging
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
 from lib.jsonld import extract_jsonld_blocks, parse_location
+from lib.timeutil import assume_utc
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -103,7 +104,7 @@ class ThunderTixScraper(BaseScraper):
         raw_events = self._extract_events_from_item_list(blocks)
         self.logger.info(f"Found {len(raw_events)} events in JSON-LD")
 
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         events = []
 
         for item in raw_events:
@@ -122,12 +123,12 @@ class ThunderTixScraper(BaseScraper):
             return None
 
         try:
-            dtstart = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
+            dtstart = datetime.fromisoformat(start_str)
         except ValueError:
             self.logger.debug(f"Bad startDate {start_str!r} for {title!r}")
             return None
 
-        start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=timezone.utc)
+        start_aware = assume_utc(dtstart)
         if start_aware < now:
             return None
 
@@ -135,7 +136,7 @@ class ThunderTixScraper(BaseScraper):
         dtend = None
         if end_str:
             with contextlib.suppress(ValueError):
-                dtend = datetime.fromisoformat(end_str.replace("Z", "+00:00"))
+                dtend = datetime.fromisoformat(end_str)
 
         location = parse_location(item.get("location"), self.default_location)
 

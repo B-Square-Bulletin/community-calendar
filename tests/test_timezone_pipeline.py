@@ -10,7 +10,7 @@ Run: python -m pytest tests/test_timezone_pipeline.py -v
 
 import re
 import sys
-from datetime import date, datetime, timedelta, timezone
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -270,10 +270,10 @@ class TestFullPipeline:
         # Parse the result to check the actual UTC instant
         assert result is not None
         result_dt = datetime.fromisoformat(result)
-        result_utc = result_dt.astimezone(timezone.utc)
+        result_utc = result_dt.astimezone(UTC)
 
         # 7pm Eastern on Jan 15 = midnight UTC on Jan 16
-        expected_utc = datetime(2025, 1, 16, 0, 0, 0, tzinfo=timezone.utc)
+        expected_utc = datetime(2025, 1, 16, 0, 0, 0, tzinfo=UTC)
 
         assert result_utc == expected_utc, (
             f"Wrong UTC instant!\n"
@@ -293,10 +293,10 @@ class TestFullPipeline:
 
         assert result is not None
         result_dt = datetime.fromisoformat(result)
-        result_utc = result_dt.astimezone(timezone.utc)
+        result_utc = result_dt.astimezone(UTC)
 
         # 7pm Pacific on Jan 15 = 3am UTC on Jan 16
-        expected_utc = datetime(2025, 1, 16, 3, 0, 0, tzinfo=timezone.utc)
+        expected_utc = datetime(2025, 1, 16, 3, 0, 0, tzinfo=UTC)
 
         assert result_utc == expected_utc
 
@@ -307,9 +307,9 @@ class TestFullPipeline:
 
         assert result is not None
         result_dt = datetime.fromisoformat(result)
-        result_utc = result_dt.astimezone(timezone.utc)
+        result_utc = result_dt.astimezone(UTC)
 
-        expected_utc = datetime(2025, 1, 15, 20, 0, 0, tzinfo=timezone.utc)
+        expected_utc = datetime(2025, 1, 15, 20, 0, 0, tzinfo=UTC)
         assert result_utc == expected_utc
 
 
@@ -339,7 +339,7 @@ class TestEnrichmentTimezone:
         """
         naive = "2025-01-15T19:00:00"
         # Postgres with default UTC session timezone treats this as UTC
-        as_utc = datetime.fromisoformat(naive).replace(tzinfo=timezone.utc)
+        as_utc = datetime.fromisoformat(naive).replace(tzinfo=UTC)
         # But the user meant 7pm Pacific
         as_pacific = datetime.fromisoformat(naive).replace(tzinfo=ZoneInfo("America/Los_Angeles"))
 
@@ -365,8 +365,8 @@ class TestEnrichmentTimezone:
         assert correct == "2025-01-15T19:00:00-08:00"
 
         # Verify both resolve to the same UTC instant
-        correct_utc = datetime.fromisoformat(correct).astimezone(timezone.utc)
-        expected_utc = datetime(2025, 1, 16, 3, 0, 0, tzinfo=timezone.utc)
+        correct_utc = datetime.fromisoformat(correct).astimezone(UTC)
+        expected_utc = datetime(2025, 1, 16, 3, 0, 0, tzinfo=UTC)
         assert correct_utc == expected_utc
 
     def test_enrichment_roundtrip_bug(self):
@@ -389,8 +389,8 @@ class TestEnrichmentTimezone:
 
         # Step 1: Event correctly stored as 7pm Pacific = 3am UTC next day
         original_local = datetime(2025, 1, 15, 19, 0, 0, tzinfo=city_tz)
-        stored_utc = original_local.astimezone(timezone.utc)
-        assert stored_utc == datetime(2025, 1, 16, 3, 0, 0, tzinfo=timezone.utc)
+        stored_utc = original_local.astimezone(UTC)
+        assert stored_utc == datetime(2025, 1, 16, 3, 0, 0, tzinfo=UTC)
 
         # Step 2: Postgres returns ISO string with +00:00
         pg_returns = stored_utc.isoformat()  # "2025-01-16T03:00:00+00:00"
@@ -408,7 +408,7 @@ class TestEnrichmentTimezone:
         naive_submitted = f"{form_date}T{form_time}:00"  # "2025-01-15T19:00:00"
 
         # Step 5-6: Sent to Postgres REST API — no offset, interpreted as UTC
-        pg_stores_as_utc = datetime.fromisoformat(naive_submitted).replace(tzinfo=timezone.utc)
+        pg_stores_as_utc = datetime.fromisoformat(naive_submitted).replace(tzinfo=UTC)
 
         # Step 7: Frontend reads it back, converts to Pacific for display
         displayed_back = pg_stores_as_utc.astimezone(city_tz)
@@ -429,7 +429,7 @@ class TestEnrichmentTimezone:
 
         # Steps 1-3: Same as above
         original_local = datetime(2025, 1, 15, 19, 0, 0, tzinfo=city_tz)
-        stored_utc = original_local.astimezone(timezone.utc)
+        stored_utc = original_local.astimezone(UTC)
         pg_returns = stored_utc.isoformat()
         displayed = datetime.fromisoformat(pg_returns).astimezone(city_tz)
         form_date = displayed.strftime("%Y-%m-%d")
@@ -441,7 +441,7 @@ class TestEnrichmentTimezone:
         # "2025-01-15T19:00:00-08:00"
 
         # Step 5-6: Postgres receives offset-qualified string, stores correctly
-        pg_stores = datetime.fromisoformat(offset_submitted).astimezone(timezone.utc)
+        pg_stores = datetime.fromisoformat(offset_submitted).astimezone(UTC)
 
         # Step 7: Round-trip is correct
         displayed_back = pg_stores.astimezone(city_tz)
@@ -460,7 +460,7 @@ class TestEnrichmentTimezone:
         city_tz = ZoneInfo("America/New_York")
 
         original_local = datetime(2025, 1, 15, 19, 0, 0, tzinfo=city_tz)
-        stored_utc = original_local.astimezone(timezone.utc)
+        stored_utc = original_local.astimezone(UTC)
         pg_returns = stored_utc.isoformat()
         displayed = datetime.fromisoformat(pg_returns).astimezone(city_tz)
 
@@ -469,7 +469,7 @@ class TestEnrichmentTimezone:
         naive_submitted = f"{form_date}T{form_time}:00"
 
         # BUG path: Postgres treats as UTC
-        pg_stores_as_utc = datetime.fromisoformat(naive_submitted).replace(tzinfo=timezone.utc)
+        pg_stores_as_utc = datetime.fromisoformat(naive_submitted).replace(tzinfo=UTC)
         displayed_back = pg_stores_as_utc.astimezone(city_tz)
 
         # 7pm becomes 2pm (5 hours wrong)
@@ -572,7 +572,7 @@ class TestApplyTimezoneOffset:
 
         # Original: 7pm Pacific
         original = datetime(2025, 1, 15, 19, 0, 0, tzinfo=city_tz)
-        stored_utc = original.astimezone(timezone.utc)
+        stored_utc = original.astimezone(UTC)
 
         # Form shows 7pm, user submits
         naive = "2025-01-15T19:00:00"
@@ -582,7 +582,7 @@ class TestApplyTimezoneOffset:
         assert with_offset == "2025-01-15T19:00:00-08:00"
 
         # Postgres stores it
-        pg_stores = datetime.fromisoformat(with_offset).astimezone(timezone.utc)
+        pg_stores = datetime.fromisoformat(with_offset).astimezone(UTC)
 
         # Same UTC instant as original
         assert pg_stores == stored_utc
@@ -842,8 +842,8 @@ class TestRealIcsFiles:
 
         assert pacific_parsed is not None
         assert eastern_parsed is not None
-        pacific_utc = datetime.fromisoformat(pacific_parsed).astimezone(timezone.utc)
-        eastern_utc = datetime.fromisoformat(eastern_parsed).astimezone(timezone.utc)
+        pacific_utc = datetime.fromisoformat(pacific_parsed).astimezone(UTC)
+        eastern_utc = datetime.fromisoformat(eastern_parsed).astimezone(UTC)
 
         # 7pm Pacific = 3am UTC, 7pm Eastern = midnight UTC — 3 hours apart
         diff_hours = (pacific_utc - eastern_utc).total_seconds() / 3600

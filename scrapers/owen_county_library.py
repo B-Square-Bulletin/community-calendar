@@ -18,13 +18,14 @@ import argparse
 import contextlib
 import json
 import logging
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 from lib.base import BaseScraper
+from lib.timeutil import assume_utc
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -75,7 +76,7 @@ class OwenCountyLibraryScraper(BaseScraper):
             return {}
 
     def fetch_events(self) -> list[dict[str, Any]]:
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         events = []
         page = 1
 
@@ -92,13 +93,13 @@ class OwenCountyLibraryScraper(BaseScraper):
 
                 try:
                     # Dates come in as ISO 8601 UTC strings
-                    dtstart = datetime.fromisoformat(date_str.replace("Z", "+00:00"))
+                    dtstart = datetime.fromisoformat(date_str)
                 except ValueError:
                     self.logger.debug(f"Bad date: {date_str}")
                     continue
 
                 # Skip past events
-                start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=timezone.utc)
+                start_aware = assume_utc(dtstart)
                 if start_aware < now:
                     continue
 
@@ -110,9 +111,7 @@ class OwenCountyLibraryScraper(BaseScraper):
                 end_str = doc.get("endDate")
                 if end_str:
                     with contextlib.suppress(ValueError):
-                        dtend = datetime.fromisoformat(end_str.replace("Z", "+00:00")).astimezone(
-                            TZ
-                        )
+                        dtend = datetime.fromisoformat(end_str).astimezone(TZ)
 
                 # Location: use the room field if available, fall back to default
                 location = doc.get("location") or ""

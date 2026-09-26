@@ -91,7 +91,7 @@ class SidearmScraper(BaseScraper):
             )
             with urlopen(req, timeout=30) as resp:
                 data = json.loads(resp.read())
-        except (HTTPError, URLError):
+        except HTTPError, URLError:
             return None
 
         events = []
@@ -152,9 +152,9 @@ class SidearmScraper(BaseScraper):
     def _parse_api_datetime(self, day_date: str, time_str: str) -> datetime | None:
         """Parse date from API and time string like '7 p.m.'."""
         try:
-            dt = datetime.fromisoformat(day_date.replace("Z", "+00:00"))
+            dt = datetime.fromisoformat(day_date)
             dt = dt.replace(tzinfo=None)
-        except (ValueError, AttributeError):
+        except ValueError, AttributeError:
             return None
 
         if time_str:

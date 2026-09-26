@@ -177,10 +177,7 @@ class CatsCradleScraper(BaseScraper):
 
     @staticmethod
     def _parse_iso_date(date_str: str) -> datetime | None:
-        """Parse ISO date string, handling offset formats like -0400 that
-        Python < 3.11 fromisoformat() doesn't support."""
-        # Insert colon in timezone offset if missing (e.g., -0400 -> -04:00)
-        date_str = re.sub(r"([+-]\d{2})(\d{2})$", r"\1:\2", date_str)
+        """Parse an ISO date string and drop any offset to a wall-clock value."""
         try:
             dt = datetime.fromisoformat(date_str)
             return dt.replace(tzinfo=None)

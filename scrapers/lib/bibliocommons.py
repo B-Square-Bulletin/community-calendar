@@ -174,7 +174,7 @@ class BibliocommonsEventsScraper(BaseScraper):
     def _parse_dt(self, value: Any, tz: ZoneInfo) -> datetime | None:
         if not value or not isinstance(value, str):
             return None
-        s = value.strip().replace("Z", "+00:00")
+        s = value.strip()
         try:
             dt = datetime.fromisoformat(s)
             if dt.tzinfo is None:

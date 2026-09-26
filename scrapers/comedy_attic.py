@@ -99,7 +99,7 @@ class ComedyAtticScraper(BaseScraper):
                 continue
             try:
                 data = json.loads(script.string)
-            except (json.JSONDecodeError, TypeError):
+            except json.JSONDecodeError, TypeError:
                 continue
 
             if not isinstance(data, dict) or data.get("@type") != "Event":
@@ -112,7 +112,7 @@ class ComedyAtticScraper(BaseScraper):
 
             # Parse ISO 8601 UTC date
             try:
-                dt = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
+                dt = datetime.fromisoformat(start_str)
             except ValueError:
                 self.logger.warning(f"Could not parse startDate: {start_str}")
                 continue
