@@ -41,6 +41,7 @@ from .jsonld import (
     extract_jsonld_blocks,
     parse_location,
 )
+from .timeutil import assume_utc
 
 logger = logging.getLogger(__name__)
 
@@ -118,7 +119,7 @@ class DiceVenueScraper(BaseScraper):
 
         # Skip past events
         now = datetime.now(UTC)
-        start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=UTC)
+        start_aware = assume_utc(dtstart)
         if start_aware < now:
             return None
 

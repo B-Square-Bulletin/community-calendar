@@ -30,6 +30,7 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
+from lib.timeutil import assume_utc
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -189,7 +190,7 @@ class GuildHostScraper(BaseScraper):
             if event:
                 # Skip past events
                 dtstart = event["dtstart"]
-                start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=UTC)
+                start_aware = assume_utc(dtstart)
                 if start_aware < now:
                     self.logger.debug(f"Skipping past event: {event['title']}")
                     continue

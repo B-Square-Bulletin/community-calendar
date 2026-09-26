@@ -19,7 +19,7 @@ from zoneinfo import ZoneInfo
 
 sys.path.insert(0, "scrapers")
 
-from lib.timeutil import parse_naive_ics
+from lib.timeutil import assume_utc, parse_naive_ics
 
 
 def strip_html_tags(text):
@@ -657,8 +657,7 @@ def instant_epoch(event):
         parsed = datetime.fromisoformat(start)
     except ValueError:
         return None
-    if parsed.tzinfo is None:
-        parsed = parsed.replace(tzinfo=UTC)
+    parsed = assume_utc(parsed)
     return int(parsed.astimezone(UTC).timestamp())
 
 
@@ -1174,8 +1173,7 @@ def ics_to_json(ics_file, output_file=None, future_only=True, city=None, diagnos
         if future_only and start_time:
             try:
                 event_dt = datetime.fromisoformat(start_time)
-                if event_dt.tzinfo is None:
-                    event_dt = event_dt.replace(tzinfo=UTC)
+                event_dt = assume_utc(event_dt)
                 if event_dt < now:
                     continue
             except ValueError:

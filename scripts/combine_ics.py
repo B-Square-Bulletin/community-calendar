@@ -17,7 +17,7 @@ sys.path.insert(0, "scrapers")
 import icalendar
 import recurring_ical_events
 from lib.city_filter import load_allowed_cities, location_matches_allowed_cities
-from lib.timeutil import parse_naive_ics, utc_now, utc_today
+from lib.timeutil import assume_utc, parse_naive_ics, utc_now, utc_today
 
 # Fallback URLs for sources whose ICS events lack a URL property.
 # Only needed for scraped sources where per-event URLs aren't available.
@@ -841,9 +841,7 @@ def combine_ics_files(
 
     # Sort by start time
     def normalize_dt(dt):
-        if dt.tzinfo is None:
-            return dt.replace(tzinfo=UTC)
-        return dt
+        return assume_utc(dt)
 
     all_events.sort(key=lambda x: normalize_dt(x["dtstart"]))
 

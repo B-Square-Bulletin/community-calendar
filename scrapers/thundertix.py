@@ -33,6 +33,7 @@ from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
 from lib.jsonld import extract_jsonld_blocks, parse_location
+from lib.timeutil import assume_utc
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -127,7 +128,7 @@ class ThunderTixScraper(BaseScraper):
             self.logger.debug(f"Bad startDate {start_str!r} for {title!r}")
             return None
 
-        start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=UTC)
+        start_aware = assume_utc(dtstart)
         if start_aware < now:
             return None
 

@@ -28,7 +28,7 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
-from lib.timeutil import parse_naive_ics
+from lib.timeutil import assume_utc, parse_naive_ics
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
@@ -127,10 +127,10 @@ class TurtleBackZooScraper(BaseScraper):
                     continue
 
                 # If no year given and date is in the past, try next year
-                if not year_str and dt.replace(tzinfo=UTC) < now:
+                if not year_str and assume_utc(dt) < now:
                     dt = dt.replace(year=current_year + 1)
 
-                dt = dt.replace(tzinfo=UTC)
+                dt = assume_utc(dt)
                 if dt < now:
                     continue
 

@@ -48,6 +48,7 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
+from lib.timeutil import assume_utc
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -131,8 +132,7 @@ class DiceApiScraper(BaseScraper):
         except ValueError:
             self.logger.debug(f"Bad date {start_str!r} for {title}")
             return None
-        if dtstart.tzinfo is None:
-            dtstart = dtstart.replace(tzinfo=UTC)
+        dtstart = assume_utc(dtstart)
 
         # Skip past events
         if dtstart < datetime.now(UTC):
@@ -143,8 +143,7 @@ class DiceApiScraper(BaseScraper):
         if end_str:
             try:
                 dtend = datetime.fromisoformat(end_str.replace("Z", "+00:00"))
-                if dtend.tzinfo is None:
-                    dtend = dtend.replace(tzinfo=UTC)
+                dtend = assume_utc(dtend)
             except ValueError:
                 pass
 

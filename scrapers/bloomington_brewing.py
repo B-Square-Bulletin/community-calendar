@@ -36,6 +36,7 @@ from zoneinfo import ZoneInfo
 
 from icalendar import Calendar as ICalendar
 from lib.base import BaseScraper
+from lib.timeutil import assume_utc
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -117,11 +118,11 @@ class BloomingtonBrewingScraper(BaseScraper):
 
             # Normalize to aware datetime for comparison
             if hasattr(dt, "hour"):
-                start_aware = dt if dt.tzinfo else dt.replace(tzinfo=UTC)
+                start_aware = assume_utc(dt)
             else:
                 import datetime as _dt
 
-                start_aware = _dt.datetime.combine(dt, _dt.time.min).replace(tzinfo=UTC)
+                start_aware = assume_utc(_dt.datetime.combine(dt, _dt.time.min))
 
             if start_aware < now:
                 continue
@@ -133,11 +134,11 @@ class BloomingtonBrewingScraper(BaseScraper):
             if dtend_prop:
                 end_dt = dtend_prop.dt
                 if hasattr(end_dt, "hour"):
-                    end_aware = end_dt if end_dt.tzinfo else end_dt.replace(tzinfo=UTC)
+                    end_aware = assume_utc(end_dt)
                 else:
                     import datetime as _dt
 
-                    end_aware = _dt.datetime.combine(end_dt, _dt.time.min).replace(tzinfo=UTC)
+                    end_aware = assume_utc(_dt.datetime.combine(end_dt, _dt.time.min))
                 dtend = end_aware.astimezone(TZ)
 
             title = str(comp.get("summary", "Untitled"))
