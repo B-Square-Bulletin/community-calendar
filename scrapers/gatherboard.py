@@ -33,6 +33,7 @@ from urllib.request import Request, urlopen
 
 from icalendar import Calendar as ICalendar
 from lib.base import BaseScraper
+from lib.timeutil import assume_utc
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -195,7 +196,7 @@ class GatherBoardScraper(BaseScraper):
             dtstart = dtstart_raw.dt
             # Normalize to datetime for comparison
             if hasattr(dtstart, "hour"):
-                dt_for_compare = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=UTC)
+                dt_for_compare = assume_utc(dtstart)
             else:
                 dt_for_compare = datetime(dtstart.year, dtstart.month, dtstart.day, tzinfo=UTC)
 

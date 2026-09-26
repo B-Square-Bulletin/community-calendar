@@ -24,6 +24,7 @@ from urllib.request import Request, urlopen
 
 from icalendar import Calendar as ICalendar
 from lib.base import BaseScraper
+from lib.timeutil import assume_utc
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
@@ -81,7 +82,7 @@ class RaptorTrustScraper(BaseScraper):
                 continue
             dt = dtstart.dt
             if hasattr(dt, "hour"):
-                start_aware = dt if dt.tzinfo else dt.replace(tzinfo=UTC)
+                start_aware = assume_utc(dt)
             else:
                 start_aware = datetime.combine(dt, datetime.min.time()).replace(tzinfo=UTC)
 

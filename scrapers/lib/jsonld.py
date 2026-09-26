@@ -33,6 +33,7 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 from .base import BaseScraper
+from .timeutil import assume_utc
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -242,7 +243,7 @@ class JsonLdScraper(BaseScraper):
 
         # Skip past events
         now = datetime.now(UTC)
-        start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=UTC)
+        start_aware = assume_utc(dtstart)
         if start_aware < now:
             return None
 

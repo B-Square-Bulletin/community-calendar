@@ -26,6 +26,7 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
+from lib.timeutil import assume_utc
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -87,7 +88,7 @@ class SongkickScraper(BaseScraper):
                     continue
 
                 # Skip past events
-                start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=UTC)
+                start_aware = assume_utc(dtstart)
                 if start_aware < now:
                     continue
 

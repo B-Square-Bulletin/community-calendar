@@ -32,6 +32,7 @@ from zoneinfo import ZoneInfo
 
 from icalendar import Calendar as ICalendar
 from lib.base import BaseScraper
+from lib.timeutil import assume_utc
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -96,7 +97,7 @@ class BrownCountyGovScraper(BaseScraper):
 
             # Normalize to aware datetime for comparison
             if hasattr(dt, "hour"):
-                start_aware = dt if dt.tzinfo else dt.replace(tzinfo=UTC)
+                start_aware = assume_utc(dt)
             else:
                 import datetime as _dt
 
@@ -113,7 +114,7 @@ class BrownCountyGovScraper(BaseScraper):
             if dtend_prop:
                 end_dt = dtend_prop.dt
                 if hasattr(end_dt, "hour"):
-                    end_aware = end_dt if end_dt.tzinfo else end_dt.replace(tzinfo=UTC)
+                    end_aware = assume_utc(end_dt)
                 else:
                     import datetime as _dt
 

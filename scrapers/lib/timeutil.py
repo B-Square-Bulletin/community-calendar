@@ -44,3 +44,14 @@ def utc_now():
 def utc_today():
     """Return today's date in UTC, matching the pipeline's ±1-day tolerance."""
     return utc_now().date()
+
+
+def assume_utc(dt):
+    """Return an aware datetime, stamping UTC on a naive value and passing
+    an already-aware value through unchanged.
+
+    Scrapers compare a parsed start/end against "now". A source that omits a
+    zone would otherwise compare a naive value against an aware one, so this
+    centralizes the assumption that a zoneless timestamp is UTC.
+    """
+    return dt if dt.tzinfo else dt.replace(tzinfo=UTC)
