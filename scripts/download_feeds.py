@@ -117,9 +117,11 @@ def fetch_feeds_from_db(city: str):
     }
     req = urllib.request.Request(query_url, headers=headers)
     try:
-        with urllib.request.urlopen(req) as resp:
+        with urllib.request.urlopen(req, timeout=_DB_TIMEOUT_SECONDS) as resp:
             feeds = json.loads(resp.read().decode())
-    except urllib.error.URLError as e:
+    except OSError as e:
+        # URLError, TimeoutError and socket errors are all OSError: a slow or
+        # stalled query must degrade to feeds.txt, not crash the whole city.
         print(f"  ⚠️  Failed to query feeds table: {e}")
         return None
 
@@ -143,9 +145,9 @@ def mark_feeds_active(feeds_to_activate):
         data = json.dumps({"status": "active"}).encode()
         req = urllib.request.Request(patch_url, data=data, headers=headers, method="PATCH")
         try:
-            urllib.request.urlopen(req)
+            urllib.request.urlopen(req, timeout=_DB_TIMEOUT_SECONDS)
             print(f"  ✅ Marked active: {feed['name']}")
-        except urllib.error.URLError as e:
+        except OSError as e:
             print(f"  ⚠️  Failed to mark active: {feed['name']}: {e}")
 
 
@@ -157,6 +159,20 @@ def mark_feeds_active(feeds_to_activate):
 
 
 USER_AGENT = "Mozilla/5.0 (compatible; CommunityCalendar/1.0)"
+
+# Every network call in the download path is time-bounded so one bad source
+# cannot hang the build. curl defaults to no overall timeout: a feed whose
+# host accepts the connection and then stalls would spin the "Download live
+# feeds" step until the job was cancelled (see _curl_command below).
+_URLLIB_TIMEOUT_SECONDS = 60
+_CURL_CONNECT_TIMEOUT_SECONDS = 15
+_CURL_MAX_TIME_SECONDS = 90  # per curl attempt
+_CURL_RETRIES = 3
+_CURL_RETRY_MAX_TIME_SECONDS = 180  # caps curl's total retry window
+# curl can overshoot --retry-max-time by one in-flight --max-time, so the
+# subprocess backstop must clear 180 + 90 before it is allowed to fire.
+_CURL_HARD_TIMEOUT_SECONDS = _CURL_RETRY_MAX_TIME_SECONDS + _CURL_MAX_TIME_SECONDS + 30
+_DB_TIMEOUT_SECONDS = 30
 
 # Seconds to wait between consecutive requests to the same host. Localist
 # (events.in.gov) throttles when two requests land within the same second,
@@ -199,12 +215,38 @@ def _download_body(url: str) -> bytes:
     """Download a feed body, retrying with exponential backoff on 429/503."""
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     try:
-        with urllib.request.urlopen(req, timeout=60) as resp:
+        with urllib.request.urlopen(req, timeout=_URLLIB_TIMEOUT_SECONDS) as resp:
             return resp.read()
     except urllib.error.HTTPError as e:
         if e.code in (429, 503):
             raise _RateLimited() from e
         raise
+
+
+def _curl_command(url: str, outfile: Path) -> list[str]:
+    """Build the curl fallback command with per-attempt and total time bounds.
+
+    curl has no default overall timeout, so a source that connects and then
+    stalls would block the build indefinitely. --max-time bounds each attempt
+    and --retry-max-time bounds the whole invocation.
+    """
+    return [
+        "curl",
+        "-sL",
+        "-A",
+        USER_AGENT,
+        "--connect-timeout",
+        str(_CURL_CONNECT_TIMEOUT_SECONDS),
+        "--max-time",
+        str(_CURL_MAX_TIME_SECONDS),
+        "--retry",
+        str(_CURL_RETRIES),
+        "--retry-max-time",
+        str(_CURL_RETRY_MAX_TIME_SECONDS),
+        url,
+        "-o",
+        str(outfile),
+    ]
 
 
 def fetch_with_curl_fallback(url: str, outfile: Path) -> bool:
@@ -222,9 +264,15 @@ def fetch_with_curl_fallback(url: str, outfile: Path) -> bool:
         outfile.write_bytes(_download_body(url))
     except Exception:
         # Any urllib failure (rate limit, network error, timeout, HTTP error)
-        # falls through to curl, which never raises for a single feed.
-        cmd = ["curl", "-sL", "-A", USER_AGENT, "--retry", "3", url, "-o", str(outfile)]
-        subprocess.run(cmd)
+        # falls through to curl. curl's own flags are the primary bound; the
+        # subprocess backstop catches a curl that ignores them.
+        try:
+            subprocess.run(_curl_command(url, outfile), timeout=_CURL_HARD_TIMEOUT_SECONDS)
+        except subprocess.TimeoutExpired:
+            print(f"  ⏱ curl timed out after {_CURL_HARD_TIMEOUT_SECONDS}s: {url}")
+            # Discard the partial file so a truncated download is not
+            # reported as success.
+            outfile.unlink(missing_ok=True)
 
     return outfile.exists() and outfile.stat().st_size > 0
 
@@ -256,7 +304,12 @@ def download_feeds(city: str) -> None:
 
         # Throttle per-host so rate-limited sources (events.in.gov) aren't
         # hammered, even when their feeds are interleaved with other hosts.
-        _wait_for_host(_host_of(url), last_request_at)
+        host = _host_of(url)
+        _wait_for_host(host, last_request_at)
+
+        # Log the in-flight feed before fetching so a hang names its suspect
+        # (the workflow sets PYTHONUNBUFFERED so this line reaches the log).
+        print(f"  ⬇️  {filename} ({host})")
 
         ok = fetch_with_curl_fallback(url, outfile)
 
