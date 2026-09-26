@@ -2,7 +2,7 @@
 """Tests for the shared timezone-safe datetime helpers (scrapers/lib/timeutil.py)."""
 
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
@@ -74,14 +74,14 @@ class TestUtcNow:
     def test_is_timezone_aware_utc(self):
         result = utc_now()
         assert result.tzinfo is not None
-        assert result.utcoffset() == timezone.utc.utcoffset(None)
+        assert result.utcoffset() == UTC.utcoffset(None)
 
     def test_close_to_now(self):
         from datetime import datetime as dt
 
-        before = dt.now(timezone.utc)
+        before = dt.now(UTC)
         result = utc_now()
-        after = dt.now(timezone.utc)
+        after = dt.now(UTC)
         assert before <= result <= after
 
 

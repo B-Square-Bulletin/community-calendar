@@ -18,7 +18,7 @@ import argparse
 import contextlib
 import json
 import logging
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -75,7 +75,7 @@ class OwenCountyLibraryScraper(BaseScraper):
             return {}
 
     def fetch_events(self) -> list[dict[str, Any]]:
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         events = []
         page = 1
 
@@ -98,7 +98,7 @@ class OwenCountyLibraryScraper(BaseScraper):
                     continue
 
                 # Skip past events
-                start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=timezone.utc)
+                start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=UTC)
                 if start_aware < now:
                     continue
 

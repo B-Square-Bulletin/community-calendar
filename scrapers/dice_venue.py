@@ -41,7 +41,7 @@ import argparse
 import json
 import logging
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
@@ -132,10 +132,10 @@ class DiceApiScraper(BaseScraper):
             self.logger.debug(f"Bad date {start_str!r} for {title}")
             return None
         if dtstart.tzinfo is None:
-            dtstart = dtstart.replace(tzinfo=timezone.utc)
+            dtstart = dtstart.replace(tzinfo=UTC)
 
         # Skip past events
-        if dtstart < datetime.now(timezone.utc):
+        if dtstart < datetime.now(UTC):
             return None
 
         dtend = None
@@ -144,7 +144,7 @@ class DiceApiScraper(BaseScraper):
             try:
                 dtend = datetime.fromisoformat(end_str.replace("Z", "+00:00"))
                 if dtend.tzinfo is None:
-                    dtend = dtend.replace(tzinfo=timezone.utc)
+                    dtend = dtend.replace(tzinfo=UTC)
             except ValueError:
                 pass
 

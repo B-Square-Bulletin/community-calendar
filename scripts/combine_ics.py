@@ -8,7 +8,7 @@ import argparse
 import json
 import re
 import sys
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -295,7 +295,7 @@ def parse_naive_ics_datetime(dt_str):
 
     try:
         if dt_str.endswith("Z"):
-            return datetime.strptime(dt_str, "%Y%m%dT%H%M%SZ").replace(tzinfo=timezone.utc)
+            return datetime.strptime(dt_str, "%Y%m%dT%H%M%SZ").replace(tzinfo=UTC)
         elif "T" in dt_str:
             return parse_naive_ics(dt_str, "%Y%m%dT%H%M%S")
         else:
@@ -749,7 +749,7 @@ def combine_ics_files(
     # Use 24 hours ago to avoid filtering out same-day events due to timezone differences
     from datetime import timedelta
 
-    now = datetime.now(timezone.utc) - timedelta(hours=24)
+    now = datetime.now(UTC) - timedelta(hours=24)
 
     # Load allowed cities for geo filtering
     allowed_cities, excluded_cities, allowed_zips = load_allowed_cities(input_dir)
@@ -779,7 +779,7 @@ def combine_ics_files(
             events = extract_events(content, source_name, source_id, fallback_url)
 
             # Filter to future events only
-            future_events = [e for e in events if e["dtstart"].replace(tzinfo=timezone.utc) >= now]
+            future_events = [e for e in events if e["dtstart"].replace(tzinfo=UTC) >= now]
 
             # Filter out events whose URL contains a /YYYY/MM/ path predating the build window.
             # Scrapers that infer year from month/day can project old posts into the future;
@@ -842,7 +842,7 @@ def combine_ics_files(
     # Sort by start time
     def normalize_dt(dt):
         if dt.tzinfo is None:
-            return dt.replace(tzinfo=timezone.utc)
+            return dt.replace(tzinfo=UTC)
         return dt
 
     all_events.sort(key=lambda x: normalize_dt(x["dtstart"]))

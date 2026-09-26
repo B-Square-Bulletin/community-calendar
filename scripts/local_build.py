@@ -33,7 +33,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from contextlib import contextmanager
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -1083,7 +1083,7 @@ def main() -> int:
     logger = BuildLogger(ROOT / args.build_log)
     runtime = collect_runtime_info()
 
-    build_started = datetime.now(timezone.utc).isoformat()
+    build_started = datetime.now(UTC).isoformat()
     results = []
     validation_errors = []
     city_validation_errors: dict[str, list] = {}
@@ -1128,7 +1128,7 @@ def main() -> int:
     validation_summary = build_validation_summary(validation_errors)
 
     audit = {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": datetime.now(UTC).isoformat(),
         "build_started_at": build_started,
         "runtime": runtime,
         "dotenv_loaded": dotenv_loaded,

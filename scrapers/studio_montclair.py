@@ -26,7 +26,7 @@ import html as html_mod
 import json
 import logging
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -71,7 +71,7 @@ def _parse_month_day_year(text: str, default_year: int = 2026) -> datetime | Non
     month = parse_naive_ics(month_str, "%B").month
     day = int(day_str)
     year = int(year_str) if year_str else default_year
-    return datetime(year, month, day, tzinfo=timezone.utc)
+    return datetime(year, month, day, tzinfo=UTC)
 
 
 class StudioMontclairScraper(BaseScraper):
@@ -96,7 +96,7 @@ class StudioMontclairScraper(BaseScraper):
         link = post["link"]
         events = []
 
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         location = self._detect_gallery(text)
 
         # 1. Exhibition dates: "January 30 to February 27, 2026"

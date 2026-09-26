@@ -43,7 +43,7 @@ import logging
 import re
 import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import date, datetime, timedelta, timezone
+from datetime import UTC, date, datetime, timedelta
 from email.utils import parsedate_to_datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
@@ -121,7 +121,7 @@ class SimpleviewScraper(BaseScraper):
             self.logger.error(f"Failed to parse RSS: {exc}")
             return []
 
-        now_utc = datetime.now(timezone.utc)
+        now_utc = datetime.now(UTC)
         items = []
         skipped_past = 0
         skipped_town = 0
@@ -271,9 +271,9 @@ def _parse_date_or_datetime(s: str):
 
 def _is_past(dt) -> bool:
     """True if dt (date or datetime) is strictly in the past."""
-    today = datetime.now(timezone.utc).date()
+    today = datetime.now(UTC).date()
     if isinstance(dt, datetime):
-        return dt.astimezone(timezone.utc) < datetime.now(timezone.utc)
+        return dt.astimezone(UTC) < datetime.now(UTC)
     # date object
     return dt < today
 

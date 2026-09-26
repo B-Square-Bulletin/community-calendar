@@ -19,7 +19,7 @@ Usage:
 
 import json
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -87,10 +87,10 @@ class SquarespaceScraper(BaseScraper):
         if not start_ms:
             return None
 
-        dtstart = datetime.fromtimestamp(start_ms / 1000, tz=timezone.utc)
+        dtstart = datetime.fromtimestamp(start_ms / 1000, tz=UTC)
 
         end_ms = item.get("endDate")
-        dtend = datetime.fromtimestamp(end_ms / 1000, tz=timezone.utc) if end_ms else None
+        dtend = datetime.fromtimestamp(end_ms / 1000, tz=UTC) if end_ms else None
 
         # Description: strip HTML tags
         body = item.get("body", "") or item.get("excerpt", "") or ""

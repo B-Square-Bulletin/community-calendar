@@ -23,7 +23,7 @@ import argparse
 import json
 import logging
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 
 from lib import BaseScraper
@@ -152,7 +152,7 @@ class LumaCollectionScraper(BaseScraper):
 
         events = []
         seen = set()
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         for entry in self._fetch_entries(calendar_api_id):
             parsed = self._parse_entry(entry, now)
             if parsed:

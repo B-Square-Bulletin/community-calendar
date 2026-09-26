@@ -22,7 +22,7 @@ import html as html_mod
 import json
 import logging
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -102,7 +102,7 @@ class TurtleBackZooScraper(BaseScraper):
             self.logger.warning(f"Failed to fetch WP API: {e}")
             return []
 
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         current_year = now.year
         all_events = []
 
@@ -127,10 +127,10 @@ class TurtleBackZooScraper(BaseScraper):
                     continue
 
                 # If no year given and date is in the past, try next year
-                if not year_str and dt.replace(tzinfo=timezone.utc) < now:
+                if not year_str and dt.replace(tzinfo=UTC) < now:
                     dt = dt.replace(year=current_year + 1)
 
-                dt = dt.replace(tzinfo=timezone.utc)
+                dt = dt.replace(tzinfo=UTC)
                 if dt < now:
                     continue
 

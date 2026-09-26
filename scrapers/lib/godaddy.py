@@ -27,7 +27,7 @@ Usage:
 
 import html as html_mod
 import re
-from datetime import datetime, timezone, tzinfo
+from datetime import UTC, datetime, tzinfo
 from typing import Any, cast
 from zoneinfo import ZoneInfo
 
@@ -102,7 +102,7 @@ class GoDaddyScraper(BaseScraper):
             dtstart = dtstart.replace(tzinfo=cast("tzinfo", tz))
 
         # Skip past events
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         if dtstart < now:
             return None
 

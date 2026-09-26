@@ -27,13 +27,15 @@ import html as html_mod
 import json
 import logging
 import re
-from collections.abc import Callable
-from datetime import datetime, timezone
-from typing import Any, ClassVar
+from datetime import UTC, datetime
+from typing import TYPE_CHECKING, Any, ClassVar
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 from .base import BaseScraper
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 logger = logging.getLogger(__name__)
 
@@ -239,8 +241,8 @@ class JsonLdScraper(BaseScraper):
             return None
 
         # Skip past events
-        now = datetime.now(timezone.utc)
-        start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=timezone.utc)
+        now = datetime.now(UTC)
+        start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=UTC)
         if start_aware < now:
             return None
 

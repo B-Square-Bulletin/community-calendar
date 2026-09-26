@@ -26,7 +26,7 @@ import hashlib
 import json
 import logging
 import re
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -136,7 +136,7 @@ def expand_recurring_events(
                 try:
                     # Epoch milliseconds are UTC-based instants, so UTC is the
                     # correct tz for the skip date.
-                    exc_dt = datetime.fromtimestamp(orig / 1000, tz=timezone.utc)
+                    exc_dt = datetime.fromtimestamp(orig / 1000, tz=UTC)
                     exceptions.add(exc_dt.date())
                 except ValueError, TypeError:
                     pass

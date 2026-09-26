@@ -24,7 +24,7 @@ import json
 import logging
 import re
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -174,7 +174,7 @@ class GuildHostScraper(BaseScraper):
         if not slugs:
             return []
 
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         events = []
 
         for i, slug in enumerate(slugs):
@@ -189,7 +189,7 @@ class GuildHostScraper(BaseScraper):
             if event:
                 # Skip past events
                 dtstart = event["dtstart"]
-                start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=timezone.utc)
+                start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=UTC)
                 if start_aware < now:
                     self.logger.debug(f"Skipping past event: {event['title']}")
                     continue

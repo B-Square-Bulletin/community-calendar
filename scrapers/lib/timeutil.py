@@ -13,7 +13,7 @@ Two categories:
   pipeline needs "right now".
 """
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 
 def wall_clock(year, month, day, hour=0, minute=0, second=0, microsecond=0):
@@ -38,7 +38,7 @@ def parse_naive_ics(dt_str, fmt):
 
 def utc_now():
     """Return the current absolute instant in UTC."""
-    return datetime.now(timezone.utc)
+    return datetime.now(UTC)
 
 
 def utc_today():

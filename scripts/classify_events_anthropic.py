@@ -19,7 +19,7 @@ import os
 import sys
 import urllib.parse
 import urllib.request
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import cast
 
@@ -213,7 +213,7 @@ def main():
         print(f"Using {len(overrides)} curator overrides as few-shot examples")
 
     # Fetch unclassified events
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%dT00:00:00Z")
+    today = datetime.now(UTC).strftime("%Y-%m-%dT00:00:00Z")
     path = (
         "events?select=id,title,location,description,ics_categories,category,source"
         "&category=is.null"

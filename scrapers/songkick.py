@@ -20,7 +20,7 @@ import argparse
 import json
 import logging
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -59,7 +59,7 @@ class SongkickScraper(BaseScraper):
             self.logger.warning(f"Failed to fetch {self.url}: {e}")
             return []
 
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         events = []
 
         blocks = re.findall(
@@ -87,7 +87,7 @@ class SongkickScraper(BaseScraper):
                     continue
 
                 # Skip past events
-                start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=timezone.utc)
+                start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=UTC)
                 if start_aware < now:
                     continue
 
