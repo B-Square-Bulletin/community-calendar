@@ -1,0 +1,52 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Edgewood Athletics//maxpreps.com//
+X-WR-CALNAME:Edgewood Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Edgewood Varsity Football @ Vincennes Lincoln
+DTSTART;TZID=America/Indiana/Indianapolis:20260925T193000
+DTEND;TZID=America/Indiana/Indianapolis:20260925T213000
+UID:56e0fe0d70cf4e826335a78afd285545@maxpreps.com
+DESCRIPTION:Boys Varsity Football\nNo result has been reported for the Edg
+ ewood varsity football away conference game @ Vincennes Lincoln (Vincennes
+ \, IN).
+URL:https://www.maxpreps.com/in/football/game/edgewood-ellettsville-vs-vin
+ cennes-lincoln/9-25-2026/?c=4c02d398-d8e6-4d46-8345-8ebfeb0fdf6c
+X-SOURCE:Edgewood Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Vincennes Lincoln Girls Varsity Soccer @ Edgewood
+DTSTART;TZID=America/Indiana/Indianapolis:20260926T100000
+DTEND;TZID=America/Indiana/Indianapolis:20260926T114500
+UID:a31442c797d58ae989d44381ec5a1be1@maxpreps.com
+DESCRIPTION:Girls Varsity Soccer\nThe Vincennes Lincoln varsity soccer tea
+ m has an away conference match @  Edgewood (Ellettsville\, IN) today @ 10a
+ .
+URL:https://www.maxpreps.com/in/soccer/girls/match/edgewood-ellettsville-v
+ s-vincennes-lincoln/9-26-2026/?c=b85ccf61-a7db-4ebb-8caf-b1073d071317
+X-SOURCE:Edgewood Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Edgewood JV Football @ Vincennes Lincoln
+DTSTART;TZID=America/Indiana/Indianapolis:20260926T100000
+DTEND;TZID=America/Indiana/Indianapolis:20260926T120000
+UID:014e077ecbf575bffa474cbf61340d89@maxpreps.com
+DESCRIPTION:Boys JV Football\nThe Edgewood JV football team has an away co
+ nference game @  Vincennes Lincoln (Vincennes\, IN) today @ 10a.
+URL:https://www.maxpreps.com/in/football/game/edgewood-ellettsville-vs-vin
+ cennes-lincoln/jv/9-26-2026/?c=505cf262-2b1e-48c7-b7c8-6f408c1340e7
+X-SOURCE:Edgewood Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Vincennes Lincoln Boys Varsity Soccer @ Edgewood
+DTSTART;TZID=America/Indiana/Indianapolis:20260926T120000
+DTEND;TZID=America/Indiana/Indianapolis:20260926T134500
+UID:d398dc23dea465ec925e20c3be84a5cb@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nThe Vincennes Lincoln varsity soccer team
+  has an away conference match @  Edgewood (Ellettsville\, IN) today @ 12p.
+URL:https://www.maxpreps.com/in/soccer/match/edgewood-ellettsville-vs-vinc
+ ennes-lincoln/9-26-2026/?c=afb574d0-5246-4892-bba4-127883b93f1a
+X-SOURCE:Edgewood Athletics
+END:VEVENT
+END:VCALENDAR

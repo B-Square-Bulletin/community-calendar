@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Eastern Greene Athletics//maxpreps.com//
+X-WR-CALNAME:Eastern Greene Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Eastern Greene Varsity Football @ Cloverdale
+DTSTART;TZID=America/Indiana/Indianapolis:20260925T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260925T210000
+UID:889d1a39d9a705a1968947551171ff92@maxpreps.com
+DESCRIPTION:Boys Varsity Football\nOn 9/25\, the Eastern Greene varsity fo
+ otball team lost their away non-conference game against Cloverdale (IN) by
+  a score of 39-14.
+URL:https://www.maxpreps.com/in/football/game/cloverdale-vs-eastern-greene
+ -bloomfield/9-25-2026/?c=932a1d96-f48e-4162-b3b4-22d02a201986
+X-SOURCE:Eastern Greene Athletics
+END:VEVENT
+END:VCALENDAR

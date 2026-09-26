@@ -1,0 +1,41 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Owen Valley Athletics//maxpreps.com//
+X-WR-CALNAME:Owen Valley Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Owen Valley Varsity Football @ Sullivan
+DTSTART;TZID=America/Indiana/Indianapolis:20260925T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260925T210000
+UID:3f69e63ceaedda1e02a1e9e49a644230@maxpreps.com
+DESCRIPTION:Boys Varsity Football\nNo result has been reported for the Owe
+ n Valley varsity football away conference game @ Sullivan (IN).
+URL:https://www.maxpreps.com/in/football/game/owen-valley-spencer-vs-sulli
+ van/9-25-2026/?c=62bedb3c-f5f4-47e7-b699-2e8e09f5c961
+X-SOURCE:Owen Valley Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Owen Valley Boys Varsity Soccer @ Southwestern
+DTSTART;TZID=America/Indiana/Indianapolis:20260925T190000
+DTEND;TZID=America/Indiana/Indianapolis:20260925T204500
+UID:9ee6ca8296773d35ca7a04bebd285a7e@maxpreps.com
+DESCRIPTION:Boys Varsity Soccer\nOn 9/25\, the Owen Valley varsity soccer 
+ team lost their away non-conference match against Southwestern (Shelbyvill
+ e\, IN) by a score of 10-0.
+URL:https://www.maxpreps.com/in/soccer/match/owen-valley-spencer-vs-southw
+ estern-shelbyville/9-25-2026/?c=e1916534-25b5-4fa1-91e4-de23209c09cc
+X-SOURCE:Owen Valley Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Owen Valley Girls Varsity Volleyball vs. South Vermillion
+DTSTART;TZID=America/Indiana/Indianapolis:20260926T090000
+DTEND;TZID=America/Indiana/Indianapolis:20260926T100000
+UID:b3b2999922b4bf961bb85916018333a2@maxpreps.com
+DESCRIPTION:Girls Varsity Volleyball\nThe Owen Valley varsity volleyball t
+ eam has a neutral tournament match vs.  South Vermillion (Clinton\, IN) to
+ day @ 9a.
+URL:https://www.maxpreps.com/in/volleyball/match/owen-valley-spencer-vs-so
+ uth-vermillion-clinton/9-26-2026/?c=03f76bc7-9c9a-46d4-8a8f-22896026f4c6
+X-SOURCE:Owen Valley Athletics
+END:VEVENT
+END:VCALENDAR

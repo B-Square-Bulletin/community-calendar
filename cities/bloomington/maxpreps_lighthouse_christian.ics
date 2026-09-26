@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Lighthouse Christian Athletics//maxpreps.com//
+X-WR-CALNAME:Lighthouse Christian Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:LCA Girls JV Volleyball @ MCHS
+DTSTART;TZID=America/Indiana/Indianapolis:20260925T180000
+DTEND;TZID=America/Indiana/Indianapolis:20260925T190000
+UID:8bf85c23f629cc4c880a2b779ef44fcf@maxpreps.com
+DESCRIPTION:Girls JV Volleyball\nNo result has been reported for the Light
+ house Christian Academy JV volleyball away non-conference match @ Mooresvi
+ lle Christian (Mooresville\, IN).
+URL:https://www.maxpreps.com/in/volleyball/match/lighthouse-christian-acad
+ emy-bloomington-vs-mooresville-christian/jv/9-25-2026/?c=df14a023-cf54-482
+ 3-a472-9333ecc3749a
+X-SOURCE:Lighthouse Christian Athletics
+END:VEVENT
+END:VCALENDAR
