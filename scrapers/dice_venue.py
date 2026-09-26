@@ -38,6 +38,7 @@ import sys
 sys.path.insert(0, __file__.rsplit("/", 1)[0])
 
 import argparse
+import contextlib
 import json
 import logging
 import re
@@ -128,7 +129,7 @@ class DiceApiScraper(BaseScraper):
             return None
 
         try:
-            dtstart = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
+            dtstart = datetime.fromisoformat(start_str)
         except ValueError:
             self.logger.debug(f"Bad date {start_str!r} for {title}")
             return None
@@ -141,11 +142,8 @@ class DiceApiScraper(BaseScraper):
         dtend = None
         end_str = item.get("date_end") or ""
         if end_str:
-            try:
-                dtend = datetime.fromisoformat(end_str.replace("Z", "+00:00"))
-                dtend = assume_utc(dtend)
-            except ValueError:
-                pass
+            with contextlib.suppress(ValueError):
+                dtend = assume_utc(datetime.fromisoformat(end_str))
 
         # Location: "<venue name>, <full address>"
         venue_name = item.get("venue") or ""

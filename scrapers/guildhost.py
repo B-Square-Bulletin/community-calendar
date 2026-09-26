@@ -101,7 +101,7 @@ class GuildHostScraper(BaseScraper):
                     continue
 
                 try:
-                    dtstart = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
+                    dtstart = datetime.fromisoformat(start_str)
                 except ValueError:
                     continue
 
@@ -110,7 +110,7 @@ class GuildHostScraper(BaseScraper):
                 end_str = item.get("endDate", "")
                 if end_str:
                     with contextlib.suppress(ValueError):
-                        dtend = datetime.fromisoformat(end_str.replace("Z", "+00:00"))
+                        dtend = datetime.fromisoformat(end_str)
 
                 title = item.get("name", "Untitled")
 

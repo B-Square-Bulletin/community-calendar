@@ -123,7 +123,7 @@ class ThunderTixScraper(BaseScraper):
             return None
 
         try:
-            dtstart = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
+            dtstart = datetime.fromisoformat(start_str)
         except ValueError:
             self.logger.debug(f"Bad startDate {start_str!r} for {title!r}")
             return None
@@ -136,7 +136,7 @@ class ThunderTixScraper(BaseScraper):
         dtend = None
         if end_str:
             with contextlib.suppress(ValueError):
-                dtend = datetime.fromisoformat(end_str.replace("Z", "+00:00"))
+                dtend = datetime.fromisoformat(end_str)
 
         location = parse_location(item.get("location"), self.default_location)
 
