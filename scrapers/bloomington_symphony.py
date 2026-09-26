@@ -33,10 +33,12 @@ import html as html_mod
 import logging
 import re
 from datetime import datetime, timedelta
-from typing import Any
-from zoneinfo import ZoneInfo
+from typing import TYPE_CHECKING, Any
 
 from lib.tribe_events import TribeEventsScraper
+
+if TYPE_CHECKING:
+    from zoneinfo import ZoneInfo
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)

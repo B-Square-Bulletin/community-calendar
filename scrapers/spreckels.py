@@ -20,14 +20,16 @@ import sys
 sys.path.insert(0, __file__.rsplit("/", 1)[0])
 
 import re
-from datetime import datetime
-from typing import Any, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 import requests
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
 from lib.timeutil import wall_clock
 from lib.utils import DEFAULT_HEADERS
+
+if TYPE_CHECKING:
+    from datetime import datetime
 
 
 class SpreckelsScraper(BaseScraper):

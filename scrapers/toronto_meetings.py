@@ -9,12 +9,14 @@ import sys
 
 sys.path.insert(0, __file__.rsplit("/", 1)[0])
 
-from datetime import datetime
-from typing import Any
+from typing import TYPE_CHECKING, Any
 from zoneinfo import ZoneInfo
 
 from lib.ckan import CKANScraper
 from lib.timeutil import parse_naive_ics, utc_now
+
+if TYPE_CHECKING:
+    from datetime import datetime
 
 TZ = ZoneInfo("America/Toronto")
 

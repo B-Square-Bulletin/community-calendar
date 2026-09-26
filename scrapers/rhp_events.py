@@ -34,7 +34,7 @@ import logging
 import re
 import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from email.utils import parsedate_to_datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
@@ -109,7 +109,7 @@ class RhpEventsScraper(BaseScraper):
 
         # Only fetch items published recently — older ones are almost certainly past events.
         # pubDate is publish date, not event date, but recently published = likely upcoming.
-        cutoff = datetime.now(timezone.utc) - timedelta(days=60)
+        cutoff = datetime.now(UTC) - timedelta(days=60)
         urls = []
         skipped = 0
         for item in root.findall(".//item"):
@@ -159,8 +159,8 @@ class RhpEventsScraper(BaseScraper):
             return None
 
         # Skip past events
-        now = datetime.now(timezone.utc)
-        start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=timezone.utc)
+        now = datetime.now(UTC)
+        start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=UTC)
         if start_aware < now:
             return None
 

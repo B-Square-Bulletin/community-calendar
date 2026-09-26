@@ -5,15 +5,17 @@ import logging
 import os
 import subprocess
 from abc import ABC, abstractmethod
-from datetime import datetime
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 from zoneinfo import ZoneInfo
 
 from icalendar import Calendar, Event
 
 from .horizon import horizon_end, within
 from .utils import generate_uid
+
+if TYPE_CHECKING:
+    from datetime import datetime
 
 
 class BaseScraper(ABC):

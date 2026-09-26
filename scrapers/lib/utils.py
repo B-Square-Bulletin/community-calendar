@@ -5,11 +5,14 @@ import logging
 import random
 import re
 import time
-from datetime import datetime
+from typing import TYPE_CHECKING
 
 import requests
 
 from .timeutil import wall_clock
+
+if TYPE_CHECKING:
+    from datetime import datetime
 
 logger = logging.getLogger(__name__)
 

@@ -14,7 +14,7 @@ outdir as the later build's state directory.
 
 import sys
 import xml.etree.ElementTree as ET
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from email.utils import format_datetime
 from pathlib import Path
 
@@ -23,8 +23,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
 from scripts.generate_rss import generate
 
-NOW = datetime(2026, 9, 22, 12, 0, tzinfo=timezone.utc)
-NEXT_DAY = datetime(2026, 9, 23, 12, 0, tzinfo=timezone.utc)
+NOW = datetime(2026, 9, 22, 12, 0, tzinfo=UTC)
+NEXT_DAY = datetime(2026, 9, 23, 12, 0, tzinfo=UTC)
 START = "2026-10-01T19:00:00+00:00"
 
 

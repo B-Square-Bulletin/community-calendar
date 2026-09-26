@@ -16,7 +16,7 @@ import contextlib
 import json
 import re
 import sys
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
@@ -51,7 +51,7 @@ MAX_ANOMALY_DAYS = 180
 
 def count_future_events_in_ics(filepath: Path) -> tuple[int, str | None]:
     """Count VEVENT entries with future DTSTART in an ICS file."""
-    cutoff = datetime.now(timezone.utc) - timedelta(hours=24)
+    cutoff = datetime.now(UTC) - timedelta(hours=24)
     try:
         with filepath.open(encoding="utf-8", errors="ignore") as f:
             content = f.read()
@@ -69,11 +69,11 @@ def count_future_events_in_ics(filepath: Path) -> tuple[int, str | None]:
         dt_str = dt_match.group(1)
         try:
             if dt_str.endswith("Z"):
-                dt = datetime.strptime(dt_str, "%Y%m%dT%H%M%SZ").replace(tzinfo=timezone.utc)
+                dt = datetime.strptime(dt_str, "%Y%m%dT%H%M%SZ").replace(tzinfo=UTC)
             elif "T" in dt_str:
-                dt = datetime.strptime(dt_str, "%Y%m%dT%H%M%S").replace(tzinfo=timezone.utc)
+                dt = datetime.strptime(dt_str, "%Y%m%dT%H%M%S").replace(tzinfo=UTC)
             else:
-                dt = datetime.strptime(dt_str, "%Y%m%d").replace(tzinfo=timezone.utc)
+                dt = datetime.strptime(dt_str, "%Y%m%d").replace(tzinfo=UTC)
             if dt >= cutoff:
                 count += 1
         except ValueError:

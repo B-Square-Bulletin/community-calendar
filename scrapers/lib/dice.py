@@ -32,7 +32,7 @@ import html as html_mod
 import logging
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any, ClassVar
 
 from .base import BaseScraper
@@ -117,8 +117,8 @@ class DiceVenueScraper(BaseScraper):
             return None
 
         # Skip past events
-        now = datetime.now(timezone.utc)
-        start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=timezone.utc)
+        now = datetime.now(UTC)
+        start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=UTC)
         if start_aware < now:
             return None
 

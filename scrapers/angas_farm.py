@@ -17,7 +17,7 @@ import argparse
 import logging
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -66,7 +66,7 @@ class AngasFarmScraper(BaseScraper):
         if not data:
             return []
 
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         events = []
         try:
             cal = ICalendar.from_ical(data.decode("utf-8-sig"))
@@ -79,9 +79,9 @@ class AngasFarmScraper(BaseScraper):
                 continue
             dt = dtstart.dt
             if hasattr(dt, "hour"):
-                start_aware = dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
+                start_aware = dt if dt.tzinfo else dt.replace(tzinfo=UTC)
             else:
-                start_aware = datetime.combine(dt, datetime.min.time()).replace(tzinfo=timezone.utc)
+                start_aware = datetime.combine(dt, datetime.min.time()).replace(tzinfo=UTC)
 
             if start_aware < now:
                 continue
