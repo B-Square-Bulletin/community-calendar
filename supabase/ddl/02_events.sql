@@ -13,12 +13,15 @@ CREATE TABLE IF NOT EXISTS events (
   source_id text,           -- filename-derived source identifier for curator reference
   source_uid text UNIQUE,   -- unique ID from source for deduplication
   transcript text,          -- Whisper transcript for audio-captured events
-  cluster_id text,          -- groups similar events within same timeslot for UI display
   source_urls jsonb,        -- per-source URLs for aggregator attribution links
   category text,            -- auto-classified bucket (e.g., 'Music & Concerts', 'Arts & Culture')
   ics_categories text[],    -- CATEGORIES values from ICS source
   image_url text,           -- event image URL from ICS ATTACH or scraper
   all_day boolean DEFAULT false,  -- true for all-day events (VALUE=DATE in ICS)
+  cluster_id text,             -- legacy compatibility field; removed after the transition build
+  duplicate_group text,     -- opaque route group id; NULL = Separate (one row is one group)
+  source_names text[],      -- structured, priority-ordered source names from the route
+  duplicate_group_representative text, -- route's canonical member source_uid for the group
   created_at timestamptz DEFAULT now()
 );
 
@@ -61,7 +64,7 @@ CREATE INDEX IF NOT EXISTS events_category_idx ON events (category);
 CREATE INDEX IF NOT EXISTS events_city_source_uid_idx ON events (city, source_uid);
 
 -- Index for source filtering (kept for general source-column lookups;
--- refresh_source_names() now splits sources with string_to_array, not LIKE)
+-- refresh_source_names() prefers structured source_names, then falls back to source)
 CREATE INDEX IF NOT EXISTS events_source_idx ON events (source);
 
 -- Enable Row Level Security (public read access)

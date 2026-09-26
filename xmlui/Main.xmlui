@@ -406,7 +406,7 @@
       onClick="const nextIndex = moreNextIndex(displayStartIndex, pageSizeFor(filterTerm)); displayStartIndex = nextIndex; browseStartIndex = nextIndex; scrollRequest = scrollRequest + 1;"
     />
     <VStack when="{viewMode === 'picks'}" gap="$space-2">
-      <Text fontSize="$fontSize-sm" value="{(picks.value || []).length + ' events'}" />
+      <Text fontSize="$fontSize-sm" value="{window.dedupePicks(picks.value || []).length + ' events'}" />
       <Text fontSize="$fontSize-xs" color="$color-text-secondary">Calendar feed for your picks:</Text>
       <Text fontSize="$fontSize-xs" overflowMode="flow" value="{feedToken.value && feedToken.value[0] ? appGlobals.supabaseUrl + '/functions/v1/my-picks?token=' + feedToken.value[0].token : ''}" />
       <HStack verticalAlignment="center" gap="$space-1" wrapContent="true" width="100%">
@@ -417,7 +417,7 @@
         />
         <Text fontSize="$fontSize-xs" color="$color-text-secondary" overflowMode="flow">Click to copy link, paste into your calendar app to subscribe.</Text>
       </HStack>
-      <List data="{picks.value || []}" fixedItemSize="true" limit="100">
+      <List data="{window.dedupePicks(picks.value || [])}" fixedItemSize="true" limit="100">
         <PickItem pick="{$item}" />
       </List>
     </VStack>

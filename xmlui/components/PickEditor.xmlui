@@ -217,7 +217,7 @@
             overflowMode="flow"
             breakMode="word"
             openLinkInNewTab="true"
-            content="{window.formatSourceLinks($props.event.source, $props.event.source_urls, (userSettingsData && userSettingsData[0] && userSettingsData[0].hidden_sources) || [])}"
+            content="{window.formatSourceLinks($props.event.source, $props.event.source_urls, (userSettingsData && userSettingsData[0] && userSettingsData[0].hidden_sources) || [], $props.event.source_names)}"
           />
           <Text when="{!showRecurrence}" fontSize="$fontSize-sm" color="$color-text-secondary">
             Add this event to your picks. Recurrence is optional.

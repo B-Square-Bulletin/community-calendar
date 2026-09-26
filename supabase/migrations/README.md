@@ -66,3 +66,22 @@ Prefer staged rollouts:
 3. Remove old structure in a later migration.
 
 This keeps upstream and forked instances easier to sync.
+
+### Verified compatibility window: `cluster_id` transition (#155)
+
+The consumer switch and schema cleanup are staged across builds:
+
+1. `20260923120000_add_duplicate_group_and_route_view.sql` adds
+   `duplicate_group`, recreates the view, and keeps `cluster_id` readable.
+2. Consumers use `duplicate_group` while one compatibility build completes.
+3. Promote `post-compatibility/20260923130000_drop_cluster_id.sql` into the
+   active migration sequence only after that build is verified.
+
+Verify the promoted cleanup with `make setup-local` and `make test-sql` before
+applying it to production. The database tests must confirm that the view drops
+`cluster_id`, keeps one row per stored Group, and remains refreshable.
+
+Apply the additive migration before the scheduled build runs. The artifact emits
+only `duplicate_group`, while the database remains readable by older consumers.
+`tests/test_cluster_id_transition.py` and
+`supabase/tests/test_cluster_id_compatibility.sql` pin this window.

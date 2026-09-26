@@ -1,5 +1,13 @@
 # Deduplication and Event Ordering
 
+> **Superseded (2026-09-22).** Grouping is now decided once, at build time, by
+> the confidence route and stored as `events.duplicate_group`. Every consumer
+> reads that stored decision. See
+> [ADR 0013](adr/0013-confidence-route-merge-group-separate.md) and the
+> Deduplication entry in [CONTEXT.md](../CONTEXT.md) for the current model.
+> The stage-by-stage description below documents the pre-route pipeline and is
+> retained for history.
+
 ## For Curators
 
 See the [Curator Guide](curator-guide.md#duplicates-and-event-ordering) for what you need to know about deduplication, event ordering, and adding your city. The rest of this document covers the technical implementation.
@@ -308,7 +316,7 @@ A simple global aggregator list accomplishes the same thing with zero configurat
 
 ### What Was Built
 
-Fuzzy dedup in `combine_ics.py` using Claude 3.5 Haiku (batch clustering approach). Gated by `ENABLE_FUZZY_DEDUP` env var + `ANTHROPIC_API_KEY`. Code remains in `combine_ics.py` but is dormant — neither env var is set.
+Fuzzy dedup in `combine_ics.py` used Claude 3.5 Haiku (batch clustering approach). The helper remains as historical code, but `combine_ics` no longer calls it—even when `ENABLE_FUZZY_DEDUP` is set—because the confidence route is the only authority allowed to delete cross-UID listings.
 
 ### Results: Not Worth Pursuing
 

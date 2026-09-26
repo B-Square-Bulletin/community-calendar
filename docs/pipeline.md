@@ -101,11 +101,13 @@ The old `SOURCE_NAMES` dict in `combine_ics.py` has been removed. `feeds.txt` (g
 
 ## Deduplication
 
-Two rounds:
-
-1. **Cross-source dedup** — Events with identical title + date from different sources are merged. The non-aggregator version is kept, and `X-SOURCE` headers are merged (e.g., "North Bay Bohemian, Press Democrat").
-
-2. **Fuzzy dedup** — Clusters events within the same timeslot using token-set string similarity (threshold 0.85). Events at different locations are never clustered. Uses union-find to assign a shared `cluster_id`.
+A single build-time **confidence route** (`scripts/ics_to_json.py`) decides
+Merge / Group / Separate for every cleaned listing and stores the result as
+`events.duplicate_group`. See
+[ADR 0013](adr/0013-confidence-route-merge-group-separate.md). Consumers — the
+`deduplicated_events` view, the app, dashboard tiles, saved picks, and RSS —
+read that stored decision and never recompute similarity, location, or
+grouping. `combine_ics.py` performs UID-level de-duplication and ICS assembly.
 
 ## Cities
 

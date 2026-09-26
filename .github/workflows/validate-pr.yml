@@ -87,6 +87,18 @@ jobs:
       - name: Run node tests (vitest)
         run: pnpm vitest run
 
+  deno-tests:
+    # Edge-function seam (supabase/functions/my-picks): the saved-picks ICS
+    # feed collapses stored groups, which neither pytest nor vitest covers.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: denoland/setup-deno@v2
+
+      - name: Run Deno tests (my-picks dedupe)
+        run: deno test supabase/functions/my-picks/dedupe_test.ts
+
   browser-tests:
     # Playwright gate over xmlui/test.html's served-file groups and the
     # date-tab accessibility spec (axe + keyboard/focus/360px, #109).

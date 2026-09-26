@@ -28,7 +28,6 @@ from scrapers.wfiu_community_calendar import (
 from scripts.combine_ics import (
     AGGREGATORS,
     _url_predates_window,
-    dedupe_cross_source,
     extract_events,
 )
 from scripts.process_pending_feeds import parse_pending_feeds
@@ -670,18 +669,8 @@ def _registered_bloomington_entries() -> list[dict]:
     return entries
 
 
-def _dedupe_event(title: str, source: str) -> dict:
-    content = (
-        f"SUMMARY:{title}\r\n"
-        f"X-SOURCE:{source}\r\n"
-        f"URL:https://example.com/{source.replace(' ', '-')}\r\n"
-        "UID:shared-uid"
-    )
-    return {"dtstart": datetime(2026, 9, 18, 9, 0, tzinfo=TZ), "content": content}
-
-
 class TestRegistrationContract:
-    """The #140 registration shape: DB-first entry, aggregator dedup (ADR 0011)."""
+    """The #140 registration shape: DB-first entry, primary-source priority (ADR 0011)."""
 
     def test_scraper_identity_matches_the_spec(self):
         assert WFIUCommunityCalendarScraper.name == "WFIU Community Calendar"
@@ -707,24 +696,6 @@ class TestRegistrationContract:
 
     def test_source_is_an_aggregator(self):
         assert "WFIU Community Calendar" in AGGREGATORS
-
-    def test_dedupe_prefers_visit_bloomington_over_wfiu(self):
-        wfiu = _dedupe_event("Heist", "WFIU Community Calendar")
-        visit = _dedupe_event("Heist", "Visit Bloomington")
-
-        kept = dedupe_cross_source([wfiu, visit], input_dir=None)
-
-        assert len(kept) == 1
-        assert "X-SOURCE:Visit Bloomington, WFIU Community Calendar" in kept[0]["content"]
-
-    def test_dedupe_merges_fellow_aggregators_alphabetically(self):
-        wfiu = _dedupe_event("Heist", "WFIU Community Calendar")
-        limestone = _dedupe_event("Heist", "Limestone Post")
-
-        kept = dedupe_cross_source([wfiu, limestone], input_dir=None)
-
-        assert len(kept) == 1
-        assert "X-SOURCE:Limestone Post, WFIU Community Calendar" in kept[0]["content"]
 
 
 HEIST_IMAGE_SUFFIX = "sq-heist-2.jpg"

@@ -1,20 +1,52 @@
--- Materialized view: deduplicated_events
--- Authoritative deduplicated read model. The confidence route (#150) stores one
--- Merge/Group/Separate decision per listing as events.duplicate_group; this view
--- groups by that stored decision and never recomputes similarity, location, or
--- grouping.
+-- #152: persist the confidence route's duplicate-group decision and expose it
+-- through the authoritative deduplicated read model.
 --
--- NULL isolation: a NULL duplicate_group means the route left the row alone and
--- it is its own group. PostgreSQL groups all NULLs together, so each NULL row is
--- keyed by a per-row value ('row:<id>') instead of by the NULL itself.
+-- `events.duplicate_group` is the route's opaque, versioned group id (NULL for
+-- a Separate row). `events.source_names` is the route's structured, priority-
+-- ordered name list and `events.duplicate_group_representative` is the route's
+-- canonical member source_uid, both persisted so the view never re-splits
+-- ambiguous comma-joined `source` text and never invents a competing
+-- representative rule (the 2026-09-22 review amendment supersedes the earlier
+-- "only duplicate_group" schema note).
 --
--- Representative: the route persists duplicate_group_representative, so the
--- view presents that member's fields and id. There is no database-assigned
--- min(id) competing rule.
---
--- Refreshed after load-events runs so the app can query pre-deduplicated rows.
+-- The route runs on every build, so no row needs a pre-migration fallback: a
+-- NULL duplicate_group means the route left the row alone and it is its own
+-- group. The view isolates each NULL row with a per-row key because PostgreSQL
+-- groups all NULLs together otherwise.
 
-DROP VIEW IF EXISTS deduplicated_events;
+ALTER TABLE events ADD COLUMN IF NOT EXISTS duplicate_group text;
+ALTER TABLE events ADD COLUMN IF NOT EXISTS source_names text[];
+ALTER TABLE events ADD COLUMN IF NOT EXISTS duplicate_group_representative text;
+
+-- Refresh source counts from the route's structured names. The comma-joined
+-- source field remains a fallback for rows written before this route migration.
+CREATE OR REPLACE FUNCTION public.refresh_source_names(target_city text)
+RETURNS void
+SET statement_timeout TO '0'
+AS $function$
+BEGIN
+    DELETE FROM source_names WHERE city = target_city;
+
+    INSERT INTO source_names (city, name, event_count)
+    SELECT target_city, source_name, COUNT(DISTINCT event_id)
+    FROM (
+        SELECT e.id AS event_id, trim(source_entry.name) AS source_name
+        FROM events e
+        CROSS JOIN LATERAL unnest(
+            CASE
+                WHEN COALESCE(cardinality(e.source_names), 0) > 0
+                    THEN e.source_names
+                ELSE string_to_array(e.source, ',')
+            END
+        ) AS source_entry(name)
+        WHERE e.city = target_city
+          AND (COALESCE(cardinality(e.source_names), 0) > 0 OR e.source IS NOT NULL)
+    ) entries
+    WHERE source_name <> ''
+    GROUP BY source_name;
+END;
+$function$ LANGUAGE plpgsql SECURITY DEFINER;
+
 DROP MATERIALIZED VIEW IF EXISTS deduplicated_events;
 
 CREATE MATERIALIZED VIEW IF NOT EXISTS deduplicated_events AS
@@ -22,6 +54,7 @@ WITH base AS (
     SELECT
         e.*,
         COALESCE(e.duplicate_group, 'row:' || e.id::text) AS group_key,
+        -- The route representative sorts first so representative fields win.
         CASE
             WHEN e.duplicate_group IS NOT NULL
                 AND e.source_uid IS NOT DISTINCT FROM e.duplicate_group_representative
@@ -38,6 +71,8 @@ WITH base AS (
     WHERE e.source IS DISTINCT FROM 'poster_capture'
 ),
 name_occurrences AS (
+    -- Rank whole occurrences so the representative rank and source position
+    -- always come from the same member row.
     SELECT
         b.city,
         b.start_time,
@@ -105,6 +140,7 @@ rolled AS (
         b.city,
         (array_agg(b.transcript ORDER BY b.rep_rank, b.id) FILTER (WHERE b.transcript IS NOT NULL))[1] AS transcript,
         (array_agg(b.source_id ORDER BY b.rep_rank, b.id))[1] AS source_id,
+        -- cluster_id stays readable for the one-compatibility-build window.
         (array_agg(b.cluster_id ORDER BY b.rep_rank, b.id) FILTER (WHERE b.cluster_id IS NOT NULL))[1] AS cluster_id,
         (array_agg(b.category ORDER BY b.rep_rank, b.id) FILTER (WHERE b.category IS NOT NULL))[1] AS category,
         (array_agg(b.ics_categories ORDER BY b.rep_rank, b.id) FILTER (WHERE b.ics_categories IS NOT NULL))[1] AS ics_categories,
@@ -146,12 +182,14 @@ LEFT JOIN name_agg n USING (city, start_time, group_key)
 LEFT JOIN url_agg u USING (city, start_time, group_key)
 ORDER BY r.start_time;
 
+-- Unique index required for REFRESH MATERIALIZED VIEW CONCURRENTLY.
 CREATE UNIQUE INDEX IF NOT EXISTS deduplicated_events_id_idx ON deduplicated_events (id);
 CREATE INDEX IF NOT EXISTS deduplicated_events_city_start_time_idx ON deduplicated_events (city, start_time);
 
 GRANT SELECT ON deduplicated_events TO anon, authenticated, service_role;
 
--- RPC used by the nightly build after load-events completes.
+-- RPC used by the nightly build after load-events completes. A failure here
+-- must fail the pipeline so consumers never read a stale group decision.
 CREATE OR REPLACE FUNCTION public.refresh_deduplicated_events()
 RETURNS void
 LANGUAGE plpgsql

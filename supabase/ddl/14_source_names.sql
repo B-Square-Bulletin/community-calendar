@@ -1,7 +1,7 @@
 -- Source names: clean flat list of individual source names per city
--- Populated/refreshed by refresh_source_names() RPC during nightly build
--- The events.source column may contain comma-separated merged sources from dedup;
--- this table provides the canonical individual source names with counts.
+-- Populated/refreshed by refresh_source_names() RPC during nightly build.
+-- The RPC prefers events.source_names and falls back to splitting events.source
+-- for legacy rows that do not have structured names.
 
 CREATE TABLE source_names (
   id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -22,25 +22,24 @@ AS $$
 BEGIN
   -- Delete old entries for this city first
   DELETE FROM source_names WHERE city = target_city;
-  
-  -- Split comma-separated sources and count in one pass.
-  -- CONVENTION: commas in events.source are always treated as separators
-  -- between distinct source names (produced by deduplicated_events via
-  -- string_agg). Individual source names must not contain commas.
-  -- This processes each event exactly once (O(n)) instead of
-  -- running a correlated subquery for each source_name (O(n×m)).
-  -- Empty names (from blank sources, trailing/double commas) are filtered out.
+
+  -- Prefer the route's structured names so commas inside a source name stay
+  -- intact. Split `source` only for legacy rows with no structured names.
   INSERT INTO source_names (city, name, event_count)
-  SELECT city, name, event_count FROM (
-    SELECT
-      target_city AS city,
-      trim(unnest(string_to_array(source, ','))) AS name,
-      COUNT(DISTINCT id) AS event_count
-    FROM events
-    WHERE city = target_city
-      AND source IS NOT NULL
-    GROUP BY name
-  ) s
-  WHERE name <> '';
+  SELECT target_city, source_name, COUNT(DISTINCT event_id)
+  FROM (
+    SELECT e.id AS event_id, trim(source_entry.name) AS source_name
+    FROM events e
+    CROSS JOIN LATERAL unnest(
+      CASE
+        WHEN COALESCE(cardinality(e.source_names), 0) > 0 THEN e.source_names
+        ELSE string_to_array(e.source, ',')
+      END
+    ) AS source_entry(name)
+    WHERE e.city = target_city
+      AND (COALESCE(cardinality(e.source_names), 0) > 0 OR e.source IS NOT NULL)
+  ) entries
+  WHERE source_name <> ''
+  GROUP BY source_name;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;

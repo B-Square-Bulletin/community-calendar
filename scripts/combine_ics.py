@@ -397,20 +397,6 @@ def expand_rrules(ics_content, window_days=90):
     return results
 
 
-def normalize_title(title):
-    """Normalize title for dedup matching: strip leading article, lowercase, alphanumeric only, first 40 chars."""
-    if not title:
-        return ""
-    # Strip leading articles ("The", "A", "An") to improve matching
-    # e.g. "The Sam Grisman Project" matches "Sam Grisman Project"
-    lower = title.lower()
-    for article in ("the ", "a ", "an "):
-        if lower.startswith(article):
-            title = title[len(article) :]
-            break
-    return "".join(c.lower() for c in title if c.isalnum())[:40]
-
-
 def extract_field(event_content, field_name):
     """Extract a field value from VEVENT content, handling line folding."""
     # Match field, handling continuation lines (start with space/tab)
@@ -427,13 +413,6 @@ def extract_field(event_content, field_name):
         )
         return value.strip()
     return None
-
-
-def get_dedup_key(event):
-    """Generate dedup key from event: (date, normalized_title)."""
-    date_str = event["dtstart"].strftime("%Y-%m-%d")
-    title = extract_field(event["content"], "SUMMARY") or ""
-    return (date_str, normalize_title(title))
 
 
 # Known aggregators - these get lowest priority in deduplication.
@@ -472,138 +451,25 @@ def _url_predates_window(event_content, now):
     return (url_year, url_month) < (now.year, now.month)
 
 
-def dedupe_cross_source(events, input_dir):
-    """Deduplicate events across sources using title+date matching.
+def dedupe_by_uid(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Keep the first listing per UID; listings without a UID are never dropped.
 
-    When duplicates are found, prefers primary sources over aggregators.
-    Among primary sources or among aggregators, keeps the first encountered.
-    Also merges groups where one title is a prefix of another on the same date
-    (handles aggregators that append "at Venue Name" to titles).
+    UID-level de-duplication is the only de-duplication ``combine_ics``
+    performs. Whether two *different* UIDs are the same event is the confidence
+    route's decision (``scripts/ics_to_json.py``), made later on cleaned titles.
     """
-    # Group events by dedup key
-    groups: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    seen_uids = set()
+    deduped = []
     for event in events:
-        key = get_dedup_key(event)
-        if key not in groups:
-            groups[key] = []
-        groups[key].append(event)
-
-    # Second pass: merge groups where one normalized title is a prefix of another
-    # on the same date. This handles "Hands on a Hardbody" vs
-    # "Hands on a Hardbody at Spreckels Performing Arts Center".
-    # Only merge if the shorter title is at least 12 chars (avoid false positives).
-    date_keys: dict[str, list[tuple[str, str]]] = {}
-    for key in groups:
-        date_str, _norm_title = key
-        if date_str not in date_keys:
-            date_keys[date_str] = []
-        date_keys[date_str].append(key)
-
-    merged_into = {}  # key -> canonical key it was merged into
-    for date_str, keys in date_keys.items():
-        if len(keys) < 2:
+        uid_match = re.search(r"UID:([^\r\n]+)", event["content"])
+        if not uid_match:
+            deduped.append(event)
             continue
-        # Sort by title length so shorter titles come first
-        keys.sort(key=lambda k: len(k[1]))
-        for i in range(len(keys)):
-            if keys[i] in merged_into:
-                continue
-            short_title = keys[i][1]
-            if len(short_title) < 12:
-                continue
-            for j in range(i + 1, len(keys)):
-                if keys[j] in merged_into:
-                    continue
-                long_title = keys[j][1]
-                if (
-                    long_title.startswith(short_title)
-                    and len(short_title) / len(long_title) <= 0.75
-                ):
-                    # Only merge if at least one group contains an aggregator event.
-                    # This avoids merging unrelated events that happen to share a prefix
-                    # (e.g. "After School Club" vs "After School Club Robotics" at different libraries).
-                    has_aggregator = False
-                    for e in groups[keys[i]] + groups[keys[j]]:
-                        src = extract_field(e["content"], "X-SOURCE") or ""
-                        if any(is_aggregator(s.strip()) for s in src.split(",")):
-                            has_aggregator = True
-                            break
-                    if not has_aggregator:
-                        continue
-                    # Merge longer-title group into shorter-title group
-                    groups[keys[i]].extend(groups[keys[j]])
-                    merged_into[keys[j]] = keys[i]
-                    print(
-                        f"  Prefix dedup: merged '{keys[j][1][:50]}' into '{keys[i][1][:50]}' on {date_str}"
-                    )
-
-    # Remove merged groups
-    for key in merged_into:
-        del groups[key]
-
-    # For each group, keep primary source over aggregator
-    unique_events = []
-    cross_source_deduped = 0
-
-    for group in groups.values():
-        if len(group) == 1:
-            unique_events.append(group[0])
-        else:
-            # Multiple events with same title+date
-            # Sort: primary sources first, aggregators last
-            group.sort(
-                key=lambda e: (
-                    1 if is_aggregator(extract_field(e["content"], "X-SOURCE") or "") else 0
-                )
-            )
-
-            # Merge sources from all duplicates into the kept event
-            kept = group[0]
-            all_sources = []
-            source_urls = {}
-            for e in group:
-                src = extract_field(e["content"], "X-SOURCE")
-                evt_url = extract_field(e["content"], "URL")
-                if src:
-                    for s in src.split(","):
-                        s = s.strip()
-                        if s and s not in all_sources:
-                            all_sources.append(s)
-                        if s and evt_url:
-                            source_urls[s] = evt_url
-
-            # Update X-SOURCE to combined value (primary sources first, then aggregators)
-            if len(all_sources) > 1:
-                primary = sorted(s for s in all_sources if not is_aggregator(s))
-                agg = sorted(s for s in all_sources if is_aggregator(s))
-                merged_source = ", ".join(primary + agg)
-                kept["content"] = re.sub(
-                    r"^X-SOURCE:[^\r\n]+",
-                    f"X-SOURCE:{merged_source}",
-                    kept["content"],
-                    flags=re.MULTILINE,
-                )
-
-            # Store per-source URLs for aggregator attribution
-            if source_urls:
-                kept["content"] = f"X-SOURCE-URLS:{json.dumps(source_urls)}\r\n{kept['content']}"
-
-            unique_events.append(kept)
-            cross_source_deduped += len(group) - 1
-
-    if cross_source_deduped > 0:
-        print(f"  Cross-source dedup: removed {cross_source_deduped} duplicate events")
-
-    # Re-sort by start time
-    unique_events.sort(
-        key=lambda x: (
-            x["dtstart"].replace(tzinfo=timezone.utc)
-            if x["dtstart"].tzinfo is None
-            else x["dtstart"]
-        )
-    )
-
-    return unique_events
+        uid = uid_match.group(1)
+        if uid not in seen_uids:
+            seen_uids.add(uid)
+            deduped.append(event)
+    return deduped
 
 
 def dedupe_fuzzy(events, input_dir):
@@ -981,28 +847,12 @@ def combine_ics_files(
 
     all_events.sort(key=lambda x: normalize_dt(x["dtstart"]))
 
-    # Remove duplicates based on UID (same-source duplicates)
-    seen_uids = set()
-    uid_deduped = []
-    for event in all_events:
-        uid_match = re.search(r"UID:([^\r\n]+)", event["content"])
-        if uid_match:
-            uid = uid_match.group(1)
-            if uid not in seen_uids:
-                seen_uids.add(uid)
-                uid_deduped.append(event)
-        else:
-            uid_deduped.append(event)
+    # De-duplicate by UID only. Whether two different UIDs are the same event is
+    # the confidence route's decision (scripts/ics_to_json.py), not this step's.
+    unique_events = dedupe_by_uid(all_events)
 
-    # Cross-source deduplication: group by (date, normalized_title)
-    # Keep the event from the highest-priority source (primary sources over aggregators)
-    unique_events = dedupe_cross_source(uid_deduped, input_dir)
-
-    # Fuzzy deduplication: use LLM to find duplicates with different titles
-    import os
-
-    if os.environ.get("ENABLE_FUZZY_DEDUP"):
-        unique_events = dedupe_fuzzy(unique_events, input_dir)
+    # Do not call the legacy model-based deduper here. Cross-UID deletion is
+    # exclusively owned by confidence_route after events have been cleaned.
 
     # Build combined ICS
     output = [

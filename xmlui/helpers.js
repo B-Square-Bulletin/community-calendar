@@ -472,10 +472,22 @@ function filterByDateWindow(events, windowOrStartISO, endISOOrOpts, maybeOpts) {
 window.filterByDateWindow = filterByDateWindow;
 
 // --- Cluster Colors ---
+// The border colour is derived from the route's opaque duplicate_group id, not
+// a positional cluster index: the id is stable across a build, so a grouped
+// card keeps the same colour while membership is unchanged. A NULL group is a
+// Separate row and gets no border.
 const CLUSTER_COLORS = ['#6b9bd2', '#7bc47f', '#d4a04a'];
-window.clusterBorder = function (clusterId, filtered) {
-  if (clusterId == null || filtered) return 'none';
-  return '3px solid ' + CLUSTER_COLORS[clusterId % CLUSTER_COLORS.length];
+function duplicateGroupColor(duplicateGroup) {
+  var s = String(duplicateGroup);
+  var h = 0;
+  for (var i = 0; i < s.length; i++) {
+    h = (h * 31 + s.charCodeAt(i)) | 0;
+  }
+  return CLUSTER_COLORS[Math.abs(h) % CLUSTER_COLORS.length];
+}
+window.clusterBorder = function (duplicateGroup, filtered) {
+  if (duplicateGroup == null || duplicateGroup === '' || filtered) return 'none';
+  return '3px solid ' + duplicateGroupColor(duplicateGroup);
 };
 
 // --- Image Resize (client-side, before upload) ---
@@ -985,11 +997,31 @@ function uniqueSourceNames(source) {
     });
 }
 
+// Structured source names from the view, falling back to the legacy split.
+// The view's `source_names` is authoritative: a human source name may contain
+// a comma, so splitting the compatibility `source` string would fabricate
+// names (spec amendment L402). Every client site that derives names uses this.
+function eventSourceNames(e) {
+  if (e && Array.isArray(e.source_names) && e.source_names.length) {
+    var seen = new Set();
+    return e.source_names
+      .map(function (s) {
+        return String(s).trim();
+      })
+      .filter(function (s) {
+        if (!s || seen.has(s)) return false;
+        seen.add(s);
+        return true;
+      });
+  }
+  return uniqueSourceNames((e && e.source) || '');
+}
+
 // Extract a short readable snippet from an event description (for always-visible preview)
 // Junk line patterns are hardcoded here; see docs/admin-interface.md for plan to make configurable
-function formatSourceLinks(source, sourceUrls, hiddenSources) {
-  if (!source) return '';
-  var sources = uniqueSourceNames(source);
+function formatSourceLinks(source, sourceUrls, hiddenSources, sourceNames) {
+  var sources = eventSourceNames({ source: source, source_names: sourceNames });
+  if (!sources.length) return '';
   // Filter out hidden sources, but keep all if all would be removed
   if (hiddenSources && hiddenSources.length) {
     var visible = sources.filter(function (s) {
@@ -1221,13 +1253,8 @@ function filterHiddenSources(events, hiddenSources) {
   if (!hiddenSources || !hiddenSources.length) return events;
   if (!events) return [];
   return events.filter(function (e) {
-    if (!e.source) return true;
-    var sources = e.source
-      .split(',')
-      .map(function (s) {
-        return s.trim();
-      })
-      .filter(Boolean);
+    var sources = eventSourceNames(e);
+    if (!sources.length) return true;
     if (
       sources.some(function (s) {
         return hiddenSources.indexOf(s) >= 0 && AGGREGATOR_SOURCES.has(s);
@@ -1245,7 +1272,8 @@ function getSourceCounts(events) {
   if (!events || !events.length) return [];
   const counts = {};
   events.forEach((e) => {
-    const sources = uniqueSourceNames(e.source || 'Unknown');
+    var sources = eventSourceNames(e);
+    if (!sources.length) sources = ['Unknown'];
     sources.forEach((src) => {
       counts[src] = (counts[src] || 0) + 1;
     });
@@ -1272,7 +1300,8 @@ function getVisibleSourceCounts(events, hiddenSources) {
   var counts = {};
   var aggHidden = {};
   (events || []).forEach(function (e) {
-    var sources = uniqueSourceNames(e.source || 'Unknown');
+    var sources = eventSourceNames(e);
+    if (!sources.length) sources = ['Unknown'];
     var viaAgg = sources.some(function (s) {
       return hiddenSources.indexOf(s) >= 0 && AGGREGATOR_SOURCES.has(s);
     });
@@ -1319,7 +1348,8 @@ function sourceCountTooltip(row, hiddenSources) {
   );
 }
 
-// Deduplicate events: merge events with same title + start_time, combine sources
+// Deduplicate route rows by stored duplicate_group. Attach each enrichment's
+// original occurrence through its event_id; titles never provide a fallback key.
 // Cache variables (module-level for browser, will be on window)
 let _dedupedEventsCache = null;
 let _dedupedEventsLastLen = 0;
@@ -1344,80 +1374,130 @@ function dedupeEvents(events) {
   _dedupedEventsLastFirst = events[0];
   _dedupedEventsLastLast = events[events.length - 1];
 
+  // Recurring enrichment occurrences have synthetic ids. Link only the
+  // original RRULE occurrence to its stored event; future occurrences remain
+  // separate virtual rows. The event_id comes from the enrichment foreign key.
+  const routeGroupByMember = new Map();
+  events.forEach((e) => {
+    if (e._enrichment_event_id != null) return;
+    const normalizedTime = e.start_time ? new Date(e.start_time).toISOString() : '';
+    const routeGroup =
+      e.duplicate_group != null && e.duplicate_group !== ''
+        ? 'g:' + e.duplicate_group
+        : 'r:' + e.id;
+    const memberIds = Array.isArray(e.merged_ids) && e.merged_ids.length ? e.merged_ids : [e.id];
+    memberIds.forEach((id) => {
+      routeGroupByMember.set(String(id), { group: routeGroup, startTime: normalizedTime });
+    });
+  });
+
   const groups = {};
   events.forEach((e) => {
     // Normalize start_time to ISO string for consistent dedup across formats
     // e.g. '2026-02-11T18:00:00+00:00' and '2026-02-11T18:00:00.000Z' are the same instant
-    const normalizedTime = e.start_time ? new Date(e.start_time).toISOString() : '';
-    const key = (e.title || '').trim().toLowerCase() + '|' + normalizedTime;
+    const virtualTime = e.start_time ? new Date(e.start_time).toISOString() : '';
+    // The route's stored decision is authoritative for calendar rows. The
+    // original recurrence uses its linked row's stored time; other NULL-group
+    // rows keep their own row key and virtual occurrence time.
+    const linkedRoute =
+      e._enrichment_event_id != null && e._enrichment_is_original_occurrence
+        ? routeGroupByMember.get(String(e._enrichment_event_id))
+        : null;
+    const normalizedTime = linkedRoute ? linkedRoute.startTime : virtualTime;
+    const group =
+      (linkedRoute && linkedRoute.group) ||
+      (e.duplicate_group != null && e.duplicate_group !== ''
+        ? 'g:' + e.duplicate_group
+        : 'r:' + e.id);
+    const key = group + '|' + normalizedTime;
+    // Seed membership from the view's merged_ids so a pick on the card lights
+    // up every member; fall back to the row id for raw rows.
+    const seedIds =
+      Array.isArray(e.merged_ids) && e.merged_ids.length ? e.merged_ids.slice() : [e.id];
+    // The view's `source_names` is structured and already ordered by the route's
+    // representative rule. Only a raw row without it falls back to splitting the
+    // legacy comma-joined `source` string (spec amendment L402).
+    const names = eventSourceNames(e);
+    const structured = Array.isArray(e.source_names) && e.source_names.length ? names : null;
     if (!groups[key]) {
       groups[key] = {
         ...e,
-        sources: new Set(
-          (e.source || '')
-            .split(',')
-            .map((s) => s.trim())
-            .filter(Boolean)
-        ),
-        mergedIds: [e.id],
+        sourceNames: names.slice(),
+        structuredSources: structured != null,
+        source_urls: Object.assign({}, e.source_urls || {}),
+        mergedIds: seedIds,
       };
     } else {
       // Track all merged event IDs (for picks to work across sources)
-      groups[key].mergedIds.push(e.id);
-      // Add individual sources (split comma-separated values before deduping)
-      (e.source || '')
-        .split(',')
-        .map((s) => s.trim())
-        .filter(Boolean)
-        .forEach((s) => groups[key].sources.add(s));
+      seedIds.forEach((id) => {
+        if (groups[key].mergedIds.indexOf(id) < 0) groups[key].mergedIds.push(id);
+      });
+      // Union member source names, representative row's order first
+      names.forEach((s) => {
+        if (groups[key].sourceNames.indexOf(s) < 0) groups[key].sourceNames.push(s);
+      });
+      groups[key].structuredSources = groups[key].structuredSources || structured != null;
+      // Union per-source links so every member source stays reachable
+      Object.assign(groups[key].source_urls, e.source_urls || {});
       // Prefer non-empty values for other fields
       if (!groups[key].url && e.url) groups[key].url = e.url;
       if (!groups[key].location && e.location) groups[key].location = e.location;
       if (!groups[key].description && e.description) groups[key].description = e.description;
       if (!groups[key].rrule && e.rrule) groups[key].rrule = e.rrule;
-      if (!groups[key].cluster_id && e.cluster_id) groups[key].cluster_id = e.cluster_id;
     }
   });
-  // Convert sources Set to comma-separated string, with authoritative source first.
-  // Known aggregators sort to the end; among non-aggregators, a source whose name
-  // appears in the event location is promoted to the front.
-  // Filter mergedIds to only include numeric IDs (exclude synthetic enrichment IDs)
+  // Render the ordered names as the compatibility comma string. When the names
+  // are structured the view's order is authoritative; only the raw-row fallback
+  // applies the legacy aggregator/location ordering. Filter mergedIds to only
+  // include numeric IDs (exclude synthetic enrichment IDs).
   let result = Object.values(groups)
     .map((e) => {
-      const sourcesArr = Array.from(e.sources).sort((a, b) => {
-        var aAgg = AGGREGATOR_SOURCES.has(a) ? 1 : 0;
-        var bAgg = AGGREGATOR_SOURCES.has(b) ? 1 : 0;
-        if (aAgg !== bAgg) return aAgg - bAgg;
-        return a.localeCompare(b);
-      });
-      if (e.location) {
-        // Among non-aggregators, promote a source whose name appears in the location
-        const authIdx = sourcesArr.findIndex(
-          (s) => !AGGREGATOR_SOURCES.has(s) && sourceMatchesLocation(s, e.location)
-        );
-        if (authIdx > 0) {
-          const [auth] = sourcesArr.splice(authIdx, 1);
-          sourcesArr.unshift(auth);
+      let sourcesArr;
+      if (e.structuredSources) {
+        sourcesArr = e.sourceNames.slice();
+      } else {
+        sourcesArr = e.sourceNames.slice().sort((a, b) => {
+          var aAgg = AGGREGATOR_SOURCES.has(a) ? 1 : 0;
+          var bAgg = AGGREGATOR_SOURCES.has(b) ? 1 : 0;
+          if (aAgg !== bAgg) return aAgg - bAgg;
+          return a.localeCompare(b);
+        });
+        if (e.location) {
+          // Among non-aggregators, promote a source whose name appears in the location
+          const authIdx = sourcesArr.findIndex(
+            (s) => !AGGREGATOR_SOURCES.has(s) && sourceMatchesLocation(s, e.location)
+          );
+          if (authIdx > 0) {
+            const [auth] = sourcesArr.splice(authIdx, 1);
+            sourcesArr.unshift(auth);
+          }
         }
       }
-      return {
+      const out = {
         ...e,
         source: sourcesArr.join(', '),
+        source_names: sourcesArr,
         mergedIds: e.mergedIds.filter((id) => typeof id === 'number' || /^\d+$/.test(id)),
       };
+      delete out.sourceNames;
+      delete out.structuredSources;
+      delete out._enrichment_event_id;
+      delete out._enrichment_is_original_occurrence;
+      return out;
     })
     .sort((a, b) => {
       const timeCmp = (a.start_time || '').localeCompare(b.start_time || '');
       if (timeCmp !== 0) return timeCmp;
-      // Within same timeslot, group clustered events together by cluster_id, then title
-      const ca = a.cluster_id != null ? a.cluster_id : null;
-      const cb = b.cluster_id != null ? b.cluster_id : null;
-      if (ca != null && cb != null) {
-        if (ca !== cb) return ca - cb;
+      // Within the same instant, keep a group's row ahead of Separate rows and
+      // order deterministically by group id then title.
+      const ga = a.duplicate_group || '';
+      const gb = b.duplicate_group || '';
+      if (ga && gb) {
+        if (ga !== gb) return ga.localeCompare(gb);
         return (a.title || '').localeCompare(b.title || '');
       }
-      if (ca != null) return -1;
-      if (cb != null) return 1;
+      if (ga) return -1;
+      if (gb) return 1;
       return (a.title || '').localeCompare(b.title || '');
     });
 
@@ -1586,6 +1666,9 @@ function collapseLongRunningEvents(events) {
 function sortSourcesForDisplay(events) {
   if (!events) return [];
   return events.map(function (e) {
+    // A structured row already carries the view's representative ordering;
+    // re-sorting the compatibility string would undo it (spec amendment L402).
+    if (e && Array.isArray(e.source_names) && e.source_names.length) return e;
     if (!e.source) return e;
     var sourcesArr = uniqueSourceNames(e.source);
     if (sourcesArr.length <= 1) return e;
@@ -1644,6 +1727,67 @@ function isEventPicked(mergedIds, picks) {
   // mergedIds can be an array (from dedupe) or a single ID
   const ids = Array.isArray(mergedIds) ? mergedIds : [mergedIds];
   return picks.some((p) => ids.some((id) => p.event_id == id));
+}
+
+// The complete membership of the card an event belongs to. Prefers the
+// client-computed camelCase `mergedIds`; otherwise reads the view's `merged_ids`
+// column; otherwise the event is its own single-member group. Picks and
+// unpicks route through here so one card covers every stored member.
+function eventMergedIds(event) {
+  if (!event) return [];
+  if (Array.isArray(event.mergedIds) && event.mergedIds.length) return event.mergedIds;
+  if (Array.isArray(event.merged_ids) && event.merged_ids.length) return event.merged_ids;
+  return event.id != null ? [event.id] : [];
+}
+
+// My Picks shows one row per stored Group, not one per picked member. Rows
+// without a group (NULL) stay separate. When several members of one group are
+// picked, the route's canonical representative wins so the displayed fields
+// match the card; otherwise the smallest member event id wins for determinism.
+// When the representative is not among the picked events (a pick stored before
+// the route, or a representative that changed between builds), that fallback
+// runs — the same ordering as the my-picks ICS feed (ADR 0013), so the list and
+// the feed cannot pick different members.
+// Cached by input identity so the List binding returns a stable reference
+// between renders (picks are replaced wholesale on refetch).
+var _dedupePicksLast = null;
+var _dedupePicksResult = null;
+function dedupePicks(picks) {
+  if (!Array.isArray(picks)) return [];
+  if (picks === _dedupePicksLast) return _dedupePicksResult;
+  var best = {};
+  var order = [];
+  picks.forEach(function (p) {
+    var ev = (p && p.events) || {};
+    var key =
+      ev.duplicate_group != null && ev.duplicate_group !== ''
+        ? 'g:' + ev.duplicate_group
+        : 'r:' + (ev.id != null ? ev.id : 'p:' + (p && p.id));
+    var candidate = {
+      isRep:
+        ev.duplicate_group_representative != null &&
+        ev.source_uid === ev.duplicate_group_representative
+          ? 0
+          : 1,
+      eventId: ev.id != null ? Number(ev.id) : 0,
+    };
+    if (!best[key]) {
+      best[key] = { pick: p, rank: candidate };
+      order.push(key);
+      return;
+    }
+    var cur = best[key].rank;
+    if (
+      candidate.isRep !== cur.isRep ? candidate.isRep < cur.isRep : candidate.eventId < cur.eventId
+    ) {
+      best[key] = { pick: p, rank: candidate };
+    }
+  });
+  _dedupePicksLast = picks;
+  _dedupePicksResult = order.map(function (key) {
+    return best[key].pick;
+  });
+  return _dedupePicksResult;
 }
 
 // Build Google Calendar URL for an event
@@ -2155,6 +2299,8 @@ function expandEnrichments(enrichments, fromDateStr, toDateStr) {
           city: enrichment.city || null,
           rrule: enrichment.rrule,
           _enrichment_id: enrichment.id,
+          _enrichment_event_id: enrichment.event_id,
+          _enrichment_is_original_occurrence: date.getTime() === dtstart.getTime(),
         });
       });
     } catch (e) {
@@ -2360,11 +2506,12 @@ if (typeof window !== 'undefined') {
     var requireApproval = exc.requireApproval && exc.lastReviewed;
     var lastReviewed = exc.lastReviewed || null;
     return events.filter(function (e) {
-      if (e.source) {
-        var parts = e.source.split(', ');
-        for (var i = 0; i < parts.length; i++) {
-          if (exSources.indexOf(parts[i]) >= 0) return false;
-        }
+      // Structured source_names first (spec amendment L402): splitting the
+      // legacy comma-joined `source` would fabricate names for a human source
+      // such as "Taste, Inc." and fail to exclude it.
+      var parts = eventSourceNames(e);
+      for (var i = 0; i < parts.length; i++) {
+        if (exSources.indexOf(parts[i]) >= 0) return false;
       }
       if (e.category && exCategories.indexOf(e.category) >= 0) return false;
       if (e.source_uid && rejSet[e.source_uid]) return false;
@@ -2535,10 +2682,24 @@ if (typeof window !== 'undefined') {
   // signature instead (the ccArraySig length + first/last id test) plus the
   // emission signature shell.js publishes (#86), and __ccRefStats counts the
   // identity churn as evidence for the upstream XMLUI finding.
-  function ccArraySig(a) {
+  function ccArraySig(a, includeEnrichmentLinkage) {
     if (!Array.isArray(a)) return 'na';
     if (!a.length) return '0';
-    return a.length + ':' + a[0].id + ':' + a[a.length - 1].id;
+    var signature = a.length + ':' + a[0].id + ':' + a[a.length - 1].id;
+    if (includeEnrichmentLinkage) {
+      signature +=
+        ':' +
+        a
+          .map(function (e) {
+            return [
+              e._enrichment_id,
+              e._enrichment_event_id,
+              e._enrichment_is_original_occurrence,
+            ].join('|');
+          })
+          .join(',');
+    }
+    return signature;
   }
   window.__ccRefStats = { combineCalls: 0, eventsRefChanges: 0, enrichRefChanges: 0 };
   var _combineLastARef = null,
@@ -2559,7 +2720,7 @@ if (typeof window !== 'undefined') {
       _combineLastBRef = enrichments;
     }
     var aSig = ccArraySig(events),
-      bSig = ccArraySig(enrichments),
+      bSig = ccArraySig(enrichments, true),
       emitSig = window.__ccEmitSig || '';
     if (
       aSig === _combineLastASig &&
@@ -2572,9 +2733,15 @@ if (typeof window !== 'undefined') {
     _combineLastASig = aSig;
     _combineLastBSig = bSig;
     _combineLastEmitSig = emitSig;
-    _combineResult = (Array.isArray(events) ? events : []).concat(
+    var combined = (Array.isArray(events) ? events : []).concat(
       Array.isArray(enrichments) ? enrichments : []
     );
+    var hasLinkedEnrichment =
+      Array.isArray(enrichments) &&
+      enrichments.some(function (event) {
+        return event && event._enrichment_event_id != null;
+      });
+    _combineResult = hasLinkedEnrichment ? dedupeEvents(combined) : combined;
     return _combineResult;
   };
 
@@ -2653,6 +2820,8 @@ if (typeof window !== 'undefined') {
 
   window.clearDedupeCache = clearDedupeCache;
   window.isEventPicked = isEventPicked;
+  window.eventMergedIds = eventMergedIds;
+  window.dedupePicks = dedupePicks;
   window.buildGoogleCalendarUrl = buildGoogleCalendarUrl;
   window.downloadEventICS = downloadEventICS;
   // Enrichment helpers
@@ -2695,6 +2864,7 @@ if (typeof window !== 'undefined') {
           enrichments.map(function (e) {
             return [
               e.id,
+              e.event_id,
               e.rrule,
               e.start_time,
               e.title,

@@ -20,7 +20,7 @@
       width="16px"
       height="16px"
       color="$color-text-tertiary"
-      onClick="removePick($props.pick.id)"
+      onClick="removePick($props.pick.id, $props.pick.events?.duplicate_group)"
     />
   </HStack>
 </Component>
