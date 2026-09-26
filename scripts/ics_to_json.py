@@ -397,7 +397,7 @@ _US_STATE_TOKENS = {
 _SOURCE_PRIORITY_PATH = Path(__file__).resolve().parent.parent / "source_priority.json"
 try:
     AGGREGATORS = set(json.loads(_SOURCE_PRIORITY_PATH.read_text())["aggregators"])
-except (OSError, json.JSONDecodeError, KeyError, TypeError):
+except OSError, json.JSONDecodeError, KeyError, TypeError:
     AGGREGATORS = set()
 
 

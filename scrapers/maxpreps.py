@@ -174,7 +174,7 @@ class MaxPrepsScraper(BaseScraper):
             # The date is in local time for the school
             dtstart = datetime.fromisoformat(date_str)
             dtstart = dtstart.replace(tzinfo=self.tz)
-        except (ValueError, TypeError):
+        except ValueError, TypeError:
             return None
 
         # Filter out past events (only include future or today's events)

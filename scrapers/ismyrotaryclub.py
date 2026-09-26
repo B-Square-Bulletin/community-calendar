@@ -112,7 +112,7 @@ class IsMyRotaryClubScraper(BaseScraper):
 
         try:
             dtstart = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
-        except (ValueError, TypeError):
+        except ValueError, TypeError:
             return None
 
         dtend = None

@@ -141,7 +141,7 @@ class SimpleviewScraper(BaseScraper):
                     if pub_dt < now_utc:
                         skipped_past += 1
                         continue
-                except (ValueError, TypeError):
+                except ValueError, TypeError:
                     pass  # malformed date — include and let detail page decide
 
             # Categories: used for town filtering.

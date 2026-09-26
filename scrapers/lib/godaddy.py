@@ -93,7 +93,7 @@ class GoDaddyScraper(BaseScraper):
 
         try:
             dtstart = datetime.fromisoformat(start_str)
-        except (ValueError, TypeError):
+        except ValueError, TypeError:
             return None
 
         # Localize naive datetimes to the scraper's configured timezone
@@ -116,7 +116,7 @@ class GoDaddyScraper(BaseScraper):
                         ZoneInfo(self.timezone) if isinstance(self.timezone, str) else self.timezone
                     )
                     dtend = dtend.replace(tzinfo=cast("tzinfo", tz))
-            except (ValueError, TypeError):
+            except ValueError, TypeError:
                 pass
 
         # Clean description: strip HTML tags, unescape entities

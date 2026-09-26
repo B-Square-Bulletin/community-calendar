@@ -160,7 +160,7 @@ class VisitSantaRosaScraper(BaseScraper):
             dtstart = datetime.fromtimestamp(int(start_epoch), tz=timezone.utc).replace(
                 tzinfo=ZoneInfo(self.timezone)
             )
-        except (ValueError, TypeError):
+        except ValueError, TypeError:
             return None
 
         # Skip past events
@@ -170,7 +170,7 @@ class VisitSantaRosaScraper(BaseScraper):
                 dtend = datetime.fromtimestamp(int(end_epoch), tz=timezone.utc).replace(
                     tzinfo=ZoneInfo(self.timezone)
                 )
-            except (ValueError, TypeError):
+            except ValueError, TypeError:
                 dtend = dtstart
             # Skip if end is in the past
             if dtend < now:

@@ -123,7 +123,7 @@ class RhpEventsScraper(BaseScraper):
                     if pub_dt < cutoff:
                         skipped += 1
                         continue
-                except (ValueError, TypeError):
+                except ValueError, TypeError:
                     pass
             urls.append(link.text.strip())
 
