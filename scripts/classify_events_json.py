@@ -77,7 +77,7 @@ class RateLimitTracker:
                     "tokens_limit": tokens_limit,
                     "reset_time": reset_time,
                 }
-        except (ValueError, TypeError):
+        except ValueError, TypeError:
             pass
         return None
 
@@ -188,7 +188,7 @@ def anthropic_call(api_key, model, prompt, retry_count=0):
             if retry_after:
                 try:
                     retry_delay = int(retry_after)
-                except (ValueError, TypeError):
+                except ValueError, TypeError:
                     retry_delay = RETRY_BASE_DELAY * (2**retry_count)
             else:
                 retry_delay = RETRY_BASE_DELAY * (2**retry_count)

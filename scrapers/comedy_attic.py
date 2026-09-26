@@ -99,7 +99,7 @@ class ComedyAtticScraper(BaseScraper):
                 continue
             try:
                 data = json.loads(script.string)
-            except (json.JSONDecodeError, TypeError):
+            except json.JSONDecodeError, TypeError:
                 continue
 
             if not isinstance(data, dict) or data.get("@type") != "Event":

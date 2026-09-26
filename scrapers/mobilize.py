@@ -177,7 +177,7 @@ class MobilizeScraper(BaseScraper):
         raw_events = []
         try:
             raw_events = data["data"]["events"]
-        except (KeyError, TypeError):
+        except KeyError, TypeError:
             self.logger.error(
                 f"Unexpected data structure, top keys: {list(data.keys()) if isinstance(data, dict) else type(data)}"
             )

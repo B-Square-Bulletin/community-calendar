@@ -84,7 +84,7 @@ def events_to_ics(events, source_name="Legistar"):
             dt = parse_naive_ics(f"{event_date} {time_str}", "%Y-%m-%d %I:%M %p")
             dtstart = dt.strftime("%Y%m%dT%H%M%S")
             dtend = (dt + timedelta(hours=2)).strftime("%Y%m%dT%H%M%S")  # Assume 2hr meetings
-        except (ValueError, AttributeError):
+        except ValueError, AttributeError:
             # Fall back to all-day event
             dtstart = event_date.replace("-", "")
             dtend = dtstart

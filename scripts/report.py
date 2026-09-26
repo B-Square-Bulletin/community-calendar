@@ -148,7 +148,7 @@ def load_report(report_path: str) -> dict:
     try:
         with Path(report_path).open() as f:
             return json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
+    except FileNotFoundError, json.JSONDecodeError:
         return {"generated": None, "cities": {}, "anomalies": []}
 
 
@@ -251,7 +251,7 @@ def update_report(cities: list[str], report_path: str = "report.json"):
         try:
             with Path(events_json).open() as f:
                 events = json.load(f)
-        except (FileNotFoundError, json.JSONDecodeError):
+        except FileNotFoundError, json.JSONDecodeError:
             continue
 
         urls_with_url = [e for e in events if e.get("url")]
@@ -358,7 +358,7 @@ def update_report(cities: list[str], report_path: str = "report.json"):
                 report["cities"][city]["geo_filtered"] = geo_filtered
             else:
                 report["cities"][city].pop("geo_filtered", None)
-        except (FileNotFoundError, json.JSONDecodeError):
+        except FileNotFoundError, json.JSONDecodeError:
             report["cities"][city].pop("geo_filtered", None)
 
         prev_build: dict[str, Any] = report["cities"][city].get("build") or {}
@@ -385,7 +385,7 @@ def update_report(cities: list[str], report_path: str = "report.json"):
         try:
             with Path(events_json).open() as f:
                 events = json.load(f)
-        except (FileNotFoundError, json.JSONDecodeError):
+        except FileNotFoundError, json.JSONDecodeError:
             continue
 
         tz_name = get_city_timezone(city)
@@ -512,7 +512,7 @@ def update_report(cities: list[str], report_path: str = "report.json"):
     cities_json = Path(__file__).parent.parent / "cities.json"
     try:
         active_cities = set(json.loads(cities_json.read_text()).keys())
-    except (OSError, json.JSONDecodeError):
+    except OSError, json.JSONDecodeError:
         active_cities = None
     if active_cities:
         for stale in [c for c in report["cities"] if c not in active_cities]:

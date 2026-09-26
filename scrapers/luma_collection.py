@@ -108,7 +108,7 @@ def _price_text(ticket_info: Any) -> str | None:
 
     try:
         amount = float(cents) / 100.0
-    except (TypeError, ValueError):
+    except TypeError, ValueError:
         return None
 
     if currency:

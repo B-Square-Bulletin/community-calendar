@@ -138,7 +138,7 @@ def expand_recurring_events(
                     # correct tz for the skip date.
                     exc_dt = datetime.fromtimestamp(orig / 1000, tz=timezone.utc)
                     exceptions.add(exc_dt.date())
-                except (ValueError, TypeError):
+                except ValueError, TypeError:
                     pass
 
     # Day name to weekday number mapping
@@ -322,7 +322,7 @@ class ElfsightCalendarScraper(BaseScraper):
                     end_dt = occ_dt.replace(hour=end_h, minute=end_m)
                     if end_dt < occ_dt:
                         end_dt += timedelta(days=1)
-                except (ValueError, AttributeError):
+                except ValueError, AttributeError:
                     end_dt = occ_dt + timedelta(hours=1)
 
                 # Generate unique ID
