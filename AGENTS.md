@@ -143,3 +143,4 @@ python scripts/validate_pipeline.py --cities santarosa --strict
 | [docs/platforms.md](docs/platforms.md)                 | Platform techniques (Drupal, Wix, SeeTickets) and known limitations      |
 | [docs/discovery-lessons.md](docs/discovery-lessons.md) | Real-world discovery lessons and edge cases                              |
 | [docs/curator-guide.md](docs/curator-guide.md)         | Source discovery playbook with topical search categories                 |
+| [docs/dependencies.md](docs/dependencies.md)           | Dependency update automation and vulnerability scanning cadence          |
