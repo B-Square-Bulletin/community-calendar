@@ -1,0 +1,24 @@
+# Dependency update automation. See docs/dependencies.md and ADR 0016.
+#
+# The `uv` ecosystem updates `pyproject.toml` and `uv.lock` together, so each
+# PR is a coherent lockfile bump. Routine minor/patch bumps are grouped into a
+# single weekly PR; majors stay separate so a deliberate hold (for example the
+# `icalendar < 7` cap, issue #161) is reviewed on its own.
+version: 2
+updates:
+  - package-ecosystem: "uv"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      python-dependencies:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"

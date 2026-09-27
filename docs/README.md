@@ -28,6 +28,9 @@
 - [regression-testing.md](regression-testing.md) — Trace-tools CI setup
 - [search-pattern-tests.md](search-pattern-tests.md) — Search discovery test patterns
 
+## Development
+- [dependencies.md](dependencies.md) — Dependency update automation and vulnerability scanning
+
 ## Auto-generated
 - [prodid.md](prodid.md) — ICS platform inventory (via `scripts/prodid.py`)
 - [snippet-eval-prompt.md](snippet-eval-prompt.md) — LLM prompt for snippet quality evaluation

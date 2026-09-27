@@ -51,6 +51,7 @@ Know of a local calendar that should be included? [Open an issue](https://github
 - **Scrapers**: [scrapers/README.md](scrapers/README.md) — scraper library and per-site docs
 - **Timezones**: [docs/timezone.md](docs/timezone.md) — ICS timezone handling conventions
 - **Deduplication**: [docs/deduplication.md](docs/deduplication.md) — dedup implementation details
+- **Dependencies**: [docs/dependencies.md](docs/dependencies.md) — Dependabot cadence, vulnerability scanning, lockfile policy
 - **AI agents**: [AGENTS.md](AGENTS.md) — operating guide for AI agents working on this codebase
 
 ## Repo Structure
