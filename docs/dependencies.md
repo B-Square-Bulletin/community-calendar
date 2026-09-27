@@ -22,6 +22,9 @@ re-resolves.
 
 ## What needs a human
 
+The repository maintainers own both items below; nothing merges or clears an
+alert on its own.
+
 - **Merge Dependabot PRs.** There is no auto-merge. The normal PR gates
   (`make lint`, `make test-python`, feeds validation, and the rest of
   `validate-pr.yml`) are the review. Merge when green; if red, the bump broke
