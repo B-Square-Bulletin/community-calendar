@@ -192,7 +192,7 @@ class MontclairFilmScraper(BaseScraper):
             if not start_str:
                 continue
             try:
-                dtstart = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
+                dtstart = datetime.fromisoformat(start_str)
             except ValueError:
                 continue
             start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=EASTERN)
@@ -202,7 +202,7 @@ class MontclairFilmScraper(BaseScraper):
             end_str = data.get("endDate", "")
             if end_str:
                 with contextlib.suppress(ValueError):
-                    dtend = datetime.fromisoformat(end_str.replace("Z", "+00:00"))
+                    dtend = datetime.fromisoformat(end_str)
             loc_data = data.get("location", {})
             if isinstance(loc_data, dict):
                 loc_name = loc_data.get("name", "")

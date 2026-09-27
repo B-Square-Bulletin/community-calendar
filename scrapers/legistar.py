@@ -10,7 +10,7 @@ import json
 import subprocess
 import sys
 import urllib.parse
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 from lib.timeutil import parse_naive_ics, utc_now
@@ -84,7 +84,7 @@ def events_to_ics(events, source_name="Legistar"):
             dt = parse_naive_ics(f"{event_date} {time_str}", "%Y-%m-%d %I:%M %p")
             dtstart = dt.strftime("%Y%m%dT%H%M%S")
             dtend = (dt + timedelta(hours=2)).strftime("%Y%m%dT%H%M%S")  # Assume 2hr meetings
-        except (ValueError, AttributeError):
+        except ValueError, AttributeError:
             # Fall back to all-day event
             dtstart = event_date.replace("-", "")
             dtend = dtstart
@@ -116,7 +116,7 @@ def events_to_ics(events, source_name="Legistar"):
                 fold_line(f"LOCATION:{escape_ics(location)}"),
                 fold_line(f"DESCRIPTION:{escape_ics(description)}"),
                 f"URL:{url}",
-                f"DTSTAMP:{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}",
+                f"DTSTAMP:{datetime.now(UTC).strftime('%Y%m%dT%H%M%SZ')}",
                 "END:VEVENT",
             ]
         )

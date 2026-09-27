@@ -118,7 +118,7 @@ class GrowthZoneScraper(BaseScraper):
         try:
             dtstart = datetime.fromisoformat(start_str).replace(tzinfo=self.tz)
             dtend = datetime.fromisoformat(end_str).replace(tzinfo=self.tz) if end_str else None
-        except (ValueError, TypeError):
+        except ValueError, TypeError:
             return None
 
         # Skip events too far in the past or future

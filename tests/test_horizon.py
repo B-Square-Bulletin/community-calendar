@@ -7,7 +7,7 @@ boundary instant; `within` answers "is this event inside it?", normalising the
 """
 
 import sys
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -65,8 +65,8 @@ class TestWithin:
 
     def test_aware_datetime_compares_as_an_absolute_instant(self):
         end = datetime(2026, 4, 4, 12, 0, tzinfo=TZ)  # 16:00 UTC in April
-        assert within(datetime(2026, 4, 4, 16, 0, tzinfo=timezone.utc), end) is True
-        assert within(datetime(2026, 4, 4, 16, 1, tzinfo=timezone.utc), end) is False
+        assert within(datetime(2026, 4, 4, 16, 0, tzinfo=UTC), end) is True
+        assert within(datetime(2026, 4, 4, 16, 1, tzinfo=UTC), end) is False
 
     def test_missing_start_is_not_within(self):
         assert within(None, datetime(2026, 4, 4, tzinfo=TZ)) is False

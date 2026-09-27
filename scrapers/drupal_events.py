@@ -101,7 +101,7 @@ class DrupalEventsScraper(BaseScraper):
             event_tz_str = item.get("timezone", self.timezone)
             event_tz = ZoneInfo(event_tz_str) if event_tz_str else self.tz
             dtstart = dtstart.replace(tzinfo=event_tz)
-        except (ValueError, KeyError):
+        except ValueError, KeyError:
             return None
 
         end_str = item.get("end_date", "")

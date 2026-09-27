@@ -8,11 +8,9 @@ xmlui/config.json merge=keepours
 cities.json merge=keepours
 cities/*/feeds.txt merge=keepours
 
-# uv-generated artifacts: keep the fork's versions on upstream merges and
-# collapse them in GitHub PR diffs (regenerate with `make export-requirements`).
+# uv lockfile: keep the fork's version on upstream merges and collapse it in
+# GitHub PR diffs (regenerate with `uv lock`).
 uv.lock merge=keepours linguist-generated=true
-requirements.txt merge=keepours linguist-generated=true
-requirements-dev.txt merge=keepours linguist-generated=true
 
 # Per-city calendar artifacts: keep the fork's versions (regenerate with
 # the daily "Auto-generate calendar metadata" pipeline).

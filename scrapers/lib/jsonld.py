@@ -27,13 +27,16 @@ import html as html_mod
 import json
 import logging
 import re
-from collections.abc import Callable
-from datetime import datetime, timezone
-from typing import Any, ClassVar
+from datetime import UTC, datetime
+from typing import TYPE_CHECKING, Any, ClassVar
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 from .base import BaseScraper
+from .timeutil import assume_utc
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 logger = logging.getLogger(__name__)
 
@@ -233,14 +236,14 @@ class JsonLdScraper(BaseScraper):
             return None
 
         try:
-            dtstart = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
+            dtstart = datetime.fromisoformat(start_str)
         except ValueError:
             self.logger.debug(f"Skipping {title}: bad startDate {start_str}")
             return None
 
         # Skip past events
-        now = datetime.now(timezone.utc)
-        start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=timezone.utc)
+        now = datetime.now(UTC)
+        start_aware = assume_utc(dtstart)
         if start_aware < now:
             return None
 
@@ -249,7 +252,7 @@ class JsonLdScraper(BaseScraper):
         end_str = item.get("endDate", "")
         if end_str:
             with contextlib.suppress(ValueError):
-                dtend = datetime.fromisoformat(end_str.replace("Z", "+00:00"))
+                dtend = datetime.fromisoformat(end_str)
 
         # Location
         location = parse_location(item.get("location"), self.default_location)

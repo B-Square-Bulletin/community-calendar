@@ -23,7 +23,7 @@ import argparse
 import json
 import logging
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 
 from lib import BaseScraper
@@ -77,7 +77,7 @@ def _iso_datetime(value: Any) -> datetime | None:
     if not text:
         return None
     try:
-        return datetime.fromisoformat(text.replace("Z", "+00:00"))
+        return datetime.fromisoformat(text)
     except ValueError:
         return None
 
@@ -108,7 +108,7 @@ def _price_text(ticket_info: Any) -> str | None:
 
     try:
         amount = float(cents) / 100.0
-    except (TypeError, ValueError):
+    except TypeError, ValueError:
         return None
 
     if currency:
@@ -152,7 +152,7 @@ class LumaCollectionScraper(BaseScraper):
 
         events = []
         seen = set()
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         for entry in self._fetch_entries(calendar_api_id):
             parsed = self._parse_entry(entry, now)
             if parsed:

@@ -20,7 +20,7 @@ import argparse
 import json
 import logging
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -87,7 +87,7 @@ class VisitSantaRosaScraper(BaseScraper):
         """Query Algolia for events."""
         url = f"https://{app_id}-dsn.algolia.net/1/indexes/{INDEX_NAME}/query"
 
-        now_epoch = int(datetime.now(timezone.utc).timestamp())
+        now_epoch = int(datetime.now(UTC).timestamp())
         params = (
             f"filters=sectionName:Events AND endDate >= {now_epoch}&hitsPerPage=1000&page={page}"
         )
@@ -134,7 +134,7 @@ class VisitSantaRosaScraper(BaseScraper):
 
         self.logger.info(f"Total hits from Algolia: {len(all_hits)}")
 
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         events = []
         for hit in all_hits:
             event = self._parse_hit(hit, now)
@@ -157,20 +157,20 @@ class VisitSantaRosaScraper(BaseScraper):
         try:
             # Simpleview encodes local wall time as a fake-UTC epoch:
             # the UTC fields ARE the local wall clock — relabel, don't convert
-            dtstart = datetime.fromtimestamp(int(start_epoch), tz=timezone.utc).replace(
+            dtstart = datetime.fromtimestamp(int(start_epoch), tz=UTC).replace(
                 tzinfo=ZoneInfo(self.timezone)
             )
-        except (ValueError, TypeError):
+        except ValueError, TypeError:
             return None
 
         # Skip past events
         end_epoch = hit.get("endDate")
         if end_epoch:
             try:
-                dtend = datetime.fromtimestamp(int(end_epoch), tz=timezone.utc).replace(
+                dtend = datetime.fromtimestamp(int(end_epoch), tz=UTC).replace(
                     tzinfo=ZoneInfo(self.timezone)
                 )
-            except (ValueError, TypeError):
+            except ValueError, TypeError:
                 dtend = dtstart
             # Skip if end is in the past
             if dtend < now:

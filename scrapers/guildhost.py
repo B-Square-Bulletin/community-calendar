@@ -24,12 +24,13 @@ import json
 import logging
 import re
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
+from lib.timeutil import assume_utc
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -100,7 +101,7 @@ class GuildHostScraper(BaseScraper):
                     continue
 
                 try:
-                    dtstart = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
+                    dtstart = datetime.fromisoformat(start_str)
                 except ValueError:
                     continue
 
@@ -109,7 +110,7 @@ class GuildHostScraper(BaseScraper):
                 end_str = item.get("endDate", "")
                 if end_str:
                     with contextlib.suppress(ValueError):
-                        dtend = datetime.fromisoformat(end_str.replace("Z", "+00:00"))
+                        dtend = datetime.fromisoformat(end_str)
 
                 title = item.get("name", "Untitled")
 
@@ -174,7 +175,7 @@ class GuildHostScraper(BaseScraper):
         if not slugs:
             return []
 
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         events = []
 
         for i, slug in enumerate(slugs):
@@ -189,7 +190,7 @@ class GuildHostScraper(BaseScraper):
             if event:
                 # Skip past events
                 dtstart = event["dtstart"]
-                start_aware = dtstart if dtstart.tzinfo else dtstart.replace(tzinfo=timezone.utc)
+                start_aware = assume_utc(dtstart)
                 if start_aware < now:
                     self.logger.debug(f"Skipping past event: {event['title']}")
                     continue

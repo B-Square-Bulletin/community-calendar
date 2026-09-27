@@ -102,13 +102,13 @@ class CitySparkScraper(BaseScraper):
         if not start_utc:
             return None
 
-        event_start_utc = datetime.fromisoformat(start_utc.replace("Z", "+00:00"))
+        event_start_utc = datetime.fromisoformat(start_utc)
         event_start = event_start_utc.astimezone(pacific)
 
         # Parse end time
         end_utc = event.get("EndUTC")
         if end_utc:
-            event_end_utc = datetime.fromisoformat(end_utc.replace("Z", "+00:00"))
+            event_end_utc = datetime.fromisoformat(end_utc)
             event_end = event_end_utc.astimezone(pacific)
         else:
             event_end = event_start

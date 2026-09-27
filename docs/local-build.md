@@ -19,7 +19,7 @@ or refresh Supabase-side materialized state.
 ## Prerequisites
 
 - `python3`
-- project dependencies already installed (`pip install -r requirements.txt`)
+- project dependencies installed with `uv sync` (the Makefile's `setup-python` target)
 - optional but recommended for DB-backed comparison/export:
   - `SUPABASE_URL`
   - `SUPABASE_SERVICE_KEY`
@@ -33,15 +33,13 @@ already-exported variables.
 
 For close GitHub parity, use the same runtime family as the workflow:
 
-- GitHub Actions runs `python-version: 3.10`
-- the repo currently pins `lxml==4.9.1`
-- that `lxml` pin does not build cleanly on Python 3.13/3.14, so a modern
-  Homebrew `python3` can produce unavoidable local drift before the build even
-  starts
+- GitHub Actions runs `python-version: 3.14`
+- `.python-version` pins the local toolchain to the same 3.14 line, so
+  `uv sync` and `uv run` select a matching interpreter automatically
 
-If you need local-vs-GitHub reconciliation, treat Python 3.10 plus a clean
-`pip install -r requirements.txt` environment as part of the test setup, not
-as an optional nice-to-have.
+If you need local-vs-GitHub reconciliation, treat Python 3.14 plus a clean
+`uv sync` environment as part of the test setup, not as an optional
+nice-to-have.
 
 ## Usage
 

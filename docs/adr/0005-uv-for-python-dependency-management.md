@@ -9,6 +9,10 @@ CI workflows install via `astral-sh/setup-uv` + `uv sync`, and the generated
 `requirements*.txt` artifacts were retired. `uv.lock` (via `pyproject.toml`) is
 the single source of truth.
 
+**Superseded in part by [0014](0014-python-314-toolchain-floor.md):** the
+`requires-python = ">=3.10"` floor (Decision item 1) and the Python 3.10
+toolchain pin (Decision item 3) were raised to the 3.14 line.
+
 ## Context
 
 The project manages Python via `requirements.txt` (11 pinned prod deps) and `requirements-dev.txt` (pytest + `-r requirements.txt`), installed by `python3 -m venv` + `pip` in the Makefile and by `pip install -r ...` in CI workflows. There is no `pyproject.toml`.
