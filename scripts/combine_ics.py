@@ -840,10 +840,7 @@ def combine_ics_files(
             print(f"  Error processing {ics_file.name}: {e}")
 
     # Sort by start time
-    def normalize_dt(dt):
-        return assume_utc(dt)
-
-    all_events.sort(key=lambda x: normalize_dt(x["dtstart"]))
+    all_events.sort(key=lambda x: assume_utc(x["dtstart"]))
 
     # De-duplicate by UID only. Whether two different UIDs are the same event is
     # the confidence route's decision (scripts/ics_to_json.py), not this step's.
