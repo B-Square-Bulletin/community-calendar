@@ -32,6 +32,10 @@ dev = [
 
 [tool.uv]
 package = false
+# charset-normalizer is transitive (via requests), which allows 2.x and
+# 3.x. Constrain it to the 3.x line so the deliberate decoding change in
+# ADR 0015 cannot silently revert on a future re-resolve.
+constraint-dependencies = ["charset-normalizer>=3"]
 
 [tool.ruff]
 line-length = 100

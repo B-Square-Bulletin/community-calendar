@@ -49,8 +49,12 @@ Facts measured before deciding:
    run on urllib3 2.x. Bump the matching dev stubs (`types-requests`,
    `types-pytz`); `types-urllib3` is dropped because urllib3 2.x ships its own
    types.
-2. **Force `charset-normalizer` to 3.x** (`3.5.1`), accepting its changed
-   detection heuristics rather than pinning it back to freeze decoding.
+2. **Constrain `charset-normalizer` to the 3.x line** in the manifest
+   (`[tool.uv] constraint-dependencies = ["charset-normalizer>=3"]`), so the
+   deliberate move cannot silently revert; the lock resolves `3.5.1`. Accept its
+   changed detection heuristics rather than pinning it back to freeze decoding.
+   The constraint is a floor, not an exact pin, so a future 3.x release can
+   still be adopted.
 3. **Keep the `==` convention.** Do not relax pins to floors. The lockfile
    already provides reproducibility, and exact pins are the documented style
    (issue #57). Staleness is addressed by adding automation, not by loosening
@@ -95,6 +99,16 @@ solving the underlying problem, which is the absence of update automation.
 Rejected: it preserves today's byte-for-byte decoding but leaves a stale
 dependency in place, defeating the purpose. The accepted risk is covered by the
 nightly pipeline.
+
+### Pin `charset-normalizer` as a direct runtime dependency
+
+Add `charset-normalizer==3.5.1` to the `dependencies` list.
+
+Rejected: nothing imports the package, so a direct runtime dependency would
+declare an unused package. The `[tool.uv] constraint-dependencies` entry
+expresses the same requirement without that. An exact pin would also need a
+hand-bump for every 3.x release, which reintroduces the staleness this change
+removes; the floor avoids that.
 
 ### Upgrade `icalendar` to 7.x in the same change
 

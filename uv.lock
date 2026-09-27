@@ -2,6 +2,9 @@ version = 1
 revision = 3
 requires-python = ">=3.14"
 
+[manifest]
+constraints = [{ name = "charset-normalizer", specifier = ">=3" }]
+
 [[package]]
 name = "annotated-types"
 version = "0.8.0"

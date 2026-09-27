@@ -11,6 +11,11 @@ pyrefly *warning* baseline (174 warn-severity findings: `str(__file__)` in the
 scraper `sys.path` boilerplate, and `untyped-import` on `requests`) was driven
 to zero, and pyrefly now gates on warnings as well as errors.
 
+**Superseded in part by [0015](0015-modernize-stale-runtime-dependencies.md):**
+`types-urllib3` was removed when `urllib3` moved to the 2.x line, which ships
+its own type hints. The `types-requests` stub no longer pulls it in, so the
+stub list in Decision item 3 is out of date on that point.
+
 ## Context
 
 The Python codebase (~200 files: `scripts/`, `scrapers/`, `tests/`) has grown with essentially no static analysis: zero `# type: ignore` comments today, and a large fraction of files with no type hints. Running any type checker across it will produce thousands of diagnostics.
