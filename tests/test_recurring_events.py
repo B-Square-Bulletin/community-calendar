@@ -12,6 +12,7 @@ Run: python -m pytest tests/test_recurring_events.py -v
 
 import re
 import sys
+from datetime import date, timedelta
 from pathlib import Path
 
 # Add project root to path
@@ -44,8 +45,6 @@ class TestRecurrenceIdOverride:
         The expanded output should contain the new date, NOT the original.
         Uses relative dates so the test doesn't expire as time passes.
         """
-        from datetime import date, timedelta
-
         today = utc_today()
 
         def nth_weekday(year, month, n, weekday):
@@ -163,8 +162,6 @@ class TestRecurrenceIdOverride:
         Uses near-future dates so expansion window (today + 120 days)
         covers all COUNT=N instances.
         """
-        from datetime import timedelta
-
         start = utc_today() + timedelta(days=7)  # one week from now
         start_str = start.strftime("%Y%m%d")
         dtstart = f"DTSTART:{start_str}T090000"
@@ -193,8 +190,6 @@ class TestRecurrenceIdOverride:
         be handled correctly. Overridden instances should be replaced,
         non-overridden instances should remain.
         """
-        from datetime import timedelta
-
         start = utc_today() + timedelta(days=7)  # one week from now
         start_str = start.strftime("%Y%m%d")
 
@@ -279,8 +274,6 @@ class TestSerializationRoundTrip:
     """
 
     def test_recurring_instance_round_trip_preserves_fields(self):
-        from datetime import timedelta
-
         start = utc_today() + timedelta(days=7)
         start_str = start.strftime("%Y%m%d")
 
