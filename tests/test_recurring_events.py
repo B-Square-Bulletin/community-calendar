@@ -12,6 +12,7 @@ Run: python -m pytest tests/test_recurring_events.py -v
 
 import re
 import sys
+from datetime import date, timedelta
 from pathlib import Path
 
 # Add project root to path
@@ -44,8 +45,6 @@ class TestRecurrenceIdOverride:
         The expanded output should contain the new date, NOT the original.
         Uses relative dates so the test doesn't expire as time passes.
         """
-        from datetime import date, timedelta
-
         today = utc_today()
 
         def nth_weekday(year, month, n, weekday):
@@ -163,8 +162,6 @@ class TestRecurrenceIdOverride:
         Uses near-future dates so expansion window (today + 120 days)
         covers all COUNT=N instances.
         """
-        from datetime import timedelta
-
         start = utc_today() + timedelta(days=7)  # one week from now
         start_str = start.strftime("%Y%m%d")
         dtstart = f"DTSTART:{start_str}T090000"
@@ -193,8 +190,6 @@ class TestRecurrenceIdOverride:
         be handled correctly. Overridden instances should be replaced,
         non-overridden instances should remain.
         """
-        from datetime import timedelta
-
         start = utc_today() + timedelta(days=7)  # one week from now
         start_str = start.strftime("%Y%m%d")
 
@@ -268,3 +263,44 @@ class TestRecurrenceIdOverride:
         assert day_2 in dtstarts, f"Day 2 ({day_2}, unmodified) should appear"
         day_4 = (start + timedelta(days=3)).strftime("%Y%m%d")
         assert day_4 in dtstarts, f"Day 4 ({day_4}, unmodified) should appear"
+
+
+class TestSerializationRoundTrip:
+    """`combine_ics` reads each source with `icalendar` and re-serializes every
+    expanded recurrence instance with `Component.to_ical()`. icalendar 7.x
+    changed property escaping/decoding and error handling, so this locks the
+    parse -> expand -> serialize round trip that the combine step depends on
+    (issue #161).
+    """
+
+    def test_recurring_instance_round_trip_preserves_fields(self):
+        start = utc_today() + timedelta(days=7)
+        start_str = start.strftime("%Y%m%d")
+
+        event = make_vevent(
+            "Book Club, Weekly",
+            f"DTSTART:{start_str}T190000",
+            f"DTEND:{start_str}T200000",
+            "roundtrip@test",
+            rrule="FREQ=WEEKLY;COUNT=2",
+        )
+        event = event.replace(
+            "END:VEVENT",
+            "LOCATION:Redwood Cafe, Cotati\r\nX-SOURCE:Redwood Cafe\r\nEND:VEVENT",
+        )
+        ics = make_ics(event)
+
+        expanded = expand_rrules(ics, window_days=120)
+        assert expanded is not None
+        assert len(expanded) == 2
+
+        for block in expanded:
+            # TEXT values keep their comma escaping through the round trip.
+            assert "SUMMARY:Book Club\\, Weekly" in block
+            assert "LOCATION:Redwood Cafe\\, Cotati" in block
+            # X- properties survive verbatim (7.x changed unknown-property escaping).
+            assert "X-SOURCE:Redwood Cafe" in block
+            # TZID and the date-suffixed UID are preserved/mutated as before.
+            assert "DTSTART;TZID=America/Los_Angeles:" in block
+            uid = re.search(r"UID:([^\r\n]+)", block)
+            assert uid and "__" in uid.group(1)

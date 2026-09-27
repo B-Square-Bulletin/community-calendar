@@ -6,6 +6,11 @@ Date: 2026-09-26
 
 Accepted.
 
+**Decision 4 actioned (2026-09-27):** the deferred `icalendar` 7.x migration
+landed in [issue #161](https://github.com/B-Square-Bulletin/community-calendar/issues/161).
+The manifest now resolves `icalendar` 7.x, and `types-icalendar` was dropped
+from the dev group because 7.x ships inline type hints.
+
 ## Context
 
 [0014](0014-python-314-toolchain-floor.md) raised the toolchain to Python 3.14
