@@ -4,7 +4,7 @@ Python dependencies live in `pyproject.toml`. `uv.lock` is the resolved
 lockfile and the source of truth for what actually installs
 ([ADR 0005](adr/0005-uv-for-python-dependency-management.md)). Most runtime
 dependencies use exact `==` pins; a few use deliberate ranges (the `icalendar`
-ceiling below is one) that `uv.lock` resolves. Do not treat those ranges as
+major ceiling is one) that `uv.lock` resolves. Do not treat those ranges as
 pins for Dependabot to collapse back to `==`. Dev tools live in the
 `[dependency-groups].dev` group. Run `uv sync` to install the locked
 environment.
@@ -49,8 +49,6 @@ alert on its own.
 
 Dependabot proposes bumps; it does not decide what is safe. Known holds:
 
-- `icalendar` is capped below 7.x on purpose; the 7.x migration is
-  [issue #161](https://github.com/B-Square-Bulletin/community-calendar/issues/161).
 - `pytz` and `Jinja2` remain only for the abandoned `legacy/` tree; removing
   them is [issue #162](https://github.com/B-Square-Bulletin/community-calendar/issues/162).
 
