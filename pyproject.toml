@@ -5,13 +5,13 @@ description = "Community calendar build pipeline: ICS feeds and scrapers merged 
 requires-python = ">=3.14"
 dependencies = [
   "beautifulsoup4==4.15.0",
-  "pytz==2022.1",
-  "requests==2.27.1",
-  "urllib3==1.26.9",
+  "pytz==2026.4",
+  "requests==2.34.2",
+  "urllib3==2.8.0",
   "feedparser==6.0.12",
   "icalendar>=5.0.0,<7.0.0",
   "recurring-ical-events>=3.1.0",
-  "Jinja2==3.1.2",
+  "Jinja2==3.1.6",
   "anthropic>=0.18.0",
   "tenacity>=9.1.4",
 ]
@@ -25,13 +25,17 @@ dev = [
   "pyrefly==1.2.0",
   "pyright==1.1.411",
   "zuban==0.9.1",
-  "types-pytz==2026.3.1.20260727",
+  "types-pytz==2026.4.0.20260926",
   "types-icalendar==6.3.2.20260712",
-  "types-requests==2.31.0.6",
+  "types-requests==2.33.0.20260906",
 ]
 
 [tool.uv]
 package = false
+# charset-normalizer is transitive (via requests), which allows 2.x and
+# 3.x. Constrain it to the 3.x line so the deliberate decoding change in
+# ADR 0015 cannot silently revert on a future re-resolve.
+constraint-dependencies = ["charset-normalizer>=3"]
 
 [tool.ruff]
 line-length = 100

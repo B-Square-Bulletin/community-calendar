@@ -5,7 +5,9 @@ Date: 2026-09-26
 ## Status
 
 Accepted. Supersedes the Python 3.10 pin recorded in
-[0005](0005-uv-for-python-dependency-management.md).
+[0005](0005-uv-for-python-dependency-management.md). The stale runtime pins
+deferred in Decision item 4 are addressed by
+[0015](0015-modernize-stale-runtime-dependencies.md).
 
 ## Context
 
