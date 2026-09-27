@@ -2,9 +2,12 @@
 
 Python dependencies live in `pyproject.toml`. `uv.lock` is the resolved
 lockfile and the source of truth for what actually installs
-([ADR 0005](adr/0005-uv-for-python-dependency-management.md)). Runtime pins use
-exact `==` versions; dev tools live in the `[dependency-groups].dev` group. Run
-`uv sync` to install the locked environment.
+([ADR 0005](adr/0005-uv-for-python-dependency-management.md)). Most runtime
+dependencies use exact `==` pins; a few use deliberate ranges (the `icalendar`
+ceiling below is one) that `uv.lock` resolves. Do not treat those ranges as
+pins for Dependabot to collapse back to `==`. Dev tools live in the
+`[dependency-groups].dev` group. Run `uv sync` to install the locked
+environment.
 
 Two automations keep the manifest from going stale — the failure mode that let
 2022-era pins sit for years ([ADR 0015](adr/0015-modernize-stale-runtime-dependencies.md)).
