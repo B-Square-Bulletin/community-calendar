@@ -88,7 +88,6 @@ Docs: https://documentation.events.iu.edu/feed-and-linked-calendars/ical-feed.ht
 | Bloomington Community Band | Scraper | ~5 | `tribe_rest.py` — Tribe ICS returns an empty body; REST API works (2026-08) |
 | Bloominglabs Makerspace | Google Calendar | ~10+ | |
 | Habitat for Humanity Monroe County | Scraper | ~4 | `habitat.py` — fundraisers, 5K, volunteer events |
-| NAMI Greater Bloomington | Scraper | ~31 | `nami_bloomington.py` — Tribe Events API; support groups at library |
 | Bloomington Spinners & Weavers Guild | ICS | — | |
 
 ### Nature & Outdoors (6 sources)
@@ -188,7 +187,7 @@ These curate or aggregate events from multiple venues:
 | Bloomington Yoga Collective | Squarespace + MindBody | Class schedules only |
 | Vibe Yoga Studio | Squarespace | Class schedules only |
 | Bloomington Volunteer Network | Galaxy Digital | No feed export |
-| ~~NAMI Greater Bloomington~~ | ~~The Events Calendar~~ | RESOLVED: Tribe Events REST API works (2026-03) |
+| NAMI Greater Bloomington | The Events Calendar + Cloudflare | Tribe REST API 403s from CI (Cloudflare IP/WAF block on GitHub Actions egress); dropped as a source 2026-09 (#19) |
 | SIREN Solar | Tribe Events Calendar | ICS broken, API returns 0 events — dead calendar |
 | ~~Pillar Arts~~ | ~~WordPress + TEC~~ | RESOLVED: events published via Pillar Arts Community Calendar Tockify feed (bloomington.arts.calendar) |
 | Monroe County Gov | Indiana state platform | No ICS export |
@@ -416,7 +415,7 @@ Annual events with reliable dates but no feeds — a once-a-season curator sweep
 | Songkick | `lib/songkick.py` | Bluebird, Blockhouse | Venue event pages |
 | Eventbrite | `scrapers/eventbrite.py` | Morgenstern Books, Nerd Nite | Organizer page → JSON-LD |
 | Mobilize.us | `scrapers/mobilize.py` | Indivisible | Organizer event pages |
-| The Events Calendar (Tribe) | `lib/tribe_events.py`, `scrapers/tribe_rest.py` | NAMI, Boys & Girls Club, Community Band, Upland | WordPress plugin REST API; bypasses blocked or empty ICS exports |
+| The Events Calendar (Tribe) | `lib/tribe_events.py`, `scrapers/tribe_rest.py` | Bloomington Symphony, Boys & Girls Club, Community Band, Upland | WordPress plugin REST API; bypasses blocked or empty ICS exports |
 | Localist | `scrapers/localist.py` | McCormick's Creek SP, Brown County SP | events.in.gov JSON API; filter by venue_id |
 | JSON-LD | `lib/jsonld.py` | (used by Eventbrite) | Schema.org Event extraction |
 

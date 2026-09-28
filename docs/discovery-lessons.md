@@ -418,7 +418,9 @@ curl -sL "https://example.com/wp-json/tribe/events/v1/events/?per_page=5" \
 
 **Reusable base:** `scrapers/lib/tribe_events.py` (TribeEventsScraper). Subclass with `api_url` and you're done — structured dates, venues with addresses, descriptions, pagination all handled.
 
-**Example:** NAMI Greater Bloomington's ICS export returns 403 (Cloudflare), but the Tribe API returns 78 events with structured data. See `scrapers/nami_bloomington.py` (10-line subclass, 31 future events).
+**Example:** Bloomington Symphony Orchestra's Tribe API works from CI. See `scrapers/bloomington_symphony.py`.
+
+**Caveat — the API is not immune to Cloudflare:** NAMI Greater Bloomington's ICS export returned 403, and its Tribe API worked from residential IPs, so it looked like a clean bypass. But the same endpoint returned 403 from GitHub Actions egress (a fast `server: cloudflare` response with `x-policy-marker`) — an IP/WAF reputation block against datacenter ranges, not a UA or plugin-level block. No header change fixed it, and the source was dropped (#19). Test a Tribe endpoint from CI before committing to it, and prefer sites that don't front the whole host with Cloudflare bot protection.
 
 **Prevalence:** The Events Calendar is one of the most popular WordPress calendar plugins (~800K+ active installs). Many community organizations use it. Always try the Tribe API before giving up on a WordPress site with blocked ICS.
 
