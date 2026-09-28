@@ -2,7 +2,6 @@ node_modules/
 .venv/
 .worktrees/
 xmlui/xmlui/
-legacy/
 supabase/functions/
 playwright-report/
 test-results/

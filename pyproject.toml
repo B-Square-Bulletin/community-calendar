@@ -5,13 +5,11 @@ description = "Community calendar build pipeline: ICS feeds and scrapers merged 
 requires-python = ">=3.14"
 dependencies = [
   "beautifulsoup4==4.15.0",
-  "pytz==2026.4",
   "requests==2.34.2",
   "urllib3==2.8.0",
   "feedparser==6.0.12",
   "icalendar>=7.0.0,<8.0.0",
   "recurring-ical-events>=3.1.0",
-  "Jinja2==3.1.6",
   "anthropic>=0.18.0",
   "tenacity>=9.1.4",
 ]
@@ -25,7 +23,6 @@ dev = [
   "pyrefly==1.2.0",
   "pyright==1.1.411",
   "zuban==0.9.1",
-  "types-pytz==2026.4.0.20260926",
   "types-requests==2.33.0.20260906",
 ]
 
@@ -39,7 +36,6 @@ constraint-dependencies = ["charset-normalizer>=3"]
 [tool.ruff]
 line-length = 100
 target-version = "py314"
-extend-exclude = ["legacy"]
 force-exclude = true
 
 [tool.ruff.lint]
@@ -69,7 +65,7 @@ pythonVersion = "3.14"
 venvPath = "."
 venv = ".venv"
 typeCheckingMode = "standard"
-exclude = ["legacy", ".venv", ".worktrees"]
+exclude = [".venv", ".worktrees"]
 extraPaths = ["scripts", "scrapers"]
 
 [tool.ty.environment]
@@ -77,17 +73,17 @@ python-version = "3.14"
 extra-paths = ["scripts", "scrapers"]
 
 [tool.ty.src]
-exclude = ["legacy", ".venv", ".worktrees"]
+exclude = [".venv", ".worktrees"]
 
 [tool.pyrefly]
 python-version = "3.14"
 project_includes = ["scripts/**", "scrapers/**", "tests/**"]
-project_excludes = ["legacy/**", ".worktrees/**"]
+project_excludes = [".worktrees/**"]
 search_path = ["scripts", "scrapers"]
 
 [tool.mypy]
 python_version = "3.14"
-exclude = 'legacy|\.venv|\.worktrees'
+exclude = '\.venv|\.worktrees'
 ignore_missing_imports = true
 check_untyped_defs = true
 warn_unused_ignores = true

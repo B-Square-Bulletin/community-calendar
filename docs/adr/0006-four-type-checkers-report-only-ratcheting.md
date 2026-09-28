@@ -16,6 +16,12 @@ to zero, and pyrefly now gates on warnings as well as errors.
 its own type hints. The `types-requests` stub no longer pulls it in, so the
 stub list in Decision item 3 is out of date on that point.
 
+**Also superseded in part by [0015](0015-modernize-stale-runtime-dependencies.md)
+([#162](https://github.com/B-Square-Bulletin/community-calendar/issues/162)):**
+the abandoned `legacy/` tree was deleted, so the `legacy/` exclusions and the
+`types-pytz` stub named below no longer exist. The checkers now exclude `.venv`
+and `.worktrees` only, and the dev stub list is `types-requests` alone.
+
 ## Context
 
 The Python codebase (~200 files: `scripts/`, `scrapers/`, `tests/`) has grown with essentially no static analysis: zero `# type: ignore` comments today, and a large fraction of files with no type hints. Running any type checker across it will produce thousands of diagnostics.

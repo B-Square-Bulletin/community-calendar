@@ -49,7 +49,9 @@ alert on its own.
 
 Dependabot proposes bumps; it does not decide what is safe. Known holds:
 
-- `pytz` and `Jinja2` remain only for the abandoned `legacy/` tree; removing
-  them is [issue #162](https://github.com/B-Square-Bulletin/community-calendar/issues/162).
+- None at present. The prior `pytz`/`Jinja2` hold — kept only for the abandoned
+  `legacy/` tree — was resolved in
+  [issue #162](https://github.com/B-Square-Bulletin/community-calendar/issues/162)
+  by deleting the tree and dropping both dependencies (plus `types-pytz`).
 
 See [ADR 0016](adr/0016-dependency-update-automation.md) for the decision record.
