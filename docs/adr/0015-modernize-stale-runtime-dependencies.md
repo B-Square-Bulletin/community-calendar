@@ -17,6 +17,13 @@ and `pytz`, `Jinja2`, and `types-pytz` were removed from the manifest. No
 dependency remains whose only consumer was code the repository treats as
 abandoned.
 
+Delete was chosen over migrate because the tree is already dead: no code path
+imports it, and ruff and all four type checkers exclude it. Migrating the
+module to `zoneinfo` would preserve code that nothing exercises and commit the
+repository to maintaining it, whereas deleting removes the code and yields the
+smaller manifest. The issue offered both end states; delete is the one that
+shrinks the code and the dependency set together.
+
 ## Context
 
 [0014](0014-python-314-toolchain-floor.md) raised the toolchain to Python 3.14
