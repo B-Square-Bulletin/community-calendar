@@ -6,6 +6,11 @@ Date: 2026-09-11
 
 Accepted.
 
+**Update (2026-09-27, [#162](https://github.com/B-Square-Bulletin/community-calendar/issues/162)):**
+the abandoned `legacy/` tree was deleted, so the `legacy/` entry in the ESLint
+`ignores` list (Decision 1) no longer exists. The remaining ignores are
+unchanged.
+
 ## Context
 
 The JS side (~15 hand-written files: `xmlui/*.js`, `tests/js/`, `scripts/`,

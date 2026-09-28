@@ -1,5 +1,5 @@
 // ESLint flat config — Prettier owns style, ESLint owns correctness.
-// Scope per grill Q2: hand-written JS only; vendored/legacy/Deno TS excluded.
+// Scope per grill Q2: hand-written JS only; vendored/Deno TS excluded.
 import js from '@eslint/js';
 import globals from 'globals';
 
@@ -10,7 +10,6 @@ export default [
       '.venv/**',
       '.worktrees/**',
       'xmlui/xmlui/**',
-      'legacy/**',
       'supabase/functions/**',
       'coverage/**',
       'playwright-report/**',
