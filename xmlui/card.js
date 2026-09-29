@@ -231,6 +231,10 @@
       var card = Object.assign({}, g.row, {
         source: sourcesArr.join(', '),
         source_names: sourcesArr,
+        // g.row is a copy of the first row, so its own `source_urls` is not the
+        // union built above; emit the tracked map or a second member's link is
+        // lost (endpoint/url rendering reads this).
+        source_urls: Object.assign({}, g.source_urls),
         // Synthetic ids never enter membership (the picks FK enforces it too).
         merged_ids: g.merged_ids.filter(isNumericId),
       });

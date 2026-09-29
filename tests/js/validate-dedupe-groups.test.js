@@ -1,15 +1,16 @@
-// tests/js/validate-dedupe-groups.test.js — client consumer seam for #153:
+// tests/js/validate-dedupe-groups.test.js — client consumer seam for #153/#173:
 // the calendar, dashboard, and picks collapse the route's *stored* duplicate
 // decision instead of recomputing a title+time fallback.
 //
 // WHY: the confidence route already decided Merge/Group/Separate at build time
-// and the view carries one row per group with `merged_ids`. A client that
-// re-groups by title would re-collapse two Separate rows the route deliberately
-// kept apart (identical title at incompatible locations), and a client that
-// ignores `merged_ids` would let a pick light up only the representative. These
-// tests pin the public client behavior: group by `(start_time, duplicate_group)`,
-// treat NULL as separate, seed `mergedIds` from the view, and hash the border
-// color from the group id.
+// and the view carries one row per group with `merged_ids`. That stored
+// decision is now read through the one Card module (#171/#173), so a client
+// that re-groups by title would re-collapse two Separate rows the route
+// deliberately kept apart (identical title at incompatible locations), and a
+// client that ignores `merged_ids` would let a pick light up only the
+// representative. These tests pin the public client behavior: group by
+// `(start_time, duplicate_group)`, treat NULL as separate, read `merged_ids`
+// through `Card.members`, and hash the border color from the group id.
 'use strict';
 import { describe, it, expect, beforeEach } from 'vitest';
 import { loadShipped, readShipped } from './load-shipped.js';
@@ -37,9 +38,9 @@ beforeEach(() => {
   window.clearDedupeCache();
 });
 
-describe('dedupeEvents groups by the stored duplicate_group', () => {
+describe('Card.group groups by the stored duplicate_group', () => {
   it('collapses one stored group to one card with every member id and source', () => {
-    const out = window.dedupeEvents([
+    const out = window.Card.group([
       row({
         id: 1,
         source: 'WFIU',
@@ -57,7 +58,7 @@ describe('dedupeEvents groups by the stored duplicate_group', () => {
       }),
     ]);
     expect(out).toHaveLength(1);
-    expect(out[0].mergedIds.slice().sort()).toEqual([1, 2]);
+    expect(window.Card.members(out[0]).slice().sort()).toEqual([1, 2]);
     expect(out[0].source.split(', ').sort()).toEqual(['Visit Bloomington', 'WFIU']);
     expect(out[0].source_urls).toEqual({
       WFIU: 'https://wfiu.example/1',
@@ -66,7 +67,7 @@ describe('dedupeEvents groups by the stored duplicate_group', () => {
   });
 
   it('keeps NULL groups separate even when title and instant match', () => {
-    const out = window.dedupeEvents([
+    const out = window.Card.group([
       row({ id: 1, duplicate_group: null, merged_ids: [1] }),
       row({ id: 2, duplicate_group: null, merged_ids: [2] }),
     ]);
@@ -74,24 +75,24 @@ describe('dedupeEvents groups by the stored duplicate_group', () => {
   });
 
   it('keeps two different stored groups separate even when title and instant match', () => {
-    const out = window.dedupeEvents([
+    const out = window.Card.group([
       row({ id: 1, duplicate_group: 'cr1:a', merged_ids: [1] }),
       row({ id: 2, duplicate_group: 'cr1:b', merged_ids: [2] }),
     ]);
     expect(out).toHaveLength(2);
   });
 
-  it('seeds mergedIds from the view merged_ids column so one pick lights every member', () => {
-    const out = window.dedupeEvents([
+  it('seeds merged_ids from the view column so one pick lights every member', () => {
+    const out = window.Card.group([
       row({ id: 7, duplicate_group: 'cr1:g', merged_ids: [7, 8, 9] }),
     ]);
     expect(out).toHaveLength(1);
-    expect(out[0].mergedIds).toEqual([7, 8, 9]);
-    expect(window.isEventPicked(out[0].mergedIds, [{ event_id: 8 }])).toBe(true);
+    expect(window.Card.members(out[0])).toEqual([7, 8, 9]);
+    expect(window.Card.isPicked(out[0], [{ event_id: 8 }])).toBe(true);
   });
 
   it('does not collapse groups that only share a title at different instants', () => {
-    const out = window.dedupeEvents([
+    const out = window.Card.group([
       row({
         id: 1,
         start_time: '2026-09-19T18:00:00+00:00',
@@ -114,9 +115,9 @@ describe('dedupeEvents groups by the stored duplicate_group', () => {
 // than re-splitting the compatibility `source` string. Splitting "Taste, Inc."
 // would fabricate two sources and let the client disagree with the view's
 // representative ordering (spec amendment L402).
-describe('dedupeEvents folds structured source_names', () => {
+describe('Card.group folds structured source_names', () => {
   it('does not split a comma-containing source name', () => {
-    const out = window.dedupeEvents([
+    const out = window.Card.group([
       row({
         id: 1,
         source: 'Taste, Inc.',
@@ -130,7 +131,7 @@ describe('dedupeEvents folds structured source_names', () => {
   });
 
   it("preserves the view's representative order instead of re-sorting", () => {
-    const out = window.dedupeEvents([
+    const out = window.Card.group([
       row({
         id: 1,
         source: 'Zeta, Alpha',
@@ -143,7 +144,7 @@ describe('dedupeEvents folds structured source_names', () => {
   });
 
   it('keeps a comma-containing name intact through the card path', () => {
-    const out = window.dedupeEvents([
+    const out = window.Card.group([
       row({
         id: 1,
         source: 'Taste, Inc.',
@@ -161,14 +162,14 @@ describe('dedupeEvents folds structured source_names', () => {
   });
 
   it('falls back to splitting source for raw rows without source_names', () => {
-    const out = window.dedupeEvents([row({ id: 1, source: 'WFIU, Visit Bloomington' })]);
+    const out = window.Card.group([row({ id: 1, source: 'WFIU, Visit Bloomington' })]);
     expect(out[0].source.split(', ').sort()).toEqual(['Visit Bloomington', 'WFIU']);
   });
 });
 
-describe('dedupeEvents attaches recurring enrichments by explicit event linkage', () => {
+describe('Card.group attaches recurring enrichments by explicit event linkage', () => {
   it('carries the enrichment rrule onto its linked route row', () => {
-    const out = window.dedupeEvents([
+    const out = window.Card.group([
       row({
         id: 7,
         start_time: '2026-09-20T01:00:00+00:00',
@@ -190,11 +191,11 @@ describe('dedupeEvents attaches recurring enrichments by explicit event linkage'
     expect(out).toHaveLength(1);
     expect(out[0].rrule).toBe('FREQ=WEEKLY;BYDAY=SA');
     expect(out[0].source).toContain('Picks: curator');
-    expect(out[0].mergedIds).toEqual([7, 8]);
+    expect(window.Card.members(out[0])).toEqual([7, 8]);
   });
 
   it('does not attach an enrichment to a different occurrence time', () => {
-    const out = window.dedupeEvents([
+    const out = window.Card.group([
       row({
         id: 7,
         start_time: '2026-09-20T01:00:00+00:00',
@@ -228,11 +229,15 @@ describe('dedupeEvents attaches recurring enrichments by explicit event linkage'
       rrule: 'FREQ=WEEKLY;BYDAY=SA',
     };
 
-    const attached = window.dedupeEvents(
-      window.combineEvents([routeRow], [{ ...linkedOccurrence, _enrichment_event_id: 18 }])
+    // combineEvents folds the linked enrichment through Card, so a changed
+    // link must miss the combine cache and re-fold.
+    const attached = window.combineEvents(
+      [routeRow],
+      [{ ...linkedOccurrence, _enrichment_event_id: 18 }]
     );
-    const detached = window.dedupeEvents(
-      window.combineEvents([routeRow], [{ ...linkedOccurrence, _enrichment_event_id: 19 }])
+    const detached = window.combineEvents(
+      [routeRow],
+      [{ ...linkedOccurrence, _enrichment_event_id: 19 }]
     );
 
     expect(attached).toHaveLength(1);
@@ -274,15 +279,12 @@ describe('clusterBorder derives its colour from the group id', () => {
   });
 });
 
-describe('eventMergedIds reads the stored membership', () => {
-  it('prefers camelCase mergedIds when present', () => {
-    expect(window.eventMergedIds({ id: 1, mergedIds: [1, 2] })).toEqual([1, 2]);
-  });
+describe('Card.members reads the stored membership', () => {
   it('reads the view merged_ids column', () => {
-    expect(window.eventMergedIds({ id: 1, merged_ids: [1, 2, 3] })).toEqual([1, 2, 3]);
+    expect(window.Card.members({ id: 1, merged_ids: [1, 2, 3] })).toEqual([1, 2, 3]);
   });
   it('falls back to the single id', () => {
-    expect(window.eventMergedIds({ id: 5 })).toEqual([5]);
+    expect(window.Card.members({ id: 5 })).toEqual([5]);
   });
 });
 
@@ -400,10 +402,13 @@ describe('consumers read the stored decision from the view', () => {
     expect(shell).not.toMatch(/\bcluster_id\b/);
   });
 
-  it('the event card borders on duplicate_group and picks through the membership helper', () => {
+  it('the event card borders on duplicate_group and picks through the Card module', () => {
     const card = readShipped('components/EventCard.xmlui');
     expect(card).toContain('window.clusterBorder($props.event.duplicate_group');
-    expect(card).toContain('window.eventMergedIds($props.event)');
+    expect(card).toContain('window.Card.isPicked($props.event');
+    // A future occurrence is its own virtual card: no membership, so the
+    // bookmark is hidden rather than rendered as a save that fails the FK.
+    expect(card).toContain('!$props.event.isVirtual');
   });
 
   it('the saved-picks list collapses stored groups', () => {
@@ -456,5 +461,51 @@ describe('structured source_names outside the card path', () => {
     } finally {
       window.externalExclusions = previous;
     }
+  });
+});
+
+// #173: the calendar's grouping reads the one Card module. The processed card
+// therefore carries the view's `merged_ids` (never the retired camelCase alias)
+// and any member pick lights it; a future occurrence stays its own virtual,
+// unpickable card.
+describe('the calendar composition reads Card membership', () => {
+  function linkedOccurrence(overrides = {}) {
+    return Object.assign(
+      {
+        id: 'enrichment-42-2026-09-19T18:00:00.000Z',
+        _enrichment_id: 42,
+        _enrichment_event_id: 38,
+        _enrichment_is_original_occurrence: true,
+        title: 'Concert',
+        start_time: '2026-09-19T18:00:00.000Z',
+        source: 'Picks: curator',
+        rrule: 'FREQ=WEEKLY',
+      },
+      overrides
+    );
+  }
+
+  it('groups the enrichment path through Card, emitting merged_ids only', () => {
+    const routeRow = row({ id: 37, duplicate_group: 'cr2:g', merged_ids: [37, 38] });
+    const out = window.processEvents(window.combineEvents([routeRow], [linkedOccurrence()]), []);
+
+    expect(out).toHaveLength(1);
+    expect(out[0].merged_ids).toEqual([37, 38]);
+    expect(out[0].mergedIds).toBeUndefined();
+    expect(window.Card.isPicked(out[0], [{ event_id: 38 }])).toBe(true);
+  });
+
+  it('marks a future occurrence as its own unpickable virtual card', () => {
+    const routeRow = row({ id: 37, duplicate_group: 'cr2:g', merged_ids: [37, 38] });
+    const future = linkedOccurrence({
+      id: 'enrichment-42-2026-09-26T18:00:00.000Z',
+      start_time: '2026-09-26T18:00:00.000Z',
+      _enrichment_is_original_occurrence: false,
+    });
+    const out = window.processEvents(window.combineEvents([routeRow], [future]), []);
+
+    const virtual = out.find((e) => e.isVirtual);
+    expect(virtual).toBeTruthy();
+    expect(window.Card.isPicked(virtual, [{ event_id: 38 }])).toBe(false);
   });
 });

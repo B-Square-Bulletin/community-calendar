@@ -1425,12 +1425,12 @@ function dedupeEvents(events) {
         sourceNames: names.slice(),
         structuredSources: structured != null,
         source_urls: Object.assign({}, e.source_urls || {}),
-        mergedIds: seedIds,
+        merged_ids: seedIds,
       };
     } else {
       // Track all merged event IDs (for picks to work across sources)
       seedIds.forEach((id) => {
-        if (groups[key].mergedIds.indexOf(id) < 0) groups[key].mergedIds.push(id);
+        if (groups[key].merged_ids.indexOf(id) < 0) groups[key].merged_ids.push(id);
       });
       // Union member source names, representative row's order first
       names.forEach((s) => {
@@ -1448,7 +1448,7 @@ function dedupeEvents(events) {
   });
   // Render the ordered names as the compatibility comma string. When the names
   // are structured the view's order is authoritative; only the raw-row fallback
-  // applies the legacy aggregator/location ordering. Filter mergedIds to only
+  // applies the legacy aggregator/location ordering. Filter merged_ids to only
   // include numeric IDs (exclude synthetic enrichment IDs).
   let result = Object.values(groups)
     .map((e) => {
@@ -1477,7 +1477,7 @@ function dedupeEvents(events) {
         ...e,
         source: sourcesArr.join(', '),
         source_names: sourcesArr,
-        mergedIds: e.mergedIds.filter((id) => typeof id === 'number' || /^\d+$/.test(id)),
+        merged_ids: e.merged_ids.filter((id) => typeof id === 'number' || /^\d+$/.test(id)),
       };
       delete out.sourceNames;
       delete out.structuredSources;
@@ -1636,6 +1636,13 @@ function clearDedupeCache() {
   ) {
     window.__ccMemoClear.collapseLongRunningEvents();
   }
+  // combineEvents now folds through Card.groupMemo (composite signature + the
+  // emission signature). That signature is weak by design, so a test that
+  // swaps same-shaped fixtures must clear it too or a false HIT leaks the
+  // previous fixture's cards across cases.
+  if (typeof window !== 'undefined' && window.Card && window.Card.resetMemo) {
+    window.Card.resetMemo();
+  }
 }
 
 // Check if an event is picked (supports merged IDs from cross-source duplicates)
@@ -1647,15 +1654,12 @@ function isEventPicked(mergedIds, picks) {
   return picks.some((p) => ids.some((id) => p.event_id == id));
 }
 
-// The complete membership of the card an event belongs to. Prefers the
-// client-computed camelCase `mergedIds`; otherwise reads the view's `merged_ids`
-// column; otherwise the event is its own single-member group. Picks and
-// unpicks route through here so one card covers every stored member.
+// The complete membership of the card an event belongs to, read through the one
+// Card module (#169/#173): the view's `merged_ids` for a stored group, the
+// row's own id for a NULL group, and nothing for a virtual (future-occurrence)
+// card. Picks route through here until the one write authority lands (#175).
 function eventMergedIds(event) {
-  if (!event) return [];
-  if (Array.isArray(event.mergedIds) && event.mergedIds.length) return event.mergedIds;
-  if (Array.isArray(event.merged_ids) && event.merged_ids.length) return event.merged_ids;
-  return event.id != null ? [event.id] : [];
+  return window.Card.members(event);
 }
 
 // My Picks shows one row per stored Group, not one per picked member. Rows
@@ -2659,7 +2663,12 @@ if (typeof window !== 'undefined') {
       enrichments.some(function (event) {
         return event && event._enrichment_event_id != null;
       });
-    _combineResult = hasLinkedEnrichment ? dedupeEvents(combined) : combined;
+    // Card owns client grouping (#169/#173): on the plain path the view already
+    // returns one row per stored group, so the guard still returns the
+    // concatenation; only a linked enrichment needs the fold, which Card.group
+    // performs. groupMemo's composite signature carries the enrichment
+    // linkage, so a changed link misses rather than serving a stale fold.
+    _combineResult = hasLinkedEnrichment ? window.Card.groupMemo(combined) : combined;
     return _combineResult;
   };
 

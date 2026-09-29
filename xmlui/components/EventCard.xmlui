@@ -139,12 +139,12 @@
         <SpaceFiller />
         <AddToCalendar event="{$props.event}" />
         <Icon
-          when="{authUser}"
+          when="{authUser && !$props.event.isVirtual}"
           name="l-bookmark-filled"
           width="$space-4"
           height="$space-4"
-          tooltip="{(window.isEventPicked(window.eventMergedIds($props.event), picksData) ? 'Remove from my picks' : 'Add to my picks') + ': ' + $props.event.title}"
-          color="{window.isEventPicked(window.eventMergedIds($props.event), picksData) ? '$color-primary-500' : '$color-surface-300'}"
+          tooltip="{(window.Card.isPicked($props.event, picksData) ? 'Remove from my picks' : 'Add to my picks') + ': ' + $props.event.title}"
+          color="{window.Card.isPicked($props.event, picksData) ? '$color-primary-500' : '$color-surface-300'}"
           cursor="pointer"
           onClick="togglePick($props.event)"
         />

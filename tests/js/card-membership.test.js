@@ -106,6 +106,11 @@ describe('Card.group groups by the stored route decision', () => {
     expect(cards).toHaveLength(1);
     expect(window.Card.members(cards[0]).sort()).toEqual([1, 2]);
     expect(cards[0].source.split(', ').sort()).toEqual(['Visit Bloomington', 'WFIU']);
+    // Every member's link survives the fold, not just the first row's.
+    expect(cards[0].source_urls).toEqual({
+      WFIU: 'https://wfiu.example/1',
+      'Visit Bloomington': 'https://vb.example/2',
+    });
   });
 
   it('keeps a NULL duplicate_group as one row is one card', () => {

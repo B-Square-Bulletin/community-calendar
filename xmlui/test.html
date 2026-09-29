@@ -386,7 +386,7 @@
             { id: 2, title: 'Show', start_time: '2026-02-01T20:00:00Z', source: 'B', duplicate_group: 'cr1:y' }
           ];
           const result = dedupeEvents(events);
-          assertDeepEqual(result[0].mergedIds, [1, 2]);
+          assertDeepEqual(result[0].merged_ids, [1, 2]);
         });
 
         it('keeps events with different start times separate', () => {
@@ -2165,11 +2165,11 @@
           assert(result.length <= events.length, 'Deduped count should be <= original');
         });
 
-        test('dedupeEvents preserves mergedIds for all events', () => {
+        test('dedupeEvents preserves merged_ids for all events', () => {
           clearDedupeCache();
           const result = dedupeEvents(events);
-          const missingMergedIds = result.filter(e => !e.mergedIds || !Array.isArray(e.mergedIds));
-          assert(missingMergedIds.length === 0, `${missingMergedIds.length} events missing mergedIds`);
+          const missingMergedIds = result.filter(e => !e.merged_ids || !Array.isArray(e.merged_ids));
+          assert(missingMergedIds.length === 0, `${missingMergedIds.length} events missing merged_ids`);
         });
 
         test('dedupeEvents result is sorted by start_time', () => {
