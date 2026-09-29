@@ -12,7 +12,8 @@
   var.suggestSuccess="{false}"
   var.suggestError=""
   var.localHidden="{[]}"
-  var.currentEvents="{($props.events || []).filter(function(e) { return !e || !$props.city || e.city === $props.city; })}">
+  var.currentEvents="{($props.events || []).filter(function(e) { return !e || !$props.city || e.city === $props.city; })}"
+  var.groupedEvents="{window.Recurring.collapse(window.Card.groupMemo(currentEvents, window.eventsSignature(currentEvents)))}">
 
   <APICall
     id="suggestApi"
@@ -45,7 +46,7 @@
       <VStack width="*" gap="$space-1">
         <H3>Sources</H3>
         <Text
-          value="{$props.events ? window.filterHiddenSources(window.Recurring.collapse(window.dedupeEvents(currentEvents)), localHidden).length + ' events for the next ' + window.getQueryMonths() + ' months' : 'Loading...'}" />
+          value="{$props.events ? window.filterHiddenSources(groupedEvents, localHidden).length + ' events for the next ' + window.getQueryMonths() + ' months' : 'Loading...'}" />
       </VStack>
       <Icon
         name="close"
@@ -65,7 +66,7 @@
       <Spinner when="{!$props.events}" />
       <Table
         when="{!!$props.events}"
-        data="{window.getVisibleSourceCounts(window.Recurring.collapse(window.dedupeEvents(currentEvents)), localHidden).map(function(item) { return { name: item.source, event_count: item.count, total_count: item.total, agg_hidden: item.hiddenViaAggregator }; })}"
+        data="{window.getVisibleSourceCounts(groupedEvents, localHidden).map(function(item) { return { name: item.source, event_count: item.count, total_count: item.total, agg_hidden: item.hiddenViaAggregator }; })}"
         idKey="name"
         sortBy="total_count"
         sortDirection="descending"

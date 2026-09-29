@@ -249,14 +249,16 @@ describe('intended delta: the enrichment path follows the plain path for an excl
 });
 
 describe('the sources dialog calls the one collapse explicitly', () => {
-  it('wraps its grouped rows in Recurring.collapse', () => {
+  it('applies Card grouping and one collapse in a named step the counts read', () => {
     const src = readFileSync(
       join(__dirname, '..', '..', 'xmlui', 'components', 'SourcesDialog.xmlui'),
       'utf8'
     );
-    const matches = src.match(/window\.Recurring\.collapse\(\s*window\.dedupeEvents\(/g) || [];
-    // Two bindings read grouped counts: the header total and the per-source
-    // tiles. Both must apply the one collapse rule, not rely on dedupeEvents.
-    expect(matches).toHaveLength(2);
+    const matches = src.match(/window\.Recurring\.collapse\(\s*window\.Card\.groupMemo\(/g) || [];
+    // One named step owns the rule; both count bindings read it, so the
+    // collapse runs once, not per binding. Grouping no longer comes from the
+    // legacy dedupeEvents (#169/#176).
+    expect(matches).toHaveLength(1);
+    expect(src).not.toContain('dedupeEvents');
   });
 });

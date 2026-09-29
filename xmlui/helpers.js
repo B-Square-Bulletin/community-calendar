@@ -2826,9 +2826,16 @@ if (typeof window !== 'undefined') {
   window.toBigCalendarEvents = toBigCalendarEvents;
 
   // --- Dashboard helpers ---
+  // A dashboard tile reads the same cards as the list: group the view's stored
+  // rows through Card (enrichment fold included), apply Recurring's weekly
+  // collapse, then the tile's own category/search filter — the list's order, so
+  // tile counts agree with the calendar (#169/#176). The strong
+  // `eventsSignature` keys the grouping memo (spec: tiles pass it).
   window.filterTileEvents = function (events, category, search) {
     if (!events || !Array.isArray(events)) return [];
-    var result = events;
+    var result = window.Recurring.collapse(
+      window.Card.groupMemo(events, window.eventsSignature(events))
+    );
     if (category) {
       result = result.filter(function (e) {
         return e.category === category;

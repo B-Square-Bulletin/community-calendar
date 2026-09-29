@@ -9,6 +9,11 @@
     }}"
   />
 
+  <!-- The tile fetch is `limit=200` over the tile's window. filterTileEvents
+       applies the same Card grouping and Recurring weekly collapse as the list
+       before the tile's category/search filter, so counts agree across the app
+       (#169/#176). Truncation caveat: a long-running series straddling the
+       limit=200 cutoff can still tally differently than the list's full fetch. -->
   <variable name="filteredEvents" value="{window.filterTileEvents(tileEvents.value, $props.category, $props.search)}" />
 
   <VStack height="100%" gap="$space-0">
