@@ -66,6 +66,9 @@ sandbox.global = sandbox;
 vm.createContext(sandbox);
 
 const helpersSrc = fs.readFileSync(path.join(ROOT, 'xmlui', 'helpers.js'), 'utf8');
+// helpers.js's collapse cache delegates the rule to Recurring, so load it first.
+const recurringSrc = fs.readFileSync(path.join(ROOT, 'xmlui', 'recurring.js'), 'utf8');
+vm.runInContext(recurringSrc, sandbox, { filename: 'xmlui/recurring.js' });
 vm.runInContext(helpersSrc, sandbox, { filename: 'xmlui/helpers.js' });
 
 // --- Event generation -------------------------------------------------------

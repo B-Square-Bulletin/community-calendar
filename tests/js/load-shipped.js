@@ -40,6 +40,11 @@ function loadShipped(opts = {}) {
   vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'card.js'), 'utf8'), {
     filename: 'card.js',
   });
+  // Recurring owns the weekly collapse; helpers.js's cache stage delegates to
+  // it, so it must be present before any test drives the pipeline.
+  vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'recurring.js'), 'utf8'), {
+    filename: 'recurring.js',
+  });
   vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'helpers.js'), 'utf8'), {
     filename: 'helpers.js',
   });

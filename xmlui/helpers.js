@@ -1501,18 +1501,22 @@ function dedupeEvents(events) {
       return (a.title || '').localeCompare(b.title || '');
     });
 
-  // Collapse long-running events (exhibitions, recurring services)
-  result = collapseLongRunningEvents(result);
+  // Grouping only: the weekly collapse is Recurring's job and runs once at the
+  // processEvents composition point (#169 item 03), never inside the grouping
+  // path. Applying it here as well is what made an excluded-source survivor
+  // drop the whole week on the enrichment path.
 
   // Cache the result
   _dedupedEventsCache = result;
   return result;
 }
 
-// For long-running events (exhibitions, recurring services), show only once per week.
-// This reduces clutter while keeping events visible throughout their run.
-// Weeks are anchored to "today" so the first occurrence shown is today or later,
-// then subsequent occurrences appear ~7 days apart.
+// For long-running events (exhibitions, recurring services), show only once per
+// week. The rule lives in Recurring (#169 item 03) and is applied once at the
+// processEvents composition point; this wrapper owns only the pipeline-level
+// content-key cache that keeps the repeated cached-then-fresh pipeline runs
+// cheap. Weeks are anchored to "today" so the first occurrence shown is today
+// or later, then subsequent occurrences appear ~7 days apart.
 var _collapseCache = null;
 var _collapseLastLen = 0;
 var _collapseLastFirstId = null;
@@ -1563,93 +1567,7 @@ function collapseLongRunningEvents(events) {
   _collapseLastLastId = lastId;
   _collapseLastEmitSig = emitSig;
 
-  const MIN_OCCURRENCES = 5; // Need at least this many to consider "long-running"
-
-  // Get start of today (midnight local)
-  const now = new Date();
-  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
-  // Helper: get week number relative to today (0 = this week, 1 = next week, etc.)
-  function getWeekFromToday(dateStr) {
-    const d = new Date(dateStr);
-    const eventDay = new Date(d.getFullYear(), d.getMonth(), d.getDate());
-    const daysDiff = Math.floor((eventDay - todayStart) / (24 * 60 * 60 * 1000));
-    return Math.floor(daysDiff / 7);
-  }
-
-  // Get time-of-day string in city timezone (cached to avoid expensive toLocaleString calls)
-  const tz = getCityTimezone();
-  var _todCache = {};
-  function getTimeOfDay(dateStr) {
-    if (_todCache[dateStr]) return _todCache[dateStr];
-    const d = new Date(dateStr);
-    const h = String(
-      parseInt(d.toLocaleString('en-US', { hour: 'numeric', hour12: false, timeZone: tz }))
-    ).padStart(2, '0');
-    const m = String(
-      parseInt(d.toLocaleString('en-US', { minute: 'numeric', timeZone: tz }))
-    ).padStart(2, '0');
-    var result = h + ':' + m;
-    _todCache[dateStr] = result;
-    return result;
-  }
-
-  // Group by title + location + time-of-day to identify long-running events
-  const groups = {};
-  events.forEach((e) => {
-    const timeOfDay = getTimeOfDay(e.start_time);
-    const key =
-      (e.title || '').trim().toLowerCase() +
-      '|' +
-      (e.location || '').trim().toLowerCase() +
-      '|' +
-      timeOfDay;
-    if (!groups[key]) {
-      groups[key] = [];
-    }
-    groups[key].push(e);
-  });
-
-  // Identify which event keys are "long-running"
-  const longRunningKeys = new Set();
-  for (const [key, groupEvents] of Object.entries(groups)) {
-    if (groupEvents.length >= MIN_OCCURRENCES) {
-      longRunningKeys.add(key);
-    }
-  }
-
-  // For long-running events, track which weeks we've seen (relative to today)
-  // key -> Set of week numbers
-  const seenWeeks = {};
-
-  // Build result: for long-running events, include only first occurrence per week
-  const result = [];
-
-  events.forEach((e) => {
-    const timeOfDay = getTimeOfDay(e.start_time);
-    const key =
-      (e.title || '').trim().toLowerCase() +
-      '|' +
-      (e.location || '').trim().toLowerCase() +
-      '|' +
-      timeOfDay;
-
-    if (longRunningKeys.has(key)) {
-      const weekNum = getWeekFromToday(e.start_time);
-      if (!seenWeeks[key]) {
-        seenWeeks[key] = new Set();
-      }
-      if (!seenWeeks[key].has(weekNum)) {
-        seenWeeks[key].add(weekNum);
-        // Mark as recurring so UI can indicate it
-        result.push({ ...e, isRecurring: true });
-      }
-    } else {
-      result.push(e);
-    }
-  });
-
-  _collapseCache = result.sort((a, b) => (a.start_time || '').localeCompare(b.start_time || ''));
+  _collapseCache = window.Recurring.collapse(events);
   if (!window._pipelineLog) window._pipelineLog = [];
   window._pipelineLog.push(
     'collapseLong run#' +

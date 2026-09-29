@@ -87,9 +87,11 @@ window._xsLogs = [];
     });
     script('xmlui/xmlui-masonry.js?v=' + v);
     script('xmlui/xmlui-grid-layout.js?v=' + v);
-    // Card (#169) owns client card membership; it must evaluate before the
-    // helpers script and before app start.
+    // Card (#169) owns client card membership; Recurring (#169) owns the
+    // weekly collapse and helpers.js's cache stage delegates to it. Both must
+    // evaluate before the helpers script and before app start.
     script('card.js?v=' + v);
+    script('recurring.js?v=' + v);
     script('helpers.js?v=' + v);
     script('xs-trace.js?v=' + v).addEventListener('load', function () {
       // index-standalone.ts arms startApp on DOMContentLoaded with no
