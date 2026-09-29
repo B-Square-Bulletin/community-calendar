@@ -345,17 +345,17 @@
         });
       });
 
-      describe('dedupeEvents', () => {
+      describe('Card.group', () => {
         beforeEach: clearDedupeCache();
 
         it('returns empty array for null', () => {
           clearDedupeCache();
-          assertDeepEqual(dedupeEvents(null), []);
+          assertDeepEqual(window.Card.group(null), []);
         });
 
         it('returns empty array for empty array', () => {
           clearDedupeCache();
-          assertDeepEqual(dedupeEvents([]), []);
+          assertDeepEqual(window.Card.group([]), []);
         });
 
         it('merges events that share a stored duplicate_group', () => {
@@ -364,7 +364,7 @@
             { id: 1, title: 'Concert', start_time: '2026-02-01T19:00:00Z', source: 'Venue A', duplicate_group: 'cr1:x' },
             { id: 2, title: 'Concert', start_time: '2026-02-01T19:00:00Z', source: 'Venue B', duplicate_group: 'cr1:x' }
           ];
-          const result = dedupeEvents(events);
+          const result = window.Card.group(events);
           assertEqual(result.length, 1);
           assertEqual(result[0].source, 'Venue A, Venue B');
         });
@@ -375,7 +375,7 @@
             { id: 1, title: 'Concert', start_time: '2026-02-01T19:00:00Z', source: 'Venue A', duplicate_group: null },
             { id: 2, title: 'Concert', start_time: '2026-02-01T19:00:00Z', source: 'Venue B', duplicate_group: null }
           ];
-          const result = dedupeEvents(events);
+          const result = window.Card.group(events);
           assertEqual(result.length, 2, 'A NULL group is one row is one group');
         });
 
@@ -385,7 +385,7 @@
             { id: 1, title: 'Show', start_time: '2026-02-01T20:00:00Z', source: 'A', duplicate_group: 'cr1:y' },
             { id: 2, title: 'Show', start_time: '2026-02-01T20:00:00Z', source: 'B', duplicate_group: 'cr1:y' }
           ];
-          const result = dedupeEvents(events);
+          const result = window.Card.group(events);
           assertDeepEqual(result[0].merged_ids, [1, 2]);
         });
 
@@ -395,7 +395,7 @@
             { id: 1, title: 'Concert', start_time: '2026-02-01T19:00:00Z', source: 'A' },
             { id: 2, title: 'Concert', start_time: '2026-02-02T19:00:00Z', source: 'A' }
           ];
-          const result = dedupeEvents(events);
+          const result = window.Card.group(events);
           assertEqual(result.length, 2);
         });
 
@@ -405,7 +405,7 @@
             { id: 1, title: 'Show', start_time: '2026-02-01T20:00:00Z', source: 'A', url: null, location: 'Place', duplicate_group: 'cr1:z' },
             { id: 2, title: 'Show', start_time: '2026-02-01T20:00:00Z', source: 'B', url: 'http://example.com', location: null, duplicate_group: 'cr1:z' }
           ];
-          const result = dedupeEvents(events);
+          const result = window.Card.group(events);
           assertEqual(result[0].url, 'http://example.com');
           assertEqual(result[0].location, 'Place');
         });
@@ -416,7 +416,7 @@
             { id: 2, title: 'Later', start_time: '2026-02-02T10:00:00Z', source: 'A' },
             { id: 1, title: 'Earlier', start_time: '2026-02-01T10:00:00Z', source: 'A' }
           ];
-          const result = dedupeEvents(events);
+          const result = window.Card.group(events);
           assertEqual(result[0].title, 'Earlier');
           assertEqual(result[1].title, 'Later');
         });
@@ -860,14 +860,14 @@
         window.cityFilter = savedCityFilter;
       });
 
-      describe('dedupeEvents - rrule carry-through', () => {
+      describe('Card.group - rrule carry-through', () => {
         it('carries rrule from enrichment event to merged result', () => {
           clearDedupeCache();
           const events = [
             { id: 1, title: 'Circus jam', start_time: '2026-02-12T02:00:00Z', source: 'Bohemian', duplicate_group: 'cr1:r', merged_ids: [1, 5] },
             { id: 'enrichment-5-2026-02-11T18:00:00.000Z', title: 'Circus jam', start_time: '2026-02-11T18:00:00.000Z', source: 'Picks: jon', rrule: 'FREQ=WEEKLY;BYDAY=WE', _enrichment_id: 5, _enrichment_event_id: 5, _enrichment_is_original_occurrence: true }
           ];
-          const result = dedupeEvents(events);
+          const result = window.Card.group(events);
           assertEqual(result.length, 1, 'Should merge into one event');
           assertEqual(result[0].rrule, 'FREQ=WEEKLY;BYDAY=WE', 'Should carry rrule');
           assert(result[0].source.includes('Bohemian'), 'Should include Bohemian source');
@@ -880,7 +880,7 @@
             { id: 1, title: 'Test', start_time: '2026-02-11T18:00:00Z', source: 'A', rrule: 'FREQ=DAILY', duplicate_group: 'cr1:s' },
             { id: 2, title: 'Test', start_time: '2026-02-11T18:00:00Z', source: 'B', rrule: 'FREQ=WEEKLY;BYDAY=MO', duplicate_group: 'cr1:s' }
           ];
-          const result = dedupeEvents(events);
+          const result = window.Card.group(events);
           assertEqual(result[0].rrule, 'FREQ=DAILY', 'Should keep first rrule');
         });
 
@@ -890,7 +890,7 @@
             { id: 1, title: 'Show', start_time: '2026-02-11T18:00:00Z', source: 'A', duplicate_group: 'cr1:t' },
             { id: 2, title: 'Show', start_time: '2026-02-11T18:00:00Z', source: 'B', duplicate_group: 'cr1:t' }
           ];
-          const result = dedupeEvents(events);
+          const result = window.Card.group(events);
           assert(!result[0].rrule, 'Should have no rrule');
         });
       });
@@ -2150,31 +2150,31 @@
           assertEqual(result.length, events.length);
         });
 
-        // dedupeEvents tests
-        test('dedupeEvents handles real data without crashing', () => {
+        // Card.group tests
+        test('Card.group handles real data without crashing', () => {
           clearDedupeCache();
-          const result = dedupeEvents(events);
+          const result = window.Card.group(events);
           assert(Array.isArray(result), 'Should return array');
         });
 
-        test('dedupeEvents reduces event count (finds duplicates)', () => {
+        test('Card.group reduces event count (finds duplicates)', () => {
           clearDedupeCache();
-          const result = dedupeEvents(events);
+          const result = window.Card.group(events);
           // Real data should have some duplicates from multiple sources
           console.log(`Dedupe: ${events.length} → ${result.length} events`);
           assert(result.length <= events.length, 'Deduped count should be <= original');
         });
 
-        test('dedupeEvents preserves merged_ids for all events', () => {
+        test('Card.group preserves merged_ids for all events', () => {
           clearDedupeCache();
-          const result = dedupeEvents(events);
+          const result = window.Card.group(events);
           const missingMergedIds = result.filter(e => !e.merged_ids || !Array.isArray(e.merged_ids));
           assert(missingMergedIds.length === 0, `${missingMergedIds.length} events missing merged_ids`);
         });
 
-        test('dedupeEvents result is sorted by start_time', () => {
+        test('Card.group result is sorted by start_time', () => {
           clearDedupeCache();
-          const result = dedupeEvents(events);
+          const result = window.Card.group(events);
           for (let i = 1; i < result.length; i++) {
             assert(
               result[i].start_time >= result[i-1].start_time,
@@ -2247,7 +2247,7 @@
           console.log(`Events with null optional fields: ${nullCount}`);
           // Just verify we can process them
           clearDedupeCache();
-          const result = dedupeEvents(events);
+          const result = window.Card.group(events);
           assert(result.length > 0, 'Should still produce results');
         });
 

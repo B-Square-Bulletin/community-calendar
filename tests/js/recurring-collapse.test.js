@@ -6,7 +6,7 @@
 // — as one pure function with an injected clock. It runs exactly once per
 // pipeline, at the composition point in processEvents (after exclusions and
 // source ordering, before hidden-source filtering and the search index); the
-// `dedupeEvents` grouping path no longer collapses. Tests assert through the
+// Card.group grouping path does not collapse. Tests assert through the
 // public interface with hand-computed literals, so they can disagree with the
 // implementation instead of pinning it.
 //
@@ -118,9 +118,9 @@ describe('Recurring runs once at the processEvents composition point', () => {
     return [0, 7, 14, 21, 28].map((offset, i) => occurrence(base, offset, { id: firstId + i }));
   }
 
-  it('dedupeEvents groups but no longer collapses', () => {
+  it('Card.group groups but does not collapse', () => {
     const rows = seriesRows(new Date());
-    const out = window.dedupeEvents(rows);
+    const out = window.Card.group(rows);
     expect(out).toHaveLength(5);
     expect(out.some((e) => e.isRecurring)).toBe(false);
   });
@@ -256,9 +256,8 @@ describe('the sources dialog calls the one collapse explicitly', () => {
     );
     const matches = src.match(/window\.Recurring\.collapse\(\s*window\.Card\.groupMemo\(/g) || [];
     // One named step owns the rule; both count bindings read it, so the
-    // collapse runs once, not per binding. Grouping no longer comes from the
-    // legacy dedupeEvents (#169/#176).
+    // collapse runs once, not per binding. Grouping comes from Card, not a
+    // legacy grouping path.
     expect(matches).toHaveLength(1);
-    expect(src).not.toContain('dedupeEvents');
   });
 });

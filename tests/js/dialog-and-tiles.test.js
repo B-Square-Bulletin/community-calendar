@@ -1,7 +1,7 @@
 // tests/js/dialog-and-tiles.test.js — the sources dialog and the dashboard
 // tiles read the same cards as the list (#169/#176).
 //
-// WHY: the sources dialog counted `dedupeEvents` rows and the tiles did no
+// WHY: the sources dialog counted a legacy grouping pass and the tiles did no
 // client grouping or collapse at all, so either could disagree with the
 // calendar's row count. Both now apply the list's rule — Card.group over the
 // view's stored rows, then Recurring's weekly collapse — before the dialog's
@@ -68,7 +68,6 @@ describe('the sources dialog groups and collapses through the shared rule', () =
     // The named step is where grouping and the one weekly collapse happen;
     // every count binding reads it, so the rule cannot drift per binding.
     expect(src).toMatch(/window\.Recurring\.collapse\(\s*window\.Card\.groupMemo\(currentEvents/);
-    expect(src).not.toContain('dedupeEvents');
   });
 
   it("keeps the dialog's own inputs while sharing the rule", () => {

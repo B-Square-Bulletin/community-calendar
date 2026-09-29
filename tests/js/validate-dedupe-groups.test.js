@@ -288,20 +288,20 @@ describe('Card.members reads the stored membership', () => {
   });
 });
 
-describe('dedupePicks shows one representation per stored group', () => {
+describe('Card.uniquePicks shows one representation per stored group', () => {
   it('collapses two picks on members of one group to one', () => {
     const picks = [
       { id: 10, event_id: 1, events: row({ id: 1, duplicate_group: 'cr1:g', merged_ids: [1, 2] }) },
       { id: 11, event_id: 2, events: row({ id: 2, duplicate_group: 'cr1:g', merged_ids: [1, 2] }) },
     ];
-    expect(window.dedupePicks(picks)).toHaveLength(1);
+    expect(window.Card.uniquePicks(picks)).toHaveLength(1);
   });
   it('keeps picks on NULL groups separate', () => {
     const picks = [
       { id: 10, event_id: 1, events: row({ id: 1, duplicate_group: null, merged_ids: [1] }) },
       { id: 11, event_id: 2, events: row({ id: 2, duplicate_group: null, merged_ids: [2] }) },
     ];
-    expect(window.dedupePicks(picks)).toHaveLength(2);
+    expect(window.Card.uniquePicks(picks)).toHaveLength(2);
   });
   it('prefers the group representative when members are both picked', () => {
     const picks = [
@@ -328,7 +328,7 @@ describe('dedupePicks shows one representation per stored group', () => {
         }),
       },
     ];
-    expect(window.dedupePicks(picks).map((p) => p.id)).toEqual([11]);
+    expect(window.Card.uniquePicks(picks).map((p) => p.id)).toEqual([11]);
   });
   it('falls back to the smallest member event id when the representative is not picked', () => {
     // A pick stored before the route, or a representative that changed between
@@ -360,7 +360,7 @@ describe('dedupePicks shows one representation per stored group', () => {
         }),
       },
     ];
-    expect(window.dedupePicks(picks).map((p) => p.id)).toEqual([10]);
+    expect(window.Card.uniquePicks(picks).map((p) => p.id)).toEqual([10]);
   });
 });
 
@@ -412,12 +412,10 @@ describe('consumers read the stored decision from the view', () => {
   });
 
   it('the saved-picks list collapses stored groups through Card.uniquePicks', () => {
-    // The picks list is the last consumer of the legacy dedupePicks seam. Card
-    // is now the one membership authority, so the list must read Card.uniquePicks
-    // and the legacy seam must not linger as a second list authority.
+    // Card is the one membership authority, so the list must read
+    // Card.uniquePicks; a second list authority must not linger.
     const main = readShipped('Main.xmlui');
     expect(main).toContain('window.Card.uniquePicks(picks.value');
-    expect(main).not.toContain('window.dedupePicks');
   });
 
   it('the saved-picks list hands each item over as a whole pick object', () => {

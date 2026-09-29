@@ -1348,169 +1348,6 @@ function sourceCountTooltip(row, hiddenSources) {
   );
 }
 
-// Deduplicate route rows by stored duplicate_group. Attach each enrichment's
-// original occurrence through its event_id; titles never provide a fallback key.
-// Cache variables (module-level for browser, will be on window)
-let _dedupedEventsCache = null;
-let _dedupedEventsLastLen = 0;
-let _dedupedEventsLastFirst = null;
-let _dedupedEventsLastLast = null;
-
-function dedupeEvents(events) {
-  if (!events || !events.length) return [];
-
-  // Use cache if the data is unchanged.
-  // The combined array is always a new reference (spread), so check
-  // length + first/last element identity as a fast proxy.
-  if (
-    _dedupedEventsCache &&
-    events.length === _dedupedEventsLastLen &&
-    events[0] === _dedupedEventsLastFirst &&
-    events[events.length - 1] === _dedupedEventsLastLast
-  ) {
-    return _dedupedEventsCache;
-  }
-  _dedupedEventsLastLen = events.length;
-  _dedupedEventsLastFirst = events[0];
-  _dedupedEventsLastLast = events[events.length - 1];
-
-  // Recurring enrichment occurrences have synthetic ids. Link only the
-  // original RRULE occurrence to its stored event; future occurrences remain
-  // separate virtual rows. The event_id comes from the enrichment foreign key.
-  const routeGroupByMember = new Map();
-  events.forEach((e) => {
-    if (e._enrichment_event_id != null) return;
-    const normalizedTime = e.start_time ? new Date(e.start_time).toISOString() : '';
-    const routeGroup =
-      e.duplicate_group != null && e.duplicate_group !== ''
-        ? 'g:' + e.duplicate_group
-        : 'r:' + e.id;
-    const memberIds = Array.isArray(e.merged_ids) && e.merged_ids.length ? e.merged_ids : [e.id];
-    memberIds.forEach((id) => {
-      routeGroupByMember.set(String(id), { group: routeGroup, startTime: normalizedTime });
-    });
-  });
-
-  const groups = {};
-  events.forEach((e) => {
-    // Normalize start_time to ISO string for consistent dedup across formats
-    // e.g. '2026-02-11T18:00:00+00:00' and '2026-02-11T18:00:00.000Z' are the same instant
-    const virtualTime = e.start_time ? new Date(e.start_time).toISOString() : '';
-    // The route's stored decision is authoritative for calendar rows. The
-    // original recurrence uses its linked row's stored time; other NULL-group
-    // rows keep their own row key and virtual occurrence time.
-    const linkedRoute =
-      e._enrichment_event_id != null && e._enrichment_is_original_occurrence
-        ? routeGroupByMember.get(String(e._enrichment_event_id))
-        : null;
-    const normalizedTime = linkedRoute ? linkedRoute.startTime : virtualTime;
-    const group =
-      (linkedRoute && linkedRoute.group) ||
-      (e.duplicate_group != null && e.duplicate_group !== ''
-        ? 'g:' + e.duplicate_group
-        : 'r:' + e.id);
-    const key = group + '|' + normalizedTime;
-    // Seed membership from the view's merged_ids so a pick on the card lights
-    // up every member; fall back to the row id for raw rows.
-    const seedIds =
-      Array.isArray(e.merged_ids) && e.merged_ids.length ? e.merged_ids.slice() : [e.id];
-    // The view's `source_names` is structured and already ordered by the route's
-    // representative rule. Only a raw row without it falls back to splitting the
-    // legacy comma-joined `source` string (spec amendment L402).
-    const names = eventSourceNames(e);
-    const structured = Array.isArray(e.source_names) && e.source_names.length ? names : null;
-    if (!groups[key]) {
-      groups[key] = {
-        ...e,
-        sourceNames: names.slice(),
-        structuredSources: structured != null,
-        source_urls: Object.assign({}, e.source_urls || {}),
-        merged_ids: seedIds,
-      };
-    } else {
-      // Track all merged event IDs (for picks to work across sources)
-      seedIds.forEach((id) => {
-        if (groups[key].merged_ids.indexOf(id) < 0) groups[key].merged_ids.push(id);
-      });
-      // Union member source names, representative row's order first
-      names.forEach((s) => {
-        if (groups[key].sourceNames.indexOf(s) < 0) groups[key].sourceNames.push(s);
-      });
-      groups[key].structuredSources = groups[key].structuredSources || structured != null;
-      // Union per-source links so every member source stays reachable
-      Object.assign(groups[key].source_urls, e.source_urls || {});
-      // Prefer non-empty values for other fields
-      if (!groups[key].url && e.url) groups[key].url = e.url;
-      if (!groups[key].location && e.location) groups[key].location = e.location;
-      if (!groups[key].description && e.description) groups[key].description = e.description;
-      if (!groups[key].rrule && e.rrule) groups[key].rrule = e.rrule;
-    }
-  });
-  // Render the ordered names as the compatibility comma string. When the names
-  // are structured the view's order is authoritative; only the raw-row fallback
-  // applies the legacy aggregator/location ordering. Filter merged_ids to only
-  // include numeric IDs (exclude synthetic enrichment IDs).
-  let result = Object.values(groups)
-    .map((e) => {
-      let sourcesArr;
-      if (e.structuredSources) {
-        sourcesArr = e.sourceNames.slice();
-      } else {
-        sourcesArr = e.sourceNames.slice().sort((a, b) => {
-          var aAgg = AGGREGATOR_SOURCES.has(a) ? 1 : 0;
-          var bAgg = AGGREGATOR_SOURCES.has(b) ? 1 : 0;
-          if (aAgg !== bAgg) return aAgg - bAgg;
-          return a.localeCompare(b);
-        });
-        if (e.location) {
-          // Among non-aggregators, promote a source whose name appears in the location
-          const authIdx = sourcesArr.findIndex(
-            (s) => !AGGREGATOR_SOURCES.has(s) && sourceMatchesLocation(s, e.location)
-          );
-          if (authIdx > 0) {
-            const [auth] = sourcesArr.splice(authIdx, 1);
-            sourcesArr.unshift(auth);
-          }
-        }
-      }
-      const out = {
-        ...e,
-        source: sourcesArr.join(', '),
-        source_names: sourcesArr,
-        merged_ids: e.merged_ids.filter((id) => typeof id === 'number' || /^\d+$/.test(id)),
-      };
-      delete out.sourceNames;
-      delete out.structuredSources;
-      delete out._enrichment_event_id;
-      delete out._enrichment_is_original_occurrence;
-      return out;
-    })
-    .sort((a, b) => {
-      const timeCmp = (a.start_time || '').localeCompare(b.start_time || '');
-      if (timeCmp !== 0) return timeCmp;
-      // Within the same instant, keep a group's row ahead of Separate rows and
-      // order deterministically by group id then title.
-      const ga = a.duplicate_group || '';
-      const gb = b.duplicate_group || '';
-      if (ga && gb) {
-        if (ga !== gb) return ga.localeCompare(gb);
-        return (a.title || '').localeCompare(b.title || '');
-      }
-      if (ga) return -1;
-      if (gb) return 1;
-      return (a.title || '').localeCompare(b.title || '');
-    });
-
-  // Grouping only: the weekly collapse is Recurring's job and runs once at the
-  // processEvents composition point (#169 item 03), never inside the grouping
-  // path. Applying it here as well is what made an excluded-source survivor
-  // drop the whole week on the enrichment path.
-
-  // Cache the result
-  _dedupedEventsCache = result;
-  return result;
-}
-
 // For long-running events (exhibitions, recurring services), show only once per
 // week. The rule lives in Recurring (#169 item 03) and is applied once at the
 // processEvents composition point; this wrapper owns only the pipeline-level
@@ -1610,15 +1447,11 @@ function sortSourcesForDisplay(events) {
 }
 
 // Clear dedupe cache (useful for testing)
-// Also resets the collapse stage: dedupeEvents feeds its grouped output into
+// Also resets the collapse stage: the grouped rows feed into
 // collapseLongRunningEvents, whose content-blind key (len + first/last id)
 // would otherwise return the previous test's object for a same-shaped but
 // different-content input.
 function clearDedupeCache() {
-  _dedupedEventsCache = null;
-  _dedupedEventsLastLen = 0;
-  _dedupedEventsLastFirst = null;
-  _dedupedEventsLastLast = null;
   _collapseCache = null;
   _collapseLastLen = 0;
   _collapseLastFirstId = null;
@@ -1626,9 +1459,9 @@ function clearDedupeCache() {
   _collapseLastEmitSig = null;
   // Also reset the issue-82 memo layer on collapseLongRunningEvents: in the
   // browser the global identifier is rebound to the memoized wrapper, so the
-  // inner call inside dedupeEvents hits that cache (keyed len + endpoint
-  // ids) rather than _collapseCache directly. Without this, same-shaped but
-  // different-content inputs falsely hit across clearDedupeCache() calls.
+  // pipeline call hits that cache (keyed len + endpoint ids) rather than
+  // _collapseCache directly. Without this, same-shaped but different-content
+  // inputs falsely hit across clearDedupeCache() calls.
   if (
     typeof window !== 'undefined' &&
     window.__ccMemoClear &&
@@ -1652,64 +1485,6 @@ function isEventPicked(mergedIds, picks) {
   // mergedIds can be an array (from dedupe) or a single ID
   const ids = Array.isArray(mergedIds) ? mergedIds : [mergedIds];
   return picks.some((p) => ids.some((id) => p.event_id == id));
-}
-
-// The complete membership of the card an event belongs to, read through the one
-// Card module (#169/#173): the view's `merged_ids` for a stored group, the
-// row's own id for a NULL group, and nothing for a virtual (future-occurrence)
-// card. Picks route through here until the one write authority lands (#175).
-function eventMergedIds(event) {
-  return window.Card.members(event);
-}
-
-// My Picks shows one row per stored Group, not one per picked member. Rows
-// without a group (NULL) stay separate. When several members of one group are
-// picked, the route's canonical representative wins so the displayed fields
-// match the card; otherwise the smallest member event id wins for determinism.
-// When the representative is not among the picked events (a pick stored before
-// the route, or a representative that changed between builds), that fallback
-// runs — the same ordering as the my-picks ICS feed (ADR 0013), so the list and
-// the feed cannot pick different members.
-// Cached by input identity so the List binding returns a stable reference
-// between renders (picks are replaced wholesale on refetch).
-var _dedupePicksLast = null;
-var _dedupePicksResult = null;
-function dedupePicks(picks) {
-  if (!Array.isArray(picks)) return [];
-  if (picks === _dedupePicksLast) return _dedupePicksResult;
-  var best = {};
-  var order = [];
-  picks.forEach(function (p) {
-    var ev = (p && p.events) || {};
-    var key =
-      ev.duplicate_group != null && ev.duplicate_group !== ''
-        ? 'g:' + ev.duplicate_group
-        : 'r:' + (ev.id != null ? ev.id : 'p:' + (p && p.id));
-    var candidate = {
-      isRep:
-        ev.duplicate_group_representative != null &&
-        ev.source_uid === ev.duplicate_group_representative
-          ? 0
-          : 1,
-      eventId: ev.id != null ? Number(ev.id) : 0,
-    };
-    if (!best[key]) {
-      best[key] = { pick: p, rank: candidate };
-      order.push(key);
-      return;
-    }
-    var cur = best[key].rank;
-    if (
-      candidate.isRep !== cur.isRep ? candidate.isRep < cur.isRep : candidate.eventId < cur.eventId
-    ) {
-      best[key] = { pick: p, rank: candidate };
-    }
-  });
-  _dedupePicksLast = picks;
-  _dedupePicksResult = order.map(function (key) {
-    return best[key].pick;
-  });
-  return _dedupePicksResult;
 }
 
 // Build Google Calendar URL for an event
@@ -2458,20 +2233,6 @@ if (typeof window !== 'undefined') {
   window.isAggregatorSource = isAggregatorSource;
   window.getVisibleSourceCounts = getVisibleSourceCounts;
   window.sourceCountTooltip = sourceCountTooltip;
-  var _dedupeEvents = dedupeEvents;
-  window.dedupeEvents = function (events) {
-    return window.xsTraceWith
-      ? window.xsTraceWith(
-          'dedupeEvents',
-          function () {
-            return _dedupeEvents(events);
-          },
-          function (result) {
-            return { inputCount: (events || []).length, outputCount: result.length };
-          }
-        )
-      : _dedupeEvents(events);
-  };
   var _collapseLongRunning = collapseLongRunningEvents;
   window.collapseLongRunningEvents = function (events) {
     return window.xsTraceWith
@@ -2747,8 +2508,6 @@ if (typeof window !== 'undefined') {
 
   window.clearDedupeCache = clearDedupeCache;
   window.isEventPicked = isEventPicked;
-  window.eventMergedIds = eventMergedIds;
-  window.dedupePicks = dedupePicks;
   window.buildGoogleCalendarUrl = buildGoogleCalendarUrl;
   window.downloadEventICS = downloadEventICS;
   // Enrichment helpers

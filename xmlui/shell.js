@@ -546,47 +546,6 @@ window._xsLogs = [];
       });
     }
 
-    window.togglePick = async function (eventId) {
-      console.log('togglePick called with eventId:', eventId);
-      if (!window.authSession) {
-        alert('Please sign in to pick events');
-        return;
-      }
-      var headers = {
-        apikey: SUPABASE_KEY,
-        Authorization: 'Bearer ' + window.authSession.access_token,
-        'Content-Type': 'application/json',
-        Prefer: 'return=minimal',
-      };
-      var userId = window.authUser.id;
-
-      var checkUrl =
-        SUPABASE_URL + '/rest/v1/picks?select=id&user_id=eq.' + userId + '&event_id=eq.' + eventId;
-      var checkRes = await fetch(checkUrl, { headers: headers });
-      var existing = await checkRes.json();
-      console.log('Existing picks:', existing);
-
-      if (existing && existing.length > 0) {
-        console.log('Removing pick:', existing[0].id);
-        var deleteUrl = SUPABASE_URL + '/rest/v1/picks?id=eq.' + existing[0].id;
-        var deleteRes = await fetch(deleteUrl, { method: 'DELETE', headers: headers });
-        console.log('Delete response:', deleteRes.status);
-        if (window.xsTraceEvent)
-          window.xsTraceEvent('unpick', { eventId: eventId, status: deleteRes.status });
-      } else {
-        console.log('Adding pick for event:', eventId);
-        var insertUrl = SUPABASE_URL + '/rest/v1/picks';
-        var insertRes = await fetch(insertUrl, {
-          method: 'POST',
-          headers: headers,
-          body: JSON.stringify({ user_id: userId, event_id: eventId }),
-        });
-        console.log('Insert response:', insertRes.status);
-        if (window.xsTraceEvent)
-          window.xsTraceEvent('pick', { eventId: eventId, status: insertRes.status });
-      }
-    };
-
     window.getFromDate = function () {
       return window.fromDate;
     };
