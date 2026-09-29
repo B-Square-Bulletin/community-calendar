@@ -411,9 +411,20 @@ describe('consumers read the stored decision from the view', () => {
     expect(card).toContain('!$props.event.isVirtual');
   });
 
-  it('the saved-picks list collapses stored groups', () => {
+  it('the saved-picks list collapses stored groups through Card.uniquePicks', () => {
+    // The picks list is the last consumer of the legacy dedupePicks seam. Card
+    // is now the one membership authority, so the list must read Card.uniquePicks
+    // and the legacy seam must not linger as a second list authority.
     const main = readShipped('Main.xmlui');
-    expect(main).toContain('window.dedupePicks(picks.value');
+    expect(main).toContain('window.Card.uniquePicks(picks.value');
+    expect(main).not.toContain('window.dedupePicks');
+  });
+
+  it('the saved-picks list hands each item over as a whole pick object', () => {
+    // uniquePicks ranks on fields the pick's fetched event carries (the route
+    // representative and the member event id), so the list must pass the whole
+    // pick to PickItem — a bare id would lose the ranking inputs.
+    expect(readShipped('Main.xmlui')).toContain('<PickItem pick="{$item}"');
   });
 
   it('removing a saved Group targets every picked member', () => {

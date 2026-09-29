@@ -28,8 +28,8 @@
     {
       "title": "refactor(xmlui): picks list collapses through Card.uniquePicks",
       "description": "My Picks shows one entry per stored event, using `Card.uniquePicks` over whole pick objects (the list item passes the pick, not just its id). The representative ranking stays exactly the same as the client twin and the `my-picks` ICS feed — representative first, then smallest `event_id` — so the list and the feed cannot pick different members (ADR-0013). A saved pick survives a build that reshuffles which listing represents the group.",
-      "passes": false,
-      "notes": "",
+      "passes": true,
+      "notes": "My Picks now reads window.Card.uniquePicks for both the count and the List data bindings in Main.xmlui, replacing the legacy window.dedupePicks call sites (the list is the last consumer of that seam; the function itself stays defined for item 08 to delete, and the legacy dedupePicks unit block in validate-dedupe-groups.test.js stays green against it until then). PickItem already received the whole pick object ($props.pick.*, pick=\"{$item}\"), so criterion 4 needed only a pin. Re-pointed the source-text call-site check to window.Card.uniquePicks(picks.value plus a negative assertion that no window.dedupePicks remains, and added a check that the List hands PickItem the whole item (pick=\"{$item}\") because uniquePicks ranks on the pick's fetched event fields (representative, event_id) a bare id would drop. Behavioral coverage lives at the Card seam already: card-membership.test.js tests one-entry-per-group, the representative/smallest-id ranking, the build-reshuffle fallback, and the cross-check against my-picks/dedupe.ts (imported, ADR-0013). No memo added to uniquePicks — the spec interface lists it without one and picks change wholesale on refetch. Checks green: make lint (type checkers + prettier + eslint), make test-python (357), make test-node (305), make test-deno (5), make test-browser (25), pnpm bench.",
       "reference": ".scratch/169-card-membership/issues/05-picks-list-unique-picks.md",
       "priority": 4
     },
