@@ -11,7 +11,7 @@
     "test": "vitest run",
     "test:node": "vitest run",
     "test:browser": "playwright test",
-    "bench": "node scripts/bench_collapse_long.js",
+    "bench": "node scripts/bench_collapse_long.js && node scripts/bench_card_group.js",
     "lint:js": "prettier --check \"xmlui/*.js\" \"tests/js/*.js\" \"scripts/*.js\" \"*.config.js\" \"eslint.config.mjs\" && eslint .",
     "format:js": "prettier --write \"xmlui/*.js\" \"tests/js/*.js\" \"scripts/*.js\" \"*.config.js\" \"eslint.config.mjs\" && eslint --fix ."
   },
