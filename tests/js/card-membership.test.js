@@ -551,8 +551,27 @@ describe('enrichment fixture pins the single-pass fold -> group output', () => {
   });
 });
 
+// The pinned card order (see 'Card.group ordering contract'): start_time, then
+// grouped rows before Separate rows at one instant, then group id, then title.
+// Declared from the documented contract rather than read from Card, so this
+// expectation can disagree with the implementation.
+function pinnedCardOrder(a, b) {
+  const time = String(a.start_time || '').localeCompare(String(b.start_time || ''));
+  if (time !== 0) return time;
+  const ga = a.duplicate_group || '';
+  const gb = b.duplicate_group || '';
+  if (ga && gb) {
+    return ga !== gb
+      ? ga.localeCompare(gb)
+      : String(a.title || '').localeCompare(String(b.title || ''));
+  }
+  if (ga) return -1;
+  if (gb) return 1;
+  return String(a.title || '').localeCompare(String(b.title || ''));
+}
+
 describe('plain-path equivalence over the production view payload', () => {
-  it('is near pass-through: one card per stored view row with its membership intact', () => {
+  it('returns every stored view row field-for-field in the pinned card order', () => {
     const gz = readFileSync(
       join(__dirname, '..', 'fixtures', 'deduplicated_events_bloomington.json.gz')
     );
@@ -561,15 +580,25 @@ describe('plain-path equivalence over the production view payload', () => {
 
     const cards = window.Card.group(rows);
     // The view already returns one row per stored group, so the plain path
-    // adds and drops nothing: card count equals row count.
+    // adds and drops nothing: card count equals row count, ids are unique.
     expect(cards).toHaveLength(rows.length);
+    expect(new Set(cards.map((c) => c.id)).size).toBe(rows.length);
 
+    // Membership is what the list reads; it must agree with the stored roll-up.
     const byId = new Map(cards.map((c) => [c.id, c]));
-    expect(byId.size).toBe(rows.length);
     for (const r of rows) {
-      const card = byId.get(r.id);
-      expect(card).toBeTruthy();
-      expect(window.Card.members(card)).toEqual(r.merged_ids);
+      expect(window.Card.members(byId.get(r.id))).toEqual(r.merged_ids);
     }
+
+    // Field-for-field equality over the whole payload, in order. The captured
+    // view rows are the independent source of truth for the near-pass-through
+    // plain path; Card only normalises a NULL `source_urls` to an empty map so
+    // the renderer can index it. A dropped or reordered field (`source`,
+    // `source_names`, `source_urls`, `merged_ids`, `isVirtual`, the card order)
+    // makes this fail.
+    const expected = rows
+      .map((r) => Object.assign({}, r, { source_urls: Object.assign({}, r.source_urls || {}) }))
+      .sort(pinnedCardOrder);
+    expect(cards).toStrictEqual(expected);
   });
 });
