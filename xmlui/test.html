@@ -423,35 +423,34 @@
         });
       });
 
-      describe('isEventPicked', () => {
+      describe('Card.isPicked', () => {
         const picks = [
           { event_id: 1 },
           { event_id: 3 }
         ];
 
         it('returns false for null picks', () => {
-          assertEqual(isEventPicked([1], null), false);
+          assertEqual(window.Card.isPicked({ id: 1, merged_ids: [1] }, null), false);
         });
 
-        it('returns false for null mergedIds', () => {
-          assertEqual(isEventPicked(null, picks), false);
+        it('returns true when any member is picked', () => {
+          assertEqual(window.Card.isPicked({ id: 1, merged_ids: [1, 2] }, picks), true);
         });
 
-        it('returns true when event is picked', () => {
-          assertEqual(isEventPicked([1], picks), true);
+        it('returns false when no member is picked', () => {
+          assertEqual(window.Card.isPicked({ id: 2, merged_ids: [2] }, picks), false);
         });
 
-        it('returns false when event is not picked', () => {
-          assertEqual(isEventPicked([2], picks), false);
+        it('is false for a virtual card even if an id matches', () => {
+          assertEqual(
+            window.Card.isPicked({ id: 1, merged_ids: [1], isVirtual: true }, picks),
+            false
+          );
         });
 
-        it('works with merged IDs (any match)', () => {
-          assertEqual(isEventPicked([2, 3], picks), true);
-        });
-
-        it('works with single ID (not array)', () => {
-          assertEqual(isEventPicked(1, picks), true);
-          assertEqual(isEventPicked(2, picks), false);
+        it('falls back to the single row id', () => {
+          assertEqual(window.Card.isPicked({ id: 1 }, picks), true);
+          assertEqual(window.Card.isPicked({ id: 2 }, picks), false);
         });
       });
 

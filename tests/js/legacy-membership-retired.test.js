@@ -24,6 +24,13 @@ describe('the legacy membership surface is retired', () => {
     expect(window.dedupePicks).toBeUndefined();
   });
 
+  it('no longer exposes the legacy isEventPicked pick-state reader', () => {
+    // isEventPicked keyed on an id list and was exercised only by its own
+    // test.html block; Card.isPicked is the one pick-state reader now, so a
+    // surviving window.isEventPicked would be a second place to disagree.
+    expect(window.isEventPicked).toBeUndefined();
+  });
+
   it('removed the dead shell toggle while keeping the live Globals.xs one', () => {
     // shell.js's window.togglePick was referenced by no markup; EventCard still
     // wires its bookmark to the Globals.xs code-behind togglePick.

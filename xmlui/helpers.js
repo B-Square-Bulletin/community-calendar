@@ -1419,15 +1419,6 @@ function clearDedupeCache() {
   }
 }
 
-// Check if an event is picked (supports merged IDs from cross-source duplicates)
-function isEventPicked(mergedIds, picks) {
-  if (!picks || !Array.isArray(picks)) return false;
-  if (!mergedIds) return false;
-  // mergedIds can be an array (from dedupe) or a single ID
-  const ids = Array.isArray(mergedIds) ? mergedIds : [mergedIds];
-  return picks.some((p) => ids.some((id) => p.event_id == id));
-}
-
 // Build Google Calendar URL for an event
 function buildGoogleCalendarUrl(event) {
   if (!event) return '';
@@ -2448,7 +2439,6 @@ if (typeof window !== 'undefined') {
   });
 
   window.clearDedupeCache = clearDedupeCache;
-  window.isEventPicked = isEventPicked;
   window.buildGoogleCalendarUrl = buildGoogleCalendarUrl;
   window.downloadEventICS = downloadEventICS;
   // Enrichment helpers

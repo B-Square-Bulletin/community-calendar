@@ -266,6 +266,13 @@ describe('Card.members', () => {
   it('falls back to the single row id (a NULL group)', () => {
     expect(window.Card.members({ id: 5 })).toEqual([5]);
   });
+  it('ignores the retired camelCase mergedIds alias', () => {
+    // The only producer of `mergedIds` was dedupeEvents, deleted with the Card
+    // refactor, so the alias can never fire in production. Reading it here would
+    // resurrect a second membership key; a row carrying only the retired alias is
+    // treated as a NULL-group row and falls back to its own id.
+    expect(window.Card.members({ id: 5, mergedIds: [1, 2] })).toEqual([5]);
+  });
   it('returns nothing for a virtual card', () => {
     expect(window.Card.members({ id: 'enrichment-1-x', isVirtual: true, merged_ids: [1] })).toEqual(
       []

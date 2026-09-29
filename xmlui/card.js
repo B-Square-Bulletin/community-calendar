@@ -44,7 +44,6 @@
   function memberIdList(row) {
     if (!row) return [];
     if (Array.isArray(row.merged_ids) && row.merged_ids.length) return row.merged_ids;
-    if (Array.isArray(row.mergedIds) && row.mergedIds.length) return row.mergedIds;
     return [row.id];
   }
 
