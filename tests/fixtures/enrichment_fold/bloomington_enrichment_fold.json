@@ -1,0 +1,241 @@
+{
+  "description": "Hand-built fixture for the enrichment path: the client's real combined input shape for one curator enrichment folded onto one stored Group, plus a long-running stored series so the weekly collapse is non-trivial. Pins the single-pass fold -> group -> collapse output the Card and Recurring modules must produce (see #169 / #171).",
+  "provenance": "Hand-built (not captured). The production plain-path twin is tests/fixtures/deduplicated_events_bloomington.json.gz.",
+  "city": "bloomington",
+  "timezone": "America/Indiana/Indianapolis",
+  "now": "2026-09-28T12:00:00-04:00",
+  "scenario": {
+    "group": "One stored Group (two listings the confidence route folded into one event). The view returns it as a single row carrying merged_ids.",
+    "enrichment": "A curator enrichment on the Group's representative id, weekly, three occurrences: one original (folds onto the Group's card) and two future occurrences (their own cards, marked virtual, unpickable).",
+    "series": "Five stored Separate rows of one daily exhibition, all inside a single week relative to `now`, so the five-occurrence minimum is met exactly and the collapse keeps one card marked isRecurring."
+  },
+  "events": [
+    {
+      "id": 1001,
+      "title": "Weekly Community Sing",
+      "start_time": "2026-09-30T23:00:00+00:00",
+      "end_time": "2026-10-01T01:00:00+00:00",
+      "url": "https://downtown.example/sing",
+      "location": "Juniper Art Gallery",
+      "description": "A weekly community sing. All voices welcome.",
+      "source": "WFIU, Downtown News",
+      "source_names": ["WFIU", "Downtown News"],
+      "source_urls": {
+        "WFIU": "https://wfiu.example/sing",
+        "Downtown News": "https://downtown.example/sing"
+      },
+      "category": "Music",
+      "image_url": null,
+      "all_day": false,
+      "merged_ids": [1001, 1002],
+      "duplicate_group": "cr2:sing",
+      "city": "bloomington",
+      "transcript": null
+    },
+    {
+      "id": 1003,
+      "title": "Farmers Market",
+      "start_time": "2026-10-03T13:00:00+00:00",
+      "end_time": "2026-10-03T17:00:00+00:00",
+      "url": "https://market.example/",
+      "location": "Showers Plaza",
+      "description": "Weekly outdoor market.",
+      "source": "Bloomington Farmers Market",
+      "source_names": ["Bloomington Farmers Market"],
+      "source_urls": { "Bloomington Farmers Market": "https://market.example/" },
+      "category": "Food",
+      "image_url": null,
+      "all_day": false,
+      "merged_ids": [1003],
+      "duplicate_group": null,
+      "city": "bloomington",
+      "transcript": null
+    },
+    {
+      "id": 1100,
+      "title": "Autumn Exhibition",
+      "start_time": "2026-09-29T14:00:00+00:00",
+      "end_time": "2026-09-29T22:00:00+00:00",
+      "url": "https://museum.example/autumn",
+      "location": "Eskenazi Museum",
+      "description": "A daily exhibition through the fall.",
+      "source": "Eskenazi Museum",
+      "source_names": ["Eskenazi Museum"],
+      "source_urls": { "Eskenazi Museum": "https://museum.example/autumn" },
+      "category": "Arts",
+      "image_url": null,
+      "all_day": false,
+      "merged_ids": [1100],
+      "duplicate_group": null,
+      "city": "bloomington",
+      "transcript": null
+    },
+    {
+      "id": 1101,
+      "title": "Autumn Exhibition",
+      "start_time": "2026-09-30T14:00:00+00:00",
+      "end_time": "2026-09-30T22:00:00+00:00",
+      "url": "https://museum.example/autumn",
+      "location": "Eskenazi Museum",
+      "description": "A daily exhibition through the fall.",
+      "source": "Eskenazi Museum",
+      "source_names": ["Eskenazi Museum"],
+      "source_urls": { "Eskenazi Museum": "https://museum.example/autumn" },
+      "category": "Arts",
+      "image_url": null,
+      "all_day": false,
+      "merged_ids": [1101],
+      "duplicate_group": null,
+      "city": "bloomington",
+      "transcript": null
+    },
+    {
+      "id": 1102,
+      "title": "Autumn Exhibition",
+      "start_time": "2026-10-01T14:00:00+00:00",
+      "end_time": "2026-10-01T22:00:00+00:00",
+      "url": "https://museum.example/autumn",
+      "location": "Eskenazi Museum",
+      "description": "A daily exhibition through the fall.",
+      "source": "Eskenazi Museum",
+      "source_names": ["Eskenazi Museum"],
+      "source_urls": { "Eskenazi Museum": "https://museum.example/autumn" },
+      "category": "Arts",
+      "image_url": null,
+      "all_day": false,
+      "merged_ids": [1102],
+      "duplicate_group": null,
+      "city": "bloomington",
+      "transcript": null
+    },
+    {
+      "id": 1103,
+      "title": "Autumn Exhibition",
+      "start_time": "2026-10-02T14:00:00+00:00",
+      "end_time": "2026-10-02T22:00:00+00:00",
+      "url": "https://museum.example/autumn",
+      "location": "Eskenazi Museum",
+      "description": "A daily exhibition through the fall.",
+      "source": "Eskenazi Museum",
+      "source_names": ["Eskenazi Museum"],
+      "source_urls": { "Eskenazi Museum": "https://museum.example/autumn" },
+      "category": "Arts",
+      "image_url": null,
+      "all_day": false,
+      "merged_ids": [1103],
+      "duplicate_group": null,
+      "city": "bloomington",
+      "transcript": null
+    },
+    {
+      "id": 1104,
+      "title": "Autumn Exhibition",
+      "start_time": "2026-10-03T14:00:00+00:00",
+      "end_time": "2026-10-03T22:00:00+00:00",
+      "url": "https://museum.example/autumn",
+      "location": "Eskenazi Museum",
+      "description": "A daily exhibition through the fall.",
+      "source": "Eskenazi Museum",
+      "source_names": ["Eskenazi Museum"],
+      "source_urls": { "Eskenazi Museum": "https://museum.example/autumn" },
+      "category": "Arts",
+      "image_url": null,
+      "all_day": false,
+      "merged_ids": [1104],
+      "duplicate_group": null,
+      "city": "bloomington",
+      "transcript": null
+    }
+  ],
+  "virtual": [
+    {
+      "id": "enrichment-77-2026-09-30T23:00:00.000Z",
+      "title": "Weekly Community Sing",
+      "start_time": "2026-09-30T23:00:00.000Z",
+      "end_time": null,
+      "location": "Juniper Art Gallery",
+      "description": "A weekly community sing. All voices welcome.",
+      "url": "https://downtown.example/sing",
+      "source": "Picks: Curator",
+      "city": "bloomington",
+      "rrule": "FREQ=WEEKLY;COUNT=3",
+      "_enrichment_id": 77,
+      "_enrichment_event_id": 1001,
+      "_enrichment_is_original_occurrence": true
+    },
+    {
+      "id": "enrichment-77-2026-10-07T23:00:00.000Z",
+      "title": "Weekly Community Sing",
+      "start_time": "2026-10-07T23:00:00.000Z",
+      "end_time": null,
+      "location": "Juniper Art Gallery",
+      "description": "A weekly community sing. All voices welcome.",
+      "url": "https://downtown.example/sing",
+      "source": "Picks: Curator",
+      "city": "bloomington",
+      "rrule": "FREQ=WEEKLY;COUNT=3",
+      "_enrichment_id": 77,
+      "_enrichment_event_id": 1001,
+      "_enrichment_is_original_occurrence": false
+    },
+    {
+      "id": "enrichment-77-2026-10-14T23:00:00.000Z",
+      "title": "Weekly Community Sing",
+      "start_time": "2026-10-14T23:00:00.000Z",
+      "end_time": null,
+      "location": "Juniper Art Gallery",
+      "description": "A weekly community sing. All voices welcome.",
+      "url": "https://downtown.example/sing",
+      "source": "Picks: Curator",
+      "city": "bloomington",
+      "rrule": "FREQ=WEEKLY;COUNT=3",
+      "_enrichment_id": 77,
+      "_enrichment_event_id": 1001,
+      "_enrichment_is_original_occurrence": false
+    }
+  ],
+  "expected": {
+    "note": "The intended fold -> group -> collapse outcome. #171's Card/Recurring tests assert these load-bearing facts; they are not a byte-for-byte golden of the emitted row objects.",
+    "cardCount": 5,
+    "cards": [
+      {
+        "title": "Weekly Community Sing",
+        "members": [1001, 1002],
+        "isVirtual": false,
+        "foldsOriginalEnrichmentId": 77,
+        "comment": "The stored Group's one card; the enrichment's original occurrence folds onto it rather than rendering a second card."
+      },
+      {
+        "title": "Weekly Community Sing",
+        "members": [],
+        "isVirtual": true,
+        "start_time": "2026-10-07T23:00:00.000Z",
+        "comment": "Future occurrence: its own card, virtual, unpickable (no numeric members)."
+      },
+      {
+        "title": "Weekly Community Sing",
+        "members": [],
+        "isVirtual": true,
+        "start_time": "2026-10-14T23:00:00.000Z",
+        "comment": "Future occurrence: its own card, virtual, unpickable (no numeric members)."
+      },
+      {
+        "title": "Farmers Market",
+        "members": [1003],
+        "isVirtual": false,
+        "comment": "A Separate row: one row is one card."
+      },
+      {
+        "title": "Autumn Exhibition",
+        "members": [1100],
+        "isVirtual": false,
+        "isRecurring": true,
+        "comment": "Five occurrences inside one week meet the five-occurrence minimum exactly; the weekly collapse keeps the first occurrence and drops the other four."
+      }
+    ],
+    "collapse": {
+      "appliedOnce": true,
+      "droppedIds": [1101, 1102, 1103, 1104]
+    }
+  }
+}

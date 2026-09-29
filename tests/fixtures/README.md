@@ -1,7 +1,9 @@
 # Test Fixtures
 
-This directory contains minimal ICS fixtures for the timezone pipeline plus a
-production-scale JSON fixture for the confidence route.
+This directory contains minimal ICS fixtures for the timezone pipeline, a
+production-scale JSON fixture for the confidence route, and the client-side
+card-membership fixtures for #169 (the view-shaped payload and the enrichment
+fold).
 
 ## Purpose
 
@@ -24,7 +26,9 @@ fixtures/
 ├── bloomington/        # America/Indiana/Indianapolis
 ├── montclair/          # America/New_York
 ├── toronto/            # America/Toronto
-└── confidence_route/   # Full production artifact for blast-radius checks
+├── confidence_route/   # Full production artifact for blast-radius checks
+├── enrichment_fold/    # Hand-built client enrichment fold -> group -> collapse
+└── deduplicated_events_bloomington.json.gz  # Captured client view payload
 ```
 
 ## Fixtures by Scenario
@@ -59,6 +63,35 @@ fixtures/
   (a chain or all-day explosion fails loudly). Regenerate it from a fresh
   `cities/bloomington/events.json` by keeping only those eight fields per
   event.
+
+### Client Card Membership (#169)
+
+These two fixtures pin the client's card-membership refactor (#170/#171). They
+are the client's *real input shape*, not the build-time artifact.
+
+- **`deduplicated_events_bloomington.json.gz`** — a captured production
+  `deduplicated_events` payload: exactly what the browser shell receives, one
+  row per stored group, carrying `merged_ids`, `duplicate_group`, `source_names`,
+  and `source_urls`. The plain-path output-equivalence check replays this through
+  the new `Card` module and asserts the result matches the pre-refactor output.
+  Captured once with the public anon key and the shell's exact select and 31-day
+  horizon (no JWT required):
+
+  ```bash
+  curl -sS \
+    "https://qatykxdvbpojxnvpicyi.supabase.co/rest/v1/deduplicated_events?select=id,title,start_time,end_time,url,location,description,source,source_names,transcript,source_urls,category,image_url,all_day,merged_ids,duplicate_group,city&order=start_time.asc&limit=6000&start_time=gte.<FROM>&start_time=lte.<TO>&city=eq.bloomington" \
+    -H "apikey: sb_publishable_xXwJNayt4zT37TqqvMUD2g_BLeAUdfW" \
+    --compressed | gzip -c > tests/fixtures/deduplicated_events_bloomington.json.gz
+  ```
+
+- **`enrichment_fold/bloomington_enrichment_fold.json`** — hand-built. One
+  stored Group with a curator enrichment (an original occurrence that folds onto
+  the Group's card, plus future occurrences that stay their own virtual,
+  unpickable cards) and five stored Separate rows of one daily exhibition inside
+  a single week, so the five-occurrence minimum is met exactly. It pins the
+  single-pass fold → group → collapse output, including a `now` clock for the
+  weekly anchor. The `expected` block records the load-bearing outcome
+  semantics; #171's tests assert those, not a byte-for-byte row golden.
 
 ## Maintenance
 
