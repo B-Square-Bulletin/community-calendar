@@ -1,0 +1,78 @@
+{
+  "loop": "ship-features",
+  "items": [
+    {
+      "title": "feat(xmlui): Card module owns client card membership",
+      "description": "One client module, **Card**, owns card membership: grouping stored listings into cards, the member event ids behind each card, which cards are picked, the representative pick per card, and the delete plan a pick or unpick executes. Pure functions attached to `window`, loaded as a shipped script before the helpers script and before app start.\n\nCard reads only the stored route decision (`duplicate_group`, `merged_ids`, `source_names`, `source_urls`) and never recomputes similarity — the build-time confidence route stays the sole authority on which listings are one event (ADR-0013). A NULL `duplicate_group` means one row is one card.\n\nDeliver the full interface: `group`, `groupMemo`, `members`, `isPicked`, `uniquePicks`, `pickPlan`, `cardForPick`, `normalizePick`.\n\nThe load-bearing job is **enrichment folding**: a virtual occurrence whose original-occurrence flag is set attaches to its linked group's card (enrichment data arrives on a separate fetch from events); every other virtual occurrence stays its own card, marked virtual, and synthetic enrichment ids never enter membership. The legacy raw-row fallback (split the comma-joined `source` string, then apply the aggregator/location ordering) is kept so vm fixtures over raw rows stay meaningful, though it is inert on view rows. Memoisation uses the existing composite signature (array signature + enrichment-linkage signature + emission signature), with a reset hook for the vm harness.",
+      "passes": false,
+      "notes": "",
+      "reference": ".scratch/169-card-membership/issues/02-card-module-owns-membership.md",
+      "priority": 1
+    },
+    {
+      "title": "feat(xmlui): Recurring owns the weekly collapse, applied once",
+      "description": "A second small module, **Recurring**, owns the long-running-series weekly collapse — first occurrence per week, the five-occurrence minimum, and the `isRecurring` mark — as a pure function with an injected clock. Its rule is otherwise unchanged; only its ownership and placement change.\n\nExtract it from the grouping path and apply it **once**, at its current composition point (after exclusions and source ordering, before hidden-source filtering and the search index). The second application is removed, and the sources dialog calls it explicitly.\n\nIntended delta: the enrichment path now follows the plain path's rule in the excluded-source edge case — a Separate-band pair sharing title/location/time-of-day whose collapse survivor comes from an excluded source is kept by both paths, where today they disagree.",
+      "passes": false,
+      "notes": "",
+      "reference": ".scratch/169-card-membership/issues/03-recurring-collapse-applied-once.md",
+      "priority": 2
+    },
+    {
+      "title": "refactor(xmlui): calendar list and event card read one membership",
+      "description": "The calendar's grouping and the card's bookmark read the one membership module. A pick made on one source's row lights up the duplicate card rendered from another source, and unpicking clears it everywhere.\n\nDrop the camelCase `mergedIds` alias in favour of the view's `merged_ids`; `members` is the reader. The card's bookmark reads `isPicked`, which returns false for virtual cards, and the icon is hidden on virtual (future-occurrence) cards — today it renders on every signed-in card and its save always fails on the picks foreign key.",
+      "passes": false,
+      "notes": "",
+      "reference": ".scratch/169-card-membership/issues/04-calendar-and-event-card-read-membership.md",
+      "priority": 3
+    },
+    {
+      "title": "refactor(xmlui): picks list collapses through Card.uniquePicks",
+      "description": "My Picks shows one entry per stored event, using `Card.uniquePicks` over whole pick objects (the list item passes the pick, not just its id). The representative ranking stays exactly the same as the client twin and the `my-picks` ICS feed — representative first, then smallest `event_id` — so the list and the feed cannot pick different members (ADR-0013). A saved pick survives a build that reshuffles which listing represents the group.",
+      "passes": false,
+      "notes": "",
+      "reference": ".scratch/169-card-membership/issues/05-picks-list-unique-picks.md",
+      "priority": 4
+    },
+    {
+      "title": "refactor(xmlui): one write authority for pick and unpick",
+      "description": "The two write paths — `togglePick` and `removePick` — become one authority whose delete plan comes from `Card.pickPlan`. The plan carries a single member-id list; the authority issues two deletes: picks by `event_id in members` and `user_id`, and enrichments by `event_id in members` and `curator_id`. User/curator scoping stays verbatim on every URL; RLS remains the backstop, not the primary scoping.\n\n`removePick` resolves its card from a new App global that mirrors the processed card list (same listener pattern as the picks data). Because that mirror is city-and-window scoped, on a miss it falls back to DB-side resolution: if the pick carries a `duplicate_group`, one `events?duplicate_group=eq.<group>` GET yields the full membership; for NULL-group or orphaned picks, membership is the pick row's own `event_id`. Then the same two deletes run.\n\nBookmarking or unbookmarking must not re-ingest the whole event list.",
+      "passes": false,
+      "notes": "",
+      "reference": ".scratch/169-card-membership/issues/06-one-write-authority-for-pick-unpick.md",
+      "priority": 5
+    },
+    {
+      "title": "refactor(xmlui): sources dialog and dashboard tiles apply the same rule",
+      "description": "The sources dialog and the dashboard tiles apply the same grouping rule as the list.\n\n- The sources dialog lifts grouping to a named step: `Card.group` plus an explicit `Recurring.collapse` over its current city-filtered rows, then hidden-source filtering with its uncommitted `localHidden` preview. It deliberately keeps its own filter inputs (no date window), so its counts are not expected to equal the list's row count — what changes is the rule, not the inputs. Hiding a source hides every card it fully carries.\n- The dashboard tiles apply `Card.group` and `Recurring.collapse` **before** category/search filtering, the same order as the list. Tiles do no client collapse today, so tile counts drop for long-running series — intended.",
+      "passes": false,
+      "notes": "",
+      "reference": ".scratch/169-card-membership/issues/07-sources-dialog-and-dashboard-tiles.md",
+      "priority": 6
+    },
+    {
+      "title": "chore(xmlui): retire the dead toggle and legacy membership names",
+      "description": "The contract step of the refactor: with every consumer migrated, remove the legacy membership surface and the dead code, and re-point the tests that pinned it.\n\n- Delete the dead `window.togglePick` in `shell.js` — a second toggle keyed on a bare event id, referenced by no markup.\n- Remove `dedupeEvents`, `eventMergedIds`, and `dedupePicks` outright, migrating every call site to the module.\n- Retire the source-text regex assertions that only pinned the old call sites, and replace them with **call-site checks** for the code-behind glue (the pick/unpick routing), which no automated test covers today because the vm harness does not load code-behind.",
+      "passes": false,
+      "notes": "",
+      "reference": ".scratch/169-card-membership/issues/08-retire-dead-toggle-and-legacy-names.md",
+      "priority": 7
+    },
+    {
+      "title": "docs(xmlui): Card glossary entry, ADR-0017, and acceptance checklist",
+      "description": "Commit the documentation on the feature branch (never on `main`) and record the verification evidence.\n\n- Add the **Card** entry to the domain glossary.\n- Add **ADR-0017** — \"client card membership is one module\" — referencing ADR-0013.\n- Record the before/after performance capture with a tolerance.\n- Add the acceptance checklist mapping all 24 stories to their verification.",
+      "passes": false,
+      "notes": "",
+      "reference": ".scratch/169-card-membership/issues/09-docs-and-verification.md",
+      "priority": 8
+    },
+    {
+      "title": "Review the work against the spec",
+      "description": "Run `code-review` over `git diff 0dfcfc43ed3a2fe50dbf182f33bf77a17de17bf9...HEAD` against the spec at `.scratch/169-card-membership/spec.md`. Run the findings through `receiving-code-review`. Append each worthwhile finding as a new item with no `reference` and `hand_off: false`, with a `priority` greater than this item's. Write every remaining finding and every outstanding hand-off item into this item's `notes`.",
+      "passes": false,
+      "hand_off": false,
+      "notes": "",
+      "reference": ".scratch/169-card-membership/spec.md",
+      "priority": 9
+    }
+  ]
+}
