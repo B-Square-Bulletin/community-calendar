@@ -88,6 +88,10 @@ _Avoid_: Cutoff (when meaning horizon), capping
 One row from one source: a single source's rendering of an event. Two sources carrying one real-world event produce two listings.
 _Avoid_: Event (when the source's copy is meant), record
 
+**Card**:
+One row of the calendar: the client-side rendering of one real-world event. A card is either one stored listing (a Separate row, or the view's single row for a stored Group) or the fold of an enrichment's original occurrence onto its linked group's card. Every consumer — the list, the dashboard tiles, the picks list, the sources dialog — reads card membership from the one Card module; no consumer recomputes grouping. See [ADR 0017](docs/adr/0017-client-card-membership-is-one-module.md).
+_Avoid_: Event (when the rendered row is meant), listing (the stored per-source row a card may fold)
+
 **Merge**:
 The destructive band of the confidence route: listings that are certainly one event (identical cleaned full title, same start instant, compatible locations present on both sides — a stricter location test than Group's, since a shared town or state is not evidence, a pair with no street number needs three shared tokens rather than two, and a shared generic token is not enough when neither side names a town) collapse to one surviving row; the other sources fold into it. Merge is an equivalence class over the exact-title relation alone — it never propagates through a similarity edge, so no threshold change can delete a row.
 _Avoid_: Dedupe, fuzzy match
