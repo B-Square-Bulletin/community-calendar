@@ -88,8 +88,11 @@ window._xsLogs = [];
     script('xmlui/xmlui-masonry.js?v=' + v);
     script('xmlui/xmlui-grid-layout.js?v=' + v);
     // Card (#169) owns client card membership; Recurring (#169) owns the
-    // weekly collapse and helpers.js's cache stage delegates to it. Both must
-    // evaluate before the helpers script and before app start.
+    // weekly collapse and helpers.js's cache stage delegates to it. Both read
+    // the shared source-name/ordering/timezone derivation in source-helpers.js,
+    // so it must evaluate before them. All must evaluate before the helpers
+    // script and before app start.
+    script('source-helpers.js?v=' + v);
     script('card.js?v=' + v);
     script('recurring.js?v=' + v);
     script('helpers.js?v=' + v);

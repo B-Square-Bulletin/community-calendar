@@ -54,6 +54,9 @@ sandbox.global = sandbox;
 vm.createContext(sandbox);
 
 const cardSrc = fs.readFileSync(path.join(ROOT, 'xmlui', 'card.js'), 'utf8');
+const sourceHelpersSrc = fs.readFileSync(path.join(ROOT, 'xmlui', 'source-helpers.js'), 'utf8');
+// Card reads the shared source derivation, so load it first.
+vm.runInContext(sourceHelpersSrc, sandbox, { filename: 'xmlui/source-helpers.js' });
 vm.runInContext(cardSrc, sandbox, { filename: 'xmlui/card.js' });
 
 // --- Event generation (view-shaped: one row per stored group) ---------------

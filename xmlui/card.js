@@ -22,123 +22,34 @@
     return typeof id === 'number' || (typeof id === 'string' && /^\d+$/.test(id));
   }
 
-  // The view's structured `source_names` is authoritative; only a raw row
-  // without it falls back to splitting the legacy comma-joined `source` string
-  // (spec amendment L402).
-  function uniqueSourceNames(source) {
-    if (!source) return [];
-    var seen = new Set();
-    return source
-      .split(',')
-      .map(function (s) {
-        return s.trim();
-      })
-      .filter(function (s) {
-        if (!s || seen.has(s)) return false;
-        seen.add(s);
-        return true;
-      });
-  }
-
-  function eventSourceNames(e) {
-    if (e && Array.isArray(e.source_names) && e.source_names.length) {
-      var seen = new Set();
-      return e.source_names
-        .map(function (s) {
-          return String(s).trim();
-        })
-        .filter(function (s) {
-          if (!s || seen.has(s)) return false;
-          seen.add(s);
-          return true;
-        });
-    }
-    return uniqueSourceNames((e && e.source) || '');
-  }
-
-  // Aggregators are the same `source_priority.json` data helpers.js reads; Card
-  // reads it lazily (never at load) so it carries no aggregator dependency into
-  // module evaluation. Cached by the config array's identity.
-  var _aggCacheSet = null;
-  var _aggCacheSrc = null;
-  function aggregatorSet() {
-    var src =
-      (typeof window !== 'undefined' &&
-        window._sourcePriority &&
-        window._sourcePriority.aggregators) ||
-      [];
-    if (_aggCacheSrc !== src) {
-      _aggCacheSet = new Set(src);
-      _aggCacheSrc = src;
-    }
-    return _aggCacheSet;
-  }
-
-  function normalizeVenueToken(value) {
-    return (value || '')
-      .toLowerCase()
-      .replace(/[^\w\s]/g, ' ')
-      .replace(/\b(the|a|an)\b/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim();
-  }
-
-  function sourceMatchesLocation(source, location) {
-    if (!source || !location) return false;
-    var normalizedLocation = normalizeVenueToken(location);
-    if (!normalizedLocation) return false;
-    var candidates = [];
-    var raw = (source || '').toLowerCase().trim();
-    var normalized = normalizeVenueToken(source);
-    if (raw) candidates.push(raw);
-    if (normalized && candidates.indexOf(normalized) < 0) candidates.push(normalized);
-    return candidates.some(function (candidate) {
-      return candidate && normalizedLocation.includes(candidate);
-    });
-  }
-
-  // Legacy raw-row ordering: aggregators last, then alphabetical, then a source
-  // whose name appears in the location promoted to the front. Inert on view rows
-  // because those already carry a structured, representative-ordered
-  // `source_names`.
-  function orderSourceNames(names, location) {
-    var agg = aggregatorSet();
-    var sorted = names.slice().sort(function (a, b) {
-      var aAgg = agg.has(a) ? 1 : 0;
-      var bAgg = agg.has(b) ? 1 : 0;
-      if (aAgg !== bAgg) return aAgg - bAgg;
-      return a.localeCompare(b);
-    });
-    if (location) {
-      var authIdx = -1;
-      for (var i = 0; i < sorted.length; i++) {
-        if (!agg.has(sorted[i]) && sourceMatchesLocation(sorted[i], location)) {
-          authIdx = i;
-          break;
-        }
-      }
-      if (authIdx > 0) sorted.unshift(sorted.splice(authIdx, 1)[0]);
-    }
-    return sorted;
-  }
-
   function normalizeTime(startTime) {
     return startTime ? new Date(startTime).toISOString() : '';
   }
 
-  function routeGroupKey(e) {
-    return e.duplicate_group != null && e.duplicate_group !== ''
-      ? 'g:' + e.duplicate_group
-      : 'r:' + e.id;
+  // The composite key that identifies one stored group: the route's group id
+  // when present, else the row's own id. Grouping and the picks-list dedupe key
+  // on it, so it is written once.
+  function routeKey(duplicateGroup, id) {
+    return duplicateGroup != null && duplicateGroup !== '' ? 'g:' + duplicateGroup : 'r:' + id;
   }
 
-  // The membership a row seeds into its card: the view's rolled-up id list when
-  // present, else the row's own id. Synthetic enrichment ids are filtered out at
-  // emission, so a virtual row seeds nothing.
+  function routeGroupKey(e) {
+    return routeKey(e.duplicate_group, e.id);
+  }
+
+  // The stored member ids a row (or card) carries: the view's rolled-up list
+  // when present, else the row's own id. `members(card)` additionally drops
+  // synthetic ids and refuses virtual cards; grouping seeds with the raw list so
+  // an enrichment occurrence can resolve its linked event.
+  function memberIdList(row) {
+    if (!row) return [];
+    if (Array.isArray(row.merged_ids) && row.merged_ids.length) return row.merged_ids;
+    if (Array.isArray(row.mergedIds) && row.mergedIds.length) return row.mergedIds;
+    return [row.id];
+  }
+
   function seedMemberIds(e) {
-    if (Array.isArray(e.merged_ids) && e.merged_ids.length) return e.merged_ids.slice();
-    if (Array.isArray(e.mergedIds) && e.mergedIds.length) return e.mergedIds.slice();
-    return [e.id];
+    return memberIdList(e).slice();
   }
 
   function compareCards(a, b) {
@@ -187,7 +98,7 @@
       var groupName = (linked && linked.group) || routeGroupKey(e);
       var key = groupName + '|' + normalizedTime;
 
-      var names = eventSourceNames(e);
+      var names = window.SourceHelpers.eventSourceNames(e);
       var structured =
         Array.isArray(e.source_names) && e.source_names.length ? names.slice() : null;
       var seedIds = seedMemberIds(e);
@@ -227,7 +138,7 @@
       var g = groups[key];
       var sourcesArr = g.structured
         ? g.sourceNames.slice()
-        : orderSourceNames(g.sourceNames, g.row.location);
+        : window.SourceHelpers.orderSourceNames(g.sourceNames, g.row.location);
       var card = Object.assign({}, g.row, {
         source: sourcesArr.join(', '),
         source_names: sourcesArr,
@@ -252,14 +163,7 @@
   // they read as empty.
   function members(card) {
     if (!card || card.isVirtual) return [];
-    var ids = Array.isArray(card.merged_ids)
-      ? card.merged_ids
-      : Array.isArray(card.mergedIds)
-        ? card.mergedIds
-        : card.id != null
-          ? [card.id]
-          : [];
-    return ids.filter(isNumericId);
+    return memberIdList(card).filter(isNumericId);
   }
 
   function isPicked(card, picks) {
@@ -325,10 +229,7 @@
     var order = [];
     picks.forEach(function (pick) {
       var n = normalizePick(pick);
-      var key =
-        n.duplicateGroup != null && n.duplicateGroup !== ''
-          ? 'g:' + n.duplicateGroup
-          : 'r:' + n.eventId;
+      var key = routeKey(n.duplicateGroup, n.eventId);
       var rank = [n.isRepresentative ? 0 : 1, n.eventId || 0];
       var current = best.get(key);
       if (!current) {

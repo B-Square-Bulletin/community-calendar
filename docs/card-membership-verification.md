@@ -64,8 +64,8 @@ warm is at parity or faster (0.84–0.87×). No regression was observed.
 
 All 24 user stories from `.scratch/169-card-membership/spec.md`. "Where" names
 the test file and, in quotes, the case that carries the verification. The
-shipped-file `vm` harness (`tests/js/load-shipped.js`) loads `card.js` and
-`recurring.js`; the browser groups run under Playwright via
+shipped-file `vm` harness (`tests/js/load-shipped.js`) loads `source-helpers.js`,
+`card.js`, and `recurring.js`; the browser groups run under Playwright via
 `tests/js/test-html.browser.spec.js`.
 
 | # | Story | Verifies it | Where |

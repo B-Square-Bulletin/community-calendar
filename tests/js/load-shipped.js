@@ -35,6 +35,11 @@ function loadShipped(opts = {}) {
   vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'date-windows.js'), 'utf8'), {
     filename: 'date-windows.js',
   });
+  // SourceHelpers owns the shared source-name / ordering / timezone derivation
+  // that Card, Recurring, and helpers.js all read; it must evaluate first.
+  vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'source-helpers.js'), 'utf8'), {
+    filename: 'source-helpers.js',
+  });
   // Card owns client card membership and loads before helpers.js in the
   // browser too (shell.js's loader list), so the vm harness mirrors that order.
   vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'card.js'), 'utf8'), {

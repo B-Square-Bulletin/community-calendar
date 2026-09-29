@@ -31,28 +31,9 @@ var AGGREGATOR_SOURCES = new Set(
   (window._sourcePriority && window._sourcePriority.aggregators) || []
 );
 
-function normalizeVenueToken(value) {
-  return (value || '')
-    .toLowerCase()
-    .replace(/[^\w\s]/g, ' ')
-    .replace(/\b(the|a|an)\b/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-
-function sourceMatchesLocation(source, location) {
-  if (!source || !location) return false;
-  var normalizedLocation = normalizeVenueToken(location);
-  if (!normalizedLocation) return false;
-  var candidates = [];
-  var raw = (source || '').toLowerCase().trim();
-  var normalized = normalizeVenueToken(source);
-  if (raw) candidates.push(raw);
-  if (normalized && candidates.indexOf(normalized) < 0) candidates.push(normalized);
-  return candidates.some(function (candidate) {
-    return candidate && normalizedLocation.includes(candidate);
-  });
-}
+// Source-name parsing, venue matching, and the aggregator/location ordering all
+// live in `window.SourceHelpers` (loaded before this file) so Card and Recurring
+// read the same derivation instead of forking it (#169 review item 11).
 
 // --- URL sync for category filter ---
 window.syncCategoryParam = function (category) {
@@ -904,13 +885,11 @@ function getDescriptionSnippet(description, term) {
   return snippet;
 }
 
-// Get the IANA timezone for the current city (e.g. "America/New_York")
+// Get the IANA timezone for the current city (e.g. "America/New_York").
+// Owned by SourceHelpers; kept as a named delegate so this file's many callers
+// and the source-text pins do not move.
 function getCityTimezone() {
-  var city = window.cityFilter;
-  if (city && window._cities && window._cities[city]) {
-    return window._cities[city].timezone;
-  }
-  return undefined; // fall back to browser default
+  return window.SourceHelpers.cityTimezone();
 }
 
 // Next scheduled build time in the city's local timezone
@@ -982,39 +961,13 @@ function formatTime(isoString) {
   return h + ':' + m + ' ' + ampm;
 }
 
-function uniqueSourceNames(source) {
-  if (!source) return [];
-  var seen = new Set();
-  return source
-    .split(',')
-    .map(function (s) {
-      return s.trim();
-    })
-    .filter(function (s) {
-      if (!s || seen.has(s)) return false;
-      seen.add(s);
-      return true;
-    });
-}
-
 // Structured source names from the view, falling back to the legacy split.
 // The view's `source_names` is authoritative: a human source name may contain
 // a comma, so splitting the compatibility `source` string would fabricate
 // names (spec amendment L402). Every client site that derives names uses this.
+// Owned by SourceHelpers so Card and Recurring read the same derivation.
 function eventSourceNames(e) {
-  if (e && Array.isArray(e.source_names) && e.source_names.length) {
-    var seen = new Set();
-    return e.source_names
-      .map(function (s) {
-        return String(s).trim();
-      })
-      .filter(function (s) {
-        if (!s || seen.has(s)) return false;
-        seen.add(s);
-        return true;
-      });
-  }
-  return uniqueSourceNames((e && e.source) || '');
+  return window.SourceHelpers.eventSourceNames(e);
 }
 
 // Extract a short readable snippet from an event description (for always-visible preview)
@@ -1425,23 +1378,11 @@ function sortSourcesForDisplay(events) {
     // re-sorting the compatibility string would undo it (spec amendment L402).
     if (e && Array.isArray(e.source_names) && e.source_names.length) return e;
     if (!e.source) return e;
-    var sourcesArr = uniqueSourceNames(e.source);
+    var sourcesArr = window.SourceHelpers.uniqueSourceNames(e.source);
     if (sourcesArr.length <= 1) return e;
-    sourcesArr.sort(function (a, b) {
-      var aAgg = AGGREGATOR_SOURCES.has(a) ? 1 : 0;
-      var bAgg = AGGREGATOR_SOURCES.has(b) ? 1 : 0;
-      if (aAgg !== bAgg) return aAgg - bAgg;
-      return a.localeCompare(b);
-    });
-    if (e.location) {
-      var authIdx = sourcesArr.findIndex(function (s) {
-        return !AGGREGATOR_SOURCES.has(s) && sourceMatchesLocation(s, e.location);
-      });
-      if (authIdx > 0) {
-        var auth = sourcesArr.splice(authIdx, 1)[0];
-        sourcesArr.unshift(auth);
-      }
-    }
+    // The aggregator/location ordering is SourceHelpers', the same one Card
+    // applies to raw rows (#169 review item 11).
+    sourcesArr = window.SourceHelpers.orderSourceNames(sourcesArr, e.location);
     return Object.assign({}, e, { source: sourcesArr.join(', ') });
   });
 }
