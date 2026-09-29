@@ -427,12 +427,12 @@ describe('consumers read the stored decision from the view', () => {
     expect(readShipped('Main.xmlui')).toContain('<PickItem pick="{$item}"');
   });
 
-  it('removing a saved Group targets every picked member', () => {
+  it('removing a saved Group runs the one write plan for its members', () => {
     const item = readShipped('components/PickItem.xmlui');
     const globals = readShipped('Globals.xs');
-    expect(item).toContain('removePick($props.pick.id, $props.pick.events?.duplicate_group)');
-    expect(globals).toContain('events!inner(duplicate_group)');
-    expect(globals).toContain('id=in.(');
+    expect(item).toContain('removePick($props.pick)');
+    expect(globals).toContain('window.Card.cardForPick(pick, processedCards)');
+    expect(globals).toContain("'/rest/v1/events?select=id&duplicate_group=eq.'");
   });
 });
 

@@ -9,6 +9,7 @@
   var.browseStartIndex="{0}"
   global.scrollRequest="{0}"
   global.picksData="{null}"
+  global.processedCards="{null}"
   global.userSettingsData="{window._localHiddenSources ? [{ hidden_sources: window._localHiddenSources }] : null}"
   global.authUser="{authUser}"
   global.authSession="{authSession}"
@@ -56,6 +57,15 @@
   <ChangeListener
     listenTo="{picks.value}"
     onDidChange="() => picksData = picks.value"
+  />
+
+  <!-- The write authority's card mirror (#169/#175): removePick resolves a pick
+       to its card here first, and a miss (other-city, out-of-window, or a pick
+       made before the mirror populated) falls back to DB-side membership.
+       Mirrors the same window-scoped list the calendar renders. -->
+  <ChangeListener
+    listenTo="{dateFilteredEvents}"
+    onDidChange="() => processedCards = dateFilteredEvents"
   />
 
   <!-- Epoch nudge (xmlui#3816 workaround): a PushSource's second emission

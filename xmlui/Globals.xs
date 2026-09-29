@@ -166,6 +166,31 @@ function getInlinePanelHostOverflow(name) {
   return 'auto';
 }
 
+// The one write authority for pick and unpick (#169/#175): the delete plan
+// comes from Card, and every removal issues the same two user-scoped deletes —
+// the user's picks by member event id, and the curator's enrichments by member
+// event id. Unpicking therefore also clears the curator's enrichment for the
+// group (intended). User/curator scoping stays verbatim on the URLs; RLS is the
+// backstop, not the primary scoping.
+function runPickPlan(card, headers) {
+  const members = window.Card.pickPlan(card).memberEventIds;
+  if (!members || !members.length) return;
+  const memberList = members.join(',');
+  Actions.callApi({
+    method: 'delete',
+    url: appGlobals.supabaseUrl + '/rest/v1/picks?event_id=in.(' + memberList + ')&user_id=eq.' + authUser.id,
+    headers,
+    invalidates: []
+  });
+  Actions.callApi({
+    method: 'delete',
+    url: appGlobals.supabaseUrl + '/rest/v1/event_enrichments?event_id=in.(' + memberList + ')&curator_id=eq.' + authUser.id,
+    headers,
+    invalidates: []
+  });
+  picksCounter = picksCounter + 1;
+}
+
 function togglePick(event) {
   if (!authSession) {
     alert('Please sign in to pick events');
@@ -175,7 +200,8 @@ function togglePick(event) {
     apikey: appGlobals.supabasePublishableKey,
     Authorization: 'Bearer ' + authSession?.access_token
   };
-  const ids = window.eventMergedIds(event);
+  // The GET-existing probe stays outside Card: it only decides pick vs unpick.
+  const ids = window.Card.members(event);
   const existing = Actions.callApi({
     method: 'get',
     url: appGlobals.supabaseUrl + '/rest/v1/picks?select=id&user_id=eq.' + authUser.id + '&event_id=in.(' + ids.join(',') + ')',
@@ -183,27 +209,11 @@ function togglePick(event) {
     invalidates: []
   });
   if (existing?.length > 0) {
-    // Unpicking: clear every pick in the group so the card goes dark everywhere
-    existing.forEach(function(pick) {
-      Actions.callApi({
-        method: 'delete',
-        url: appGlobals.supabaseUrl + '/rest/v1/picks?id=eq.' + pick.id,
-        headers,
-        invalidates: []
-      });
-    });
-    // Also delete any enrichment the user created for these event IDs
-    ids.forEach(function(eid) {
-      Actions.callApi({
-        method: 'delete',
-        url: appGlobals.supabaseUrl + '/rest/v1/event_enrichments?event_id=eq.' + eid + '&curator_id=eq.' + authUser.id,
-        headers,
-        invalidates: []
-      });
-    });
-    picksCounter = picksCounter + 1;
+    // Unpicking: the one authority clears the whole card everywhere.
+    runPickPlan(event, headers);
   } else if (oneClickPick && event.id) {
-    // One-click pick: skip the editor and create pick directly
+    // One-click pick: skip the editor and create the pick for the event id
+    // unchanged.
     Actions.callApi({
       method: 'post',
       url: appGlobals.supabaseUrl + '/rest/v1/picks',
@@ -309,28 +319,33 @@ function persistDashboard(tiles, layout) {
   window.saveDashboardConfig(tiles, layout, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey);
 }
 
-function removePick(pickId, duplicateGroup) {
+// Resolve a pick to its card, then run the one write plan. The mirror is
+// city+date-window scoped, so a miss (other-city, out-of-window, or a pick made
+// before the mirror populated) falls back to DB-side resolution: one GET for the
+// stored group's members, or the pick's own event id for a NULL group / orphan.
+// A virtual card in the mirror carries no membership, so it too lands on the
+// fallback rather than silently swallowing the removal.
+function removePick(pick) {
   const headers = {
     apikey: appGlobals.supabasePublishableKey,
     Authorization: 'Bearer ' + authSession?.access_token
   };
-  let pickIds = [pickId];
-  if (duplicateGroup) {
-    const groupPicks = Actions.callApi({
+  const card = window.Card.cardForPick(pick, processedCards);
+  if (card && window.Card.members(card).length) {
+    runPickPlan(card, headers);
+    return;
+  }
+  const normalized = window.Card.normalizePick(pick);
+  if (normalized.duplicateGroup) {
+    const rows = Actions.callApi({
       method: 'get',
-      url: appGlobals.supabaseUrl + '/rest/v1/picks?select=id,events!inner(duplicate_group)&user_id=eq.' + authUser.id + '&events.duplicate_group=eq.' + encodeURIComponent(duplicateGroup),
+      url: appGlobals.supabaseUrl + '/rest/v1/events?select=id&duplicate_group=eq.' + encodeURIComponent(normalized.duplicateGroup),
       headers,
       invalidates: []
     });
-    if (Array.isArray(groupPicks) && groupPicks.length) {
-      pickIds = groupPicks.map(function(pick) { return pick.id; });
-    }
+    const members = (Array.isArray(rows) ? rows.map(function(row) { return row.id; }) : []).filter(function(id) { return id != null; });
+    runPickPlan({ id: normalized.eventId, merged_ids: members.length ? members : [normalized.eventId] }, headers);
+    return;
   }
-  Actions.callApi({
-    method: 'delete',
-    url: appGlobals.supabaseUrl + '/rest/v1/picks?id=in.(' + pickIds.join(',') + ')',
-    headers,
-    invalidates: []
-  });
-  picksCounter = picksCounter + 1;
+  runPickPlan({ id: normalized.eventId, merged_ids: normalized.eventId != null ? [normalized.eventId] : [] }, headers);
 }
