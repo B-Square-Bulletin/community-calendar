@@ -68,11 +68,35 @@
     {
       "title": "Review the work against the spec",
       "description": "Run `code-review` over `git diff 0dfcfc43ed3a2fe50dbf182f33bf77a17de17bf9...HEAD` against the spec at `.scratch/169-card-membership/spec.md`. Run the findings through `receiving-code-review`. Append each worthwhile finding as a new item with no `reference` and `hand_off: false`, with a `priority` greater than this item's. Write every remaining finding and every outstanding hand-off item into this item's `notes`.",
+      "passes": true,
+      "hand_off": false,
+      "notes": "Ran code-review over `git diff 0dfcfc43ed3a2fe50dbf182f33bf77a17de17bf9...HEAD` (9 commits, 25 files) against `.scratch/169-card-membership/spec.md`: two parallel axes (Standards, Spec), then every finding run through receiving-code-review and re-verified against the code before recording. Three findings were worth a later fix and became items 11-13 (priorities 10-12), each with no `reference` and `hand_off: false`: (p10) Card/Recurring fork helpers.js's source-name/aggregator-ordering/timezone helpers; (p11) the legacy pick read `isEventPicked` and the camelCase `mergedIds` input reads survive with no production caller; (p12) the production-fixture equivalence test is structural only (card count + members), not the full-row golden the spec asks for. Remaining findings, held (none is a hard standard breach; each is a judgement call): Recurring exposes no memo reset — defensible, it is stateless, only Card holds memo state, no action. Recurring exports `MIN_OCCURRENCES` beyond the pinned interface (spec line 62) and nothing consumes it — minor scope creep, drop it alongside the item-12 cleanup or leave it as a named constant. `pickPlan` is a one-line delegation to `members` — rejected: spec line 70 pins `pickPlan(card) -> { memberEventIds }`, so the wrapper is the contract, not a Middle Man. `removePick`'s DB fallback hand-assembles Card's own shape at the call site (`runPickPlan({ id, merged_ids: members })`, Globals.xs:347/350) — minor Feature Envy/Primitive Obsession; a `Card.pickPlanForMemberIds(ids)` would move that knowledge back into Card, left un-itemised as low value. `Card.groupMemo` is a single shared slot, so the calendar's `combineEvents` fold, SourcesDialog, and each tile evict one another even though dialog/tiles pass the strong `window.eventsSignature` — output is correct and pnpm bench passes (warm hit verified), but the spec's signature-keying only partly delivers cross-site reuse; recorded as low-severity. Process oddity: `prd.json` is committed at the repo root while its `.scratch/*` references are gitignored — no documented rule forbids it, but it ships an agent working artifact; consider dropping before the PR. Outstanding hand-off items: none (no item carries `hand_off: true`). Decisions (unattended loop, pre-approved): recorded the worthwhile findings as separate backlog items rather than fixing them inside the review item, because the item's charge is review-and-append and the new items are the fix queue; verified each finding against the code first, and rejected the two that the spec itself pins. Checks: `make lint` and `make test` green (review was a prd-only change; no source touched).",
+      "reference": ".scratch/169-card-membership/spec.md",
+      "priority": 9
+    },
+    {
+      "title": "refactor(xmlui): share source-name, ordering, and timezone helpers",
+      "description": "Card and Recurring fork helpers.js's source helpers instead of reading one derivation. `card.js` re-implements `uniqueSourceNames`, `eventSourceNames`, `normalizeVenueToken`, `sourceMatchesLocation`, and the aggregator/location ordering (`orderSourceNames` duplicating `sortSourcesForDisplay`); `recurring.js`'s `cityTimezone` duplicates `getCityTimezone`. The spec (line 68) says ordering \"stays the separate `sortSourcesForDisplay` helper, so Card takes no aggregator dependency\", while line 66 requires the raw-row fallback ordering inside Card — the two clauses contradict, and the implementation resolved it by forking. Also dedupe the intra-Card pairs: `seedMemberIds`/`members`, and the `'g:'+duplicate_group : 'r:'+id` key rebuilt in `routeGroupKey` and `uniquePicks`. Constraint: `card.js` is loaded standalone by `scripts/bench_card_group.js` (and before helpers.js at runtime), so share via a small standalone module or update that bench to load helpers.js too.",
       "passes": false,
       "hand_off": false,
       "notes": "",
-      "reference": ".scratch/169-card-membership/spec.md",
-      "priority": 9
+      "priority": 10
+    },
+    {
+      "title": "chore(xmlui): retire the surviving legacy pick read and alias",
+      "description": "`isEventPicked` (helpers.js:1482) is still defined and exported (`window.isEventPicked`, helpers.js:2510) and exercised only by its own `xmlui/test.html` block — no production call site remains, so it is a second pick-state reader kept alive by its test (spec Solution: one place decides `isPicked`; spec line 79 removed only `dedupeEvents`/`eventMergedIds`/`dedupePicks`). Delete it and re-point or retire the test.html block to `Card.isPicked`. Also drop the vestigial camelCase `mergedIds` input reads in `card.js` (`seedMemberIds` line 140, `members` lines 257-258): the only producer (`dedupeEvents`) was deleted, so those reads can never fire (spec line 78: drop the alias in favour of `merged_ids`).",
+      "passes": false,
+      "hand_off": false,
+      "notes": "",
+      "priority": 11
+    },
+    {
+      "title": "test(xmlui): full-row equivalence over the production view payload",
+      "description": "The captured production-payload test (tests/js/card-membership.test.js:547-567) asserts only card count and per-card `members()` equality — a silently dropped or reordered field (`source`, `source_names`, `source_urls`, `isVirtual`, start-time ordering) would still pass. The spec's Testing Decisions and Further Notes call for \"output equals the golden snapshot\". Strengthen the test to compare the grouped output field-for-field against a committed golden (or against the input rows, given the plain path is near pass-through), so story 21's output-equivalence claim is actually verified.",
+      "passes": false,
+      "hand_off": false,
+      "notes": "",
+      "priority": 12
     }
   ]
 }
