@@ -125,6 +125,15 @@
       "details_fetched": 313,
       "postal_less": 7,
       "emitted": 595
+    },
+    {
+      "date": "2026-10-02",
+      "pages": 59,
+      "cards_fetched": 589,
+      "unique_detail_urls": 308,
+      "details_fetched": 308,
+      "postal_less": 7,
+      "emitted": 584
     }
   ]
 }
