@@ -1,0 +1,307 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Meetup//Meetup Calendar 1.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+NAME:Toronto Bike Meetup
+X-WR-CALNAME:Toronto Bike Meetup
+BEGIN:VTIMEZONE
+TZID:America/Toronto
+TZURL:http://tzurl.org/zoneinfo-outlook/America/Toronto
+X-LIC-LOCATION:America/Toronto
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Bike Meetup
+X-SOURCE-URL:https://www.meetup.com/torontobikemeetup/
+UID:event_313321506@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031643Z
+DTSTART;TZID=America/Toronto:20260411T130000
+DTEND;TZID=America/Toronto:20260411T170000
+SUMMARY:Winter Walk Long Branch Return Via Etobicoke Creek Trail
+DESCRIPTION:Toronto Bike Meetup\n10 km (9.95) winter walk at 4 km per hour
+  pace (or faster by consensus) from Long Branch Return Via Etobicoke Creek
+  Trail.\n\n1 PM Meet at Long Branch GO station\, 20 Brow Dr\, Etobicoke\, 
+ ON M8W 3P6\n\n1 PM to 2 PM Eat at 241 Pizza\, 3815 Lake Shore Blvd W\, Eto
+ bicoke\, ON M8W 1R2\, [(416) 241-0241](https://www.google.com/search?q=241
+ +pizza+near+longbranch&rlz=1C1RXMK_enCA1182CA1182&ie=UTF-8#)\n\n2 PM to 4:
+ 30 PM Walk North up Etobicoke Creek Trail to Sherway Dr. Then return south
+  to the lake. Finally return to Long branch GO station.\n\nRoute Map with 
+ GPX Download:\nhttps://www.komoot.com/tour/2775245111\n\nWear loose fittin
+ g winter clothing: coat\, hat\, gloves\, snow pants\, thick socks\, waterp
+ roof thermal lined boots with non slip soles. If necessary put warmers in 
+ your gloves and boots. Bring water.\n\nChris 647 453 3327
+URL;VALUE=URI:https://www.meetup.com/torontobikemeetup/events/313321506/
+STATUS:CONFIRMED
+CREATED:20260212T053801Z
+LAST-MODIFIED:20260212T053801Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Bike Meetup
+X-SOURCE-URL:https://www.meetup.com/torontobikemeetup/
+UID:event_313321510@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031643Z
+DTSTART;TZID=America/Toronto:20260412T130000
+DTEND;TZID=America/Toronto:20260412T170000
+SUMMARY:Winter Walk Finch West Return Via G Ross Lord Park 
+DESCRIPTION:Toronto Bike Meetup\n10.5 km winter walk at 4 km per hour pace
+  (or faster by consensus) We walk East along Finch Corridor Trail to G Ros
+ s Lord park. Sunday March 08\, 2026\, 12 PM to 4 PM.\n\n1 PM Meet at Finch
+  West Station\n\n1 PM to 2 PM: Dine at Caribbean Heat\, 1300 Finch Ave W\,
+  North York\, ON M3J 3K2\, [(416) 739-6600](https://www.google.com/search?
+ q=caribbean+heat&rlz=1C1RXMK_enCA1182CA1182&ie=UTF-8&lqi=Cg5jYXJpYmJlYW4ga
+ GVhdCIDiAEBSOTXyMnlgICACFoYEAAQARgAGAEiDmNhcmliYmVhbiBoZWF0kgEUY2FyaWJiZWF
+ uX3Jlc3RhdXJhbnQ#)\, Menu: [caribbeanheat.ca](http://caribbeanheat.ca/)\n\
+ n2 PM to 5 PM: walk East along Finch Corridor Trail to G Ross Lord park. R
+ eturn to Finch West Station.\n\nRoute Map with GPX download:\nhttps://www.
+ komoot.com/tour/2774816588\n\nWear loose fitting winter clothing: coat\, h
+ at\, gloves\, snow pants\, thick socks\, waterproof thermal lined boots wi
+ th non slip soles. If necessary put warmers in your gloves and boots. Brin
+ g water.\n\nChris 647 453 3327
+URL;VALUE=URI:https://www.meetup.com/torontobikemeetup/events/313321510/
+STATUS:CONFIRMED
+CREATED:20260212T054002Z
+LAST-MODIFIED:20260212T054002Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Bike Meetup
+X-SOURCE-URL:https://www.meetup.com/torontobikemeetup/
+UID:event_313321515@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031643Z
+DTSTART;TZID=America/Toronto:20260418T130000
+DTEND;TZID=America/Toronto:20260418T170000
+SUMMARY:Winter Walk Davisville Return to Brickworks 
+DESCRIPTION:Toronto Bike Meetup\n12 km\, winter walk at 4 km per hour pace
+  (or faster by consensus) from Davisville Station return Via Evergreen Bri
+ ck Works. Saturday March 1 PM to 5 PM\n\n1 PM Meet at Eglinton Station.\n\
+ n1 PM to 2 PM: Eat at Y&E Caribbean Bistro\, 2352 Yonge St\, Toronto\, ON 
+ M4P 2E6\, [(437) 333-4696](https://www.google.com/search?q=caribbean+resta
+ urant+near+yonge+and+davisville+toronto&rlz=1C1RXMK_enCA1182CA1182&ie=UTF-
+ 8&lqi=CjZjYXJpYmJlYW4gcmVzdGF1cmFudCBuZWFyIHlvbmdlIGFuZCBkYXZpc3ZpbGxlIHRv
+ cm9udG9Ioer0hYO9gIAIWkgQABABGAAYAxgGIjZjYXJpYmJlYW4gcmVzdGF1cmFudCBuZWFyIH
+ lvbmdlIGFuZCBkYXZpc3ZpbGxlIHRvcm9udG8qBAgDEAGSARRjYXJpYmJlYW5fcmVzdGF1cmFu
+ dJoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQyeHdVbFF5Vm5Ga2JVWXdVek5vV21FeGFFeF
+ RWMlJRVG5wT1prOUZSUkFC-gEECAAQRA#)\, https://ynecaribbeanbistro.com/\n\nCa
+ tch a train south 1 stop to Davisville.\n\n2 PM to 5 PM Proceed South down
+  the Ravine Beltline Trail. Return to Davisville station by walking North 
+ on the Park Drive Reservation Trail.\n\nRoute Map With GPX Download:\nhttp
+ s://www.komoot.com/tour/2775139417\n\nWear loose fitting winter clothing: 
+ coat\, hat\, gloves\, snow pants\, thick socks\, waterproof thermal lined 
+ boots with non slip soles. If necessary put warmers in your gloves and boo
+ ts. Bring water.\n\nChris 647 453 3327
+URL;VALUE=URI:https://www.meetup.com/torontobikemeetup/events/313321515/
+STATUS:CONFIRMED
+CREATED:20260212T054155Z
+LAST-MODIFIED:20260212T054155Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Bike Meetup
+X-SOURCE-URL:https://www.meetup.com/torontobikemeetup/
+UID:event_313323941@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031643Z
+DTSTART;TZID=America/Toronto:20260419T130000
+DTEND;TZID=America/Toronto:20260419T170000
+SUMMARY:Winter Walk Ward Island to Hanlan's Point
+DESCRIPTION:Toronto Bike Meetup\n12.5 km walk from Ward Island to Hanlan's
+  Point. Saturday March 28\, 2026\n\n1 PM meet near Roy Woods restaurant in
+  the food court at Union Station near the York St. entrance.\n\n1 PM to 2 
+ PM: Eat at Union Station food court.\n\n2 PM From Union station\, catch th
+ e [509 Harbourfront](https://www.google.com/search?q=509+Harbourfront&rlz=
+ 1C1RXMK_enCA1182CA1182&ie=UTF-8&ved=2ahUKEwj6yPr6h8uSAxUtwvACHfgaBgIQgK4Qe
+ gQIARAC) or [510 Spadina](https://www.google.com/search?q=510+Spadina&rlz=
+ 1C1RXMK_enCA1182CA1182&ie=UTF-8&ved=2ahUKEwj6yPr6h8uSAxUtwvACHfgaBgIQgK4Qe
+ gQIARAD) streetcars to the Jack Layton Ferry terminal.\n\nCatch the ferry 
+ to Ward's Island. Proceed to walk to Hanlan's point. Catch the ferry back 
+ to the mainland.\n\nRoute Map with GPX Download:\nhttps://www.komoot.com/t
+ our/2776019044\n\nWear loose fitting winter clothing: coat\, hat\, gloves\
+ , snow pants\, thick socks\, waterproof thermal lined boots with non slip 
+ soles. If necessary put warmers in your gloves and boots. Bring water.\n\n
+ Chris 647 453 3327
+URL;VALUE=URI:https://www.meetup.com/torontobikemeetup/events/313323941/
+STATUS:CONFIRMED
+CREATED:20260212T124541Z
+LAST-MODIFIED:20260212T124541Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Bike Meetup
+X-SOURCE-URL:https://www.meetup.com/torontobikemeetup/
+UID:event_313321536@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031643Z
+DTSTART;TZID=America/Toronto:20260425T130000
+DTEND;TZID=America/Toronto:20260425T180000
+SUMMARY:Winter Walk Unionville GO Return Via TooGood Pond and The Milne Da
+ m
+DESCRIPTION:Toronto Bike Meetup\n# 15.7 km Winter Walk Unionville GO Retur
+ n Via TooGood Pond and The Milne Dam\n\n1 PM Meet at Unionville GO\,\n\nRo
+ ute Map with GPX Download Available:\nhttps://www.komoot.com/tour/27791343
+ 15\n\n1 :30 PM to 2:30 PM Near the start of this walk and not far off rout
+ e\, we eat at Grillies ( Highway 7 - Markham)\, 4580 York Regional Rd 7\, 
+ Unionville\, ON L3R 1M5\, +1 905 944 1010\n\n2:30 PM to 6 PM walk North on
+  Main St. to TooGood pond. Then follow the Rouge Valley Trail Eastward. Re
+ turn to Unionville GO.
+URL;VALUE=URI:https://www.meetup.com/torontobikemeetup/events/313321536/
+STATUS:CONFIRMED
+CREATED:20260212T054646Z
+LAST-MODIFIED:20260212T054646Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Bike Meetup
+X-SOURCE-URL:https://www.meetup.com/torontobikemeetup/
+UID:event_313321616@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031643Z
+DTSTART;TZID=America/Toronto:20260426T130000
+DTEND;TZID=America/Toronto:20260426T180000
+SUMMARY:Brampton GO Return to Stafford Woods Via Etobicoke Creek Trail
+DESCRIPTION:Toronto Bike Meetup\n16.3 km walk from Brampton Innovation GO 
+ Return to Stafford Forest Via Etobicoke Creek Trail. Sunday April 5\, 2026
+ . 1PM to 6PM\n\n1 PM Meet at Brampton Innovation GO\,\n\n1 PM to 2 PM Dine
+  at Indian Curry Express & Bar\, 47 Queen St W Unit 1\, Brampton\, ON L6Y 
+ 1L9\, [(905) 450-4300](https://www.google.com/search?q=budget+friendly+ind
+ ian+restaurant+near+brampton+innovation+go&rlz=1C1RXMK_enCA1182CA1182&sxsr
+ f=ANbL-n77FH-WP0jl8cwN66S4TFXsWwUfTA:1770685422464&udm=1&lsack=7oOKadnxG-W
+ B5OMPien08AU&dpr=0.8&lqi=Cj1idWRnZXQgZnJpZW5kbHkgaW5kaWFuIHJlc3RhdXJhbnQgb
+ mVhciBicmFtcHRvbiBpbm5vdmF0aW9uIGdvIihSJi9nZW8vdHlwZS9lc3RhYmxpc2htZW50X3B
+ vaS9mZWVsc19jb3p5SLb5kpP4r4CACFpVEAAQARACEAMQBhAHGAIYBSI9YnVkZ2V0IGZyaWVuZ
+ Gx5IGluZGlhbiByZXN0YXVyYW50IG5lYXIgYnJhbXB0b24gaW5ub3ZhdGlvbiBnbyoECAMQA5I
+ BEWluZGlhbl9yZXN0YXVyYW50mgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVU5mYXpVM1dXTkJFQ
+ UX6AQQIVxAs#)\n\n2 PM to 6 PM walk from Brampton Innovation GO to Stafford
+  Forest Via Etobicoke Creek Trail. Return to Brampton GO\,\n\nRoute Map Wi
+ th GPX Download:\nhttps://www.komoot.com/tour/2778999201
+URL;VALUE=URI:https://www.meetup.com/torontobikemeetup/events/313321616/
+STATUS:CONFIRMED
+CREATED:20260212T055107Z
+LAST-MODIFIED:20260212T055107Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Bike Meetup
+X-SOURCE-URL:https://www.meetup.com/torontobikemeetup/
+UID:event_313321625@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031643Z
+DTSTART;TZID=America/Toronto:20260502T130000
+DTEND;TZID=America/Toronto:20260502T160000
+SUMMARY:Winter Walk Through High Park
+DESCRIPTION:Toronto Bike Meetup\n7.3 km winter walk at 4 km per hour pace 
+ (or faster by consensus) through High Park. Saturday Feb 21\, 2026\, 12 PM
+  to 3 PM.\n\n1 PM Meet at High Park Station.\n\n2 PM to 3 PM Near halfway 
+ point we will dine at T Dot Jerk restaurant\, 26 Roncesvalles Ave\, Toront
+ o\, ON M6R 2K3\, Phone: [(416) 534-5375](https://www.google.com/search?q=T
+ +Dot+Jerk+restaurant&rlz=1C1RXMK_enCA1182CA1182&ie=UTF-8#)\, https://tdotj
+ erk.ca/\n\n3 PM to 4 PM Return to High Park Station Via High Park Zoo.\n\n
+ The Route map bypasses the zoo. On return leg\, just turn left onto Spring
+  Road and continue along Deer Pen Rd toward the zoo.\n\nRoute Map with GPX
+  download:\nhttps://www.komoot.com/tour/2775222692\n\nAlternate Route Map 
+ if trails are accesable:\nhttps://www.komoot.com/tour/2776010341\n\nWear l
+ oose fitting winter clothing: coat\, hat\, gloves\, snow pants\, thick soc
+ ks\, waterproof thermal lined boots with non slip soles. If necessary put 
+ warmers in your gloves and boots. Bring water.\n\nChris 647 453 3327
+URL;VALUE=URI:https://www.meetup.com/torontobikemeetup/events/313321625/
+STATUS:CONFIRMED
+CREATED:20260212T055314Z
+LAST-MODIFIED:20260212T055314Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Bike Meetup
+X-SOURCE-URL:https://www.meetup.com/torontobikemeetup/
+UID:event_313742806@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031643Z
+DTSTART;TZID=America/Toronto:20260509T130000
+DTEND;TZID=America/Toronto:20260509T170000
+SUMMARY:Pioneer Village to Union Station Via Humber River Trail and High P
+ ark
+DESCRIPTION:Toronto Bike Meetup\n40.6 km cherry blossom ride from Pioneer 
+ Village to Union Station Via Humber River Trail and High Park\n\nRoute Map
+ :\n\nhttps://www.komoot.com/tour/2821848844
+URL;VALUE=URI:https://www.meetup.com/torontobikemeetup/events/313742806/
+STATUS:CONFIRMED
+CREATED:20260311T133321Z
+LAST-MODIFIED:20260311T133321Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Bike Meetup
+X-SOURCE-URL:https://www.meetup.com/torontobikemeetup/
+UID:event_313652540@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031643Z
+DTSTART;TZID=America/Toronto:20260516T130000
+DTEND;TZID=America/Toronto:20260516T170000
+SUMMARY:Vaughan Return Via William Granger Greenway and  Rib Fest
+DESCRIPTION:Toronto Bike Meetup\n46 km loop starting and ending from Vaugh
+ an Metropolitan Center.\n1 PM to 4PM.\n\n4 PM to 5 PM Eat at Vaughan Rib F
+ est\n\nRoute Map:\nhttps://www.komoot.com/tour/2811559783\n\nhttps://ribfe
+ stx.com/event/vaughan-ribfest-2026/\nFREE PARKING \\| FREE CONCERT WITH AD
+ MISSION \\| ![🐶](https://s.w.org/images/core/emoji/17.0.2/svg/1f436.svg
+ ) PET FRIENDLY\n![🎟️](https://s.w.org/images/core/emoji/17.0.2/svg/1f
+ 39f.svg) $5 ADMISSION\, CHILDREN 10 & UNDER FREE\nOntario Festival Group &
+  Ribfest X are **committed to eliminating all single-use plastics** at our
+  events\, including **water bottles\, cups\, containers\, and utensils**. 
+ We encourage guests to bring their own **reusable water bottles**\, which 
+ can be refilled at our onsite water stations for **FREE**. **All reusable 
+ water bottles must be emptied before entering event grounds.**
+URL;VALUE=URI:https://www.meetup.com/torontobikemeetup/events/313652540/
+STATUS:CONFIRMED
+CREATED:20260305T184407Z
+LAST-MODIFIED:20260305T184407Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Toronto Bike Meetup
+X-SOURCE-URL:https://www.meetup.com/torontobikemeetup/
+UID:event_313757394@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031643Z
+DTSTART;TZID=America/Toronto:20260530T120000
+DTEND;TZID=America/Toronto:20260530T140000
+SUMMARY:Eglinton West  to Toronto Island Via Beltline\, Taylor Creek\, Boa
+ rdwalk
+DESCRIPTION:Toronto Bike Meetup\n41 KM bike ride from Eglinton West Statio
+ n to Toronto Island Via Beltline\, Moore Ravine\, Taylor Creek\, Boardwalk
+ . **12:00 PM - 6 PM**\n\nAlong forest\, rivers and lakes\nWe arouse blissf
+ ul states\n\nCatch the 4:00 pm ferry to Ward's Island\nCatch the 530 pm fe
+ rry from Harlan's Point to the Ferry Docks\n\nSnack at Tim Hortons\, 130 H
+ arbour St\, Toronto\, ON M5J 2Y2\nTel. [(416) 551-9413](https://www.google
+ .com/search?client=opera&q=Tim+Hortons%2C+130+Harbor+St&sourceid=opera&ie=
+ UTF-8&oe=UTF-8#)\n\nRoute Map:\nhttps://web.bikemap.net/r/16101445\n\nGPX:
+ \nhttps://drive.google.com/file/d/19sCN2dw5GMKACNPL4uIpYteeUi8p92kU/view?u
+ sp=drive_link\n\nNote: Riders may start and end at any point along the rou
+ te. Please inform me of your intentions.\n\nChris cell 647 453 3327\n\nWha
+ tsApp Bike Group:\nhttps://chat.whatsapp.com/DG9wJZfrVoe1xj2JyaMOyT\n\nSom
+ e Bike Group Chat History Before Winter 2024:\nhttps://drive.google.com/fi
+ le/d/1QnGKUaSQ_cKOoPrcxDiQb6fyDB9gJmD0/view?usp=sharing
+URL;VALUE=URI:https://www.meetup.com/torontobikemeetup/events/313757394/
+STATUS:CONFIRMED
+CREATED:20260312T121610Z
+LAST-MODIFIED:20260312T121610Z
+CLASS:PUBLIC
+END:VEVENT
+X-ORIGINAL-URL:https://www.meetup.com/TorontoBikeMeetup/events/ical/
+X-WR-CALNAME:Toronto Bike Meetup
+END:VCALENDAR
