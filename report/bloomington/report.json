@@ -1,11 +1,11 @@
 {
   "city": "bloomington",
-  "generated": "2026-10-06T05:26:15.818201+00:00",
+  "generated": "2026-10-07T04:53:14.366278+00:00",
   "build": {
-    "generated": "2026-10-06T05:26:15.818201+00:00",
-    "total_events": 7519,
-    "prev_total_events": 7543,
-    "delta": -24
+    "generated": "2026-10-07T04:53:14.366278+00:00",
+    "total_events": 7448,
+    "prev_total_events": 7519,
+    "delta": -71
   },
   "problems": [
     {
@@ -60,7 +60,7 @@
       "severity": 1,
       "kind": "broken_feed",
       "title": "uplandbeer is serving empty, not ICS",
-      "detail": "no good build in recorded history; broken since 2026-07-09",
+      "detail": "no good build in recorded history; broken since 2026-07-10",
       "feed": "uplandbeer",
       "repro": {
         "display": "Upland Brewing",
@@ -72,7 +72,7 @@
       "severity": 1,
       "kind": "broken_feed",
       "title": "wonderlab is serving html, not ICS",
-      "detail": "no good build in recorded history; broken since 2026-07-09",
+      "detail": "no good build in recorded history; broken since 2026-07-10",
       "feed": "wonderlab",
       "repro": {
         "display": "WonderLab Museum",
@@ -83,25 +83,25 @@
     {
       "severity": 2,
       "kind": "newly_silent",
-      "title": "gcal_mocoin4h went silent (valid calendar, 0 events)",
-      "detail": "was 1 events on 2026-09-28",
-      "feed": "gcal_mocoin4h",
+      "title": "events_livewhale_235 went silent (valid calendar, 0 events)",
+      "detail": "was 2 events on 2026-10-06",
+      "feed": "events_livewhale_235",
       "repro": {
-        "display": "Monroe County 4-H",
-        "source": "https://calendar.google.com/calendar/ical/mocoin4h%40gmail.com/public/basic.ics",
-        "command": "curl -sL -A 'Mozilla/5.0' 'https://calendar.google.com/calendar/ical/mocoin4h%40gmail.com/public/basic.ics' | grep -c 'BEGIN:VEVENT'"
+        "display": "IU Neal-Marshall Black Culture Center",
+        "source": "https://events.iu.edu/live/ical/events/group_id/235",
+        "command": "curl -sL -A 'Mozilla/5.0' 'https://events.iu.edu/live/ical/events/group_id/235' | grep -c 'BEGIN:VEVENT'"
       }
     },
     {
       "severity": 2,
       "kind": "newly_silent",
-      "title": "gcal_r5lf3al9blontcsjnedbr2f2u0 went silent (valid calendar, 0 events)",
-      "detail": "was 1 events on 2026-10-02",
-      "feed": "gcal_r5lf3al9blontcsjnedbr2f2u0",
+      "title": "gcal_bloomington_in_gov_1b95au4d2ueudldosb024fimp0_group_calendar_google_com went silent (valid calendar, 0 events)",
+      "detail": "was 2 events on 2026-10-06",
+      "feed": "gcal_bloomington_in_gov_1b95au4d2ueudldosb024fimp0_group_calendar_google_com",
       "repro": {
-        "display": "Bloomington Velo Club",
-        "source": "https://calendar.google.com/calendar/ical/r5lf3al9blontcsjnedbr2f2u0%40group.calendar.google.com/public/basic.ics",
-        "command": "curl -sL -A 'Mozilla/5.0' 'https://calendar.google.com/calendar/ical/r5lf3al9blontcsjnedbr2f2u0%40group.calendar.google.com/public/basic.ics' | grep -c 'BEGIN:VEVENT'"
+        "display": "Utilities Service Board",
+        "source": "https://calendar.google.com/calendar/ical/bloomington.in.gov_1b95au4d2ueudldosb024fimp0@group.calendar.google.com/public/basic.ics",
+        "command": "curl -sL -A 'Mozilla/5.0' 'https://calendar.google.com/calendar/ical/bloomington.in.gov_1b95au4d2ueudldosb024fimp0@group.calendar.google.com/public/basic.ics' | grep -c 'BEGIN:VEVENT'"
       }
     },
     {
@@ -114,30 +114,6 @@
         "display": "Bloomington Old-Time Music & Dance",
         "source": "https://calendar.google.com/calendar/ical/shweekend%40gmail.com/public/basic.ics",
         "command": "curl -sL -A 'Mozilla/5.0' 'https://calendar.google.com/calendar/ical/shweekend%40gmail.com/public/basic.ics' | grep -c 'BEGIN:VEVENT'"
-      }
-    },
-    {
-      "severity": 2,
-      "kind": "newly_silent",
-      "title": "sycamore_land_trust went silent (valid calendar, 0 events)",
-      "detail": "was 8 events on 2026-10-05",
-      "feed": "sycamore_land_trust",
-      "repro": {
-        "display": "Sycamore Land Trust",
-        "source": "python scrapers/sycamore_land_trust.py",
-        "command": "python scrapers/sycamore_land_trust.py"
-      }
-    },
-    {
-      "severity": 2,
-      "kind": "newly_silent",
-      "title": "writersguildbloomington went silent (valid calendar, 0 events)",
-      "detail": "was 3 events on 2026-10-01",
-      "feed": "writersguildbloomington",
-      "repro": {
-        "display": "Writers Guild at Bloomington",
-        "source": "python scrapers/writers_guild.py --output cities/bloomington/writersguildbloomington.ics",
-        "command": "python scrapers/writers_guild.py --output cities/bloomington/writersguildbloomington.ics"
       }
     },
     {
@@ -189,9 +165,21 @@
       }
     },
     {
+      "severity": 2,
+      "kind": "drop",
+      "title": "maxpreps_eastern_greene: Events dropped 60% (5 \u2192 2)",
+      "detail": "2026-10-07",
+      "feed": "maxpreps_eastern_greene",
+      "repro": {
+        "display": "Eastern Greene Athletics",
+        "source": "python scrapers/maxpreps.py --url \"https://www.maxpreps.com/in/bloomfield/eastern-greene-thunderbirds/events/\" --name \"Eastern Greene Athletics\" --timezone \"America/Indiana/Indianapolis\"",
+        "command": "python scrapers/maxpreps.py --url \"https://www.maxpreps.com/in/bloomfield/eastern-greene-thunderbirds/events/\" --name \"Eastern Greene Athletics\" --timezone \"America/Indiana/Indianapolis\""
+      }
+    },
+    {
       "severity": 3,
       "kind": "tz_anomaly",
-      "title": "WFIU Community Calendar: 22/220 events at suspicious hours",
+      "title": "WFIU Community Calendar: 22/221 events at suspicious hours",
       "detail": "likely a -4h offset error",
       "feed": "wfiu_community_calendar",
       "repro": {
@@ -271,6 +259,18 @@
       }
     },
     {
+      "feed": "cicada_cinema",
+      "was": null,
+      "was_date": null,
+      "silent_since": "2026-10-07",
+      "content": "quiet",
+      "repro": {
+        "display": "Cicada Cinema",
+        "source": "python scrapers/shopify_events.py --url \"https://cicadacinema.com\" --name \"Cicada Cinema\"",
+        "command": "python scrapers/shopify_events.py --url \"https://cicadacinema.com\" --name \"Cicada Cinema\""
+      }
+    },
+    {
       "feed": "dice_orbit_room",
       "was": null,
       "was_date": null,
@@ -286,7 +286,7 @@
       "feed": "dzpdualvwspgqghrysyz_functions_v1",
       "was": null,
       "was_date": null,
-      "silent_since": "2026-07-09",
+      "silent_since": "2026-07-10",
       "content": "quiet",
       "repro": {
         "display": "The Night",
@@ -346,7 +346,7 @@
       "feed": "gcal_2gd73d7gc46mstrdnr6k7v7b2o_group_calendar_google_com",
       "was": null,
       "was_date": null,
-      "silent_since": "2026-07-09",
+      "silent_since": "2026-07-10",
       "content": "quiet",
       "repro": {
         "display": "B-Square: Critical Mass",
@@ -358,7 +358,7 @@
       "feed": "gcal_bloominglabs",
       "was": null,
       "was_date": null,
-      "silent_since": "2026-07-09",
+      "silent_since": "2026-07-10",
       "content": "quiet",
       "repro": {
         "display": "Bloominglabs Makerspace",
@@ -370,7 +370,7 @@
       "feed": "gcal_c_7b681cea9368f8b7aebb110afb0b41e427eaaf748d3f03784876fa37f1d6b793_group_calendar_google_com",
       "was": null,
       "was_date": null,
-      "silent_since": "2026-07-09",
+      "silent_since": "2026-07-10",
       "content": "quiet",
       "repro": {
         "display": "Bloomington Transit",
@@ -400,6 +400,18 @@
         "display": "Monroe County Fairgrounds",
         "source": "https://calendar.google.com/calendar/ical/mocofairgrounds%40gmail.com/public/basic.ics",
         "command": "curl -sL -A 'Mozilla/5.0' 'https://calendar.google.com/calendar/ical/mocofairgrounds%40gmail.com/public/basic.ics' | grep -c 'BEGIN:VEVENT'"
+      }
+    },
+    {
+      "feed": "gcal_mocoin4h",
+      "was": 1,
+      "was_date": "2026-09-28",
+      "silent_since": "2026-09-29",
+      "content": "quiet",
+      "repro": {
+        "display": "Monroe County 4-H",
+        "source": "https://calendar.google.com/calendar/ical/mocoin4h%40gmail.com/public/basic.ics",
+        "command": "curl -sL -A 'Mozilla/5.0' 'https://calendar.google.com/calendar/ical/mocoin4h%40gmail.com/public/basic.ics' | grep -c 'BEGIN:VEVENT'"
       }
     },
     {
@@ -584,6 +596,13 @@
       "content": "not_ics:unknown"
     },
     {
+      "feed": "cicada_cinema",
+      "was": null,
+      "was_date": null,
+      "silent_since": "2026-10-07",
+      "content": "quiet"
+    },
+    {
       "feed": "dice_orbit_room",
       "was": null,
       "was_date": null,
@@ -594,7 +613,7 @@
       "feed": "dzpdualvwspgqghrysyz_functions_v1",
       "was": null,
       "was_date": null,
-      "silent_since": "2026-07-09",
+      "silent_since": "2026-07-10",
       "content": "quiet"
     },
     {
@@ -619,6 +638,13 @@
       "content": "quiet"
     },
     {
+      "feed": "events_livewhale_235",
+      "was": 2,
+      "was_date": "2026-10-06",
+      "silent_since": "2026-10-07",
+      "content": "quiet"
+    },
+    {
       "feed": "gcal_2db8c2cf65a3558e38c4caaea43cb56e722090235237a95f137b087306353e51",
       "was": 1,
       "was_date": "2026-08-30",
@@ -629,21 +655,28 @@
       "feed": "gcal_2gd73d7gc46mstrdnr6k7v7b2o_group_calendar_google_com",
       "was": null,
       "was_date": null,
-      "silent_since": "2026-07-09",
+      "silent_since": "2026-07-10",
       "content": "quiet"
     },
     {
       "feed": "gcal_bloominglabs",
       "was": null,
       "was_date": null,
-      "silent_since": "2026-07-09",
+      "silent_since": "2026-07-10",
+      "content": "quiet"
+    },
+    {
+      "feed": "gcal_bloomington_in_gov_1b95au4d2ueudldosb024fimp0_group_calendar_google_com",
+      "was": 2,
+      "was_date": "2026-10-06",
+      "silent_since": "2026-10-07",
       "content": "quiet"
     },
     {
       "feed": "gcal_c_7b681cea9368f8b7aebb110afb0b41e427eaaf748d3f03784876fa37f1d6b793_group_calendar_google_com",
       "was": null,
       "was_date": null,
-      "silent_since": "2026-07-09",
+      "silent_since": "2026-07-10",
       "content": "quiet"
     },
     {
@@ -665,13 +698,6 @@
       "was": 1,
       "was_date": "2026-09-28",
       "silent_since": "2026-09-29",
-      "content": "quiet"
-    },
-    {
-      "feed": "gcal_r5lf3al9blontcsjnedbr2f2u0",
-      "was": 1,
-      "was_date": "2026-10-02",
-      "silent_since": "2026-10-03",
       "content": "quiet"
     },
     {
@@ -738,13 +764,6 @@
       "content": "quiet"
     },
     {
-      "feed": "sycamore_land_trust",
-      "was": 8,
-      "was_date": "2026-10-05",
-      "silent_since": "2026-10-06",
-      "content": "quiet"
-    },
-    {
       "feed": "tm_bill_armstrong",
       "was": null,
       "was_date": null,
@@ -790,22 +809,15 @@
       "feed": "uplandbeer",
       "was": null,
       "was_date": null,
-      "silent_since": "2026-07-09",
+      "silent_since": "2026-07-10",
       "content": "not_ics:empty"
     },
     {
       "feed": "wonderlab",
       "was": null,
       "was_date": null,
-      "silent_since": "2026-07-09",
+      "silent_since": "2026-07-10",
       "content": "not_ics:html"
-    },
-    {
-      "feed": "writersguildbloomington",
-      "was": 3,
-      "was_date": "2026-10-01",
-      "silent_since": "2026-10-02",
-      "content": "quiet"
     }
   ],
   "new_errors": [],
@@ -814,7 +826,7 @@
     {
       "source": "WFIU Community Calendar",
       "count": 22,
-      "total": 220,
+      "total": 221,
       "offset": -4,
       "samples": [
         {
@@ -851,14 +863,6 @@
     }
   ],
   "recent_anomalies": [
-    {
-      "type": "zero_events",
-      "message": "Feed returned 0 events (was 1)",
-      "severity": "info",
-      "date": "2026-09-29",
-      "city": "bloomington",
-      "feed": "gcal_mocoin4h"
-    },
     {
       "type": "zero_events",
       "message": "Feed returned 0 events (was 500)",
@@ -1034,19 +1038,39 @@
       "date": "2026-10-06",
       "city": "bloomington",
       "feed": "sycamore_land_trust"
+    },
+    {
+      "type": "zero_events",
+      "message": "Feed returned 0 events (was 2)",
+      "severity": "info",
+      "date": "2026-10-07",
+      "city": "bloomington",
+      "feed": "events_livewhale_235"
+    },
+    {
+      "type": "zero_events",
+      "message": "Feed returned 0 events (was 2)",
+      "severity": "info",
+      "date": "2026-10-07",
+      "city": "bloomington",
+      "feed": "gcal_bloomington_in_gov_1b95au4d2ueudldosb024fimp0_group_calendar_google_com"
+    },
+    {
+      "type": "significant_drop",
+      "message": "Events dropped 60% (5 \u2192 2)",
+      "severity": "medium",
+      "date": "2026-10-07",
+      "city": "bloomington",
+      "feed": "maxpreps_eastern_greene"
     }
   ],
   "detail": {
     "feeds": {
       "api": {
-        "count": 589,
+        "count": 591,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 587
-          },
           {
             "date": "2026-09-08",
             "count": 587
@@ -1162,6 +1186,10 @@
           {
             "date": "2026-10-06",
             "count": 589
+          },
+          {
+            "date": "2026-10-07",
+            "count": 591
           }
         ]
       },
@@ -1170,10 +1198,6 @@
         "error": null,
         "content": "quiet",
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 1
-          },
           {
             "date": "2026-09-08",
             "count": 1
@@ -1288,6 +1312,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 0
+          },
+          {
+            "date": "2026-10-07",
             "count": 0
           }
         ]
@@ -1298,10 +1326,6 @@
         "content": null,
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 4
-          },
-          {
             "date": "2026-09-08",
             "count": 4
           },
@@ -1415,6 +1439,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 11
+          },
+          {
+            "date": "2026-10-07",
             "count": 11
           }
         ]
@@ -1425,10 +1453,6 @@
         "content": null,
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 7
-          },
-          {
             "date": "2026-09-08",
             "count": 8
           },
@@ -1543,6 +1567,10 @@
           {
             "date": "2026-10-06",
             "count": 12
+          },
+          {
+            "date": "2026-10-07",
+            "count": 12
           }
         ]
       },
@@ -1551,10 +1579,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 3
-          },
           {
             "date": "2026-09-08",
             "count": 3
@@ -1669,6 +1693,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 6
+          },
+          {
+            "date": "2026-10-07",
             "count": 6
           }
         ]
@@ -1745,6 +1773,10 @@
           {
             "date": "2026-10-06",
             "count": 1
+          },
+          {
+            "date": "2026-10-07",
+            "count": 1
           }
         ]
       },
@@ -1753,10 +1785,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 30
-          },
           {
             "date": "2026-09-08",
             "count": 30
@@ -1872,6 +1900,10 @@
           {
             "date": "2026-10-06",
             "count": 25
+          },
+          {
+            "date": "2026-10-07",
+            "count": 25
           }
         ]
       },
@@ -1880,10 +1912,6 @@
         "error": null,
         "content": "not_ics:html",
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 125
-          },
           {
             "date": "2026-09-08",
             "count": 125
@@ -1999,6 +2027,10 @@
           {
             "date": "2026-10-06",
             "count": 0
+          },
+          {
+            "date": "2026-10-07",
+            "count": 0
           }
         ]
       },
@@ -2007,10 +2039,6 @@
         "error": null,
         "content": "quiet",
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 5
-          },
           {
             "date": "2026-09-08",
             "count": 5
@@ -2126,6 +2154,10 @@
           {
             "date": "2026-10-06",
             "count": 0
+          },
+          {
+            "date": "2026-10-07",
+            "count": 0
           }
         ]
       },
@@ -2134,10 +2166,6 @@
         "error": null,
         "content": "quiet",
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 0
-          },
           {
             "date": "2026-09-08",
             "count": 0
@@ -2253,6 +2281,10 @@
           {
             "date": "2026-10-06",
             "count": 0
+          },
+          {
+            "date": "2026-10-07",
+            "count": 0
           }
         ]
       },
@@ -2261,10 +2293,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 30
-          },
           {
             "date": "2026-09-08",
             "count": 30
@@ -2380,6 +2408,21 @@
           {
             "date": "2026-10-06",
             "count": 28
+          },
+          {
+            "date": "2026-10-07",
+            "count": 28
+          }
+        ]
+      },
+      "buskirk_chumley": {
+        "count": 32,
+        "error": null,
+        "content": null,
+        "history": [
+          {
+            "date": "2026-10-07",
+            "count": 32
           }
         ]
       },
@@ -2388,10 +2431,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 8
-          },
           {
             "date": "2026-09-08",
             "count": 8
@@ -2507,6 +2546,10 @@
           {
             "date": "2026-10-06",
             "count": 5
+          },
+          {
+            "date": "2026-10-07",
+            "count": 5
           }
         ]
       },
@@ -2515,10 +2558,6 @@
         "error": null,
         "content": "not_ics:unknown",
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 500
-          },
           {
             "date": "2026-09-08",
             "count": 500
@@ -2634,18 +2673,18 @@
           {
             "date": "2026-10-06",
             "count": 0
+          },
+          {
+            "date": "2026-10-07",
+            "count": 0
           }
         ]
       },
       "campuslabs_iub": {
-        "count": 1309,
+        "count": 1257,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 1643
-          },
           {
             "date": "2026-09-08",
             "count": 1630
@@ -2761,6 +2800,10 @@
           {
             "date": "2026-10-06",
             "count": 1309
+          },
+          {
+            "date": "2026-10-07",
+            "count": 1257
           }
         ]
       },
@@ -2769,10 +2812,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 12
-          },
           {
             "date": "2026-09-08",
             "count": 11
@@ -2888,6 +2927,21 @@
           {
             "date": "2026-10-06",
             "count": 13
+          },
+          {
+            "date": "2026-10-07",
+            "count": 13
+          }
+        ]
+      },
+      "cicada_cinema": {
+        "count": 0,
+        "error": null,
+        "content": "quiet",
+        "history": [
+          {
+            "date": "2026-10-07",
+            "count": 0
           }
         ]
       },
@@ -2896,10 +2950,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 57
-          },
           {
             "date": "2026-09-08",
             "count": 57
@@ -3015,6 +3065,10 @@
           {
             "date": "2026-10-06",
             "count": 54
+          },
+          {
+            "date": "2026-10-07",
+            "count": 54
           }
         ]
       },
@@ -3023,10 +3077,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 26
-          },
           {
             "date": "2026-09-08",
             "count": 25
@@ -3142,6 +3192,10 @@
           {
             "date": "2026-10-06",
             "count": 51
+          },
+          {
+            "date": "2026-10-07",
+            "count": 51
           }
         ]
       },
@@ -3150,10 +3204,6 @@
         "error": null,
         "content": "quiet",
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 0
-          },
           {
             "date": "2026-09-08",
             "count": 0
@@ -3268,6 +3318,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 0
+          },
+          {
+            "date": "2026-10-07",
             "count": 0
           }
         ]
@@ -3278,10 +3332,6 @@
         "content": "quiet",
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 0
-          },
-          {
             "date": "2026-09-08",
             "count": 0
           },
@@ -3395,19 +3445,19 @@
           },
           {
             "date": "2026-10-06",
+            "count": 0
+          },
+          {
+            "date": "2026-10-07",
             "count": 0
           }
         ]
       },
       "ellettsville_egov_apps": {
-        "count": 23,
+        "count": 24,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 22
-          },
           {
             "date": "2026-09-08",
             "count": 22
@@ -3523,18 +3573,18 @@
           {
             "date": "2026-10-06",
             "count": 23
+          },
+          {
+            "date": "2026-10-07",
+            "count": 24
           }
         ]
       },
       "ellettsvillechurchofchrist_about": {
-        "count": 104,
+        "count": 105,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 104
-          },
           {
             "date": "2026-09-08",
             "count": 104
@@ -3650,6 +3700,10 @@
           {
             "date": "2026-10-06",
             "count": 104
+          },
+          {
+            "date": "2026-10-07",
+            "count": 105
           }
         ]
       },
@@ -3658,10 +3712,6 @@
         "error": null,
         "content": "quiet",
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 0
-          },
           {
             "date": "2026-09-08",
             "count": 0
@@ -3776,6 +3826,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 0
+          },
+          {
+            "date": "2026-10-07",
             "count": 0
           }
         ]
@@ -3786,10 +3840,6 @@
         "content": "quiet",
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 0
-          },
-          {
             "date": "2026-09-08",
             "count": 0
           },
@@ -3904,18 +3954,18 @@
           {
             "date": "2026-10-06",
             "count": 0
+          },
+          {
+            "date": "2026-10-07",
+            "count": 0
           }
         ]
       },
       "events_livewhale_11": {
-        "count": 240,
+        "count": 236,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 218
-          },
           {
             "date": "2026-09-08",
             "count": 216
@@ -4031,18 +4081,18 @@
           {
             "date": "2026-10-06",
             "count": 240
+          },
+          {
+            "date": "2026-10-07",
+            "count": 236
           }
         ]
       },
       "events_livewhale_130": {
-        "count": 86,
+        "count": 81,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 36
-          },
           {
             "date": "2026-09-08",
             "count": 35
@@ -4158,18 +4208,18 @@
           {
             "date": "2026-10-06",
             "count": 86
+          },
+          {
+            "date": "2026-10-07",
+            "count": 81
           }
         ]
       },
       "events_livewhale_135": {
-        "count": 92,
+        "count": 87,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 70
-          },
           {
             "date": "2026-09-08",
             "count": 71
@@ -4285,6 +4335,10 @@
           {
             "date": "2026-10-06",
             "count": 92
+          },
+          {
+            "date": "2026-10-07",
+            "count": 87
           }
         ]
       },
@@ -4293,10 +4347,6 @@
         "error": null,
         "content": "quiet",
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 0
-          },
           {
             "date": "2026-09-08",
             "count": 0
@@ -4411,6 +4461,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 0
+          },
+          {
+            "date": "2026-10-07",
             "count": 0
           }
         ]
@@ -4421,10 +4475,6 @@
         "content": null,
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 4
-          },
-          {
             "date": "2026-09-08",
             "count": 4
           },
@@ -4539,18 +4589,18 @@
           {
             "date": "2026-10-06",
             "count": 3
+          },
+          {
+            "date": "2026-10-07",
+            "count": 3
           }
         ]
       },
       "events_livewhale_234": {
-        "count": 39,
+        "count": 37,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 31
-          },
           {
             "date": "2026-09-08",
             "count": 31
@@ -4666,18 +4716,18 @@
           {
             "date": "2026-10-06",
             "count": 39
+          },
+          {
+            "date": "2026-10-07",
+            "count": 37
           }
         ]
       },
       "events_livewhale_235": {
-        "count": 2,
+        "count": 0,
         "error": null,
-        "content": null,
+        "content": "quiet",
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 0
-          },
           {
             "date": "2026-09-08",
             "count": 0
@@ -4793,18 +4843,18 @@
           {
             "date": "2026-10-06",
             "count": 2
+          },
+          {
+            "date": "2026-10-07",
+            "count": 0
           }
         ]
       },
       "events_livewhale_237": {
-        "count": 19,
+        "count": 17,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 26
-          },
           {
             "date": "2026-09-08",
             "count": 26
@@ -4920,18 +4970,18 @@
           {
             "date": "2026-10-06",
             "count": 19
+          },
+          {
+            "date": "2026-10-07",
+            "count": 17
           }
         ]
       },
       "events_livewhale_261": {
-        "count": 88,
+        "count": 90,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 90
-          },
           {
             "date": "2026-09-08",
             "count": 90
@@ -5047,6 +5097,10 @@
           {
             "date": "2026-10-06",
             "count": 88
+          },
+          {
+            "date": "2026-10-07",
+            "count": 90
           }
         ]
       },
@@ -5055,10 +5109,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 6
-          },
           {
             "date": "2026-09-08",
             "count": 6
@@ -5174,18 +5224,18 @@
           {
             "date": "2026-10-06",
             "count": 6
+          },
+          {
+            "date": "2026-10-07",
+            "count": 6
           }
         ]
       },
       "events_livewhale_314": {
-        "count": 12,
+        "count": 21,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 20
-          },
           {
             "date": "2026-09-08",
             "count": 20
@@ -5301,18 +5351,18 @@
           {
             "date": "2026-10-06",
             "count": 12
+          },
+          {
+            "date": "2026-10-07",
+            "count": 21
           }
         ]
       },
       "events_livewhale_343": {
-        "count": 45,
+        "count": 43,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 32
-          },
           {
             "date": "2026-09-08",
             "count": 32
@@ -5428,6 +5478,10 @@
           {
             "date": "2026-10-06",
             "count": 45
+          },
+          {
+            "date": "2026-10-07",
+            "count": 43
           }
         ]
       },
@@ -5436,10 +5490,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 2
-          },
           {
             "date": "2026-09-08",
             "count": 2
@@ -5555,18 +5605,18 @@
           {
             "date": "2026-10-06",
             "count": 3
+          },
+          {
+            "date": "2026-10-07",
+            "count": 3
           }
         ]
       },
       "events_livewhale_378": {
-        "count": 25,
+        "count": 24,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 26
-          },
           {
             "date": "2026-09-08",
             "count": 26
@@ -5682,18 +5732,18 @@
           {
             "date": "2026-10-06",
             "count": 25
+          },
+          {
+            "date": "2026-10-07",
+            "count": 24
           }
         ]
       },
       "events_livewhale_45": {
-        "count": 34,
+        "count": 37,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 40
-          },
           {
             "date": "2026-09-08",
             "count": 40
@@ -5809,18 +5859,18 @@
           {
             "date": "2026-10-06",
             "count": 34
+          },
+          {
+            "date": "2026-10-07",
+            "count": 37
           }
         ]
       },
       "events_livewhale_56": {
-        "count": 369,
+        "count": 370,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 254
-          },
           {
             "date": "2026-09-08",
             "count": 256
@@ -5936,18 +5986,18 @@
           {
             "date": "2026-10-06",
             "count": 369
+          },
+          {
+            "date": "2026-10-07",
+            "count": 370
           }
         ]
       },
       "events_livewhale_59": {
-        "count": 37,
+        "count": 34,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 47
-          },
           {
             "date": "2026-09-08",
             "count": 47
@@ -6063,18 +6113,18 @@
           {
             "date": "2026-10-06",
             "count": 37
+          },
+          {
+            "date": "2026-10-07",
+            "count": 34
           }
         ]
       },
       "events_livewhale_64": {
-        "count": 71,
+        "count": 64,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 91
-          },
           {
             "date": "2026-09-08",
             "count": 91
@@ -6190,18 +6240,18 @@
           {
             "date": "2026-10-06",
             "count": 71
+          },
+          {
+            "date": "2026-10-07",
+            "count": 64
           }
         ]
       },
       "events_livewhale_81": {
-        "count": 26,
+        "count": 25,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 19
-          },
           {
             "date": "2026-09-08",
             "count": 19
@@ -6317,6 +6367,10 @@
           {
             "date": "2026-10-06",
             "count": 26
+          },
+          {
+            "date": "2026-10-07",
+            "count": 25
           }
         ]
       },
@@ -6325,10 +6379,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 56
-          },
           {
             "date": "2026-09-08",
             "count": 52
@@ -6444,6 +6494,10 @@
           {
             "date": "2026-10-06",
             "count": 32
+          },
+          {
+            "date": "2026-10-07",
+            "count": 32
           }
         ]
       },
@@ -6452,10 +6506,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 138
-          },
           {
             "date": "2026-09-08",
             "count": 138
@@ -6571,18 +6621,18 @@
           {
             "date": "2026-10-06",
             "count": 107
+          },
+          {
+            "date": "2026-10-07",
+            "count": 107
           }
         ]
       },
       "firstuc": {
-        "count": 7,
+        "count": 6,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 30
-          },
           {
             "date": "2026-09-08",
             "count": 30
@@ -6698,6 +6748,10 @@
           {
             "date": "2026-10-06",
             "count": 7
+          },
+          {
+            "date": "2026-10-07",
+            "count": 6
           }
         ]
       },
@@ -6706,10 +6760,6 @@
         "error": null,
         "content": "quiet",
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 0
-          },
           {
             "date": "2026-09-08",
             "count": 0
@@ -6824,6 +6874,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 0
+          },
+          {
+            "date": "2026-10-07",
             "count": 0
           }
         ]
@@ -6834,10 +6888,6 @@
         "content": "quiet",
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 0
-          },
-          {
             "date": "2026-09-08",
             "count": 0
           },
@@ -6952,18 +7002,18 @@
           {
             "date": "2026-10-06",
             "count": 0
+          },
+          {
+            "date": "2026-10-07",
+            "count": 0
           }
         ]
       },
       "gcal_48ac7e6a73bd950b28dea0eca41b3050858f0c4f00ddfbd78dd23a2a9e5fc51d": {
-        "count": 7,
+        "count": 8,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 15
-          },
           {
             "date": "2026-09-08",
             "count": 14
@@ -7079,18 +7129,18 @@
           {
             "date": "2026-10-06",
             "count": 7
+          },
+          {
+            "date": "2026-10-07",
+            "count": 8
           }
         ]
       },
       "gcal_90204180d86dfba4a7c6fcd85e2082b5f9414f751c9a42d840016d3333a115f2": {
-        "count": 13,
+        "count": 14,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 12
-          },
           {
             "date": "2026-09-08",
             "count": 12
@@ -7206,6 +7256,10 @@
           {
             "date": "2026-10-06",
             "count": 13
+          },
+          {
+            "date": "2026-10-07",
+            "count": 14
           }
         ]
       },
@@ -7215,10 +7269,6 @@
         "content": null,
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 10
-          },
-          {
             "date": "2026-09-08",
             "count": 10
           },
@@ -7332,6 +7382,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 8
+          },
+          {
+            "date": "2026-10-07",
             "count": 8
           }
         ]
@@ -7342,10 +7396,6 @@
         "content": "quiet",
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 0
-          },
-          {
             "date": "2026-09-08",
             "count": 0
           },
@@ -7459,6 +7509,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 0
+          },
+          {
+            "date": "2026-10-07",
             "count": 0
           }
         ]
@@ -7469,10 +7523,6 @@
         "content": null,
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 5
-          },
-          {
             "date": "2026-09-08",
             "count": 5
           },
@@ -7586,19 +7636,19 @@
           },
           {
             "date": "2026-10-06",
+            "count": 2
+          },
+          {
+            "date": "2026-10-07",
             "count": 2
           }
         ]
       },
       "gcal_bloomington_in_gov_1b95au4d2ueudldosb024fimp0_group_calendar_google_com": {
-        "count": 2,
+        "count": 0,
         "error": null,
-        "content": null,
+        "content": "quiet",
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 2
-          },
           {
             "date": "2026-09-08",
             "count": 2
@@ -7714,18 +7764,18 @@
           {
             "date": "2026-10-06",
             "count": 2
+          },
+          {
+            "date": "2026-10-07",
+            "count": 0
           }
         ]
       },
       "gcal_bloomington_in_gov_1rosks8nont4ebaq41tfgg8v7g_group_calendar_google_com": {
-        "count": 64,
+        "count": 63,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 103
-          },
           {
             "date": "2026-09-08",
             "count": 103
@@ -7841,18 +7891,18 @@
           {
             "date": "2026-10-06",
             "count": 64
+          },
+          {
+            "date": "2026-10-07",
+            "count": 63
           }
         ]
       },
       "gcal_bloomington_in_gov_35a6qiaiperdn7b1r6v2ksjlig_group_calendar_google_com": {
-        "count": 113,
+        "count": 108,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 111
-          },
           {
             "date": "2026-09-08",
             "count": 110
@@ -7968,6 +8018,10 @@
           {
             "date": "2026-10-06",
             "count": 113
+          },
+          {
+            "date": "2026-10-07",
+            "count": 108
           }
         ]
       },
@@ -7976,10 +8030,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 8
-          },
           {
             "date": "2026-09-08",
             "count": 8
@@ -8095,18 +8145,18 @@
           {
             "date": "2026-10-06",
             "count": 3
+          },
+          {
+            "date": "2026-10-07",
+            "count": 3
           }
         ]
       },
       "gcal_bloomington_in_gov_r7b1mkrme1r8uhl3b5amhb50bc_group_calendar_google_com": {
-        "count": 106,
+        "count": 101,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 97
-          },
           {
             "date": "2026-09-08",
             "count": 97
@@ -8222,6 +8272,10 @@
           {
             "date": "2026-10-06",
             "count": 106
+          },
+          {
+            "date": "2026-10-07",
+            "count": 101
           }
         ]
       },
@@ -8230,10 +8284,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 16
-          },
           {
             "date": "2026-09-08",
             "count": 16
@@ -8349,18 +8399,18 @@
           {
             "date": "2026-10-06",
             "count": 33
+          },
+          {
+            "date": "2026-10-07",
+            "count": 33
           }
         ]
       },
       "gcal_c_67228f47640aec0e7a9e654fa0124080357557242e1bc400f3c225c9a90d8bfb": {
-        "count": 6,
+        "count": 5,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 0
-          },
           {
             "date": "2026-09-08",
             "count": 8
@@ -8476,6 +8526,10 @@
           {
             "date": "2026-10-06",
             "count": 6
+          },
+          {
+            "date": "2026-10-07",
+            "count": 5
           }
         ]
       },
@@ -8484,10 +8538,6 @@
         "error": null,
         "content": "quiet",
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 0
-          },
           {
             "date": "2026-09-08",
             "count": 0
@@ -8602,6 +8652,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 0
+          },
+          {
+            "date": "2026-10-07",
             "count": 0
           }
         ]
@@ -8612,10 +8666,6 @@
         "content": null,
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 26
-          },
-          {
             "date": "2026-09-08",
             "count": 25
           },
@@ -8730,18 +8780,18 @@
           {
             "date": "2026-10-06",
             "count": 31
+          },
+          {
+            "date": "2026-10-07",
+            "count": 31
           }
         ]
       },
       "gcal_c_siu0d8ohqr5j5p936tig34emts": {
-        "count": 6,
+        "count": 5,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 1
-          },
           {
             "date": "2026-09-08",
             "count": 0
@@ -8857,18 +8907,18 @@
           {
             "date": "2026-10-06",
             "count": 6
+          },
+          {
+            "date": "2026-10-07",
+            "count": 5
           }
         ]
       },
       "gcal_cuc66guoam1hhcqq2rnaniinl8": {
-        "count": 9,
+        "count": 8,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 28
-          },
           {
             "date": "2026-09-08",
             "count": 27
@@ -8984,6 +9034,10 @@
           {
             "date": "2026-10-06",
             "count": 9
+          },
+          {
+            "date": "2026-10-07",
+            "count": 8
           }
         ]
       },
@@ -8992,10 +9046,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 17
-          },
           {
             "date": "2026-09-08",
             "count": 17
@@ -9111,6 +9161,10 @@
           {
             "date": "2026-10-06",
             "count": 14
+          },
+          {
+            "date": "2026-10-07",
+            "count": 14
           }
         ]
       },
@@ -9119,10 +9173,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 9
-          },
           {
             "date": "2026-09-08",
             "count": 8
@@ -9238,6 +9288,10 @@
           {
             "date": "2026-10-06",
             "count": 5
+          },
+          {
+            "date": "2026-10-07",
+            "count": 5
           }
         ]
       },
@@ -9246,10 +9300,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 54
-          },
           {
             "date": "2026-09-08",
             "count": 52
@@ -9365,6 +9415,10 @@
           {
             "date": "2026-10-06",
             "count": 40
+          },
+          {
+            "date": "2026-10-07",
+            "count": 40
           }
         ]
       },
@@ -9373,10 +9427,6 @@
         "error": null,
         "content": "quiet",
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 0
-          },
           {
             "date": "2026-09-08",
             "count": 0
@@ -9492,6 +9542,10 @@
           {
             "date": "2026-10-06",
             "count": 0
+          },
+          {
+            "date": "2026-10-07",
+            "count": 0
           }
         ]
       },
@@ -9500,10 +9554,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 15
-          },
           {
             "date": "2026-09-08",
             "count": 15
@@ -9619,18 +9669,18 @@
           {
             "date": "2026-10-06",
             "count": 19
+          },
+          {
+            "date": "2026-10-07",
+            "count": 19
           }
         ]
       },
       "gcal_mjsnm57lcjgbhseu4lj9ee704k": {
-        "count": 12,
+        "count": 13,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 11
-          },
           {
             "date": "2026-09-08",
             "count": 11
@@ -9746,6 +9796,10 @@
           {
             "date": "2026-10-06",
             "count": 12
+          },
+          {
+            "date": "2026-10-07",
+            "count": 13
           }
         ]
       },
@@ -9754,10 +9808,6 @@
         "error": null,
         "content": "quiet",
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 0
-          },
           {
             "date": "2026-09-08",
             "count": 0
@@ -9872,6 +9922,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 0
+          },
+          {
+            "date": "2026-10-07",
             "count": 0
           }
         ]
@@ -9882,10 +9936,6 @@
         "content": "quiet",
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 1
-          },
-          {
             "date": "2026-09-08",
             "count": 1
           },
@@ -9999,19 +10049,19 @@
           },
           {
             "date": "2026-10-06",
+            "count": 0
+          },
+          {
+            "date": "2026-10-07",
             "count": 0
           }
         ]
       },
       "gcal_r5lf3al9blontcsjnedbr2f2u0": {
-        "count": 0,
+        "count": 1,
         "error": null,
-        "content": "quiet",
+        "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 4
-          },
           {
             "date": "2026-09-08",
             "count": 2
@@ -10127,6 +10177,10 @@
           {
             "date": "2026-10-06",
             "count": 0
+          },
+          {
+            "date": "2026-10-07",
+            "count": 1
           }
         ]
       },
@@ -10136,10 +10190,6 @@
         "content": null,
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 33
-          },
-          {
             "date": "2026-09-08",
             "count": 32
           },
@@ -10253,6 +10303,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 25
+          },
+          {
+            "date": "2026-10-07",
             "count": 25
           }
         ]
@@ -10263,10 +10317,6 @@
         "content": "quiet",
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 4
-          },
-          {
             "date": "2026-09-08",
             "count": 4
           },
@@ -10380,6 +10430,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 0
+          },
+          {
+            "date": "2026-10-07",
             "count": 0
           }
         ]
@@ -10390,10 +10444,6 @@
         "content": "not_ics:html",
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 0
-          },
-          {
             "date": "2026-09-08",
             "count": 0
           },
@@ -10508,6 +10558,10 @@
           {
             "date": "2026-10-06",
             "count": 0
+          },
+          {
+            "date": "2026-10-07",
+            "count": 0
           }
         ]
       },
@@ -10516,10 +10570,6 @@
         "error": null,
         "content": "not_ics:empty",
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 1
-          },
           {
             "date": "2026-09-08",
             "count": 1
@@ -10635,6 +10685,10 @@
           {
             "date": "2026-10-06",
             "count": 0
+          },
+          {
+            "date": "2026-10-07",
+            "count": 0
           }
         ]
       },
@@ -10643,10 +10697,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 25
-          },
           {
             "date": "2026-09-08",
             "count": 25
@@ -10762,18 +10812,18 @@
           {
             "date": "2026-10-06",
             "count": 17
+          },
+          {
+            "date": "2026-10-07",
+            "count": 17
           }
         ]
       },
       "libcal_iub_5914": {
-        "count": 134,
+        "count": 132,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 134
-          },
           {
             "date": "2026-09-08",
             "count": 134
@@ -10889,18 +10939,18 @@
           {
             "date": "2026-10-06",
             "count": 134
+          },
+          {
+            "date": "2026-10-07",
+            "count": 132
           }
         ]
       },
       "limestone_post": {
-        "count": 419,
+        "count": 418,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 459
-          },
           {
             "date": "2026-09-08",
             "count": 459
@@ -11016,6 +11066,10 @@
           {
             "date": "2026-10-06",
             "count": 419
+          },
+          {
+            "date": "2026-10-07",
+            "count": 418
           }
         ]
       },
@@ -11024,10 +11078,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 5
-          },
           {
             "date": "2026-09-08",
             "count": 5
@@ -11143,18 +11193,18 @@
           {
             "date": "2026-10-06",
             "count": 1
+          },
+          {
+            "date": "2026-10-07",
+            "count": 1
           }
         ]
       },
       "master_gardeners": {
-        "count": 4,
+        "count": 3,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 7
-          },
           {
             "date": "2026-09-08",
             "count": 7
@@ -11270,11 +11320,15 @@
           {
             "date": "2026-10-06",
             "count": 4
+          },
+          {
+            "date": "2026-10-07",
+            "count": 3
           }
         ]
       },
       "maxpreps_bloomington_north": {
-        "count": 11,
+        "count": 8,
         "error": null,
         "content": null,
         "history": [
@@ -11385,11 +11439,15 @@
           {
             "date": "2026-10-06",
             "count": 11
+          },
+          {
+            "date": "2026-10-07",
+            "count": 8
           }
         ]
       },
       "maxpreps_bloomington_south": {
-        "count": 6,
+        "count": 4,
         "error": null,
         "content": null,
         "history": [
@@ -11500,6 +11558,10 @@
           {
             "date": "2026-10-06",
             "count": 6
+          },
+          {
+            "date": "2026-10-07",
+            "count": 4
           }
         ]
       },
@@ -11615,11 +11677,15 @@
           {
             "date": "2026-10-06",
             "count": 4
+          },
+          {
+            "date": "2026-10-07",
+            "count": 4
           }
         ]
       },
       "maxpreps_eastern_greene": {
-        "count": 5,
+        "count": 2,
         "error": null,
         "content": null,
         "history": [
@@ -11730,11 +11796,15 @@
           {
             "date": "2026-10-06",
             "count": 5
+          },
+          {
+            "date": "2026-10-07",
+            "count": 2
           }
         ]
       },
       "maxpreps_edgewood": {
-        "count": 5,
+        "count": 4,
         "error": null,
         "content": null,
         "history": [
@@ -11845,6 +11915,10 @@
           {
             "date": "2026-10-06",
             "count": 5
+          },
+          {
+            "date": "2026-10-07",
+            "count": 4
           }
         ]
       },
@@ -11960,11 +12034,15 @@
           {
             "date": "2026-10-06",
             "count": 2
+          },
+          {
+            "date": "2026-10-07",
+            "count": 2
           }
         ]
       },
       "maxpreps_martinsville": {
-        "count": 6,
+        "count": 4,
         "error": null,
         "content": null,
         "history": [
@@ -12075,11 +12153,15 @@
           {
             "date": "2026-10-06",
             "count": 6
+          },
+          {
+            "date": "2026-10-07",
+            "count": 4
           }
         ]
       },
       "maxpreps_owen_valley": {
-        "count": 6,
+        "count": 4,
         "error": null,
         "content": null,
         "history": [
@@ -12190,6 +12272,10 @@
           {
             "date": "2026-10-06",
             "count": 6
+          },
+          {
+            "date": "2026-10-07",
+            "count": 4
           }
         ]
       },
@@ -12198,10 +12284,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 25
-          },
           {
             "date": "2026-09-08",
             "count": 24
@@ -12316,6 +12398,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 23
+          },
+          {
+            "date": "2026-10-07",
             "count": 23
           }
         ]
@@ -12326,10 +12412,6 @@
         "content": "quiet",
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 0
-          },
-          {
             "date": "2026-09-08",
             "count": 0
           },
@@ -12443,6 +12525,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 0
+          },
+          {
+            "date": "2026-10-07",
             "count": 0
           }
         ]
@@ -12453,10 +12539,6 @@
         "content": null,
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 10
-          },
-          {
             "date": "2026-09-08",
             "count": 10
           },
@@ -12570,6 +12652,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 10
+          },
+          {
+            "date": "2026-10-07",
             "count": 10
           }
         ]
@@ -12580,10 +12666,6 @@
         "content": null,
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 10
-          },
-          {
             "date": "2026-09-08",
             "count": 10
           },
@@ -12697,6 +12779,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 10
+          },
+          {
+            "date": "2026-10-07",
             "count": 10
           }
         ]
@@ -12707,10 +12793,6 @@
         "content": null,
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 3
-          },
-          {
             "date": "2026-09-08",
             "count": 3
           },
@@ -12824,6 +12906,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 1
+          },
+          {
+            "date": "2026-10-07",
             "count": 1
           }
         ]
@@ -12834,10 +12920,6 @@
         "content": "quiet",
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 0
-          },
-          {
             "date": "2026-09-08",
             "count": 0
           },
@@ -12951,6 +13033,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 0
+          },
+          {
+            "date": "2026-10-07",
             "count": 0
           }
         ]
@@ -12961,10 +13047,6 @@
         "content": null,
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 8
-          },
-          {
             "date": "2026-09-08",
             "count": 8
           },
@@ -13078,6 +13160,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 14
+          },
+          {
+            "date": "2026-10-07",
             "count": 14
           }
         ]
@@ -13088,10 +13174,6 @@
         "content": "quiet",
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 0
-          },
-          {
             "date": "2026-09-08",
             "count": 0
           },
@@ -13205,6 +13287,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 0
+          },
+          {
+            "date": "2026-10-07",
             "count": 0
           }
         ]
@@ -13215,10 +13301,6 @@
         "content": null,
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 11
-          },
-          {
             "date": "2026-09-08",
             "count": 12
           },
@@ -13332,6 +13414,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 12
+          },
+          {
+            "date": "2026-10-07",
             "count": 12
           }
         ]
@@ -13342,10 +13428,6 @@
         "content": "quiet",
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 0
-          },
-          {
             "date": "2026-09-08",
             "count": 0
           },
@@ -13460,18 +13542,18 @@
           {
             "date": "2026-10-06",
             "count": 0
+          },
+          {
+            "date": "2026-10-07",
+            "count": 0
           }
         ]
       },
       "rbbschools_cal_11": {
-        "count": 19,
+        "count": 18,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 17
-          },
           {
             "date": "2026-09-08",
             "count": 17
@@ -13587,6 +13669,10 @@
           {
             "date": "2026-10-06",
             "count": 19
+          },
+          {
+            "date": "2026-10-07",
+            "count": 18
           }
         ]
       },
@@ -13595,10 +13681,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 6
-          },
           {
             "date": "2026-09-08",
             "count": 6
@@ -13713,6 +13795,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 10
+          },
+          {
+            "date": "2026-10-07",
             "count": 10
           }
         ]
@@ -13723,10 +13809,6 @@
         "content": null,
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 32
-          },
-          {
             "date": "2026-09-08",
             "count": 31
           },
@@ -13840,6 +13922,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 30
+          },
+          {
+            "date": "2026-10-07",
             "count": 30
           }
         ]
@@ -13850,10 +13936,6 @@
         "content": "quiet",
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 0
-          },
-          {
             "date": "2026-09-08",
             "count": 0
           },
@@ -13967,6 +14049,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 0
+          },
+          {
+            "date": "2026-10-07",
             "count": 0
           }
         ]
@@ -13977,10 +14063,6 @@
         "content": null,
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 1
-          },
-          {
             "date": "2026-09-08",
             "count": 1
           },
@@ -14095,6 +14177,10 @@
           {
             "date": "2026-10-06",
             "count": 1
+          },
+          {
+            "date": "2026-10-07",
+            "count": 1
           }
         ]
       },
@@ -14103,10 +14189,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 8
-          },
           {
             "date": "2026-09-08",
             "count": 9
@@ -14222,6 +14304,10 @@
           {
             "date": "2026-10-06",
             "count": 15
+          },
+          {
+            "date": "2026-10-07",
+            "count": 15
           }
         ]
       },
@@ -14230,10 +14316,6 @@
         "error": null,
         "content": "quiet",
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 0
-          },
           {
             "date": "2026-09-08",
             "count": 0
@@ -14348,6 +14430,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 0
+          },
+          {
+            "date": "2026-10-07",
             "count": 0
           }
         ]
@@ -14358,10 +14444,6 @@
         "content": null,
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 5
-          },
-          {
             "date": "2026-09-08",
             "count": 5
           },
@@ -14476,18 +14558,18 @@
           {
             "date": "2026-10-06",
             "count": 5
+          },
+          {
+            "date": "2026-10-07",
+            "count": 5
           }
         ]
       },
       "sycamore_land_trust": {
-        "count": 0,
+        "count": 8,
         "error": null,
-        "content": "quiet",
+        "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 0
-          },
           {
             "date": "2026-09-08",
             "count": 0
@@ -14603,6 +14685,10 @@
           {
             "date": "2026-10-06",
             "count": 0
+          },
+          {
+            "date": "2026-10-07",
+            "count": 8
           }
         ]
       },
@@ -14611,10 +14697,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 4
-          },
           {
             "date": "2026-09-08",
             "count": 4
@@ -14730,6 +14812,10 @@
           {
             "date": "2026-10-06",
             "count": 4
+          },
+          {
+            "date": "2026-10-07",
+            "count": 4
           }
         ]
       },
@@ -14738,10 +14824,6 @@
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 8
-          },
           {
             "date": "2026-09-08",
             "count": 8
@@ -14857,6 +14939,10 @@
           {
             "date": "2026-10-06",
             "count": 21
+          },
+          {
+            "date": "2026-10-07",
+            "count": 21
           }
         ]
       },
@@ -14865,10 +14951,6 @@
         "error": null,
         "content": "quiet",
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 0
-          },
           {
             "date": "2026-09-08",
             "count": 0
@@ -14983,6 +15065,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 0
+          },
+          {
+            "date": "2026-10-07",
             "count": 0
           }
         ]
@@ -14993,10 +15079,6 @@
         "content": null,
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 24
-          },
-          {
             "date": "2026-09-08",
             "count": 25
           },
@@ -15110,6 +15192,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 22
+          },
+          {
+            "date": "2026-10-07",
             "count": 22
           }
         ]
@@ -15120,10 +15206,6 @@
         "content": "quiet",
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 0
-          },
-          {
             "date": "2026-09-08",
             "count": 0
           },
@@ -15237,6 +15319,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 0
+          },
+          {
+            "date": "2026-10-07",
             "count": 0
           }
         ]
@@ -15247,10 +15333,6 @@
         "content": null,
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 7
-          },
-          {
             "date": "2026-09-08",
             "count": 7
           },
@@ -15364,6 +15446,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 4
+          },
+          {
+            "date": "2026-10-07",
             "count": 4
           }
         ]
@@ -15374,10 +15460,6 @@
         "content": "quiet",
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 0
-          },
-          {
             "date": "2026-09-08",
             "count": 0
           },
@@ -15491,6 +15573,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 0
+          },
+          {
+            "date": "2026-10-07",
             "count": 0
           }
         ]
@@ -15501,10 +15587,6 @@
         "content": "quiet",
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 0
-          },
-          {
             "date": "2026-09-08",
             "count": 0
           },
@@ -15618,6 +15700,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 0
+          },
+          {
+            "date": "2026-10-07",
             "count": 0
           }
         ]
@@ -15628,10 +15714,6 @@
         "content": "quiet",
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 0
-          },
-          {
             "date": "2026-09-08",
             "count": 0
           },
@@ -15745,6 +15827,10 @@
           },
           {
             "date": "2026-10-06",
+            "count": 0
+          },
+          {
+            "date": "2026-10-07",
             "count": 0
           }
         ]
@@ -15755,10 +15841,6 @@
         "content": "quiet",
         "history": [
           {
-            "date": "2026-09-07",
-            "count": 1
-          },
-          {
             "date": "2026-09-08",
             "count": 1
           },
@@ -15873,18 +15955,18 @@
           {
             "date": "2026-10-06",
             "count": 0
+          },
+          {
+            "date": "2026-10-07",
+            "count": 0
           }
         ]
       },
       "tockify_bloomington.arts.calendar": {
-        "count": 328,
+        "count": 351,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 323
-          },
           {
             "date": "2026-09-08",
             "count": 320
@@ -16000,18 +16082,18 @@
           {
             "date": "2026-10-06",
             "count": 328
+          },
+          {
+            "date": "2026-10-07",
+            "count": 351
           }
         ]
       },
       "tockify_thebackdoor": {
-        "count": 225,
+        "count": 228,
         "error": null,
         "content": null,
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 231
-          },
           {
             "date": "2026-09-08",
             "count": 231
@@ -16127,6 +16209,10 @@
           {
             "date": "2026-10-06",
             "count": 225
+          },
+          {
+            "date": "2026-10-07",
+            "count": 228
           }
         ]
       },
@@ -16135,10 +16221,6 @@
         "error": null,
         "content": "not_ics:empty",
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 0
-          },
           {
             "date": "2026-09-08",
             "count": 0
@@ -16254,11 +16336,15 @@
           {
             "date": "2026-10-06",
             "count": 0
+          },
+          {
+            "date": "2026-10-07",
+            "count": 0
           }
         ]
       },
       "visit_bloomington": {
-        "count": 637,
+        "count": 633,
         "error": null,
         "content": null,
         "history": [
@@ -16337,11 +16423,15 @@
           {
             "date": "2026-10-06",
             "count": 637
+          },
+          {
+            "date": "2026-10-07",
+            "count": 633
           }
         ]
       },
       "wfiu_community_calendar": {
-        "count": 559,
+        "count": 550,
         "error": null,
         "content": null,
         "history": [
@@ -16416,6 +16506,10 @@
           {
             "date": "2026-10-06",
             "count": 559
+          },
+          {
+            "date": "2026-10-07",
+            "count": 550
           }
         ]
       },
@@ -16424,10 +16518,6 @@
         "error": null,
         "content": "not_ics:html",
         "history": [
-          {
-            "date": "2026-09-07",
-            "count": 0
-          },
           {
             "date": "2026-09-08",
             "count": 0
@@ -16543,13 +16633,17 @@
           {
             "date": "2026-10-06",
             "count": 0
+          },
+          {
+            "date": "2026-10-07",
+            "count": 0
           }
         ]
       },
       "writersguildbloomington": {
-        "count": 0,
+        "count": 3,
         "error": null,
-        "content": "quiet",
+        "content": null,
         "history": [
           {
             "date": "2026-09-20",
@@ -16618,29 +16712,33 @@
           {
             "date": "2026-10-06",
             "count": 0
+          },
+          {
+            "date": "2026-10-07",
+            "count": 3
           }
         ]
       }
     },
     "url_quality": {
-      "total_with_url": 5334,
-      "total_events": 7519,
-      "unique_urls": 3346,
-      "generic_count": 314,
+      "total_with_url": 5273,
+      "total_events": 7448,
+      "unique_urls": 3310,
+      "generic_count": 306,
       "generic_domains": [
         {
           "domain": "bloomingtonpride.org",
-          "events": 137,
+          "events": 135,
           "url": "https://bloomingtonpride.org/community-calendar"
         },
         {
           "domain": "www.monroedems.org",
-          "events": 67,
+          "events": 66,
           "url": "https://www.monroedems.org/"
         },
         {
           "domain": "letsgo.terrorware.com",
-          "events": 47,
+          "events": 48,
           "url": "https://letsgo.terrorware.com/"
         },
         {
@@ -16657,99 +16755,94 @@
           "domain": "www.womenwritingbloomington.org",
           "events": 7,
           "url": "https://www.womenwritingbloomington.org/product/creative-writing-for-all-genders-fall-2026/"
-        },
-        {
-          "domain": "www.visithendrickscounty.com",
-          "events": 6,
-          "url": "https://www.visithendrickscounty.com/event/beasleys-heartland-apple-festival/34425/"
         }
       ],
-      "http_count": 7,
-      "http_domains": 3,
+      "http_count": 10,
+      "http_domains": 5,
       "source_specificity": [
         {
           "source": "IU beINvolved Student Orgs",
-          "events": 1147,
-          "unique_urls": 1147,
+          "events": 1094,
+          "unique_urls": 1094,
           "specificity_pct": 100
         },
         {
           "source": "Visit Bloomington",
-          "events": 496,
-          "unique_urls": 104,
+          "events": 494,
+          "unique_urls": 106,
           "specificity_pct": 21
         },
         {
           "source": "Limestone Post",
           "events": 359,
-          "unique_urls": 102,
-          "specificity_pct": 28
+          "unique_urls": 103,
+          "specificity_pct": 29
         },
         {
           "source": "Pillar Arts Community Calendar",
-          "events": 293,
-          "unique_urls": 293,
+          "events": 316,
+          "unique_urls": 316,
           "specificity_pct": 100
         },
         {
           "source": "IU Eskenazi School of Art, Architecture + Design",
-          "events": 242,
+          "events": 237,
           "unique_urls": 16,
           "specificity_pct": 7
         },
         {
           "source": "The Back Door",
-          "events": 225,
-          "unique_urls": 225,
+          "events": 228,
+          "unique_urls": 228,
           "specificity_pct": 100
         },
         {
           "source": "WFIU Community Calendar",
-          "events": 220,
-          "unique_urls": 65,
+          "events": 221,
+          "unique_urls": 67,
           "specificity_pct": 30
         },
         {
           "source": "IU Jacobs School of Music",
-          "events": 204,
-          "unique_urls": 182,
+          "events": 209,
+          "unique_urls": 187,
           "specificity_pct": 89
         },
         {
           "source": "IU Bloomington Libraries",
-          "events": 184,
-          "unique_urls": 28,
-          "specificity_pct": 15
+          "events": 183,
+          "unique_urls": 30,
+          "specificity_pct": 16
         },
         {
           "source": "IU Jacobs School of Music, WFIU Community Calendar",
-          "events": 152,
-          "unique_urls": 142,
+          "events": 150,
+          "unique_urls": 140,
           "specificity_pct": 93
         },
         {
           "source": "IU Arts & Humanities Institute, IU Bloomington Libraries",
-          "events": 147,
+          "events": 145,
           "unique_urls": 6,
           "specificity_pct": 4
         },
         {
           "source": "Bloomington Pride",
-          "events": 137,
+          "events": 135,
           "unique_urls": 1,
           "specificity_pct": 1
         },
         {
           "source": "Libcal Iub 5914",
-          "events": 134,
-          "unique_urls": 134,
+          "events": 132,
+          "unique_urls": 132,
           "specificity_pct": 100
         },
         {
           "source": "IU Maurer School of Law",
-          "events": 132,
-          "unique_urls": 64,
-          "specificity_pct": 48
+          "events": 124,
+          "unique_urls": 57,
+          "specificity_pct": 46
         },
         {
           "source": "Monroe County Government",
@@ -16765,8 +16858,8 @@
       "tzids": [
         {
           "tzid": "UTC (Z suffix)",
-          "count": 26882,
-          "files": 56,
+          "count": 26838,
+          "files": 55,
           "matches_city": false,
           "sample_files": [
             "browncountyinn_events_2.ics",
@@ -16778,7 +16871,7 @@
         },
         {
           "tzid": "America/New_York",
-          "count": 14200,
+          "count": 14201,
           "files": 36,
           "matches_city": false,
           "sample_files": [
@@ -16791,8 +16884,8 @@
         },
         {
           "tzid": "America/Indiana/Indianapolis",
-          "count": 3639,
-          "files": 44,
+          "count": 3647,
+          "files": 46,
           "matches_city": true,
           "sample_files": [
             "bloomington_rotary.ics",
@@ -16804,8 +16897,8 @@
         },
         {
           "tzid": "(bare \u2014 assumes city tz)",
-          "count": 233,
-          "files": 45,
+          "count": 241,
+          "files": 46,
           "matches_city": false,
           "sample_files": [
             "api.ics",
@@ -16862,17 +16955,6 @@
       {
         "source": "Campuslabs Iub",
         "source_id": "campuslabs_iub",
-        "location": "Global & International Studies, GA 1128",
-        "count": 31,
-        "titles": [
-          "Ritmos Latinos at IUB: Beginners Class",
-          "A2F",
-          "Board Game Engage Friday Meetup"
-        ]
-      },
-      {
-        "source": "Campuslabs Iub",
-        "source_id": "campuslabs_iub",
         "location": "Global & International Studies, GA 1100",
         "count": 30,
         "titles": [
@@ -16882,10 +16964,21 @@
         ]
       },
       {
+        "source": "Campuslabs Iub",
+        "source_id": "campuslabs_iub",
+        "location": "Global & International Studies, GA 1128",
+        "count": 30,
+        "titles": [
+          "A2F",
+          "Board Game Engage Friday Meetup",
+          "Professional Development Workshop"
+        ]
+      },
+      {
         "source": "WFIU Community Calendar",
         "source_id": "wfiu_community_calendar",
         "location": "The Arts Federation, 638 North Street, Lafayette, Indiana 47901",
-        "count": 28,
+        "count": 27,
         "titles": [
           "Adult Ukulele Class",
           "Adult Ukulele Class",
@@ -16896,11 +16989,11 @@
         "source": "Campuslabs Iub",
         "source_id": "campuslabs_iub",
         "location": "Global & International Studies, GA 2067",
-        "count": 18,
+        "count": 17,
         "titles": [
           "Hindu YUVA General Body Meeting",
-          "Hindu YUVA General Body Meeting",
-          "Balance at Kelley Meeting Fall '26"
+          "Balance at Kelley Meeting Fall '26",
+          "Hindu YUVA General Body Meeting"
         ]
       },
       {
@@ -16940,11 +17033,11 @@
         "source": "Campuslabs Iub",
         "source_id": "campuslabs_iub",
         "location": "Global International Studies Building, GA 1106",
-        "count": 6,
+        "count": 5,
         "titles": [
-          "Passport Around the World",
           "Central FYDE Meetings",
-          "Alexander Hamilton Society Social Event"
+          "Alexander Hamilton Society Social Event",
+          "Central FYDE Meetings"
         ]
       },
       {
@@ -16961,28 +17054,6 @@
       {
         "source": "Campuslabs Iub",
         "source_id": "campuslabs_iub",
-        "location": "Global & International Studies, GA 3170",
-        "count": 3,
-        "titles": [
-          "Table de Conversation Avanc\u00e9e (Advanced French Conversation Table)",
-          "PowerPoint Night",
-          "Mindfully Motivated Study Tables"
-        ]
-      },
-      {
-        "source": "Campuslabs Iub",
-        "source_id": "campuslabs_iub",
-        "location": "Global & International Studies, GA 1099 - Atrium",
-        "count": 3,
-        "titles": [
-          "Hot Chocolate Chats with HLSG",
-          "Short Term Study Abroad Tabling",
-          "Hot Chocolate Chats with HLSG"
-        ]
-      },
-      {
-        "source": "Campuslabs Iub",
-        "source_id": "campuslabs_iub",
         "location": "Global & International Studies, GA 3067",
         "count": 3,
         "titles": [
@@ -16994,11 +17065,22 @@
       {
         "source": "Campuslabs Iub",
         "source_id": "campuslabs_iub",
-        "location": "Global & International Studies, GA 3106",
+        "location": "Global & International Studies, GA 1099 - Atrium",
+        "count": 3,
+        "titles": [
+          "Short Term Study Abroad Tabling",
+          "Hot Chocolate Chats with HLSG",
+          "Give Thanks for Pie"
+        ]
+      },
+      {
+        "source": "Campuslabs Iub",
+        "source_id": "campuslabs_iub",
+        "location": "Global & International Studies, GA 3170",
         "count": 2,
         "titles": [
-          "Bible Study",
-          "Colloquium"
+          "PowerPoint Night",
+          "Mindfully Motivated Study Tables"
         ]
       },
       {
@@ -17024,16 +17106,6 @@
       {
         "source": "WFIU Community Calendar",
         "source_id": "wfiu_community_calendar",
-        "location": "DePauw University Green Center, 600 South Locust St, GREENCASTLE, Indiana 46135",
-        "count": 2,
-        "titles": [
-          "U.S. Poet Laureate Arthur Sze",
-          "Green Guest Artist Concert: TAKE3"
-        ]
-      },
-      {
-        "source": "WFIU Community Calendar",
-        "source_id": "wfiu_community_calendar",
         "location": "The Haan Museum of Indiana Art, 920 State St, Lafayette, Indiana 47905",
         "count": 2,
         "titles": [
@@ -17044,19 +17116,19 @@
       {
         "source": "Campuslabs Iub",
         "source_id": "campuslabs_iub",
-        "location": "Global & International Studies, GA 3015",
+        "location": "Global & International Studies, GA 3134",
         "count": 1,
         "titles": [
-          "ALPFA Candy & Board Game Night"
+          "Citizen Opioid Responders Student Group Mass Meeting"
         ]
       },
       {
         "source": "Campuslabs Iub",
         "source_id": "campuslabs_iub",
-        "location": "Global & International Studies, GA 3134",
+        "location": "Wylie Hall, WY 115",
         "count": 1,
         "titles": [
-          "Citizen Opioid Responders Student Group Mass Meeting"
+          "October Monthly Meeting"
         ]
       },
       {
@@ -17105,6 +17177,15 @@
         ]
       },
       {
+        "source": "Campuslabs Iub",
+        "source_id": "campuslabs_iub",
+        "location": "Global & International Studies, GA 3106",
+        "count": 1,
+        "titles": [
+          "Colloquium"
+        ]
+      },
+      {
         "source": "Gcal 90204180D86Dfba4A7C6Fcd85E2082B5F9414F751C9A42D840016D3333A115F2",
         "source_id": "gcal_90204180d86dfba4a7c6fcd85e2082b5f9414f751c9a42d840016d3333a115f2",
         "location": "Harrison County Fairgrounds, 341 S Capitol Ave, Corydon, IN 47\r112, USA\r",
@@ -17134,10 +17215,10 @@
       {
         "source": "WFIU Community Calendar",
         "source_id": "wfiu_community_calendar",
-        "location": "Music on the Square, 21 N. Indiana Street, Greencastle, Indiana 46135",
+        "location": "DePauw University Green Center, 600 South Locust St, GREENCASTLE, Indiana 46135",
         "count": 1,
         "titles": [
-          "Lunch Box Music Series: Matt Giallongo\\, baritone"
+          "Green Guest Artist Concert: TAKE3"
         ]
       },
       {
@@ -17216,71 +17297,71 @@
     "categories": [
       {
         "category": "Religion / Spirituality",
-        "count": 869
+        "count": 864
       },
       {
         "category": "Community / Social",
-        "count": 802
+        "count": 785
       },
       {
         "category": "Education / Workshops",
-        "count": 786
+        "count": 762
       },
       {
         "category": "Arts / Culture",
-        "count": 733
+        "count": 696
       },
       {
         "category": "Music / Concerts",
-        "count": 641
+        "count": 653
       },
       {
         "category": "Sports / Fitness",
-        "count": 499
+        "count": 509
       },
       {
         "category": "Government / Civic",
-        "count": 475
-      },
-      {
-        "category": "Dance / Performance",
         "count": 452
       },
       {
+        "category": "Dance / Performance",
+        "count": 450
+      },
+      {
         "category": "Games / Trivia",
-        "count": 409
+        "count": 405
       },
       {
         "category": "Family / Kids",
-        "count": 305
+        "count": 301
       },
       {
         "category": "History / Heritage",
-        "count": 230
+        "count": 227
       },
       {
         "category": "Craft / Maker",
-        "count": 228
+        "count": 223
       },
       {
         "category": "Comedy / Improv",
-        "count": 210
-      },
-      {
-        "category": "Health / Wellness",
-        "count": 189
+        "count": 209
       },
       {
         "category": "Film / Cinema",
-        "count": 167
+        "count": 189
+      },
+      {
+        "category": "Health / Wellness",
+        "count": 183
       },
       {
         "category": "Food / Drink",
-        "count": 158
+        "count": 161
       },
       {
         "category": "Books / Literature / Poetry",
-        "count": 156
+        "count": 153
       },
       {
         "category": "Nature / Outdoors / Recreation",
@@ -17288,15 +17369,15 @@
       },
       {
         "category": "LGBTQ+ / Gender",
-        "count": 66
-      },
-      {
-        "category": "Technology / Careers",
-        "count": 34
+        "count": 64
       },
       {
         "category": "(uncategorized)",
-        "count": 26
+        "count": 45
+      },
+      {
+        "category": "Technology / Careers",
+        "count": 33
       },
       {
         "category": "Gardening / Horticulture",
@@ -17304,53 +17385,53 @@
       }
     ],
     "images": {
-      "total": 7519,
-      "with_image": 1649,
+      "total": 7448,
+      "with_image": 1652,
       "by_source": [
         {
           "source": "Pillar Arts Community Calendar",
-          "total": 293,
-          "with_image": 293
+          "total": 316,
+          "with_image": 316
         },
         {
           "source": "IU Eskenazi School of Art, Architecture + Design",
-          "total": 242,
-          "with_image": 241
+          "total": 237,
+          "with_image": 236
         },
         {
           "source": "The Back Door",
-          "total": 225,
-          "with_image": 225
+          "total": 228,
+          "with_image": 228
         },
         {
           "source": "WFIU Community Calendar",
-          "total": 220,
-          "with_image": 177
+          "total": 221,
+          "with_image": 176
         },
         {
           "source": "IU Arts & Humanities Institute, IU Bloomington Libraries",
-          "total": 147,
-          "with_image": 147
+          "total": 145,
+          "with_image": 145
         },
         {
           "source": "IU Bloomington Libraries",
-          "total": 184,
-          "with_image": 93
+          "total": 183,
+          "with_image": 94
         },
         {
           "source": "IU Hamilton Lugar School",
-          "total": 69,
-          "with_image": 55
-        },
-        {
-          "source": "IU La Casa Latino Cultural Center",
-          "total": 39,
-          "with_image": 39
+          "total": 66,
+          "with_image": 52
         },
         {
           "source": "IU Jacobs School of Music, WFIU Community Calendar",
-          "total": 152,
-          "with_image": 35
+          "total": 150,
+          "with_image": 37
+        },
+        {
+          "source": "IU La Casa Latino Cultural Center",
+          "total": 36,
+          "with_image": 36
         },
         {
           "source": "Brown County Playhouse",
@@ -17359,33 +17440,38 @@
         },
         {
           "source": "IU Arts & Humanities Institute",
-          "total": 53,
-          "with_image": 26
-        },
-        {
-          "source": "IU Auditorium",
-          "total": 25,
+          "total": 51,
           "with_image": 25
         },
         {
-          "source": "Eskenazi Museum of Art",
-          "total": 22,
-          "with_image": 20
+          "source": "IU Auditorium",
+          "total": 24,
+          "with_image": 24
         },
         {
-          "source": "IU La Casa Latino Cultural Center, IU beINvolved Student Orgs",
+          "source": "Eskenazi Museum of Art",
+          "total": 24,
+          "with_image": 22
+        },
+        {
+          "source": "IU Asian Culture Center, IU beINvolved Student Orgs",
           "total": 20,
           "with_image": 20
         },
         {
-          "source": "IU Kelley School of Business",
-          "total": 27,
+          "source": "IU La Casa Latino Cultural Center, IU beINvolved Student Orgs",
+          "total": 19,
           "with_image": 19
         },
         {
           "source": "IU Jacobs School of Music",
-          "total": 204,
+          "total": 209,
           "with_image": 19
+        },
+        {
+          "source": "IU Kelley School of Business",
+          "total": 25,
+          "with_image": 18
         },
         {
           "source": "Bloomington Spinners & Weavers Guild",
@@ -17393,13 +17479,13 @@
           "with_image": 17
         },
         {
-          "source": "Eskenazi Museum of Art, Events Livewhale 11",
-          "total": 14,
-          "with_image": 14
+          "source": "IU Media School",
+          "total": 35,
+          "with_image": 15
         },
         {
-          "source": "IU Media School",
-          "total": 33,
+          "source": "Eskenazi Museum of Art, Events Livewhale 11, IU Arts & Humanities Institute",
+          "total": 15,
           "with_image": 14
         },
         {
@@ -17408,18 +17494,8 @@
           "with_image": 14
         },
         {
-          "source": "Eskenazi Museum of Art, Events Livewhale 11, IU Arts & Humanities Institute",
-          "total": 14,
-          "with_image": 13
-        },
-        {
-          "source": "IU Asian Culture Center, IU beINvolved Student Orgs",
-          "total": 12,
-          "with_image": 12
-        },
-        {
           "source": "Monroe County Democratic Party",
-          "total": 67,
+          "total": 66,
           "with_image": 11
         },
         {
@@ -17428,9 +17504,9 @@
           "with_image": 11
         },
         {
-          "source": "Pillar Arts Community Calendar, WFIU Community Calendar",
-          "total": 11,
-          "with_image": 11
+          "source": "Eskenazi Museum of Art, Events Livewhale 11",
+          "total": 10,
+          "with_image": 10
         },
         {
           "source": "IU Hamilton Lugar School, IU Kelley School of Business",
@@ -17438,22 +17514,22 @@
           "with_image": 8
         },
         {
-          "source": "Eskenazi Museum of Art, IU Arts & Humanities Institute",
+          "source": "Pillar Arts Community Calendar, WFIU Community Calendar",
           "total": 7,
           "with_image": 7
         },
         {
-          "source": "IU Arts & Humanities Institute, IU Hamilton Lugar School",
+          "source": "Eskenazi Museum of Art, IU Arts & Humanities Institute",
           "total": 6,
           "with_image": 6
         },
         {
-          "source": "Pillar Arts Community Calendar, Visit Bloomington, WFIU Community Calendar",
-          "total": 16,
-          "with_image": 6
+          "source": "IU LGBTQ+ Culture Center, IU La Casa Latino Cultural Center",
+          "total": 5,
+          "with_image": 5
         },
         {
-          "source": "IU LGBTQ+ Culture Center, IU La Casa Latino Cultural Center",
+          "source": "IU Arts & Humanities Institute, IU Hamilton Lugar School",
           "total": 5,
           "with_image": 5
         },
@@ -17468,28 +17544,18 @@
           "with_image": 4
         },
         {
-          "source": "IU LGBTQ+ Culture Center, IU beINvolved Student Orgs",
-          "total": 3,
-          "with_image": 3
-        },
-        {
-          "source": "Pillar Arts Community Calendar, Visit Bloomington",
-          "total": 8,
-          "with_image": 3
-        },
-        {
           "source": "Eskenazi Museum of Art, IU Arts & Humanities Institute, IU Hamilton Lugar School",
           "total": 4,
           "with_image": 3
         },
         {
-          "source": "IU Arts & Humanities Institute, IU Neal-Marshall Black Culture Center",
-          "total": 2,
+          "source": "Pillar Arts Community Calendar, Visit Bloomington, WFIU Community Calendar",
+          "total": 5,
           "with_image": 2
         },
         {
-          "source": "IU Jacobs School of Music, Visit Bloomington, WFIU Community Calendar",
-          "total": 5,
+          "source": "IU LGBTQ+ Culture Center, IU beINvolved Student Orgs",
+          "total": 2,
           "with_image": 2
         },
         {
@@ -17503,23 +17569,13 @@
           "with_image": 2
         },
         {
-          "source": "IU LGBTQ+ Culture Center",
-          "total": 45,
-          "with_image": 1
-        },
-        {
-          "source": "IU Arts & Humanities Institute, IU Hamilton Lugar School, IU Jacobs School of Music",
-          "total": 1,
-          "with_image": 1
-        },
-        {
-          "source": "IU Cinema, IU Hamilton Lugar School, Visit Bloomington",
-          "total": 1,
-          "with_image": 1
-        },
-        {
           "source": "IU Black Film Center & Archive, IU Media School",
           "total": 1,
+          "with_image": 1
+        },
+        {
+          "source": "IU LGBTQ+ Culture Center",
+          "total": 44,
           "with_image": 1
         },
         {
@@ -17528,7 +17584,17 @@
           "with_image": 1
         },
         {
+          "source": "IU Asian Culture Center",
+          "total": 1,
+          "with_image": 1
+        },
+        {
           "source": "IU Mathers Museum of World Cultures",
+          "total": 3,
+          "with_image": 1
+        },
+        {
+          "source": "Pillar Arts Community Calendar, Visit Bloomington",
           "total": 3,
           "with_image": 1
         },
@@ -17543,6 +17609,11 @@
           "with_image": 1
         },
         {
+          "source": "Events Livewhale 11, IU Arts & Humanities Institute, IU Hamilton Lugar School",
+          "total": 1,
+          "with_image": 1
+        },
+        {
           "source": "BloomingtonOnline Events, WFIU Community Calendar",
           "total": 4,
           "with_image": 1
@@ -17550,6 +17621,11 @@
         {
           "source": "IU Black Film Center & Archive, IU La Casa Latino Cultural Center, IU beINvolved Student Orgs",
           "total": 1,
+          "with_image": 1
+        },
+        {
+          "source": "IU Jacobs School of Music, Visit Bloomington, WFIU Community Calendar",
+          "total": 4,
           "with_image": 1
         },
         {
