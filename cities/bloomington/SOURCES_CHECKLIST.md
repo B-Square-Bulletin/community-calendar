@@ -77,13 +77,12 @@ Docs: https://documentation.events.iu.edu/feed-and-linked-calendars/ical-feed.ht
 | Redbud Books | Google Calendar | ~348 | Book clubs, author talks, film, community events |
 | Nerd Nite Bloomington | Eventbrite scraper | ~1 | Quarterly science talks at The Bishop |
 
-### Community & Family (8 sources)
+### Community & Family (7 sources)
 
 | Source | Type | Events | Notes |
 |--------|------|--------|-------|
 | Monroe County Public Library | ICS | ~500 | Communico/Stacks partner portal `mcplin.libnet.info/feeds` (was `calendar.mcpl.info`; see 2026-10-09 repair) |
 | Boys & Girls Club | Scraper | ~2 | `tribe_rest.py` — Tribe ICS returns empty reply; REST API works (2026-08) |
-| WonderLab Museum | ICS | ~30+ | WordPress ICS — Cloudflare blocks HTML but not ICS |
 | First United Church | ICS | ~50+ | WordPress ICS — community hub (DSA, Al-Anon, scouts) |
 | Bloomington Community Band | Scraper | ~5 | `tribe_rest.py` — Tribe ICS returns an empty body; REST API works (2026-08) |
 | Bloominglabs Makerspace | Google Calendar | ~10+ | |
@@ -188,6 +187,7 @@ These curate or aggregate events from multiple venues:
 | Vibe Yoga Studio | Squarespace | Class schedules only |
 | Bloomington Volunteer Network | Galaxy Digital | No feed export |
 | NAMI Greater Bloomington | The Events Calendar + Cloudflare | Tribe REST API 403s from CI (Cloudflare IP/WAF block on GitHub Actions egress); dropped as a source 2026-09 (#19) |
+| WonderLab Museum | The Events Calendar + Cloudflare | Whole host behind Cloudflare bot protection: ICS and Tribe REST API both 403 from CI for every UA; dropped as a source 2026-10 (#186). Events covered by WFIU Community Calendar, Visit Bloomington, Pillar Arts |
 | SIREN Solar | Tribe Events Calendar | ICS broken, API returns 0 events — dead calendar |
 | ~~Pillar Arts~~ | ~~WordPress + TEC~~ | RESOLVED: events published via Pillar Arts Community Calendar Tockify feed (bloomington.arts.calendar) |
 | Monroe County Gov | Indiana state platform | No ICS export |
@@ -446,6 +446,12 @@ Annual events with reliable dates but no feeds — a once-a-season curator sweep
 - Verified 2026-10-09: old host `/feeds?data=...` → 404; `https://mcplin.libnet.info/feeds?data=<same payload>` → 200, `BEGIN:VCALENDAR`, **500 events** (`PRODID:-//Monroe County Public Library//Event Calendar//EN`).
 - Fix is a DB update (no scraper code change): migration `supabase/migrations/20261009120000_repair_mcpl_feed_url.sql` repoints the registered row from the dead `calendar.mcpl.info` URL to `mcplin.libnet.info`, keeping the same 90-day, all-filters payload so the source name and filters are unchanged. `feeds.txt` regenerates from the DB on the next build; do not hand-edit it.
 - The earlier note that `library_intercept.py --location bloomington` still covered MCPL was wrong: that config points at `bloomingtonlibrary.org` (Bloomington, **Illinois** — see #50), not MCPL. The Communico feed is the ingest.
+
+### 2026-10-10: WonderLab Museum feed dropped (issue #186)
+- The `WonderLab Museum` ICS feed (`https://wonderlab.org/events/list/?ical=1`) served HTML, not ICS, with no good build in recorded history (`✅ wonderlab.ics: 0 events` every nightly build). wonderlab.org fronts the whole host with Cloudflare bot protection: from GitHub Actions egress **every** endpoint returns an HTTP 403 Cloudflare challenge page (`<!DOCTYPE html>...<title>Just a moment...</title>`) for **every** User-Agent — the ICS export and the Tribe REST API (`/wp-json/tribe/events/v1/events/`) alike. Verified from CI with a throwaway probe workflow (runner IP, `curl/8.5.0`, `Mozilla/5.0`, and the project `CommunityCalendar` UA all 403).
+- This is the documented Cloudflare datacenter-IP block pattern (`docs/discovery-lessons.md`; NAMI Greater Bloomington, #19): no header or User-Agent change fixes it, and converting to `tribe_rest.py` (the #185 Hard Truth move) would only write a valid-empty calendar from CI. Dropped the source instead.
+- No coverage is lost: WonderLab events already reach the calendar through `WFIU Community Calendar` (ipm.org, 151 WonderLab-titled items in the current `rss/bloomington-full.xml`), `Visit Bloomington`, and `Pillar Arts Community Calendar` — the recurring programs and the special events both.
+- Fix is a DB update (no scraper code change): migration `supabase/migrations/20261010140000_drop_wonderlab_feed.sql` deletes the registered row and any events it produced. `feeds.txt` regenerates from the DB on the next build; do not hand-edit it.
 
 ### 2026-10-10: Hard Truth Distilling Co. feed converted to a Tribe REST scraper (issue #185)
 - The `Hard Truth Distilling Co.` ICS feed (`https://hardtruth.com/events/?post_type=tribe_events&ical=1&eventDisplay=list`) served HTML, not ICS, with no good build in recorded history. hardtruth.com is behind SiteGround's `sgcaptcha` bot protection: it returns an HTTP 202 challenge page (`SG-Captcha: challenge`, meta-refresh to `/.well-known/sgcaptcha/`) to non-browser clients and hard-403s the project's default `CommunityCalendar` User-Agent. The downloader treats any non-empty body as a successful download and never falls back to curl, so the challenge page was written to `hardtruth.ics` and reported as `not_ics:html`.
