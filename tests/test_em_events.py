@@ -141,6 +141,39 @@ class TestParseEvent:
         assert result["location"] == "Test Venue, 123 Main St, Anytown, ST"
         assert result["uid"].endswith("@example.org")
 
+    def test_single_time_gets_a_default_end(self):
+        """A start time with no end is not emitted as a zero-duration event."""
+        html = """<div class="em-event em-item" data-href="https://example.org/events/show/">
+          <h3 class="em-item-title"><a href="https://example.org/events/show/">Show</a></h3>
+          <div class="em-event-date">June 18, 2026</div>
+          <div class="em-event-time">8:00 pm</div>
+        </div>"""
+        el = BeautifulSoup(html, "html.parser").select_one(".em-event")
+        scraper = EmEventsScraper()
+        scraper.domain = "example.org"
+        result = scraper._parse_event(el, TZ)
+        assert result is not None
+        assert result["dtstart"] == datetime(2026, 6, 18, 20, 0, tzinfo=TZ)
+        assert result["dtend"] == datetime(2026, 6, 18, 22, 0, tzinfo=TZ)
+
+    def test_url_less_event_uid_is_stable_across_runs(self):
+        """No URL and no data-event-id must still give a run-stable UID."""
+        html = """<div class="em-event em-item">
+          <h3 class="em-item-title"><a>Nameless</a></h3>
+          <div class="em-event-date">June 18, 2026</div>
+          <div class="em-event-time">8:00 pm</div>
+        </div>"""
+        scraper = EmEventsScraper()
+        scraper.domain = "example.org"
+
+        def parse() -> dict:
+            el = BeautifulSoup(html, "html.parser").select_one(".em-event")
+            result = scraper._parse_event(el, TZ)
+            assert result is not None
+            return result
+
+        assert parse()["uid"] == parse()["uid"]
+
 
 class TestOccurrenceExpansion:
     """The AJAX listing is occurrence-expanded; the UID keys each occurrence."""

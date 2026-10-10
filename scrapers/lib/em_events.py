@@ -215,6 +215,11 @@ class EmEventsScraper(BaseScraper):
 
         if not dtstart:
             dtstart = datetime(year, month, day, tzinfo=tz)
+        if not dtend:
+            # A single clock time carries no end: default to two hours, as
+            # lib/ai1ec.py did, so the event is not zero-duration. A card with
+            # no time element at all is treated as a full day.
+            dtend = dtstart + (timedelta(hours=2) if time_el else timedelta(days=1))
 
         # Location parsing
         location = self._parse_location(event_el)
@@ -229,9 +234,10 @@ class EmEventsScraper(BaseScraper):
         # the same id, date and time still collapse.
         event_id = event_el.get("data-event-id", "")
         if not event_id:
-            # Fall back to URL-based UID
+            # Fall back to the URL slug, then the title. str(id()) is a memory
+            # address that changes every run, which would churn the event.
             uid_match = re.search(r"/(?:events/)?([^/]+)/?$", url)
-            event_id = uid_match.group(1) if uid_match else str(id(event_el))
+            event_id = uid_match.group(1) if uid_match else title
         uid = generate_uid(event_id, dtstart, self.domain)
 
         # Description (from listing page — may be truncated or absent)
