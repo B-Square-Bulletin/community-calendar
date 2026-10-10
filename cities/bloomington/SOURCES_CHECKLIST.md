@@ -331,7 +331,7 @@ Edgewood alone shows 84 aggregator-only events today. Also: third-party IU footb
 | Tibetan Mongolian Buddhist Cultural Center | WordPress RSS `tmbcc.org/feed/` | Events as blog posts; retreats, LOSAR, Summer Prayer Festival; mod_security blocks ?ical=1 |
 | Brown County government | CivicEngage: POST `chkCalendarID=14` to `/iCalendar.aspx` | Button exists; needs form-style request |
 | Owen County Public Library (Spencer) | JSON API `https://owenlib.org/api/events` (87 events) | Payload CMS JSON — trivial adapter, not ICS |
-| Monroe County Public Library ICS | Communico (`calendar.mcpl.info`) | `showICAL: true` but export is a JS POST to api.communico.co; existing `library_intercept.py` scraper still covers MCPL — this is only an alternative |
+| Monroe County Public Library ICS | Communico/Stacks | The iCal export lives on the partner portal `mcplin.libnet.info/feeds?data=...` (the `calendar.mcpl.info` custom-domain endpoint 404'd 2026-09-30; see the 2026-10-09 repair entry) |
 | Chamber of Commerce (Atlas) | WebLink JSON `api-internal.weblinkconnect.com` (auth) | Upgraded from dead end |
 | Bloomington Symphony Orchestra | WordPress, no TEC; ~6 concerts/yr | bloomingtonsymphony.org/concert/ |
 | Monroe County Civic Theater | WordPress/Kubio + Ludus ticketing | mcct.org; Shakespeare in the Park |
@@ -440,6 +440,12 @@ Annual events with reliable dates but no feeds — a once-a-season curator sweep
 - **Correction:** the earlier "Visit Bloomington — Simpleview CMS — No public API" entry (and the generic "Simpleview is a dead end" claim in `docs/search-pattern-tests.md`/`docs/platforms.md`) was wrong. The `/event/rss/` feed caps at 30 items and detail JSON-LD is date-only, but the same-origin Simpleview **REST API** (`/includes/rest_v2/plugins_events_events_by_date/find/` + `get_simple_token/`) returns clock times, full descriptions, geo, recurrence and `skip` paging over plain HTTP — 34 requests → 1,666 occurrences across 230 recids, empty cookie jar, no browser.
 - Also fixed the stale assumption in `scrapers/simpleview.py` reuse: its RSS + JSON-LD path emits all-day events and drops recurring series, so Visit Bloomington needs a dedicated `scrapers/visit_bloomington.py`.
 - Nothing built here — the surface decision, coverage bar, API mechanism, registration and dedup/geo contracts are locked in the spec issue #124 (see map #117).
+
+### 2026-10-09: Monroe County Public Library feed repaired (issue #183)
+- `Monroe County Public Library` feed 404s: the registered Communico/Stacks feed `https://calendar.mcpl.info/feeds?data=...` returned `Not Found` (broken since 2026-09-30, ~500 events lost). The host migrated the portal: MCPL's own events page now loads its components from `elements.communico.co` and builds the iCal link on the partner portal `https://<keyword>.libnet.info` — keyword `mcplin`, so `https://mcplin.libnet.info/feeds?data=...`.
+- Verified 2026-10-09: old host `/feeds?data=...` → 404; `https://mcplin.libnet.info/feeds?data=<same payload>` → 200, `BEGIN:VCALENDAR`, **500 events** (`PRODID:-//Monroe County Public Library//Event Calendar//EN`).
+- Fix is a DB update (no scraper code change): migration `supabase/migrations/20261009120000_repair_mcpl_feed_url.sql` repoints the registered row from the dead `calendar.mcpl.info` URL to `mcplin.libnet.info`, keeping the same 90-day, all-filters payload so the source name and filters are unchanged. `feeds.txt` regenerates from the DB on the next build; do not hand-edit it.
+- The earlier note that `library_intercept.py --location bloomington` still covered MCPL was wrong: that config points at `bloomingtonlibrary.org` (Bloomington, **Illinois** — see #50), not MCPL. The Communico feed is the ingest.
 
 ### 2026-09-07: Master Gardeners URL fix (issue #13)
 - `Monroe County Master Gardeners` scraper 404s: DB `feeds` row id=14 still runs `squarespace.py --url "https://www.mcmga.net/events"` (404). Same stale-URL pattern as Sassafras (#8) — the pre-DB-first URL fix never reached the seeded DB row.
