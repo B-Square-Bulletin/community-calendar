@@ -136,7 +136,7 @@ These curate or aggregate events from multiple venues:
 
 | Source | Type | Events | Notes |
 |--------|------|--------|-------|
-| WFHB Community Calendar | Scraper | ~349 | `wfhb_calendar.py` — ai1ec; covers Orbit Room, library events, and many venues not otherwise scrapable |
+| WFHB Community Calendar | Scraper | ~244 | `wfhb_calendar.py` — Events Manager (`lib/em_events.py`); covers Orbit Room, library events, and many venues not otherwise scrapable |
 | WFIU Community Calendar | Scraper | ~667 | `wfiu_community_calendar.py` — Brightspot server-rendered HTML; occurrence-expanded regional community calendar (Bloomington + surrounding towns) |
 | BloomingtonOnline: Events | Google Calendar | ~224 | Community events |
 | BloomingtonOnline: Food & Drink | Google Calendar | ~133 | Restaurant/brewery specials |
@@ -410,7 +410,8 @@ Annual events with reliable dates but no feeds — a once-a-season curator sweep
 | Platform | File | Used By (Bloomington) | Notes |
 |----------|------|-----------------------|-------|
 | Squarespace | `lib/squarespace.py` | Cardinal Spirits, Sassafras Audubon, Master Gardeners, People's Market | JSON API at `?format=json` |
-| All-in-One Event Calendar (ai1ec) | `lib/ai1ec.py` | WFHB | WordPress plugin; HTML agenda view |
+| All-in-One Event Calendar (ai1ec) | `lib/ai1ec.py` | — | WordPress plugin; HTML agenda view (no Bloomington source; WFHB moved to Events Manager) |
+| Events Manager (EM) | `lib/em_events.py` | WFHB | WordPress plugin; AJAX listing endpoint |
 | Sugar Calendar Lite | `lib/sugar_calendar.py` | Writers Guild | WordPress plugin; list + detail pages |
 | Songkick | `lib/songkick.py` | Bluebird, Blockhouse | Venue event pages |
 | Eventbrite | `scrapers/eventbrite.py` | Morgenstern Books, Nerd Nite | Organizer page → JSON-LD |
@@ -458,6 +459,12 @@ Annual events with reliable dates but no feeds — a once-a-season curator sweep
 - The Tribe REST API (`/wp-json/tribe/events/v1/events/`) is challenged identically. SiteGround's response is stateful/rate-based, not fixed UA/IP filtering: a plain `curl -A "Mozilla/5.0"` returned 7 events before this machine was rate-flagged, then every client (urllib, requests, curl, a real browser, and a text-proxy on a different IP) hit the challenge.
 - Fix follows the documented SiteGround pattern (`docs/discovery-lessons.md`; the 2026-08-07 conversions): migration `supabase/migrations/20261010130000_convert_hardtruth_feed_to_scraper.sql` converts the row from `ics_url` to a `scrapers/tribe_rest.py` scraper with `--user-agent "Mozilla/5.0"`, the UA SiteGround is intermittently permissive to. `feeds.txt` regenerates from the DB on the next build; do not hand-edit it.
 - Tradeoff (accepted, as for the earlier conversions): on a blocked day the scraper writes a valid-empty calendar — classified `quiet`, not `broken_feed` — so the source leaves the feed-health problem queue. First real event counts are expected from CI's quieter network path; local probes here hit the challenge.
+
+### 2026-10-10: WFHB Community Calendar registered (issue #189)
+- Registered the dormant `scrapers/wfhb_calendar.py` via the standard DB-first path — `add_scraper.py wfhb_calendar bloomington "WFHB Community Calendar"` wrote the `cities/bloomington/pending_feeds.txt` entry (`# WFHB Community Calendar`, `# cmd: python scrapers/wfhb_calendar.py --output cities/bloomington/wfhb_calendar.ics`). No workflow edit: the nightly pending-feeds processor inserts the active DB row and the DB-first runner executes it.
+- Verified live at registration: `add_scraper.py --test` produced 230 events (`SCRAPE_MONTHS=2`); a full 6-month run emits 244, every one carrying `X-SOURCE:WFHB Community Calendar`.
+- The issue title says "existing ai1ec scraper", but the source had already migrated off ai1ec: #31 (`d45c48bd`) replaced the ai1ec agenda-view scraper with the Events Manager AJAX scraper (`lib/em_events.py`) after wfhb.org changed plugins. `lib/ai1ec.py` remains in the tree but no Bloomington source uses it; the Platform Scrapers table is corrected here.
+- WFHB is an aggregator covering venues with no own calendar (Orbit Room, library-hosted events, and outlying town events) and is already in `source_priority.json`'s `aggregators`, so it loses cross-source dedup to primaries.
 
 ### 2026-09-07: Master Gardeners URL fix (issue #13)
 - `Monroe County Master Gardeners` scraper 404s: DB `feeds` row id=14 still runs `squarespace.py --url "https://www.mcmga.net/events"` (404). Same stale-URL pattern as Sassafras (#8) — the pre-DB-first URL fix never reached the seeded DB row.
