@@ -81,7 +81,7 @@ Docs: https://documentation.events.iu.edu/feed-and-linked-calendars/ical-feed.ht
 
 | Source | Type | Events | Notes |
 |--------|------|--------|-------|
-| Monroe County Public Library | Scraper | ~483 | `library_intercept.py --location bloomington` |
+| Monroe County Public Library | ICS | ~500 | Communico/Stacks partner portal `mcplin.libnet.info/feeds` (was `calendar.mcpl.info`; see 2026-10-09 repair) |
 | Boys & Girls Club | Scraper | ~2 | `tribe_rest.py` — Tribe ICS returns empty reply; REST API works (2026-08) |
 | WonderLab Museum | ICS | ~30+ | WordPress ICS — Cloudflare blocks HTML but not ICS |
 | First United Church | ICS | ~50+ | WordPress ICS — community hub (DSA, Al-Anon, scouts) |
