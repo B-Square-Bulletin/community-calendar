@@ -1,0 +1,325 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Faculty of Applied Science &amp; Engineering - ECPv6.15.0.1//NONSGML v1.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Faculty of Applied Science &amp; Engineering
+X-ORIGINAL-URL:https://www.engineering.utoronto.ca
+X-WR-CALDESC:Events for Faculty of Applied Science &amp; Engineering
+REFRESH-INTERVAL;VALUE=DURATION:PT1H
+X-Robots-Tag:noindex
+X-PUBLISHED-TTL:PT1H
+BEGIN:VTIMEZONE
+TZID:America/Toronto
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:20260308T070000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:20261101T060000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VTIMEZONE
+TZID:UTC
+BEGIN:STANDARD
+TZOFFSETFROM:+0000
+TZOFFSETTO:+0000
+TZNAME:UTC
+DTSTART:20260101T000000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VTIMEZONE
+TZID:America/Denver
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0700
+TZOFFSETTO:-0600
+TZNAME:MDT
+DTSTART:20260308T090000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0600
+TZOFFSETTO:-0700
+TZNAME:MST
+DTSTART:20261101T080000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+X-SOURCE:UofT Engineering
+X-SOURCE-URL:https://www.engineering.utoronto.ca/engineering-events/
+DTSTART;TZID=America/Toronto:20260407T120000
+DTEND;TZID=America/Toronto:20260407T130000
+DTSTAMP:20260406T175948
+CREATED:20260402T153256Z
+LAST-MODIFIED:20260402T153256Z
+UID:10004518-1775563200-1775566800@www.engineering.utoronto.ca
+SUMMARY:ChemE Master of Engineering (MEng) Online Application Support Drop-In
+DESCRIPTION:Do you have questions about your MEng application to the Department of Chemical Engineering & Applied Chemistry? Attend this online drop-in session for an opportunity to ask questions and receive answers from a graduate studies staff member.
+URL:https://www.engineering.utoronto.ca/event/cheme-master-of-engineering-meng-online-application-support-drop-in/
+LOCATION:Zoom (link will be provided upon registration)
+CATEGORIES:MEng Info,Prospective Students
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:UofT Engineering
+X-SOURCE-URL:https://www.engineering.utoronto.ca/engineering-events/
+DTSTART;TZID=America/Toronto:20260407T120000
+DTEND;TZID=America/Toronto:20260407T140000
+DTSTAMP:20260406T175948
+CREATED:20260324T164516Z
+LAST-MODIFIED:20260324T164516Z
+UID:10004466-1775563200-1775570400@www.engineering.utoronto.ca
+SUMMARY:ECE Industry Day: Lightmatter
+DESCRIPTION:RSVP for the next ECE Industry Day with Lightmatter.  \nThis is your opportunity to connect with leaders from a company at the forefront of photonic supercomputing and next-generation AI infrastructure. \nLearn what it’s like to work at Lightmatter during an exclusive information session\, followed by a Q&A panel moderated by ECE Chair Professor Deepa Kundur. Gain insights into emerging technologies\, career pathways\, and the future of artificial intelligence systems. \nSpots are limited. Please register by April 3 to secure your place at ECE Industry Day
+URL:https://www.engineering.utoronto.ca/event/ece-industry-day-lightmatter/
+LOCATION:GB202\, 35 St George St\, Toronto\, Ontario\, M5S 1A4\, Canada
+CATEGORIES:Info sessions,Lectures, seminars and workshops,Socials
+ATTACH;FMTTYPE=image/png:https://www.engineering.utoronto.ca/wp-content/uploads/sites/28/2026/03/Mailchimp-ECE-ID-Lightmatter-RX4A0X.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:UofT Engineering
+X-SOURCE-URL:https://www.engineering.utoronto.ca/engineering-events/
+DTSTART;TZID=America/Toronto:20260408T090000
+DTEND;TZID=America/Toronto:20260408T170000
+DTSTAMP:20260406T175948
+CREATED:20260325T144850Z
+LAST-MODIFIED:20260325T144850Z
+UID:10004503-1775638800-1775667600@www.engineering.utoronto.ca
+SUMMARY:Praxis II Showcase
+DESCRIPTION:EngSci’s Praxis II Showcase is open to the public.\nAt the Praxis II Showcase\, student teams present and demonstrate their designs to stakeholders and the general public. Attendees will be able to ask questions and talk to the teams in small group chats. \nRead about a previous Praxis II Showcase in the U of T Engineering News. \nSee photos from last year’s event. \nPraxis II is a Year 1 course that allows Engineering Science students to refine and apply their engineering\, design\, and communication skills. The students are given a single challenge: \nEffect a verified and validated sustainable improvement in the lived experience of a community. \nFocusing on a community allows students to gain first-hand experience with the issues confronting real groups of people and to engage one-on-one with stakeholders and community representatives. \nThe course culminates in the public Praxis II Showcase. At the event\, students share their refined understanding of their opportunity and their proposed engineering designs with a wide audience through posters\, prototypes and presentations. \nRegistration is requested for guests who are not affiliated with the course\, though drop-ins are also welcome. \nSEE THE EVENT SCHEDULE AND REGISTER HERE\nMedia enquiries are welcome.  Please visit the link above for contact information.
+URL:https://www.engineering.utoronto.ca/event/praxis-ii-showcase-4/
+LOCATION:7 Hart House Circle Toronto\, ON Canada
+CATEGORIES:Lectures, seminars and workshops
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:UofT Engineering
+X-SOURCE-URL:https://www.engineering.utoronto.ca/engineering-events/
+DTSTART;TZID=America/Toronto:20260408T100000
+DTEND;TZID=America/Toronto:20260408T160000
+DTSTAMP:20260406T175948
+CREATED:20260402T154353Z
+LAST-MODIFIED:20260402T154353Z
+UID:10004516-1775642400-1775664000@www.engineering.utoronto.ca
+SUMMARY:2026 Winter First-Year Engineering Exam Jam
+DESCRIPTION:U of T Engineering’s Exam Jam for the 2026 Winter Term will be held in person on Wednesday\, April 8\, 2026 from 10 a.m.–4 p.m. No registration is required\, and all events are free of charge for first-year engineering students. \nWe hope you’ll take advantage of some of these de-stressing and extra help opportunities: \n\nReview sessions with your first-year course instructors and/or TAs;\nHealthy free snacks and de-stressing activities for first-year students from 1 – 3 p.m.;\nTherapy Dog Visit from the Sunshine Therapy Dogs of Toronto from 1 – 2 p.m.\n\nExam Jam Schedule\n\n\n\nTime\nEvent\nLocation\nDescription\n\n\n\n\n10–11 a.m.\nAPS105\nMC 102\nReview session\n\n\n10–11 a.m.\nMIN120\nMC 254\nReview session\n\n\n11 a.m.–12 p.m.\nMIE100\nMC 102\nReview session\n\n\n11 a.m.–12 p.m.\nCIV100\nMC 254\nReview session\n\n\n12–1 p.m.\nCHE112\nMC 102\nReview session\n\n\n12–1 p.m.\nMSE120\nMC 254\nReview session\n\n\n1–2 p.m.\nFree snacks\nMC Lobby\nGrab some free healthy snacks (while supplies last!) in the MC Lobby with the FYO team\n\n\n1–2 p.m.\nTherapy Dog Visit\nGB 202\nDe-stress with furry friends from the Sunshine Therapy Dog program!\n\n\n1–3 p.m.\nGEARS Drop-in Study Sessions\nSF 2402 (Engineering Library Classroom)\nJoin GEARS student mentors to study\, review\, and share exam prep tips!\n\n\n1–3 p.m.\nRelaxing Crafts & Activities\nSF 2402 (Engineering Library)\nDrop by for free and fun activities in the Library! Featuring games\, puzzles\, cute spring crafts\, origami and colouring! Snacks will also be available.\n\n\n2–3 p.m.\nMAT187\nMC 102\nReview session\n\n\n3–4 p.m.\nAPS106\nMC 102\nReview session
+URL:https://www.engineering.utoronto.ca/event/2026-winter-first-year-engineering-exam-jam/
+LOCATION:Multiple Locations
+CATEGORIES:2026 Winter Term,Info sessions,Socials
+ORGANIZER;CN="First Year Office":MAILTO:firstyear@engineering.utoronto.ca
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:UofT Engineering
+X-SOURCE-URL:https://www.engineering.utoronto.ca/engineering-events/
+DTSTART;TZID=America/Toronto:20260409T093000
+DTEND;TZID=America/Toronto:20260409T170000
+DTSTAMP:20260406T175948
+CREATED:20260324T183011Z
+LAST-MODIFIED:20260324T183011Z
+UID:10004502-1775727000-1775754000@www.engineering.utoronto.ca
+SUMMARY:ESP Design Day 2026
+DESCRIPTION:You are invited to attend ESP Design Day\, an opportunity to explore the projects our first-year engineering students worked on in the Engineering Strategies & Practice (ESP) course.   \nEngineering Strategies & Practice (APS112) is an award-winning engineering design course taken by all first-year students in the Core 8 programs. The course explores themes such as the role of engineering in society\, our relationship with the environment\, and the potential and importance that our work holds for people.  \nIn APS112\, first-year engineering students do real work for real clients\, seeing a design project from beginning to end. In learning the basics of project management\, how to approach and break down complex problems\, and how to execute the design process\, students use knowledge gained in the classroom to tackle real-world problems.  \nThis year\, we have 200 projects! Students have worked with a variety of different clients\, such as the City of Toronto\, Toronto Fire Services\, Sunnybrook Health Sciences Centre\, The Hospital for Sick Children\, and St. Lawrence College\, to mention a few. Sessions run in the morning and afternoon.   \nWe look forward to seeing you at ESP Design Day 2026! Registration is required for guests\, including alumni\, staff\, faculty\, and students not affiliated with the course. Please register by Monday\, April 6.   \nIf you have any questions\, please email esp@engineering.utoronto.ca 
+URL:https://www.engineering.utoronto.ca/event/esp-design-day-2026/
+LOCATION:Myhal Centre for Engineering Innovation & Entrepreneurship\, 55 St. George Street
+ORGANIZER;CN="Engineering Strategies and Practice (ESP)":MAILTO:esp@engineering.utoronto.ca
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:UofT Engineering
+X-SOURCE-URL:https://www.engineering.utoronto.ca/engineering-events/
+DTSTART;TZID=America/Toronto:20260414T120000
+DTEND;TZID=America/Toronto:20260414T130000
+DTSTAMP:20260406T175948
+CREATED:20260402T154114Z
+LAST-MODIFIED:20260402T154114Z
+UID:10004520-1776168000-1776171600@www.engineering.utoronto.ca
+SUMMARY:ChemE Master of Engineering (MEng) Online Application Support Drop-In
+DESCRIPTION:Do you have questions about your MEng application to the Department of Chemical Engineering & Applied Chemistry? Attend this online drop-in session for an opportunity to ask questions and receive answers from a graduate studies staff member.
+URL:https://www.engineering.utoronto.ca/event/cheme-master-of-engineering-meng-online-application-support-drop-in-4/
+LOCATION:Zoom (link will be provided upon registration)
+CATEGORIES:Info sessions,MEng Info,Prospective Students
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:UofT Engineering
+X-SOURCE-URL:https://www.engineering.utoronto.ca/engineering-events/
+DTSTART;TZID=UTC:20260414T150000
+DTEND;TZID=UTC:20260414T160000
+DTSTAMP:20260406T175948
+CREATED:20260312T223945Z
+LAST-MODIFIED:20260312T223945Z
+UID:10004352-1776178800-1776182400@www.engineering.utoronto.ca
+SUMMARY:Robotics Institute Seminar: Tobi Fischer\, “Sensing Change: Brain-Inspired Navigation Beyond GPS”
+DESCRIPTION:Sensing Change: Brain-Inspired Navigation Beyond GPS \nJoin in MY580 or Zoom \nAbstract\n\nKnowing your location is fundamental to navigation – for humans\, animals\, and autonomous systems alike. But how can robots and other autonomous agents determine their position with confidence and precision in environments where satellite systems are unavailable or unreliable? The central theme of this talk explores Visual Place Recognition (VPR)\, which is the ability to recognise previously visited locations using only visual data. I will demonstrate how energy-efficient approaches using bio-inspired event-based cameras and spiking neural networks can provide low-power edge devices with location information with superior energy efficiency\, adaptability\, and data efficiency. Beyond this central theme\, I will also touch on my work on underwater perception for reef restoration\, and about Pixi\, a powerful tool to run many robotics\, computer vision\, and AI libraries on any operating system (Linux\, MacOS\, Windows\, or even your browser!).\n\nSpeaker Bio\n\nDr Tobias Fischer is a Senior Lecturer (US: Associate Professor) and ARC DECRA Fellow at the Queensland University of Technology (QUT)\, where he conducts research at the intersection of neuromorphic computing\, computer vision\, and robotics. He conducts research in robot localisation and underwater perception\, blending neuroscience and robotics to push the boundaries of intelligent systems operating under resource constraints. Dr Fischer has attracted over $3 million in competitive funding and leads research within the QUT Centre for Robotics and the Reef Restoration and Adaptation Program\, with previous grants from Intel and Amazon. He obtained his PhD from Imperial College London\, where his thesis won the UK Best PhD in Robotics Award. He has published more than 50 papers in top venues including Science Robotics\, IEEE Transactions on Robotics\, IEEE Transactions on Pattern Analysis and Machine Intelligence\, CVPR\, ICCV\, ECCV\, ICRA\, and IROS. Dr Fischer serves as Associate Editor for leading robotics journals and conferences and co-chairs the IEEE Robotics and Automation Society Women in Engineering Committee. His PhD students have gone on to successful careers as Assistant Professor\, Research Scientists\, and Research Fellows. Website: https://www.tobiasfischer.info
+URL:https://www.engineering.utoronto.ca/event/robotics-institute-seminar-tobi-fischer-sensing-change-brain-inspired-navigation-beyond-gps/
+LOCATION:Myhal Centre for Engineering Innovation & Entrepreneurship\, Room 580\, or on Zoom\, 55 St. George Street\, Toronto\, Ontario\, M5S 0C9\, Canada
+CATEGORIES:Lectures, seminars and workshops
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:UofT Engineering
+X-SOURCE-URL:https://www.engineering.utoronto.ca/engineering-events/
+DTSTART;TZID=America/Denver:20260415T173000
+DTEND;TZID=America/Denver:20260415T200000
+DTSTAMP:20260406T175948
+CREATED:20260402T154750Z
+LAST-MODIFIED:20260402T154750Z
+UID:10004505-1776274200-1776283200@www.engineering.utoronto.ca
+SUMMARY:San Francisco: Fireside Chat with Catherine Lacavera
+DESCRIPTION:Join the Rotman team for a special Fireside Chat and Networking Event on April 15 at 5:30 PM. This evening will bring together members of our alumni community for thoughtful conversation and meaningful connections. \nYou’ll hear an engaging chat between Rotman Dean Susan Christoffersen and U of T Engineering alumna Catherine Lacavera (CompE\, JD/MBA)\, discussing Catherine’s distinguished career at the epicentre of technology and law and they will look ahead to the future of business in the age of AI. \nEvent Details: \nDate: April 15\, 2026\nTime: 5:30 p.m. – 8:00 p.m.\nPlace: Convene\, 100 Stockton Street (entrance is at 40 O’Farrell Street)\, San Francisco\, California\, 94108  \nQuestions?\nEmail Jess MacInnis \n\n\n\n\n\n\n\n\n\nDiscover your Global Alumni Ambassadors (GAA) around the world—visit our GAA site for more details!
+URL:https://www.engineering.utoronto.ca/event/san-francisco-fireside-chat-with-catherine-lacavera/
+LOCATION:Convene\, 100 Stockton Street
+CATEGORIES:Lectures, seminars and workshops,Socials
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:UofT Engineering
+X-SOURCE-URL:https://www.engineering.utoronto.ca/engineering-events/
+DTSTART;TZID=America/Toronto:20260417T120000
+DTEND;TZID=America/Toronto:20260417T130000
+DTSTAMP:20260406T175948
+CREATED:20260323T212816Z
+LAST-MODIFIED:20260323T212816Z
+UID:10004501-1776427200-1776430800@www.engineering.utoronto.ca
+SUMMARY:Disruptors & Dilemmas presents: Rethinking higher education in the era of AI
+DESCRIPTION:Technology is rapidly reshaping the educational landscape\, transforming how students learn\, create and make decisions. AI tools now personalize content in real time and generate instant feedback. This deep shift is challenging us to reimagine learning goals in the classroom and\, surprisingly\, encouraging us to strength human-centered skills like critical thinking\, empathy and creativity.    \nWhat does it mean to develop human potential in a world where machines produce answers instantly.\nAs students interact with knowledge in new ways\, big questions emerge about cognition\, development and what it truly means to learn. Universities are rethinking assessment and learning to ensure graduates can thrive not only in today’s workforce but in a future defined by constant technological change.    \nJoin leading experts for an exciting conversation about the future of teaching\, learning and the vital role of educational institutions in applying new technologies with intentionality\, driving innovation in a way that is ethical and inclusive. Explore how learning goals are evolving\, the impact on employment and how we can build educational systems that empower students for whatever comes next.   \nFind full details and registration here. \n\n\n\n\n\n\n\n\n\n\nThis is a Disruptors and Dilemmas speaker series event. \nThis event is co-hosted by: University of Toronto Faculty of Applied Science & Engineering\, Faculty of Arts & Science\, Ontario Institute for Studies in Education.
+URL:https://www.engineering.utoronto.ca/event/disruptors-dilemmas-presents-rethinking-higher-education-in-the-era-of-ai/
+LOCATION:Online\, link shared upon registration\, Online
+CATEGORIES:Alumni events
+ATTACH;FMTTYPE=image/png:https://www.engineering.utoronto.ca/wp-content/uploads/sites/28/2026/03/DD-Apr-2026_event-page-2048x727-1-e1773758474144-wO6AJt.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:UofT Engineering
+X-SOURCE-URL:https://www.engineering.utoronto.ca/engineering-events/
+DTSTART;TZID=America/Toronto:20260417T120000
+DTEND;TZID=America/Toronto:20260417T130000
+DTSTAMP:20260406T175948
+CREATED:20260324T164158Z
+LAST-MODIFIED:20260324T164158Z
+UID:10004468-1776427200-1776430800@www.engineering.utoronto.ca
+SUMMARY:Rethinking higher education in the era of AI
+DESCRIPTION:Technology is rapidly reshaping the educational landscape\, transforming how students learn\, create and make decisions. AI tools now personalize content in real time and generate instant feedback. This deep shift is challenging us to reimagine learning goals in the classroom and\, surprisingly\, encouraging us to strength human-centered skills like critical thinking\, empathy and creativity.    \nWhat does it mean to develop human potential in a world where machines produce answers instantly.\nAs students interact with knowledge in new ways\, big questions emerge about cognition\, development and what it truly means to learn. Universities are rethinking assessment and learning to ensure graduates can thrive not only in today’s workforce but in a future defined by constant technological change.    \nJoin leading experts for an exciting conversation about the future of teaching\, learning and the vital role of educational institutions in applying new technologies with intentionality\, driving innovation in a way that is ethical and inclusive. Explore how learning goals are evolving\, the impact on employment and how we can build educational systems that empower students for whatever comes next.    \nThis is a Disruptors and Dilemmas speaker series event.\nThis event is co-hosted by: University of Toronto Faculty of Applied Science & Engineering\, Faculty of Arts & Science\, Ontario Institute for Studies in Education. \nAbout the speakers\n \nProfessor Susan MacCahan  \nAssociate Vice-President and Vice-Provost\, Digital Strategies and Vice-Provost\, Innovations in Undergraduate Education \n  \n  \n  \n \nAssociate Professor Paolo Granata  \nAssociate Professor\, Book and Media Studies\, St. Michael’s College\, University of Toronto \n  \n  \n  \n \nProfessor Eunice Jang  \nProfessor\, Department of Applied Psychology and Human Development\, OISE \n  \n  \n  \nOur moderator\n \nClaire Kennedy\,\n(BASc ’89 Chemical Engineering\, Applied Science & Engineering\, Hon LLD ’23) \nCo-chair\, Defy Gravity Campaign \n  \n  \n  \n  \nProudly sponsored by U of T affinity partners:\n \nDiscover the benefits of affinity products!
+URL:https://www.engineering.utoronto.ca/event/rethinking-higher-education-in-the-era-of-ai/
+LOCATION:Online
+CATEGORIES:Lectures, seminars and workshops
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:UofT Engineering
+X-SOURCE-URL:https://www.engineering.utoronto.ca/engineering-events/
+DTSTART;TZID=America/Toronto:20260417T150000
+DTEND;TZID=America/Toronto:20260417T160000
+DTSTAMP:20260406T175948
+CREATED:20260210T220358Z
+LAST-MODIFIED:20260210T220358Z
+UID:10004329-1776438000-1776441600@www.engineering.utoronto.ca
+SUMMARY:Robotics Institute Seminar: Risto Ojala\, “Perception solutions for enabling automated driving in winter conditions”
+DESCRIPTION:Perception solutions for enabling automated driving in winter conditions \nJoin in MY580 or online (Zoom) \nThis talk presents methods and findings from research on perception solutions for automated driving in winter conditions\, carried out at the Autonomy & Mobility Laboratory\, Aalto University. Winter conditions pose several challenges for automated vehicle perception pipelines\, which currently limit the applicability of the technology in adverse weather conditions. The talk focuses on two main research directions: denoising snowflakes from LiDAR data and road segmentation in snowy conditions. Airborne snowflakes introduce significant noise into LiDAR scans\, which can hinder downstream perception tasks. To address this challenge\, the talk presents deep learning approaches for point cloud denoising based on both supervised and self-supervised learning. In addition\, snowy conditions drastically alter the visual appearance of the environment and the road\, rendering road segmentation methods trained on traditional datasets unreliable. To overcome this\, trajectory-based approaches leveraging vision foundation models are presented for learning varied road appearance without requiring manual labeling. \nSpeaker bio \nRisto Ojala (DSc\, Tech) is an Assistant Professor at Aalto University\, Finland\, where he leads the Autonomy & Mobility Laboratory within the Mechatronics research group. His research focuses on intelligent vehicles and mobile robotics\, with particular emphasis on perception\, sensor fusion\, and applied machine learning for autonomous systems. He is also currently a Visiting Scholar at Simon Fraser University\, Canada\, collaborating with the Multi-Agent Robotic Systems Laboratory on research in semantic understanding for mobile robotics. His work develops perception solutions that enable robust autonomous operation in challenging environments. A central application of his research is automated driving in winter conditions\, addressing problems such as scene understanding\, situational awareness\, and perception reliability. His work has been published in leading robotics and intelligent transportation venues and he collaborates closely with both academic and industrial partners.
+URL:https://www.engineering.utoronto.ca/event/robotics-institute-seminar-risto-ojala-perception-solutions-for-enabling-automated-driving-in-winter-conditions/
+LOCATION:Myhal Centre for Engineering Innovation & Entrepreneurship\, Room 580\, or on Zoom
+CATEGORIES:Lectures, seminars and workshops
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:UofT Engineering
+X-SOURCE-URL:https://www.engineering.utoronto.ca/engineering-events/
+DTSTART;TZID=UTC:20260417T150000
+DTEND;TZID=UTC:20260417T160000
+DTSTAMP:20260406T175948
+CREATED:20260312T223931Z
+LAST-MODIFIED:20260312T223931Z
+UID:10004353-1776438000-1776441600@www.engineering.utoronto.ca
+SUMMARY:Robotics Institute Seminar: Risto Ojala\, “Perception solutions for enabling automated driving in winter conditions”
+DESCRIPTION:Perception solutions for enabling automated driving in winter conditions \nJoin in MY580 or online (Zoom) \nThis talk presents methods and findings from research on perception solutions for automated driving in winter conditions\, carried out at the Autonomy & Mobility Laboratory\, Aalto University. Winter conditions pose several challenges for automated vehicle perception pipelines\, which currently limit the applicability of the technology in adverse weather conditions. The talk focuses on two main research directions: denoising snowflakes from LiDAR data and road segmentation in snowy conditions. Airborne snowflakes introduce significant noise into LiDAR scans\, which can hinder downstream perception tasks. To address this challenge\, the talk presents deep learning approaches for point cloud denoising based on both supervised and self-supervised learning. In addition\, snowy conditions drastically alter the visual appearance of the environment and the road\, rendering road segmentation methods trained on traditional datasets unreliable. To overcome this\, trajectory-based approaches leveraging vision foundation models are presented for learning varied road appearance without requiring manual labeling. \nSpeaker bio \nRisto Ojala (DSc\, Tech) is an Assistant Professor at Aalto University\, Finland\, where he leads the Autonomy & Mobility Laboratory within the Mechatronics research group. His research focuses on intelligent vehicles and mobile robotics\, with particular emphasis on perception\, sensor fusion\, and applied machine learning for autonomous systems. He is also currently a Visiting Scholar at Simon Fraser University\, Canada\, collaborating with the Multi-Agent Robotic Systems Laboratory on research in semantic understanding for mobile robotics. His work develops perception solutions that enable robust autonomous operation in challenging environments. A central application of his research is automated driving in winter conditions\, addressing problems such as scene understanding\, situational awareness\, and perception reliability. His work has been published in leading robotics and intelligent transportation venues and he collaborates closely with both academic and industrial partners.
+URL:https://www.engineering.utoronto.ca/event/robotics-institute-seminar-risto-ojala-perception-solutions-for-enabling-automated-driving-in-winter-conditions-2/
+LOCATION:Myhal Centre for Engineering Innovation & Entrepreneurship\, Room 580\, or on Zoom\, 55 St. George Street\, Toronto\, Ontario\, M5S 0C9\, Canada
+CATEGORIES:Lectures, seminars and workshops
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:UofT Engineering
+X-SOURCE-URL:https://www.engineering.utoronto.ca/engineering-events/
+DTSTART;TZID=America/Toronto:20260421T120000
+DTEND;TZID=America/Toronto:20260421T130000
+DTSTAMP:20260406T175948
+CREATED:20260402T154058Z
+LAST-MODIFIED:20260402T154058Z
+UID:10004521-1776772800-1776776400@www.engineering.utoronto.ca
+SUMMARY:ChemE Master of Engineering (MEng) Online Application Support Drop-In
+DESCRIPTION:Do you have questions about your MEng application to the Department of Chemical Engineering & Applied Chemistry? Attend this online drop-in session for an opportunity to ask questions and receive answers from a graduate studies staff member.
+URL:https://www.engineering.utoronto.ca/event/cheme-master-of-engineering-meng-online-application-support-drop-in-3/
+LOCATION:Zoom (link will be provided upon registration)
+CATEGORIES:Info sessions,MEng Info,Prospective Students
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:UofT Engineering
+X-SOURCE-URL:https://www.engineering.utoronto.ca/engineering-events/
+DTSTART;TZID=UTC:20260424T150000
+DTEND;TZID=UTC:20260424T160000
+DTSTAMP:20260406T175948
+CREATED:20260312T224009Z
+LAST-MODIFIED:20260312T224009Z
+UID:10004431-1777042800-1777046400@www.engineering.utoronto.ca
+SUMMARY:Robotics Institute Seminar: Nick Rhinehart (U of T)
+DESCRIPTION:Join in MY580 or online (Zoom) \nTitle and abstract to come. \nSpeaker bio \nNick Rhinehart is an Assistant Professor at the University of Toronto\, where he is appointed to the Institute for Aerospace Science\, cross-appointed to the Department of Computer Science\, and a faculty member of the Robotics Institute. \nHe leads the Learning\, Embodied Autonomy\, and Forecasting (LEAF) lab\, which studies learning-based foundations for reliable model-based robot autonomy. The LEAF lab’s recent work focuses on learning transferable dynamics and world models\, adapting learned models for efficient real-time planning\, and inferring task objectives from sparse human and language-based supervision. \nProf. Rhinehart joined the University of Toronto after holding positions as a Senior Research Scientist at Waymo Research from 2022–2024 and a Postdoctoral Researcher at the UC Berkeley Artificial Intelligence Research laboratory from 2019–2022. He received a Ph.D. in Robotics from Carnegie Mellon University (CMU). His work received the Best Paper Honorable Mention Award at ICCV 2017 and the Best Paper Award at the ICML 2019 Workshop on AI for Autonomous Driving. Prof. Rhinehart holds undergraduate degrees in Engineering and Computer Science from Swarthmore College.
+URL:https://www.engineering.utoronto.ca/event/robotics-institute-seminar-nick-rhinehart-u-of-t/
+LOCATION:Myhal Centre for Engineering Innovation & Entrepreneurship\, Room 580\, or on Zoom\, 55 St. George Street\, Toronto\, Ontario\, M5S 0C9\, Canada
+CATEGORIES:Lectures, seminars and workshops
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:UofT Engineering
+X-SOURCE-URL:https://www.engineering.utoronto.ca/engineering-events/
+DTSTART;TZID=America/Toronto:20260427T180000
+DTEND;TZID=America/Toronto:20260427T203000
+DTSTAMP:20260406T175948
+CREATED:20260402T153455Z
+LAST-MODIFIED:20260402T153455Z
+UID:10004523-1777312800-1777321800@www.engineering.utoronto.ca
+SUMMARY:Vancouver\, BC – Thinking Out Loud Together: Why Civil Discourse Matters On and Off Campus
+DESCRIPTION:This regional alumni and friends event is open to all U of T community members in the Vancouver area. \nIn his talk\, novelist and professor Randy Boyagoda (HBA 1999 A&S TRIN)\, the University of Toronto’s advisor on civil discourse\, explores the challenges of thinking out loud together across our personal\, professional\, and public lives. He’ll discuss the U of T’s civil discourse portfolio\, why a commitment to disagreeing well and dialogue across difference matters\, and how the university is taking a leading role in this important area. \nProfessor Boyagoda is Vice-Dean\, Undergraduate in the Faculty of Arts & Science and a professor in the Department of English. His work at the university in civil discourse earned him a place on Toronto Life magazine’s list of Toronto’s 50 most influential people in 2024. \nDon’t miss this chance to sit in on an exclusive talk and connect with fellow U of T community members in Vancouver. \nRegister
+URL:https://www.engineering.utoronto.ca/event/vancouver-bc-thinking-out-loud-together-why-civil-discourse-matters-on-and-off-campus/
+LOCATION:Segal Building\, 500 Granville Street\, Vancouver\, BC\, Canada
+CATEGORIES:Alumni events
+ATTACH;FMTTYPE=image/jpeg:https://www.engineering.utoronto.ca/wp-content/uploads/sites/28/2026/03/Randy-Boyagoda-at-Fisher-Rare-Book-Library-1200x657-1-e1774448341748-vd84qt.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:UofT Engineering
+X-SOURCE-URL:https://www.engineering.utoronto.ca/engineering-events/
+DTSTART;TZID=America/Toronto:20260428T080000
+DTEND;TZID=America/Toronto:20260428T130000
+DTSTAMP:20260406T175948
+CREATED:20260402T153616Z
+LAST-MODIFIED:20260402T153616Z
+UID:10004522-1777363200-1777381200@www.engineering.utoronto.ca
+SUMMARY:ChemE Master of Engineering (MEng) Online Application Support Drop-In
+DESCRIPTION:Do you have questions about your MEng application to the Department of Chemical Engineering & Applied Chemistry? Attend this online drop-in session for an opportunity to ask questions and receive answers from a graduate studies staff member.
+URL:https://www.engineering.utoronto.ca/event/cheme-master-of-engineering-meng-online-application-support-drop-in-2/
+LOCATION:Zoom (link will be provided upon registration)
+CATEGORIES:Info sessions,MEng Info,Prospective Students
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:UofT Engineering
+X-SOURCE-URL:https://www.engineering.utoronto.ca/engineering-events/
+DTSTART;TZID=America/Toronto:20260708T083000
+DTEND;TZID=America/Toronto:20260710T173000
+DTSTAMP:20260406T175948
+CREATED:20260120T161821Z
+LAST-MODIFIED:20260120T161821Z
+UID:10004243-1783499400-1783704600@www.engineering.utoronto.ca
+SUMMARY:Industry Registration - 2026 CRAFT Microfluidics Professional Course
+DESCRIPTION:The Microfluidics Professional Course is a 3-day crash course for industrial/academic researchers with little or no experience in the microfluidics field. Led by our expert staff\, and utilizing our state of the art cleanroom facility\, labs will cover various fabrication techniques including prototyping of polymer devices using lithography and 3D printing\, and small scale-up fabrication of thermoplastic devices for commercialization using injection molding and roll-2-roll coating.In our CL2 bio facilities we will cover cell/tissue culture techniques and advanced imaging for validating and carrying out MF experiments. At the end of the course you will have been exposed to a variety of the latest research being carried out using MF platforms as well as utilized the newest high-tech instrumentation to manufacture your own MF device. \n\nQuestions? \nContact Dan Voicu at dan.voicu@utoronto.ca
+URL:https://www.engineering.utoronto.ca/event/industry-registration-2026-craft-microfluidics-professional-course/
+LOCATION:Bahen Centre\, 40 St. George Street\, Toronto\, Canada
+CATEGORIES:Lectures, seminars and workshops
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:UofT Engineering
+X-SOURCE-URL:https://www.engineering.utoronto.ca/engineering-events/
+DTSTART;TZID=America/Toronto:20260708T083000
+DTEND;TZID=America/Toronto:20260710T173000
+DTSTAMP:20260406T175948
+CREATED:20260120T161905Z
+LAST-MODIFIED:20260120T161905Z
+UID:10004242-1783499400-1783704600@www.engineering.utoronto.ca
+SUMMARY:Academic/Student Registration - 2026 CRAFT Microfluidics Professional Course
+DESCRIPTION:The Microfluidics Professional Course is a 3-day crash course for industrial/academic researchers with little or no experience in the microfluidics field. Led by our expert staff\, and utilizing our state of the art cleanroom facility\, labs will cover various fabrication techniques including prototyping of polymer devices using lithography and 3D printing\, and small scale-up fabrication of thermoplastic devices for commercialization using injection molding and roll-2-roll coating.In our CL2 bio facilities we will cover cell/tissue culture techniques and advanced imaging for validating and carrying out MF experiments. At the end of the course you will have been exposed to a variety of the latest research being carried out using MF platforms as well as utilized the newest high-tech instrumentation to manufacture your own MF device. \n\nQuestions? \nContact Dan Voicu at dan.voicu@utoronto.ca
+URL:https://www.engineering.utoronto.ca/event/academic-student-registration-2026-craft-microfluidics-professional-course/
+LOCATION:Bahen Centre\, 40 St. George Street\, Toronto\, Canada
+CATEGORIES:Lectures, seminars and workshops
+END:VEVENT
+END:VCALENDAR
