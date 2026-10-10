@@ -73,8 +73,6 @@ https://calendar.google.com/calendar/ical/mjsnm57lcjgbhseu4lj9ee704k%40group.cal
 https://calendar.google.com/calendar/ical/fpcbloomington.org_soip8veg9uk3hvpo3oj19bc5tg%40group.calendar.google.com/public/basic.ics
 # First United Church
 https://firstuc.org/events/?ical=1
-# Hard Truth Distilling Co.
-https://hardtruth.com/events/?post_type=tribe_events&ical=1&eventDisplay=list
 # Harmony School Calendar
 https://calendar.google.com/calendar/ical/c_eec83e1cbfbdf8804b061fbaa23ea7300a127c74c0668e9512747006f10b3833@group.calendar.google.com/public/basic.ics
 # Hoosier Fly Fishers
@@ -140,7 +138,7 @@ https://calendar.google.com/calendar/ical/mocofairgrounds%40gmail.com/public/bas
 # Monroe County Government
 https://events.in.gov/search/events.ics?browse_type=school&event_types%5B%5D=49056849667840
 # Monroe County Public Library
-https://calendar.mcpl.info/feeds?data=eyJmZWVkVHlwZSI6ImljYWwiLCJmaWx0ZXJzIjp7ImxvY2F0aW9uIjpbImFsbCJdLCJhZ2VzIjpbImFsbCJdLCJ0eXBlcyI6WyJhbGwiXSwidGFncyI6W10sInRlcm0iOiIiLCJkYXlzIjo5MH19
+https://mcplin.libnet.info/feeds?data=eyJmZWVkVHlwZSI6ImljYWwiLCJmaWx0ZXJzIjp7ImxvY2F0aW9uIjpbImFsbCJdLCJhZ2VzIjpbImFsbCJdLCJ0eXBlcyI6WyJhbGwiXSwidGFncyI6W10sInRlcm0iOiIiLCJkYXlzIjo5MH19
 # Monroe Lake DNR
 https://events.in.gov/monroe_lake_296/calendar.ics
 # Mother Hubbard's Calendar
@@ -226,6 +224,9 @@ cities/bloomington/eventbrite_exodus.ics
 # Gaden KhachoeShing Monastery
 # cmd: python scrapers/eventbrite.py --url "https://www.eventbrite.com/o/10637013504" --name "Gaden KhachoeShing Monastery"
 cities/bloomington/eventbrite_gaden.ics
+# Hard Truth Distilling Co.
+# cmd: python scrapers/tribe_rest.py --api-base "https://hardtruth.com" --name "Hard Truth Distilling Co." --timezone America/Indiana/Indianapolis --user-agent "Mozilla/5.0" --output cities/bloomington/hardtruth.ics
+cities/bloomington/hardtruth.ics
 # Indivisible South Central Indiana (Mobilize)
 # cmd: python scrapers/mobilize.py --url "https://www.mobilize.us/indivisiblesouthcentralindiana/" --name "Indivisible South Central Indiana (Mobilize)"
 cities/bloomington/mobilize_indivisible_south_central.ics
