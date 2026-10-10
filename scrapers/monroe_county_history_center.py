@@ -100,12 +100,14 @@ class HistoryCenterScraper(BaseScraper):
                 f"{self.api_url}?per_page=50&page={page}", headers=HEADERS, timeout=30
             )
             if response.status_code != 200:
-                # A 202 challenge page means SiteGround blocked this egress IP;
-                # log it so a blocked run is visible instead of silently empty.
-                self.logger.warning(
-                    f"Listing page {page} returned HTTP {response.status_code} "
-                    f"({response.text[:80]!r}); stopping"
-                )
+                # A challenged IP gets a 202 sgcaptcha page, not a calendar.
+                # Warn so a blocked run is visible; a 400 past the last page is
+                # a normal end-of-list, so only the challenge is worth a warning.
+                if "sgcaptcha" in response.text:
+                    self.logger.warning(
+                        f"SiteGround captcha challenge on listing page {page} "
+                        f"(HTTP {response.status_code}); stopping"
+                    )
                 break
 
             items = response.json()
