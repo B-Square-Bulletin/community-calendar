@@ -119,7 +119,7 @@ Docs: https://documentation.events.iu.edu/feed-and-linked-calendars/ical-feed.ht
 | The Tap | Eventbrite scraper | — | Live music, craft beer events |
 | Martinsville Arts Council | Eventbrite scraper | ~6 | Community theater in Martinsville (20 mi) |
 | Story Inn | Eventbrite scraper | — | Seasonal: wine fairs, comedy, music in Story (17 mi) |
-| Hard Truth Distilling Co. | ICS | ~15 | TEC feed; Nashville, IN (16 mi) |
+| Hard Truth Distilling Co. | Scraper | ~15 | `tribe_rest.py` — TEC site behind SiteGround sgcaptcha (ICS + REST APIs challenged); plain-Mozilla UA; Nashville, IN (16 mi) |
 | Upland Brewing | Scraper | 0 current | `tribe_rest.py` — valid REST calendar, dormant/seasonal as of 2026-08 |
 | People's Market | Scraper | ~10 | Squarespace — `peoples_market.py` |
 
@@ -415,7 +415,7 @@ Annual events with reliable dates but no feeds — a once-a-season curator sweep
 | Songkick | `lib/songkick.py` | Bluebird, Blockhouse | Venue event pages |
 | Eventbrite | `scrapers/eventbrite.py` | Morgenstern Books, Nerd Nite | Organizer page → JSON-LD |
 | Mobilize.us | `scrapers/mobilize.py` | Indivisible | Organizer event pages |
-| The Events Calendar (Tribe) | `lib/tribe_events.py`, `scrapers/tribe_rest.py` | Bloomington Symphony, Boys & Girls Club, Community Band, Upland | WordPress plugin REST API; bypasses blocked or empty ICS exports |
+| The Events Calendar (Tribe) | `lib/tribe_events.py`, `scrapers/tribe_rest.py` | Bloomington Symphony, Boys & Girls Club, Community Band, Upland, Hard Truth Distilling Co. | WordPress plugin REST API; bypasses blocked or empty ICS exports |
 | Localist | `scrapers/localist.py` | McCormick's Creek SP, Brown County SP | events.in.gov JSON API; filter by venue_id |
 | JSON-LD | `lib/jsonld.py` | (used by Eventbrite) | Schema.org Event extraction |
 
@@ -446,6 +446,12 @@ Annual events with reliable dates but no feeds — a once-a-season curator sweep
 - Verified 2026-10-09: old host `/feeds?data=...` → 404; `https://mcplin.libnet.info/feeds?data=<same payload>` → 200, `BEGIN:VCALENDAR`, **500 events** (`PRODID:-//Monroe County Public Library//Event Calendar//EN`).
 - Fix is a DB update (no scraper code change): migration `supabase/migrations/20261009120000_repair_mcpl_feed_url.sql` repoints the registered row from the dead `calendar.mcpl.info` URL to `mcplin.libnet.info`, keeping the same 90-day, all-filters payload so the source name and filters are unchanged. `feeds.txt` regenerates from the DB on the next build; do not hand-edit it.
 - The earlier note that `library_intercept.py --location bloomington` still covered MCPL was wrong: that config points at `bloomingtonlibrary.org` (Bloomington, **Illinois** — see #50), not MCPL. The Communico feed is the ingest.
+
+### 2026-10-10: Hard Truth Distilling Co. feed converted to a Tribe REST scraper (issue #185)
+- The `Hard Truth Distilling Co.` ICS feed (`https://hardtruth.com/events/?post_type=tribe_events&ical=1&eventDisplay=list`) served HTML, not ICS, with no good build in recorded history. hardtruth.com is behind SiteGround's `sgcaptcha` bot protection: it returns an HTTP 202 challenge page (`SG-Captcha: challenge`, meta-refresh to `/.well-known/sgcaptcha/`) to non-browser clients and hard-403s the project's default `CommunityCalendar` User-Agent. The downloader treats any non-empty body as a successful download and never falls back to curl, so the challenge page was written to `hardtruth.ics` and reported as `not_ics:html`.
+- The Tribe REST API (`/wp-json/tribe/events/v1/events/`) is challenged identically. SiteGround's response is stateful/rate-based, not fixed UA/IP filtering: a plain `curl -A "Mozilla/5.0"` returned 7 events before this machine was rate-flagged, then every client (urllib, requests, curl, a real browser, and a text-proxy on a different IP) hit the challenge.
+- Fix follows the documented SiteGround pattern (`docs/discovery-lessons.md`; the 2026-08-07 conversions): migration `supabase/migrations/20261010130000_convert_hardtruth_feed_to_scraper.sql` converts the row from `ics_url` to a `scrapers/tribe_rest.py` scraper with `--user-agent "Mozilla/5.0"`, the UA SiteGround is intermittently permissive to. `feeds.txt` regenerates from the DB on the next build; do not hand-edit it.
+- Tradeoff (accepted, as for the earlier conversions): on a blocked day the scraper writes a valid-empty calendar — classified `quiet`, not `broken_feed` — so the source leaves the feed-health problem queue. First real event counts are expected from CI's quieter network path; local probes here hit the challenge.
 
 ### 2026-09-07: Master Gardeners URL fix (issue #13)
 - `Monroe County Master Gardeners` scraper 404s: DB `feeds` row id=14 still runs `squarespace.py --url "https://www.mcmga.net/events"` (404). Same stale-URL pattern as Sassafras (#8) — the pre-DB-first URL fix never reached the seeded DB row.
