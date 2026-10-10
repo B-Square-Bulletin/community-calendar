@@ -144,7 +144,7 @@ These curate or aggregate events from multiple venues:
 | BloomingtonOnline: Shopping | Google Calendar | ~18 | Markets, deals |
 | Let's Go! Bloomington | Google Calendar | — | Indie venues, shows, art openings |
 | BloomingtonArts.Today | Scraper | ~115 | Hand-curated arts calendar; 88% overlap with authoritative feeds |
-| Brown County Events | ICS | ~94 | browncounty.com CVB — aggregates Nashville/Brown County venues |
+| Brown County Events | ICS | ~94 | browncounty.com CVB — aggregates Nashville/Brown County venues (MEC events page at `/calendar/`) |
 | B-Square Bulletin (4 feeds) | Google Calendar | ~9162 | Government, misc civic, Critical Mass, BPTC meetings (mostly historical, future-filtered) |
 | IU beINvolved Student Orgs | ICS | ~16900 | CampusLabs — all student org events campus-wide |
 | Limestone Post | CitySpark scraper | ~488 | Community aggregator; 29% overlap with existing, 344 unique events (sports, trivia, gallery, faith) |
@@ -440,6 +440,11 @@ Annual events with reliable dates but no feeds — a once-a-season curator sweep
 - **Correction:** the earlier "Visit Bloomington — Simpleview CMS — No public API" entry (and the generic "Simpleview is a dead end" claim in `docs/search-pattern-tests.md`/`docs/platforms.md`) was wrong. The `/event/rss/` feed caps at 30 items and detail JSON-LD is date-only, but the same-origin Simpleview **REST API** (`/includes/rest_v2/plugins_events_events_by_date/find/` + `get_simple_token/`) returns clock times, full descriptions, geo, recurrence and `skip` paging over plain HTTP — 34 requests → 1,666 occurrences across 230 recids, empty cookie jar, no browser.
 - Also fixed the stale assumption in `scrapers/simpleview.py` reuse: its RSS + JSON-LD path emits all-day events and drops recurring series, so Visit Bloomington needs a dedicated `scrapers/visit_bloomington.py`.
 - Nothing built here — the surface decision, coverage bar, API mechanism, registration and dedup/geo contracts are locked in the spec issue #124 (see map #117).
+
+### 2026-10-10: Brown County Events feed repaired (issue #184)
+- `Brown County Events` feed has served non-ICS since 2026-10-03 (~106 events lost). The CVB moved its Modern Events Calendar (MEC) events page from `/events/` to `/calendar/`; MEC serves the iCal export (`?mec-ical-feed=1`) only on the configured events page, so `https://browncounty.com/events/?mec-ical-feed=1` rendered the events page HTML instead of ICS.
+- Fix is a DB update (no scraper code change): migration `supabase/migrations/20261010120000_repair_brown_county_feed_url.sql` repoints the registered row to `https://browncounty.com/calendar/?mec-ical-feed=1`. `feeds.txt` regenerates from the DB on the next build; do not hand-edit it.
+- Caveat: during the repair window browncounty.com's MEC query endpoints (the iCal export, `/calendar/`, `/events/`, and the WP REST API) were timing out site-wide, so the new URL could not be fetched end-to-end. Confirm the event count on the next feed-health report; if the export still returns HTML, fall back to the documented MEC workaround (per-event `?method=ical&id={id}` or the `mec-events` RSS feed).
 
 ### 2026-10-09: Monroe County Public Library feed repaired (issue #183)
 - `Monroe County Public Library` feed 404s: the registered Communico/Stacks feed `https://calendar.mcpl.info/feeds?data=...` returned `Not Found` (broken since 2026-09-30, ~500 events lost). The host migrated the portal: MCPL's own events page now loads its components from `elements.communico.co` and builds the iCal link on the partner portal `https://<keyword>.libnet.info` — keyword `mcplin`, so `https://mcplin.libnet.info/feeds?data=...`.
