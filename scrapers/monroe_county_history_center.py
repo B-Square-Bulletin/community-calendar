@@ -15,8 +15,11 @@ import requests
 from bs4 import BeautifulSoup
 from lib.base import BaseScraper
 
+# monroehistory.org sits behind SiteGround's sgcaptcha bot protection, which
+# 202-challenges the project's default UA. A plain Mozilla/5.0 UA is the
+# documented bypass (same as scrapers/tribe_rest.py).
 HEADERS = {
-    "User-Agent": "Mozilla/5.0 (compatible; CommunityCalendar/1.0)",
+    "User-Agent": "Mozilla/5.0",
     "Accept": "application/json",
 }
 
@@ -97,6 +100,12 @@ class HistoryCenterScraper(BaseScraper):
                 f"{self.api_url}?per_page=50&page={page}", headers=HEADERS, timeout=30
             )
             if response.status_code != 200:
+                # A 202 challenge page means SiteGround blocked this egress IP;
+                # log it so a blocked run is visible instead of silently empty.
+                self.logger.warning(
+                    f"Listing page {page} returned HTTP {response.status_code} "
+                    f"({response.text[:80]!r}); stopping"
+                )
                 break
 
             items = response.json()

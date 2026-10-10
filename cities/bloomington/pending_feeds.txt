@@ -40,3 +40,7 @@
 # WFHB Community Calendar
 # cmd: python scrapers/wfhb_calendar.py --output cities/bloomington/wfhb_calendar.ics
 cities/bloomington/wfhb_calendar.ics
+
+# Monroe County History Center
+# cmd: python scrapers/monroe_county_history_center.py --output cities/bloomington/monroe_county_history_center.ics
+cities/bloomington/monroe_county_history_center.ics
