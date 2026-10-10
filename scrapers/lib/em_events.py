@@ -31,6 +31,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from .base import BaseScraper
+from .utils import generate_uid
 
 MONTH_NAMES = {
     "january": 1,
@@ -220,17 +221,22 @@ class EmEventsScraper(BaseScraper):
         if not location:
             location = self.default_location
 
-        # UID
+        # UID keyed by occurrence, mirroring WFIU's occurrence cards. The AJAX
+        # listing is occurrence-expanded: a recurring event returns one row per
+        # occurrence with the same URL and data-event-id, so the shared
+        # generate_uid combines the event id with the occurrence datetime or
+        # every occurrence after the first is silently dropped. Rows repeating
+        # the same id, date and time still collapse.
         event_id = event_el.get("data-event-id", "")
         if not event_id:
             # Fall back to URL-based UID
             uid_match = re.search(r"/(?:events/)?([^/]+)/?$", url)
             event_id = uid_match.group(1) if uid_match else str(id(event_el))
-        uid = f"em-{event_id}@{self.domain}"
+        uid = generate_uid(event_id, dtstart, self.domain)
 
         # Description (from listing page — may be truncated or absent)
-        desc_el = event_el.select_one(".em-event-description, .em-item-content")
-        description = desc_el.get_text(strip=True) if desc_el else ""
+        desc_el = event_el.select_one(".em-event-description, .em-item-desc, .em-item-content")
+        description = desc_el.get_text(" ", strip=True) if desc_el else ""
 
         return {
             "title": title,

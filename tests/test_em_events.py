@@ -140,7 +140,70 @@ class TestParseEvent:
         assert result["dtend"] == datetime(2026, 6, 18, 22, 0, tzinfo=TZ)
         assert result["location"] == "Test Venue, 123 Main St, Anytown, ST"
         assert result["uid"].endswith("@example.org")
-        assert result["uid"].startswith("em-")
+
+
+class TestOccurrenceExpansion:
+    """The AJAX listing is occurrence-expanded; the UID keys each occurrence."""
+
+    @staticmethod
+    def _event(url: str, date_text: str, time_text: str, title: str = "Recurring") -> Tag:
+        html = f"""<div class="em-event em-item" data-href="{url}">
+          <h3 class="em-item-title"><a href="{url}">{title}</a></h3>
+          <div class="em-event-date">{date_text}</div>
+          <div class="em-event-time">{time_text}</div>
+          <div class="em-item-desc"><p>Body text</p></div>
+        </div>"""
+        soup = BeautifulSoup(html, "html.parser")
+        el = soup.select_one(".em-event")
+        assert el is not None
+        return el
+
+    def test_same_event_on_two_dates_gets_distinct_uids(self):
+        """Two occurrences of one recurring event share a URL but not a UID."""
+        scraper = EmEventsScraper()
+        scraper.domain = "wfhb.org"
+        first = scraper._parse_event(
+            self._event("https://wfhb.org/events/trivia/", "October 14, 2026", "8:00 pm"), TZ
+        )
+        second = scraper._parse_event(
+            self._event("https://wfhb.org/events/trivia/", "October 21, 2026", "8:00 pm"), TZ
+        )
+        assert first is not None and second is not None
+        assert first["uid"] != second["uid"]
+
+    def test_description_is_read_from_em_item_desc(self):
+        """The current EM markup carries the body in .em-item-desc."""
+        scraper = EmEventsScraper()
+        scraper.domain = "wfhb.org"
+        event = scraper._parse_event(
+            self._event("https://wfhb.org/events/x/", "October 14, 2026", "8:00 pm"), TZ
+        )
+        assert event is not None
+        assert event["description"] == "Body text"
+
+
+class TestFetchEventsDedup:
+    """fetch_events() keeps distinct occurrences and drops exact repeats."""
+
+    def test_occurrences_kept_and_exact_repeats_dropped(self):
+        scraper = EmEventsScraper()
+        scraper.domain = "wfhb.org"
+        row = {
+            "title": "Trivia Night",
+            "dtstart": datetime(2026, 10, 14, 20, 0, tzinfo=TZ),
+            "dtend": None,
+            "url": "https://wfhb.org/events/trivia/",
+            "location": "",
+            "description": "",
+        }
+        rows = [
+            {**row, "uid": "occurrence-1"},
+            {**row, "uid": "occurrence-1"},  # exact repeat of the same occurrence
+            {**row, "uid": "occurrence-2"},  # the next week's occurrence
+        ]
+        with patch.object(scraper, "_fetch_page", return_value=rows):
+            events = scraper.fetch_events()
+        assert [event["uid"] for event in events] == ["occurrence-1", "occurrence-2"]
 
 
 class TestFetchPage:

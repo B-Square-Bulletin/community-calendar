@@ -136,7 +136,7 @@ These curate or aggregate events from multiple venues:
 
 | Source | Type | Events | Notes |
 |--------|------|--------|-------|
-| WFHB Community Calendar | Scraper | ~244 | `wfhb_calendar.py` — Events Manager (`lib/em_events.py`); covers Orbit Room, library events, and many venues not otherwise scrapable |
+| WFHB Community Calendar | Scraper | ~393 | `wfhb_calendar.py` — Events Manager (`lib/em_events.py`), occurrence-expanded; covers Orbit Room, library events, and many venues not otherwise scrapable |
 | WFIU Community Calendar | Scraper | ~667 | `wfiu_community_calendar.py` — Brightspot server-rendered HTML; occurrence-expanded regional community calendar (Bloomington + surrounding towns) |
 | BloomingtonOnline: Events | Google Calendar | ~224 | Community events |
 | BloomingtonOnline: Food & Drink | Google Calendar | ~133 | Restaurant/brewery specials |
@@ -462,7 +462,7 @@ Annual events with reliable dates but no feeds — a once-a-season curator sweep
 
 ### 2026-10-10: WFHB Community Calendar registered (issue #189)
 - Registered the dormant `scrapers/wfhb_calendar.py` via the standard DB-first path — `add_scraper.py wfhb_calendar bloomington "WFHB Community Calendar"` wrote the `cities/bloomington/pending_feeds.txt` entry (`# WFHB Community Calendar`, `# cmd: python scrapers/wfhb_calendar.py --output cities/bloomington/wfhb_calendar.ics`). No workflow edit: the nightly pending-feeds processor inserts the active DB row and the DB-first runner executes it.
-- Verified live at registration: `add_scraper.py --test` produced 230 events (`SCRAPE_MONTHS=2`); a full 6-month run emits 244, every one carrying `X-SOURCE:WFHB Community Calendar`.
+- Verified live at registration, and the verification caught a real defect before merge: the AJAX listing is **occurrence-expanded** (a recurring event returns one row per occurrence with the same URL), but the scraper's URL-based UID collapsed every recurrence to its first occurrence — a full run lost ~149 of 406 occurrences (weekly Trivia Night and People's Co-op Market each fell to a single event). `lib/em_events.py` now keys the UID by occurrence through the shared `generate_uid` (the same occurrence identity WFIU uses) and reads the body from `.em-item-desc` (the old `.em-event-description`/`.em-item-content` selectors matched nothing, so every event shipped with an empty description). The change is library-only; only WFHB uses it. Verified after the fix: a full 6-month run emits **393 events** (13 dropped past the Horizon), unique UIDs, descriptions populated, every one carrying `X-SOURCE:WFHB Community Calendar`. `add_scraper.py --test` (`SCRAPE_MONTHS=2`) still passes.
 - The issue title says "existing ai1ec scraper", but the source had already migrated off ai1ec: #31 (`d45c48bd`) replaced the ai1ec agenda-view scraper with the Events Manager AJAX scraper (`lib/em_events.py`) after wfhb.org changed plugins. `lib/ai1ec.py` remains in the tree but no Bloomington source uses it; the Platform Scrapers table is corrected here.
 - WFHB is an aggregator covering venues with no own calendar (Orbit Room, library-hosted events, and outlying town events) and is already in `source_priority.json`'s `aggregators`, so it loses cross-source dedup to primaries.
 
