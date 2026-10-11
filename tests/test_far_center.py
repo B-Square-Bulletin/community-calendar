@@ -27,9 +27,12 @@ def _card(title: str, href: str, date_line: str = "Sunday, October 11 | 2:00pm -
     """
 
 
-def _parse(html: str):
+def _parse(html: str) -> dict:
     card = BeautifulSoup(html, "html.parser").select_one("div.mb-8")
-    return FARCenterScraper()._parse_card(card, TZ)
+    assert card is not None
+    event = FARCenterScraper()._parse_card(card, TZ)
+    assert event is not None
+    return event
 
 
 def test_uid_is_stable_across_runs():
