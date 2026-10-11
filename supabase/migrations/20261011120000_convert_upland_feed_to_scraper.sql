@@ -29,6 +29,5 @@ BEGIN
       url = out_path,
       scraper_cmd = cmd
   WHERE city = 'bloomington'
-    AND name = 'Upland Brewing'
     AND url = old_url;
 END $$;
