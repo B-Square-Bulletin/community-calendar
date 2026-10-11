@@ -103,6 +103,9 @@ class HistoryCenterScraper(BaseScraper):
                 # A challenged IP gets a 202 sgcaptcha page, not a calendar.
                 # Warn so a blocked run is visible; a 400 past the last page is
                 # a normal end-of-list, so only the challenge is worth a warning.
+                # Keep pages already parsed: an empty calendar would delete this
+                # source's events from the city (delete_stale_events), a partial
+                # refresh only drops the unfetched pages.
                 if "sgcaptcha" in response.text:
                     self.logger.warning(
                         f"SiteGround captcha challenge on listing page {page} "

@@ -29,6 +29,16 @@ def _mock_response(status_code: int, text: str) -> Mock:
     return mock
 
 
+# One listing item whose date the scraper can parse from the content field.
+EVENT_ITEM = {
+    "slug": "test-event",
+    "title": {"rendered": "Test Event"},
+    "link": "https://monroehistory.org/event/test-event/",
+    "date": "2026-10-01T12:00:00",
+    "content": {"rendered": '<div class="eelisttime">Thursday, July 16: 5:30pm – 6:30pm</div>'},
+}
+
+
 class TestUserAgent:
     """monroehistory.org hard-403s the project UA; a plain one is required."""
 
@@ -82,3 +92,27 @@ class TestSiteGroundChallenge:
 
         assert events == []
         assert not any("captcha" in r.message for r in caplog.records)
+
+    def test_partial_pages_kept_when_challenge_hits_later_page(self, caplog):
+        """A mid-pagination block keeps earlier pages, not an empty calendar.
+
+        An empty calendar would delete every event for this source from the
+        city (delete_stale_events); keeping the fetched pages only drops the
+        pages that were never fetched.
+        """
+        scraper = HistoryCenterScraper()
+        page_one = _mock_response(200, "")
+        page_one.json.return_value = [EVENT_ITEM]
+
+        with (
+            patch(
+                "scrapers.monroe_county_history_center.requests.get",
+                side_effect=[page_one, _mock_response(202, CAPTCHA_HTML)],
+            ),
+            caplog.at_level(logging.WARNING, logger="HistoryCenterScraper"),
+        ):
+            events = scraper.fetch_events()
+
+        assert len(events) == 1
+        assert events[0]["title"] == "Test Event"
+        assert any("captcha challenge" in r.message for r in caplog.records)
