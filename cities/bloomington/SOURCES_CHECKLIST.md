@@ -477,6 +477,7 @@ Annual events with reliable dates but no feeds — a once-a-season curator sweep
 ### 2026-10-10: FAR Center for Contemporary Arts registered (issue #191)
 - Registered the existing `scrapers/far_center.py` via the standard DB-first path — `add_scraper.py far_center bloomington "FAR Center for Contemporary Arts"` wrote the `cities/bloomington/pending_feeds.txt` entry (`# cmd: python scrapers/far_center.py --output cities/bloomington/far_center.ics`). No workflow edit: the nightly pending-feeds processor inserts the active DB row and the DB-first runner executes it.
 - Source is Craft CMS (`thefar.org/events/list`); the scraper reads each event card's title, date/time range, description, and detail URL from the listing HTML — no per-event detail fetches.
+- UIDs key on the Craft detail-page id (`/events/event/<id>/`) plus the occurrence datetime through the shared `generate_uid` — the same occurrence identity WFIU uses. This replaces a 40-character title slug that could collapse two same-day events into one UID.
 - Verified 2026-10-10: `add_scraper.py --test` (`SCRAPE_MONTHS=2`) produced 5 events; a full 6-month run also produced 5. Four are future — "Photo Forward: Fall 2026" carries a 2026-09-04 start and is already past, so combine_ics's future filter drops it — and the merged Bloomington calendar carries the 4 future events under `X-SOURCE:FAR Center for Contemporary Arts`. Feed health is clean (a valid, non-empty calendar).
 
 ### 2026-09-07: Master Gardeners URL fix (issue #13)

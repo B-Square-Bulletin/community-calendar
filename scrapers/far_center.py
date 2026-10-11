@@ -13,6 +13,7 @@ from bs4 import BeautifulSoup
 sys.path.insert(0, __file__.rsplit("/", 2)[0])
 from lib.base import BaseScraper
 from lib.timeutil import parse_naive_ics, utc_now
+from lib.utils import generate_uid
 
 
 class FARCenterScraper(BaseScraper):
@@ -89,8 +90,11 @@ class FARCenterScraper(BaseScraper):
         if not dtend:
             dtend = dtstart + timedelta(hours=2)
 
-        slug = re.sub(r"[^a-z0-9]+", "-", title.lower())[:40]
-        uid = f"far-{dtstart.strftime('%Y%m%d')}-{slug}@thefar.org"
+        # Key the UID by the detail-page id and the occurrence datetime, as
+        # WFIU does. A truncated title slug can collide across events.
+        event_id = re.search(r"/events/event/(\d+)", url)
+        identity = event_id.group(1) if event_id else (url or title)
+        uid = generate_uid(identity, dtstart, self.domain)
 
         return {
             "title": title,
