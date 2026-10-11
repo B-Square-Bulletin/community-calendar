@@ -44,3 +44,7 @@ cities/bloomington/wfhb_calendar.ics
 # Monroe County History Center
 # cmd: python scrapers/monroe_county_history_center.py --output cities/bloomington/monroe_county_history_center.ics
 cities/bloomington/monroe_county_history_center.ics
+
+# FAR Center for Contemporary Arts
+# cmd: python scrapers/far_center.py --output cities/bloomington/far_center.ics
+cities/bloomington/far_center.ics
