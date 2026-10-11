@@ -8,9 +8,10 @@ without touching iuhoosiers.com.
 
 import json
 import sys
-from datetime import timedelta
+from datetime import datetime, timedelta
 from pathlib import Path
 from unittest.mock import patch
+from zoneinfo import ZoneInfo
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 sys.path.insert(0, str(Path(__file__).parent.parent / "scrapers"))
@@ -108,3 +109,24 @@ def test_v3_api_bad_json_falls_back_instead_of_raising():
             home_only=True,
         )
         assert scraper._fetch_v3_api() is None
+
+
+def test_v3_api_fetches_the_full_six_month_horizon():
+    # Six months is 6 * 31 = 186 days, not 180 (see scrapers/lib/horizon.py).
+    captured: dict[str, str] = {}
+
+    def _fake_urlopen(req, timeout=30):
+        captured["url"] = req.full_url
+        return _FakeResponse(PAYLOAD)
+
+    fixed = datetime(2026, 10, 10, 12, 0, tzinfo=ZoneInfo("America/Indiana/Indianapolis"))
+    with patch("scrapers.sidearm.urlopen", side_effect=_fake_urlopen):
+        scraper = SidearmScraper(
+            base_url="https://iuhoosiers.com",
+            source_name="IU Athletics",
+            tz="America/Indiana/Indianapolis",
+            home_only=True,
+        )
+        scraper._fetch_v3_api(now=fixed)
+
+    assert captured["url"].endswith("/from/10-10-2026/to/4-14-2027")

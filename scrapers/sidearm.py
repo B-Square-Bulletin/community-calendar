@@ -71,10 +71,10 @@ class SidearmScraper(BaseScraper):
 
     # ── v3 Calendar API path ──────────────────────────────────────────
 
-    def _fetch_v3_api(self) -> list[dict[str, Any]] | None:
+    def _fetch_v3_api(self, now: datetime | None = None) -> list[dict[str, Any]] | None:
         """Fetch from /api/v2/Calendar. Returns None if endpoint doesn't exist."""
-        now = datetime.now(self.tz)
-        end = now + timedelta(days=180)
+        now = now or datetime.now(self.tz)
+        end = self.horizon_cutoff(now)
         start_str = now.strftime("%-m-%-d-%Y")
         end_str = end.strftime("%-m-%-d-%Y")
 
