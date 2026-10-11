@@ -1,0 +1,132 @@
+#!/usr/bin/env python3
+"""Tests for the Sidearm scraper's --home-only filtering (#192).
+
+The HTTP boundary is the module `urlopen` seam: the tests patch it with a small
+v3 Calendar payload, so the home / away / neutral decision runs end to end
+without touching iuhoosiers.com.
+"""
+
+import json
+import sys
+from datetime import datetime, timedelta
+from pathlib import Path
+from unittest.mock import patch
+from zoneinfo import ZoneInfo
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+sys.path.insert(0, str(Path(__file__).parent.parent / "scrapers"))
+
+from scrapers.sidearm import SidearmScraper
+
+
+def _event(indicator, opponent, at_vs="vs", location=""):
+    return {
+        "opponent": {"title": opponent, "website": ""},
+        "sport": {"title": "Basketball"},
+        "locationIndicator": indicator,
+        "status": "A",
+        "atVs": at_vs,
+        "time": "7 p.m.",
+        "location": location,
+    }
+
+
+# H = home site, A = away, N = neutral site.
+PAYLOAD = [
+    {
+        "date": "2026-11-01",
+        "events": [
+            _event("H", "Rutgers", location="Bloomington, Ind."),
+            _event("A", "Purdue", at_vs="at", location="West Lafayette, Ind."),
+            _event("N", "Arkansas", location="New York, N.Y."),
+        ],
+    }
+]
+
+
+class _FakeResponse:
+    def __init__(self, payload):
+        self._payload = json.dumps(payload).encode()
+
+    def read(self):
+        return self._payload
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        return False
+
+
+def _fetch(home_only, payload=PAYLOAD):
+    with patch("scrapers.sidearm.urlopen", return_value=_FakeResponse(payload)):
+        scraper = SidearmScraper(
+            base_url="https://iuhoosiers.com",
+            source_name="IU Athletics",
+            tz="America/Indiana/Indianapolis",
+            home_only=home_only,
+        )
+        return scraper.fetch_events()
+
+
+def test_home_only_keeps_only_home_site_games():
+    titles = [e["title"] for e in _fetch(home_only=True)]
+    assert titles == ["Basketball vs Rutgers"]
+
+
+def test_home_only_keeps_events_with_unknown_indicator():
+    # A missing indicator is not known away/neutral, so keep it.
+    payload = [{"date": "2026-11-01", "events": [_event("", "Iowa", location="Bloomington, Ind.")]}]
+    titles = [e["title"] for e in _fetch(home_only=True, payload=payload)]
+    assert titles == ["Basketball vs Iowa"]
+
+
+def test_without_home_only_all_sites_are_kept():
+    titles = sorted(e["title"] for e in _fetch(home_only=False))
+    assert titles == [
+        "Basketball at Purdue",
+        "Basketball vs Arkansas",
+        "Basketball vs Rutgers",
+    ]
+
+
+def test_events_get_a_default_two_hour_end():
+    # The API states a start time only, so events need an estimated end.
+    event = _fetch(home_only=True)[0]
+    assert event["dtend"] - event["dtstart"] == timedelta(hours=2)
+
+
+def test_v3_api_bad_json_falls_back_instead_of_raising():
+    class _HtmlResponse(_FakeResponse):
+        def read(self):
+            return b"<html>maintenance</html>"
+
+    with patch("scrapers.sidearm.urlopen", return_value=_HtmlResponse(PAYLOAD)):
+        scraper = SidearmScraper(
+            base_url="https://iuhoosiers.com",
+            source_name="IU Athletics",
+            tz="America/Indiana/Indianapolis",
+            home_only=True,
+        )
+        assert scraper._fetch_v3_api() is None
+
+
+def test_v3_api_fetches_the_full_six_month_horizon():
+    # Six months is 6 * 31 = 186 days, not 180 (see scrapers/lib/horizon.py).
+    captured: dict[str, str] = {}
+
+    def _fake_urlopen(req, timeout=30):
+        captured["url"] = req.full_url
+        return _FakeResponse(PAYLOAD)
+
+    fixed = datetime(2026, 10, 10, 12, 0, tzinfo=ZoneInfo("America/Indiana/Indianapolis"))
+    with patch("scrapers.sidearm.urlopen", side_effect=_fake_urlopen):
+        scraper = SidearmScraper(
+            base_url="https://iuhoosiers.com",
+            source_name="IU Athletics",
+            tz="America/Indiana/Indianapolis",
+            home_only=True,
+        )
+        scraper._fetch_v3_api(now=fixed)
+
+    assert captured["url"].endswith("/from/10-10-2026/to/4-14-2027")

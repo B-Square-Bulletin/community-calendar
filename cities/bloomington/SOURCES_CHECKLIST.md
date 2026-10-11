@@ -29,12 +29,13 @@ Prioritized list of potential event sources for the Bloomington, IN community ca
 Feed URL pattern: `https://events.iu.edu/live/ical/events/group_id/{id}`
 Docs: https://documentation.events.iu.edu/feed-and-linked-calendars/ical-feed.html
 
-### University — Other IU Platforms (2 feeds)
+### University — Other IU Platforms (3 feeds)
 
 | Source | Type | Events | Notes |
 |--------|------|--------|-------|
 | IU Moving Image Archive | LibCal `cid=5914` | ~151 | |
 | IU Scholars' Commons | LibCal `cid=1228` | ~26 | |
+| IU Athletics | Sidearm | ~82 | `sidearm.py` — v3 Calendar API, home-site games only |
 
 ### City & Civic (4 feeds)
 
@@ -385,7 +386,6 @@ Annual events with reliable dates but no feeds — a once-a-season curator sweep
 | IHSAA calendar | 403 on all probes |
 | fixtur.es | Pro/national leagues only; no Bloomington teams |
 | Bloomington Roller Derby / IU Club Rugby / Bloomington Soccer | Active schedules, no ICS anywhere |
-| IU Athletics composite (iuhoosiers.com) | No ICS; 2013-15 Google feeds dead (iu_athletics.ics feed already implemented remains the source) |
 | Legistar / Granicus (city) | Not a Legistar client; Granicus is meeting videos + RSS only |
 | B-Clear open data | No calendar/events datasets |
 | TeamUp / MembershipWorks | No area orgs found on either platform |
@@ -480,6 +480,12 @@ Annual events with reliable dates but no feeds — a once-a-season curator sweep
 - UIDs key on the Craft detail-page id (`/events/event/<id>/`) plus the occurrence datetime through the shared `generate_uid` — the same occurrence identity WFIU uses. This replaces a 40-character title slug that could collapse two same-day events into one UID.
 - Yearless dates bind to the source-local current date and roll to the next year once they have passed ("January 20" seen in October becomes 2027), and a December–January multi-day range gets the correct end year. Both were latent defects: the six-month Horizon spans New Year, so every January–April card parsed in the November–December window would have landed in the past and been dropped.
 - Verified 2026-10-10: `add_scraper.py --test` (`SCRAPE_MONTHS=2`) produced 5 events. A full 6-month run emits **4 events** — "Photo Forward: Fall 2026" started 2026-09-04, rolls to 2027-09-04, and is past the Horizon — all carrying `X-SOURCE:FAR Center for Contemporary Arts`. Feed health is clean (a valid, non-empty calendar).
+
+### 2026-10-10: IU Athletics registered (issue #192)
+- Registered the existing `scrapers/sidearm.py` (Sidearm Sports) via the standard DB-first path — `add_scraper.py sidearm bloomington "IU Athletics" --extra-args '--base-url "https://iuhoosiers.com" --name "IU Athletics" --timezone America/Indiana/Indianapolis --home-only' --output-name iu_athletics` wrote the `cities/bloomington/pending_feeds.txt` entry (`# cmd: python scrapers/sidearm.py ... --output cities/bloomington/iu_athletics.ics`). No workflow edit: the nightly pending-feeds processor inserts the active DB row and the DB-first runner executes it. This matches the registration upstream already carries for this source. Reverses the 2026-07-17 dead-end entry (no ICS; the old 2013-15 Google feeds are dead, but the Sidearm v3 API is live).
+- Source is the Sidearm v3 Calendar API (`iuhoosiers.com/api/v2/Calendar`), which returns structured game data with a `locationIndicator` of `H` (home site), `A` (away), or `N` (neutral site). `--home-only` previously dropped only `A`, so every neutral-site game — ITA regionals in Ohio, invitationals in Georgia and Arizona, 149 in all — flowed into Bloomington. The combine-time geo-filter does not catch them: it recognises only abbreviated states (`, OH`), and Sidearm writes the full name (`Mason, Ohio`). `--home-only` now drops both `A` and `N` on the v3 API path. The API states a start time only, so each event also gets a two-hour default end.
+- The v3 request window now comes from `BaseScraper.horizon_cutoff(now)` — six months is 6 × 31 = 186 days — instead of a hardcoded 180 days, which had dropped the last six days of the Horizon. A fixed-clock test pins the window.
+- Verified 2026-10-10: full 6-month run emits **85 events**, all home-site — 79 in Bloomington, 4 at Indianapolis (IU-hosted), 2 with no location — every event carrying `X-SOURCE:IU Athletics`, unique UIDs. `add_scraper.py --test` (`SCRAPE_MONTHS=2`) produced 131 before the fix and 50 after. Feed health is clean.
 
 ### 2026-09-07: Master Gardeners URL fix (issue #13)
 - `Monroe County Master Gardeners` scraper 404s: DB `feeds` row id=14 still runs `squarespace.py --url "https://www.mcmga.net/events"` (404). Same stale-URL pattern as Sassafras (#8) — the pre-DB-first URL fix never reached the seeded DB row.

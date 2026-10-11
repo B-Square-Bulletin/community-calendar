@@ -71,10 +71,10 @@ class SidearmScraper(BaseScraper):
 
     # ── v3 Calendar API path ──────────────────────────────────────────
 
-    def _fetch_v3_api(self) -> list[dict[str, Any]] | None:
+    def _fetch_v3_api(self, now: datetime | None = None) -> list[dict[str, Any]] | None:
         """Fetch from /api/v2/Calendar. Returns None if endpoint doesn't exist."""
-        now = datetime.now(self.tz)
-        end = now + timedelta(days=180)
+        now = now or datetime.now(self.tz)
+        end = self.horizon_cutoff(now)
         start_str = now.strftime("%-m-%-d-%Y")
         end_str = end.strftime("%-m-%-d-%Y")
 
@@ -91,7 +91,7 @@ class SidearmScraper(BaseScraper):
             )
             with urlopen(req, timeout=30) as resp:
                 data = json.loads(resp.read())
-        except HTTPError, URLError:
+        except HTTPError, URLError, json.JSONDecodeError:
             return None
 
         events = []
@@ -112,7 +112,9 @@ class SidearmScraper(BaseScraper):
         sport = sport_data.get("title", "") if isinstance(sport_data, dict) else ""
         location_indicator = e.get("locationIndicator", "")
 
-        if self.home_only and location_indicator == "A":
+        # The API marks A=away and N=neutral. Drop only those; keep home and
+        # any unknown indicator (missing events are worse than extra ones).
+        if self.home_only and location_indicator in ("A", "N"):
             return None
         if e.get("status") != "A":
             return None
@@ -141,6 +143,7 @@ class SidearmScraper(BaseScraper):
         event = {
             "title": title,
             "dtstart": dtstart,
+            "dtend": dtstart + timedelta(hours=2),
             "url": url,
             "location": location,
             "description": "",
@@ -265,9 +268,7 @@ class SidearmScraper(BaseScraper):
         # and home games have the school listed as homeTeam with local address
         if self.home_only:
             home_team = data.get("homeTeam", {})
-            away_team = data.get("awayTeam", {})
             home_name = home_team.get("name", "") if isinstance(home_team, dict) else ""
-            away_team.get("name", "") if isinstance(away_team, dict) else ""
             # If our team is listed as awayTeam, skip (we're visiting)
             # Sidearm always lists the site's school as homeTeam for home games
             # For away games, the school is still homeTeam but location is elsewhere
