@@ -8,6 +8,7 @@ without touching iuhoosiers.com.
 
 import json
 import sys
+from datetime import timedelta
 from pathlib import Path
 from unittest.mock import patch
 
@@ -80,5 +81,30 @@ def test_home_only_keeps_events_with_unknown_indicator():
 
 
 def test_without_home_only_all_sites_are_kept():
-    titles = [e["title"] for e in _fetch(home_only=False)]
-    assert len(titles) == 3
+    titles = sorted(e["title"] for e in _fetch(home_only=False))
+    assert titles == [
+        "Basketball at Purdue",
+        "Basketball vs Arkansas",
+        "Basketball vs Rutgers",
+    ]
+
+
+def test_events_get_a_default_two_hour_end():
+    # The API states a start time only, so events need an estimated end.
+    event = _fetch(home_only=True)[0]
+    assert event["dtend"] - event["dtstart"] == timedelta(hours=2)
+
+
+def test_v3_api_bad_json_falls_back_instead_of_raising():
+    class _HtmlResponse(_FakeResponse):
+        def read(self):
+            return b"<html>maintenance</html>"
+
+    with patch("scrapers.sidearm.urlopen", return_value=_HtmlResponse(PAYLOAD)):
+        scraper = SidearmScraper(
+            base_url="https://iuhoosiers.com",
+            source_name="IU Athletics",
+            tz="America/Indiana/Indianapolis",
+            home_only=True,
+        )
+        assert scraper._fetch_v3_api() is None

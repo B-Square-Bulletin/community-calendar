@@ -91,7 +91,7 @@ class SidearmScraper(BaseScraper):
             )
             with urlopen(req, timeout=30) as resp:
                 data = json.loads(resp.read())
-        except HTTPError, URLError:
+        except HTTPError, URLError, json.JSONDecodeError:
             return None
 
         events = []
@@ -143,6 +143,7 @@ class SidearmScraper(BaseScraper):
         event = {
             "title": title,
             "dtstart": dtstart,
+            "dtend": dtstart + timedelta(hours=2),
             "url": url,
             "location": location,
             "description": "",
@@ -267,9 +268,7 @@ class SidearmScraper(BaseScraper):
         # and home games have the school listed as homeTeam with local address
         if self.home_only:
             home_team = data.get("homeTeam", {})
-            away_team = data.get("awayTeam", {})
             home_name = home_team.get("name", "") if isinstance(home_team, dict) else ""
-            away_team.get("name", "") if isinstance(away_team, dict) else ""
             # If our team is listed as awayTeam, skip (we're visiting)
             # Sidearm always lists the site's school as homeTeam for home games
             # For away games, the school is still homeTeam but location is elsewhere
