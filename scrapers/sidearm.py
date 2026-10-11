@@ -112,7 +112,9 @@ class SidearmScraper(BaseScraper):
         sport = sport_data.get("title", "") if isinstance(sport_data, dict) else ""
         location_indicator = e.get("locationIndicator", "")
 
-        if self.home_only and location_indicator == "A":
+        # The API marks A=away and N=neutral. Drop only those; keep home and
+        # any unknown indicator (missing events are worse than extra ones).
+        if self.home_only and location_indicator in ("A", "N"):
             return None
         if e.get("status") != "A":
             return None
