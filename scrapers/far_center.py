@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 
 sys.path.insert(0, __file__.rsplit("/", 2)[0])
 from lib.base import BaseScraper
-from lib.timeutil import parse_naive_ics, utc_now
+from lib.timeutil import parse_naive_ics
 from lib.utils import generate_uid
 
 
@@ -46,15 +46,16 @@ class FARCenterScraper(BaseScraper):
         if not main:
             return events
 
+        now = datetime.now(tz)
         for card in main.select("div.mb-8"):
-            parsed = self._parse_card(card, tz)
+            parsed = self._parse_card(card, tz, now)
             if parsed:
                 events.append(parsed)
 
         self.logger.info(f"Found {len(events)} events")
         return events
 
-    def _parse_card(self, card, tz: ZoneInfo) -> dict[str, Any] | None:
+    def _parse_card(self, card, tz: ZoneInfo, now: datetime) -> dict[str, Any] | None:
         """Parse a single event card."""
         title_el = card.select_one("h3 a")
         if not title_el:
@@ -78,7 +79,7 @@ class FARCenterScraper(BaseScraper):
                 r"(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d",
                 text,
             ):
-                start, end = self._parse_datetime(text, tz)
+                start, end = self._parse_datetime(text, tz, now)
                 if start:
                     dtstart, dtend = start, end
             elif not dtstart:
@@ -106,8 +107,12 @@ class FARCenterScraper(BaseScraper):
             "uid": uid,
         }
 
-    def _parse_datetime(self, text: str, tz: ZoneInfo):
-        """Parse date/time from strings like 'Friday, April 3 | 5:00pm - 8:00pm'."""
+    def _parse_datetime(self, text: str, tz: ZoneInfo, now: datetime):
+        """Parse date/time from strings like 'Friday, April 3 | 5:00pm - 8:00pm'.
+
+        A yearless date binds to `now`'s year, or to the next year when it has
+        already passed; the listing carries upcoming events only.
+        """
         # Strip day-of-week
         text = re.sub(self.DAYS, "", text, flags=re.IGNORECASE)
 
@@ -119,7 +124,7 @@ class FARCenterScraper(BaseScraper):
             re.IGNORECASE,
         )
         if m:
-            year = utc_now().year
+            year = self._resolve_year(m.group(1), now)
             dtstart = self._make_dt(m.group(1), m.group(2), year, tz)
             dtend = self._make_dt(m.group(1), m.group(3), year, tz)
             if dtstart and dtend and dtend < dtstart:
@@ -133,19 +138,35 @@ class FARCenterScraper(BaseScraper):
             re.IGNORECASE,
         )
         if m:
-            year = utc_now().year
-            dtstart = self._make_dt(m.group(1), m.group(2), year, tz)
-            dtend = self._make_dt(m.group(3), m.group(4), year, tz)
+            dtstart = self._make_dt(m.group(1), m.group(2), self._resolve_year(m.group(1), now), tz)
+            dtend = self._make_dt(m.group(3), m.group(4), self._resolve_year(m.group(3), now), tz)
+            if dtstart and dtend and dtend < dtstart:
+                dtend = dtend.replace(year=dtend.year + 1)
             return dtstart, dtend
 
         # Date only, no time: "April 3"
         m = re.match(r"(\w+ \d{1,2})", text)
         if m:
-            year = utc_now().year
+            year = self._resolve_year(m.group(1), now)
             dtstart = self._make_dt(m.group(1), "12:00 pm", year, tz)
             return dtstart, None
 
         return None, None
+
+    @staticmethod
+    def _resolve_year(date_str: str, now: datetime) -> int:
+        """The year a yearless 'Month D' refers to relative to `now`.
+
+        The listing shows upcoming events, so a date that has already passed
+        this year belongs to the next one.
+        """
+        try:
+            parsed = parse_naive_ics(f"{date_str} {now.year}", "%B %d %Y")
+        except ValueError:
+            return now.year
+        if (parsed.month, parsed.day) < (now.month, now.day):
+            return now.year + 1
+        return now.year
 
     @staticmethod
     def _make_dt(date_str: str, time_str: str, year: int, tz: ZoneInfo) -> datetime | None:
