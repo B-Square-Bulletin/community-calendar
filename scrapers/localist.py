@@ -35,6 +35,10 @@ from urllib.request import Request, urlopen
 
 from lib.base import BaseScraper
 
+# Bound the crawl: an API that keeps returning a `next_page` cursor must not
+# fetch forever (AGENTS.md "Cap pagination").
+MAX_PAGES = 20
+
 
 class LocalistScraper(BaseScraper):
     name = "Localist"
@@ -145,6 +149,9 @@ class LocalistScraper(BaseScraper):
             # Check for more pages. The API's `total` counts pages, not items,
             # so follow its `next_page` cursor rather than a size-based offset.
             if not data.get("page", {}).get("next_page"):
+                break
+            if page >= MAX_PAGES:
+                self.logger.warning(f"Stopping at page cap ({MAX_PAGES}); more pages remain")
                 break
             page += 1
 

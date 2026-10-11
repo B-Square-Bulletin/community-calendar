@@ -8,7 +8,7 @@ _proj_root = Path(__file__).parent.parent
 sys.path.insert(0, str(_proj_root))
 sys.path.insert(0, str(_proj_root / "scrapers"))
 
-from scrapers.localist import LocalistScraper  # noqa: E402
+from scrapers.localist import MAX_PAGES, LocalistScraper  # noqa: E402
 
 
 def _page(events, *, current, total, next_page):
@@ -58,6 +58,21 @@ def test_follows_next_page_cursor(monkeypatch):
     ]
     titles = [e["title"] for e in _scraper(monkeypatch, pages).fetch_events()]
     assert titles == ["Page one", "Page two"]
+
+
+def test_pagination_stops_at_page_cap(monkeypatch):
+    calls: list[int] = []
+
+    def always_more(page=1):
+        calls.append(page)
+        return _page([_event(f"E{page}")], current=page, total=999, next_page=page + 1)
+
+    scraper = LocalistScraper(base_url="https://events.in.gov", name="Test")
+    monkeypatch.setattr(scraper, "_fetch_api", always_more)
+
+    events = scraper.fetch_events()
+    assert len(calls) == MAX_PAGES
+    assert len(events) == MAX_PAGES
 
 
 def test_scheme_less_url_falls_back_to_localist_url(monkeypatch):
