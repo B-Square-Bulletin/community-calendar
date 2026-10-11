@@ -66,6 +66,7 @@ Docs: https://documentation.events.iu.edu/feed-and-linked-calendars/ical-feed.ht
 | FAR Center for Contemporary Arts | Scraper | ~4 | `far_center.py` — Craft CMS |
 | Cicada Cinema | Scraper | ~6 | Shopify products API — `cicada_cinema.py` |
 | Pottery House Studio | Scraper | ~40 | Squarespace — `squarespace.py` workshops |
+| Monroe County History Center | Scraper | ~17 | `monroe_county_history_center.py` — EventON WP REST API; behind SiteGround sgcaptcha (plain-Mozilla UA) |
 | Bloomington Old-Time Music & Dance | Google Calendar | — | |
 
 ### Literary (4 sources)
@@ -465,6 +466,13 @@ Annual events with reliable dates but no feeds — a once-a-season curator sweep
 - Verified live at registration, and the verification caught a real defect before merge: the AJAX listing is **occurrence-expanded** (a recurring event returns one row per occurrence with the same URL), but the scraper's URL-based UID collapsed every recurrence to its first occurrence — a full run lost ~149 of 406 occurrences (weekly Trivia Night and People's Co-op Market each fell to a single event). `lib/em_events.py` now keys the UID by occurrence through the shared `generate_uid` (the same occurrence identity WFIU uses) and reads the body from `.em-item-desc` (the old `.em-event-description`/`.em-item-content` selectors matched nothing, so every event shipped with an empty description). The change is library-only; only WFHB uses it. Verified after the fix: a full 6-month run emits **393 events** (13 dropped past the Horizon), unique UIDs, descriptions populated, every one carrying `X-SOURCE:WFHB Community Calendar`. Single-time cards now get a two-hour default end so they are not zero-duration (previously 164 of 393). `add_scraper.py --test` (`SCRAPE_MONTHS=2`) still passes.
 - The issue title says "existing ai1ec scraper", but the source had already migrated off ai1ec: #31 (`d45c48bd`) replaced the ai1ec agenda-view scraper with the Events Manager AJAX scraper (`lib/em_events.py`) after wfhb.org changed plugins. `lib/ai1ec.py` remains in the tree but no Bloomington source uses it; the Platform Scrapers table is corrected here.
 - WFHB is an aggregator covering venues with no own calendar (Orbit Room, library-hosted events, and outlying town events) and is already in `source_priority.json`'s `aggregators`, so it loses cross-source dedup to primaries.
+
+### 2026-10-10: Monroe County History Center registered (issue #190)
+- Registered the dormant `scrapers/monroe_county_history_center.py` via the standard DB-first path — `add_scraper.py monroe_county_history_center bloomington "Monroe County History Center"` wrote the `cities/bloomington/pending_feeds.txt` entry (`# cmd: python scrapers/monroe_county_history_center.py --output cities/bloomington/monroe_county_history_center.ics`). No workflow edit.
+- Source is EventON (WP REST API `monroehistory.org/wp-json/wp/v2/ajde_events`); the scraper parses dates from the listing `content` field and only falls back to a detail-page fetch for items with no parseable date.
+- monroehistory.org sits behind SiteGround's `sgcaptcha` bot protection (the same WAF as Hard Truth, #185): a challenged request returns an HTTP 202 HTML page. The scraper's UA was changed from the project `CommunityCalendar/1.0` to a plain `Mozilla/5.0` (the documented SiteGround bypass), and a non-200 listing response now logs a warning so a blocked run is visible instead of silently emitting 0 events.
+- Verified 2026-10-10: full 6-month run emits **17 events** (55 parsed from 250 listing items across 5 pages, 38 past the Horizon), unique UIDs, descriptions populated, every event carrying `X-SOURCE:Monroe County History Center`. `add_scraper.py --test` (`SCRAPE_MONTHS=2`) produced 7 events.
+- Tradeoff (same as Hard Truth): SiteGround's block is stateful/rate-based. A challenge on the first page writes a valid-empty calendar (classified `quiet`, not `broken_feed`); a mid-pagination challenge keeps the pages already fetched rather than discarding them, so a partial refresh deletes fewer events than an empty one would.
 
 ### 2026-09-07: Master Gardeners URL fix (issue #13)
 - `Monroe County Master Gardeners` scraper 404s: DB `feeds` row id=14 still runs `squarespace.py --url "https://www.mcmga.net/events"` (404). Same stale-URL pattern as Sassafras (#8) — the pre-DB-first URL fix never reached the seeded DB row.
