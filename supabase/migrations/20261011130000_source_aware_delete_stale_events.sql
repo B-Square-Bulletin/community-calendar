@@ -19,12 +19,12 @@
 -- likewise absent, so those rows can persist; see ADR 0017.
 --
 -- The 50% partial-load guard is evaluated per present source, so a healthy
--- source's uid count cannot mask a truncated one: if any single named source
--- would lose more than half its rows, the call refuses. The caller upserts the
--- payload first (load-events does), so each source's row count already
--- includes its incoming uids. The cost is that a legitimate >50% shrink of one
--- source also refuses; that refusal is loud and recoverable through remove_feed
--- or direct maintenance SQL.
+-- source's uid count cannot mask a truncated one: a source that would lose
+-- more than half its rows is preserved (skipped) and the rest are swept, with
+-- a WARNING naming it. Skipping instead of raising keeps one source that winds
+-- down (a festival, a semester) from blocking cleanup for the whole city. The
+-- caller upserts the payload first (load-events does), so each source's row
+-- count already includes its incoming uids.
 --
 -- CREATE OR REPLACE cannot change the argument list (it would overload rather
 -- than replace, leaving the old whole-city function callable by name), so the
@@ -43,9 +43,7 @@ DECLARE
   current_count bigint;
   would_delete bigint;
   incoming_count bigint;
-  guard_source text;
-  guard_current bigint;
-  guard_stale bigint;
+  guard_sources text[] := ARRAY[]::text[];
   deleted_count bigint;
 BEGIN
   IF p_sources IS NULL THEN
@@ -75,11 +73,13 @@ BEGIN
         p_city, would_delete, current_count, incoming_count;
     END IF;
   ELSE
-    -- Source-scoped sweep: guard each present source on its own. With the
-    -- payload upserted, a source's stale count exceeding its incoming count is
-    -- the same as losing more than half its rows.
-    SELECT s.source_id, s.current_s, s.stale_s
-      INTO guard_source, guard_current, guard_stale
+    -- Source-scoped sweep: evaluate the guard per present source so a healthy
+    -- source's uid count cannot mask a truncated one, but preserve the
+    -- offending sources and sweep the rest. Raising here would let one source
+    -- winding down (a festival, a semester) refuse every run and so block
+    -- cleanup for the whole city.
+    SELECT coalesce(array_agg(s.source_id), ARRAY[]::text[])
+      INTO guard_sources
     FROM (
       SELECT e.source_id,
              count(*) AS current_s,
@@ -95,15 +95,13 @@ BEGIN
         AND e.source_id = ANY(p_sources)
       GROUP BY e.source_id
     ) s
-    WHERE s.stale_s * 2 > s.current_s
-    LIMIT 1;
+    WHERE s.stale_s * 2 > s.current_s;
 
-    IF FOUND THEN
-      RAISE EXCEPTION
-        'delete_stale_events refused for city % source %: would delete % of % '
-        'events (>50%% of one source driven by a short uid list looks like a '
-        'partial load, not real churn)',
-        p_city, guard_source, guard_stale, guard_current;
+    IF array_length(guard_sources, 1) IS NOT NULL THEN
+      RAISE WARNING
+        'delete_stale_events preserved % source(s) for city % (would delete '
+        'more than half their rows): %',
+        array_length(guard_sources, 1), p_city, array_to_string(guard_sources, ', ');
     END IF;
   END IF;
 
@@ -111,6 +109,7 @@ BEGIN
   WHERE e.city = p_city
     AND e.source_uid IS NOT NULL
     AND (p_sources IS NULL OR e.source_id = ANY(p_sources))
+    AND NOT (e.source_id = ANY(guard_sources))
     AND NOT EXISTS (
       SELECT 1 FROM unnest(p_source_uids) AS u(uid)
       WHERE u.uid = e.source_uid

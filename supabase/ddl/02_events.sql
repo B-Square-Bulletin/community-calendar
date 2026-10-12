@@ -36,7 +36,8 @@ CREATE TABLE IF NOT EXISTS events (
 -- Includes the partial-load guard from 20260722210000_guard_delete_stale_events.sql,
 -- which the migrations apply but a CLI `init` (which runs only supabase/ddl/*.sql)
 -- would otherwise miss. The guard is evaluated per present source, so a healthy
--- source's uid count cannot mask a truncated one.
+-- source's uid count cannot mask a truncated one; an offending source is
+-- preserved and the rest are swept.
 --
 -- Uses NOT EXISTS (unnest) instead of != ALL() because != ALL() with 3000+ items
 -- hits Postgres statement timeout. The unnest pattern is index-friendly and
@@ -54,9 +55,7 @@ DECLARE
   current_count bigint;
   would_delete bigint;
   incoming_count bigint;
-  guard_source text;
-  guard_current bigint;
-  guard_stale bigint;
+  guard_sources text[] := ARRAY[]::text[];
   deleted_count bigint;
 BEGIN
   IF p_sources IS NULL THEN
@@ -85,8 +84,8 @@ BEGIN
         p_city, would_delete, current_count, incoming_count;
     END IF;
   ELSE
-    SELECT s.source_id, s.current_s, s.stale_s
-      INTO guard_source, guard_current, guard_stale
+    SELECT coalesce(array_agg(s.source_id), ARRAY[]::text[])
+      INTO guard_sources
     FROM (
       SELECT e.source_id,
              count(*) AS current_s,
@@ -102,15 +101,13 @@ BEGIN
         AND e.source_id = ANY(p_sources)
       GROUP BY e.source_id
     ) s
-    WHERE s.stale_s * 2 > s.current_s
-    LIMIT 1;
+    WHERE s.stale_s * 2 > s.current_s;
 
-    IF FOUND THEN
-      RAISE EXCEPTION
-        'delete_stale_events refused for city % source %: would delete % of % '
-        'events (>50%% of one source driven by a short uid list looks like a '
-        'partial load, not real churn)',
-        p_city, guard_source, guard_stale, guard_current;
+    IF array_length(guard_sources, 1) IS NOT NULL THEN
+      RAISE WARNING
+        'delete_stale_events preserved % source(s) for city % (would delete '
+        'more than half their rows): %',
+        array_length(guard_sources, 1), p_city, array_to_string(guard_sources, ', ');
     END IF;
   END IF;
 
@@ -118,6 +115,7 @@ BEGIN
   WHERE e.city = p_city
     AND e.source_uid IS NOT NULL
     AND (p_sources IS NULL OR e.source_id = ANY(p_sources))
+    AND NOT (e.source_id = ANY(guard_sources))
     AND NOT EXISTS (
       SELECT 1 FROM unnest(p_source_uids) AS u(uid)
       WHERE u.uid = e.source_uid

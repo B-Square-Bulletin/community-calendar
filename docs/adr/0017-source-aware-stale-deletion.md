@@ -40,12 +40,13 @@ Because `CREATE OR REPLACE` cannot change an argument list (it overloads instead
 of replacing), the migration drops the two-argument function first.
 
 The 50% partial-load guard is evaluated per present source, so a healthy
-source's uid count cannot mask a truncated one; a source that would lose more
-than half its rows refuses the call. The cost is that a source that
-legitimately shrinks by more than half in one run also refuses; that refusal is
-loud and recoverable through `remove_feed` or direct maintenance SQL. The guard
-reads each source's current row count, so the caller must upsert the payload
-before the sweep (`load-events` does).
+source's uid count cannot mask a truncated one. A source that would lose more
+than half its rows is preserved and the rest are swept, with a WARNING naming
+it; one source winding down (a festival, a semester) therefore cannot block
+cleanup for the whole city. The cost is that such a source keeps its rows,
+including any that were genuinely removed, until it stops tripping the guard.
+The guard reads each source's current row count, so the caller must upsert the
+payload before the sweep (`load-events` does).
 
 ## Consequences
 
@@ -61,10 +62,12 @@ before the sweep (`load-events` does).
   non-empty run. The preserved rows are not necessarily past: if a source
   removed or cancelled its future events, those rows stay and remain visible as
   upcoming. This is the deliberate cost of never deleting on a transient
-  failure, and repeated empty runs do not clean them. `remove_feed` matches the
-  feed's name against `source_names` as well as `source`, so a source folded
-  into a merge survivor is removed too; a row whose structured names are slug
-  fallbacks can still be missed, and a durable feed-to-`source_id` mapping is a
+  failure, and repeated empty runs do not clean them. `remove_feed` deletes
+  only rows whose `source` equals the feed's name, so it leaves a merge survivor
+  (whose `source` is the comma-joined member names) for the next build to
+  re-attribute; matching the survivor by name would delete an event owned by
+  another feed and cascade away its saved picks. Clearing a survivor when its
+  own feed is retired needs a durable feed-to-`source_id` mapping and is a
   follow-up.
 - A source whose *entire* output is merged into another source's survivors has
   no `source_id` in the payload, so its old rows can linger as duplicates. The

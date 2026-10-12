@@ -9,7 +9,7 @@
 -- Or:  make test-sql
 
 BEGIN;
-SELECT plan(16);
+SELECT plan(17);
 
 -- ============================================================================
 -- Test 1: Basic stale event deletion
@@ -181,11 +181,10 @@ SELECT is(
 );
 
 -- ============================================================================
--- Test 7: the 50% guard refuses a truncated single-source payload
+-- Test 7: the guard preserves a source that would lose more than half its rows
 -- ============================================================================
--- Four src-a rows and a payload with one uid is >50% of the present sources
--- with a short uid list, so the sweep must raise rather than wipe src-a
--- (issue #227: "mind the existing guard").
+-- Four src-a rows and a payload with one uid: src-a is over the threshold, so
+-- it is preserved (skipped) rather than emptied.
 DELETE FROM events
 WHERE city = 'test_dse';
 
@@ -193,11 +192,10 @@ INSERT INTO events (city, title, start_time, source, source_id, source_uid)
 SELECT 'test_dse', 'Event A' || g, now(), 'Source A', 'src-a', 'uid-a' || g
 FROM generate_series(1, 4) g;
 
-SELECT throws_ok(
-    $$ SELECT delete_stale_events('test_dse', ARRAY['uid-a1'], ARRAY['src-a']) $$,
-    'P0001',
-    NULL,
-    'Test 7: guard refuses a truncated single-source payload'
+SELECT is(
+    delete_stale_events('test_dse', ARRAY['uid-a1'], ARRAY['src-a']),
+    bigint '0',
+    'Test 7: a source over the threshold is preserved, not emptied'
 );
 
 SELECT is(
@@ -206,15 +204,15 @@ SELECT is(
         WHERE city = 'test_dse'
     ),
     4,
-    'Test 7b: nothing deleted when the guard refuses'
+    'Test 7b: the guarded source keeps all its rows'
 );
 
 -- ============================================================================
--- Test 8: a healthy source cannot mask a truncated one
+-- Test 8: a healthy source is still swept while another is preserved
 -- ============================================================================
--- src-a has 4 rows and sends 1; src-b has 100 rows and sends all 100. An
--- aggregate guard would see only 3 stale of 104 and let src-a lose 75%, so the
--- guard must evaluate each source alone.
+-- src-a is over the threshold (4 rows, sends 1) and src-b is healthy (100
+-- rows, sends 99). src-a is preserved and src-b's one stale row is swept, so a
+-- source winding down cannot block cleanup for the rest of the city.
 DELETE FROM events
 WHERE city = 'test_dse';
 
@@ -226,26 +224,32 @@ INSERT INTO events (city, title, start_time, source, source_id, source_uid)
 SELECT 'test_dse', 'Event B' || g, now(), 'Source B', 'src-b', 'uid-b' || g
 FROM generate_series(1, 100) g;
 
-SELECT throws_ok(
-    $$
-        SELECT delete_stale_events(
-            'test_dse',
-            ARRAY['uid-a1'] || ARRAY(SELECT 'uid-b' || g FROM generate_series(1, 100) g),
-            ARRAY['src-a', 'src-b']
-        )
-    $$,
-    'P0001',
-    NULL,
-    'Test 8: healthy source does not mask a truncated one'
+SELECT is(
+    delete_stale_events(
+        'test_dse',
+        ARRAY['uid-a1'] || ARRAY(SELECT 'uid-b' || g FROM generate_series(1, 99) g),
+        ARRAY['src-a', 'src-b']
+    ),
+    bigint '1',
+    'Test 8: healthy source is swept while the guarded one is preserved'
 );
 
 SELECT is(
     (
         SELECT count(*)::int FROM events
-        WHERE city = 'test_dse'
+        WHERE city = 'test_dse' AND source_id = 'src-a'
     ),
-    104,
-    'Test 8b: nothing deleted when the guard refuses'
+    4,
+    'Test 8b: guarded source keeps all its rows'
+);
+
+SELECT is(
+    (
+        SELECT count(*)::int FROM events
+        WHERE city = 'test_dse' AND source_id = 'src-b'
+    ),
+    99,
+    'Test 8c: healthy source lost only its stale row'
 );
 
 -- ============================================================================

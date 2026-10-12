@@ -24,12 +24,15 @@ CREATE POLICY "Admin users can manage feeds" ON feeds FOR ALL
 
 -- Used by the Manage Feeds delete button (SECURITY DEFINER bypasses RLS).
 -- Atomic since 20260807170000_atomic_remove_feed.sql: deletes the feed's
--- events and the feed row in one transaction, returns what it deleted, and
--- raises for an unknown id. Callers that still pre-delete events by
--- source+city simply leave 0 rows for the RPC to delete — backward compatible.
--- Since 20261011140000_remove_feed_match_source_names.sql it also matches
--- members of a merged route through events.source_names, so a feed folded into
--- another source is still removed.
+-- events (matched by the feed's city + name) and the feed row in one
+-- transaction, returns what it deleted, and raises for an unknown id.
+-- Callers that still pre-delete events by source+city simply leave 0
+-- rows for the RPC to delete — backward compatible.
+--
+-- Matches `events.source = feeds.name` only. A merge survivor's source is the
+-- comma-joined member names, so it is not matched here; it is re-attributed by
+-- the next build instead. Matching it by name would delete a survivor owned by
+-- another feed and cascade away that event's saved picks (ADR 0017).
 CREATE FUNCTION remove_feed(feed_id bigint)
 RETURNS TABLE (events_deleted bigint, feed_deleted boolean)
 LANGUAGE plpgsql SECURITY DEFINER
@@ -43,9 +46,7 @@ BEGIN
     RAISE EXCEPTION 'remove_feed: no feed row with id %', feed_id;
   END IF;
 
-  DELETE FROM events e
-  WHERE e.city = f.city
-    AND (e.source = f.name OR f.name = ANY(coalesce(e.source_names, ARRAY[]::text[])));
+  DELETE FROM events e WHERE e.city = f.city AND e.source = f.name;
   GET DIAGNOSTICS ev_count = ROW_COUNT;
 
   DELETE FROM feeds WHERE id = feed_id;

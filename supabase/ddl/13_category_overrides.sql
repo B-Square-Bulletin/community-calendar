@@ -15,8 +15,8 @@
 --
 -- Since 20261011130000_source_aware_delete_stale_events.sql the sweep is
 -- scoped to the sources present in the payload, so a source that failed to
--- produce output is never touched; the guard now bounds churn for each source
--- that did load.
+-- produce output is never touched; the guard preserves any single source that
+-- would lose more than half its rows and sweeps the rest.
 
 CREATE TABLE IF NOT EXISTS category_overrides (
   id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
