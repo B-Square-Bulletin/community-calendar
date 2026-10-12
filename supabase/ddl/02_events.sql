@@ -33,9 +33,16 @@ CREATE TABLE IF NOT EXISTS events (
 -- so a source whose ingestion failed and produced no output keeps its rows.
 -- p_sources IS NULL falls back to the old whole-city sweep.
 --
+-- Includes the partial-load guard from 20260722210000_guard_delete_stale_events.sql,
+-- which the migrations apply but a CLI `init` (which runs only supabase/ddl/*.sql)
+-- would otherwise miss. current_count and would_delete are both scoped to the
+-- present sources, so a truncated single-source payload is refused.
+--
 -- Uses NOT EXISTS (unnest) instead of != ALL() because != ALL() with 3000+ items
 -- hits Postgres statement timeout. The unnest pattern is index-friendly and
 -- works with the composite events_city_source_uid_idx index.
+DROP FUNCTION IF EXISTS delete_stale_events(text, text[]);
+
 CREATE FUNCTION delete_stale_events(
     p_city text, p_source_uids text[], p_sources text[] DEFAULT NULL
 )
@@ -44,8 +51,38 @@ LANGUAGE plpgsql
 SECURITY DEFINER
 AS $$
 DECLARE
+  current_count bigint;
+  would_delete bigint;
+  incoming_count bigint;
   deleted_count bigint;
 BEGIN
+  SELECT count(*) INTO current_count
+  FROM events
+  WHERE city = p_city
+    AND (p_sources IS NULL OR source_id = ANY(p_sources));
+
+  SELECT count(*) INTO would_delete
+  FROM events e
+  WHERE e.city = p_city
+    AND e.source_uid IS NOT NULL
+    AND (p_sources IS NULL OR e.source_id = ANY(p_sources))
+    AND NOT EXISTS (
+      SELECT 1 FROM unnest(p_source_uids) AS u(uid)
+      WHERE u.uid = e.source_uid
+    );
+
+  incoming_count := coalesce(array_length(p_source_uids, 1), 0);
+
+  IF current_count > 0
+     AND would_delete * 2 > current_count
+     AND incoming_count < would_delete THEN
+    RAISE EXCEPTION
+      'delete_stale_events refused for city %: would delete % of % events '
+      'with only % incoming source_uids (>50%% deletion driven by a short '
+      'uid list looks like a partial load, not real churn)',
+      p_city, would_delete, current_count, incoming_count;
+  END IF;
+
   DELETE FROM events e
   WHERE e.city = p_city
     AND e.source_uid IS NOT NULL

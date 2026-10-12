@@ -73,7 +73,17 @@ Deno.serve(async (req) => {
       // produce output is absent here and keeps its rows (issue #227).
       // Uses RPC to avoid URL length limits with large IN lists.
       const newSourceUids = Array.from(uniqueEvents.keys());
-      const presentSources = [...new Set(events.map((e: any) => e.source_id).filter(Boolean))];
+      // Derive present sources from the accepted events, not the raw body: an
+      // event with a source_id but no source_uid is dropped by the upsert, so
+      // it must not activate a sweep of that source (no keep uid would exist).
+      const presentSources = [
+        ...new Set(Array.from(uniqueEvents.values()).map((e: any) => e.source_id).filter(Boolean)),
+      ];
+      if (newSourceUids.length > 0 && presentSources.length === 0) {
+        console.warn(
+          `Cleanup ${city}: payload has source_uids but no source_id; stale sweep skipped`
+        );
+      }
       let deleted = 0;
       if (newSourceUids.length > 0) {
         const { data: delCount, error: delError } = await supabase
@@ -152,8 +162,12 @@ Deno.serve(async (req) => {
         const citySources: string[] = [];
         for (const event of events) {
           event.city = event.city || city;
-          if (event.source_uid) cityUids.push(event.source_uid);
-          if (event.source_id) citySources.push(event.source_id);
+          // Only an accepted event (one with a source_uid) activates its
+          // source for cleanup; see the direct-POST path note above.
+          if (event.source_uid) {
+            cityUids.push(event.source_uid);
+            if (event.source_id) citySources.push(event.source_id);
+          }
         }
         eventsByCity.set(city, cityUids);
         sourcesByCity.set(city, [...new Set(citySources)]);
@@ -210,11 +224,17 @@ Deno.serve(async (req) => {
     let deleted = 0;
     for (const [city, uids] of eventsByCity) {
       if (uids.length > 0) {
+        const sources = sourcesByCity.get(city) ?? [];
+        if (sources.length === 0) {
+          console.warn(
+            `Cleanup ${city}: payload has source_uids but no source_id; stale sweep skipped`
+          );
+        }
         const { data: delCount, error: delError } = await supabase
           .rpc("delete_stale_events", {
             p_city: city,
             p_source_uids: uids,
-            p_sources: sourcesByCity.get(city) ?? [],
+            p_sources: sources,
           });
         if (delError) {
           console.error(`Cleanup ${city} error:`, delError);

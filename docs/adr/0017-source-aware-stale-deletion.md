@@ -39,8 +39,12 @@ has not been updated, and the two-argument pgTAP calls document the legacy path.
 Because `CREATE OR REPLACE` cannot change an argument list (it overloads instead
 of replacing), the migration drops the two-argument function first.
 
-The 50% partial-load guard stays, but its would-delete count is now computed
-over the scoped predicate, so it bounds churn within the sources that did load.
+The 50% partial-load guard stays, with both its count and its would-delete
+count scoped to `p_sources`, so a truncated single-source payload (one source
+named, a short uid list) is refused instead of wiping that source. The cost is
+that a legitimate large shrink of the present sources also refuses; that
+refusal is loud and recoverable through `remove_feed` or direct maintenance
+SQL.
 
 ## Consequences
 
@@ -52,14 +56,19 @@ over the scoped predicate, so it bounds churn within the sources that did load.
 
 **Harder / surprising:**
 - A source that runs successfully but has zero upcoming events is
-  indistinguishable from a failed one, so its rows are preserved as stale until
-  its next non-empty run. The stale rows are past events, so the upcoming
-  calendar does not surface them; repeated empty runs do not clean them.
-  Retiring a source uses `remove_feed`, which deletes explicitly.
+  indistinguishable from a failed one, so its rows are preserved until its next
+  non-empty run. The preserved rows are not necessarily past: if a source
+  removed or cancelled its future events, those rows stay and remain visible as
+  upcoming. This is the deliberate cost of never deleting on a transient
+  failure, and repeated empty runs do not clean them. Retiring a source uses
+  `remove_feed`, which deletes explicitly.
 - A source whose *entire* output is merged into another source's survivors has
-  no `source_id` in the payload, so its old rows can linger as duplicates until
-  it next emits a non-merged event. Accepted: the dropped member of a merge is
-  the lower-priority (usually aggregator) copy, and the condition self-heals.
+  no `source_id` in the payload, so its old rows can linger as duplicates. The
+  condition self-heals only if the source later emits a non-merged event; a
+  source that always duplicates a primary (typically an aggregator) keeps those
+  rows indefinitely. Accepted for now — the dropped member of a merge is the
+  lower-priority copy, and cleaning orphaned members is a follow-up, not part of
+  this change.
 - Rows with a NULL `source_id` belong to no source and are never swept when
   `p_sources` is set.
 

@@ -15,7 +15,15 @@
 -- Trade-off: a source that legitimately runs with zero upcoming events looks
 -- identical to a failed one, so its rows are preserved until its next
 -- non-empty run. Retiring a source goes through remove_feed, which deletes
--- its rows explicitly.
+-- its rows explicitly. A source whose every event merges into another source
+-- is likewise absent, so those rows can persist indefinitely; see ADR 0017.
+--
+-- The 50% partial-load guard is scoped the same way: current_count counts only
+-- the sources named in p_sources, so a truncated single-source payload (one
+-- source named, a short uid list) is refused instead of wiping that source.
+-- The cost is that a legitimate large shrink of the present sources also
+-- refuses; that refusal is loud and recoverable through remove_feed or direct
+-- maintenance SQL.
 --
 -- CREATE OR REPLACE cannot change the argument list (it would overload rather
 -- than replace, leaving the old whole-city function callable by name), so the
@@ -38,7 +46,8 @@ DECLARE
 BEGIN
   SELECT count(*) INTO current_count
   FROM events
-  WHERE city = p_city;
+  WHERE city = p_city
+    AND (p_sources IS NULL OR source_id = ANY(p_sources));
 
   SELECT count(*) INTO would_delete
   FROM events e

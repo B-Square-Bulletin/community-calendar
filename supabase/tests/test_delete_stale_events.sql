@@ -9,7 +9,7 @@
 -- Or:  make test-sql
 
 BEGIN;
-SELECT plan(12);
+SELECT plan(14);
 
 -- ============================================================================
 -- Test 1: Basic stale event deletion
@@ -152,16 +152,22 @@ WHERE city = 'test_dse';
 -- ============================================================================
 -- Test 6: A present source loses only the uids it dropped
 -- ============================================================================
+-- Ten rows for src-a; the payload keeps nine. That is under the 50% guard, so
+-- the sweep proceeds and drops exactly the one missing uid.
 INSERT INTO events (city, title, start_time, source, source_id, source_uid)
-VALUES
-('test_dse', 'Event A1', now(), 'Source A', 'src-a', 'uid-a1'),
-('test_dse', 'Event A2', now(), 'Source A', 'src-a', 'uid-a2'),
-('test_dse', 'Event A3', now(), 'Source A', 'src-a', 'uid-a3'),
-('test_dse', 'Event B1', now(), 'Source B', 'src-b', 'uid-b1');
+SELECT 'test_dse', 'Event A' || g, now(), 'Source A', 'src-a', 'uid-a' || g
+FROM generate_series(1, 10) g;
+
+INSERT INTO events (city, title, start_time, source, source_id, source_uid)
+VALUES ('test_dse', 'Event B1', now(), 'Source B', 'src-b', 'uid-b1');
 
 SELECT is(
-    delete_stale_events('test_dse', ARRAY['uid-a1'], ARRAY['src-a']),
-    bigint '2',
+    delete_stale_events(
+        'test_dse',
+        ARRAY(SELECT 'uid-a' || g FROM generate_series(1, 9) g),
+        ARRAY['src-a']
+    ),
+    bigint '1',
     'Test 6: present source drops its missing uids only'
 );
 
@@ -170,8 +176,37 @@ SELECT is(
         SELECT count(*)::int FROM events
         WHERE city = 'test_dse'
     ),
-    2,
-    'Test 6b: uid-a1 kept, src-b untouched, uid-a2/uid-a3 gone'
+    10,
+    'Test 6b: uid-a10 gone, uid-a1..a9 and src-b kept'
+);
+
+-- ============================================================================
+-- Test 7: the 50% guard refuses a truncated single-source payload
+-- ============================================================================
+-- Four src-a rows and a payload with one uid is >50% of the present sources
+-- with a short uid list, so the sweep must raise rather than wipe src-a
+-- (issue #227: "mind the existing guard").
+DELETE FROM events
+WHERE city = 'test_dse';
+
+INSERT INTO events (city, title, start_time, source, source_id, source_uid)
+SELECT 'test_dse', 'Event A' || g, now(), 'Source A', 'src-a', 'uid-a' || g
+FROM generate_series(1, 4) g;
+
+SELECT throws_ok(
+    $$ SELECT delete_stale_events('test_dse', ARRAY['uid-a1'], ARRAY['src-a']) $$,
+    'P0001',
+    NULL,
+    'Test 7: guard refuses a truncated single-source payload'
+);
+
+SELECT is(
+    (
+        SELECT count(*)::int FROM events
+        WHERE city = 'test_dse'
+    ),
+    4,
+    'Test 7b: nothing deleted when the guard refuses'
 );
 
 -- ============================================================================
