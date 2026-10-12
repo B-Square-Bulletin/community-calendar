@@ -9,7 +9,7 @@
 -- Or:  make test-sql
 
 BEGIN;
-SELECT plan(14);
+SELECT plan(16);
 
 -- ============================================================================
 -- Test 1: Basic stale event deletion
@@ -207,6 +207,45 @@ SELECT is(
     ),
     4,
     'Test 7b: nothing deleted when the guard refuses'
+);
+
+-- ============================================================================
+-- Test 8: a healthy source cannot mask a truncated one
+-- ============================================================================
+-- src-a has 4 rows and sends 1; src-b has 100 rows and sends all 100. An
+-- aggregate guard would see only 3 stale of 104 and let src-a lose 75%, so the
+-- guard must evaluate each source alone.
+DELETE FROM events
+WHERE city = 'test_dse';
+
+INSERT INTO events (city, title, start_time, source, source_id, source_uid)
+SELECT 'test_dse', 'Event A' || g, now(), 'Source A', 'src-a', 'uid-a' || g
+FROM generate_series(1, 4) g;
+
+INSERT INTO events (city, title, start_time, source, source_id, source_uid)
+SELECT 'test_dse', 'Event B' || g, now(), 'Source B', 'src-b', 'uid-b' || g
+FROM generate_series(1, 100) g;
+
+SELECT throws_ok(
+    $$
+        SELECT delete_stale_events(
+            'test_dse',
+            ARRAY['uid-a1'] || ARRAY(SELECT 'uid-b' || g FROM generate_series(1, 100) g),
+            ARRAY['src-a', 'src-b']
+        )
+    $$,
+    'P0001',
+    NULL,
+    'Test 8: healthy source does not mask a truncated one'
+);
+
+SELECT is(
+    (
+        SELECT count(*)::int FROM events
+        WHERE city = 'test_dse'
+    ),
+    104,
+    'Test 8b: nothing deleted when the guard refuses'
 );
 
 -- ============================================================================

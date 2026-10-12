@@ -39,12 +39,13 @@ has not been updated, and the two-argument pgTAP calls document the legacy path.
 Because `CREATE OR REPLACE` cannot change an argument list (it overloads instead
 of replacing), the migration drops the two-argument function first.
 
-The 50% partial-load guard stays, with both its count and its would-delete
-count scoped to `p_sources`, so a truncated single-source payload (one source
-named, a short uid list) is refused instead of wiping that source. The cost is
-that a legitimate large shrink of the present sources also refuses; that
-refusal is loud and recoverable through `remove_feed` or direct maintenance
-SQL.
+The 50% partial-load guard is evaluated per present source, so a healthy
+source's uid count cannot mask a truncated one; a source that would lose more
+than half its rows refuses the call. The cost is that a source that
+legitimately shrinks by more than half in one run also refuses; that refusal is
+loud and recoverable through `remove_feed` or direct maintenance SQL. The guard
+reads each source's current row count, so the caller must upsert the payload
+before the sweep (`load-events` does).
 
 ## Consequences
 
@@ -60,8 +61,11 @@ SQL.
   non-empty run. The preserved rows are not necessarily past: if a source
   removed or cancelled its future events, those rows stay and remain visible as
   upcoming. This is the deliberate cost of never deleting on a transient
-  failure, and repeated empty runs do not clean them. Retiring a source uses
-  `remove_feed`, which deletes explicitly.
+  failure, and repeated empty runs do not clean them. `remove_feed` matches the
+  feed's name against `source_names` as well as `source`, so a source folded
+  into a merge survivor is removed too; a row whose structured names are slug
+  fallbacks can still be missed, and a durable feed-to-`source_id` mapping is a
+  follow-up.
 - A source whose *entire* output is merged into another source's survivors has
   no `source_id` in the payload, so its old rows can linger as duplicates. The
   condition self-heals only if the source later emits a non-merged event; a

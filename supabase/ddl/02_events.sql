@@ -35,8 +35,8 @@ CREATE TABLE IF NOT EXISTS events (
 --
 -- Includes the partial-load guard from 20260722210000_guard_delete_stale_events.sql,
 -- which the migrations apply but a CLI `init` (which runs only supabase/ddl/*.sql)
--- would otherwise miss. current_count and would_delete are both scoped to the
--- present sources, so a truncated single-source payload is refused.
+-- would otherwise miss. The guard is evaluated per present source, so a healthy
+-- source's uid count cannot mask a truncated one.
 --
 -- Uses NOT EXISTS (unnest) instead of != ALL() because != ALL() with 3000+ items
 -- hits Postgres statement timeout. The unnest pattern is index-friendly and
@@ -54,33 +54,64 @@ DECLARE
   current_count bigint;
   would_delete bigint;
   incoming_count bigint;
+  guard_source text;
+  guard_current bigint;
+  guard_stale bigint;
   deleted_count bigint;
 BEGIN
-  SELECT count(*) INTO current_count
-  FROM events
-  WHERE city = p_city
-    AND (p_sources IS NULL OR source_id = ANY(p_sources));
+  IF p_sources IS NULL THEN
+    SELECT count(*) INTO current_count
+    FROM events
+    WHERE city = p_city;
 
-  SELECT count(*) INTO would_delete
-  FROM events e
-  WHERE e.city = p_city
-    AND e.source_uid IS NOT NULL
-    AND (p_sources IS NULL OR e.source_id = ANY(p_sources))
-    AND NOT EXISTS (
-      SELECT 1 FROM unnest(p_source_uids) AS u(uid)
-      WHERE u.uid = e.source_uid
-    );
+    SELECT count(*) INTO would_delete
+    FROM events e
+    WHERE e.city = p_city
+      AND e.source_uid IS NOT NULL
+      AND NOT EXISTS (
+        SELECT 1 FROM unnest(p_source_uids) AS u(uid)
+        WHERE u.uid = e.source_uid
+      );
 
-  incoming_count := coalesce(array_length(p_source_uids, 1), 0);
+    incoming_count := coalesce(array_length(p_source_uids, 1), 0);
 
-  IF current_count > 0
-     AND would_delete * 2 > current_count
-     AND incoming_count < would_delete THEN
-    RAISE EXCEPTION
-      'delete_stale_events refused for city %: would delete % of % events '
-      'with only % incoming source_uids (>50%% deletion driven by a short '
-      'uid list looks like a partial load, not real churn)',
-      p_city, would_delete, current_count, incoming_count;
+    IF current_count > 0
+       AND would_delete * 2 > current_count
+       AND incoming_count < would_delete THEN
+      RAISE EXCEPTION
+        'delete_stale_events refused for city %: would delete % of % events '
+        'with only % incoming source_uids (>50%% deletion driven by a short '
+        'uid list looks like a partial load, not real churn)',
+        p_city, would_delete, current_count, incoming_count;
+    END IF;
+  ELSE
+    SELECT s.source_id, s.current_s, s.stale_s
+      INTO guard_source, guard_current, guard_stale
+    FROM (
+      SELECT e.source_id,
+             count(*) AS current_s,
+             count(*) FILTER (
+               WHERE NOT EXISTS (
+                 SELECT 1 FROM unnest(p_source_uids) AS u(uid)
+                 WHERE u.uid = e.source_uid
+               )
+             ) AS stale_s
+      FROM events e
+      WHERE e.city = p_city
+        AND e.source_uid IS NOT NULL
+        AND e.source_id = ANY(p_sources)
+      GROUP BY e.source_id
+    ) s
+    WHERE s.stale_s * 2 > s.current_s
+    LIMIT 1;
+
+    IF FOUND THEN
+      RAISE EXCEPTION
+        'delete_stale_events refused for city % source %: would delete % of % '
+        'events (>50%% of one source driven by a short uid list looks like a '
+        'partial load, not real churn)',
+        p_city, guard_source, guard_stale, guard_current;
+    END IF;
   END IF;
 
   DELETE FROM events e

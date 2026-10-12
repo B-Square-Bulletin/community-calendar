@@ -14,16 +14,17 @@
 --
 -- Trade-off: a source that legitimately runs with zero upcoming events looks
 -- identical to a failed one, so its rows are preserved until its next
--- non-empty run. Retiring a source goes through remove_feed, which deletes
--- its rows explicitly. A source whose every event merges into another source
--- is likewise absent, so those rows can persist indefinitely; see ADR 0017.
+-- non-empty run. Retiring a source goes through remove_feed, which deletes its
+-- rows explicitly. A source whose every event merges into another source is
+-- likewise absent, so those rows can persist; see ADR 0017.
 --
--- The 50% partial-load guard is scoped the same way: current_count counts only
--- the sources named in p_sources, so a truncated single-source payload (one
--- source named, a short uid list) is refused instead of wiping that source.
--- The cost is that a legitimate large shrink of the present sources also
--- refuses; that refusal is loud and recoverable through remove_feed or direct
--- maintenance SQL.
+-- The 50% partial-load guard is evaluated per present source, so a healthy
+-- source's uid count cannot mask a truncated one: if any single named source
+-- would lose more than half its rows, the call refuses. The caller upserts the
+-- payload first (load-events does), so each source's row count already
+-- includes its incoming uids. The cost is that a legitimate >50% shrink of one
+-- source also refuses; that refusal is loud and recoverable through remove_feed
+-- or direct maintenance SQL.
 --
 -- CREATE OR REPLACE cannot change the argument list (it would overload rather
 -- than replace, leaving the old whole-city function callable by name), so the
@@ -42,33 +43,68 @@ DECLARE
   current_count bigint;
   would_delete bigint;
   incoming_count bigint;
+  guard_source text;
+  guard_current bigint;
+  guard_stale bigint;
   deleted_count bigint;
 BEGIN
-  SELECT count(*) INTO current_count
-  FROM events
-  WHERE city = p_city
-    AND (p_sources IS NULL OR source_id = ANY(p_sources));
+  IF p_sources IS NULL THEN
+    -- Legacy whole-city sweep: the original aggregate guard.
+    SELECT count(*) INTO current_count
+    FROM events
+    WHERE city = p_city;
 
-  SELECT count(*) INTO would_delete
-  FROM events e
-  WHERE e.city = p_city
-    AND e.source_uid IS NOT NULL
-    AND (p_sources IS NULL OR e.source_id = ANY(p_sources))
-    AND NOT EXISTS (
-      SELECT 1 FROM unnest(p_source_uids) AS u(uid)
-      WHERE u.uid = e.source_uid
-    );
+    SELECT count(*) INTO would_delete
+    FROM events e
+    WHERE e.city = p_city
+      AND e.source_uid IS NOT NULL
+      AND NOT EXISTS (
+        SELECT 1 FROM unnest(p_source_uids) AS u(uid)
+        WHERE u.uid = e.source_uid
+      );
 
-  incoming_count := coalesce(array_length(p_source_uids, 1), 0);
+    incoming_count := coalesce(array_length(p_source_uids, 1), 0);
 
-  IF current_count > 0
-     AND would_delete * 2 > current_count
-     AND incoming_count < would_delete THEN
-    RAISE EXCEPTION
-      'delete_stale_events refused for city %: would delete % of % events '
-      'with only % incoming source_uids (>50%% deletion driven by a short '
-      'uid list looks like a partial load, not real churn)',
-      p_city, would_delete, current_count, incoming_count;
+    IF current_count > 0
+       AND would_delete * 2 > current_count
+       AND incoming_count < would_delete THEN
+      RAISE EXCEPTION
+        'delete_stale_events refused for city %: would delete % of % events '
+        'with only % incoming source_uids (>50%% deletion driven by a short '
+        'uid list looks like a partial load, not real churn)',
+        p_city, would_delete, current_count, incoming_count;
+    END IF;
+  ELSE
+    -- Source-scoped sweep: guard each present source on its own. With the
+    -- payload upserted, a source's stale count exceeding its incoming count is
+    -- the same as losing more than half its rows.
+    SELECT s.source_id, s.current_s, s.stale_s
+      INTO guard_source, guard_current, guard_stale
+    FROM (
+      SELECT e.source_id,
+             count(*) AS current_s,
+             count(*) FILTER (
+               WHERE NOT EXISTS (
+                 SELECT 1 FROM unnest(p_source_uids) AS u(uid)
+                 WHERE u.uid = e.source_uid
+               )
+             ) AS stale_s
+      FROM events e
+      WHERE e.city = p_city
+        AND e.source_uid IS NOT NULL
+        AND e.source_id = ANY(p_sources)
+      GROUP BY e.source_id
+    ) s
+    WHERE s.stale_s * 2 > s.current_s
+    LIMIT 1;
+
+    IF FOUND THEN
+      RAISE EXCEPTION
+        'delete_stale_events refused for city % source %: would delete % of % '
+        'events (>50%% of one source driven by a short uid list looks like a '
+        'partial load, not real churn)',
+        p_city, guard_source, guard_stale, guard_current;
+    END IF;
   END IF;
 
   DELETE FROM events e
