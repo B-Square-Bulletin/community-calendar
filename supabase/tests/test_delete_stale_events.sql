@@ -2,11 +2,14 @@
 -- Tests the performance fix: NOT EXISTS (unnest) instead of != ALL()
 -- which was hitting Postgres statement timeout with 3500+ source_uids.
 --
+-- Tests 1-4 call the 2-arg form (p_sources defaulted to NULL = legacy
+-- whole-city sweep). Tests 5-6 cover source-aware behavior (issue #227).
+--
 -- Run: supabase test db supabase/tests/
 -- Or:  make test-sql
 
 BEGIN;
-SELECT plan(8);
+SELECT plan(12);
 
 -- ============================================================================
 -- Test 1: Basic stale event deletion
@@ -112,6 +115,63 @@ SELECT is(
     ),
     1,
     'Test 4b: Survivor event present after large-array delete_stale_events'
+);
+
+-- ============================================================================
+-- Test 5: A source absent from the payload keeps its rows (issue #227)
+-- ============================================================================
+-- test_dse now has src-a and src-b. The payload only carries src-a, so the
+-- sweep must leave src-b's rows alone (a failed scraper/feed).
+DELETE FROM events
+WHERE city = 'test_dse';
+
+INSERT INTO events (city, title, start_time, source, source_id, source_uid)
+VALUES
+('test_dse', 'Event A', now(), 'Source A', 'src-a', 'uid-a'),
+('test_dse', 'Event B', now(), 'Source B', 'src-b', 'uid-b');
+
+SELECT is(
+    delete_stale_events('test_dse', ARRAY['uid-a'], ARRAY['src-a']),
+    bigint '0',
+    'Test 5: absent source (src-b) is not swept'
+);
+
+SELECT is(
+    (
+        SELECT count(*)::int FROM events
+        WHERE city = 'test_dse'
+    ),
+    2,
+    'Test 5b: src-b row survives even though src-b is absent from the payload'
+);
+
+-- Cleanup
+DELETE FROM events
+WHERE city = 'test_dse';
+
+-- ============================================================================
+-- Test 6: A present source loses only the uids it dropped
+-- ============================================================================
+INSERT INTO events (city, title, start_time, source, source_id, source_uid)
+VALUES
+('test_dse', 'Event A1', now(), 'Source A', 'src-a', 'uid-a1'),
+('test_dse', 'Event A2', now(), 'Source A', 'src-a', 'uid-a2'),
+('test_dse', 'Event A3', now(), 'Source A', 'src-a', 'uid-a3'),
+('test_dse', 'Event B1', now(), 'Source B', 'src-b', 'uid-b1');
+
+SELECT is(
+    delete_stale_events('test_dse', ARRAY['uid-a1'], ARRAY['src-a']),
+    bigint '2',
+    'Test 6: present source drops its missing uids only'
+);
+
+SELECT is(
+    (
+        SELECT count(*)::int FROM events
+        WHERE city = 'test_dse'
+    ),
+    2,
+    'Test 6b: uid-a1 kept, src-b untouched, uid-a2/uid-a3 gone'
 );
 
 -- ============================================================================

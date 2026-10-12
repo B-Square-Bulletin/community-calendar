@@ -28,10 +28,17 @@ CREATE TABLE IF NOT EXISTS events (
 -- RPC for stale event cleanup (used by load-events edge function;
 -- replaces URL-based NOT IN filter that exceeded PostgREST URL length limits)
 --
+-- Source-aware (20261011130000_source_aware_delete_stale_events.sql): only
+-- rows belonging to a source_id present in the payload (p_sources) are swept,
+-- so a source whose ingestion failed and produced no output keeps its rows.
+-- p_sources IS NULL falls back to the old whole-city sweep.
+--
 -- Uses NOT EXISTS (unnest) instead of != ALL() because != ALL() with 3000+ items
 -- hits Postgres statement timeout. The unnest pattern is index-friendly and
 -- works with the composite events_city_source_uid_idx index.
-CREATE OR REPLACE FUNCTION delete_stale_events(p_city text, p_source_uids text[])
+CREATE FUNCTION delete_stale_events(
+    p_city text, p_source_uids text[], p_sources text[] DEFAULT NULL
+)
 RETURNS bigint
 LANGUAGE plpgsql
 SECURITY DEFINER
@@ -42,6 +49,7 @@ BEGIN
   DELETE FROM events e
   WHERE e.city = p_city
     AND e.source_uid IS NOT NULL
+    AND (p_sources IS NULL OR e.source_id = ANY(p_sources))
     AND NOT EXISTS (
       SELECT 1 FROM unnest(p_source_uids) AS u(uid)
       WHERE u.uid = e.source_uid

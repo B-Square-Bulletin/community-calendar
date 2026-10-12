@@ -68,13 +68,20 @@ Deno.serve(async (req) => {
         }
       }
 
-      // Remove stale events for this city that are no longer in the feed
-      // Uses RPC to avoid URL length limits with large IN lists
+      // Remove stale events for this city that are no longer in the feed.
+      // Scoped to the sources present in the payload: a source that failed to
+      // produce output is absent here and keeps its rows (issue #227).
+      // Uses RPC to avoid URL length limits with large IN lists.
       const newSourceUids = Array.from(uniqueEvents.keys());
+      const presentSources = [...new Set(events.map((e: any) => e.source_id).filter(Boolean))];
       let deleted = 0;
       if (newSourceUids.length > 0) {
         const { data: delCount, error: delError } = await supabase
-          .rpc("delete_stale_events", { p_city: city, p_source_uids: newSourceUids });
+          .rpc("delete_stale_events", {
+            p_city: city,
+            p_source_uids: newSourceUids,
+            p_sources: presentSources,
+          });
         if (delError) {
           console.error(`Cleanup ${city} error:`, delError);
           errorDetails.push(`cleanup: ${delError.message}`);
@@ -130,6 +137,7 @@ Deno.serve(async (req) => {
     // Collect events per city for stale cleanup after upsert
     const allEvents: any[] = [];
     const eventsByCity = new Map<string, string[]>(); // city -> source_uids
+    const sourcesByCity = new Map<string, string[]>(); // city -> source_ids
     for (const city of cities) {
       const url = `${RAW_BASE}/${city}/events.json`;
       console.log(`Fetching events from ${city}:`, url);
@@ -141,11 +149,14 @@ Deno.serve(async (req) => {
         }
         const events = await response.json();
         const cityUids: string[] = [];
+        const citySources: string[] = [];
         for (const event of events) {
           event.city = event.city || city;
           if (event.source_uid) cityUids.push(event.source_uid);
+          if (event.source_id) citySources.push(event.source_id);
         }
         eventsByCity.set(city, cityUids);
+        sourcesByCity.set(city, [...new Set(citySources)]);
         allEvents.push(...events);
         console.log(`Fetched ${events.length} events from ${city}`);
       } catch (e) {
@@ -194,12 +205,17 @@ Deno.serve(async (req) => {
       }
     }
 
-    // Remove stale events per city using RPC to avoid URL length limits
+    // Remove stale events per city, scoped to the sources present in the
+    // payload, using RPC to avoid URL length limits
     let deleted = 0;
     for (const [city, uids] of eventsByCity) {
       if (uids.length > 0) {
         const { data: delCount, error: delError } = await supabase
-          .rpc("delete_stale_events", { p_city: city, p_source_uids: uids });
+          .rpc("delete_stale_events", {
+            p_city: city,
+            p_source_uids: uids,
+            p_sources: sourcesByCity.get(city) ?? [],
+          });
         if (delError) {
           console.error(`Cleanup ${city} error:`, delError);
         } else {
