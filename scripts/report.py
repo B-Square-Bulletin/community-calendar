@@ -158,7 +158,9 @@ def save_report(report: dict, report_path: str):
         json.dump(report, f, indent=2, default=str)
 
 
-def update_report(cities: list[str], report_path: str = "report.json"):
+def update_report(
+    cities: list[str], report_path: str = "report.json", scrapers_skipped: bool = False
+):
     """Main function to update the report."""
     report = load_report(report_path)
     today = utc_today().isoformat()
@@ -224,24 +226,31 @@ def update_report(cities: list[str], report_path: str = "report.json"):
         # A source listed in feeds.txt whose .ics is absent today produced no
         # calendar — its scraper failed or its download failed. Keep it in the
         # report as a failed build, so a blocked source stays visible instead
-        # of going dark. Only sources feeds.txt no longer lists are retired.
-        expected = set(parse_feeds_reference(city))
-        current_basenames = {p.name.replace(".ics", "") for p in Path(city_dir).glob("*.ics")} - {
-            "combined"
-        }
-        for stem in sorted(expected - current_basenames):
-            feed_data = city_data["feeds"].setdefault(stem, {"history": []})
-            feed_data["content"] = "no_calendar"
-            entry = {"date": today, "count": 0}
-            if feed_data["history"] and feed_data["history"][-1]["date"] == today:
-                feed_data["history"][-1] = entry
-            else:
-                feed_data["history"].append(entry)
-            feed_data["history"] = feed_data["history"][-MAX_FEED_HISTORY:]
-        for k in [
-            k for k in city_data["feeds"] if k not in current_basenames and k not in expected
-        ]:
-            del city_data["feeds"][k]
+        # of going dark. Record it with an error marker: detect_anomalies keys
+        # its baseline off the last error-free entry, and the feed table reads
+        # error, not count, to label a build. Only sources feeds.txt no longer
+        # lists are retired.
+        #
+        # When scrapers did not run this build (regenerate_only), their .ics are
+        # absent by design, so leave the prior status untouched and flag nothing.
+        if not scrapers_skipped:
+            expected = set(parse_feeds_reference(city))
+            current_basenames = {
+                p.name.replace(".ics", "") for p in Path(city_dir).glob("*.ics")
+            } - {"combined"}
+            for stem in sorted(expected - current_basenames):
+                feed_data = city_data["feeds"].setdefault(stem, {"history": []})
+                feed_data["content"] = "no_calendar"
+                entry = {"date": today, "count": 0, "error": "no calendar produced"}
+                if feed_data["history"] and feed_data["history"][-1]["date"] == today:
+                    feed_data["history"][-1] = entry
+                else:
+                    feed_data["history"].append(entry)
+                feed_data["history"] = feed_data["history"][-MAX_FEED_HISTORY:]
+            for k in [
+                k for k in city_data["feeds"] if k not in current_basenames and k not in expected
+            ]:
+                del city_data["feeds"][k]
 
     # Update anomalies (keep all historical anomalies)
     existing_today = {
@@ -1021,13 +1030,18 @@ def main():
         default=None,
         help="HTML template copied to <slice-dir>/<city>/index.html",
     )
+    parser.add_argument(
+        "--scrapers-skipped",
+        action="store_true",
+        help="Scrapers did not run this build (e.g. regenerate_only); keep prior source status",
+    )
     args = parser.parse_args()
 
     cities = [c.strip() for c in args.cities.split(",")]
     # Snapshot the prior build's error lines before this run overwrites
     # them, so slices can distinguish NEW errors from ongoing ones.
     prev_error_lines = {e.get("line") for e in load_report(args.output).get("errors", [])}
-    update_report(cities, args.output)
+    update_report(cities, args.output, scrapers_skipped=args.scrapers_skipped)
 
     # Parse build errors if log provided
     if args.build_log:

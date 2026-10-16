@@ -35,7 +35,9 @@ def test_expected_source_with_no_calendar_is_reported_not_deleted(tmp_path, monk
     report.update_report(["bloomington"], report_path=str(report_path))
 
     saved = json.loads(report_path.read_text())
-    assert saved["cities"]["bloomington"]["feeds"]["hardtruth"]["content"] == "no_calendar"
+    feed = saved["cities"]["bloomington"]["feeds"]["hardtruth"]
+    assert feed["content"] == "no_calendar"
+    assert feed["history"][-1]["error"] == "no calendar produced"
 
     slice_ = report.build_city_slice(saved, "bloomington", set())
     problems = slice_["problems"]
@@ -84,4 +86,46 @@ def test_present_source_is_not_marked_no_calendar(tmp_path, monkeypatch):
     saved = json.loads(report_path.read_text())
     feed = saved["cities"]["bloomington"]["feeds"]["hardtruth"]
     assert feed["content"] == "quiet"
+    assert report.build_city_slice(saved, "bloomington", set())["problems"] == []
+
+
+def test_missing_build_keeps_the_anomaly_baseline():
+    """A missing-calendar entry must not become the drop-alert baseline."""
+    history = [
+        {"date": "2026-10-01", "count": 100},
+        {"date": "2026-10-02", "count": 0, "error": "no calendar produced"},
+    ]
+    assert [a["type"] for a in report.detect_anomalies("hardtruth", 10, history)] == [
+        "significant_drop"
+    ]
+
+
+def test_skipped_scrapers_leave_prior_status_untouched(tmp_path, monkeypatch):
+    """regenerate_only: scrapers did not run, so an absent .ics is not a failure."""
+    monkeypatch.chdir(tmp_path)
+    (tmp_path / "cities" / "bloomington").mkdir(parents=True)
+    monkeypatch.setattr(
+        report, "parse_feeds_reference", lambda city: _scraper_reference("hardtruth")
+    )
+
+    report_path = tmp_path / "report.json"
+    report_path.write_text(
+        json.dumps(
+            {
+                "generated": None,
+                "cities": {
+                    "bloomington": {
+                        "feeds": {"hardtruth": {"history": [{"date": "2026-10-01", "count": 7}]}}
+                    }
+                },
+                "anomalies": [],
+            }
+        )
+    )
+    report.update_report(["bloomington"], report_path=str(report_path), scrapers_skipped=True)
+
+    saved = json.loads(report_path.read_text())
+    feed = saved["cities"]["bloomington"]["feeds"]["hardtruth"]
+    assert feed["history"] == [{"date": "2026-10-01", "count": 7}]
+    assert "content" not in feed
     assert report.build_city_slice(saved, "bloomington", set())["problems"] == []
