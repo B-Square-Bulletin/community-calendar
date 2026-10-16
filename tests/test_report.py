@@ -129,3 +129,45 @@ def test_skipped_scrapers_leave_prior_status_untouched(tmp_path, monkeypatch):
     assert feed["history"] == [{"date": "2026-10-01", "count": 7}]
     assert "content" not in feed
     assert report.build_city_slice(saved, "bloomington", set())["problems"] == []
+
+
+def test_skipped_scrapers_still_check_live_feeds(tmp_path, monkeypatch):
+    """regenerate_only skips scrapers but still downloads live feeds."""
+    monkeypatch.chdir(tmp_path)
+    (tmp_path / "cities" / "bloomington").mkdir(parents=True)
+    monkeypatch.setattr(
+        report,
+        "parse_feeds_reference",
+        lambda city: {
+            "uplandbeer": {"kind": "scraper", "name": "Upland Brewing", "cmd": "python x.py"},
+            "bgcbloomington": {"kind": "feed", "name": "Boys & Girls Club", "url": "https://e/x"},
+        },
+    )
+
+    report_path = tmp_path / "report.json"
+    report_path.write_text(
+        json.dumps(
+            {
+                "generated": None,
+                "cities": {
+                    "bloomington": {
+                        "feeds": {
+                            "uplandbeer": {"history": [{"date": "2026-10-01", "count": 4}]},
+                            "retiredsrc": {"history": [{"date": "2026-10-01", "count": 2}]},
+                        }
+                    }
+                },
+                "anomalies": [],
+            }
+        )
+    )
+    report.update_report(["bloomington"], report_path=str(report_path), scrapers_skipped=True)
+
+    feeds = json.loads(report_path.read_text())["cities"]["bloomington"]["feeds"]
+    # A skipped scraper keeps its prior status.
+    assert feeds["uplandbeer"]["history"] == [{"date": "2026-10-01", "count": 4}]
+    assert "content" not in feeds["uplandbeer"]
+    # A live feed that produced no .ics is still a failure.
+    assert feeds["bgcbloomington"]["content"] == "no_calendar"
+    # A source feeds.txt no longer lists is still retired.
+    assert "retiredsrc" not in feeds

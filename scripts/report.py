@@ -231,26 +231,33 @@ def update_report(
         # error, not count, to label a build. Only sources feeds.txt no longer
         # lists are retired.
         #
-        # When scrapers did not run this build (regenerate_only), their .ics are
-        # absent by design, so leave the prior status untouched and flag nothing.
-        if not scrapers_skipped:
-            expected = set(parse_feeds_reference(city))
-            current_basenames = {
-                p.name.replace(".ics", "") for p in Path(city_dir).glob("*.ics")
-            } - {"combined"}
-            for stem in sorted(expected - current_basenames):
-                feed_data = city_data["feeds"].setdefault(stem, {"history": []})
-                feed_data["content"] = "no_calendar"
-                entry = {"date": today, "count": 0, "error": "no calendar produced"}
-                if feed_data["history"] and feed_data["history"][-1]["date"] == today:
-                    feed_data["history"][-1] = entry
-                else:
-                    feed_data["history"].append(entry)
-                feed_data["history"] = feed_data["history"][-MAX_FEED_HISTORY:]
-            for k in [
-                k for k in city_data["feeds"] if k not in current_basenames and k not in expected
-            ]:
-                del city_data["feeds"][k]
+        # When scrapers did not run this build (regenerate_only), a scraper's
+        # absent .ics is by design: leave its prior status untouched and flag
+        # nothing for it. Live feeds still download, so a feed that produced no
+        # .ics is a real failure and stays checked either way.
+        refs = parse_feeds_reference(city)
+        expected = set(refs)
+        checked = {
+            stem
+            for stem, ref in refs.items()
+            if not (scrapers_skipped and ref.get("kind") == "scraper")
+        }
+        current_basenames = {p.name.replace(".ics", "") for p in Path(city_dir).glob("*.ics")} - {
+            "combined"
+        }
+        for stem in sorted(checked - current_basenames):
+            feed_data = city_data["feeds"].setdefault(stem, {"history": []})
+            feed_data["content"] = "no_calendar"
+            entry = {"date": today, "count": 0, "error": "no calendar produced"}
+            if feed_data["history"] and feed_data["history"][-1]["date"] == today:
+                feed_data["history"][-1] = entry
+            else:
+                feed_data["history"].append(entry)
+            feed_data["history"] = feed_data["history"][-MAX_FEED_HISTORY:]
+        for k in [
+            k for k in city_data["feeds"] if k not in current_basenames and k not in expected
+        ]:
+            del city_data["feeds"][k]
 
     # Update anomalies (keep all historical anomalies)
     existing_today = {
