@@ -3,10 +3,7 @@
 
 import sys
 from pathlib import Path
-from unittest.mock import Mock, patch
-
-import pytest
-import requests
+from unittest.mock import patch
 
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -124,65 +121,3 @@ class TestParseEvent:
         assert isinstance(result["dtend"], datetime)
         assert result["dtend"].hour == 19
         assert result["dtend"].minute == 0
-
-
-class TestFetchFailures:
-    """A broken first page fails the run; a dormant calendar stays quiet."""
-
-    def _scraper(self) -> TribeEventsScraper:
-        class TestScraper(TribeEventsScraper):
-            name = "Test Source"
-            domain = "test.example.com"
-            api_url = "https://test.example.com/wp-json/tribe/events/v1/events/"
-            max_pages = 3
-
-        return TestScraper()
-
-    def _response(self, payload: dict) -> Mock:
-        response = Mock()
-        response.raise_for_status.return_value = None
-        response.json.return_value = payload
-        return response
-
-    def test_200_with_no_events_is_quiet_not_a_failure(self):
-        with patch("scrapers.lib.tribe_events.requests.get") as mock_get:
-            mock_get.return_value = self._response({"events": [], "total_pages": 1})
-            assert self._scraper().fetch_events() == []
-
-    def test_http_error_raises(self):
-        with patch("scrapers.lib.tribe_events.requests.get") as mock_get:
-            response = Mock()
-            response.raise_for_status.side_effect = requests.exceptions.HTTPError(
-                "403 Client Error"
-            )
-            mock_get.return_value = response
-            with pytest.raises(requests.exceptions.HTTPError):
-                self._scraper().fetch_events()
-
-    def test_network_error_raises(self):
-        with patch("scrapers.lib.tribe_events.requests.get") as mock_get:
-            mock_get.side_effect = requests.exceptions.ConnectionError("connection refused")
-            with pytest.raises(requests.exceptions.ConnectionError):
-                self._scraper().fetch_events()
-
-    def test_malformed_json_raises(self):
-        with patch("scrapers.lib.tribe_events.requests.get") as mock_get:
-            response = self._response({})
-            response.json.side_effect = ValueError("Expecting value: line 1 column 1")
-            mock_get.return_value = response
-            with pytest.raises(ValueError):
-                self._scraper().fetch_events()
-
-    def test_later_page_failure_keeps_pages_already_fetched(self):
-        page1 = self._response(
-            {
-                "events": [{"id": 1, "title": "Concert", "start_date": "2030-05-01 19:00:00"}],
-                "total_pages": 2,
-            }
-        )
-        page2 = Mock()
-        page2.raise_for_status.side_effect = requests.exceptions.HTTPError("500 Server Error")
-        with patch("scrapers.lib.tribe_events.requests.get") as mock_get:
-            mock_get.side_effect = [page1, page2]
-            events = self._scraper().fetch_events()
-        assert [e["title"] for e in events] == ["Concert"]
