@@ -221,12 +221,26 @@ def update_report(cities: list[str], report_path: str = "report.json"):
                 feed_data["history"].append(entry)
             feed_data["history"] = feed_data["history"][-MAX_FEED_HISTORY:]
 
-        # Remove feeds from report that no longer have .ics files
+        # A source listed in feeds.txt whose .ics is absent today produced no
+        # calendar — its scraper failed or its download failed. Keep it in the
+        # report as a failed build, so a blocked source stays visible instead
+        # of going dark. Only sources feeds.txt no longer lists are retired.
+        expected = set(parse_feeds_reference(city))
         current_basenames = {p.name.replace(".ics", "") for p in Path(city_dir).glob("*.ics")} - {
             "combined"
         }
-        stale = [k for k in city_data["feeds"] if k not in current_basenames]
-        for k in stale:
+        for stem in sorted(expected - current_basenames):
+            feed_data = city_data["feeds"].setdefault(stem, {"history": []})
+            feed_data["content"] = "no_calendar"
+            entry = {"date": today, "count": 0}
+            if feed_data["history"] and feed_data["history"][-1]["date"] == today:
+                feed_data["history"][-1] = entry
+            else:
+                feed_data["history"].append(entry)
+            feed_data["history"] = feed_data["history"][-MAX_FEED_HISTORY:]
+        for k in [
+            k for k in city_data["feeds"] if k not in current_basenames and k not in expected
+        ]:
             del city_data["feeds"][k]
 
     # Update anomalies (keep all historical anomalies)
@@ -773,6 +787,8 @@ def build_city_slice(report: dict, city: str, prev_error_lines: set) -> dict:
         hist = fd.get("history", [])
         if not hist or hist[-1].get("count") != 0 or hist[-1].get("error"):
             continue
+        if fd.get("content") == "no_calendar":
+            continue
         was_count, was_date = None, None
         for h in reversed(hist):
             if h.get("count"):
@@ -836,6 +852,19 @@ def build_city_slice(report: dict, city: str, prev_error_lines: set) -> dict:
                 "detail": (e.get("message") or e.get("line") or "")[:300],
                 "feed": match,
                 "repro": repro_for(match) if match else None,
+            }
+        )
+    for name, fd in sorted(feeds.items()):
+        if fd.get("content") != "no_calendar":
+            continue
+        items.append(
+            {
+                "severity": 1,
+                "kind": "no_calendar",
+                "title": f"{name} produced no calendar",
+                "detail": "no .ics was produced this build (scraper or download failed)",
+                "feed": name,
+                "repro": repro_for(name),
             }
         )
     for s in silent:
