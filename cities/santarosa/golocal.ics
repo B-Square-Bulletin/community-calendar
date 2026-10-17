@@ -1,0 +1,561 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//GO LOCAL - ECPv6.15.18//NONSGML v1.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:GO LOCAL
+X-ORIGINAL-URL:https://golocal.coop
+X-WR-CALDESC:Events for GO LOCAL
+REFRESH-INTERVAL;VALUE=DURATION:PT1H
+X-Robots-Tag:noindex
+X-PUBLISHED-TTL:PT1H
+BEGIN:VTIMEZONE
+TZID:America/Los_Angeles
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0800
+TZOFFSETTO:-0700
+TZNAME:PDT
+DTSTART:20250309T100000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0700
+TZOFFSETTO:-0800
+TZNAME:PST
+DTSTART:20251102T090000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0800
+TZOFFSETTO:-0700
+TZNAME:PDT
+DTSTART:20260308T100000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0700
+TZOFFSETTO:-0800
+TZNAME:PST
+DTSTART:20261101T090000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0800
+TZOFFSETTO:-0700
+TZNAME:PDT
+DTSTART:20270314T100000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0700
+TZOFFSETTO:-0800
+TZNAME:PST
+DTSTART:20271107T090000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260406T180000
+DTEND;TZID=America/Los_Angeles:20260406T210000
+DTSTAMP:20260406T201325
+CREATED:20260319T164806Z
+LAST-MODIFIED:20260327T233552Z
+UID:10017311-1775498400-1775509200@golocal.coop
+SUMMARY:Pro Jam with Guitar Great Steve Freund
+DESCRIPTION:Praised by Rolling Stone for his “masterful\, no-nonsense guitar work.”\nGuitarist\, producer and bandleader Steve Freund was praised by Rolling Stone for his “masterful\, no-nonsense guitar work” and has appeared on over 50 albums\, including the legendary Koko Taylor’s Grammy-winning “Blues Explosion.” Steve was Sunnyland Slim’s main guitarist and has also worked with Big Walter Horton\, Floyd Jones\, and harmonica legend James Cotton.\nIn addition to his guitar career\, Steve is an accomplished piano accompanist who has worked with Pinetop Perkins\, Jimmy Walker\, Henry Gray\, Erwin Helfer and many more. Daniel Castro learned his craft in the South Central L.A. blues clubs alongside “Mighty Mouth” Delmar Evans\, before recording and touring with artists including Small Faces singer-bassist Ronnie Lane. In 1995\, he formed The Daniel Castro Band\, releasing two albums under that name. He now plays regularly with bassist Johnny Yu and drummer David Perper. \nBlues Defenders hosts a weekly concert with headliners and swing dancing. Followed by Pro Jam. \nDoors open at 5pm Show Starts at 6pm. Tickets $15 online. $18 at door. $12 for members.\nOur kitchen is open and serving our All New Menu from the time doors open until end of intermission.
+URL:https://golocal.coop/event/pro-jam-with-guitar-great-steve-freund/
+LOCATION:The California Theatre of Santa Rosa\, 528 7th Street\, Santa Rosa\, CA
+CATEGORIES:Music
+ATTACH;FMTTYPE=image/jpeg:https://golocal.coop/wp-content/uploads/2025/11/Pro-Jam-Steve-Freund-PZj6b4.jpg
+GEO:38.44252;-122.71621
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=The California Theatre of Santa Rosa 528 7th Street Santa Rosa CA;X-APPLE-RADIUS=500;X-TITLE=528 7th Street:geo:-122.71621,38.44252
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260407T150000
+DTEND;TZID=America/Los_Angeles:20260407T180000
+DTSTAMP:20260406T201325
+CREATED:20260403T025250Z
+LAST-MODIFIED:20260403T025250Z
+UID:10018883-1775574000-1775584800@golocal.coop
+SUMMARY:Art Opening at Mayacamas Home
+DESCRIPTION:Meet the Tim Weldon\, San Francisco mixed media artist as he exhibits recent works inspired by his studio environs in New Mexico. The paintings are fun\, evocative\, and wild. \nMayacamas Home is proud to present the works at this experiential gallery event. \nTour to the live music of flamenco guitarist El Oso.
+URL:https://golocal.coop/event/art-opening-at-mayacamas-home/
+LOCATION:Mayacamas Home\, 105 4th Street\, Santa Rosa\, 95401
+CATEGORIES:Art,Music
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260407T173000
+DTEND;TZID=America/Los_Angeles:20260407T173000
+DTSTAMP:20260406T201325
+CREATED:20251020T230434Z
+LAST-MODIFIED:20251020T230434Z
+UID:10002883-1775583000-1775583000@golocal.coop
+SUMMARY:Taco Tuesday Bike Ride
+DESCRIPTION:A fun community bike ride through the heart of Santa Rosa. \nCome join us this Tuesday!\nWe roll through the JC and McDonald Ave neighborhood\, stop in Courthouse Square\, then on to the taco trucks at Mitote Food Park in Roseland for dinner!\nWe depart Mitote at 8:15pm\, ride back through Courthouse Square\, then on to Yogurt Farms for dessert.\nThis ride is 8 miles round trip and rides all year long.\nRides canceled for rain and holidays.\nAll riders welcome. Bring the whole family!\nMeet at SRJC parking lot at 550 Silva Ave. We are renting the use of this parking lot every Tuesday from 5:30pm to 9:30 pm. Taco Tuesday riders can park in the lot during that time frame for free.\nPlease park cars along the back wall on the east side. And stage in the row on the northern side of the lot (closest to Silva Ave). \nMeet at 5:30pm; pedals up at 6pm.\n 
+URL:https://golocal.coop/event/taco-tuesday-bike-ride-25/
+LOCATION:SRJC parking lot\, 550 Silva Ave\, Santa Rosa\, CA
+CATEGORIES:Recreation
+ATTACH;FMTTYPE=image/jpeg:https://golocal.coop/wp-content/uploads/2025/10/Taco-Tuesday-bike-ride-3s-RowzQj.jpg
+GEO:38.45872;-122.71660
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=SRJC parking lot 550 Silva Ave Santa Rosa CA;X-APPLE-RADIUS=500;X-TITLE=550 Silva Ave:geo:-122.71660,38.45872
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260407T193000
+DTEND;TZID=America/Los_Angeles:20260407T193000
+DTSTAMP:20260406T201325
+CREATED:20251209T234011Z
+LAST-MODIFIED:20260403T185029Z
+UID:10008958-1775590200-1775590200@golocal.coop
+SUMMARY:Amy Goodman at Green Music Center
+DESCRIPTION:Amy Goodman is the host and executive producer of Democracy Now!\, a national\, daily\, independent\, award-winning news program airing on over 1\,400 public television and radio stations worldwide. Goodman has also co-authored six New York Times bestsellers. Her latest one\, Democracy Now!: Twenty Years Covering the Movements Changing America looks back over the past two decades of Democracy Now! and the powerful movements and charismatic leaders who are re-shaping our world.\nFree to SSU students\, faculty\, and staff (ticket required) \nSupported in part by\nDr. H. Andréa Neves and Barton Evans \nMedia support provided by Northern California Public Media
+URL:https://golocal.coop/event/amy-goodman-at-green-music-center/
+LOCATION:Green Music Center\, Weill Hall\, Sonoma State University\, 1801 East Cotati Avenue\, Rohnert Park\, CA
+CATEGORIES:Other
+ATTACH;FMTTYPE=image/jpeg:https://golocal.coop/wp-content/uploads/2025/12/Amy-Goodman.jpg
+GEO:38.34224;-122.67781
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Green Music Center Weill Hall Sonoma State University 1801 East Cotati Avenue Rohnert Park CA;X-APPLE-RADIUS=500;X-TITLE=1801 East Cotati Avenue:geo:-122.67781,38.34224
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260407T193000
+DTEND;TZID=America/Los_Angeles:20260407T193000
+DTSTAMP:20260406T201325
+CREATED:20260328T205956Z
+LAST-MODIFIED:20260328T205956Z
+UID:10018392-1775590200-1775590200@golocal.coop
+SUMMARY:The Incubators Trio at The Big Easy
+DESCRIPTION:Chris Chappell\, Katie Schuch and Emily Froberg draw from The Incubators catalog while mixing in some classic covers. \nClub Tuesday – This is a free weekly Tuesday night show featuring local talent \n 
+URL:https://golocal.coop/event/the-incubators-trio-at-the-big-easy-2/
+LOCATION:The Big Easy\, 128 American Alley\, Petaluma\, CA
+CATEGORIES:Music
+GEO:38.2346;-122.641
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=The Big Easy 128 American Alley Petaluma CA;X-APPLE-RADIUS=500;X-TITLE=128 American Alley:geo:-122.641,38.2346
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260407T203000
+DTEND;TZID=America/Los_Angeles:20260407T203000
+DTSTAMP:20260406T201325
+CREATED:20260328T201112Z
+LAST-MODIFIED:20260328T201112Z
+UID:10018379-1775593800-1775593800@golocal.coop
+SUMMARY:Cass McCombs w/ Hand Habits at The Mystic Theatre
+DESCRIPTION:Cass McCombs: \nOver the past twenty plus years\, Cass McCombs has journeyed a singular path as an \nuncompromising song-carver\, guitarist and singer. \nAlong with the finest squadron of collaborators and bandmates\, his music travels gracefully over \nseemingly contradictory terrain\, from infectious guitar riffage to intensely personal lyricism. \nIn 2024\, 4AD reissued his first three groundbreaking albums. In September\, Domino Records \nreleased a lost album from the same period\, Seed Cake On Leap Year. \nCass lives in New York City and is currently working on new recordings. \nHAND HABITS: \nFor artists who have built a creative practice centered around vulnerability\, what could possibly feel\nmore exposing? For Meg Duffy\, the multi-instrumentalist and songwriter known as Hand Habits\, it turns\nout there are things even more daunting than excavating unhappiness or grappling with personal identity.\n“For this record I had set out to write less as a way to process grief\, dredge up trauma\, or consider\nheartache\, and more as a way to tap into something that was surprisingly more challenging — to allow\nmyself to feel into in the given moment-the decision I made to no longer shape shift when it came to the\nperson I become in the face of love\,” explains Duffy.
+URL:https://golocal.coop/event/cass-mccombs-w-hand-habits-at-the-mystic-theatre/
+LOCATION:Mystic Theatre & Music Hall\, 23 Petaluma Blvd N\, Petaluma\, CA
+CATEGORIES:Music
+GEO:38.2334;-122.64
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Mystic Theatre & Music Hall 23 Petaluma Blvd N Petaluma CA;X-APPLE-RADIUS=500;X-TITLE=23 Petaluma Blvd N:geo:-122.64,38.2334
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260408T130000
+DTEND;TZID=America/Los_Angeles:20260408T150000
+DTSTAMP:20260406T201325
+CREATED:20260404T221237Z
+LAST-MODIFIED:20260404T221237Z
+UID:10018958-1775653200-1775660400@golocal.coop
+SUMMARY:Kevin Hutchinson at Cafe Frida
+DESCRIPTION:Kevin Hutchinson is a musical storyteller with deep roots in traditional folk music. His influences and styles cover many genres: folk rock\, blues\, rock\, rockabilly\, Americana\, folk\, and classic country. His originals and covers span topics from love to social commentary\, and serious to light-hearted.
+URL:https://golocal.coop/event/kevin-hutchinson-at-cafe-frida-2/
+LOCATION:Cafe Frida Gallery\, 300 South A Street #4\, Santa Rosa\, CA
+CATEGORIES:Music
+GEO:38.43412;-122.71481
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Cafe Frida Gallery 300 South A Street #4 Santa Rosa CA;X-APPLE-RADIUS=500;X-TITLE=300 South A Street #4:geo:-122.71481,38.43412
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260408T170000
+DTEND;TZID=America/Los_Angeles:20260408T190000
+DTSTAMP:20260406T201325
+CREATED:20260111T193142Z
+LAST-MODIFIED:20260111T193152Z
+UID:10013441-1775667600-1775674800@golocal.coop
+SUMMARY:Live Music Happy Hour - Pickin' Peaches!
+DESCRIPTION:Downtown Santa Rosa ‘Golden Hour’ 4-7p | Live music 5-7 p | $6 beers & $2 off wine |Tuesday-Saturday!\nFor people who like to party…but want to be home at a reasonable hour…Pickin’ Peaches – Every Wednesday!\nAlong with their friends\, The Peaches play your favorite hits with a ukulele spin and wonderful harmonies.\n21+ Happy Hour Pricing 4-6pm All beers – $6 + $2 off wine & SABE cocktails. Live Music 5-7pm 2 drink minimum\, please.\nFree popcorn!\nCheck out www.BarrelProofLounge.com for all sorts of good times ahead!
+URL:https://golocal.coop/event/live-music-happy-hour-pickin-peaches-10/
+LOCATION:Barrel Proof Lounge\, 501 Mendocino Avenue\, Santa Rosa\, CA
+CATEGORIES:Music
+GEO:38.44260;-122.71573
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Barrel Proof Lounge 501 Mendocino Avenue Santa Rosa CA;X-APPLE-RADIUS=500;X-TITLE=501 Mendocino Avenue:geo:-122.71573,38.44260
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260408T180000
+DTEND;TZID=America/Los_Angeles:20260408T200000
+DTSTAMP:20260406T201325
+CREATED:20260405T013748Z
+LAST-MODIFIED:20260405T013748Z
+UID:10018998-1775671200-1775678400@golocal.coop
+SUMMARY:Riley Hill at Rio Nido Roadhouse
+DESCRIPTION:Spend your Wednesday night with live music from Riley Hill\, an incredible guitarist and songwriter\, plus delicious food and drink specials all evening long. Come relax\, grab your favorites\, and make the middle of the week something to look forward to.
+URL:https://golocal.coop/event/riley-hill-at-rio-nido-roadhouse/
+LOCATION:Rio Nido Roadhouse\, 14540 Canyon 2 Road\, Rio Nido\, CA
+CATEGORIES:Music
+GEO:38.5205;-122.979
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Rio Nido Roadhouse 14540 Canyon 2 Road Rio Nido CA;X-APPLE-RADIUS=500;X-TITLE=14540 Canyon 2 Road:geo:-122.979,38.5205
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260408T180000
+DTEND;TZID=America/Los_Angeles:20260408T203000
+DTSTAMP:20260406T201325
+CREATED:20260406T020344Z
+LAST-MODIFIED:20260406T020344Z
+UID:10019030-1775671200-1775680200@golocal.coop
+SUMMARY:Peacetown continues at HopMonk with Jenerator
+DESCRIPTION:Jenerator is a collective of long-time friends and collaborators\, curated by Jen Rund. \nEach musician brings their own unique sound to Jenerator’s music\, giving a rich variety of expression to Jenerator’s catalogue of original tunes and covered favorites. Jen\, Mojo\, and Anna will be jammin’ for your dancing pleasure. Special guests? Hmmmm….. \nBorn and raised in northern California\, Jen Rund began her love affair with music at an early age. She played many instruments – cello\, clarinet\, piano\, guitar – before discovering the electric bass at 15. She went on to perform and record in a wide variety of genres\, including: rock\, pop\, folk\, Latin\, jazz\, R&B\, funk\, and blues\, in venues ranging from clubs to festivals. Jen has also enjoyed playing in ensembles for musical theater.
+URL:https://golocal.coop/event/peacetown-continues-at-hopmonk-with-jenerator/
+LOCATION:HopMonk Tavern – Sebastopol\, 230 Petaluma Ave\, Sebastopol\, CA
+CATEGORIES:Music
+GEO:38.4012;-122.823
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=HopMonk Tavern – Sebastopol 230 Petaluma Ave Sebastopol CA;X-APPLE-RADIUS=500;X-TITLE=230 Petaluma Ave:geo:-122.823,38.4012
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260408T180000
+DTEND;TZID=America/Los_Angeles:20260408T210000
+DTSTAMP:20260406T201325
+CREATED:20260328T201915Z
+LAST-MODIFIED:20260328T201915Z
+UID:10018382-1775671200-1775682000@golocal.coop
+SUMMARY:Dan Durkin at the Penngrove Pub
+DESCRIPTION:BIO: \nSinger-Songwriter\, Guitarist\, Keyboardist\, Drummer. Founder & lead singer for Petty Theft. \nDon’t miss this one! \n 
+URL:https://golocal.coop/event/dan-durkin-at-the-penngrove-pub-2/
+LOCATION:Penngrove Pub\, 10005 Main Street\, Penngrove\, CA
+CATEGORIES:Music
+GEO:38.297140;-122.666400
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Penngrove Pub 10005 Main Street Penngrove CA;X-APPLE-RADIUS=500;X-TITLE=10005 Main Street:geo:-122.666400,38.297140
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260408T190000
+DTEND;TZID=America/Los_Angeles:20260408T190000
+DTSTAMP:20260406T201325
+CREATED:20251205T010951Z
+LAST-MODIFIED:20251205T010951Z
+UID:10008447-1775674800-1775674800@golocal.coop
+SUMMARY:Wednesday Night Big Band Jazz at The Big Easy
+DESCRIPTION:Still going strong after four decades\, our 17-piece modern jazz big band playing the works of Jones\, Kenton\, Corea\, Kubis\, Goodwin and many others.
+URL:https://golocal.coop/event/wednesday-night-big-band-jazz-at-the-big-easy-11/2026-04-08/
+LOCATION:The Big Easy\, 128 American Alley\, Petaluma\, CA
+CATEGORIES:Music
+GEO:38.2346;-122.641
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=The Big Easy 128 American Alley Petaluma CA;X-APPLE-RADIUS=500;X-TITLE=128 American Alley:geo:-122.641,38.2346
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260408T190000
+DTEND;TZID=America/Los_Angeles:20260408T210000
+DTSTAMP:20260406T201325
+CREATED:20260405T032450Z
+LAST-MODIFIED:20260405T032450Z
+UID:10014387-1775674800-1775682000@golocal.coop
+SUMMARY:Wednesday Night Comedy Open Mic
+DESCRIPTION:Wednesday Night Comedy Open Mic-Downtown Santa Rosa. No cover\, free popcorn\, Bay Area comics\, & a fun crowd whether you go up or just watch.\nWednesday nights are for working it out\, trying new jokes\, and laughing with the local comedy community at Wednesday Night Comedy Open Mic at Barrel Proof Lounge in Downtown Santa Rosa .\nThis is a lively\, welcoming open mic that draws comedians from all over the Bay Area and beyond. Whether you’re getting on stage or just grabbing a drink and enjoying the show\, it’s always a fun\, unpredictable night.\nNo cover (2-drink minimum)\n🍿 Free popcorn\n🔞 21+\nComedian Info:\n• Pre-signups open at 10am via the BACN Facebook group\n• Limited 6:00pm in-person signups\n• 6:30pm bucket draw for set order\n• 3–4 minute sets (light at 1 minute remaining)\n• Hosted by Jon Lehre\nIt’s a great room for comics — and a great show even if you never touch the mic.\nCheck out www.barrelprooflounge.com for all sorts of good times ahead!
+URL:https://golocal.coop/event/wednesday-night-comedy-open-mic-3/
+LOCATION:Barrel Proof Lounge\, 501 Mendocino Avenue\, Santa Rosa\, CA
+CATEGORIES:Comedy
+GEO:38.44260;-122.71573
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Barrel Proof Lounge 501 Mendocino Avenue Santa Rosa CA;X-APPLE-RADIUS=500;X-TITLE=501 Mendocino Avenue:geo:-122.71573,38.44260
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260408T193000
+DTEND;TZID=America/Los_Angeles:20260408T193000
+DTSTAMP:20260406T201325
+CREATED:20260208T050452Z
+LAST-MODIFIED:20260208T050452Z
+UID:10009305-1775676600-1775676600@golocal.coop
+SUMMARY:West Side Stories Petaluma
+DESCRIPTION:It’s the longest running StorySlam in Northern California! Everyday people have stories to tell and we have a stage to tell them on The Polly Klaas Community Theater located at 417 Western in Petaluma. You can (but are not required to) drop your name in the hat to tell a 5 Minute\, True Story\, Based on the theme of the night. You should get tickets in advance (we do tend to sell-out) at davepokornypresents.com
+URL:https://golocal.coop/event/west-side-stories-petaluma-11/
+LOCATION:Polly Klaas Community Theatre\, 417 Western Avenue\, Petaluma\, CA
+CATEGORIES:Other
+ATTACH;FMTTYPE=image/jpeg:https://golocal.coop/wp-content/uploads/2025/12/West-Side-Stories-S.jpg
+GEO:38.23266;-122.64474
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Polly Klaas Community Theatre 417 Western Avenue Petaluma CA;X-APPLE-RADIUS=500;X-TITLE=417 Western Avenue:geo:-122.64474,38.23266
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260408T200000
+DTEND;TZID=America/Los_Angeles:20260408T200000
+DTSTAMP:20260406T201325
+CREATED:20251205T011323Z
+LAST-MODIFIED:20251205T011323Z
+UID:10008704-1775678400-1775678400@golocal.coop
+SUMMARY:Karaoke Night at Clubhouse Bar & Grill
+DESCRIPTION:Join us every Wednesday for Karaoke Night at Clubhouse Bar & Grill! Show kicks off at 8pm and we rock out until close! \nWar Pigs BBQ has AMAZING coming from the kitchen and GREAT drinks are served at the bar. \nMake some lifelong memories with some of the best people you will ever meet! \n*No cover*
+URL:https://golocal.coop/event/karaoke-night-at-clubhouse-bar-grill-11/2026-04-08/
+LOCATION:Clubhouse Bar & Grill\, 3082 Marlow Rd\, B 8\, Santa Rosa\, CA
+CATEGORIES:Music
+GEO:38.46669;-122.75126
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Clubhouse Bar & Grill 3082 Marlow Rd B 8 Santa Rosa CA;X-APPLE-RADIUS=500;X-TITLE=3082 Marlow Rd\, B 8:geo:-122.75126,38.46669
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260408T210000
+DTEND;TZID=America/Los_Angeles:20260408T210000
+DTSTAMP:20260406T201325
+CREATED:20260208T050302Z
+LAST-MODIFIED:20260208T050302Z
+UID:10015347-1775682000-1775682000@golocal.coop
+SUMMARY:Big Stage Karaoke Wednesdays with KJ Danny D
+DESCRIPTION:Wednesday nights at Barrel Proof Lounge just got louder\, sexier\, and way more fun.\nKaraoke moves to the main showroom big stage every Wednesday at 9pm\, following Open Mic\, and runs until late. Hosting the night is KJ Danny D (Danny Duclos)—one of the most popular and in-demand karaoke hosts around. We’re genuinely stoked to have him bringing his style\, energy\, and crowd-moving presence to Downtown Santa Rosa.\nThis isn’t sleepy bar karaoke. Danny brings a fresh\, high-energy approach that turns singing into a full-on late-night experience. Big stage\, great sound\, packed room\, and the kind of momentum that keeps people singing well past closing time.\n🎤 Main showroom\n🕘 Starts 9pm (after Open Mic)\n🎟 No cover\n📍 Downtown Santa Rosa\nCheck out www.barrelprooflounge.com for all sorts of good times ahead.
+URL:https://golocal.coop/event/big-stage-karaoke-wednesdays-with-kj-danny-d-12/
+LOCATION:Barrel Proof Lounge\, 501 Mendocino Avenue\, Santa Rosa\, CA
+CATEGORIES:Music
+GEO:38.44260;-122.71573
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Barrel Proof Lounge 501 Mendocino Avenue Santa Rosa CA;X-APPLE-RADIUS=500;X-TITLE=501 Mendocino Avenue:geo:-122.71573,38.44260
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260409T120000
+DTEND;TZID=America/Los_Angeles:20260409T140000
+DTSTAMP:20260406T201325
+CREATED:20260404T221420Z
+LAST-MODIFIED:20260404T221420Z
+UID:10018959-1775736000-1775743200@golocal.coop
+SUMMARY:Stevie Cornell at Cafe Frida
+DESCRIPTION:Award winning singer / songwriter \n  \nEclectic is the only way to describe Stevie’s music. And catchy! Over a long musical arc from 70s punk rock through early americana\, jazz\, film music\, electronica\, retro country western\, rockabilly he has always been restlessly devouring styles\, turning them inside out to see what makes them tick.
+URL:https://golocal.coop/event/stevie-cornell-at-cafe-frida-4/
+LOCATION:Cafe Frida Gallery\, 300 South A Street #4\, Santa Rosa\, CA
+CATEGORIES:Music
+GEO:38.43412;-122.71481
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Cafe Frida Gallery 300 South A Street #4 Santa Rosa CA;X-APPLE-RADIUS=500;X-TITLE=300 South A Street #4:geo:-122.71481,38.43412
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260409T170000
+DTEND;TZID=America/Los_Angeles:20260409T210000
+DTSTAMP:20260406T201325
+CREATED:20251205T011912Z
+LAST-MODIFIED:20251205T011912Z
+UID:10009209-1775754000-1775768400@golocal.coop
+SUMMARY:Wine Country Bingo
+DESCRIPTION:Located in the Lodge Room at the Santa Rosa Veterans Memorial Building\, Wine Country Bingo will bring a fun evening of games\, community and excitement every 2nd Thursday of the month. \nCelebrate Wine Country Trykes 1 Year Anniversary with Early Bird\, 7 Pack Games\, Flash and Pull Tabs \nFood\, Snacks & Beverages. 18+ only. \nLIMITED SEATING! DOORS OPEN AT 5 PM. GAMES START AT 6 PM \nADMISSION $35:(1) ONE Adult Admission Seat.(2) TWO 6 Game Board Packs (12 Cards per game). Total of 7 Pack Games + 1 Dauber \nExtra Packs available at the door.
+URL:https://golocal.coop/event/wine-country-bingo-4/2026-04-09/
+LOCATION:Santa Rosa Veterans Memorial Building\, 1351 Maple Ave\, Santa Rosa\, CA
+CATEGORIES:Other
+GEO:38.4343;-122.701
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Santa Rosa Veterans Memorial Building 1351 Maple Ave Santa Rosa CA;X-APPLE-RADIUS=500;X-TITLE=1351 Maple Ave:geo:-122.701,38.4343
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260409T170000
+DTEND;TZID=America/Los_Angeles:20260409T210000
+DTSTAMP:20260406T201325
+CREATED:20260404T215412Z
+LAST-MODIFIED:20260404T215412Z
+UID:10018952-1775754000-1775768400@golocal.coop
+SUMMARY:Whiskey Dent at Brewsters
+DESCRIPTION:Lo-Fi\, Hi level Garage Rock- Sonoma County style
+URL:https://golocal.coop/event/whiskey-dent-at-brewsters/
+LOCATION:Brewsters Beer Garden\, 229 Water Street\, Petaluma\, CA
+CATEGORIES:Music
+GEO:38.2366;-122.641
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Brewsters Beer Garden 229 Water Street Petaluma CA;X-APPLE-RADIUS=500;X-TITLE=229 Water Street:geo:-122.641,38.2366
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260409T173000
+DTEND;TZID=America/Los_Angeles:20260409T193000
+DTSTAMP:20260406T201325
+CREATED:20260404T215511Z
+LAST-MODIFIED:20260404T215511Z
+UID:10017295-1775755800-1775763000@golocal.coop
+SUMMARY:Thursday Sunset Paddle & Party at The Floathouse Petaluma
+DESCRIPTION:Ease into the evening with a relaxed paddle on the Petaluma River\, followed by dockside snacks and community time at The Floathouse Petaluma\, right downtown in the central turning basin. No fuss\, no stress\, just community on the water with the sunset accompanying us. \nOnce a month from April through September\, paddlers gather for a 5:30 pm launch and head out together onto the calm tidal waters of the Petaluma River\, right in the heart of downtown. As the seasons shift\, the length of the paddle changes with the daylight—stretching into Sonoma County’s long summer evenings and shortening again as fall approaches. \nThe group returns to the dock about 30 minutes before sunset\, when everyone gathers to enjoy simple snacks\, good conversation\, and views of the evening sky over the river. \nRent one of The Floathouse’s stable sit-on-top kayaks or stand-up paddleboards\, or bring your own board or small boat and join the fun. This easygoing after-work outing is a great way to get outside\, connect with the river\, and meet fellow paddlers. \n2026 Dates: April 9 • May 21 • June 11 • July 9 • August 20 • September 24 \nPricing:\n$35 – Kayak or SUP rental for the duration of the paddle\n$10 – Bring your own board or boat \nOpen to SUP-per Club members and the public. To join the Floathouse SUP-per Club ($150 for 11 outings\, no expiration)\, see our website.
+URL:https://golocal.coop/event/thursday-sunset-paddle-party-at-the-floathouse-petaluma-2/
+LOCATION:The Floathouse Petaluma\, 50 Water Street\, Petaluma\, CA
+CATEGORIES:Kids and Family,Recreation
+GEO:38.23441;-122.63978
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=The Floathouse Petaluma 50 Water Street Petaluma CA;X-APPLE-RADIUS=500;X-TITLE=50 Water Street:geo:-122.63978,38.23441
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260409T180000
+DTEND;TZID=America/Los_Angeles:20260409T200000
+DTSTAMP:20260406T201325
+CREATED:20260405T012350Z
+LAST-MODIFIED:20260405T012350Z
+UID:10018995-1775757600-1775764800@golocal.coop
+SUMMARY:The High Sonomen at Redwood Cafe
+DESCRIPTION:Four veterans of the Sonoma County music scene — Dave Hooper\, Paul Riley\, Dave Hamilton\, and Ken Risling — walk the high-wire without a net! That’s right\, they will be performing their own songs only. Some brand new\, but many award winners that have delighted audiences for years. All together on the Hopmonk stage for the first time in history!\nDave Hooper — For decades\, known in Nashville\, Austin\, and Europe as the front man of “Dave Hooper and the Corporate Monkeys”\, currently performs with Hooper and Sloss.\nPaul Riley — Familiar host of many variety music shows\, he fronted both The Feud and St. Peterbilt.\nDave Hamilton — Voted “Best” numerous times in numerous local music competitions\, including the Bohemian’s annual reader polls\, because\, well\, he is.\nKen Risling — Songs and/or recordings have won statewide competitions and national airplay. Former host of West Coast Songwriters competition. Now a proud member of The AOKs
+URL:https://golocal.coop/event/the-high-sonomen-at-redwood-cafe/
+LOCATION:Redwood Cafe\, 8240 Old Redwood Hwy\, Cotati\, CA
+CATEGORIES:Music
+GEO:38.3256;-122.705
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Redwood Cafe 8240 Old Redwood Hwy Cotati CA;X-APPLE-RADIUS=500;X-TITLE=8240 Old Redwood Hwy:geo:-122.705,38.3256
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260409T193000
+DTEND;TZID=America/Los_Angeles:20260409T193000
+DTSTAMP:20260406T201325
+CREATED:20260404T225523Z
+LAST-MODIFIED:20260404T225523Z
+UID:10018978-1775763000-1775763000@golocal.coop
+SUMMARY:Sebastian Saint James w/ Anna Jae Band & Diana Dreams at HopMonk Sebastopol
+DESCRIPTION:CASA CENI PRESENTS \nSebastian Saint James feat: Mingo Lewis Jr. and Faith + Anna Jae Band + Diana Dreams \n  \nABOUT: \nSEBASTIAN SAINT JAMES \nSebastian Saint James\, Mingo Lewis Jr.\, and Faith come together in a collaborative project built around original songs performed through live looping\, percussion\, and layered vocals that grow in real time on stage. \nBlending indie blues\, funk\, soul\, and elements of lofi hip hop\, the trio builds each piece from the ground up with looping guitars\, deep rhythmic grooves\, and rich vocal harmonies. \nEach performance unfolds organically as the music is created live in the moment\, turning original ideas into hypnotic\, groove driven soundscapes. \nANNA JAE BAND \nAnna Jae is a Northern California singer-songwriter blending folk\, rock\, and 60s–70s soul into a sound that feels both nostalgic and deeply personal. With honey-warm vocals and storytelling lyrics\, she weaves originals alongside reimagined classics from Dylan to Janis. Whether solo or backed by her band\, Anna Jae brings heart\, grit\, and a little flower-child fire to every stage. \nDIANA DREAMS \nDark Magical Girl Music \nClassically-trained singer-songwriter Diana Dreams will share her unique blend of folk music\, pop/rock\, and classical ‘high drama’ music. \n 
+URL:https://golocal.coop/event/sebastian-saint-james-w-anna-jae-band-diana-dreams-at-hopmonk-sebastopol/
+LOCATION:HopMonk Tavern – Sebastopol\, 230 Petaluma Ave\, Sebastopol\, CA
+CATEGORIES:Music
+GEO:38.4012;-122.823
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=HopMonk Tavern – Sebastopol 230 Petaluma Ave Sebastopol CA;X-APPLE-RADIUS=500;X-TITLE=230 Petaluma Ave:geo:-122.823,38.4012
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260409T193000
+DTEND;TZID=America/Los_Angeles:20260409T193000
+DTSTAMP:20260406T201325
+CREATED:20260404T231901Z
+LAST-MODIFIED:20260404T231901Z
+UID:10018983-1775763000-1775763000@golocal.coop
+SUMMARY:The Showcase Sessions at Murphy’s w/ Spike Sikes
+DESCRIPTION:The Showcase Sessions at Murphy’s are designed for true music lovers — limited seating & incredible talent. \nJoin us this April for unforgettable evenings of live music up close and personal. \n  \nApril 9 – Spike Sikes\n🎟 $17.50 \nApril 16 – Ellie James\n🎟 $15.00 \nApril 23 – The Sun Kings Duo\n🎟 $35.00
+URL:https://golocal.coop/event/the-showcase-sessions-at-murphys-w-spike-sikes/
+LOCATION:Murphy’s Irish Pub & Restaurant\, 464 1st St E.\, Sonoma\, CA
+CATEGORIES:Music
+GEO:38.2924023;-122.4558064
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Murphy’s Irish Pub & Restaurant 464 1st St E. Sonoma CA;X-APPLE-RADIUS=500;X-TITLE=464 1st St E.:geo:-122.4558064,38.2924023
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260409T200000
+DTEND;TZID=America/Los_Angeles:20260409T200000
+DTSTAMP:20260406T201325
+CREATED:20260404T234310Z
+LAST-MODIFIED:20260404T234310Z
+UID:10018988-1775764800-1775764800@golocal.coop
+SUMMARY:Ben Roy at The Mystic Theatre
+DESCRIPTION:Get ready to laugh out loud with a night of stand-up comedy in McNear’s upstairs Red Bull Room! Food and drink specials available\, making it the perfect night out in historic downtown Petaluma! Grab your crew\, grab a drink\, and get ready for a hilarious night you won’t forget! Seating is limited—don’t wait! 7PM Doors – Show: 8PM \nCOMEDY CENTRAL \nHBO \nHULU \nVARIETY’S TOP TEN COMICS TO WATCH \nIf you aren’t familiar with Ben Roy\, he’s been taking comedy audiences by storm since 2004\, bringing an unparalleled energy and unique voice to the stage. Often compared to Lewis Black or Bill Hicks due to his passionate\, ranting approach\, Roy has a style that is definitively his own. \nRoy cut his comedic teeth in Denver at the world famous Comedy Works. Since then\, Ben has been selected to perform at the Montreal Just for Laughs Comedy Festival (for New Faces\, The Nasty Show\, and his own hour show)\, Just For Laughs Toronto\, Just For Laughs Chicago\, The New York Comedy Festival\, Austin’s South by Southwest festival (where he was an official invitee for both music and comedy in the same year)\, and many more. \nRoy has been featured on HBO’s Funny as Hell series; as well as on the Comedy Central shows Adam DeVine’s House Party\, Corporate\, @midnight\, This Is Not Happening\, and TruTV’s Talk Show The Game Show. Ben has also released five stand-up comedy albums and was listed as one of Variety’s Top 10 Comics to Watch. In 2023 his first streaming stand up special\, ‘HYENA’\, was released on YouTube by 800LB Gorilla Media. That same year NPR listed ‘HYENA’ as one of their Top Specials Of 2023. From that success\, ‘HYENA’ was licensed by HULU and Disney+ and began streaming on their platforms in July of 2024. Ben will be recording his sixth album at the world famous Comedy Works Downtown in January 2026. \nAlong with fellow Denver Comedians Adam Cayton-Holland and Andrew Orvedahl (who collectively perform as The Grawlix)\, Ben also created\, wrote\, and starred in the original comedy series Those Who Can’t that ran for three seasons on TruTV and HBOMax. \nHe’s also currently the host of two podcasts\, 97.9 The Rat Race and Advice Fight. \nIn addition to stand-up comedy\, acting\, podcasting\, and writing\, Roy is a prolific musician and the current lead singer of pop punk outfit SPELLS\, signed to indie label Snappy Little Numbers Records\, and hardcore/metal band Arson Charge\, currently signed to Anxious & Angry Records.
+URL:https://golocal.coop/event/ben-roy-at-the-mystic-theatre/
+LOCATION:Mystic Theatre & Music Hall\, 23 Petaluma Blvd N\, Petaluma\, CA
+CATEGORIES:Comedy
+GEO:38.2334;-122.64
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Mystic Theatre & Music Hall 23 Petaluma Blvd N Petaluma CA;X-APPLE-RADIUS=500;X-TITLE=23 Petaluma Blvd N:geo:-122.64,38.2334
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260409T200000
+DTEND;TZID=America/Los_Angeles:20260409T200000
+DTSTAMP:20260406T201325
+CREATED:20260405T021923Z
+LAST-MODIFIED:20260405T021923Z
+UID:10019006-1775764800-1775764800@golocal.coop
+SUMMARY:Don't Tell Santa Rosa at the Vintage Space
+DESCRIPTION:No spoilers! All comedians remain unknown until the moment they take the stage. But don’t fret\, we carefully curate lineups of 4-7 different comics to create a hilarious and diverse show. The best part is—you never know who might show up! \nYou might discover your next favorite underground comedian or see a fan favorite. We specialize in introducing audiences to the best-emerging talent from cities around the world through a mix of the best local and nationally touring comedians.
+URL:https://golocal.coop/event/dont-tell-santa-rosa-at-the-vintage-space-11/
+LOCATION:Vintage Space at The Flamingo Resort\, 2777 Fourth St.\, Santa Rosa\, CA
+CATEGORIES:Comedy
+GEO:38.45182;-122.68916
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Vintage Space at The Flamingo Resort 2777 Fourth St. Santa Rosa CA;X-APPLE-RADIUS=500;X-TITLE=2777 Fourth St.:geo:-122.68916,38.45182
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260410T090000
+DTEND;TZID=America/Los_Angeles:20260410T140000
+DTSTAMP:20260406T201325
+CREATED:20260403T030855Z
+LAST-MODIFIED:20260403T030855Z
+UID:10018814-1775811600-1775829600@golocal.coop
+SUMMARY:Thrift Pop Up to Benefit The Living Room
+DESCRIPTION:Find great deals while supporting the programs benefiting women and children at The Living Room. \nApril 10-12\, 2026 \n1701 Piner Road\, Santa Rosa (former Pick of the Litter shop)
+URL:https://golocal.coop/event/thrift-pop-up-to-benefit-the-living-room/
+LOCATION:(former) Pick of the Litter shop\, 1701 Piner Road\, Santa Rosa\, CA\, 95403\, United States
+CATEGORIES:Other
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260410T113000
+DTEND;TZID=America/Los_Angeles:20260410T133000
+DTSTAMP:20260406T201325
+CREATED:20260404T221549Z
+LAST-MODIFIED:20260404T221549Z
+UID:10018960-1775820600-1775827800@golocal.coop
+SUMMARY:G3 at Cafe Frida
+DESCRIPTION:Enjoy brunch with live Jazz music.
+URL:https://golocal.coop/event/g3-at-cafe-frida-3/
+LOCATION:Cafe Frida Gallery\, 300 South A Street #4\, Santa Rosa\, CA
+CATEGORIES:Music
+GEO:38.43412;-122.71481
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Cafe Frida Gallery 300 South A Street #4 Santa Rosa CA;X-APPLE-RADIUS=500;X-TITLE=300 South A Street #4:geo:-122.71481,38.43412
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260410T150000
+DTEND;TZID=America/Los_Angeles:20260410T180000
+DTSTAMP:20260406T201325
+CREATED:20251127T164841Z
+LAST-MODIFIED:20251127T164841Z
+UID:10007618-1775833200-1775844000@golocal.coop
+SUMMARY:Live Music Happy Hour Fridays - Eric "T-Bone" Titus - Downtown Santa Rosa
+DESCRIPTION:Friday Happy Hour w/ Eric “T-Bone” Titus — live roots-rock & Americana @ Barrel Proof Lounge\, Downtown Santa Rosa. Our comedy show hits at 8\nEvery Friday\, roll into the weekend at Barrel Proof Lounge with Happy Hour sounds from Eric “T-Bone” Titus. This Santa Rosa singer-guitarist blends soulful Americana\, folk-rock\, and classic tunes that pair perfectly with a cold drink and an exhale after the workweek.\nSip $6 beers and enjoy $2 off wine and soju cocktails while T-Bone sets the tone for the night in Downtown Santa Rosa. Then stick around for our signature Friday stand-up comedy show at 8pm\, featuring rotating comics from across the Bay Area and beyond.\nMake Fridays at Barrel Proof Lounge your weekly ritual for live music\, laughs\, and laid-back vibes in Downtown Santa Rosa.\nCheck out www.BarrelProofLounge.com for all sorts of good times ahead!
+URL:https://golocal.coop/event/live-music-happy-hour-fridays-eric-t-bone-titus-downtown-santa-rosa/2026-04-10/
+LOCATION:Barrel Proof Lounge\, 501 Mendocino Avenue\, Santa Rosa\, CA
+CATEGORIES:Music
+GEO:38.44260;-122.71573
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Barrel Proof Lounge 501 Mendocino Avenue Santa Rosa CA;X-APPLE-RADIUS=500;X-TITLE=501 Mendocino Avenue:geo:-122.71573,38.44260
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260410T170000
+DTEND;TZID=America/Los_Angeles:20260410T190000
+DTSTAMP:20260406T201325
+CREATED:20251205T002814Z
+LAST-MODIFIED:20251205T002814Z
+UID:10008376-1775840400-1775847600@golocal.coop
+SUMMARY:Live Music Happy Hour – Eliud Conde – Música Regional Mexicana
+DESCRIPTION:Latin vibes with Eliud Conde — Happy Hour live music 5-7PM! Drink specials\, What the Shuck\, free popcorn\, no cover.\n🎶 Kick off your weekend with live Latin music at Barrel Proof Lounge! Eliud Conde brings the rhythms while you enjoy:\n🍹 Happy Hour specials starting at 4PM — $6 beer\, $2 off wine\, Soju cocktails\n🍽️ Food by What the Shuck — New Orleans–inspired seafood favorites\n🍿 Free popcorn • No cover\nMusic starts at 5PM and runs through 7PM. Stick around afterward for our 8PM comedy show — a full night of fun in Downtown Santa Rosa!\n🎶 Empieza tu fin de semana con música latina en vivo en Barrel Proof Lounge. Eliud Conde trae el ritmo mientras disfrutas:\n🍹 Especiales de Happy Hour desde las 4PM — cerveza $6\, $2 de descuento en vino\, cócteles de Soju\n🍽️ Comida de What the Shuck — mariscos con estilo de Nueva Orleans\n🍿 Palomitas gratis • Sin cover\nLa música comienza a las 5PM y termina a las 7PM. ¡Quédate después para nuestro show de comedia a las 8PM en el centro de Santa Rosa!\nCheck out www.BarrelProofLounge.com for all sorts of good times ahead!
+URL:https://golocal.coop/event/live-music-happy-hour-eliud-conde-musica-regional-mexicana-11/2026-04-10/
+LOCATION:Barrel Proof Lounge\, 501 Mendocino Avenue\, Santa Rosa\, CA
+CATEGORIES:Music
+GEO:38.44260;-122.71573
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Barrel Proof Lounge 501 Mendocino Avenue Santa Rosa CA;X-APPLE-RADIUS=500;X-TITLE=501 Mendocino Avenue:geo:-122.71573,38.44260
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:GoLocal Cooperative
+X-SOURCE-URL:https://golocal.coop/events/
+DTSTART;TZID=America/Los_Angeles:20260410T170000
+DTEND;TZID=America/Los_Angeles:20260410T200000
+DTSTAMP:20260406T201325
+CREATED:20260404T215834Z
+LAST-MODIFIED:20260404T215834Z
+UID:10018953-1775840400-1775851200@golocal.coop
+SUMMARY:PB & Jam at Brewsters
+DESCRIPTION:PB&JAM is at the heart of my musical life. Music that plays to my purest intentions. American and true to my Blues\, Rock\, Jazz and Country Music heritages. These songs are a mixture of studio\, home recording and live recordings. Me and my group sincerely hope that you enjoy these songs and thanks for listening.
+URL:https://golocal.coop/event/pb-jam-at-brewsters/
+LOCATION:Brewsters Beer Garden\, 229 Water Street\, Petaluma\, CA
+CATEGORIES:Music
+GEO:38.2366;-122.641
+X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Brewsters Beer Garden 229 Water Street Petaluma CA;X-APPLE-RADIUS=500;X-TITLE=229 Water Street:geo:-122.641,38.2366
+END:VEVENT
+END:VCALENDAR

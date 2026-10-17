@@ -1,0 +1,67 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//FAR Center for Contemporary Arts//thefar.org//
+X-WR-CALNAME:FAR Center for Contemporary Arts
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:FAR Photo Review
+DTSTART;TZID=America/Indiana/Indianapolis:20261021T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261021T210000
+UID:f11dc7f5d49d0b944f94b964ebde64d4@thefar.org
+DESCRIPTION:In a facilitated discussion led by photographer Chaz Mottinger
+ \, learn how to talk about your own photography\, critique work\, and buil
+ d community. All skill levels welcome.
+LOCATION:FAR Center for Contemporary Arts\, 505 W 4th St\, Bloomington\, I
+ N
+URL:https://www.thefar.org/events/event/17709/2026/10/21
+X-SOURCE:FAR Center for Contemporary Arts
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:FAR Photo Review
+DTSTART;TZID=America/Indiana/Indianapolis:20261118T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261118T210000
+UID:72f965fbf8a3d5c16813404bb23cc156@thefar.org
+DESCRIPTION:In a facilitated discussion led by photographer Chaz Mottinger
+ \, learn how to talk about your own photography\, critique work\, and buil
+ d community. All skill levels welcome.
+LOCATION:FAR Center for Contemporary Arts\, 505 W 4th St\, Bloomington\, I
+ N
+URL:https://www.thefar.org/events/event/17709/2026/10/21
+X-SOURCE:FAR Center for Contemporary Arts
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:FAR Photo Review
+DTSTART;TZID=America/Indiana/Indianapolis:20261216T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261216T210000
+UID:24de14cd98269d20e95c60afa7a8da2c@thefar.org
+DESCRIPTION:In a facilitated discussion led by photographer Chaz Mottinger
+ \, learn how to talk about your own photography\, critique work\, and buil
+ d community. All skill levels welcome.
+LOCATION:FAR Center for Contemporary Arts\, 505 W 4th St\, Bloomington\, I
+ N
+URL:https://www.thefar.org/events/event/17709/2026/10/21
+X-SOURCE:FAR Center for Contemporary Arts
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:From Promise to Purpose: Angela Brown in Concert
+DTSTART;TZID=America/Indiana/Indianapolis:20261105T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261105T193000
+UID:7aa7c04e1bbf13af05a347f8225c57b9@thefar.org
+DESCRIPTION:
+LOCATION:FAR Center for Contemporary Arts\, 505 W 4th St\, Bloomington\, I
+ N
+URL:https://www.thefar.org/events/event/124549/
+X-SOURCE:FAR Center for Contemporary Arts
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Upcoming Exhibition: Elliot Ross
+DTSTART;TZID=America/Indiana/Indianapolis:20261106T170000
+DTEND;TZID=America/Indiana/Indianapolis:20261106T200000
+UID:c14999f2736eb607e394e019e734189d@thefar.org
+DESCRIPTION:
+LOCATION:FAR Center for Contemporary Arts\, 505 W 4th St\, Bloomington\, I
+ N
+URL:https://www.thefar.org/events/event/123100/
+X-SOURCE:FAR Center for Contemporary Arts
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,227 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Goat Conspiracy//thegoatconspiracy.com//
+X-WR-CALNAME:Goat Conspiracy
+X-WR-TIMEZONE:America/Los_Angeles
+BEGIN:VEVENT
+SUMMARY:Sunset Piano Recital with Concert Pianist James LaVelle
+DTSTART;TZID=America/Los_Angeles:20240908T153000
+DTEND;TZID=America/Los_Angeles:20240908T173000
+UID:66a92d46712c5016ecf3ad54@squarespace.com
+DESCRIPTION:
+LOCATION:The Goat Conspiracy\, 6022 Kent Road\, Bloomington\, IN\, 47401\,
+  United States
+URL:https://www.thegoatconspiracy.com/events/2024/9/8/sunset-piano-recital
+ -with-cocert-pianist-james-lavelle
+X-SOURCE:Goat Conspiracy
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:2025 Hayraiser 5K
+DTSTART;TZID=America/Los_Angeles:20251116T060000
+DTEND;TZID=America/Los_Angeles:20251116T100000
+UID:68f54d979f0bc157f7a3f30f@squarespace.com
+DESCRIPTION:
+LOCATION:The Goat Conspiracy\, 6030 E Kent Road\, Bloomington\, IN\, 47401
+ \, United States
+URL:https://www.thegoatconspiracy.com/events/2025/10/19/hayraiser
+X-SOURCE:Goat Conspiracy
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Barniversary!
+DTSTART;TZID=America/Los_Angeles:20250406T070000
+DTEND;TZID=America/Los_Angeles:20250406T100000
+UID:67d2f4e93e42a24e7282def0@squarespace.com
+DESCRIPTION:
+LOCATION:The Goat Conspiracy\, 6030 E Kent Road\, Bloomington\, IN\, 47401
+ \, United States
+URL:https://www.thegoatconspiracy.com/events/2025/3/13/barniversary
+X-SOURCE:Goat Conspiracy
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Barniversary!
+DTSTART;TZID=America/Los_Angeles:20250427T070000
+DTEND;TZID=America/Los_Angeles:20250427T100000
+UID:67f9814ea0ed69764cfc376e@squarespace.com
+DESCRIPTION:
+LOCATION:The Goat Conspiracy\, 6030 E Kent Road\, Bloomington\, IN\, 47401
+ \, United States
+URL:https://www.thegoatconspiracy.com/events/2025/4/27/barniversary
+X-SOURCE:Goat Conspiracy
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Benefit Concert Featuring Six Foot Blonde
+DTSTART;TZID=America/Los_Angeles:20250516T134500
+DTEND;TZID=America/Los_Angeles:20250516T173000
+UID:67e71e63b4b66c7db1636aae@squarespace.com
+DESCRIPTION:
+LOCATION:The Goat Conspiracy\, 6030 E Kent Road\, Bloomington\, IN\, 47401
+ \, United States
+URL:https://www.thegoatconspiracy.com/events/2025/5/16/benefit-concert-fea
+ turing-six-foot-blonde
+X-SOURCE:Goat Conspiracy
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Plein Air Watercolors at the Goat Conspiracy
+DTSTART;TZID=America/Los_Angeles:20251005T110000
+DTEND;TZID=America/Los_Angeles:20251005T140000
+UID:68a77dbbf4e7151c35c0da51@squarespace.com
+DESCRIPTION:
+LOCATION:The Goat Conspiracy\, 6030 E Kent Road\, Bloomington\, IN\, 47401
+ \, United States
+URL:https://www.thegoatconspiracy.com/events/2025/8/21/pleinair1
+X-SOURCE:Goat Conspiracy
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Shelby County Sinners at The Cabin
+DTSTART;TZID=America/Los_Angeles:20251101T110000
+DTEND;TZID=America/Los_Angeles:20251101T140000
+UID:68a760a3ad82c530c404cb39@squarespace.com
+DESCRIPTION:
+LOCATION:The Goat Conspiracy\, 6030 E Kent Road\, Bloomington\, IN\, 47401
+ \, United States
+URL:https://www.thegoatconspiracy.com/events/2025/8/21/scs2025
+X-SOURCE:Goat Conspiracy
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:James LaVelle Sunset Piano Concert
+DTSTART;TZID=America/Los_Angeles:20250907T150000
+DTEND;TZID=America/Los_Angeles:20250907T170000
+UID:687ea42159dc9053319772ef@squarespace.com
+DESCRIPTION:
+LOCATION:The Goat Conspiracy\, 6030 E Kent Road\, Bloomington\, IN\, 47401
+ \, United States
+URL:https://www.thegoatconspiracy.com/events/2025/9/7/james-lavelle-sunset
+ -piano-concert
+X-SOURCE:Goat Conspiracy
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Christmas Trees for the Goats
+DTSTART;TZID=America/Los_Angeles:20260104T100000
+DTEND;TZID=America/Los_Angeles:20260104T120000
+UID:6956a921bf9df642eef74594@squarespace.com
+DESCRIPTION:
+LOCATION:The Goat Conspiracy\, 6030 E Kent Road\, Bloomington\, IN\, 47401
+ \, United States
+URL:https://www.thegoatconspiracy.com/events/2026/1/4/christmas-trees-for-
+ the-goats
+X-SOURCE:Goat Conspiracy
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:2026 Hayraiser 5K Fun Run
+DTSTART;TZID=America/Los_Angeles:20261024T070000
+DTEND;TZID=America/Los_Angeles:20261024T100000
+UID:6ab163e6c34d77402197538c@squarespace.com
+DESCRIPTION:
+LOCATION:The Goat Conspiracy\, 6030 E Kent Road\, Bloomington\, IN\, 47401
+ \, United States
+URL:https://www.thegoatconspiracy.com/events/2026/10/24/2026-hayraiser-5k-
+ fun-run
+X-SOURCE:Goat Conspiracy
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Spring Fling 5K Fun-raiser
+DTSTART;TZID=America/Los_Angeles:20260614T070000
+DTEND;TZID=America/Los_Angeles:20260614T100000
+UID:69debbdc1cdf803bf7d31273@squarespace.com
+DESCRIPTION:
+LOCATION:The Goat Conspiracy\, 6030 E Kent Road\, Bloomington\, IN\, 47401
+ \, United States
+URL:https://www.thegoatconspiracy.com/events/2026/4/14/spring-fling-fundra
+ iser
+X-SOURCE:Goat Conspiracy
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Goat Conspiracy Barniversary
+DTSTART;TZID=America/Los_Angeles:20260419T080000
+DTEND;TZID=America/Los_Angeles:20260419T110000
+UID:69601f0e77254d7a3cac24cc@squarespace.com
+DESCRIPTION:
+LOCATION:The Goat Conspiracy\, 6030 E Kent Road\, Bloomington\, IN\, 47401
+ \, United States
+URL:https://www.thegoatconspiracy.com/events/2026/4/19/goat-conspiracy-bar
+ niversary
+X-SOURCE:Goat Conspiracy
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Goat Yoga
+DTSTART;TZID=America/Los_Angeles:20260808T100000
+DTEND;TZID=America/Los_Angeles:20260808T110000
+UID:6a0b80ced7c5a1011cd87656@squarespace.com
+DESCRIPTION:
+LOCATION:The Goat Conspiracy\, 6030 E Kent Road\, Bloomington\, IN\, 47401
+ \, United States
+URL:https://www.thegoatconspiracy.com/events/2026/5/23/goat-yoga
+X-SOURCE:Goat Conspiracy
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Goat Yoga
+DTSTART;TZID=America/Los_Angeles:20260725T063000
+DTEND;TZID=America/Los_Angeles:20260725T073000
+UID:6a0b826228eba515c3847ebe@squarespace.com
+DESCRIPTION:
+LOCATION:The Goat Conspiracy\, 6030 E Kent Road\, Bloomington\, IN\, 47401
+ \, United States
+URL:https://www.thegoatconspiracy.com/events/2026/5/23/goat-yoga-3dsdk
+X-SOURCE:Goat Conspiracy
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Goat Yoga
+DTSTART;TZID=America/Los_Angeles:20261010T100000
+DTEND;TZID=America/Los_Angeles:20261010T110000
+UID:6a8b3ccbb8b0920b7984555f@squarespace.com
+DESCRIPTION:
+LOCATION:The Goat Conspiracy\, 6030 E Kent Road\, Bloomington\, IN\, 47401
+ \, United States
+URL:https://www.thegoatconspiracy.com/events/2026/5/23/goat-yoga-kgydt-nw2
+ 5g
+X-SOURCE:Goat Conspiracy
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:2026 Summer Goat Camp
+DTSTART;TZID=America/Los_Angeles:20260615T060000
+DTEND;TZID=America/Los_Angeles:20260619T130000
+UID:6960195058a97c64bafb243f@squarespace.com
+DESCRIPTION:
+LOCATION:The Goat Conspiracy\, 6030 E Kent Road\, Bloomington\, IN\, 47401
+ \, United States
+URL:https://www.thegoatconspiracy.com/events/2026/6/8/2026-summer-goat-cam
+ p
+X-SOURCE:Goat Conspiracy
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Goat Pilates with Kaylin Byrd
+DTSTART;TZID=America/Los_Angeles:20261003T080000
+DTEND;TZID=America/Los_Angeles:20261003T090000
+UID:6a78a83641bd7b44010f3176@squarespace.com
+DESCRIPTION:
+LOCATION:The Goat Conspiracy\, 6030 E Kent Road\, Bloomington\, IN\, 47401
+ \, United States
+URL:https://www.thegoatconspiracy.com/events/2026/8/9/goat-pilates-with-ka
+ ylin-byrd
+X-SOURCE:Goat Conspiracy
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Family Day at the Sanctuary
+DTSTART;TZID=America/Los_Angeles:20260919T093000
+DTEND;TZID=America/Los_Angeles:20260919T123000
+UID:6a7df4f45e18f17129a0dd7e@squarespace.com
+DESCRIPTION:
+LOCATION:The Goat Conspiracy\, 6030 E Kent Road\, Bloomington\, IN\, 47401
+ \, United States
+URL:https://www.thegoatconspiracy.com/events/2026/9/19/family-day-at-the-s
+ anctuary
+X-SOURCE:Goat Conspiracy
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:City of Bloomington Volunteer Fair at City Hall
+DTSTART;TZID=America/Los_Angeles:20260905T070000
+DTEND;TZID=America/Los_Angeles:20260905T103000
+UID:6a8b2027c86605059d49326e@squarespace.com
+DESCRIPTION:
+LOCATION:City Hall Atrium and Fernandez Plaza\, 401 North Morton Street\, 
+ Bloomington\, Indiana\, 47404\, United States
+URL:https://www.thegoatconspiracy.com/events/2026/9/5/40kpsf5juaz40609lz7k
+ r7q2grcf2u
+X-SOURCE:Goat Conspiracy
+END:VEVENT
+END:VCALENDAR

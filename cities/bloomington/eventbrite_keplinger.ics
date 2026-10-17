@@ -1,0 +1,31 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Keplinger Institute for Wellness and Art//eventbrite.com//
+X-WR-CALNAME:Keplinger Institute for Wellness and Art
+X-WR-TIMEZONE:America/New_York
+BEGIN:VEVENT
+SUMMARY:Practical Approaches with Therapeutic Foot Massage
+DTSTART;TZID=America/New_York:20261101T120000
+DTEND;TZID=America/New_York:20261101T180000
+UID:fc846dd119a22f083e416a51f2897b30@eventbrite.com
+DESCRIPTION:Explore anatomy\, Reflexology\, and therapeutic techniques to 
+ create intentional\, client-centered foot massage treatments.
+LOCATION:205 N College Ave\, 205 North College Avenue\, Bloomington\, IN 4
+ 7404\, Bloomington\, IN
+URL:https://www.eventbrite.com/e/practical-approaches-with-therapeutic-foo
+ t-massage-tickets-2002756527687
+X-SOURCE:Keplinger Institute for Wellness and Art
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Personal Training with Lisa Keplinger
+DTSTART;TZID=America/New_York:20261201T100000
+DTEND;TZID=America/New_York:20261201T110000
+UID:721a13783b0a0629400c4047c17f7839@eventbrite.com
+DESCRIPTION:Build strength\, improve mobility\, and develop greater confid
+ ence through personalized training.The date shown on Eventbrite is a place
+ holder
+URL:https://www.eventbrite.com/e/personal-training-with-lisa-keplinger-tic
+ kets-1992022268228
+X-SOURCE:Keplinger Institute for Wellness and Art
+END:VEVENT
+END:VCALENDAR

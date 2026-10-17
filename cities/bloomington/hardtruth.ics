@@ -1,0 +1,73 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Hard Truth Distilling Co.//hardtruth.com//
+X-WR-CALNAME:Hard Truth Distilling Co.
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Live Music at Hard Truth on the Rocks
+DTSTART;TZID=America/Indiana/Indianapolis:20261016T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261016T210000
+UID:tribe-8616@hardtruth.com
+DESCRIPTION:Join us for live\, outdoor music at Hard Truth Distilling Co. 
+ with a performance from Banister Bluegrass.
+URL:https://hardtruth.com/event/live-music-on-the-rocks-10/
+X-SOURCE:Hard Truth Distilling Co.
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Live Music at Hard Truth on the Rocks
+DTSTART;TZID=America/Indiana/Indianapolis:20261017T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261017T210000
+UID:tribe-8610@hardtruth.com
+DESCRIPTION:Join us for live\, outdoor music at Hard Truth on the Rocks wi
+ th a performance from Chase N Tyler.
+URL:https://hardtruth.com/event/live-music-on-the-rocks-7/
+X-SOURCE:Hard Truth Distilling Co.
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Live Music at Hard Truth on the Rocks
+DTSTART;TZID=America/Indiana/Indianapolis:20261023T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261023T210000
+UID:tribe-8614@hardtruth.com
+DESCRIPTION:Join us for live\, outdoor music at Hard Truth Distilling Co. 
+ with a performance from Dean Metcalf Bluegrass.
+URL:https://hardtruth.com/event/live-music-on-the-rocks-9/
+X-SOURCE:Hard Truth Distilling Co.
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Live Music at Hard Truth on the Rocks
+DTSTART;TZID=America/Indiana/Indianapolis:20261024T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261024T210000
+UID:tribe-8612@hardtruth.com
+DESCRIPTION:Join us for live music at Hard Truth Distilling Co. with live 
+ performances from Rusty Bladen.
+URL:https://hardtruth.com/event/live-music-on-the-rocks-8/
+X-SOURCE:Hard Truth Distilling Co.
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Halloween: Live Music at Hard Truth on the Rocks
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T210000
+UID:tribe-8798@hardtruth.com
+DESCRIPTION:Join us Hallo-weekend for live music at Hard Truth Distilling 
+ Co. with live performances from Zion Crossroads.Break out your best costum
+ e and join the fun!
+URL:https://hardtruth.com/event/halloween-live-music-on-the-rocks/
+X-SOURCE:Hard Truth Distilling Co.
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Flannel 5k
+DTSTART;TZID=America/Indiana/Indianapolis:20261107T083000
+DTEND;TZID=America/Indiana/Indianapolis:20261107T133000
+UID:tribe-8310@hardtruth.com
+DESCRIPTION:Pull on your favorite flannel and join us for a day of trail r
+ acing\, fall colors\, and good company on Hard Truth’s scenic\, 325-acre
+  campus.Whether you’re looking to set a personal best\, team up with a f
+ riend\, or tackle a unique challenge\, there’s a race for everyone.The R
+ aces:5k Trail Run\, 9:30 a.m.: Run\, walk\, or creatively step your way al
+ ong our trail through the native hardwoods.10K Relay\, 9 a.m.: Teams of tw
+ o compete on our beautiful trails.Shot Mile (21+)\, 10 a.m.: This challeng
+ e is a quic
+URL:https://hardtruth.com/event/flannel-5k/
+X-SOURCE:Hard Truth Distilling Co.
+END:VEVENT
+END:VCALENDAR

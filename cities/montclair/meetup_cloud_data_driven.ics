@@ -1,0 +1,291 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Meetup//Meetup Calendar 1.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+NAME:Cloud Data Driven
+X-WR-CALNAME:Cloud Data Driven
+BEGIN:VTIMEZONE
+TZID:America/New_York
+TZURL:http://tzurl.org/zoneinfo-outlook/America/New_York
+X-LIC-LOCATION:America/New_York
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+X-SOURCE:Meetup: Cloud Data Driven
+X-SOURCE-URL:https://www.meetup.com/cloud-data-driven/
+UID:event_313358740@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T030205Z
+DTSTART;TZID=America/New_York:20260409T120000
+DTEND;TZID=America/New_York:20260409T133000
+SUMMARY:From Cosmos DB to AI: Search\, Analytics & Intelligent Experiences
+DESCRIPTION:Cloud Data Driven\n**Turn transactional data into powerful ins
+ ights and intelligent experiences 🚀**\n\nDiscover how to transform tran
+ sactional data from Azure Cosmos DB into actionable insights and AI-driven
+  applications. This session explores how to integrate Cosmos DB with Azure
+  Synapse for advanced analytics and with Azure AI Search to enable discove
+ rability\, context-aware interactions\, and a user-friendly interface for 
+ searching and retrieving data directly from Search.\n\nLearn how to implem
+ ent Retrieval-Augmented Generation (RAG) patterns and Agentic AI to build 
+ scalable\, cloud-native solutions that maintain transactional integrity wh
+ ile ensuring high searchability and enterprise-grade security.\n\n🔹 **L
+ evel:** Intermediate\n\n▬▬▬▬▬ About the community ▬▬▬▬
+ ▬\n📌Data Driven Community & Cloud Data-Driven user group\nThe Cloud D
+ ata-Driven User Group is the official user group of the Data-Driven Commun
+ ity\, hosting weekly meetings as part of our community-driven activities. 
+ For a full list of upcoming events and more details about our community\, 
+ visit: https://datadrivencommunity.com\n▬▬▬▬▬▬▬▬▬▬▬
+ ▬▬▬▬
+URL;VALUE=URI:https://www.meetup.com/cloud-data-driven/events/313358740/
+STATUS:CONFIRMED
+CREATED:20260214T200027Z
+LAST-MODIFIED:20260214T200027Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Cloud Data Driven
+X-SOURCE-URL:https://www.meetup.com/cloud-data-driven/
+UID:event_313895290@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T030205Z
+DTSTART;TZID=America/New_York:20260416T120000
+DTEND;TZID=America/New_York:20260416T133000
+SUMMARY:JSON in the world of MSSQL
+DESCRIPTION:Cloud Data Driven\nJSON (JavaScript Object Notation) is a lang
+ uage in depended\, very popular\, open standard format for data exchange b
+ etween applications and services.\n\nJSON support was introduced in MS SQL
+  2016\, enhanced in 2022. With the new "JSON data type"\, is now the time 
+ to finally complete the story and give to JSON everything he deserves?\nOn
+  this session accompanied by numerous examples we should pass through the 
+ usage and support of JSON in MS SQL.
+URL;VALUE=URI:https://www.meetup.com/cloud-data-driven/events/313895290/
+STATUS:CONFIRMED
+CREATED:20260322T144015Z
+LAST-MODIFIED:20260322T144015Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Cloud Data Driven
+X-SOURCE-URL:https://www.meetup.com/cloud-data-driven/
+UID:event_313895997@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T030205Z
+DTSTART;TZID=America/New_York:20260423T120000
+DTEND;TZID=America/New_York:20260423T133000
+SUMMARY:Agentic AI Finance: Governed Metrics\, Open Access\, Automated Act
+ ion on Databrick
+DESCRIPTION:Cloud Data Driven\nLarge finance organizations already rely on
+  dashboards and reports\, but the real challenge is enabling automation wi
+ thout breaking governance or auditability. This session shares how a globa
+ l finance organization implemented agent-driven workflows on the Databrick
+ s Data Intelligence Platform using Unity Catalog\, metrics views\, and ope
+ n lakehouse patterns.\n\nThe talk walks through a real implementation wher
+ e finance metrics are defined once using metrics views\, protected with at
+ tribute-based access control and automated classification\, and reused con
+ sistently across reporting\, analytics\, and automation. Power BI connects
+  directly to governed lakehouse tables and metrics for enterprise reportin
+ g\, while Iceberg-compliant clients consume Delta tables through Uniform\,
+  enabling open access without duplicating data.\n\nAgentic workflows obser
+ ve certified metrics and events\, assist with variance investigation\, ano
+ maly triage\, and operational follow-ups\, and propose actions that remain
+  traceable and reviewable. Early results indicated several hours of manual
+  investigation effort saved per reporting cycle and faster anomaly triage\
+ , without introducing additional governance or audit risk. The session inc
+ ludes an architecture walkthrough and demo using synthetic data\, reflecti
+ ng real finance constraints\, trade-offs\, and lessons learned when moving
+  from reporting to governed\, open\, and action-oriented analytics.
+URL;VALUE=URI:https://www.meetup.com/cloud-data-driven/events/313895997/
+STATUS:CONFIRMED
+CREATED:20260322T150331Z
+LAST-MODIFIED:20260322T150331Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Cloud Data Driven
+X-SOURCE-URL:https://www.meetup.com/cloud-data-driven/
+UID:event_313896196@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T030205Z
+DTSTART;TZID=America/New_York:20260430T120000
+DTEND;TZID=America/New_York:20260430T133000
+SUMMARY:Implementing Zero Trust Security in Modern Enterprise Data Archite
+ ctures​
+DESCRIPTION:Cloud Data Driven\nAs enterprise data ecosystems expand across
+  hybrid and multi-cloud environments\, traditional perimeter-based securit
+ y models are no longer sufficient to protect sensitive information. Organi
+ zations are increasingly adopting Zero Trust Architecture (ZTA) to secure 
+ complex data environments where information flows across distributed platf
+ orms\, services\, and organizational boundaries.\n\nThis session explores 
+ how Zero Trust principles can be applied to modern enterprise data archite
+ ctures\, with a focus on the security implications of federated and centra
+ lized data models. The discussion examines how these architectures approac
+ h identity management\, access control\, and data governance within a Zero
+  Trust framework. Federated architectures offer advantages in data soverei
+ gnty\, localized policy enforcement\, and distributed resilience\, while c
+ entralized architectures enable unified security policies\, centralized mo
+ nitoring\, and coordinated threat response.\n\nThe session will also highl
+ ight how AI-driven security capabilities are transforming Zero Trust imple
+ mentations by enabling real-time threat detection\, behavioral analytics\,
+  and automated response mechanisms. Additionally\, the talk will address s
+ trategies for protecting AI-powered data pipelines\, maintaining data line
+ age visibility\, and ensuring compliance with evolving regulatory requirem
+ ents.\n\nAttendees will gain practical insights into designing secure\, sc
+ alable enterprise data systems\, understanding the trade-offs between fede
+ rated and centralized models\, and implementing Zero Trust strategies that
+  strengthen data protection in AI-enabled environments.
+URL;VALUE=URI:https://www.meetup.com/cloud-data-driven/events/313896196/
+STATUS:CONFIRMED
+CREATED:20260322T152552Z
+LAST-MODIFIED:20260322T152552Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Cloud Data Driven
+X-SOURCE-URL:https://www.meetup.com/cloud-data-driven/
+UID:event_314132913@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T030205Z
+DTSTART;TZID=America/New_York:20260507T120000
+DTEND;TZID=America/New_York:20260507T133000
+SUMMARY:SQL Supercharged: Azure\, Fabric & Copilot in Action
+DESCRIPTION:Cloud Data Driven\nGet ready to explore the **next generation 
+ of SQL innovation** across Azure SQL\, SQL Server\, and the brand‑new **
+ SQL in Microsoft Fabric**. We’ll break down what’s changing\, why it m
+ atters\, and how you can start taking advantage of these capabilities imme
+ diately.\n\n🔹 **Azure SQL & SQL on Fabric** See how the newest features
+ —**database mirroring\, real‑time analytics\, and intelligent performa
+ nce insights**—unlock scenarios that were impossible just a year ago.\n\
+ n🔹 **SQL Server: What’s Coming Next** Preview the upcoming SQL Server
+  release with a focus on **performance enhancements\, security improvement
+ s\, and operational efficiency** that will reshape how teams build and man
+ age data systems.\n\n🔹 **Copilot for Data Professionals** Watch how Cop
+ ilot transforms the way we **query\, manage\, and reason about data**\, ac
+ celerating productivity and simplifying complex tasks across the SQL ecosy
+ stem.\n\nIf you’re working in data engineering\, analytics\, or database
+  administration\, this session will give you **practical\, future‑ready 
+ insights** you can apply right away.\n\n**Register now and join us—don
+ ’t miss this deep dive into the future of SQL.**
+URL;VALUE=URI:https://www.meetup.com/cloud-data-driven/events/314132913/
+STATUS:CONFIRMED
+CREATED:20260405T141347Z
+LAST-MODIFIED:20260405T141347Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Cloud Data Driven
+X-SOURCE-URL:https://www.meetup.com/cloud-data-driven/
+UID:event_314133091@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T030205Z
+DTSTART;TZID=America/New_York:20260514T120000
+DTEND;TZID=America/New_York:20260514T133000
+SUMMARY:Silent Failures in AI Data Systems: Risk Drift in Pipelines​
+DESCRIPTION:Cloud Data Driven\nAs AI becomes embedded in cloud data platfo
+ rms\, organizations are encountering failure modes that differ fundamental
+ ly from traditional deterministic systems. In contrast to binary failures\
+ , AI-augmented pipelines often degrade silently\, with quality erosion eme
+ rging gradually and compounding over time.\n\nThis talk explores key failu
+ re patterns in production AI data systems. Drawing from machine learning s
+ ystems research\, we examine how data and concept drift can persist undete
+ cted as models continue producing outputs despite shifting feature distrib
+ utions. The risk intensifies in chained pipelines\, where probabilistic er
+ rors compound across stages—for example\, when upstream model inaccuraci
+ es propagate and amplify downstream.\n\nWe also analyze non-deterministic 
+ inference behavior\, which complicates reproducibility\, auditability\, an
+ d root cause analysis in cloud environments. The session highlights risks 
+ of AI-generated data contamination\, where synthetic outputs are mistakenl
+ y treated as ground truth\, accelerating feedback loops and long-term mode
+ l degradation.\n\nAt the infrastructure level\, we discuss challenges such
+  as non-linear inference cost scaling\, observability gaps that mask seman
+ tic failures\, and automation complacency that reduces human oversight.\n\
+ nThe talk concludes with practical design principles for cloud data system
+ s\, including metadata-first architectures\, explicit trust boundaries\, a
+ nd human-in-the-loop checkpoints to build resilient\, auditable\, and trus
+ tworthy AI-driven pipelines.
+URL;VALUE=URI:https://www.meetup.com/cloud-data-driven/events/314133091/
+STATUS:CONFIRMED
+CREATED:20260405T144742Z
+LAST-MODIFIED:20260405T144742Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Cloud Data Driven
+X-SOURCE-URL:https://www.meetup.com/cloud-data-driven/
+UID:event_314133019@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T030205Z
+DTSTART;TZID=America/New_York:20260521T120000
+DTEND;TZID=America/New_York:20260521T133000
+SUMMARY:SQL Server 2025: The Future of Data Starts Here
+DESCRIPTION:Cloud Data Driven\nSQL Server 2025 is more than just an upgrad
+ e—it’s a leap forward. From becoming an AI-ready database to deliverin
+ g modern development tools\, this release is packed with innovations that 
+ redefine performance\, scalability\, and productivity.\n\nIn this session\
+ , you’ll see demos and practical examples showcasing a wide range of enh
+ ancements\, including:\n\nImproved JSON handling\nT‑SQL REST API integra
+ tion\nExpanded T‑SQL functionality\, including fuzzy string matching and
+  regular expression support\nTime‑bound Extended Events\nChange event st
+ reaming for real‑time data integration\nMirroring in Microsoft Fabric\nU
+ pdates to change tracking and columnstore indexes\n\nWhether you’re a de
+ veloper\, DBA\, or architect\, this session will help you understand where
+  SQL Server 2025 fits into your broader data platform strategy. Join us to
+  explore what’s new and improved in SQL Server 2025!
+URL;VALUE=URI:https://www.meetup.com/cloud-data-driven/events/314133019/
+STATUS:CONFIRMED
+CREATED:20260405T143339Z
+LAST-MODIFIED:20260405T143339Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Cloud Data Driven
+X-SOURCE-URL:https://www.meetup.com/cloud-data-driven/
+UID:event_314133608@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T030205Z
+DTSTART;TZID=America/New_York:20260528T120000
+DTEND;TZID=America/New_York:20260528T133000
+SUMMARY:Centralized Data Lakes in the Cloud: Scalable and Governed Archite
+ ctures
+DESCRIPTION:Cloud Data Driven\nGlobal data creation is projected to reach 
+ 175 zettabytes\, with enterprises managing the majority of this growth. In
+  data-intensive industries\, organizations process an average of 9.1 petab
+ ytes per enterprise\, exposing the limitations of traditional data warehou
+ ses. Yet 76% of organizations struggle with data lake governance\, and 68%
+  lack clear data ownership.\n\nThis session presents a research-backed fra
+ mework for building centralized\, cloud-based data lakes that deliver meas
+ urable improvements in performance\, cost\, and governance. Mature impleme
+ ntations achieve 3.2× faster time-to-insight\, 54% reduction in data prep
+ aration effort\, and 59.3% lower storage costs. Multi-layered architecture
+ s improve query performance by 73%\, increase resource utilization by 81%\
+ , and reduce bottlenecks by 67.4%.\n\nCloud-native distributed storage sup
+ ports 3.2× higher performance for mixed workloads\, enables 8.7× more co
+ ncurrent users\, and delivers 99.99% availability. Beyond architecture\, s
+ trong governance and master data management reduce inconsistencies by 83.6
+ %\, increase data utilization by 412%\, and improve decision-making speed 
+ by 47.2%.\n\nSecurity-by-design approaches reduce unauthorized access by 7
+ 8.4%\, lower breach likelihood by 56.2%\, and decrease compliance penaltie
+ s by 85.4%.\n\nAttendees will gain practical\, data-driven strategies to d
+ esign scalable\, secure\, and governance-centric cloud data lakes.
+URL;VALUE=URI:https://www.meetup.com/cloud-data-driven/events/314133608/
+STATUS:CONFIRMED
+CREATED:20260405T150512Z
+LAST-MODIFIED:20260405T150512Z
+CLASS:PUBLIC
+END:VEVENT
+X-ORIGINAL-URL:https://www.meetup.com/cloud-data-driven/events/ical/
+X-WR-CALNAME:Cloud Data Driven
+END:VCALENDAR
