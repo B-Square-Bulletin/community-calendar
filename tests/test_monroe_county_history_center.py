@@ -61,8 +61,8 @@ class TestUserAgent:
         )
 
 
-class TestSiteGroundChallenge:
-    """A challenge is a block, not an empty calendar."""
+class TestListingFailure:
+    """A failed listing page is a block or a truncation, not an empty calendar."""
 
     def test_first_page_challenge_fails_the_run(self, caplog):
         """A blocked first page is a broken ingest, not a dormant calendar."""
@@ -116,6 +116,27 @@ class TestSiteGroundChallenge:
 
         assert len(events) == 1
         assert not any("captcha" in r.message for r in caplog.records)
+        assert not any(r.levelno >= logging.WARNING for r in caplog.records), (
+            "a 400 past the last page is the normal end-of-list signal, not a warning"
+        )
+
+    def test_later_page_error_is_logged(self, caplog):
+        """A truncated later page names its status in the build log."""
+        scraper = HistoryCenterScraper()
+        page_one = _mock_response(200, "")
+        page_one.json.return_value = [EVENT_ITEM]
+
+        with (
+            patch(
+                "scrapers.monroe_county_history_center.requests.get",
+                side_effect=[page_one, _mock_response(500, "Internal Error")],
+            ),
+            caplog.at_level(logging.WARNING, logger="HistoryCenterScraper"),
+        ):
+            events = scraper.fetch_events()
+
+        assert len(events) == 1
+        assert any("page 2 returned HTTP 500" in r.message for r in caplog.records)
 
     def test_partial_pages_kept_when_challenge_hits_later_page(self, caplog):
         """A mid-pagination block keeps earlier pages, not an empty calendar.
