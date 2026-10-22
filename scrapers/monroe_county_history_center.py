@@ -101,15 +101,15 @@ class HistoryCenterScraper(BaseScraper):
             )
             if response.status_code != 200:
                 # A first-page failure is a broken ingest, not a dormant
-                # calendar: raise so feed-health reports a scraper failure
-                # instead of a valid-empty (quiet) source. Later pages keep what
-                # was already parsed; only their unfetched uids are swept from
-                # the city, subject to the 50% partial-load guard (ADR 0017).
-                # A 400 is end-of-list only past the last page, never on page 1.
+                # calendar: raise so feed-health reports a scraper failure, not
+                # a quiet source. A 400 is end-of-list only past the last page.
+                # Later pages keep what was already parsed, so the source stays
+                # present and only its unfetched uids are swept, subject to the
+                # 50% guard (ADR 0017). An absent source is never swept at all.
                 if "sgcaptcha" in response.text:
                     self.logger.warning(
                         f"SiteGround captcha challenge on listing page {page} "
-                        f"(HTTP {response.status_code}); stopping"
+                        f"(HTTP {response.status_code})"
                     )
                 if page == 1:
                     raise RuntimeError(
