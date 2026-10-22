@@ -9,7 +9,7 @@
 -- Or:  make test-sql
 
 BEGIN;
-SELECT plan(8);
+SELECT plan(11);
 
 INSERT INTO feeds (city, url, name, status, feed_type, source_ids)
 VALUES
@@ -17,7 +17,9 @@ VALUES
 ('test_rf', 'https://example.invalid/test_rf_b.ics', 'Feed B', 'active', 'ics_url', ARRAY['feed_b']),
 ('test_rf', 'https://example.invalid/test_rf_c.ics', 'Feed C', 'active', 'ics_url', ARRAY[]::text[]),
 ('test_rf', 'https://example.invalid/test_rf_d.ics', 'Shared Name', 'active', 'ics_url', ARRAY['feed_d']),
-('test_rf', 'https://example.invalid/test_rf_e.ics', 'Shared Name', 'active', 'ics_url', ARRAY['feed_e']);
+('test_rf', 'https://example.invalid/test_rf_e.ics', 'Shared Name', 'active', 'ics_url', ARRAY['feed_e']),
+('test_rf', 'https://example.invalid/test_rf_f.ics', 'Feed F', 'active', 'ics_url', ARRAY['shared_stem']),
+('test_rf', 'https://example.invalid/test_rf_g.ics', 'Feed G', 'active', 'ics_url', ARRAY['shared_stem']);
 
 INSERT INTO events (city, title, start_time, source, source_id, source_uid, source_names)
 VALUES
@@ -26,7 +28,9 @@ VALUES
 ('test_rf', 'Feed B only', now(), 'Feed B', 'feed_b', 'uid-b-only', ARRAY['Feed B']),
 ('test_rf', 'Legacy Feed C row', now(), 'Feed C', 'legacy_c_stem', 'uid-c-legacy', ARRAY['Feed C']),
 ('test_rf', 'Shared-name row owned by D', now(), 'Shared Name', 'feed_d', 'uid-d-shared', ARRAY['Shared Name']),
-('test_rf', 'Shared-name row owned by E', now(), 'Shared Name', 'feed_e', 'uid-e-shared', ARRAY['Shared Name']);
+('test_rf', 'Shared-name row owned by E', now(), 'Shared Name', 'feed_e', 'uid-e-shared', ARRAY['Shared Name']),
+('test_rf', 'Shared-stem row owned by F', now(), 'Feed F', 'shared_stem', 'uid-f-shared', ARRAY['Feed F']),
+('test_rf', 'Shared-stem row owned by G', now(), 'Feed G', 'shared_stem', 'uid-g-shared', ARRAY['Feed G']);
 
 INSERT INTO auth.users (id, instance_id, aud, role, email)
 VALUES (
@@ -38,7 +42,8 @@ VALUES (
 INSERT INTO picks (user_id, event_id)
 VALUES
 ('00000000-0000-0000-0000-000000000232', (SELECT id FROM events WHERE source_uid = 'uid-a-owns')),
-('00000000-0000-0000-0000-000000000232', (SELECT id FROM events WHERE source_uid = 'uid-b-owns'));
+('00000000-0000-0000-0000-000000000232', (SELECT id FROM events WHERE source_uid = 'uid-b-owns')),
+('00000000-0000-0000-0000-000000000232', (SELECT id FROM events WHERE source_uid = 'uid-g-shared'));
 
 -- Remove Feed A: the survivor it won must go; Feed B's survivor must stay.
 SELECT remove_feed((SELECT id FROM feeds WHERE city = 'test_rf' AND name = 'Feed A'));
@@ -75,8 +80,8 @@ SELECT is(
         SELECT count(*)::int FROM picks
         WHERE user_id = '00000000-0000-0000-0000-000000000232'
     ),
-    1,
-    'the other feed''s saved pick survives and the retired event''s pick is gone'
+    2,
+    'the other feeds'' saved picks survive and the retired event''s pick is gone'
 );
 
 -- Feed C has no recorded source_id: the name fallback still clears its rows.
@@ -119,12 +124,49 @@ SELECT is(
     'a same-name feed''s row is left to the feed that owns it'
 );
 
+-- Two feeds can produce the same stem (bloomington's two events.in.gov rows
+-- both slug to events_search_events_ics). That stem identifies neither feed
+-- exclusively, so neither feed's rows may be deleted through it.
+SELECT remove_feed(
+    (
+        SELECT id FROM feeds
+        WHERE city = 'test_rf' AND name = 'Feed F'
+    )
+);
+
+SELECT is(
+    (
+        SELECT count(*)::int FROM events
+        WHERE city = 'test_rf' AND source_uid = 'uid-f-shared'
+    ),
+    1,
+    'rows under a shared source_id are left in place when their feed retires'
+);
+
+SELECT is(
+    (
+        SELECT count(*)::int FROM events
+        WHERE city = 'test_rf' AND source_uid = 'uid-g-shared'
+    ),
+    1,
+    'the other feed keeps the rows it built under the shared source_id'
+);
+
+SELECT is(
+    (
+        SELECT count(*)::int FROM picks
+        WHERE user_id = '00000000-0000-0000-0000-000000000232'
+    ),
+    2,
+    'saved picks on shared-source_id events survive the retirement'
+);
+
 SELECT is(
     (
         SELECT count(*)::int FROM feeds
         WHERE city = 'test_rf'
     ),
-    2,
+    3,
     'each removal deletes only its own feed row'
 );
 

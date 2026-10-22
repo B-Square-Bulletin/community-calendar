@@ -537,10 +537,10 @@ class TestRecordFeedSources:
     """remove_feed reads feeds.source_ids, so a wrong payload here silently
     disables survivor deletion (#232)."""
 
-    def test_patches_the_stem_and_activates_only_pending_rows(self, monkeypatch):
+    def test_posts_the_stem_and_activates_only_pending_rows(self, monkeypatch):
         monkeypatch.setenv("SUPABASE_URL", "https://fake.supabase.co")
         monkeypatch.setenv("SUPABASE_SERVICE_KEY", "service-key")
-        sent: list[tuple[str, dict]] = []
+        sent: list[tuple[str, str, dict]] = []
 
         class FakeResponse:
             def __enter__(self):
@@ -550,7 +550,7 @@ class TestRecordFeedSources:
                 return False
 
         def fake_urlopen(req, timeout=None):
-            sent.append((req.get_method(), json.loads(req.data)))
+            sent.append((req.get_method(), req.full_url, json.loads(req.data)))
             return FakeResponse()
 
         monkeypatch.setattr(df.urllib.request, "urlopen", fake_urlopen)
@@ -563,7 +563,6 @@ class TestRecordFeedSources:
                     "name": "Example",
                     "feed_type": "ics_url",
                     "status": "active",
-                    "source_ids": ["example_feed_ics"],
                 },
                 {
                     "id": 8,
@@ -571,16 +570,27 @@ class TestRecordFeedSources:
                     "name": "Tockify",
                     "feed_type": "curator",
                     "status": "pending",
-                    "source_ids": [],
                 },
             ]
         )
 
-        assert [body for _, body in sent] == [
-            {"source_ids": ["example_feed_ics"]},
-            {"source_ids": ["tockify_examplefarmers"], "status": "active"},
+        assert sent == [
+            (
+                "POST",
+                "https://fake.supabase.co/rest/v1/rpc/record_feed_source",
+                {"p_feed_id": 7, "p_source_id": "example_feed_ics"},
+            ),
+            (
+                "POST",
+                "https://fake.supabase.co/rest/v1/rpc/record_feed_source",
+                {"p_feed_id": 8, "p_source_id": "tockify_examplefarmers"},
+            ),
+            (
+                "PATCH",
+                "https://fake.supabase.co/rest/v1/feeds?id=eq.8",
+                {"status": "active"},
+            ),
         ]
-        assert {method for method, _ in sent} == {"PATCH"}
 
     def test_a_failed_patch_is_reported_not_raised(self, monkeypatch, capsys):
         monkeypatch.setenv("SUPABASE_URL", "https://fake.supabase.co")
@@ -599,7 +609,6 @@ class TestRecordFeedSources:
                     "name": "Example",
                     "feed_type": "ics_url",
                     "status": "active",
-                    "source_ids": [],
                 }
             ]
         )

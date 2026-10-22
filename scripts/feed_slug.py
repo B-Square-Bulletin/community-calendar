@@ -24,14 +24,6 @@ def source_id_for(feed_type: str, url: str) -> str:
     return Path(url).stem if feed_type == "scraper" else slugify(url)
 
 
-def add_source_id(existing, source_id: str) -> list[str]:
-    """Append a source_id to a feed's history, keeping order, ignoring repeats."""
-    ids = list(existing or [])
-    if source_id and source_id not in ids:
-        ids.append(source_id)
-    return ids
-
-
 def slugify(url: str) -> str:
     """Generate a readable, collision-resistant filename slug from a feed URL."""
     parsed = urlparse(url)

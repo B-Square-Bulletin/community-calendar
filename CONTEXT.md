@@ -37,7 +37,7 @@ The technical mechanism that delivers events from a source — an ICS URL or a s
 _Avoid_: URL, scraper (when referring to the abstraction)
 
 **Source id**:
-The `.ics` filename stem a feed's build produces — a scraper's output filename, or the slug of an ICS URL. The build stamps it on every event as `X-SOURCE-ID` and records it on the feed row in `feeds.source_ids`, which is a history because a feed's URL can change. Stable per feed, unlike the display `source`, which becomes a comma-joined aggregate after a Merge.
+The `.ics` filename stem a feed's build produces — a scraper's output filename, or the slug of an ICS URL. The build stamps it on every event as `X-SOURCE-ID` and records it on the feed row in `feeds.source_ids`, which is a history because a feed's URL can change. Stable per feed, unlike the display `source`, which becomes a comma-joined aggregate after a Merge. A stem that two same-city feeds share identifies neither exclusively; retirement keeps those rows.
 _Avoid_: Source name, slug (when the identity is meant)
 
 **Feed-owned survivor**:

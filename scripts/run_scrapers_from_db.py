@@ -30,7 +30,7 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-from feed_slug import add_source_id, source_id_for
+from feed_slug import source_id_for
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -81,7 +81,7 @@ def query_db_scraper_rows(city: str) -> tuple[list[dict] | None, str | None]:
 
     query = (
         f"{supabase_url}/rest/v1/feeds"
-        f"?select=id,city,url,name,scraper_cmd,status,source_ids"
+        f"?select=id,city,url,name,scraper_cmd,status"
         f"&city=eq.{urllib.parse.quote(city)}"
         f"&feed_type=eq.scraper"
         f"&status=in.(active,pending)"
@@ -118,7 +118,6 @@ def query_db_scraper_rows(city: str) -> tuple[list[dict] | None, str | None]:
                 "feed_type": "scraper",
                 "scraper_cmd": ensure_output_flag(row["scraper_cmd"].strip(), row["url"]),
                 "name_source": "db",
-                "source_ids": row.get("source_ids") or [],
             }
         )
     return rows, None
@@ -208,14 +207,11 @@ def record_source_id(row: dict) -> None:
     if not supabase_url or not service_key or not row.get("id"):
         return
     payload = {
-        # shortcut: overlapping builds can overwrite each other's append; add a
-        # server-side append RPC if builds ever overlap.
-        "source_ids": add_source_id(
-            row.get("source_ids"), source_id_for(row["feed_type"], row["url"])
-        )
+        "p_feed_id": row["id"],
+        "p_source_id": source_id_for(row["feed_type"], row["url"]),
     }
     req = urllib.request.Request(
-        f"{supabase_url}/rest/v1/feeds?id=eq.{row['id']}",
+        f"{supabase_url}/rest/v1/rpc/record_feed_source",
         data=json.dumps(payload).encode(),
         headers={
             "apikey": service_key,
@@ -223,7 +219,7 @@ def record_source_id(row: dict) -> None:
             "Content-Type": "application/json",
             "Prefer": "return=minimal",
         },
-        method="PATCH",
+        method="POST",
     )
     try:
         urllib.request.urlopen(req, timeout=30)

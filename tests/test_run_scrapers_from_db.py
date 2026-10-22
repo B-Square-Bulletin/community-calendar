@@ -19,17 +19,16 @@ def _row(**overrides):
         "name": "IU Events",
         "feed_type": "scraper",
         "scraper_cmd": "python scrapers/example.py --output cities/bloomington/iu_events.ics",
-        "source_ids": [],
     }
     row.update(overrides)
     return row
 
 
 class TestRecordSourceId:
-    def test_patches_the_output_stem(self, monkeypatch):
+    def test_posts_the_output_stem(self, monkeypatch):
         monkeypatch.setenv("SUPABASE_URL", "https://fake.supabase.co")
         monkeypatch.setenv("SUPABASE_SERVICE_KEY", "service-key")
-        sent: list[tuple[str, dict]] = []
+        sent: list[tuple[str, str, dict]] = []
 
         class FakeResponse:
             def __enter__(self):
@@ -39,22 +38,23 @@ class TestRecordSourceId:
                 return False
 
         def fake_urlopen(req, timeout=None):
-            sent.append((req.full_url, json.loads(req.data)))
+            sent.append((req.get_method(), req.full_url, json.loads(req.data)))
             return FakeResponse()
 
         monkeypatch.setattr(rs.urllib.request, "urlopen", fake_urlopen)
 
-        rs.record_source_id(_row(source_ids=["old_stem"]))
+        rs.record_source_id(_row())
 
         assert sent == [
             (
-                "https://fake.supabase.co/rest/v1/feeds?id=eq.4",
-                {"source_ids": ["old_stem", "iu_events"]},
+                "POST",
+                "https://fake.supabase.co/rest/v1/rpc/record_feed_source",
+                {"p_feed_id": 4, "p_source_id": "iu_events"},
             )
         ]
 
     def test_rows_without_an_id_are_skipped(self, monkeypatch):
-        """feeds.txt fallback rows have no DB id, so there is nothing to PATCH."""
+        """feeds.txt fallback rows have no DB id, so there is nothing to record."""
         monkeypatch.setenv("SUPABASE_URL", "https://fake.supabase.co")
         monkeypatch.setenv("SUPABASE_SERVICE_KEY", "service-key")
 

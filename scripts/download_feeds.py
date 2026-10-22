@@ -18,7 +18,7 @@ import urllib.request
 from pathlib import Path
 from urllib.parse import urlparse
 
-from feed_slug import add_source_id, slugify, source_id_for
+from feed_slug import slugify, source_id_for
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
 
 
@@ -105,7 +105,7 @@ def fetch_feeds_from_db(city: str):
 
     query_url = (
         f"{supabase_url}/rest/v1/feeds"
-        f"?select=id,url,name,status,fallback_url,feed_type,source_ids"
+        f"?select=id,url,name,status,fallback_url,feed_type"
         f"&city=eq.{city}"
         f"&status=in.(active,pending)"
         f"&feed_type=in.(ics_url,curator)"
@@ -149,25 +149,33 @@ def record_feed_sources(feeds_to_record):
         "Prefer": "return=minimal",
     }
     for feed in feeds_to_record:
-        payload: dict[str, object] = {
-            # shortcut: overlapping builds can overwrite each other's append;
-            # add a server-side append RPC if builds ever overlap.
-            "source_ids": add_source_id(
-                feed.get("source_ids"), source_id_for(feed["feed_type"], feed["url"])
-            )
-        }
-        if feed.get("status") == "pending":
-            payload["status"] = "active"
-        patch_url = f"{supabase_url}/rest/v1/feeds?id=eq.{feed['id']}"
-        data = json.dumps(payload).encode()
-        req = urllib.request.Request(patch_url, data=data, headers=headers, method="PATCH")
+        source_id = source_id_for(feed["feed_type"], feed["url"])
+        data = json.dumps({"p_feed_id": feed["id"], "p_source_id": source_id}).encode()
+        req = urllib.request.Request(
+            f"{supabase_url}/rest/v1/rpc/record_feed_source",
+            data=data,
+            headers=headers,
+            method="POST",
+        )
         try:
             urllib.request.urlopen(req, timeout=_DB_TIMEOUT_SECONDS)
         except OSError as e:
             print(f"  ⚠️  Failed to record source_id: {feed['name']}: {e}")
             continue
-        if feed.get("status") == "pending":
+        if feed.get("status") != "pending":
+            continue
+        data = json.dumps({"status": "active"}).encode()
+        req = urllib.request.Request(
+            f"{supabase_url}/rest/v1/feeds?id=eq.{feed['id']}",
+            data=data,
+            headers=headers,
+            method="PATCH",
+        )
+        try:
+            urllib.request.urlopen(req, timeout=_DB_TIMEOUT_SECONDS)
             print(f"  ✅ Marked active: {feed['name']}")
+        except OSError as e:
+            print(f"  ⚠️  Failed to mark active: {feed['name']}: {e}")
 
 
 # NOTE: browncounty.com's MEC v7.25.0 used to export UTC values mislabeled with

@@ -12,7 +12,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
-from scripts.feed_slug import add_source_id, slugify, source_id_for
+from scripts.feed_slug import slugify, source_id_for
 
 ACS = "https://www.ashevillecityschools.net/fs/calendar-manager/events.ics"
 
@@ -122,11 +122,3 @@ class TestSourceId:
             source_id_for("curator", "https://example.com/functions/v1/my-picks")
             == "example_functions_v1"
         )
-
-    def test_history_append_keeps_order_and_ignores_duplicates(self):
-        assert add_source_id(None, "feed_a") == ["feed_a"]
-        assert add_source_id(["feed_a"], "feed_a") == ["feed_a"]
-        assert add_source_id(["feed_a"], "feed_b") == ["feed_a", "feed_b"]
-
-    def test_blank_source_id_is_not_recorded(self):
-        assert add_source_id(["feed_a"], "") == ["feed_a"]

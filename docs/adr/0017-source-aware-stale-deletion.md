@@ -94,6 +94,16 @@ name arm still deletes a feed's plain rows, but not a survivor the feed owns,
 whose `source` is the comma-joined list — a survivor can outlive its owner
 until that feed completes one build.
 
+A stem is an exclusive identity only while one feed claims it. Two same-city
+feeds can produce the same stem: Bloomington's two `events.in.gov` rows both
+slug to `events_search_events_ics`, because the general slug drops the query
+string. `remove_feed` keeps rows that carry a stem another same-city feed also
+claims, and warns. Those rows stay until the feeds are disambiguated.
+
+`record_feed_source` appends server-side instead of writing a whole array, so
+two overlapping builds — the workflow has no concurrency group — cannot erase
+each other's stems.
+
 Retiring the owner of a survivor deletes the survivor even when another member
 feed still lists the event. The next build recreates that event under a new row
 id, and picks saved on the old row are gone with it. The alternative — keeping
