@@ -133,9 +133,10 @@ def record_feed_sources(feeds_to_record):
 
     source_ids is the feed's history of produced .ics stems; remove_feed needs
     it to delete the merge survivors the feed owns (#232). The stem follows from
-    the feed's url, so a pending row whose fetch failed still records it. A
-    failed PATCH leaves the mapping stale until the next build, and remove_feed
-    falls back to matching by name.
+    the feed's url, so every row records it, whether or not this run wrote a
+    file: a feed that has failed every build since deploy must still map.
+    A failed PATCH leaves the mapping stale until the next build, and
+    remove_feed falls back to matching by name.
     """
     supabase_url = os.environ.get("SUPABASE_URL")
     service_key = os.environ.get("SUPABASE_SERVICE_KEY")
@@ -149,6 +150,8 @@ def record_feed_sources(feeds_to_record):
     }
     for feed in feeds_to_record:
         payload: dict[str, object] = {
+            # shortcut: overlapping builds can overwrite each other's append;
+            # add a server-side append RPC if builds ever overlap.
             "source_ids": add_source_id(
                 feed.get("source_ids"), source_id_for(feed["feed_type"], feed["url"])
             )
@@ -345,7 +348,6 @@ def download_feeds(city: str) -> None:
         print(f"  Using feeds.txt ({len(feed_list)} feeds)")
 
     count = 0
-    downloaded_urls = set()
     last_request_at: dict[str, float] = {}
     for url, friendly_name, fallback_url in feed_list:
         filename = slugify(url) + ".ics"
@@ -364,7 +366,6 @@ def download_feeds(city: str) -> None:
 
         # Report result
         if ok:
-            downloaded_urls.add(url)
             try:
                 with outfile.open() as ics:
                     events = ics.read().count("BEGIN:VEVENT")
@@ -386,16 +387,10 @@ def download_feeds(city: str) -> None:
 
     print(f"Downloaded {count} feeds for {city}")
 
-    # Record downloaded feeds' source_id; pending rows are activated either way
-    # (the pre-#232 behavior: activation never depended on the fetch result).
+    # Record every row's source_id: the stem follows from the url, so a feed
+    # that failed this run must still map for a later retirement (#232).
     if db_feeds_by_url:
-        record_feed_sources(
-            [
-                f
-                for url, f in db_feeds_by_url.items()
-                if url in downloaded_urls or f.get("status") == "pending"
-            ]
-        )
+        record_feed_sources(db_feeds_by_url.values())
 
 
 if __name__ == "__main__":

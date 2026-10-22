@@ -9,8 +9,10 @@ ALTER TABLE feeds ADD COLUMN source_ids text[] NOT NULL DEFAULT '{}';
 
 -- remove_feed now matches by source_id (the feed's own rows, including a merge
 -- survivor whose comma-joined `source` hides its owner) and keeps the old
--- exact-name match for rows built before the mapping existed. A feed with no
--- recorded history falls back to the name match with a warning.
+-- exact-name match for rows built before the mapping existed. The name arm
+-- skips rows another same-city feed's history owns, so feeds that share a
+-- display name cannot delete each other's events. A feed with no recorded
+-- history falls back to the name match with a warning.
 CREATE OR REPLACE FUNCTION remove_feed(feed_id bigint)
 RETURNS TABLE (events_deleted bigint, feed_deleted boolean)
 LANGUAGE plpgsql SECURITY DEFINER
@@ -34,7 +36,18 @@ BEGIN
 
   DELETE FROM events e
   WHERE e.city = f.city
-    AND ((has_history AND e.source_id = ANY(f.source_ids)) OR e.source = f.name);
+    AND (
+      (has_history AND e.source_id = ANY(f.source_ids))
+      OR (
+        e.source = f.name
+        AND NOT EXISTS (
+          SELECT 1 FROM feeds o
+          WHERE o.city = f.city
+            AND o.id <> feed_id
+            AND e.source_id = ANY(o.source_ids)
+        )
+      )
+    );
   GET DIAGNOSTICS ev_count = ROW_COUNT;
 
   DELETE FROM feeds WHERE id = feed_id;

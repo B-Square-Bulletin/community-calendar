@@ -9,20 +9,24 @@
 -- Or:  make test-sql
 
 BEGIN;
-SELECT plan(6);
+SELECT plan(8);
 
 INSERT INTO feeds (city, url, name, status, feed_type, source_ids)
 VALUES
 ('test_rf', 'https://example.invalid/test_rf_a.ics', 'Feed A', 'active', 'ics_url', ARRAY['feed_a']),
 ('test_rf', 'https://example.invalid/test_rf_b.ics', 'Feed B', 'active', 'ics_url', ARRAY['feed_b']),
-('test_rf', 'https://example.invalid/test_rf_c.ics', 'Feed C', 'active', 'ics_url', ARRAY[]::text[]);
+('test_rf', 'https://example.invalid/test_rf_c.ics', 'Feed C', 'active', 'ics_url', ARRAY[]::text[]),
+('test_rf', 'https://example.invalid/test_rf_d.ics', 'Shared Name', 'active', 'ics_url', ARRAY['feed_d']),
+('test_rf', 'https://example.invalid/test_rf_e.ics', 'Shared Name', 'active', 'ics_url', ARRAY['feed_e']);
 
 INSERT INTO events (city, title, start_time, source, source_id, source_uid, source_names)
 VALUES
 ('test_rf', 'Survivor owned by A', now(), 'Feed A, Feed B', 'feed_a', 'uid-a-owns', ARRAY['Feed A', 'Feed B']),
 ('test_rf', 'Survivor owned by B', now(), 'Feed A, Feed B', 'feed_b', 'uid-b-owns', ARRAY['Feed A', 'Feed B']),
 ('test_rf', 'Feed B only', now(), 'Feed B', 'feed_b', 'uid-b-only', ARRAY['Feed B']),
-('test_rf', 'Legacy Feed C row', now(), 'Feed C', 'legacy_c_stem', 'uid-c-legacy', ARRAY['Feed C']);
+('test_rf', 'Legacy Feed C row', now(), 'Feed C', 'legacy_c_stem', 'uid-c-legacy', ARRAY['Feed C']),
+('test_rf', 'Shared-name row owned by D', now(), 'Shared Name', 'feed_d', 'uid-d-shared', ARRAY['Shared Name']),
+('test_rf', 'Shared-name row owned by E', now(), 'Shared Name', 'feed_e', 'uid-e-shared', ARRAY['Shared Name']);
 
 INSERT INTO auth.users (id, instance_id, aud, role, email)
 VALUES (
@@ -87,12 +91,40 @@ SELECT is(
     'a feed without source_ids still deletes its rows by name'
 );
 
+-- Two feeds share a display name: the name arm must not touch the other
+-- feed's rows, whose source_id belongs to its history.
+SELECT remove_feed(
+    (
+        SELECT id FROM feeds
+        WHERE city = 'test_rf' AND name = 'Shared Name'
+          AND url LIKE '%_d.ics'
+    )
+);
+
+SELECT is(
+    (
+        SELECT count(*)::int FROM events
+        WHERE city = 'test_rf' AND source_uid = 'uid-d-shared'
+    ),
+    0,
+    'the retiring feed''s shared-name row is deleted'
+);
+
+SELECT is(
+    (
+        SELECT count(*)::int FROM events
+        WHERE city = 'test_rf' AND source_uid = 'uid-e-shared'
+    ),
+    1,
+    'a same-name feed''s row is left to the feed that owns it'
+);
+
 SELECT is(
     (
         SELECT count(*)::int FROM feeds
         WHERE city = 'test_rf'
     ),
-    1,
+    2,
     'each removal deletes only its own feed row'
 );
 

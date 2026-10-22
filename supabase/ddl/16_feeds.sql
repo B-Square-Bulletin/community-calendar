@@ -33,7 +33,9 @@ CREATE POLICY "Admin users can manage feeds" ON feeds FOR ALL
 -- the comma-joined member names, so only source_id identifies which feed owns
 -- it; matching it by name would delete a survivor owned by another feed and
 -- cascade away that event's saved picks (ADR 0017). The exact-name arm keeps
--- rows built before the mapping existed (20261021120000_feed_source_ids.sql).
+-- rows built before the mapping existed (20261021120000_feed_source_ids.sql)
+-- and skips rows that another same-city feed's history owns, so two feeds that
+-- share a display name cannot delete each other's events.
 CREATE FUNCTION remove_feed(feed_id bigint)
 RETURNS TABLE (events_deleted bigint, feed_deleted boolean)
 LANGUAGE plpgsql SECURITY DEFINER
@@ -57,7 +59,18 @@ BEGIN
 
   DELETE FROM events e
   WHERE e.city = f.city
-    AND ((has_history AND e.source_id = ANY(f.source_ids)) OR e.source = f.name);
+    AND (
+      (has_history AND e.source_id = ANY(f.source_ids))
+      OR (
+        e.source = f.name
+        AND NOT EXISTS (
+          SELECT 1 FROM feeds o
+          WHERE o.city = f.city
+            AND o.id <> feed_id
+            AND e.source_id = ANY(o.source_ids)
+        )
+      )
+    );
   GET DIAGNOSTICS ev_count = ROW_COUNT;
 
   DELETE FROM feeds WHERE id = feed_id;

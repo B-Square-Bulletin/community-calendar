@@ -85,9 +85,21 @@ URL can change, and rows built under an older stem must stay attributable.
 `remove_feed` deletes rows whose `source_id` is in that history, so it clears a
 merge survivor the retiring feed owns. A survivor owned by another feed stays,
 because its `source_id` names that feed, and so do its saved picks. The
-exact-name arm remains for rows built before the mapping existed; an empty
-history also raises a WARNING. There is no backfill: the mapping fills on the
-next build, and the name arm covers the gap.
+exact-name arm remains for rows built before the mapping existed, and it skips
+rows that another same-city feed's history owns. An empty history also raises a
+WARNING.
+
+There is no backfill: the mapping fills on the next build. In that window the
+name arm still deletes a feed's plain rows, but not a survivor the feed owns,
+whose `source` is the comma-joined list — a survivor can outlive its owner
+until that feed completes one build.
+
+Retiring the owner of a survivor deletes the survivor even when another member
+feed still lists the event. The next build recreates that event under a new row
+id, and picks saved on the old row are gone with it. The alternative — keeping
+a survivor whose owner is gone — leaves a duplicate that the source-aware sweep
+cannot clear, because the retiring feed's `source_id` is no longer in the
+payload.
 
 ## Alternatives Considered
 

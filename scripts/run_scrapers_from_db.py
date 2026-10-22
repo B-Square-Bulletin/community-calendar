@@ -208,6 +208,8 @@ def record_source_id(row: dict) -> None:
     if not supabase_url or not service_key or not row.get("id"):
         return
     payload = {
+        # shortcut: overlapping builds can overwrite each other's append; add a
+        # server-side append RPC if builds ever overlap.
         "source_ids": add_source_id(
             row.get("source_ids"), source_id_for(row["feed_type"], row["url"])
         )
@@ -253,8 +255,9 @@ def run_rows(city: str, rows: list[dict], months: str) -> int:
         print(f"[{city}][scraper] EXIT {result.returncode} {label}")
         if result.returncode != 0:
             failures += 1
-        else:
-            record_source_id(row)
+        # Record on failure too: the stem follows from the row's url, and a
+        # scraper broken since deploy must still map for a later retirement.
+        record_source_id(row)
     return failures
 
 
