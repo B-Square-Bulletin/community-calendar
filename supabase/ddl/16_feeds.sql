@@ -11,6 +11,7 @@ CREATE TABLE feeds (
   feed_type text NOT NULL CHECK (feed_type IN ('ics_url', 'scraper', 'curator')),
   scraper_cmd text,
   fallback_url text,
+  source_ids text[] NOT NULL DEFAULT '{}',
   created_at timestamptz DEFAULT now(),
   UNIQUE(city, url)
 );
@@ -24,29 +25,39 @@ CREATE POLICY "Admin users can manage feeds" ON feeds FOR ALL
 
 -- Used by the Manage Feeds delete button (SECURITY DEFINER bypasses RLS).
 -- Atomic since 20260807170000_atomic_remove_feed.sql: deletes the feed's
--- events (matched by the feed's city + name) and the feed row in one
--- transaction, returns what it deleted, and raises for an unknown id.
--- Callers that still pre-delete events by source+city simply leave 0
--- rows for the RPC to delete — backward compatible.
+-- events and the feed row in one transaction, returns what it deleted, and
+-- raises for an unknown id.
 --
--- Matches `events.source = feeds.name` only. A merge survivor's source is the
--- comma-joined member names, so it is not matched here; it is re-attributed by
--- the next build instead. Matching it by name would delete a survivor owned by
--- another feed and cascade away that event's saved picks (ADR 0017).
+-- Ownership is `events.source_id = ANY(feeds.source_ids)` — the history of
+-- .ics stems the build produced for this feed. A merge survivor's `source` is
+-- the comma-joined member names, so only source_id identifies which feed owns
+-- it; matching it by name would delete a survivor owned by another feed and
+-- cascade away that event's saved picks (ADR 0017). The exact-name arm keeps
+-- rows built before the mapping existed (20261021120000_feed_source_ids.sql).
 CREATE FUNCTION remove_feed(feed_id bigint)
 RETURNS TABLE (events_deleted bigint, feed_deleted boolean)
 LANGUAGE plpgsql SECURITY DEFINER
 AS $$
 DECLARE
   f record;
+  has_history boolean;
   ev_count bigint;
 BEGIN
-  SELECT city, name INTO f FROM feeds WHERE id = feed_id;
+  SELECT city, name, source_ids INTO f FROM feeds WHERE id = feed_id;
   IF NOT FOUND THEN
     RAISE EXCEPTION 'remove_feed: no feed row with id %', feed_id;
   END IF;
 
-  DELETE FROM events e WHERE e.city = f.city AND e.source = f.name;
+  has_history := cardinality(f.source_ids) > 0;
+  IF NOT has_history THEN
+    RAISE WARNING
+      'remove_feed: feed % (id %) has no recorded source_id; matching by name only',
+      f.name, feed_id;
+  END IF;
+
+  DELETE FROM events e
+  WHERE e.city = f.city
+    AND ((has_history AND e.source_id = ANY(f.source_ids)) OR e.source = f.name);
   GET DIAGNOSTICS ev_count = ROW_COUNT;
 
   DELETE FROM feeds WHERE id = feed_id;

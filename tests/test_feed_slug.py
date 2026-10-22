@@ -12,7 +12,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
-from scripts.feed_slug import slugify
+from scripts.feed_slug import add_source_id, slugify, source_id_for
 
 ACS = "https://www.ashevillecityschools.net/fs/calendar-manager/events.ics"
 
@@ -102,3 +102,31 @@ class TestGeneralCase:
         ) == "ashevilleart_feed_ics" or slugify(
             "https://ashevilleart.org/events/feed.ics"
         ).startswith("ashevilleart")
+
+
+class TestSourceId:
+    """events.source_id is the .ics stem the build writes, so the feed row must
+    derive the same value when it records its history (#232)."""
+
+    def test_scraper_output_path_uses_filename_stem(self):
+        assert source_id_for("scraper", "cities/bloomington/iu_events.ics") == "iu_events"
+
+    def test_ics_url_uses_the_slug(self):
+        assert (
+            source_id_for("ics_url", f"{ACS}?calendar_ids%5B%5D=25")
+            == "ashevillecityschools_cal_25"
+        )
+
+    def test_curator_url_uses_the_slug(self):
+        assert (
+            source_id_for("curator", "https://example.com/functions/v1/my-picks")
+            == "example_functions_v1"
+        )
+
+    def test_history_append_keeps_order_and_ignores_duplicates(self):
+        assert add_source_id(None, "feed_a") == ["feed_a"]
+        assert add_source_id(["feed_a"], "feed_a") == ["feed_a"]
+        assert add_source_id(["feed_a"], "feed_b") == ["feed_a", "feed_b"]
+
+    def test_blank_source_id_is_not_recorded(self):
+        assert add_source_id(["feed_a"], "") == ["feed_a"]
