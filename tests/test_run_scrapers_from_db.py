@@ -18,6 +18,7 @@ def _row(**overrides):
         "url": "cities/bloomington/iu_events.ics",
         "name": "IU Events",
         "feed_type": "scraper",
+        "scraper_cmd": "python scrapers/example.py --output cities/bloomington/iu_events.ics",
         "source_ids": [],
     }
     row.update(overrides)
@@ -63,3 +64,26 @@ class TestRecordSourceId:
         monkeypatch.setattr(rs.urllib.request, "urlopen", boom)
 
         rs.record_source_id(_row(id=None))
+
+
+class TestRunRowsRecordsOnFailure:
+    """The stem follows from the row, so a failed run must still record it;
+    otherwise a scraper broken since deploy never maps and its survivors
+    outlive retirement (#232)."""
+
+    def test_failed_scraper_still_records_its_stem(self, monkeypatch):
+        recorded: list[dict] = []
+        monkeypatch.setattr(rs, "record_source_id", recorded.append)
+
+        class FailedRun:
+            returncode = 1
+            stdout = ""
+            stderr = "boom"
+
+        monkeypatch.setattr(rs.subprocess, "run", lambda *a, **k: FailedRun())
+
+        row = _row()
+        failures = rs.run_rows("bloomington", [row], "3")
+
+        assert failures == 1
+        assert recorded == [row]
