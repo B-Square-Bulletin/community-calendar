@@ -35,6 +35,17 @@ Deno.serve(async (req) => {
       }
       console.log(`Unique events for ${city}: ${uniqueEvents.size}`);
 
+      // Manifest of sources whose ingestion succeeded this build (#233).
+      // Absent means the caller predates it; a present-but-empty array means
+      // nothing ran. Cleanup does not read it yet (prefactor).
+      const ranSources = Array.isArray(body.ran_sources)
+        ? body.ran_sources.filter((s: unknown) => typeof s === "string" && s.length > 0)
+        : undefined;
+      if (body.ran_sources !== undefined && ranSources === undefined) {
+        console.warn(`Direct POST ${city}: ran_sources is not an array; ignoring it`);
+      }
+      if (ranSources) console.log(`Ran sources for ${city}: ${ranSources.length}`);
+
       const batchSize = 500;
       const eventsArray = Array.from(uniqueEvents.values());
       let inserted = 0;

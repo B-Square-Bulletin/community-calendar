@@ -257,7 +257,17 @@ jobs:
           if [ -f "cities/$city/events.json" ]; then
             START=$(date +%s)
             echo "Uploading $city events..."
-            jq -c --arg city "$city" '{city: $city, events: .}' "cities/$city/events.json" > /tmp/payload_${city}.json
+            # Sources that ran this build scope the stale sweep (#233). The
+            # file is absent when no runner reported, which tells the loader
+            # to fall back to payload presence.
+            if [ -f "cities/$city/ran_sources.txt" ]; then
+              jq -c --arg city "$city" --rawfile ran "cities/$city/ran_sources.txt" \
+                '{city: $city, events: .,
+                  ran_sources: ($ran | split("\n") | map(select(length > 0)) | unique)}' \
+                "cities/$city/events.json" > /tmp/payload_${city}.json
+            else
+              jq -c --arg city "$city" '{city: $city, events: .}' "cities/$city/events.json" > /tmp/payload_${city}.json
+            fi
             RESPONSE=$(curl -sL -X POST "${SUPABASE_URL}/functions/v1/load-events" \
               -H "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
               -H 'Content-Type: application/json' \
