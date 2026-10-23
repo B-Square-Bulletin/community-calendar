@@ -55,6 +55,9 @@ jobs:
     - name: Determine locations to process
       id: locations
       run: |
+        # A manifest describes one build. Truncate before the runners so a
+        # reused workspace cannot carry a stem from a source that later failed.
+        rm -f cities/*/ran_sources.txt
         INPUT="${{ github.event.inputs.locations }}"
         ENABLED="${{ vars.ENABLED_CITIES }}"
         ALL=$(ls -d cities/*/feeds.txt 2>/dev/null | sed 's|cities/||;s|/feeds.txt||' | paste -sd, -)

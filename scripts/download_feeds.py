@@ -19,7 +19,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from feed_slug import slugify, source_id_for
-from ran_sources import record_ran
+from ran_sources import is_calendar_body, record_ran
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
 
 
@@ -375,7 +375,7 @@ def download_feeds(city: str) -> None:
         body = outfile.read_text(encoding="utf-8", errors="ignore") if ok else ""
         # A 200 carrying an HTML block page is a failed source, not a quiet
         # one: only a real calendar counts as ran (#233).
-        ok = ok and "BEGIN:VCALENDAR" in body
+        ok = ok and is_calendar_body(body)
 
         # Report result
         if ok:

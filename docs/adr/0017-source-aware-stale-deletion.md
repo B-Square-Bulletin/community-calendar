@@ -146,7 +146,7 @@ Consequences that remain:
   empty `combined.ics` as an error. Its sources are ran, but the loader never
   runs.
 - A per-file `combine_ics` exception prints an error and contributes zero events,
-  so a healthy source looks quiet and is swept. The warning from the 50% check is
-  the only signal.
+  so a healthy source looks quiet and is swept. The 50% check warns, but the
+  notice lands in the Postgres log, not the Actions log (#231).
 - A feed whose URL changes gets a new stem in the manifest; rows under the old
   stem stay unswept, exactly as before.

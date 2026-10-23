@@ -16,12 +16,18 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 FILENAME = "ran_sources.txt"
+CALENDAR_MARKER = "BEGIN:VCALENDAR"
+
+
+def is_calendar_body(text: str) -> bool:
+    """True when the text holds a calendar, not a block page or error body."""
+    return CALENDAR_MARKER in text
 
 
 def is_calendar(path: Path) -> bool:
     """True when the file holds a calendar, not a block page or error body."""
     try:
-        return "BEGIN:VCALENDAR" in path.read_text(encoding="utf-8", errors="ignore")
+        return is_calendar_body(path.read_text(encoding="utf-8", errors="ignore"))
     except OSError:
         return False
 
