@@ -1,4 +1,5 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { resolveSweepScope } from "./scope.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -37,7 +38,7 @@ Deno.serve(async (req) => {
 
       // Manifest of sources whose ingestion succeeded this build (#233).
       // Absent means the caller predates it; a present-but-empty array means
-      // nothing ran. Cleanup does not read it yet (prefactor).
+      // nothing ran.
       const ranSources = Array.isArray(body.ran_sources)
         ? body.ran_sources.filter((s: unknown) => typeof s === "string" && s.length > 0)
         : undefined;
@@ -80,9 +81,10 @@ Deno.serve(async (req) => {
       }
 
       // Remove stale events for this city that are no longer in the feed.
-      // Scoped to the sources present in the payload: a source that failed to
-      // produce output is absent here and keeps its rows (issue #227).
-      // Uses RPC to avoid URL length limits with large IN lists.
+      // Scoped to the sources that ran this build (#233): `ran_sources` comes
+      // from the runners, so a quiet source is swept while a failed one keeps
+      // its rows. Without a manifest, fall back to the sources present in the
+      // payload (#227). Uses RPC to avoid URL length limits with large IN lists.
       const newSourceUids = Array.from(uniqueEvents.keys());
       // Derive present sources from the accepted events, not the raw body: an
       // event with a source_id but no source_uid is dropped by the upsert, so
@@ -90,9 +92,14 @@ Deno.serve(async (req) => {
       const presentSources = [
         ...new Set(Array.from(uniqueEvents.values()).map((e: any) => e.source_id).filter(Boolean)),
       ];
-      if (newSourceUids.length > 0 && presentSources.length === 0) {
+      if (newSourceUids.length > 0 && !ranSources && presentSources.length === 0) {
         console.warn(
-          `Cleanup ${city}: payload has source_uids but no source_id; stale sweep skipped`
+          `Cleanup ${city}: payload has source_uids but no source_id and no ran_sources; stale sweep skipped`
+        );
+      }
+      if (ranSources && ranSources.length > 0 && newSourceUids.length === 0) {
+        console.warn(
+          `Cleanup ${city}: ran_sources is non-empty but the payload has no events; nothing swept`
         );
       }
       let deleted = 0;
@@ -101,7 +108,7 @@ Deno.serve(async (req) => {
           .rpc("delete_stale_events", {
             p_city: city,
             p_source_uids: newSourceUids,
-            p_sources: presentSources,
+            p_sources: resolveSweepScope(ranSources, presentSources),
           });
         if (delError) {
           console.error(`Cleanup ${city} error:`, delError);
