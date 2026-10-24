@@ -18,6 +18,15 @@ if TYPE_CHECKING:
     from datetime import datetime
 
 
+class SourceNotReachedError(RuntimeError):
+    """A scraper returned no events without declaring it reached its source.
+
+    An empty result from a source that was never reached is a False quiet: it
+    looks like a dormant calendar and would be swept like one. Failing keeps
+    the source's rows and makes the outage visible.
+    """
+
+
 class BaseScraper(ABC):
     """
     Base class for event scrapers.
@@ -26,6 +35,11 @@ class BaseScraper(ABC):
     - name: str - Source name (e.g., "Redwood Cafe")
     - domain: str - Domain for UIDs (e.g., "redwoodcafecotati.com")
     - fetch_events() -> list[dict]
+
+    Subclasses must also call `mark_source_reached()` from `fetch_events()`
+    once their primary fetch has returned and parsed. Without that declaration
+    an empty result fails the run, because the base class cannot tell an
+    unreachable source from a quiet one.
 
     Each event dict should have:
     - title: str (required)
@@ -55,6 +69,16 @@ class BaseScraper(ABC):
         Pass `now` to key the boundary to the source's own clock.
         """
         return horizon_end(now, self.months_ahead)
+
+    def mark_source_reached(self) -> None:
+        """Declare that the primary fetch reached the source.
+
+        Call this from `fetch_events()` once the primary listing or API payload
+        has come back and parsed. It lets a quiet source (valid payload, no
+        upcoming events) exit 0 while an outage fails the run. Never call it
+        from an exception handler.
+        """
+        self._source_reached = True
 
     @classmethod
     def setup_logging(cls, level: int = logging.INFO):
@@ -180,7 +204,14 @@ class BaseScraper(ABC):
         """Main entry point: fetch events and write calendar."""
         self.logger.info(f"Scraping {self.name}")
 
+        self._source_reached = False
         events = self.fetch_events()
+        if not events and not self._source_reached:
+            raise SourceNotReachedError(
+                f"{self.name} returned no events and never declared reaching its "
+                "source; call self.mark_source_reached() after the primary fetch "
+                "succeeds"
+            )
         cutoff = self.horizon_cutoff()
         before = len(events)
 
