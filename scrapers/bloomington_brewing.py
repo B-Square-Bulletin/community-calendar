@@ -81,6 +81,10 @@ class BloomingtonBrewingScraper(BaseScraper):
         text = data.decode("utf-8")
         # Extract <loc> entries that match event paths
         locs = re.findall(r"<loc>(https?://[^<]+)</loc>", text)
+        if not locs:
+            # A sitemap with no <loc> at all is a block page or an error body,
+            # not a quiet venue. An empty event list still has other <loc>s.
+            raise RuntimeError(f"{SITEMAP_URL} returned no <loc> entries; not a sitemap")
         self.mark_source_reached()
         event_urls = []
         seen = set()
