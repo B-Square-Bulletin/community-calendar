@@ -12,12 +12,17 @@
 -- Or:  make test-sql
 
 BEGIN;
-SELECT plan(2);
+SELECT plan(3);
 
 SELECT is(
     has_function_privilege('anon', 'public.delete_stale_events(text,text[],text[])', 'EXECUTE'),
     false,
     'anon cannot execute delete_stale_events'
+);
+
+SELECT ok(
+    has_function_privilege('service_role', 'public.delete_stale_events(text,text[],text[])', 'EXECUTE'),
+    'service_role can execute delete_stale_events'
 );
 
 SET LOCAL ROLE anon;

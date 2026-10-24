@@ -12,6 +12,7 @@
 -- untouched: the workflow calls them with the anon key.
 
 DROP POLICY IF EXISTS "Service function can insert events" ON events;
+DROP POLICY IF EXISTS "service_role inserts events" ON events;
 
 CREATE POLICY "service_role inserts events"
   ON events FOR INSERT
