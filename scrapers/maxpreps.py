@@ -144,8 +144,7 @@ class MaxPrepsScraper(BaseScraper):
             page_props = data.get("props", {}).get("pageProps", {})
             contests = page_props.get("initSchoolContests")
             if contests is None:
-                self.logger.error("No initSchoolContests in __NEXT_DATA__; page layout changed")
-                return events
+                raise RuntimeError("No initSchoolContests in __NEXT_DATA__; page layout changed")
             self.mark_source_reached()
 
             self.logger.info(f"Found {len(contests)} contests in __NEXT_DATA__")

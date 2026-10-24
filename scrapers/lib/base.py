@@ -211,9 +211,9 @@ class BaseScraper(ABC):
         events = self.fetch_events()
         if not events and not self._source_reached:
             raise SourceNotReachedError(
-                f"{self.name} returned no events and never declared reaching its "
-                "source; call self.mark_source_reached() after the primary fetch "
-                "succeeds"
+                f"{self.name} returned no events without declaring reaching its "
+                "source: the primary fetch failed (see the logged fetch error) or "
+                "mark_source_reached() was never called after a successful parse"
             )
         cutoff = self.horizon_cutoff()
         before = len(events)

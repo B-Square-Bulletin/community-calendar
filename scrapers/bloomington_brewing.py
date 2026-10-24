@@ -84,7 +84,6 @@ class BloomingtonBrewingScraper(BaseScraper):
             # A sitemap with no <loc> at all is a block page or an error body,
             # not a quiet venue. An empty event list still has other <loc>s.
             raise RuntimeError(f"{SITEMAP_URL} returned no <loc> entries; not a sitemap")
-        self.mark_source_reached()
         event_urls = []
         seen = set()
         for loc in locs:
@@ -93,6 +92,11 @@ class BloomingtonBrewingScraper(BaseScraper):
             if _EVENT_PATH_RE.match(path) and path not in seen:
                 seen.add(path)
                 event_urls.append(f"{BASE_URL}{path}")
+        if not event_urls:
+            # The sitemap keeps past events, so a quiet venue still has event
+            # paths. Zero paths means the URL scheme changed, not a quiet week.
+            raise RuntimeError(f"{SITEMAP_URL} lists no event URLs; the URL scheme changed")
+        self.mark_source_reached()
 
         self.logger.info(f"Found {len(event_urls)} event URLs in sitemap")
         return event_urls

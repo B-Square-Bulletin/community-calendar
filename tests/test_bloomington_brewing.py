@@ -13,6 +13,17 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 import scrapers.bloomington_brewing as bb
 from scrapers.bloomington_brewing import BloomingtonBrewingScraper
 
+PAST_ICS = b"""\
+BEGIN:VCALENDAR\r
+VERSION:2.0\r
+BEGIN:VEVENT\r
+UID:past@example.com\r
+DTSTART:20250101T190000Z\r
+SUMMARY:Past Event\r
+END:VEVENT\r
+END:VCALENDAR\r
+"""
+
 
 class _FakeResponse:
     def __init__(self, body: bytes):
@@ -32,6 +43,13 @@ def _serve(monkeypatch, body: bytes) -> None:
     monkeypatch.setattr(bb, "urlopen", lambda req, timeout: _FakeResponse(body))
 
 
+def _serve_sitemap_and_ics(monkeypatch, sitemap: bytes, ics: bytes) -> None:
+    def fake_urlopen(req, timeout):
+        return _FakeResponse(ics if "format=ical" in req.full_url else sitemap)
+
+    monkeypatch.setattr(bb, "urlopen", fake_urlopen)
+
+
 def test_non_sitemap_body_fails_without_writing_a_calendar(tmp_path, monkeypatch):
     _serve(monkeypatch, b"<html><body>blocked</body></html>")
     out = tmp_path / "brew.ics"
@@ -42,10 +60,24 @@ def test_non_sitemap_body_fails_without_writing_a_calendar(tmp_path, monkeypatch
     assert not out.exists()
 
 
-def test_sitemap_without_event_urls_stays_quiet(tmp_path, monkeypatch):
+def test_sitemap_without_event_paths_fails(tmp_path, monkeypatch):
     _serve(
         monkeypatch,
         b"<urlset><url><loc>https://bloomingtonbrew.com/about</loc></url></urlset>",
+    )
+    out = tmp_path / "brew.ics"
+
+    with pytest.raises(RuntimeError, match="no event URLs"):
+        BloomingtonBrewingScraper().run(str(out))
+
+    assert not out.exists()
+
+
+def test_sitemap_with_only_past_events_stays_quiet(tmp_path, monkeypatch):
+    _serve_sitemap_and_ics(
+        monkeypatch,
+        b"<urlset><url><loc>https://bloomingtonbrew.com/events/2025/5/3/past</loc></url></urlset>",
+        PAST_ICS,
     )
     out = tmp_path / "brew.ics"
 
