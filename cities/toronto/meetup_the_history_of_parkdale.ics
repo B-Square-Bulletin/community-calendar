@@ -1,0 +1,498 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Meetup//Meetup Calendar 1.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+NAME:Toronto History Walks
+X-WR-CALNAME:Toronto History Walks
+BEGIN:VTIMEZONE
+TZID:America/Toronto
+TZURL:http://tzurl.org/zoneinfo-outlook/America/Toronto
+X-LIC-LOCATION:America/Toronto
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+X-SOURCE:Meetup: History of Parkdale
+X-SOURCE-URL:https://www.meetup.com/the-history-of-parkdale/
+UID:event_312865265@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031656Z
+DTSTART;TZID=America/Toronto:20260411T120000
+DTEND;TZID=America/Toronto:20260411T140000
+SUMMARY:Historic Hogg's Hollow
+DESCRIPTION:Toronto History Walks\n\\*\\***The Toronto History Walks Yearl
+ y Pass is available. Get it now for $125.00 for 1 year of unlimited tours\
+ , email**\n**torontohistorywalks@gmail.com**\n**for more information or fo
+ r signing up!\\*\\***\n\n\\*\\* **Please note: Please e-transfer the ticke
+ t price when booking your space for this tour! You can e-transfer to the f
+ ollowing email at:**\n**torontohistorywalks@gmail.com**\n\nJohn and Willia
+ m Hogg\, sons to James Hogg\, subdivided the marshy land that became "Hogg
+ s Hollow."\n\nIt took a little time to encourage settlers to develop the l
+ and due to the inhospitable environment\, but settlers moved in over the f
+ ollowing decades. With the historic village of York Mills adjacent\, a sch
+ ool\, post office\, pottery\, blacksmith\, livery\, stable\, store\, cemet
+ ery and St. John's Anglican Church served Scottish\, Irish and English imm
+ igrants.\n\nThe history of modern Hogg's Hollow began in the 1920s with th
+ e creation of lots\, and homes reflected the beauty of the English country
+ side. The Baron Renfrew School opened in 1925 to replace a structure at 45
+  York Mills Road that was destroyed by fire.\n\nHogg's Hollow is certainly
+  far from the tourist centre to the south\, and is well worth exploring. W
+ ith Yonge Street its main street\, the community has a fascinating history
+  that has long gone uncovered. Give Hogg's Hollow a look and you might sta
+ y awhile. I promise!\n\nThis walk is for all walking levels. Please dress 
+ for the season and bring water. Our Hogg's Hollow adventure walk begins at
+  the Yonge Street doors of the York Mills Subway station. We head south an
+ d downhill and return to our starting point. Hope to see you there!\n\nThi
+ s tour has a ticket price of $15.00 per person!\n\n\\*\\* **Please note: P
+ lease e-transfer the ticket price when booking your space for this tour! Y
+ ou can e-transfer to the following email at:**\n**torontohistorywalks@gmai
+ l.com**
+URL;VALUE=URI:https://www.meetup.com/the-history-of-parkdale/events/312865
+ 265/
+STATUS:CONFIRMED
+CREATED:20260113T173358Z
+LAST-MODIFIED:20260113T173358Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: History of Parkdale
+X-SOURCE-URL:https://www.meetup.com/the-history-of-parkdale/
+UID:event_313034609@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031656Z
+DTSTART;TZID=America/Toronto:20260412T130000
+DTEND;TZID=America/Toronto:20260412T150000
+SUMMARY:Historic Little India: Gerrard India Bazaar (REVISED FOR 2026)
+DESCRIPTION:Toronto History Walks\n\\*\\***The Toronto History Walks Explo
+ rer Pass is available. Get it now for $125.00 for 1 year of unlimited tour
+ s\, email**\n**torontohistorywalks@gmail.com**\n**for more information or 
+ for signing up!\\*\\***\n\n\\*\\* **Please note: Please e-transfer the Tic
+ ket amount when booking your space for this tour! You can e-transfer to th
+ e following email at:**\n**torontohistorywalks@gmail.com**\n\nThe story of
+  historic Little India is a true Toronto success story\, a unique look at 
+ a neighbourhood and the people who call it home. But the story is not alwa
+ ys a happy one. Like all other areas in Toronto\, Little India started out
+  as a purely English - Anglican area and was repeatedly changed as other i
+ mmigrants opted to leave the security of the downtown core for outer areas
+ .\n\nWith the opening of the Naaz theatre in 1972\, the community that bec
+ ame Little India started to take shape\, but in Toronto the forces that de
+ veloped communities were different in that part of the city sandwiched bet
+ ween Leslieville to the south\, and Greektown to the north.\n\nWith a stri
+ ctly Anglo-Saxon pro-British community entrenched for over 100 years\, now
+  changing to include south Asians\, the area was seen as a rather depresse
+ d area\, or an area in transition\, and violence was an unfortunate part o
+ f life. Racial tensions increased dramatically with the influx of south As
+ ians.\n\nBut by the 1980s and 1990s the district had found its feet\, and 
+ Little India was a popular Toronto district and tourist attraction\, with 
+ visitors pouring in from around the world to partake of the richness. A tr
+ ue cultural enclave in Toronto! A fascinating history and a fascinating co
+ mmunity awaits! This tour has been revised a few times to add more histori
+ c information to the walk\, it has been revised once again for 2026 with n
+ ew landmarks and stories attached. Should be a fascinating walk!\n\nThis w
+ alk is for all fitness levels. The meeting place for our walking adventure
+  is on the southwest corner of Greenwood Avenue and Gerrard Street East!\n
+ \nThis tour has a ticket price of $15.00 per person!\n\n\\*\\* **Please no
+ te: Please e-transfer the Ticket amount when booking your space for this t
+ our! You can e-transfer to the following email at:**\n**torontohistorywalk
+ s@gmail.com**
+URL;VALUE=URI:https://www.meetup.com/the-history-of-parkdale/events/313034
+ 609/
+STATUS:CONFIRMED
+CREATED:20260124T124743Z
+LAST-MODIFIED:20260124T124743Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: History of Parkdale
+X-SOURCE-URL:https://www.meetup.com/the-history-of-parkdale/
+UID:event_313367250@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031656Z
+DTSTART;TZID=America/Toronto:20260417T183000
+DTEND;TZID=America/Toronto:20260417T203000
+SUMMARY:All About the Historic Beaches! (EVENING EXTENDED TOUR)
+DESCRIPTION:Toronto History Walks\n\\*\\***The Toronto History Walks Yearl
+ y Pass is available. Get it now for $125.00 for 1 year of unlimited tours\
+ , email**\n[torontohistorywalks@gmail.com](http://torontohistorywalks@gmai
+ l.com%2A%2A/)\n**for more information or for signing up!\\*\\***\n\\*\\* *
+ *Please note: Please e-transfer the ticket price when booking your space f
+ or this tour! You can e-transfer to the following email at:**\n[torontohis
+ torywalks@gmail.com](http://torontohistorywalks@gmail.com%2A%2A/)\n\nThe a
+ rea was first settled in 1794 by the Ashbridge family\, whose name is reme
+ mbered by the nearby bay and park. Their homestead on Queen Street East wa
+ s well to the west of the area currently identified as the Beaches. A late
+ r generation of the Ashbridge family rebuilt the family home in 1854 and c
+ an be seen on Queen Street East opposite the TTC barns near Kingston Road.
+ \n\nThe Beaches remained a sparely settled community until the end of the 
+ 19th century when extension of the Grand Truck Railway\, the draining of t
+ he northern parts of Ashbridges Bay\, and the construction of street car t
+ racks on Queen Street and Kingston Road\, opened the area to settlement.\n
+ \nFrom Sunnyside Amusement Park built in 1922 to Scarboro Beach built in 1
+ 906\, it seemed that Toronto cornered the market on summertime chills and 
+ thrills.\n\nWe had 5 major amusement parks along our waterfront\, and two 
+ smaller parks\, Victoria Park and Munro Park\, virtually unknown to Toront
+ onians today\, but extremely popular summertime places\, years ago as plea
+ sure parks.\n\nThis walking tour is for all walking levels and fitness ski
+ lls. Please dress for the season and bring water. And remember to bring yo
+ ur love of history.\n\nIt begins outside the Beaches Branch of the Toronto
+  Public Library at Queen Street East\, and Lee Avenue adjacent to Kew Gard
+ ens. The tour ends at the Neville Park Queen Street Streetcar Loop.\n\nThi
+ s tour has a ticket price of $15.00 per person.\n\n\\*\\* **Please note: P
+ lease e-transfer the ticket price when booking your space for this tour! Y
+ ou can e-transfer to the following email at:**\n[torontohistorywalks@gmail
+ .com](http://torontohistorywalks@gmail.com%2A%2A/)
+URL;VALUE=URI:https://www.meetup.com/the-history-of-parkdale/events/313367
+ 250/
+STATUS:CONFIRMED
+CREATED:20260215T133734Z
+LAST-MODIFIED:20260215T133734Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: History of Parkdale
+X-SOURCE-URL:https://www.meetup.com/the-history-of-parkdale/
+UID:event_313004899@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031656Z
+DTSTART;TZID=America/Toronto:20260418T120000
+DTEND;TZID=America/Toronto:20260418T140000
+SUMMARY:Toronto's Darkest Secrets! The Original Tour (RETURN FOR 2026)
+DESCRIPTION:Toronto History Walks\n\\*\\***The Toronto History Walks Yearl
+ y Pass is available. Get it now for $125.00 for 1 year of unlimited tours\
+ , email**\n**[torontohistorywalks@gmail.com](http://torontohistorywalks@gm
+ ail.com/)**\n**for more information or for signing up!\\*\\***\n\n\\*\\* *
+ *Please note: Please e-transfer the ticket amount when booking your space 
+ for this tour! You can e-transfer to the following email at:**\n**[toronto
+ historywalks@gmail.com](http://torontohistorywalks@gmail.com/)**\n\nThis t
+ our was one of the original 5 tours that started it all back in 2019. Hear
+  about the stories that still haunt Toronto. From the murder of a shoeshin
+ e boy to the place where the gallows were constructed. Stories of Toronto'
+ s hidden history.\n\nSo you want to hear all about Toronto's darkest momen
+ ts\, do you?\n\nToronto has a rich and varied history\, we all know that\,
+  or we should.\n\nLet's explore new and old stories of Toronto's darkest h
+ istorical moments\, a new crop of dark secrets\, and a few of the old stor
+ ies to make the blood run cold.\n\nAnd these secrets will be revealed in t
+ ime. That's all I'm saying. I guess you'll have to sign up and commit to t
+ he true darkness hidden in the human spirit.\n\nThis horrific walking tour
+  is for all levels and walkers.\n\nThe tour begins on the site of the old 
+ Ford Hotel at the northeast corner of Dundas Street West and Bay Street\, 
+ or the western doors to the Atrium on Bay. The tour ends at old City Hall 
+ on Queen Street West.\n\nAnd if you dare\, I'll see you soon on Toronto's 
+ Darkest side.\n\nThis tour has a ticket price of $15.00 per person!\n\n\\*
+ \\* **Please note: Please e-transfer the ticket amount when booking your s
+ pace for this tour! You can e-transfer to the following email at:**\n**[to
+ rontohistorywalks@gmail.com](http://torontohistorywalks@gmail.com/)**
+URL;VALUE=URI:https://www.meetup.com/the-history-of-parkdale/events/313004
+ 899/
+STATUS:CONFIRMED
+CREATED:20260122T151934Z
+LAST-MODIFIED:20260122T151934Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: History of Parkdale
+X-SOURCE-URL:https://www.meetup.com/the-history-of-parkdale/
+UID:event_313413046@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031656Z
+DTSTART;TZID=America/Toronto:20260418T150000
+DTEND;TZID=America/Toronto:20260418T170000
+SUMMARY:The Ward: Our First Immigrant Community and University Avenue!
+DESCRIPTION:Toronto History Walks\n\\*\\***The Toronto History Walks Yearl
+ y Pass is available. Get it now for $125.00 for 1 year of unlimited tours\
+ , email**\n**[torontohistorywalks@gmail.com](http://torontohistorywalks@gm
+ ail.com/)**\n**for more information or for signing up!\\*\\***\n\n\\*\\* *
+ *Please note: Please e-transfer the ticket amount when booking your space 
+ for this tour! You can e-transfer to the following email at:**\n**[toronto
+ historywalks@gmail.com](http://torontohistorywalks@gmail.com/)**\n\nThis i
+ s an updated tour to the original Ward Tour introduced back in 2020. It br
+ ings in a new crop of landmarks that tell the tale of Toronto's first subu
+ rb Macaulaytown\, on the property of James Macaulay.\n\nThe Ward\, Toronto
+ 's first suburb\, first immigrant community and first large scale urban re
+ newal project is a neighbourhood that dates to the beginnings of local his
+ tory.\n\nBounded by Yonge Street on the east\, College Street on the north
+ \, University on the West\, and Queen Street on the south\, is a history w
+ alkers dream.\n\nBut before the area developed and a civic square was even
+  dreamed of\, it was forest on the edge of Little York\, with a clear flow
+ ing creek\, named Taddle at its centre. A few years later James Macaulay e
+ stablished himself in the area northwest of the town of York.\n\nBy mid-ce
+ ntury the winds of change brought in Chinese rail workers and Jewish immig
+ rants\, mostly from Eastern Europe. The face of The Ward changed once agai
+ n\, but this time the ugly realties of racial injustice were prominent.\n\
+ nWith the building of the new Toronto General Hospital in 1909 the area re
+ invented itself\, and the mass migration of jewish residents to the Kensin
+ gton Market area to the west started. The Ward changed again and the idea 
+ that the area could be a pedestrian square with a new town hall at its cen
+ tre took shape. And the rest as they say is history\, Toronto got its new 
+ civic square and Toronto a new voice at the dawn of a new era in city buil
+ ding.\n\nThe ward is a fascinating look at life in Toronto in the late 19t
+ h\, 20th\, and 21 century. For a quick preview of the walk click on the fo
+ llowing link and enjoy https://youtu.be/4QEHjfuhmik\n\nThis walking tour i
+ s for all walking levels and fitness skills. Please dress for the season a
+ nd bring water. And remember to bring your love of history as well. Hope t
+ o see you there.\n\nThis walking tour begins on the steps of Old City Hall
+  at the northeast corner of Queen Street West\, and Bay Street. The tour r
+ eturns to the start location at the Old City Hall.\n\nThis tour has a tick
+ et price of $15.00 per person.\n\n\\*\\* **Please note: Please e-transfer 
+ the ticket amount when booking your space for this tour! You can e-transfe
+ r to the following email at:**\n**[torontohistorywalks@gmail.com](http://t
+ orontohistorywalks@gmail.com/)**
+URL;VALUE=URI:https://www.meetup.com/the-history-of-parkdale/events/313413
+ 046/
+STATUS:CONFIRMED
+CREATED:20260218T143749Z
+LAST-MODIFIED:20260218T143749Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: History of Parkdale
+X-SOURCE-URL:https://www.meetup.com/the-history-of-parkdale/
+UID:event_313413102@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031656Z
+DTSTART;TZID=America/Toronto:20260419T110000
+DTEND;TZID=America/Toronto:20260419T130000
+SUMMARY:Spring in Edwards Gardens and Historic Sunnybrook Park!
+DESCRIPTION:Toronto History Walks\n\\*\\***The Toronto History Walks Yearl
+ y Pass is available. Get it now for $125.00 for 1 year of unlimited tours\
+ , email**\n**torontohistorywalks@gmail.com**\n**for more information or fo
+ r signing up!\\*\\***\n\n\\*\\* **Please note: Please e-transfer the ticke
+ t amount when booking your space for this tour! You can e-transfer to the 
+ following email at:**\n**torontohistorywalks@gmail.com**\n\nGet out and ex
+ plore! A brilliant spring tour awaits\, and let's celebrate the coming sum
+ mer.\n\nKnown as Sunnybrook Farm\, situated in Leaside\, it was owned by J
+ oseph and Alice Kilgour and turned over to the City of Toronto in 1928 as 
+ a public park.\n\nJoseph Kilgour was President of the Canada Paper Company
+ . He and his wife purchased the property in the 1890s in the suburban frin
+ ge.\n\nIn 1933\, Kilgour Memorial Gates and plaque at Wilket Creek Park we
+ re added to honour the Kilgour family. The park is a quiet oasis in the he
+ art of the city. But it's also about treasured Canadian history and our be
+ loved Veterans who now call Sunnybrook Hospital home.\n\nThe Kilgour famil
+ y gave the land for a hospital to be erected while the old veterans centre
+  on Christie Street was literally falling apart. That's the way to treat t
+ he Veterans who fought for our freedom\, put them in a cold\, wet hospital
+  to recover\, way to go I must say!\n\nThis walking tour is for all walkin
+ g levels and fitness skills\, however there are a few small hills. Please 
+ dress for the season and bring water. And remember to bring your love of h
+ istory as well. Hope to see you there.\n\nThis walking tour begins and end
+ s at the main entrance of Edwards Gardens\, 755 Lawrence Ave East\, adjace
+ nt to the Lawrence Avenue TTC bus stop and parking lot!\n\nThis tour has a
+  ticket price of $15.00 per person!\n\n\\*\\* **Please note: Please e-tran
+ sfer the ticket amount when booking your space for this tour! You can e-tr
+ ansfer to the following email at:**\n**torontohistorywalks@gmail.com**
+URL;VALUE=URI:https://www.meetup.com/the-history-of-parkdale/events/313413
+ 102/
+STATUS:CONFIRMED
+CREATED:20260218T144226Z
+LAST-MODIFIED:20260218T144226Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: History of Parkdale
+X-SOURCE-URL:https://www.meetup.com/the-history-of-parkdale/
+UID:event_312865361@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031656Z
+DTSTART;TZID=America/Toronto:20260425T120000
+DTEND;TZID=America/Toronto:20260425T140000
+SUMMARY:Teiaiagon\, Historic Jane Street\, and Baby Point
+DESCRIPTION:Toronto History Walks\n**The Toronto History Walks Yearly Pass
+  is available. Get it now for $125.00 for 1 year of unlimited tours\, emai
+ l**\n[torontohistorywalks@gmail.com](http://torontohistorywalks@gmail.com%
+ 2A%2A/)\n**for more information or for signing up!**\n\n**Please note: Ple
+ ase e-transfer the ticket price when booking your space for this tour! You
+  can e-transfer to the following email at:**\n[torontohistorywalks@gmail.c
+ om](http://torontohistorywalks@gmail.com%2A%2A/)\n\nThe legendary village 
+ of Teiaiagon\, and Baby Point are linked historically and traditionally. T
+ he stories they have generated have been carried from one generation to th
+ e next. The birth of Toronto itself swirled around the Longhouse encampmen
+ t of this Seneca village years before British settlement.\n\nJames Baby wa
+ s a member of an important French fur trading family and politician. He se
+ ttled at Baby Point in 1816\, after discovering the ruins of the abandoned
+  village on the property. An apple orchard covered the area and salmon was
+  plentiful\, but trouble with the Baby family was proving disastrous to ou
+ tsiders.\n\nJames Baby's family opposed John Graves Simcoe's effort to pro
+ hibit slavery in Upper Canada.\n\nA fascinating tale and a fascinating nei
+ ghbourhood. Many streets in this neighbourhood are named after this family
+ .\n\nThis walk is for all walking levels and fitness skills. Please dress 
+ for the season and bring water. And remember to bring your love of history
+  as well. Hope to see you there.\n\nThis walking tour begins on the west s
+ ide of Jane Street and Bloor Street West opposite the Jane Subway Station.
+  We return to the starting point after the walk.\n\nThis tour has a ticket
+  price of $15.00 per person!\n\n**Please note: Please e-transfer the ticke
+ t price when booking your space for this tour! You can e-transfer to the f
+ ollowing email at:**\n[torontohistorywalks@gmail.com](http://torontohistor
+ ywalks@gmail.com%2A%2A/)
+URL;VALUE=URI:https://www.meetup.com/the-history-of-parkdale/events/312865
+ 361/
+STATUS:CONFIRMED
+CREATED:20260113T174343Z
+LAST-MODIFIED:20260113T174343Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: History of Parkdale
+X-SOURCE-URL:https://www.meetup.com/the-history-of-parkdale/
+UID:event_312865402@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031656Z
+DTSTART;TZID=America/Toronto:20260425T150000
+DTEND;TZID=America/Toronto:20260425T170000
+SUMMARY:Tkaronto! And The Historic Carrying Place!
+DESCRIPTION:Toronto History Walks\n**The Toronto History Walks Yearly Pass
+  is available. Get it now for $125.00 for 1 year of unlimited tours\, emai
+ l**\n[torontohistorywalks@gmail.com](http://torontohistorywalks@gmail.com%
+ 2A%2A/)\n**for more information or for signing up!**\n\n**Please note: Ple
+ ase e-transfer the ticket price when booking your space for this tour! You
+  can e-transfer to the following email at:**\n[torontohistorywalks@gmail.c
+ om](http://torontohistorywalks@gmail.com%2A%2A/)\n\nThe Toronto Carrying P
+ lace\, and the birth of Toronto are connected in many historic ways\, phys
+ ically\, socially\, and spiritually as well! The historic path at one time
+  connected the northern shore of Lake Ontario with the Great Lakes especia
+ lly Lake Simcoe and Lake Huron\, and to the vast region known as Huronia\,
+  or centred around Midland\, Ontario.\n\nThe entire area was known as Tkar
+ onto\, from the old Mohawk term "where trees gathered in water."\n\nTeiaia
+ gon\, the small Seneca village on the Humber River\, was named for the cro
+ ssing of the Toronto Carrying Place\, and is now part of the Baby Point ne
+ ighbourhood!\n\nOn this walk we explore the history of the Toronto Carryin
+ g Place south from Bloor Street West to the mouth of the Humber River\, an
+ d discuss the personalities who came to the area\, and travelled this very
+  path from Jean Baptiste Rousseau\, the first French fur trader\, to Rober
+ t La Salle the explorer of the mighty Mississippi River and many others.\n
+ \nThis walk is for most walking levels and fitness skills with a few small
+  hills. Please dress for the season and bring water. And remember to bring
+  your love of history as well. Hope to see you there.\n\nThis walking tour
+  begins on the west side of Jane Street and Bloor Street West opposite the
+  Jane Subway Station. We end our journey at The Queensway and The South Ki
+ ngsway which is adjacent to several TTC routes.\n\nThis tour has a ticket 
+ price of $15.00 per person!\n\n\\*\\* **Please note: Please e-transfer the
+  ticket amount when booking your space for this tour! You can e-transfer t
+ o the following email at:**\n**torontohistorywalks@gmail.com**
+URL;VALUE=URI:https://www.meetup.com/the-history-of-parkdale/events/312865
+ 402/
+STATUS:CONFIRMED
+CREATED:20260113T174910Z
+LAST-MODIFIED:20260113T174910Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: History of Parkdale
+X-SOURCE-URL:https://www.meetup.com/the-history-of-parkdale/
+UID:event_313175471@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031656Z
+DTSTART;TZID=America/Toronto:20260426T120000
+DTEND;TZID=America/Toronto:20260426T140000
+SUMMARY:Hidden Wonders of Canada\; Northern Ontario History and Guide (LEC
+ TURE ON THE GO)
+DESCRIPTION:Toronto History Walks\n\\*\\***The Toronto History Walks Explo
+ rer Pass is available. Get it now for $125.00 for 1 year of unlimited tour
+ s\, email**\n**torontohistorywalks@gmail.com**\n**for more information or 
+ for signing up!\\*\\***\n\nWe have an amazing "Lecture on the Go" series f
+ or 2026. New topics and fascinating stories abound! Join us and learn abou
+ t the world and keep active and warm during the winter months!\n\nI starte
+ d this walking classroom when we were under that horrible cloud called Cov
+ id. This series was popular and helped people get out and back into societ
+ y and life. The series is back for 2026 with 6 new topics for exploration 
+ over the winter and spring months.\n\nThe "Lecture on the Go" Series is op
+ en only to members who have purchased the YEARLY MEMBERSHIP PASS\, it's fr
+ ee for those members. If you wish to attend a lecture and you are not a ye
+ arly pass member then the price **per** lecture is $20.00.\n\nThis third l
+ ecture is focussed on the History of Northern Ontario\, a place most don't
+  know too much about\, and that's a shame. Northern Ontario is a place of 
+ pure magic. Let's take a closer look at this fascinating subject.\n\nLong 
+ before maps or borders\, or places like Cobalt or North Bay even appeared\
+ , Indigenous peoples lived with the land\, traveling and followed the seas
+ ons. Lakes were highways\, canoes were cars\, and everything you needed ca
+ me from knowing the land. When Europeans showed up\, they didn’t so much
+  “discover” the North as wander. Business was first to get a notice.\n
+ \nCanoes loaded with beaver pelts\, trading posts popped up\, and suddenly
+  Northern Ontario was connected to Europe. Things sped up fast once railwa
+ ys arrived in the 1800s. Trains unlocked forests\, minerals\, and new town
+ s were built. Places like Sudbury and Thunder Bay grew — nickel\, timber
+ \, grain — and people followed jobs wherever they appeared. It was rugge
+ d\, noisy\, and a little chaotic\, but it worked.\n\nToday\, Northern Onta
+ rio is a world unto its own. Its big skies\, long drives\, and communities
+  know how to adapt. The past is still there — in the land\, the towns\, 
+ and the stories — but the North doesn’t dwell on it. It just keeps goi
+ ng\, and it's up to us as Canadians to understand.\n\nTopics upcoming in t
+ he 2026 series of lectures are as follows. We are a little behind but catc
+ hing up.\n\n\\*Dante\; The Hidden Meaning Behind The Divine Comedy\n\\*Phi
+ losophy 1: Great Minds of the Western World: Goethe to Kant!\n\\*Philosoph
+ y 2: Great Minds of the Eastern World: Chuang Tzu to Dalai Lama\n\nHope to
+  see you on this "Lecture on the Go!" So book your plans now!\n\nThis even
+ t is for all levels and walkers\, there are a few steps here and there to 
+ navigate\, but mostly on one level. This event in a non walking event.\n\n
+ The lecture begins on the steps of Old City Hall at the northeast corner o
+ f Bay Street and Queen Street West and head into the PATH.\n\nThis lecture
+  event has a ticket price of $20.00 per person\, and is **free with the ye
+ arly membership pass**. Hope to see you there!\n\n\\*\\* **Please note: Pl
+ ease e-transfer the ticket amount when booking your space for this tour! Y
+ ou can e-transfer to the following email at:**\n**torontohistorywalks@gmai
+ l.com**
+URL;VALUE=URI:https://www.meetup.com/the-history-of-parkdale/events/313175
+ 471/
+STATUS:CONFIRMED
+CREATED:20260202T175400Z
+LAST-MODIFIED:20260202T175400Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: History of Parkdale
+X-SOURCE-URL:https://www.meetup.com/the-history-of-parkdale/
+UID:event_313413178@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031656Z
+DTSTART;TZID=America/Toronto:20260426T150000
+DTEND;TZID=America/Toronto:20260426T170000
+SUMMARY:The Exhibition Grounds: History and Architecture (NEW FOR 2026)
+DESCRIPTION:Toronto History Walks\n\\*\\***The Toronto History Walks Explo
+ rer Pass is available. Get it now for $125.00 for 1 year of unlimited tour
+ s\, email**\n**torontohistorywalks@gmail.com**\n**for more information or 
+ for signing up!\\*\\***\n\n\\*\\* **Please note: Please e-transfer the tic
+ ket price when booking your space for this tour! You can e-transfer to the
+  following email at:**\n**torontohistorywalks@gmail.com**\n\nThe beloved C
+ NE started out as the Toronto Industrial Exhibition in 1879 and has been a
+ n icon ever since.\n\nBut the history of the CNE dates back to the mid 180
+ 0s when the Provincial Agricultural Association set up the first exhibitio
+ n in 1846 here in Toronto. The "Fair" was an Upper Canada fair and moved f
+ rom one place to another for the first 30 years until the permanent exhibi
+ tion was established in Toronto.\n\nSeen as a mini world's fair the Indust
+ rial Exhibition changed the name in 1912 to the Canadian National Exhibiti
+ on\, as was known as the "People's University."\n\nThe buildings were cons
+ idered the most beautiful exhibition buildings on the continent. In 1906 t
+ he Crystal Palace burned to the ground and the current horticultural build
+ ing built on the site.\n\nThe architecture tells its own story of Toronto 
+ and what Torontonians thought about their city. Pride in Toronto\, and all
+  that it achieved was on display for all to see during the CNE days in lat
+ e August.\n\nLearn about the history and the ups and downs of the "showpla
+ ce of the nation."\n\nThis walk is for all walkers and all skill levels. P
+ lease dress for the weather and bring water.\n\nPlease meet on the south s
+ ide of Springhurst and Dufferin Street\, just north of the TTC loop.\n\nTh
+ is tour has a ticket price of $15.00 per person.\n\n\\*\\* **Please note: 
+ Please e-transfer the ticket price when booking your space for this tour! 
+ You can e-transfer to the following email at:**\n**torontohistorywalks@gma
+ il.com**
+URL;VALUE=URI:https://www.meetup.com/the-history-of-parkdale/events/313413
+ 178/
+STATUS:CONFIRMED
+CREATED:20260218T144917Z
+LAST-MODIFIED:20260218T144917Z
+CLASS:PUBLIC
+END:VEVENT
+X-ORIGINAL-URL:https://www.meetup.com/the-history-of-parkdale/events/ical/
+X-WR-CALNAME:Toronto History Walks
+END:VCALENDAR

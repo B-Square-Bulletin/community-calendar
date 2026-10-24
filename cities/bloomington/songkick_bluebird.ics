@@ -1,0 +1,61 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//The Bluebird//songkick.com//
+X-WR-CALNAME:The Bluebird
+X-WR-TIMEZONE:America/New_York
+BEGIN:VEVENT
+SUMMARY:Hairbangers Ball
+DTSTART:20261024T210000
+DTEND:20261024T210000
+UID:c76604999d3b85bb38f33d0726eaa9df@songkick.com
+DESCRIPTION:Hairbangers Ball at Bluebird at 2026-10-24T21:00:00-0400
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43407956-hairbangers-ball-at-bluebird
+ ?utm_medium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Rod Tuffcurls\, The Benchpress
+DTSTART:20261113T200000
+DTEND:20261113T200000
+UID:4fbaccb6a630b973d2f74fdb4e9da920@songkick.com
+DESCRIPTION:Rod Tuffcurls at Bluebird at 2026-11-13T20:00:00-0500
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43471346-rod-tuffcurls-at-bluebird?ut
+ m_medium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Hank Ruff
+DTSTART:20261114T200000
+DTEND:20261114T200000
+UID:8abebed47e4afadd42133442a1fae638@songkick.com
+DESCRIPTION:Hank Ruff at Bluebird at 2026-11-14T20:00:00-0500
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43471347-hank-ruff-at-bluebird?utm_me
+ dium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Emo Nite
+DTSTART:20261120T210000
+DTEND:20261120T210000
+UID:07563ca323ad6b27652023b1a656b3a0@songkick.com
+DESCRIPTION:Emo Nite at Bluebird at 2026-11-20T21:00:00-0500
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43464144-emo-nite-at-bluebird?utm_med
+ ium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Jake Dodds
+DTSTART:20261121T210000
+DTEND:20261121T210000
+UID:0d22a978571bb65ebb5662895d82c230@songkick.com
+DESCRIPTION:Jake Dodds at Bluebird at 2026-11-21T21:00:00-0500
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43478118-jake-dodds-at-bluebird?utm_m
+ edium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+END:VCALENDAR
