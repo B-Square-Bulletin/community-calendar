@@ -132,18 +132,21 @@ def insert_feeds(city, feeds, supabase_url, service_key):
                 "apikey": service_key,
                 "Authorization": f"Bearer {service_key}",
                 "Content-Type": "application/json",
-                "Prefer": "resolution=ignore-duplicates,return=minimal",
+                "Prefer": "resolution=ignore-duplicates,return=representation",
             },
             method="POST",
         )
         try:
             with urllib.request.urlopen(req) as resp:
-                if resp.status == 201:
-                    inserted += 1
-                    print(f"  + {feed['name']}")
-                else:
-                    skipped += 1
-                    report_skipped(feed, city, supabase_url, service_key)
+                # An ignored duplicate returns an empty array, so the body, not
+                # the status, says whether the row was inserted.
+                created = json.loads(resp.read().decode() or "[]")
+            if created:
+                inserted += 1
+                print(f"  + {feed['name']}")
+            else:
+                skipped += 1
+                report_skipped(feed, city, supabase_url, service_key)
         except urllib.error.HTTPError as e:
             body = e.read().decode()
             if "duplicate" in body.lower() or e.code == 409:

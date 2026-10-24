@@ -55,7 +55,10 @@ class TestDuplicateReporting:
         def fake(req, timeout=None):
             calls.append((req.get_method(), req.full_url))
             if req.get_method() == "POST":
-                return post(req)
+                result = post(req)
+                if isinstance(result, urllib.error.HTTPError):
+                    raise result
+                return result
             return _Resp(json.dumps(rows or []).encode(), status=200)
 
         monkeypatch.setattr(ppf.urllib.request, "urlopen", fake)
@@ -75,8 +78,25 @@ class TestDuplicateReporting:
         )
         assert any(method == "GET" and "url=eq." in url for method, url in calls)
 
-    def test_non_201_response_reports_the_skip(self, monkeypatch, capsys):
-        self._fake_urlopen(monkeypatch, lambda req: _Resp(status=200), [{"status": "active"}])
+    def test_ignored_duplicate_201_reports_the_tombstone(self, monkeypatch, capsys):
+        """PostgREST answers an ignored duplicate with 201 and an empty array."""
+        self._fake_urlopen(
+            monkeypatch, lambda req: _Resp(b"[]", status=201), [{"status": "removed"}]
+        )
+
+        inserted, skipped, errors = ppf.insert_feeds(
+            "bloomington", [FEED], "https://db.example", "key"
+        )
+
+        assert (inserted, skipped, errors) == (0, 1, 0)
+        assert (
+            f"= {FEED['name']} (already exists as removed; "
+            "re-adding it has no effect — see #240)" in capsys.readouterr().out
+        )
+
+    def test_conflict_response_reports_the_skip(self, monkeypatch, capsys):
+        """Some PostgREST versions surface the unique violation as 409."""
+        self._fake_urlopen(monkeypatch, _duplicate, [{"status": "active"}])
 
         inserted, skipped, errors = ppf.insert_feeds(
             "bloomington", [FEED], "https://db.example", "key"
@@ -86,7 +106,7 @@ class TestDuplicateReporting:
         assert f"= {FEED['name']} (already exists)" in capsys.readouterr().out
 
     def test_empty_lookup_keeps_the_plain_message(self, monkeypatch, capsys):
-        self._fake_urlopen(monkeypatch, _duplicate, [])
+        self._fake_urlopen(monkeypatch, lambda req: _Resp(b"[]", status=201), [])
 
         ppf.insert_feeds("bloomington", [FEED], "https://db.example", "key")
 
@@ -115,7 +135,7 @@ class TestDuplicateReporting:
         assert f"= {FEED['name']} (already exists)" in capsys.readouterr().out
 
     def test_insert_needs_no_status_lookup(self, monkeypatch, capsys):
-        calls = self._fake_urlopen(monkeypatch, lambda req: _Resp(status=201))
+        calls = self._fake_urlopen(monkeypatch, lambda req: _Resp(b'[{"id": 1}]', status=201))
 
         inserted, skipped, errors = ppf.insert_feeds(
             "bloomington", [FEED], "https://db.example", "key"
