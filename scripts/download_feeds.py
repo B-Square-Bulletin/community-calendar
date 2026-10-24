@@ -337,6 +337,26 @@ def fetch_with_curl_fallback(url: str, outfile: Path) -> bool:
     return outfile.exists() and outfile.stat().st_size > 0
 
 
+def assert_unique_stems(feed_list) -> None:
+    """Refuse to download two feeds to one file.
+
+    Each file is slugify(url).ics, so two URLs that differ only in the query
+    string overwrite each other on a provider without a slug case. The loser's
+    rows then look stale to the sweep (ADR 0017), so fail the run instead of
+    losing a source. The PR-time check in tests/test_feed_slug.py cannot see a
+    feed added through Manage Feeds (#240).
+    """
+    stems: dict[str, str] = {}
+    for url, name, _fallback_url in feed_list:
+        stem = slugify(url)
+        if stem in stems:
+            raise SystemExit(
+                f"slug collision: {name!r} and {stems[stem]!r} both write "
+                f"{stem}.ics; give one URL a distinct path or slug case (#240)"
+            )
+        stems[stem] = name
+
+
 def download_feeds(city: str) -> None:
     output_dir = Path("cities") / city
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -355,6 +375,8 @@ def download_feeds(city: str) -> None:
         feed_list = list(parse_feeds_txt(feeds_file))
         db_feeds_by_url = {}
         print(f"  Using feeds.txt ({len(feed_list)} feeds)")
+
+    assert_unique_stems(feed_list)
 
     count = 0
     last_request_at: dict[str, float] = {}

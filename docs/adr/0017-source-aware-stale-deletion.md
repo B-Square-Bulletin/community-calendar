@@ -120,10 +120,11 @@ instead of the slug being disambiguated. The row is a `status='removed'`
 tombstone, so the URL cannot return as a new feed and recreate the collision.
 
 The guard stays: a shared stem still identifies neither feed, and
-`tests/test_feed_slug.py` now fails when two same-city entries in `feeds.txt`
-or `pending_feeds.txt` produce one stem. That check runs on snapshots, so a
-feed added outside a PR is caught by the next export, not before its first
-overwrite.
+`download_feeds.py` now exits non-zero when two feeds in one city would write
+the same `.ics` file, so a feed added through Manage Feeds fails the build
+instead of overwriting another source's calendar. `tests/test_feed_slug.py`
+also fails when two same-city entries in `feeds.txt` or `pending_feeds.txt`
+produce one stem, which catches the pair at PR time.
 
 ## Alternatives Considered
 
