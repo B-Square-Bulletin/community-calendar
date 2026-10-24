@@ -598,6 +598,63 @@ class TestStemCollisions:
 
         assert len(fetched) == 2
 
+    def test_scraper_output_stem_is_reserved(self, monkeypatch, tmp_path):
+        """Scrapers run first, so a download must not clobber their .ics file."""
+        monkeypatch.chdir(tmp_path)
+        monkeypatch.setattr(
+            df,
+            "fetch_feeds_from_db",
+            lambda city: [
+                {
+                    "id": 1,
+                    "url": "https://example.com/x/feed.ics",
+                    "name": "Example",
+                    "fallback_url": None,
+                    "status": "active",
+                    "feed_type": "ics_url",
+                    "source_ids": [],
+                },
+                {
+                    "id": 2,
+                    "url": "cities/bloomington/example_x_feed_ics.ics",
+                    "name": "Example Scraper",
+                    "fallback_url": None,
+                    "status": "active",
+                    "feed_type": "scraper",
+                    "source_ids": ["example_x_feed_ics"],
+                },
+            ],
+        )
+        fetched: list[str] = []
+        monkeypatch.setattr(
+            df,
+            "fetch_with_curl_fallback",
+            lambda url, outfile: fetched.append(url) or True,
+        )
+
+        with pytest.raises(SystemExit) as exc:
+            df.download_feeds("bloomington")
+
+        assert "example_x_feed_ics" in str(exc.value)
+        assert fetched == []
+
+    def test_feeds_txt_fallback_reserves_scraper_stems(self, monkeypatch, tmp_path):
+        monkeypatch.chdir(tmp_path)
+        monkeypatch.delenv("SUPABASE_URL", raising=False)
+        monkeypatch.delenv("SUPABASE_SERVICE_KEY", raising=False)
+        city_dir = tmp_path / "cities" / "bloomington"
+        city_dir.mkdir(parents=True)
+        (city_dir / "feeds.txt").write_text(
+            "# Example Scraper\n"
+            "cities/bloomington/example_x_feed_ics.ics\n\n"
+            "# Example\n"
+            "https://example.com/x/feed.ics\n",
+            encoding="utf-8",
+        )
+
+        with pytest.raises(SystemExit):
+            df.download_feeds("bloomington")
+
 
 class TestRecordFeedSources:
     """remove_feed reads feeds.source_ids, so a wrong payload here silently
