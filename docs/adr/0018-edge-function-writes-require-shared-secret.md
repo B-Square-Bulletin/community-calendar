@@ -54,11 +54,12 @@ repository rather than this fork.
   GitHub Actions secret). No redeploy is needed.
 - A redeploy that loses the project secret fails loudly with 500 rather than
   silently reopening anonymous writes. That is intentional.
-- `refresh_source_names` and `refresh_deduplicated_events` kept their anonymous
-  EXECUTE grant in this change: the workflow called them with the anon key.
-  `20261024130000_secure_definer_functions.sql` later made both `service_role`
-  only (GHSA-69r3-3gxw-fm4g), and the source-names step now sends the service
-  key like the dedupe step already did.
+- `refresh_deduplicated_events` kept its anonymous EXECUTE grant in this
+  change: the workflow called it with the anon key.
+  `20261024130000_secure_definer_functions.sql` later made it `service_role`
+  only (GHSA-69r3-3gxw-fm4g). `refresh_source_names` went further: nothing read
+  its `source_names` table, so `20261024140000_drop_source_names.sql` deleted
+  the RPC, the table, and the nightly step.
 - A shared secret does not identify *which* caller wrote; both workflows share
   one value. Per-caller identity is unnecessary while CI is the only writer.
 

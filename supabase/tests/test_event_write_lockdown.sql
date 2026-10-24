@@ -15,7 +15,7 @@
 -- Or:  make test-sql
 
 BEGIN;
-SELECT plan(9);
+SELECT plan(6);
 
 SELECT is(
     has_function_privilege('anon', 'public.delete_stale_events(text,text[],text[])', 'EXECUTE'),
@@ -28,7 +28,7 @@ SELECT ok(
     'service_role can execute delete_stale_events'
 );
 
--- GHSA-69r3-3gxw-fm4g: both refresh helpers are CI-only.
+-- GHSA-69r3-3gxw-fm4g: the dedupe refresh is CI-only.
 SELECT is(
     has_function_privilege('anon', 'public.refresh_deduplicated_events()', 'EXECUTE'),
     false,
@@ -44,23 +44,6 @@ SELECT is(
 SELECT ok(
     has_function_privilege('service_role', 'public.refresh_deduplicated_events()', 'EXECUTE'),
     'service_role can execute refresh_deduplicated_events'
-);
-
-SELECT is(
-    has_function_privilege('anon', 'public.refresh_source_names(text)', 'EXECUTE'),
-    false,
-    'anon cannot execute refresh_source_names'
-);
-
-SELECT is(
-    has_function_privilege('authenticated', 'public.refresh_source_names(text)', 'EXECUTE'),
-    false,
-    'authenticated cannot execute refresh_source_names'
-);
-
-SELECT ok(
-    has_function_privilege('service_role', 'public.refresh_source_names(text)', 'EXECUTE'),
-    'service_role can execute refresh_source_names'
 );
 
 SET LOCAL ROLE anon;

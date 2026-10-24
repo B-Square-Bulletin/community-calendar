@@ -10,7 +10,6 @@ This project uses both Postgres functions (PL/pgSQL or SQL, running inside the d
 - `apply_category_override()` — trigger function, stores original category then propagates override to events table
 - `get_source_counts(target_city)` — returns source names + event counts by querying events table directly (replaces cached `source_names` table)
 - `remove_feed(feed_id)` — SECURITY DEFINER, admin-only: deletes a feed row and its events (used by Manage Feeds dialog to avoid CORS issues with PATCH)
-- `refresh_source_names(target_city)` — legacy, refreshes the `source_names` cache table; service_role only
 - `refresh_deduplicated_events()` — CI-only rebuild of the `deduplicated_events` materialized view; service_role only
 
 ## Edge Functions in This Project
