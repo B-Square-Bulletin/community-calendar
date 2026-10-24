@@ -3,6 +3,7 @@
 
 import sys
 from pathlib import Path
+from urllib.error import URLError
 
 import pytest
 
@@ -53,3 +54,16 @@ def test_sitemap_without_event_urls_stays_quiet(tmp_path, monkeypatch):
     ics = out.read_text()
     assert "BEGIN:VCALENDAR" in ics
     assert "VEVENT" not in ics
+
+
+def test_unreachable_sitemap_names_the_failure(tmp_path, monkeypatch):
+    def _raise(req, timeout):
+        raise URLError("boom")
+
+    monkeypatch.setattr(bb, "urlopen", _raise)
+    out = tmp_path / "brew.ics"
+
+    with pytest.raises(RuntimeError, match="Could not fetch sitemap"):
+        BloomingtonBrewingScraper().run(str(out))
+
+    assert not out.exists()

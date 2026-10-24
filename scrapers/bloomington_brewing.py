@@ -75,8 +75,7 @@ class BloomingtonBrewingScraper(BaseScraper):
         """Parse sitemap.xml to discover all event page URLs."""
         data = self._fetch(SITEMAP_URL)
         if not data:
-            self.logger.error("Could not fetch sitemap")
-            return []
+            raise RuntimeError(f"Could not fetch sitemap {SITEMAP_URL}")
 
         text = data.decode("utf-8")
         # Extract <loc> entries that match event paths

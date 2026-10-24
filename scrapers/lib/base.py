@@ -188,6 +188,9 @@ class BaseScraper(ABC):
         timeout: int = 30,
     ) -> str:
         """Fetch text content via curl for sites that block urllib in CI."""
+        # shortcut: no -f, so HTTP error bodies are returned to the caller.
+        # Adding it changes error semantics for the non-Bloomington scrapers
+        # that share this helper (#243 left that migration out of scope).
         cmd = ["curl", "-sL", "-A", "Mozilla/5.0", "--max-time", str(timeout)]
         if accept:
             cmd.extend(["-H", f"Accept: {accept}"])
