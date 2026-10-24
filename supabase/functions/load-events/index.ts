@@ -103,7 +103,12 @@ Deno.serve(async (req) => {
         );
       }
       let deleted = 0;
-      if (newSourceUids.length > 0) {
+      if (errors > 0) {
+        console.warn(
+          `Cleanup ${city} skipped: ${errors} events failed to upsert, so their replacements may be missing`
+        );
+      }
+      if (errors === 0 && newSourceUids.length > 0) {
         const { data: delCount, error: delError } = await supabase
           .rpc("delete_stale_events", {
             p_city: city,
@@ -240,8 +245,11 @@ Deno.serve(async (req) => {
     // Remove stale events per city, scoped to the sources present in the
     // payload, using RPC to avoid URL length limits
     let deleted = 0;
+    if (errors > 0) {
+      console.warn(`Stale cleanup skipped: ${errors} events failed to upsert`);
+    }
     for (const [city, uids] of eventsByCity) {
-      if (uids.length > 0) {
+      if (errors === 0 && uids.length > 0) {
         const sources = sourcesByCity.get(city) ?? [];
         if (sources.length === 0) {
           console.warn(
