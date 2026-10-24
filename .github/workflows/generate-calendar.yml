@@ -302,15 +302,15 @@ jobs:
       continue-on-error: true
       env:
         SUPABASE_URL: ${{ vars.SUPABASE_URL }}
-        SUPABASE_ANON_KEY: ${{ vars.SUPABASE_KEY }}
+        SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
       run: |
         IFS=',' read -ra UPLOAD_CITIES <<< "${{ steps.locations.outputs.list }}"
         for city in "${UPLOAD_CITIES[@]}"; do
           city=$(echo "$city" | xargs)
           echo "Refreshing source names for $city..."
           RESPONSE=$(curl -sL -w "\n%{http_code}" -X POST "${SUPABASE_URL}/rest/v1/rpc/refresh_source_names" \
-            -H "apikey: ${SUPABASE_ANON_KEY}" \
-            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
+            -H "apikey: ${SUPABASE_SERVICE_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_SERVICE_KEY}" \
             -H "Content-Type: application/json" \
             -d "{\"target_city\": \"$city\"}")
           HTTP_CODE=$(echo "$RESPONSE" | tail -1)

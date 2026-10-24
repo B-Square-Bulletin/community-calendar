@@ -36,6 +36,14 @@ Actions secret.
 `TO service_role`, and EXECUTE on `delete_stale_events` is revoked from
 `PUBLIC`, `anon`, and `authenticated`.
 
+**Authorize definer write functions in the body.** A grant is not an
+authorization boundary: the publishable key satisfies `anon` and any signed-in
+user satisfies `authenticated`. Every SECURITY DEFINER function that writes
+must either check the caller itself (`auth.uid()` against `admin_users` for
+admin actions) or be granted to `service_role` alone. `remove_feed` and the two
+refresh helpers were brought in line by
+`20261024130000_secure_definer_functions.sql` (GHSA-69r3-3gxw-fm4g).
+
 The legacy fetch-from-GitHub mode was deleted with the same change: it existed
 only for the pg_cron job that posted `{}`, and it fetched from the upstream
 repository rather than this fork.
@@ -46,8 +54,11 @@ repository rather than this fork.
   GitHub Actions secret). No redeploy is needed.
 - A redeploy that loses the project secret fails loudly with 500 rather than
   silently reopening anonymous writes. That is intentional.
-- `refresh_source_names` and `refresh_deduplicated_events` keep their anonymous
-  EXECUTE grant: the workflow calls them with the anon key.
+- `refresh_source_names` and `refresh_deduplicated_events` kept their anonymous
+  EXECUTE grant in this change: the workflow called them with the anon key.
+  `20261024130000_secure_definer_functions.sql` later made both `service_role`
+  only (GHSA-69r3-3gxw-fm4g), and the source-names step now sends the service
+  key like the dedupe step already did.
 - A shared secret does not identify *which* caller wrote; both workflows share
   one value. Per-caller identity is unnecessary while CI is the only writer.
 
