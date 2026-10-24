@@ -186,6 +186,7 @@ class DiceApiScraper(BaseScraper):
             except json.JSONDecodeError as e:
                 self.logger.error(f"Bad JSON from {url}: {e}")
                 break
+            self.mark_source_reached()
             data: list[dict[str, Any]] = payload.get("data") or []
             self.logger.info(f"Page {pages + 1}: {len(data)} events")
             for item in data:

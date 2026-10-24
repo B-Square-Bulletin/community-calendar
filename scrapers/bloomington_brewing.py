@@ -81,6 +81,7 @@ class BloomingtonBrewingScraper(BaseScraper):
         text = data.decode("utf-8")
         # Extract <loc> entries that match event paths
         locs = re.findall(r"<loc>(https?://[^<]+)</loc>", text)
+        self.mark_source_reached()
         event_urls = []
         seen = set()
         for loc in locs:
