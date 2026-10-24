@@ -362,7 +362,7 @@ func Init() error {
 	// --- Step 6: DDL + admin ---
 	if s.Step < 6 {
 		fmt.Printf("Applying database schema...")
-		if err := applyDDL(client, s.ProjectRef, repoRoot, s.SupabaseURL, s.AnonKey); err != nil {
+		if err := applyDDL(client, s.ProjectRef, repoRoot); err != nil {
 			return fmt.Errorf("\n  %w", err)
 		}
 		fmt.Println(" ✓")
@@ -630,7 +630,7 @@ https://calendar.google.com/calendar/ical/davisbikeclubwww%40gmail.com/public/ba
 `
 
 // applyDDL reads and executes all DDL files in order.
-func applyDDL(client *supabase.Client, ref, repoRoot, supabaseURL, anonKey string) error {
+func applyDDL(client *supabase.Client, ref, repoRoot string) error {
 	ddlDir := filepath.Join(repoRoot, "supabase", "ddl")
 	entries, err := os.ReadDir(ddlDir)
 	if err != nil {
@@ -652,12 +652,6 @@ func applyDDL(client *supabase.Client, ref, repoRoot, supabaseURL, anonKey strin
 			return fmt.Errorf("reading %s: %w", f, err)
 		}
 		sql := string(data)
-
-		// Template the cron job SQL with real values
-		if f == "05_cron_jobs.sql" {
-			sql = strings.ReplaceAll(sql, "https://dzpdualvwspgqghrysyz.supabase.co", supabaseURL)
-			sql = strings.ReplaceAll(sql, "<YOUR_LEGACY_ANON_KEY>", anonKey)
-		}
 
 		if err := client.RunSQL(ref, sql); err != nil {
 			return fmt.Errorf("executing %s: %w", f, err)
