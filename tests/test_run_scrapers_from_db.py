@@ -131,3 +131,12 @@ class TestRecordRanIfSuccess:
         rs.record_ran_if_success(_row(), 0)
 
         assert not (out.parent / "ran_sources.txt").exists()
+
+    def test_truncated_calendar_is_not_recorded(self, tmp_path, monkeypatch):
+        """A calendar that opens but never closes is a failed source."""
+        monkeypatch.setattr(rs, "ROOT", tmp_path)
+        out = self._calendar(tmp_path, body="BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\n")
+
+        rs.record_ran_if_success(_row(), 0)
+
+        assert not (out.parent / "ran_sources.txt").exists()

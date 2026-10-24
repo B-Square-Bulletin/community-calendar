@@ -660,3 +660,8 @@ class TestRanSourcesManifest:
     def test_block_page_is_not_recorded(self, monkeypatch, tmp_path):
         manifest = self._run(monkeypatch, tmp_path, "<html>Access denied</html>")
         assert not manifest.exists()
+
+    def test_truncated_calendar_is_not_recorded(self, monkeypatch, tmp_path):
+        """A body that opens a calendar but never closes it is a failed fetch."""
+        manifest = self._run(monkeypatch, tmp_path, "BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\n")
+        assert not manifest.exists()

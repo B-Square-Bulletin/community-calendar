@@ -20,8 +20,13 @@ CALENDAR_MARKER = "BEGIN:VCALENDAR"
 
 
 def is_calendar_body(text: str) -> bool:
-    """True when the text holds a calendar, not a block page or error body."""
-    return CALENDAR_MARKER in text
+    """True when the text is a complete calendar, not a block page or a truncation.
+
+    A body that opens a calendar but never closes it (a cut-off download) is a
+    failed ingestion, not a quiet source: combine_ics extracts no complete
+    events from it, so recording it would sweep rows the source still has.
+    """
+    return CALENDAR_MARKER in text and "END:VCALENDAR" in text
 
 
 def is_calendar(path: Path) -> bool:
