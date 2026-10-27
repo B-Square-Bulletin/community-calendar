@@ -23,15 +23,20 @@ DO $$
 DECLARE
   r record;
 BEGIN
+  -- MATERIALIZED: the body rewrites feeds.url, and mutating the table a cursor
+  -- scans is the classic plpgsql footgun.
   FOR r IN
-    SELECT f.id, t.id AS token_id, t.user_id
-    FROM feeds f
-    JOIN feed_tokens t
-      ON t.token = substring(
-           f.url
-           from 'token=([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})'
-         )::uuid
-    WHERE f.url LIKE '%/functions/v1/my-picks?token=%'
+    WITH targets AS MATERIALIZED (
+      SELECT f.id, t.id AS token_id, t.user_id
+      FROM feeds f
+      JOIN feed_tokens t
+        ON t.token = substring(
+             f.url
+             from 'token=([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})'
+           )::uuid
+      WHERE f.url LIKE '%/functions/v1/my-picks?token=%'
+    )
+    SELECT * FROM targets
   LOOP
     UPDATE feeds
     SET feed_type = 'curator',
