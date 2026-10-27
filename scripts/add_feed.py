@@ -18,6 +18,7 @@ Usage:
 """
 
 import argparse
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -26,6 +27,12 @@ from feed_slug import slugify
 
 # Repository root
 ROOT = Path(__file__).parent.parent
+
+# A picks feed is authenticated by this token alone and feeds.url is
+# world-readable and re-exported to feeds.txt, so it never belongs here
+# (GHSA-3pg8-w4j4-6wv8). Curator feeds are registered in the feeds table with
+# curator_user_id instead.
+CAPABILITY_FEED_RE = re.compile(r"/functions/v1/my-picks(\?|$)")
 
 
 def test_feed(url: str) -> tuple[bool, int]:
@@ -124,6 +131,15 @@ Examples:
     parser.add_argument("--slug", help="Override the auto-generated filename slug")
 
     args = parser.parse_args()
+
+    if CAPABILITY_FEED_RE.search(args.url):
+        print(
+            "❌ That is a personal my-picks feed: its ?token= is the only "
+            "credential for that curator's saved events, and feeds.txt is "
+            "public. Register a curator feed in the feeds table with "
+            "curator_user_id instead (see docs/pipeline.md)."
+        )
+        sys.exit(1)
 
     # Generate slug
     slug = args.slug or slugify(args.url)

@@ -194,6 +194,26 @@ class TestIcsUrlEntry:
 
         assert vpf.validate("origin/main") == []
 
+    def test_my_picks_capability_url_is_rejected(self, tmp_path, monkeypatch):
+        """A curator's feed token is the only credential for their picks and
+        feeds.txt is public, so the URL can never be a pending entry
+        (GHSA-3pg8-w4j4-6wv8)."""
+        _setup(
+            tmp_path,
+            monkeypatch,
+            "# The Night\nhttps://ref.supabase.co/functions/v1/my-picks?token=0d6f3c1a\n",
+        )
+        monkeypatch.setattr(
+            vpf,
+            "get_changed_file_statuses",
+            lambda base_ref: [("M", "cities/bloomington/pending_feeds.txt")],
+        )
+
+        errors = vpf.validate("origin/main")
+
+        assert len(errors) == 1
+        assert "my-picks" in errors[0]
+
 
 class TestNewScraperRegistration:
     def test_new_scraper_without_pending_entry_is_flagged(self, tmp_path, monkeypatch):

@@ -9,7 +9,8 @@ Rules (DB-first model):
   so the workflow carries no per-scraper lines and is not consulted here.
 - A new scraper .py added to scrapers/ must be referenced by a
   feeds.txt or pending_feeds.txt entry.
-- ICS URL entries in pending_feeds.txt are self-contained (no other checks).
+- ICS URL entries in pending_feeds.txt are self-contained, except that a
+  personal my-picks capability URL is always rejected.
 
 Runs on PRs. Exits 0 if no feed/scraper files were touched or all checks pass.
 
@@ -33,6 +34,10 @@ ROOT = Path(__file__).parent.parent
 # path and its command invokes a repo script. Keep these in sync.
 SCRAPER_OUTPUT_RE = re.compile(r"^cities/[a-z0-9-]+/[A-Za-z0-9._-]+\.ics$")
 SCRAPER_CMD_RE = re.compile(r"^python (scrapers|scripts)/")
+
+# A personal my-picks URL is a capability URL, never a source to commit
+# (GHSA-3pg8-w4j4-6wv8). Mirrors the feeds-table CHECK constraint.
+CAPABILITY_FEED_RE = re.compile(r"/functions/v1/my-picks(\?|$)")
 
 
 def get_changed_file_statuses(base_ref: str) -> list[tuple[str, str]]:
@@ -141,6 +146,15 @@ def validate(base_ref: str) -> list[str]:
         feeds = parse_pending_feeds(path)
         for feed in feeds:
             if feed["feed_type"] != "scraper":
+                # A personal my-picks URL is a capability URL: its ?token= is
+                # the only credential for that curator's saved events, and the
+                # URL would be re-exported to feeds.txt (GHSA-3pg8-w4j4-6wv8).
+                if CAPABILITY_FEED_RE.search(feed["url"]):
+                    errors.append(
+                        f"Feed '{feed['name']}' in {f} is a personal my-picks "
+                        f"feed. Its token must not be committed: register it in "
+                        f"the feeds table with curator_user_id instead."
+                    )
                 continue
 
             # The entry must satisfy the feeds-table insert-time trigger

@@ -24,7 +24,7 @@
 - `ticketmaster.py` - Ticketmaster venues
 - `eventbrite.py` - Eventbrite organizers
 
-**Curator feeds** (type `curator`) are curated picks from community members via the `my-picks` edge function.
+**Curator feeds** (type `curator`) are curated picks from community members via the `my-picks` edge function. The row names the curator (`curator_user_id`) and its `url` is the non-secret `curator://<user_id>`; the build mints the tokenized URL from `feed_tokens` at download time. Never paste a `my-picks?token=…` URL into `feeds.txt`, `pending_feeds.txt`, or `feeds.url`: the token is the only credential for that person's saved-events feed, and `feeds` is world-readable and exported to git (GHSA-3pg8-w4j4-6wv8). A CHECK constraint rejects it.
 
 ### The `feeds` Table
 
@@ -47,6 +47,22 @@ Use the **Manage Feeds** dialog in the app (admin calendar icon):
 4. Next build picks it up, downloads it, marks it `active`
 
 Feeds with recurring events (RRULE) show a note that the build will expand them.
+
+## Adding a Curator Feed
+
+A curator feed is a community member's `my-picks` feed. Do **not** paste its
+`?token=` URL anywhere in the repo — the token is the only credential for that
+person's saved events, and `feeds` is world-readable and exported to
+`feeds.txt`. Register the curator instead, in the SQL editor:
+
+```sql
+INSERT INTO feeds (city, url, name, status, feed_type, curator_user_id)
+VALUES ('bloomington', 'curator://<curator-user-id>', 'Their Picks', 'active',
+        'curator', '<curator-user-id>');
+```
+
+The build mints the tokenized URL from `feed_tokens` on every run, so rotating
+a token (or the curator signing in again) needs no change here.
 
 ## Deleting a Feed
 

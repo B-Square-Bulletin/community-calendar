@@ -496,6 +496,64 @@ class TestBoundedTimeouts:
         assert df.fetch_feeds_from_db("bloomington") is None
 
 
+class TestCuratorFeedResolution:
+    """Curator rows store curator://<user_id>; the my-picks URL is minted from
+    feed_tokens per build, so no capability token is stored or exported
+    (GHSA-3pg8-w4j4-6wv8)."""
+
+    def test_without_credentials_mints_nothing(self, monkeypatch):
+        monkeypatch.delenv("SUPABASE_URL", raising=False)
+        monkeypatch.delenv("SUPABASE_SERVICE_KEY", raising=False)
+
+        assert df.resolve_curator_urls([{"curator_user_id": "u-1"}]) == {}
+
+    def test_mints_my_picks_url_from_feed_tokens(self, monkeypatch):
+        monkeypatch.setenv("SUPABASE_URL", "https://fake.supabase.co")
+        monkeypatch.setenv("SUPABASE_SERVICE_KEY", "service-key")
+        seen: dict[str, str] = {}
+
+        def fake_urlopen(req, timeout=None):
+            seen["url"] = req.full_url
+            return _Resp(b'[{"user_id":"u-1","token":"tok-1"}]')
+
+        monkeypatch.setattr(df.urllib.request, "urlopen", fake_urlopen)
+
+        assert df.resolve_curator_urls([{"curator_user_id": "u-1"}, {"curator_user_id": None}]) == {
+            "curator://u-1": "https://fake.supabase.co/functions/v1/my-picks?token=tok-1"
+        }
+        assert "user_id=in.(u-1)" in seen["url"]
+
+    def test_curator_row_without_token_is_skipped(self, monkeypatch, tmp_path, capsys):
+        monkeypatch.chdir(tmp_path)
+        monkeypatch.delenv("SUPABASE_URL", raising=False)
+        monkeypatch.delenv("SUPABASE_SERVICE_KEY", raising=False)
+        monkeypatch.setattr(
+            df,
+            "fetch_feeds_from_db",
+            lambda city: [
+                {
+                    "id": 7,
+                    "url": "curator://u-1",
+                    "name": "My Picks",
+                    "fallback_url": None,
+                    "status": "active",
+                    "feed_type": "curator",
+                    "curator_user_id": "u-1",
+                    "source_ids": [],
+                }
+            ],
+        )
+        monkeypatch.setattr(
+            df,
+            "fetch_with_curl_fallback",
+            lambda url, outfile: pytest.fail(f"fetched {url}"),
+        )
+
+        df.download_feeds("bloomington")
+
+        assert "no feed token" in capsys.readouterr().out
+
+
 class TestDownloadProgressLog:
     def test_logs_in_flight_feed_before_fetch(self, monkeypatch, capsys, tmp_path):
         """A hang must name the feed it is stuck on in the log."""

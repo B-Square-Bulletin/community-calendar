@@ -109,7 +109,7 @@ def fetch_feeds_from_db(city: str):
 
     query_url = (
         f"{supabase_url}/rest/v1/feeds"
-        f"?select=id,url,name,status,fallback_url,feed_type"
+        f"?select=id,url,name,status,fallback_url,feed_type,curator_user_id"
         f"&city=eq.{city}"
         f"&status=in.(active,pending)"
         f"&feed_type=in.(ics_url,curator,scraper)"
@@ -261,6 +261,44 @@ def _read_within(resp, total_seconds: float) -> bytes:
         chunks.append(chunk)
 
 
+CURATOR_PREFIX = "curator://"
+
+
+def resolve_curator_urls(rows: list[dict]) -> dict[str, str]:
+    """Map each curator row's curator://<user_id> to its my-picks URL.
+
+    The token lives in feed_tokens (RLS: owner-only), never in feeds.url, so a
+    curator feed's real URL exists only for the duration of the build. An
+    empty result means no token to mint; the caller skips those rows.
+    """
+    user_ids = [r["curator_user_id"] for r in rows if r.get("curator_user_id")]
+    supabase_url = os.environ.get("SUPABASE_URL")
+    service_key = os.environ.get("SUPABASE_SERVICE_KEY")
+    if not user_ids or not supabase_url or not service_key:
+        return {}
+
+    query_url = (
+        f"{supabase_url}/rest/v1/feed_tokens?select=user_id,token&user_id=in.({','.join(user_ids)})"
+    )
+    req = urllib.request.Request(
+        query_url,
+        headers={"apikey": service_key, "Authorization": f"Bearer {service_key}"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=_DB_TIMEOUT_SECONDS) as resp:
+            tokens = json.loads(_read_within(resp, _DB_TOTAL_TIMEOUT_SECONDS).decode())
+    except OSError as e:
+        print(f"  ⚠️  Failed to query feed tokens: {e}")
+        return {}
+
+    return {
+        f"{CURATOR_PREFIX}{t['user_id']}": (
+            f"{supabase_url}/functions/v1/my-picks?token={t['token']}"
+        )
+        for t in tokens
+    }
+
+
 @retry(
     retry=retry_if_exception_type(_RateLimited),
     stop=stop_after_attempt(4),
@@ -381,6 +419,7 @@ def download_feeds(city: str) -> None:
         print(f"  Using feeds table ({len(download_rows)} feeds)")
         feed_list = [(f["url"], f["name"], f.get("fallback_url")) for f in download_rows]
         db_feeds_by_url = {f["url"]: f for f in download_rows}
+        curator_urls = resolve_curator_urls(download_rows)
         reserved_stems = {
             Path(f["url"]).stem: f"scraper output {f['url']}"
             for f in db_feeds
@@ -393,8 +432,19 @@ def download_feeds(city: str) -> None:
             return
         feed_list = list(parse_feeds_txt(feeds_file))
         db_feeds_by_url = {}
+        curator_urls = {}
         reserved_stems = scraper_stems_from_feeds_txt(feeds_file)
         print(f"  Using feeds.txt ({len(feed_list)} feeds)")
+        skipped = sum(
+            1
+            for line in feeds_file.read_text().splitlines()
+            if line.strip().startswith(CURATOR_PREFIX)
+        )
+        if skipped:
+            print(
+                f"  ⚠️  {skipped} curator feed(s) skipped: their URLs are minted "
+                f"from the feeds table and feed_tokens, which needs SUPABASE_URL"
+            )
 
     assert_unique_stems(feed_list, reserved_stems)
 
@@ -404,16 +454,23 @@ def download_feeds(city: str) -> None:
         filename = slugify(url) + ".ics"
         outfile = output_dir / filename
 
+        # A curator row's URL is minted from feed_tokens; without a token
+        # (owner never signed in) there is nothing to fetch.
+        fetch_url = curator_urls.get(url, url)
+        if not fetch_url.startswith("https://"):
+            print(f"  ⏭️  {friendly_name or filename}: no feed token for this deployment — skipped")
+            continue
+
         # Throttle per-host so rate-limited sources (events.in.gov) aren't
         # hammered, even when their feeds are interleaved with other hosts.
-        host = _host_of(url)
+        host = _host_of(fetch_url)
         _wait_for_host(host, last_request_at)
 
         # Log the in-flight feed before fetching so a hang names its suspect
         # (the workflow sets PYTHONUNBUFFERED so this line reaches the log).
         print(f"  ⬇️  {filename} ({host})")
 
-        ok = fetch_with_curl_fallback(url, outfile)
+        ok = fetch_with_curl_fallback(fetch_url, outfile)
         body = outfile.read_text(encoding="utf-8", errors="ignore") if ok else ""
         # A 200 carrying an HTML block page is a failed source, not a quiet
         # one: only a real calendar counts as ran (#233).
