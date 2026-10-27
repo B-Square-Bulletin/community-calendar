@@ -215,6 +215,44 @@ class TestIcsUrlEntry:
         assert "my-picks" in errors[0]
 
 
+class TestFeedsTxtEntry:
+    """feeds.txt is generated, but a hand-edited line is how the two Bloomington
+    tokens leaked, so a changed feeds.txt is validated too."""
+
+    def test_capability_url_in_feeds_txt_is_rejected(self, tmp_path, monkeypatch):
+        _setup(
+            tmp_path,
+            monkeypatch,
+            "# empty\n",
+            feeds="# The Night\nhttps://ref.supabase.co/functions/v1/my-picks?token=0d6f3c1a\n",
+        )
+        monkeypatch.setattr(
+            vpf,
+            "get_changed_file_statuses",
+            lambda base_ref: [("M", "cities/bloomington/feeds.txt")],
+        )
+
+        errors = vpf.validate("origin/main")
+
+        assert len(errors) == 1
+        assert "feeds.txt:2" in errors[0]
+
+    def test_clean_feeds_txt_passes(self, tmp_path, monkeypatch):
+        _setup(
+            tmp_path,
+            monkeypatch,
+            "# empty\n",
+            feeds="# Plain\nhttps://example.com/events.ics\n",
+        )
+        monkeypatch.setattr(
+            vpf,
+            "get_changed_file_statuses",
+            lambda base_ref: [("M", "cities/bloomington/feeds.txt")],
+        )
+
+        assert vpf.validate("origin/main") == []
+
+
 class TestNewScraperRegistration:
     def test_new_scraper_without_pending_entry_is_flagged(self, tmp_path, monkeypatch):
         _setup(tmp_path, monkeypatch, "# empty\n", scraper_files=["scrapers/orphan.py"])

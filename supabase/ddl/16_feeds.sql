@@ -23,7 +23,14 @@ CREATE TABLE feeds (
   CONSTRAINT feeds_url_has_no_capability_token
     CHECK (url NOT LIKE '%/functions/v1/my-picks%'),
   CONSTRAINT feeds_curator_user_matches_type
-    CHECK ((feed_type = 'curator') = (curator_user_id IS NOT NULL))
+    CHECK (
+      (
+        feed_type = 'curator'
+        AND curator_user_id IS NOT NULL
+        AND url = 'curator://' || curator_user_id
+      )
+      OR (feed_type <> 'curator' AND curator_user_id IS NULL)
+    )
 );
 
 ALTER TABLE feeds ENABLE ROW LEVEL SECURITY;

@@ -29,7 +29,7 @@ BEGIN
     JOIN feed_tokens t
       ON t.token = substring(
            f.url
-           from 'token=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$'
+           from 'token=([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})'
          )::uuid
     WHERE f.url LIKE '%/functions/v1/my-picks?token=%'
   LOOP
@@ -87,4 +87,11 @@ ALTER TABLE feeds
 ALTER TABLE feeds DROP CONSTRAINT IF EXISTS feeds_curator_user_matches_type;
 ALTER TABLE feeds
   ADD CONSTRAINT feeds_curator_user_matches_type
-  CHECK ((feed_type = 'curator') = (curator_user_id IS NOT NULL));
+  CHECK (
+    (
+      feed_type = 'curator'
+      AND curator_user_id IS NOT NULL
+      AND url = 'curator://' || curator_user_id
+    )
+    OR (feed_type <> 'curator' AND curator_user_id IS NULL)
+  );

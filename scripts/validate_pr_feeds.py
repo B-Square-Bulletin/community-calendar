@@ -36,8 +36,8 @@ SCRAPER_OUTPUT_RE = re.compile(r"^cities/[a-z0-9-]+/[A-Za-z0-9._-]+\.ics$")
 SCRAPER_CMD_RE = re.compile(r"^python (scrapers|scripts)/")
 
 # A personal my-picks URL is a capability URL, never a source to commit
-# (GHSA-3pg8-w4j4-6wv8). Mirrors the feeds-table CHECK constraint.
-CAPABILITY_FEED_RE = re.compile(r"/functions/v1/my-picks(\?|$)")
+# (GHSA-3pg8-w4j4-6wv8). Same substring the feeds-table CHECK rejects.
+CAPABILITY_PATH = "/functions/v1/my-picks"
 
 
 def get_changed_file_statuses(base_ref: str) -> list[tuple[str, str]]:
@@ -79,6 +79,8 @@ def is_relevant(changed_files: list[str]) -> bool:
     """Check if any feed/scraper-related files were touched."""
     for f in changed_files:
         if "pending_feeds.txt" in f:
+            return True
+        if f.endswith("feeds.txt"):
             return True
         if f.startswith("scrapers/") and f.endswith(".py"):
             return True
@@ -138,6 +140,23 @@ def validate(base_ref: str) -> list[str]:
 
     errors = []
 
+    # A hand-edited feeds.txt can commit a capability URL even though the file
+    # is normally generated from the DB — that is how the two Bloomington
+    # tokens leaked (GHSA-3pg8-w4j4-6wv8).
+    for f in changed_files:
+        if not f.endswith("feeds.txt") or f.endswith("pending_feeds.txt"):
+            continue
+        path = ROOT / f
+        if not path.exists():
+            continue
+        for lineno, line in enumerate(path.read_text().splitlines(), 1):
+            if CAPABILITY_PATH in line and not line.strip().startswith("#"):
+                errors.append(
+                    f"{f}:{lineno} is a personal my-picks feed URL. Its token "
+                    f"must not be committed: register the curator in the feeds "
+                    f"table with curator_user_id instead."
+                )
+
     # Check all pending_feeds.txt files that were changed
     for f in changed_files:
         if "pending_feeds.txt" not in f:
@@ -149,7 +168,7 @@ def validate(base_ref: str) -> list[str]:
                 # A personal my-picks URL is a capability URL: its ?token= is
                 # the only credential for that curator's saved events, and the
                 # URL would be re-exported to feeds.txt (GHSA-3pg8-w4j4-6wv8).
-                if CAPABILITY_FEED_RE.search(feed["url"]):
+                if CAPABILITY_PATH in feed["url"]:
                     errors.append(
                         f"Feed '{feed['name']}' in {f} is a personal my-picks "
                         f"feed. Its token must not be committed: register it in "

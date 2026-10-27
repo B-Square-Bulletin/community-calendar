@@ -263,6 +263,15 @@ def _read_within(resp, total_seconds: float) -> bytes:
 
 CURATOR_PREFIX = "curator://"
 
+# A my-picks feed is authenticated by its query-string token alone: never
+# echo it, and never download it from feeds.txt (GHSA-3pg8-w4j4-6wv8).
+CAPABILITY_PATH = "/functions/v1/my-picks"
+
+
+def _loggable(url: str) -> str:
+    """The URL without its query string when that string is the credential."""
+    return url.split("?")[0] if CAPABILITY_PATH in url else url
+
 
 def resolve_curator_urls(rows: list[dict]) -> dict[str, str]:
     """Map each curator row's curator://<user_id> to its my-picks URL.
@@ -287,7 +296,7 @@ def resolve_curator_urls(rows: list[dict]) -> dict[str, str]:
     try:
         with urllib.request.urlopen(req, timeout=_DB_TIMEOUT_SECONDS) as resp:
             tokens = json.loads(_read_within(resp, _DB_TOTAL_TIMEOUT_SECONDS).decode())
-    except OSError as e:
+    except (OSError, ValueError) as e:
         print(f"  ⚠️  Failed to query feed tokens: {e}")
         return {}
 
@@ -369,10 +378,10 @@ def fetch_with_curl_fallback(url: str, outfile: Path) -> bool:
         except subprocess.CalledProcessError as e:
             # curl's own --max-time exits 28 having written a partial file;
             # without this the truncated feed counts as a success below.
-            print(f"  ⚠️  curl failed (exit {e.returncode}): {url}")
+            print(f"  ⚠️  curl failed (exit {e.returncode}): {_loggable(url)}")
             outfile.unlink(missing_ok=True)
         except subprocess.TimeoutExpired:
-            print(f"  ⏱ curl timed out after {_CURL_HARD_TIMEOUT_SECONDS}s: {url}")
+            print(f"  ⏱ curl timed out after {_CURL_HARD_TIMEOUT_SECONDS}s: {_loggable(url)}")
             outfile.unlink(missing_ok=True)
 
     return outfile.exists() and outfile.stat().st_size > 0
@@ -430,7 +439,9 @@ def download_feeds(city: str) -> None:
         if not feeds_file.exists():
             print(f"No feeds.txt found for {city}")
             return
-        feed_list = list(parse_feeds_txt(feeds_file))
+        feed_list = [
+            entry for entry in parse_feeds_txt(feeds_file) if CAPABILITY_PATH not in entry[0]
+        ]
         db_feeds_by_url = {}
         curator_urls = {}
         reserved_stems = scraper_stems_from_feeds_txt(feeds_file)
@@ -438,7 +449,7 @@ def download_feeds(city: str) -> None:
         skipped = sum(
             1
             for line in feeds_file.read_text().splitlines()
-            if line.strip().startswith(CURATOR_PREFIX)
+            if line.strip().startswith(CURATOR_PREFIX) or CAPABILITY_PATH in line
         )
         if skipped:
             print(
@@ -457,7 +468,7 @@ def download_feeds(city: str) -> None:
         # A curator row's URL is minted from feed_tokens; without a token
         # (owner never signed in) there is nothing to fetch.
         fetch_url = curator_urls.get(url, url)
-        if not fetch_url.startswith("https://"):
+        if url.startswith(CURATOR_PREFIX) and url not in curator_urls:
             print(f"  ⏭️  {friendly_name or filename}: no feed token for this deployment — skipped")
             continue
 

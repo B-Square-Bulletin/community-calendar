@@ -7,7 +7,11 @@
 -- Or:  make test-sql
 
 BEGIN;
-SELECT plan(4);
+SELECT plan(5);
+
+-- One real user, so every rejection below fails on a CHECK, not on the FK.
+INSERT INTO auth.users (id, instance_id, aud, role, email)
+VALUES ('11111111-1111-1111-1111-111111111111', '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', 'curator@example.invalid');
 
 -- A capability URL may not be stored, whichever feed_type claims it.
 SELECT throws_ok(
@@ -20,7 +24,7 @@ SELECT throws_ok(
 
 SELECT throws_ok(
     $$ INSERT INTO feeds (city, url, name, status, feed_type, curator_user_id)
-       VALUES ('test_cur', 'https://ref.supabase.co/functions/v1/my-picks?token=abc', 'Leak', 'active', 'curator', gen_random_uuid()) $$,
+       VALUES ('test_cur', 'https://ref.supabase.co/functions/v1/my-picks?token=abc', 'Leak', 'active', 'curator', '11111111-1111-1111-1111-111111111111') $$,
     '23514',
     NULL,
     'rejects a my-picks URL as a curator row too'
@@ -35,9 +39,14 @@ SELECT throws_ok(
     'rejects a curator row with no curator_user_id'
 );
 
--- A resolved curator row stores only the curator reference.
-INSERT INTO auth.users (id, instance_id, aud, role, email)
-VALUES ('11111111-1111-1111-1111-111111111111', '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', 'curator@example.invalid');
+-- The url must name the same person, or the build cannot mint a token for it.
+SELECT throws_ok(
+    $$ INSERT INTO feeds (city, url, name, status, feed_type, curator_user_id)
+       VALUES ('test_cur', 'curator://22222222-2222-2222-2222-222222222222', 'Typo', 'active', 'curator', '11111111-1111-1111-1111-111111111111') $$,
+    '23514',
+    NULL,
+    'rejects a curator row whose url names someone else'
+);
 
 SELECT lives_ok(
     $$ INSERT INTO feeds (city, url, name, status, feed_type, curator_user_id)

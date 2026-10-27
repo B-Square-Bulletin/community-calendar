@@ -15,6 +15,11 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
+# A my-picks URL is authenticated by its query-string token alone, and this
+# file is committed to a public repo. The DB CHECK forbids such a row; this is
+# the last line of defence for a token that predates it (GHSA-3pg8-w4j4-6wv8).
+CAPABILITY_PATH = "/functions/v1/my-picks"
+
 
 def export_feeds_txt(city, supabase_url, service_key):
     """Export feeds for a city to feeds.txt."""
@@ -36,6 +41,14 @@ def export_feeds_txt(city, supabase_url, service_key):
     except urllib.error.URLError as e:
         print(f"  ⚠️  Failed to query feeds for {city}: {e}")
         return
+
+    leaked = [f["name"] for f in feeds if CAPABILITY_PATH in f["url"]]
+    if leaked:
+        print(
+            f"  ⚠️  {len(leaked)} feed(s) skipped: a my-picks URL is a credential "
+            f"and is never written to feeds.txt ({', '.join(leaked)})"
+        )
+        feeds = [f for f in feeds if CAPABILITY_PATH not in f["url"]]
 
     feeds_file = Path("cities") / city / "feeds.txt"
     feeds_file.parent.mkdir(parents=True, exist_ok=True)
