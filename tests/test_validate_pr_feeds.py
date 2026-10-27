@@ -214,6 +214,26 @@ class TestIcsUrlEntry:
         assert len(errors) == 1
         assert "my-picks" in errors[0]
 
+    def test_my_picks_capability_url_in_metadata_is_rejected(self, tmp_path, monkeypatch):
+        # The name comment is inserted into feeds as the feed's name and
+        # exported back to feeds.txt, so a token there is committed too.
+        _setup(
+            tmp_path,
+            monkeypatch,
+            "# The Night | https://ref.supabase.co/functions/v1/my-picks?token=0d6f3c1a\n"
+            "https://example.com/events.ics\n",
+        )
+        monkeypatch.setattr(
+            vpf,
+            "get_changed_file_statuses",
+            lambda base_ref: [("M", "cities/bloomington/pending_feeds.txt")],
+        )
+
+        errors = vpf.validate("origin/main")
+
+        assert len(errors) == 1
+        assert "pending_feeds.txt:1" in errors[0]
+
 
 class TestFeedsTxtEntry:
     """feeds.txt is generated, but a hand-edited line is how the two Bloomington
@@ -236,6 +256,28 @@ class TestFeedsTxtEntry:
 
         assert len(errors) == 1
         assert "feeds.txt:2" in errors[0]
+
+    def test_capability_url_in_feeds_txt_metadata_is_rejected(self, tmp_path, monkeypatch):
+        # A "# Name | fallback URL" comment is copied into X-SOURCE-URL by
+        # download_feeds.py, so the token is committed and published even above
+        # an ordinary feed URL.
+        _setup(
+            tmp_path,
+            monkeypatch,
+            "# empty\n",
+            feeds="# Plain | https://ref.supabase.co/functions/v1/my-picks?token=0d6f3c1a\n"
+            "https://example.com/events.ics\n",
+        )
+        monkeypatch.setattr(
+            vpf,
+            "get_changed_file_statuses",
+            lambda base_ref: [("M", "cities/bloomington/feeds.txt")],
+        )
+
+        errors = vpf.validate("origin/main")
+
+        assert len(errors) == 1
+        assert "feeds.txt:1" in errors[0]
 
     def test_clean_feeds_txt_passes(self, tmp_path, monkeypatch):
         _setup(

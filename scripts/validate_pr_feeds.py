@@ -140,21 +140,22 @@ def validate(base_ref: str) -> list[str]:
 
     errors = []
 
-    # A hand-edited feeds.txt can commit a capability URL even though the file
-    # is normally generated from the DB — that is how the two Bloomington
-    # tokens leaked (GHSA-3pg8-w4j4-6wv8).
+    # A my-picks token is a credential wherever it appears: a URL line, or the
+    # "# Name | fallback URL" metadata that download_feeds.py copies into
+    # X-SOURCE-URL. feeds.txt is normally generated, but hand-editing it is how
+    # the two Bloomington tokens leaked (GHSA-3pg8-w4j4-6wv8).
     for f in changed_files:
-        if not f.endswith("feeds.txt") or f.endswith("pending_feeds.txt"):
+        if not f.endswith("feeds.txt"):
             continue
         path = ROOT / f
         if not path.exists():
             continue
         for lineno, line in enumerate(path.read_text().splitlines(), 1):
-            if CAPABILITY_PATH in line and not line.strip().startswith("#"):
+            if CAPABILITY_PATH in line:
                 errors.append(
-                    f"{f}:{lineno} is a personal my-picks feed URL. Its token "
-                    f"must not be committed: register the curator in the feeds "
-                    f"table with curator_user_id instead."
+                    f"{f}:{lineno} contains a personal my-picks feed URL. Its "
+                    f"token must not be committed: register the curator in the "
+                    f"feeds table with curator_user_id instead."
                 )
 
     # Check all pending_feeds.txt files that were changed
@@ -165,15 +166,6 @@ def validate(base_ref: str) -> list[str]:
         feeds = parse_pending_feeds(path)
         for feed in feeds:
             if feed["feed_type"] != "scraper":
-                # A personal my-picks URL is a capability URL: its ?token= is
-                # the only credential for that curator's saved events, and the
-                # URL would be re-exported to feeds.txt (GHSA-3pg8-w4j4-6wv8).
-                if CAPABILITY_PATH in feed["url"]:
-                    errors.append(
-                        f"Feed '{feed['name']}' in {f} is a personal my-picks "
-                        f"feed. Its token must not be committed: register it in "
-                        f"the feeds table with curator_user_id instead."
-                    )
                 continue
 
             # The entry must satisfy the feeds-table insert-time trigger

@@ -22,26 +22,52 @@ ALTER TABLE feeds ADD COLUMN IF NOT EXISTS curator_user_id uuid
 DO $$
 DECLARE
   r record;
+  new_stem text;
+  old_stem text;
 BEGIN
   -- MATERIALIZED: the body rewrites feeds.url, and mutating the table a cursor
   -- scans is the classic plpgsql footgun.
+  --
+  -- Select by the function path, not by "?token=": my-picks accepts the token
+  -- after another parameter (?format=ics&token=...), and a narrower selector
+  -- would leave that row for the CHECK below to abort the whole migration.
   FOR r IN
     WITH targets AS MATERIALIZED (
-      SELECT f.id, t.id AS token_id, t.user_id
+      SELECT f.id, f.url AS old_url, t.id AS token_id, t.user_id
       FROM feeds f
       JOIN feed_tokens t
         ON t.token = substring(
              f.url
              from 'token=([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})'
            )::uuid
-      WHERE f.url LIKE '%/functions/v1/my-picks?token=%'
+      WHERE f.url LIKE '%/functions/v1/my-picks%'
     )
     SELECT * FROM targets
   LOOP
+    -- A download is slugify(url).ics and events.source_id is that stem, so the
+    -- new url renames the source. Re-label the rows the feed already imported,
+    -- or the next sweep (scoped to sources that ran) never sees them and picks
+    -- the curator has dropped stay in the calendar. Mirrors slugify's general
+    -- case for a Supabase my-picks URL (host label + /functions/v1). No rows
+    -- are deleted: picks reference events(id), not source_id.
+    old_stem := left(
+      regexp_replace(
+        lower(split_part(split_part(r.old_url, '://', 2), '.', 1) || '_functions_v1'),
+        '[^a-z0-9]+',
+        '_',
+        'g'
+      ),
+      50
+    );
+    new_stem := replace(r.user_id::text, '-', '_');
+
+    UPDATE events SET source_id = new_stem WHERE source_id = old_stem;
+
     UPDATE feeds
     SET feed_type = 'curator',
         curator_user_id = r.user_id,
-        url = 'curator://' || r.user_id
+        url = 'curator://' || r.user_id,
+        source_ids = array_replace(source_ids, old_stem, new_stem)
     WHERE id = r.id;
 
     -- The token is in public git history forever; rotate it so the published
@@ -51,10 +77,13 @@ BEGIN
 END $$;
 
 -- Retire curator rows this deployment cannot mint a token for (e.g. a feed
--- served by another Supabase project). Retiring goes through remove_feed(),
--- the DB authority for source retirement (ADR 0007), so its merge-survivor
--- rules apply. remove_feed() is admin-gated, and a raw SQL session has no JWT:
--- present an admin claim the way ddl/16_feeds.sql documents.
+-- served by another Supabase project). The selector is the CHECK's predicate
+-- exactly: anything still named that way is unpublishable, so leaving it would
+-- abort the ALTER TABLE below instead of removing the exposed credential.
+-- Retiring goes through remove_feed(), the DB authority for source retirement
+-- (ADR 0007), so its merge-survivor rules apply. remove_feed() is admin-gated,
+-- and a raw SQL session has no JWT: present an admin claim the way
+-- ddl/16_feeds.sql documents.
 DO $$
 DECLARE
   stale_ids bigint[];
@@ -62,7 +91,7 @@ DECLARE
 BEGIN
   SELECT array_agg(id) INTO stale_ids
   FROM feeds
-  WHERE url LIKE '%/functions/v1/my-picks?token=%';
+  WHERE url LIKE '%/functions/v1/my-picks%';
 
   IF stale_ids IS NULL THEN
     RETURN;

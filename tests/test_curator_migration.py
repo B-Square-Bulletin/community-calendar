@@ -39,6 +39,22 @@ def test_matches_a_token_followed_by_another_parameter():
     assert _token_pattern().search(url)
 
 
+def test_matches_a_token_after_another_parameter():
+    url = (
+        "https://ref.supabase.co/functions/v1/my-picks"
+        "?format=ics&token=0d6f3c1a-1111-2222-3333-444444444444"
+    )
+    assert _token_pattern().search(url)
+
+
+def test_every_selector_uses_the_function_path():
+    """A selector demanding "?token=" alone skips ?format=ics&token=... — that
+    row is then neither converted nor retired, and the CHECK aborts the
+    migration. Every my-picks predicate must be as wide as the CHECK."""
+    selectors = set(re.findall(r"LIKE '([^']*my-picks[^']*)'", MIGRATION.read_text()))
+    assert selectors == {"%/functions/v1/my-picks%"}
+
+
 def test_matches_uppercase_uuid_hex():
     url = "https://ref.supabase.co/functions/v1/my-picks?token=0D6F3C1A-1111-2222-3333-444444444444"
     assert _token_pattern().search(url)
