@@ -612,7 +612,42 @@ class TestCuratorFeedResolution:
         df.download_feeds("bloomington")
 
         assert fetched == ["https://example.invalid/feed.ics"]
-        assert "curator feed(s) skipped" in capsys.readouterr().out
+        assert "capability URL(s) in feeds.txt ignored" in capsys.readouterr().out
+
+    def test_feeds_txt_curator_entry_is_resolved_read_only(self, monkeypatch, tmp_path):
+        """A local build keeps credentials for token lookup, but its feeds.txt
+        snapshot stays the source list and nothing is written upstream."""
+        monkeypatch.chdir(tmp_path)
+        monkeypatch.setenv("SUPABASE_URL", "https://fake.supabase.co")
+        monkeypatch.setenv("SUPABASE_SERVICE_KEY", "service-key")
+        city = tmp_path / "cities" / "bloomington"
+        city.mkdir(parents=True)
+        (city / "feeds.txt").write_text(
+            "# Curator Picks\ncurator://u-1\n# Plain\nhttps://example.invalid/feed.ics\n"
+        )
+        monkeypatch.setattr(
+            df.urllib.request,
+            "urlopen",
+            lambda req, timeout=None: _Resp(b'[{"user_id":"u-1","token":"tok-1"}]'),
+        )
+        monkeypatch.setattr(
+            df, "record_feed_sources", lambda rows: pytest.fail("wrote upstream feed status")
+        )
+        fetched: list[str] = []
+
+        def fake_fetch(feed_url, outfile):
+            fetched.append(feed_url)
+            outfile.write_text("BEGIN:VCALENDAR\r\nEND:VCALENDAR\r\n", encoding="utf-8")
+            return True
+
+        monkeypatch.setattr(df, "fetch_with_curl_fallback", fake_fetch)
+
+        df.download_feeds("bloomington", use_feeds_txt=True)
+
+        assert fetched == [
+            "https://fake.supabase.co/functions/v1/my-picks?token=tok-1",
+            "https://example.invalid/feed.ics",
+        ]
 
     def test_loggable_redacts_a_capability_query(self):
         assert (

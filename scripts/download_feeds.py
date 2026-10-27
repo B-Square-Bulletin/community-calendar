@@ -29,9 +29,12 @@ def parse_feeds_txt(feeds_file: Path):
     Structured comment format:
         # Friendly Name | https://fallback-url/
         https://feed-url/
+        curator://<user_id>
 
     A comment line immediately before a URL line is the metadata for that URL.
     Category headers (comments before blank lines or other comments) are ignored.
+    A curator entry is listed as its non-secret reference; the real URL is
+    minted from feed_tokens at download time.
     """
     pending_name = None
     pending_fallback = None
@@ -51,7 +54,7 @@ def parse_feeds_txt(feeds_file: Path):
                     pending_fallback = None
                 continue
 
-            if not stripped or not stripped.startswith("https://"):
+            if not stripped or not stripped.startswith(("https://", CURATOR_PREFIX)):
                 # Blank line or local file ref resets pending comment
                 pending_name = None
                 pending_fallback = None
@@ -417,12 +420,19 @@ def assert_unique_stems(feed_list, reserved_stems: dict[str, str]) -> None:
         stems[stem] = name
 
 
-def download_feeds(city: str) -> None:
+def download_feeds(city: str, use_feeds_txt: bool = False) -> None:
+    """Download every active feed for a city.
+
+    use_feeds_txt forces the feeds.txt inventory even when DB credentials are
+    present, which is how a local build keeps its guarded snapshot in charge.
+    Curator tokens are still resolved from feed_tokens (read-only) and no
+    feed-status write happens on this path.
+    """
     output_dir = Path("cities") / city
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # Try DB first, fall back to feeds.txt
-    db_feeds = fetch_feeds_from_db(city)
+    db_feeds = None if use_feeds_txt else fetch_feeds_from_db(city)
     if db_feeds is not None:
         download_rows = [f for f in db_feeds if f["feed_type"] != "scraper"]
         print(f"  Using feeds table ({len(download_rows)} feeds)")
@@ -439,22 +449,37 @@ def download_feeds(city: str) -> None:
         if not feeds_file.exists():
             print(f"No feeds.txt found for {city}")
             return
-        feed_list = [
-            entry for entry in parse_feeds_txt(feeds_file) if CAPABILITY_PATH not in entry[0]
-        ]
+        # A tokenized URL copied into feeds.txt is a leaked credential: never
+        # fetch it. Curator entries are curator://<user_id>; the token is minted
+        # from feed_tokens, so a local build with credentials still resolves
+        # them — that lookup only reads.
+        entries = list(parse_feeds_txt(feeds_file))
+        leaked = [entry for entry in entries if CAPABILITY_PATH in entry[0]]
+        feed_list = [entry for entry in entries if CAPABILITY_PATH not in entry[0]]
         db_feeds_by_url = {}
-        curator_urls = {}
+        curator_urls = resolve_curator_urls(
+            [
+                {"curator_user_id": url[len(CURATOR_PREFIX) :]}
+                for url, _name, _fallback in feed_list
+                if url.startswith(CURATOR_PREFIX)
+            ]
+        )
+        unresolvable = sum(
+            1
+            for url, _name, _fallback in feed_list
+            if url.startswith(CURATOR_PREFIX) and url not in curator_urls
+        )
         reserved_stems = scraper_stems_from_feeds_txt(feeds_file)
         print(f"  Using feeds.txt ({len(feed_list)} feeds)")
-        skipped = sum(
-            1
-            for line in feeds_file.read_text().splitlines()
-            if line.strip().startswith(CURATOR_PREFIX) or CAPABILITY_PATH in line
-        )
-        if skipped:
+        if leaked:
             print(
-                f"  ⚠️  {skipped} curator feed(s) skipped: their URLs are minted "
-                f"from the feeds table and feed_tokens, which needs SUPABASE_URL"
+                f"  ⚠️  {len(leaked)} capability URL(s) in feeds.txt ignored: a "
+                f"my-picks token is never fetched from the repo"
+            )
+        if unresolvable:
+            print(
+                f"  ⚠️  {unresolvable} curator feed(s) skipped: no feed token available "
+                f"(their URL is minted from feed_tokens)"
             )
 
     assert_unique_stems(feed_list, reserved_stems)
@@ -515,7 +540,13 @@ def download_feeds(city: str) -> None:
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python scripts/download_feeds.py <city>", file=sys.stderr)
+    argv = sys.argv[1:]
+    use_feeds_txt = "--feeds-txt" in argv
+    cities = [arg for arg in argv if arg != "--feeds-txt"]
+    if len(cities) != 1:
+        print(
+            "Usage: python scripts/download_feeds.py <city> [--feeds-txt]",
+            file=sys.stderr,
+        )
         sys.exit(1)
-    download_feeds(sys.argv[1])
+    download_feeds(cities[0], use_feeds_txt=use_feeds_txt)

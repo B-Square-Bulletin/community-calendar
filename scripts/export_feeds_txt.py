@@ -19,6 +19,12 @@ from pathlib import Path
 # file is committed to a public repo. The DB CHECK forbids such a row; this is
 # the last line of defence for a token that predates it (GHSA-3pg8-w4j4-6wv8).
 CAPABILITY_PATH = "/functions/v1/my-picks"
+# Every field this exporter writes; a token in any of them is published.
+EXPORTED_FIELDS = ("url", "name", "scraper_cmd")
+
+
+def has_capability_url(row: dict) -> bool:
+    return any(CAPABILITY_PATH in (row.get(field) or "") for field in EXPORTED_FIELDS)
 
 
 def export_feeds_txt(city, supabase_url, service_key):
@@ -42,13 +48,14 @@ def export_feeds_txt(city, supabase_url, service_key):
         print(f"  ⚠️  Failed to query feeds for {city}: {e}")
         return
 
-    leaked = [f["name"] for f in feeds if CAPABILITY_PATH in f["url"]]
+    leaked = [f for f in feeds if has_capability_url(f)]
     if leaked:
+        # Never echo the row: the token may be in the name or command.
         print(
             f"  ⚠️  {len(leaked)} feed(s) skipped: a my-picks URL is a credential "
-            f"and is never written to feeds.txt ({', '.join(leaked)})"
+            f"and is never written to feeds.txt"
         )
-        feeds = [f for f in feeds if CAPABILITY_PATH not in f["url"]]
+        feeds = [f for f in feeds if not has_capability_url(f)]
 
     feeds_file = Path("cities") / city / "feeds.txt"
     feeds_file.parent.mkdir(parents=True, exist_ok=True)

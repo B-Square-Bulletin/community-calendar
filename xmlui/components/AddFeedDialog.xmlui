@@ -152,7 +152,8 @@
           enabled="{feedUrl.startsWith('https://') && feedName.length > 0 && !validating}"
           onClick="() => {
             feedUrl = feedUrl.replace(/\s+/g, '');
-            if (feedUrl.includes('/functions/v1/my-picks')) {
+            const capability = '/functions/v1/my-picks';
+            if ([feedUrl, feedName, fallbackUrl].some(function (v) { return (v || '').includes(capability); })) {
               validationError = 'A my-picks URL is a personal feed token, not a source. Register the curator instead (docs/pipeline.md).';
               return;
             }

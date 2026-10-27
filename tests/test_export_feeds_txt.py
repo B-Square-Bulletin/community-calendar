@@ -73,3 +73,34 @@ def test_tokenized_row_is_not_written(tmp_path, monkeypatch, capsys):
     assert "token=abc" not in text
     assert "Leaked" not in text
     assert "skipped" in capsys.readouterr().out
+
+
+def test_token_in_name_or_cmd_is_not_written(tmp_path, monkeypatch, capsys):
+    """The exporter writes name and scraper_cmd too; the guard must cover them,
+    and its warning must not echo the metadata it rejected."""
+    text = _export(
+        tmp_path,
+        monkeypatch,
+        [
+            {
+                "name": "Leak https://ref.supabase.co/functions/v1/my-picks?token=abc",
+                "url": "https://example.invalid/events.ics",
+                "feed_type": "ics_url",
+                "scraper_cmd": None,
+            },
+            {
+                "name": "Cmd leak",
+                "url": "cities/bloomington/x.ics",
+                "feed_type": "scraper",
+                "scraper_cmd": (
+                    "python scrapers/x.py https://ref.supabase.co/functions/v1/my-picks?token=def"
+                ),
+            },
+        ],
+    )
+
+    assert "example.invalid" not in text
+    assert "token=" not in text
+    out = capsys.readouterr().out
+    assert "skipped" in out
+    assert "token=" not in out

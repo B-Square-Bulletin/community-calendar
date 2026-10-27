@@ -58,3 +58,9 @@ def test_every_selector_uses_the_function_path():
 def test_matches_uppercase_uuid_hex():
     url = "https://ref.supabase.co/functions/v1/my-picks?token=0D6F3C1A-1111-2222-3333-444444444444"
     assert _token_pattern().search(url)
+
+
+def test_event_relabel_is_scoped_to_the_feed_city():
+    """The legacy stem names the project, not the curator, so two curators on
+    one project share it; an unscoped UPDATE would move another city's events."""
+    assert "AND city = r.city" in MIGRATION.read_text()

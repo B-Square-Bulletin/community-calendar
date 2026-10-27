@@ -33,7 +33,7 @@ BEGIN
   -- would leave that row for the CHECK below to abort the whole migration.
   FOR r IN
     WITH targets AS MATERIALIZED (
-      SELECT f.id, f.url AS old_url, t.id AS token_id, t.user_id
+      SELECT f.id, f.url AS old_url, f.city, t.id AS token_id, t.user_id
       FROM feeds f
       JOIN feed_tokens t
         ON t.token = substring(
@@ -48,8 +48,10 @@ BEGIN
     -- new url renames the source. Re-label the rows the feed already imported,
     -- or the next sweep (scoped to sources that ran) never sees them and picks
     -- the curator has dropped stay in the calendar. Mirrors slugify's general
-    -- case for a Supabase my-picks URL (host label + /functions/v1). No rows
-    -- are deleted: picks reference events(id), not source_id.
+    -- case for a Supabase my-picks URL (host label + /functions/v1). The city
+    -- predicate matters: that stem names the project, not the curator, so two
+    -- curators on one project share it and an unscoped update would move the
+    -- first city's events to whichever feed was processed first.
     old_stem := left(
       regexp_replace(
         lower(split_part(split_part(r.old_url, '://', 2), '.', 1) || '_functions_v1'),
@@ -61,7 +63,7 @@ BEGIN
     );
     new_stem := replace(r.user_id::text, '-', '_');
 
-    UPDATE events SET source_id = new_stem WHERE source_id = old_stem;
+    UPDATE events SET source_id = new_stem WHERE source_id = old_stem AND city = r.city;
 
     UPDATE feeds
     SET feed_type = 'curator',
@@ -110,13 +112,37 @@ BEGIN
   PERFORM remove_feed(id) FROM unnest(stale_ids) AS id;
 END $$;
 
+-- A row that predates the constraint must not make the ADD below fail. The
+-- token is already in git history; scrub the whole capability URL so the
+-- metadata cannot be re-exported. A name keeps a placeholder (NOT NULL) and a
+-- scraper_cmd keeps its "python ..." prefix, so the row stays valid.
+UPDATE feeds
+SET fallback_url = NULL
+WHERE fallback_url LIKE '%/functions/v1/my-picks%';
+UPDATE feeds
+SET name = regexp_replace(name, '\S*/functions/v1/my-picks\S*', '[redacted]', 'g')
+WHERE name LIKE '%/functions/v1/my-picks%';
+UPDATE feeds
+SET scraper_cmd = regexp_replace(scraper_cmd, '\S*/functions/v1/my-picks\S*', '[redacted]', 'g')
+WHERE scraper_cmd LIKE '%/functions/v1/my-picks%';
+
 -- Only these two constraints keep the token out. A CHECK covers every writer
 -- (app dialog, pending_feeds, seed scripts, ad-hoc SQL), with no trigger to
--- maintain.
+-- maintain. Every field that reaches the repo or the public events payload is
+-- covered, not just url: name is exported as the source attribution,
+-- scraper_cmd is exported as a comment, and fallback_url is copied into
+-- X-SOURCE-URL. The older name is dropped too so a database that ran an
+-- earlier copy of this migration ends up with one constraint.
 ALTER TABLE feeds DROP CONSTRAINT IF EXISTS feeds_url_has_no_capability_token;
+ALTER TABLE feeds DROP CONSTRAINT IF EXISTS feeds_metadata_has_no_capability_token;
 ALTER TABLE feeds
-  ADD CONSTRAINT feeds_url_has_no_capability_token
-  CHECK (url NOT LIKE '%/functions/v1/my-picks%');
+  ADD CONSTRAINT feeds_metadata_has_no_capability_token
+  CHECK (
+    url NOT LIKE '%/functions/v1/my-picks%'
+    AND name NOT LIKE '%/functions/v1/my-picks%'
+    AND coalesce(scraper_cmd, '') NOT LIKE '%/functions/v1/my-picks%'
+    AND coalesce(fallback_url, '') NOT LIKE '%/functions/v1/my-picks%'
+  );
 
 ALTER TABLE feeds DROP CONSTRAINT IF EXISTS feeds_curator_user_matches_type;
 ALTER TABLE feeds

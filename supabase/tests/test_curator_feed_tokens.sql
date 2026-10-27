@@ -7,7 +7,7 @@
 -- Or:  make test-sql
 
 BEGIN;
-SELECT plan(5);
+SELECT plan(7);
 
 -- One real user, so every rejection below fails on a CHECK, not on the FK.
 INSERT INTO auth.users (id, instance_id, aud, role, email)
@@ -20,6 +20,24 @@ SELECT throws_ok(
     '23514',
     NULL,
     'rejects a my-picks URL as an ics_url'
+);
+
+-- The display name is exported to feeds.txt, and fallback_url is copied into
+-- X-SOURCE-URL, so a token in either is public too.
+SELECT throws_ok(
+    $$ INSERT INTO feeds (city, url, name, status, feed_type)
+       VALUES ('test_cur', 'https://example.com/events.ics', 'Leak https://ref.supabase.co/functions/v1/my-picks?token=abc', 'active', 'ics_url') $$,
+    '23514',
+    NULL,
+    'rejects a my-picks URL in the display name'
+);
+
+SELECT throws_ok(
+    $$ INSERT INTO feeds (city, url, name, status, feed_type, fallback_url)
+       VALUES ('test_cur', 'https://example.com/events.ics', 'Plain', 'active', 'ics_url', 'https://ref.supabase.co/functions/v1/my-picks?token=abc') $$,
+    '23514',
+    NULL,
+    'rejects a my-picks URL in the source page URL'
 );
 
 SELECT throws_ok(

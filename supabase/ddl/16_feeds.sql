@@ -18,10 +18,16 @@ CREATE TABLE feeds (
   source_ids text[] NOT NULL DEFAULT '{}',
   created_at timestamptz DEFAULT now(),
   UNIQUE(city, url),
-  -- A capability URL in feeds.url is world-readable and re-exported to git
+  -- A capability URL is a credential and feeds is world-readable; feeds.txt
+  -- re-exports url/name/scraper_cmd and X-SOURCE-URL carries fallback_url
   -- (GHSA-3pg8-w4j4-6wv8).
-  CONSTRAINT feeds_url_has_no_capability_token
-    CHECK (url NOT LIKE '%/functions/v1/my-picks%'),
+  CONSTRAINT feeds_metadata_has_no_capability_token
+    CHECK (
+      url NOT LIKE '%/functions/v1/my-picks%'
+      AND name NOT LIKE '%/functions/v1/my-picks%'
+      AND coalesce(scraper_cmd, '') NOT LIKE '%/functions/v1/my-picks%'
+      AND coalesce(fallback_url, '') NOT LIKE '%/functions/v1/my-picks%'
+    ),
   CONSTRAINT feeds_curator_user_matches_type
     CHECK (
       (
