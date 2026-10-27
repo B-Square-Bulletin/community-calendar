@@ -16,8 +16,16 @@
 -- (feed_tokens is per-project) and is retired with its events. Idempotent: a
 -- second run converts nothing, rotates nothing, deletes nothing.
 
-ALTER TABLE feeds ADD COLUMN IF NOT EXISTS curator_user_id uuid
-  REFERENCES auth.users(id) ON DELETE CASCADE;
+-- The curator names the feed. ON DELETE RESTRICT, not CASCADE: deleting the
+-- account must not drop the feed row behind remove_feed()'s back and strand
+-- the events it imported (ADR 0007 is the only ownership-aware cleanup).
+-- Retire the feed first, then the account can go.
+ALTER TABLE feeds ADD COLUMN IF NOT EXISTS curator_user_id uuid;
+ALTER TABLE feeds DROP CONSTRAINT IF EXISTS feeds_curator_user_id_fkey;
+ALTER TABLE feeds
+  ADD CONSTRAINT feeds_curator_user_id_fkey
+  FOREIGN KEY (curator_user_id)
+  REFERENCES auth.users(id) ON DELETE RESTRICT;
 
 DO $$
 DECLARE
@@ -113,9 +121,22 @@ BEGIN
 END $$;
 
 -- A row that predates the constraint must not make the ADD below fail. The
--- token is already in git history; scrub the whole capability URL so the
+-- token is already in git history; rotate local tokens first (the scrub below
+-- discards the reference) and then scrub the whole capability URL so the
 -- metadata cannot be re-exported. A name keeps a placeholder (NOT NULL) and a
 -- scraper_cmd keeps its "python ..." prefix, so the row stays valid.
+UPDATE feed_tokens t
+SET token = gen_random_uuid()
+WHERE t.token IN (
+  SELECT substring(ref.value from 'token=([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})')::uuid
+  FROM (
+    SELECT name AS value FROM feeds WHERE name LIKE '%/functions/v1/my-picks%'
+    UNION ALL
+    SELECT fallback_url FROM feeds WHERE fallback_url LIKE '%/functions/v1/my-picks%'
+    UNION ALL
+    SELECT scraper_cmd FROM feeds WHERE scraper_cmd LIKE '%/functions/v1/my-picks%'
+  ) ref
+);
 UPDATE feeds
 SET fallback_url = NULL
 WHERE fallback_url LIKE '%/functions/v1/my-picks%';

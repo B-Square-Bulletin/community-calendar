@@ -7,7 +7,7 @@
 -- Or:  make test-sql
 
 BEGIN;
-SELECT plan(7);
+SELECT plan(8);
 
 -- One real user, so every rejection below fails on a CHECK, not on the FK.
 INSERT INTO auth.users (id, instance_id, aud, role, email)
@@ -70,6 +70,15 @@ SELECT lives_ok(
     $$ INSERT INTO feeds (city, url, name, status, feed_type, curator_user_id)
        VALUES ('test_cur', 'curator://11111111-1111-1111-1111-111111111111', 'Curator Picks', 'active', 'curator', '11111111-1111-1111-1111-111111111111') $$,
     'accepts a curator row that names its curator'
+);
+
+-- Deleting the account must not drop the feed row behind remove_feed() and
+-- strand the events it imported; retire the feed first.
+SELECT throws_ok(
+    $$ DELETE FROM auth.users WHERE id = '11111111-1111-1111-1111-111111111111' $$,
+    '23503',
+    NULL,
+    'refuses to delete a curator account before its feed is retired'
 );
 
 SELECT * FROM finish();

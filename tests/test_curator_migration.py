@@ -64,3 +64,14 @@ def test_event_relabel_is_scoped_to_the_feed_city():
     """The legacy stem names the project, not the curator, so two curators on
     one project share it; an unscoped UPDATE would move another city's events."""
     assert "AND city = r.city" in MIGRATION.read_text()
+
+
+def test_metadata_tokens_are_rotated_before_the_scrub():
+    """Dropping a reference without rotating its token leaves a working
+    credential in git history and in already-published event payloads."""
+    sql = MIGRATION.read_text()
+    rotation = sql.index("UPDATE feed_tokens t")
+    scrub = sql.index("SET fallback_url = NULL")
+    assert rotation < scrub
+    for field in ("name", "fallback_url", "scraper_cmd"):
+        assert f"SELECT {field}" in sql[rotation:scrub]

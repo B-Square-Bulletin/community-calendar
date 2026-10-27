@@ -14,7 +14,7 @@ CREATE TABLE feeds (
   -- Curator feeds name their curator; the token lives in feed_tokens (RLS:
   -- owner-only) and download_feeds mints the URL at build time, so no token
   -- is ever stored here or exported to feeds.txt.
-  curator_user_id uuid REFERENCES auth.users(id) ON DELETE CASCADE,
+  curator_user_id uuid REFERENCES auth.users(id) ON DELETE RESTRICT,
   source_ids text[] NOT NULL DEFAULT '{}',
   created_at timestamptz DEFAULT now(),
   UNIQUE(city, url),
