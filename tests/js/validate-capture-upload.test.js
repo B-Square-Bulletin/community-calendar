@@ -154,6 +154,19 @@ describe('audio upload', () => {
     });
   });
 
+  it('surfaces the server error message from JSON', async () => {
+    window.authSession = { access_token: 'token' };
+    global.fetch = () =>
+      Promise.resolve(
+        new Response(JSON.stringify({ error: 'Failed to extract event' }), { status: 500 })
+      );
+    await expect(
+      window.uploadAudioFile(audioFile(), 'https://example.com', 'key')
+    ).resolves.toEqual({
+      error: 'Failed to extract event',
+    });
+  });
+
   it('surfaces a network failure', async () => {
     window.authSession = { access_token: 'token' };
     global.fetch = () => Promise.reject(new Error('offline'));

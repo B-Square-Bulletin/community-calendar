@@ -613,7 +613,16 @@ function uploadCaptureFile(file, supabaseUrl, publishableKey) {
       }
       if (!resp.ok) {
         return resp.text().then(function (t) {
-          return { error: 'Server error ' + resp.status + ': ' + t };
+          var serverError = null;
+          try {
+            var parsed = JSON.parse(t);
+            if (parsed && typeof parsed.error === 'string') {
+              serverError = parsed.error;
+            }
+          } catch {
+            // Not JSON; fall back to the raw text.
+          }
+          return { error: serverError || 'Server error ' + resp.status + ': ' + t };
         });
       }
       return resp.json();
