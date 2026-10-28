@@ -608,9 +608,6 @@ function uploadCaptureFile(file, supabaseUrl, publishableKey) {
       if (resp.status === 401) {
         return { error: 'Please sign in again to capture events' };
       }
-      if (resp.status === 413) {
-        return { error: 'File is too large (max 10 MiB)' };
-      }
       if (!resp.ok) {
         return resp.text().then(function (t) {
           var serverError = null;
@@ -653,6 +650,28 @@ window.resizeAndUpload = function (file, supabaseUrl, publishableKey) {
 // Returns Promise<{ event, transcript }> or Promise<{ error }>
 window.uploadAudioFile = function (file, supabaseUrl, publishableKey) {
   return uploadCaptureFile(file, supabaseUrl, publishableKey);
+};
+
+// Turn a capture-event response into the editor's event shape.
+// Returns null when the response has no event.
+window.captureResultToEvent = function (result) {
+  if (!result || !result.event) return null;
+  var event = result.event;
+  var start = String(event.start_time || '');
+  var end = String(event.end_time || '');
+  return {
+    title: event.title || '',
+    start_time: event.start_time || '',
+    end_time: event.end_time || '',
+    date: start.slice(0, 10) || '',
+    time: start.slice(11, 16) || '19:00',
+    endTime: end.slice(11, 16) || '',
+    location: event.location || '',
+    description: event.description || '',
+    url: event.url || '',
+    transcript: result.transcript || '',
+    recurrence_until: event.recurrence_until || '',
+  };
 };
 
 // --- Audio Recording ---

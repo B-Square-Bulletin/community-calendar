@@ -1,4 +1,4 @@
-// tests/js/validate-capture-upload.test.js — poster capture upload seam.
+// tests/js/validate-capture-upload.test.js — poster and audio capture upload seam.
 //
 // WHY: capture-event now requires a signed-in user's token. The dialog must
 // fail with a sign-in prompt, and must not upload, when the session is gone.
@@ -49,14 +49,14 @@ describe('resizeAndUpload auth', () => {
     });
   });
 
-  it('maps a 413 response to the size error', async () => {
+  it('passes through the server 413 message', async () => {
     window.authSession = { access_token: 'token' };
     window.resizeImageFile = () =>
       Promise.resolve(new File(['x'], 'x.jpg', { type: 'image/jpeg' }));
     global.fetch = () =>
       Promise.resolve(new Response('{"error":"Upload too large (max 10 MiB)"}', { status: 413 }));
     await expect(window.resizeAndUpload({}, 'https://example.com', 'key')).resolves.toEqual({
-      error: 'File is too large (max 10 MiB)',
+      error: 'Upload too large (max 10 MiB)',
     });
   });
 
@@ -116,14 +116,14 @@ describe('audio upload', () => {
     });
   });
 
-  it('maps a 413 response to the size error', async () => {
+  it('passes through the server 413 message', async () => {
     window.authSession = { access_token: 'token' };
     global.fetch = () =>
       Promise.resolve(new Response('{"error":"Upload too large (max 10 MiB)"}', { status: 413 }));
     await expect(
       window.uploadAudioFile(audioFile(), 'https://example.com', 'key')
     ).resolves.toEqual({
-      error: 'File is too large (max 10 MiB)',
+      error: 'Upload too large (max 10 MiB)',
     });
   });
 
@@ -181,5 +181,48 @@ describe('audio upload', () => {
     const markup = readShipped('components/AudioCaptureDialog.xmlui');
     expect(markup.match(/window\.uploadAudioFile\(/g)).toHaveLength(2);
     expect(markup).not.toContain('Actions.upload');
+  });
+});
+
+describe('capture result mapping', () => {
+  it('maps an event and transcript into the editor shape', () => {
+    expect(
+      window.captureResultToEvent({
+        event: {
+          title: 'Show',
+          start_time: '2026-02-11T19:30:00',
+          end_time: '2026-02-11T21:00:00',
+          location: 'Hall',
+          description: 'Music',
+          url: 'https://example.com',
+          recurrence_until: '2026-03-01',
+        },
+        transcript: 'come see the show',
+      })
+    ).toEqual({
+      title: 'Show',
+      start_time: '2026-02-11T19:30:00',
+      end_time: '2026-02-11T21:00:00',
+      date: '2026-02-11',
+      time: '19:30',
+      endTime: '21:00',
+      location: 'Hall',
+      description: 'Music',
+      url: 'https://example.com',
+      transcript: 'come see the show',
+      recurrence_until: '2026-03-01',
+    });
+  });
+
+  it('defaults a missing start time', () => {
+    expect(window.captureResultToEvent({ event: { title: 'Show' } })).toMatchObject({
+      date: '',
+      time: '19:00',
+      endTime: '',
+    });
+  });
+
+  it('returns null without an event', () => {
+    expect(window.captureResultToEvent({ error: 'nope' })).toBeNull();
   });
 });
