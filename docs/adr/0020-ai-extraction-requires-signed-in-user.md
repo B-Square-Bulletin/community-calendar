@@ -27,7 +27,8 @@ gateway check stays off; the check lives in the function.
 
 **Cap uploads at 10 MiB**, rejecting requests well over the cap with 413
 before the multipart body is parsed and enforcing the exact cap on
-`file.size`.
+`file.size`. A chunked request has no Content-Length, so it skips the early
+check and is rejected on `file.size`.
 
 **Delete the legacy JSON base64 extract path**, which had no caller and was
 equally unauthenticated.

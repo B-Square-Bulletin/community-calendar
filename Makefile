@@ -66,7 +66,7 @@ test-deno:
 	@deno test supabase/functions/my-picks/dedupe_test.ts supabase/functions/load-events/scope_test.ts supabase/functions/load-events/auth_test.ts
 	# capture-event imports supabase-js, whose node types want node_modules; the
 	# handler test only exercises the pre-body auth gate, so run it unchecked.
-	@deno test --no-check supabase/functions/capture-event/auth_test.ts
+	@deno test --no-check --allow-env supabase/functions/capture-event/auth_test.ts
 
 # Run browser groups (requires playwright browsers: pnpm exec playwright install chromium)
 test-browser:

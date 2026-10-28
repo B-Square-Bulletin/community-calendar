@@ -5,8 +5,9 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-ue-client-tx-id",
 };
 
-const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
-// Multipart framing adds a little to Content-Length; the file.size check is exact.
+export const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
+// Multipart framing adds a little to Content-Length; the file.size check is
+// exact. A chunked request has no Content-Length and reaches that check.
 const MAX_REQUEST_BYTES = MAX_UPLOAD_BYTES + 64 * 1024;
 
 const EVENT_JSON_FORMAT = `{
