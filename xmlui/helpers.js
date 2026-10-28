@@ -584,30 +584,42 @@ window.utcToLocal = function (isoString, timezone) {
   return { date: vals.year + '-' + vals.month + '-' + vals.day, time: hour + ':' + vals.minute };
 };
 
-// Resize image then upload to capture-event edge function via fetch
-// Returns Promise<{ event }> or Promise<{ error }>
-window.resizeAndUpload = function (file, supabaseUrl, publishableKey) {
-  return window
-    .resizeImageFile(file)
-    .then(function (resized) {
-      var fd = new FormData();
-      fd.append('mode', 'extract');
-      // Pass city timezone so Claude uses it as the default for extracted events
-      var cityTz = window._cities && window.cityFilter && window._cities[window.cityFilter];
-      if (cityTz && cityTz.timezone) {
-        fd.append('timezone', cityTz.timezone);
-      }
-      fd.append('file', resized, resized.name);
-      return fetch(supabaseUrl + '/functions/v1/capture-event', {
-        method: 'POST',
-        headers: { apikey: publishableKey },
-        body: fd,
-      });
-    })
+// Upload a capture file to the capture-event edge function.
+// Returns Promise<{ event, transcript? }> or Promise<{ error }>
+function uploadCaptureFile(file, supabaseUrl, publishableKey) {
+  var token = window.authSession && window.authSession.access_token;
+  if (!token) {
+    return Promise.resolve({ error: 'Please sign in again to capture events' });
+  }
+  var fd = new FormData();
+  fd.append('mode', 'extract');
+  // Pass city timezone so Claude uses it as the default for extracted events
+  var cityTz = window._cities && window.cityFilter && window._cities[window.cityFilter];
+  if (cityTz && cityTz.timezone) {
+    fd.append('timezone', cityTz.timezone);
+  }
+  fd.append('file', file, file.name);
+  return fetch(supabaseUrl + '/functions/v1/capture-event', {
+    method: 'POST',
+    headers: { apikey: publishableKey, Authorization: 'Bearer ' + token },
+    body: fd,
+  })
     .then(function (resp) {
+      if (resp.status === 401) {
+        return { error: 'Please sign in again to capture events' };
+      }
       if (!resp.ok) {
         return resp.text().then(function (t) {
-          return { error: 'Server error ' + resp.status + ': ' + t };
+          var serverError = null;
+          try {
+            var parsed = JSON.parse(t);
+            if (parsed && typeof parsed.error === 'string') {
+              serverError = parsed.error;
+            }
+          } catch {
+            // Not JSON; fall back to the raw text.
+          }
+          return { error: serverError || 'Server error ' + resp.status + ': ' + t };
         });
       }
       return resp.json();
@@ -615,6 +627,51 @@ window.resizeAndUpload = function (file, supabaseUrl, publishableKey) {
     .catch(function (err) {
       return { error: 'Upload failed: ' + err.message };
     });
+}
+
+// Resize a poster, then upload it through the shared capture path.
+// Returns Promise<{ event }> or Promise<{ error }>
+window.resizeAndUpload = function (file, supabaseUrl, publishableKey) {
+  var token = window.authSession && window.authSession.access_token;
+  if (!token) {
+    return Promise.resolve({ error: 'Please sign in again to capture events' });
+  }
+  return window
+    .resizeImageFile(file)
+    .then(function (resized) {
+      return uploadCaptureFile(resized, supabaseUrl, publishableKey);
+    })
+    .catch(function (err) {
+      return { error: 'Upload failed: ' + err.message };
+    });
+};
+
+// Audio files are already playable browser formats; upload them directly.
+// Returns Promise<{ event, transcript }> or Promise<{ error }>
+window.uploadAudioFile = function (file, supabaseUrl, publishableKey) {
+  return uploadCaptureFile(file, supabaseUrl, publishableKey);
+};
+
+// Turn a capture-event response into the editor's event shape.
+// Returns null when the response has no event.
+window.captureResultToEvent = function (result) {
+  if (!result || !result.event) return null;
+  var event = result.event;
+  var start = String(event.start_time || '');
+  var end = String(event.end_time || '');
+  return {
+    title: event.title || '',
+    start_time: event.start_time || '',
+    end_time: event.end_time || '',
+    date: start.slice(0, 10) || '',
+    time: start.slice(11, 16) || '19:00',
+    endTime: end.slice(11, 16) || '',
+    location: event.location || '',
+    description: event.description || '',
+    url: event.url || '',
+    transcript: result.transcript || '',
+    recurrence_until: event.recurrence_until || '',
+  };
 };
 
 // --- Audio Recording ---
