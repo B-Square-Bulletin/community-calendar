@@ -48,30 +48,7 @@
             if (!files || files.length === 0) return;
             isExtracting = true;
             errorMessage = '';
-            const token = window.authSession?.access_token;
-            if (!token) {
-              isExtracting = false;
-              errorMessage = 'Please sign in again to capture events';
-              return;
-            }
-            const result = Actions.upload({
-              file: files[0],
-              url: appGlobals.supabaseUrl + '/functions/v1/capture-event',
-              method: 'post',
-              asForm: true,
-              headers: {
-                apikey: appGlobals.supabasePublishableKey,
-                Authorization: 'Bearer ' + token
-              },
-              formParams: { mode: 'extract', timezone: (window._cities && window.cityFilter && window._cities[window.cityFilter] && window._cities[window.cityFilter].timezone) || '' },
-              onError: (err) => {
-                isExtracting = false;
-                errorMessage = err?.statusCode === 401
-                  ? 'Please sign in again to capture events'
-                  : (err?.message || 'Failed to extract event from audio');
-                return false;
-              }
-            });
+            const result = window.uploadAudioFile(files[0], appGlobals.supabaseUrl, appGlobals.supabasePublishableKey);
             isExtracting = false;
             if (result && result.event) {
               const start = String(result.event.start_time || '');
@@ -89,7 +66,7 @@
                 transcript: result.transcript || '',
                 recurrence_until: result.event.recurrence_until || ''
               };
-            } else if (!errorMessage) {
+            } else {
               errorMessage = result?.error || 'Failed to extract event from audio';
             }
           }"
@@ -128,31 +105,7 @@
               return;
             }
             isExtracting = true;
-            const token = window.authSession?.access_token;
-            if (!token) {
-              isExtracting = false;
-              errorMessage = 'Please sign in again to capture events';
-              captureMode = 'record';
-              return;
-            }
-            const result = Actions.upload({
-              file: file,
-              url: appGlobals.supabaseUrl + '/functions/v1/capture-event',
-              method: 'post',
-              asForm: true,
-              headers: {
-                apikey: appGlobals.supabasePublishableKey,
-                Authorization: 'Bearer ' + token
-              },
-              formParams: { mode: 'extract', timezone: (window._cities && window.cityFilter && window._cities[window.cityFilter] && window._cities[window.cityFilter].timezone) || '' },
-              onError: (err) => {
-                isExtracting = false;
-                errorMessage = err?.statusCode === 401
-                  ? 'Please sign in again to capture events'
-                  : (err?.message || 'Failed to extract event from audio');
-                return false;
-              }
-            });
+            const result = window.uploadAudioFile(file, appGlobals.supabaseUrl, appGlobals.supabasePublishableKey);
             isExtracting = false;
             if (result && result.event) {
               const start = String(result.event.start_time || '');
@@ -170,7 +123,7 @@
                 transcript: result.transcript || '',
                 recurrence_until: result.event.recurrence_until || ''
               };
-            } else if (!errorMessage) {
+            } else {
               errorMessage = result?.error || 'Failed to extract event from audio';
               captureMode = 'record';
             }
