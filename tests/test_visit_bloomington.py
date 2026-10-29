@@ -26,7 +26,7 @@ from scrapers.visit_bloomington import (
     TOKEN_URL,
     VisitBloomingtonScraper,
 )
-from scripts.combine_ics import AGGREGATORS
+from scripts.ics_to_json import AGGREGATORS
 from scripts.process_pending_feeds import parse_pending_feeds
 
 TZ = ZoneInfo("America/Indiana/Indianapolis")

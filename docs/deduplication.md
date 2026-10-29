@@ -272,20 +272,13 @@ Rather than per-city policy files, we use a simple global rule: **primary source
 
 ### How It Works
 
-`combine_ics.py` has a global `AGGREGATORS` set:
+`source_priority.json` at the repo root holds the global aggregator list, read by the confidence route (`scripts/ics_to_json.py`) and by `xmlui/helpers.js`:
 
-```python
-AGGREGATORS = {
-    "North Bay Bohemian",
-    "Press Democrat",
-    "Creative Sonoma",
-    "GoLocal Cooperative",
-    "NOW Toronto",
-    "Toronto Events (Tockify)",
-}
+```json
+{ "aggregators": ["North Bay Bohemian", "Press Democrat", "..."] }
 ```
 
-When duplicates are found (same title + date), the `dedupe_cross_source()` function in `scripts/combine_ics.py` keeps the non-aggregator version and merges source attribution — combining all source names into `X-SOURCE` and building an `X-SOURCE-URLS` JSON dict that maps each source name to its event URL. See [source-links.md](source-links.md) for how this flows through the rest of the pipeline.
+When the confidence route merges two listings, the surviving row is chosen primary-first: aggregator-only listings sort last, so a venue or library copy wins when both exist. Every member's source name and event URL still fold into the surviving row's `source` and `source_urls` fields in `events.json`. See [source-links.md](source-links.md) for how those fields render on the event card.
 
 ### Why Not Per-City Policies?
 
@@ -318,7 +311,7 @@ A simple global aggregator list accomplishes the same thing with zero configurat
 
 ### What Was Built
 
-Fuzzy dedup in `combine_ics.py` used Claude 3.5 Haiku (batch clustering approach). The helper remains as historical code, but `combine_ics` no longer calls it—even when `ENABLE_FUZZY_DEDUP` is set—because the confidence route is the only authority allowed to delete cross-UID listings.
+Fuzzy dedup in `combine_ics.py` used Claude 3.5 Haiku (batch clustering approach). It has since been deleted, so no flag or import can bring back cross-title deletion: the confidence route is the only authority allowed to delete cross-UID listings.
 
 ### Results: Not Worth Pursuing
 

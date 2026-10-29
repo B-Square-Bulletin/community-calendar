@@ -26,10 +26,10 @@ from scrapers.wfiu_community_calendar import (
     WFIUCommunityCalendarScraper,
 )
 from scripts.combine_ics import (
-    AGGREGATORS,
     _url_predates_window,
     extract_events,
 )
+from scripts.ics_to_json import AGGREGATORS
 from scripts.process_pending_feeds import parse_pending_feeds
 
 TZ = ZoneInfo("America/Indiana/Indianapolis")

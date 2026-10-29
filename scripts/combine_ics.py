@@ -17,7 +17,7 @@ sys.path.insert(0, "scrapers")
 import icalendar
 import recurring_ical_events
 from lib.city_filter import load_allowed_cities, location_matches_allowed_cities
-from lib.timeutil import assume_utc, parse_naive_ics, utc_now, utc_today
+from lib.timeutil import assume_utc, parse_naive_ics, utc_today
 
 # Fallback URLs for sources whose ICS events lack a URL property.
 # Only needed for scraped sources where per-event URLs aren't available.
@@ -415,20 +415,6 @@ def extract_field(event_content, field_name):
     return None
 
 
-# Known aggregators - these get lowest priority in deduplication.
-# When the same event appears in an aggregator AND a primary source,
-# we keep the primary source version.
-# Source of truth: source_priority.json at repo root, also read by xmlui/helpers.js.
-_SOURCE_PRIORITY_PATH = Path(__file__).resolve().parent.parent / "source_priority.json"
-with _SOURCE_PRIORITY_PATH.open() as _f:
-    AGGREGATORS = set(json.load(_f)["aggregators"])
-
-
-def is_aggregator(source_name):
-    """Check if a source is a known aggregator (low priority for dedup)."""
-    return source_name in AGGREGATORS
-
-
 _URL_DATE_RE = re.compile(r"/(\d{4})/(\d{2})/")
 
 
@@ -470,216 +456,6 @@ def dedupe_by_uid(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
             seen_uids.add(uid)
             deduped.append(event)
     return deduped
-
-
-def dedupe_fuzzy(events, input_dir):
-    """Use LLM to find duplicates with different titles.
-
-    Groups events by date, asks Claude to cluster same-events,
-    then keeps highest-priority source from each cluster.
-    Logs matches to {input_dir}/fuzzy_dedup.log for analysis.
-    """
-    import os
-
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
-    if not api_key:
-        print("  Fuzzy dedup: ANTHROPIC_API_KEY not set, skipping")
-        return events
-
-    try:
-        import anthropic
-    except ImportError:
-        print("  Fuzzy dedup: anthropic package not installed, skipping")
-        return events
-
-    client = anthropic.Anthropic(api_key=api_key)
-
-    # Open log file
-    log_path = Path(input_dir) / "fuzzy_dedup.log"
-    log_file = log_path.open("w")
-    log_file.write(f"Fuzzy dedup run: {utc_now().isoformat()}\n")
-    log_file.write(f"Total events: {len(events)}\n\n")
-
-    # Group by date
-    by_date: dict[str, list[dict[str, Any]]] = {}
-    for event in events:
-        date_str = event["dtstart"].strftime("%Y-%m-%d")
-        if date_str not in by_date:
-            by_date[date_str] = []
-        by_date[date_str].append(event)
-
-    # Track which events to remove (by index in original list)
-    events_to_remove = set()
-    fuzzy_deduped = 0
-    api_calls = 0
-    total_input_tokens = 0
-    total_output_tokens = 0
-    dates_with_multiple = 0
-
-    for date_str, day_events in by_date.items():
-        if len(day_events) < 2:
-            continue
-
-        dates_with_multiple += 1
-
-        # Build prompt with event summaries
-        event_lines = []
-        for i, e in enumerate(day_events):
-            title = extract_field(e["content"], "SUMMARY") or "(no title)"
-            source = extract_field(e["content"], "X-SOURCE") or "Unknown"
-            location = extract_field(e["content"], "LOCATION") or ""
-            time_str = e["dtstart"].strftime("%H:%M")
-            loc_part = f", {location}" if location else ""
-            event_lines.append(f"{i + 1}. {title} ({source}, {time_str}{loc_part})")
-
-        log_file.write(f"CHECKING: {date_str} ({len(event_lines)} events)\n")
-
-        prompt = f"""Events on {date_str}. Group any that are the SAME event (same actual gathering, possibly with different titles).
-
-{chr(10).join(event_lines)}
-
-Respond with ONLY a JSON array of arrays grouping indices of same events.
-Example: [[1,2], [3], [4,5,6]] means 1&2 are same event, 3 is unique, 4&5&6 are same event.
-If all events are unique, respond: [[1], [2], [3], ...]
-
-JSON:"""
-
-        text: str | None = None
-        try:
-            response = client.messages.create(
-                model="claude-3-5-haiku-20241022",
-                max_tokens=1024,
-                messages=[{"role": "user", "content": prompt}],
-            )
-
-            # Track API usage
-            api_calls += 1
-            if hasattr(response, "usage"):
-                total_input_tokens += response.usage.input_tokens
-                total_output_tokens += response.usage.output_tokens
-
-            # Parse response
-            import json
-
-            content_block = response.content[0]
-            text = (
-                content_block.text.strip()
-                if isinstance(content_block, anthropic.types.TextBlock)
-                else ""
-            )
-            # Handle markdown code blocks
-            if text.startswith("```"):
-                text = text.split("\n", 1)[1].rsplit("\n", 1)[0]
-            clusters = json.loads(text)
-
-            # Process clusters - keep highest priority from each
-            for cluster in clusters:
-                if len(cluster) <= 1:
-                    continue
-
-                # Get events in this cluster (convert 1-indexed to 0-indexed)
-                cluster_events = [
-                    (idx - 1, day_events[idx - 1]) for idx in cluster if 0 < idx <= len(day_events)
-                ]
-                if len(cluster_events) <= 1:
-                    continue
-
-                # Sort by priority (non-aggregators first)
-                cluster_events.sort(
-                    key=lambda x: (
-                        1 if is_aggregator(extract_field(x[1]["content"], "X-SOURCE") or "") else 0
-                    )
-                )
-
-                # Keep first, merge sources from rest, then mark rest for removal
-                _kept_idx, kept_event = cluster_events[0]
-                kept_title = extract_field(kept_event["content"], "SUMMARY") or "(no title)"
-                kept_source = extract_field(kept_event["content"], "X-SOURCE") or "Unknown"
-
-                # Collect all sources and their URLs for merging
-                all_sources = []
-                source_urls = {}
-                if kept_source != "Unknown":
-                    all_sources.extend(s.strip() for s in kept_source.split(","))
-                kept_url = extract_field(kept_event["content"], "URL")
-                if kept_source != "Unknown" and kept_url:
-                    source_urls[kept_source] = kept_url
-
-                for idx, removed_event in cluster_events[1:]:
-                    removed_title = (
-                        extract_field(removed_event["content"], "SUMMARY") or "(no title)"
-                    )
-                    removed_source = (
-                        extract_field(removed_event["content"], "X-SOURCE") or "Unknown"
-                    )
-                    removed_url = extract_field(removed_event["content"], "URL")
-
-                    if removed_source != "Unknown":
-                        for s in removed_source.split(","):
-                            s = s.strip()
-                            if s and s not in all_sources:
-                                all_sources.append(s)
-                            if s and removed_url:
-                                source_urls[s] = removed_url
-
-                    match_line = f"[{date_str}] '{removed_title}' ({removed_source}) -> '{kept_title}' ({kept_source})"
-                    print(f"    Fuzzy match: {match_line}")
-                    log_file.write(f"MATCH: {match_line}\n")
-
-                    # Find this event in the original list
-                    orig_idx = events.index(day_events[idx])
-                    events_to_remove.add(orig_idx)
-                    fuzzy_deduped += 1
-
-                # Merge sources into kept event (primary sources first, then aggregators)
-                if len(all_sources) > 1:
-                    primary = sorted(s for s in all_sources if not is_aggregator(s))
-                    agg = sorted(s for s in all_sources if is_aggregator(s))
-                    merged_source = ", ".join(primary + agg)
-                    kept_event["content"] = re.sub(
-                        r"^X-SOURCE:[^\r\n]+",
-                        f"X-SOURCE:{merged_source}",
-                        kept_event["content"],
-                        flags=re.MULTILINE,
-                    )
-                    log_file.write(f"  -> Merged sources: {merged_source}\n")
-
-                # Store per-source URLs for aggregator attribution
-                if source_urls:
-                    kept_event["content"] = (
-                        f"X-SOURCE-URLS:{json.dumps(source_urls)}\r\n{kept_event['content']}"
-                    )
-
-        except Exception as e:
-            error_msg = f"ERROR [{date_str}]: {e}"
-            print(f"  Fuzzy dedup: {error_msg}")
-            log_file.write(f"{error_msg}\n")
-            # Log the raw response if available for debugging
-            if text:
-                log_file.write(f"  Raw response: {text[:500]}\n")
-            continue
-
-    # Write summary and close log file
-    log_file.write("\n--- Summary ---\n")
-    log_file.write(f"Dates with 2+ events: {dates_with_multiple}\n")
-
-    log_file.write(f"API calls made: {api_calls}\n")
-    log_file.write(f"Total input tokens: {total_input_tokens}\n")
-    log_file.write(f"Total output tokens: {total_output_tokens}\n")
-    log_file.write(f"Fuzzy matches found: {fuzzy_deduped}\n")
-    log_file.close()
-
-    print(
-        f"  Fuzzy dedup: {api_calls} API calls, {total_input_tokens}+{total_output_tokens} tokens"
-    )
-
-    if fuzzy_deduped > 0:
-        print(f"  Fuzzy dedup: removed {fuzzy_deduped} duplicate events (see fuzzy_dedup.log)")
-    else:
-        print("  Fuzzy dedup: no additional duplicates found")
-
-    # Return events with duplicates removed
-    return [e for i, e in enumerate(events) if i not in events_to_remove]
 
 
 def extract_events(
@@ -845,9 +621,6 @@ def combine_ics_files(
     # De-duplicate by UID only. Whether two different UIDs are the same event is
     # the confidence route's decision (scripts/ics_to_json.py), not this step's.
     unique_events = dedupe_by_uid(all_events)
-
-    # Do not call the legacy model-based deduper here. Cross-UID deletion is
-    # exclusively owned by confidence_route after events have been cleaned.
 
     # Build combined ICS
     output = [

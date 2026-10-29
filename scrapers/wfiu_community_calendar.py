@@ -20,7 +20,7 @@ walk (failing loud rather than truncating a crawl).
 Each unique detail URL is fetched once for the stable `brightspot.contentId`
 that keys the UID. WFIU is an aggregator: it loses cross-source dedupe to
 direct venue/CVB sources and merges with other aggregators under the existing
-binary-tier sort in `scripts/combine_ics.py`/`source_priority.json`.
+binary-tier sort in `scripts/ics_to_json.py`/`source_priority.json`.
 
 Usage:
     python scrapers/wfiu_community_calendar.py --output cities/bloomington/wfiu_community_calendar.ics

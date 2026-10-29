@@ -393,7 +393,7 @@ _US_STATE_TOKENS = {
 }
 
 # The source-priority data file is the single source of truth for which
-# sources are aggregators (also read by combine_ics.py and xmlui/helpers.js).
+# sources are aggregators (also read by xmlui/helpers.js).
 _SOURCE_PRIORITY_PATH = Path(__file__).resolve().parent.parent / "source_priority.json"
 try:
     AGGREGATORS = set(json.loads(_SOURCE_PRIORITY_PATH.read_text())["aggregators"])

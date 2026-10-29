@@ -29,7 +29,6 @@ jobs:
       SCRAPE_MONTHS: ${{ github.event.inputs.months || '3' }}
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       TICKETMASTER_API_KEY: ${{ secrets.TICKETMASTER_API_KEY }}
-      #ENABLE_FUZZY_DEDUP: ${{ secrets.ANTHROPIC_API_KEY && 'true' || '' }}
 
     steps:
     - name: Check out repository

@@ -103,7 +103,7 @@ The principle: **we could disintermediate aggregators and only link directly to 
 
 **For developers adding a new aggregator to a city:**
 
-1. Add the aggregator's friendly name to the `AGGREGATORS` set in `scripts/combine_ics.py` so deduplication correctly prefers primary sources over the aggregator's copies.
+1. Add the aggregator's friendly name to the `aggregators` list in `source_priority.json` so the confidence route correctly prefers primary sources over the aggregator's copies.
 
 2. Ensure the fetcher emits per-event URLs whenever possible. If the aggregator's platform supports deep links to individual events (as CitySpark does for Bohemian), construct those URLs in the fetcher if possible. A ink to `bohemian.com/events-calendar/#/details/thee-sinseers/17654647/2026-02-22T19` is far more valuable than a link to `bohemian.com/events-calendar/`. If unavailable, add the aggregator's calendar page to `SOURCE_URLS` in `combine_ics.py` as a fallback. Even a link to the right calendar page is better than no link.
 
