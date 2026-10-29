@@ -8,17 +8,22 @@
 #      SUPABASE_ACCESS_TOKEN=sbp_... SUPABASE_PROJECT_REF=your_ref bash scripts/verify_edge_functions.sh
 #
 # What it does:
-#   - Fetches the deployed source for each edge function via the Management API
+#   - Downloads the deployed source for each edge function with the Supabase CLI
 #   - Diffs it against every *.ts the function ships (test files are not deployed)
 #   - Reports matches, differences, and missing (undeployed) functions
 #   - Flags if verify_jwt is ON (it should usually be OFF for these functions)
 #
-# Requirements: curl, diff, jq
+# The Management API's GET /functions/{slug} no longer returns the source (it
+# has no `files` field), so the source comes from the CLI's download instead.
+#
+# Requirements: curl, diff, jq, supabase CLI
 
 set -euo pipefail
 
 : "${SUPABASE_ACCESS_TOKEN:?Set SUPABASE_ACCESS_TOKEN (Management API token from supabase.com/dashboard/account/tokens)}"
 : "${SUPABASE_PROJECT_REF:?Set SUPABASE_PROJECT_REF (your Supabase project ref)}"
+
+command -v supabase > /dev/null || { echo "supabase CLI not found"; exit 1; }
 
 API="https://api.supabase.com/v1/projects/${SUPABASE_PROJECT_REF}/functions"
 TMPDIR_BASE=$(mktemp -d)
@@ -41,10 +46,22 @@ pass=0
 fail=0
 missing=0
 
+# Download every deployed source once, into a scratch workdir -- the CLI writes
+# into supabase/functions/, which must not touch the checkout. --use-api
+# unbundles server-side, so this does not need Docker.
+DEPLOYED_DIR="${TMPDIR_BASE}/deployed"
+mkdir -p "${DEPLOYED_DIR}/supabase/functions"
+if ! (cd "$DEPLOYED_DIR" && supabase functions download --use-api --project-ref "$SUPABASE_PROJECT_REF") \
+  > "${TMPDIR_BASE}/download.log" 2>&1; then
+  echo "Failed to download deployed functions:"
+  tail -5 "${TMPDIR_BASE}/download.log"
+  exit 1
+fi
+
 for fn in "${FUNCTIONS[@]}"; do
   echo -n "${fn}: "
 
-  # Fetch deployed function metadata + source
+  # Fetch deployed function metadata
   resp=$(curl -s -w "\n%{http_code}" \
     -H "Authorization: Bearer ${SUPABASE_ACCESS_TOKEN}" \
     "${API}/${fn}")
@@ -76,13 +93,7 @@ for fn in "${FUNCTIONS[@]}"; do
     if [[ "$name" == *_test.ts ]]; then
       continue
     fi
-    deployed_source=$(echo "$body" | jq -r --arg n "$name" '.files[] | select(.name == $n) | .content')
-    deployed_file="${TMPDIR_BASE}/${fn}.${name}"
-    if [[ -z "$deployed_source" || "$deployed_source" == "null" ]]; then
-      : > "$deployed_file"
-    else
-      echo "$deployed_source" > "$deployed_file"
-    fi
+    deployed_file="${DEPLOYED_DIR}/supabase/functions/${fn}/${name}"
     deployed_sources+=("${name}|${deployed_file}|${repo_file}")
   done
 
