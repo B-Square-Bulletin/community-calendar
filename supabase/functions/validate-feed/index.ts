@@ -284,7 +284,7 @@ export async function handler(req: Request): Promise<Response> {
       return json({ error: err.message, valid: false });
     }
     if (isTimeout(err)) {
-      return json({ error: "Feed timed out", valid: false }, 504);
+      return json({ error: "Feed timed out", valid: false });
     }
     console.error("validate-feed fetch failed:", err);
     return json({ error: "Validation failed", valid: false }, 500);
@@ -301,14 +301,14 @@ export async function handler(req: Request): Promise<Response> {
     icsText = await readCapped(feedResp);
   } catch (err) {
     if (isTimeout(err)) {
-      return json({ error: "Feed timed out", valid: false }, 504);
+      return json({ error: "Feed timed out", valid: false });
     }
     console.error("validate-feed read failed:", err);
     return json({ error: "Validation failed", valid: false }, 500);
   }
 
   if (icsText === null) {
-    return json({ error: "Feed is larger than 5 MiB", valid: false }, 413);
+    return json({ error: "Feed is larger than 5 MiB", valid: false });
   }
 
   if (!icsText.includes("BEGIN:VCALENDAR")) {

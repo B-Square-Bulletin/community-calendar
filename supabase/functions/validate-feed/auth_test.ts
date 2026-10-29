@@ -171,7 +171,7 @@ Deno.test("an invalid token returns 401 before the feed fetch", async () => {
   }
 });
 
-Deno.test("a feed that times out mid-read returns 504", async () => {
+Deno.test("a feed that times out mid-read is reported, not thrown", async () => {
   const restoreEnv = useAuthEnv();
   const stub = stubFetch(
     true,
@@ -188,8 +188,9 @@ Deno.test("a feed that times out mid-read returns 504", async () => {
   try {
     const resp = await handler(validateRequest("Bearer admin-token"));
 
-    assert(resp.status === 504, `expected 504, got ${resp.status}`);
+    assert(resp.status === 200, `expected 200, got ${resp.status}`);
     const body = await resp.json();
+    assert(body.valid === false, `expected valid:false, got ${JSON.stringify(body)}`);
     assert(body.error === "Feed timed out", `unexpected error: ${body.error}`);
   } finally {
     stub.restore();
@@ -253,7 +254,7 @@ Deno.test("a blocked feed URL is reported without fetching it", async () => {
   }
 });
 
-Deno.test("a feed over the size cap returns 413", async () => {
+Deno.test("a feed over the size cap is reported, not thrown", async () => {
   const restoreEnv = useAuthEnv();
   const stub = stubFetch(
     true,
@@ -263,7 +264,10 @@ Deno.test("a feed over the size cap returns 413", async () => {
   try {
     const resp = await handler(validateRequest("Bearer admin-token"));
 
-    assert(resp.status === 413, `expected 413, got ${resp.status}`);
+    assert(resp.status === 200, `expected 200, got ${resp.status}`);
+    const body = await resp.json();
+    assert(body.valid === false, `expected valid:false, got ${JSON.stringify(body)}`);
+    assert(body.error === "Feed is larger than 5 MiB", `unexpected error: ${body.error}`);
   } finally {
     stub.restore();
     restoreEnv();
