@@ -1,15 +1,6 @@
 {
   "runs": [
     {
-      "date": "2026-09-30",
-      "pages": 60,
-      "cards_fetched": 598,
-      "unique_detail_urls": 308,
-      "details_fetched": 308,
-      "postal_less": 7,
-      "emitted": 594
-    },
-    {
       "date": "2026-10-01",
       "pages": 60,
       "cards_fetched": 599,
@@ -269,6 +260,15 @@
       "details_fetched": 227,
       "postal_less": 2,
       "emitted": 392
+    },
+    {
+      "date": "2026-10-29",
+      "pages": 40,
+      "cards_fetched": 396,
+      "unique_detail_urls": 231,
+      "details_fetched": 231,
+      "postal_less": 1,
+      "emitted": 389
     }
   ]
 }
