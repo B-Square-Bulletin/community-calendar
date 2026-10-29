@@ -9,7 +9,7 @@
 #
 # What it does:
 #   - Fetches the deployed source for each edge function via the Management API
-#   - Diffs it against the repo source in supabase/functions/*/index.ts
+#   - Diffs it against every *.ts the function ships (test files are not deployed)
 #   - Reports matches, differences, and missing (undeployed) functions
 #   - Flags if verify_jwt is ON (it should usually be OFF for these functions)
 #
@@ -72,6 +72,10 @@ for fn in "${FUNCTIONS[@]}"; do
   deployed_sources=()
   for repo_file in "supabase/functions/${fn}"/*.ts; do
     name="$(basename "$repo_file")"
+    # Test files are never imported, so the bundler does not upload them.
+    if [[ "$name" == *_test.ts ]]; then
+      continue
+    fi
     deployed_source=$(echo "$body" | jq -r --arg n "$name" '.files[] | select(.name == $n) | .content')
     deployed_file="${TMPDIR_BASE}/${fn}.${name}"
     if [[ -z "$deployed_source" || "$deployed_source" == "null" ]]; then
