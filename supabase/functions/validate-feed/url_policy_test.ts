@@ -23,10 +23,13 @@ Deno.test("public https feed URLs are allowed", () => {
   allowed("https://www.meetup.com/events/ical/");
   allowed("https://feeds.example.com/calendar.ics?city=bloomington");
   allowed("https://example.com:443/feed.ics");
-  // Near-misses of the private ranges must stay allowed.
+  // Near-misses of the private and special-use ranges must stay allowed.
   allowed("https://172.32.0.1/feed.ics");
   allowed("https://100.63.0.1/feed.ics");
   allowed("https://198.20.0.1/feed.ics");
+  allowed("https://192.0.3.1/feed.ics");
+  allowed("https://198.51.101.1/feed.ics");
+  allowed("https://203.0.114.1/feed.ics");
   allowed("https://[2606:4700::1111]/feed.ics");
 });
 
@@ -58,6 +61,10 @@ Deno.test("loopback, private and link-local hosts are blocked", () => {
   blocked("https://192.168.1.1/feed.ics");
   blocked("https://100.64.0.1/feed.ics"); // CGNAT
   blocked("https://169.254.169.254/feed.ics"); // cloud metadata
+  blocked("https://192.0.2.1/feed.ics"); // TEST-NET-1
+  blocked("https://198.51.100.1/feed.ics"); // TEST-NET-2
+  blocked("https://203.0.113.1/feed.ics"); // TEST-NET-3
+  blocked("https://198.18.0.1/feed.ics"); // benchmarking 198.18/15
   blocked("https://0.0.0.0/feed.ics");
   blocked("https://224.0.0.1/feed.ics");
 });
