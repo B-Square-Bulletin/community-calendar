@@ -7,7 +7,7 @@
 // time. These tests pin both branches of the validator, plus the renderer's
 // byte stability, which the validator hashes.
 import { respondWithICS } from "./cache.ts";
-import { generateICS } from "./ics.ts";
+import { compareEvents, generateICS } from "./ics.ts";
 
 function assert(condition: boolean, message: string): void {
   if (!condition) throw new Error(message);
@@ -87,4 +87,31 @@ Deno.test("an unchanged pick list renders the same bytes and answers 304", async
   const etag = (await respondWithICS(request(), first, {})).headers.get("ETag")!;
   const res = await respondWithICS(request(etag), second, {});
   assert(res.status === 304, `expected 304, got ${res.status}`);
+});
+
+Deno.test("a curator edit moves the event's DTSTAMP", () => {
+  const tz = { bloomington: "America/Indiana/Indianapolis" };
+  const edited = {
+    ...PICK,
+    created_at: "2026-01-02T03:04:05Z",
+    updated_at: "2026-02-03T04:05:06Z",
+  };
+
+  assert(
+    generateICS([edited], "My Picks", tz).includes("DTSTAMP:20260203T040506Z"),
+    "expected the enrichment edit time, not the row creation time",
+  );
+});
+
+Deno.test("equal start times keep one byte order", () => {
+  // PostgREST returns tied rows in no guaranteed order, so an unstable sort
+  // would flap the ETag for any curator with two events at the same time.
+  const a = { ...PICK, id: 2, title: "Two" };
+  const b = { ...PICK, id: 1, title: "One" };
+
+  assert(
+    generateICS([a, b].sort(compareEvents), "My Picks", {}) ===
+      generateICS([b, a].sort(compareEvents), "My Picks", {}),
+    "expected a total order over picks",
+  );
 });

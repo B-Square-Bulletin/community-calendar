@@ -1,7 +1,7 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { dedupePickedEvents, withGroupMembership } from "./dedupe.ts";
 import { respondWithICS, CACHE_CONTROL } from "./cache.ts";
-import { generateICS } from "./ics.ts";
+import { compareEvents, generateICS } from "./ics.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -21,7 +21,9 @@ async function getCityTimezones(): Promise<Record<string, string>> {
       if (config.timezone) _cityTimezones[city] = config.timezone;
     }
   } catch {
-    _cityTimezones = {};
+    // Do not cache the failure: a cached {} makes this isolate render other
+    // bytes than its peers, and the feed's ETag never settles.
+    return {};
   }
   return _cityTimezones;
 }
@@ -149,6 +151,8 @@ Deno.serve(async (req) => {
           rrule: enrichment?.rrule || null,
           categories: enrichment?.categories || null,
           notes: enrichment?.notes || null,
+          // A curator edit is a feed change, and DTSTAMP carries it.
+          updated_at: enrichment?.updated_at || null,
           // Enrichment can override these if present
           description: enrichment?.description || event.description,
           location: enrichment?.location || event.location,
@@ -156,9 +160,7 @@ Deno.serve(async (req) => {
       })
       .filter((e: any) => e !== null);
     // id breaks start-time ties so the byte order (and the ETag) is stable
-    const events = dedupePickedEvents(withGroupMembership(pickedEvents, memberships)).sort((a: any, b: any) =>
-      a.start_time.localeCompare(b.start_time) || Number(a.id) - Number(b.id)
-    );
+    const events = dedupePickedEvents(withGroupMembership(pickedEvents, memberships)).sort(compareEvents);
 
     // Return JSON or ICS based on format parameter
     if (format === "json") {

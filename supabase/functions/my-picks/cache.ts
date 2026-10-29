@@ -2,7 +2,7 @@
 //
 // The feed is polled on a timer, so an unchanged calendar must cost a 304 and
 // no body. The validator is a hash of the exact bytes served, which is why the
-// ICS itself must be byte-stable between builds (see the DTSTAMP in index.ts).
+// ICS itself must be byte-stable between builds (see the DTSTAMP in ics.ts).
 
 const encoder = new TextEncoder();
 

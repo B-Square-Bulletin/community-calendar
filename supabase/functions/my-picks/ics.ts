@@ -32,6 +32,12 @@ function escapeICS(text: string | null): string {
     .replace(/\n/g, "\\n");
 }
 
+// Total order over picks: equal start times would otherwise render in whatever
+// order PostgREST returned, and the ETag hashes that order.
+export function compareEvents(a: any, b: any): number {
+  return a.start_time.localeCompare(b.start_time) || Number(a.id) - Number(b.id);
+}
+
 // Generate ICS content from events. The output must be byte-identical for the
 // same input: the feed's ETag is a hash of these bytes.
 export function generateICS(events: any[], calendarName: string, cityTimezones: Record<string, string>): string {
@@ -50,11 +56,14 @@ export function generateICS(events: any[], calendarName: string, cityTimezones: 
 
     lines.push("BEGIN:VEVENT");
     lines.push(`UID:pick-${event.id}@community-calendar`);
-    // Stable per event: a per-request DTSTAMP would change the body (and the
-    // ETag) on every poll, so the feed could never answer 304.
-    // shortcut: an edited event never looks updated to clients; switch to
+    // DTSTAMP is the only per-event timestamp a calendar client reads, so it
+    // must move when the event does and stay put when it does not: a request
+    // clock here changes the body (and the ETag) on every poll.
+    // shortcut: source-side field edits do not bump DTSTAMP; switch to
     // events.updated_at when that column exists.
-    lines.push(`DTSTAMP:${formatICSDateUTC(event.created_at || event.start_time)}`);
+    lines.push(
+      `DTSTAMP:${formatICSDateUTC(event.updated_at || event.created_at || event.start_time)}`,
+    );
     if (tz) {
       lines.push(`DTSTART;TZID=${tz}:${formatICSDateLocal(event.start_time, tz)}`);
     } else {
