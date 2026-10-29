@@ -17,7 +17,7 @@ This project uses both Postgres functions (PL/pgSQL or SQL, running inside the d
 - `load-events` — upserts CI's `{city, events, ran_sources}` payload; requires the `x-load-events-secret` header
 - `capture-event` — extracts event data from images or audio; requires a signed-in user's JWT and calls Claude/Whisper with the project's keys
 - `my-picks` — generates ICS/JSON feed of a user's bookmarked events (token-based auth)
-- `validate-feed` — validates an ICS feed URL, returns preview of future events, detects RRULE recurrence
+- `validate-feed` — validates an ICS feed URL for the Manage Feeds dialog; requires an admin's JWT, fetches only public https URLs, returns a preview of future events, detects RRULE recurrence
 
 ## When to Use Which
 

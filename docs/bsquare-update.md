@@ -170,9 +170,9 @@ The Manage Feeds dialog needs the `validate-feed` edge function to preview feeds
 supabase functions deploy validate-feed --project-ref YOUR_PROJECT_REF
 ```
 
-Or if you don't have the Supabase CLI installed, you can deploy it from the Supabase dashboard: **Edge Functions > Deploy a new function**, name it `validate-feed`, and paste the contents of `supabase/functions/validate-feed/index.ts`.
+The function is two files (`index.ts` and `url_policy.ts`), so deploy it with the CLI. Pasting `index.ts` into the dashboard is no longer enough: its import of `url_policy.ts` will not resolve.
 
-After deploying, go to **Edge Functions > validate-feed > Details** and make sure "Require JWT" is **disabled** (the function handles auth itself via the Authorization header).
+After deploying, go to **Edge Functions > validate-feed > Details** and make sure "Require JWT" is **disabled** (the function handles auth itself: it requires the signed-in caller to be an admin in `admin_users`).
 
 ### Step 6: Push and build
 
