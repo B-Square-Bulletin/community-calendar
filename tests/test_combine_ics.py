@@ -77,7 +77,7 @@ def _combine(tmp_path):
 
 
 class TestNoTitleDeletionBeforeRoute:
-    def test_legacy_fuzzy_flag_cannot_delete_before_the_confidence_route(
+    def test_retired_model_deduper_cannot_delete_before_the_confidence_route(
         self, tmp_path, monkeypatch
     ):
         _write_source_ics(
@@ -96,12 +96,12 @@ class TestNoTitleDeletionBeforeRoute:
             "uid-beta",
             "DTSTART:20990601T180000Z",
         )
+        # The retired flag is the resurrection vector: setting it must change nothing.
         monkeypatch.setenv("ENABLE_FUZZY_DEDUP", "1")
 
-        def destructive_legacy_path(events, _input_dir):
-            return events[:1]
+        # Retired, not merely off by default.
+        assert not hasattr(combine_ics, "dedupe_fuzzy")
 
-        monkeypatch.setattr(combine_ics, "dedupe_fuzzy", destructive_legacy_path)
         combined = _combine(tmp_path)
 
         assert "UID:uid-alpha" in combined

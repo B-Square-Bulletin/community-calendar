@@ -318,7 +318,7 @@ A simple global aggregator list accomplishes the same thing with zero configurat
 
 ### What Was Built
 
-Fuzzy dedup in `combine_ics.py` used Claude 3.5 Haiku (batch clustering approach). The helper remains as historical code, but `combine_ics` no longer calls it—even when `ENABLE_FUZZY_DEDUP` is set—because the confidence route is the only authority allowed to delete cross-UID listings.
+Fuzzy dedup in `combine_ics.py` used Claude 3.5 Haiku (batch clustering approach). It has since been deleted, so no flag or import can bring back cross-title deletion: the confidence route is the only authority allowed to delete cross-UID listings.
 
 ### Results: Not Worth Pursuing
 
