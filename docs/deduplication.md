@@ -278,7 +278,7 @@ Rather than per-city policy files, we use a simple global rule: **primary source
 { "aggregators": ["North Bay Bohemian", "Press Democrat", "..."] }
 ```
 
-When the confidence route merges two listings, the surviving row is chosen primary-first: aggregator-only listings sort last, so a venue or library copy wins when both exist. Every member's source name and URL still fold into the survivor as `X-SOURCE` and `X-SOURCE-URLS`. See [source-links.md](source-links.md) for how that flows through the rest of the pipeline.
+When the confidence route merges two listings, the surviving row is chosen primary-first: aggregator-only listings sort last, so a venue or library copy wins when both exist. Every member's source name and event URL still fold into the surviving row's `source` and `source_urls` fields in `events.json`. See [source-links.md](source-links.md) for how those fields render on the event card.
 
 ### Why Not Per-City Policies?
 
