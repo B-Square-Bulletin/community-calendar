@@ -51,26 +51,53 @@ const FEED_ICS = [
   "END:VCALENDAR",
 ].join("\r\n");
 
-/** Stub Supabase's /user and /admin_users plus the feed itself. */
+const ADMIN_ID = "11111111-1111-1111-1111-111111111111";
+
+function headerOf(input: RequestInfo | URL, init?: RequestInit): string {
+  const headers = (input instanceof Request ? input.headers : undefined) ??
+    new Headers(init?.headers);
+  return headers.get("Authorization") ?? "";
+}
+
+/**
+ * Stub Supabase's /user and /admin_users plus the feed itself.
+ *
+ * The admin answer is conditional on the request, not just the URL: the real
+ * gate works only because the caller's JWT rides along on the admin_users
+ * query (RLS reads auth.uid()) and because the query filters on that user's
+ * id. A stub that answered by URL alone would keep passing if either were
+ * dropped, and every real admin would then get a 403 (PR 264 review).
+ */
 function stubFetch(
   isAdmin: boolean,
   feed: () => Response = () => new Response(FEED_ICS),
+  token = "admin-token",
 ): { calls: string[]; restore: () => void } {
   const originalFetch = globalThis.fetch;
   const calls: string[] = [];
-  globalThis.fetch = ((input: RequestInfo | URL) => {
+  globalThis.fetch = ((input: RequestInfo | URL, init?: RequestInit) => {
     const url = requestUrl(input);
     calls.push(url);
+    const authorized = headerOf(input, init) === `Bearer ${token}`;
     if (url.includes("/auth/v1/user")) {
+      if (!authorized) {
+        return Promise.resolve(
+          new Response(JSON.stringify({ message: "invalid JWT" }), {
+            status: 401,
+            headers: { "Content-Type": "application/json" },
+          }),
+        );
+      }
       return Promise.resolve(
-        new Response(JSON.stringify({ id: "11111111-1111-1111-1111-111111111111", aud: "authenticated" }), {
+        new Response(JSON.stringify({ id: ADMIN_ID, aud: "authenticated" }), {
           status: 200,
           headers: { "Content-Type": "application/json" },
         }),
       );
     }
     if (url.includes("/rest/v1/admin_users")) {
-      const rows = isAdmin ? [{ user_id: "11111111-1111-1111-1111-111111111111" }] : [];
+      const targeted = url.includes(`user_id=eq.${ADMIN_ID}`);
+      const rows = isAdmin && authorized && targeted ? [{ user_id: ADMIN_ID }] : [];
       return Promise.resolve(
         new Response(JSON.stringify(rows), {
           status: 200,
@@ -105,7 +132,7 @@ Deno.test("a request without a token returns 401 with no outbound fetch", async 
 
 Deno.test("a signed-in user who is not an admin gets 403 before the feed fetch", async () => {
   const restoreEnv = useAuthEnv();
-  const stub = stubFetch(false);
+  const stub = stubFetch(false, undefined, "user-token");
 
   try {
     const resp = await handler(validateRequest("Bearer user-token"));
@@ -117,6 +144,53 @@ Deno.test("a signed-in user who is not an admin gets 403 before the feed fetch",
       !stub.calls.some((url) => url.includes("feeds.example.com")),
       `feed was fetched: ${stub.calls.join(", ")}`,
     );
+  } finally {
+    stub.restore();
+    restoreEnv();
+  }
+});
+
+Deno.test("an invalid token returns 401 before the feed fetch", async () => {
+  const restoreEnv = useAuthEnv();
+  // The stub is the token "admin-token", so a different bearer fails /user.
+  const stub = stubFetch(true, undefined, "someone-else");
+
+  try {
+    const resp = await handler(validateRequest("Bearer expired-token"));
+
+    assert(resp.status === 401, `expected 401, got ${resp.status}`);
+    const body = await resp.json();
+    assert(body.error === "Invalid authorization", `unexpected error: ${body.error}`);
+    assert(
+      !stub.calls.some((url) => url.includes("feeds.example.com")),
+      `feed was fetched: ${stub.calls.join(", ")}`,
+    );
+  } finally {
+    stub.restore();
+    restoreEnv();
+  }
+});
+
+Deno.test("a feed that times out mid-read returns 504", async () => {
+  const restoreEnv = useAuthEnv();
+  const stub = stubFetch(
+    true,
+    () =>
+      new Response(
+        new ReadableStream({
+          start(controller) {
+            controller.error(new DOMException("timed out", "TimeoutError"));
+          },
+        }),
+      ),
+  );
+
+  try {
+    const resp = await handler(validateRequest("Bearer admin-token"));
+
+    assert(resp.status === 504, `expected 504, got ${resp.status}`);
+    const body = await resp.json();
+    assert(body.error === "Feed timed out", `unexpected error: ${body.error}`);
   } finally {
     stub.restore();
     restoreEnv();
@@ -137,10 +211,41 @@ Deno.test("a redirect to a private address is refused", async () => {
   try {
     const resp = await handler(validateRequest("Bearer admin-token"));
 
-    assert(resp.status === 400, `expected 400, got ${resp.status}`);
+    // A blocked URL is a validation result (200 + valid:false), not an error
+    // status, so the dialog shows the reason instead of "Failed to validate".
+    assert(resp.status === 200, `expected 200, got ${resp.status}`);
+    const body = await resp.json();
+    assert(body.valid === false, `expected valid:false, got ${JSON.stringify(body)}`);
+    assert(body.error === "That host is not allowed", `unexpected error: ${body.error}`);
     assert(
       !stub.calls.some((url) => url.includes("169.254.169.254")),
       `metadata address was fetched: ${stub.calls.join(", ")}`,
+    );
+  } finally {
+    stub.restore();
+    restoreEnv();
+  }
+});
+
+Deno.test("a blocked feed URL is reported without fetching it", async () => {
+  const restoreEnv = useAuthEnv();
+  const stub = stubFetch(true);
+
+  try {
+    const req = new Request("http://localhost/functions/v1/validate-feed", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: "Bearer admin-token" },
+      body: JSON.stringify({ url: "https://192.168.1.10/feed.ics" }),
+    });
+    const resp = await handler(req);
+
+    assert(resp.status === 200, `expected 200, got ${resp.status}`);
+    const body = await resp.json();
+    assert(body.valid === false, `expected valid:false, got ${JSON.stringify(body)}`);
+    assert(body.error === "That host is not allowed", `unexpected error: ${body.error}`);
+    assert(
+      !stub.calls.some((url) => url.includes("192.168.1.10")),
+      `blocked host was fetched: ${stub.calls.join(", ")}`,
     );
   } finally {
     stub.restore();

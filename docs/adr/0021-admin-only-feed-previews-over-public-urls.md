@@ -52,7 +52,10 @@ included, so a chain of slow hops cannot hold the worker for longer than that.
 **Keep the detail admins need, drop the detail they do not.** Upstream HTTP
 statuses still come back as `{valid: false, error: "Feed returned HTTP 404"}`
 because that is the feature. Raw exception text (`String(err)`) is gone:
-failures are logged and the caller gets a fixed message.
+failures are logged and the caller gets a fixed message. A URL the policy
+refuses answers 200 with `valid: false` and the reason, the same shape the
+dialog already renders for a non-ICS feed, so admins read "That host is not
+allowed" instead of a generic failure. Only auth failures are non-2xx.
 
 ## Consequences
 

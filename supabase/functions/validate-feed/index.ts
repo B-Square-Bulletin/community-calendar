@@ -270,7 +270,10 @@ export async function handler(req: Request): Promise<Response> {
 
   const target = checkFeedUrl(url);
   if (!target.ok) {
-    return json({ error: target.error, valid: false }, 400);
+    // A rejected URL is a validation result, not a transport error: the
+    // dialog renders `error` from a 200 the same way it does for a non-ICS
+    // feed. Only auth failures are non-2xx, so an admin sees the reason.
+    return json({ error: target.error, valid: false });
   }
 
   let feedResp: Response;
@@ -278,7 +281,7 @@ export async function handler(req: Request): Promise<Response> {
     feedResp = await fetchFeed(target.url);
   } catch (err) {
     if (err instanceof FeedUrlRejected) {
-      return json({ error: err.message, valid: false }, 400);
+      return json({ error: err.message, valid: false });
     }
     if (isTimeout(err)) {
       return json({ error: "Feed timed out", valid: false }, 504);
