@@ -8,7 +8,7 @@ help:
 	@echo "  make test            - Run Python + node (vitest) + Deno tests"
 	@echo "  make test-python     - Run Python tests (pytest via uv)"
 	@echo "  make test-node       - Run node seam tests (vitest via pnpm)"
-	@echo "  make test-deno       - Run edge-function tests (Deno: my-picks, load-events, capture-event)"
+	@echo "  make test-deno       - Run edge-function tests (Deno: my-picks, load-events, capture-event, validate-feed)"
 	@echo "  make test-browser    - Run browser groups (Playwright over xmlui/test.html)"
 	@echo "  make test-sql        - Run database tests (local Supabase via pgTAP)"
 	@echo "  make format          - Auto-format Python + JS code"
@@ -62,11 +62,12 @@ test-node:
 # Run edge-function tests (Deno; not covered by pytest or vitest)
 test-deno:
 	@echo "Running Deno tests..."
-	@deno check supabase/functions/capture-event/index.ts supabase/functions/capture-event/auth_test.ts
-	@deno test supabase/functions/my-picks/dedupe_test.ts supabase/functions/load-events/scope_test.ts supabase/functions/load-events/auth_test.ts
-	# capture-event imports supabase-js, whose node types want node_modules; the
-	# handler test only exercises the pre-body auth gate, so run it unchecked.
-	@deno test --no-check --allow-env supabase/functions/capture-event/auth_test.ts
+	@deno check supabase/functions/capture-event/index.ts supabase/functions/capture-event/auth_test.ts supabase/functions/validate-feed/index.ts
+	@deno test supabase/functions/my-picks/dedupe_test.ts supabase/functions/load-events/scope_test.ts supabase/functions/load-events/auth_test.ts supabase/functions/validate-feed/url_policy_test.ts
+	# capture-event and validate-feed import supabase-js, whose node types want
+	# node_modules; the handler tests only exercise the pre-fetch auth gate, so
+	# run them unchecked.
+	@deno test --no-check --allow-env supabase/functions/capture-event/auth_test.ts supabase/functions/validate-feed/auth_test.ts
 
 # Run browser groups (requires playwright browsers: pnpm exec playwright install chromium)
 test-browser:
