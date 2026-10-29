@@ -9,7 +9,7 @@
 #
 # What it does:
 #   - Fetches the deployed source for each edge function via the Management API
-#   - Diffs it against the repo source in supabase/functions/*/index.ts
+#   - Diffs it against every *.ts the function ships (test files are not deployed)
 #   - Reports matches, differences, and missing (undeployed) functions
 #   - Flags if verify_jwt is ON (it should usually be OFF for these functions)
 #
@@ -42,7 +42,6 @@ fail=0
 missing=0
 
 for fn in "${FUNCTIONS[@]}"; do
-  repo_file="supabase/functions/${fn}/index.ts"
   echo -n "${fn}: "
 
   # Fetch deployed function metadata + source
@@ -67,17 +66,45 @@ for fn in "${FUNCTIONS[@]}"; do
     continue
   fi
 
-  # Extract source from the files array
-  deployed_source=$(echo "$body" | jq -r '.files[] | select(.name == "index.ts") | .content')
-  deployed_file="${TMPDIR_BASE}/${fn}.deployed.ts"
-  echo "$deployed_source" > "$deployed_file"
+  # Extract every .ts the function ships. Comparing only index.ts misses a
+  # deploy that omits a helper module: the function then dies at import on
+  # every request, while index.ts still matches.
+  deployed_sources=()
+  for repo_file in "supabase/functions/${fn}"/*.ts; do
+    name="$(basename "$repo_file")"
+    # Test files are never imported, so the bundler does not upload them.
+    if [[ "$name" == *_test.ts ]]; then
+      continue
+    fi
+    deployed_source=$(echo "$body" | jq -r --arg n "$name" '.files[] | select(.name == $n) | .content')
+    deployed_file="${TMPDIR_BASE}/${fn}.${name}"
+    if [[ -z "$deployed_source" || "$deployed_source" == "null" ]]; then
+      : > "$deployed_file"
+    else
+      echo "$deployed_source" > "$deployed_file"
+    fi
+    deployed_sources+=("${name}|${deployed_file}|${repo_file}")
+  done
 
   # Also check verify_jwt setting
   verify_jwt=$(echo "$body" | jq -r '.verify_jwt')
   version=$(echo "$body" | jq -r '.version')
 
   # Compare
-  if diff -q "$repo_file" "$deployed_file" > /dev/null 2>&1; then
+  mismatch=""
+  for entry in "${deployed_sources[@]}"; do
+    IFS='|' read -r name deployed_file repo_file <<< "$entry"
+    if [[ ! -s "$deployed_file" ]]; then
+      mismatch="MISSING ${name}"
+    elif ! diff -q "$repo_file" "$deployed_file" > /dev/null 2>&1; then
+      mismatch="DIFFERS from repo in ${name}"
+    else
+      continue
+    fi
+    break
+  done
+
+  if [[ -z "$mismatch" ]]; then
     jwt_warn=""
     if [[ "$verify_jwt" == "true" ]]; then
       jwt_warn=" !! verify_jwt is ON (should probably be OFF)"
@@ -85,12 +112,14 @@ for fn in "${FUNCTIONS[@]}"; do
     echo "OK (v${version})${jwt_warn}"
     ((pass++)) || true
   else
-    echo "DIFFERS from repo (deployed v${version})"
+    echo "${mismatch} (deployed v${version})"
     if [[ "$verify_jwt" == "true" ]]; then
       echo "   !! verify_jwt is ON (should probably be OFF)"
     fi
-    echo "   Diff (deployed vs repo):"
-    diff --unified=3 "$deployed_file" "$repo_file" | head -30 | sed 's/^/   /'
+    if [[ -s "$deployed_file" ]]; then
+      echo "   Diff (deployed vs repo):"
+      diff --unified=3 "$deployed_file" "$repo_file" | head -30 | sed 's/^/   /'
+    fi
     echo "   Fix: supabase functions deploy ${fn} --no-verify-jwt"
     ((fail++)) || true
   fi

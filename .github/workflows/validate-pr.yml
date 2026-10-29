@@ -98,11 +98,12 @@ jobs:
 
       - name: Run Deno tests
         run: |
-          deno check supabase/functions/capture-event/index.ts supabase/functions/capture-event/auth_test.ts
-          deno test supabase/functions/my-picks/dedupe_test.ts supabase/functions/load-events/scope_test.ts supabase/functions/load-events/auth_test.ts
-          # capture-event imports supabase-js, whose node types want node_modules;
-          # the handler test only exercises the pre-body auth gate.
-          deno test --no-check --allow-env supabase/functions/capture-event/auth_test.ts
+          deno check supabase/functions/capture-event/index.ts supabase/functions/capture-event/auth_test.ts supabase/functions/validate-feed/index.ts
+          deno test supabase/functions/my-picks/dedupe_test.ts supabase/functions/load-events/scope_test.ts supabase/functions/load-events/auth_test.ts supabase/functions/validate-feed/url_policy_test.ts
+          # capture-event (and validate-feed) import supabase-js, whose node types
+          # want node_modules; the handler tests only exercise the pre-fetch auth
+          # gate, so run them unchecked.
+          deno test --no-check --allow-env supabase/functions/capture-event/auth_test.ts supabase/functions/validate-feed/auth_test.ts
 
   browser-tests:
     # Playwright gate over xmlui/test.html's served-file groups and the
