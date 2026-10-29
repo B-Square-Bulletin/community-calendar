@@ -129,7 +129,7 @@ When a curator adds recurrence to an event via PickEditor, the form shows times 
 
 ### Step 8: My Picks ICS feed
 
-The `my-picks` edge function (`supabase/functions/my-picks/index.ts`) generates an ICS feed of a user's bookmarked events.
+The `my-picks` edge function (`supabase/functions/my-picks/ics.ts`) generates an ICS feed of a user's bookmarked events.
 
 For **non-recurring events**: outputs UTC times with Z suffix (`DTSTART:20250327T010000Z`). The subscribing calendar app handles conversion to the user's local timezone.
 

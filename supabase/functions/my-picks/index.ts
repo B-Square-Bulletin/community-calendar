@@ -1,5 +1,7 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { dedupePickedEvents, withGroupMembership } from "./dedupe.ts";
+import { respondWithICS, CACHE_CONTROL } from "./cache.ts";
+import { compareEvents, generateICS } from "./ics.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -19,105 +21,11 @@ async function getCityTimezones(): Promise<Record<string, string>> {
       if (config.timezone) _cityTimezones[city] = config.timezone;
     }
   } catch {
-    _cityTimezones = {};
+    // Do not cache the failure: a cached {} makes this isolate render other
+    // bytes than its peers, and the feed's ETag never settles.
+    return {};
   }
   return _cityTimezones;
-}
-
-// Format date for ICS as UTC (YYYYMMDDTHHMMSSZ)
-function formatICSDateUTC(isoString: string): string {
-  const d = new Date(isoString);
-  return d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
-}
-
-// Format date for ICS as local time (YYYYMMDDTHHMMSS) for use with TZID
-function formatICSDateLocal(isoString: string, timezone: string): string {
-  const d = new Date(isoString);
-  const parts = new Intl.DateTimeFormat("en-CA", {
-    timeZone: timezone,
-    year: "numeric", month: "2-digit", day: "2-digit",
-    hour: "2-digit", minute: "2-digit", second: "2-digit",
-    hour12: false,
-  }).formatToParts(d);
-  const v: Record<string, string> = {};
-  parts.forEach(p => { v[p.type] = p.value; });
-  const hour = v.hour === "24" ? "00" : v.hour;
-  return `${v.year}${v.month}${v.day}T${hour}${v.minute}${v.second}`;
-}
-
-// Escape text for ICS format
-function escapeICS(text: string | null): string {
-  if (!text) return "";
-  return text
-    .replace(/\\/g, "\\\\")
-    .replace(/;/g, "\\;")
-    .replace(/,/g, "\\,")
-    .replace(/\n/g, "\\n");
-}
-
-// Generate ICS content from events
-function generateICS(events: any[], calendarName: string, cityTimezones: Record<string, string>): string {
-  const lines = [
-    "BEGIN:VCALENDAR",
-    "VERSION:2.0",
-    "PRODID:-//Community Calendar//My Picks//EN",
-    `X-WR-CALNAME:${escapeICS(calendarName)}`,
-    "CALSCALE:GREGORIAN",
-    "METHOD:PUBLISH",
-  ];
-
-  for (const event of events) {
-    // For recurring events, use TZID so BYDAY expands in the correct timezone
-    const tz = event.rrule && event.city ? cityTimezones[event.city] : null;
-
-    lines.push("BEGIN:VEVENT");
-    lines.push(`UID:pick-${event.id}@community-calendar`);
-    lines.push(`DTSTAMP:${formatICSDateUTC(new Date().toISOString())}`);
-    if (tz) {
-      lines.push(`DTSTART;TZID=${tz}:${formatICSDateLocal(event.start_time, tz)}`);
-    } else {
-      lines.push(`DTSTART:${formatICSDateUTC(event.start_time)}`);
-    }
-    if (event.end_time) {
-      if (tz) {
-        lines.push(`DTEND;TZID=${tz}:${formatICSDateLocal(event.end_time, tz)}`);
-      } else {
-        lines.push(`DTEND:${formatICSDateUTC(event.end_time)}`);
-      }
-    }
-    // RRULE for recurring events (from enrichment)
-    if (event.rrule) {
-      lines.push(`RRULE:${event.rrule}`);
-    }
-    lines.push(`SUMMARY:${escapeICS(event.title)}`);
-    if (event.location) {
-      lines.push(`LOCATION:${escapeICS(event.location)}`);
-    }
-    // Build description: original + curator notes
-    let description = event.description || "";
-    if (event.notes) {
-      description = description
-        ? `${description}\n\n--- Curator notes ---\n${event.notes}`
-        : event.notes;
-    }
-    if (description) {
-      lines.push(`DESCRIPTION:${escapeICS(description)}`);
-    }
-    if (event.url) {
-      lines.push(`URL:${event.url}`);
-    }
-    if (event.image_url) {
-      lines.push(`ATTACH;FMTTYPE=image/jpeg:${event.image_url}`);
-    }
-    // Categories from enrichment
-    if (event.categories && event.categories.length > 0) {
-      lines.push(`CATEGORIES:${event.categories.join(",")}`);
-    }
-    lines.push("END:VEVENT");
-  }
-
-  lines.push("END:VCALENDAR");
-  return lines.join("\r\n");
 }
 
 Deno.serve(async (req) => {
@@ -178,7 +86,8 @@ Deno.serve(async (req) => {
           city,
           source_uid,
           duplicate_group,
-          duplicate_group_representative
+          duplicate_group_representative,
+          created_at
         )
       `)
       .eq("user_id", userId);
@@ -242,15 +151,16 @@ Deno.serve(async (req) => {
           rrule: enrichment?.rrule || null,
           categories: enrichment?.categories || null,
           notes: enrichment?.notes || null,
+          // A curator edit is a feed change, and DTSTAMP carries it.
+          updated_at: enrichment?.updated_at || null,
           // Enrichment can override these if present
           description: enrichment?.description || event.description,
           location: enrichment?.location || event.location,
         };
       })
       .filter((e: any) => e !== null);
-    const events = dedupePickedEvents(withGroupMembership(pickedEvents, memberships)).sort((a: any, b: any) =>
-      a.start_time.localeCompare(b.start_time)
-    );
+    // id breaks start-time ties so the byte order (and the ETag) is stable
+    const events = dedupePickedEvents(withGroupMembership(pickedEvents, memberships)).sort(compareEvents);
 
     // Return JSON or ICS based on format parameter
     if (format === "json") {
@@ -258,7 +168,7 @@ Deno.serve(async (req) => {
         headers: {
           ...corsHeaders,
           "Content-Type": "application/json",
-          "Cache-Control": "no-cache, must-revalidate",
+          "Cache-Control": CACHE_CONTROL,
         },
       });
     }
@@ -267,22 +177,10 @@ Deno.serve(async (req) => {
     const cityTimezones = await getCityTimezones();
     const ics = generateICS(events, "My Picks - Community Calendar", cityTimezones);
 
-    // Generate ETag from content hash for cache validation
-    const encoder = new TextEncoder();
-    const data = encoder.encode(ics);
-    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const etag = `"${hashArray.slice(0, 8).map(b => b.toString(16).padStart(2, '0')).join('')}"`;
-
-    return new Response(ics, {
-      headers: {
-        ...corsHeaders,
-        "Content-Type": "text/calendar; charset=utf-8",
-        "Content-Disposition": 'attachment; filename="my-picks.ics"',
-        "Cache-Control": "no-cache, must-revalidate",
-        "ETag": etag,
-        "Last-Modified": new Date().toUTCString(),
-      },
+    return await respondWithICS(req, ics, {
+      ...corsHeaders,
+      "Content-Type": "text/calendar; charset=utf-8",
+      "Content-Disposition": 'attachment; filename="my-picks.ics"',
     });
   } catch (error) {
     console.error("Error:", error);

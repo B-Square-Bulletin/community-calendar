@@ -43,6 +43,7 @@ Returns an ICS file with the user's picked events.
 ## Response
 
 - **Success**: Returns `text/calendar` ICS file
+- **Not modified**: 304 with no body when the request's `If-None-Match` matches the feed's `ETag`
 - **Missing token**: 400 Bad Request
 - **Invalid token**: 401 Unauthorized
 - **Error**: 500 Internal Server Error
