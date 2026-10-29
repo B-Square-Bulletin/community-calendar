@@ -80,3 +80,6 @@ playwright/.auth/
 
 .scratch
 .openchamber
+
+# deno writes this when the edge-function tests run; the repo does not pin it
+deno.lock
