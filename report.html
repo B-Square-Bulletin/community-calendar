@@ -213,10 +213,9 @@
     <script>
         // The archive branch is the source of truth (#244): report.py writes
         // report.json on every build and the workflow publishes it there, but
-        // never to main. Fetch it first so no stale copy can shadow it.
-        const REPORT_URLS = [
-            'https://raw.githubusercontent.com/B-Square-Bulletin/community-calendar/archive/report.json'
-        ];
+        // never to main, so a same-origin copy would go stale.
+        const REPORT_URL =
+            'https://raw.githubusercontent.com/B-Square-Bulletin/community-calendar/archive/report.json';
 
         async function loadConfig() {
             try {
@@ -245,17 +244,13 @@
 
         async function loadReport() {
             try {
-                let data = null;
-                for (const url of REPORT_URLS) {
-                    // raw.githubusercontent caches for ~5 min; bust it so a
-                    // just-finished run is visible without waiting.
-                    const response = await fetch(url + '?_=' + Date.now(), { cache: 'no-store' });
-                    if (!response.ok) continue;
-                    data = await response.json();
-                    break;
-                }
-                if (!data) throw new Error('Failed to load report');
-                renderReport(data);
+                // raw.githubusercontent caches for ~5 min; bust it so a
+                // just-finished run is visible without waiting.
+                const response = await fetch(REPORT_URL + '?_=' + Date.now(), {
+                    cache: 'no-store'
+                });
+                if (!response.ok) throw new Error('report fetch failed: ' + response.status);
+                renderReport(await response.json());
             } catch (e) {
                 document.getElementById('generated').textContent = 'Error: ' + e.message;
             }
