@@ -33,6 +33,11 @@ cities/*/combined.ics
 cities/*/ran_sources.txt
 cities/*/events.json
 cities/*/events.route.json
+# Rebuilt on every run and embedded in the report slice (#253).
+cities/*/geo_filtered.json
+
+# Published feeds live on the archive branch, never in main's history (#253).
+rss/
 
 # Auto-generated report (regenerate with scripts/snippet_report.py)
 docs/snippet-report.md
@@ -54,6 +59,14 @@ backups/
 # branch, so a tracked copy only ever goes stale (#244).
 /report.json
 xmlui/version.txt
+
+# The per-city slices are published to the archive branch, not committed:
+# report/<city>/index.html (the page) and *.runs.json (bounded scraper state)
+# stay tracked.
+report/*/report.json
+
+# CI truncates this before every build; the tracked copy only ever goes stale.
+build.log
 
 # Bram / Claude Code machine-local state (Setup-managed, never committed;
 # CLAUDE.md above is the same class)

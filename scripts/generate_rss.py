@@ -11,12 +11,13 @@ the route's ``duplicate_group`` and render the route's canonical
 or grouping. A grouped item lists its suppressed members as ``<category>``
 elements so the next build still knows every member UID.
 
-State model: the previous build's committed rss/<city>-full.xml lists every
-event UID known then — item GUIDs plus each grouped item's member categories —
-so "new" = current UIDs minus the previous known UIDs, and suppressed Group
-members are not re-announced. The previous -latest.xml supplies pubDates for
-items still in the window, so an item keeps its first-seen timestamp across
-builds. No storage beyond the feeds themselves.
+State model: the previous build's published rss/<city>-full.xml (restored from
+the archive branch before each run) lists every event UID known then — item
+GUIDs plus each grouped item's member categories — so "new" = current UIDs
+minus the previous known UIDs, and suppressed Group members are not
+re-announced. The previous -latest.xml supplies pubDates for items still in the
+window, so an item keeps its first-seen timestamp across builds. No storage
+beyond the feeds themselves.
 
 Usage (run after ics_to_json.py, before the metadata commit):
     python scripts/generate_rss.py <city>
@@ -35,6 +36,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
 SITE_BASE = os.environ.get("SITE_BASE", "https://b-square-bulletin.github.io/community-calendar")
+# The feeds publish to the archive branch (#253); main no longer carries them.
+FEED_BASE = os.environ.get(
+    "FEED_BASE",
+    "https://raw.githubusercontent.com/B-Square-Bulletin/community-calendar/archive/rss",
+)
 FULL_WINDOW_DAYS = 90
 LATEST_MAX_ITEMS = 100
 
@@ -255,7 +261,7 @@ def generate(city, events, outdir, state_dir, now):
             f"{city_title} Community Calendar — all upcoming events",
             f"Every event in the next {FULL_WINDOW_DAYS} days, regenerated daily.",
             app_link,
-            f"{SITE_BASE}/rss/{full_path.name}",
+            f"{FEED_BASE}/{full_path.name}",
             full_items,
         )
     )
@@ -294,7 +300,7 @@ def generate(city, events, outdir, state_dir, now):
             f"{city_title} Community Calendar — new events",
             "Events newly added to the calendar, most recent first.",
             app_link,
-            f"{SITE_BASE}/rss/{latest_path.name}",
+            f"{FEED_BASE}/{latest_path.name}",
             latest_items,
         )
     )
@@ -310,9 +316,9 @@ def main():
         "--state-dir",
         default=str(ROOT / "rss"),
         help="Where to read the previous build's feeds (the latest-feed "
-        "baseline). Defaults to the tracked rss/ directory, which is "
-        "CI-owned published state; local runs pass --outdir elsewhere "
-        "while still diffing against the real baseline here.",
+        "baseline). Defaults to the rss/ directory, which CI restores from "
+        "the archive branch before generating; local runs pass --outdir "
+        "elsewhere while still diffing against whatever baseline is here.",
     )
     args = parser.parse_args()
 

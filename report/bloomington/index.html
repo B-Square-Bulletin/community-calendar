@@ -211,9 +211,17 @@ function pre(obj) {
 }
 
 async function main() {
+  // The archive branch is the source of truth (#253): report.py writes
+  // report/<city>/report.json on every build and the workflow publishes it
+  // there, never to main, so a same-origin copy would go stale.
+  // This page is served at /report/<city>/index.html.
+  const city = location.pathname.split('/').at(-2);
+  const reportUrl =
+    'https://raw.githubusercontent.com/B-Square-Bulletin/community-calendar/archive/report/' +
+    `${city}/report.json`;
   let d;
   try {
-    d = await (await fetch('./report.json')).json();
+    d = await (await fetch(reportUrl, {cache: 'no-store'})).json();
   } catch (e) {
     document.getElementById('problems').textContent = 'Could not load report.json: ' + e;
     return;

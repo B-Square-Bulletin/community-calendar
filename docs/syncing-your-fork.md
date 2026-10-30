@@ -145,9 +145,9 @@ git add xmlui/version.txt cities.json cities/*/feeds.txt
 git commit
 ```
 
-### Point the health page at your fork
+### Point the health pages at your fork
 
-`report.html` fetches its data from a fixed `REPORT_URL` that names this repository. Change `REPORT_URL` in `report.html` to name your fork, or the page shows this repository's numbers under your domain.
+The root page `report.html` fetches its data from a fixed `REPORT_URL` that names this repository, and the per-city pages built from `scripts/report_page_template.html` (`report/<city>/index.html`) do the same. The RSS feeds advertise themselves at `FEED_BASE` in `scripts/generate_rss.py`. Change all three URLs to name your fork, or the pages and feeds show this repository's numbers under your domain.
 
 ### Step 2: Create the feeds table
 
