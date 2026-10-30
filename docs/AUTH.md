@@ -73,7 +73,7 @@ In Supabase dashboard: Authentication → URL Configuration:
 - `Main.xmlui` reads these into reactive XMLUI global vars (`global.authUser`, `global.authSession`)
 - All auth methods cause a page reload, so the globals are always current after sign-in
 - `SignInDialog.xmlui` presents all three options; magic link calls `window.signInWithEmail` which uses `sb.auth.signInWithOtp`
-- Sign-out clears localStorage and reloads
+- Sign-out clears the project's derived session key (`sb-<project-ref>-auth-token`, where the ref is the first hostname label of `SUPABASE_URL`) and reloads, so forks clear their own session rather than another project's
 
 ## Access control
 

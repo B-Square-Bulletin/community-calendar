@@ -17,16 +17,15 @@ func UpdateConfigJSON(repoRoot, supabaseURL, publishableKey string) error {
 }
 
 // UpdateHTMLFiles updates Supabase credentials in all HTML files.
-func UpdateHTMLFiles(repoRoot, supabaseURL, publishableKey, projectRef string) error {
+func UpdateHTMLFiles(repoRoot, supabaseURL, publishableKey string) error {
 	files := []string{
 		filepath.Join("xmlui", "index.html"),
 		filepath.Join("xmlui", "test.html"),
 		"report.html",
 	}
 	replacements := map[string]string{
-		"https://dzpdualvwspgqghrysyz.supabase.co":        supabaseURL,
-		"sb_publishable_NnzobdoFNU39fjs84UNq8Q_X45oiMG5":     publishableKey,
-		"sb-dzpdualvwspgqghrysyz-auth-token": "sb-" + projectRef + "-auth-token",
+		"https://dzpdualvwspgqghrysyz.supabase.co":       supabaseURL,
+		"sb_publishable_NnzobdoFNU39fjs84UNq8Q_X45oiMG5": publishableKey,
 	}
 	for _, f := range files {
 		path := filepath.Join(repoRoot, f)
