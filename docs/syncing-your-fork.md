@@ -114,12 +114,11 @@ What this does:
 
 ### Optional: keep your generated files during merges
 
-If your fork builds its own `report.json`, `xmlui/version.txt`, `cities.json`, and `cities/*/feeds.txt`, you probably do **not** want upstream's generated copies during sync. A custom merge driver lets Git keep your fork's versions automatically.
+If your fork builds its own `xmlui/version.txt`, `cities.json`, and `cities/*/feeds.txt`, you probably do **not** want upstream's generated copies during sync. A custom merge driver lets Git keep your fork's versions automatically.
 
 Add this to your fork's `.gitattributes`:
 
 ```gitattributes
-report.json merge=keepours
 xmlui/version.txt merge=keepours
 cities.json merge=keepours
 cities/*/feeds.txt merge=keepours
@@ -141,10 +140,14 @@ What this does:
 If you do not want to set up a merge driver, the manual equivalent after a merge is:
 
 ```bash
-git checkout --ours report.json xmlui/version.txt cities.json cities/*/feeds.txt
-git add report.json xmlui/version.txt cities.json cities/*/feeds.txt
+git checkout --ours xmlui/version.txt cities.json cities/*/feeds.txt
+git add xmlui/version.txt cities.json cities/*/feeds.txt
 git commit
 ```
+
+### Point the health page at your fork
+
+`report.html` fetches its data from a fixed `REPORT_URL` that names this repository. Change `REPORT_URL` in `report.html` to name your fork, or the page shows this repository's numbers under your domain.
 
 ### Step 2: Create the feeds table
 
