@@ -20,8 +20,10 @@ ARCHIVE_REPORT_URL = (
 def test_page_reads_report_json_from_the_archive_branch():
     page = (ROOT / "report.html").read_text()
     assert ARCHIVE_REPORT_URL in page
-    # A relative fetch would read the never-updated copy on main (#244).
-    assert "fetch('report.json'" not in page
+    # Any other quoted report.json fetches the never-updated copy on main
+    # (#244). Strip the good URL first so it cannot match itself.
+    leftover = page.replace(ARCHIVE_REPORT_URL, "")
+    assert "report.json'" not in leftover and 'report.json"' not in leftover
 
 
 def test_root_report_json_is_untracked():
