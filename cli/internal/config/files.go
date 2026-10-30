@@ -11,7 +11,7 @@ import (
 func UpdateConfigJSON(repoRoot, supabaseURL, publishableKey string) error {
 	path := filepath.Join(repoRoot, "xmlui", "config.json")
 	return replaceInFile(path, map[string]string{
-		"https://dzpdualvwspgqghrysyz.supabase.co":    supabaseURL,
+		"https://dzpdualvwspgqghrysyz.supabase.co":       supabaseURL,
 		"sb_publishable_NnzobdoFNU39fjs84UNq8Q_X45oiMG5": publishableKey,
 	})
 }

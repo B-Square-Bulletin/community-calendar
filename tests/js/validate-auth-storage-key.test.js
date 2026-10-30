@@ -5,12 +5,23 @@
 // WHY static: shell.js has no unit-testable seam — bootShell() needs the full
 // browser (document, fetch, IndexedDB, supabase global) and defines signOut
 // only after the boot fetches resolve. This is the repo's usual fast
-// file-content check for shipped JS (see validate-date-tabs.test.js).
+// file-content check for shipped JS (see validate-date-tabs.test.js). The
+// click path itself is checked in a browser (see the issue's manual step).
 'use strict';
+import fs from 'fs';
+import path from 'path';
 import { describe, it, expect } from 'vitest';
-import { readShipped } from './load-shipped.js';
+import { readShipped, ROOT } from './load-shipped.js';
 
-const shell = readShipped('shell.js');
+// Every shipped page, because the CLI used to rewrite this literal in these
+// same files: index.html and test.html under xmlui/, report.html at the root.
+const SHIPPED_PAGES = {
+  'shell.js': readShipped('shell.js'),
+  'index.html': readShipped('index.html'),
+  'test.html': readShipped('test.html'),
+  'report.html': fs.readFileSync(path.join(ROOT, '..', 'report.html'), 'utf8'),
+};
+const shell = SHIPPED_PAGES['shell.js'];
 
 // supabase-js defaultStorageKey is `sb-<ref>-auth-token`, where <ref> is the
 // first hostname label of the auth URL. Any quoted literal of that shape is a
@@ -24,12 +35,16 @@ function bodyOf(declaration) {
 }
 
 describe('#248 sign out clears the configured project session', () => {
-  it('ships no hardcoded auth storage key', () => {
-    expect(shell).not.toMatch(HARDCODED_KEY);
-  });
+  for (const [name, source] of Object.entries(SHIPPED_PAGES)) {
+    it(`ships no hardcoded auth storage key in ${name}`, () => {
+      expect(source).not.toMatch(HARDCODED_KEY);
+    });
+  }
 
-  it('derives the key from the configured project URL', () => {
-    expect(bodyOf('function authStorageKey')).toMatch(/new URL\(SUPABASE_URL\)/);
+  it('derives the key from the first hostname label, as supabase-js does', () => {
+    const body = bodyOf('function authStorageKey');
+    expect(body).toMatch(/new URL\(SUPABASE_URL\)/);
+    expect(body).toMatch(/\.hostname\.split\('\.'\)\[0\]/);
   });
 
   it('boot read and sign out address the same derived key', () => {
