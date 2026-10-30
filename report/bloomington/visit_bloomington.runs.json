@@ -1,11 +1,6 @@
 {
   "runs": [
     {
-      "date": "2026-10-01",
-      "fetched": 1899,
-      "emitted": 718
-    },
-    {
       "date": "2026-10-02",
       "fetched": 1885,
       "emitted": 705
@@ -149,6 +144,11 @@
       "date": "2026-10-29",
       "fetched": 1847,
       "emitted": 708
+    },
+    {
+      "date": "2026-10-29",
+      "fetched": 1886,
+      "emitted": 748
     }
   ]
 }
