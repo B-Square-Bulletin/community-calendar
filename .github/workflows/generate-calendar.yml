@@ -200,6 +200,34 @@ jobs:
           fi
         done
 
+    - name: Restore RSS baseline from archive
+      run: |
+        # rss/ is not tracked (#253): the previous build's feeds are the
+        # latest-feed baseline (known UIDs and first-seen pubDates), and they
+        # live on the archive branch. Losing them announces every event as
+        # new, so only "no such branch" (exit 2) may start without a baseline;
+        # every other lookup or restore failure fails the build.
+        lookup=0
+        git ls-remote --exit-code --heads origin archive >/dev/null || lookup=$?
+        if [ "$lookup" -eq 2 ]; then
+          echo "No archive branch yet; starting without an RSS baseline"
+        elif [ "$lookup" -ne 0 ]; then
+          echo "Could not look up the archive branch (ls-remote exit $lookup)" >&2
+          exit 1
+        else
+          git fetch --depth=1 origin archive
+        fi
+        mkdir -p rss
+        for f in $(git ls-tree --name-only origin/archive rss/ 2>/dev/null); do
+          # Truncation happens before git show runs, so a failed show must not
+          # leave an empty file behind as a baseline.
+          if ! git show "origin/archive:$f" > "$f" 2>/dev/null; then
+            rm -f "$f"
+            echo "Could not restore $f from the archive baseline" >&2
+            exit 1
+          fi
+        done
+
     - name: Generate RSS feeds
       if: github.event.inputs.regenerate_only != 'true'
       run: |
@@ -350,8 +378,10 @@ jobs:
 
         git add -f xmlui/config.json
         git add cities.json report.html cities/*/feeds.txt
+        # report/ here still carries the page and the bounded scraper run
+        # histories; report/<city>/report.json is ignored and publishes to the
+        # archive branch instead (#253).
         [ -d report ] && git add report/ || true
-        [ -d rss ] && git add rss/*.xml || true
         git diff --staged --quiet || (
           git commit -m "Auto-generate calendar metadata"
           # On conflict, our regenerated files always win
@@ -377,6 +407,9 @@ jobs:
           done
         done
         cp report.json "$ARCHIVE_DIR/" 2>/dev/null || true
+        # Untracked build artifacts (#253) publish here so main cannot grow.
+        cp -r report "$ARCHIVE_DIR/" 2>/dev/null || true
+        cp -r rss "$ARCHIVE_DIR/" 2>/dev/null || true
 
         # Clean working tree so we can switch branches
         git checkout -- . 2>/dev/null || true
@@ -405,14 +438,24 @@ jobs:
             done
             if [ "$skip" = "false" ]; then
               git checkout origin/archive -- "cities/$prev_city" 2>/dev/null || true
+              # The per-city health slice is published too (#253), so a scoped
+              # build must not drop the cities it did not rebuild.
+              git checkout origin/archive -- "report/$prev_city" 2>/dev/null || true
             fi
           done
         fi
 
-        cp -r "$ARCHIVE_DIR"/* .
+        # Copy contents, not the directories themselves: a scoped build has
+        # already restored the other cities' trees, and this must merge into
+        # them rather than nest a second level.
+        cp -r "$ARCHIVE_DIR"/. .
         rm -rf "$ARCHIVE_DIR"
 
-        git add cities/ report.json
+        # -f: the ignore rules must not apply here — the snapshot publishes
+        # exactly what main deliberately does not track (#253).
+        git add -f cities/ report.json
+        [ -d report ] && git add -f report/ || true
+        [ -d rss ] && git add -f rss/ || true
         TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M UTC")
         git commit -m "Build artifacts $TIMESTAMP" || echo "No changes to archive"
         git push --force origin archive-snapshot:archive

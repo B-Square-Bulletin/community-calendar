@@ -113,19 +113,22 @@ The audit report's per-city `execution` object records the mode
 (`db` / `feeds.txt-fallback` / `workflow`), the row count, and any
 fallback reason.
 
-**The tracked `rss/` directory is CI-owned published state** — GitHub
-Pages serves it as the live feed URLs, and each build's `-latest.xml`
-is diffed against the previously committed full feed. Local runs never
-write it: the runner sends RSS output to a per-run temp directory
-(recorded as `rss.outdir` in the audit report) while still reading the
-tracked feeds as the diff baseline via `generate_rss.py --state-dir`.
+**`rss/` is CI-owned published state, but not tracked** — each build
+publishes the feeds to the `archive` branch, which is where the live feed
+URLs point. A build's `-latest.xml` is diffed against the previous build's
+full feed, which CI restores from that branch before generating. Local
+runs never write the published feeds: the runner sends RSS output to a
+per-run temp directory (recorded as `rss.outdir` in the audit report) and
+diffs against whatever `rss/` baseline the checkout holds — restore it
+from the archive branch first to reproduce CI's "new event" set.
 
 **`cities/<city>/geo_filtered.json` is likewise CI-owned generated
-state** (committed by the nightly metadata step, read into the feed
-health report). Local runs write the sidecar to a per-run temp path
-(recorded as `combine.geo_report` in the audit report) via
-`combine_ics.py --geo-report`; the local feed report's geo section
-therefore reflects the tracked baseline, not the local run.
+state**, untracked. It is written next to the city's combined ICS on every
+build and embedded in the report slice the archive branch publishes. Local
+runs write the sidecar to a per-run temp path (recorded as
+`combine.geo_report` in the audit report) via `combine_ics.py
+--geo-report`; the local feed report's geo section therefore reflects
+whatever baseline the checkout holds, not the local run.
 
 ## What It Runs
 

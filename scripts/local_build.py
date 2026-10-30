@@ -746,8 +746,8 @@ def run_city(city: str, logger: BuildLogger, args: argparse.Namespace) -> dict:
                 }
             )
 
-        # The tracked cities/<city>/geo_filtered.json is CI-owned generated
-        # state (committed by the nightly metadata step, read by report.py).
+        # cities/<city>/geo_filtered.json is CI-owned generated state (written
+        # every build, published with the report slice, untracked — #253).
         # Local runs write the sidecar to scratch so audits keep the
         # curator-visible detail without dirtying the tree.
         geo_report_path = (
@@ -803,11 +803,12 @@ def run_city(city: str, logger: BuildLogger, args: argparse.Namespace) -> dict:
             "event_count": event_count,
         }
 
-        # The tracked rss/ directory is CI-owned published state (GitHub
-        # Pages serves it, and it is the latest-feed baseline). Local runs
-        # write RSS to a scratch dir — still diffing against the tracked
-        # baseline via generate_rss.py's default --state-dir — so audits
-        # measure RSS generation without dirtying the tree.
+        # rss/ is CI-owned published state on the archive branch (#253), and
+        # it is the latest-feed baseline CI restores before generating. Local
+        # runs write RSS to a scratch dir — still diffing against whatever
+        # rss/ baseline the checkout has, via generate_rss.py's default
+        # --state-dir — so audits measure RSS generation without dirtying the
+        # tree.
         rss_outdir = Path(tempfile.mkdtemp(prefix=f"local-build-rss-{city}-"))
         rss_result = run_command(
             logger,

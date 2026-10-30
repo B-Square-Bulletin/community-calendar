@@ -196,3 +196,18 @@ def test_representative_change_without_membership_change_is_not_reannounced(tmp_
     # rendered GUID without re-announcing the Group.
     latest = read_items(build2 / "bloomington-latest.xml")
     assert latest == []
+
+
+def test_feeds_advertise_the_archive_url_they_are_published_at(tmp_path):
+    # The feeds are no longer served from main (#253), so a reader subscribed
+    # through the feed's own rel="self" link must land on the archive copy.
+    generate("bloomington", [ev("uid-a", "Unrelated Concert")], tmp_path, tmp_path, NOW)
+
+    for name in ("bloomington-full.xml", "bloomington-latest.xml"):
+        root = ET.fromstring((tmp_path / name).read_text())
+        self_link = root.find("./channel/{http://www.w3.org/2005/Atom}link")
+        assert self_link is not None
+        assert self_link.get("href") == (
+            "https://raw.githubusercontent.com/B-Square-Bulletin/"
+            f"community-calendar/archive/rss/{name}"
+        )
