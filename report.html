@@ -244,11 +244,7 @@
 
         async function loadReport() {
             try {
-                // raw.githubusercontent caches for ~5 min; bust it so a
-                // just-finished run is visible without waiting.
-                const response = await fetch(REPORT_URL + '?_=' + Date.now(), {
-                    cache: 'no-store'
-                });
+                const response = await fetch(REPORT_URL, { cache: 'no-store' });
                 if (!response.ok) throw new Error('report fetch failed: ' + response.status);
                 renderReport(await response.json());
             } catch (e) {
