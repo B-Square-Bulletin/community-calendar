@@ -50,6 +50,8 @@ backups/
 # Generated at build/commit time — always diverges across forks.
 # Anchored to the root: the per-city slices under report/<city>/ ARE
 # committed (the workflow's git add report/ publishes them to Pages).
+# The root aggregate stays untracked: report.html reads it from the archive
+# branch, so a tracked copy only ever goes stale (#244).
 /report.json
 xmlui/version.txt
 

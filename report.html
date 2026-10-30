@@ -211,9 +211,11 @@
     </div>
 
     <script>
+        // The archive branch is the source of truth (#244): report.py writes
+        // report.json on every build and the workflow publishes it there, but
+        // never to main. Fetch it first so no stale copy can shadow it.
         const REPORT_URLS = [
-            'report.json',
-            'https://raw.githubusercontent.com/judell/community-calendar/archive/report.json'
+            'https://raw.githubusercontent.com/B-Square-Bulletin/community-calendar/archive/report.json'
         ];
 
         async function loadConfig() {
@@ -245,7 +247,9 @@
             try {
                 let data = null;
                 for (const url of REPORT_URLS) {
-                    const response = await fetch(url, { cache: 'no-store' });
+                    // raw.githubusercontent caches for ~5 min; bust it so a
+                    // just-finished run is visible without waiting.
+                    const response = await fetch(url + '?_=' + Date.now(), { cache: 'no-store' });
                     if (!response.ok) continue;
                     data = await response.json();
                     break;
