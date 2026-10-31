@@ -1,0 +1,61 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//The Bluebird//songkick.com//
+X-WR-CALNAME:The Bluebird
+X-WR-TIMEZONE:America/New_York
+BEGIN:VEVENT
+SUMMARY:The Middle Ground
+DTSTART:20261104T220000
+DTEND:20261104T220000
+UID:ed987d30362e2d309be1c0425179be2c@songkick.com
+DESCRIPTION:The Middle Ground at Bluebird at 2026-11-04T22:00:00-0500
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43490301-middle-ground-at-bluebird?ut
+ m_medium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Do Not Disturb
+DTSTART:20261105T220000
+DTEND:20261105T220000
+UID:61179e60ba66f0e8acb9f7e4eaae464c@songkick.com
+DESCRIPTION:Do Not Disturb at Bluebird at 2026-11-05T22:00:00-0500
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43490302-do-not-disturb-at-bluebird?u
+ tm_medium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Rod Tuffcurls\, The Benchpress
+DTSTART:20261113T200000
+DTEND:20261113T200000
+UID:4fbaccb6a630b973d2f74fdb4e9da920@songkick.com
+DESCRIPTION:Rod Tuffcurls at Bluebird at 2026-11-13T20:00:00-0500
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43471346-rod-tuffcurls-at-bluebird?ut
+ m_medium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Hank Ruff
+DTSTART:20261114T200000
+DTEND:20261114T200000
+UID:8abebed47e4afadd42133442a1fae638@songkick.com
+DESCRIPTION:Hank Ruff at Bluebird at 2026-11-14T20:00:00-0500
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43471347-hank-ruff-at-bluebird?utm_me
+ dium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Emo Nite
+DTSTART:20261120T210000
+DTEND:20261120T210000
+UID:07563ca323ad6b27652023b1a656b3a0@songkick.com
+DESCRIPTION:Emo Nite at Bluebird at 2026-11-20T21:00:00-0500
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43464144-emo-nite-at-bluebird?utm_med
+ ium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+END:VCALENDAR

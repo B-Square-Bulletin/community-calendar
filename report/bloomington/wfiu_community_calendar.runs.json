@@ -1,0 +1,274 @@
+{
+  "runs": [
+    {
+      "date": "2026-10-04",
+      "pages": 57,
+      "cards_fetched": 566,
+      "unique_detail_urls": 294,
+      "details_fetched": 294,
+      "postal_less": 6,
+      "emitted": 560
+    },
+    {
+      "date": "2026-10-05",
+      "pages": 57,
+      "cards_fetched": 561,
+      "unique_detail_urls": 292,
+      "details_fetched": 292,
+      "postal_less": 6,
+      "emitted": 557
+    },
+    {
+      "date": "2026-10-06",
+      "pages": 57,
+      "cards_fetched": 561,
+      "unique_detail_urls": 293,
+      "details_fetched": 293,
+      "postal_less": 6,
+      "emitted": 559
+    },
+    {
+      "date": "2026-10-07",
+      "pages": 56,
+      "cards_fetched": 552,
+      "unique_detail_urls": 288,
+      "details_fetched": 288,
+      "postal_less": 6,
+      "emitted": 550
+    },
+    {
+      "date": "2026-10-08",
+      "pages": 55,
+      "cards_fetched": 546,
+      "unique_detail_urls": 285,
+      "details_fetched": 285,
+      "postal_less": 6,
+      "emitted": 543
+    },
+    {
+      "date": "2026-10-09",
+      "pages": 55,
+      "cards_fetched": 543,
+      "unique_detail_urls": 287,
+      "details_fetched": 287,
+      "postal_less": 6,
+      "emitted": 539
+    },
+    {
+      "date": "2026-10-10",
+      "pages": 54,
+      "cards_fetched": 538,
+      "unique_detail_urls": 285,
+      "details_fetched": 285,
+      "postal_less": 6,
+      "emitted": 534
+    },
+    {
+      "date": "2026-10-11",
+      "pages": 53,
+      "cards_fetched": 525,
+      "unique_detail_urls": 278,
+      "details_fetched": 278,
+      "postal_less": 3,
+      "emitted": 521
+    },
+    {
+      "date": "2026-10-12",
+      "pages": 52,
+      "cards_fetched": 518,
+      "unique_detail_urls": 271,
+      "details_fetched": 271,
+      "postal_less": 2,
+      "emitted": 513
+    },
+    {
+      "date": "2026-10-13",
+      "pages": 52,
+      "cards_fetched": 517,
+      "unique_detail_urls": 275,
+      "details_fetched": 275,
+      "postal_less": 2,
+      "emitted": 515
+    },
+    {
+      "date": "2026-10-13",
+      "pages": 52,
+      "cards_fetched": 518,
+      "unique_detail_urls": 279,
+      "details_fetched": 279,
+      "postal_less": 2,
+      "emitted": 516
+    },
+    {
+      "date": "2026-10-14",
+      "pages": 52,
+      "cards_fetched": 513,
+      "unique_detail_urls": 276,
+      "details_fetched": 276,
+      "postal_less": 2,
+      "emitted": 509
+    },
+    {
+      "date": "2026-10-15",
+      "pages": 51,
+      "cards_fetched": 505,
+      "unique_detail_urls": 274,
+      "details_fetched": 274,
+      "postal_less": 2,
+      "emitted": 502
+    },
+    {
+      "date": "2026-10-16",
+      "pages": 50,
+      "cards_fetched": 493,
+      "unique_detail_urls": 268,
+      "details_fetched": 268,
+      "postal_less": 2,
+      "emitted": 491
+    },
+    {
+      "date": "2026-10-17",
+      "pages": 48,
+      "cards_fetched": 478,
+      "unique_detail_urls": 260,
+      "details_fetched": 260,
+      "postal_less": 1,
+      "emitted": 475
+    },
+    {
+      "date": "2026-10-18",
+      "pages": 47,
+      "cards_fetched": 470,
+      "unique_detail_urls": 254,
+      "details_fetched": 254,
+      "postal_less": 1,
+      "emitted": 465
+    },
+    {
+      "date": "2026-10-19",
+      "pages": 48,
+      "cards_fetched": 478,
+      "unique_detail_urls": 266,
+      "details_fetched": 266,
+      "postal_less": 1,
+      "emitted": 474
+    },
+    {
+      "date": "2026-10-20",
+      "pages": 47,
+      "cards_fetched": 463,
+      "unique_detail_urls": 256,
+      "details_fetched": 256,
+      "postal_less": 1,
+      "emitted": 459
+    },
+    {
+      "date": "2026-10-21",
+      "pages": 46,
+      "cards_fetched": 453,
+      "unique_detail_urls": 253,
+      "details_fetched": 253,
+      "postal_less": 1,
+      "emitted": 450
+    },
+    {
+      "date": "2026-10-22",
+      "pages": 44,
+      "cards_fetched": 440,
+      "unique_detail_urls": 247,
+      "details_fetched": 247,
+      "postal_less": 1,
+      "emitted": 435
+    },
+    {
+      "date": "2026-10-23",
+      "pages": 43,
+      "cards_fetched": 430,
+      "unique_detail_urls": 241,
+      "details_fetched": 241,
+      "postal_less": 1,
+      "emitted": 425
+    },
+    {
+      "date": "2026-10-24",
+      "pages": 42,
+      "cards_fetched": 415,
+      "unique_detail_urls": 231,
+      "details_fetched": 231,
+      "postal_less": 1,
+      "emitted": 410
+    },
+    {
+      "date": "2026-10-24",
+      "pages": 41,
+      "cards_fetched": 408,
+      "unique_detail_urls": 230,
+      "details_fetched": 230,
+      "postal_less": 1,
+      "emitted": 403
+    },
+    {
+      "date": "2026-10-25",
+      "pages": 40,
+      "cards_fetched": 394,
+      "unique_detail_urls": 222,
+      "details_fetched": 222,
+      "postal_less": 1,
+      "emitted": 391
+    },
+    {
+      "date": "2026-10-26",
+      "pages": 42,
+      "cards_fetched": 411,
+      "unique_detail_urls": 234,
+      "details_fetched": 234,
+      "postal_less": 1,
+      "emitted": 406
+    },
+    {
+      "date": "2026-10-28",
+      "pages": 40,
+      "cards_fetched": 399,
+      "unique_detail_urls": 228,
+      "details_fetched": 227,
+      "postal_less": 2,
+      "emitted": 392
+    },
+    {
+      "date": "2026-10-29",
+      "pages": 40,
+      "cards_fetched": 396,
+      "unique_detail_urls": 231,
+      "details_fetched": 231,
+      "postal_less": 1,
+      "emitted": 389
+    },
+    {
+      "date": "2026-10-29",
+      "pages": 40,
+      "cards_fetched": 392,
+      "unique_detail_urls": 232,
+      "details_fetched": 232,
+      "postal_less": 1,
+      "emitted": 386
+    },
+    {
+      "date": "2026-10-30",
+      "pages": 39,
+      "cards_fetched": 387,
+      "unique_detail_urls": 230,
+      "details_fetched": 230,
+      "postal_less": 1,
+      "emitted": 382
+    },
+    {
+      "date": "2026-10-31",
+      "pages": 38,
+      "cards_fetched": 376,
+      "unique_detail_urls": 226,
+      "details_fetched": 226,
+      "postal_less": 1,
+      "emitted": 372
+    }
+  ]
+}

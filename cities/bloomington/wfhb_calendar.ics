@@ -1,0 +1,2590 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//WFHB Community Calendar//wfhb.org//
+X-WR-CALNAME:WFHB Community Calendar
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Bedford Farmers Market
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T080000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T120000
+UID:e2a64e0cb2d98d0423b16480439f2247@wfhb.org
+DESCRIPTION:
+LOCATION:Lawrence County Courthouse Square\, 1005 15th St\, Bedford
+URL:https://wfhb.org/events/bedford-farmers-market/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington Community Farmers Market\, with entertainment by Emma 
+ Richards (sets at 9:15am and at 10:45am)
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T090000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T123000
+UID:ccfc2085983647cac576fd6c8596c719@wfhb.org
+DESCRIPTION:Today is the last Market happening at Showers Common for this 
+ year. Join us for three Saturdays in November\, November 7\, 14\, and 21\,
+  at the Switchyard Park Pavilion for our indoor Market.
+LOCATION:Showers Common\, 401 N. Morton St\,  Bloomington\, IN
+URL:https://wfhb.org/events/bloomington-community-farmers-market-with-ente
+ rtainment-by-emma-richards-sets-at-915am-and-at-1045am/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Craft Show In The Village
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T100000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T160000
+UID:c81165c54faf1e03b849200734ad9ccb@wfhb.org
+DESCRIPTION:This craft show has a wide variety of vendors with items of al
+ l kinds. Jewelry\, candles\, clothing\, flowers\, wreaths\, quilts\, subli
+ mation items\, hats\, body butters\, soaps\, etc…  The Village Craft Sh
+ ow is a fundraiser for the Friends of Spring Mill State Park\, who are ded
+ icated to conserving the natural and cultural heritage of Spring Mill Stat
+ e Park.
+LOCATION:Spring Mill State Park\, 3333 Hwy 60 East\,  Mitchell\,  IN
+URL:https://wfhb.org/events/craft-show-in-the-village/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:People's Spooky Ooky Halloween Party
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T100000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T140000
+UID:7c7db08fc60437c379601a9d2425fe08@wfhb.org
+DESCRIPTION:Spooky Artisan Vendors\, hot food vendors\, Halloween games\, 
+ Hot Cider & Hot Cocoa\, Halloween candy & More!!! We will have Halloween t
+ reats and non-candy gifts for the kids! Plus food from Making It 2gether L
+ LC and Midnight Mariposa Custom Baked Goods & Pastries\, not to mention sp
+ ooky items from Jada Bee’s Black Witchery\, Chubby Bubby farms and other
+  local artisans.
+LOCATION:First United Church\, 2420 East Third Street\,  Bloomington\, IN
+URL:https://wfhb.org/events/peoples-spooky-ooky-halloween-party/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:R.L. Stine’s Goosebumps The Musical: Phantom of the Auditorium\,
+  shows at 11 & 2
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T110000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T130000
+UID:93044db3a8888e84f215783a7f2060c4@wfhb.org
+DESCRIPTION:When Brooke and Zeke are cast in their school’s spooky new p
+ lay\, The Phantom \, they start to wonder if the show is actually cursed. 
+ As strange messages appear and rehearsals are disrupted by a mysterious ma
+ sked figure\, they must uncover the truth: is it all an elaborate prank…
+  or is their theater truly haunted? Full of catchy songs\, laugh-out-loud 
+ moments\, and just the right amount of Halloween-season chills\, this musi
+ cal mystery is perfect for kids\, tweens\, and grown-ups who remember read
+ ing by flashlight. Fun for all ages!
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/r-l-stines-goosebumps-the-musical-phantom-of-t
+ he-auditorium-shows-at-11-2/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Saturday Crafternoon: Bats\, Brooms\, and Gourds!
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T110000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T140000
+UID:b3ff907b980647963765297b1182677d@wfhb.org
+DESCRIPTION:We invite you to learn about the folklore of brooms and bats a
+ nd to check out the different types of gourds grown on the Wylie property.
+  You can also take home a packet of seeds to grow next year!
+LOCATION:Wylie House Museum\, 307 E. 2nd St.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/saturday-crafternoon-bats-brooms-and-gourds/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:String Academy Cello Halloween Concert
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T110000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T123000
+UID:b5ee52d58590b6a78c007545b57d2d1f@wfhb.org
+DESCRIPTION:
+LOCATION:Recital Hall\, on the ground floor of Merrill Hall\, 1201 E. Thir
+ d Street\, Bloomington
+URL:https://wfhb.org/events/string-academy-cello-halloween-concert/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Tasteful Oddities: Community Member Collection Show-and-Tell (ages
+  18+)
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T111500
+DTEND;TZID=America/Indiana/Indianapolis:20261031T131500
+UID:2655bde49cbbc98ec8347f702be80359@wfhb.org
+DESCRIPTION:This Halloween\, Brown County artist Sidney Bolam will give vi
+ sitors an inside look at her personal collection of Victorian mourning jew
+ elry and artifacts.
+LOCATION:T.C. Steele State Historic Site\, 4220 T.C. Steele Rd.\,  Nashvil
+ le\,  IN
+URL:https://wfhb.org/events/tasteful-oddities-community-member-collection-
+ show-and-tell-ages-18/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington Philosophy Club
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T120000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T141500
+UID:6630e2cecda08b8fe6d6ccf5675630e1@wfhb.org
+DESCRIPTION:
+LOCATION:Monroe County Public Library\, Meeting Room 214\, 303 E. Kirkwood
+  Ave.\, Bloomington
+URL:https://wfhb.org/events/bloomington-philosophy-club-8/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Dungeons & Dragons (Group C - Adults)
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T120000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T140000
+UID:367d65bf34caab77e0784430ae9cb331@wfhb.org
+DESCRIPTION:
+LOCATION:Owen County Public Library · Teen Room\, 10 S. Montgomery Street
+ \, Spencer
+URL:https://wfhb.org/events/dungeons-dragons-group-c-adults/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Open Day at the Hinkle-Garton Farmstead
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T130000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T160000
+UID:dfb7be2a4b5afdbf677875432e06a358@wfhb.org
+DESCRIPTION:Bloomington Restorations\, Inc. invites you to the October Mus
+ eum Open Day\, “A Fall Gathering.” Volunteers will give indoor tours o
+ f the Farmhouse\, which will be beautifully decorated for fall and harvest
+ . Live music in the Parlor will begin with afternoon performances by instr
+ umentalists from the Bridges Musical Arts Youth Organization. Cloud 7 will
+  perform at 3 p.m.
+LOCATION:Hinkle-Garton Farmstead\, 2920 E. 10th St.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/open-day-at-the-hinkle-garton-farmstead-2/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gene Fugate
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T140000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T170000
+UID:ab04bf7bf43580cda0cfb3dd805726d4@wfhb.org
+DESCRIPTION:
+LOCATION:Moontown Brewing Co.\, 60 Molly Lane\, Nashville
+URL:https://wfhb.org/events/gene-fugate-14/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:STEM Saturday
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T150000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T160000
+UID:26afc583e2bb978603173d6e282612db@wfhb.org
+DESCRIPTION:STEM Saturday invites kids and caregivers to explore science\,
+  technology\, engineering\, and math through hands-on fun that sparks curi
+ osity and creativity—turning learning into a true adventure. Designed fo
+ r ages 5 and up and their caregivers.
+LOCATION:WonderLab\, 308 West 4th Street\,  Bloomington\, IN
+URL:https://wfhb.org/events/stem-saturday-2/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Karaoke
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T210000
+UID:ab2f5b3d53843abef3be4aea83bba941@wfhb.org
+DESCRIPTION:
+LOCATION:Ferguson House Beer Garden\, 78 Franklin St.\, Nashville
+URL:https://wfhb.org/events/karaoke-23/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Uka-Aliens
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T210000
+UID:55f1fd7bfef6c6ba0acf6b5e065e80f3@wfhb.org
+DESCRIPTION:
+LOCATION:Country Heritage Winery\, 225 S Van Buren St\, Nashville
+URL:https://wfhb.org/events/uka-aliens-8/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Zion Crossroads
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T210000
+UID:f4df796b6e3e5c3dabd545edb42284a8@wfhb.org
+DESCRIPTION:
+LOCATION:Hard Truth On the Rocks\, 418 Old St. Rd 46\, Nashville
+URL:https://wfhb.org/events/zion-crossroads-5/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:The Exorcist (1973)
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T210000
+UID:a4f3c414a56e4c553947c881ace17dfe@wfhb.org
+DESCRIPTION:
+LOCATION:Buskirk-Chumley Theater\, 114 East Kirkwood Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/the-exorcist-1973/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Two Tales of Terror: J-Horror Unleashed with Best Wishes to All + 
+ Gozu
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T210000
+UID:d554e6d86161facf30b46184528a40b1@wfhb.org
+DESCRIPTION:A double dose of J-horror for Halloween night with a new entry
+  into the genre you won’t soon forget\, followed by one of Takashi Miike
+ ’s surreal and disturbing masterpieces.
+LOCATION:IU Cinema\, 1213 E. Seventh Street \, Bloomington
+URL:https://wfhb.org/events/two-tales-of-terror-j-horror-unleashed-with-be
+ st-wishes-to-all-gozu/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Karaoke
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T213000
+UID:085a3a0555c21b42a9d08989bf9c1a4c@wfhb.org
+DESCRIPTION:
+LOCATION:Porthole Inn\, 8939 E Southshore Drive\, Unionville
+URL:https://wfhb.org/events/karaoke-21/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Mike's Band
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T213000
+UID:3fc151967ca33a5467e63e882b4d8346@wfhb.org
+DESCRIPTION:Doors at 6pm
+LOCATION:Mike's Music & Dance Barn\, 2277 IN SR 46 W.\,  Nashville\,  IN
+URL:https://wfhb.org/events/mikes-band/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Annual Halloween Cover Show: A Benefit for The Middle Way House
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T220000
+UID:74aadd5e5dff470066cd687200c3f184@wfhb.org
+DESCRIPTION:
+LOCATION:The Blockhouse Bar\, 205 South College\,  Bloomington\, IN
+URL:https://wfhb.org/events/annual-halloween-cover-show-a-benefit-for-the-
+ middle-way-house/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Forbidden Hollows Haunted Farm
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T220000
+UID:924b958cc603acd6bf8313f808e6bb58@wfhb.org
+DESCRIPTION:
+LOCATION:Forbidden Hollows Haunted Farm\, 639 Anderson Rd\, Bedford
+URL:https://wfhb.org/events/forbidden-hollows-haunted-farm/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Homemade Jam
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T230000
+UID:073d768a42c182e6409bbc4d133c4fde@wfhb.org
+DESCRIPTION:
+LOCATION:Brown County Inn\, 51 State Road 46 E\,  Nashville\, IN
+URL:https://wfhb.org/events/homemade-jam-12/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Jukebox Luke w/ The Boys & The Brit
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T220000
+UID:3c2858d7a524821f72828f954f1cd54d@wfhb.org
+DESCRIPTION:
+LOCATION:Bluebird Night Club\, 216 N. Walnut St.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/jukebox-luke-w-the-boys-the-brit/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Open Jukebox Night
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T230000
+UID:6281a5f11e8b46b5045fb263ebfc106d@wfhb.org
+DESCRIPTION:
+LOCATION:19th Hole Sports Bar\, 2359 IN-46 East\, Nashville
+URL:https://wfhb.org/events/open-jukebox-night/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Revolver
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T220000
+UID:9cdadfda59a3e3128a7ef9b7ff1948a5@wfhb.org
+DESCRIPTION:
+LOCATION:Shortys Bar & Grill\, 1300 7th St\, Bedford
+URL:https://wfhb.org/events/revolver-2/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Spooky Night\, with entertainment by Michael McCartney
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T230000
+UID:13268b167603c5695ee5466eae9a6433@wfhb.org
+DESCRIPTION:
+LOCATION:1915 Steakhouse\, 290 East Morgan Street\, Martinsville
+URL:https://wfhb.org/events/spooky-night-with-entertainment-by-michael-mcc
+ artney/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Halloween Costume Party w/Uncle Johnnie's Karaoke
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T210000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T230000
+UID:ea29b4c2a8c7d67ce4356348275b76ca@wfhb.org
+DESCRIPTION:9pm-1am
+LOCATION:Rusty Anchor Lakeside Saloon\, 8660 S Fairfax Rd\, Bloomington
+URL:https://wfhb.org/events/halloween-costume-party-w-uncle-johnnies-karao
+ ke/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Halloween Dance Party
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T210000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T230000
+UID:dad1773a0fb5911429643778b4216fea@wfhb.org
+DESCRIPTION:Costume contest at 10pm DJ KYROBPAQ and DJ BRO-FI playing all 
+ night BACK 2 BACK.
+LOCATION:The Back Door\, 207 S. College Ave.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/halloween-dance-party/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Richard O'Brien's The Rocky Horror Show
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T223000
+DTEND;TZID=America/Indiana/Indianapolis:20261101T003000
+UID:7de9212ed788a93de0cf4161965bf461@wfhb.org
+DESCRIPTION:Book\, Music\, and Lyrics by Richard O’Brien Directed by Nat
+ e Sayatovich Musical Direction by Ray Fellman Choreography by DJ Gray In t
+ his cult classic\, sweethearts Brad and Janet\, stuck with a flat tire dur
+ ing a storm\, discover the eerie mansion of Dr. Frank-N-Furter. As their i
+ nnocence is lost\, Brad and Janet meet a houseful of wild characters\, inc
+ luding a rocking biker and a creepy butler. Elaborate dance numbers and ro
+ ck songs reveal Frank-N-Furter’s latest creation: a muscular man named 
+ “Rocky.”
+LOCATION:Ruth N. Halls Theatre\, 275 N Eagleson Ave.\, Bloomington
+URL:https://wfhb.org/events/richard-obriens-the-rocky-horror-show-4/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Craft Show In The Village
+DTSTART;TZID=America/Indiana/Indianapolis:20261101T100000
+DTEND;TZID=America/Indiana/Indianapolis:20261101T160000
+UID:7028c62e0fba909c64fbc03de42bf2d7@wfhb.org
+DESCRIPTION:This craft show has a wide variety of vendors with items of al
+ l kinds. Jewelry\, candles\, clothing\, flowers\, wreaths\, quilts\, subli
+ mation items\, hats\, body butters\, soaps\, etc…  The Village Craft Sh
+ ow is a fundraiser for the Friends of Spring Mill State Park\, who are ded
+ icated to conserving the natural and cultural heritage of Spring Mill Stat
+ e Park.
+LOCATION:Spring Mill State Park\, 3333 Hwy 60 East\,  Mitchell\,  IN
+URL:https://wfhb.org/events/craft-show-in-the-village/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gene Fugate
+DTSTART;TZID=America/Indiana/Indianapolis:20261101T130000
+DTEND;TZID=America/Indiana/Indianapolis:20261101T160000
+UID:e93e6ba6f2a5926ae5f558ef491b1497@wfhb.org
+DESCRIPTION:
+LOCATION:Ferguson House Beer Garden\, 78 Franklin St.\, Nashville
+URL:https://wfhb.org/events/gene-fugate-13/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Indiana Falun Dafa Association - Group Meditation
+DTSTART;TZID=America/Indiana/Indianapolis:20261101T130000
+DTEND;TZID=America/Indiana/Indianapolis:20261101T171500
+UID:ccd8a13c2795c51433d3805445b2bb8f@wfhb.org
+DESCRIPTION:
+LOCATION:Auditorium\, Monroe Coumnty Public Library\, 303 E. Kirkwood Ave.
+ \, Bloomington
+URL:https://wfhb.org/events/indiana-falun-dafa-association-group-meditatio
+ n/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:R.L. Stine’s Goosebumps The Musical: Phantom of the Auditorium\,
+  shows at 1 & 4
+DTSTART;TZID=America/Indiana/Indianapolis:20261101T130000
+DTEND;TZID=America/Indiana/Indianapolis:20261101T150000
+UID:a72bb9c7b948d4a66c2b2576d52ae854@wfhb.org
+DESCRIPTION:When Brooke and Zeke are cast in their school’s spooky new p
+ lay\, The Phantom \, they start to wonder if the show is actually cursed. 
+ As strange messages appear and rehearsals are disrupted by a mysterious ma
+ sked figure\, they must uncover the truth: is it all an elaborate prank…
+  or is their theater truly haunted? Full of catchy songs\, laugh-out-loud 
+ moments\, and just the right amount of Halloween-season chills\, this musi
+ cal mystery is perfect for kids\, tweens\, and grown-ups who remember read
+ ing by flashlight. Fun for all ages!
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/r-l-stines-goosebumps-the-musical-phantom-of-t
+ he-auditorium-shows-at-1-4/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:How Secure are the Election Results?
+DTSTART;TZID=America/Indiana/Indianapolis:20261101T140000
+DTEND;TZID=America/Indiana/Indianapolis:20261101T153000
+UID:9367b04ac1ee90fca9e26b32e51539d7@wfhb.org
+DESCRIPTION:Presented by Professor Emerita Marjorie Hershey for the Travel
+ ing University
+LOCATION:Unitarian Universalist Church\, 2120 North Fee Lane\,  Bloomingto
+ n\,  IN
+URL:https://wfhb.org/events/how-secure-are-the-election-results/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Concert Orchestra and IU Children’s Choir – JoAnn Falletta\, g
+ uest conductor\; Brent Gault\, chirldren’s chorus master
+DTSTART;TZID=America/Indiana/Indianapolis:20261101T150000
+DTEND;TZID=America/Indiana/Indianapolis:20261101T170000
+UID:a5a68283e36fc4dab961f110017dbd29@wfhb.org
+DESCRIPTION:Repertoire Danny Elfman: Wunderkammer (2022) MacDowell: Piano 
+ Concerto No. 2 in D Minor\, Op. 23 (1886) Barber: Symphony No. 1 (in One M
+ ovement)\, Op. 9 (1936/43)
+LOCATION:IU Musical Arts Center\, 101 North Eagleson Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/concert-orchestra-and-iu-childrens-choir-joann
+ -falletta-guest-conductor-brent-gault-chirldrens-chorus-master/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Film: Don’t Bother to Knock
+DTSTART;TZID=America/Indiana/Indianapolis:20261101T160000
+DTEND;TZID=America/Indiana/Indianapolis:20261101T180000
+UID:b787a863fc253a050bc7939b0a23e49b@wfhb.org
+DESCRIPTION:One of the best Marilyn Monroe films you never knew existed\, 
+ this taut thriller about one woman’s dangerous unraveling exemplifies wh
+ at made Monroe such a heartbreaking\, sensitive performer. Year released: 
+ 1952
+LOCATION:IU Cinema\, 1213 E. Seventh Street \, Bloomington
+URL:https://wfhb.org/events/film-dont-bother-to-knock/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Meet Me at the Metz Carillon Series
+DTSTART;TZID=America/Indiana/Indianapolis:20261101T160000
+DTEND;TZID=America/Indiana/Indianapolis:20261101T170000
+UID:9efde2e7b59a2e232ac6be88f3afdcfe@wfhb.org
+DESCRIPTION:Presented by The Jacobs School of Music
+LOCATION:IU Arboretum Gazebo\, East 10th Street on the IU Campus\, Bloomin
+ gton\, IN
+URL:https://wfhb.org/events/meet-me-at-the-metz-carillon-series/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:The Writers Guild  First Sunday Prose Reading
+DTSTART;TZID=America/Indiana/Indianapolis:20261101T160000
+DTEND;TZID=America/Indiana/Indianapolis:20261101T173000
+UID:36937135a17f9c8812aec4a544638a0e@wfhb.org
+DESCRIPTION:The November reading will feature writers Shana Ritter and Ang
+ ela Herrmann.  Some parking in the back!
+LOCATION:Juniper Art Gallery\, 615 W. Kirkwood Ave.\,  Bloomington\, IN
+URL:https://wfhb.org/events/the-writers-guild-first-sunday-prose-reading/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:We the People
+DTSTART;TZID=America/Indiana/Indianapolis:20261101T170000
+DTEND;TZID=America/Indiana/Indianapolis:20261101T190000
+UID:a43205ae77b37bcf773cd0f78f7414ae@wfhb.org
+DESCRIPTION:Presented by The Buskirk-Chumley Theater and the Bloomington S
+ ymphony Orchestra
+LOCATION:Buskirk-Chumley Theater\, 114 East Kirkwood Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/we-the-people/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Film: Ran
+DTSTART;TZID=America/Indiana/Indianapolis:20261101T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261101T210000
+UID:2087a816e50c1fdbf11068b42d750d5e@wfhb.org
+DESCRIPTION:Kurosawa’s sprawling\, monumental take on King Lear is requi
+ red viewing for fans of westerns\, war movies\, or films in general.
+LOCATION:IU Cinema\, 1213 E. Seventh Street \, Bloomington
+URL:https://wfhb.org/events/film-ran/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:THELMA & THE SLEAZE\, Bleeder\, Rearview Rhonda
+DTSTART;TZID=America/Indiana/Indianapolis:20261101T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261101T213000
+UID:79b4818eba606d75aa93119ed6fdb35b@wfhb.org
+DESCRIPTION:
+LOCATION:The Blockhouse Bar\, 205 South College\,  Bloomington\, IN
+URL:https://wfhb.org/events/thelma-the-sleaze-bleeder-rearview-rhonda/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Country Line Dancing with Billy
+DTSTART;TZID=America/Indiana/Indianapolis:20261102T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261102T203000
+UID:5b51bab8f97725c0e61840449cf5969f@wfhb.org
+DESCRIPTION:Doors open at 6pm. All ages.
+LOCATION:Mike's Music & Dance Barn\, 2277 IN SR 46 W.\,  Nashville\,  IN
+URL:https://wfhb.org/events/country-line-dancing-with-billy/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Tom Walsh Jazz Ensemble
+DTSTART;TZID=America/Indiana/Indianapolis:20261102T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261102T213000
+UID:7f7dee3f6dd5e28113a7c46263063c58@wfhb.org
+DESCRIPTION:
+LOCATION:IU Musical Arts Center\, 101 North Eagleson Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/tom-walsh-jazz-ensemble/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Trivia Night w/Bloomington Pub Quiz!
+DTSTART;TZID=America/Indiana/Indianapolis:20261102T203000
+DTEND;TZID=America/Indiana/Indianapolis:20261102T223000
+UID:964df21648fd44d01d458412f07ef4a5@wfhb.org
+DESCRIPTION:Hey smart people!! Trivia Nights are now your favorite thing t
+ o do on Mondays! We promise to keep the sports to a minimum!
+LOCATION:The Back Door\, 207 S. College Ave.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/trivia-night-w-bloomington-pub-quiz-3/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Piano Concerto Competition – Gershwin: “Rhapsody in Blue”
+DTSTART;TZID=America/Indiana/Indianapolis:20261103T140000
+DTEND;TZID=America/Indiana/Indianapolis:20261103T180000
+UID:c6aa99ddf60ace6ccf40dda1d2344b52@wfhb.org
+DESCRIPTION:
+LOCATION:Auer Hall\, on the second floor of the Simon Music Center\, 200 S
+ . Eagleson Ave.\, Bloomington
+URL:https://wfhb.org/events/piano-concerto-competition-gershwin-rhapsody-i
+ n-blue/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Muddy Boots Dart Club
+DTSTART;TZID=America/Indiana/Indianapolis:20261103T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261103T220000
+UID:c439bdfc0d412e29d1e16d701e4c8cb8@wfhb.org
+DESCRIPTION:We are a steel tip dart & social club. You do not have to be a
+  member to play. All are welcome.
+LOCATION:Mike's Music & Dance Barn\, 2277 IN SR 46 W.\,  Nashville\,  IN
+URL:https://wfhb.org/events/muddy-boots-dart-club/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Open Mic
+DTSTART;TZID=America/Indiana/Indianapolis:20261103T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261103T203000
+UID:1ab04589d27201d2f2cb718e3bab1136@wfhb.org
+DESCRIPTION:
+LOCATION:The Blockhouse Bar\, 205 South College\,  Bloomington\, IN
+URL:https://wfhb.org/events/open-mic-14/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Rainbow Elders First Wednesday Breakfast:
+DTSTART;TZID=America/Indiana/Indianapolis:20261104T100000
+DTEND;TZID=America/Indiana/Indianapolis:20261104T120000
+UID:5e7c6e9c401f30713ede0613200b7252@wfhb.org
+DESCRIPTION:
+LOCATION:Cloverleaf West\, 4023 W. Third St.\,  Bloomington\, IN
+URL:https://wfhb.org/events/rainbow-elders-first-wednesday-breakfast-6/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Open Mic
+DTSTART;TZID=America/Indiana/Indianapolis:20261104T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261104T200000
+UID:fa86cd5d66f9e5814bae9d981d8cfd63@wfhb.org
+DESCRIPTION:
+LOCATION:Brown County Inn\, 51 State Road 46 E\,  Nashville\, IN
+URL:https://wfhb.org/events/open-mic-3-2026-11-04/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington Pub Quiz (21+)
+DTSTART;TZID=America/Indiana/Indianapolis:20261104T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261104T200000
+UID:3b7e2c1fee2a0fb96d749282dc0032b2@wfhb.org
+DESCRIPTION:
+LOCATION:Cardinal Spirits\, 922 S. Morton St.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/bloomington-pub-quiz-21/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Guest Band: The Hammer and The Hatchet
+DTSTART;TZID=America/Indiana/Indianapolis:20261104T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261104T210000
+UID:d0e5efaa07eb97c8b41baf28f8470af4@wfhb.org
+DESCRIPTION:
+LOCATION:Bloomington Farm Stop\, 902 W. Kirkwood Ave.\, Bloomington
+URL:https://wfhb.org/events/guest-band-the-hammer-and-the-hatchet/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Open Mic\, hosted by Travers Marks
+DTSTART;TZID=America/Indiana/Indianapolis:20261104T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261104T220000
+UID:811709489fd554c138ff922de6176d17@wfhb.org
+DESCRIPTION:
+LOCATION:Max's Place\, 1280 N. College Ave. Suite 3\,  Bloomington\, IN
+URL:https://wfhb.org/events/open-mic-hosted-by-travers-marks-2-2026-11-04/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Trivia Night with Bloomington Pub Quiz
+DTSTART;TZID=America/Indiana/Indianapolis:20261104T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261104T220000
+UID:3c4a2c66d52336daf8ed9206a2ca691a@wfhb.org
+DESCRIPTION:Trivia Night upstairs at Lennie’s\, hosted by Bloomington Pu
+ b Quiz Every Wednesday Seating at 8pm\, starts at 8:30pm
+LOCATION:Lennie's\, 514 East Kirkwood Avenue\, Bloomington\, IN
+URL:https://wfhb.org/events/trivia-night-with-bloomington-pub-quiz/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Duo Cortona: Rachel Calloway\, mezzo-soprano\; Ari Streisfeld\, vi
+ olin
+DTSTART;TZID=America/Indiana/Indianapolis:20261105T170000
+DTEND;TZID=America/Indiana/Indianapolis:20261105T183000
+UID:022553a31ffc4739927635e8d0ba15ce@wfhb.org
+DESCRIPTION:
+LOCATION:Ford-Crawford Hall (IU)\, 200 S. Jordan Ave.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/duo-cortona-rachel-calloway-mezzo-soprano-ari-
+ streisfeld-violin/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Public Lecture: Resonances of the Declaration of Independence in A
+ merican History
+DTSTART;TZID=America/Indiana/Indianapolis:20261105T173000
+DTEND;TZID=America/Indiana/Indianapolis:20261105T193000
+UID:0bda474aafe4b738586c915b169f2868@wfhb.org
+DESCRIPTION:Presented by  IU Associate Professor of History Konstantin Di
+ erks. Sponsored by The Lilly Library. Before and after the talk\, you are 
+ invited to view the Declaration of Independence exhibitions: The Motives\,
+  The Moment and The Signers .
+LOCATION:The Lilly Library\, 1200 E. 7th St.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/public-lecture-resonances-of-the-declaration-o
+ f-independence-in-american-history/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bi-weekly jazz
+DTSTART;TZID=America/Indiana/Indianapolis:20261105T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261105T210000
+UID:d85888203b2ab041a245befc77f50a02@wfhb.org
+DESCRIPTION:Presented by Graduate by Hilton Bloomington and Hoosier Jazz I
+ nc.
+LOCATION:Poindexter Bar\, 210 East Kirkwood (inside the Graduate Hotel)\, 
+ Bloomington\, IN
+URL:https://wfhb.org/events/bi-weekly-jazz/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Adam Ezra Group with special guest Jenn Cristy
+DTSTART;TZID=America/Indiana/Indianapolis:20261105T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261105T213000
+UID:f36cd44264fc3a2ce0ced5fc6fd9c53d@wfhb.org
+DESCRIPTION:
+LOCATION:The Historic Brown County Playhouse\, 70 South Van Buren Street\,
+  Nashville
+URL:https://wfhb.org/events/adam-ezra-group-with-special-guest-jenn-cristy
+ /
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Community Christmas at Solsberry Community Church
+DTSTART;TZID=America/Indiana/Indianapolis:20261106T090000
+DTEND;TZID=America/Indiana/Indianapolis:20261106T150000
+UID:7fa684609b6003939f44627773b749b9@wfhb.org
+DESCRIPTION:The holiday bazaar features Christmas gifts & decorations\, ba
+ ked goods\, soft goods and canned goods\,  Lunch will be served.
+LOCATION:Solsberry Community Church\, 10051 E Wilkerson Drive\, Solsberry
+ \, IN
+URL:https://wfhb.org/events/community-christmas-at-solsberry-community-chu
+ rch/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Local Clay Potters’ Guild 28th Annual Holiday Pottery Sale
+DTSTART;TZID=America/Indiana/Indianapolis:20261106T160000
+DTEND;TZID=America/Indiana/Indianapolis:20261106T210000
+UID:5809807b24298ad2412475f2a8e9f9ce@wfhb.org
+DESCRIPTION:
+LOCATION:Bloomington Convention Center\, 302 S College Ave\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/local-clay-potters-guild-28th-annual-holiday-p
+ ottery-sale/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:R.L. Stine’s Goosebumps The Musical: Phantom of the Auditorium
+DTSTART;TZID=America/Indiana/Indianapolis:20261106T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261106T203000
+UID:9d979630c7ae0aa0ca1621ef6a989fd9@wfhb.org
+DESCRIPTION:When Brooke and Zeke are cast in their school’s spooky new p
+ lay\, The Phantom \, they start to wonder if the show is actually cursed. 
+ As strange messages appear and rehearsals are disrupted by a mysterious ma
+ sked figure\, they must uncover the truth: is it all an elaborate prank…
+  or is their theater truly haunted? Full of catchy songs\, laugh-out-loud 
+ moments\, and just the right amount of Halloween-season chills\, this musi
+ cal mystery is perfect for kids\, tweens\, and grown-ups who remember read
+ ing by flashlight. Fun for all ages!
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/r-l-stines-goosebumps-the-musical-phantom-of-t
+ he-auditorium/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:University Orchestra – Camilo Téllez\, alumnus guest conductor
+DTSTART;TZID=America/Indiana/Indianapolis:20261106T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261106T213000
+UID:efbc84af4966b59e8e93a824a932bd90@wfhb.org
+DESCRIPTION:Repertoire Milhaud: Le bœuf sur la toit\, Op. 58 (1919) Gabri
+ ela Lena Frank: Elegía andina (2000) Piazzolla: Sinfonietta (1953) Sibeli
+ us: Suite from “Pelleas and Melisande\,” Op. 46 (1905)
+LOCATION:Auer Hall\, on the second floor of the Simon Music Center\, 200 S
+ . Eagleson Ave.\, Bloomington
+URL:https://wfhb.org/events/university-orchestra-camilo-tellez-alumnus-gue
+ st-conductor/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington Community Farmers' Market
+DTSTART;TZID=America/Indiana/Indianapolis:20261107T030000
+DTEND;TZID=America/Indiana/Indianapolis:20261107T060000
+UID:fabcad17c71e61a6a609ed850fe311fb@wfhb.org
+DESCRIPTION:Market goers find a wide assortment of goods from the farm and
+  field\, including fruits and vegetables\, eggs\, meats and cheeses\, hone
+ y\, seasonal flowers\, and annual and perennial plants. Food and beverage 
+ artisans provide a tasteful variety of drinks\, pastries\, and savory dish
+ es. This weekly gathering provides opportunities for individuals to connec
+ t with their community in meaningful ways and support local farmers and sm
+ all businesses.
+LOCATION:Switchyard Park Pavillion\, 1601 South Rogers St.\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/bloomington-community-farmers-market-2/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Community Christmas at Solsberry Community Church
+DTSTART;TZID=America/Indiana/Indianapolis:20261107T090000
+DTEND;TZID=America/Indiana/Indianapolis:20261107T140000
+UID:ea9d3069dbf2e14291e94d145b497f1c@wfhb.org
+DESCRIPTION:The holiday bazaar features Christmas gifts & decorations\, ba
+ ked goods\, soft goods and canned goods\, Lunch will be served.
+LOCATION:Solsberry Community Church\, 10051 E Wilkerson Drive\, Solsberry
+ \, IN
+URL:https://wfhb.org/events/community-christmas-at-solsberry-community-chu
+ rch-2/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Local Clay Potters’ Guild 28th Annual Holiday Pottery Sale
+DTSTART;TZID=America/Indiana/Indianapolis:20261107T090000
+DTEND;TZID=America/Indiana/Indianapolis:20261107T170000
+UID:ca40357a4f0ca885c72c823ad395d7e1@wfhb.org
+DESCRIPTION:
+LOCATION:Bloomington Convention Center\, 302 S College Ave\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/local-clay-potters-guild-28th-annual-holiday-p
+ ottery-sale-2/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:R.L. Stine’s Goosebumps The Musical: Phantom of the Auditorium\,
+  shows at 1 & 4
+DTSTART;TZID=America/Indiana/Indianapolis:20261107T130000
+DTEND;TZID=America/Indiana/Indianapolis:20261107T150000
+UID:20fd32304a2402f91fc5ebc91d5c0992@wfhb.org
+DESCRIPTION:When Brooke and Zeke are cast in their school’s spooky new p
+ lay\, The Phantom \, they start to wonder if the show is actually cursed. 
+ As strange messages appear and rehearsals are disrupted by a mysterious ma
+ sked figure\, they must uncover the truth: is it all an elaborate prank…
+  or is their theater truly haunted? Full of catchy songs\, laugh-out-loud 
+ moments\, and just the right amount of Halloween-season chills\, this musi
+ cal mystery is perfect for kids\, tweens\, and grown-ups who remember read
+ ing by flashlight. Fun for all ages!
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/r-l-stines-goosebumps-the-musical-phantom-of-t
+ he-auditorium-shows-at-1-4/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Amplify Nashville feat. The Reverend Peyton's Big Damn Band
+DTSTART;TZID=America/Indiana/Indianapolis:20261107T133000
+DTEND;TZID=America/Indiana/Indianapolis:20261107T153000
+UID:a2fc0dff665e6c4834cfd601bed4a47e@wfhb.org
+DESCRIPTION:A unique community showcase celebrating local and regional tal
+ ent rooted in South Central Indiana and the surrounding areas\, Amplify Na
+ shville returns to the Brown County Music Center in Nashville\, Ind.\, on 
+ Saturday\, November 7\, 2026. Presented by the Brown County Music Associat
+ ion\, this evening brings rising artists to the biggest stage in town\, wh
+ ere they can share the spotlight with one of the area’s most celebrated 
+ nationally touring acts: The Reverend Peyton’s Big Damn Band. The evenin
+ g opens with Sami Riggs\, the fan-selected winner of the 2025 Brown County
+  Songwriter Showdown. From there\, the spotlight turns to two outstanding 
+ bands chosen through the inaugural Rumble on the Rocks competition at Hard
+  Truth Distilling on May 30\, June 6\, and June 13. These emerging artists
+  will be selected through a combination of fan votes and judges’ scores.
+  Headlining the night is Brown County’s own: The Reverend Peyton’s Big
+  Damn Band\, often called “the greatest front-porch blues band in the wo
+ rld.” Led by master finger-picker Reverend Peyton\, the trio—featuring
+  washboard virtuoso Breezy Peyton and drummer Jacob “The Snakob” Powel
+ l—has carried their electrifying country-blues sound to 38 countries and
+  48 states. With No. 1 records on the Billboard Blues Chart and acclaim fr
+ om Rolling Stone and others\, their music is rooted in heart\, tradition\,
+  and a live show that leaves audiences clapping\, stomping\, and singing a
+ long. At Amplify Nashville\, every ticket helps make a difference. Proceed
+ s from the event support Nashville area food pantry Mother’s Cupboard an
+ d other Nashville-area charities\, helping strengthen the community that i
+ nspires the music.
+LOCATION:The Brown County Music Center\, 200 Maple Leaf Boulevard\,  Nashv
+ ille\, IN
+URL:https://wfhb.org/events/amplify-nashville-feat-the-reverend-peytons-bi
+ g-damn-band/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Stand Up for Habitat
+DTSTART;TZID=America/Indiana/Indianapolis:20261107T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261107T213000
+UID:a5779d3887a3613f42cef2a2fe006417@wfhb.org
+DESCRIPTION:This professional comedy showcase will feature nationally tour
+ ing comedians Mitchell Potts and NYC-based headliner Elle Orlando . Procee
+ ds support Habitat for Humanity of Monroe County\, helping local families 
+ build strength\, stability\, and self-reliance through affordable homeowne
+ rship. Tickets at https://buskirkchumley.org/events/stand-up-for-habitat-n
+ ovember-7-2026/ or at the Buskirk-Chumley Theater ticket office.
+LOCATION:Buskirk-Chumley Theater\, 114 East Kirkwood Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/stand-up-for-habitat-2/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Latin American Ensemble – Andy Miller\, director
+DTSTART;TZID=America/Indiana/Indianapolis:20261107T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261107T220000
+UID:d3d89d427c32948276bc8d0c64df7625@wfhb.org
+DESCRIPTION:Presented by the Latin American Music Center
+LOCATION:Auer Hall\, on the second floor of the Simon Music Center\, 200 S
+ . Eagleson Ave.\, Bloomington
+URL:https://wfhb.org/events/latin-american-ensemble-andy-miller-director/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:R.L. Stine’s Goosebumps The Musical: Phantom of the Auditorium\,
+  shows at 1 & 4
+DTSTART;TZID=America/Indiana/Indianapolis:20261108T130000
+DTEND;TZID=America/Indiana/Indianapolis:20261108T150000
+UID:46bc00ec091dd3edd390f2281921a8bd@wfhb.org
+DESCRIPTION:When Brooke and Zeke are cast in their school’s spooky new p
+ lay\, The Phantom \, they start to wonder if the show is actually cursed. 
+ As strange messages appear and rehearsals are disrupted by a mysterious ma
+ sked figure\, they must uncover the truth: is it all an elaborate prank…
+  or is their theater truly haunted? Full of catchy songs\, laugh-out-loud 
+ moments\, and just the right amount of Halloween-season chills\, this musi
+ cal mystery is perfect for kids\, tweens\, and grown-ups who remember read
+ ing by flashlight. Fun for all ages!
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/r-l-stines-goosebumps-the-musical-phantom-of-t
+ he-auditorium-shows-at-1-4/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Hotel California – The Original Eagles Tribute
+DTSTART;TZID=America/Indiana/Indianapolis:20261108T133000
+DTEND;TZID=America/Indiana/Indianapolis:20261108T153000
+UID:ed368d754319887613472dc2d8335806@wfhb.org
+DESCRIPTION:Presented by Rock.It Boy Entertainment of America.
+LOCATION:Buskirk-Chumley Theater\, 114 E. Kirkwood Ave\,  Bloomington\, IN
+URL:https://wfhb.org/events/hotel-california-the-original-eagles-tribute/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Meet Me at the Metz Carillon Series
+DTSTART;TZID=America/Indiana/Indianapolis:20261108T160000
+DTEND;TZID=America/Indiana/Indianapolis:20261108T170000
+UID:ea609966070eedc64dcd5eb3ae4ad1fb@wfhb.org
+DESCRIPTION:Presented by The Jacobs School of Music
+LOCATION:IU Arboretum Gazebo\, East 10th Street on the IU Campus\, Bloomin
+ gton\, IN
+URL:https://wfhb.org/events/meet-me-at-the-metz-carillon-series/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Windfall Dancers Annual Cabaret Fundraiser
+DTSTART;TZID=America/Indiana/Indianapolis:20261108T163000
+DTEND;TZID=America/Indiana/Indianapolis:20261108T183000
+UID:c6938498d0f48a99330ae7296306f94a@wfhb.org
+DESCRIPTION:Performers include InMotion\, Dark Side Troupe\, Caraveransai
+ \, Paso a Paso\, Windfall Dance Company\, and many others! Proceeds suppor
+ t the Windfall Dance Company. Ticket link: https://www.zeffy.com/ en-US/ti
+ cketing/windfall- cabaret–2026
+LOCATION:Switchyard Park Pavillion\, 1601 South Rogers St.\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/windfall-dancers-annual-cabaret-fundraiser/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:“Petite messe solennelle” by Gioacchino Rossini | University S
+ ingers – Betsy Burleigh\, director/conductor
+DTSTART;TZID=America/Indiana/Indianapolis:20261108T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261108T213000
+UID:f309f57e5c0721411c549964c7b8b498@wfhb.org
+DESCRIPTION:Repertoire Rossini: Petite messe solennelle
+LOCATION:Auer Hall\, on the second floor of the Simon Music Center\, 200 S
+ . Eagleson Ave.\, Bloomington
+URL:https://wfhb.org/events/petite-messe-solennelle-by-gioacchino-rossini-
+ university-singers-betsy-burleigh-director-conductor/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:What's Happening to Climate Journalism?
+DTSTART;TZID=America/Indiana/Indianapolis:20261109T143000
+DTEND;TZID=America/Indiana/Indianapolis:20261109T153000
+UID:09297596d669889ee09658aa056a9c36@wfhb.org
+DESCRIPTION:2026 has already proven to be one of the hottest years on reco
+ rd\, but it has also seen a decline in news coverage of climate change nat
+ ionwide. This panel will examine the dynamics that influence news attentio
+ n to climate change and consider the challenges of reporting the beat in a
+  contested political and economic environment for climate journalism. Pane
+ lists: Ryan Comfort\, The Media School Suzannah Evans Comfort\, The Media 
+ School Karl Schneider\, IndyStar
+LOCATION:Franklin Hall (IU)\, 601 E Kirkwood Ave.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/whats-happening-to-climate-journalism/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Rainbow Elders Second Monday Social Hour
+DTSTART;TZID=America/Indiana/Indianapolis:20261109T170000
+DTEND;TZID=America/Indiana/Indianapolis:20261109T190000
+UID:f92c6483acfb4aaca253bb387d594eb4@wfhb.org
+DESCRIPTION:
+LOCATION:Viva Mas\, 2550 East Third Street\, Bloomington\, IN
+URL:https://wfhb.org/events/rainbow-elders-second-monday-social-hour-6/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Country Line Dancing with Billy
+DTSTART;TZID=America/Indiana/Indianapolis:20261109T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261109T203000
+UID:18df96906d3ff7d13fbd913072e43b53@wfhb.org
+DESCRIPTION:Doors open at 6pm. All ages.
+LOCATION:Mike's Music & Dance Barn\, 2277 IN SR 46 W.\,  Nashville\,  IN
+URL:https://wfhb.org/events/country-line-dancing-with-billy/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Natalie Boeyink Jazz Ensemble
+DTSTART;TZID=America/Indiana/Indianapolis:20261109T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261109T213000
+UID:588aa1eaefd822dac0fa8dcd460cba9e@wfhb.org
+DESCRIPTION:Presented by Jacobs School of Music Jazz Department
+LOCATION:Buskirk-Chumley Theater\, 114 East Kirkwood Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/natalie-boeyink-jazz-ensemble/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Trivia Night w/Bloomington Pub Quiz!
+DTSTART;TZID=America/Indiana/Indianapolis:20261109T203000
+DTEND;TZID=America/Indiana/Indianapolis:20261109T223000
+UID:77803d77f7f3326c5ea18b3750700e34@wfhb.org
+DESCRIPTION:Hey smart people!! Trivia Nights are now your favorite thing t
+ o do on Mondays! We promise to keep the sports to a minimum!
+LOCATION:The Back Door\, 207 S. College Ave.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/trivia-night-w-bloomington-pub-quiz-3/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Muddy Boots Dart Club
+DTSTART;TZID=America/Indiana/Indianapolis:20261110T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261110T220000
+UID:758de5228169e5c99001e6a47b807db7@wfhb.org
+DESCRIPTION:We are a steel tip dart & social club. You do not have to be a
+  member to play. All are welcome.
+LOCATION:Mike's Music & Dance Barn\, 2277 IN SR 46 W.\,  Nashville\,  IN
+URL:https://wfhb.org/events/muddy-boots-dart-club/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Open Mic
+DTSTART;TZID=America/Indiana/Indianapolis:20261110T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261110T203000
+UID:abd99ffefa7b27f20f3609d3eb41a9e0@wfhb.org
+DESCRIPTION:
+LOCATION:The Blockhouse Bar\, 205 South College\,  Bloomington\, IN
+URL:https://wfhb.org/events/open-mic-14/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington Pub Quiz (21+)
+DTSTART;TZID=America/Indiana/Indianapolis:20261111T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261111T200000
+UID:bea39299058ce2b78a75dc208d14d9b3@wfhb.org
+DESCRIPTION:
+LOCATION:Cardinal Spirits\, 922 S. Morton St.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/bloomington-pub-quiz-21/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Trivia Night with Bloomington Pub Quiz
+DTSTART;TZID=America/Indiana/Indianapolis:20261111T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261111T220000
+UID:204aacc4f27c1f170a65ea83133a295a@wfhb.org
+DESCRIPTION:Trivia Night upstairs at Lennie’s\, hosted by Bloomington Pu
+ b Quiz Every Wednesday Seating at 8pm\, starts at 8:30pm
+LOCATION:Lennie's\, 514 East Kirkwood Avenue\, Bloomington\, IN
+URL:https://wfhb.org/events/trivia-night-with-bloomington-pub-quiz/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Storytelling at the Museum
+DTSTART;TZID=America/Indiana/Indianapolis:20261112T173000
+DTEND;TZID=America/Indiana/Indianapolis:20261112T193000
+UID:b343cfe8b864659b692580b7bb444a82@wfhb.org
+DESCRIPTION:Open to all.
+LOCATION:IU Museum of Archaeology & Anthropology\, 416 N. Indiana Ave.\, B
+ loomington
+URL:https://wfhb.org/events/storytelling-at-the-museum/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Go Beyond: A Benefit for Lonnie Bedwell's North Pole Expedition an
+ d the Feature Film "Beyond Vision"
+DTSTART;TZID=America/Indiana/Indianapolis:20261112T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261112T200000
+UID:efd82b68ed298883eb0c42362aba6b2d@wfhb.org
+DESCRIPTION:A benefit dinner and film premiere supporting blind Navy veter
+ an Lonnie Bedwell’s expedition to the North Pole\, the final leg of his 
+ Explorers Grand Slam. The evening includes a VIP lounge\, cocktail hour\, 
+ dinner\, a silent auction\, exclusive scenes from the documentary “Beyon
+ d Vision\,” and a filmmaker panel discussion featuring Lonnie Bedwell. T
+ ickets & sponsorship: commongroundfilms.org/gobeyond Organization: Common 
+ Ground Films Inc.\, a 501(c)(3) nonprofit
+LOCATION:The Woolery Mill\, 2250 W Sunstone Drive\,  Bloomington\, IN
+URL:https://wfhb.org/events/go-beyond-a-benefit-for-lonnie-bedwells-north-
+ pole-expedition-and-the-feature-film-beyond-vision/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Music Creation and Production Concert
+DTSTART;TZID=America/Indiana/Indianapolis:20261112T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261112T203000
+UID:067de7639beeb82640f385b02bc837e9@wfhb.org
+DESCRIPTION:
+LOCATION:Ford-Crawford Hall (IU)\, 200 S. Jordan Ave.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/music-creation-and-production-concert/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Musicology Colloquium and Professional Development Series
+DTSTART;TZID=America/Indiana/Indianapolis:20261113T124500
+DTEND;TZID=America/Indiana/Indianapolis:20261113T134500
+UID:1449c19ad4267695a680d0bcf1674532@wfhb.org
+DESCRIPTION:Professional Development Workshop: On Stylish Academic Writing
+ \, with Genevieve Creedon\, director of the IU Scholarly Writing Program
+LOCATION:Simon Music Center\, 200 S. Jordan Ave.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/musicology-colloquium-and-professional-develop
+ ment-series-2/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:R.L. Stine’s Goosebumps The Musical: Phantom of the Auditorium
+DTSTART;TZID=America/Indiana/Indianapolis:20261113T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261113T203000
+UID:8339ccbd290393633eec518eab731418@wfhb.org
+DESCRIPTION:When Brooke and Zeke are cast in their school’s spooky new p
+ lay\, The Phantom \, they start to wonder if the show is actually cursed. 
+ As strange messages appear and rehearsals are disrupted by a mysterious ma
+ sked figure\, they must uncover the truth: is it all an elaborate prank…
+  or is their theater truly haunted? Full of catchy songs\, laugh-out-loud 
+ moments\, and just the right amount of Halloween-season chills\, this musi
+ cal mystery is perfect for kids\, tweens\, and grown-ups who remember read
+ ing by flashlight. Fun for all ages!
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/r-l-stines-goosebumps-the-musical-phantom-of-t
+ he-auditorium/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Guitar Ensemble – Daniel Duarte\, director
+DTSTART;TZID=America/Indiana/Indianapolis:20261113T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261113T213000
+UID:09bcd8c92c242e6567e89fd0da8ef782@wfhb.org
+DESCRIPTION:Daniel Duarte is senior lecturer in music in guitar at the Ind
+ iana University Jacobs School of Music. He is an active guitarist\, arrang
+ er\, conductor\, and lecturer who has collected prizes in several guitar a
+ nd chamber music competitions in the United States\, Europe\, and Latin Am
+ erica.
+LOCATION:Auer Hall\, on the second floor of the Simon Music Center\, 200 S
+ . Eagleson Ave.\, Bloomington
+URL:https://wfhb.org/events/guitar-ensemble-daniel-duarte-director/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Media School Workshops for Teens
+DTSTART;TZID=America/Indiana/Indianapolis:20261114T100000
+DTEND;TZID=America/Indiana/Indianapolis:20261114T160000
+UID:7518973feecae3a39fedb0ffd9a82b3e@wfhb.org
+DESCRIPTION:These weekend workshops for students ages 13-18 provide an int
+ roduction to careers in Cinema\, Game Dev\, and Journalism. Try out media 
+ production\, create a mini-project\, and experience the IU campus. No prio
+ r experience needed. Registration required: https://mediaschool.indiana.ed
+ u/academics/precollege/index.html
+LOCATION:Radio-TV Building\, 1229 E 7th St.\, Bloomington\, IN
+URL:https://wfhb.org/events/media-school-workshops-for-teens/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:R.L. Stine’s Goosebumps The Musical: Phantom of the Auditorium\,
+  shows at 1 & 4
+DTSTART;TZID=America/Indiana/Indianapolis:20261114T130000
+DTEND;TZID=America/Indiana/Indianapolis:20261114T150000
+UID:534cd48ea28f4e96a29b8c3286bf40a7@wfhb.org
+DESCRIPTION:When Brooke and Zeke are cast in their school’s spooky new p
+ lay\, The Phantom \, they start to wonder if the show is actually cursed. 
+ As strange messages appear and rehearsals are disrupted by a mysterious ma
+ sked figure\, they must uncover the truth: is it all an elaborate prank…
+  or is their theater truly haunted? Full of catchy songs\, laugh-out-loud 
+ moments\, and just the right amount of Halloween-season chills\, this musi
+ cal mystery is perfect for kids\, tweens\, and grown-ups who remember read
+ ing by flashlight. Fun for all ages!
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/r-l-stines-goosebumps-the-musical-phantom-of-t
+ he-auditorium-shows-at-1-4/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:David Cross
+DTSTART;TZID=America/Indiana/Indianapolis:20261114T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261114T210000
+UID:90c864383bc1dcdb88146bbce0d291c7@wfhb.org
+DESCRIPTION:
+LOCATION:Buskirk-Chumley Theater\, 114 E. Kirkwood Ave.\,  Bloomington\,  
+ IN
+URL:https://wfhb.org/events/david-cross/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:“Idomeneo” by Wolfgang Amadeus Mozart
+DTSTART;TZID=America/Indiana/Indianapolis:20261114T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261114T213000
+UID:b0c86b80ad3c093b4002841217bd16cf@wfhb.org
+DESCRIPTION:After King Idomeneo returns to Crete from the Trojan War\, the
+  high-stakes consequences of a desperate deal he struck with Neptune for s
+ afe passage reveal themselves when he must choose between his own son\, Id
+ amante\, and the vow he made to the sea god\, further complicated as Idama
+ nte is loved by both the Trojan princess Ilia and the jealous Greek prince
+ ss Elettra. But when divine wrath is incurred\, Idamante and Ilia prove th
+ eir worth\, prompting Neptune’s mercy. NB: Opera Insights: Pre-show talk
+  on Mozart’s “Idomeneo” – Presented by Peyson Weekley in the Music
+ al Arts Center Lobby at 6:30.
+LOCATION:IU Musical Arts Center\, 101 North Eagleson Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/idomeneo-by-wolfgang-amadeus-mozart/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:R.L. Stine’s Goosebumps The Musical: Phantom of the Auditorium\,
+  shows at 1 & 4
+DTSTART;TZID=America/Indiana/Indianapolis:20261115T130000
+DTEND;TZID=America/Indiana/Indianapolis:20261115T150000
+UID:672300fd52586c4f7fa520e87b8e3315@wfhb.org
+DESCRIPTION:When Brooke and Zeke are cast in their school’s spooky new p
+ lay\, The Phantom \, they start to wonder if the show is actually cursed. 
+ As strange messages appear and rehearsals are disrupted by a mysterious ma
+ sked figure\, they must uncover the truth: is it all an elaborate prank…
+  or is their theater truly haunted? Full of catchy songs\, laugh-out-loud 
+ moments\, and just the right amount of Halloween-season chills\, this musi
+ cal mystery is perfect for kids\, tweens\, and grown-ups who remember read
+ ing by flashlight. Fun for all ages!
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/r-l-stines-goosebumps-the-musical-phantom-of-t
+ he-auditorium-shows-at-1-4/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:“Idomeneo” by Wolfgang Amadeus Mozart
+DTSTART;TZID=America/Indiana/Indianapolis:20261115T150000
+DTEND;TZID=America/Indiana/Indianapolis:20261115T170000
+UID:f4b42d702718594ca9eea65cdeeb61bc@wfhb.org
+DESCRIPTION:After King Idomeneo returns to Crete from the Trojan War\, the
+  high-stakes consequences of a desperate deal he struck with Neptune for s
+ afe passage reveal themselves when he must choose between his own son\, Id
+ amante\, and the vow he made to the sea god\, further complicated as Idama
+ nte is loved by both the Trojan princess Ilia and the jealous Greek prince
+ ss Elettra. But when divine wrath is incurred\, Idamante and Ilia prove th
+ eir worth\, prompting Neptune’s mercy. NB: Opera Insights: Pre-show talk
+  on Mozart’s “Idomeneo” – Presented by Peyson Weekley in the Music
+ al Arts Center Lobby at 2:00.
+LOCATION:IU Musical Arts Center\, 101 North Eagleson Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/idomeneo-by-wolfgang-amadeus-mozart-2/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Audrey Rose: Hometown Debut
+DTSTART;TZID=America/Indiana/Indianapolis:20261115T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261115T210000
+UID:fd9a4855377a04b2477cb323dd00a7b3@wfhb.org
+DESCRIPTION:
+LOCATION:Buskirk-Chumley Theater\, 114 East Kirkwood Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/audrey-rose-hometown-debut/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Hoodwink & Just Penelope
+DTSTART;TZID=America/Indiana/Indianapolis:20261115T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261115T220000
+UID:59f822b9f4d51a18b5ed2d06b7fff552@wfhb.org
+DESCRIPTION:
+LOCATION:The Bishop Bar\, 123 South Walnut Street\,  Bloomington\, IN
+URL:https://wfhb.org/events/hoodwink-just-penelope/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Country Line Dancing with Billy
+DTSTART;TZID=America/Indiana/Indianapolis:20261116T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261116T203000
+UID:6e21b080ab419cdff999cf46563545a7@wfhb.org
+DESCRIPTION:Doors open at 6pm. All ages.
+LOCATION:Mike's Music & Dance Barn\, 2277 IN SR 46 W.\,  Nashville\,  IN
+URL:https://wfhb.org/events/country-line-dancing-with-billy/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Southern Indiana Wind Ensemble Fall Concert: Viva Music
+DTSTART;TZID=America/Indiana/Indianapolis:20261116T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261116T210000
+UID:0301f214c67d9bbf6587bd3bb97e555c@wfhb.org
+DESCRIPTION:
+LOCATION:Bloomington North High School Auditorium\, 3901 N. Kinser Pike\, 
+  Bloomington\,  IN
+URL:https://wfhb.org/events/southern-indiana-wind-ensemble-fall-concert-vi
+ va-music/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Indiana University Latin Jazz Ensemble
+DTSTART;TZID=America/Indiana/Indianapolis:20261116T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261116T213000
+UID:ab41b6ac0b493625900b98dc75a2c44f@wfhb.org
+DESCRIPTION:Presented by the Jazz Department\, Jacobs School of Music
+LOCATION:Buskirk-Chumley Theater\, 114 East Kirkwood Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/indiana-university-latin-jazz-ensemble/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Jazz @ the Buskirk-Chumley Theater: Latin American Jazz Ensemble 
+ – Wayne Wallace\, director\; Andy Miller\, rhythm section coach
+DTSTART;TZID=America/Indiana/Indianapolis:20261116T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261116T213000
+UID:b0cf046377f782eb2757fd11ecade330@wfhb.org
+DESCRIPTION:
+LOCATION:Buskirk-Chumley Theater\, 114 East Kirkwood Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/jazz-the-buskirk-chumley-theater-latin-america
+ n-jazz-ensemble-wayne-wallace-director-andy-miller-rhythm-section-coach/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Trivia Night w/Bloomington Pub Quiz!
+DTSTART;TZID=America/Indiana/Indianapolis:20261116T203000
+DTEND;TZID=America/Indiana/Indianapolis:20261116T223000
+UID:08019f5672531012bd0652a2b7541585@wfhb.org
+DESCRIPTION:Hey smart people!! Trivia Nights are now your favorite thing t
+ o do on Mondays! We promise to keep the sports to a minimum!
+LOCATION:The Back Door\, 207 S. College Ave.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/trivia-night-w-bloomington-pub-quiz-3/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Muddy Boots Dart Club
+DTSTART;TZID=America/Indiana/Indianapolis:20261117T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261117T220000
+UID:daf37e688e2f9db1fd1543fd7fd8ff86@wfhb.org
+DESCRIPTION:We are a steel tip dart & social club. You do not have to be a
+  member to play. All are welcome.
+LOCATION:Mike's Music & Dance Barn\, 2277 IN SR 46 W.\,  Nashville\,  IN
+URL:https://wfhb.org/events/muddy-boots-dart-club/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Open Mic
+DTSTART;TZID=America/Indiana/Indianapolis:20261117T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261117T203000
+UID:73798f2eb09f37c7a9d31cd65342530b@wfhb.org
+DESCRIPTION:
+LOCATION:The Blockhouse Bar\, 205 South College\,  Bloomington\, IN
+URL:https://wfhb.org/events/open-mic-14/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Mainstage in Concert – “Symphony No. 3. ‘Circus Maximus’
+ ” by John Corigliano
+DTSTART;TZID=America/Indiana/Indianapolis:20261117T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261117T213000
+UID:96258df59329c957ff5c8244a730fba2@wfhb.org
+DESCRIPTION:John Corigliano’s massive 2005 work for a large concert band
+  is known for its intensity and theatricality as it stretches the boundari
+ es of the wind ensemble. A synthesis of genres\, the piece references jazz
+ \, martial fanfares\, circus music\, and hunting calls\, interspersed with
+  lyrical passages.
+LOCATION:IU Musical Arts Center\, 101 North Eagleson Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/mainstage-in-concert-symphony-no-3-circus-maxi
+ mus-by-john-corigliano/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington Pub Quiz (21+)
+DTSTART;TZID=America/Indiana/Indianapolis:20261118T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261118T200000
+UID:def0045108e88c5e7d957c995dd09810@wfhb.org
+DESCRIPTION:
+LOCATION:Cardinal Spirits\, 922 S. Morton St.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/bloomington-pub-quiz-21/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Philharmonic Orchestra – Karen Kamensek\, alumna guest conductor
+DTSTART;TZID=America/Indiana/Indianapolis:20261118T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261118T213000
+UID:e0c01e513197aa566a178f11509264c5@wfhb.org
+DESCRIPTION:Repertoire R. Strauss: Four Symphonic Interludes from “Inter
+ mezzo” (1924) Percussion Concerto (to be announced) Philip Glass: Sympho
+ ny No. 15 (“Lincoln”) (2023)
+LOCATION:IU Musical Arts Center\, 101 North Eagleson Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/philharmonic-orchestra-karen-kamensek-alumna-g
+ uest-conductor/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Trivia Night with Bloomington Pub Quiz
+DTSTART;TZID=America/Indiana/Indianapolis:20261118T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261118T220000
+UID:209f0a73d39c996448b05719cc9ae737@wfhb.org
+DESCRIPTION:Trivia Night upstairs at Lennie’s\, hosted by Bloomington Pu
+ b Quiz Every Wednesday Seating at 8pm\, starts at 8:30pm
+LOCATION:Lennie's\, 514 East Kirkwood Avenue\, Bloomington\, IN
+URL:https://wfhb.org/events/trivia-night-with-bloomington-pub-quiz/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bi-weekly jazz
+DTSTART;TZID=America/Indiana/Indianapolis:20261119T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261119T210000
+UID:1e1613fbe01d79dc492b53771648cb92@wfhb.org
+DESCRIPTION:Presented by Graduate by Hilton Bloomington and Hoosier Jazz I
+ nc.
+LOCATION:Poindexter Bar\, 210 East Kirkwood (inside the Graduate Hotel)\, 
+ Bloomington\, IN
+URL:https://wfhb.org/events/bi-weekly-jazz/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Concentus – Joanna Blendulf and Dana Marsh\, directors
+DTSTART;TZID=America/Indiana/Indianapolis:20261119T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261119T213000
+UID:e1aac898de67d1c7bd498f68fd7c0bb6@wfhb.org
+DESCRIPTION:Presented by the Historical Performance Institute Repertoire t
+ o be announced
+LOCATION:Auer Hall\, on the second floor of the Simon Music Center\, 200 S
+ . Eagleson Ave.\, Bloomington
+URL:https://wfhb.org/events/concentus-joanna-blendulf-and-dana-marsh-direc
+ tors-2/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Rainbow Elders Third Friday Breakfast
+DTSTART;TZID=America/Indiana/Indianapolis:20261120T100000
+DTEND;TZID=America/Indiana/Indianapolis:20261120T120000
+UID:02bc155852b6055e1e6561ea816c857d@wfhb.org
+DESCRIPTION:
+LOCATION:Village Inn Restaurant\, 3619 W. Ind. 46\,  Bloomington\, IN
+URL:https://wfhb.org/events/rainbow-elders-third-friday-breakfast-6/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:TandemFest
+DTSTART;TZID=America/Indiana/Indianapolis:20261120T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261120T220000
+UID:75e185ac93f6bc22399abcfcfc1bcf91@wfhb.org
+DESCRIPTION:You are invited to join us for a night of music\, art\, and co
+ mmunity. Live music performances by Time Well Spent\, The U-Station Agents
+ \, and more. Flash Tattoos by Jason Profant\, Julian/bblackhoundd\, and Ha
+ ley/Yelah Tattoos. Essay and poetry readings by members of Women Writing f
+ or (a) Change. Food from Erika Yochum and Pili’s Party Truck. Cash Bar. 
+ Live Karaoke. Overall Merriment. All proceeds will go towards opening Bloo
+ mington’s 1st birth center\, as well as other Tandem services including 
+ our Hoosier Diaper Program\, support groups\, Free Room\, Doula Equity Pro
+ gram\, Period Equity Program\, and more. All Ages Event. Tickets can be pu
+ rchased at: www.givebutter.com/tandemfest
+LOCATION:FAR Center for Contemporary Arts\, 505 W 4th St\,  Bloomington\, 
+  IN
+URL:https://wfhb.org/events/tandemfest/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Jacobs Composition Academy Fall Recital II
+DTSTART;TZID=America/Indiana/Indianapolis:20261120T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261120T210000
+UID:900bdba4c64838ef8460e71b445f7ca8@wfhb.org
+DESCRIPTION:
+LOCATION:Ford-Crawford Hall\, 200 South Eagleson Avenue\, on the second fl
+ oor of the Simon Music Center\, Bloomington\, IN
+URL:https://wfhb.org/events/jacobs-composition-academy-fall-recital-ii/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:A Foreigner's Journey to Boston
+DTSTART;TZID=America/Indiana/Indianapolis:20261120T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261120T213000
+UID:7497b40781884c6814756cafee480c8f@wfhb.org
+DESCRIPTION:
+LOCATION:Buskirk-Chumley Theater\, 114 East Kirkwood Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/a-foreigners-journey-to-boston/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Country Line Dancing with Billy
+DTSTART;TZID=America/Indiana/Indianapolis:20261123T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261123T203000
+UID:a98ae1b07dd21be6031685595e9e6a3c@wfhb.org
+DESCRIPTION:Doors open at 6pm. All ages.
+LOCATION:Mike's Music & Dance Barn\, 2277 IN SR 46 W.\,  Nashville\,  IN
+URL:https://wfhb.org/events/country-line-dancing-with-billy/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Trivia Night w/Bloomington Pub Quiz!
+DTSTART;TZID=America/Indiana/Indianapolis:20261123T203000
+DTEND;TZID=America/Indiana/Indianapolis:20261123T223000
+UID:6b1dc083a00f9eaa00fdcf4d945efa1f@wfhb.org
+DESCRIPTION:Hey smart people!! Trivia Nights are now your favorite thing t
+ o do on Mondays! We promise to keep the sports to a minimum!
+LOCATION:The Back Door\, 207 S. College Ave.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/trivia-night-w-bloomington-pub-quiz-3/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Muddy Boots Dart Club
+DTSTART;TZID=America/Indiana/Indianapolis:20261124T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261124T220000
+UID:8c3c3c20717698df06816f62a621633d@wfhb.org
+DESCRIPTION:We are a steel tip dart & social club. You do not have to be a
+  member to play. All are welcome.
+LOCATION:Mike's Music & Dance Barn\, 2277 IN SR 46 W.\,  Nashville\,  IN
+URL:https://wfhb.org/events/muddy-boots-dart-club/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Open Mic
+DTSTART;TZID=America/Indiana/Indianapolis:20261124T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261124T203000
+UID:45b4c71bcc5c39e7210336711421ea40@wfhb.org
+DESCRIPTION:
+LOCATION:The Blockhouse Bar\, 205 South College\,  Bloomington\, IN
+URL:https://wfhb.org/events/open-mic-14/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington Pub Quiz (21+)
+DTSTART;TZID=America/Indiana/Indianapolis:20261125T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261125T200000
+UID:e0fd97dd2c063d3d36cc285a3d8b9bf5@wfhb.org
+DESCRIPTION:
+LOCATION:Cardinal Spirits\, 922 S. Morton St.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/bloomington-pub-quiz-21/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Trivia Night with Bloomington Pub Quiz
+DTSTART;TZID=America/Indiana/Indianapolis:20261125T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261125T220000
+UID:3a58754bcea06345663b2252298db3e5@wfhb.org
+DESCRIPTION:Trivia Night upstairs at Lennie’s\, hosted by Bloomington Pu
+ b Quiz Every Wednesday Seating at 8pm\, starts at 8:30pm
+LOCATION:Lennie's\, 514 East Kirkwood Avenue\, Bloomington\, IN
+URL:https://wfhb.org/events/trivia-night-with-bloomington-pub-quiz/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Celebrate the Season\, performances at 5:00 & 8:00 pm
+DTSTART;TZID=America/Indiana/Indianapolis:20261127T000000
+DTEND;TZID=America/Indiana/Indianapolis:20261127T020000
+UID:7abc8c40a6593f07444bc0386d718c12@wfhb.org
+DESCRIPTION:Presented by Bloomington Symphony Orchestra.
+LOCATION:Buskirk-Chumley Theater\, 114 East Kirkwood Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/celebrate-the-season-performances-at-500-800-p
+ m/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Country Line Dancing with Billy
+DTSTART;TZID=America/Indiana/Indianapolis:20261130T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261130T203000
+UID:66b9443cecaa1be981b09ac4446a9b9a@wfhb.org
+DESCRIPTION:Doors open at 6pm. All ages.
+LOCATION:Mike's Music & Dance Barn\, 2277 IN SR 46 W.\,  Nashville\,  IN
+URL:https://wfhb.org/events/country-line-dancing-with-billy/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Trivia Night w/Bloomington Pub Quiz!
+DTSTART;TZID=America/Indiana/Indianapolis:20261130T203000
+DTEND;TZID=America/Indiana/Indianapolis:20261130T223000
+UID:0c670c927115874a59ae3620aadca7a7@wfhb.org
+DESCRIPTION:Hey smart people!! Trivia Nights are now your favorite thing t
+ o do on Mondays! We promise to keep the sports to a minimum!
+LOCATION:The Back Door\, 207 S. College Ave.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/trivia-night-w-bloomington-pub-quiz-3/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Muddy Boots Dart Club
+DTSTART;TZID=America/Indiana/Indianapolis:20261201T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261201T220000
+UID:8dc2243fa808911776b0d1fb7ef0e469@wfhb.org
+DESCRIPTION:We are a steel tip dart & social club. You do not have to be a
+  member to play. All are welcome.
+LOCATION:Mike's Music & Dance Barn\, 2277 IN SR 46 W.\,  Nashville\,  IN
+URL:https://wfhb.org/events/muddy-boots-dart-club/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Open Mic
+DTSTART;TZID=America/Indiana/Indianapolis:20261201T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261201T203000
+UID:f0b07f6a2c41e263cbdc1aef301bf0c9@wfhb.org
+DESCRIPTION:
+LOCATION:The Blockhouse Bar\, 205 South College\,  Bloomington\, IN
+URL:https://wfhb.org/events/open-mic-14/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington Pub Quiz (21+)
+DTSTART;TZID=America/Indiana/Indianapolis:20261202T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261202T200000
+UID:68c06fc1e7786bcde11e7eaf3588fecd@wfhb.org
+DESCRIPTION:
+LOCATION:Cardinal Spirits\, 922 S. Morton St.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/bloomington-pub-quiz-21/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Baroque Orchestra – Ingrid Matthews\, director
+DTSTART;TZID=America/Indiana/Indianapolis:20261202T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261202T213000
+UID:7bc693e13e4940c3f63ed92200eb3504@wfhb.org
+DESCRIPTION:Presented by the Historical Performance Institute Repertoire t
+ o be announced
+LOCATION:Auer Hall\, on the second floor of the Simon Music Center\, 200 S
+ . Eagleson Ave.\, Bloomington
+URL:https://wfhb.org/events/baroque-orchestra-ingrid-matthews-director-2/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Trivia Night with Bloomington Pub Quiz
+DTSTART;TZID=America/Indiana/Indianapolis:20261202T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261202T220000
+UID:064cd53b6327107e33337d68915b4fb0@wfhb.org
+DESCRIPTION:Trivia Night upstairs at Lennie’s\, hosted by Bloomington Pu
+ b Quiz Every Wednesday Seating at 8pm\, starts at 8:30pm
+LOCATION:Lennie's\, 514 East Kirkwood Avenue\, Bloomington\, IN
+URL:https://wfhb.org/events/trivia-night-with-bloomington-pub-quiz/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bi-weekly jazz
+DTSTART;TZID=America/Indiana/Indianapolis:20261203T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261203T210000
+UID:2816e9a9c100c83bc07d43f37d873bed@wfhb.org
+DESCRIPTION:Presented by Graduate by Hilton Bloomington and Hoosier Jazz I
+ nc.
+LOCATION:Poindexter Bar\, 210 East Kirkwood (inside the Graduate Hotel)\, 
+ Bloomington\, IN
+URL:https://wfhb.org/events/bi-weekly-jazz/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Sarah Jarosz: 10 Years of Undercurrent
+DTSTART;TZID=America/Indiana/Indianapolis:20261203T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261203T210000
+UID:aa839c32e4296680b9310dbf765289fb@wfhb.org
+DESCRIPTION:
+LOCATION:Buskirk-Chumley Theater\, 114 East Kirkwood Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/sarah-jarosz-10-years-of-undercurrent/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:New Music Ensemble – David Dzubay\, director\; Dai Fujikura\, gu
+ est composer\; Sara Erb\, alumna guest bassoon
+DTSTART;TZID=America/Indiana/Indianapolis:20261203T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261203T213000
+UID:fc58eb2c305d3bd1e5dd50146e3afadb@wfhb.org
+DESCRIPTION:Repertoire Augusta Read Thomas: Solstice Ritual (2024) Donald 
+ Erb: The Towers of Silence (1974) Dai Fujikura: Bassoon Concerto No. 2 (20
+ 26) Five Friends Master Class Series – Honoring Robert Samels
+LOCATION:Auer Hall\, on the second floor of the Simon Music Center\, 200 S
+ . Eagleson Ave.\, Bloomington
+URL:https://wfhb.org/events/new-music-ensemble-david-dzubay-director-dai-f
+ ujikura-guest-composer-sara-erb-alumna-guest-bassoon/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Another Round's Winter Show
+DTSTART;TZID=America/Indiana/Indianapolis:20261204T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261204T210000
+UID:5c3f772d77aae183accb16e212536d77@wfhb.org
+DESCRIPTION:Another Round returns to the Buskirk-Chumley for their annual 
+ Winter Show! Catch IU’s only all-male a cappella group as they sing Chri
+ stmas classics\, pop throwbacks\, and classic R&B.
+LOCATION:Buskirk-Chumley Theater\, 114 E. Kirkwood Ave.\,  Bloomington\,  
+ IN
+URL:https://wfhb.org/events/another-rounds-winter-show/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:“The Nutcracker” by Peter Ilyich Tchaikovsky
+DTSTART;TZID=America/Indiana/Indianapolis:20261204T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261204T213000
+UID:dfce69795cb9956354597323ceaf1694@wfhb.org
+DESCRIPTION:
+LOCATION:IU Musical Arts Center\, 101 North Eagleson Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/the-nutcracker-by-peter-ilyich-tchaikovsky/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:“The Nutcracker” by Peter Ilyich Tchaikovsky
+DTSTART;TZID=America/Indiana/Indianapolis:20261205T140000
+DTEND;TZID=America/Indiana/Indianapolis:20261205T160000
+UID:8a7b8bfc8ab1fc3953594bdd6282c90e@wfhb.org
+DESCRIPTION:
+LOCATION:IU Musical Arts Center\, 101 North Eagleson Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/the-nutcracker-by-peter-ilyich-tchaikovsky-2/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:The Singing Hoosiers Present Holiday Chimes
+DTSTART;TZID=America/Indiana/Indianapolis:20261205T160000
+DTEND;TZID=America/Indiana/Indianapolis:20261205T180000
+UID:6dbf8c34aebc8fe54f7c9d549165f540@wfhb.org
+DESCRIPTION:
+LOCATION:Indiana University Auditorium\, 1211 East 7th Street\, Bloomingto
+ n\, IN
+URL:https://wfhb.org/events/the-singing-hoosiers-present-holiday-chimes/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Pierce Arrow Live in Concert
+DTSTART;TZID=America/Indiana/Indianapolis:20261205T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261205T213000
+UID:dcbabcd666085cbf6869d6884810f196@wfhb.org
+DESCRIPTION:Presented by Encore Entertainment.
+LOCATION:Buskirk-Chumley Theater\, 114 East Kirkwood Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/pierce-arrow-live-in-concert/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Wreath Workshop (all ages)
+DTSTART;TZID=America/Indiana/Indianapolis:20261206T130000
+DTEND;TZID=America/Indiana/Indianapolis:20261206T150000
+UID:2da860ea08025254a26ba8dbd09211ff@wfhb.org
+DESCRIPTION:Make your own one-of-a-kind wreath\, just in time for the holi
+ days! Regional Landscape Manager Lori Willis will walk you through the pro
+ cess of creating a beautiful decoration for your front door with evergreen
+  tree branches. Price includes all the materials needed for your wreath an
+ d admission to Steele’s Country Christmas.
+LOCATION:T.C. Steele State Historic Site\, 4220 T.C. Steele Rd.\,  Nashvil
+ le\,  IN
+URL:https://wfhb.org/events/wreath-workshop-all-ages/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:“The Nutcracker” by Peter Ilyich Tchaikovsky
+DTSTART;TZID=America/Indiana/Indianapolis:20261206T140000
+DTEND;TZID=America/Indiana/Indianapolis:20261206T160000
+UID:15f7c3483138cf963341f54b16c83f78@wfhb.org
+DESCRIPTION:
+LOCATION:IU Musical Arts Center\, 101 North Eagleson Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/the-nutcracker-by-peter-ilyich-tchaikovsky-3/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Why Should a Grownup Play with Flies?
+DTSTART;TZID=America/Indiana/Indianapolis:20261206T154500
+DTEND;TZID=America/Indiana/Indianapolis:20261206T171500
+UID:e722b80f0abb58bef7035bde843d735e@wfhb.org
+DESCRIPTION:Presented by Professor Emeritus Peter Cherbas for the Travelin
+ g University
+LOCATION:Monroe County Public Library\, 303 East Kirkwood\,  Bloomington\,
+  IN
+URL:https://wfhb.org/events/why-should-a-grownup-play-with-flies/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Country Line Dancing with Billy
+DTSTART;TZID=America/Indiana/Indianapolis:20261207T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261207T203000
+UID:b60ab2109fc284ce99b765f5d49566df@wfhb.org
+DESCRIPTION:Doors open at 6pm. All ages.
+LOCATION:Mike's Music & Dance Barn\, 2277 IN SR 46 W.\,  Nashville\,  IN
+URL:https://wfhb.org/events/country-line-dancing-with-billy/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:All-Campus Orchestra
+DTSTART;TZID=America/Indiana/Indianapolis:20261207T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261207T213000
+UID:61bdc63f036298e9c9de92a155c15700@wfhb.org
+DESCRIPTION:
+LOCATION:Auer Hall\, on the second floor of the Simon Music Center\, 200 S
+ . Eagleson Ave.\, Bloomington
+URL:https://wfhb.org/events/all-campus-orchestra/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:All-Campus Chorus
+DTSTART;TZID=America/Indiana/Indianapolis:20261207T203000
+DTEND;TZID=America/Indiana/Indianapolis:20261207T220000
+UID:6bda43af47bf816b86461da88344f36f@wfhb.org
+DESCRIPTION:
+LOCATION:Recital Hall\, on the ground floor of Merrill Hall\, 1201 E. Thir
+ d Street\, Bloomington
+URL:https://wfhb.org/events/all-campus-chorus/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Trivia Night w/Bloomington Pub Quiz!
+DTSTART;TZID=America/Indiana/Indianapolis:20261207T203000
+DTEND;TZID=America/Indiana/Indianapolis:20261207T223000
+UID:784e51f6dfe2277cc563b2e1d51a82ba@wfhb.org
+DESCRIPTION:Hey smart people!! Trivia Nights are now your favorite thing t
+ o do on Mondays! We promise to keep the sports to a minimum!
+LOCATION:The Back Door\, 207 S. College Ave.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/trivia-night-w-bloomington-pub-quiz-3/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Muddy Boots Dart Club
+DTSTART;TZID=America/Indiana/Indianapolis:20261208T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261208T220000
+UID:72dd7d695a3703f3efcddd2613086ef2@wfhb.org
+DESCRIPTION:We are a steel tip dart & social club. You do not have to be a
+  member to play. All are welcome.
+LOCATION:Mike's Music & Dance Barn\, 2277 IN SR 46 W.\,  Nashville\,  IN
+URL:https://wfhb.org/events/muddy-boots-dart-club/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Open Mic
+DTSTART;TZID=America/Indiana/Indianapolis:20261208T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261208T203000
+UID:23e92befb21d092594f12cf3e1ccefba@wfhb.org
+DESCRIPTION:
+LOCATION:The Blockhouse Bar\, 205 South College\,  Bloomington\, IN
+URL:https://wfhb.org/events/open-mic-14/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Brass Band
+DTSTART;TZID=America/Indiana/Indianapolis:20261208T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261208T213000
+UID:007f2b5af8ed0dbbe2eccd267d7e6be5@wfhb.org
+DESCRIPTION:
+LOCATION:Auer Hall\, on the second floor of the Simon Music Center\, 200 S
+ . Eagleson Ave.\, Bloomington
+URL:https://wfhb.org/events/brass-band/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington Pub Quiz (21+)
+DTSTART;TZID=America/Indiana/Indianapolis:20261209T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261209T200000
+UID:19ce2b462c8e7ce795ccf65527e0df8c@wfhb.org
+DESCRIPTION:
+LOCATION:Cardinal Spirits\, 922 S. Morton St.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/bloomington-pub-quiz-21/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Trivia Night with Bloomington Pub Quiz
+DTSTART;TZID=America/Indiana/Indianapolis:20261209T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261209T220000
+UID:9579af0ddc8b188f6571e3cfb928059d@wfhb.org
+DESCRIPTION:Trivia Night upstairs at Lennie’s\, hosted by Bloomington Pu
+ b Quiz Every Wednesday Seating at 8pm\, starts at 8:30pm
+LOCATION:Lennie's\, 514 East Kirkwood Avenue\, Bloomington\, IN
+URL:https://wfhb.org/events/trivia-night-with-bloomington-pub-quiz/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Annie
+DTSTART;TZID=America/Indiana/Indianapolis:20261210T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261210T210000
+UID:060aebe8ff983ebc241a5e00466b5240@wfhb.org
+DESCRIPTION:The timeless tale of Little Orphan Annie follows a tenacious y
+ oung girl whose unbreakable optimism leads her on an unforgettable journey
+  from a New York City orphanage to a place she can finally call home. Feat
+ uring one of Broadway’s most memorable scores\, including “It’s the 
+ Hard-Knock Life\,” “Easy Street\,” “N.Y.C.” and the endlessly-up
+ lifting “Tomorrow\,” Annie is a delightful theatrical experience for t
+ he entire family. See Constellation’s website for more information\, inc
+ luding a detailed performance schedule. Learn more and find tickets at htt
+ ps://seeconstellation.org/ kids/annie/
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/annie/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Annie
+DTSTART;TZID=America/Indiana/Indianapolis:20261211T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261211T210000
+UID:6a9a3a748fc34427a9b9b8b9d43949df@wfhb.org
+DESCRIPTION:The timeless tale of Little Orphan Annie follows a tenacious y
+ oung girl whose unbreakable optimism leads her on an unforgettable journey
+  from a New York City orphanage to a place she can finally call home. Feat
+ uring one of Broadway’s most memorable scores\, including “It’s the 
+ Hard-Knock Life\,” “Easy Street\,” “N.Y.C.” and the endlessly-up
+ lifting “Tomorrow\,” Annie is a delightful theatrical experience for t
+ he entire family. See Constellation’s website for more information\, inc
+ luding a detailed performance schedule. Learn more and find tickets at htt
+ ps://seeconstellation.org/ kids/annie/
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/annie/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:“The Nutcracker” by Peter Ilyich Tchaikovsky  Time: 7:30 PM
+DTSTART;TZID=America/Indiana/Indianapolis:20261211T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261211T213000
+UID:3f8d875fe2ee3437a9c52484659354a6@wfhb.org
+DESCRIPTION:
+LOCATION:IU Musical Arts Center\, 101 North Eagleson Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/the-nutcracker-by-peter-ilyich-tchaikovsky-tim
+ e-730-pm/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:“The Nutcracker” by Peter Ilyich Tchaikovsky
+DTSTART;TZID=America/Indiana/Indianapolis:20261212T140000
+DTEND;TZID=America/Indiana/Indianapolis:20261212T160000
+UID:5ce1afcc2dd5b5f9091e2bd7808a022b@wfhb.org
+DESCRIPTION:
+LOCATION:IU Musical Arts Center\, 101 North Eagleson Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/the-nutcracker-by-peter-ilyich-tchaikovsky-4/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Annie\, performances at 2:00 pm & 7:00pm
+DTSTART;TZID=America/Indiana/Indianapolis:20261212T140000
+DTEND;TZID=America/Indiana/Indianapolis:20261212T160000
+UID:0d38386d3106f73a2f793f671721a417@wfhb.org
+DESCRIPTION:The timeless tale of Little Orphan Annie follows a tenacious y
+ oung girl whose unbreakable optimism leads her on an unforgettable journey
+  from a New York City orphanage to a place she can finally call home. Feat
+ uring one of Broadway’s most memorable scores\, including “It’s the 
+ Hard-Knock Life\,” “Easy Street\,” “N.Y.C.” and the endlessly-up
+ lifting “Tomorrow\,” Annie is a delightful theatrical experience for t
+ he entire family. See Constellation’s website for more information\, inc
+ luding a detailed performance schedule. Learn more and find tickets at htt
+ ps://seeconstellation.org/ kids/annie/
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/annie-performances-at-200-pm-700pm/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Annie
+DTSTART;TZID=America/Indiana/Indianapolis:20261213T140000
+DTEND;TZID=America/Indiana/Indianapolis:20261213T160000
+UID:19b591dafd0fe86cc2613bd9fc604168@wfhb.org
+DESCRIPTION:The timeless tale of Little Orphan Annie follows a tenacious y
+ oung girl whose unbreakable optimism leads her on an unforgettable journey
+  from a New York City orphanage to a place she can finally call home. Feat
+ uring one of Broadway’s most memorable scores\, including “It’s the 
+ Hard-Knock Life\,” “Easy Street\,” “N.Y.C.” and the endlessly-up
+ lifting “Tomorrow\,” Annie is a delightful theatrical experience for t
+ he entire family. See Constellation’s website for more information\, inc
+ luding a detailed performance schedule. Learn more and find tickets at htt
+ ps://seeconstellation.org/ kids/annie/
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/annie-2/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Country Line Dancing with Billy
+DTSTART;TZID=America/Indiana/Indianapolis:20261214T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261214T203000
+UID:fbd58a3e8f2c2c9de2250dcb8d305a5a@wfhb.org
+DESCRIPTION:Doors open at 6pm. All ages.
+LOCATION:Mike's Music & Dance Barn\, 2277 IN SR 46 W.\,  Nashville\,  IN
+URL:https://wfhb.org/events/country-line-dancing-with-billy/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Trivia Night w/Bloomington Pub Quiz!
+DTSTART;TZID=America/Indiana/Indianapolis:20261214T203000
+DTEND;TZID=America/Indiana/Indianapolis:20261214T223000
+UID:a81b3641be5b29e497412c81015b405c@wfhb.org
+DESCRIPTION:Hey smart people!! Trivia Nights are now your favorite thing t
+ o do on Mondays! We promise to keep the sports to a minimum!
+LOCATION:The Back Door\, 207 S. College Ave.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/trivia-night-w-bloomington-pub-quiz-3/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Muddy Boots Dart Club
+DTSTART;TZID=America/Indiana/Indianapolis:20261215T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261215T220000
+UID:9f6d4e28b1631b5e06103107b7a0e6ca@wfhb.org
+DESCRIPTION:We are a steel tip dart & social club. You do not have to be a
+  member to play. All are welcome.
+LOCATION:Mike's Music & Dance Barn\, 2277 IN SR 46 W.\,  Nashville\,  IN
+URL:https://wfhb.org/events/muddy-boots-dart-club/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Open Mic
+DTSTART;TZID=America/Indiana/Indianapolis:20261215T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261215T203000
+UID:f2cc0e83a2d48837147ee150c77afbb1@wfhb.org
+DESCRIPTION:
+LOCATION:The Blockhouse Bar\, 205 South College\,  Bloomington\, IN
+URL:https://wfhb.org/events/open-mic-14/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington Pub Quiz (21+)
+DTSTART;TZID=America/Indiana/Indianapolis:20261216T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261216T200000
+UID:d7e316a6de14a00e2149c7896207e204@wfhb.org
+DESCRIPTION:
+LOCATION:Cardinal Spirits\, 922 S. Morton St.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/bloomington-pub-quiz-21/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Trivia Night with Bloomington Pub Quiz
+DTSTART;TZID=America/Indiana/Indianapolis:20261216T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261216T220000
+UID:5ce3f67372954b24c357301355b4169d@wfhb.org
+DESCRIPTION:Trivia Night upstairs at Lennie’s\, hosted by Bloomington Pu
+ b Quiz Every Wednesday Seating at 8pm\, starts at 8:30pm
+LOCATION:Lennie's\, 514 East Kirkwood Avenue\, Bloomington\, IN
+URL:https://wfhb.org/events/trivia-night-with-bloomington-pub-quiz/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Annie
+DTSTART;TZID=America/Indiana/Indianapolis:20261217T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261217T210000
+UID:0fc81c04c05d19f92e00fd670b29252e@wfhb.org
+DESCRIPTION:The timeless tale of Little Orphan Annie follows a tenacious y
+ oung girl whose unbreakable optimism leads her on an unforgettable journey
+  from a New York City orphanage to a place she can finally call home. Feat
+ uring one of Broadway’s most memorable scores\, including “It’s the 
+ Hard-Knock Life\,” “Easy Street\,” “N.Y.C.” and the endlessly-up
+ lifting “Tomorrow\,” Annie is a delightful theatrical experience for t
+ he entire family. See Constellation’s website for more information\, inc
+ luding a detailed performance schedule. Learn more and find tickets at htt
+ ps://seeconstellation.org/ kids/annie/
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/annie/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:The ConstelLate Show: Holiday Special
+DTSTART;TZID=America/Indiana/Indianapolis:20261217T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261217T213000
+UID:c1d67014d150b228511c97c18df29873@wfhb.org
+DESCRIPTION:The ConstelLate Show is Constellation’s very own late-night 
+ holiday special—part talk show\, part variety show\, and completely one-
+ of-a-kind. Running throughout the holidays with brand-new guests each nigh
+ t\, this festive evening brings together local luminaries\, performers\, a
+ nd personalities. Each episode features interviews\, games\, live music\, 
+ comedy\, surprise talents\, and a few unexpected twists. Complete with cam
+ eras and live monitors\, audiences won’t just watch the show—they’ll
+  feel like they’re part of the broadcast. It’s joyful\, it’s unpredi
+ ctable\, and it’s the most Constellation way imaginable to celebrate the
+  season. See Constellation’s website for more information\, including a 
+ detailed performance schedule. Learn more and find tickets at https://seec
+ onstellation.org/ event/constellate-show/
+LOCATION:Rose Firebay\, Waldron Arts Center\, 122 S Walnut St (use the 4th
+  St. entrance)\, Bloomington
+URL:https://wfhb.org/events/the-constellate-show-holiday-special/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Annie
+DTSTART;TZID=America/Indiana/Indianapolis:20261218T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261218T210000
+UID:3b7d826129d1ecc1ecce1e7d29a34a05@wfhb.org
+DESCRIPTION:The timeless tale of Little Orphan Annie follows a tenacious y
+ oung girl whose unbreakable optimism leads her on an unforgettable journey
+  from a New York City orphanage to a place she can finally call home. Feat
+ uring one of Broadway’s most memorable scores\, including “It’s the 
+ Hard-Knock Life\,” “Easy Street\,” “N.Y.C.” and the endlessly-up
+ lifting “Tomorrow\,” Annie is a delightful theatrical experience for t
+ he entire family. See Constellation’s website for more information\, inc
+ luding a detailed performance schedule. Learn more and find tickets at htt
+ ps://seeconstellation.org/ kids/annie/
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/annie/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:PReservation Hall Jazz Band: Creole Christmas
+DTSTART;TZID=America/Indiana/Indianapolis:20261218T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261218T213000
+UID:8364fba4d541ac4cf777a901b9d5ec64@wfhb.org
+DESCRIPTION:
+LOCATION:Buskirk-Chumley Theater\, 114 East Kirkwood Avenue\,  Bloomington
+ \, IN
+URL:https://wfhb.org/events/preservation-hall-jazz-band-creole-christmas/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:The ConstelLate Show: Holiday Special
+DTSTART;TZID=America/Indiana/Indianapolis:20261218T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261218T213000
+UID:9706d2c98c57398a6669a2b1f999a093@wfhb.org
+DESCRIPTION:The ConstelLate Show is Constellation’s very own late-night 
+ holiday special—part talk show\, part variety show\, and completely one-
+ of-a-kind. Running throughout the holidays with brand-new guests each nigh
+ t\, this festive evening brings together local luminaries\, performers\, a
+ nd personalities. Each episode features interviews\, games\, live music\, 
+ comedy\, surprise talents\, and a few unexpected twists. Complete with cam
+ eras and live monitors\, audiences won’t just watch the show—they’ll
+  feel like they’re part of the broadcast. It’s joyful\, it’s unpredi
+ ctable\, and it’s the most Constellation way imaginable to celebrate the
+  season. See Constellation’s website for more information\, including a 
+ detailed performance schedule. Learn more and find tickets at https://seec
+ onstellation.org/ event/constellate-show/
+LOCATION:Rose Firebay\, Waldron Arts Center\, 122 S Walnut St (use the 4th
+  St. entrance)\, Bloomington
+URL:https://wfhb.org/events/the-constellate-show-holiday-special/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Annie\, performances at 2:00 pm & 7:00pm
+DTSTART;TZID=America/Indiana/Indianapolis:20261219T140000
+DTEND;TZID=America/Indiana/Indianapolis:20261219T160000
+UID:8cfb76e42c835a7a397a1a4f3f13745f@wfhb.org
+DESCRIPTION:The timeless tale of Little Orphan Annie follows a tenacious y
+ oung girl whose unbreakable optimism leads her on an unforgettable journey
+  from a New York City orphanage to a place she can finally call home. Feat
+ uring one of Broadway’s most memorable scores\, including “It’s the 
+ Hard-Knock Life\,” “Easy Street\,” “N.Y.C.” and the endlessly-up
+ lifting “Tomorrow\,” Annie is a delightful theatrical experience for t
+ he entire family. See Constellation’s website for more information\, inc
+ luding a detailed performance schedule. Learn more and find tickets at htt
+ ps://seeconstellation.org/ kids/annie/
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/annie-performances-at-200-pm-700pm/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:The ConstelLate Show: Holiday Special
+DTSTART;TZID=America/Indiana/Indianapolis:20261219T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261219T213000
+UID:b4d787bc168ac151bfa6d3c65e5e561c@wfhb.org
+DESCRIPTION:The ConstelLate Show is Constellation’s very own late-night 
+ holiday special—part talk show\, part variety show\, and completely one-
+ of-a-kind. Running throughout the holidays with brand-new guests each nigh
+ t\, this festive evening brings together local luminaries\, performers\, a
+ nd personalities. Each episode features interviews\, games\, live music\, 
+ comedy\, surprise talents\, and a few unexpected twists. Complete with cam
+ eras and live monitors\, audiences won’t just watch the show—they’ll
+  feel like they’re part of the broadcast. It’s joyful\, it’s unpredi
+ ctable\, and it’s the most Constellation way imaginable to celebrate the
+  season. See Constellation’s website for more information\, including a 
+ detailed performance schedule. Learn more and find tickets at https://seec
+ onstellation.org/ event/constellate-show/
+LOCATION:Rose Firebay\, Waldron Arts Center\, 122 S Walnut St (use the 4th
+  St. entrance)\, Bloomington
+URL:https://wfhb.org/events/the-constellate-show-holiday-special/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Annie\, performances at 2:00 pm & 7:00pm
+DTSTART;TZID=America/Indiana/Indianapolis:20261220T140000
+DTEND;TZID=America/Indiana/Indianapolis:20261220T160000
+UID:fd0f51b88d32cf57eed2ec620966246a@wfhb.org
+DESCRIPTION:The timeless tale of Little Orphan Annie follows a tenacious y
+ oung girl whose unbreakable optimism leads her on an unforgettable journey
+  from a New York City orphanage to a place she can finally call home. Feat
+ uring one of Broadway’s most memorable scores\, including “It’s the 
+ Hard-Knock Life\,” “Easy Street\,” “N.Y.C.” and the endlessly-up
+ lifting “Tomorrow\,” Annie is a delightful theatrical experience for t
+ he entire family. See Constellation’s website for more information\, inc
+ luding a detailed performance schedule. Learn more and find tickets at htt
+ ps://seeconstellation.org/ kids/annie/
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/annie-performances-at-200-pm-700pm/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:The ConstelLate Show: Holiday Special
+DTSTART;TZID=America/Indiana/Indianapolis:20261220T143000
+DTEND;TZID=America/Indiana/Indianapolis:20261220T163000
+UID:895b27daf96dde1c1d5de7e9f6e9c76d@wfhb.org
+DESCRIPTION:The ConstelLate Show is Constellation’s very own late-night 
+ holiday special—part talk show\, part variety show\, and completely one-
+ of-a-kind. Running throughout the holidays with brand-new guests each nigh
+ t\, this festive evening brings together local luminaries\, performers\, a
+ nd personalities. Each episode features interviews\, games\, live music\, 
+ comedy\, surprise talents\, and a few unexpected twists. Complete with cam
+ eras and live monitors\, audiences won’t just watch the show—they’ll
+  feel like they’re part of the broadcast. It’s joyful\, it’s unpredi
+ ctable\, and it’s the most Constellation way imaginable to celebrate the
+  season. See Constellation’s website for more information\, including a 
+ detailed performance schedule. Learn more and find tickets at https://seec
+ onstellation.org/ event/constellate-show/
+LOCATION:Rose Firebay\, Waldron Arts Center\, 122 S Walnut St (use the 4th
+  St. entrance)\, Bloomington
+URL:https://wfhb.org/events/the-constellate-show-holiday-special-2/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Country Line Dancing with Billy
+DTSTART;TZID=America/Indiana/Indianapolis:20261221T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261221T203000
+UID:de817e617c3a18358933e07da0c265cd@wfhb.org
+DESCRIPTION:Doors open at 6pm. All ages.
+LOCATION:Mike's Music & Dance Barn\, 2277 IN SR 46 W.\,  Nashville\,  IN
+URL:https://wfhb.org/events/country-line-dancing-with-billy/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Annie
+DTSTART;TZID=America/Indiana/Indianapolis:20261221T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261221T210000
+UID:06b24e2ea5370c1939e6d662049e2ed7@wfhb.org
+DESCRIPTION:The timeless tale of Little Orphan Annie follows a tenacious y
+ oung girl whose unbreakable optimism leads her on an unforgettable journey
+  from a New York City orphanage to a place she can finally call home. Feat
+ uring one of Broadway’s most memorable scores\, including “It’s the 
+ Hard-Knock Life\,” “Easy Street\,” “N.Y.C.” and the endlessly-up
+ lifting “Tomorrow\,” Annie is a delightful theatrical experience for t
+ he entire family. See Constellation’s website for more information\, inc
+ luding a detailed performance schedule. Learn more and find tickets at htt
+ ps://seeconstellation.org/ kids/annie/
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/annie/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:The ConstelLate Show: Holiday Special
+DTSTART;TZID=America/Indiana/Indianapolis:20261221T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261221T213000
+UID:7cdbb6b0291a4770f3716e75295438fc@wfhb.org
+DESCRIPTION:The ConstelLate Show is Constellation’s very own late-night 
+ holiday special—part talk show\, part variety show\, and completely one-
+ of-a-kind. Running throughout the holidays with brand-new guests each nigh
+ t\, this festive evening brings together local luminaries\, performers\, a
+ nd personalities. Each episode features interviews\, games\, live music\, 
+ comedy\, surprise talents\, and a few unexpected twists. Complete with cam
+ eras and live monitors\, audiences won’t just watch the show—they’ll
+  feel like they’re part of the broadcast. It’s joyful\, it’s unpredi
+ ctable\, and it’s the most Constellation way imaginable to celebrate the
+  season. See Constellation’s website for more information\, including a 
+ detailed performance schedule. Learn more and find tickets at https://seec
+ onstellation.org/ event/constellate-show/
+LOCATION:Rose Firebay\, Waldron Arts Center\, 122 S Walnut St (use the 4th
+  St. entrance)\, Bloomington
+URL:https://wfhb.org/events/the-constellate-show-holiday-special/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Trivia Night w/Bloomington Pub Quiz!
+DTSTART;TZID=America/Indiana/Indianapolis:20261221T203000
+DTEND;TZID=America/Indiana/Indianapolis:20261221T223000
+UID:7cc248a693f3020e24b03efb329d2b6a@wfhb.org
+DESCRIPTION:Hey smart people!! Trivia Nights are now your favorite thing t
+ o do on Mondays! We promise to keep the sports to a minimum!
+LOCATION:The Back Door\, 207 S. College Ave.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/trivia-night-w-bloomington-pub-quiz-3/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Annie\, performances at 2:00 pm & 7:00pm
+DTSTART;TZID=America/Indiana/Indianapolis:20261222T140000
+DTEND;TZID=America/Indiana/Indianapolis:20261222T160000
+UID:d2c0757b5d9b2a0c4b6a6e5df441dd7e@wfhb.org
+DESCRIPTION:The timeless tale of Little Orphan Annie follows a tenacious y
+ oung girl whose unbreakable optimism leads her on an unforgettable journey
+  from a New York City orphanage to a place she can finally call home. Feat
+ uring one of Broadway’s most memorable scores\, including “It’s the 
+ Hard-Knock Life\,” “Easy Street\,” “N.Y.C.” and the endlessly-up
+ lifting “Tomorrow\,” Annie is a delightful theatrical experience for t
+ he entire family. See Constellation’s website for more information\, inc
+ luding a detailed performance schedule. Learn more and find tickets at htt
+ ps://seeconstellation.org/ kids/annie/
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/annie-performances-at-200-pm-700pm/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Muddy Boots Dart Club
+DTSTART;TZID=America/Indiana/Indianapolis:20261222T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261222T220000
+UID:23e02cf220aab73026d4de985f5bc087@wfhb.org
+DESCRIPTION:We are a steel tip dart & social club. You do not have to be a
+  member to play. All are welcome.
+LOCATION:Mike's Music & Dance Barn\, 2277 IN SR 46 W.\,  Nashville\,  IN
+URL:https://wfhb.org/events/muddy-boots-dart-club/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Open Mic
+DTSTART;TZID=America/Indiana/Indianapolis:20261222T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261222T203000
+UID:d7e7e5665ca53a46afa67877590bbc4c@wfhb.org
+DESCRIPTION:
+LOCATION:The Blockhouse Bar\, 205 South College\,  Bloomington\, IN
+URL:https://wfhb.org/events/open-mic-14/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:The ConstelLate Show: Holiday Special
+DTSTART;TZID=America/Indiana/Indianapolis:20261222T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261222T213000
+UID:2b792e18e116b5ed95919622e508de1f@wfhb.org
+DESCRIPTION:The ConstelLate Show is Constellation’s very own late-night 
+ holiday special—part talk show\, part variety show\, and completely one-
+ of-a-kind. Running throughout the holidays with brand-new guests each nigh
+ t\, this festive evening brings together local luminaries\, performers\, a
+ nd personalities. Each episode features interviews\, games\, live music\, 
+ comedy\, surprise talents\, and a few unexpected twists. Complete with cam
+ eras and live monitors\, audiences won’t just watch the show—they’ll
+  feel like they’re part of the broadcast. It’s joyful\, it’s unpredi
+ ctable\, and it’s the most Constellation way imaginable to celebrate the
+  season. See Constellation’s website for more information\, including a 
+ detailed performance schedule. Learn more and find tickets at https://seec
+ onstellation.org/ event/constellate-show/
+LOCATION:Rose Firebay\, Waldron Arts Center\, 122 S Walnut St (use the 4th
+  St. entrance)\, Bloomington
+URL:https://wfhb.org/events/the-constellate-show-holiday-special/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Annie\, performances at 2:00 pm & 7:00pm
+DTSTART;TZID=America/Indiana/Indianapolis:20261223T140000
+DTEND;TZID=America/Indiana/Indianapolis:20261223T160000
+UID:d4fe1c883fd3c4e4f3543ef8ba0d8006@wfhb.org
+DESCRIPTION:The timeless tale of Little Orphan Annie follows a tenacious y
+ oung girl whose unbreakable optimism leads her on an unforgettable journey
+  from a New York City orphanage to a place she can finally call home. Feat
+ uring one of Broadway’s most memorable scores\, including “It’s the 
+ Hard-Knock Life\,” “Easy Street\,” “N.Y.C.” and the endlessly-up
+ lifting “Tomorrow\,” Annie is a delightful theatrical experience for t
+ he entire family. See Constellation’s website for more information\, inc
+ luding a detailed performance schedule. Learn more and find tickets at htt
+ ps://seeconstellation.org/ kids/annie/
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/annie-performances-at-200-pm-700pm/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington Pub Quiz (21+)
+DTSTART;TZID=America/Indiana/Indianapolis:20261223T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261223T200000
+UID:2ab3a7aa82a379a3ffbaaee93975c366@wfhb.org
+DESCRIPTION:
+LOCATION:Cardinal Spirits\, 922 S. Morton St.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/bloomington-pub-quiz-21/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:The ConstelLate Show: Holiday Special
+DTSTART;TZID=America/Indiana/Indianapolis:20261223T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261223T213000
+UID:8b82831d37a4b0765e8904434c010dbf@wfhb.org
+DESCRIPTION:The ConstelLate Show is Constellation’s very own late-night 
+ holiday special—part talk show\, part variety show\, and completely one-
+ of-a-kind. Running throughout the holidays with brand-new guests each nigh
+ t\, this festive evening brings together local luminaries\, performers\, a
+ nd personalities. Each episode features interviews\, games\, live music\, 
+ comedy\, surprise talents\, and a few unexpected twists. Complete with cam
+ eras and live monitors\, audiences won’t just watch the show—they’ll
+  feel like they’re part of the broadcast. It’s joyful\, it’s unpredi
+ ctable\, and it’s the most Constellation way imaginable to celebrate the
+  season. See Constellation’s website for more information\, including a 
+ detailed performance schedule. Learn more and find tickets at https://seec
+ onstellation.org/ event/constellate-show/
+LOCATION:Rose Firebay\, Waldron Arts Center\, 122 S Walnut St (use the 4th
+  St. entrance)\, Bloomington
+URL:https://wfhb.org/events/the-constellate-show-holiday-special/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Trivia Night with Bloomington Pub Quiz
+DTSTART;TZID=America/Indiana/Indianapolis:20261223T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261223T220000
+UID:d4ae476fedcafcfce19cfc0d97483932@wfhb.org
+DESCRIPTION:Trivia Night upstairs at Lennie’s\, hosted by Bloomington Pu
+ b Quiz Every Wednesday Seating at 8pm\, starts at 8:30pm
+LOCATION:Lennie's\, 514 East Kirkwood Avenue\, Bloomington\, IN
+URL:https://wfhb.org/events/trivia-night-with-bloomington-pub-quiz/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Annie\, performances at 2:00 pm & 7:00pm
+DTSTART;TZID=America/Indiana/Indianapolis:20261226T140000
+DTEND;TZID=America/Indiana/Indianapolis:20261226T160000
+UID:d6a1517bbcbbd8a845456a4854102550@wfhb.org
+DESCRIPTION:The timeless tale of Little Orphan Annie follows a tenacious y
+ oung girl whose unbreakable optimism leads her on an unforgettable journey
+  from a New York City orphanage to a place she can finally call home. Feat
+ uring one of Broadway’s most memorable scores\, including “It’s the 
+ Hard-Knock Life\,” “Easy Street\,” “N.Y.C.” and the endlessly-up
+ lifting “Tomorrow\,” Annie is a delightful theatrical experience for t
+ he entire family. See Constellation’s website for more information\, inc
+ luding a detailed performance schedule. Learn more and find tickets at htt
+ ps://seeconstellation.org/ kids/annie/
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/annie-performances-at-200-pm-700pm/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:The ConstelLate Show: Holiday Special
+DTSTART;TZID=America/Indiana/Indianapolis:20261226T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261226T213000
+UID:b5de90623709017f0339ae0d50111b8f@wfhb.org
+DESCRIPTION:The ConstelLate Show is Constellation’s very own late-night 
+ holiday special—part talk show\, part variety show\, and completely one-
+ of-a-kind. Running throughout the holidays with brand-new guests each nigh
+ t\, this festive evening brings together local luminaries\, performers\, a
+ nd personalities. Each episode features interviews\, games\, live music\, 
+ comedy\, surprise talents\, and a few unexpected twists. Complete with cam
+ eras and live monitors\, audiences won’t just watch the show—they’ll
+  feel like they’re part of the broadcast. It’s joyful\, it’s unpredi
+ ctable\, and it’s the most Constellation way imaginable to celebrate the
+  season. See Constellation’s website for more information\, including a 
+ detailed performance schedule. Learn more and find tickets at https://seec
+ onstellation.org/ event/constellate-show/
+LOCATION:Rose Firebay\, Waldron Arts Center\, 122 S Walnut St (use the 4th
+  St. entrance)\, Bloomington
+URL:https://wfhb.org/events/the-constellate-show-holiday-special/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Annie
+DTSTART;TZID=America/Indiana/Indianapolis:20261227T140000
+DTEND;TZID=America/Indiana/Indianapolis:20261227T160000
+UID:844a537a33549412b9492f2c60fb7710@wfhb.org
+DESCRIPTION:The timeless tale of Little Orphan Annie follows a tenacious y
+ oung girl whose unbreakable optimism leads her on an unforgettable journey
+  from a New York City orphanage to a place she can finally call home. Feat
+ uring one of Broadway’s most memorable scores\, including “It’s the 
+ Hard-Knock Life\,” “Easy Street\,” “N.Y.C.” and the endlessly-up
+ lifting “Tomorrow\,” Annie is a delightful theatrical experience for t
+ he entire family. See Constellation’s website for more information\, inc
+ luding a detailed performance schedule. Learn more and find tickets at htt
+ ps://seeconstellation.org/ kids/annie/
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/annie-2/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:The ConstelLate Show: Holiday Special
+DTSTART;TZID=America/Indiana/Indianapolis:20261227T143000
+DTEND;TZID=America/Indiana/Indianapolis:20261227T163000
+UID:0392c4fe90571c1dbf6e8d567c08e920@wfhb.org
+DESCRIPTION:The ConstelLate Show is Constellation’s very own late-night 
+ holiday special—part talk show\, part variety show\, and completely one-
+ of-a-kind. Running throughout the holidays with brand-new guests each nigh
+ t\, this festive evening brings together local luminaries\, performers\, a
+ nd personalities. Each episode features interviews\, games\, live music\, 
+ comedy\, surprise talents\, and a few unexpected twists. Complete with cam
+ eras and live monitors\, audiences won’t just watch the show—they’ll
+  feel like they’re part of the broadcast. It’s joyful\, it’s unpredi
+ ctable\, and it’s the most Constellation way imaginable to celebrate the
+  season. See Constellation’s website for more information\, including a 
+ detailed performance schedule. Learn more and find tickets at https://seec
+ onstellation.org/ event/constellate-show/
+LOCATION:Rose Firebay\, Waldron Arts Center\, 122 S Walnut St (use the 4th
+  St. entrance)\, Bloomington
+URL:https://wfhb.org/events/the-constellate-show-holiday-special-2/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Country Line Dancing with Billy
+DTSTART;TZID=America/Indiana/Indianapolis:20261228T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261228T203000
+UID:44aaac8a56c2749af10fee6386b9b535@wfhb.org
+DESCRIPTION:Doors open at 6pm. All ages.
+LOCATION:Mike's Music & Dance Barn\, 2277 IN SR 46 W.\,  Nashville\,  IN
+URL:https://wfhb.org/events/country-line-dancing-with-billy/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Annie
+DTSTART;TZID=America/Indiana/Indianapolis:20261228T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261228T210000
+UID:e48b49d9026cad184e0ad7ab206417a6@wfhb.org
+DESCRIPTION:The timeless tale of Little Orphan Annie follows a tenacious y
+ oung girl whose unbreakable optimism leads her on an unforgettable journey
+  from a New York City orphanage to a place she can finally call home. Feat
+ uring one of Broadway’s most memorable scores\, including “It’s the 
+ Hard-Knock Life\,” “Easy Street\,” “N.Y.C.” and the endlessly-up
+ lifting “Tomorrow\,” Annie is a delightful theatrical experience for t
+ he entire family. See Constellation’s website for more information\, inc
+ luding a detailed performance schedule. Learn more and find tickets at htt
+ ps://seeconstellation.org/ kids/annie/
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/annie/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Trivia Night w/Bloomington Pub Quiz!
+DTSTART;TZID=America/Indiana/Indianapolis:20261228T203000
+DTEND;TZID=America/Indiana/Indianapolis:20261228T223000
+UID:fe76d036bc36d84788f2d95cf9801548@wfhb.org
+DESCRIPTION:Hey smart people!! Trivia Nights are now your favorite thing t
+ o do on Mondays! We promise to keep the sports to a minimum!
+LOCATION:The Back Door\, 207 S. College Ave.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/trivia-night-w-bloomington-pub-quiz-3/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Annie\, performances at 2:00 pm & 7:00pm
+DTSTART;TZID=America/Indiana/Indianapolis:20261229T140000
+DTEND;TZID=America/Indiana/Indianapolis:20261229T160000
+UID:0a801c7cbabb29b98b39ee3807273b7b@wfhb.org
+DESCRIPTION:The timeless tale of Little Orphan Annie follows a tenacious y
+ oung girl whose unbreakable optimism leads her on an unforgettable journey
+  from a New York City orphanage to a place she can finally call home. Feat
+ uring one of Broadway’s most memorable scores\, including “It’s the 
+ Hard-Knock Life\,” “Easy Street\,” “N.Y.C.” and the endlessly-up
+ lifting “Tomorrow\,” Annie is a delightful theatrical experience for t
+ he entire family. See Constellation’s website for more information\, inc
+ luding a detailed performance schedule. Learn more and find tickets at htt
+ ps://seeconstellation.org/ kids/annie/
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/annie-performances-at-200-pm-700pm/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Open Mic
+DTSTART;TZID=America/Indiana/Indianapolis:20261229T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261229T203000
+UID:07242a80d6fe0607d68054e578507564@wfhb.org
+DESCRIPTION:
+LOCATION:The Blockhouse Bar\, 205 South College\,  Bloomington\, IN
+URL:https://wfhb.org/events/open-mic-14/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Country Line Dancing with Wall to Wall Line Dance Club!
+DTSTART;TZID=America/Indiana/Indianapolis:20261229T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261229T230000
+UID:a8d70df360d5bd3ee72ec4fccd4cd3e1@wfhb.org
+DESCRIPTION:
+LOCATION:The Back Door\, 207 S. College Ave.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/country-line-dancing-with-wall-to-wall-line-da
+ nce-club-2026-05-26-2026-06-02-2026-06-09-2026-06-16-2026-06-23-2026-06-30
+ -2026-07-07-2026-07-14-2026-07-21-2026-07-28-2026-08-04-2026-08-11-15-2026
+ -09-22/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Annie\, performances at 2:00 pm & 7:00pm
+DTSTART;TZID=America/Indiana/Indianapolis:20261230T140000
+DTEND;TZID=America/Indiana/Indianapolis:20261230T160000
+UID:569e6bc3c717b81ad63010d242da8c91@wfhb.org
+DESCRIPTION:The timeless tale of Little Orphan Annie follows a tenacious y
+ oung girl whose unbreakable optimism leads her on an unforgettable journey
+  from a New York City orphanage to a place she can finally call home. Feat
+ uring one of Broadway’s most memorable scores\, including “It’s the 
+ Hard-Knock Life\,” “Easy Street\,” “N.Y.C.” and the endlessly-up
+ lifting “Tomorrow\,” Annie is a delightful theatrical experience for t
+ he entire family. See Constellation’s website for more information\, inc
+ luding a detailed performance schedule. Learn more and find tickets at htt
+ ps://seeconstellation.org/ kids/annie/
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/annie-performances-at-200-pm-700pm/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington Pub Quiz (21+)
+DTSTART;TZID=America/Indiana/Indianapolis:20261230T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261230T200000
+UID:b3cff2a6c4197076e9d1054cb45712df@wfhb.org
+DESCRIPTION:
+LOCATION:Cardinal Spirits\, 922 S. Morton St.\,  Bloomington\,  IN
+URL:https://wfhb.org/events/bloomington-pub-quiz-21/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Trivia Night with Bloomington Pub Quiz
+DTSTART;TZID=America/Indiana/Indianapolis:20261230T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261230T220000
+UID:5c4ebe4f2fd0c35ee70ded295a997fb0@wfhb.org
+DESCRIPTION:Trivia Night upstairs at Lennie’s\, hosted by Bloomington Pu
+ b Quiz Every Wednesday Seating at 8pm\, starts at 8:30pm
+LOCATION:Lennie's\, 514 East Kirkwood Avenue\, Bloomington\, IN
+URL:https://wfhb.org/events/trivia-night-with-bloomington-pub-quiz/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Annie\, performances at 2:00 pm & 7:00pm
+DTSTART;TZID=America/Indiana/Indianapolis:20270102T140000
+DTEND;TZID=America/Indiana/Indianapolis:20270102T160000
+UID:5dfa90a581a10a9f288409241474bf5c@wfhb.org
+DESCRIPTION:The timeless tale of Little Orphan Annie follows a tenacious y
+ oung girl whose unbreakable optimism leads her on an unforgettable journey
+  from a New York City orphanage to a place she can finally call home. Feat
+ uring one of Broadway’s most memorable scores\, including “It’s the 
+ Hard-Knock Life\,” “Easy Street\,” “N.Y.C.” and the endlessly-up
+ lifting “Tomorrow\,” Annie is a delightful theatrical experience for t
+ he entire family. See Constellation’s website for more information\, inc
+ luding a detailed performance schedule. Learn more and find tickets at htt
+ ps://seeconstellation.org/ kids/annie/
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/annie-performances-at-200-pm-700pm/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Annie
+DTSTART;TZID=America/Indiana/Indianapolis:20270103T140000
+DTEND;TZID=America/Indiana/Indianapolis:20270103T160000
+UID:aa6a2e2f9e7f0ac2e5410114f18f9c00@wfhb.org
+DESCRIPTION:The timeless tale of Little Orphan Annie follows a tenacious y
+ oung girl whose unbreakable optimism leads her on an unforgettable journey
+  from a New York City orphanage to a place she can finally call home. Feat
+ uring one of Broadway’s most memorable scores\, including “It’s the 
+ Hard-Knock Life\,” “Easy Street\,” “N.Y.C.” and the endlessly-up
+ lifting “Tomorrow\,” Annie is a delightful theatrical experience for t
+ he entire family. See Constellation’s website for more information\, inc
+ luding a detailed performance schedule. Learn more and find tickets at htt
+ ps://seeconstellation.org/ kids/annie/
+LOCATION:Waldron Auditorium\, 122 South Walnut Street\, Bloomington\, IN
+URL:https://wfhb.org/events/annie-2/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Honky Tonk
+DTSTART;TZID=America/Indiana/Indianapolis:20270105T203000
+DTEND;TZID=America/Indiana/Indianapolis:20270105T223000
+UID:fb2e7aaaa5eec8d5d2d9e83e628d7a5b@wfhb.org
+DESCRIPTION:
+LOCATION:The Blockhouse Bar\, 205 South College\,  Bloomington\, IN
+URL:https://wfhb.org/events/honky-tonk-2026-05-26-2026-06-02-2026-06-09-20
+ 26-06-16-2026-06-23-2026-06-30-2026-07-07-2026-07-14-2026-07-21-2026-07-28
+ -2026-08-04-2026-08-11-2026-08-18-2026-08-25-2026-09-01-2026-09-08-15-2026
+ -09-22/
+X-SOURCE:WFHB Community Calendar
+END:VEVENT
+END:VCALENDAR

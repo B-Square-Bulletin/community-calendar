@@ -1,0 +1,490 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//IU Athletics//iuhoosiers.com//
+X-WR-CALNAME:IU Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Football vs Minnesota
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T153000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T173000
+UID:c99e8589d6da615e04fbc3af5bc55e76@iuhoosiers.com
+ATTACH;FMTTYPE=image/jpeg:https://iuhoosiers.com/images/2026/10/12/_RM_686
+ 2.jpg
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:https://gophersports.com/index.aspx
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Men's Basketball vs Eastern Illinois
+DTSTART;TZID=America/Indiana/Indianapolis:20261102T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261102T210000
+UID:16ccc3bd8e5486eba61c4b680255f4d8@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.eiupanthers.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Basketball vs FGCU
+DTSTART;TZID=America/Indiana/Indianapolis:20261103T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261103T210000
+UID:3779a8273ba990f6dd50d34b6c5849e1@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.fgcuathletics.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Men's Soccer vs Michigan State
+DTSTART;TZID=America/Indiana/Indianapolis:20261104T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261104T220000
+UID:56780fb555e33af094a7fd40ddf99568@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://msuspartans.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Swimming and Diving vs College Swimming League - Wild Card
+DTSTART;TZID=America/Indiana/Indianapolis:20261105T000000
+DTEND;TZID=America/Indiana/Indianapolis:20261105T020000
+UID:4fcddc14668dc89f2a26bed540f16aaa@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Indianapolis\, Ind.
+URL:https://www.collegeswimmingleague.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Men's Swimming and Diving vs College Swimming League - Wild Card
+DTSTART;TZID=America/Indiana/Indianapolis:20261105T000000
+DTEND;TZID=America/Indiana/Indianapolis:20261105T020000
+UID:d61f42b34760455a77bfbd29cf1df94b@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Indianapolis\, Ind.
+URL:https://www.collegeswimmingleague.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Men's Basketball vs Bellarmine
+DTSTART;TZID=America/Indiana/Indianapolis:20261105T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261105T200000
+UID:c7cfb8bf2bfdcdd949d34bc1ecd18331@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://athletics.bellarmine.edu/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Swimming and Diving vs College Swimming League - Champions
+ hip
+DTSTART;TZID=America/Indiana/Indianapolis:20261106T000000
+DTEND;TZID=America/Indiana/Indianapolis:20261106T020000
+UID:56a9d901c6f5e76f9d7d2e85d6462e29@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Indianapolis\, Ind.
+URL:https://www.collegeswimmingleague.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Men's Swimming and Diving vs College Swimming League - Championshi
+ p
+DTSTART;TZID=America/Indiana/Indianapolis:20261106T000000
+DTEND;TZID=America/Indiana/Indianapolis:20261106T020000
+UID:02cadba99a9d4d48e5204ea6c785b5f1@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Indianapolis\, Ind.
+URL:https://www.collegeswimmingleague.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Volleyball vs Iowa
+DTSTART;TZID=America/Indiana/Indianapolis:20261106T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261106T210000
+UID:c978da4ad886227814fba68d4b10cb88@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.hawkeyesports.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Basketball vs Southern Illinois
+DTSTART;TZID=America/Indiana/Indianapolis:20261106T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261106T210000
+UID:0af21a88fd2d14a44b31ad40c1bd9d9e@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.siusalukis.com
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Volleyball vs Illinois
+DTSTART;TZID=America/Indiana/Indianapolis:20261108T140000
+DTEND;TZID=America/Indiana/Indianapolis:20261108T160000
+UID:f131be554037a04d7128ecee2962a4a5@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.fightingillini.com
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Basketball vs Bradley
+DTSTART;TZID=America/Indiana/Indianapolis:20261109T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261109T210000
+UID:abbcf916b7e6dfc5366a8b4ad8b32342@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.bubraves.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Men's Basketball vs Tennessee Tech
+DTSTART;TZID=America/Indiana/Indianapolis:20261112T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261112T203000
+UID:2998479449ed78d06aedc5d1ad0a793a@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.ttusports.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Basketball vs Samford
+DTSTART;TZID=America/Indiana/Indianapolis:20261113T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261113T210000
+UID:74c035385ac002ea1938f46b8ebf98e1@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.samfordsports.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Football vs USC
+DTSTART;TZID=America/Indiana/Indianapolis:20261114T120000
+DTEND;TZID=America/Indiana/Indianapolis:20261114T140000
+UID:a7a990cc73603d57591548a82bc11962@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.usctrojans.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Volleyball vs Northwestern
+DTSTART;TZID=America/Indiana/Indianapolis:20261114T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261114T220000
+UID:8359944364e7ae6552887b7317b33866@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.nusports.com
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Basketball vs Milwaukee
+DTSTART;TZID=America/Indiana/Indianapolis:20261115T140000
+DTEND;TZID=America/Indiana/Indianapolis:20261115T160000
+UID:5fe6f11cd2f3110f06ca979e78d6c378@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://mkepanthers.com
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Volleyball vs Purdue
+DTSTART;TZID=America/Indiana/Indianapolis:20261117T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261117T210000
+UID:95b8e4529f2f51c01aca9e00fd1ffe2f@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.purduesports.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Basketball vs Coastal Carolina
+DTSTART;TZID=America/Indiana/Indianapolis:20261118T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261118T210000
+UID:84dcd5a3416a1f06bd7231767609ba2a@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.goccusports.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Wrestling vs Oklahoma
+DTSTART;TZID=America/Indiana/Indianapolis:20261120T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261120T210000
+UID:a57a0c8a23413ab217674eb40717cbae@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.soonersports.com
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Basketball vs Southern Indiana
+DTSTART;TZID=America/Indiana/Indianapolis:20261122T140000
+DTEND;TZID=America/Indiana/Indianapolis:20261122T160000
+UID:c9cc65af3dcbfa6dfdec1e526dcd19a0@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://gousieagles.com
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Men's Basketball vs Jacksonville
+DTSTART;TZID=America/Indiana/Indianapolis:20261124T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261124T210000
+UID:f73cd74f2f07cd7ab465be1fd4d4bd32@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.judolphins.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Men's Basketball vs Bowling Green
+DTSTART;TZID=America/Indiana/Indianapolis:20261127T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261127T200000
+UID:818faf984e8a8e8227c3b2039dabc2d5@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://bgsufalcons.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Football vs Purdue
+DTSTART;TZID=America/Indiana/Indianapolis:20261128T120000
+DTEND;TZID=America/Indiana/Indianapolis:20261128T140000
+UID:fc3b580f69738c654793897eb6047021@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.purduesports.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Men's Basketball vs Rutgers
+DTSTART;TZID=America/Indiana/Indianapolis:20261201T200000
+DTEND;TZID=America/Indiana/Indianapolis:20261201T220000
+UID:e24e0d7569c6b77d91fcf77a7ea6de1c@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.scarletknights.com
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Basketball vs Boston College
+DTSTART;TZID=America/Indiana/Indianapolis:20261202T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261202T210000
+UID:ab26fb35829974675a8d6b86e25a8545@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://bceagles.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Men's Basketball vs Western Illinois
+DTSTART;TZID=America/Indiana/Indianapolis:20261203T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261203T200000
+UID:fd8f954239b1df97a9c2430e2649e34f@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.goleathernecks.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Basketball vs Northern Kentucky
+DTSTART;TZID=America/Indiana/Indianapolis:20261209T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261209T210000
+UID:990abbd89af0d01311934a7ff86d4f8a@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://nkunorse.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Men's Basketball vs UCF
+DTSTART;TZID=America/Indiana/Indianapolis:20261212T120000
+DTEND;TZID=America/Indiana/Indianapolis:20261212T140000
+UID:4ba05d36768929d764cf293bec769b2d@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://ucfknights.com
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Basketball vs Illinois State
+DTSTART;TZID=America/Indiana/Indianapolis:20261213T140000
+DTEND;TZID=America/Indiana/Indianapolis:20261213T160000
+UID:051ecb2594afeb424e1ea7d1431381a2@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://goredbirds.com
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Men's Basketball vs Missouri
+DTSTART;TZID=America/Indiana/Indianapolis:20261218T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261218T200000
+UID:cdf0e5e11176f16a34b21049d028e013@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http:///www.mutigers.com
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Basketball vs Florida State
+DTSTART;TZID=America/Indiana/Indianapolis:20261220T130000
+DTEND;TZID=America/Indiana/Indianapolis:20261220T150000
+UID:f769a5c4ad61307771e5bc3ac256529e@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.seminoles.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Men's Basketball vs FDU
+DTSTART;TZID=America/Indiana/Indianapolis:20261222T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261222T210000
+UID:715bbdba6dae4f195591a80e19bc5cac@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.fduknights.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Basketball vs Rutgers 
+DTSTART;TZID=America/Indiana/Indianapolis:20261229T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261229T210000
+UID:163ce59d9778f1962d4cdd23c7745745@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind. 
+URL:http://www.scarletknights.com
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Men's Basketball vs USC
+DTSTART;TZID=America/Indiana/Indianapolis:20270102T140000
+DTEND;TZID=America/Indiana/Indianapolis:20270102T160000
+UID:2b15d6768812525e348cac53d8a82b32@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.usctrojans.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Basketball vs  Maryland
+DTSTART;TZID=America/Indiana/Indianapolis:20270105T190000
+DTEND;TZID=America/Indiana/Indianapolis:20270105T210000
+UID:34382abb948c39caa24676335ef702bb@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.umterps.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Swimming and Diving vs Michigan
+DTSTART;TZID=America/Indiana/Indianapolis:20270108T120000
+DTEND;TZID=America/Indiana/Indianapolis:20270108T140000
+UID:5658aebf9579612a15d1a9d772d54447@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.mgoblue.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Men's Swimming and Diving vs Michigan
+DTSTART;TZID=America/Indiana/Indianapolis:20270108T120000
+DTEND;TZID=America/Indiana/Indianapolis:20270108T140000
+UID:f88076d7492fa5e5c93c2755d485219d@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.mgoblue.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Basketball vs UCLA
+DTSTART;TZID=America/Indiana/Indianapolis:20270108T180000
+DTEND;TZID=America/Indiana/Indianapolis:20270108T200000
+UID:56ddc286616e8453a621f44bb9edb061@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.uclabruins.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Wrestling vs Illinois
+DTSTART;TZID=America/Indiana/Indianapolis:20270110T140000
+DTEND;TZID=America/Indiana/Indianapolis:20270110T160000
+UID:cc406ac2a0de498aa581ca5435cda0b7@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.fightingillini.com
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Men's Basketball vs Maryland
+DTSTART;TZID=America/Indiana/Indianapolis:20270112T180000
+DTEND;TZID=America/Indiana/Indianapolis:20270112T200000
+UID:cc0523cfb48454147e5707fcf27c1532@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.umterps.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Men's Basketball vs Michigan
+DTSTART;TZID=America/Indiana/Indianapolis:20270116T130000
+DTEND;TZID=America/Indiana/Indianapolis:20270116T150000
+UID:1a05e7b2a4a2626eb151e1f612243e2d@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.mgoblue.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Wrestling vs Ohio State
+DTSTART;TZID=America/Indiana/Indianapolis:20270122T200000
+DTEND;TZID=America/Indiana/Indianapolis:20270122T220000
+UID:1c6beda067730433ad665c9650728b4e@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.ohiostatebuckeyes.com
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Men's Basketball vs Illinois
+DTSTART;TZID=America/Indiana/Indianapolis:20270124T120000
+DTEND;TZID=America/Indiana/Indianapolis:20270124T140000
+UID:c73764ed21ce28f6f0f045930e484f71@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.fightingillini.com
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Basketball vs USC
+DTSTART;TZID=America/Indiana/Indianapolis:20270127T190000
+DTEND;TZID=America/Indiana/Indianapolis:20270127T210000
+UID:ff14437d7caba27b01da19da3b54a763@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.usctrojans.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Men's Basketball vs UCLA
+DTSTART;TZID=America/Indiana/Indianapolis:20270130T120000
+DTEND;TZID=America/Indiana/Indianapolis:20270130T140000
+UID:b0f66819685d9fdf7f6d73d4b8a51ed0@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.uclabruins.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Women's Basketball vs Purdue
+DTSTART;TZID=America/Indiana/Indianapolis:20270131T140000
+DTEND;TZID=America/Indiana/Indianapolis:20270131T160000
+UID:0a7fad3ff3bae721335a3441bce3739a@iuhoosiers.com
+DESCRIPTION:
+LOCATION:Bloomington\, Ind.
+URL:http://www.purduesports.com/
+X-SOURCE:IU Athletics
+END:VEVENT
+END:VCALENDAR

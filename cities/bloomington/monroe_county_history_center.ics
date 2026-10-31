@@ -1,0 +1,135 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Monroe County History Center//monroehistory.org//
+X-WR-CALNAME:Monroe County History Center
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Rescheduled Puzzle Swap 2026!
+DTSTART;TZID=America/Indiana/Indianapolis:20270131T100000
+DTEND;TZID=America/Indiana/Indianapolis:20270131T120000
+UID:mchc-20270131-rescheduled-puzzle-swap-2026-@monroehistory.org
+DESCRIPTION:Puzzleswap will be held at the History Center on Saturday\, Ja
+ nuary 31st from 10 am – 4 pm (and half off from 3-4 pm). You can drop of
+ f puzzles Tuesday\, January 27 through Friday\, January 30 during our open
+  hours of 10 am until 4 pm (*please call to make sure we are open in this 
+ weather).
+LOCATION:Monroe County History Center\, 202 E 6th St\, Bloomington\, IN
+URL:https://monroehistory.org/events/rescheduled-puzzle-swap-2026/
+X-SOURCE:Monroe County History Center
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:November HiStory Book Club
+DTSTART;TZID=America/Indiana/Indianapolis:20261128T170000
+DTEND;TZID=America/Indiana/Indianapolis:20261128T190000
+UID:mchc-20261128-november-history-book-club@monroehistory.org
+DESCRIPTION:We meet from 1-2:30 on November 28th at the Monroe County Hist
+ ory Center and online. Everyone is welcome – you don’t have to attend 
+ regularly and you don’t have to read the books in order to join a discus
+ sion. Email book club organizer: Jennifer Borland atjennifer.borse@gmail.c
+ omto be added to our m
+LOCATION:Monroe County History Center\, 202 E 6th St\, Bloomington\, IN
+URL:https://monroehistory.org/events/november-history-book-club/
+X-SOURCE:Monroe County History Center
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:October HiStory Book Club
+DTSTART;TZID=America/Indiana/Indianapolis:20261031T170000
+DTEND;TZID=America/Indiana/Indianapolis:20261031T190000
+UID:mchc-20261031-october-history-book-club@monroehistory.org
+DESCRIPTION:We meet from 1-2:30 on October 31st at the Monroe County Histo
+ ry Center and online. Everyone is welcome – you don’t have to attend r
+ egularly and you don’t have to read the books in order to join a discuss
+ ion. Email book club organizer: Jennifer Borland atjennifer.borse@gmail.co
+ mto be added to our ma
+LOCATION:Monroe County History Center\, 202 E 6th St\, Bloomington\, IN
+URL:https://monroehistory.org/events/october-history-book-club/
+X-SOURCE:Monroe County History Center
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:History Club
+DTSTART;TZID=America/Indiana/Indianapolis:20270127T123000
+DTEND;TZID=America/Indiana/Indianapolis:20270127T133000
+UID:mchc-20270127-history-club@monroehistory.org
+DESCRIPTION:
+LOCATION:Monroe County History Center\, 202 E 6th St\, Bloomington\, IN
+URL:https://monroehistory.org/events/history-club/
+X-SOURCE:Monroe County History Center
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Puzzlefest 2026
+DTSTART;TZID=America/Indiana/Indianapolis:20270131T100000
+DTEND;TZID=America/Indiana/Indianapolis:20270131T120000
+UID:mchc-20270131-puzzlefest-2026@monroehistory.org
+DESCRIPTION:UPDATE: New competition date is TBD\, we will announce and sen
+ d out emails to team captains asap.
+LOCATION:Monroe County History Center\, 202 E 6th St\, Bloomington\, IN
+URL:https://monroehistory.org/events/puzzlefest-2026/
+X-SOURCE:Monroe County History Center
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Remember the Night
+DTSTART;TZID=America/Indiana/Indianapolis:20261210T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261210T213000
+UID:mchc-20261210-remember-the-night@monroehistory.org
+DESCRIPTION:
+LOCATION:Monroe County History Center\, 202 E 6th St\, Bloomington\, IN
+URL:https://monroehistory.org/events/remember-the-night/
+X-SOURCE:Monroe County History Center
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Public Day November Garage Sale Extravaganza
+DTSTART;TZID=America/Indiana/Indianapolis:20261108T090000
+DTEND;TZID=America/Indiana/Indianapolis:20261108T110000
+UID:mchc-20261108-public-day-november-garage-sale-extravag@monroehistory.o
+ rg
+DESCRIPTION:Come out to support the Monroe County History Center at our No
+ vember Garage Sale Fundraiser! Our entire warehouse will be open for peopl
+ e to browse and shop for unique and fun finds.
+LOCATION:Monroe County History Center\, 202 E 6th St\, Bloomington\, IN
+URL:https://monroehistory.org/events/november-garage-sale-extravaganza-pub
+ lic-day-2/
+X-SOURCE:Monroe County History Center
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:MCHC Member and Cook Day November Garage Sale Extravaganza!
+DTSTART;TZID=America/Indiana/Indianapolis:20261107T090000
+DTEND;TZID=America/Indiana/Indianapolis:20261107T110000
+UID:mchc-20261107-mchc-member-and-cook-day-november-garage@monroehistory.o
+ rg
+DESCRIPTION:Come out to support the Monroe County History Center at our No
+ vember Garage Sale Fundraiser! MCHC Members and Cook Employees are invited
+  to come out on the special day set aside for them. Join as a member today
+ \, or at the door\, to gain early access a day early to the sale!
+LOCATION:Monroe County History Center\, 202 E 6th St\, Bloomington\, IN
+URL:https://monroehistory.org/events/november-garage-sale-extravaganza-mch
+ c-member-and-cook-day/
+X-SOURCE:Monroe County History Center
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:MCHC Member and Cook Day at the November Garage Sale Extravaganza!
+DTSTART;TZID=America/Indiana/Indianapolis:20261101T090000
+DTEND;TZID=America/Indiana/Indianapolis:20261101T110000
+UID:mchc-20261101-mchc-member-and-cook-day-at-the-november@monroehistory.o
+ rg
+DESCRIPTION:If you are a current member at the Monroe County History Cente
+ r (MCHC) or an employee at Cook\, join us for the special day on Friday No
+ vember 1st from 9 am until 6 pm. You can join anytime\, up to and includin
+ g the day of the sale. If you are not a current member\, join byclicking h
+ ere\, or stop by the
+LOCATION:Monroe County History Center\, 202 E 6th St\, Bloomington\, IN
+URL:https://monroehistory.org/events/november-garage-sale-extravaganza-mon
+ roe-county-history-center-member-and-cook-employee-day/
+X-SOURCE:Monroe County History Center
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington&#8217\;s Local Author Book Fair
+DTSTART;TZID=America/Indiana/Indianapolis:20261102T100000
+DTEND;TZID=America/Indiana/Indianapolis:20261102T120000
+UID:mchc-20261102-bloomington-8217-s-local-author-book-fai@monroehistory.o
+ rg
+DESCRIPTION:Bloomington’s Local Author Book Fair
+LOCATION:Monroe County History Center\, 202 E 6th St\, Bloomington\, IN
+URL:https://monroehistory.org/events/bloomingtons-local-author-book-fair/
+X-SOURCE:Monroe County History Center
+END:VEVENT
+END:VCALENDAR

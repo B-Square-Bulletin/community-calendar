@@ -1,0 +1,154 @@
+{
+  "runs": [
+    {
+      "date": "2026-10-04",
+      "fetched": 1845,
+      "emitted": 657
+    },
+    {
+      "date": "2026-10-05",
+      "fetched": 1815,
+      "emitted": 646
+    },
+    {
+      "date": "2026-10-06",
+      "fetched": 1799,
+      "emitted": 645
+    },
+    {
+      "date": "2026-10-07",
+      "fetched": 1806,
+      "emitted": 642
+    },
+    {
+      "date": "2026-10-08",
+      "fetched": 1789,
+      "emitted": 634
+    },
+    {
+      "date": "2026-10-09",
+      "fetched": 1830,
+      "emitted": 678
+    },
+    {
+      "date": "2026-10-10",
+      "fetched": 1849,
+      "emitted": 681
+    },
+    {
+      "date": "2026-10-11",
+      "fetched": 1832,
+      "emitted": 656
+    },
+    {
+      "date": "2026-10-12",
+      "fetched": 1805,
+      "emitted": 647
+    },
+    {
+      "date": "2026-10-13",
+      "fetched": 1787,
+      "emitted": 643
+    },
+    {
+      "date": "2026-10-13",
+      "fetched": 1812,
+      "emitted": 668
+    },
+    {
+      "date": "2026-10-14",
+      "fetched": 1809,
+      "emitted": 660
+    },
+    {
+      "date": "2026-10-15",
+      "fetched": 1797,
+      "emitted": 652
+    },
+    {
+      "date": "2026-10-16",
+      "fetched": 1784,
+      "emitted": 641
+    },
+    {
+      "date": "2026-10-17",
+      "fetched": 1763,
+      "emitted": 625
+    },
+    {
+      "date": "2026-10-18",
+      "fetched": 1737,
+      "emitted": 604
+    },
+    {
+      "date": "2026-10-19",
+      "fetched": 1936,
+      "emitted": 779
+    },
+    {
+      "date": "2026-10-20",
+      "fetched": 1931,
+      "emitted": 777
+    },
+    {
+      "date": "2026-10-21",
+      "fetched": 1989,
+      "emitted": 839
+    },
+    {
+      "date": "2026-10-22",
+      "fetched": 1969,
+      "emitted": 823
+    },
+    {
+      "date": "2026-10-23",
+      "fetched": 1949,
+      "emitted": 808
+    },
+    {
+      "date": "2026-10-24",
+      "fetched": 1930,
+      "emitted": 784
+    },
+    {
+      "date": "2026-10-24",
+      "fetched": 1930,
+      "emitted": 784
+    },
+    {
+      "date": "2026-10-25",
+      "fetched": 1888,
+      "emitted": 747
+    },
+    {
+      "date": "2026-10-26",
+      "fetched": 1873,
+      "emitted": 736
+    },
+    {
+      "date": "2026-10-28",
+      "fetched": 1862,
+      "emitted": 719
+    },
+    {
+      "date": "2026-10-29",
+      "fetched": 1847,
+      "emitted": 708
+    },
+    {
+      "date": "2026-10-29",
+      "fetched": 1886,
+      "emitted": 748
+    },
+    {
+      "date": "2026-10-30",
+      "fetched": 1886,
+      "emitted": 738
+    },
+    {
+      "date": "2026-10-31",
+      "fetched": 1873,
+      "emitted": 713
+    }
+  ]
+}
