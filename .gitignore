@@ -4,7 +4,7 @@
 !scripts/align-fork.sh
 !scripts/verify_edge_functions.sh
 !tests/sql/*.sh
-.jsonsupabase/.temp/
+.json
 supabase/.temp/
 xmlui/supabase.min.js
 __pycache__/
@@ -18,6 +18,10 @@ PENDING.md
 .envrc
 sb.sh
 local-overrides.js
+
+# cc-cli init's resume file holds the service-role key and other secrets;
+# an interrupted run leaves it behind for the next `git add -A` (#249).
+.cc-cli-state.json
 
 # trace-tools is cloned at test/CI time, not checked in
 trace-tools/
