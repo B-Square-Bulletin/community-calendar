@@ -705,12 +705,16 @@ window._xsLogs = [];
         window.__ccEmitSig = (sig == null ? 'null' : sig) + '#' + emitSeq;
       }
 
+      // #247: the event prefetch's REST row cap.
+      var EVENTS_FETCH_LIMIT = 6000;
+
       function eventsUrl(city) {
         return (
           window.SUPABASE_URL +
           '/rest/v1/deduplicated_events' +
           '?select=id,title,start_time,end_time,url,location,description,source,source_names,transcript,source_urls,category,image_url,all_day,merged_ids,duplicate_group,city' +
-          '&order=start_time.asc&limit=6000' +
+          '&order=start_time.asc&limit=' +
+          EVENTS_FETCH_LIMIT +
           '&start_time=gte.' +
           window.fromDate +
           '&start_time=lte.' +
@@ -735,6 +739,19 @@ window._xsLogs = [];
           .then(function (rows) {
             if (Array.isArray(rows)) {
               fetchResolvedCity = city;
+              // Ordered start_time.asc: a capped page is the earliest rows
+              // only, so the far months would render silently empty (#247).
+              // shortcut: exactly 6000 events warns falsely, upgrade if a
+              // real city hits that boundary.
+              if (rows.length >= EVENTS_FETCH_LIMIT) {
+                console.warn(
+                  'Events fetch hit the ' +
+                    EVENTS_FETCH_LIMIT +
+                    '-row cap for ' +
+                    city +
+                    '; events later in the window are missing'
+                );
+              }
               // True network completion, independent of any subscriber —
               // cc-events-emit-fresh records delivery, which collapses to
               // subscription time when the response wins that race.
