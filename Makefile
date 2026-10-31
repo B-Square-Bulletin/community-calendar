@@ -62,12 +62,12 @@ test-node:
 # Run edge-function tests (Deno; not covered by pytest or vitest)
 test-deno:
 	@echo "Running Deno tests..."
-	@deno check supabase/functions/capture-event/index.ts supabase/functions/capture-event/auth_test.ts supabase/functions/validate-feed/index.ts
+	@deno check supabase/functions/capture-event/index.ts supabase/functions/capture-event/auth_test.ts supabase/functions/validate-feed/index.ts supabase/functions/load-events/index.ts
 	@deno test supabase/functions/my-picks/dedupe_test.ts supabase/functions/my-picks/cache_test.ts supabase/functions/load-events/scope_test.ts supabase/functions/load-events/auth_test.ts supabase/functions/validate-feed/url_policy_test.ts
-	# capture-event and validate-feed import supabase-js, whose node types want
-	# node_modules; the handler tests only exercise the pre-fetch auth gate, so
-	# run them unchecked.
-	@deno test --no-check --allow-env supabase/functions/capture-event/auth_test.ts supabase/functions/validate-feed/auth_test.ts
+	# capture-event, validate-feed and load-events also import supabase-js,
+	# whose node types want node_modules; their handler tests stub fetch
+	# instead of reaching the real service, so run them unchecked.
+	@deno test --no-check --allow-env supabase/functions/capture-event/auth_test.ts supabase/functions/validate-feed/auth_test.ts supabase/functions/load-events/sweep_guard_test.ts
 
 # Run browser groups (requires playwright browsers: pnpm exec playwright install chromium)
 test-browser:
