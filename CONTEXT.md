@@ -104,6 +104,10 @@ _Avoid_: Snapping, correcting
 Labeling when a window extends past the horizon so the visitor knows the calendar ended, not the filter.
 _Avoid_: Cutoff (when meaning horizon), capping
 
+**Fetch cap**:
+The REST row limit on the event prefetch, 6,000 in production. A city with more events in a window than the cap receives its earliest rows only, so the calendar ends early even though the horizon still holds events; the client logs a warning naming the city. Distinct from Horizon and Truncation.
+_Avoid_: Horizon (when the cap is meant), data end
+
 **Listing**:
 One row from one source: a single source's rendering of an event. Two sources carrying one real-world event produce two listings.
 _Avoid_: Event (when the source's copy is meant), record
