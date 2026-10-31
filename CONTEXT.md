@@ -37,7 +37,7 @@ The technical mechanism that delivers events from a source — an ICS URL or a s
 _Avoid_: URL, scraper (when referring to the abstraction)
 
 **Build**:
-One run of the pipeline that turns the sources into a published snapshot: scrape, download, combine, classify, upload, and the metadata and archive pushes. A build is either running or queued; a queued build starts only after the running one finishes, because builds share the metadata commit and the archive snapshot. A build covers the cities in its scope; the archive snapshot also carries forward cities it did not rebuild.
+One run of the pipeline that turns the sources into a published snapshot: scrape, download, combine, classify, upload, and the metadata and archive pushes. A build covers the cities in its scope; the archive snapshot also carries forward cities it did not rebuild.
 _Avoid_: Job, deploy (when the pipeline run is meant)
 
 **Source id**:

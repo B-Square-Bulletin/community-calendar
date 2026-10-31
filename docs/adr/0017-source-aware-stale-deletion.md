@@ -101,7 +101,8 @@ string. `remove_feed` keeps rows that carry a stem another same-city feed also
 claims, and warns. Those rows stay until the feeds are disambiguated.
 
 `record_feed_source` appends server-side instead of writing a whole array, so
-two overlapping builds cannot erase each other's stems.
+two builds that do still overlap — a local build beside CI — cannot erase each
+other's stems.
 
 Retiring the owner of a survivor deletes the survivor even when another member
 feed still lists the event. The next build recreates that event under a new row
@@ -184,9 +185,10 @@ metadata commit on `main` and the force-push of the single-snapshot `archive`
 branch — were what made an overlapping build destructive: the later push won,
 and the earlier run's snapshot and report were lost.
 
-Serialization is the only guard: `record_feed_source`'s server-side append
-stays, because it costs nothing and still protects concurrent local builds and
-any future caller. GitHub keeps one pending run per group, so a third dispatch
-replaces the queued second rather than joining a queue; the replaced run's
-scoped cities are not rebuilt, and its snapshot simply reflects the run that
-did execute.
+Serialization is the only guard between builds: `record_feed_source`'s
+server-side append stays, because it costs nothing and still protects a local
+build running beside CI. It is not a repo-wide guard — `regression-tests.yml`
+also pushes to `main`, outside this group. GitHub keeps one pending run per
+group, so a third dispatch replaces the queued second rather than joining a
+queue; the replaced run's scoped cities are not rebuilt and keep their previous
+snapshot, rather than being lost.

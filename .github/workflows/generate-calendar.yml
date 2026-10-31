@@ -443,9 +443,12 @@ jobs:
               [ "$(echo "$city" | xargs)" = "$prev_city" ] && skip=true
             done
             if [ "$skip" = "false" ]; then
-              git checkout origin/archive -- "cities/$prev_city" 2>/dev/null || true
+              # A failed copy here would silently drop the city from the
+              # snapshot the force-push then publishes, so let it fail the build.
+              git checkout origin/archive -- "cities/$prev_city"
               # The per-city health slice is published too (#253), so a scoped
-              # build must not drop the cities it did not rebuild.
+              # build must not drop the cities it did not rebuild. Older
+              # snapshots carry no slice, so an absent one stays tolerated.
               git checkout origin/archive -- "report/$prev_city" 2>/dev/null || true
             fi
           done
