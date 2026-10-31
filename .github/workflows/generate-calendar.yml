@@ -22,6 +22,12 @@ on:
   schedule:
     - cron: '0 0 * * *'
 
+# Builds share the `main` metadata commit and the archive force-push, so a
+# second run queues instead of racing the first (#246).
+concurrency:
+  group: generate-calendar
+  cancel-in-progress: false
+
 jobs:
   generate-calendar:
     runs-on: ubuntu-latest
@@ -420,8 +426,8 @@ jobs:
         # growth). The 224-commit history through 2026-08-13 is
         # preserved as a git bundle on the archive-history-2026-08-13
         # release. Consumer URLs (raw .../archive/...) are unchanged.
-        git fetch origin archive --depth=1 2>/dev/null || true
-
+        # origin/archive is already local from "Restore RSS baseline from
+        # archive"; re-fetching here would hide a failed fetch as "no baseline".
         git checkout --orphan archive-snapshot
         git rm -rf . 2>/dev/null || true
         git clean -fd 2>/dev/null || true
@@ -437,9 +443,12 @@ jobs:
               [ "$(echo "$city" | xargs)" = "$prev_city" ] && skip=true
             done
             if [ "$skip" = "false" ]; then
-              git checkout origin/archive -- "cities/$prev_city" 2>/dev/null || true
+              # A failed copy here would silently drop the city from the
+              # snapshot the force-push then publishes, so let it fail the build.
+              git checkout origin/archive -- "cities/$prev_city"
               # The per-city health slice is published too (#253), so a scoped
-              # build must not drop the cities it did not rebuild.
+              # build must not drop the cities it did not rebuild. Older
+              # snapshots carry no slice, so an absent one stays tolerated.
               git checkout origin/archive -- "report/$prev_city" 2>/dev/null || true
             fi
           done

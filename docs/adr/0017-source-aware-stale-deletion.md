@@ -174,3 +174,25 @@ that have not migrated to the source-reached declaration. `BaseScraper.run()`
 fails a scraper that returns no events without declaring it reached its source
 (ADR 0018), so a migrated quiet source exits 0 and is swept while an outage
 exits non-zero and keeps its rows.
+
+## Amendment 2026-10-30 (#246)
+
+The parenthetical in Decision — that the workflow has no concurrency group — no
+longer holds: `generate-calendar.yml` now serializes on a workflow-level
+`concurrency` group with `cancel-in-progress: false`, so a dispatch during a run
+stays pending until that run finishes. The two jobs that could not be reconciled
+— the metadata commit on `main` and the force-push of the single-snapshot
+`archive` branch — were what made an overlapping build destructive: the later
+push won, and the earlier run's snapshot and report were lost.
+
+Serialization is the only guard between builds: `record_feed_source`'s
+server-side append stays, because it costs nothing and still protects a local
+build running beside CI. It is not a repo-wide guard — `regression-tests.yml`
+also pushes to `main`, outside this group; a push landing between the metadata
+step's rebase and its push fails that step, which stops the run before the
+archive push, and the next build recovers. GitHub keeps one pending run per
+group, so a third dispatch replaces the queued second rather than joining a
+queue; the replaced run's scoped cities are not rebuilt and keep their previous
+snapshot, rather than being lost. The evicted run can be the nightly one: a
+dispatch that replaces a queued cron run skips that night's build, and the next
+scheduled run catches up.

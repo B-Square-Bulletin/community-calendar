@@ -36,6 +36,10 @@ _Avoid_: Venue, organization (when referring to the calendar entry point)
 The technical mechanism that delivers events from a source — an ICS URL or a scraper command. One source has one feed. The implementation layer — what the pipeline operates on.
 _Avoid_: URL, scraper (when referring to the abstraction)
 
+**Build**:
+One run of the pipeline that turns the sources into a published snapshot: scrape, download, combine, classify, upload, and the metadata and archive pushes. A build covers the cities in its scope; the archive snapshot also carries forward cities it did not rebuild.
+_Avoid_: Job, deploy (when the pipeline run is meant)
+
 **Source id**:
 The `.ics` filename stem a feed's build produces — a scraper's output filename, or the slug of an ICS URL. The build stamps it on every event as `X-SOURCE-ID` and records it on the feed row in `feeds.source_ids`, which is a history because a feed's URL can change. Stable per feed, unlike the display `source`, which becomes a comma-joined aggregate after a Merge. A stem that two same-city feeds share identifies neither exclusively; retirement keeps those rows.
 _Avoid_: Source name, slug (when the identity is meant)
