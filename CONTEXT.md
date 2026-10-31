@@ -105,7 +105,7 @@ Labeling when a window extends past the horizon so the visitor knows the calenda
 _Avoid_: Cutoff (when meaning horizon), capping
 
 **Fetch cap**:
-The REST row limit on the event prefetch, 6,000 in production. A city with more events in a window than the cap receives its earliest rows only, so the calendar ends early even though the horizon still holds events; the client logs a warning naming the city. Distinct from Horizon and Truncation.
+The REST row limit on the event prefetch, 6,000 in production. A city with more events in a window than the cap receives its earliest rows only, so the calendar ends early even though the horizon still holds events; the client logs a warning naming the city. The server row limit must stay at or above the cap, or the warning cannot fire. Distinct from Horizon and Truncation.
 _Avoid_: Horizon (when the cap is meant), data end
 
 **Listing**:
