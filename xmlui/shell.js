@@ -741,6 +741,8 @@ window._xsLogs = [];
               fetchResolvedCity = city;
               // Ordered start_time.asc: a capped page is the earliest rows
               // only, so the far months would render silently empty (#247).
+              // shortcut: exactly 6000 events warns falsely, upgrade if a
+              // real city hits that boundary.
               if (rows.length >= EVENTS_FETCH_LIMIT) {
                 console.warn(
                   'Events fetch hit the ' +

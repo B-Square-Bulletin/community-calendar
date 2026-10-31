@@ -29,11 +29,14 @@ function capSizedRows() {
 
 async function bootAndCollectWarnings(page, rows) {
   const warnings = [];
+  const requests = [];
   page.on('console', (msg) => {
     if (msg.type() === 'warning') warnings.push(msg.text());
   });
   await page.route('**/rest/v1/**', (route) => {
-    if (route.request().url().includes('/deduplicated_events')) {
+    const url = route.request().url();
+    requests.push(url);
+    if (url.includes('/deduplicated_events')) {
       return route.fulfill({
         status: 200,
         contentType: 'application/json',
@@ -46,19 +49,24 @@ async function bootAndCollectWarnings(page, rows) {
     route.fulfill({ status: 200, contentType: 'application/json', body: '{}' })
   );
   await page.goto('/xmlui/index.html?city=' + CITY);
-  return warnings;
+  return { warnings, requests };
 }
 
 test('a full page warns, naming the city and the cap', async ({ page }) => {
-  const warnings = await bootAndCollectWarnings(page, capSizedRows());
+  const { warnings, requests } = await bootAndCollectWarnings(page, capSizedRows());
   await expect
     .poll(() => warnings.filter((w) => w.includes('row cap')).length, { timeout: 45000 })
     .toBe(1);
   expect(warnings.find((w) => w.includes('row cap'))).toBe(CAP_WARNING);
+  // The warning only means truncation if the request still asks for the cap
+  // in start_time order, so pin the query the response is paired with.
+  const eventsRequest = requests.find((u) => u.includes('/deduplicated_events'));
+  expect(eventsRequest).toContain('limit=6000');
+  expect(eventsRequest).toContain('order=start_time.asc');
 });
 
 test('a city under the cap is unchanged', async ({ page }) => {
-  const warnings = await bootAndCollectWarnings(page, [event(1), event(2), event(3)]);
+  const { warnings } = await bootAndCollectWarnings(page, [event(1), event(2), event(3)]);
   await expect(page.getByText('Cap Test 1', { exact: true })).toBeVisible({ timeout: 45000 });
   expect(warnings.filter((w) => w.includes('row cap'))).toHaveLength(0);
 });
