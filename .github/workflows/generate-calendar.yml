@@ -22,6 +22,12 @@ on:
   schedule:
     - cron: '0 0 * * *'
 
+# Builds share the `main` metadata commit and the archive force-push, so a
+# second run queues instead of racing the first (#246).
+concurrency:
+  group: generate-calendar
+  cancel-in-progress: false
+
 jobs:
   generate-calendar:
     runs-on: ubuntu-latest
