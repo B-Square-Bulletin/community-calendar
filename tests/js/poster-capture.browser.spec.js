@@ -1,22 +1,25 @@
 // tests/js/poster-capture.browser.spec.js — Playwright guard for #254.
 //
-// WHY: poster capture was reported as "the upload returns a promise that is
-// used as if it were the result", so the dialog would always fail and never
-// show the spinner. The dialogs assign `const result = window.resizeAndUpload(…)`
-// without `await`; XMLUI has no `await`, and compiles that declaration to
-// `await runtime.complete(runtime.call(…))`, flushing pending state first
-// (xmlui@0.14.27 event-async.ts / event-runtime.ts). This spec is the only
-// seam that proves the runtime contract end to end: the dialog boots the real
-// index.html hermetically, the capture-event request is held open, and the
-// spinner, the editor fill, and the bearer token are all observed in the DOM.
-// If XMLUI ever stops awaiting that call, this test fails rather than silently
-// spending an API call and showing "Failed to extract event".
+// WHY: the dialog assigns `const result = window.resizeAndUpload(…)` with no
+// `await`. XMLUI compiles that declaration into an awaited call, so the editor
+// fills and the spinner paints while the request is open. If that compile
+// changes, this spec fails instead of spending a request and showing the user
+// "Failed to extract event".
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 import { test, expect } from '@playwright/test';
 
-const CITY = 'davis';
+const CITY = 'bloomington';
 const TOKEN = 'test-token';
-const AUTH_STORAGE_KEY = 'sb-qatykxdvbpojxnvpicyi-auth-token';
 const SPINNER = 'Extracting event details...';
+
+// shell.js derives the key from the configured project URL (#248), so a fork
+// that changes supabaseUrl must not need to edit this spec.
+const { appGlobals } = JSON.parse(
+  readFileSync(path.join(__dirname, '..', '..', 'xmlui', 'config.json'), 'utf8')
+);
+const AUTH_STORAGE_KEY =
+  'sb-' + new URL(appGlobals.supabaseUrl).hostname.split('.')[0] + '-auth-token';
 
 // One transparent pixel: enough for resizeImageFile to decode and re-encode.
 const PNG = Buffer.from(
@@ -28,10 +31,6 @@ const EXTRACTED = {
   event: {
     title: 'Poster Show',
     start_time: '2026-11-05T19:30:00',
-    end_time: '2026-11-05T21:00:00',
-    location: 'Hall',
-    description: 'Music',
-    url: 'https://example.com/show',
   },
 };
 
@@ -63,9 +62,7 @@ async function boot(page) {
     [AUTH_STORAGE_KEY, TOKEN]
   );
   await page.goto('/xmlui/index.html?city=' + CITY);
-  await expect(page.locator('[aria-label="Capture Event from Poster"]')).toBeVisible({
-    timeout: 45000,
-  });
+  await expect(page.locator('[aria-label="Capture Event from Poster"]')).toBeVisible();
 }
 
 async function openPosterCapture(page) {
