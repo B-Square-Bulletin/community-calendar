@@ -7,7 +7,7 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-Deno.serve(async (req) => {
+export async function handler(req: Request): Promise<Response> {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
@@ -121,12 +121,15 @@ Deno.serve(async (req) => {
           `Cleanup ${city} skipped: ${errors} events failed to upsert, so their replacements may be missing`
         );
       }
-      if (errors === 0 && newSourceUids.length > 0) {
+      // An empty scope means nothing ran (#233), so skip the call outright:
+      // an empty manifest must issue zero sweep RPCs (issue #245).
+      const sweepScope = resolveSweepScope(ranSources, presentSources);
+      if (errors === 0 && newSourceUids.length > 0 && sweepScope.length > 0) {
         const { data: delCount, error: delError } = await supabase
           .rpc("delete_stale_events", {
             p_city: city,
             p_source_uids: newSourceUids,
-            p_sources: resolveSweepScope(ranSources, presentSources),
+            p_sources: sweepScope,
           });
         if (delError) {
           console.error(`Cleanup ${city} error:`, delError);
@@ -163,4 +166,6 @@ Deno.serve(async (req) => {
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   }
-});
+}
+
+if (import.meta.main) Deno.serve(handler);
