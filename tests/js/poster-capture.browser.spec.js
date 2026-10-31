@@ -35,6 +35,13 @@ const EXTRACTED = {
 };
 
 async function boot(page) {
+  // A developer's config.local.js (scripts/align-fork.sh) can point
+  // SUPABASE_URL at another project, and the app then derives a different
+  // auth key than the one seeded below. Stub it empty so the spec reads
+  // config.json and stays hermetic.
+  await page.route('**/config.local.js*', (route) =>
+    route.fulfill({ status: 200, contentType: 'application/javascript', body: '' })
+  );
   await page.route('**/rest/v1/**', (route) => {
     const url = route.request().url();
     let body = '[]';
