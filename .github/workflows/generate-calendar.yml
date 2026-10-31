@@ -426,8 +426,11 @@ jobs:
         # growth). The 224-commit history through 2026-08-13 is
         # preserved as a git bundle on the archive-history-2026-08-13
         # release. Consumer URLs (raw .../archive/...) are unchanged.
-        git fetch origin archive --depth=1 2>/dev/null || true
-
+        # origin/archive is already local from "Restore RSS baseline from
+        # archive", which fails the build when the branch cannot be fetched.
+        # Re-fetching here would swallow that failure into "no baseline" and
+        # silently publish a snapshot missing every city this run did not
+        # rebuild, so the carry-forward below reads the existing ref.
         git checkout --orphan archive-snapshot
         git rm -rf . 2>/dev/null || true
         git clean -fd 2>/dev/null || true
