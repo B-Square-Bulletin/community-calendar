@@ -439,11 +439,18 @@ window._xsLogs = [];
     var SUPABASE_KEY = window.SUPABASE_KEY;
     var sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+    // #248: supabase-js stores the session under `sb-<ref>-auth-token`, where
+    // <ref> is the first hostname label of the configured project URL. Derive
+    // it here so boot read and sign out always address the same key on this
+    // project and on forks — a hardcoded key signs fork users back in.
+    function authStorageKey() {
+      return 'sb-' + new URL(SUPABASE_URL).hostname.split('.')[0] + '-auth-token';
+    }
+
     window.authUser = null;
     window.authSession = null;
     try {
-      var projRef = new URL(SUPABASE_URL).hostname.split('.')[0];
-      var stored = localStorage.getItem('sb-' + projRef + '-auth-token');
+      var stored = localStorage.getItem(authStorageKey());
       if (stored) {
         var parsed = JSON.parse(stored);
         if (parsed.user && parsed.expires_at) {
@@ -485,9 +492,7 @@ window._xsLogs = [];
     };
 
     window.signOut = function () {
-      console.log('signOut called');
-      localStorage.removeItem('sb-dzpdualvwspgqghrysyz-auth-token');
-      console.log('localStorage cleared, reloading...');
+      localStorage.removeItem(authStorageKey());
       window.location.reload();
     };
 

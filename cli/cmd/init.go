@@ -445,7 +445,7 @@ func Init() error {
 		if err := config.UpdateConfigJSON(repoRoot, s.SupabaseURL, s.PublishableKey); err != nil {
 			return fmt.Errorf("\n  config.json: %w", err)
 		}
-		if err := config.UpdateHTMLFiles(repoRoot, s.SupabaseURL, s.PublishableKey, s.ProjectRef); err != nil {
+		if err := config.UpdateHTMLFiles(repoRoot, s.SupabaseURL, s.PublishableKey); err != nil {
 			return fmt.Errorf("\n  %w", err)
 		}
 		fmt.Println(" ✓")
