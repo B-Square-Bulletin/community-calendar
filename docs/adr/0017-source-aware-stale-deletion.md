@@ -193,4 +193,6 @@ step's rebase and its push fails that step, which stops the run before the
 archive push, and the next build recovers. GitHub keeps one pending run per
 group, so a third dispatch replaces the queued second rather than joining a
 queue; the replaced run's scoped cities are not rebuilt and keep their previous
-snapshot, rather than being lost.
+snapshot, rather than being lost. The evicted run can be the nightly one: a
+dispatch that replaces a queued cron run skips that night's build, and the next
+scheduled run catches up.

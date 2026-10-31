@@ -427,10 +427,7 @@ jobs:
         # preserved as a git bundle on the archive-history-2026-08-13
         # release. Consumer URLs (raw .../archive/...) are unchanged.
         # origin/archive is already local from "Restore RSS baseline from
-        # archive", which fails the build when the branch cannot be fetched.
-        # Re-fetching here would swallow that failure into "no baseline" and
-        # silently publish a snapshot missing every city this run did not
-        # rebuild, so the carry-forward below reads the existing ref.
+        # archive"; re-fetching here would hide a failed fetch as "no baseline".
         git checkout --orphan archive-snapshot
         git rm -rf . 2>/dev/null || true
         git clean -fd 2>/dev/null || true
