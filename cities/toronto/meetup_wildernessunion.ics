@@ -1,0 +1,445 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Meetup//Meetup Calendar 1.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+NAME:Wilderness Union Toronto - Outdoor Adventure and Hiking Club
+X-WR-CALNAME:Wilderness Union Toronto - Outdoor Adventure and Hiking Club
+BEGIN:VTIMEZONE
+TZID:America/Toronto
+TZURL:http://tzurl.org/zoneinfo-outlook/America/Toronto
+X-LIC-LOCATION:America/Toronto
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+X-SOURCE:Meetup: Wilderness Union
+X-SOURCE-URL:https://www.meetup.com/wildernessunion/
+UID:event_313820489@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031649Z
+DTSTART;TZID=America/Toronto:20260412T080000
+DTEND;TZID=America/Toronto:20260412T200000
+SUMMARY:Survivalist Series: Introduction to Cold Exposure
+DESCRIPTION:Wilderness Union Toronto - Outdoor Adventure and Hiking Club\n
+ **Please note the only way to register for this adventure is on [our websi
+ te.](https://www.wildernessunion.com/adventures/intro-cold-exposure)**\n\n
+ **Learning how to embrace the cold and manage its risks is key to enjoying
+  the Canadian outdoors all year ‘round.**\n\nIn this adventure\, we will
+  combine hiking in a rugged winter landscape with skill-building challenge
+ s\, teaching you how to thrive in cold conditions. You will learn:\n\n* Ho
+ w to dress and act to stay warm and healthy during outdoor activities in c
+ old conditions\n* The basics of preventing\, recognizing\, and responding 
+ to hypothermia and frostbite\n* How to recognize hazardous ice and snow\, 
+ and what to do in case of accidental immersion in frozen water\n* Optional
+ ly (and weather/conditions permitting)\, you could take on the challenge o
+ f a real cold plunge in a frozen lake\, with expert guidance and safety pl
+ anning.\n\nThis course is led by Sarah\, our amazing guide and medical doc
+ tor who has experience as a first responder in remote environments and exp
+ ertise in simulation-based teaching of emergency skills.\n\n**Interested i
+ n joining this year’s Epics? Completing this and other relevant courses 
+ will support your approval process for advanced adventures.**\n\n**Include
+ d:** Essential cold-weather items to add to your personal first aid kit\, 
+ including a hypothermia blanket and ‘Cold Card’.\n\n**Who It’s For**
+ : Anyone who wants to spend time outdoors with confidence in all four seas
+ ons! No previous first aid experience is required. For those with prior wi
+ lderness first aid training\, or other healthcare experience\, this worksh
+ op is an opportunity to gain valuable extra repetitions honing your skills
+  in a realistic outdoor environment.\n\n**About this series:** The Surviva
+ list Series is an expert-led set of courses designed to develop applicable
+  and life-saving skills in the outdoors. Keep your eyes peeled for more co
+ urses on many other topics as they become available.\n\n**Due to limited p
+ arking at the course location\, WU transport is strongly recommended. We c
+ annot guarantee safe parking for your vehicle.**\n\n**Highlights**\n**Surv
+ ivalist Skills Training:** Develop essential skills to survive and thrive 
+ in the wild.\n**Expert Instructors:** Our amazing expert guides will teach
+  you everything you need to know in a safe and fun way.\n**Cold Exposure K
+ it Included:** Each participant will get a ‘cold card’ and an emergenc
+ y blanket to add to their medical kits.\n\n**Event cost: $90+HST - optiona
+ l transport available.**\n**Register [here.](https://www.wildernessunion.c
+ om/adventures/intro-cold-exposure)**\n\n**About Wilderness Union**\nWilder
+ ness Union is deliberate about building an outdoors community that connect
+ s you to the life-changing magic of the outdoors and helps you find your p
+ eople.\n\nMembers range from 20-40 years old. The group is a mix of GTA lo
+ cals and newcomers to Toronto from within Canada and abroad.\n\nAttendance
+  numbers on Meetup don't reflect our actual event attendance - we typicall
+ y have 15-20 community members at each event. Large enough that there's so
+ meone new to meet but small enough that it's not overwhelming!\n\n***Learn
+  more at our website [www.wildernessunion.com](https://www.wildernessunion
+ .com/)***
+URL;VALUE=URI:https://www.meetup.com/wildernessunion/events/313820489/
+STATUS:CONFIRMED
+CREATED:20260317T180453Z
+LAST-MODIFIED:20260317T180453Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Wilderness Union
+X-SOURCE-URL:https://www.meetup.com/wildernessunion/
+UID:event_314152891@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031649Z
+DTSTART;TZID=America/Toronto:20260415T183000
+DTEND;TZID=America/Toronto:20260415T223000
+SUMMARY:CommUnion: Tilt Arcade Bar Social
+DESCRIPTION:Wilderness Union Toronto - Outdoor Adventure and Hiking Club\n
+ **Please note the only way to register for this adventure is on [our websi
+ te.](https://www.wildernessunion.com/adventures/communion-tilt)**\n\n***Ba
+ ck again with another social for the homies as we spring into the new seas
+ on. This time\, we’re taking over Tilt Arcade Bar in Toronto.***\nWhat y
+ ou can expect:\n\n* A great time with new and old friends alike\n* Gamecub
+ e consoles so you can finally prove to yourself (and your family) that you
+ r sibling was clearly cheating growing up and that you’re not actually t
+ hat bad at Mario Kart afterall!!\n* Isaac trying to play dance dance revol
+ ution (a must see)\n* Drink tickets for the big winners\n* Loads of food a
+ nd drink options\n\nThis spot is super rad because they have tons of amazi
+ ng games that you can play as much as you want. They also have good drinks
+  (alc & non alc) and some bar food to keep you locked and loaded (figurati
+ vely speaking\, of course).\n\nThe price of your ticket gets you access in
+ to the venue. Wilderness Union will also be providing a limited amount of 
+ food and drink for attendees.\n\nCommUnion is the new name for Wilderness 
+ Union's social series. This is a members-only event but you are welcome to
+  bring guests!\n\n**Whether you’re new to the community or have been wit
+ h us since day 1\, come join in on a great night out! This one should be a
+  ton of fun!**\n\n**Highlights**\nUnlimited Arcade Games. Good People. Spr
+ ing Vibes.\n\n**Event cost: $10+HST. Register [here.](https://www.wilderne
+ ssunion.com/adventures/communion-tilt)**\n\n**About Wilderness Union**\nWi
+ lderness Union is deliberate about building an outdoors community that con
+ nects you to the life-changing magic of the outdoors and helps you find yo
+ ur people.\n\nMembers range from 20-40 years old. The group is a mix of GT
+ A locals and newcomers to Toronto from within Canada and abroad.\n\nAttend
+ ance numbers on Meetup don't reflect our actual event attendance - we typi
+ cally have 15-20 community members at each event. Large enough that there'
+ s someone new to meet but small enough that it's not overwhelming!\n\n***L
+ earn more at our website [www.wildernessunion.com](https://www.wildernessu
+ nion.com/)***
+URL;VALUE=URI:https://www.meetup.com/wildernessunion/events/314152891/
+STATUS:CONFIRMED
+CREATED:20260406T200012Z
+LAST-MODIFIED:20260406T200012Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Wilderness Union
+X-SOURCE-URL:https://www.meetup.com/wildernessunion/
+UID:event_313942060@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031649Z
+DTSTART;TZID=America/Toronto:20260418T063000
+DTEND;TZID=America/Toronto:20260418T200000
+SUMMARY:Wilder Series: The Wilder Loop
+DESCRIPTION:Wilderness Union Toronto - Outdoor Adventure and Hiking Club\n
+ **Please note the only way to register for this adventure is on [our websi
+ te.](https://www.wildernessunion.com/adventures/wilder-loop-26)**\n\n**Wel
+ come to the original Wilder Series adventure- a very challenging hike thro
+ ugh a wild\, secret location.**\n\nThe Wilder Loop is 20 km of remote\, ru
+ gged terrain through one of Ontario’s most untouched landscapes. Right f
+ rom the start\, the trail throws you into the wild: the first 5 km have ev
+ erything we love about backcountry hiking\; twisting forest paths\, sweepi
+ ng granite ridges\, narrow boardwalks\, and multiple beaver dams to scramb
+ le across. No two kilometers are the same\, and every twist in the trail f
+ eels like a secret waiting to be found.\n\nOnce we hit the loop section\, 
+ things get much quieter. This part of the park sees very few visitors as h
+ uman footprints give way to moose tracks\, and the rustling in the brush m
+ ight just be one of the many beavers that call this area home.\n\nThough t
+ he total elevation gain is relatively modest (about 260 m over the whole r
+ oute)\, the trail’s difficulty comes from its remoteness\, terrain\, and
+  ever-changing conditions. That said\, for those willing to take it on\, t
+ he reward is huge: sweeping views\, total solitude\, an unfiltered experie
+ nce of Ontario’s boreal beauty... and a well-earned sense of pride by th
+ e time we make it back to the trailhead.\n\n***Secret Location***\nThis is
+  one of Wilderness Union's 'secret' hikes. As a group\, we visit some trul
+ y special spots that are undiscovered by the wider world. We like to keep 
+ them pristine and only share them among our members- we ask that you do th
+ e same! We reveal the location to registered members in the days before th
+ e trip.\n\n**Highlights**\n**Untouched Wilderness-** Step into a landscape
+  that feels frozen in time\; wild\, windswept\, and wonderfully remote. Ju
+ st you\, the forest\, and the sound of your boots on the trail.\n**Wildlif
+ e Spotting -** Bears\, moose\, beavers and loons are just some of the crea
+ tures that call this area home. You'll have a chance to spot some from a s
+ afe distance for a magical encounter.\n**Beaver Dam Crossings -** The area
+  we're visiting is shaped by beavers. Tiptoe across nature’s original br
+ idges- muddy\, meticulously built\, and surprisingly sturdy.\n\n**Event co
+ st: $60+HST - optional transport available.**\n**Register [here.](https://
+ www.wildernessunion.com/adventures/wilder-loop-26)**\n\n**About Wilderness
+  Union**\nWilderness Union is deliberate about building an outdoors commun
+ ity that connects you to the life-changing magic of the outdoors and helps
+  you find your people.\n\nMembers range from 20-40 years old. The group is
+  a mix of GTA locals and newcomers to Toronto from within Canada and abroa
+ d.\n\nAttendance numbers on Meetup don't reflect our actual event attendan
+ ce - we typically have 15-20 community members at each event. Large enough
+  that there's someone new to meet but small enough that it's not overwhelm
+ ing!\n\n***Learn more at our website [www.wildernessunion.com](https://www
+ .wildernessunion.com/)***
+URL;VALUE=URI:https://www.meetup.com/wildernessunion/events/313942060/
+STATUS:CONFIRMED
+CREATED:20260325T134743Z
+LAST-MODIFIED:20260325T134743Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Wilderness Union
+X-SOURCE-URL:https://www.meetup.com/wildernessunion/
+UID:event_314043705@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031649Z
+DTSTART;TZID=America/Toronto:20260425T103000
+DTEND;TZID=America/Toronto:20260425T190000
+SUMMARY:Hockley Valley Hike & Winery Visit
+DESCRIPTION:Wilderness Union Toronto - Outdoor Adventure and Hiking Club\n
+ **Please note the only way to register for this adventure is on [our websi
+ te.](https://www.wildernessunion.com/adventures/hockley-valley-and-winery)
+ **\n\n***Just over an hour outside of Toronto\, enjoy a leisurely hike alo
+ ng the Niagara Escarpment\, ending with great food & drink overlooking a v
+ ineyard.***\n\nHockley Valley offers some of the best hiking in the GTA. I
+ t’s especially beautiful in the spring time with the trees budding\, the
+  ice thawing and no bugs to be found.\n\nThis hike covers a gentle 6km and
+  brings you over trickling streams and bridges\, winds through diverse\, p
+ iney forests filled with fungi and brings you out to hilly meadows where y
+ ou may spot the first few wildflowers of the season pushing through.\n\nAf
+ ter the hike\, we’ll gather together for some time at the Adamo Estate W
+ inery right beside the park to eat\, drink and socialize with good company
+ .\n\n**Please note anything purchased at the winery is not included in the
+  cost of your registration.**\n\n**Highlights**\n**Diverse Landscapes-** E
+ mbrace the wide array of different landscapes you will encounter throughou
+ t this adventure\n**Winery Experience-** Savour amazing wines from a great
+  Ontario producer\n**Group Social Moment-** The perfect opportunity to con
+ nect and chat with fellow WU members\n\n**Event cost: $40+HST - optional t
+ ransport available.**\n**Register [here. ](https://www.wildernessunion.com
+ /adventures/hockley-valley-and-winery)**\n\n**About Wilderness Union**\nWi
+ lderness Union is deliberate about building an outdoors community that con
+ nects you to the life-changing magic of the outdoors and helps you find yo
+ ur people.\n\nMembers range from 20-40 years old. The group is a mix of GT
+ A locals and newcomers to Toronto from within Canada and abroad.\n\nAttend
+ ance numbers on Meetup don't reflect our actual event attendance - we typi
+ cally have 15-20 community members at each event. Large enough that there'
+ s someone new to meet but small enough that it's not overwhelming!\n\n***L
+ earn more at our website [www.wildernessunion.com](https://www.wildernessu
+ nion.com/)***
+URL;VALUE=URI:https://www.meetup.com/wildernessunion/events/314043705/
+STATUS:CONFIRMED
+CREATED:20260330T203748Z
+LAST-MODIFIED:20260330T203748Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Wilderness Union
+X-SOURCE-URL:https://www.meetup.com/wildernessunion/
+UID:event_314043753@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031649Z
+DTSTART;TZID=America/Toronto:20260426T083000
+DTEND;TZID=America/Toronto:20260426T133000
+SUMMARY:Spring Migration Birding Workshop
+DESCRIPTION:Wilderness Union Toronto - Outdoor Adventure and Hiking Club\n
+ **Please note the only way to register for this adventure is on [our websi
+ te.](https://www.wildernessunion.com/adventures/spring-birdwatching-26)**\
+ n\n***Join us at Tommy Thompson park in Toronto to experience spring migra
+ tion in all its glory.***\n\nBack by popular demand\, our expert birdwatch
+ ing guide Pedro Hernandez from [Outdoor Commute](https://www.instagram.com
+ /outdoor.commute/) will be leading his Introduction to Birdwatching Worksh
+ op.\n\nThis experience is designed for beginners and regular birders alike
+  who are curious about the birds that share our city. Together\, we’ll l
+ earn how to identify both local and migratory species\, practice using bin
+ oculars\, and explore field guides and apps\, all while deepening our appr
+ eciation for the natural world around us.\n\n**What we might see:** The en
+ d of April and into May is peak spring migration season in Ontario. Tommy 
+ Thompson Park is one of the best birding spots in the province and is loca
+ ted right in the city. Depending on conditions\, we might encounter warble
+ rs\, sparrows\, thrushes\, and waterfowl such as northern shovelers and ga
+ dwalls\, along with year-round residents like red-tailed hawks\, black-cap
+ ped chickadees\, and northern cardinals.\n\n**Please note that binoculars 
+ are included in the cost of the adventure and that\, due to the Toronto lo
+ cation\, transportation is not offered.**\n\n**Highlights**\n**Spring Migr
+ ation -** Experience birding at one of the best times of year\, connecting
+  with both local and travelling species before many move south for the win
+ ter.\n**Binoculars Included -** Every participant will get to use a pair o
+ f high quality NOCS binoculars.\n**Professional Birder -** Learn from Pedr
+ o Hernandez\, founder of the popular Instragram account Outdoor Commute\n\
+ n**Event cost: $50+HST - optional transport available.**\n**Register [here
+ .](https://www.wildernessunion.com/adventures/spring-birdwatching-26)**\n\
+ n**About Wilderness Union**\nWilderness Union is deliberate about building
+  an outdoors community that connects you to the life-changing magic of the
+  outdoors and helps you find your people.\n\nMembers range from 20-40 year
+ s old. The group is a mix of GTA locals and newcomers to Toronto from with
+ in Canada and abroad.\n\nAttendance numbers on Meetup don't reflect our ac
+ tual event attendance - we typically have 15-20 community members at each 
+ event. Large enough that there's someone new to meet but small enough that
+  it's not overwhelming!\n\n***Learn more at our website [www.wildernessuni
+ on.com](https://www.wildernessunion.com/)***
+URL;VALUE=URI:https://www.meetup.com/wildernessunion/events/314043753/
+STATUS:CONFIRMED
+CREATED:20260330T204405Z
+LAST-MODIFIED:20260330T204405Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Wilderness Union
+X-SOURCE-URL:https://www.meetup.com/wildernessunion/
+UID:event_314152930@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031649Z
+DTSTART;TZID=America/Toronto:20260502T090000
+DTEND;TZID=America/Toronto:20260502T183000
+SUMMARY:Hilton Falls Mega Hike
+DESCRIPTION:Wilderness Union Toronto - Outdoor Adventure and Hiking Club\n
+ **Please note the only way to register for this adventure is on [our websi
+ te.](https://www.wildernessunion.com/adventures/hilton-falls-mega-hike)**\
+ n\n**Join us for this half-marathon spring challenge as we trek a full 21 
+ km through the rugged heart of the Hilton Falls trail system.**\n\nWe are 
+ heading out to the Milton area to test our endurance amidst Ontario’s be
+ autiful scenery. We’ll navigate varied terrain under towering pines that
+  define this UNESCO World Biosphere Reserve.\n\nThe air should be crisp an
+ d the forest floor will be waking up with the first signs of spring. You c
+ an expect a stop at the iconic waterfall and old mill along the way\, a un
+ ique feature of this conservation area.\n\nThe day is designed for those w
+ ho want to push their endurance while surrounded by a crew of supportive\,
+  like-minded adventurers. Please consider your fitness level when register
+ ing for this adventure\, as it will be challenging and fast paced.\n\n**Hi
+ ghlights**\n**Incredible views:** We will trek along the ridges of the Nia
+ gara escarpment\, giving us shimmering views of the horizon and the valley
+  below.\n**Half Marathon Hike:** Covering 21 km is the perfect challenge f
+ or those looking to level up their endurance with a supportive group.\n**C
+ elebratory Drinks:** We’ll go for an (optional) celebration once the hik
+ e is done to toast our success with the crew.\n\n**Event cost: $60+HST - o
+ ptional transport available.**\n**Register [here.](https://www.wildernessu
+ nion.com/adventures/hilton-falls-mega-hike)**\n\n**About Wilderness Union*
+ *\nWilderness Union is deliberate about building an outdoors community tha
+ t connects you to the life-changing magic of the outdoors and helps you fi
+ nd your people.\n\nMembers range from 20-40 years old. The group is a mix 
+ of GTA locals and newcomers to Toronto from within Canada and abroad.\n\nA
+ ttendance numbers on Meetup don't reflect our actual event attendance - we
+  typically have 15-20 community members at each event. Large enough that t
+ here's someone new to meet but small enough that it's not overwhelming!\n\
+ n***Learn more at our website [www.wildernessunion.com](https://www.wilder
+ nessunion.com/)***
+URL;VALUE=URI:https://www.meetup.com/wildernessunion/events/314152930/
+STATUS:CONFIRMED
+CREATED:20260406T200526Z
+LAST-MODIFIED:20260406T200526Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Wilderness Union
+X-SOURCE-URL:https://www.meetup.com/wildernessunion/
+UID:event_314152973@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031649Z
+DTSTART;TZID=America/Toronto:20260503T100000
+DTEND;TZID=America/Toronto:20260503T170000
+SUMMARY:Survivalist Series: Introduction to Firecraft
+DESCRIPTION:Wilderness Union Toronto - Outdoor Adventure and Hiking Club\n
+ **Please note the only way to register for this adventure is on [our websi
+ te.](https://www.wildernessunion.com/adventures/fire-craft-intro-3)**\n\n*
+ **Discover the ancient art of safely creating and maintaining fire without
+  lighters or matches!***\n\nFor thousands of years\, fire has been our gre
+ atest ally for warmth\, safety\, cooking\, and survival. But in the wild\,
+  fire doesn’t come easy. It takes knowledge\, patience\, and the right t
+ echnique.\n\nWe are back for the third installment of this popular course 
+ to teach you the beautiful art of fire. You’ll begin to master the craft
+  with hands-on guidance from our expert firecraft instructor - guide Kyle.
+ \n\nYou'll be shown and encouraged to practice:\n1\\. Ferrocerium rod tech
+ niques with multiple tinders\n2\\. Traditional flint & steel fire lighting
+ \n3\\. The art of hand\\-drill friction fire\nThis course will give you th
+ e foundation to create fire anywhere\, anytime.\n\n**Included:** Your own 
+ high-quality ferro rod to take home and keep the fire burning wherever you
+  go.\n\n**Who It’s For:** This course is for beginners and intermediate 
+ survivalists alike. Bring your curiosity\, a willingness to learn\, and a 
+ love of getting outside. This is an amazing opportunity not only to learn 
+ from our expert\, but it's a fun\, practical lesson at a uniquely low pric
+ e.\n\n**About this series:** The Survivalist Series is an expert-led set o
+ f courses designed to develop applicable and life-saving skills in the out
+ doors. Keep your eyes peeled for more courses on many other topics coming 
+ soon!\n\n**Due to the cost of parking at Bronte Creek\, WU transport is re
+ commended for this course.**\n\n**Highlights**\n**Ancient techniques:** Le
+ arn unique firecraft techniques from long ago that do not need matches or 
+ a lighter.\n**Survivalist skills training:** Develop essential skills to s
+ urvive and thrive in the wild.\n**Fire kit included:** Every participant g
+ ets this kit including a ferro rod and variety of tinders.\n\n**Event cost
+ : $95+HST - optional transport available.**\n**Register [here.](https://ww
+ w.wildernessunion.com/adventures/fire-craft-intro-3)**\n\n**About Wilderne
+ ss Union**\nWilderness Union is deliberate about building an outdoors comm
+ unity that connects you to the life-changing magic of the outdoors and hel
+ ps you find your people.\n\nMembers range from 20-40 years old. The group 
+ is a mix of GTA locals and newcomers to Toronto from within Canada and abr
+ oad.\n\nAttendance numbers on Meetup don't reflect our actual event attend
+ ance - we typically have 15-20 community members at each event. Large enou
+ gh that there's someone new to meet but small enough that it's not overwhe
+ lming!\n\n***Learn more at our website [www.wildernessunion.com](https://w
+ ww.wildernessunion.com/)***
+URL;VALUE=URI:https://www.meetup.com/wildernessunion/events/314152973/
+STATUS:CONFIRMED
+CREATED:20260406T201142Z
+LAST-MODIFIED:20260406T201142Z
+CLASS:PUBLIC
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Meetup: Wilderness Union
+X-SOURCE-URL:https://www.meetup.com/wildernessunion/
+UID:event_314043796@meetup.com
+SEQUENCE:1
+DTSTAMP:20260407T031649Z
+DTSTART;TZID=America/Toronto:20260516T080000
+DTEND;TZID=America/Toronto:20260518T200000
+SUMMARY:Victoria Day Long Weekend Camping at Bruce Peninsula
+DESCRIPTION:Wilderness Union Toronto - Outdoor Adventure and Hiking Club\n
+ **Please note the only way to register for this adventure is on [our websi
+ te.](https://www.wildernessunion.com/adventures/bruce-fc-26)**\n\n***Join 
+ us for the first camping trip of the season as we head to the turquoise wa
+ ters and towering cliffs of the famed Bruce Peninsula!***\n\nWe are kickin
+ g off the year with a beginner-friendly weekend at one of Ontario’s most
+  legendary landscapes: The Bruce is famous for its shimmering\, crystal-cl
+ ear pools and rugged limestone shores.\n\nSecuring a spot here can be toug
+ h\, but luckily we have handled all the logistics\, so you can focus on ma
+ stering your camp skills\, soaking in the fresh spring air and maybe even 
+ going for a cheeky swim.\n\nOur home for the night is a cozy site at Cypru
+ s Lake\, tucked within the National Park. Whether you want to learn to bui
+ ld the perfect campfire or simply chill in a hammock under a canopy of pin
+ es\, this trip is designed for relaxation and discovery. When the sun goes
+  down\, we will gather for a communal dinner under skies that offer some o
+ f the best stargazing in the province.\n\nWhat's included\n\n* Professiona
+ l & certified guides\n* ‍All camp meals\, cooking equipment and mess kit
+ s\n* ‍Tents\n\nSleeping bags and sleep pads can be rented from WU for a 
+ small fee. Please note that due to the trip’s itinerary and extremely li
+ mited parking options on the Bruce Peninsula during long weekends\, you’
+ ll need to ride with Wilderness Union for this adventure. Please note that
+  the cost of transport is included in the price.\n\n**Whether you’re a s
+ easoned camper or it’s your first time in a tent\, this adventure has so
+ mething for everyone.**\n\n**Highlights**\n**Grotto Exploration -** Visit 
+ the famous sea caves that feel more like the Mediterranean than Ontario\n*
+ *Dark Sky Stargazing -** Our campsite sits in a Dark Sky Preserve\, offeri
+ ng a window into the cosmos in dazzling\, untouched clarity.\n**Learn Camp
+  Skills**\\- Our guides will show you how to set up a tent\\\, build a roa
+ ring fire and any other skills you want to learn so you can feel totally p
+ repared for the season ahead\\.\n\n**Event cost: $420+HST**\n**Register [h
+ ere.](https://www.wildernessunion.com/adventures/bruce-fc-26)**\n\n**About
+  Wilderness Union**\nWilderness Union is deliberate about building an outd
+ oors community that connects you to the life-changing magic of the outdoor
+ s and helps you find your people.\n\nMembers range from 20-40 years old. T
+ he group is a mix of GTA locals and newcomers to Toronto from within Canad
+ a and abroad.\n\nAttendance numbers on Meetup don't reflect our actual eve
+ nt attendance - we typically have 15-20 community members at each event. L
+ arge enough that there's someone new to meet but small enough that it's no
+ t overwhelming!\n\n***Learn more at our website [www.wildernessunion.com](
+ https://www.wildernessunion.com/)***
+URL;VALUE=URI:https://www.meetup.com/wildernessunion/events/314043796/
+STATUS:CONFIRMED
+CREATED:20260330T205013Z
+LAST-MODIFIED:20260330T205013Z
+CLASS:PUBLIC
+END:VEVENT
+X-ORIGINAL-URL:https://www.meetup.com/wildernessunion/events/ical/
+X-WR-CALNAME:Wilderness Union Toronto - Outdoor Adventure and Hiking Club
+END:VCALENDAR

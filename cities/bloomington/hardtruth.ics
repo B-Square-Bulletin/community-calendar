@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Hard Truth Distilling Co.//hardtruth.com//
+X-WR-CALNAME:Hard Truth Distilling Co.
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Flannel 5k
+DTSTART;TZID=America/Indiana/Indianapolis:20261107T083000
+DTEND;TZID=America/Indiana/Indianapolis:20261107T133000
+UID:tribe-8310@hardtruth.com
+DESCRIPTION:Pull on your favorite flannel and join us for a day of trail r
+ acing\, fall colors\, and good company on Hard Truth’s scenic\, 325-acre
+  campus.Whether you’re looking to set a personal best\, team up with a f
+ riend\, or tackle a unique challenge\, there’s a race for everyone.The R
+ aces:5k Trail Run\, 9:30 a.m.: Run\, walk\, or creatively step your way al
+ ong our trail through the native hardwoods.10K Relay\, 9 a.m.: Teams of tw
+ o compete on our beautiful trails.Shot Mile (21+)\, 10 a.m.: This challeng
+ e is a quic
+URL:https://hardtruth.com/event/flannel-5k/
+X-SOURCE:Hard Truth Distilling Co.
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,28 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Habitat for Humanity Monroe County//monroecountyhabitat.org//
+X-WR-CALNAME:Habitat for Humanity Monroe County
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Donor Appreciation
+DTSTART;TZID=America/Indiana/Indianapolis:20261021T120000
+DTEND;TZID=America/Indiana/Indianapolis:20261021T150000
+UID:habitat-20261021-donor-appreciation@monroecountyhabitat.org
+DESCRIPTION:Please join us for our 2026 Donor Appreciation Event. This eve
+ ning is an opportunity for us to celebrate with you\, thank you\, and shar
+ e…
+LOCATION:Bloomington\, IN
+URL:https://monroecountyhabitat.org/events/
+X-SOURCE:Habitat for Humanity Monroe County
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Stand Up for Habitat
+DTSTART;TZID=America/Indiana/Indianapolis:20261107T120000
+DTEND;TZID=America/Indiana/Indianapolis:20261107T150000
+UID:habitat-20261107-stand-up-for-habitat@monroecountyhabitat.org
+DESCRIPTION:Join us for an unforgettable night of laughter and…
+LOCATION:Bloomington\, IN
+URL:https://monroecountyhabitat.org/events/
+X-SOURCE:Habitat for Humanity Monroe County
+END:VEVENT
+END:VCALENDAR
