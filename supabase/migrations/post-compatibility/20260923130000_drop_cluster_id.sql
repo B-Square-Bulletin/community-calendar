@@ -12,6 +12,9 @@
 -- The view is dropped before the column because the existing view definition
 -- selects `b.cluster_id`. Recreating it here keeps a single source of truth for
 -- the read model (the previous definition plus the column removal).
+--
+-- Requires `events.updated_at`: promote this file with a timestamp after
+-- 20261110120000_add_events_updated_at.sql or the view below fails to create.
 
 DROP MATERIALIZED VIEW IF EXISTS deduplicated_events;
 
@@ -118,6 +121,8 @@ rolled AS (
         (array_agg(b.description ORDER BY b.rep_rank, b.id) FILTER (WHERE b.description IS NOT NULL))[1] AS description,
         (array_agg(b.source_uid ORDER BY b.rep_rank, b.id))[1] AS source_uid,
         min(b.created_at) AS created_at,
+        -- A group changed when any member changed.
+        max(b.updated_at) AS updated_at,
         b.city,
         (array_agg(b.transcript ORDER BY b.rep_rank, b.id) FILTER (WHERE b.transcript IS NOT NULL))[1] AS transcript,
         (array_agg(b.source_id ORDER BY b.rep_rank, b.id))[1] AS source_id,
@@ -142,6 +147,7 @@ SELECT
     COALESCE(n.source, '') AS source,
     r.source_uid,
     r.created_at,
+    r.updated_at,
     r.city,
     r.transcript,
     r.source_id,

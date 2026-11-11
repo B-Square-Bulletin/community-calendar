@@ -52,6 +52,7 @@ Database tests in this repo target a disposable local project database. They are
 ## Current Tests
 
 - `test_deduplicated_events.sql` - verifies route persistence columns and the `deduplicated_events` view: one row per stored group, NULL-group isolation, structured source-name aggregation, deterministic representative, and source-URL union
+- `test_events_updated_at.sql` - verifies `events.updated_at` moves only when a feed-relevant column changes: every content field advances it, an identical upsert and non-content writes do not, and the read model exposes it
 
 ## Troubleshooting
 

@@ -38,6 +38,17 @@ export function compareEvents(a: any, b: any): number {
   return a.start_time.localeCompare(b.start_time) || Number(a.id) - Number(b.id);
 }
 
+// DTSTAMP is per event, so it carries the later of a curator edit and a
+// source change; an older enrichment must not mask a newer feed edit.
+export function laterTimestamp(
+  a: string | null | undefined,
+  b: string | null | undefined,
+): string | null {
+  if (!a) return b || null;
+  if (!b) return a;
+  return Date.parse(a) >= Date.parse(b) ? a : b;
+}
+
 // Generate ICS content from events. The output must be byte-identical for the
 // same input: the feed's ETag is a hash of these bytes.
 export function generateICS(events: any[], calendarName: string, cityTimezones: Record<string, string>): string {
@@ -59,8 +70,6 @@ export function generateICS(events: any[], calendarName: string, cityTimezones: 
     // DTSTAMP is the only per-event timestamp a calendar client reads, so it
     // must move when the event does and stay put when it does not: a request
     // clock here changes the body (and the ETag) on every poll.
-    // shortcut: source-side field edits do not bump DTSTAMP; switch to
-    // events.updated_at when that column exists.
     lines.push(
       `DTSTAMP:${formatICSDateUTC(event.updated_at || event.created_at || event.start_time)}`,
     );

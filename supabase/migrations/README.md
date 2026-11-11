@@ -75,7 +75,9 @@ The consumer switch and schema cleanup are staged across builds:
    `duplicate_group`, recreates the view, and keeps `cluster_id` readable.
 2. Consumers use `duplicate_group` while one compatibility build completes.
 3. Promote `post-compatibility/20260923130000_drop_cluster_id.sql` into the
-   active migration sequence only after that build is verified.
+   active migration sequence only after that build is verified, and give the
+   promoted file a timestamp after `20261110120000_add_events_updated_at.sql`:
+   the recreated view reads `events.updated_at`.
 
 Verify the promoted cleanup with `make setup-local` and `make test-sql` before
 applying it to production. The database tests must confirm that the view drops

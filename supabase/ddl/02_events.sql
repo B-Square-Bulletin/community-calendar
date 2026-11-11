@@ -22,8 +22,42 @@ CREATE TABLE IF NOT EXISTS events (
   duplicate_group text,     -- opaque route group id; NULL = Separate (one row is one group)
   source_names text[],      -- structured, priority-ordered source names from the route
   duplicate_group_representative text, -- route's canonical member source_uid for the group
-  created_at timestamptz DEFAULT now()
+  created_at timestamptz DEFAULT now(),
+  updated_at timestamptz NOT NULL DEFAULT now()  -- content change time (trigger below)
 );
+
+-- Content-sensitive modification time: advances only when a feed-relevant
+-- column changes, so an identical re-upsert leaves it untouched.
+CREATE OR REPLACE FUNCTION public.touch_event_updated_at()
+RETURNS trigger
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  IF NEW.title IS DISTINCT FROM OLD.title
+     OR NEW.start_time IS DISTINCT FROM OLD.start_time
+     OR NEW.end_time IS DISTINCT FROM OLD.end_time
+     OR NEW.location IS DISTINCT FROM OLD.location
+     OR NEW.description IS DISTINCT FROM OLD.description
+     OR NEW.url IS DISTINCT FROM OLD.url
+     OR NEW.image_url IS DISTINCT FROM OLD.image_url
+     OR NEW.city IS DISTINCT FROM OLD.city
+     OR NEW.source IS DISTINCT FROM OLD.source
+  THEN
+    NEW.updated_at := now();
+  ELSE
+    -- Also drops any value a client supplies on UPDATE: the database owns
+    -- this column. An INSERT keeps the default or an explicit value, which
+    -- the backfill relies on.
+    NEW.updated_at := OLD.updated_at;
+  END IF;
+  RETURN NEW;
+END;
+$$;
+
+DROP TRIGGER IF EXISTS events_touch_updated_at ON public.events;
+CREATE TRIGGER events_touch_updated_at
+  BEFORE UPDATE ON public.events
+  FOR EACH ROW EXECUTE FUNCTION public.touch_event_updated_at();
 
 -- RPC for stale event cleanup (used by load-events edge function;
 -- replaces URL-based NOT IN filter that exceeded PostgREST URL length limits)
