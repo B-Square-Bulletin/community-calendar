@@ -26,7 +26,7 @@ help:
 	@echo ""
 	@echo "Prerequisites:"
 	@echo "  - uv (install with: curl -LsSf https://astral.sh/uv/install.sh | sh)"
-	@echo "  - Supabase CLI installed (for database tests)"
+	@echo "  - Supabase CLI 3.x installed (for database tests)"
 	@echo "  - PostgreSQL client (psql) for local database access"
 
 # Run default tests

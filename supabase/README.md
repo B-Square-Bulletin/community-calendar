@@ -210,8 +210,8 @@ delete from admin_github_users where github_user = 'judell';
 ### 2. Deploy Edge Functions
 
 ```bash
-# Install Supabase CLI
-npm install -g supabase
+# Install Supabase CLI 3.x (2.x rejects the 3.x config.toml keys)
+npm install -g supabase@3
 
 # Login
 supabase login
