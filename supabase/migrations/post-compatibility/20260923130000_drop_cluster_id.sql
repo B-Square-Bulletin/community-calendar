@@ -12,6 +12,9 @@
 -- The view is dropped before the column because the existing view definition
 -- selects `b.cluster_id`. Recreating it here keeps a single source of truth for
 -- the read model (the previous definition plus the column removal).
+--
+-- Requires `events.updated_at`: promote this file with a timestamp after
+-- 20261110120000_add_events_updated_at.sql or the view below fails to create.
 
 DROP MATERIALIZED VIEW IF EXISTS deduplicated_events;
 

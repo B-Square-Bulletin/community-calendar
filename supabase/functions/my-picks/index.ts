@@ -87,7 +87,8 @@ Deno.serve(async (req) => {
           source_uid,
           duplicate_group,
           duplicate_group_representative,
-          created_at
+          created_at,
+          updated_at
         )
       `)
       .eq("user_id", userId);
@@ -151,8 +152,9 @@ Deno.serve(async (req) => {
           rrule: enrichment?.rrule || null,
           categories: enrichment?.categories || null,
           notes: enrichment?.notes || null,
-          // A curator edit is a feed change, and DTSTAMP carries it.
-          updated_at: enrichment?.updated_at || null,
+          // A curator edit or a source-side field change is a feed change,
+          // and DTSTAMP carries it.
+          updated_at: enrichment?.updated_at || event.updated_at || null,
           // Enrichment can override these if present
           description: enrichment?.description || event.description,
           location: enrichment?.location || event.location,

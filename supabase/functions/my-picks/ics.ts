@@ -59,8 +59,6 @@ export function generateICS(events: any[], calendarName: string, cityTimezones: 
     // DTSTAMP is the only per-event timestamp a calendar client reads, so it
     // must move when the event does and stay put when it does not: a request
     // clock here changes the body (and the ETag) on every poll.
-    // shortcut: source-side field edits do not bump DTSTAMP; switch to
-    // events.updated_at when that column exists.
     lines.push(
       `DTSTAMP:${formatICSDateUTC(event.updated_at || event.created_at || event.start_time)}`,
     );

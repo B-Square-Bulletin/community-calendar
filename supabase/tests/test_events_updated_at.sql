@@ -8,7 +8,7 @@
 -- Or:  make test-sql
 
 BEGIN;
-SELECT plan(19);
+SELECT plan(20);
 
 -- ============================================================================
 -- Shape
@@ -158,6 +158,17 @@ SELECT is(
     (SELECT updated_at FROM events WHERE source_uid = 'tua-noop'),
     '2000-01-01T00:00:00Z'::timestamptz,
     'writes outside the feed-content columns leave updated_at unchanged'
+);
+
+-- The database owns the column: a payload that names updated_at cannot set it.
+UPDATE events
+SET title = title, updated_at = '2031-06-01T00:00:00Z'
+WHERE source_uid = 'tua-noop';
+
+SELECT is(
+    (SELECT updated_at FROM events WHERE source_uid = 'tua-noop'),
+    '2000-01-01T00:00:00Z'::timestamptz,
+    'a client-supplied updated_at is discarded'
 );
 
 -- ============================================================================

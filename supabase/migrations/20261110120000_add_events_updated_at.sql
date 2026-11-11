@@ -8,6 +8,10 @@
 --
 -- Add nullable, backfill from created_at, then set default + NOT NULL so no
 -- existing row reads as "modified at migration time".
+--
+-- Ordering: post-compatibility/20260923130000_drop_cluster_id.sql now reads
+-- updated_at too, so promote that file with a timestamp after this migration
+-- or its CREATE MATERIALIZED VIEW fails.
 
 ALTER TABLE public.events ADD COLUMN IF NOT EXISTS updated_at timestamptz;
 
