@@ -6,6 +6,8 @@ import sys
 from datetime import UTC, datetime
 from pathlib import Path
 
+import pytest
+
 _proj_root = Path(__file__).parent.parent
 sys.path.insert(0, str(_proj_root))
 sys.path.insert(0, str(_proj_root / "scrapers"))
@@ -16,6 +18,13 @@ from scrapers.ontap_tickets import MAX_PAGES, OnTapTicketsScraper  # noqa: E402
 
 FIXTURE = Path(__file__).parent / "fixtures/bloomington/ontap_tickets_page1.json"
 NOW = datetime(2026, 10, 1, tzinfo=UTC)
+
+
+@pytest.fixture(autouse=True)
+def _fixed_clock(monkeypatch):
+    # fetch_events reads the real clock; without this the fixture's dates age
+    # out and the pagination tests fail once the last fixture event ends.
+    monkeypatch.setattr("scrapers.ontap_tickets.utc_now", lambda: NOW)
 
 
 def _items() -> list[dict]:
