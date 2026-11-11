@@ -42,7 +42,9 @@ BEGIN
   THEN
     NEW.updated_at := now();
   ELSE
-    -- Also drops any client-supplied value: the database owns this column.
+    -- Also drops any value a client supplies on UPDATE: the database owns
+    -- this column. An INSERT keeps the default or an explicit value, which
+    -- the backfill relies on.
     NEW.updated_at := OLD.updated_at;
   END IF;
   RETURN NEW;

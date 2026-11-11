@@ -1,7 +1,7 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { dedupePickedEvents, withGroupMembership } from "./dedupe.ts";
 import { respondWithICS, CACHE_CONTROL } from "./cache.ts";
-import { compareEvents, generateICS } from "./ics.ts";
+import { compareEvents, generateICS, laterTimestamp } from "./ics.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -153,8 +153,8 @@ Deno.serve(async (req) => {
           categories: enrichment?.categories || null,
           notes: enrichment?.notes || null,
           // A curator edit or a source-side field change is a feed change,
-          // and DTSTAMP carries it.
-          updated_at: enrichment?.updated_at || event.updated_at || null,
+          // and DTSTAMP carries the later of the two.
+          updated_at: laterTimestamp(enrichment?.updated_at, event.updated_at),
           // Enrichment can override these if present
           description: enrichment?.description || event.description,
           location: enrichment?.location || event.location,

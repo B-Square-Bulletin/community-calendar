@@ -7,7 +7,7 @@
 // time. These tests pin both branches of the validator, plus the renderer's
 // byte stability, which the validator hashes.
 import { respondWithICS } from "./cache.ts";
-import { compareEvents, generateICS } from "./ics.ts";
+import { compareEvents, generateICS, laterTimestamp } from "./ics.ts";
 
 function assert(condition: boolean, message: string): void {
   if (!condition) throw new Error(message);
@@ -101,6 +101,26 @@ Deno.test("a curator edit moves the event's DTSTAMP", () => {
     generateICS([edited], "My Picks", tz).includes("DTSTAMP:20260203T040506Z"),
     "expected the enrichment edit time, not the row creation time",
   );
+});
+
+Deno.test("the later of a curator edit and a source change wins", () => {
+  // An older enrichment must not freeze DTSTAMP over a newer feed edit, and
+  // the merge must stay null-safe when a pick has neither.
+  assert(
+    laterTimestamp("2026-01-01T00:00:00Z", "2026-02-01T00:00:00Z") ===
+      "2026-02-01T00:00:00Z",
+    "expected the later source change to win",
+  );
+  assert(
+    laterTimestamp("2026-03-01T00:00:00Z", "2026-02-01T00:00:00Z") ===
+      "2026-03-01T00:00:00Z",
+    "expected the later curator edit to win",
+  );
+  assert(
+    laterTimestamp(null, "2026-02-01T00:00:00Z") === "2026-02-01T00:00:00Z",
+    "expected a source-only timestamp to survive",
+  );
+  assert(laterTimestamp(undefined, null) === null, "expected null for neither");
 });
 
 Deno.test("equal start times keep one byte order", () => {

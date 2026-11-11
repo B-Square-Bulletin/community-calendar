@@ -38,6 +38,17 @@ export function compareEvents(a: any, b: any): number {
   return a.start_time.localeCompare(b.start_time) || Number(a.id) - Number(b.id);
 }
 
+// DTSTAMP is per event, so it carries the later of a curator edit and a
+// source change; an older enrichment must not mask a newer feed edit.
+export function laterTimestamp(
+  a: string | null | undefined,
+  b: string | null | undefined,
+): string | null {
+  if (!a) return b || null;
+  if (!b) return a;
+  return Date.parse(a) >= Date.parse(b) ? a : b;
+}
+
 // Generate ICS content from events. The output must be byte-identical for the
 // same input: the feed's ETag is a hash of these bytes.
 export function generateICS(events: any[], calendarName: string, cityTimezones: Record<string, string>): string {
