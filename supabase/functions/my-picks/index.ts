@@ -153,7 +153,7 @@ Deno.serve(async (req) => {
           categories: enrichment?.categories || null,
           notes: enrichment?.notes || null,
           // A curator edit or a source-side field change is a feed change,
-          // and DTSTAMP carries the later of the two.
+          // and LAST-MODIFIED carries the later of the two.
           updated_at: laterTimestamp(enrichment?.updated_at, event.updated_at),
           // Enrichment can override these if present
           description: enrichment?.description || event.description,

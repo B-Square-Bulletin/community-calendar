@@ -38,8 +38,8 @@ export function compareEvents(a: any, b: any): number {
   return a.start_time.localeCompare(b.start_time) || Number(a.id) - Number(b.id);
 }
 
-// DTSTAMP is per event, so it carries the later of a curator edit and a
-// source change; an older enrichment must not mask a newer feed edit.
+// LAST-MODIFIED carries the later of a curator edit and a source change; an
+// older enrichment must not mask a newer feed edit.
 export function laterTimestamp(
   a: string | null | undefined,
   b: string | null | undefined,
@@ -67,12 +67,18 @@ export function generateICS(events: any[], calendarName: string, cityTimezones: 
 
     lines.push("BEGIN:VEVENT");
     lines.push(`UID:pick-${event.id}@community-calendar`);
-    // DTSTAMP is the only per-event timestamp a calendar client reads, so it
-    // must move when the event does and stay put when it does not: a request
-    // clock here changes the body (and the ETag) on every poll.
+    // DTSTAMP is the event's creation time and LAST-MODIFIED its latest
+    // content change: revision-aware clients compare the latter, so a
+    // reschedule must move it. `updated_at` arrives already merged with the
+    // curator edit by the feed handler. Both come from the row, never the
+    // request clock, or the body (and the ETag) changes on every poll.
     lines.push(
-      `DTSTAMP:${formatICSDateUTC(event.updated_at || event.created_at || event.start_time)}`,
+      `DTSTAMP:${formatICSDateUTC(event.created_at || event.updated_at || event.start_time)}`,
     );
+    const lastModified = event.updated_at || event.created_at;
+    if (lastModified) {
+      lines.push(`LAST-MODIFIED:${formatICSDateUTC(lastModified)}`);
+    }
     if (tz) {
       lines.push(`DTSTART;TZID=${tz}:${formatICSDateLocal(event.start_time, tz)}`);
     } else {
