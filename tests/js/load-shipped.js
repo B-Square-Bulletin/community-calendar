@@ -35,6 +35,13 @@ function loadShipped(opts = {}) {
   vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'date-windows.js'), 'utf8'), {
     filename: 'date-windows.js',
   });
+  vm.runInThisContext(
+    fs.readFileSync(
+      path.join(ROOT, '..', 'supabase', 'functions', '_shared', 'ics_text.js'),
+      'utf8'
+    ),
+    { filename: 'supabase/functions/_shared/ics_text.js' }
+  );
   vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'helpers.js'), 'utf8'), {
     filename: 'helpers.js',
   });

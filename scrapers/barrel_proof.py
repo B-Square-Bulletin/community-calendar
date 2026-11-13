@@ -23,6 +23,8 @@ from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
+from lib.ics_text import escape_ics
+
 EVENTS_URL = "https://barrelprooflounge.com/events/"
 VENUE_NAME = "Barrel Proof Lounge"
 VENUE_ADDRESS = "501 Mendocino Ave, Santa Rosa, CA 95401"
@@ -87,9 +89,10 @@ def parse_events(html):
 
 def event_to_ics(event):
     """Convert event dict to ICS VEVENT"""
-    title = event["title"].replace(",", "\\,").replace(";", "\\;")
-    desc = event["description"].replace("\n", "\\n").replace(",", "\\,").replace(";", "\\;")
+    desc = event["description"]
     desc = desc[:500] + "..." if len(desc) > 500 else desc
+    title = escape_ics(event["title"])
+    desc = escape_ics(desc)
 
     uid = f"barrelproof-{event['start'].strftime('%Y%m%d%H%M')}-{hash(event['title']) % 100000}"
 
@@ -99,7 +102,7 @@ def event_to_ics(event):
         f"DTSTART:{event['start'].strftime('%Y%m%dT%H%M%S')}",
         f"DTEND:{event['end'].strftime('%Y%m%dT%H%M%S')}",
         f"SUMMARY:{title}",
-        f"LOCATION:{VENUE_NAME}\\, {VENUE_ADDRESS}",
+        f"LOCATION:{escape_ics(f'{VENUE_NAME}, {VENUE_ADDRESS}')}",
         f"X-SOURCE:{VENUE_NAME}",
     ]
 

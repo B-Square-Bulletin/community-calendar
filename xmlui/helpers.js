@@ -1,5 +1,6 @@
 // Community Calendar Helper Functions
 // Pure functions for filtering, formatting, and deduplication
+/* global escapeICS */
 
 // --- Categories (derived from categories.json, loaded in index.html) ---
 var CATEGORY_NAMES = {};
@@ -1889,16 +1890,6 @@ function formatICSDate(isoString) {
     .toISOString()
     .replace(/[-:]/g, '')
     .replace(/\.\d{3}/, '');
-}
-
-// Escape text for ICS format
-function escapeICS(text) {
-  if (!text) return '';
-  return text
-    .replace(/\\/g, '\\\\')
-    .replace(/;/g, '\\;')
-    .replace(/,/g, '\\,')
-    .replace(/\n/g, '\\n');
 }
 
 // Generate ICS content for a single event and trigger download

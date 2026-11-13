@@ -87,6 +87,7 @@ window._xsLogs = [];
     });
     script('xmlui/xmlui-masonry.js?v=' + v);
     script('xmlui/xmlui-grid-layout.js?v=' + v);
+    script('../supabase/functions/_shared/ics_text.js?v=' + v);
     script('helpers.js?v=' + v);
     script('xs-trace.js?v=' + v).addEventListener('load', function () {
       // index-standalone.ts arms startApp on DOMContentLoaded with no

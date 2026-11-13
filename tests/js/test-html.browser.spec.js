@@ -14,3 +14,12 @@ test('test.html browser groups all pass', async ({ page }) => {
   expect(summary).toBeTruthy();
   expect(summary).not.toMatch(/failed/);
 });
+
+test('the app shell loads the shared ICS text rule (#251)', async ({ page }) => {
+  await page.goto('/xmlui/index.html');
+  await page.waitForFunction(
+    () => typeof window.escapeICS === 'function' && typeof window.unescapeICS === 'function',
+    null,
+    { timeout: 30000 }
+  );
+});

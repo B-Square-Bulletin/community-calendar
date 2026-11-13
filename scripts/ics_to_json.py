@@ -19,6 +19,7 @@ from zoneinfo import ZoneInfo
 
 sys.path.insert(0, "scrapers")
 
+from lib.ics_text import unescape_ics
 from lib.timeutil import assume_utc, parse_naive_ics
 
 
@@ -134,9 +135,7 @@ def extract_field(event_content, field_name):
     if match:
         value = match.group(1)
         # Unescape ICS escapes
-        value = (
-            value.replace("\\n", "\n").replace("\\,", ",").replace("\\;", ";").replace("\\\\", "\\")
-        )
+        value = unescape_ics(value)
         return value.strip()
     return None
 
@@ -176,7 +175,7 @@ def extract_image_url(event_content):
     pattern = r"^X-LIVEWHALE-IMAGE:(.+)"
     match = re.search(pattern, event_content, re.IGNORECASE | re.MULTILINE)
     if match:
-        url = match.group(1).strip().replace("\\,", ",")
+        url = unescape_ics(match.group(1).strip())
         # Replace thumbnail dimensions with a larger display size
         url = re.sub(r"/width/\d+/height/\d+/", "/width/400/height/300/", url)
         return url

@@ -13,6 +13,7 @@ import urllib.parse
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
+from lib.ics_text import escape_ics
 from lib.timeutil import parse_naive_ics, utc_now
 
 
@@ -33,19 +34,6 @@ def fetch_events(client, months_ahead=12):
         timeout=30,
     )
     return json.loads(result.stdout)
-
-
-def escape_ics(text):
-    """Escape text for ICS format."""
-    if not text:
-        return ""
-    return (
-        text.replace("\\", "\\\\")
-        .replace(",", "\\,")
-        .replace(";", "\\;")
-        .replace("\n", "\\n")
-        .replace("\r", "")
-    )
 
 
 def fold_line(line, max_len=75):
@@ -103,8 +91,7 @@ def events_to_ics(events, source_name="Legistar"):
             desc_parts.append(f"Agenda: {event['EventAgendaFile']}")
         if event.get("EventComment"):
             desc_parts.append(f"Note: {event['EventComment']}")
-        desc_parts.append(f"\nSource: {source_name}")
-        description = "\\n".join(desc_parts)
+        description = "\n".join(desc_parts)
 
         lines.extend(
             [
@@ -115,6 +102,7 @@ def events_to_ics(events, source_name="Legistar"):
                 fold_line(f"SUMMARY:{escape_ics(body_name)}"),
                 fold_line(f"LOCATION:{escape_ics(location)}"),
                 fold_line(f"DESCRIPTION:{escape_ics(description)}"),
+                f"X-SOURCE:{escape_ics(source_name)}",
                 f"URL:{url}",
                 f"DTSTAMP:{datetime.now(UTC).strftime('%Y%m%dT%H%M%SZ')}",
                 "END:VEVENT",
