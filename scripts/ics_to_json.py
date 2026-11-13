@@ -175,7 +175,7 @@ def extract_image_url(event_content):
     pattern = r"^X-LIVEWHALE-IMAGE:(.+)"
     match = re.search(pattern, event_content, re.IGNORECASE | re.MULTILINE)
     if match:
-        url = match.group(1).strip().replace("\\,", ",")
+        url = unescape_ics(match.group(1).strip())
         # Replace thumbnail dimensions with a larger display size
         url = re.sub(r"/width/\d+/height/\d+/", "/width/400/height/300/", url)
         return url
