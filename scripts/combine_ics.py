@@ -17,6 +17,7 @@ sys.path.insert(0, "scrapers")
 import icalendar
 import recurring_ical_events
 from lib.city_filter import load_allowed_cities, location_matches_allowed_cities
+from lib.ics_text import unescape_ics
 from lib.timeutil import assume_utc, parse_naive_ics, utc_today
 
 # Fallback URLs for sources whose ICS events lack a URL property.
@@ -408,9 +409,7 @@ def extract_field(event_content, field_name):
         # Unfold: remove newline+space/tab
         value = re.sub(r"[\r\n]+[ \t]", "", match.group(1))
         # Unescape ICS escapes
-        value = (
-            value.replace("\\n", " ").replace("\\,", ",").replace("\\;", ";").replace("\\\\", "\\")
-        )
+        value = unescape_ics(value)
         return value.strip()
     return None
 
@@ -596,8 +595,8 @@ def combine_ics_files(
                             {
                                 "source": source_name,
                                 "source_id": source_id,
-                                "title": title,
-                                "location": location.replace("\\,", ","),
+                                "title": unescape_ics(title),
+                                "location": unescape_ics(location),
                             }
                         )
                 future_events = filtered_events

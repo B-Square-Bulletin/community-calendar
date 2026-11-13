@@ -1,6 +1,13 @@
 // ICS rendering for the my-picks feed. Kept free of Supabase and Deno.serve so
 // the byte-stability the ETag depends on is testable without a database.
 
+// One ICS text rule for the browser, this feed and validate-feed. The module
+// has no exports (it is also a classic browser script), so it is imported for
+// its globalThis side effect.
+import "../_shared/ics_text.js";
+
+const escapeICS: (text: string | null) => string = (globalThis as any).escapeICS;
+
 // Format date for ICS as UTC (YYYYMMDDTHHMMSSZ)
 function formatICSDateUTC(isoString: string): string {
   const d = new Date(isoString);
@@ -20,16 +27,6 @@ function formatICSDateLocal(isoString: string, timezone: string): string {
   parts.forEach(p => { v[p.type] = p.value; });
   const hour = v.hour === "24" ? "00" : v.hour;
   return `${v.year}${v.month}${v.day}T${hour}${v.minute}${v.second}`;
-}
-
-// Escape text for ICS format
-function escapeICS(text: string | null): string {
-  if (!text) return "";
-  return text
-    .replace(/\\/g, "\\\\")
-    .replace(/;/g, "\\;")
-    .replace(/,/g, "\\,")
-    .replace(/\n/g, "\\n");
 }
 
 // Total order over picks: equal start times would otherwise render in whatever

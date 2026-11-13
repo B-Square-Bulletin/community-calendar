@@ -19,6 +19,7 @@ from zoneinfo import ZoneInfo
 
 sys.path.insert(0, "scrapers")
 
+from lib.ics_text import unescape_ics
 from lib.timeutil import assume_utc, parse_naive_ics
 
 
@@ -134,9 +135,7 @@ def extract_field(event_content, field_name):
     if match:
         value = match.group(1)
         # Unescape ICS escapes
-        value = (
-            value.replace("\\n", "\n").replace("\\,", ",").replace("\\;", ";").replace("\\\\", "\\")
-        )
+        value = unescape_ics(value)
         return value.strip()
     return None
 

@@ -8,6 +8,11 @@
 // and every redirect hop is re-checked.
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { checkFeedUrl } from "./url_policy.ts";
+// One ICS text rule for the browser, my-picks and this preview. Imported for
+// its globalThis side effect because the module is also a classic browser script.
+import "../_shared/ics_text.js";
+
+const unescapeICS: (text: string) => string = (globalThis as any).unescapeICS;
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -193,17 +198,6 @@ function extractField(block: string, field: string): string | null {
   const m = block.match(re);
   if (!m) return null;
   return m[1].trim();
-}
-
-/**
- * Unescape ICS text values.
- */
-function unescapeICS(text: string): string {
-  return text
-    .replace(/\\n/gi, "\n")
-    .replace(/\\,/g, ",")
-    .replace(/\\;/g, ";")
-    .replace(/\\\\/g, "\\");
 }
 
 /**

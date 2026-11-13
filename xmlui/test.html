@@ -79,6 +79,7 @@
         utc: { timezone: "UTC" }
       };
     </script>
+    <script src="../supabase/functions/_shared/ics_text.js"></script>
     <script src="helpers.js"></script>
     <script src="boot-decisions.js"></script>
     <script src="date-windows.js"></script>
@@ -546,6 +547,11 @@
 
         it('handles multiple special chars', () => {
           assertEqual(escapeICS('a;b,c\nd'), 'a\\;b\\,c\\nd');
+        });
+
+        it('normalizes a bare carriage return to a line break', () => {
+          assertEqual(escapeICS('Fright\rNight'), 'Fright\\nNight');
+          assertEqual(escapeICS('a\r\nb'), 'a\\nb');
         });
       });
 

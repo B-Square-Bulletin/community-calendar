@@ -63,7 +63,7 @@ test-node:
 test-deno:
 	@echo "Running Deno tests..."
 	@deno check supabase/functions/capture-event/index.ts supabase/functions/capture-event/auth_test.ts supabase/functions/validate-feed/index.ts supabase/functions/load-events/index.ts
-	@deno test supabase/functions/my-picks/dedupe_test.ts supabase/functions/my-picks/cache_test.ts supabase/functions/load-events/scope_test.ts supabase/functions/load-events/auth_test.ts supabase/functions/validate-feed/url_policy_test.ts
+	@deno test supabase/functions/my-picks/dedupe_test.ts supabase/functions/my-picks/cache_test.ts supabase/functions/my-picks/ics_test.ts supabase/functions/load-events/scope_test.ts supabase/functions/load-events/auth_test.ts supabase/functions/validate-feed/url_policy_test.ts
 	# capture-event, validate-feed and load-events also import supabase-js,
 	# whose node types want node_modules; their handler tests stub fetch
 	# instead of reaching the real service, so run them unchecked.

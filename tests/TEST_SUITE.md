@@ -70,6 +70,7 @@ supabase test db supabase/tests/
 - `tests/test_add_scraper.py` - DB-first registration helper: smoke-test bounds are environment-only (the registered command stays unbounded)
 - `supabase/tests/test_deduplicated_events.sql` - pgTAP tests for route persistence columns and the `deduplicated_events` view (group collapse, NULL isolation, structured source names, representative)
 - `supabase/functions/my-picks/dedupe_test.ts` - Deno tests for the saved-picks group collapse (one ICS entry per stored group, NULL isolation, canonical representative). Run with `make test-deno` or the full `make test` command; CI runs these in its dedicated Deno job.
+- `supabase/functions/my-picks/ics_test.ts` - Deno test for the one shared ICS text rule (#251): a title with a bare carriage return cannot split a feed line, and browser, personal feed and JSON artifact render the same text. Run with `make test-deno`.
 - `supabase/tests/README.md` - database-test-specific setup, workflow, and troubleshooting
 
 ## Continuous Integration
