@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Lighthouse Christian Athletics//maxpreps.com//
+X-WR-CALNAME:Lighthouse Christian Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Clay City Girls Varsity Basketball @ LCA
+DTSTART;TZID=America/Indiana/Indianapolis:20261113T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261113T194500
+UID:59514d6b55ea1fb05df706fbd68eab40@maxpreps.com
+DESCRIPTION:Girls Varsity Basketball\nNo result has been reported for the 
+ Clay City varsity basketball away non-conference game @ Lighthouse Christi
+ an Academy (Bloomington\, IN).
+URL:https://www.maxpreps.com/in/basketball/girls/game/clay-city-vs-lightho
+ use-christian-academy-bloomington/11-13-2026/?c=2758dffb-7f8a-4bc5-b157-22
+ c69c628480
+X-SOURCE:Lighthouse Christian Athletics
+END:VEVENT
+END:VCALENDAR

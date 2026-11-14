@@ -1,0 +1,52 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Hard Truth Distilling Co.//hardtruth.com//
+X-WR-CALNAME:Hard Truth Distilling Co.
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Holiday Vault Cask &#038\; Still
+DTSTART;TZID=America/Indiana/Indianapolis:20261205T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261205T210000
+UID:tribe-8867@hardtruth.com
+DESCRIPTION:Step into the Holiday Vault and unwrap a rare taste of Hard Tr
+ uth history.For a limited time this holiday season\, we’re opening the v
+ ault and bringing back a curated collection of past Hard Truth releases th
+ at have long since disappeared from shelves. These limited pours offer a c
+ hance to revisit beloved expressions\, discover bottles you’ve always wa
+ nted to try\, and experience whiskeys that may not be available again for 
+ years\, if ever.Set against the warmth and wonder of the holiday season\, 
+ the
+URL:https://hardtruth.com/event/holiday-vault-cask-still/
+X-SOURCE:Hard Truth Distilling Co.
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Whiskey &#038\; Wreaths
+DTSTART;TZID=America/Indiana/Indianapolis:20261210T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261210T200000
+UID:tribe-8884@hardtruth.com
+DESCRIPTION:Join us for a cozy\, creative evening at Hard Truth Distilling
+  Co. and craft your very own holiday wreath! Our instructor will guide you
+  step-by-step as you design a beautiful\, custom piece to bring seasonal c
+ heer to your home. Enjoy the warm\, rustic atmosphere of Hard Truth while 
+ sipping on a signature cocktail and embracing the holiday spirit. All mate
+ rials are provided—just bring your creativity and festive energy!Date: D
+ ec. 10\, 2026Time: 6:00pm to 8:00pmLocation: Hard Truth Distilling Co. Tou
+URL:https://hardtruth.com/event/whiskey-and-wreaths/
+X-SOURCE:Hard Truth Distilling Co.
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Brunch with Santa
+DTSTART;TZID=America/Indiana/Indianapolis:20261212T100000
+DTEND;TZID=America/Indiana/Indianapolis:20261212T130000
+UID:tribe-8898@hardtruth.com
+DESCRIPTION:Brunch with Santa at Hard Truth Distilling Co.Gather your love
+ d ones and celebrate the season with a magical morning at Hard Truth! Join
+  us for a heartwarmingBrunch with Santa\, where holiday cheer meets delici
+ ous eats.Date:December 12Time:10:00 AM – 1:00 PMLocation:Hard Truth Dist
+ illing Co.Highlights:Seasonal brunch favoritesPhotos and wish-sharing with
+  SantaHoliday crafts for all agesHot chocolate barBring your camera and yo
+ ur holiday spirit!*Seatings are 1.5 hour. Events occur rain or shine.
+URL:https://hardtruth.com/event/brunch-with-santa-2/
+X-SOURCE:Hard Truth Distilling Co.
+END:VEVENT
+END:VCALENDAR

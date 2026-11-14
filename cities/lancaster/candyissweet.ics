@@ -1,0 +1,477 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//The Candy Factory - ECPv6.15.18//NONSGML v1.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:The Candy Factory
+X-ORIGINAL-URL:https://candyissweet.com
+X-WR-CALDESC:Events for The Candy Factory
+REFRESH-INTERVAL;VALUE=DURATION:PT1H
+X-Robots-Tag:noindex
+X-PUBLISHED-TTL:PT1H
+BEGIN:VTIMEZONE
+TZID:America/New_York
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:20250309T070000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:20251102T060000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:20260308T070000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:20261101T060000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:20270314T070000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:20271107T060000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260407T120000
+DTEND;TZID=America/New_York:20260407T130000
+DTSTAMP:20260406T230114
+CREATED:20251119T205807Z
+LAST-MODIFIED:20260303T181552Z
+UID:36960-1775563200-1775566800@candyissweet.com
+SUMMARY:MEMBER EVENT - KickAss Chats w/ Anne
+DESCRIPTION:Join Anne and the wonderful Women of Coworking to connect in Conf Room A! Every Tuesday at 12pm!
+URL:https://candyissweet.com/event/kickass-chats-w-anne-4/2026-04-07/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2025/11/KickAss-Jan-1.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260407T143000
+DTEND;TZID=America/New_York:20260407T150000
+DTSTAMP:20260406T230114
+CREATED:20230103T154623Z
+LAST-MODIFIED:20230103T154623Z
+UID:32143-1775572200-1775574000@candyissweet.com
+SUMMARY:Member Walk + Talks
+DESCRIPTION:Join us twice a week for some fresh air and a chance to connect with other members all while getting those steps in and giving your brain a well deserved break! Cheers to a happy and healthy new chapter
+URL:https://candyissweet.com/event/member-walk-talks/2026-04-07/
+CATEGORIES:Member Event,Social,Wellness
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2023/01/tcf-nov-2-1.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260407T150000
+DTEND;TZID=America/New_York:20260407T160000
+DTSTAMP:20260406T230114
+CREATED:20210806T184643Z
+LAST-MODIFIED:20210806T184643Z
+UID:32142-1775574000-1775577600@candyissweet.com
+SUMMARY:MEMBER EVENT - Barista Hour
+DESCRIPTION:Swing by the Main Hall every Tuesday at 3 for an afternoon pick me up! We will have someone on hand making espresso drinks\, and sometimes other special treats as well! ☕️
+URL:https://candyissweet.com/event/barista-hour/2026-04-07/
+CATEGORIES:Coffee,Member Events,Social
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2021/08/TCF-Events-2021-TCF-Clubs-August-Fall-1.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260408T120000
+DTEND;TZID=America/New_York:20260408T130000
+DTSTAMP:20260406T230114
+CREATED:20260402T144356Z
+LAST-MODIFIED:20260402T144356Z
+UID:39494-1775649600-1775653200@candyissweet.com
+SUMMARY:MEMBER EVENT - AI Unfiltered
+DESCRIPTION:Your go-to spot for all things AI. News\, tools\, demos\, debates\, and the occasional existential crisis. Pull up a chair.
+URL:https://candyissweet.com/event/member-event-ai-unfiltered/2026-04-08/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2026/04/AI-Unfiltered.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260408T130000
+DTEND;TZID=America/New_York:20260408T133000
+DTSTAMP:20260406T230114
+CREATED:20250715T155944Z
+LAST-MODIFIED:20260330T145423Z
+UID:36329-1775653200-1775655000@candyissweet.com
+SUMMARY:MEMBER EVENT - Meditation Club w/ Rick
+DESCRIPTION:Join Rick every Wednesday at 1pm for Meditation Club! Learn more about meditation while engaging in sessions!
+URL:https://candyissweet.com/event/meditation-club-w-rick/2026-04-08/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2025/07/Meditation-Club-2026-1.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260408T170000
+DTEND;TZID=America/New_York:20260408T180000
+DTSTAMP:20260406T230114
+CREATED:20251119T202418Z
+LAST-MODIFIED:20251119T202418Z
+UID:39195-1775667600-1775671200@candyissweet.com
+SUMMARY:MEMBER EVENT - Beer Buddies w/ Katie
+DESCRIPTION:Join Katie for Beer Buddies every 2nd Wednesday of the month and taste test some seasonal sips!
+URL:https://candyissweet.com/event/beer-buddies/2026-04-08/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2025/11/Beer-Buddies-w_-Katie-1.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260409T090000
+DTEND;TZID=America/New_York:20260409T100000
+DTSTAMP:20260406T230114
+CREATED:20250715T154352Z
+LAST-MODIFIED:20260303T184759Z
+UID:35076-1775725200-1775728800@candyissweet.com
+SUMMARY:MEMBER EVENT - Marketing Club
+DESCRIPTION:Join Anne for Marketing Club every Thursday at 9am! Talk all things marketing and AI and get feedback on current projects!
+URL:https://candyissweet.com/event/marketing-club/2026-04-09/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2025/07/tcf.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260409T113000
+DTEND;TZID=America/New_York:20260409T123000
+DTSTAMP:20260406T230114
+CREATED:20260330T204727Z
+LAST-MODIFIED:20260330T204727Z
+UID:39362-1775734200-1775737800@candyissweet.com
+SUMMARY:MEMBER EVENT - Sliders Potluck Lunch
+DESCRIPTION:Join us in the Main Hall and bring a side to share!
+URL:https://candyissweet.com/event/member-event-sliders-potluck-lunch/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2026/03/Member-Lunch-April-2026.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260409T143000
+DTEND;TZID=America/New_York:20260409T150000
+DTSTAMP:20260406T230114
+CREATED:20230103T154623Z
+LAST-MODIFIED:20230103T154623Z
+UID:32149-1775745000-1775746800@candyissweet.com
+SUMMARY:Member Walk + Talks
+DESCRIPTION:Join us twice a week for some fresh air and a chance to connect with other members all while getting those steps in and giving your brain a well deserved break! Cheers to a happy and healthy new chapter
+URL:https://candyissweet.com/event/member-walk-talks/2026-04-09/
+CATEGORIES:Member Event,Social,Wellness
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2023/01/tcf-nov-2-1.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260410T090000
+DTEND;TZID=America/New_York:20260410T100000
+DTSTAMP:20260406T230114
+CREATED:20251218T182705Z
+LAST-MODIFIED:20260303T190745Z
+UID:36778-1775811600-1775815200@candyissweet.com
+SUMMARY:MEMBER EVENT - AV Club w/ Jason
+DESCRIPTION:Join Jason at TCF Hub 812 every Friday to connect with fellow media lovers\, podcasters\, and videographers! All levels welcome!
+URL:https://candyissweet.com/event/av-club-w-jason/2026-04-10/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2025/12/TCF-AV-Club-2026.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260410T160000
+DTEND;TZID=America/New_York:20260410T170000
+DTSTAMP:20260406T230114
+CREATED:20260127T012112Z
+LAST-MODIFIED:20260303T191220Z
+UID:37579-1775836800-1775840400@candyissweet.com
+SUMMARY:MEMBER EVENT - Happy Hour
+DESCRIPTION:Join us around the bar every Friday at 4pm for Happy Hour! Grab a drink\, network and connect with the community!
+URL:https://candyissweet.com/event/happy-hour/2026-04-10/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2026/01/Screenshot-2026-01-26-at-5.24.09-PM.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260410T190000
+DTEND;TZID=America/New_York:20260410T220000
+DTSTAMP:20260406T230114
+CREATED:20260227T171029Z
+LAST-MODIFIED:20260303T191544Z
+UID:38034-1775847600-1775858400@candyissweet.com
+SUMMARY:MEMBER EVENT - Rowan House (ROHO)
+DESCRIPTION:Join us at Rowan House (ROHO)\, our member-exclusive Sixth Floor lounge\, open every Friday 7pm-10ish. Come curious. Leave Connected.
+URL:https://candyissweet.com/event/roho/2026-04-10/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2026/02/Rowan-House-6-1.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260411T090000
+DTEND;TZID=America/New_York:20260411T140000
+DTSTAMP:20260406T230114
+CREATED:20260402T142026Z
+LAST-MODIFIED:20260402T142239Z
+UID:39413-1775898000-1775916000@candyissweet.com
+SUMMARY:MEMBERS - Saturday Work Café
+DESCRIPTION:Join us for some weekend productivity and great vibes every Saturday in the Main Hall!
+URL:https://candyissweet.com/event/memers-saturday-work-cafe/2026-04-11/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2026/04/Saturday-Cafe-Slide.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260413T100000
+DTEND;TZID=America/New_York:20260413T150000
+DTSTAMP:20260406T230114
+CREATED:20260330T152819Z
+LAST-MODIFIED:20260330T152819Z
+UID:39252-1776074400-1776092400@candyissweet.com
+SUMMARY:MEMBER EVENT - Deep Focus Zone
+DESCRIPTION:Head up to ROHO every Monday from 10am-3pm for a distraction and call free space! Kick your Monday off on a great note.
+URL:https://candyissweet.com/event/member-event-deep-focus-zone/2026-04-13/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2026/03/DEEP-FOCUS-ZONE.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260413T120000
+DTEND;TZID=America/New_York:20260413T130000
+DTSTAMP:20260406T230114
+CREATED:20251218T185810Z
+LAST-MODIFIED:20260303T192305Z
+UID:36904-1776081600-1776085200@candyissweet.com
+SUMMARY:MEMBER EVENT - The Men's Room w/ Adam
+DESCRIPTION:Join Adam for the Men’s Room\, a men’s group held at TCF Hub 812 every Monday from 12pm-1pm! Real conversation and open discussion.
+URL:https://candyissweet.com/event/the-mens-room-w-adam/2026-04-13/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2025/12/Themensroom.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260413T123000
+DTEND;TZID=America/New_York:20260413T133000
+DTSTAMP:20260406T230114
+CREATED:20260330T205427Z
+LAST-MODIFIED:20260330T205459Z
+UID:39365-1776083400-1776087000@candyissweet.com
+SUMMARY:MEMBER EVENT - Spanish Immersion Lunch w/ Francis and Yessica
+DESCRIPTION:Join Francis and Yessica for lunch as a part of our #languageclub!
+URL:https://candyissweet.com/event/spanish-immersion-lunch-w-francis-and-yessica-9/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2026/03/Spanish-Immersion-April-2026.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260414T120000
+DTEND;TZID=America/New_York:20260414T130000
+DTSTAMP:20260406T230114
+CREATED:20251119T205807Z
+LAST-MODIFIED:20260303T181555Z
+UID:36961-1776168000-1776171600@candyissweet.com
+SUMMARY:MEMBER EVENT - KickAss Chats w/ Anne
+DESCRIPTION:Join Anne and the wonderful Women of Coworking to connect in Conf Room A! Every Tuesday at 12pm!
+URL:https://candyissweet.com/event/kickass-chats-w-anne-4/2026-04-14/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2025/11/KickAss-Jan-1.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260414T143000
+DTEND;TZID=America/New_York:20260414T150000
+DTSTAMP:20260406T230114
+CREATED:20230103T154623Z
+LAST-MODIFIED:20230103T154623Z
+UID:32163-1776177000-1776178800@candyissweet.com
+SUMMARY:Member Walk + Talks
+DESCRIPTION:Join us twice a week for some fresh air and a chance to connect with other members all while getting those steps in and giving your brain a well deserved break! Cheers to a happy and healthy new chapter
+URL:https://candyissweet.com/event/member-walk-talks/2026-04-14/
+CATEGORIES:Member Event,Social,Wellness
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2023/01/tcf-nov-2-1.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260414T150000
+DTEND;TZID=America/New_York:20260414T160000
+DTSTAMP:20260406T230114
+CREATED:20210806T184643Z
+LAST-MODIFIED:20210806T184643Z
+UID:32162-1776178800-1776182400@candyissweet.com
+SUMMARY:MEMBER EVENT - Barista Hour
+DESCRIPTION:Swing by the Main Hall every Tuesday at 3 for an afternoon pick me up! We will have someone on hand making espresso drinks\, and sometimes other special treats as well! ☕️
+URL:https://candyissweet.com/event/barista-hour/2026-04-14/
+CATEGORIES:Coffee,Member Events,Social
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2021/08/TCF-Events-2021-TCF-Clubs-August-Fall-1.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260415T120000
+DTEND;TZID=America/New_York:20260415T130000
+DTSTAMP:20260406T230114
+CREATED:20260402T144356Z
+LAST-MODIFIED:20260402T144356Z
+UID:39496-1776254400-1776258000@candyissweet.com
+SUMMARY:MEMBER EVENT - AI Unfiltered
+DESCRIPTION:Your go-to spot for all things AI. News\, tools\, demos\, debates\, and the occasional existential crisis. Pull up a chair.
+URL:https://candyissweet.com/event/member-event-ai-unfiltered/2026-04-15/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2026/04/AI-Unfiltered.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260415T130000
+DTEND;TZID=America/New_York:20260415T133000
+DTSTAMP:20260406T230114
+CREATED:20250715T155944Z
+LAST-MODIFIED:20260330T145425Z
+UID:36330-1776258000-1776259800@candyissweet.com
+SUMMARY:MEMBER EVENT - Meditation Club w/ Rick
+DESCRIPTION:Join Rick every Wednesday at 1pm for Meditation Club! Learn more about meditation while engaging in sessions!
+URL:https://candyissweet.com/event/meditation-club-w-rick/2026-04-15/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2025/07/Meditation-Club-2026-1.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260415T190000
+DTEND;TZID=America/New_York:20260415T210000
+DTSTAMP:20260406T230114
+CREATED:20260330T205718Z
+LAST-MODIFIED:20260330T205718Z
+UID:39370-1776279600-1776286800@candyissweet.com
+SUMMARY:MEMBER EVENT - House & Table Dinner w/ Alani
+DESCRIPTION:Explore new cuisine and share your favorite recipes at our monthly House & Table Dinner!
+URL:https://candyissweet.com/event/member-event-house-table-dinner-w-alani/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2026/03/House-and-Table.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260416T090000
+DTEND;TZID=America/New_York:20260416T100000
+DTSTAMP:20260406T230114
+CREATED:20250715T154352Z
+LAST-MODIFIED:20260303T184802Z
+UID:35077-1776330000-1776333600@candyissweet.com
+SUMMARY:MEMBER EVENT - Marketing Club
+DESCRIPTION:Join Anne for Marketing Club every Thursday at 9am! Talk all things marketing and AI and get feedback on current projects!
+URL:https://candyissweet.com/event/marketing-club/2026-04-16/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2025/07/tcf.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260416T120000
+DTEND;TZID=America/New_York:20260416T130000
+DTSTAMP:20260406T230114
+CREATED:20260330T151750Z
+LAST-MODIFIED:20260330T151750Z
+UID:39240-1776340800-1776344400@candyissweet.com
+SUMMARY:Writing Lunch Bunch w/ Heather
+DESCRIPTION:Join Heather every other Thursday and connect with fellow creative writers! Work on prompts and share projects!
+URL:https://candyissweet.com/event/writing-lunch-bunch-w-heather-8/2026-04-16/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2026/03/Writing-Lunch-Bunch-April-2026.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260416T143000
+DTEND;TZID=America/New_York:20260416T150000
+DTSTAMP:20260406T230114
+CREATED:20230103T154623Z
+LAST-MODIFIED:20230103T154623Z
+UID:32170-1776349800-1776351600@candyissweet.com
+SUMMARY:Member Walk + Talks
+DESCRIPTION:Join us twice a week for some fresh air and a chance to connect with other members all while getting those steps in and giving your brain a well deserved break! Cheers to a happy and healthy new chapter
+URL:https://candyissweet.com/event/member-walk-talks/2026-04-16/
+CATEGORIES:Member Event,Social,Wellness
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2023/01/tcf-nov-2-1.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260417T090000
+DTEND;TZID=America/New_York:20260417T100000
+DTSTAMP:20260406T230114
+CREATED:20251218T182705Z
+LAST-MODIFIED:20260303T190749Z
+UID:36779-1776416400-1776420000@candyissweet.com
+SUMMARY:MEMBER EVENT - AV Club w/ Jason
+DESCRIPTION:Join Jason at TCF Hub 812 every Friday to connect with fellow media lovers\, podcasters\, and videographers! All levels welcome!
+URL:https://candyissweet.com/event/av-club-w-jason/2026-04-17/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2025/12/TCF-AV-Club-2026.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260417T120000
+DTEND;TZID=America/New_York:20260417T123000
+DTSTAMP:20260406T230114
+CREATED:20251119T212833Z
+LAST-MODIFIED:20260303T194501Z
+UID:36627-1776427200-1776429000@candyissweet.com
+SUMMARY:MEMBER EVENT - Kitten Social Hour
+DESCRIPTION:Join us in the Fishbowl for Kitten Social Hour and hang with some sweet foster kittens every third Friday!
+URL:https://candyissweet.com/event/kitten-social-hour-2/2026-04-17/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2025/11/KittenSocialHour.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260417T160000
+DTEND;TZID=America/New_York:20260417T170000
+DTSTAMP:20260406T230114
+CREATED:20260127T012112Z
+LAST-MODIFIED:20260303T191234Z
+UID:37581-1776441600-1776445200@candyissweet.com
+SUMMARY:MEMBER EVENT - Happy Hour
+DESCRIPTION:Join us around the bar every Friday at 4pm for Happy Hour! Grab a drink\, network and connect with the community!
+URL:https://candyissweet.com/event/happy-hour/2026-04-17/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2026/01/Screenshot-2026-01-26-at-5.24.09-PM.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260417T160000
+DTEND;TZID=America/New_York:20260417T170000
+DTSTAMP:20260406T230114
+CREATED:20260330T210144Z
+LAST-MODIFIED:20260330T210144Z
+UID:39373-1776441600-1776445200@candyissweet.com
+SUMMARY:MEMBER EVENT - Clothing Swap Happy Hour
+DESCRIPTION:Bring your clothes donations and shop the swap during Happy Hour! Time to clean out your closets and refresh your wardrobe.
+URL:https://candyissweet.com/event/member-event-clothing-swap-happy-hour/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2026/03/CLOTHING-SWAP-HAPPY-HOUR.png
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Candy Is Sweet
+X-SOURCE-URL:https://candyissweet.com/events/
+DTSTART;TZID=America/New_York:20260417T190000
+DTEND;TZID=America/New_York:20260417T220000
+DTSTAMP:20260406T230114
+CREATED:20260227T171029Z
+LAST-MODIFIED:20260303T191547Z
+UID:38035-1776452400-1776463200@candyissweet.com
+SUMMARY:MEMBER EVENT - Rowan House (ROHO)
+DESCRIPTION:Join us at Rowan House (ROHO)\, our member-exclusive Sixth Floor lounge\, open every Friday 7pm-10ish. Come curious. Leave Connected.
+URL:https://candyissweet.com/event/roho/2026-04-17/
+ATTACH;FMTTYPE=image/png:https://candyissweet.com/wp-content/uploads/2026/02/Rowan-House-6-1.png
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Bloomington South Athletics//maxpreps.com//
+X-WR-CALNAME:Bloomington South Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Bloomington South Varsity Football vs. Castle
+DTSTART;TZID=America/Indiana/Indianapolis:20261113T183000
+DTEND;TZID=America/Indiana/Indianapolis:20261113T203000
+UID:f9910d03941e80de4c21ab5922be4f30@maxpreps.com
+DESCRIPTION:Boys Varsity Football\nTournament: 2026 IHSAA Football State T
+ ournament (Indiana)\nOn 11/13\, the Bloomington South varsity football tea
+ m won their neutral playoff game against Castle (Newburgh\, IN) by a score
+  of 38-14.
+LOCATION:Central Time
+URL:https://www.maxpreps.com/in/football/game/bloomington-south-vs-castle-
+ newburgh/11-13-2026/?c=c61c136a-f1ff-4c98-a66a-521e9f52904c
+X-SOURCE:Bloomington South Athletics
+END:VEVENT
+END:VCALENDAR

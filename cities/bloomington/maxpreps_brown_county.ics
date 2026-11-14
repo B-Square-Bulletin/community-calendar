@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Brown County Athletics//maxpreps.com//
+X-WR-CALNAME:Brown County Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Eminence Girls Varsity Basketball @ Brown County
+DTSTART;TZID=America/Indiana/Indianapolis:20261113T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261113T191500
+UID:e74636a8b6ee50e101bc2736229c63a2@maxpreps.com
+DESCRIPTION:Girls Varsity Basketball\nOn 11/13\, the Eminence varsity bask
+ etball team won their away non-conference game against Brown County (Nashv
+ ille\, IN) by a score of 39-22.
+URL:https://www.maxpreps.com/in/basketball/girls/game/brown-county-nashvil
+ le-vs-eminence/11-13-2026/?c=d5819d4b-02f3-44e6-a066-1aacc69584d2
+X-SOURCE:Brown County Athletics
+END:VEVENT
+END:VCALENDAR
