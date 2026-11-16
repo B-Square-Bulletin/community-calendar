@@ -22,8 +22,10 @@ from typing import Any
 from zoneinfo import ZoneInfo
 
 sys.path.insert(0, "scrapers")
+sys.path.insert(0, str(Path(__file__).parent))
 
 from lib.timeutil import utc_now, utc_today
+from ran_sources import CALENDAR, NOT_CALENDAR, classify_file
 
 DEFAULT_TIMEZONE = "America/Los_Angeles"
 
@@ -121,26 +123,16 @@ def detect_anomalies(feed_name: str, current: int, history: list[dict]) -> list[
     return anomalies
 
 
-def classify_ics_content(filepath: Path) -> str:
-    """Classify what a feed file actually contains, so a zero count
-    carries a cause: 'not_ics:html' / 'not_ics:json' / 'not_ics:empty'
-    (broken/blocked), 'quiet' (valid calendar, no future events), or
-    'ok' (has future events — callers only ask for zero-count feeds)."""
-    try:
-        with Path(filepath).open(encoding="utf-8", errors="ignore") as f:
-            content = f.read()
-    except OSError:
-        return "unreadable"
-    if "BEGIN:VCALENDAR" not in content:
-        head = content[:512].lstrip().lower()
-        if not head:
-            return "not_ics:empty"
-        if head.startswith(("<!doctype", "<html")) or "<html" in head:
-            return "not_ics:html"
-        if head.startswith(("{", "[")):
-            return "not_ics:json"
-        return "not_ics:unknown"
-    return "quiet"
+def content_label(outcome, future_events: int) -> str:
+    """Report's published label for one feed file: ``not_ics:<detail>`` for a
+    body that is not a calendar, ``quiet`` for a valid calendar with no future
+    events, ``ok`` when it has some. ``truncated`` and ``unreadable`` keep
+    their own names so the problem list can say what actually failed."""
+    if outcome.kind == CALENDAR:
+        return "quiet" if future_events == 0 else "ok"
+    if outcome.kind == NOT_CALENDAR:
+        return f"not_ics:{outcome.detail}"
+    return outcome.kind
 
 
 def load_report(report_path: str) -> dict:
@@ -212,10 +204,7 @@ def update_report(
             entry = {"date": today, "count": count}
             if error:
                 entry["error"] = error
-            if count == 0 and not error:
-                feed_data["content"] = classify_ics_content(ics_path)
-            else:
-                feed_data.pop("content", None)
+            feed_data["content"] = content_label(classify_file(ics_path), count)
 
             if feed_data["history"] and feed_data["history"][-1]["date"] == today:
                 feed_data["history"][-1] = entry
@@ -782,6 +771,32 @@ def _norm_key(text):
     return re.sub(r"[^a-z0-9]+", "", (text or "").lower())
 
 
+# Content labels a build can trust: a valid calendar (quiet or populated), or
+# an absent .ics, which gets its own severity-1 item.
+HEALTHY_CONTENT = {"quiet", "ok", "no_calendar"}
+
+
+def _is_broken(content) -> bool:
+    """True when a content label names a source the build cannot trust."""
+    return bool(content) and content not in HEALTHY_CONTENT
+
+
+def _silence_streak(hist: list[dict]) -> tuple[int | None, str | None, str]:
+    """(last non-zero count, its date, start of the current zero run)."""
+    was_count, was_date = None, None
+    for h in reversed(hist):
+        if h.get("count"):
+            was_count, was_date = h["count"], h["date"]
+            break
+    since = hist[-1]["date"]
+    for h in reversed(hist):
+        if h.get("count") == 0 and not h.get("error"):
+            since = h["date"]
+        else:
+            break
+    return was_count, was_date, since
+
+
 def build_city_slice(report: dict, city: str, prev_error_lines: set) -> dict:
     """Assemble the per-city report slice: last-build status, ranked
     action items answering "has a feed gone silent (and why)", "are
@@ -808,17 +823,7 @@ def build_city_slice(report: dict, city: str, prev_error_lines: set) -> dict:
             continue
         if fd.get("content") == "no_calendar":
             continue
-        was_count, was_date = None, None
-        for h in reversed(hist):
-            if h.get("count"):
-                was_count, was_date = h["count"], h["date"]
-                break
-        since = hist[-1]["date"]
-        for h in reversed(hist):
-            if h.get("count") == 0 and not h.get("error"):
-                since = h["date"]
-            else:
-                break
+        was_count, was_date, since = _silence_streak(hist)
         silent.append(
             {
                 "feed": name,
@@ -826,6 +831,23 @@ def build_city_slice(report: dict, city: str, prev_error_lines: set) -> dict:
                 "was_date": was_date,
                 "silent_since": since,
                 "content": fd.get("content", "quiet"),
+            }
+        )
+
+    # Keyed on content, not on the zero-count list: a cut-off or unreadable
+    # file can still yield future events, and it is broken regardless.
+    broken = []
+    for name, fd in sorted(feeds.items()):
+        if not _is_broken(fd.get("content")):
+            continue
+        was_count, was_date, since = _silence_streak(fd.get("history", []))
+        broken.append(
+            {
+                "feed": name,
+                "was": was_count,
+                "was_date": was_date,
+                "broken_since": since,
+                "content": fd["content"],
             }
         )
 
@@ -894,22 +916,27 @@ def build_city_slice(report: dict, city: str, prev_error_lines: set) -> dict:
                 "repro": repro_for(name),
             }
         )
-    for s in silent:
-        if str(s["content"]).startswith("not_ics"):
-            kind = str(s["content"]).split(":", 1)[-1]
-            items.append(
-                {
-                    "severity": 1,
-                    "kind": "broken_feed",
-                    "title": f"{s['feed']} is serving {kind}, not ICS",
-                    "detail": f"{_was_phrase(s)}; broken since {s['silent_since']}",
-                    "feed": s["feed"],
-                    "repro": repro_for(s["feed"]),
-                }
-            )
+    for s in broken:
+        content = str(s["content"])
+        if content.startswith("not_ics:"):
+            title = f"{s['feed']} is serving {content.split(':', 1)[1]}, not ICS"
+        elif content == "truncated":
+            title = f"{s['feed']} is serving a cut-off calendar"
+        else:
+            title = f"{s['feed']} could not be read"
+        items.append(
+            {
+                "severity": 1,
+                "kind": "broken_feed",
+                "title": title,
+                "detail": f"{_was_phrase(s)}; broken since {s['broken_since']}",
+                "feed": s["feed"],
+                "repro": repro_for(s["feed"]),
+            }
+        )
     newly_zero = {a.get("feed") for a in recent_anoms if a.get("type") == "zero_events"}
     for s in silent:
-        if not str(s["content"]).startswith("not_ics") and s["feed"] in newly_zero:
+        if not _is_broken(s["content"]) and s["feed"] in newly_zero:
             items.append(
                 {
                     "severity": 2,
@@ -962,7 +989,7 @@ def build_city_slice(report: dict, city: str, prev_error_lines: set) -> dict:
     watching = [
         {**s, "repro": repro_for(s["feed"])}
         for s in silent
-        if not str(s["content"]).startswith("not_ics") and s["feed"] not in newly_zero
+        if not _is_broken(s["content"]) and s["feed"] not in newly_zero
     ]
 
     build = dict(data.get("build") or {})

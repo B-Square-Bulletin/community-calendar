@@ -31,7 +31,7 @@ import urllib.request
 from pathlib import Path
 
 from feed_slug import source_id_for
-from ran_sources import is_calendar, record_ran
+from ran_sources import record_ran
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -231,14 +231,13 @@ def record_source_id(row: dict) -> None:
 def record_ran_if_success(row: dict, returncode: int) -> None:
     """Record a source as ran when it exited 0 with a parseable calendar.
 
-    The exit code alone is not enough: a scraper that wrote nothing, or
-    wrote a block page, must keep its rows (issue #233).
+    The exit code alone is not enough: a scraper that wrote nothing, wrote a
+    block page, or left a cut-off calendar must keep its rows (issue #233).
+    record_ran is the gate; it refuses anything but a complete calendar.
     """
     if returncode != 0:
         return
-    output = ROOT / row["url"]
-    if is_calendar(output):
-        record_ran(output)
+    record_ran(ROOT / row["url"])
 
 
 def run_rows(city: str, rows: list[dict], months: str) -> int:

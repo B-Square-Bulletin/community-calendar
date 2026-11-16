@@ -60,6 +60,10 @@ _Avoid_: Quiet source (when the source was never reached), empty feed
 A source whose ingestion succeeded in a build run — a scraper that exited 0, declared it reached its source, and left a parseable calendar, or a feed fetch that returned a valid ICS body — regardless of how many events survive later filtering. The build lists these in `cities/<city>/ran_sources.txt`, and the stale sweep deletes only from them. A quiet source and a source the geo or horizon filter emptied are both ran; a failed source is not.
 _Avoid_: Successful source (when ingestion success is meant), processed source
 
+**Cut-off calendar**:
+An ICS body that opens a calendar and never closes it, so it is not a Ran source; a failed ingestion rather than a Quiet source, because `combine_ics` extracts no complete events from it.
+_Avoid_: Truncation (that is the horizon label)
+
 **Fork**:
 This repository is a *hard fork* of the upstream community-calendar project (judell/community-calendar). It intentionally diverges from upstream — origin/main contains Bloomington-only customizations, scrapers, and infrastructure that are not present in upstream/main. origin/main ≠ upstream/main by design.
 _Avoid_: Tracking fork, downstream mirror

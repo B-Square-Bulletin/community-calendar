@@ -44,6 +44,7 @@ sys.path.insert(0, str(SCRIPTS_DIR))
 from backfill_scraper_feeds import workflow_scraper_rows  # noqa: E402
 from feed_slug import slugify  # noqa: E402
 from process_pending_feeds import parse_pending_feeds  # noqa: E402
+from ran_sources import CALENDAR, classify_file  # noqa: E402
 from run_scrapers_from_db import load_scraper_rows as load_db_scraper_rows  # noqa: E402
 from validate_pipeline import (  # noqa: E402
     build_validation_summary,
@@ -330,28 +331,18 @@ def count_events(ics_path: Path) -> int:
         return 0
 
 
-def sniff_content_kind(content: str) -> str:
-    """Best-effort label for what a non-ICS file actually contains."""
-    head = content[:512].lstrip().lower()
-    if not head:
-        return "empty"
-    if head.startswith(("<!doctype", "<html")) or "<html" in head:
-        return "html"
-    if head.startswith(("{", "[")):
-        return "json"
-    return "unknown"
-
-
 def summarize_output(path: Path) -> dict:
     """Classify an output file by its content, not just its event count.
 
     A zero-event file that is a real (if quiet) calendar is different from a
-    403 block page, an HTML error page, or a JSON error body saved with an
-    ``.ics`` extension; the latter get status ``not_ics`` so broken sources
-    stop hiding inside the zero-event review queue.
+    403 block page, an HTML error page, a JSON error body saved with an
+    ``.ics`` extension, or a cut-off calendar; the latter get status
+    ``not_ics`` so broken sources stop hiding inside the zero-event review
+    queue. The file is read once by ``classify_file`` and stat'ed once here.
     """
-    exists = path.exists()
-    if not exists:
+    try:
+        size = path.stat().st_size
+    except OSError:
         return {
             "path": str(path.relative_to(ROOT)),
             "exists": False,
@@ -360,21 +351,18 @@ def summarize_output(path: Path) -> dict:
             "status": "missing",
         }
 
-    try:
-        content = path.read_text(errors="ignore")
-    except OSError:
-        content = ""
-    events = content.count("BEGIN:VEVENT")
-    is_calendar = "BEGIN:VCALENDAR" in content
+    outcome = classify_file(path)
     summary = {
         "path": str(path.relative_to(ROOT)),
         "exists": True,
-        "size": path.stat().st_size,
-        "events": events,
-        "status": ("not_ics" if not is_calendar else "no_events" if events == 0 else "ok"),
+        "size": size,
+        "events": outcome.events,
+        "status": "not_ics",
     }
-    if summary["status"] == "not_ics":
-        summary["content_kind"] = sniff_content_kind(content)
+    if outcome.kind == CALENDAR:
+        summary["status"] = "no_events" if outcome.events == 0 else "ok"
+    else:
+        summary["content_kind"] = outcome.detail or outcome.kind
     return summary
 
 

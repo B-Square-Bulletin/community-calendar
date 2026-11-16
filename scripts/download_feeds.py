@@ -19,7 +19,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from feed_slug import slugify, source_id_for
-from ran_sources import is_calendar_body, record_ran
+from ran_sources import CALENDAR, record_ran
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
 
 
@@ -507,27 +507,23 @@ def download_feeds(city: str, use_feeds_txt: bool = False) -> None:
         print(f"  ⬇️  {filename} ({host})")
 
         ok = fetch_with_curl_fallback(fetch_url, outfile)
-        body = outfile.read_text(encoding="utf-8", errors="ignore") if ok else ""
-        # A 200 carrying an HTML block page is a failed source, not a quiet
-        # one: only a real calendar counts as ran (#233).
-        ok = ok and is_calendar_body(body)
+        # A 200 carrying an HTML block page or a cut-off download is a failed
+        # source, not a quiet one; record_ran only records a complete calendar (#233).
+        outcome = record_ran(outfile) if ok else None
 
         # Report result
-        if ok:
-            events = body.count("BEGIN:VEVENT")
-
+        if outcome and outcome.kind == CALENDAR:
             # Inject source headers from feeds.txt metadata
             if friendly_name:
                 inject_source_headers(outfile, friendly_name, fallback_url)
 
-            record_ran(outfile)
-
             print(
-                f"  ✅ {filename}: {events} events"
+                f"  ✅ {filename}: {outcome.events} events"
                 f"{' (source: ' + friendly_name + ')' if friendly_name else ''}"
             )
         else:
-            print(f"  ❌ {filename}: empty or failed")
+            reason = (outcome.detail or outcome.kind) if outcome else "not fetched"
+            print(f"  ❌ {filename}: {reason}")
 
         count += 1
 

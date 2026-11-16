@@ -64,7 +64,10 @@ supabase test db supabase/tests/
 - `tests/test_tribe_events.py` - Tribe Events REST base scraper headers and event parsing
 - `tests/test_tribe_rest.py` - parameterized Tribe REST scraper `run()` output (dormant writes a valid empty ICS, first-page failure writes no calendar)
 - `tests/test_monroe_county_history_center.py` - SiteGround `sgcaptcha` handling: a blocked first page fails the run and writes no calendar, a later-page non-400 error keeps fetched pages and logs its status, the end-of-list 400 stays quiet
-- `tests/test_report.py` - feed-health report keeps a `feeds.txt` source with no `.ics` as a failed build, and drops a source `feeds.txt` no longer lists
+- `tests/test_report.py` - feed-health report keeps a `feeds.txt` source with no `.ics` as a failed build, drops a source `feeds.txt` no longer lists, and reports a cut-off calendar with future events as broken
+- `tests/test_ran_sources.py` - the shared source-outcome classifier: `calendar` (quiet or populated) / `not_calendar` with `html`/`json`/`empty`/`unknown` / `truncated` / `unreadable`, the event count, and `record_ran` refusing anything but a complete calendar
+- `tests/test_local_build.py` - the audit's output summary maps a classified file to its four statuses (missing / not_ics / no_events / ok), with cut-off and unreadable files landing in `not_ics`
+- `tests/test_add_feed.py` - feed registration smoke test accepts a complete calendar and rejects a cut-off body and a block page
 - `tests/test_base_scraper.py` - base scraper `X-SOURCE-URL`/`GEO` emission and the source-reached contract (undeclared empty fails, declared empty stays quiet)
 - `tests/test_validate_pr_feeds.py` - PR feed/scraper registration validation against the DB-first contract
 - `tests/test_add_scraper.py` - DB-first registration helper: smoke-test bounds are environment-only (the registered command stays unbounded)
