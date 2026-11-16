@@ -23,6 +23,7 @@ import sys
 from pathlib import Path
 
 from feed_slug import slugify
+from ran_sources import CALENDAR, classify
 
 # Repository root
 ROOT = Path(__file__).parent.parent
@@ -52,13 +53,15 @@ def test_feed(url: str) -> tuple[bool, int]:
             print("❌ No response from URL")
             return False, 0
 
-        if "BEGIN:VCALENDAR" not in content:
-            print("❌ Response is not valid ICS (no BEGIN:VCALENDAR)")
+        outcome = classify(content)
+
+        if outcome.kind != CALENDAR:
+            print(f"❌ Response is not a usable ICS calendar ({outcome.detail or outcome.kind})")
             if len(content) < 500:
                 print(f"   Response: {content[:500]}")
             return False, 0
 
-        event_count = content.count("BEGIN:VEVENT")
+        event_count = outcome.events
 
         if event_count == 0:
             print("⚠️  Valid ICS but 0 events (may be normal if no upcoming events)")

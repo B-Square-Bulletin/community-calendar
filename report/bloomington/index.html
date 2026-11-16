@@ -169,7 +169,7 @@ function feedTable(feeds) {
   for (const name of names) {
     const f = feeds[name];
     const note = f.error ? ('error: ' + f.error)
-               : (f.content && f.content.startsWith('not_ics')) ? f.content
+               : (f.content && f.content !== 'quiet' && f.content !== 'ok') ? f.content
                : (f.count === 0 ? 'quiet' : '');
     table.appendChild(el('tr', {}, [
       el('td', {text: name}),

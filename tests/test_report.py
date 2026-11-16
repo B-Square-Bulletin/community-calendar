@@ -89,6 +89,136 @@ def test_present_source_is_not_marked_no_calendar(tmp_path, monkeypatch):
     assert report.build_city_slice(saved, "bloomington", set())["problems"] == []
 
 
+def test_cut_off_calendar_with_future_events_is_a_broken_feed(tmp_path, monkeypatch):
+    """A download that opens the calendar but never closes it is a failed
+    ingestion even when it still yields future events, so it must reach the
+    problem list instead of being reported healthy (#285)."""
+    monkeypatch.chdir(tmp_path)
+    city_dir = tmp_path / "cities" / "bloomington"
+    city_dir.mkdir(parents=True)
+    (city_dir / "cutoff.ics").write_text(
+        "BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\nDTSTART:20990101T190000Z\r\n"
+        "SUMMARY:Book club\r\nEND:VEVENT\r\n"
+    )
+    monkeypatch.setattr(report, "parse_feeds_reference", lambda city: _scraper_reference("cutoff"))
+
+    report_path = tmp_path / "report.json"
+    report.update_report(["bloomington"], report_path=str(report_path))
+
+    saved = json.loads(report_path.read_text())
+    assert saved["cities"]["bloomington"]["feeds"]["cutoff"]["content"] == "truncated"
+
+    problems = report.build_city_slice(saved, "bloomington", set())["problems"]
+    assert [(i["kind"], i["severity"], i["feed"]) for i in problems] == [
+        ("broken_feed", 1, "cutoff")
+    ]
+    assert "cut-off calendar" in problems[0]["title"]
+
+
+def _write_feed(tmp_path, body: str) -> None:
+    city_dir = tmp_path / "cities" / "bloomington"
+    city_dir.mkdir(parents=True)
+    (city_dir / "feed.ics").write_text(body)
+
+
+def test_block_page_feed_is_a_broken_feed(tmp_path, monkeypatch):
+    """A body without a calendar opener keeps its published not_ics label."""
+    monkeypatch.chdir(tmp_path)
+    _write_feed(tmp_path, "<html>Access denied</html>")
+    monkeypatch.setattr(report, "parse_feeds_reference", lambda city: _scraper_reference("feed"))
+
+    report_path = tmp_path / "report.json"
+    report.update_report(["bloomington"], report_path=str(report_path))
+
+    saved = json.loads(report_path.read_text())
+    assert saved["cities"]["bloomington"]["feeds"]["feed"]["content"] == "not_ics:html"
+
+    problems = report.build_city_slice(saved, "bloomington", set())["problems"]
+    assert [(i["kind"], i["title"]) for i in problems] == [
+        ("broken_feed", "feed is serving html, not ICS")
+    ]
+
+
+def test_unreadable_feed_gets_its_own_wording(tmp_path, monkeypatch):
+    """A file the report cannot read is not a file that served HTML."""
+    monkeypatch.chdir(tmp_path)
+    city_dir = tmp_path / "cities" / "bloomington"
+    city_dir.mkdir(parents=True)
+    (city_dir / "feed.ics").mkdir()
+    monkeypatch.setattr(report, "parse_feeds_reference", lambda city: _scraper_reference("feed"))
+
+    report_path = tmp_path / "report.json"
+    report.update_report(["bloomington"], report_path=str(report_path))
+
+    saved = json.loads(report_path.read_text())
+    assert saved["cities"]["bloomington"]["feeds"]["feed"]["content"] == "unreadable"
+
+    problems = report.build_city_slice(saved, "bloomington", set())["problems"]
+    assert [(i["kind"], i["title"]) for i in problems] == [
+        ("broken_feed", "feed could not be read")
+    ]
+    assert problems[0]["detail"] == "the report could not read the file"
+
+
+def test_healthy_calendar_with_events_is_not_a_problem(tmp_path, monkeypatch):
+    """The report now classifies every file, so a populated calendar gets a
+    label too; that label must stay out of the problem list."""
+    monkeypatch.chdir(tmp_path)
+    _write_feed(
+        tmp_path,
+        "BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\nDTSTART:20990101T190000Z\r\n"
+        "SUMMARY:Book club\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n",
+    )
+    monkeypatch.setattr(report, "parse_feeds_reference", lambda city: _scraper_reference("feed"))
+
+    report_path = tmp_path / "report.json"
+    report.update_report(["bloomington"], report_path=str(report_path))
+
+    saved = json.loads(report_path.read_text())
+    assert saved["cities"]["bloomington"]["feeds"]["feed"]["content"] == "ok"
+    assert report.build_city_slice(saved, "bloomington", set())["problems"] == []
+
+
+def test_broken_feed_does_not_misdates_its_failure(tmp_path, monkeypatch):
+    """A zero-count streak cannot date a content failure. A feed that was quiet
+    for days and then turned cut-off is not broken since its quiet days, so the
+    report states the current count instead of a historical claim."""
+    monkeypatch.chdir(tmp_path)
+    _write_feed(tmp_path, "BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\n")
+    monkeypatch.setattr(report, "parse_feeds_reference", lambda city: _scraper_reference("feed"))
+
+    report_path = tmp_path / "report.json"
+    report_path.write_text(
+        json.dumps(
+            {
+                "generated": None,
+                "cities": {
+                    "bloomington": {
+                        "feeds": {
+                            "feed": {
+                                "content": "quiet",
+                                "history": [
+                                    {"date": "2026-01-01", "count": 3},
+                                    {"date": "2026-01-02", "count": 0},
+                                    {"date": "2026-01-03", "count": 0},
+                                ],
+                            }
+                        }
+                    }
+                },
+                "anomalies": [],
+            }
+        )
+    )
+
+    report.update_report(["bloomington"], report_path=str(report_path))
+
+    saved = json.loads(report_path.read_text())
+    problems = report.build_city_slice(saved, "bloomington", set())["problems"]
+    assert [i["kind"] for i in problems] == ["broken_feed"]
+    assert problems[0]["detail"] == "0 future events in a file that is not a usable calendar"
+
+
 def test_missing_build_keeps_the_anomaly_baseline():
     """A missing-calendar entry must not become the drop-alert baseline."""
     history = [

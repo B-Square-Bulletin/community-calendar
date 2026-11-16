@@ -27,6 +27,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from ran_sources import classify
+
 # Repository root
 ROOT = Path(__file__).parent.parent
 SCRAPERS_DIR = ROOT / "scrapers"
@@ -86,7 +88,7 @@ def test_scraper(scraper_path: Path, extra_args: str) -> bool:
             return False
 
         content = output_file.read_text()
-        event_count = content.count("BEGIN:VEVENT")
+        event_count = classify(content).events
 
         if event_count == 0:
             print("⚠️  Scraper produced 0 events (may be normal if no upcoming events)")
