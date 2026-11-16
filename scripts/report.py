@@ -835,19 +835,18 @@ def build_city_slice(report: dict, city: str, prev_error_lines: set) -> dict:
         )
 
     # Keyed on content, not on the zero-count list: a cut-off or unreadable
-    # file can still yield future events, and it is broken regardless.
+    # file can still yield future events, and it is broken regardless. A
+    # zero-count streak cannot date a content failure, so no historical claim.
     broken = []
     for name, fd in sorted(feeds.items()):
         if not _is_broken(fd.get("content")):
             continue
-        was_count, was_date, since = _silence_streak(fd.get("history", []))
+        hist = fd.get("history", [])
         broken.append(
             {
                 "feed": name,
-                "was": was_count,
-                "was_date": was_date,
-                "broken_since": since,
                 "content": fd["content"],
+                "count": hist[-1].get("count", 0) if hist else 0,
             }
         )
 
@@ -924,12 +923,19 @@ def build_city_slice(report: dict, city: str, prev_error_lines: set) -> dict:
             title = f"{s['feed']} is serving a cut-off calendar"
         else:
             title = f"{s['feed']} could not be read"
+        count = s["count"]
+        detail = "the report could not read the file"
+        if content != "unreadable":
+            detail = (
+                f"{count} future event{'s' if count != 1 else ''} "
+                "in a file that is not a usable calendar"
+            )
         items.append(
             {
                 "severity": 1,
                 "kind": "broken_feed",
                 "title": title,
-                "detail": f"{_was_phrase(s)}; broken since {s['broken_since']}",
+                "detail": detail,
                 "feed": s["feed"],
                 "repro": repro_for(s["feed"]),
             }

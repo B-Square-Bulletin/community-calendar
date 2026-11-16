@@ -157,6 +157,7 @@ def test_unreadable_feed_gets_its_own_wording(tmp_path, monkeypatch):
     assert [(i["kind"], i["title"]) for i in problems] == [
         ("broken_feed", "feed could not be read")
     ]
+    assert problems[0]["detail"] == "the report could not read the file"
 
 
 def test_healthy_calendar_with_events_is_not_a_problem(tmp_path, monkeypatch):
@@ -176,6 +177,46 @@ def test_healthy_calendar_with_events_is_not_a_problem(tmp_path, monkeypatch):
     saved = json.loads(report_path.read_text())
     assert saved["cities"]["bloomington"]["feeds"]["feed"]["content"] == "ok"
     assert report.build_city_slice(saved, "bloomington", set())["problems"] == []
+
+
+def test_broken_feed_does_not_misdates_its_failure(tmp_path, monkeypatch):
+    """A zero-count streak cannot date a content failure. A feed that was quiet
+    for days and then turned cut-off is not broken since its quiet days, so the
+    report states the current count instead of a historical claim."""
+    monkeypatch.chdir(tmp_path)
+    _write_feed(tmp_path, "BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\n")
+    monkeypatch.setattr(report, "parse_feeds_reference", lambda city: _scraper_reference("feed"))
+
+    report_path = tmp_path / "report.json"
+    report_path.write_text(
+        json.dumps(
+            {
+                "generated": None,
+                "cities": {
+                    "bloomington": {
+                        "feeds": {
+                            "feed": {
+                                "content": "quiet",
+                                "history": [
+                                    {"date": "2026-01-01", "count": 3},
+                                    {"date": "2026-01-02", "count": 0},
+                                    {"date": "2026-01-03", "count": 0},
+                                ],
+                            }
+                        }
+                    }
+                },
+                "anomalies": [],
+            }
+        )
+    )
+
+    report.update_report(["bloomington"], report_path=str(report_path))
+
+    saved = json.loads(report_path.read_text())
+    problems = report.build_city_slice(saved, "bloomington", set())["problems"]
+    assert [i["kind"] for i in problems] == ["broken_feed"]
+    assert problems[0]["detail"] == "0 future events in a file that is not a usable calendar"
 
 
 def test_missing_build_keeps_the_anomaly_baseline():
