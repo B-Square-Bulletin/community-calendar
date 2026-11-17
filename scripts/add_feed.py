@@ -23,7 +23,7 @@ import sys
 from pathlib import Path
 
 from feed_slug import slugify
-from ran_sources import CALENDAR, classify
+from ran_sources import CALENDAR, TRUNCATED, classify
 
 # Repository root
 ROOT = Path(__file__).parent.parent
@@ -56,7 +56,11 @@ def test_feed(url: str) -> tuple[bool, int]:
         outcome = classify(content)
 
         if outcome.kind != CALENDAR:
-            print(f"❌ Response is not a usable ICS calendar ({outcome.detail or outcome.kind})")
+            reason = outcome.detail or outcome.kind
+            if outcome.kind == TRUNCATED:
+                # "truncation" is the horizon's word (CONTEXT.md); name the cut-off body.
+                reason = "cut-off calendar"
+            print(f"❌ Response is not a usable ICS calendar ({reason})")
             if len(content) < 500:
                 print(f"   Response: {content[:500]}")
             return False, 0

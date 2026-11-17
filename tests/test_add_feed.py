@@ -37,9 +37,12 @@ class TestTestFeed:
         )
         assert add_feed.test_feed("https://example.com/feed.ics") == (True, 1)
 
-    def test_cut_off_calendar_is_rejected(self, monkeypatch):
+    def test_cut_off_calendar_is_rejected(self, monkeypatch, capsys):
         _respond(monkeypatch, "BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\n")
         assert add_feed.test_feed("https://example.com/feed.ics") == (False, 0)
+        # CONTEXT.md reserves "truncation" for the horizon, so the printed
+        # reason names the cut-off body instead of echoing the kind.
+        assert "cut-off calendar" in capsys.readouterr().out
 
     def test_block_page_is_rejected(self, monkeypatch):
         _respond(monkeypatch, "<html>Access denied</html>")

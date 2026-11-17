@@ -25,13 +25,23 @@ import os
 import shlex
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
-from ran_sources import classify
+from ran_sources import CALENDAR, TRUNCATED, classify_file
 
 # Repository root
 ROOT = Path(__file__).parent.parent
 SCRAPERS_DIR = ROOT / "scrapers"
+
+
+def trial_output() -> Path:
+    """The trial calendar this invocation owns.
+
+    A fixed path is machine-wide, so a concurrent registration would unlink or
+    classify another run's output.
+    """
+    return Path(tempfile.gettempdir()) / f"scraper_test_{os.getpid()}.ics"
 
 
 def find_scraper(name: str) -> Path | None:
@@ -60,13 +70,17 @@ def test_scraper(scraper_path: Path, extra_args: str) -> bool:
     can validate end to end inside the 120s timeout. Scrapers that ignore it are
     unaffected.
     """
-    output_file = Path("/tmp/scraper_test.ics")
+    output_file = trial_output()
     cmd = [sys.executable, str(scraper_path)]
     if extra_args:
         cmd += shlex.split(extra_args)
     cmd += ["--output", str(output_file)]
 
     print(f"\n🧪 Testing scraper: {' '.join(cmd)}")
+
+    # A scraper that exits 0 without writing must not be judged on the previous
+    # registration's leftover file.
+    output_file.unlink(missing_ok=True)
 
     try:
         result = subprocess.run(
@@ -87,13 +101,19 @@ def test_scraper(scraper_path: Path, extra_args: str) -> bool:
             print("❌ Scraper did not produce output file")
             return False
 
-        content = output_file.read_text()
-        event_count = classify(content).events
+        outcome = classify_file(output_file)
+        if outcome.kind != CALENDAR:
+            reason = outcome.detail or outcome.kind
+            if outcome.kind == TRUNCATED:
+                # "truncation" is the horizon's word (CONTEXT.md); name the cut-off body.
+                reason = "cut-off calendar"
+            print(f"❌ Scraper output is not a usable ICS calendar ({reason})")
+            return False
 
-        if event_count == 0:
+        if outcome.events == 0:
             print("⚠️  Scraper produced 0 events (may be normal if no upcoming events)")
         else:
-            print(f"✅ Scraper produced {event_count} events")
+            print(f"✅ Scraper produced {outcome.events} events")
 
         return True
 
