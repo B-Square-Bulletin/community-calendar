@@ -70,7 +70,7 @@ supabase test db supabase/tests/
 - `tests/test_add_feed.py` - feed registration smoke test accepts a complete calendar and rejects a cut-off body and a block page
 - `tests/test_base_scraper.py` - base scraper `X-SOURCE-URL`/`GEO` emission and the source-reached contract (undeclared empty fails, declared empty stays quiet)
 - `tests/test_validate_pr_feeds.py` - PR feed/scraper registration validation against the DB-first contract
-- `tests/test_add_scraper.py` - DB-first registration helper: smoke-test bounds are environment-only (the registered command stays unbounded)
+- `tests/test_add_scraper.py` - DB-first registration helper: smoke-test bounds are environment-only (the registered command stays unbounded), and the smoke test shares the source-outcome rule — an HTML/JSON/empty/cut-off trial output fails and prints why, a valid zero-event calendar still registers
 - `supabase/tests/test_deduplicated_events.sql` - pgTAP tests for route persistence columns and the `deduplicated_events` view (group collapse, NULL isolation, structured source names, representative)
 - `supabase/functions/my-picks/dedupe_test.ts` - Deno tests for the saved-picks group collapse (one ICS entry per stored group, NULL isolation, canonical representative). Run with `make test-deno` or the full `make test` command; CI runs these in its dedicated Deno job.
 - `supabase/functions/my-picks/ics_test.ts` - Deno test for the one shared ICS text rule (#251): a title with a bare carriage return cannot split a feed line, and browser, personal feed and JSON artifact render the same text. Run with `make test-deno`.
