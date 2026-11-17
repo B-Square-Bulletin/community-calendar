@@ -324,13 +324,6 @@ def clean_known_outputs(city: str, workflow_rows: list[dict], live_feed_rows: li
             path.unlink()
 
 
-def count_events(ics_path: Path) -> int:
-    try:
-        return ics_path.read_text(errors="ignore").count("BEGIN:VEVENT")
-    except OSError:
-        return 0
-
-
 def summarize_output(path: Path) -> dict:
     """Classify an output file by its content, not just its event count.
 
