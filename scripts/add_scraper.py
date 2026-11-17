@@ -25,6 +25,7 @@ import os
 import shlex
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 from ran_sources import CALENDAR, TRUNCATED, classify_file
@@ -32,9 +33,15 @@ from ran_sources import CALENDAR, TRUNCATED, classify_file
 # Repository root
 ROOT = Path(__file__).parent.parent
 SCRAPERS_DIR = ROOT / "scrapers"
-# Where the smoke test writes its trial calendar; tests import it so they cannot
-# drift from the path the runner reads.
-TEST_OUTPUT = Path("/tmp/scraper_test.ics")
+
+
+def trial_output() -> Path:
+    """The trial calendar this invocation owns.
+
+    A fixed path is machine-wide, so a concurrent registration would unlink or
+    classify another run's output.
+    """
+    return Path(tempfile.gettempdir()) / f"scraper_test_{os.getpid()}.ics"
 
 
 def find_scraper(name: str) -> Path | None:
@@ -63,7 +70,7 @@ def test_scraper(scraper_path: Path, extra_args: str) -> bool:
     can validate end to end inside the 120s timeout. Scrapers that ignore it are
     unaffected.
     """
-    output_file = TEST_OUTPUT
+    output_file = trial_output()
     cmd = [sys.executable, str(scraper_path)]
     if extra_args:
         cmd += shlex.split(extra_args)
