@@ -1,8 +1,8 @@
 // tests/js/validate-custom-helpers.test.js — vitest migration of
 // scripts/validate_custom_helpers.js (seam harness for #107: Custom range picker).
 //
-// WHY: dateWindowForCustom / syncCustomParams are pure
-// helpers with no browser dependency. Expected values are hand-computed
+// WHY: dateWindowForCustom and the commitFor/syncDateParams pair are pure
+// seams with no browser dependency. Expected values are hand-computed
 // literals (PST, UTC-8), never the engine's own output, so these tests can
 // disagree with the code.
 'use strict';
@@ -99,7 +99,9 @@ describe('picker seams', () => {
     expect(window.customDisabledDates()).toEqual([{ before: window.todayDateOnly() }]);
   });
   it('canonical custom link carries from/to only with siblings preserved', () => {
-    window.syncCustomParams('2026-02-12', '2026-02-14');
+    window.syncDateParams(
+      window.commitFor({ preset: 'custom', from: '2026-02-12', to: '2026-02-14' }).urlParams
+    );
     const u = new URL(window.location);
     expect([
       u.searchParams.get('from'),

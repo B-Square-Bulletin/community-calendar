@@ -346,7 +346,8 @@
          glyph (endIcon) is a plain adornment inside that same Control, so
          tapping it opens the popup too. Tapping Custom again re-opens a
          dismissed popup. Commit fires once on explicit confirm (Proceed
-         via onDidChange): malformed or partial input is ignored, past starts clamp,
+         via onDidChange → commitCustomRange, the same applier the tabs use):
+         malformed or partial input is ignored, past starts clamp,
          inverted ranges coerce to a single day, and the canonical
          exact-date link syncs (prio-90: the committed window travels as
          one object). Manual typing alone never commits. -->
@@ -362,7 +363,7 @@
         disabledDates="{window.customDisabledDates()}"
         endIcon="calendar-days"
         confirmRangeSelection="true"
-        onDidChange="(val) => { const customWindow = window.dateWindowForCustom(val); if (!customWindow) return; datePreset = 'custom'; dateWindowStart = customWindow.start; dateWindowEnd = customWindow.end; dateTruncationLabel = window.dateTruncationText(customWindow); displayStartIndex = 0; browseStartIndex = 0; scrollRequest = scrollRequest + 1; window.syncCustomParams(customWindow); }"
+        onDidChange="(val) => commitCustomRange(val)"
       />
     </HStack>
     <Text when="{dateTruncationLabel}" fontSize="$fontSize-sm" color="$color-text-secondary" value="{dateTruncationLabel}" />

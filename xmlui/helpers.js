@@ -86,10 +86,9 @@ window.syncSearchParam = function (search) {
 // All strips only the date keys, and every commit preserves sibling params
 // (city, search, category, mode, images, embed, cards). history-replace (not
 // push) so Back leaves the calendar instead of stepping through tab history.
-// Single replace site: syncDateParams/syncCustomParams both route through
-// replaceDateUrlParams, which owns the new-URL -> set/delete -> replaceState
-// shape. A value of undefined leaves the key untouched, null deletes it, and
-// a string sets it.
+// Single replace site: replaceDateUrlParams owns the new-URL -> set/delete ->
+// replaceState shape. A value of undefined leaves the key untouched, null
+// deletes it, and a string sets it.
 window.replaceDateUrlParams = function (params) {
   var url = new URL(window.location);
   params = params || {};
@@ -107,21 +106,12 @@ window.replaceDateUrlParams = function (params) {
   }
   window.history.replaceState({}, '', url);
 };
-// Single source of truth for preset keys (prio-80): the engine owns the
-// canonical list (window.DATE_PRESETS in date-windows.js); the tab strip is
-// exactly that list, derived here so adding a preset means editing the
-// engine only. The slice freezes a copy with a literal fallback for load
-// orders where the engine is absent.
-window.DATE_TAB_PRESETS = (
-  window.DATE_PRESETS || ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth']
-).slice();
-window.syncDateParams = function (sel) {
-  var preset = sel && sel.preset;
-  if (preset && preset !== 'all' && window.DATE_TAB_PRESETS.indexOf(preset) >= 0) {
-    window.replaceDateUrlParams({ date: preset, from: null, to: null });
-  } else {
-    window.replaceDateUrlParams({ date: null, from: null, to: null });
-  }
+// Apply one commit's URL patch. window.commitFor always names all three date
+// keys, and date-windows.js encodeDateParams is the only place that decides
+// what a preset or a Custom range encodes to, so no preset validation lives
+// here.
+window.syncDateParams = function (urlParams) {
+  window.replaceDateUrlParams(urlParams || {});
 };
 
 // Single window-resolution opts (prio-70 dedup): dateWindowForPreset and
@@ -136,20 +126,28 @@ window.dateWindowOpts = function () {
   return opts;
 };
 
-// Resolve one #105 day preset to its absolute window ({start, end} ISO
-// strings, nulls for All) in the city timezone via the #104 engine.
+// Resolve one #105 day preset to its absolute window ({preset, start, end}
+// ISO strings, nulls for All) in the city timezone via the #104 engine.
 // #108: the prefetch horizon truncates overrunning windows (This month past
 // the horizon) and the truncation flag rides along for the label below.
+// The resolved window is what window.commitFor decorates into a commit.
 window.dateWindowForPreset = function (preset) {
-  if (!preset || preset === 'all') return { start: null, end: null, truncated: false };
+  if (!preset || preset === 'all')
+    return { preset: 'all', start: null, end: null, truncated: false };
   try {
     if (typeof window.resolveDatePreset !== 'function')
-      return { start: null, end: null, truncated: false };
+      return { preset: preset, start: null, end: null, truncated: false };
     var windowRange = window.resolveDatePreset(preset, window.dateWindowOpts());
-    if (!windowRange || !windowRange.start) return { start: null, end: null, truncated: false };
-    return { start: windowRange.start, end: windowRange.end, truncated: !!windowRange.truncated };
+    if (!windowRange || !windowRange.start)
+      return { preset: preset, start: null, end: null, truncated: false };
+    return {
+      preset: windowRange.preset,
+      start: windowRange.start,
+      end: windowRange.end,
+      truncated: !!windowRange.truncated,
+    };
   } catch (e) {
-    return { start: null, end: null, truncated: false };
+    return { preset: preset, start: null, end: null, truncated: false };
   }
 };
 
@@ -169,37 +167,6 @@ window.dateWindowLabel = function (preset) {
     custom: 'in this date range',
   };
   return labels[preset] || 'found';
-};
-
-// Horizon-truncation copy for the label below the tabs (prio-70 dedup):
-// this is a thin delegate — the engine's truncationLabelForWindow owns the
-// `Showing through {horizonDate} — the calendar currently ends there.`
-// copy plus the inclusive-last-day math, so the Main.xmlui custom confirm
-// and the shell boot seed render byte-identical labels through this seam.
-// Falls back to the local render only when the engine is absent.
-window.dateTruncationText = function (windowRange) {
-  if (!windowRange || !windowRange.truncated || !windowRange.end) return null;
-  try {
-    if (typeof window.truncationLabelForWindow === 'function') {
-      return window.truncationLabelForWindow(windowRange, getCityTimezone() || 'UTC');
-    }
-  } catch (e) {
-    return null;
-  }
-  try {
-    var tz = getCityTimezone() || 'UTC';
-    var lastMs = new Date(windowRange.end).getTime() - 1;
-    if (!isFinite(lastMs)) return null;
-    var day = new Intl.DateTimeFormat('en-CA', {
-      timeZone: tz,
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-    }).format(new Date(lastMs));
-    return 'Showing through ' + day + ' — the calendar currently ends there.';
-  } catch (e) {
-    return null;
-  }
 };
 
 // Move focus to the tab-strip heading after the empty-state reset commits
@@ -292,7 +259,7 @@ window.todayDateOnly = function () {
 // window.* seam rather than inlined at the DatePicker binding because (a)
 // getCityTimezone is a bare (non-window) function the markup cannot call,
 // and (b) the `|| 'UTC'` fallback policy lives here in one place alongside
-// dateWindowOpts/todayDateOnly/dateTruncationText instead of being
+// dateWindowOpts/todayDateOnly instead of being
 // duplicated in the declarative binding.
 window.customPickerTimezone = function () {
   return getCityTimezone() || 'UTC';
@@ -303,14 +270,15 @@ window.customDisabledDates = function () {
   return [{ before: window.todayDateOnly() }];
 };
 
-// Resolve an exact Custom range to its committed window ({start, end} ISO
-// plus canonical from/to, truncated, clamped) in the city timezone via the
-// #104 engine. Null on malformed or partial input (the commit ignores it,
-// so nothing filters mid-drag or per tick). End-before-start coerces to a
-// single day, over-long ranges cap at 180 days, past starts clamp to today,
-// and ends past the prefetch horizon truncate with the truncation label.
-// Takes the window shape {from, to} (prio-90 Data Clumps fix); the legacy
-// positional (from, to) pair still works so existing harnesses stay green.
+// Resolve an exact Custom range to its committed window ({preset:'custom'},
+// {start, end} ISO plus canonical from/to, truncated, clamped) in the city
+// timezone via the #104 engine. Null on malformed or partial input (the
+// commit ignores it, so nothing filters mid-drag or per tick). End-before-start
+// coerces to a single day, over-long ranges cap at 180 days, past starts
+// clamp to today, and ends past the prefetch horizon truncate with the
+// truncation label. Takes the window shape {from, to} (prio-90 Data Clumps
+// fix); the legacy positional (from, to) pair still works so existing
+// harnesses stay green.
 window.dateWindowForCustom = function (rangeOrFrom, to) {
   var from = rangeOrFrom;
   if (
@@ -328,6 +296,7 @@ window.dateWindowForCustom = function (rangeOrFrom, to) {
     var windowRange = window.resolveCustomRange(from, to, window.dateWindowOpts());
     if (!windowRange || !windowRange.start) return null;
     return {
+      preset: 'custom',
       start: windowRange.start,
       end: windowRange.end,
       from: windowRange.from,
@@ -337,31 +306,6 @@ window.dateWindowForCustom = function (rangeOrFrom, to) {
     };
   } catch (e) {
     return null;
-  }
-};
-
-// Sync the canonical Custom link: exact from/to only with no preset key,
-// preserving sibling params (city, search, category, mode, images, embed,
-// cards). history-replace (not push) so Back leaves the calendar instead of
-// stepping through filter states. Takes the committed window {from, to}
-// (prio-90); the legacy positional (from, to) pair still works.
-window.syncCustomParams = function (rangeOrFrom, to) {
-  var from = rangeOrFrom;
-  if (
-    rangeOrFrom != null &&
-    typeof rangeOrFrom === 'object' &&
-    !Array.isArray(rangeOrFrom) &&
-    ('from' in rangeOrFrom || 'to' in rangeOrFrom)
-  ) {
-    from = rangeOrFrom.from;
-    to = rangeOrFrom.to;
-  }
-  if (from && to) {
-    window.replaceDateUrlParams({ date: null, from: from, to: to });
-  } else {
-    // No-op commit (callers guard on the resolve, so this path only fires on
-    // malformed input): rewrite the untouched URL, exactly as before.
-    window.replaceDateUrlParams({});
   }
 };
 

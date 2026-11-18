@@ -69,38 +69,45 @@ function setCategoryFilter(category) {
   window.syncCategoryParam(categoryFilter);
 }
 
-// Single date-tab commit path: every preset tab plus the empty-state reset
-// funnels through here instead of repeating the commit sequence inline in
-// markup. Resolves the absolute window via the date-window engine, assigns
-// the committed preset/bounds, closes the Custom picker flow (customOpen)
-// so a stale range can never display under a non-custom window, resets paging, scrolls to top on user taps,
-// surfaces the horizon-truncation label, and syncs the evergreen ?date= link
-// with history-replace. The empty-state reset passes {scroll: false} and
-// chains window.focusDateTabHeading() so focus moves without scrolling.
-function commitDatePreset(preset, opts) {
-  const withScroll = !opts || opts.scroll !== false;
-  if (!preset || preset === 'all') {
-    datePreset = 'all';
-    customOpen = false;
-    dateWindowStart = null;
-    dateWindowEnd = null;
-    dateTruncationLabel = null;
-    displayStartIndex = 0;
-    browseStartIndex = 0;
-    if (withScroll) scrollRequest = scrollRequest + 1;
-    window.syncDateParams({ preset: 'all' });
-    return;
-  }
-  const windowRange = window.dateWindowForPreset(preset);
-  datePreset = preset;
-  customOpen = false;
-  dateWindowStart = windowRange.start;
-  dateWindowEnd = windowRange.end;
-  dateTruncationLabel = window.dateTruncationText(windowRange);
+// Single date-commit applier: the preset tabs, the empty-state reset, and the
+// Custom confirm all hand a window.commitFor patch to this one function, so
+// the committed preset/bounds/label/Custom flag and the ?date= or
+// ?from=&to= link can never disagree. The engine decides; this only assigns
+// and resets paging.
+function applyDateCommit(commit, withScroll) {
+  datePreset = commit.preset;
+  customOpen = commit.customOpen;
+  dateWindowStart = commit.start;
+  dateWindowEnd = commit.end;
+  dateTruncationLabel = commit.truncationLabel;
   displayStartIndex = 0;
   browseStartIndex = 0;
   if (withScroll) scrollRequest = scrollRequest + 1;
-  window.syncDateParams({ preset: preset });
+  window.syncDateParams(commit.urlParams);
+}
+
+// Single date-tab commit path: every preset tab plus the empty-state reset
+// funnels through here instead of repeating the commit sequence inline in
+// markup. Resolves the absolute window via the date-window engine, then
+// applies the shared commit (preset/bounds, Custom closed, label, paging
+// reset, scroll on user taps, history-replace URL). The empty-state reset
+// passes {scroll: false} and chains window.focusDateTabHeading() so focus
+// moves without scrolling.
+function commitDatePreset(preset, opts) {
+  applyDateCommit(
+    window.commitFor(window.dateWindowForPreset(preset), window.customPickerTimezone()),
+    !opts || opts.scroll !== false
+  );
+}
+
+// Single Custom commit path: the picker's explicit confirm resolves the exact
+// range and applies the same commit, so the range display and the committed
+// window stay in step. Malformed or partial input is ignored (nothing commits
+// mid-drag or per tick).
+function commitCustomRange(range) {
+  const customWindow = window.dateWindowForCustom(range);
+  if (!customWindow) return;
+  applyDateCommit(window.commitFor(customWindow, window.customPickerTimezone()), true);
 }
 
 function openPanel(name) {

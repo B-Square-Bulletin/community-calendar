@@ -30,14 +30,16 @@ function read(p) {
     return null;
   }
 }
-// Body of the single date commit helper (Globals.xs code-behind): every
-// preset tap plus the empty-state reset funnels through commitDatePreset,
-// so commit-contract assertions below read the helper body once instead of
-// repeating per-button inline sequences.
+// Body of the single date-commit applier plus its two entry points
+// (Globals.xs code-behind): every preset tap, the empty-state reset, and the
+// Custom confirm funnel through them, so commit-contract assertions below read
+// this block once instead of repeating per-button inline sequences.
 function commitBody() {
   const g = read('Globals.xs') || '';
-  const at = g.indexOf('function commitDatePreset(');
-  return at < 0 ? '' : g.substring(at, at + 2500);
+  const at = g.indexOf('function applyDateCommit(');
+  if (at < 0) return '';
+  const end = g.indexOf('function openPanel(', at);
+  return g.substring(at, end < 0 ? at + 2500 : end);
 }
 
 const main = (() => {
@@ -253,19 +255,13 @@ describe('intraday tabs', () => {
         /datePreset === 'weekend' && !customOpen \? 'solid' : 'outlined'/.test(main)
     ).toBe(true);
   });
-  it('helpers.js date-tab presets derive from the engine canonical list (single source)', () => {
-    expect(
-      !!helpers &&
-        /window\.DATE_TAB_PRESETS[\s\S]{0,300}?window\.DATE_PRESETS/.test(helpers) &&
-        /DATE_TAB_PRESETS/.test(helpers)
-    ).toBe(true);
-  });
-  it('shell.js boot seed derives the honored set from the engine list (no alias map)', () => {
+  it('shell.js boot seed commits through the shared seam (one decoder, no alias map)', () => {
     expect(
       !!shell &&
-        /window\.DATE_PRESETS/.test(shell) &&
-        !/window\.DATE_PRESET_ALIASES/.test(shell) &&
-        /HONORED/.test(shell)
+        /decodeDateParams/.test(shell) &&
+        /window\.commitFor/.test(shell) &&
+        !/HONORED/.test(shell) &&
+        !/DATE_PRESET_ALIASES/.test(shell)
     ).toBe(true);
   });
   it('this month commits and boots as ?date=thismonth (#103 contract)', () => {
@@ -348,43 +344,49 @@ describe('custom picker', () => {
         })()
     ).toBe(true);
   });
-  it('custom confirm commits once via the engine with paging reset, scroll, and canonical link', () => {
+  it('custom confirm commits once through the shared applier with paging reset and canonical link', () => {
     expect(
       !!main &&
-        /dateWindowForCustom\(/.test(main) &&
-        /datePreset = 'custom'[\s\S]{0,500}?displayStartIndex = 0/.test(main) &&
-        /datePreset = 'custom'[\s\S]{0,600}?syncCustomParams/.test(main)
+        /commitCustomRange\(val\)/.test(main) &&
+        /dateWindowForCustom/.test(commitBody()) &&
+        /displayStartIndex = 0/.test(commitBody()) &&
+        /syncDateParams/.test(commitBody())
     ).toBe(true);
   });
   it('horizon overrun renders the truncation label below the tabs (single copy in the engine)', () => {
     expect(
       !!main &&
         /dateTruncationLabel/.test(main) &&
-        /window\.dateTruncationText\(customWindow\)/.test(main) &&
+        /commitFor/.test(commitBody()) &&
         (() => {
           const eng = read('date-windows.js') || '';
           return /Showing through/.test(eng) && /calendar currently ends there/.test(eng);
         })()
     ).toBe(true);
   });
-  it('helpers.js exposes the custom seam', () => {
+  it('helpers.js exposes the custom seam and the engine owns the commit', () => {
     expect(
       !!helpers &&
         /window\.dateWindowForCustom/.test(helpers) &&
-        /window\.syncCustomParams/.test(helpers) &&
         !/window\.customForwardPresets/.test(helpers) &&
-        /window\.todayDateOnly/.test(helpers)
+        /window\.todayDateOnly/.test(helpers) &&
+        /function commitFor\(/.test(read('date-windows.js') || '')
     ).toBe(true);
   });
-  it('helpers.js custom seam commits with history-replace and canonical from/to only', () => {
+  it('date commits with history-replace through the one URL helper', () => {
     expect(
       !!helpers &&
-        /syncCustomParams[\s\S]{0,400}?replaceDateUrlParams/.test(helpers) &&
+        /syncDateParams[\s\S]{0,400}?replaceDateUrlParams/.test(helpers) &&
         /replaceDateUrlParams[\s\S]{0,1200}?replaceState/.test(helpers)
     ).toBe(true);
   });
-  it('shell.js boot seed honors the custom from/to pair with clamp rewrite', () => {
-    expect(!!shell && /from/.test(shell) && /initialDatePreset = 'custom'/.test(shell)).toBe(true);
+  it('shell.js boot seed restores a deep-linked Custom window and rewrites a clamped start', () => {
+    expect(
+      !!shell &&
+        /initialDatePreset/.test(shell) &&
+        /commit\.urlParams/.test(shell) &&
+        /if \(!commit\.rewritten\)/.test(shell)
+    ).toBe(true);
   });
 });
 
@@ -435,7 +437,6 @@ describe('hardening', () => {
     expect(
       !!helpers &&
         /window\.dateWindowLabel/.test(helpers) &&
-        /window\.dateTruncationText/.test(helpers) &&
         /window\.focusDateTabHeading/.test(helpers)
     ).toBe(true);
   });
@@ -443,7 +444,7 @@ describe('hardening', () => {
     expect(
       !!main &&
         /commitDatePreset\('today'\)/.test(main) &&
-        /dateTruncationText/.test(commitBody()) &&
+        /commitFor/.test(commitBody()) &&
         /horizonEnd/.test(helpers) &&
         /getToDate/.test(helpers)
     ).toBe(true);
@@ -470,8 +471,7 @@ describe('hardening', () => {
       !!shell &&
         /selectCity[\s\S]{0,300}?pushState/.test(shell) &&
         /replaceDateUrlParams[\s\S]{0,1200}?replaceState/.test(helpers) &&
-        /syncDateParams[\s\S]{0,400}?replaceDateUrlParams/.test(helpers) &&
-        /syncCustomParams[\s\S]{0,400}?replaceDateUrlParams/.test(helpers)
+        /syncDateParams[\s\S]{0,400}?replaceDateUrlParams/.test(helpers)
     ).toBe(true);
   });
   it('date sync preserves embed; All clears only date keys', () => {
@@ -480,14 +480,11 @@ describe('hardening', () => {
         (() => {
           const r = helpers.indexOf('window.replaceDateUrlParams');
           const d = helpers.indexOf('window.syncDateParams');
-          const c = helpers.indexOf('window.syncCustomParams');
-          if (r < 0 || d < 0 || c < 0) return false;
+          if (r < 0 || d < 0) return false;
           const rb = helpers.substring(r, r + 1200);
           const db = helpers.substring(d, d + 400);
-          const cb = helpers.substring(c, c + 400);
           return (
             /replaceDateUrlParams/.test(db) &&
-            /replaceDateUrlParams/.test(cb) &&
             !/delete\('embed'\)/.test(rb) &&
             /delete\('date'\)/.test(rb) &&
             /delete\('from'\)/.test(rb) &&
@@ -502,6 +499,9 @@ describe('hardening', () => {
 describe('single commit path', () => {
   it('code-behind exposes one shared date commit helper', () => {
     expect(!!globals && /function commitDatePreset\(/.test(globals)).toBe(true);
+  });
+  it('the applier takes the Custom flag from the patch (never a literal)', () => {
+    expect(!!globals && /customOpen = commit\.customOpen/.test(commitBody())).toBe(true);
   });
   it('commit helper uses no var-in-function declarations (XMLUI rejects them)', () => {
     expect(!!globals && !/^\s*var\s+\w/m.test(commitBody())).toBe(true);
@@ -524,8 +524,8 @@ describe('single commit path', () => {
       !!main &&
         ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth'].every(
           function (k) {
-            // The Custom confirm keeps its own from/to path (syncCustomParams);
-            // unifying it rides prio-70. Only the seven preset keys must be gone.
+            // The Custom confirm commits through commitCustomRange in the same
+            // applier; only the seven preset keys must be absent from markup.
             return !main.includes("datePreset = '" + k + "'");
           }
         )
@@ -563,35 +563,29 @@ describe('single window-resolution path', () => {
       })()
     ).toBe(true);
   });
-  it('helpers truncation text delegates to the engine formatter (one copy)', () => {
-    expect(
-      !!helpers &&
-        /window\.dateTruncationText/.test(helpers) &&
-        /truncationLabelForWindow/.test(helpers)
-    ).toBe(true);
-  });
-  it('custom confirm routes truncation through dateTruncationText (no inline copy)', () => {
+  it('custom confirm labels the overrun through the shared commit (no inline copy)', () => {
     expect(
       !!main &&
         (() => {
           const at = main.indexOf('<DatePicker');
           if (at < 0) return false;
           const handler = main.substring(at, at + 2200);
-          return /dateTruncationText/.test(handler) && !/Showing through/.test(handler);
+          return /commitCustomRange\(val\)/.test(handler) && !/Showing through/.test(handler);
         })()
     ).toBe(true);
   });
-  it('shell boot seed resolves the preset-only path via decodeDateParams (one resolver)', () => {
+  it('shell boot seed resolves and commits through one decoder plus the shared seam', () => {
     expect(
       !!shell &&
-        !/resolveDatePreset\(key/.test(shell) &&
-        /decodeDateParams\(\s*\{ date: key/.test(shell)
+        !/resolveDatePreset\(/.test(shell) &&
+        /decodeDateParams\(/.test(shell) &&
+        /commitFor\(/.test(shell)
     ).toBe(true);
   });
-  it('shell boot seed routes truncation through the shared formatter (no hand-rolled copy)', () => {
+  it('shell boot seed takes the truncation label from the commit (no hand-rolled copy)', () => {
     expect(
       !!shell &&
-        /truncationLabelForWindow|dateTruncationText/.test(shell) &&
+        /initialDateTruncationLabel = commit\.truncationLabel/.test(shell) &&
         !/Showing through '/.test(shell)
     ).toBe(true);
   });
@@ -606,7 +600,7 @@ describe('committed window object', () => {
         )
     ).toBe(true);
   });
-  it('custom confirm resolves and syncs through the window-object form', () => {
+  it('custom confirm resolves and commits through the window-object form', () => {
     expect(
       !!main &&
         (() => {
@@ -614,10 +608,8 @@ describe('committed window object', () => {
           if (at < 0) return false;
           const handler = main.substring(at, at + 2200);
           return (
-            /dateWindowForCustom\(val\)/.test(handler) &&
-            /syncCustomParams\(customWindow\)/.test(handler) &&
-            !/dateWindowForCustom\(val && val\.from/.test(handler) &&
-            !/syncCustomParams\(customWindow\.from/.test(handler)
+            /commitCustomRange\(val\)/.test(handler) &&
+            !/dateWindowForCustom\(val && val\.from/.test(handler)
           );
         })()
     ).toBe(true);
@@ -626,7 +618,6 @@ describe('committed window object', () => {
     expect(
       !!helpers &&
         /window\.dateWindowForCustom = function\s*\(rangeOrFrom/.test(helpers) &&
-        /window\.syncCustomParams = function\s*\(rangeOrFrom/.test(helpers) &&
         /function filterByDateWindow\(events, windowOrStartISO/.test(helpers)
     ).toBe(true);
   });
@@ -660,9 +651,6 @@ describe('custom affordance', () => {
         /<DatePicker[\s\S]{0,1600}?label="Custom date range"/.test(main) &&
         /<DatePicker[\s\S]{0,1600}?placeholder=/.test(main)
     ).toBe(true);
-  });
-  it('shared commit helper closes the custom flow (no stale range display)', () => {
-    expect(!!globals && /customOpen = false/.test(commitBody())).toBe(true);
   });
   it('custom tab reads pressed while the custom flow is open (not only after commit)', () => {
     expect(
