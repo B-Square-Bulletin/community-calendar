@@ -118,6 +118,19 @@ class TestClassify:
         body = make_ics(_event(), vtimezone=VTIMEZONE_LA)
         assert rs.classify(body) == rs.Outcome(rs.CALENDAR, None, 1)
 
+    @pytest.mark.parametrize("pad", [" ", "\t"])
+    def test_whitespace_padded_event_openers_are_not_a_calendar(self, pad):
+        """combine_ics needs BEGIN:VEVENT followed immediately by a line break."""
+        body = (
+            "BEGIN:VCALENDAR\r\n"
+            f"BEGIN:VEVENT{pad}\r\n"
+            "DTSTART:20990101T190000Z\r\n"
+            "UID:x@example.com\r\n"
+            "END:VEVENT\r\n"
+            "END:VCALENDAR\r\n"
+        )
+        assert rs.classify(body) == rs.Outcome(rs.NOT_CALENDAR, "unknown", 1)
+
     def test_a_folded_line_is_not_structure(self):
         body = (
             "BEGIN:VCALENDAR\r\n"

@@ -72,11 +72,11 @@ def _scan_blocks(body: str) -> tuple[str | None, int]:
     ``unclosed`` is a block still open at the end of the body (a cut-off
     download); ``malformed`` is anything else — an ``END`` that does not close
     the block it is in, a top-level block that is not a calendar, content
-    outside every block, or a ``VEVENT`` whose marker is not uppercase. A
-    lowercase event marker is refused because the fallback extractor is
-    uppercase-only while the recurring path parses any case, so such a body
-    can extract only partly. A ``VEVENT`` counts once its own uppercase
-    ``END:VEVENT`` closes it.
+    outside every block, or a ``VEVENT`` whose marker is not uppercase or whose
+    ``BEGIN`` line has trailing whitespace. A lowercase event marker is refused
+    because the fallback extractor is uppercase-only while the recurring path
+    parses any case, so such a body can extract only partly. A ``VEVENT`` counts
+    once its own uppercase ``END:VEVENT`` closes it.
     """
     stack: list[str] = []
     problem: str | None = None
@@ -89,8 +89,10 @@ def _scan_blocks(body: str) -> tuple[str | None, int]:
                 problem = problem or _MALFORMED
             continue
         marker = match.group(0)
-        readable = marker == marker.upper()
         tag, name = match.group(1).upper(), match.group(2).upper()
+        # The extractor needs `BEGIN:VEVENT` immediately followed by a line
+        # break, so trailing whitespace the rstrip hid makes it unreadable.
+        readable = marker == marker.upper() and (tag == "END" or line == marker)
         if name == "VEVENT" and not readable:
             problem = problem or _MALFORMED
         if tag == "BEGIN":
