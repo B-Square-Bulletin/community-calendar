@@ -15,6 +15,7 @@ the loader falls back to the pre-#233 payload-presence behavior.
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
@@ -22,9 +23,19 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 FILENAME = "ran_sources.txt"
-CALENDAR_MARKER = "BEGIN:VCALENDAR"
-CALENDAR_END = "END:VCALENDAR"
-EVENT_MARKER = "BEGIN:VEVENT"
+
+# A structural line names a block: no leading space (so a folded continuation
+# line never counts as structure). Component names are case-insensitive, but a
+# VEVENT the extractor cannot read is refused in _scan_blocks.
+BLOCK_LINE = re.compile(r"^(BEGIN|END):([A-Za-z0-9-]+)$", re.IGNORECASE)
+
+# iCalendar text is UTF-8 and may hold U+2028 or U+0085 inside a property value,
+# so a physical line ends only at CR or LF.
+LINE_BREAK = re.compile(r"\r\n|\n|\r")
+
+# Internal failure names for the structural scan; neither is a public kind.
+_UNCLOSED = "unclosed"
+_MALFORMED = "malformed"
 
 CALENDAR = "calendar"
 NOT_CALENDAR = "not_calendar"
@@ -55,20 +66,71 @@ def _content_detail(body: str) -> str:
     return "unknown"
 
 
+def _scan_blocks(body: str) -> tuple[str | None, int]:
+    """The first structural failure (or ``None``) and the completed event count.
+
+    ``unclosed`` is a block still open at the end of the body (a cut-off
+    download); ``malformed`` is anything else — an ``END`` that does not close
+    the block it is in, a top-level block that is not a calendar, content
+    outside every block, or a ``VEVENT`` whose marker is not uppercase or whose
+    ``BEGIN`` line has trailing whitespace. A lowercase event marker is refused
+    because the fallback extractor is uppercase-only while the recurring path
+    parses any case, so such a body can extract only partly. A ``VEVENT`` counts
+    once its own uppercase ``END:VEVENT`` closes it.
+    """
+    stack: list[str] = []
+    problem: str | None = None
+    events = 0
+    saw_calendar = False
+    for line in LINE_BREAK.split(body):
+        match = BLOCK_LINE.match(line.rstrip())
+        if not match:
+            if not stack and line.strip():
+                problem = problem or _MALFORMED
+            continue
+        marker = match.group(0)
+        tag, name = match.group(1).upper(), match.group(2).upper()
+        # The extractor needs `BEGIN:VEVENT` immediately followed by a line
+        # break, so trailing whitespace the rstrip hid makes it unreadable.
+        readable = marker == marker.upper() and (tag == "END" or line == marker)
+        if name == "VEVENT" and not readable:
+            problem = problem or _MALFORMED
+        if tag == "BEGIN":
+            if not stack:
+                if name != "VCALENDAR":
+                    problem = problem or _MALFORMED
+                    continue
+                saw_calendar = True
+            stack.append(name)
+        elif stack and stack[-1] == name:
+            stack.pop()
+            if name == "VEVENT" and readable:
+                events += 1
+        else:
+            problem = problem or _MALFORMED
+    if problem is not None:
+        return problem, events
+    if stack:
+        return _UNCLOSED, events
+    if not saw_calendar:
+        return _MALFORMED, events
+    return None, events
+
+
 def classify(body: str) -> Outcome:
     """Classify an already-fetched body.
 
-    A body that opens a calendar but never closes it is a cut-off download: a
-    failed ingestion, not a quiet source, because combine_ics extracts no
-    complete events from it. Requiring both markers keeps the sweep boundary
-    where ADR 0017 put it.
+    A body whose blocks do not pair up is a failed ingestion, not a quiet
+    source, because combine_ics extracts only complete events from it.
+    Requiring the structure keeps the sweep boundary where ADR 0017 put it.
     """
-    events = body.count(EVENT_MARKER)
-    if CALENDAR_MARKER not in body:
-        return Outcome(NOT_CALENDAR, _content_detail(body), events)
-    if CALENDAR_END not in body:
+    body = body.removeprefix("\ufeff")
+    problem, events = _scan_blocks(body)
+    if problem is None:
+        return Outcome(CALENDAR, None, events)
+    if problem == _UNCLOSED:
         return Outcome(TRUNCATED, None, events)
-    return Outcome(CALENDAR, None, events)
+    return Outcome(NOT_CALENDAR, _content_detail(body), events)
 
 
 def classify_file(path: Path) -> Outcome:

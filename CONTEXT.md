@@ -61,7 +61,7 @@ A source whose ingestion succeeded in a build run — a scraper that exited 0, d
 _Avoid_: Successful source (when ingestion success is meant), processed source
 
 **Cut-off calendar**:
-An ICS body that opens a calendar and never closes it, so it is not a Ran source; a failed ingestion rather than a Quiet source, because `combine_ics` extracts no complete events from it.
+An ICS body whose blocks do not pair up — one still open at the end, an `END` that does not close the block it is in, a block outside a calendar, or content outside every block — so it is not a Ran source: a failed ingestion rather than a Quiet source, because the body cannot be trusted to be the source's complete calendar. A body that simply ends inside an open block is reported as `truncated`; anything else is a `not_ics:<detail>` body, including html, json and empty responses.
 _Avoid_: Truncation (that is the horizon label)
 
 **Fork**:

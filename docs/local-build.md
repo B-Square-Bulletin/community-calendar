@@ -171,12 +171,14 @@ By default the runner writes:
 - missing outputs
 - zero-event outputs reported separately as informational inventory
 - non-ICS outputs (`status: not_ics`) — files that are not a complete
-  calendar: no `BEGIN:VCALENDAR` opener (typically 403 block pages, HTML
-  error pages, or JSON error bodies saved with an `.ics` extension), a cut-off
-  body that opens a calendar and never closes it, or a path that cannot be
-  read. A `content_kind` field (`html`, `json`, `empty`, `unknown`,
-  `truncated`, `unreadable`) hints at what came back. These are broken
-  sources, not quiet ones, and are kept out of the zero-event queue
+  calendar: a body whose blocks do not pair up (no top-level
+  `BEGIN:VCALENDAR`, an `END` that does not close the block it is in, or
+  content outside every block — typically 403 block pages, HTML error pages,
+  or JSON error bodies saved with an `.ics` extension), a cut-off body that
+  ends with a block still open, or a path that cannot be read. A
+  `content_kind` field (`html`, `json`, `empty`, `unknown`, `truncated`,
+  `unreadable`) hints at what came back. These are broken sources, not quiet
+  ones, and are kept out of the zero-event queue
 - workflow/DB scraper drift
 - per-city registration notes (`legacy_url_keyed_scraper_row` for DB scraper
   rows keyed by an http(s) URL instead of an output path, and
