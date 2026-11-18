@@ -70,10 +70,13 @@ class TestRecurrenceIdOverride:
                 y += 1
             occurrences.append(nth_weekday(y, m, 3, 1))
 
-        # Filter to dates in the expansion window (today to today+90 days)
-        in_window = [d for d in occurrences if d >= today]
-        assert len(in_window) >= 3, (
-            f"Need at least 3 occurrences in expansion window, got {len(in_window)}"
+        # Filter to dates in the expansion window: today through today + window_days,
+        # which `recurring_ical_events.between()` treats as end-exclusive.
+        window_days = 90
+        window_end = today + timedelta(days=window_days)
+        in_window = [d for d in occurrences if today <= d < window_end]
+        assert len(in_window) >= 2, (
+            f"Need at least 2 occurrences in expansion window, got {len(in_window)}"
         )
 
         override_original = in_window[0]
@@ -108,7 +111,7 @@ class TestRecurrenceIdOverride:
             vtimezone=VTIMEZONE_NY,
         )
 
-        expanded = expand_rrules(ics, window_days=90)
+        expanded = expand_rrules(ics, window_days=window_days)
         assert expanded is not None, "expand_rrules should not return None with RRULE present"
         assert len(expanded) > 0, "Should have expanded events"
 
