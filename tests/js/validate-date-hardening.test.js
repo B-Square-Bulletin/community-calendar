@@ -544,7 +544,7 @@ describe('naming', () => {
       /(?:var|const|let)\s+[wt]\s*=\s*window\.(?:dateWindowFor|resolveDate|resolveCustom|decodeDate)/.test(
         src
       ) ||
-      /function\s+(?:truncationLabelForWindow|dateTruncationText)\s*\(\s*w\s*[,)]/.test(src) ||
+      /function\s+truncationLabelForWindow\s*\(\s*w\s*[,)]/.test(src) ||
       /function\s*\(\s*w\s*\)/.test(src) ||
       /var\s+[ft]\s*=\s*parseDateOnly/.test(src) ||
       /var\s+t\s*=\s*(?:cityToday\(\)|new Date\(e\.start_time\)|new Date\(Date\.UTC\(y, mo - 1, d\)|new Date\(value\))/.test(
