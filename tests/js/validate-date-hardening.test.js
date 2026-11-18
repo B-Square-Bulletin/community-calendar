@@ -84,15 +84,17 @@ describe('truncation copy', () => {
     expect([monthCut.end, monthCut.truncated]).toEqual(['2026-02-15T08:00:00.000Z', true]);
   });
   it('truncation copy names the inclusive last day', () => {
-    expect(window.dateTruncationText(monthCut)).toEqual(
+    expect(window.truncationLabelForWindow(monthCut, 'America/Los_Angeles')).toEqual(
       'Showing through 2026-02-14 — the calendar currently ends there.'
     );
   });
   it('no truncation copy without an overrun', () => {
-    expect(window.dateTruncationText(month)).toEqual(null);
+    expect(window.truncationLabelForWindow(month, 'America/Los_Angeles')).toEqual(null);
   });
   it('no truncation copy for All', () => {
-    expect(window.dateTruncationText({ start: null, end: null, truncated: false })).toEqual(null);
+    expect(
+      window.truncationLabelForWindow({ start: null, end: null, truncated: false }, 'UTC')
+    ).toEqual(null);
   });
 });
 
@@ -188,7 +190,7 @@ describe('URL contract', () => {
     );
   });
   it('preset commit preserves embed and every sibling', () => {
-    window.syncDateParams({ preset: 'today' });
+    window.syncDateParams(window.commitFor({ preset: 'today' }).urlParams);
     const u = new URL(window.location);
     expect([
       u.searchParams.get('date'),
@@ -202,8 +204,8 @@ describe('URL contract', () => {
     ]).toEqual(['today', 'true', 'davis', 'x', 'y', 'list', 'preview', '25']);
   });
   it('All strips only date keys and preserves city, search, category, display params', () => {
-    window.syncDateParams({ preset: 'today' });
-    window.syncDateParams({ preset: 'all' });
+    window.syncDateParams(window.commitFor({ preset: 'today' }).urlParams);
+    window.syncDateParams(window.commitFor({ preset: 'all' }).urlParams);
     const u = new URL(window.location);
     expect([
       u.searchParams.get('date'),
@@ -219,8 +221,10 @@ describe('URL contract', () => {
     ]).toEqual([null, null, null, 'davis', 'x', 'y', 'list', 'preview', 'true', '25']);
   });
   it('custom commit preserves embed alongside the exact dates', () => {
-    window.syncDateParams({ preset: 'today' });
-    window.syncCustomParams('2026-02-12', '2026-02-14');
+    window.syncDateParams(window.commitFor({ preset: 'today' }).urlParams);
+    window.syncDateParams(
+      window.commitFor({ preset: 'custom', from: '2026-02-12', to: '2026-02-14' }).urlParams
+    );
     const u = new URL(window.location);
     expect([
       u.searchParams.get('from'),
@@ -381,11 +385,6 @@ describe('Tonight exclusions', () => {
 });
 
 describe('single-path parity', () => {
-  it('helpers truncation delegates to the engine formatter byte-identically', () => {
-    expect(window.dateTruncationText(monthCut)).toEqual(
-      window.truncationLabelForWindow(monthCut, 'America/Los_Angeles')
-    );
-  });
   it('engine formatter names the inclusive last day (hand-computed PST)', () => {
     expect(window.truncationLabelForWindow(monthCut, 'America/Los_Angeles')).toEqual(
       'Showing through 2026-02-14 — the calendar currently ends there.'
@@ -448,18 +447,12 @@ describe('preset keys', () => {
   it('engine exposes no alias map (unknown keys fall to All per #103)', () => {
     expect(window.DATE_PRESET_ALIASES).toEqual(undefined);
   });
-  it('tab-strip list derives from the engine canonical list (same copy, not a fork)', () => {
-    expect(window.DATE_TAB_PRESETS).toEqual(window.DATE_PRESETS);
-  });
-  it('tab-strip list is a copy (mutating it leaves the engine list intact)', () => {
-    expect(
-      (() => {
-        window.DATE_TAB_PRESETS.push('bogus');
-        const intact = window.DATE_PRESETS.indexOf('bogus') < 0;
-        window.DATE_TAB_PRESETS.pop();
-        return intact;
-      })()
-    ).toEqual(true);
+  it('an unknown preset key can never reach the URL (fail open to All)', () => {
+    expect(window.commitFor({ preset: 'month' }).urlParams).toEqual({
+      date: null,
+      from: null,
+      to: null,
+    });
   });
 });
 
@@ -496,11 +489,13 @@ describe('committed window', () => {
   it('custom resolve ignores a null window object', () => {
     expect(window.dateWindowForCustom(null)).toEqual(null);
   });
-  it('custom sync accepts the committed window object', () => {
+  it('custom commit carries the canonical from/to pair as one patch', () => {
     expect(
       (() => {
         window.location = new URL('https://example.com/?city=davis');
-        window.syncCustomParams({ from: '2026-02-12', to: '2026-02-14' });
+        window.syncDateParams(
+          window.commitFor({ preset: 'custom', from: '2026-02-12', to: '2026-02-14' }).urlParams
+        );
         const u = new URL(window.location);
         return [u.searchParams.get('from'), u.searchParams.get('to'), u.searchParams.get('date')];
       })()

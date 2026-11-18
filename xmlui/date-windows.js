@@ -20,11 +20,10 @@
   // Canonical preset keys. Rolling presets encode as ?date=<key>; Custom
   // encodes as an exact ?from=yyyy-MM-dd&to=yyyy-MM-dd pair with no preset
   // key; All strips every date key. This list is the single source of truth
-  // for preset keys (prio-80): helpers.js DATE_TAB_PRESETS and the shell
-  // boot HONORED set both derive from window.DATE_PRESETS, so adding a
-  // preset means editing this list only. Unknown ?date= keys (including the
-  // retired pre-rename `month`) fall back to All per the #103 URL contract
-  // (lowercase exact match) — there is no alias map.
+  // for preset keys (prio-80): encodeDateParams gates every written ?date=
+  // value on it, so adding a preset means editing this list only. Unknown
+  // ?date= keys (including the retired pre-rename `month`) fall back to All
+  // per the #103 URL contract (lowercase exact match) — there is no alias map.
   var DATE_PRESETS = ['all', 'today', 'tonight', 'tomorrow', 'weekend', 'next7', 'thismonth'];
 
   var DATE_RE = /^(\d{4})-(\d{2})-(\d{2})$/;
@@ -141,12 +140,12 @@
   // Single truncation copy (#108, prio-70 dedup): every committed-window
   // label below the tabs reads
   // `Showing through {day} — the calendar currently ends there.` where
-  // {day} is the inclusive last day. helpers.js dateTruncationText, the
-  // Main.xmlui custom confirm, and the shell boot seed all route through
-  // truncationLabelForWindow, so this prefix/suffix pair is the one place
-  // the copy lives. date-windows.js owns it (not helpers.js) because the
-  // shell boot seed runs before helpers.js loads (index.html injects the
-  // engine scripts after boot) while date-windows.js is already present.
+  // {day} is the inclusive last day. commitFor routes every path through
+  // truncationLabelForWindow — the tab taps, the Custom confirm, and the
+  // shell boot seed — so this prefix/suffix pair is the one place the copy
+  // lives. date-windows.js owns it because the shell boot seed runs before
+  // helpers.js loads (index.html injects the engine scripts after boot)
+  // while date-windows.js is already present.
   var TRUNCATION_LABEL_PREFIX = 'Showing through ';
   var TRUNCATION_LABEL_SUFFIX = ' — the calendar currently ends there.';
 
@@ -366,6 +365,37 @@
     return {};
   }
 
+  // Turn an already-resolved window into the one committed state every path
+  // applies (#286): the preset key, its bounds, the Custom flag, the
+  // horizon-truncation label, and the complete set of URL keys. Resolution
+  // stays with the caller (decodeDateParams, dateWindowForPreset,
+  // dateWindowForCustom); this only decides what a commit means, so the tab
+  // taps, the Custom confirm, and the boot seed cannot drift apart. urlParams
+  // always names all three keys, and an unknown preset or a Custom window
+  // without a valid date pair fails open to All, so a patch can never pair
+  // "All" with a window or "Custom" with no dates.
+  function commitFor(windowRange, timeZone) {
+    var range = windowRange || {};
+    var enc = encodeDateParams(
+      range.preset === 'custom'
+        ? { preset: 'custom', from: range.from, to: range.to }
+        : { preset: range.preset }
+    );
+    var preset = enc.from ? 'custom' : enc.date || 'all';
+    var committed = preset === 'all' ? emptyWindow('all') : range;
+    return {
+      preset: preset,
+      start: committed.start || null,
+      end: committed.end || null,
+      customOpen: preset === 'custom',
+      truncationLabel: truncationLabelForWindow(committed, timeZone),
+      urlParams: { date: enc.date || null, from: enc.from || null, to: enc.to || null },
+      // `clamped` is what the Custom resolver reports and `rewritten` is the
+      // decoder's report of the same fact; either means the URL moved.
+      rewritten: !!(range.rewritten || range.clamped),
+    };
+  }
+
   function readParams(params) {
     if (!params) return {};
     if (typeof params.get === 'function') {
@@ -427,6 +457,7 @@
     },
     encodeDateParams: encodeDateParams,
     decodeDateParams: decodeDateParams,
+    commitFor: commitFor,
   };
 
   if (typeof window !== 'undefined') {
@@ -440,6 +471,7 @@
     window.resolveCustomRange = api.resolveCustomRange;
     window.encodeDateParams = api.encodeDateParams;
     window.decodeDateParams = api.decodeDateParams;
+    window.commitFor = api.commitFor;
   }
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = api;

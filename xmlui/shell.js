@@ -334,105 +334,58 @@ window._xsLogs = [];
 
     // Date-tab boot seed (#105 day presets + #106 intraday tabs + #107 Custom):
     // first paint already reflects a shared date link, alongside the existing
-    // search/category seeds above. Both the from/to pair and the preset-only
-    // path resolve through the single decodeDateParams codec (prio-70 dedup:
-    // the preset-only branch used to call resolveDatePreset directly), and
-    // both label the horizon overrun through the engine's shared
-    // truncationLabelForWindow formatter (date-windows.js loads before this
-    // file per index.html, so it is always present; the typeof guard degrades
-    // to no label rather than a failed seed). A complete valid from/to pair
-    // wins over the preset key and restores the exact Custom window; partial
-    // or invalid pairs and unknown keys fall back to All so bad links never
-    // strand the visitor on an empty. A clamped past start rewrites the URL
-    // for stable reload. ?date= keys are lowercase exact matches per the #103
-    // URL contract (unknown = All); the retired pre-rename `month` key is
-    // unknown and falls back to All.
+    // search/category seeds above. The URL is decoded by the single
+    // decodeDateParams codec and decorated by the same window.commitFor seam
+    // every tab tap and the Custom confirm use, so boot cannot drift from the
+    // app's commit. A complete valid from/to pair wins over the preset key and
+    // restores the exact Custom window; partial or invalid pairs and unknown
+    // keys fall back to All so bad links never strand the visitor on an empty.
+    // ?date= keys are lowercase exact matches per the #103 URL contract
+    // (unknown = All); there is no alias map, so the retired pre-rename
+    // `month` key falls back to All. A clamped past start rewrites the URL for
+    // stable reload. date-windows.js loads before this file per index.html;
+    // the typeof guard keeps the All defaults rather than failing the seed.
     window.initialDatePreset = 'all';
     window.initialDateStart = null;
     window.initialDateEnd = null;
     window.initialDateTruncationLabel = null;
     (function () {
-      // Single source of truth for preset keys (prio-80): the boot-honored set
-      // derives from the engine's canonical window.DATE_PRESETS (minus 'all',
-      // which is the default when no key is present). Literals below are
-      // fallbacks for boot orders where the engine is absent. Unknown keys
-      // (including the retired `month`) fall back to All per the #103 URL
-      // contract — there is no alias map.
-      var HONORED = {};
-      var canonical = window.DATE_PRESETS || [
-        'all',
-        'today',
-        'tonight',
-        'tomorrow',
-        'weekend',
-        'next7',
-        'thismonth',
-      ];
-      canonical.forEach(function (k) {
-        if (k !== 'all') HONORED[k] = 1;
-      });
+      if (typeof window.decodeDateParams !== 'function' || typeof window.commitFor !== 'function') {
+        return;
+      }
       var tz =
         (window._cities &&
           window.cityFilter &&
           window._cities[window.cityFilter] &&
           window._cities[window.cityFilter].timezone) ||
         'UTC';
-      var key = null,
-        from = null,
-        to = null;
+      var commit;
       try {
-        key = params.get('date');
-        from = params.get('from');
-        to = params.get('to');
-      } catch (e) {}
-      if ((from != null || to != null) && typeof window.decodeDateParams === 'function') {
-        try {
-          var decoded = window.decodeDateParams(
-            { date: key, from: from, to: to },
+        commit = window.commitFor(
+          window.decodeDateParams(
+            { date: params.get('date'), from: params.get('from'), to: params.get('to') },
             { timeZone: tz, horizonEnd: window.toDate }
-          );
-          if (!decoded || !decoded.start) return;
-          if (decoded.preset !== 'custom') {
-            // Present-but-invalid/partial pair is ignored by the codec, so
-            // the accompanying ?date= preset (if any) still applies here.
-            window.initialDatePreset = decoded.preset;
-            window.initialDateStart = decoded.start;
-            window.initialDateEnd = decoded.end;
-            if (decoded.truncated && typeof window.truncationLabelForWindow === 'function') {
-              window.initialDateTruncationLabel = window.truncationLabelForWindow(decoded, tz);
-            }
-            return;
-          }
-          window.initialDatePreset = 'custom';
-          window.initialDateStart = decoded.start;
-          window.initialDateEnd = decoded.end;
-          if (decoded.truncated && typeof window.truncationLabelForWindow === 'function') {
-            window.initialDateTruncationLabel = window.truncationLabelForWindow(decoded, tz);
-          }
-          if (decoded.rewritten) {
-            var url = new URL(window.location);
-            url.searchParams.set('from', decoded.from);
-            url.searchParams.set('to', decoded.to);
-            url.searchParams.delete('date');
-            window.history.replaceState({}, '', url.toString());
-          }
-        } catch (e) {}
+          ),
+          tz
+        );
+      } catch (e) {
         return;
       }
-      if (!key || !HONORED[key]) return;
+      window.initialDatePreset = commit.preset;
+      window.initialDateStart = commit.start;
+      window.initialDateEnd = commit.end;
+      window.initialDateTruncationLabel = commit.truncationLabel;
+      if (!commit.rewritten) return;
+      // Clamping moved a stale Custom start forward: rewrite the three date
+      // keys the commit names so a reload lands on the same window.
       try {
-        if (typeof window.decodeDateParams !== 'function') return;
-        var decodedWindow = window.decodeDateParams(
-          { date: key },
-          { timeZone: tz, horizonEnd: window.toDate }
-        );
-        if (!decodedWindow || !decodedWindow.start) return;
-        window.initialDatePreset = decodedWindow.preset;
-        window.initialDateStart = decodedWindow.start;
-        window.initialDateEnd = decodedWindow.end;
-        if (decodedWindow.truncated && typeof window.truncationLabelForWindow === 'function') {
-          window.initialDateTruncationLabel = window.truncationLabelForWindow(decodedWindow, tz);
-        }
+        var url = new URL(window.location);
+        Object.keys(commit.urlParams).forEach(function (k) {
+          var v = commit.urlParams[k];
+          if (v) url.searchParams.set(k, v);
+          else url.searchParams.delete(k);
+        });
+        window.history.replaceState({}, '', url.toString());
       } catch (e) {}
     })();
 
