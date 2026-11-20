@@ -74,10 +74,11 @@ REQUEST_TIMEOUT = 90
 MAX_PAGES = 60
 
 # Silent-degradation guard: each run appends its occurrence count to a history
-# file under the committed per-city report slice (`report/<city>/` is published
-# by the workflow's existing `git add report/`), so the next run can compare
-# against the trailing window and warn when a fetch collapses. The existing
-# nightly failure signal stays the only alarm -- this is a log line, not a system.
+# file the archive branch carries (main ignores it; the workflow's restore
+# step puts it back before the run, see scripts/restore_from_archive.sh), so
+# the next run can compare against the trailing window and warn when a fetch
+# collapses. The existing nightly failure signal stays the only alarm -- this
+# is a log line, not a system.
 RUN_HISTORY_PATH = ROOT_DIR / "report" / CITY / "visit_bloomington.runs.json"
 RUN_HISTORY_MAX = 30
 RUN_HISTORY_WINDOW = 7

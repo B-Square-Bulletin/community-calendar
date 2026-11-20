@@ -103,32 +103,10 @@ jobs:
         fi
 
     - name: Restore run histories from archive
-      run: |
-        # A scraper's *.runs.json is state, not output: it carries the recent
-        # counts the silent-degradation guard compares against, and main no
-        # longer holds it. Losing it blinds the guard, so only "no such
-        # branch" (exit 2) may start without one; every other lookup or
-        # restore failure fails the build.
-        lookup=0
-        git ls-remote --exit-code --heads origin archive >/dev/null || lookup=$?
-        if [ "$lookup" -eq 2 ]; then
-          echo "No archive branch yet; starting without run histories"
-        elif [ "$lookup" -ne 0 ]; then
-          echo "Could not look up the archive branch (ls-remote exit $lookup)" >&2
-          exit 1
-        else
-          git fetch --depth=1 origin archive
-        fi
-        for f in $(git ls-tree -r --name-only origin/archive report/ 2>/dev/null | grep '\.runs\.json$'); do
-          mkdir -p "$(dirname "$f")"
-          # Redirect truncates before git show runs, so a failed show must not
-          # leave an empty file behind as a baseline.
-          if ! git show "origin/archive:$f" > "$f" 2>/dev/null; then
-            rm -f "$f"
-            echo "Could not restore $f from the archive baseline" >&2
-            exit 1
-          fi
-        done
+      # A scraper's *.runs.json is state, not output: it carries the recent
+      # counts the silent-degradation guard compares against, and main no
+      # longer holds it. The restore must precede the scrapers that read it.
+      run: bash scripts/restore_from_archive.sh "run histories" report/ '\.runs\.json$'
 
     # The active scraper rows in the feeds table are the only execution
     # set (see docs/local-build.md and reports/db-first-parity-2026-08-07.md).
@@ -233,32 +211,10 @@ jobs:
         done
 
     - name: Restore RSS baseline from archive
-      run: |
-        # rss/ is not tracked (#253): the previous build's feeds are the
-        # latest-feed baseline (known UIDs and first-seen pubDates), and they
-        # live on the archive branch. Losing them announces every event as
-        # new, so only "no such branch" (exit 2) may start without a baseline;
-        # every other lookup or restore failure fails the build.
-        lookup=0
-        git ls-remote --exit-code --heads origin archive >/dev/null || lookup=$?
-        if [ "$lookup" -eq 2 ]; then
-          echo "No archive branch yet; starting without an RSS baseline"
-        elif [ "$lookup" -ne 0 ]; then
-          echo "Could not look up the archive branch (ls-remote exit $lookup)" >&2
-          exit 1
-        else
-          git fetch --depth=1 origin archive
-        fi
-        mkdir -p rss
-        for f in $(git ls-tree --name-only origin/archive rss/ 2>/dev/null); do
-          # Truncation happens before git show runs, so a failed show must not
-          # leave an empty file behind as a baseline.
-          if ! git show "origin/archive:$f" > "$f" 2>/dev/null; then
-            rm -f "$f"
-            echo "Could not restore $f from the archive baseline" >&2
-            exit 1
-          fi
-        done
+      # rss/ is not tracked (#253): the previous build's feeds are the
+      # latest-feed baseline (known UIDs and first-seen pubDates), and they
+      # live on the archive branch. Losing them announces every event as new.
+      run: bash scripts/restore_from_archive.sh "an RSS baseline" rss/
 
     - name: Generate RSS feeds
       if: github.event.inputs.regenerate_only != 'true'
@@ -452,8 +408,9 @@ jobs:
         # growth). The 224-commit history through 2026-08-13 is
         # preserved as a git bundle on the archive-history-2026-08-13
         # release. Consumer URLs (raw .../archive/...) are unchanged.
-        # origin/archive is already local from "Restore RSS baseline from
-        # archive"; re-fetching here would hide a failed fetch as "no baseline".
+        # origin/archive is already local from the restore steps
+        # (restore_from_archive.sh); re-fetching here would hide a failed
+        # fetch as "no baseline".
         git checkout --orphan archive-snapshot
         git rm -rf . 2>/dev/null || true
         git clean -fd 2>/dev/null || true

@@ -3,6 +3,7 @@
 !scripts/local_regression_test.sh
 !scripts/align-fork.sh
 !scripts/verify_edge_functions.sh
+!scripts/restore_from_archive.sh
 !tests/sql/*.sh
 .json
 supabase/.temp/
