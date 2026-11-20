@@ -97,10 +97,10 @@ DETAIL_ERROR_THRESHOLD = 3
 CRAWL_DELAY = 2.0
 REQUEST_TIMEOUT = 90
 
-# Silent-degradation guard: each run appends its counts to a history file under
-# the committed per-city report slice (`report/<city>/` is published by the
-# workflow's existing `git add report/`), so the next run can warn when the
-# fetched card count collapses against the trailing window.
+# Silent-degradation guard: each run appends its counts to a history file the
+# archive branch carries (main ignores it; the workflow's restore step puts it
+# back before the run, see scripts/restore_from_archive.sh), so the next run
+# can warn when the fetched card count collapses against the trailing window.
 RUN_HISTORY_PATH = ROOT_DIR / "report" / CITY / "wfiu_community_calendar.runs.json"
 RUN_HISTORY_MAX = 30
 RUN_HISTORY_WINDOW = 7

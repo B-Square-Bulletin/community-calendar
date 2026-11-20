@@ -40,6 +40,10 @@ _Avoid_: URL, scraper (when referring to the abstraction)
 One run of the pipeline that turns the sources into a published snapshot: scrape, download, combine, classify, upload, and the metadata and archive pushes. A build covers the cities in its scope; the archive snapshot also carries forward cities it did not rebuild.
 _Avoid_: Job, deploy (when the pipeline run is meant)
 
+**Archive snapshot**:
+The single force-pushed commit that carries every generated build artifact — city JSON and ICS, feed files, the health report and its per-city data. It is the published home for output main deliberately does not hold, and each build replaces it rather than appending to it.
+_Avoid_: Artifacts branch, gh-pages, release branch
+
 **Source id**:
 The `.ics` filename stem a feed's build produces — a scraper's output filename, or the slug of an ICS URL. The build stamps it on every event as `X-SOURCE-ID` and records it on the feed row in `feeds.source_ids`, which is a history because a feed's URL can change. Stable per feed, unlike the display `source`, which becomes a comma-joined aggregate after a Merge. A stem that two same-city feeds share identifies neither exclusively; retirement keeps those rows.
 _Avoid_: Source name, slug (when the identity is meant)
@@ -59,6 +63,10 @@ _Avoid_: Quiet source (when the source was never reached), empty feed
 **Ran source**:
 A source whose ingestion succeeded in a build run — a scraper that exited 0, declared it reached its source, and left a parseable calendar, or a feed fetch that returned a valid ICS body — regardless of how many events survive later filtering. The build lists these in `cities/<city>/ran_sources.txt`, and the stale sweep deletes only from them. A quiet source and a source the geo or horizon filter emptied are both ran; a failed source is not.
 _Avoid_: Successful source (when ingestion success is meant), processed source
+
+**Run history**:
+A bounded record of a scraper's per-run event counts, kept across builds so a run that returns far fewer events than its own recent median is caught instead of published silently. It is state, not output: the build restores it before the scrapers run.
+_Avoid_: Scrape log, report (when the run history is meant)
 
 **Cut-off calendar**:
 An ICS body whose blocks do not pair up — one still open at the end, an `END` that does not close the block it is in, a block outside a calendar, or content outside every block — so it is not a Ran source: a failed ingestion rather than a Quiet source, because the body cannot be trusted to be the source's complete calendar. A body that simply ends inside an open block is reported as `truncated`; anything else is a `not_ics:<detail>` body, including html, json and empty responses.

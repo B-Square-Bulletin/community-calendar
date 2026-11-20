@@ -35,13 +35,17 @@ The health pages read their data from `raw.githubusercontent.com/.../archive/`,
 both at the root (`report.html`) and per city
 (`scripts/report_page_template.html`). The RSS feeds' `rel="self"` links point
 at the archive copy, because the Pages path for them no longer exists. The
-tracked `report/<city>/index.html` pages, `*.runs.json` run histories and
-`feeds.txt` exports stay: they are pages or bounded state, not per-run output.
+tracked `report/<city>/index.html` pages and `feeds.txt` exports stay: they are
+pages, not per-run output. The `*.runs.json` run histories are bounded state
+that changes every run, so they live on the archive and the workflow restores
+them before the scrapers run.
 
 ## Consequences
 
 - A nightly run adds no multi-megabyte blob to `main`; the archive branch is
   bounded because it is replaced, not appended to.
+- A nightly run whose only change was appending to a scraper's run history adds
+  no commit to `main` at all.
 - The RSS feed URLs change from `…/community-calendar/rss/<name>.xml` to the
   archive's raw URL. Nothing in the repository linked the old URLs, so the
   breakage is limited to anyone who subscribed by hand.

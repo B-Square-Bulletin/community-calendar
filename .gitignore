@@ -3,6 +3,7 @@
 !scripts/local_regression_test.sh
 !scripts/align-fork.sh
 !scripts/verify_edge_functions.sh
+!scripts/restore_from_archive.sh
 !tests/sql/*.sh
 .json
 supabase/.temp/
@@ -64,10 +65,12 @@ backups/
 /report.json
 xmlui/version.txt
 
-# The per-city slices are published to the archive branch, not committed:
-# report/<city>/index.html (the page) and *.runs.json (bounded scraper state)
-# stay tracked.
+# The per-city slices are published to the archive branch, not committed.
+# report/<city>/index.html (the page) stays tracked because Pages serves main;
+# the *.runs.json run histories change every run, so they live on the archive
+# and the workflow restores them before the scrapers run.
 report/*/report.json
+report/*/*.runs.json
 
 # CI truncates this before every build; the tracked copy only ever goes stale.
 build.log
