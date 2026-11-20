@@ -6,6 +6,11 @@ The nightly job rewrites rss/<city>-full.xml (4 MB), report/<city>/report.json
 committed nightly, so the repository grew by megabytes a night. They are build
 output: the archive branch is their single published home (#244), and the pages
 fetch them from there.
+
+The scraper run histories under report/<city>/*.runs.json are not output but
+bounded state, and they gained one entry a night, so they moved to the archive
+too; the workflow restores them before the scrapers run. The per-city
+index.html shell stays tracked because Pages serves it from main.
 """
 
 import subprocess
@@ -19,6 +24,7 @@ UNTRACKED = [
     "build.log",
     "rss/",
     "report/*/report.json",
+    "report/*/*.runs.json",
     "cities/*/geo_filtered.json",
 ]
 
@@ -46,6 +52,14 @@ def test_city_health_page_reads_its_slice_from_the_archive_branch():
     assert "report.json'" not in leftover and 'report.json"' not in leftover
     # One template serves every city page, so the city comes from the URL.
     assert "location.pathname" in page
+
+
+def test_run_histories_are_restored_before_the_scrapers_run():
+    workflow = (ROOT / ".github/workflows/generate-calendar.yml").read_text()
+    restore = workflow.find("name: Restore run histories from archive")
+    assert restore != -1, "no restore step: the guard starts blind every night"
+    # The restore must precede the step that reads the history.
+    assert restore < workflow.find("name: Run scrapers from DB")
 
 
 def test_committed_city_page_matches_the_template():
