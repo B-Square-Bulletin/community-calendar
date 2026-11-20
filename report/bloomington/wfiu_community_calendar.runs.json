@@ -3,15 +3,6 @@
     {
       "date": "2026-10-13",
       "pages": 52,
-      "cards_fetched": 517,
-      "unique_detail_urls": 275,
-      "details_fetched": 275,
-      "postal_less": 2,
-      "emitted": 515
-    },
-    {
-      "date": "2026-10-13",
-      "pages": 52,
       "cards_fetched": 518,
       "unique_detail_urls": 279,
       "details_fetched": 279,
@@ -269,6 +260,15 @@
       "details_fetched": 186,
       "postal_less": 1,
       "emitted": 314
+    },
+    {
+      "date": "2026-11-19",
+      "pages": 32,
+      "cards_fetched": 312,
+      "unique_detail_urls": 185,
+      "details_fetched": 185,
+      "postal_less": 1,
+      "emitted": 306
     }
   ]
 }
