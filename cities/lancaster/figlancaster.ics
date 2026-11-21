@@ -1,0 +1,545 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Fig Lancaster - ECPv6.15.17//NONSGML v1.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Fig Lancaster
+X-ORIGINAL-URL:https://figlancaster.com
+X-WR-CALDESC:Events for Fig Lancaster
+REFRESH-INTERVAL;VALUE=DURATION:PT1H
+X-Robots-Tag:noindex
+X-PUBLISHED-TTL:PT1H
+BEGIN:VTIMEZONE
+TZID:America/New_York
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:20250309T070000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:20251102T060000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:20260308T070000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:20261101T060000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:20270314T070000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:20271107T060000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260407T180000
+DTEND;TZID=America/New_York:20260407T200000
+DTSTAMP:20260406T230111
+CREATED:20251023T154908Z
+LAST-MODIFIED:20251023T173318Z
+UID:10014106-1775584800-1775592000@figlancaster.com
+SUMMARY:Adult Beginner Salsa
+DESCRIPTION:It’s never too late to break in those dancing shoes! Learn the basic steps of salsa dancing in this engaging\, high-energy class designed for adult beginners. ¡Vámonos!\n\nWhat to wear:\n\n• Comfortable\, breathable clothing that allows for movement (e.g. leggings\, athletic wear\, t-shirts)\n• Jazz shoes\, dance shoes\, or clean sneakers\n• Hair pulled back if long\n• Water bottle encouraged for hydration \n            \n        \n                \n            \n                \n                \n    Register Now
+URL:https://figlancaster.com/event/adult-beginner-salsa/
+LOCATION:Ware Center for the Arts\, 42 N. Prince St.\, Lancaster\, PA\, 17603\, United States
+CATEGORIES:Education & Classes
+ATTACH;FMTTYPE=image/jpeg:https://fig.guide/content/uploads/sites/3/2025/10/2026.04.07-Adult-Beginner-Salsa.avif
+ORGANIZER;CN="Millersville University Office of Visual & Performing Arts":MAILTO:cori.jackson@millersville.edu
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260407T183000
+DTEND;TZID=America/New_York:20260407T193000
+DTSTAMP:20260406T230111
+CREATED:20260404T143118Z
+LAST-MODIFIED:20260406T135739Z
+UID:10014569-1775586600-1775590200@figlancaster.com
+SUMMARY:Free Community Yoga
+DESCRIPTION:Free Community Yoga Class \n\nTuesdays 6:30-7:30PM\n\nFebruary 10 – April 14\n\nJoin us for a free\, all-levels community yoga class led by Laela Brown\,  Yoga Teacher in Training. This slow-flow\, meditative practice is designed to help you unwind\, move mindfully\, and reconnect with your breath and body in a supportive\, inclusive environment.\n\nClass Details:\n\nStyle: Slow Flow / Meditative Yoga\nLevel: Open to all levels—beginners welcome\nWhat to Bring: Your own yoga mat and/or towel\nOptional Props: Yoga blocks or bolsters if you use them\nQuestions?  Please email laelarae26@gmail.com\n\nPlease note: All participants must pre-register and sign a waiver prior to class.\n\nWe look forward to practicing together \n\n\n\n\n    Learn More
+URL:https://figlancaster.com/event/free-community-yoga/2026-04-07/
+LOCATION:Lancaster Art Vault\, 100 North Queen Street\, Lancaster\, PA\, 17603\, United States
+CATEGORIES:Arts & Entertainment
+ATTACH;FMTTYPE=image/jpeg:https://fig.guide/content/uploads/sites/3/2026/04/IMG_4567.avif
+ORGANIZER;CN="Lancaster Art Vault":MAILTO:Info@LancasterArtVault.com
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260407T190000
+DTEND;TZID=America/New_York:20260407T213000
+DTSTAMP:20260406T230111
+CREATED:20260224T213643Z
+LAST-MODIFIED:20260330T133847Z
+UID:10014426-1775588400-1775597400@figlancaster.com
+SUMMARY:Revolution: The Music of the Beatles—A Symphonic Experience
+DESCRIPTION:Experience The Beatles like never before as the LSO joins top vocalists and rock musicians to perform sweeping orchestral arrangements of more than 25 of the Fab Four’s top hits. Revolution immerses audiences in legendary songs like Ticket to Ride\, Penny Lane\, All You Need Is Love\, Get Back\, Here Comes the Sun\, and Hey Jude (and many more)—accompanied by stunning video\, animation\, and hundreds of rare and unseen photos from the archives of the band’s official fan magazine\, The Beatles Book Monthly. \n\n\n\nGrammy-winner Jeff Tyzik’s new arrangements\, transcribed and arranged from the original master recordings at Abbey Road\, bring The Beatles’ magic to life in this celebration of the band’s enduring legacy. \n\n\n\n\n    tickets
+URL:https://figlancaster.com/event/revolution-the-music-of-the-beatles-a-symphonic-experience-2/
+LOCATION:Lancaster County Convention Center\, 25 S Queen St\, Lancaster\, PA\, 17603\, United States
+CATEGORIES:Arts & Entertainment
+ATTACH;FMTTYPE=image/webp:https://fig.guide/content/uploads/sites/3/2026/02/AprilWebsite.webp
+ORGANIZER;CN="Lancaster Symphony Orchestra":MAILTO:info@lancastersymphony.org
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260408T160000
+DTEND;TZID=America/New_York:20260408T180000
+DTSTAMP:20260406T230111
+CREATED:20260216T182448Z
+LAST-MODIFIED:20260216T191339Z
+UID:10014405-1775664000-1775671200@figlancaster.com
+SUMMARY:Bowl For Kids Sake
+DESCRIPTION:Bowl for Kids’ Sake is a fun and easy way for you and your company\, friends\, or family to support the life-changing work of Big Brothers Big Sisters of South-Central PA. If you believe in the power of mentorship and can spare a few hours to have fun\, then Bowl for Kids’ Sake is for you! Register today!\nWe request a team of 5 fundraise a minimum of $500 ($100 per person) \n            \n        \n                \n                \n    Register Now
+URL:https://figlancaster.com/event/bowl-for-kids-sake/
+LOCATION:Clearview Lanes\, 1990 W Main St\, Mount\, PA\, 17552\, United States
+CATEGORIES:Community
+ATTACH;FMTTYPE=image/jpeg:https://fig.guide/content/uploads/sites/3/2026/02/image-5.avif
+ORGANIZER;CN="Big Brothers Big Sisters South Central PA":MAILTO:apijar@bbbsscpa.org
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260408T173000
+DTEND;TZID=America/New_York:20260408T183000
+DTSTAMP:20260406T230111
+CREATED:20260303T192323Z
+LAST-MODIFIED:20260305T165107Z
+UID:10014459-1775669400-1775673000@figlancaster.com
+SUMMARY:Spring Bubble Bowl Arrangement Workshop
+DESCRIPTION:Spend an evening creating\, learning\, and welcoming spring together. Our expert designer will walk you through the techniques behind a beautifully balanced bubble bowl arrangement — no experience needed. Bring a friend and enjoy a creative night out in our floral studio.\n\nClass Details:\n\nDate: Apr 8th\, 2026\nSession Times: 5:30 PM\nLocation: Central Market Flowers on Queen\nRegistration is required\, and spots are limited—so secure your place today! Whether you’re a flower enthusiast or a beginner looking to try something new\, this class is a perfect opportunity to learn from the best while having fun with flowers. \n            \n        \n                \n            \n                \n                \n    Learn More
+URL:https://figlancaster.com/event/spring-bubble-bowl-arrangement-workshop/
+LOCATION:Central Market Flowers\, 258 North Queen St.\, Lancaster\, 17603
+CATEGORIES:Education & Classes
+ATTACH;FMTTYPE=image/jpeg:https://fig.guide/content/uploads/sites/3/2026/03/Untitled-design.avif
+ORGANIZER;CN="Central Market Flowers":MAILTO:Socialmedia@perfectpots.com
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260408T180000
+DTEND;TZID=America/New_York:20260408T210000
+DTSTAMP:20260406T230111
+CREATED:20260211T180147Z
+LAST-MODIFIED:20260211T190054Z
+UID:10014387-1775671200-1775682000@figlancaster.com
+SUMMARY:Un Noche en Casa Blanca (Latin Inspired Girl's Night Out)
+DESCRIPTION:Join Lancaster Women for Good for a relaxed and joyful evening celebrating culture\, connection\, and good food. We’re gathering on April 8th from 6 to 9pm for Una Noche en Casa Blanca\, a Latin-inspired night designed to bring us together in a fun and meaningful way. \n\nExpect a night that pulls you right into the spirit of Latin culture with bold flavors\, good drinks\, and a beginner-friendly Salsa or Bachata class that adds a little adventure to the evening. It’s the kind of experience that lets you unwind\, try something new\, and enjoy the moment. \n\nWednesday\, April 8th\,  2026\n6:00–9:00pm\nCasa Blanca Event Space — 201 W Orange St\, Lancaster\nTickets are $70 per person\nLatin-inspired dinner + beverages\nCash bar available\nFun beginner Latin dance class \n            \n        \n                \n                \n    Buy Tickets
+URL:https://figlancaster.com/event/un-noche-en-casa-blanca-latin-inspired-girls-night-out/
+LOCATION:Casa Blanca Event Space\, 201 W Orange St\, Lancaster\, PA\, 17603-3747\, United States
+CATEGORIES:Community
+ATTACH;FMTTYPE=image/jpeg:https://fig.guide/content/uploads/sites/3/2026/02/LCWG-GNO-Casa-Blanca-Apr-8.avif
+ORGANIZER;CN="Lancaster County Women for Good":MAILTO:lancowomenforgood@gmail.com
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260408T190000
+DTEND;TZID=America/New_York:20260408T220000
+DTSTAMP:20260406T230111
+CREATED:20240528T163607Z
+LAST-MODIFIED:20240604T000619Z
+UID:10001872-1775674800-1775685600@figlancaster.com
+SUMMARY:Trivia Night at Southern Market
+DESCRIPTION:$1 off draft beer and wine during trivia hours – Prizes for trivia winners are gift cards which can be redeemed at any Southern Market vendor. \n\n\n\n\n    Learn More
+URL:https://figlancaster.com/event/trivia-night-at-southern-market/2026-04-08/
+LOCATION:Southern Market\, 100 South Queen Street\, Lancaster\, Pennsylvania\, 17602\, United States
+CATEGORIES:Community
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260409T093000
+DTEND;TZID=America/New_York:20260409T120000
+DTSTAMP:20260406T230111
+CREATED:20260304T044409Z
+LAST-MODIFIED:20260316T201130Z
+UID:10014463-1775727000-1775736000@figlancaster.com
+SUMMARY:Quest for Learning Spring 2026
+DESCRIPTION:Celebrate 50 years of Quest for Learning with our 99th season.\nWe meet for six Thursdays\, from April 9 to May 14 (9:30 till NOON) at\nHoly Trinity Lutheran Church\,\n31 South Duke Street\,\nLancaster\, Pennsylvania.\n\nThere will be lectures on areas related to science\, baseball\, health\, mortality\, reconnecting plus a half hour coffee and cookies break \n\n\n\n\n\n\n    Register Now
+URL:https://figlancaster.com/event/quest-for-learning-spring-2026/2026-04-09/
+LOCATION:Trinity Lutheran Church\, 31 South Duke Street\, Lancaster\, Pennsylvania\, 17602\, United States
+CATEGORIES:Education & Classes
+ORGANIZER;CN="Quest":MAILTO:questlancaster@gmail.com
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260409T190000
+DTEND;TZID=America/New_York:20260409T220000
+DTSTAMP:20260406T230111
+CREATED:20240528T164309Z
+LAST-MODIFIED:20240604T000809Z
+UID:10002133-1775761200-1775772000@figlancaster.com
+SUMMARY:Trivioke Night at Southern Market
+DESCRIPTION:Starts with music trivia\, then ends with karaoke! $1 off beer and wine from 7:00-9:00 PM during music trivia. Prizes for trivia winners are gift cards that can be redeemed at any Southern Market vendor. \n\n\n\n\n    Learn More
+URL:https://figlancaster.com/event/trivioke-night-at-southern-market/2026-04-09/
+LOCATION:Southern Market\, 100 South Queen Street\, Lancaster\, Pennsylvania\, 17602\, United States
+CATEGORIES:Community
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260410T080000
+DTEND;TZID=America/New_York:20260410T090000
+DTSTAMP:20260406T230111
+CREATED:20260305T143344Z
+LAST-MODIFIED:20260305T164811Z
+UID:10014464-1775808000-1775811600@figlancaster.com
+SUMMARY:Court Appointed Special Advocates (CASA) Community Awareness Breakfast
+DESCRIPTION:Event Details\n\nJoin Court Appointed Special Advocates (CASA) for breakfast to learn how to participate in the critical advocacy work CASA provides for children who have experienced abuse and neglect and are placed in the foster care system.  \n\nHear from CASA staff and supporters about the crucial and life-changing impact CASA volunteers have on the lives of our community’s most vulnerable children.  \n\nThe Community Awareness Breakfast is open to anyone who wants to learn more about becoming a CASA volunteer\, donor\, or friend. Guests will be given the opportunity to make a contribution. \n\nThis event is free and open to the public\, but registration is required. Please feel free to bring a friend! Please register by March 30\, 2026.\n\nQuestions? Please contact raquel@casalancleb.org \n\n\nWho We Are \n\nCASA of Lancaster and Lebanon Counties recruits and trains citizen volunteers to advocate for the best interests of youth who have suffered abuse and neglect and are in the foster care system. \n\nWe have served over 1\,100 of Lancaster and Lebanon County’s most vulnerable children since our program began in 2009. \n\nOur mission is to provide a qualified and compassionate court-appointed volunteer advocate to every child who is abused and neglected\, to ensure the fundamental human right of having a safe\, nurturing\, and permanent home is met. \n\nTo learn more\, please visit www.casalancleb.org \n            \n        \n                \n                \n    Register Now
+URL:https://figlancaster.com/event/court-appointed-special-advocates-casa-community-awareness-breakfast/
+LOCATION:DoubleTree Resort\, 2400 Willow Street Pike\, Lancaster\, 17602
+CATEGORIES:Community
+ATTACH;FMTTYPE=image/jpeg:https://fig.guide/content/uploads/sites/3/2026/03/Lancaster-breakfast-email.avif
+ORGANIZER;CN="CASA of Lancaster and Lebanon Counties":MAILTO:margie@casalancleb.org
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260410T193000
+DTEND;TZID=America/New_York:20260410T210000
+DTSTAMP:20260406T230111
+CREATED:20251023T155808Z
+LAST-MODIFIED:20251023T173331Z
+UID:10014107-1775849400-1775854800@figlancaster.com
+SUMMARY:Shawan Rice & The Quiet Riders
+DESCRIPTION:Treat yourself to a night under the stars featuring the best of local music!\n\nSoulful\, rootsy\, unique: these innovative artists and Central PA natives deliver inventive tunes that will have you grooving in your seat. Originally from the midstate\, Shawan Rice toured the U.S. before relocating to New Orleans\, where her captivating voice has made her a staple in the city’s vibrant music scene. Lancaster-based band The Quiet Riders share a deep love for American music\, earning them a Central PA Music Award for “Best Funk Band” in 2024. \n\nTaking place in the stunning glass pyramid-topped Atrium of the Ware Center\, the “Lancaster Loves” series features the best in local music across a variety of genres in a lively cabaret setting. \n            \n        \n                \n            \n                \n                \n    Buy Tickets
+URL:https://figlancaster.com/event/shawan-rice-the-quiet-riders/
+LOCATION:Ware Center for the Arts\, 42 N. Prince St.\, Lancaster\, PA\, 17603\, United States
+CATEGORIES:Arts & Entertainment
+ATTACH;FMTTYPE=image/jpeg:https://fig.guide/content/uploads/sites/3/2025/10/2026.04.10-Shawan-Rice-The-Quiet-Riders.avif
+ORGANIZER;CN="Millersville University Office of Visual & Performing Arts":MAILTO:cori.jackson@millersville.edu
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260410T193000
+DTEND;TZID=America/New_York:20260503T140000
+DTSTAMP:20260406T230111
+CREATED:20250812T201745Z
+LAST-MODIFIED:20260330T134107Z
+UID:10013646-1775849400-1777816800@figlancaster.com
+SUMMARY:Hairspray: Opening Night at the Fulton
+DESCRIPTION:Change the world\, one dance step at a time!  \nYou can’t stop the beat in this big and bold musical about one girl’s inspiring dream to dance. The 1950s are out\, and change is in the air! Hairspray\, winner of eight Tony Awards\, including Best Musical\, is a family-friendly musical\, piled bouffant-high with laughter\, romance and deliriously tuneful songs. \n\n\n\n\n    Buy Tickets
+URL:https://figlancaster.com/event/hairspray-opening-night-at-the-fulton/
+LOCATION:Fulton Theatre: Mainstage\, 12 North Prince Street\, Lancaster\, Pennsylvania\, 17603\, United States
+CATEGORIES:Arts & Entertainment
+ATTACH;FMTTYPE=image/jpeg:https://fig.guide/content/uploads/sites/3/2025/08/Hairspray-Artwork-Reveal-4x5-1.avif
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260411T090000
+DTEND;TZID=America/New_York:20260411T130000
+DTSTAMP:20260406T230111
+CREATED:20260215T145848Z
+LAST-MODIFIED:20260216T191418Z
+UID:10014391-1775898000-1775912400@figlancaster.com
+SUMMARY:Spring Open House at Thaddeus Stevens College
+DESCRIPTION:One event: endless opportunities. Attend our Spring Open House! We’re looking forward to meeting future Bulldogs at our Open House on Saturday\, April 11th\, from 9 a.m. to 1 p.m.!\n\nOpen House offers a unique and engaging in-person opportunity to explore all that Thaddeus Stevens College of Technology has to offer. While visiting us for the Spring Open House\, plan to:\n– Spend time in your future program of study\, tour our labs\, and talk with faculty.\n– Connect with various support offices.\n– Speak with industry partners regarding the opportunities that await after earning a degree from Thaddeus Stevens College. \n            \n        \n                \n                \n    Register Now
+URL:https://figlancaster.com/event/spring-open-house-at-thaddeus-stevens-college/
+LOCATION:Thaddeus Stevens College of Technology\, 750 E. King St.\, Lancaster\, 17603
+CATEGORIES:Education & Classes
+ATTACH;FMTTYPE=image/jpeg:https://fig.guide/content/uploads/sites/3/2026/02/FacebookOpenHouse.avif
+ORGANIZER;CN="Thaddeus Stevens College":MAILTO:info@stevenscollege.edu
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260411T100000
+DTEND;TZID=America/New_York:20260411T160000
+DTSTAMP:20260406T230111
+CREATED:20260228T161135Z
+LAST-MODIFIED:20260302T142202Z
+UID:10014443-1775901600-1775923200@figlancaster.com
+SUMMARY:Landscape Workshop with PCAD Professor Jason Ward
+DESCRIPTION:April 11\, 2026 10AM-4PM – $100 per person\n\nThis class takes us outdoors where we respond directly to what the landscape has to offer. If this class is held indoors we will be working from a shared reference. We’ll start by discussing the features of the landscape and some strategies for how to get the most out of our time painting.  We’ll focus on finding a compelling composition\, the use of color and tone\, understanding the effects of atmospheric perspective to create a convincing sense of depth\, as well as methods for rendering specific features of the scene. We end each class with a brief critique.  This class is open to beginners and advanced students of any painting or drawing medium.\n\nMaterials list:\n\nPainting oils/acrylics:\n– Paints: Titanium White\, Burnt Sienna\, Burnt Umber\, Cadmium Red\, Cadmium Yellow\, Ultramarine BlueAll other colors are optional\n-Brushes: A variety of brush sizes and shapes\, as well as\, both stiff and soft bristles are recommended.\n-Palette Knife: I use a medium/small metal diamond shaped palette knife for both mixing and application of paint.\n-Artist Palette: A proper wood or glass palette is recommended\, palette paper will work fine for this workshop. Please avoid creative substitutes (such as watercolor palettes\, paper plates\, anything wrapped in tinfoil\, etc.) as they tend to cause problems during the painting process.\n-Surface: A primed and stretched canvas\, or hardboard panel is best for painting. A heavy bodied paper\, such as watercolor paper\, will also work.\n-Lint Free Rags or paper Towels\n-(Optional) For oils -Turpentine\, Odorless Turpiniod\, or Mineral Spirits:Good for cleaning brushes\, but I just use soap and water. For Acrylic- jar for water\n\nDrawing:\n\nPencils and Graphite Sticks: A range of leads from H-B’s is recommended\, however a classic #2 pencil is hard to beat.\n-Charcoal: Soft vine charcoal\, compressed charcoal sticks\, charcoal pencils\, and charcoal powder are all recommended.\n-Erasers: A kneaded eraser and a rectangular white eraser are both great. I often use pink pencil cap erasers.\n-Artist Sandpaper Block or Stump: A great tool for toning a surface\, and sharpening pencils and charcoal sticks.\n-Surface: For graphite I recommend a heavy bodied hot press paper such as Bristol Vellum. For Charcoal\, a heavy bodied charcoal or watercolor paper will work. My preferred paper for charcoal is Rives BFK.\n-Paper Towels and Artist brushes: For blending.\n\nREGISTER HERE \n            \n        \n                \n            \n                \n                \n    Learn More
+URL:https://figlancaster.com/event/landscape-workshop-with-pcad-professor-jason-ward/
+LOCATION:Lancaster Art Vault\, 100 North Queen Street\, Lancaster\, PA\, 17603\, United States
+CATEGORIES:Education & Classes
+ATTACH;FMTTYPE=image/jpeg:https://fig.guide/content/uploads/sites/3/2026/02/IMG_1995.avif
+ORGANIZER;CN="Lancaster Art Vault":MAILTO:Info@LancasterArtVault.com
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260411T110000
+DTEND;TZID=America/New_York:20260411T123000
+DTSTAMP:20260406T230111
+CREATED:20260130T192629Z
+LAST-MODIFIED:20260202T142338Z
+UID:10014350-1775905200-1775910600@figlancaster.com
+SUMMARY:Servant Stage Company’s A BROADWAY MELODY
+DESCRIPTION:Step into the spotlight with A Broadway Melody! This spectacular revue celebrates 100 years of Broadway magic\, featuring unforgettable songs and showstoppers from the greatest musicals of all time. With a powerhouse cast of dynamic performers\, this intimate cabaret-style performance brings the best of the Great White Way up close and personal. From classic tunes to modern hits\, A Broadway Melody is a joyful\, high-energy tribute to the music\, memories\, and magic that have defined a century of Broadway! \n            \n        \n                \n                \n    Learn More
+URL:https://figlancaster.com/event/servant-stage-companys-a-broadway-melody/
+LOCATION:Ware Center for the Arts\, 42 N. Prince St.\, Lancaster\, PA\, 17603\, United States
+CATEGORIES:Arts & Entertainment
+ATTACH;FMTTYPE=image/webp:https://fig.guide/content/uploads/sites/3/2026/01/ss26_broadwaymelody_color-square.png.webp
+ORGANIZER;CN="Servant Stage Company":MAILTO:info@servantstage.org
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260411T110000
+DTEND;TZID=America/New_York:20260411T150000
+DTSTAMP:20260406T230111
+CREATED:20260313T120325Z
+LAST-MODIFIED:20260316T200349Z
+UID:10014495-1775905200-1775919600@figlancaster.com
+SUMMARY:Spring Fling at Lancaster Friends School
+DESCRIPTION:Spring is in the air\, and that means it’s time for our favorite tradition: the Annual Spring Fling! Join us on April 11th at 1210 Maple Avenue in Lancaster from 11am-3pm for a day full of laughter\, live music\, local food\, and family fun – all in support of our mission of nurturing a peace-centered and socially conscious learning community. This year’s Spring Fling will feature: Local vendors and artisans showcasing unique\, handmade goods Live performances from area musicians and dance groups Games and activities for kids of all ages Delicious food from community favorites Silent auction Whether you’ve joined us in the past or you’re a first-time guest\, Spring Fling is the perfect way to connect with friends\, neighbors\, and our mission of nurturing a peace-centered and socially conscious learning community. Admission is free\, and all proceeds from our silent auction and ticketed activities go directly to funding educational programs and outreach initiatives that strengthen our community.Bring your family\, invite your friends\, and help us make this year’s celebration our biggest yet! Founded by members of the local Quaker community\, Lancaster Friends School was established to offer education rooted in the belief that “education is the way to lasting peace\, and there can be no peace without justice.” LFS embraces the Quaker testimonies of Simplicity\, Peace\, Integrity\, Community\, Equality/Equity\, and Stewardship/Sustainability\, known collectively as SPICES\, which guide both its educational philosophy and day-to-day practice. LFS serves children from preschool through eighth grade\, fostering an environment where curiosity\, compassion\, and conscience grow together in balance. \n\n\n\n\n    Learn More
+URL:https://figlancaster.com/event/spring-fling-at-lancaster-friends-school/
+LOCATION:Lancaster Friends School\, 1210 Maple Avenue\, Lancaster\, PA\, 17603\, United States
+CATEGORIES:Festivals & Annual Events
+ATTACH;FMTTYPE=image/jpeg:https://fig.guide/content/uploads/sites/3/2026/03/Spring-Fling-Lawn-Sign-ver-2-1-scaled.avif
+ORGANIZER;CN="Lancaster Friends School":MAILTO:acarty@lancasterfriends.org
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260411T120000
+DTEND;TZID=America/New_York:20260411T150000
+DTSTAMP:20260406T230111
+CREATED:20260310T182146Z
+LAST-MODIFIED:20260311T162629Z
+UID:10014485-1775908800-1775919600@figlancaster.com
+SUMMARY:St. Baldrick's Fundraiser
+DESCRIPTION:Since 2008\, the head-shaving extravaganza hosted at Annie Bailey’s Irish Public House has raised over $1 MILLION in support of the St. Baldrick’s Foundation’s ongoing fight to end childhood cancers. Whether you decide to #bravetheshave yourself\, volunteer your hair-cutting services as a shaver\, or support by making a donation\, we hope you’ll join us in helping to give hope to infants\, children\, teens & young adults fighting cancer!\n\nShaving starts at 12pm and ends at 3pm\, don’t miss your opportunity to support! \n            \n        \n                \n                \n    Learn More
+URL:https://figlancaster.com/event/st-baldricks-fundraiser/
+LOCATION:Annie Bailey’s Irish Public House\, 28-30 East King Street\, Lancaster\, Pennsylvania\, 17602\, United States
+CATEGORIES:Community
+ATTACH;FMTTYPE=image/jpeg:https://fig.guide/content/uploads/sites/3/2026/03/470A3677-1.avif
+ORGANIZER;CN="Annie Bailey's Irish Public House":MAILTO:marketing@tfbhospitality.com
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260411T193000
+DTEND;TZID=America/New_York:20260411T213000
+DTSTAMP:20260406T230111
+CREATED:20260224T211353Z
+LAST-MODIFIED:20260224T211354Z
+UID:10014419-1775935800-1775943000@figlancaster.com
+SUMMARY:Sarah Fleiss at The Trust
+DESCRIPTION:Presented by the Curtis Institute of Music\, soprano Sarah Fleiss has been described as “bright” and “stylish” by Opera News. She joins the exclusive international Baroque touring ensemble Le Jardin des Voix of Les Arts Florissants for the 2025-26 and 2026-27 seasons and will also tour Latin America with Curtis on Tour this year. Performing in many noteworthy opera roles and as a soloist with several orchestras\, she is the 2025 winner of the Arthur W. Foote Award from the Harvard Musical Association. \n\n\n\n\n    tickets
+URL:https://figlancaster.com/event/sarah-fleiss-at-the-trust/
+LOCATION:The Trust Performing Arts Center\, 37 North Market Street\, Lancaster\, Pennsylvania\, 17603\, United States
+CATEGORIES:Arts & Entertainment
+ATTACH;FMTTYPE=image/jpeg:https://fig.guide/content/uploads/sites/3/2026/02/170177_event_md_248.avif
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260411T210000
+DTEND;TZID=America/New_York:20260411T230000
+DTSTAMP:20260406T230111
+CREATED:20260330T152609Z
+LAST-MODIFIED:20260331T190351Z
+UID:10014556-1775941200-1775948400@figlancaster.com
+SUMMARY:Cartel Brewing & Blending Presents Kricket Comedy
+DESCRIPTION:Cartel Brewing & Blending will be hosting Kricket Comedy Saturday April 11th at 9pm\n\nFeaturing comedy from Steve Bickel & Eddie Gallagher.\n\nCome out for drinks and a night of laughs.\n\nTickets available at https://www.kricketcomedy.com/shows/357904 \n\n\n\n\n\n\n    Buy Tickets
+URL:https://figlancaster.com/event/cartel-brewing-blending-presents-kricket-comedy/
+LOCATION:Cartel Brewing And Blending\, 920 Landis Ave\, Lancaster\, PA\, 17602\, United States
+CATEGORIES:Arts & Entertainment
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260415T173000
+DTEND;TZID=America/New_York:20260415T183000
+DTSTAMP:20260406T230111
+CREATED:20260315T143837Z
+LAST-MODIFIED:20260316T200104Z
+UID:10014498-1776274200-1776277800@figlancaster.com
+SUMMARY:Spring is in the Air Moss Wall Workshop
+DESCRIPTION:Design a framed moss wall with preserved moss\, botanicals\, and two air plants in this hands-on\, guided workshop.\nUnwind at the end of your day and join us for an intimate happy hour workshop with expert instruction. As always\, BYOB.\nCreate a one-of-a-kind moss wall that brings texture\, nature\, and art together in a beautiful\, modern way.\nIn this hands-on workshop\, you’ll design a framed moss wall using a thoughtfully curated selection of preserved moss\, dried elements\, and botanical accents. Two air plants will be incorporated into your piece\, adding sculptural dimension and a living touch to your finished design.\nOur very own featured moss wall artist\, Laura Alvis\, will guide you through the creative process\, offering styling tips\, composition guidance\, and design insight along the way. Whether your aesthetic leans minimal and modern or lush and layered\, you’ll have the support to make it uniquely yours. \n            \n        \n                \n                \n    Register Now
+URL:https://figlancaster.com/event/spring-is-in-the-air-moss-wall-workshop/
+LOCATION:Gallery Grow\, 320 North Queen Street\, Lancaster\, PA\, 17603\, United States
+CATEGORIES:Education & Classes
+ATTACH;FMTTYPE=image/jpeg:https://fig.guide/content/uploads/sites/3/2026/03/Moss-Wall-header.avif
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260415T190000
+DTEND;TZID=America/New_York:20260415T220000
+DTSTAMP:20260406T230111
+CREATED:20240528T163607Z
+LAST-MODIFIED:20240604T000619Z
+UID:10001873-1776279600-1776290400@figlancaster.com
+SUMMARY:Trivia Night at Southern Market
+DESCRIPTION:$1 off draft beer and wine during trivia hours – Prizes for trivia winners are gift cards which can be redeemed at any Southern Market vendor. \n\n\n\n\n    Learn More
+URL:https://figlancaster.com/event/trivia-night-at-southern-market/2026-04-15/
+LOCATION:Southern Market\, 100 South Queen Street\, Lancaster\, Pennsylvania\, 17602\, United States
+CATEGORIES:Community
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260416T093000
+DTEND;TZID=America/New_York:20260416T120000
+DTSTAMP:20260406T230111
+CREATED:20260304T044409Z
+LAST-MODIFIED:20260316T201130Z
+UID:10014504-1776331800-1776340800@figlancaster.com
+SUMMARY:Quest for Learning Spring 2026
+DESCRIPTION:Celebrate 50 years of Quest for Learning with our 99th season.\nWe meet for six Thursdays\, from April 9 to May 14 (9:30 till NOON) at\nHoly Trinity Lutheran Church\,\n31 South Duke Street\,\nLancaster\, Pennsylvania.\n\nThere will be lectures on areas related to science\, baseball\, health\, mortality\, reconnecting plus a half hour coffee and cookies break \n\n\n\n\n\n\n    Register Now
+URL:https://figlancaster.com/event/quest-for-learning-spring-2026/2026-04-16/
+LOCATION:Trinity Lutheran Church\, 31 South Duke Street\, Lancaster\, Pennsylvania\, 17602\, United States
+CATEGORIES:Education & Classes
+ORGANIZER;CN="Quest":MAILTO:questlancaster@gmail.com
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260416T180000
+DTEND;TZID=America/New_York:20260416T200000
+DTSTAMP:20260406T230111
+CREATED:20260306T192756Z
+LAST-MODIFIED:20260310T133513Z
+UID:10014472-1776362400-1776369600@figlancaster.com
+SUMMARY:Etiquette Dinner Theater at The Log Cabin
+DESCRIPTION:Join us for an interactive dining experience where a 4-course meal is paired with live interactive theater. As you dine\, actors humorously demonstrate proper (and improper) table manners through a playful story featuring rival etiquette experts and their eager students. With light audience participation and plenty of laughs\, the night blends refinement and fun into one unforgettable experience.\n\nThis event will be available on multiple dates but for a limited number of guests so book soon!\n\nDates: April 16\, 17\, 22\, 23\, 24\nLocation: The Log Cabin restaurant\, 11 Lehoy Forest Dr\, Leola\, PA 17540 \nTickets: EARLY BIRD $95 through March 15th | $120 after\n\nLearn more and purchase tickets at https://logcabin1933.com/etiquette-dinner/ \n            \n        \n                \n            \n                \n                \n    Buy Tickets
+URL:https://figlancaster.com/event/etiquette-dinner-theater/
+LOCATION:The Log Cabin Restaurant\, 11 Lehoy Forest Dr\, Leola\, 17540
+CATEGORIES:Food & Drink
+ATTACH;FMTTYPE=image/jpeg:https://fig.guide/content/uploads/sites/3/2026/03/20260301_115220-scaled.avif
+ORGANIZER;CN="The Log Cabin Restaurant":MAILTO:info@logcabin1933.com
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260416T180000
+DTEND;TZID=America/New_York:20260416T200000
+DTSTAMP:20260406T230111
+CREATED:20260316T133925Z
+LAST-MODIFIED:20260316T133927Z
+UID:10014502-1776362400-1776369600@figlancaster.com
+SUMMARY:The Rise and Fall of the Pennsylvania Railroad Lecture
+DESCRIPTION:Did you know the Pennsylvania Railroad—known as “The Pennsy”—was an industry leaderfor 122 years? \n\n\n\nJoin local historian and train enthusiast Jim Bennett for his presentation\, The Rise and Fallof the PA Railroad. This illustrated talk explores how the Pennsylvania Railroad fueledindustry and contributed to the growth and development of York and Lancaster Counties\,becoming the standard by which America’s railroads were measured. \n\n\n\nAttendees will learn about the railroad’s ambitious beginnings\, its rise to prominence\, andthe factors that ultimately led to its decline. Bennett\, a Lancaster County resident\, hasshared his engaging train talks with numerous local groups and brings a passion for railhistory to this in-depth look at one of America’s most influential corporations. \n\n\n\n\n    more info
+URL:https://figlancaster.com/event/the-rise-and-fall-of-the-pennsylvania-railroad-lecture/
+LOCATION:The Susquehanna National Heritage Area\, 1706 Long Level Road\, Wrightsville\, Pennsylvania\, United States
+CATEGORIES:Education & Classes
+ATTACH;FMTTYPE=image/jpeg:https://fig.guide/content/uploads/sites/3/2026/03/smoker-lecture-2-scaled.avif
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260416T183000
+DTEND;TZID=America/New_York:20260416T213000
+DTSTAMP:20260406T230111
+CREATED:20260404T122744Z
+LAST-MODIFIED:20260406T142130Z
+UID:10014565-1776364200-1776375000@figlancaster.com
+SUMMARY:PDF at Zoetropolis: The Last Picture Show
+DESCRIPTION:Join us at Zoetropolis Cinema Stillhouse on Thursday\, April 16 at 6:30 PM as we begin the next three-film sequence in our America 250 series: Community in the American Landscape.\n\nOur first film is Peter Bogdanovich’s The Last Picture Show (1971)\, a haunting portrait of a small Texas town in decline. Set in the 1950s but made in the early 1970s\, the film reflects on loneliness\, fading institutions\, fractured relationships\, and the slow erosion of communal life. It asks a question that still feels urgent today: what holds a community together\, and what happens when those bonds begin to fray?\n\nThis new three-film sequence explores American community across very different landscapes and histories. The Last Picture Show will be followed by Lone Star and Killer of Sheep\, each offering a distinct vision of shared life\, memory\, struggle\, and belonging in America.\n\nThe evening will include a brief introduction before the screening and a post-film discussion afterward.\n\n📍 Zoetropolis Cinema Stillhouse\n📅 Thursday\, April 16\n🕡 6:30 PM\n\nCome early\, grab a drink\, and join us for the start of a new cinematic conversation about community\, memory\, and the American landscape. \n            \n        \n                \n            \n                \n                \n    Buy Tickets
+URL:https://figlancaster.com/event/pdf-at-zoetropolis-the-last-picture-show/
+LOCATION:Zoetropolis Cinema Stillhouse\, 112 North Water Street\, Lancaster\, Pennsylvania\, 17603\, United States
+CATEGORIES:Arts & Entertainment
+ATTACH;FMTTYPE=image/jpeg:https://fig.guide/content/uploads/sites/3/2026/04/p4046_v_h10_aa.avif
+ORGANIZER;CN="Zoetropolis Cinema Stillhouse":MAILTO:info@zoetropolis.com
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260416T190000
+DTEND;TZID=America/New_York:20260416T220000
+DTSTAMP:20260406T230111
+CREATED:20240528T164309Z
+LAST-MODIFIED:20240604T000809Z
+UID:10002134-1776366000-1776376800@figlancaster.com
+SUMMARY:Trivioke Night at Southern Market
+DESCRIPTION:Starts with music trivia\, then ends with karaoke! $1 off beer and wine from 7:00-9:00 PM during music trivia. Prizes for trivia winners are gift cards that can be redeemed at any Southern Market vendor. \n\n\n\n\n    Learn More
+URL:https://figlancaster.com/event/trivioke-night-at-southern-market/2026-04-16/
+LOCATION:Southern Market\, 100 South Queen Street\, Lancaster\, Pennsylvania\, 17602\, United States
+CATEGORIES:Community
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260416T193000
+DTEND;TZID=America/New_York:20260416T210000
+DTSTAMP:20260406T230111
+CREATED:20251023T160650Z
+LAST-MODIFIED:20251023T173359Z
+UID:10014108-1776367800-1776373200@figlancaster.com
+SUMMARY:The Making of Life On Our Planet
+DESCRIPTION:our billion years. Millions of species. Five mass extinction events (and counting). It’s the story of Life on Our Planet. From the Emmy® Award-winning team behind Netflix’s Our Planet series comes an immersive new live show where one of the explorers\, filmmakers\, scientists\, or adventurers behind the scenes takes the stage to share stories about creating some of the most eye-catching footage of our planet. \n\nAt 6:30 pm in the salon\, celebrate the beauty of nature and the coming of Earth Day with a seasoned panel of “green” experts from the Lancaster Conservancy\, whose mission is to preserve forested lands and clean water forever. \n            \n        \n                \n            \n                \n                \n    Buy Tickets
+URL:https://figlancaster.com/event/the-making-of-life-on-our-planet/
+LOCATION:Ware Center for the Arts\, 42 N. Prince St.\, Lancaster\, PA\, 17603\, United States
+CATEGORIES:Arts & Entertainment
+ATTACH;FMTTYPE=image/jpeg:https://fig.guide/content/uploads/sites/3/2025/10/2026.04.16-Making-of-Life-On-Our-Planet.avif
+ORGANIZER;CN="Millersville University Office of Visual & Performing Arts":MAILTO:cori.jackson@millersville.edu
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260417T180000
+DTEND;TZID=America/New_York:20260417T210000
+DTSTAMP:20260406T230111
+CREATED:20260124T172601Z
+LAST-MODIFIED:20260126T143420Z
+UID:10014335-1776448800-1776459600@figlancaster.com
+SUMMARY:Live Music at South County
+DESCRIPTION:Join us every first & third Friday here at South County Brewing Co. for Live Music featuring local artists. Warmer weather months shows will be held in The SC Park Bar. April 17th Featuring 3 West Duo 6-9PM! \n            \n        \n                \n                \n    Learn More
+URL:https://figlancaster.com/event/live-music-at-south-county/
+LOCATION:South County Brewing Co.\, 26 W King St\, Lancaster\, PA\, 17603-3809\, United States
+CATEGORIES:Arts & Entertainment
+ATTACH;FMTTYPE=image/jpeg:https://fig.guide/content/uploads/sites/3/2026/01/3-West1.avif
+ORGANIZER;CN="South County Brewing Co.":MAILTO:info@southcountybrewing.com
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260417T193000
+DTEND;TZID=America/New_York:20260503T153000
+DTSTAMP:20260406T230111
+CREATED:20260122T211547Z
+LAST-MODIFIED:20260202T142942Z
+UID:10014329-1776454200-1777822200@figlancaster.com
+SUMMARY:Complete History of America (Abridged) Opening Night
+DESCRIPTION:Big Laughs. Live.\n\nFrom the pilgrims to pop culture\, this is American history like it’s never been told — fast\, fearless\, and hilarious.\n\nThree performers. Dozens of characters. A full-throttle joyride through the moments that made a nation and all the wild in between.\n\nSmart\, ridiculous\, and absurdly entertaining.\n\nAnything but a lecture\, this is a high-voltage comedy built for laughter\, connection\, and a night that’s anything but ordinary.\n\nNo textbooks. No tests. Just comedy in full swing. \n\n\n\n\n\n\n    Buy Tickets
+URL:https://figlancaster.com/event/complete-history-of-america-abridged-opening-night/
+LOCATION:Prima Theatre\, 941 Wheatland Ave\, Lancaster\, 17603
+CATEGORIES:Arts & Entertainment
+ATTACH;FMTTYPE=image/jpeg:https://fig.guide/content/uploads/sites/3/2026/01/25_CompleteHistory_1920x1080-1.avif
+ORGANIZER;CN="Prima Theatre":MAILTO:info@primatheatre.org
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Fig Lancaster
+X-SOURCE-URL:https://figlancaster.com/events/
+DTSTART;TZID=America/New_York:20260417T200000
+DTEND;TZID=America/New_York:20260417T223000
+DTSTAMP:20260406T230111
+CREATED:20260324T124307Z
+LAST-MODIFIED:20260326T160836Z
+UID:10014545-1776456000-1776465000@figlancaster.com
+SUMMARY:The World on Edge & Public Disco Porch
+DESCRIPTION:Zoetropolis Cinema Stillhouse\, located at 112 N. Water Street in Lancaster\, will host an evening of bold and atmospheric live music on Friday\, April 17\, 2026\, beginning at 8:00 PM\, featuring Harrisburg’s The World on Edge and York ensemble Public Disco Porch.\n\nThe World on Edge is a three-piece cinematic post-rock band from Harrisburg\, PA\, known for widescreen instrumental music built on atmosphere\, tension\, and emotional storytelling. Their sound layers guitars\, dynamic percussion\, and high-fidelity production to create immersive sonic narratives — and audiences can look forward to new material\, with a full-length album due out this summer.\n\nYork’s Public Disco Porch brings a singular vision to the stage: music rooted in the land\, the history\, and the people of South Central Pennsylvania. Their catalog weaves folk-metal riffage\, entrancing percussion\, and muscled low-end into something that feels at once like historical excavation and unhinged spiritual celebration.\n\nTogether\, the two acts offer a rare evening of music that is ambitious\, deeply felt\, and entirely original. \n            \n        \n                \n            \n                \n                \n    Buy Tickets
+URL:https://figlancaster.com/event/the-world-on-edge-public-disco-porch/
+LOCATION:Zoetropolis Cinema Stillhouse\, 112 North Water Street\, Lancaster\, Pennsylvania\, 17603\, United States
+CATEGORIES:Arts & Entertainment
+ATTACH;FMTTYPE=image/jpeg:https://fig.guide/content/uploads/sites/3/2026/03/2026-04-Poster-Zoetropolis1-scaled.avif
+ORGANIZER;CN="Zoetropolis":MAILTO:info@zoetropolis.com
+END:VEVENT
+END:VCALENDAR

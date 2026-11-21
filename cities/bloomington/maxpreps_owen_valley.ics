@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Owen Valley Athletics//maxpreps.com//
+X-WR-CALNAME:Owen Valley Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Bloomington South Girls Varsity Basketball @ Owen Valley
+DTSTART;TZID=America/Indiana/Indianapolis:20261120T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261120T204500
+UID:d978a6107cff715d51093bd0c7b3bddf@maxpreps.com
+DESCRIPTION:Girls Varsity Basketball\nNo result has been reported for the 
+ Bloomington South varsity basketball away non-conference game @ Owen Valle
+ y (Spencer\, IN).
+URL:https://www.maxpreps.com/in/basketball/girls/game/bloomington-south-vs
+ -owen-valley-spencer/11-20-2026/?c=839ee17a-ec3e-4870-9d26-0148424afc88
+X-SOURCE:Owen Valley Athletics
+END:VEVENT
+END:VCALENDAR

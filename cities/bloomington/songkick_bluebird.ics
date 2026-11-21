@@ -1,0 +1,50 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//The Bluebird//songkick.com//
+X-WR-CALNAME:The Bluebird
+X-WR-TIMEZONE:America/New_York
+BEGIN:VEVENT
+SUMMARY:Jake Dodds
+DTSTART:20261121T210000
+DTEND:20261121T210000
+UID:0d22a978571bb65ebb5662895d82c230@songkick.com
+DESCRIPTION:Jake Dodds at Bluebird at 2026-11-21T21:00:00-0500
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43478118-jake-dodds-at-bluebird?utm_m
+ edium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Hank Ruff\, Jake Dodds
+DTSTART:20261125T200000
+DTEND:20261125T200000
+UID:8ad353b7fff1d12a5d9cc98e410100f6@songkick.com
+DESCRIPTION:Hank Ruff at Bluebird at 2026-11-25T20:00:00-0500
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43518658-hank-ruff-at-bluebird?utm_me
+ dium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Josh Meloy
+DTSTART:20261204T200000
+DTEND:20261204T200000
+UID:c5558534f17c9eb15bbbd4c97019cb84@songkick.com
+DESCRIPTION:Josh Meloy at Bluebird at 2026-12-04T20:00:00-0500
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43422742-josh-meloy-at-bluebird?utm_m
+ edium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Easy Honey
+DTSTART:20261208T200000
+DTEND:20261208T200000
+UID:75149a48cab6705eb36d888a439871a4@songkick.com
+DESCRIPTION:Easy Honey at Bluebird at 2026-12-08T20:00:00-0500
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43444119-easy-honey-at-bluebird?utm_m
+ edium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+END:VCALENDAR

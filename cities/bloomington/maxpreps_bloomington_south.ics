@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Bloomington South Athletics//maxpreps.com//
+X-WR-CALNAME:Bloomington South Athletics
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Cathedral Varsity Football vs. Bloomington South
+DTSTART;TZID=America/Indiana/Indianapolis:20261120T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261120T210000
+UID:676fe74cdc42f11afbde96eeea543c7f@maxpreps.com
+DESCRIPTION:Boys Varsity Football\nTournament: 2026 IHSAA Football State T
+ ournament (Indiana)\nThe Cathedral varsity football team is at their neutr
+ al playoff game vs.  Bloomington South (Bloomington\, IN).
+URL:https://www.maxpreps.com/in/football/game/bloomington-south-vs-cathedr
+ al-indianapolis/11-20-2026/?c=87fd52fc-8a87-48c8-8af4-ef45ff91ab03
+X-SOURCE:Bloomington South Athletics
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Bloomington South Girls Varsity Basketball @ Owen Valley
+DTSTART;TZID=America/Indiana/Indianapolis:20261120T193000
+DTEND;TZID=America/Indiana/Indianapolis:20261120T204500
+UID:d978a6107cff715d51093bd0c7b3bddf@maxpreps.com
+DESCRIPTION:Girls Varsity Basketball\nNo result has been reported for the 
+ Bloomington South varsity basketball away non-conference game @ Owen Valle
+ y (Spencer\, IN).
+URL:https://www.maxpreps.com/in/basketball/girls/game/bloomington-south-vs
+ -owen-valley-spencer/11-20-2026/?c=839ee17a-ec3e-4870-9d26-0148424afc88
+X-SOURCE:Bloomington South Athletics
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,305 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Big Brothers Big Sisters of Central Indiana - ECPv6.18.3.1//NONSGML v1.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Big Brothers Big Sisters of Central Indiana
+X-ORIGINAL-URL:https://www.bebigforkids.org
+X-WR-CALDESC:Events for Big Brothers Big Sisters of Central Indiana
+REFRESH-INTERVAL;VALUE=DURATION:PT1H
+X-Robots-Tag:noindex
+X-PUBLISHED-TTL:PT1H
+BEGIN:VTIMEZONE
+TZID:America/Indiana/Indianapolis
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:20250309T070000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:20251102T060000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:20260308T070000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:20261101T060000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:20270314T070000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:20271107T060000
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:20280312T070000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:20281105T060000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VTIMEZONE
+TZID:UTC
+BEGIN:STANDARD
+TZOFFSETFROM:+0000
+TZOFFSETTO:+0000
+TZNAME:UTC
+DTSTART:20250101T000000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+X-SOURCE:Big Brothers/Sisters 
+DTSTART;TZID=America/Indiana/Indianapolis:20261121T123000
+DTEND;TZID=America/Indiana/Indianapolis:20261121T140000
+DTSTAMP:20261118T142547Z
+CREATED:20261118T142546Z
+LAST-MODIFIED:20261118T142547Z
+UID:10000390-1795264200-1795269600@www.bebigforkids.org
+SUMMARY:Match Event: Art Reach with Indianapolis Art Center
+DESCRIPTION:November              21              \, 2026            \n            BBBSCI hosts record-breaking annual gala\, “The Main Event\,” with Title Sponsor\, Delta Faucet Company           \n            Get creative with other matches every other Saturday at the Indy Art Center! \n\n                            Email Us to Learn More\n                      \n        \n      \n    \n  \n\n\n\n\n\nLearn more:\n\n\n\nArt Reach is a recurring event *almost every other Saturday\, where matches learn from an experienced art teacher and create a masterpiece to take home. \n\n\n\nAttend one or attend all\, but each Art Reach session focuses on a different art method and unique project\, so no two visits are the same! All skill levels welcome. \n\n\n\nThis event is great at instilling confidence in Littles (and Bigs) as they learn something new and bring their imagination alive.
+URL:https://www.bebigforkids.org/event/match-event-art-reach-with-indianapolis-art-center/
+ATTACH;FMTTYPE=image/jpeg:https://www.bebigforkids.org/wp-content/uploads/2025/08/New-Indy-Art.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Big Brothers/Sisters 
+DTSTART;TZID=America/Indiana/Indianapolis:20261122T150000
+DTEND;TZID=America/Indiana/Indianapolis:20261122T170000
+DTSTAMP:20261118T142948Z
+CREATED:20261118T142947Z
+LAST-MODIFIED:20261118T142948Z
+UID:10000391-1795359600-1795366800@www.bebigforkids.org
+SUMMARY:Match Event: Match Meet-Up at The Children's Museum
+DESCRIPTION:November              21              \, 2026            \n            BBBSCI hosts record-breaking annual gala\, “The Main Event\,” with Title Sponsor\, Delta Faucet Company           \n            \n\nJoin us for an evening of discovery and wonder at The Children’s Museum of Indianapolis! \n\n\n\n                            Email Us to Learn More\n                      \n        \n      \n    \n  \n\n\n\n\n\nLearn more:\n\n\n\nWe’re meeting up at the largest children’s museum in the world! Learning is intertwined with play for Littles and Bigs throughout interactive exhibits like the Dinosphere\, Beyond Spaceship Earth\, and ScienceWorks. If you’d rather cut straight to the play\, take a spin on the Carousel Wishes and Dreams or experience the magic of the first Disney exhibit in a children’s museum\, Tiana’s Joyful Celebration!
+URL:https://www.bebigforkids.org/event/match-event-match-meet-up-at-the-childrens-museum/
+ATTACH;FMTTYPE=image/jpeg:https://www.bebigforkids.org/wp-content/uploads/2026/07/260629_TCMI_BigBrothersBigSisters_BigNightOut_19-scaled.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Big Brothers/Sisters 
+DTSTART;TZID=UTC:20261201T080000
+DTEND;TZID=UTC:20261201T170000
+DTSTAMP:20261109T202939Z
+CREATED:20261104T191856Z
+LAST-MODIFIED:20261109T202939Z
+UID:10000389-1796112000-1796144400@www.bebigforkids.org
+SUMMARY:Giving Tuesday
+DESCRIPTION:Unlock Magical Memories!\n                                      When you give to BBBSCI this Giving Tuesday\, December 1\, you’re unlocking bucket-list experiences for our Bigs and Littles to enjoy. Your support will help unlock Magical Memories\, which give up to 10 matches the chance to enjoy a new and unique experience together! \n\n                      \n          \n            Make a Donation          \n        \n      \n    \n  \n\n\n\n  \n    \n      \n            \n      \n        \n          \n                          \n                Make a Donation              \n                                      Your donation helps connect more young people in our community with life-changing mentorship resources! On Giving Tuesday\, your impact will be DOUBLED – as every dollar raised will be matched up to $100\,000\, thanks to the generous Larry & Lisa Sablosky. \n\n                        \n              Donate Today            \n          \n          \n                                            \n                        \n        \n      \n  \n\n\n\n  \n    \n      \n        \n          \n                          Become a Giving Tuesday Ambassador to Win a Bucket-List Experience\n                                      Calling Bigs! Share your story and inspire more mentors as a Giving Tuesday Ambassador. Join us to be entered to win a $500 Magical Memory experience\, raise critical dollars through your personalized fundraising page\, and inspire 100 more mentors this holiday season! \n\n                      \n          \n            Sign Up          \n        \n      \n    \n  \n\n\n\n  \n    \n      \n            \n      \n        \n          \n                          \n                Become a Big!              \n                                      With so many ways to mentor youth in our community\, being a Big and making a positive impact on the life a child is easier than ever. Sign-up to become a community-based or site-based mentor below – don’t forget to let us know who referred you! \n\n                        \n              Become a Mentor            \n          \n          \n                                            \n                        \n        \n      \n  \n\n\n\n  \n    \n              \n            \n        \n          \n                          \n                See the Impact              \n                                      Meet Little Sister Jaime and Big Sister Jaleesa\, 2026 National Big and Little of the Year.
+URL:https://www.bebigforkids.org/event/giving-tuesday/
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Big Brothers/Sisters 
+DTSTART;TZID=America/Indiana/Indianapolis:20261201T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261201T200000
+DTSTAMP:20261118T143550Z
+CREATED:20261118T143549Z
+LAST-MODIFIED:20261118T143550Z
+UID:10000392-1796148000-1796155200@www.bebigforkids.org
+SUMMARY:Match Event: December Game Night + Winter Gifts
+DESCRIPTION:November              21              \, 2026            \n            BBBSCI hosts record-breaking annual gala\, “The Main Event\,” with Title Sponsor\, Delta Faucet Company           \n            We’re celebrating the season with dozens of games\, gifts for every match\, Pacers tickets\, hot cocoa\, and cookies! Dinner provided. \n\n                            Email Us to Learn More
+URL:https://www.bebigforkids.org/event/match-event-december-game-night-winter-gifts/
+ATTACH;FMTTYPE=image/jpeg:https://www.bebigforkids.org/wp-content/uploads/2024/12/welcome-night.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Big Brothers/Sisters 
+DTSTART;TZID=America/Indiana/Indianapolis:20261205T120000
+DTEND;TZID=America/Indiana/Indianapolis:20261205T140000
+DTSTAMP:20261118T144530Z
+CREATED:20261118T144123Z
+LAST-MODIFIED:20261118T144530Z
+UID:10000393-1796472000-1796479200@www.bebigforkids.org
+SUMMARY:Match Event: Big Perspectives (Grades 6-12)
+DESCRIPTION:November              21              \, 2026            \n            BBBSCI hosts record-breaking annual gala\, “The Main Event\,” with Title Sponsor\, Delta Faucet Company           \n            Littles have big opinions! Through fun discussions and activities\, we’ll explore the future they want to see in their communities and how they can make a difference. And\, each match will receive Pacers tickets! \n\n                            Email Us to Learn More
+URL:https://www.bebigforkids.org/event/match-event-big-perspectives-grades-6-12/
+ATTACH;FMTTYPE=image/jpeg:https://www.bebigforkids.org/wp-content/uploads/2026/11/pexels-hamzasamadh-31418370-scaled.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Big Brothers/Sisters 
+DTSTART;TZID=America/Indiana/Indianapolis:20261208T173000
+DTEND;TZID=America/Indiana/Indianapolis:20261208T200000
+DTSTAMP:20261118T145146Z
+CREATED:20261118T145145Z
+LAST-MODIFIED:20261118T145146Z
+UID:10000394-1796751000-1796760000@www.bebigforkids.org
+SUMMARY:Match Event: Holiday Movie Night
+DESCRIPTION:November              21              \, 2026            \n            BBBSCI hosts record-breaking annual gala\, “The Main Event\,” with Title Sponsor\, Delta Faucet Company           \n            Watch The Princess Bride with us while eating dinner\, drinking hot cocoa\, and decorating sweet treats! \n\n                            Email Us to Learn More
+URL:https://www.bebigforkids.org/event/match-event-holiday-movie-night/
+ATTACH;FMTTYPE=image/jpeg:https://www.bebigforkids.org/wp-content/uploads/2026/11/pexels-pixabay-33129-scaled.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Big Brothers/Sisters 
+DTSTART;TZID=America/Indiana/Indianapolis:20261213T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261213T200000
+DTSTAMP:20261118T151327Z
+CREATED:20261118T151211Z
+LAST-MODIFIED:20261118T151327Z
+UID:10000400-1797184800-1797192000@www.bebigforkids.org
+SUMMARY:Match Event: Southside Game Night
+DESCRIPTION:November              21              \, 2026            \n            BBBSCI hosts record-breaking annual gala\, “The Main Event\,” with Title Sponsor\, Delta Faucet Company           \n            Join us in Johnson County for an evening of dinner\, games\, and fun giveaways! \n\n                            Email Us to Learn More
+URL:https://www.bebigforkids.org/event/match-event-southside-game-night/
+ATTACH;FMTTYPE=image/jpeg:https://www.bebigforkids.org/wp-content/uploads/2024/12/Jan-Game-Night.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Big Brothers/Sisters 
+DTSTART;TZID=America/Indiana/Indianapolis:20261216T180000
+DTEND;TZID=America/Indiana/Indianapolis:20261216T193000
+DTSTAMP:20261118T150206Z
+CREATED:20261118T145359Z
+LAST-MODIFIED:20261118T150206Z
+UID:10000395-1797444000-1797449400@www.bebigforkids.org
+SUMMARY:Match Event: Canvas\, Cookies\, and Cocoa
+DESCRIPTION:November              21              \, 2026            \n            BBBSCI hosts record-breaking annual gala\, “The Main Event\,” with Title Sponsor\, Delta Faucet Company           \n            Celebrate the chilly season with us as we paint a winter-themed work of art while enjoying cookies and hot cocoa! \n\n                            Email Us to Learn More
+URL:https://www.bebigforkids.org/event/match-event-canvas-cookies-and-cocoa/
+ATTACH;FMTTYPE=image/jpeg:https://www.bebigforkids.org/wp-content/uploads/2025/08/canvas-painting.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Big Brothers/Sisters 
+DTSTART;TZID=America/Indiana/Indianapolis:20261217T171500
+DTEND;TZID=America/Indiana/Indianapolis:20261217T210000
+DTSTAMP:20261118T150134Z
+CREATED:20261118T150133Z
+LAST-MODIFIED:20261118T150134Z
+UID:10000396-1797527700-1797541200@www.bebigforkids.org
+SUMMARY:Holliday on Ice: Family Skate Night
+DESCRIPTION:November              21              \, 2026            \n            BBBSCI hosts record-breaking annual gala\, “The Main Event\,” with Title Sponsor\, Delta Faucet Company           \n            Matches and their families are invited to join us at Holliday Park for a magical night on the ice rink! \n\n                            Email Us to Learn More
+URL:https://www.bebigforkids.org/event/holliday-on-ice-family-skate-night/
+ATTACH;FMTTYPE=image/jpeg:https://www.bebigforkids.org/wp-content/uploads/2024/11/iceskating.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Big Brothers/Sisters 
+DTSTART;TZID=America/Indiana/Indianapolis:20261219T123000
+DTEND;TZID=America/Indiana/Indianapolis:20261219T140000
+DTSTAMP:20261118T150406Z
+CREATED:20261118T150405Z
+LAST-MODIFIED:20261118T150406Z
+UID:10000398-1797683400-1797688800@www.bebigforkids.org
+SUMMARY:Match Event: Art Reach with Indianapolis Art Center
+DESCRIPTION:November              21              \, 2026            \n            BBBSCI hosts record-breaking annual gala\, “The Main Event\,” with Title Sponsor\, Delta Faucet Company           \n            Get creative with other matches every other Saturday at the Indy Art Center! \n\n                            Email Us to Learn More\n                      \n        \n      \n    \n  \n\n\n\n\n\nLearn more:\n\n\n\nArt Reach is a recurring event *almost every other Saturday\, where matches learn from an experienced art teacher and create a masterpiece to take home. \n\n\n\nAttend one or attend all\, but each Art Reach session focuses on a different art method and unique project\, so no two visits are the same! All skill levels welcome. \n\n\n\nThis event is great at instilling confidence in Littles (and Bigs) as they learn something new and bring their imagination alive.
+URL:https://www.bebigforkids.org/event/match-event-art-reach-with-indianapolis-art-center-2/
+ATTACH;FMTTYPE=image/jpeg:https://www.bebigforkids.org/wp-content/uploads/2025/08/New-Indy-Art.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Big Brothers/Sisters 
+DTSTART;TZID=America/Indiana/Indianapolis:20270113T180000
+DTEND;TZID=America/Indiana/Indianapolis:20270113T200000
+DTSTAMP:20261118T150956Z
+CREATED:20261118T150954Z
+LAST-MODIFIED:20261118T150956Z
+UID:10000399-1799863200-1799870400@www.bebigforkids.org
+SUMMARY:Match Event: January Game Night
+DESCRIPTION:November              21              \, 2026            \n            BBBSCI hosts record-breaking annual gala\, “The Main Event\,” with Title Sponsor\, Delta Faucet Company           \n            Don’t miss out on dozens of board & card games\, an Xbox\, pool table\, ping-pong\, foosball\, & more! IU med students are joining us for an optional wellness activity. \n\n                            Email Us to Learn More
+URL:https://www.bebigforkids.org/event/match-event-january-game-night/
+ATTACH;FMTTYPE=image/jpeg:https://www.bebigforkids.org/wp-content/uploads/2024/07/augustgamenight.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Big Brothers/Sisters 
+DTSTART;TZID=America/Indiana/Indianapolis:20270114T180000
+DTEND;TZID=America/Indiana/Indianapolis:20270114T200000
+DTSTAMP:20261118T151917Z
+CREATED:20261118T151916Z
+LAST-MODIFIED:20261118T151917Z
+UID:10000401-1799949600-1799956800@www.bebigforkids.org
+SUMMARY:Match Event: Big Futures New Years Party! (Grades 6-12)
+DESCRIPTION:November              21              \, 2026            \n            BBBSCI hosts record-breaking annual gala\, “The Main Event\,” with Title Sponsor\, Delta Faucet Company           \n            Ring in the New Year with other matches with t(w)een Littles! Celebrate the growth and look to the future with dinner\, giveaway\, fun challenges\, and activity stations to rotate through at your own pace! \n\n                            Email Us to Learn More
+URL:https://www.bebigforkids.org/event/match-event-big-futures-new-years-party-grades-6-12/
+ATTACH;FMTTYPE=image/jpeg:https://www.bebigforkids.org/wp-content/uploads/2026/11/pexels-patricia-luquet-293443066-14946491-scaled.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Big Brothers/Sisters 
+DTSTART;TZID=America/Indiana/Indianapolis:20270116T123000
+DTEND;TZID=America/Indiana/Indianapolis:20270116T140000
+DTSTAMP:20261118T152024Z
+CREATED:20261118T152022Z
+LAST-MODIFIED:20261118T152024Z
+UID:10000402-1800102600-1800108000@www.bebigforkids.org
+SUMMARY:Match Event: Art Reach with Indianapolis Art Center
+DESCRIPTION:November              21              \, 2026            \n            BBBSCI hosts record-breaking annual gala\, “The Main Event\,” with Title Sponsor\, Delta Faucet Company           \n            Get creative with other matches every other Saturday at the Indy Art Center! \n\n                            Email Us to Learn More\n                      \n        \n      \n    \n  \n\n\n\n\n\nLearn more:\n\n\n\nArt Reach is a recurring event *almost every other Saturday\, where matches learn from an experienced art teacher and create a masterpiece to take home. \n\n\n\nAttend one or attend all\, but each Art Reach session focuses on a different art method and unique project\, so no two visits are the same! All skill levels welcome. \n\n\n\nThis event is great at instilling confidence in Littles (and Bigs) as they learn something new and bring their imagination alive.
+URL:https://www.bebigforkids.org/event/match-event-art-reach-with-indianapolis-art-center-3/
+ATTACH;FMTTYPE=image/jpeg:https://www.bebigforkids.org/wp-content/uploads/2025/08/New-Indy-Art.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Big Brothers/Sisters 
+DTSTART;TZID=America/Indiana/Indianapolis:20270118T140000
+DTEND;TZID=America/Indiana/Indianapolis:20270118T153000
+DTSTAMP:20261118T152837Z
+CREATED:20261118T152836Z
+LAST-MODIFIED:20261118T152837Z
+UID:10000403-1800280800-1800286200@www.bebigforkids.org
+SUMMARY:Match Event: MLK Day of Youth Service
+DESCRIPTION:November              21              \, 2026            \n            BBBSCI hosts record-breaking annual gala\, “The Main Event\,” with Title Sponsor\, Delta Faucet Company           \n            We’re joining Seeds of Caring’s MLK Day of Youth Service at the Madam Walker Legacy Center! Get hands-on with service activities while learning about the impact you can make in your community. \n\n                            Email Us to Learn More
+URL:https://www.bebigforkids.org/event/match-event-mlk-day-of-youth-service/
+ATTACH;FMTTYPE=image/jpeg:https://www.bebigforkids.org/wp-content/uploads/2026/11/pexels-artempodrez-7048027-scaled.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Big Brothers/Sisters 
+DTSTART;TZID=America/Indiana/Indianapolis:20270120T180000
+DTEND;TZID=America/Indiana/Indianapolis:20270120T200000
+DTSTAMP:20261118T153215Z
+CREATED:20261118T153214Z
+LAST-MODIFIED:20261118T153215Z
+UID:10000404-1800468000-1800475200@www.bebigforkids.org
+SUMMARY:Match Event: Welcome Night
+DESCRIPTION:November              21              \, 2026            \n            BBBSCI hosts record-breaking annual gala\, “The Main Event\,” with Title Sponsor\, Delta Faucet Company           \n            Newer matches are invited to create memories through art\, fun challenges\, and opportunities to win giveaways – including tickets to The Children’s Museum and Pacers games! \n\n                            Email Us to Learn More
+URL:https://www.bebigforkids.org/event/match-event-welcome-night/
+ATTACH;FMTTYPE=image/jpeg:https://www.bebigforkids.org/wp-content/uploads/2024/01/Welcome-Night-10.18.23-2-scaled.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Big Brothers/Sisters 
+DTSTART;TZID=America/Indiana/Indianapolis:20270123T173000
+DTEND;TZID=America/Indiana/Indianapolis:20270123T190000
+DTSTAMP:20261118T153842Z
+CREATED:20261118T153839Z
+LAST-MODIFIED:20261118T153842Z
+UID:10000405-1800725400-1800730800@www.bebigforkids.org
+SUMMARY:Match Event: Meet-Up at ComedySportz
+DESCRIPTION:November              21              \, 2026            \n            BBBSCI hosts record-breaking annual gala\, “The Main Event\,” with Title Sponsor\, Delta Faucet Company           \n            Get ready to laugh at ComedySportz! Bigs and Littles will enjoy an interactive improv comedy show filled with audience participation and plenty of laughs. \n\n                            Email Us to Learn More
+URL:https://www.bebigforkids.org/event/match-event-meet-up-at-comedysportz/
+ATTACH;FMTTYPE=image/jpeg:https://www.bebigforkids.org/wp-content/uploads/2026/11/pexels-timmossholder-1115680.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Big Brothers/Sisters 
+DTSTART;TZID=America/Indiana/Indianapolis:20270126T180000
+DTEND;TZID=America/Indiana/Indianapolis:20270126T200000
+DTSTAMP:20261118T154348Z
+CREATED:20261118T154347Z
+LAST-MODIFIED:20261118T154348Z
+UID:10000406-1800986400-1800993600@www.bebigforkids.org
+SUMMARY:Match Event: LEGO Build & Movie Night
+DESCRIPTION:November              21              \, 2026            \n            BBBSCI hosts record-breaking annual gala\, “The Main Event\,” with Title Sponsor\, Delta Faucet Company           \n            Get creative and eat good food as we build and watch The Lego Move 2 together! One lucky Little will receive a surprise LEGO set. \n\n                            Email Us to Learn More
+URL:https://www.bebigforkids.org/event/match-event-lego-build-movie-night/
+ATTACH;FMTTYPE=image/jpeg:https://www.bebigforkids.org/wp-content/uploads/2026/11/pexels-polesietoys-4491711-scaled.jpg
+END:VEVENT
+BEGIN:VEVENT
+X-SOURCE:Big Brothers/Sisters 
+DTSTART;TZID=America/Indiana/Indianapolis:20270128T180000
+DTEND;TZID=America/Indiana/Indianapolis:20270128T200000
+DTSTAMP:20261118T154601Z
+CREATED:20261118T154601Z
+LAST-MODIFIED:20261118T154601Z
+UID:10000407-1801159200-1801166400@www.bebigforkids.org
+SUMMARY:Match Event: Big Climbers (Grades 6-12)
+DESCRIPTION:November              21              \, 2026            \n            BBBSCI hosts record-breaking annual gala\, “The Main Event\,” with Title Sponsor\, Delta Faucet Company           \n            Meet us at North Mass Boulder to learn and/or practice the fun and healthy hobby of bouldering – a form of rock climbing! All skill levels are welcome. \n\n                            Email Us to Learn More
+URL:https://www.bebigforkids.org/event/match-event-big-climbers-grades-6-12/
+ATTACH;FMTTYPE=image/jpeg:https://www.bebigforkids.org/wp-content/uploads/2025/07/rock-climbing.jpg
+END:VEVENT
+END:VCALENDAR
