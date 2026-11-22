@@ -53,7 +53,8 @@ REQUIRED_CHECKS = {
 def test_pr_check_names_match_ruleset():
     """Keep validate-pr.yml job names in sync with the merge-blocking ruleset."""
     path = WORKFLOW_DIR / "validate-pr.yml"
-    jobs = yaml.safe_load(path.read_text(encoding="utf-8"))["jobs"] or {}
+    doc = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    jobs = doc.get("jobs") or {}
     names = {(job or {}).get("name") or key for key, job in jobs.items()}
     assert names == REQUIRED_CHECKS, (
         f"{path.name} job names differ from the required checks in {RULESET_URL}.\n"
