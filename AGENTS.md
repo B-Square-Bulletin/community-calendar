@@ -126,8 +126,8 @@ PR CI `validate-pr.yml` gates main merges. Replicate locally before pushing:
 - `pytest tests/ -v`
 - `supabase test db supabase/tests/`
 - `pnpm bench` — perf gate guarding the content-key collapse cache regressions
-- `docker run --rm -v "$PWD:/repo" -w /repo rhysd/actionlint:1.7.12 -shellcheck= -pyflakes=`
-  — workflow YAML lint; `pytest` already covers the parse half
+- `docker run --rm -v "$PWD:/repo" -w /repo rhysd/actionlint:1.7.12`
+  — workflow YAML + shellcheck/pyflakes lint; `pytest` already covers the parse half
 
 Pipeline validation for scrape/download runs (not needed for every PR):
 
