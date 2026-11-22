@@ -6,8 +6,9 @@ only and the PR checks never parse those files, so a syntax slip surfaced as a
 failed nightly build instead of a failed test. This runs under `make test`.
 
 PyYAML implements YAML 1.1 and GitHub a 1.2-family parser, so this asserts only
-that each document parses (PyYAML reads `on:` as the key True), plus one
-structural case: the PR check names the main ruleset requires. Duplicate
+that each document parses (PyYAML reads `on:` as the key True), plus two
+structural cases: the PR check names the main ruleset requires, and the archive
+publish step's condition. Duplicate
 mapping keys are the one error PyYAML accepts and GitHub rejects; actionlint
 covers that in CI. The glob covers a new workflow with no edit here.
 """
@@ -61,4 +62,22 @@ def test_pr_check_names_match_ruleset():
         f"required but missing: {sorted(REQUIRED_CHECKS - names)}\n"
         f"present but not required: {sorted(names - REQUIRED_CHECKS)}\n"
         "Update that ruleset's required status checks, then this set."
+    )
+
+
+# The archive holds the only copy of the health report, RSS baselines and run
+# histories (#253), so a plain `if:` silently starves it after any failure.
+ARCHIVE_STEP = "Push build artifacts to archive branch"
+
+
+def test_archive_publish_survives_failure_but_not_cancellation():
+    """The archive publishes after a failure, but not after a cancellation."""
+    path = WORKFLOW_DIR / "generate-calendar.yml"
+    doc = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    steps = doc["jobs"]["generate-calendar"]["steps"]
+    step = next((s for s in steps if s.get("name") == ARCHIVE_STEP), None)
+    assert step is not None, f"{path.name} has no step named {ARCHIVE_STEP!r}"
+    assert step.get("if") == "${{ !cancelled() }}", (
+        "The archive publish step must run after a failure but not after a "
+        "cancellation (a cancelled run force-pushes a partial snapshot)."
     )

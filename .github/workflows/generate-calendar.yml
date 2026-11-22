@@ -382,13 +382,20 @@ jobs:
         )
 
     # A rejected main push (or any earlier failure) must not starve the
-    # archive, which carries the daily health report and RSS feeds.
+    # archive, which carries the daily health report and RSS feeds. A
+    # cancelled run is the exception: publishing its half-built state would
+    # force-push over the last good snapshot.
     - name: Push build artifacts to archive branch
-      if: always()
+      if: ${{ !cancelled() }}
       env:
         GITHUB_TOKEN: ${{ secrets.COMMUNITY_CALENDAR }}
       run: |
         git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
+        # A runner starts without a git identity and the steps that set one run
+        # only on some paths, so the commit below needs its own. Same identity
+        # as the metadata step, which authors the archive commit today.
+        git config user.name 'GitHub Actions'
+        git config user.email 'actions@github.com'
 
         # Stash generated files before switching branches
         ARCHIVE_DIR=$(mktemp -d)
@@ -416,15 +423,32 @@ jobs:
         # growth). The 224-commit history through 2026-08-13 is
         # preserved as a git bundle on the archive-history-2026-08-13
         # release. Consumer URLs (raw .../archive/...) are unchanged.
-        # origin/archive is already local from the restore steps
-        # (restore_from_archive.sh); re-fetching here would hide a failed
-        # fetch as "no baseline".
         git checkout --orphan archive-snapshot
         git rm -rf . 2>/dev/null || true
         git clean -fd 2>/dev/null || true
 
+        # An early failure skips the restore steps, so the previous snapshot
+        # may not be local yet. Only "no branch yet" may start without a
+        # baseline; any other lookup or fetch failure must fail the build
+        # rather than force-push a snapshot that drops everything it did not
+        # rebuild.
+        if ! git rev-parse --verify --quiet origin/archive >/dev/null; then
+          lookup=0
+          git ls-remote --exit-code --heads origin archive >/dev/null || lookup=$?
+          if [ "$lookup" -eq 0 ]; then
+            # Explicit destination: a narrowed refspec would put the fetch in
+            # FETCH_HEAD only, leaving the carry-forward below to skip.
+            git fetch --depth=1 origin archive:refs/remotes/origin/archive
+          elif [ "$lookup" -ne 2 ]; then
+            echo "Could not look up the archive branch (ls-remote exit $lookup)" >&2
+            exit 1
+          fi
+        fi
+
         # Carry forward cities from the previous snapshot that were not
-        # rebuilt this run, so a scoped build doesn't drop other cities.
+        # rebuilt this run, so a scoped build doesn't drop other cities. A
+        # city in scope whose build failed produced no events.json and falls
+        # back to its last good snapshot too.
         if git rev-parse --verify origin/archive >/dev/null 2>&1; then
           # Trailing slash matters: "cities" returns the single tree
           # entry itself; "cities/" lists its children.
@@ -433,7 +457,7 @@ jobs:
             for city in "${CITIES[@]}"; do
               [ "$(echo "$city" | xargs)" = "$prev_city" ] && skip=true
             done
-            if [ "$skip" = "false" ]; then
+            if [ "$skip" = "false" ] || [ ! -f "$ARCHIVE_DIR/cities/$prev_city/events.json" ]; then
               # A failed copy here would silently drop the city from the
               # snapshot the force-push then publishes, so let it fail the build.
               git checkout origin/archive -- "cities/$prev_city"
@@ -443,6 +467,11 @@ jobs:
               git checkout origin/archive -- "report/$prev_city" 2>/dev/null || true
             fi
           done
+          # Root report.json and rss/ are baselines too: losing rss/ makes the
+          # next feed announce every event as new. Keep the published pair
+          # when a failure skipped generating this run's.
+          [ -f "$ARCHIVE_DIR/report.json" ] || git checkout origin/archive -- report.json 2>/dev/null || true
+          [ -d "$ARCHIVE_DIR/rss" ] || git checkout origin/archive -- rss 2>/dev/null || true
         fi
 
         # Copy contents, not the directories themselves: a scoped build has
@@ -453,7 +482,10 @@ jobs:
 
         # -f: the ignore rules must not apply here — the snapshot publishes
         # exactly what main deliberately does not track (#253).
-        git add -f cities/ report.json
+        git add -f cities/
+        # An early failure can leave no root report; a missing pathspec would
+        # abort the step before the push and publish nothing at all.
+        [ -f report.json ] && git add -f report.json || true
         [ -d report ] && git add -f report/ || true
         [ -d rss ] && git add -f rss/ || true
         TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M UTC")
