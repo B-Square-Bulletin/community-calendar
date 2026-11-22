@@ -4,6 +4,9 @@ Date: 2026-08-09
 
 ## Status
 
+**Superseded by [0023](0023-single-type-checker-pyrefly.md):** the project now
+runs pyrefly alone, pinned and gating on warnings.
+
 Accepted. The phased rollout completed 2026-08-12 (issue #60): the type-checker
 baseline is clean across `scripts/`, `scrapers/`, and `tests/`, and all four
 checkers gate in `make lint` and the PR CI `lint` job. On 2026-08-17 the
