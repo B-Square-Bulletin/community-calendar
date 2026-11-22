@@ -381,7 +381,10 @@ jobs:
           git pull --rebase --autostash -X theirs && git push
         )
 
+    # A rejected main push (or any earlier failure) must not starve the
+    # archive, which carries the daily health report and RSS feeds.
     - name: Push build artifacts to archive branch
+      if: always()
       env:
         GITHUB_TOKEN: ${{ secrets.COMMUNITY_CALENDAR }}
       run: |
