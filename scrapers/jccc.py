@@ -139,15 +139,16 @@ class JCCCScraper(BaseScraper):
 
     def event_is_current_or_future(self, dtstart: date | datetime, dtend: date | datetime) -> bool:
         now = datetime.now(self.tz)
-        if isinstance(dtstart, datetime):
+        if isinstance(dtstart, datetime) or isinstance(dtend, datetime):
             end_dt = (
                 dtend
                 if isinstance(dtend, datetime)
-                else datetime.combine(dtend, datetime.min.time()).replace(tzinfo=self.tz)
+                else datetime.combine(dtend, datetime.min.time())
             )
+            if end_dt.tzinfo is None:
+                end_dt = end_dt.replace(tzinfo=self.tz)
             return end_dt >= now
-        end_date = dtend.date() if isinstance(dtend, datetime) else dtend
-        return end_date > now.date()
+        return dtend > now.date()
 
     def sort_key(self, value: date | datetime) -> datetime:
         if isinstance(value, datetime):
