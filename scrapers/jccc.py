@@ -146,7 +146,8 @@ class JCCCScraper(BaseScraper):
                 else datetime.combine(dtend, datetime.min.time()).replace(tzinfo=self.tz)
             )
             return end_dt >= now
-        return dtend > now.date()
+        end_date = dtend.date() if isinstance(dtend, datetime) else dtend
+        return end_date > now.date()
 
     def sort_key(self, value: date | datetime) -> datetime:
         if isinstance(value, datetime):
