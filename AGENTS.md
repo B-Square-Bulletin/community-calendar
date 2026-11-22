@@ -78,6 +78,9 @@ Source attribution flows through a single `X-SOURCE` ICS header — NEVER put
 - **Test before adding:** For Legistar, always test the API first (some cities
   have a web UI but a broken API). For scrapers, use `add_scraper.py --test`.
 - **Prefer DuckDuckGo** over Google for discovery searches (Google often blocks).
+- **`*.sh` is gitignored.** Before `git add` will track a new shell script,
+  add an allowlist line below the `*.sh` rule in `.gitignore`
+  (e.g. `!scripts/your_script.sh`).
 
 ## Provenance: Source Attribution
 
