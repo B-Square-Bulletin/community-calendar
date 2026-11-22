@@ -445,33 +445,13 @@ jobs:
           fi
         fi
 
-        # Carry forward cities from the previous snapshot that were not
-        # rebuilt this run, so a scoped build doesn't drop other cities. A
-        # city in scope whose build failed produced no events.json and falls
-        # back to its last good snapshot too.
+        # Start from the previous snapshot and overlay this run's artifacts
+        # below, so a scoped or failed build keeps every city, report slice,
+        # feed and root report it did not produce. A restore failure must fail
+        # the build: a shorter snapshot silently drops the baselines the next
+        # run diffs against.
         if git rev-parse --verify origin/archive >/dev/null 2>&1; then
-          # Trailing slash matters: "cities" returns the single tree
-          # entry itself; "cities/" lists its children.
-          for prev_city in $(git ls-tree --name-only origin/archive cities/ 2>/dev/null | sed 's|cities/||'); do
-            skip=false
-            for city in "${CITIES[@]}"; do
-              [ "$(echo "$city" | xargs)" = "$prev_city" ] && skip=true
-            done
-            if [ "$skip" = "false" ] || [ ! -f "$ARCHIVE_DIR/cities/$prev_city/events.json" ]; then
-              # A failed copy here would silently drop the city from the
-              # snapshot the force-push then publishes, so let it fail the build.
-              git checkout origin/archive -- "cities/$prev_city"
-              # The per-city health slice is published too (#253), so a scoped
-              # build must not drop the cities it did not rebuild. Older
-              # snapshots carry no slice, so an absent one stays tolerated.
-              git checkout origin/archive -- "report/$prev_city" 2>/dev/null || true
-            fi
-          done
-          # Root report.json and rss/ are baselines too: losing rss/ makes the
-          # next feed announce every event as new. Keep the published pair
-          # when a failure skipped generating this run's.
-          [ -f "$ARCHIVE_DIR/report.json" ] || git checkout origin/archive -- report.json 2>/dev/null || true
-          [ -d "$ARCHIVE_DIR/rss" ] || git checkout origin/archive -- rss 2>/dev/null || true
+          git checkout origin/archive -- .
         fi
 
         # Copy contents, not the directories themselves: a scoped build has
