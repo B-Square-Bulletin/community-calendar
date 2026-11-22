@@ -17,12 +17,14 @@ dependencies = [
 dev = [
   "pytest==9.1.1",
   "pytest-cov==7.1.0",
+  "pyyaml==6.0.4",
   "ruff==0.16.2",
   "ty==0.0.69",
   "pyrefly==1.2.0",
   "pyright==1.1.411",
   "zuban==0.9.1",
   "types-requests==2.33.0.20260906",
+  "types-pyyaml==6.0.12.20261113",
 ]
 
 [tool.uv]
