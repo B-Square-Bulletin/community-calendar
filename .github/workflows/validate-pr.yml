@@ -152,7 +152,7 @@ jobs:
       - name: Install JS dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run lint (ruff + type checkers + JS)
+      - name: Run lint (ruff + pyrefly + JS)
         run: make lint
 
   actionlint:

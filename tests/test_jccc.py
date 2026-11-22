@@ -19,7 +19,7 @@ class TestEventIsCurrentOrFuture:
 
     def test_date_start_with_datetime_end_compares_without_raising(self):
         # A datetime `dtend` under a date `dtstart` used to compare a datetime
-        # to a date, which raises TypeError at runtime.
+        # to a date, which would raise TypeError at runtime.
         tomorrow = self.today + timedelta(days=1)
         assert self.scraper.event_is_current_or_future(
             tomorrow, datetime.combine(tomorrow, datetime.min.time())

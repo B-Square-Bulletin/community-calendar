@@ -32,10 +32,11 @@ parameter type has to be inferred from a typed default; zuban misses it too.
 Ty's refusal to honour `# type: ignore[code]` has no effect here because the
 repository contains no such comments.
 
-In the other direction, the upgrade from pyrefly 1.2.0 to 1.5.0 caught a real
-runtime bug that all four pinned checkers missed: `scrapers/jccc.py` compared a
-`datetime` with a `date`, which raises `TypeError`. It type-checked because
-`datetime` is a subclass of `date`.
+In the other direction, the upgrade from pyrefly 1.2.0 to 1.5.0 caught a latent
+type error that all four pinned checkers missed: `scrapers/jccc.py` compared a
+`datetime` with a `date`, which raises `TypeError`. The method signature allows
+a mixed-type call, though no production caller produces one. The comparison
+type-checked because `datetime` is a subclass of `date`.
 
 ## Decision
 
@@ -63,7 +64,7 @@ whichever checker would have caught it. There is no standing second checker.
 ## Consequences
 
 - One toolchain to upgrade, one configuration section, one gate. Pyrefly checks
-  this project's 232 files in well under a second.
+  the whole project in well under a second.
 - pyright's linter-style rules (duplicate imports, mutable defaults, implicit
   string concatenation, naming) are no longer reported. Ruff already owns them.
 - pyright execution environments (per-path Python version, platform, or search
