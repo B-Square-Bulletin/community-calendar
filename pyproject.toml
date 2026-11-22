@@ -19,10 +19,7 @@ dev = [
   "pytest-cov==7.1.0",
   "pyyaml==6.0.4",
   "ruff==0.16.2",
-  "ty==0.0.69",
-  "pyrefly==1.2.0",
-  "pyright==1.1.411",
-  "zuban==0.9.1",
+  "pyrefly==1.5.0",
   "types-requests==2.33.0.20260906",
   "types-pyyaml==6.0.12.20261113",
 ]
@@ -61,30 +58,15 @@ allowed-confusables = ["–", "—", "’", "‘"]
 [tool.ruff.lint.isort]
 known-first-party = ["scrapers"]
 
-[tool.pyright]
-pythonVersion = "3.14"
-venvPath = "."
-venv = ".venv"
-typeCheckingMode = "standard"
-exclude = [".venv", ".worktrees"]
-extraPaths = ["scripts", "scrapers"]
-
-[tool.ty.environment]
-python-version = "3.14"
-extra-paths = ["scripts", "scrapers"]
-
-[tool.ty.src]
-exclude = [".venv", ".worktrees"]
-
 [tool.pyrefly]
 python-version = "3.14"
-project_includes = ["scripts/**", "scrapers/**", "tests/**"]
-project_excludes = [".worktrees/**"]
-search_path = ["scripts", "scrapers"]
+project-includes = ["scripts/**", "scrapers/**", "tests/**"]
+project-excludes = [".worktrees/**"]
+search-path = ["scripts", "scrapers"]
+# Fail loudly if a stale binary runs instead of checking with different rules.
+required-version = "==1.5.0"
 
-[tool.mypy]
-python_version = "3.14"
-exclude = '\.venv|\.worktrees'
-ignore_missing_imports = true
-check_untyped_defs = true
-warn_unused_ignores = true
+[tool.pyrefly.errors]
+# Carry-over of mypy's warn_unused_ignores, which has no single pyrefly knob.
+unused-ignore = "warn"
+unused-type-ignore = "warn"

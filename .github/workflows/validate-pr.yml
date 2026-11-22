@@ -127,9 +127,9 @@ jobs:
 
   lint:
     # Mirrors the local lint target (make lint): ruff (format + check), the
-    # four type checkers (pyright, ty, pyrefly, zuban), and the JS gate
-    # (prettier --check + eslint) all gate the job, so an introduced
-    # finding fails the PR (ADR 0006 — phased rollout complete, ADR 0009).
+    # pyrefly type checker, and the JS gate (prettier --check + eslint) all
+    # gate the job, so an introduced finding fails the PR (ADR 0023 — one type
+    # checker; ADR 0009 — JS lint/format).
     name: Lint
     runs-on: ubuntu-latest
     steps:
@@ -152,7 +152,7 @@ jobs:
       - name: Install JS dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run lint (ruff + type checkers + JS)
+      - name: Run lint (ruff + pyrefly + JS)
         run: make lint
 
   actionlint:

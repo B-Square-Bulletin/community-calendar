@@ -21,6 +21,7 @@ from urllib.parse import urlparse
 
 import requests
 from icalendar import Calendar
+from icalendar.prop import vDDDTypes
 
 # Squarespace seeds new Events collections with placeholder/demo events whose
 # slugs are event-one … event-five plus a random suffix (e.g.
@@ -112,12 +113,13 @@ class SquarespaceScraper(BaseScraper):
             for component in cal.walk():
                 if component.name == "VEVENT":
                     dtstart = component.get("dtstart")
-                    if not dtstart:
+                    dtend = component.get("dtend")
+                    if not isinstance(dtstart, vDDDTypes):
                         continue
                     return {
                         "title": _clean_text(component.get("summary", "")),
                         "dtstart": dtstart.dt,
-                        "dtend": component.get("dtend").dt if component.get("dtend") else None,
+                        "dtend": dtend.dt if isinstance(dtend, vDDDTypes) else None,
                         "location": _clean_text(component.get("location", "")),
                         "description": _clean_text(component.get("description", "")),
                         "url": event_url,

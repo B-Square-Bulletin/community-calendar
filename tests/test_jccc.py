@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+"""Tests for the JCCC event-currency check's date/datetime comparisons."""
+
+import sys
+from datetime import date, datetime, timedelta
+from pathlib import Path
+from unittest.mock import patch
+
+_proj_root = Path(__file__).parent.parent
+sys.path.insert(0, str(_proj_root))
+sys.path.insert(0, str(_proj_root / "scrapers"))
+
+from scrapers.jccc import JCCCScraper  # noqa: E402
+
+
+class _FrozenDatetime(datetime):
+    @classmethod
+    def now(cls, tz=None):
+        return cls(2026, 5, 1, 9, 0, tzinfo=tz)
+
+
+class TestEventIsCurrentOrFuture:
+    def setup_method(self):
+        self.scraper = JCCCScraper()
+        self.today = datetime.now(self.scraper.tz).date()
+
+    def test_date_start_with_datetime_end_compares_without_raising(self):
+        # A datetime `dtend` under a date `dtstart` used to compare a datetime
+        # to a date, which would raise TypeError at runtime.
+        tomorrow = self.today + timedelta(days=1)
+        assert self.scraper.event_is_current_or_future(
+            tomorrow, datetime.combine(tomorrow, datetime.min.time())
+        )
+
+    def test_datetime_end_later_today_is_current(self):
+        # The datetime end must not be truncated to its date: 17:00 today is
+        # still current at 09:00 today.
+        with patch("scrapers.jccc.datetime", _FrozenDatetime):
+            assert self.scraper.event_is_current_or_future(
+                date(2026, 5, 1),
+                _FrozenDatetime(2026, 5, 1, 17, 0, tzinfo=self.scraper.tz),
+            )
+
+    def test_date_range_ending_today_is_not_current(self):
+        assert not self.scraper.event_is_current_or_future(self.today, self.today)
+
+    def test_date_range_ending_yesterday_is_past(self):
+        yesterday = self.today - timedelta(days=1)
+        assert not self.scraper.event_is_current_or_future(yesterday, yesterday)
+
+    def test_datetime_range_in_the_future_is_current(self):
+        start = datetime.now(self.scraper.tz) + timedelta(days=2)
+        assert self.scraper.event_is_current_or_future(start, start + timedelta(hours=2))

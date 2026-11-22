@@ -15,7 +15,7 @@ help:
 	@echo "  make format-python   - Auto-format Python code (ruff format)"
 	@echo "  make format-js       - Auto-format JS code (prettier --write + eslint --fix)"
 	@echo "  make lint            - Lint Python + JS code"
-	@echo "  make lint-python     - Lint Python code (ruff check; type checkers gate)"
+	@echo "  make lint-python     - Lint Python code (ruff check; pyrefly gates)"
 	@echo "  make lint-js         - Lint JS code (prettier --check + eslint)"
 	@echo "  make check           - Run lint + Python + node tests"
 	@echo "  make setup-python    - Create venv and install dependencies (uv sync)"
@@ -98,9 +98,9 @@ lint-js:
 	@pnpm run lint:js
 	@echo "✓ JS clean"
 
-# Lint Python code. Ruff (format + check) and all four type checkers gate.
+# Lint Python code. Ruff (format + check) and pyrefly (gating on warnings) gate.
 # `uv sync` runs first so a stale venv (e.g. after removing a dependency) can't
-# mask diagnostics with leftover installed packages — the checkers must resolve
+# mask diagnostics with leftover installed packages — the checker must resolve
 # against the exact lockfile state, not whatever uv run leaves behind.
 lint-python:
 	@echo "Syncing environment to lockfile..."
@@ -115,20 +115,9 @@ lint-python:
 	@uv run ruff check .
 	@echo "✓ ruff clean"
 	@echo ""
-	@echo "Running type checkers..."
-	@status=0; \
-	for checker in "pyright" "ty check" "pyrefly check --min-severity warn" "zuban mypy ."; do \
-		echo "  → $$checker"; \
-		uv run $$checker >/tmp/cc-lint-$$(echo $$checker | tr ' ' '_').log 2>&1 || status=$$?; \
-		tail -2 /tmp/cc-lint-$$(echo $$checker | tr ' ' '_').log | sed 's/^/    /'; \
-	done; \
-	echo ""; \
-	if [ $$status -ne 0 ]; then \
-		echo "❌ Type checkers reported diagnostics (gating)."; \
-	else \
-		echo "✓ Type checkers clean"; \
-	fi; \
-	exit $$status
+	@echo "Running type checker..."
+	@uv run pyrefly check --min-severity warn
+	@echo "✓ pyrefly clean"
 
 # Lint + tests
 check: lint test-python test-node test-deno
