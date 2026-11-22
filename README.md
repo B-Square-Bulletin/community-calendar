@@ -42,7 +42,7 @@ Know of a local calendar that should be included? [Open an issue](https://github
 ## Development
 
 - **App architecture**: [docs/app-architecture.md](docs/app-architecture.md) — XMLUI components, local dev setup, resources
-- **Testing**: Python and database tests via `make test` and `make test-sql`. [tests/TEST_SUITE.md](tests/TEST_SUITE.md) — Python tests and Supabase-native pgTAP database tests run in CI on PRs
+- **Testing**: Python and database tests via `make test` and `make test-sql`. Python tests live in `tests/`, database tests in `supabase/tests/` (see its README)
 - **Frontend tests**: Browser-based unit tests in `test.html`; regression tests via [trace-tools](https://github.com/xmlui-org/trace-tools). [docs/regression-testing.md](docs/regression-testing.md)
 - **Adding a city**: [docs/curator-guide.md](docs/curator-guide.md) (discovery) and [AGENTS.md](AGENTS.md) (technical steps)
 - **Contributing**: [CONTRIBUTING.md](CONTRIBUTING.md) — how to add feeds and submit PRs
