@@ -53,9 +53,10 @@ jobs:
 
     - name: Set up build logging
       run: |
-        > $GITHUB_WORKSPACE/build.log
-        echo 'exec 2> >(tee -a $GITHUB_WORKSPACE/build.log >&2)' > /tmp/bash_env.sh
-        echo "BASH_ENV=/tmp/bash_env.sh" >> $GITHUB_ENV
+        : > "$GITHUB_WORKSPACE/build.log"
+        # \$GITHUB_WORKSPACE stays literal: BASH_ENV's child shell expands it.
+        echo "exec 2> >(tee -a \$GITHUB_WORKSPACE/build.log >&2)" > /tmp/bash_env.sh
+        echo "BASH_ENV=/tmp/bash_env.sh" >> "$GITHUB_ENV"
 
     - name: Determine locations to process
       id: locations
@@ -65,18 +66,22 @@ jobs:
         rm -f cities/*/ran_sources.txt
         INPUT="${{ github.event.inputs.locations }}"
         ENABLED="${{ vars.ENABLED_CITIES }}"
-        ALL=$(ls -d cities/*/feeds.txt 2>/dev/null | sed 's|cities/||;s|/feeds.txt||' | paste -sd, -)
-        MANIFEST="$ALL"
+        MANIFEST=""
+        for feed in cities/*/feeds.txt; do
+          [ -f "$feed" ] || continue
+          city=${feed#cities/}
+          MANIFEST="${MANIFEST:+$MANIFEST,}${city%/feeds.txt}"
+        done
         if [ -n "$ENABLED" ]; then
           MANIFEST="$ENABLED"
         fi
         if [ -z "$INPUT" ] || [ "$INPUT" = "all" ]; then
           # If ENABLED_CITIES is set for this repo/fork, use it as the default build scope.
-          echo "list=$MANIFEST" >> $GITHUB_OUTPUT
+          echo "list=$MANIFEST" >> "$GITHUB_OUTPUT"
         else
-          echo "list=$INPUT" >> $GITHUB_OUTPUT
+          echo "list=$INPUT" >> "$GITHUB_OUTPUT"
         fi
-        echo "manifest_list=$MANIFEST" >> $GITHUB_OUTPUT
+        echo "manifest_list=$MANIFEST" >> "$GITHUB_OUTPUT"
 
     # ==========================================
     # Register pending sources, then run scrapers (all cities, DB-first)
@@ -190,13 +195,13 @@ jobs:
           city=$(echo "$city" | xargs)
           echo "Checking city: '$city'"
           # Get previous events.json (with categories) from archive branch
-          git show origin/archive:cities/$city/events.json > "cities/$city/events.prev.json" 2>/dev/null || rm -f "cities/$city/events.prev.json"
+          git show "origin/archive:cities/$city/events.json" > "cities/$city/events.prev.json" 2>/dev/null || rm -f "cities/$city/events.prev.json"
           [ -s "cities/$city/events.prev.json" ] || rm -f "cities/$city/events.prev.json"
           if [ -f "cities/$city/combined.ics" ]; then
             START=$(date +%s)
             echo "Running ics_to_json for $city..."
             python scripts/ics_to_json.py "cities/$city/combined.ics" -o "cities/$city/events.json" --city "$city"
-            echo "$city: Converted $(cat cities/$city/events.json | python -c 'import json,sys; print(len(json.load(sys.stdin)))') events to JSON"
+            echo "$city: Converted $(cat "cities/$city/events.json" | python -c 'import json,sys; print(len(json.load(sys.stdin)))') events to JSON"
             # Carry forward categories from previous build
             if [ -f "cities/$city/events.prev.json" ]; then
               python scripts/merge_categories.py "cities/$city/events.prev.json" "cities/$city/events.json"
@@ -232,15 +237,15 @@ jobs:
         SUPABASE_KEY: ${{ vars.SUPABASE_KEY }}
       run: |
         IFS=',' read -ra CITIES <<< "${{ steps.locations.outputs.list }}"
-        FILES=""
+        FILES=()
         for city in "${CITIES[@]}"; do
           city=$(echo "$city" | xargs)
           if [ -f "cities/$city/events.json" ]; then
-            FILES="$FILES cities/$city/events.json"
+            FILES+=("cities/$city/events.json")
           fi
         done
-        if [ -n "$FILES" ]; then
-          python scripts/classify_events_json.py $FILES
+        if [ "${#FILES[@]}" -gt 0 ]; then
+          python scripts/classify_events_json.py "${FILES[@]}"
         fi
 
     - name: Restore prior report history
@@ -284,20 +289,20 @@ jobs:
               jq -c --arg city "$city" --rawfile ran "cities/$city/ran_sources.txt" \
                 '{city: $city, events: .,
                   ran_sources: ($ran | split("\n") | map(select(length > 0)) | unique)}' \
-                "cities/$city/events.json" > /tmp/payload_${city}.json
+                "cities/$city/events.json" > "/tmp/payload_${city}.json"
             else
               # No runner recorded a success. Send an empty manifest, not an
               # absent one: the empty set means "nothing ran, sweep nothing",
               # whereas absence would fall back to payload presence and could
               # authorize cleanup for a source that failed mid-write.
               jq -c --arg city "$city" '{city: $city, events: ., ran_sources: []}' \
-                "cities/$city/events.json" > /tmp/payload_${city}.json
+                "cities/$city/events.json" > "/tmp/payload_${city}.json"
             fi
             RESPONSE=$(curl -sL -X POST "${SUPABASE_URL}/functions/v1/load-events" \
               -H "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
               -H "x-load-events-secret: ${LOAD_EVENTS_SECRET}" \
               -H 'Content-Type: application/json' \
-              --data-binary @/tmp/payload_${city}.json)
+              --data-binary "@/tmp/payload_${city}.json")
             echo "$city: $(echo "$RESPONSE" | jq -c '{success, inserted, deleted}')"
             SUCCESS=$(echo "$RESPONSE" | jq -r '.success // false')
             if [ "$SUCCESS" != "true" ]; then
@@ -308,7 +313,7 @@ jobs:
             INSERTED=$(echo "$RESPONSE" | jq -r '.inserted')
             TOTAL_INSERTED=$((TOTAL_INSERTED + INSERTED))
             echo "⏱ $city upload: $(( $(date +%s) - START ))s"
-            rm -f /tmp/payload_${city}.json
+            rm -f "/tmp/payload_${city}.json"
           fi
         done
         echo "Successfully loaded $TOTAL_INSERTED total events into Supabase"
@@ -360,7 +365,7 @@ jobs:
       run: |
         git config --global user.name 'GitHub Actions'
         git config --global user.email 'actions@github.com'
-        git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+        git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
 
         git describe --tags --always > xmlui/version.txt
 
@@ -380,7 +385,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.COMMUNITY_CALENDAR }}
       run: |
-        git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+        git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
 
         # Stash generated files before switching branches
         ARCHIVE_DIR=$(mktemp -d)
@@ -388,9 +393,9 @@ jobs:
         for city in "${CITIES[@]}"; do
           city=$(echo "$city" | xargs)
           mkdir -p "$ARCHIVE_DIR/cities/$city"
-          cp cities/$city/events.json "$ARCHIVE_DIR/cities/$city/" 2>/dev/null || true
-          cp cities/$city/combined.ics "$ARCHIVE_DIR/cities/$city/" 2>/dev/null || true
-          for f in cities/$city/*.ics; do
+          cp "cities/$city/events.json" "$ARCHIVE_DIR/cities/$city/" 2>/dev/null || true
+          cp "cities/$city/combined.ics" "$ARCHIVE_DIR/cities/$city/" 2>/dev/null || true
+          for f in "cities/$city"/*.ics; do
             [ -f "$f" ] && cp "$f" "$ARCHIVE_DIR/cities/$city/" 2>/dev/null || true
           done
         done
