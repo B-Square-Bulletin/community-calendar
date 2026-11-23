@@ -92,13 +92,16 @@ inputs, zero commits" observable rather than aspirational.
    `Run scrapers from DB`, `|| true` on RSS generation, the archive step's copy
    fallbacks) is deliberate and stays: one bad source must not red the night. The
    archive publish keeps `if: ${{ !cancelled() }}` and starts from the previous
-   snapshot, so a failed build still publishes the day's report and RSS and does not
-   drop cities it did not rebuild (0022, #315). A red scheduled run is the signal;
-   recovery is a PR, not a revert.
+   snapshot, so a failed build still publishes and does not drop cities it did not
+   rebuild (0022, #315); what a failed step did not produce comes forward from the
+   previous snapshot, so an early failure serves the prior night's report and RSS, not
+   fresh ones. A red scheduled run is the signal; recovery is a PR, not a revert.
 
-6. **Rollout order.** (a) Delete the write steps with test coverage; (b) re-home the
-   files in parallel — `version.txt` removal, `prodid.md` move, `cities.json` guard test,
-   `feeds.txt` wording and archive copy, append-only `pending_feeds`; (c) add the
+6. **Rollout order.** (a) Make `pending_feeds.txt` append-only (#322) and delete the
+   write steps, with test coverage — the append-only change lands no later than the
+   deletion, so the later guard has nothing to red on; (b) re-home the remaining files
+   in parallel — `version.txt` removal, `prodid.md` move, `cities.json` guard test,
+   `feeds.txt` wording and archive copy; (c) add the
    per-run guard, which is only green once (b) has no tracked file left to dirty;
    (d) add the PR rule and correct AGENTS.md and ADR 0002; (e) one `workflow_dispatch`
    with a real database diff to verify end to end.
@@ -107,8 +110,8 @@ inputs, zero commits" observable rather than aspirational.
 
 One issue per PR-sized change, in rollout order:
 
-- [Quiet main: delete the nightly main-writing steps](https://github.com/B-Square-Bulletin/community-calendar/issues/317)
 - [Make pending_feeds.txt append-only](https://github.com/B-Square-Bulletin/community-calendar/issues/322)
+- [Quiet main: delete the nightly main-writing steps](https://github.com/B-Square-Bulletin/community-calendar/issues/317)
 - [Remove xmlui/version.txt and the reload it feeds](https://github.com/B-Square-Bulletin/community-calendar/issues/319)
 - [Publish the PRODID inventory to the archive](https://github.com/B-Square-Bulletin/community-calendar/issues/318)
 - [Guard cities.json against drift with a test](https://github.com/B-Square-Bulletin/community-calendar/issues/320)
