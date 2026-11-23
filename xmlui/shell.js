@@ -59,7 +59,10 @@ window._xsLogs = [];
     };
   }
 
-  function injectScripts(v) {
+  // No cache-buster: APP_VERSION changes on every load, so appending it here
+  // re-downloaded the engine bundle and its neighbours on each visit. Plain
+  // URLs let the HTTP cache serve them; brand components still bust per load.
+  function injectScripts() {
     function script(src) {
       var s = document.createElement('script');
       s.src = src;
@@ -69,24 +72,24 @@ window._xsLogs = [];
     }
     var link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = 'xmlui/xmlui-grid-layout.css?v=' + v;
+    link.href = 'xmlui/xmlui-grid-layout.css';
     document.head.appendChild(link);
     // The bundle bracket now spans download+eval (DOM-inserted scripts
     // have no between-download execution point to mark).
     try {
       performance.mark('cc-bundle-eval-start');
     } catch (e) {}
-    var bundle = script('xmlui/xmlui-standalone.umd.js?v=' + v);
+    var bundle = script('xmlui/xmlui-standalone.umd.js');
     bundle.addEventListener('load', function () {
       try {
         performance.mark('cc-bundle-eval-end');
       } catch (e) {}
     });
-    script('xmlui/xmlui-masonry.js?v=' + v);
-    script('xmlui/xmlui-grid-layout.js?v=' + v);
-    script('../supabase/functions/_shared/ics_text.js?v=' + v);
-    script('helpers.js?v=' + v);
-    script('xs-trace.js?v=' + v).addEventListener('load', function () {
+    script('xmlui/xmlui-masonry.js');
+    script('xmlui/xmlui-grid-layout.js');
+    script('../supabase/functions/_shared/ics_text.js');
+    script('helpers.js');
+    script('xs-trace.js').addEventListener('load', function () {
       // index-standalone.ts arms startApp on DOMContentLoaded with no
       // readyState fallback, and DCL has long passed by the time the
       // DOM-inserted bundle evaluates — so start the engine explicitly
@@ -141,10 +144,10 @@ window._xsLogs = [];
       // our explicit startApp above is then the only boot path.
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function () {
-          injectScripts(window.APP_VERSION);
+          injectScripts();
         });
       } else {
-        injectScripts(window.APP_VERSION);
+        injectScripts();
       }
     }
   );
