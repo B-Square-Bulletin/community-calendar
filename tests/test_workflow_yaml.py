@@ -124,3 +124,20 @@ def test_prodid_inventory_is_only_published_from_a_full_run():
         "A scoped run must leave the archive's full PRODID inventory alone; "
         f"the step's condition was {condition!r}."
     )
+
+
+# feeds.txt on main is a frozen seed; the live export rides to the archive, and
+# city discovery reads directories so a city without a seed still builds (#321).
+def test_feeds_txt_lives_on_the_archive_and_cities_are_directories():
+    path = WORKFLOW_DIR / "generate-calendar.yml"
+    doc = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    steps = doc["jobs"]["generate-calendar"]["steps"]
+    by_name = {s.get("name"): s for s in steps}
+    assert 'cp "cities/$city/feeds.txt"' in by_name[ARCHIVE_STEP]["run"], (
+        "The archive snapshot must carry each city's live feeds.txt export; "
+        "main keeps only the frozen seed."
+    )
+    locations = by_name["Determine locations to process"]["run"]
+    assert "cities/*/" in locations and "cities/*/feeds.txt" not in locations, (
+        "City discovery must list cities/*/ directories, not feeds.txt files."
+    )

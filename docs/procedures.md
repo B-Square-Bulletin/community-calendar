@@ -199,7 +199,7 @@ Create/update `cities/{cityname}/SOURCES_CHECKLIST.md`:
 
 ## 4. Add Working Feeds
 
-The Supabase **`feeds` table** is the source of truth for all calendar sources. The file `feeds.txt` is auto-generated from the database during each build by `export_feeds_txt.py` — do not edit it by hand.
+The Supabase **`feeds` table** is the source of truth for all calendar sources. `feeds.txt` is generated from it by `export_feeds_txt.py`: the copy tracked on `main` is a frozen seed that may lag, and each build publishes the live export to the `archive` branch (ADR 0024). Do not edit it by hand.
 
 ### ICS feeds (the common case)
 
