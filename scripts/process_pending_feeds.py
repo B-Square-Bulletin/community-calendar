@@ -163,49 +163,6 @@ def insert_feeds(city, feeds, supabase_url, service_key):
     return inserted, skipped, errors
 
 
-TEMPLATE = """\
-# Add feed URLs or scraper outputs here.
-#
-# Pipeline: On each build, process_pending_feeds.py reads this file and
-# inserts rows into the Supabase `feeds` table. It never edits this file:
-# entries stay after they are inserted, and resubmitting one is harmless
-# because the unique key skips it. Remove your entry in a follow-up PR if
-# you like. export_feeds_txt.py then regenerates feeds.txt from the DB.
-# Never edit feeds.txt manually.
-# Think of this file as an inbox for new sources, not as a source inventory.
-#
-# The "# Source Name" comment becomes the display name in the calendar
-# (user-visible source attribution under each event card). Use the bare
-# canonical venue/source name only — no parenthetical context, no event
-# counts, no strategy notes. Put verification/discovery notes in
-# SOURCES_CHECKLIST.md, not here.
-#
-# --- ICS feed URLs ---
-# Just add the name and URL. The build handles everything else.
-#
-#   # Source Name
-#   https://example.com/events/?ical=1
-#
-# --- Scrapers ---
-# Add the name, cmd, and output path. That is the whole job: the build
-# inserts the row into the feeds table (validated at insert time) and
-# the DB-first runner executes it in that same build. The workflow is
-# never edited. Prefer scripts/add_scraper.py, which tests the exact
-# command and writes this entry for you.
-#
-#   # Source Name
-#   # cmd: python scrapers/example.py --name "Source Name" --output cities/{city}/example.ics
-#   cities/{city}/example.ics
-#
-# Validate without registering (--test writes nothing); run without
-# --test to validate and register:
-#   python scripts/add_feed.py URL {city} "Source Name" --test
-#   python scripts/add_scraper.py example {city} "Source Name" --test
-#
-# See CONTRIBUTING.md for details.
-"""
-
-
 def process_city(city, supabase_url, service_key):
     """Process pending_feeds.txt for one city. Returns True if any were processed."""
     pending_path = ROOT / "cities" / city / "pending_feeds.txt"
@@ -225,8 +182,12 @@ def process_city(city, supabase_url, service_key):
 
     summary = os.environ.get("GITHUB_STEP_SUMMARY")
     if summary:
-        with Path(summary).open("a") as f:
-            f.write(f"{city}: {inserted} new, {skipped} already present, {errors} errors\n")
+        # Diagnostics must never fail the step: the scrapers run behind it.
+        try:
+            with Path(summary).open("a") as f:
+                f.write(f"{city}: {inserted} new, {skipped} already present, {errors} errors\n")
+        except OSError as e:
+            print(f"  could not write the step summary: {e}")
 
     return True
 

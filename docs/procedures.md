@@ -249,7 +249,7 @@ python scripts/add_scraper.py songkick santarosa "My Venue" \
 The scraper is always tested before registration; add `--test` to
 validate only, writing nothing.
 
-The next build moves the pending entry into the `feeds` table
+The next build inserts the pending entry into the `feeds` table
 (validated at insert time), executes the scraper in that same build,
 and regenerates `feeds.txt` — the read-only reference of what the
 database drives. See `scrapers/README.md` for each base scraper's

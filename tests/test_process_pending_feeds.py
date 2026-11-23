@@ -167,3 +167,20 @@ def test_process_city_leaves_pending_file_byte_identical(tmp_path, monkeypatch):
 
     assert pending.read_bytes() == before
     assert summary.read_text() == "bloomington: 1 new, 0 already present, 0 errors\n"
+
+
+def test_unusable_summary_path_does_not_fail_the_step(tmp_path, monkeypatch, capsys):
+    """Diagnostics must never skip the scrapers that run behind this step."""
+    city_dir = tmp_path / "cities" / "bloomington"
+    city_dir.mkdir(parents=True)
+    (city_dir / "pending_feeds.txt").write_text(f"# {FEED['name']}\n{FEED['url']}\n")
+    monkeypatch.setattr(ppf, "ROOT", tmp_path)
+    monkeypatch.setattr(
+        ppf.urllib.request,
+        "urlopen",
+        lambda req, timeout=None: _Resp(b'[{"id": 1}]', status=201),
+    )
+    monkeypatch.setenv("GITHUB_STEP_SUMMARY", str(tmp_path / "missing" / "summary.md"))
+
+    assert ppf.process_city("bloomington", "https://db.example", "key") is True
+    assert "could not write the step summary" in capsys.readouterr().out
