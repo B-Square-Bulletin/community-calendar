@@ -325,10 +325,9 @@ jobs:
         fi
         echo "done (HTTP $HTTP_CODE)"
 
-    # A rejected main push (or any earlier failure) must not starve the
-    # archive, which carries the daily health report and RSS feeds. A
-    # cancelled run is the exception: publishing its half-built state would
-    # force-push over the last good snapshot.
+    # An earlier failure must not starve the archive, which carries the daily
+    # health report and RSS feeds. A cancelled run is the exception: publishing
+    # its half-built state would force-push over the last good snapshot.
     - name: Push build artifacts to archive branch
       if: ${{ !cancelled() }}
       env:
