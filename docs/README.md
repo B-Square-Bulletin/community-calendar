@@ -6,6 +6,7 @@
 - [FUNCTIONS.md](FUNCTIONS.md) — Postgres functions vs Edge Functions
 - [AUTH.md](AUTH.md) — Supabase Auth setup (GitHub OAuth, Google OAuth, magic link)
 - [timezone.md](timezone.md) — ICS timezone conventions and pipeline handling
+- [PRODID inventory](https://raw.githubusercontent.com/B-Square-Bulletin/community-calendar/archive/report/prodid.md) — ICS platform inventory (via `scripts/prodid.py`)
 
 ## Discovery & Curation
 - [curator-guide.md](curator-guide.md) — Philosophy, source types, aggregators, deduplication, categories
@@ -32,7 +33,6 @@
 - [dependencies.md](dependencies.md) — Dependency update automation and vulnerability scanning
 
 ## Auto-generated
-- [prodid.md](prodid.md) — ICS platform inventory (via `scripts/prodid.py`)
 - [snippet-eval-prompt.md](snippet-eval-prompt.md) — LLM prompt for snippet quality evaluation
 
 ## Planning & Notes
