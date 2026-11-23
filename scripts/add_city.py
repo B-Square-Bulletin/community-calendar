@@ -127,7 +127,8 @@ See [docs/procedures.md](../../docs/procedures.md) for discovery techniques.
     print(f"  2. Add feeds to cities/{city}/pending_feeds.txt")
     print(f"  3. Edit cities/{city}/city.conf with nearby cities")
     print(f"  4. Run: python scripts/geocode_cities.py --city {city}")
-    print("  5. Register in cities.json and xmlui/Main.xmlui")
+    print("  5. Run: python scripts/generate_cities_json.py and commit cities.json")
+    print("  6. Register in xmlui/Main.xmlui")
 
 
 if __name__ == "__main__":

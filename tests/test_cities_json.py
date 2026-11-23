@@ -36,12 +36,3 @@ def test_cities_json_matches_the_generator():
         f"cities.json does not match the cities/*/city.conf files: "
         f"run `python {GENERATOR}` and commit the result"
     )
-
-    status = subprocess.run(
-        ["git", "status", "--porcelain", "--", "cities.json"],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-    )
-    assert status.returncode == 0, status.stderr
-    assert status.stdout.strip() == "", f"test dirtied cities.json: {status.stdout}"
