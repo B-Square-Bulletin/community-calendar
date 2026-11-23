@@ -59,18 +59,18 @@ inputs, zero commits" observable rather than aspirational.
    | `report/<city>/index.html`       | `main` page; changes only with `report_page_template.html` (test-enforced)   |
    | `report.html`                    | `main`, hand-maintained                                                      |
 
-   Three notes. `version.txt`'s deletion (#319) also covers the `report.html` footer,
-   whose commit link becomes the per-load timestamp instead of a dead `local-dev` link.
-   The `report/<city>/index.html` test pins only Bloomington today — the only city page
-   there is — and must be looped over every `report/*/index.html` before a second city
-   page lands. And `xmlui/config.local.js` is gitignored and untracked, so it needs no
-   home; deleting the injection write is the whole change.
+   Three notes. `version.txt`'s deletion (#319) also deletes the `report.html` footer's
+   commit link, keeping only the XMLUI engine link. The `report/<city>/index.html` test
+   pins only Bloomington today — the only city page there is — and must be looped over
+   every `report/*/index.html` before a second city page lands. And
+   `xmlui/config.local.js` is gitignored and untracked, so it needs no home; deleting
+   the injection write is the whole change.
 
    `feeds.txt` drift is declared harmless: the DB-less fork path
    (`download_feeds.py`, `seed_feeds_from_txt.py`) still bootstraps from the checked-in
    inventory, the header will say it is a snapshot that may lag (#321), and contributors
-   never touch it. City discovery globs `cities/*/feeds.txt`, so the seed must be
-   refreshed — the human refresh PR — before a new city can run.
+   never touch it. City discovery reads the `cities/*/` directories (#321), not the file,
+   so a new city runs without a seed refresh.
 
 3. **The guard is per-run, not per-night.** A step after the build fails the run when
    `git diff` shows any tracked path except an unstaged `cities/*/feeds.txt` — the one
