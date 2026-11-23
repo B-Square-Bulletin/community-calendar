@@ -31,11 +31,11 @@
 All sources are stored in the Supabase `feeds` table — the single source of truth. Columns:
 - `city`, `url`, `name`, `status` (active/pending/removed), `feed_type` (ics_url/scraper/curator), `scraper_cmd`, `curator_user_id`, `source_ids`
 
-The Manage Feeds dialog (admin-only) reads and writes this table; its Delete button removes any source — scraper or ICS feed — and all its events in one atomic server operation. Scrapers are added via `add_scraper.py`, which stages a scraper entry in `pending_feeds.txt`; the next build inserts it into the `feeds` table (validated at insert time, before the scrape step) and the DB-first runner executes it in that same build. The workflow is never edited.
+The Manage Feeds dialog (admin-only) reads and writes this table; its Delete button removes any source — scraper or ICS feed — and all its events in one atomic server operation. Scrapers are added via `add_scraper.py`, which stages a scraper entry in `pending_feeds.txt`; the next build inserts it into the `feeds` table (validated at insert time, before the scrape step) and the DB-first runner executes it in that same build. The entry stays in `pending_feeds.txt`, so remove it in a follow-up PR if you like. The workflow is never edited.
 
 `feeds.txt` files are **generated** from the `feeds` table during each build (by `export_feeds_txt.py`) for fork compatibility. Do not edit feeds.txt manually.
 
-`pending_feeds.txt` is a git-side intake file only. It is processed at the start of the build into the `feeds` table, then reset back to its template. The old `pending_feeds` database table path is obsolete.
+`pending_feeds.txt` is a git-side intake file only. It is processed at the start of the build into the `feeds` table. The build never edits it: entries stay after they are inserted, and re-submitting one is harmless because the unique key skips it. Remove your entry in a follow-up PR if you like. The old `pending_feeds` database table path is obsolete.
 
 ## Adding a Feed (ICS URL)
 
@@ -84,7 +84,7 @@ python scripts/add_scraper.py tribe_rest davis "My Venue" \
   --output-name myvenue
 ```
 
-The scraper is always tested first (the exact command being registered); `--test` validates only, writing nothing. On success the script appends a scraper entry to `pending_feeds.txt`; the next build moves it into the `feeds` table (validated at insert time, before the scrape step), executes it in that same build, and regenerates `feeds.txt`. See `scrapers/README.md` for each base scraper's arguments.
+The scraper is always tested first (the exact command being registered); `--test` validates only, writing nothing. On success the script appends a scraper entry to `pending_feeds.txt`; the next build inserts it into the `feeds` table (validated at insert time, before the scrape step), executes it in that same build, and regenerates `feeds.txt`. The entry is not removed from `pending_feeds.txt`; duplicates are harmless, so remove it in a follow-up PR if you like. See `scrapers/README.md` for each base scraper's arguments.
 
 ## Build Pipeline
 
@@ -92,7 +92,7 @@ The workflow in `.github/workflows/generate-calendar.yml` runs daily or on manua
 
 **Per-city steps:**
 
-1. **Process `pending_feeds.txt`** — `process_pending_feeds.py` inserts staged entries into the `feeds` table and resets the file to its template, so just-merged sources participate in this build
+1. **Process `pending_feeds.txt`** — `process_pending_feeds.py` inserts staged entries into the `feeds` table without editing the file, so just-merged sources participate in this build
 2. **Run scrapers** — `run_scrapers_from_db.py` executes the active scraper rows in the `feeds` table (DB-first; the workflow carries no per-scraper lines)
 3. **Download live feeds** — `download_feeds.py` queries the `feeds` table for active+pending `ics_url`/`curator` feeds, downloads each, injects `X-SOURCE` headers. Falls back to `feeds.txt` if DB not available (forks); a `curator://` entry there is minted from `feed_tokens` when credentials are present (the local build's `--feeds-txt` mode) and skipped with a warning otherwise. Records each feed's output stem in `feeds.source_ids` and marks pending feeds as `active` after download.
 4. **Export feeds.txt** — `export_feeds_txt.py` regenerates `feeds.txt` from the `feeds` table (the read-only reference of what the database drives). It exports active+pending rows so just-added sources appear immediately.

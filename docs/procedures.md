@@ -212,7 +212,7 @@ The Supabase **`feeds` table** is the source of truth for all calendar sources. 
 https://example.com/events/?ical=1
 ```
 
-After the PR is merged, the next build automatically runs `scripts/process_pending_feeds.py` to insert them into the database and clear the file. See `CONTRIBUTING.md` for the full workflow.
+After the PR is merged, the next build automatically runs `scripts/process_pending_feeds.py` to insert them into the database. It does not clear the file: entries stay, and duplicates are harmless, so remove your entry in a follow-up PR if you like. See `CONTRIBUTING.md` for the full workflow.
 
 ### Curator feeds (a person's My Picks)
 

@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
-"""Process pending_feeds.txt for a city: insert into the feeds table, then reset to template.
+"""Process pending_feeds.txt for a city: insert its entries into the feeds table.
 
 Contributors add ICS feed URLs to cities/<city>/pending_feeds.txt in their PRs.
-After merging, the build runs this script to move them into the database.
+After merging, the build runs this script to insert them into the database.
+
+The file is append-only: the build never edits it, so an entry stays after it
+is inserted. Re-submitting one is harmless because the unique key skips it;
+remove your entry in a follow-up PR if you like. Never edit feeds.txt.
 
 For scraper entries, this script registers source metadata only. It does not
 run the scraper. Actual scraper execution still comes from the matching line in
@@ -162,12 +166,13 @@ def insert_feeds(city, feeds, supabase_url, service_key):
 TEMPLATE = """\
 # Add feed URLs or scraper outputs here.
 #
-# Pipeline: On each build, process_pending_feeds.py reads this file,
-# inserts rows into the Supabase `feeds` table, then resets this file
-# to the template below. export_feeds_txt.py then regenerates feeds.txt
-# from the DB. Do not edit feeds.txt manually.
-# Think of this file as a temporary inbox for new sources, not as a
-# long-term source inventory.
+# Pipeline: On each build, process_pending_feeds.py reads this file and
+# inserts rows into the Supabase `feeds` table. It never edits this file:
+# entries stay after they are inserted, and resubmitting one is harmless
+# because the unique key skips it. Remove your entry in a follow-up PR if
+# you like. export_feeds_txt.py then regenerates feeds.txt from the DB.
+# Never edit feeds.txt manually.
+# Think of this file as an inbox for new sources, not as a source inventory.
 #
 # The "# Source Name" comment becomes the display name in the calendar
 # (user-visible source attribution under each event card). Use the bare
@@ -201,12 +206,6 @@ TEMPLATE = """\
 """
 
 
-def write_template(path: Path, city):
-    """Reset pending_feeds.txt to the template."""
-    with path.open("w") as f:
-        f.write(TEMPLATE.replace("{city}", city))
-
-
 def process_city(city, supabase_url, service_key):
     """Process pending_feeds.txt for one city. Returns True if any were processed."""
     pending_path = ROOT / "cities" / city / "pending_feeds.txt"
@@ -219,14 +218,15 @@ def process_city(city, supabase_url, service_key):
         return False
 
     print(f"{city}: {len(feeds)} pending feed(s)")
+    # shortcut: re-POSTs every retained entry each night; switch to one GET per
+    # city (url,status) if a pending file passes ~100 entries.
     inserted, skipped, errors = insert_feeds(city, feeds, supabase_url, service_key)
     print(f"  {inserted} inserted, {skipped} skipped, {errors} errors")
 
-    if errors == 0:
-        write_template(pending_path, city)
-        print("  reset pending_feeds.txt to template")
-    else:
-        print("  pending_feeds.txt NOT cleared (errors occurred)")
+    summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary:
+        with Path(summary).open("a") as f:
+            f.write(f"{city}: {inserted} new, {skipped} already present, {errors} errors\n")
 
     return True
 

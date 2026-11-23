@@ -39,8 +39,9 @@ def main():
 
     # pending_feeds.txt
     (city_dir / "pending_feeds.txt").write_text(f"""\
-# Add feed URLs or scraper outputs here. The build will process them into the
-# database automatically and reset this file to the template below.
+# Add feed URLs or scraper outputs here. The build inserts them into the
+# database but never removes them from this file; duplicates are harmless,
+# so remove your entry in a follow-up PR if you like. Never edit feeds.txt.
 #
 # Format:
 #   # Source Name

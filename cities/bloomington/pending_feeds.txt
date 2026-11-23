@@ -1,11 +1,12 @@
 # Add feed URLs or scraper outputs here.
 #
-# Pipeline: On each build, process_pending_feeds.py reads this file,
-# inserts rows into the Supabase `feeds` table, then resets this file
-# to the template below. export_feeds_txt.py then regenerates feeds.txt
-# from the DB. Do not edit feeds.txt manually.
-# Think of this file as a temporary inbox for new sources, not as a
-# long-term source inventory.
+# Pipeline: On each build, process_pending_feeds.py reads this file and
+# inserts rows into the Supabase `feeds` table. It never edits this file:
+# entries stay after they are inserted, and resubmitting one is harmless
+# because the unique key skips it. Remove your entry in a follow-up PR if
+# you like. export_feeds_txt.py then regenerates feeds.txt from the DB.
+# Never edit feeds.txt manually.
+# Think of this file as an inbox for new sources, not as a source inventory.
 #
 # The "# Source Name" comment becomes the display name in the calendar
 # (user-visible source attribution under each event card). Use the bare

@@ -143,3 +143,27 @@ class TestDuplicateReporting:
 
         assert (inserted, skipped, errors) == (1, 0, 0)
         assert [method for method, _ in calls] == ["POST"]
+
+
+def test_process_city_leaves_pending_file_byte_identical(tmp_path, monkeypatch):
+    """The DB insert is the only side effect; the file stays append-only."""
+    city_dir = tmp_path / "cities" / "bloomington"
+    city_dir.mkdir(parents=True)
+    pending = city_dir / "pending_feeds.txt"
+    pending.write_text(
+        f"# Add feed URLs or scraper outputs here.\n#\n# {FEED['name']}\n{FEED['url']}\n"
+    )
+    before = pending.read_bytes()
+    monkeypatch.setattr(ppf, "ROOT", tmp_path)
+    monkeypatch.setattr(
+        ppf.urllib.request,
+        "urlopen",
+        lambda req, timeout=None: _Resp(b'[{"id": 1}]', status=201),
+    )
+    summary = tmp_path / "summary.md"
+    monkeypatch.setenv("GITHUB_STEP_SUMMARY", str(summary))
+
+    assert ppf.process_city("bloomington", "https://db.example", "key") is True
+
+    assert pending.read_bytes() == before
+    assert summary.read_text() == "bloomington: 1 new, 0 already present, 0 errors\n"
