@@ -179,3 +179,19 @@ def test_feeds_txt_lives_on_the_archive_and_cities_are_directories():
     assert "cities/*/" in locations and "cities/*/feeds.txt" not in locations, (
         "City discovery must list cities/*/ directories, not feeds.txt files."
     )
+
+
+# cities.json and the PRODID inventory describe what the build serves, so a
+# variable that disagrees with cities/ must name itself, not red the nightly
+# later as an unexplained dirty worktree.
+def test_enabled_cities_must_match_the_city_directories():
+    path = WORKFLOW_DIR / "generate-calendar.yml"
+    doc = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    steps = doc["jobs"]["generate-calendar"]["steps"]
+    step = next(s for s in steps if s.get("name") == "Determine locations to process")
+    run = step["run"]
+    assert "::error::ENABLED_CITIES" in run and "does not match cities/" in run, (
+        "A scoped build must fail loudly when ENABLED_CITIES and cities/ "
+        "disagree; otherwise the nightly reds on a confusing cities.json diff."
+    )
+    assert "exit 1" in run

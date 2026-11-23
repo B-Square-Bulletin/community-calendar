@@ -386,7 +386,7 @@ python scripts/generate_cities_json.py
 
 The frontend and the `my-picks` edge function read this file from `main`, so it is tracked and cannot follow the other build output to the archive branch; `tests/test_cities_json.py` fails when it drifts from `cities/*/city.conf`.
 
-The city key must match the directory name under `cities/` and the `?city=` URL parameter. A city whose `city.conf` has no `# timezone: <IANA zone>` line is silently omitted from `cities.json`; add the line before regenerating.
+The city key must match the directory name under `cities/` and the `?city=` URL parameter. A city whose `city.conf` has no `# timezone: <IANA zone>` line is silently omitted from `cities.json`; add the line before regenerating. When the `ENABLED_CITIES` repository variable is set, add the new city there too — the nightly fails, naming the mismatch, if the variable and `cities/` disagree.
 
 ---
 

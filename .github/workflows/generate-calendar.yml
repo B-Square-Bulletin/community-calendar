@@ -72,6 +72,16 @@ jobs:
           city=${city_dir#cities/}
           MANIFEST="${MANIFEST:+$MANIFEST,}${city%/}"
         done
+        ALL="$MANIFEST"
+        # cities.json and the PRODID inventory describe what the build serves,
+        # so a variable that disagrees with cities/ must name itself here
+        # rather than red later as an unexplained dirty worktree.
+        if [ -n "$ENABLED" ] &&
+          [ "$(printf '%s\n' "$ENABLED" | tr ',' '\n' | sort -u)" != \
+            "$(printf '%s\n' "$ALL" | tr ',' '\n' | sort -u)" ]; then
+          echo "::error::ENABLED_CITIES ($ENABLED) does not match cities/ ($ALL); update the variable to list every city directory."
+          exit 1
+        fi
         if [ -n "$ENABLED" ]; then
           MANIFEST="$ENABLED"
         fi
@@ -82,7 +92,6 @@ jobs:
           echo "list=$INPUT" >> "$GITHUB_OUTPUT"
         fi
         echo "manifest_list=$MANIFEST" >> "$GITHUB_OUTPUT"
-
     # ==========================================
     # Register pending sources, then run scrapers (all cities, DB-first)
     # ==========================================
