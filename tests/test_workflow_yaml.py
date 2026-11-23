@@ -6,9 +6,10 @@ only and the PR checks never parse those files, so a syntax slip surfaced as a
 failed nightly build instead of a failed test. This runs under `make test`.
 
 PyYAML implements YAML 1.1 and GitHub a 1.2-family parser, so this asserts only
-that each document parses (PyYAML reads `on:` as the key True), plus three
+that each document parses (PyYAML reads `on:` as the key True), plus four
 structural cases: the PR check names the main ruleset requires, that only the
-archive step writes to git, and that step's condition. Duplicate
+archive step writes to git, that step's condition, and the worktree guard before
+it. Duplicate
 mapping keys are the one error PyYAML accepts and GitHub rejects; actionlint
 covers that in CI. The glob covers a new workflow with no edit here.
 """
@@ -68,6 +69,7 @@ def test_pr_check_names_match_ruleset():
 # The archive holds the only copy of the health report, RSS baselines and run
 # histories (#253), so a plain `if:` silently starves it after any failure.
 ARCHIVE_STEP = "Push build artifacts to archive branch"
+GUARD_STEP = "Guard the build worktree"
 
 # ADR 0024: main changes only through a human PR, so no step may stage or push
 # a tracked file. Both steps below did exactly that.
@@ -105,6 +107,29 @@ def test_archive_publish_survives_failure_but_not_cancellation():
         "The archive publish step must run after a failure but not after a "
         "cancellation (a cancelled run force-pushes a partial snapshot)."
     )
+
+
+def test_build_worktree_guard_precedes_the_archive_push():
+    """ADR 0024 §3: a dirty tracked file reds the run, before any publish."""
+    path = WORKFLOW_DIR / "generate-calendar.yml"
+    doc = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    steps = doc["jobs"]["generate-calendar"]["steps"]
+    names = [s.get("name") for s in steps]
+    assert GUARD_STEP in names, f"{path.name} has no step named {GUARD_STEP!r}"
+    assert names.index(GUARD_STEP) == names.index(ARCHIVE_STEP) - 1, (
+        "The worktree guard must sit immediately before the archive push, "
+        "which is the only step allowed to write to git."
+    )
+    step = steps[names.index(GUARD_STEP)]
+    assert not step.get("continue-on-error"), "A dirty worktree must red the run."
+    run = step.get("run") or ""
+    # Both diff halves: an unstaged write and a staged one are both offenders.
+    assert "git diff --name-only" in run
+    assert "git diff --cached --name-only" in run
+    # The DB export's worktree copy is the one tracked file a build may touch.
+    assert "feeds.txt" in run and "cities/" in run
+    # A failure has to name the offending paths, not just exit 1.
+    assert "GITHUB_STEP_SUMMARY" in run
 
 
 # The inventory covers every city. A scoped run that wrote one over the archive

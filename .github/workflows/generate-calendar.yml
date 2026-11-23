@@ -340,6 +340,35 @@ jobs:
         fi
         echo "done (HTTP $HTTP_CODE)"
 
+    # ADR 0024 §3: a build writes no tracked file, so it proves that by leaving
+    # the worktree clean. cities/<city>/feeds.txt is the one exception — the DB
+    # export rewrites that worktree copy and never stages it.
+    - name: Guard the build worktree
+      run: |
+        offenders=$(
+          {
+            # Unstaged: cities/<city>/feeds.txt is the one tracked file the
+            # DB export may rewrite here.
+            git diff --name-only | grep -vE '^cities/[^/]+/feeds\.txt$'
+            # Staged: nothing may be staged at all — this worktree is never
+            # committed, so a staged path is a write waiting to happen.
+            git diff --cached --name-only
+          } | sort -u
+        )
+        if [ -z "$offenders" ]; then
+          echo "No tracked file differs from HEAD." >> "$GITHUB_STEP_SUMMARY"
+          exit 0
+        fi
+        {
+          echo "### The build wrote tracked files"
+          echo
+          echo '```'
+          echo "$offenders"
+          echo '```'
+        } >> "$GITHUB_STEP_SUMMARY"
+        echo "::error::Tracked file changed by the build; see the job summary"
+        exit 1
+
     # An earlier failure must not starve the archive, which carries the daily
     # health report and RSS feeds. A cancelled run is the exception: publishing
     # its half-built state would force-push over the last good snapshot.
