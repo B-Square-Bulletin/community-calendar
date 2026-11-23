@@ -137,6 +137,10 @@ def test_feeds_txt_lives_on_the_archive_and_cities_are_directories():
         "The archive snapshot must carry each city's live feeds.txt export; "
         "main keeps only the frozen seed."
     )
+    # A skipped or failed export leaves main's seed in place, so the copy is
+    # gated on this run's success manifest rather than on file content.
+    assert "feeds_exported.txt" in by_name[ARCHIVE_STEP]["run"]
+    assert "feeds_exported.txt" in by_name["Export feeds.txt from DB"]["run"]
     locations = by_name["Determine locations to process"]["run"]
     assert "cities/*/" in locations and "cities/*/feeds.txt" not in locations, (
         "City discovery must list cities/*/ directories, not feeds.txt files."

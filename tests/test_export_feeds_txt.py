@@ -104,3 +104,16 @@ def test_token_in_name_or_cmd_is_not_written(tmp_path, monkeypatch, capsys):
     out = capsys.readouterr().out
     assert "skipped" in out
     assert "token=" not in out
+
+
+def test_failed_query_is_reported_as_failure(tmp_path, monkeypatch):
+    """The build gates its archive copy on this, so it must not fail quietly."""
+
+    def offline(req):
+        raise ex.urllib.error.URLError("offline")
+
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr(ex.urllib.request, "urlopen", offline)
+
+    assert ex.export_feeds_txt("bloomington", "https://fake.supabase.co", "k") is False
+    assert not (tmp_path / "cities" / "bloomington" / "feeds.txt").exists()
