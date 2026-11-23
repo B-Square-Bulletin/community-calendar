@@ -66,7 +66,10 @@ def export_feeds_txt(city, supabase_url, service_key):
 
     with feeds_file.open("w") as out:
         out.write(f"# {city.title()} - source inventory\n")
-        out.write("# Generated from feeds table (active + pending). Do not edit manually.\n")
+        out.write(
+            "# Generated from feeds table (active + pending); a snapshot that may lag. "
+            "Do not edit manually.\n"
+        )
         out.write("# To add feeds, use pending_feeds.txt in this directory.\n\n")
 
         if ics_urls:

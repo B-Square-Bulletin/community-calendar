@@ -67,10 +67,10 @@ jobs:
         INPUT="${{ github.event.inputs.locations }}"
         ENABLED="${{ vars.ENABLED_CITIES }}"
         MANIFEST=""
-        for feed in cities/*/feeds.txt; do
-          [ -f "$feed" ] || continue
-          city=${feed#cities/}
-          MANIFEST="${MANIFEST:+$MANIFEST,}${city%/feeds.txt}"
+        for city_dir in cities/*/; do
+          [ -d "$city_dir" ] || continue
+          city=${city_dir#cities/}
+          MANIFEST="${MANIFEST:+$MANIFEST,}${city%/}"
         done
         if [ -n "$ENABLED" ]; then
           MANIFEST="$ENABLED"
@@ -351,6 +351,8 @@ jobs:
           mkdir -p "$ARCHIVE_DIR/cities/$city"
           cp "cities/$city/events.json" "$ARCHIVE_DIR/cities/$city/" 2>/dev/null || true
           cp "cities/$city/combined.ics" "$ARCHIVE_DIR/cities/$city/" 2>/dev/null || true
+          # The frozen seed on main may lag; the archive carries the live export.
+          cp "cities/$city/feeds.txt" "$ARCHIVE_DIR/cities/$city/" 2>/dev/null || true
           for f in "cities/$city"/*.ics; do
             [ -f "$f" ] && cp "$f" "$ARCHIVE_DIR/cities/$city/" 2>/dev/null || true
           done
