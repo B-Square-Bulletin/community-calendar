@@ -105,3 +105,22 @@ def test_archive_publish_survives_failure_but_not_cancellation():
         "The archive publish step must run after a failure but not after a "
         "cancellation (a cancelled run force-pushes a partial snapshot)."
     )
+
+
+# The inventory covers every city. A scoped run that wrote one over the archive
+# copy would serve a wrong count at the documented URL until the next nightly.
+PRODID_STEP = "Generate PRODID platform report"
+
+
+def test_prodid_inventory_is_only_published_from_a_full_run():
+    path = WORKFLOW_DIR / "generate-calendar.yml"
+    doc = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    steps = doc["jobs"]["generate-calendar"]["steps"]
+    step = next((s for s in steps if s.get("name") == PRODID_STEP), None)
+    assert step is not None, f"{path.name} has no step named {PRODID_STEP!r}"
+    condition = step.get("if") or ""
+    # Empty covers the schedule (a null input compares equal to '').
+    assert "locations == ''" in condition and "'all'" in condition, (
+        "A scoped run must leave the archive's full PRODID inventory alone; "
+        f"the step's condition was {condition!r}."
+    )
