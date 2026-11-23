@@ -55,8 +55,8 @@ if [ "$RESTORED" -eq 0 ]; then
   echo "[ok] All upstream city directories already present"
 else
   echo "[+] Restored $RESTORED city directories"
-  echo "    These will be ignored at build time if ENABLED_CITIES is set."
-  echo "    Keeping them avoids merge conflicts on every upstream sync."
+  echo "    The build serves every city directory; ENABLED_CITIES must list"
+  echo "    them all, and the nightly fails when the two disagree."
 fi
 echo
 
@@ -87,14 +87,13 @@ echo
 
 # 5. ENABLED_CITIES reminder
 echo "--- ENABLED_CITIES ---"
-echo "If your fork only serves a subset of cities, set a repository variable"
-echo "so the build skips the rest without deleting their directories:"
+echo "This variable is a scope check, not a filter: when set it must list every"
+echo "directory under cities/, and the nightly fails, naming both lists, when"
+echo "they disagree. Serve fewer cities by pruning their directories during sync."
 echo
 echo "  GitHub repo > Settings > Secrets and variables > Actions > Variables"
 echo "  Name:  ENABLED_CITIES"
-echo "  Value: bloomington          (or comma-separated: bloomington,bedford)"
-echo
-echo "This scopes scheduled builds without fork-specific workflow edits."
+echo "  Value: bloomington          (or every city, comma-separated)"
 echo
 
 # Summary

@@ -14,6 +14,8 @@ mapping keys are the one error PyYAML accepts and GitHub rejects; actionlint
 covers that in CI. The glob covers a new workflow with no edit here.
 """
 
+import os
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -184,14 +186,58 @@ def test_feeds_txt_lives_on_the_archive_and_cities_are_directories():
 # cities.json and the PRODID inventory describe what the build serves, so a
 # variable that disagrees with cities/ must name itself, not red the nightly
 # later as an unexplained dirty worktree.
-def test_enabled_cities_must_match_the_city_directories():
+def test_enabled_cities_guard_runs_the_real_comparison(tmp_path):
+    """Execute the step's own shell, so breaking the comparison fails a test."""
+    result, output = _run_determine(tmp_path / "match", "santarosa, bloomington")
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "list=bloomington,santarosa" in output
+
+    # The variable is a check, not the scope: duplicates cannot reach a loop.
+    result, output = _run_determine(tmp_path / "dupes", "bloomington,santarosa,santarosa")
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "list=bloomington,santarosa" in output
+
+    result, _ = _run_determine(tmp_path / "subset", "bloomington")
+    assert result.returncode == 1
+    combined = result.stdout + result.stderr
+    assert "does not match cities/" in combined, combined
+
+
+# cities.json and the PRODID inventory describe what the build serves, so a
+# variable that disagrees with cities/ must name itself, not red the nightly
+# later as an unexplained dirty worktree.
+DETERMINE_STEP = "Determine locations to process"
+
+
+def _determine_run():
     path = WORKFLOW_DIR / "generate-calendar.yml"
     doc = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
     steps = doc["jobs"]["generate-calendar"]["steps"]
-    step = next(s for s in steps if s.get("name") == "Determine locations to process")
-    run = step["run"]
-    assert "::error::ENABLED_CITIES" in run and "does not match cities/" in run, (
-        "A scoped build must fail loudly when ENABLED_CITIES and cities/ "
-        "disagree; otherwise the nightly reds on a confusing cities.json diff."
+    step = next((s for s in steps if s.get("name") == DETERMINE_STEP), None)
+    assert step is not None, f"no step named {DETERMINE_STEP!r}"
+    # The step interpolates two workflow expressions at build time; read them
+    # from the environment instead so the shell can run here.
+    return (
+        step["run"]
+        .replace("${{ github.event.inputs.locations }}", "$INPUT")
+        .replace("${{ vars.ENABLED_CITIES }}", "$ENABLED")
     )
-    assert "exit 1" in run
+
+
+def _run_determine(root, enabled, input_value=""):
+    for city in ("bloomington", "santarosa"):
+        (root / "cities" / city).mkdir(parents=True, exist_ok=True)
+    output = root / "github_output"
+    result = subprocess.run(
+        ["bash", "-eo", "pipefail", "-c", _determine_run()],
+        cwd=root,
+        env={
+            **os.environ,
+            "ENABLED": enabled,
+            "INPUT": input_value,
+            "GITHUB_OUTPUT": str(output),
+        },
+        capture_output=True,
+        text=True,
+    )
+    return result, output.read_text() if output.exists() else ""
