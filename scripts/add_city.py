@@ -42,6 +42,8 @@ def main():
 # Add feed URLs or scraper outputs here. The build inserts them into the
 # database but never removes them from this file; duplicates are harmless,
 # so remove your entry in a follow-up PR if you like. Never edit feeds.txt.
+# A source removed in Manage Feeds must have its entry deleted here too, or
+# the next build inserts it again.
 #
 # Format:
 #   # Source Name
