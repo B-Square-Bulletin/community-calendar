@@ -68,6 +68,19 @@ Use the Manage Feeds dialog (admin icon) — its Delete button removes
 the source's row and all its events in one atomic server operation, for
 scrapers and ICS feeds alike.
 
+### Adding, renaming, or removing a city
+
+A city is a directory under `cities/` with a `city.conf` that declares its
+timezone. `cities.json` is generated from those files, but it is tracked on
+`main` — the frontend fetches it same-origin and the `my-picks` edge function
+hardcodes its main URL — so the same PR must carry the regenerated copy:
+
+```bash
+python scripts/generate_cities_json.py
+```
+
+`tests/test_cities_json.py` fails if the tracked copy is stale.
+
 ### What NOT to edit
 
 - **`cities/<city>/feeds.txt`** — auto-generated from the database each
@@ -87,6 +100,7 @@ Update `cities/<city>/SOURCES_CHECKLIST.md` with what you found — working feed
 - [ ] For scrapers: used `add_scraper.py`
 - [ ] Updated `SOURCES_CHECKLIST.md` with findings
 - [ ] Tested feed URLs with `add_feed.py --test`
+- [ ] For a city added, renamed, or removed: regenerated `cities.json`
 
 ## Other Guidelines
 
