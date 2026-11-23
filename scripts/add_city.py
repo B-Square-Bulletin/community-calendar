@@ -125,7 +125,7 @@ See [docs/procedures.md](../../docs/procedures.md) for discovery techniques.
     print("\nNext steps:")
     print("  1. Search for feeds: see docs/procedures.md")
     print(f"  2. Add feeds to cities/{city}/pending_feeds.txt")
-    print(f"  3. Edit cities/{city}/city.conf with nearby cities")
+    print(f"  3. Edit cities/{city}/city.conf with nearby cities and # timezone: <IANA zone>")
     print(f"  4. Run: python scripts/geocode_cities.py --city {city}")
     print("  5. Run: python scripts/generate_cities_json.py and commit cities.json")
     print("  6. Register in xmlui/Main.xmlui")

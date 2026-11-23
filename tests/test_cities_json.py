@@ -8,6 +8,7 @@ build no longer commits it, so the PR that adds, renames or removes a city
 must carry the regenerated copy (ADR 0024). This test is that guard.
 """
 
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -35,4 +36,15 @@ def test_cities_json_matches_the_generator():
     assert generated == before, (
         f"cities.json does not match the cities/*/city.conf files: "
         f"run `python {GENERATOR}` and commit the result"
+    )
+
+
+def test_every_city_directory_reaches_the_manifest():
+    """The generator drops a city whose city.conf has no timezone, silently."""
+    directories = {path.name for path in (ROOT / "cities").iterdir() if path.is_dir()}
+    manifest = set(json.loads(CITIES_JSON.read_text()))
+    assert manifest == directories, (
+        "cities.json is missing a city directory: add "
+        "`# timezone: <IANA zone>` to cities/<city>/city.conf, then run "
+        f"`python {GENERATOR}`. Missing: {sorted(directories - manifest)}"
     )
