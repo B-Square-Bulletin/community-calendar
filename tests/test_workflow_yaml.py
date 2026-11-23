@@ -110,7 +110,7 @@ def test_archive_publish_survives_failure_but_not_cancellation():
 
 
 def test_build_worktree_guard_precedes_the_archive_push():
-    """ADR 0024 §3: a dirty tracked file reds the run, before any publish."""
+    """ADR 0024 §3: a dirty tracked file reds the run before the archive cleans it."""
     path = WORKFLOW_DIR / "generate-calendar.yml"
     doc = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
     steps = doc["jobs"]["generate-calendar"]["steps"]
