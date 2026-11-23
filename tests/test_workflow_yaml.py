@@ -6,10 +6,10 @@ only and the PR checks never parse those files, so a syntax slip surfaced as a
 failed nightly build instead of a failed test. This runs under `make test`.
 
 PyYAML implements YAML 1.1 and GitHub a 1.2-family parser, so this asserts only
-that each document parses (PyYAML reads `on:` as the key True), plus four
-structural cases: the PR check names the main ruleset requires, that only the
-archive step writes to git, that step's condition, and the worktree guard before
-it. Duplicate
+that each document parses (PyYAML reads `on:` as the key True), plus structural
+cases: the PR check names the main ruleset requires, that only the archive step
+writes to git, that step's condition and its worktree guard, and what each
+publishes (the PRODID inventory, the live feeds.txt export). Duplicate
 mapping keys are the one error PyYAML accepts and GitHub rejects; actionlint
 covers that in CI. The glob covers a new workflow with no edit here.
 """
@@ -128,6 +128,8 @@ def test_build_worktree_guard_precedes_the_archive_push():
     assert "git diff --cached --name-only" in run
     # The DB export's worktree copy is the one tracked file a build may touch.
     assert "feeds.txt" in run and "cities/" in run
+    # -v is what makes it an exclusion; without it every real export reds.
+    assert "grep -v" in run
     # A failure has to name the offending paths, not just exit 1.
     assert "GITHUB_STEP_SUMMARY" in run
 
