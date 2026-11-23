@@ -22,8 +22,8 @@ on:
   schedule:
     - cron: '0 0 * * *'
 
-# Builds share the `main` metadata commit and the archive force-push, so a
-# second run queues instead of racing the first (#246).
+# Builds share the archive force-push, so a second run queues instead of
+# racing the first (#246).
 concurrency:
   group: generate-calendar
   cancel-in-progress: false
@@ -94,18 +94,6 @@ jobs:
         SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
       run: |
         python scripts/process_pending_feeds.py --all
-
-    - name: Commit processed pending_feeds.txt
-      run: |
-        if git status --porcelain | grep -q pending_feeds.txt; then
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add cities/*/pending_feeds.txt
-          git commit -m "Process pending feeds into DB"
-          git pull --rebase --autostash && git push || true
-        else
-          echo "No pending feeds to process"
-        fi
 
     - name: Restore run histories from archive
       # A scraper's *.runs.json is state, not output: it carries the recent
@@ -337,50 +325,6 @@ jobs:
         fi
         echo "done (HTTP $HTTP_CODE)"
 
-    - name: Generate instance config files
-      env:
-        SUPABASE_URL: ${{ vars.SUPABASE_URL }}
-        SUPABASE_KEY: ${{ vars.SUPABASE_KEY }}
-      run: |
-        cat > xmlui/config.local.js <<JSEOF
-        window.SUPABASE_URL = '${SUPABASE_URL}';
-        window.SUPABASE_KEY = '${SUPABASE_KEY}';
-        JSEOF
-
-        # Inject instance credentials into config.json
-        python -c "
-        import json
-        with open('xmlui/config.json') as f:
-            config = json.load(f)
-        config['appGlobals']['supabaseUrl'] = '${SUPABASE_URL}'
-        config['appGlobals']['supabasePublishableKey'] = '${SUPABASE_KEY}'
-        with open('xmlui/config.json', 'w') as f:
-            json.dump(config, f, indent=2)
-            f.write('\n')
-        "
-
-    - name: Commit metadata changes
-      env:
-        GITHUB_TOKEN: ${{ secrets.COMMUNITY_CALENDAR }}
-      run: |
-        git config --global user.name 'GitHub Actions'
-        git config --global user.email 'actions@github.com'
-        git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
-
-        git describe --tags --always > xmlui/version.txt
-
-        git add -f xmlui/config.json
-        git add cities.json report.html cities/*/feeds.txt
-        # report/ here carries only the per-city pages, which Pages serves from
-        # main; report/<city>/report.json and the *.runs.json run histories are
-        # ignored and publish to the archive branch instead (#253).
-        [ -d report ] && git add report/ || true
-        git diff --staged --quiet || (
-          git commit -m "Auto-generate calendar metadata"
-          # On conflict, our regenerated files always win
-          git pull --rebase --autostash -X theirs && git push
-        )
-
     # A rejected main push (or any earlier failure) must not starve the
     # archive, which carries the daily health report and RSS feeds. A
     # cancelled run is the exception: publishing its half-built state would
@@ -388,12 +332,11 @@ jobs:
     - name: Push build artifacts to archive branch
       if: ${{ !cancelled() }}
       env:
-        GITHUB_TOKEN: ${{ secrets.COMMUNITY_CALENDAR }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
-        # A runner starts without a git identity and the steps that set one run
-        # only on some paths, so the commit below needs its own. Same identity
-        # as the metadata step, which authors the archive commit today.
+        # A runner starts without a git identity, so the commit below needs
+        # its own.
         git config user.name 'GitHub Actions'
         git config user.email 'actions@github.com'
 
