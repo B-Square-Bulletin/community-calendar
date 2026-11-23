@@ -5,7 +5,7 @@ window._xsLogs = [];
     /^(localhost|127(?:\.\d+){3}|0\.0\.0\.0)$/.test(window.location.hostname) ||
     window.location.protocol === 'file:';
 
-  // async-boot-fetches (#82 item 4): the five boot resources download in
+  // async-boot-fetches (#82 item 4): the four boot resources download in
   // PARALLEL as fetch() promises (started in index.html so they overlap
   // the CDN scripts; window.__ccBootFetches). The engine scripts are then
   // DOM-inserted with async=false (order preserved) once everything has
