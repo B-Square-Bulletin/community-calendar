@@ -12,8 +12,6 @@ window._xsLogs = [];
   // resolved — the same before-engine guarantees the old sequential
   // sync-XHR chain gave, at max(RTT) instead of sum(RTT). Measured
   // deployed cost of the old chain: ~0.77 s of serial blocking XHRs.
-  var isLocalDevHost = /^(localhost|127(?:\.\d+){3}|0\.0\.0\.0)$/.test(window.location.hostname);
-
   // boot-attribution-marks (cc-* namespace, in-memory Performance
   // timeline only; summarized by window.__ccBootMarks() in helpers.js).
   // DOMContentLoaded now fires long before the engine scripts load, so
@@ -55,7 +53,6 @@ window._xsLogs = [];
     return {
       localConfig: isLocalConfigHost ? t('config.local.js' + bust) : Promise.resolve(''),
       config: j('config.json' + bust),
-      version: t('version.txt' + bust),
       categories: j('../categories.json' + bust),
       cities: j('../cities.json' + bust),
       sourcePriority: j('../source_priority.json' + bust),
@@ -107,11 +104,10 @@ window._xsLogs = [];
   }
 
   var F = ccFetches();
-  Promise.all([F.localConfig, F.config, F.version, F.categories, F.cities, F.sourcePriority]).then(
+  Promise.all([F.localConfig, F.config, F.categories, F.cities, F.sourcePriority]).then(
     function (r) {
       var localCfg = r[0],
-        cfg = r[1],
-        fetchedVersion = (r[2] || '').trim();
+        cfg = r[1];
       // config.local.js applies first, then config.json fills gaps —
       // same precedence as the old sync path.
       if (localCfg) {
@@ -128,29 +124,13 @@ window._xsLogs = [];
         performance.mark('cc-config-loaded');
       } catch (e) {}
 
-      var baseVersion = isLocalDevHost ? 'local-dev' : 'missing-version';
-      if (fetchedVersion) baseVersion = fetchedVersion;
-      try {
-        var lastSeenVersion = localStorage.getItem('cc-shell-version');
-        var hasReloadedForVersion = sessionStorage.getItem('cc-version-reload') === baseVersion;
-        if (lastSeenVersion && lastSeenVersion !== baseVersion && !hasReloadedForVersion) {
-          sessionStorage.setItem('cc-version-reload', baseVersion);
-          localStorage.setItem('cc-shell-version', baseVersion);
-          window.location.replace(window.location.pathname + window.location.search);
-        } else {
-          localStorage.setItem('cc-shell-version', baseVersion);
-          if (hasReloadedForVersion) {
-            sessionStorage.removeItem('cc-version-reload');
-          }
-        }
-      } catch (e) {}
+      // Per-load cache-buster; the name stays APP_VERSION because Main.xmlui
+      // and the brand-chrome tests key on it.
+      window.APP_VERSION = Date.now();
 
-      var assetVersionSuffix = isLocalDevHost ? '-dev-' + Date.now() : '';
-      window.APP_VERSION = baseVersion + assetVersionSuffix;
-
-      window._categories = r[3];
-      window._cities = r[4];
-      window._sourcePriority = r[5];
+      window._categories = r[2];
+      window._cities = r[3];
+      window._sourcePriority = r[4];
       try {
         performance.mark('cc-static-json-loaded');
       } catch (e) {}
