@@ -140,7 +140,10 @@ def test_feeds_txt_lives_on_the_archive_and_cities_are_directories():
     # A skipped or failed export leaves main's seed in place, so the copy is
     # gated on this run's success manifest rather than on file content.
     assert "feeds_exported.txt" in by_name[ARCHIVE_STEP]["run"]
-    assert "feeds_exported.txt" in by_name["Export feeds.txt from DB"]["run"]
+    export_run = by_name["Export feeds.txt from DB"]["run"]
+    assert "feeds_exported.txt" in export_run
+    # `cmd && echo` exits 0 when a failure precedes a success under bash -e.
+    assert 'exit "$failed"' in export_run
     locations = by_name["Determine locations to process"]["run"]
     assert "cities/*/" in locations and "cities/*/feeds.txt" not in locations, (
         "City discovery must list cities/*/ directories, not feeds.txt files."

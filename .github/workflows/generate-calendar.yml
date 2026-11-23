@@ -150,13 +150,20 @@ jobs:
       run: |
         # The archive publishes only cities whose export succeeded; a failed
         # query must not let main's frozen seed replace the last live export.
+        # `cmd && echo` would let a failure before a success exit 0 under
+        # `bash -e`, so accumulate and fail the step after the loop.
         : > "$RUNNER_TEMP/feeds_exported.txt"
+        failed=0
         IFS=',' read -ra CITIES <<< "${{ steps.locations.outputs.list }}"
         for city in "${CITIES[@]}"; do
           city=$(echo "$city" | xargs)
-          python scripts/export_feeds_txt.py "$city" &&
+          if python scripts/export_feeds_txt.py "$city"; then
             echo "$city" >> "$RUNNER_TEMP/feeds_exported.txt"
+          else
+            failed=1
+          fi
         done
+        exit "$failed"
 
     - name: Combine ICS files
       run: |
