@@ -342,8 +342,11 @@ jobs:
 
     # ADR 0024 §3: a build writes no tracked file, so it proves that by leaving
     # the worktree clean. cities/<city>/feeds.txt is the one exception — the DB
-    # export rewrites that worktree copy and never stages it.
+    # export rewrites that worktree copy and never stages it. Runs after a
+    # failure too: the archive step cleans the worktree, which would hide the
+    # offending paths.
     - name: Guard the build worktree
+      if: ${{ !cancelled() }}
       run: |
         offenders=$(
           {

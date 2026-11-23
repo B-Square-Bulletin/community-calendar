@@ -121,6 +121,10 @@ def test_build_worktree_guard_precedes_the_archive_push():
         "which is the only step allowed to write to git."
     )
     step = steps[names.index(GUARD_STEP)]
+    assert step.get("if") == "${{ !cancelled() }}", (
+        "The guard must run after an earlier failure, or the archive step's "
+        "cleanup hides the offending paths."
+    )
     assert not step.get("continue-on-error"), "A dirty worktree must red the run."
     run = step.get("run") or ""
     # Both diff halves: an unstaged write and a staged one are both offenders.
