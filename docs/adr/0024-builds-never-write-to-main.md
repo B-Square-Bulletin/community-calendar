@@ -59,28 +59,42 @@ inputs, zero commits" observable rather than aspirational.
    | `report/<city>/index.html`       | `main` page; changes only with `report_page_template.html` (test-enforced)   |
    | `report.html`                    | `main`, hand-maintained                                                      |
 
+   Three notes. `version.txt`'s deletion (#319) also covers the `report.html` footer,
+   whose commit link becomes the per-load timestamp instead of a dead `local-dev` link.
+   The `report/<city>/index.html` test pins only Bloomington today — the only city page
+   there is — and must be looped over every `report/*/index.html` before a second city
+   page lands. And `xmlui/config.local.js` is gitignored and untracked, so it needs no
+   home; deleting the injection write is the whole change.
+
    `feeds.txt` drift is declared harmless: the DB-less fork path
    (`download_feeds.py`, `seed_feeds_from_txt.py`) still bootstraps from the checked-in
-   inventory, the header says it is a snapshot that may lag, and contributors never touch
-   it. City discovery reads the `cities/*/` directories, not the file.
+   inventory, the header will say it is a snapshot that may lag (#321), and contributors
+   never touch it. City discovery globs `cities/*/feeds.txt`, so the seed must be
+   refreshed — the human refresh PR — before a new city can run.
 
 3. **The guard is per-run, not per-night.** A step after the build fails the run when
-   `git diff` or `git diff --cached` shows any tracked path except `cities/*/feeds.txt`,
-   and names the offending path in `$GITHUB_STEP_SUMMARY`. A quiet night proves nothing:
-   with no DB change, "no write" and "no diff" are indistinguishable.
+   `git diff` shows any tracked path except an unstaged `cities/*/feeds.txt` — the one
+   file the invariant excepts and never stages — or when `git diff --cached` shows any
+   staged path at all, and names the offending path in `$GITHUB_STEP_SUMMARY`. A quiet
+   night proves nothing: with no DB change, "no write" and "no diff" are
+   indistinguishable.
 
 4. **`main` requires a PR, permanently.** Add a pull-request rule to
    `main-required-checks`, keep its eight required checks, keep `bypass_actors` empty,
    and keep `strict_required_status_checks_policy` off (no merge queue; strict only adds
-   rebase churn). The workflow's `COMMUNITY_CALENDAR` token is dropped; its only uses
-   were the two deleted steps, and the default `GITHUB_TOKEN` force-pushes the
-   unprotected archive branch.
+   rebase churn). The workflow's `COMMUNITY_CALENDAR` token is dropped: its uses are the
+   metadata commit (deleted with the step) and the archive push, which switches to the
+   default `GITHUB_TOKEN` — the token that force-pushes the unprotected archive branch.
 
-5. **Failures stay loud and are fixed forward.** No `|| true` or `continue-on-error` on
-   pipeline steps. The archive publish keeps `if: ${{ !cancelled() }}` and starts from
-   the previous snapshot, so a failed build still publishes the day's report and RSS and
-   does not drop cities it did not rebuild (0022, #315). A red scheduled run is the
-   signal; recovery is a PR, not a revert.
+5. **Failures stay loud and are fixed forward.** The tolerance the deleted write steps
+   carried leaves with them, and nothing new gets `|| true` or `continue-on-error`. The
+   scraper, RSS and archive-publish tolerance that exists today (`continue-on-error` on
+   `Run scrapers from DB`, `|| true` on RSS generation, the archive step's copy
+   fallbacks) is deliberate and stays: one bad source must not red the night. The
+   archive publish keeps `if: ${{ !cancelled() }}` and starts from the previous
+   snapshot, so a failed build still publishes the day's report and RSS and does not
+   drop cities it did not rebuild (0022, #315). A red scheduled run is the signal;
+   recovery is a PR, not a revert.
 
 6. **Rollout order.** (a) Delete the write steps with test coverage; (b) re-home the
    files in parallel — `version.txt` removal, `prodid.md` move, `cities.json` guard test,
@@ -111,7 +125,7 @@ One issue per PR-sized change, in rollout order:
   insert retries by staying in the file. The file is append-only: entries are not
   removed for them, and retained entries cost one duplicate POST a night (a no-op).
 - A maintainer must run `export_feeds_txt.py` with service credentials and open a PR to
-  refresh the seed. The file says it may lag.
+  refresh the seed. The file will say it may lag (#321).
 - Rotating Supabase credentials is now a `config.json` PR. A stale key fails visibly
   rather than being silently overwritten nightly.
 - Brand components re-download on every page load (the `version.txt` cache-buster is
