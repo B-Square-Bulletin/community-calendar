@@ -16,7 +16,12 @@ The root cause: no guard rails prevented the accidental push, and no documentati
 
 ## Decision
 
-1. **Branch protection on origin/main.** GitHub branch protection requires pull requests for all pushes to main. The `generate-calendar.yml` workflow is allowed to bypass this requirement for its automated commits (both the default GitHub Actions token and the `COMMUNITY_CALENDAR` token used for metadata pushes).
+1. **Branch protection on origin/main.** GitHub branch protection requires pull requests for all pushes to main. ~~The `generate-calendar.yml` workflow is allowed to bypass this requirement for its automated commits (both the default GitHub Actions token and the `COMMUNITY_CALENDAR` token used for metadata pushes).~~
+
+   *Amended 2026-11-23:* that exemption no longer exists. `main-required-checks` requires a
+   pull request plus eight status checks with `bypass_actors: []`, and the build writes
+   only to the unprotected `archive` branch. See
+   [ADR 0024](0024-builds-never-write-to-main.md) §4.
 
 2. **Hard fork model, documented.** This repository is a hard fork, not a tracking fork. origin/main ≠ upstream/main by design. This is documented in CONTEXT.md (glossary: "Fork") and AGENTS.md (agent directive).
 
@@ -36,5 +41,7 @@ The root cause: no guard rails prevented the accidental push, and no documentati
 - Agents must be directed to use PR workflow for main changes
 
 **Unchanged:**
-- CI workflow continues to push build artifacts directly (bot exempt from branch protection)
+- ~~CI workflow continues to push build artifacts directly (bot exempt from branch protection)~~.
+  *Amended 2026-11-23:* the CI workflow writes only the `archive` branch; `main` changes
+  only through a human PR (ADR 0024).
 - Feature branches and other branches are unaffected
