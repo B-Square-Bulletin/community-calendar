@@ -378,7 +378,15 @@ const cityNames = {
 
 **`load-events` edge function** — No change is needed. The workflow sends each city's events to `load-events` in the same POST that carries the city name, so a new city directory is enough.
 
-The city key must match the directory name under `cities/` and the `?city=` URL parameter.
+**`cities.json`** — Regenerate and commit it in the same PR when a city is added, renamed, or removed:
+
+```bash
+python scripts/generate_cities_json.py
+```
+
+The frontend and the `my-picks` edge function read this file from `main`, so it is tracked and cannot follow the other build output to the archive branch; `tests/test_cities_json.py` fails when it drifts from `cities/*/city.conf`.
+
+The city key must match the directory name under `cities/` and the `?city=` URL parameter. A city whose `city.conf` has no `# timezone: <IANA zone>` line is silently omitted from `cities.json`; add the line before regenerating.
 
 ---
 
