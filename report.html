@@ -707,8 +707,6 @@
 
         async function loadFooter() {
             try {
-                var versionResp = await fetch('xmlui/version.txt');
-                var appCommit = versionResp.ok ? (await versionResp.text()).trim() : 'local-dev';
                 var xmluiVersion = window.XMLUI_VERSION || '0.12.6';
                 try {
                     var script = await fetch('xmlui/xmlui/xmlui-standalone.umd.js');
@@ -718,8 +716,7 @@
                 } catch(e) {}
                 var footer = document.getElementById('build-footer');
                 footer.innerHTML =
-                    '<a href="https://github.com/judell/community-calendar/commit/' + appCommit + '">community-calendar ' + appCommit.substring(0, 7) + '</a>' +
-                    ' &bull; <a href="https://github.com/xmlui-org/xmlui">XMLUI engine ' + xmluiVersion + '</a>';
+                    '<a href="https://github.com/xmlui-org/xmlui">XMLUI engine ' + xmluiVersion + '</a>';
             } catch(e) {}
         }
 

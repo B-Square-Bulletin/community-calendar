@@ -5,15 +5,13 @@ window._xsLogs = [];
     /^(localhost|127(?:\.\d+){3}|0\.0\.0\.0)$/.test(window.location.hostname) ||
     window.location.protocol === 'file:';
 
-  // async-boot-fetches (#82 item 4): the five boot resources download in
+  // async-boot-fetches (#82 item 4): the four boot resources download in
   // PARALLEL as fetch() promises (started in index.html so they overlap
   // the CDN scripts; window.__ccBootFetches). The engine scripts are then
   // DOM-inserted with async=false (order preserved) once everything has
   // resolved — the same before-engine guarantees the old sequential
   // sync-XHR chain gave, at max(RTT) instead of sum(RTT). Measured
   // deployed cost of the old chain: ~0.77 s of serial blocking XHRs.
-  var isLocalDevHost = /^(localhost|127(?:\.\d+){3}|0\.0\.0\.0)$/.test(window.location.hostname);
-
   // boot-attribution-marks (cc-* namespace, in-memory Performance
   // timeline only; summarized by window.__ccBootMarks() in helpers.js).
   // DOMContentLoaded now fires long before the engine scripts load, so
@@ -55,14 +53,16 @@ window._xsLogs = [];
     return {
       localConfig: isLocalConfigHost ? t('config.local.js' + bust) : Promise.resolve(''),
       config: j('config.json' + bust),
-      version: t('version.txt' + bust),
       categories: j('../categories.json' + bust),
       cities: j('../cities.json' + bust),
       sourcePriority: j('../source_priority.json' + bust),
     };
   }
 
-  function injectScripts(v) {
+  // No cache-buster: APP_VERSION changes on every load, so appending it here
+  // re-downloaded the engine bundle and its neighbours on each visit. Plain
+  // URLs let the HTTP cache serve them; brand components still bust per load.
+  function injectScripts() {
     function script(src) {
       var s = document.createElement('script');
       s.src = src;
@@ -72,24 +72,24 @@ window._xsLogs = [];
     }
     var link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = 'xmlui/xmlui-grid-layout.css?v=' + v;
+    link.href = 'xmlui/xmlui-grid-layout.css';
     document.head.appendChild(link);
     // The bundle bracket now spans download+eval (DOM-inserted scripts
     // have no between-download execution point to mark).
     try {
       performance.mark('cc-bundle-eval-start');
     } catch (e) {}
-    var bundle = script('xmlui/xmlui-standalone.umd.js?v=' + v);
+    var bundle = script('xmlui/xmlui-standalone.umd.js');
     bundle.addEventListener('load', function () {
       try {
         performance.mark('cc-bundle-eval-end');
       } catch (e) {}
     });
-    script('xmlui/xmlui-masonry.js?v=' + v);
-    script('xmlui/xmlui-grid-layout.js?v=' + v);
-    script('../supabase/functions/_shared/ics_text.js?v=' + v);
-    script('helpers.js?v=' + v);
-    script('xs-trace.js?v=' + v).addEventListener('load', function () {
+    script('xmlui/xmlui-masonry.js');
+    script('xmlui/xmlui-grid-layout.js');
+    script('../supabase/functions/_shared/ics_text.js');
+    script('helpers.js');
+    script('xs-trace.js').addEventListener('load', function () {
       // index-standalone.ts arms startApp on DOMContentLoaded with no
       // readyState fallback, and DCL has long passed by the time the
       // DOM-inserted bundle evaluates — so start the engine explicitly
@@ -107,11 +107,10 @@ window._xsLogs = [];
   }
 
   var F = ccFetches();
-  Promise.all([F.localConfig, F.config, F.version, F.categories, F.cities, F.sourcePriority]).then(
+  Promise.all([F.localConfig, F.config, F.categories, F.cities, F.sourcePriority]).then(
     function (r) {
       var localCfg = r[0],
-        cfg = r[1],
-        fetchedVersion = (r[2] || '').trim();
+        cfg = r[1];
       // config.local.js applies first, then config.json fills gaps —
       // same precedence as the old sync path.
       if (localCfg) {
@@ -128,29 +127,13 @@ window._xsLogs = [];
         performance.mark('cc-config-loaded');
       } catch (e) {}
 
-      var baseVersion = isLocalDevHost ? 'local-dev' : 'missing-version';
-      if (fetchedVersion) baseVersion = fetchedVersion;
-      try {
-        var lastSeenVersion = localStorage.getItem('cc-shell-version');
-        var hasReloadedForVersion = sessionStorage.getItem('cc-version-reload') === baseVersion;
-        if (lastSeenVersion && lastSeenVersion !== baseVersion && !hasReloadedForVersion) {
-          sessionStorage.setItem('cc-version-reload', baseVersion);
-          localStorage.setItem('cc-shell-version', baseVersion);
-          window.location.replace(window.location.pathname + window.location.search);
-        } else {
-          localStorage.setItem('cc-shell-version', baseVersion);
-          if (hasReloadedForVersion) {
-            sessionStorage.removeItem('cc-version-reload');
-          }
-        }
-      } catch (e) {}
+      // Per-load cache-buster; the name stays APP_VERSION because Main.xmlui
+      // and the brand-chrome tests key on it.
+      window.APP_VERSION = Date.now();
 
-      var assetVersionSuffix = isLocalDevHost ? '-dev-' + Date.now() : '';
-      window.APP_VERSION = baseVersion + assetVersionSuffix;
-
-      window._categories = r[3];
-      window._cities = r[4];
-      window._sourcePriority = r[5];
+      window._categories = r[2];
+      window._cities = r[3];
+      window._sourcePriority = r[4];
       try {
         performance.mark('cc-static-json-loaded');
       } catch (e) {}
@@ -161,10 +144,10 @@ window._xsLogs = [];
       // our explicit startApp above is then the only boot path.
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function () {
-          injectScripts(window.APP_VERSION);
+          injectScripts();
         });
       } else {
-        injectScripts(window.APP_VERSION);
+        injectScripts();
       }
     }
   );

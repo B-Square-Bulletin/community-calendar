@@ -63,7 +63,6 @@ backups/
 # The root aggregate stays untracked: report.html reads it from the archive
 # branch, so a tracked copy only ever goes stale (#244).
 /report.json
-xmlui/version.txt
 
 # The per-city slices are published to the archive branch, not committed.
 # report/<city>/index.html (the page) stays tracked because Pages serves main;

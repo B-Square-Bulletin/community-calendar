@@ -33,7 +33,6 @@
         window.__ccBootFetches = {
           localConfig: isLocal ? t('config.local.js' + _ccCacheBust) : Promise.resolve(''),
           config: j('config.json' + _ccCacheBust),
-          version: t('version.txt' + _ccCacheBust),
           categories: j('../categories.json' + _ccCacheBust),
           cities: j('../cities.json' + _ccCacheBust),
           sourcePriority: j('../source_priority.json' + _ccCacheBust)
