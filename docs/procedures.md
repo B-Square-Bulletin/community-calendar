@@ -212,7 +212,7 @@ The Supabase **`feeds` table** is the source of truth for all calendar sources. 
 https://example.com/events/?ical=1
 ```
 
-After the PR is merged, the next build automatically runs `scripts/process_pending_feeds.py` to insert them into the database and clear the file. See `CONTRIBUTING.md` for the full workflow.
+After the PR is merged, the next build automatically runs `scripts/process_pending_feeds.py` to insert them into the database. It does not clear the file: entries stay, and duplicates are harmless, so remove your entry in a follow-up PR if you like. See `CONTRIBUTING.md` for the full workflow.
 
 ### Curator feeds (a person's My Picks)
 
@@ -249,7 +249,7 @@ python scripts/add_scraper.py songkick santarosa "My Venue" \
 The scraper is always tested before registration; add `--test` to
 validate only, writing nothing.
 
-The next build moves the pending entry into the `feeds` table
+The next build inserts the pending entry into the `feeds` table
 (validated at insert time), executes the scraper in that same build,
 and regenerates `feeds.txt` — the read-only reference of what the
 database drives. See `scrapers/README.md` for each base scraper's

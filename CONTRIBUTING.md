@@ -28,7 +28,7 @@ python scripts/add_feed.py URL city "Source Name"          # validate + register
 python scripts/add_feed.py URL city "Source Name" --test   # validate only
 ```
 
-After your PR is merged, the next build automatically processes `pending_feeds.txt` — inserting the feeds into the database and resetting the file to its template.
+After your PR is merged, the next build automatically processes `pending_feeds.txt` — inserting the feeds into the database. It does not remove your entry: duplicates are harmless, so you can delete it in a follow-up PR if you like.
 
 ### Adding scrapers
 
@@ -55,7 +55,9 @@ test fails. Add `--test` to validate only, writing nothing. On
 success the script appends a scraper entry to
 `cities/<city>/pending_feeds.txt`; the next build inserts it into the
 `feeds` table (validated at insert time) and the DB-first runner
-executes it in that same build.
+executes it in that same build. The entry is not removed from the
+file; duplicates are harmless, so delete it in a follow-up PR if you
+like.
 
 See `scrapers/README.md` for the available base scrapers and how to
 form each one's arguments (widget IDs, venue IDs, API bases, etc.).

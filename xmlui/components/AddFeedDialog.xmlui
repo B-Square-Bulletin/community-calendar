@@ -125,7 +125,7 @@
           This panel shows database-backed feed status. Queued means the feed is already in the database but has not yet been picked up by a build. Active means a build has processed it successfully.
         </Text>
         <Text fontSize="$fontSize-sm" color="$color-text-secondary">
-          Git-side intake still exists in <Text variant="code">pending_feeds.txt</Text>. That complementary path is used for contributor-submitted ICS feeds and for scraper staging. The build moves those entries into the database before normal feed processing continues.
+          Git-side intake still exists in <Text variant="code">pending_feeds.txt</Text>. That complementary path is used for contributor-submitted ICS feeds and for scraper staging. The build inserts those entries into the database before normal feed processing continues.
         </Text>
       </Card>
 

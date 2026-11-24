@@ -191,7 +191,7 @@ During builds, `download_feeds.py` queries active feeds and `export_feeds_txt.py
 
 ### pending_feeds.txt
 
-Each city has a `cities/{city}/pending_feeds.txt` file — a staging area for contributors without database access to propose new feeds. During the build, entries are moved from `pending_feeds.txt` into the `feeds` table, then the file is cleared back to its template. This is a temporary inbox, not permanent storage.
+Each city has a `cities/{city}/pending_feeds.txt` file — a staging area for contributors without database access to propose new feeds. During the build, entries are inserted from `pending_feeds.txt` into the `feeds` table; the build never edits the file, so an entry stays after processing. Duplicates are harmless (the unique key skips them), so remove your entry in a follow-up PR if you like. Never edit `feeds.txt`; it is generated. Removing a source in Manage Feeds hard-deletes its row, so delete its entry here in the same PR — otherwise the next build inserts it again.
 
 ### Event Classification
 

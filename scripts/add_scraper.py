@@ -10,7 +10,7 @@ By default the scraper is tested and then registered. --test runs the
 same validation and shows what would be registered without writing
 anything.
 
-The nightly build's process_pending_feeds step moves the entry into the
+The nightly build's process_pending_feeds step inserts the entry into the
 feeds table (validated at insert time), and the DB-first runner executes
 active scraper rows the same build — the workflow itself carries no
 per-scraper lines and is never edited.
