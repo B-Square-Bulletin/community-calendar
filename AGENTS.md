@@ -28,7 +28,12 @@ city configuration) that are NOT on upstream/main.
 
 ### Branch protection
 
-origin/main requires pull requests. The `generate-calendar.yml` workflow is allowed to bypass this requirement for its automated commits (both the default GitHub Actions token and the `COMMUNITY_CALENDAR` token used for metadata pushes).
+origin/main requires a pull request for every change, admins included, with no bypass
+actors. The `main-required-checks` ruleset also requires eight CI checks: `validate-feeds`,
+`db-tests`, `perf-gate`, `node-tests`, `deno-tests`, `browser-tests`, `Lint`, `actionlint`.
+No automated process writes to `main`; the build's only write is a force-push to the
+unprotected `archive` branch with the default workflow token. See
+[ADR 0024](docs/adr/0024-builds-never-write-to-main.md).
 
 ## Architecture (Compact)
 
