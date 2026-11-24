@@ -70,6 +70,8 @@ backups/
 # and the workflow restores them before the scrapers run.
 report/*/report.json
 report/*/*.runs.json
+# Rebuilt every run by scripts/prodid.py, published to the archive.
+report/prodid.md
 
 # CI truncates this before every build; the tracked copy only ever goes stale.
 build.log

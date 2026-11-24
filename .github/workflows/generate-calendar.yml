@@ -250,6 +250,10 @@ jobs:
           --slice-dir report --template scripts/report_page_template.html $skip_flag
 
     - name: Generate PRODID platform report
+      # The inventory covers every city. A scoped run would publish a one-city
+      # copy over the archive's full one; the carry-forward keeps the last full
+      # inventory instead.
+      if: github.event.inputs.locations == '' || github.event.inputs.locations == 'all'
       run: python scripts/prodid.py
 
     - name: Validate pipeline output

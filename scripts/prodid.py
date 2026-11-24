@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Scan ICS files across all cities and report distinct PRODID values (ICS platforms).
-Updates docs/prodid.md with a table of platforms, descriptions, and which cities use them.
+Updates report/prodid.md with a table of platforms, descriptions, and which cities use them.
 
 Unrecognized PRODIDs are listed in an "Unclassified" section so new platforms
 don't silently disappear. To fix: add a pattern to PLATFORM_MAP or OUR_SCRAPERS.
@@ -129,7 +129,7 @@ def scan_cities(repo_root: Path) -> tuple[dict, dict]:
 
 
 def generate_markdown(platforms: dict, unclassified: dict) -> str:
-    """Generate the docs/prodid.md content."""
+    """Generate the report/prodid.md content."""
     lines = [
         "# ICS Platforms (PRODID Report)",
         "",
@@ -197,7 +197,7 @@ def main():
     platforms, unclassified = scan_cities(repo_root)
     md = generate_markdown(platforms, unclassified)
 
-    out_path = repo_root / "docs" / "prodid.md"
+    out_path = repo_root / "report" / "prodid.md"
     out_path.write_text(md)
     print(f"Wrote {out_path}")
 
@@ -209,7 +209,7 @@ def main():
     if unclassified:
         total_unknown = sum(len(f) for files in unclassified.values() for f in files.values())
         print(
-            f"{len(unclassified)} unclassified PRODIDs ({total_unknown} feeds) — see docs/prodid.md"
+            f"{len(unclassified)} unclassified PRODIDs ({total_unknown} feeds) — see report/prodid.md"
         )
 
 
