@@ -6,9 +6,9 @@ only and the PR checks never parse those files, so a syntax slip surfaced as a
 failed nightly build instead of a failed test. This runs under `make test`.
 
 PyYAML implements YAML 1.1 and GitHub a 1.2-family parser, so this asserts only
-that each document parses (PyYAML reads `on:` as the key True), plus two
-structural cases: the PR check names the main ruleset requires, and the archive
-publish step's condition. Duplicate
+that each document parses (PyYAML reads `on:` as the key True), plus three
+structural cases: the PR check names the main ruleset requires, that only the
+archive step writes to git, and that step's condition. Duplicate
 mapping keys are the one error PyYAML accepts and GitHub rejects; actionlint
 covers that in CI. The glob covers a new workflow with no edit here.
 """
@@ -68,6 +68,30 @@ def test_pr_check_names_match_ruleset():
 # The archive holds the only copy of the health report, RSS baselines and run
 # histories (#253), so a plain `if:` silently starves it after any failure.
 ARCHIVE_STEP = "Push build artifacts to archive branch"
+
+# ADR 0024: main changes only through a human PR, so no step may stage or push
+# a tracked file. Both steps below did exactly that.
+DELETED_WRITE_STEPS = (
+    "Commit metadata changes",
+    "Commit processed pending_feeds.txt",
+)
+
+
+def test_no_step_writes_to_main():
+    """Only the archive force-push writes to git; the deleted writers stay gone."""
+    path = WORKFLOW_DIR / "generate-calendar.yml"
+    text = path.read_text(encoding="utf-8")
+    steps = (yaml.safe_load(text) or {})["jobs"]["generate-calendar"]["steps"]
+    assert {s.get("name") for s in steps}.isdisjoint(DELETED_WRITE_STEPS)
+    # The token existed only to author those commits and the archive push.
+    assert "COMMUNITY_CALENDAR" not in text
+    writers = [
+        s.get("name")
+        for s in steps
+        if s.get("name") != ARCHIVE_STEP
+        and any(cmd in (s.get("run") or "") for cmd in ("git add", "git commit", "git push"))
+    ]
+    assert writers == [], f"steps stage or push to main: {writers}"
 
 
 def test_archive_publish_survives_failure_but_not_cancellation():
