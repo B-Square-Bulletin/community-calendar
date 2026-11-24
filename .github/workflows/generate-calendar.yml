@@ -72,17 +72,25 @@ jobs:
           city=${city_dir#cities/}
           MANIFEST="${MANIFEST:+$MANIFEST,}${city%/}"
         done
-        if [ -n "$ENABLED" ]; then
-          MANIFEST="$ENABLED"
+        ALL="$MANIFEST"
+        # cities.json and the PRODID inventory describe what the build serves,
+        # so ENABLED_CITIES must name every directory under cities/. This is
+        # what makes a sync that quietly re-adds an upstream city visible; red
+        # here rather than later on an unexplained dirty worktree.
+        normalize() {
+          printf '%s\n' "${1:-}" | tr ',' '\n' |
+            sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | sed '/^$/d' | sort -u
+        }
+        if [ -n "$ENABLED" ] && [ "$(normalize "$ENABLED")" != "$(normalize "$ALL")" ]; then
+          echo "::error::ENABLED_CITIES ($ENABLED) does not match cities/ ($ALL); list every city directory or prune the extra one."
+          exit 1
         fi
         if [ -z "$INPUT" ] || [ "$INPUT" = "all" ]; then
-          # If ENABLED_CITIES is set for this repo/fork, use it as the default build scope.
           echo "list=$MANIFEST" >> "$GITHUB_OUTPUT"
         else
           echo "list=$INPUT" >> "$GITHUB_OUTPUT"
         fi
         echo "manifest_list=$MANIFEST" >> "$GITHUB_OUTPUT"
-
     # ==========================================
     # Register pending sources, then run scrapers (all cities, DB-first)
     # ==========================================

@@ -90,27 +90,23 @@ You'll likely get a merge conflict in `.github/workflows/generate-calendar.yml` 
 
 For conflicts in `config.json` or `index.html`, keep **your** values (your Supabase URL and anon key).
 
-### Optional: limit a fork to specific cities
+### City scope
 
-If your fork only serves a subset of cities, set a repository variable instead of carrying a fork-only workflow edit.
+`cities.json` and the published PRODID inventory describe exactly the cities
+the build serves, so the build serves every directory under `cities/`. A fork
+that serves fewer cities than upstream prunes the extra `cities/*` directories
+during merge resolution (see the sync steps above) instead of filtering them at
+build time — otherwise the app advertises a city no build ever fills.
 
-In GitHub, go to **Settings > Secrets and variables > Actions > Variables** and add:
+`ENABLED_CITIES` is a scope check, not a filter. When it is set it must list
+**every** directory under `cities/`, and the nightly fails — naming both lists —
+when they disagree. That is what makes an upstream sync that quietly re-adds a
+city you do not serve visible. Set it under **Settings > Secrets and variables >
+Actions > Variables**, comma-separated:
 
 ```text
 ENABLED_CITIES=bloomington
 ```
-
-Or multiple cities:
-
-```text
-ENABLED_CITIES=bloomington,bedford
-```
-
-What this does:
-
-- Scheduled builds default to only those cities.
-- `cities.json` is generated only for those cities.
-- Upstream workflow changes remain easy to merge because the scope lives in repo settings, not in a fork-only YAML fork.
 
 ### Optional: keep your generated files during merges
 

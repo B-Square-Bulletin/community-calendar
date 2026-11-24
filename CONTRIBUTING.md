@@ -81,6 +81,10 @@ python scripts/generate_cities_json.py
 
 `tests/test_cities_json.py` fails if the tracked copy is stale.
 
+Adding a city also means adding it to the `ENABLED_CITIES` repository variable
+when that variable is set: the nightly build fails, naming the mismatch, if
+`ENABLED_CITIES` and the `cities/` directories disagree.
+
 ### What NOT to edit
 
 - **`cities/<city>/feeds.txt`** — a frozen seed of the database's
