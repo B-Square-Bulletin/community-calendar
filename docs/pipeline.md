@@ -33,7 +33,7 @@ All sources are stored in the Supabase `feeds` table — the single source of tr
 
 The Manage Feeds dialog (admin-only) reads and writes this table; its Delete button removes any source — scraper or ICS feed — and all its events in one atomic server operation. Scrapers are added via `add_scraper.py`, which stages a scraper entry in `pending_feeds.txt`; the next build inserts it into the `feeds` table (validated at insert time, before the scrape step) and the DB-first runner executes it in that same build. The entry stays in `pending_feeds.txt`, so remove it in a follow-up PR if you like. The workflow is never edited.
 
-`feeds.txt` files are **generated** from the `feeds` table during each build (by `export_feeds_txt.py`) for fork compatibility. Do not edit feeds.txt manually.
+`feeds.txt` files are **generated** from the `feeds` table by `export_feeds_txt.py`. The tracked copy is a frozen seed that may lag; each build publishes the live export to the `archive` branch (ADR 0024). Do not edit feeds.txt manually.
 
 `pending_feeds.txt` is a git-side intake file only. It is processed at the start of the build into the `feeds` table. The build never edits it: entries stay after they are inserted, and re-submitting one is harmless because the unique key skips it. Remove your entry in a follow-up PR if you like. The old `pending_feeds` database table path is obsolete.
 

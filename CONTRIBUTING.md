@@ -2,7 +2,7 @@
 
 ## How to Add Calendar Sources
 
-The Supabase `feeds` table is the source of truth for all ICS feed sources. The file `cities/<city>/feeds.txt` is auto-generated from the database during each build — do not edit it by hand.
+The Supabase `feeds` table is the source of truth for all ICS feed sources. The tracked `cities/<city>/feeds.txt` is a frozen seed that may lag the database: the nightly build rewrites that file in its own worktree, publishes the live export to the `archive` branch, and never commits it to `main`. Only a maintainer's ad-hoc PR — `scripts/export_feeds_txt.py` run with service credentials — refreshes the seed. Never edit `feeds.txt` by hand; use `pending_feeds.txt`.
 
 ### Adding ICS feeds
 
@@ -83,9 +83,12 @@ python scripts/generate_cities_json.py
 
 ### What NOT to edit
 
-- **`cities/<city>/feeds.txt`** — auto-generated from the database each
-  build; a read-only, human-readable reference for what the database
-  drives. Your changes will be overwritten.
+- **`cities/<city>/feeds.txt`** — a frozen seed of the database's
+  sources that may lag; a read-only, human-readable reference for what
+  the database drives. Builds rewrite it in their own worktree and
+  publish the live export to the `archive` branch, never to `main`; only
+  a maintainer's ad-hoc `export_feeds_txt.py` PR refreshes the seed. Your
+  changes will not survive — use `pending_feeds.txt`.
 - **`.github/workflows/generate-calendar.yml`** — carries no per-source
   lines at all: ICS feeds download from the `feeds` table and scrapers
   execute from it too.

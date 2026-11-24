@@ -187,9 +187,7 @@ def collect_runtime_info() -> dict:
 
 
 def discover_all_cities() -> list[str]:
-    return sorted(
-        path.parent.name for path in ROOT.glob("cities/*/feeds.txt") if path.parent.is_dir()
-    )
+    return sorted(path.name for path in ROOT.glob("cities/*/") if path.is_dir())
 
 
 def selected_cities(args: argparse.Namespace) -> list[str]:

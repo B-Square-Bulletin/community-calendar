@@ -5,7 +5,8 @@ Usage: SUPABASE_URL=... SUPABASE_SERVICE_KEY=... python scripts/export_feeds_txt
 
 Queries the feeds table for active and pending feeds and writes
 cities/<city>/feeds.txt.
-If no city is given, exports all cities.
+If no city is given, exports all cities. Exits 1 if any city's query fails,
+so the nightly build can tell a live export from the frozen seed it leaves.
 """
 
 import json
@@ -46,7 +47,7 @@ def export_feeds_txt(city, supabase_url, service_key):
             feeds = json.loads(resp.read().decode())
     except urllib.error.URLError as e:
         print(f"  ⚠️  Failed to query feeds for {city}: {e}")
-        return
+        return False
 
     leaked = [f for f in feeds if has_capability_url(f)]
     if leaked:
@@ -66,7 +67,10 @@ def export_feeds_txt(city, supabase_url, service_key):
 
     with feeds_file.open("w") as out:
         out.write(f"# {city.title()} - source inventory\n")
-        out.write("# Generated from feeds table (active + pending). Do not edit manually.\n")
+        out.write(
+            "# Generated from feeds table (active + pending); a snapshot that may lag. "
+            "Do not edit manually.\n"
+        )
         out.write("# To add feeds, use pending_feeds.txt in this directory.\n\n")
 
         if ics_urls:
@@ -95,6 +99,7 @@ def export_feeds_txt(city, supabase_url, service_key):
                 out.write(f"{f['url']}\n")
 
     print(f"  {city}: {len(feeds)} feeds → {feeds_file}")
+    return True
 
 
 def main():
@@ -105,6 +110,7 @@ def main():
         print("Set SUPABASE_URL and SUPABASE_SERVICE_KEY")
         sys.exit(1)
 
+    failed = []
     if len(sys.argv) > 1:
         cities = [sys.argv[1]]
     else:
@@ -124,7 +130,12 @@ def main():
         cities = sorted({r["city"] for r in rows})
 
     for city in cities:
-        export_feeds_txt(city, supabase_url, service_key)
+        ok = export_feeds_txt(city, supabase_url, service_key)
+        if not ok:
+            failed.append(city)
+    if failed:
+        print(f"Export failed for: {', '.join(failed)}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

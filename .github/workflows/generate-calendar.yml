@@ -67,10 +67,10 @@ jobs:
         INPUT="${{ github.event.inputs.locations }}"
         ENABLED="${{ vars.ENABLED_CITIES }}"
         MANIFEST=""
-        for feed in cities/*/feeds.txt; do
-          [ -f "$feed" ] || continue
-          city=${feed#cities/}
-          MANIFEST="${MANIFEST:+$MANIFEST,}${city%/feeds.txt}"
+        for city_dir in cities/*/; do
+          [ -d "$city_dir" ] || continue
+          city=${city_dir#cities/}
+          MANIFEST="${MANIFEST:+$MANIFEST,}${city%/}"
         done
         if [ -n "$ENABLED" ]; then
           MANIFEST="$ENABLED"
@@ -148,11 +148,22 @@ jobs:
         SUPABASE_URL: ${{ vars.SUPABASE_URL }}
         SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
       run: |
+        # The archive publishes only cities whose export succeeded; a failed
+        # query must not let main's frozen seed replace the last live export.
+        # `cmd && echo` would let a failure before a success exit 0 under
+        # `bash -e`, so accumulate and fail the step after the loop.
+        : > "$RUNNER_TEMP/feeds_exported.txt"
+        failed=0
         IFS=',' read -ra CITIES <<< "${{ steps.locations.outputs.list }}"
         for city in "${CITIES[@]}"; do
           city=$(echo "$city" | xargs)
-          python scripts/export_feeds_txt.py "$city"
+          if python scripts/export_feeds_txt.py "$city"; then
+            echo "$city" >> "$RUNNER_TEMP/feeds_exported.txt"
+          else
+            failed=1
+          fi
         done
+        exit "$failed"
 
     - name: Combine ICS files
       run: |
@@ -351,6 +362,12 @@ jobs:
           mkdir -p "$ARCHIVE_DIR/cities/$city"
           cp "cities/$city/events.json" "$ARCHIVE_DIR/cities/$city/" 2>/dev/null || true
           cp "cities/$city/combined.ics" "$ARCHIVE_DIR/cities/$city/" 2>/dev/null || true
+          # Only a city whose export succeeded this run has a live export; the
+          # archive keeps its previous copy for a skipped or failed export
+          # instead of regressing to main's frozen seed.
+          if grep -qx "$city" "$RUNNER_TEMP/feeds_exported.txt" 2>/dev/null; then
+            cp "cities/$city/feeds.txt" "$ARCHIVE_DIR/cities/$city/" 2>/dev/null || true
+          fi
           for f in "cities/$city"/*.ics; do
             [ -f "$f" ] && cp "$f" "$ARCHIVE_DIR/cities/$city/" 2>/dev/null || true
           done

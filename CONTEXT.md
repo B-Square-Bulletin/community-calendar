@@ -187,7 +187,7 @@ The Supabase `feeds` table is the authoritative registry of all sources:
 - **Scrapers:** `feed_type='scraper'`, has `scraper_cmd` (e.g., `python scrapers/legistar.py --client santa-rosa`)
 - **Status:** `active` (included in builds), `pending` (awaiting approval), `removed` (archived)
 
-During builds, `download_feeds.py` queries active feeds and `export_feeds_txt.py` regenerates `feeds.txt` from the DB. `feeds.txt` is a compatibility layer — the DB is the source of truth.
+During builds, `download_feeds.py` queries active feeds and `export_feeds_txt.py` writes the current export of the DB. The tracked `cities/{city}/feeds.txt` is a frozen seed that may lag: builds rewrite the worktree copy but never commit it, the archive branch carries the live export, and only an ad-hoc maintainer PR (`export_feeds_txt.py` with service credentials) refreshes the seed. Contributors use `pending_feeds.txt` and never edit `feeds.txt`.
 
 ### pending_feeds.txt
 
@@ -282,7 +282,7 @@ When a scraper must fetch individual event pages (listing + detail pattern):
 5. Convert to JSON (ics_to_json.py → cities/{city}/events.json)
 6. Classify events (classify_events_json.py adds category field)
 7. Load into Supabase (supabase/functions/load-events/index.ts edge function)
-8. Commit and push (updated events.json files, feeds.txt)
+8. Publish build artifacts to the archive branch (events.json, feeds.txt, report, RSS)
 9. Deploy to GitHub Pages (xmlui/ directory)
 ```
 
@@ -368,12 +368,12 @@ Feeds table (DB)
   ↓
 export_feeds_txt.py
   ↓
-feeds.txt (generated, for compatibility)
+feeds.txt (frozen seed on main; live export on archive)
   ↓
 combine_ics.py reads as fallback display-name map
 ```
 
-DO NOT manually edit `feeds.txt` or the legacy `SOURCE_NAMES`/`SOURCE_URLS` dicts in `combine_ics.py`. The `feeds` table is the source of truth.
+DO NOT manually edit `feeds.txt` or the legacy `SOURCE_NAMES`/`SOURCE_URLS` dicts in `combine_ics.py`. The `feeds` table is the source of truth, and the tracked `feeds.txt` is a snapshot that may lag — refreshed only by a maintainer PR.
 
 ### Adding a New Scraper (Workflow)
 
