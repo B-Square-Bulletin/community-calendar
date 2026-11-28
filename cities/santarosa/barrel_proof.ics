@@ -1,0 +1,50 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Community Calendar//Barrel Proof Lounge Scraper//EN
+X-WR-CALNAME:Barrel Proof Lounge
+BEGIN:VEVENT
+UID:barrelproof-202604061800-62769@barrelprooflounge.com
+DTSTART:20260406T180000
+DTEND:20260406T200000
+SUMMARY:Be Ready Comedy Open Mic – Monday Comedy Workshop & Comedy Open Mic
+LOCATION:Barrel Proof Lounge\, 501 Mendocino Ave, Santa Rosa, CA 95401
+DESCRIPTION:Source: Barrel Proof Lounge
+URL:https://www.eventbrite.com/e/1986179078089
+END:VEVENT
+BEGIN:VEVENT
+UID:barrelproof-202604071600-35647@barrelprooflounge.com
+DTSTART:20260407T160000
+DTEND:20260407T180000
+SUMMARY:Live Music Happy Hour – The Hutchinsons: Sonoma Seasoned Americana
+LOCATION:Barrel Proof Lounge\, 501 Mendocino Ave, Santa Rosa, CA 95401
+DESCRIPTION:Source: Barrel Proof Lounge
+URL:https://www.eventbrite.com/e/1980129759414
+END:VEVENT
+BEGIN:VEVENT
+UID:barrelproof-202604072000-66654@barrelprooflounge.com
+DTSTART:20260407T200000
+DTEND:20260407T220000
+SUMMARY:Tuesday Night Comedy Showcase with Tony Sparks
+LOCATION:Barrel Proof Lounge\, 501 Mendocino Ave, Santa Rosa, CA 95401
+DESCRIPTION:Source: Barrel Proof Lounge
+URL:https://www.eventbrite.com/e/1979841195311
+END:VEVENT
+BEGIN:VEVENT
+UID:barrelproof-202604081700-34349@barrelprooflounge.com
+DTSTART:20260408T170000
+DTEND:20260408T190000
+SUMMARY:Live Music Happy Hour – Pickin’ Peaches!
+LOCATION:Barrel Proof Lounge\, 501 Mendocino Ave, Santa Rosa, CA 95401
+DESCRIPTION:Source: Barrel Proof Lounge
+URL:https://www.eventbrite.com/e/1980122342229
+END:VEVENT
+BEGIN:VEVENT
+UID:barrelproof-202604081800-16751@barrelprooflounge.com
+DTSTART:20260408T180000
+DTEND:20260408T200000
+SUMMARY:Wednesday Night Comedy Open Mic
+LOCATION:Barrel Proof Lounge\, 501 Mendocino Ave, Santa Rosa, CA 95401
+DESCRIPTION:Source: Barrel Proof Lounge
+URL:https://www.eventbrite.com/e/1979898644142
+END:VEVENT
+END:VCALENDAR

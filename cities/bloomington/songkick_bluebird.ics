@@ -1,0 +1,61 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//The Bluebird//songkick.com//
+X-WR-CALNAME:The Bluebird
+X-WR-TIMEZONE:America/New_York
+BEGIN:VEVENT
+SUMMARY:Moxy\, The Middle Ground
+DTSTART:20261202T220000
+DTEND:20261202T220000
+UID:6b74f06f9f26e567f5ee39e3056d4344@songkick.com
+DESCRIPTION:Moxy at Bluebird at 2026-12-02T22:00:00-0500
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43536890-moxy-at-bluebird?utm_medium=
+ organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Kyle Walker
+DTSTART:20261203T210000
+DTEND:20261203T210000
+UID:4d789444e3eef3a9f118eb4fc60c5cff@songkick.com
+DESCRIPTION:Kyle Walker at Bluebird at 2026-12-03T21:00:00-0500
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43537950-kyle-walker-at-bluebird?utm_
+ medium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Josh Meloy
+DTSTART:20261204T200000
+DTEND:20261204T200000
+UID:c5558534f17c9eb15bbbd4c97019cb84@songkick.com
+DESCRIPTION:Josh Meloy at Bluebird at 2026-12-04T20:00:00-0500
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43422742-josh-meloy-at-bluebird?utm_m
+ edium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Easy Honey
+DTSTART:20261208T200000
+DTEND:20261208T200000
+UID:75149a48cab6705eb36d888a439871a4@songkick.com
+DESCRIPTION:Easy Honey at Bluebird at 2026-12-08T20:00:00-0500
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43444119-easy-honey-at-bluebird?utm_m
+ edium=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Hyryder
+DTSTART:20270108T210000
+DTEND:20270108T210000
+UID:9e24daae9ae1580d72cc6047cae89745@songkick.com
+DESCRIPTION:Hyryder at Bluebird at 2027-01-08T21:00:00-0500
+LOCATION:Bluebird\, 216 N. Walnut St.\, Bloomington\, IN\, 47404
+URL:http://www.songkick.com/concerts/43540139-hyryder-at-bluebird?utm_medi
+ um=organic&utm_source=microformat
+X-SOURCE:The Bluebird
+END:VEVENT
+END:VCALENDAR

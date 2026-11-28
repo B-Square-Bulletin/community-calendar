@@ -1,0 +1,74 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Bloomington Symphony Orchestra//bloomingtonsymphony.com//
+X-WR-CALNAME:Bloomington Symphony Orchestra
+X-WR-TIMEZONE:America/Indiana/Indianapolis
+BEGIN:VEVENT
+SUMMARY:Celebrate the Season with the BSO\, 5pm and 8pm at Buskirk-Chumley
+  Theater
+DTSTART;TZID=America/Indiana/Indianapolis:20261127T170000
+DTEND;TZID=America/Indiana/Indianapolis:20261127T183000
+UID:tribe-5862@bloomingtonsymphony.com
+DESCRIPTION:Are you ready to celebrate the season with the Bloomington Sym
+ phony Orchestra?Popcorn?Check.Comfy chair?Check.Lights turned down low?Che
+ ck.That special feeling of quiet anticipation you get when you hear music 
+ from your favorite holiday films?Check!Music from the Moviesis the theme o
+ f this year’s festive holiday celebration.Choose from the 5pm or 8pm sho
+ w\, before or after enjoying Bloomington’s Canopy of Lights.5pm or 8pm C
+ oncertBuskirk-Chumley TheaterGET TICKETS:for the 5 pm showfor the 8 pm sh
+LOCATION:Buskirk-Chumley Theater\, 114 E. Kirkwood Avenue\, Bloomington\, 
+ IN
+URL:https://www.bloomingtonsymphony.com/event/cts2026/
+X-SOURCE:Bloomington Symphony Orchestra
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Window of Giving
+DTSTART;TZID=America/Indiana/Indianapolis:20261127T080000
+DTEND;TZID=America/Indiana/Indianapolis:20261209T000000
+UID:tribe-6121@bloomingtonsymphony.com
+DESCRIPTION:At the $75 levelchoose from:A BSO button + bumper sticker\,ora
+  BSO t-shirt\,ora signed concert posterAt the $150 levelchoose from:A pers
+ onalized ad in a future program\,ora “section selfie” taken with your 
+ favorite section of the orchestraAt the $300 levelchoose from:One of four 
+ special ringtones/sound-effects recorded by our own musicians (spooky\, su
+ blime\, or just plain silly!)At the $500 levelchoose from:A special photo 
+ op onstage with the BSOora chance to sit in with the section of your choic
+ e f
+LOCATION:Buskirk-Chumley Theater\, 114 E Kirkwood Ave\, Bloomington\, IN 4
+ 7408
+URL:https://www.bloomingtonsymphony.com/event/window-of-giving/
+X-SOURCE:Bloomington Symphony Orchestra
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Celebrate the Season with the BSO\, at Tivoli Theatre in Spencer
+DTSTART;TZID=America/Indiana/Indianapolis:20261208T190000
+DTEND;TZID=America/Indiana/Indianapolis:20261208T200000
+UID:tribe-5864@bloomingtonsymphony.com
+DESCRIPTION:Kick off the holidays with the BSO’s much-loved Celebrate th
+ e Season concert at Spencer’s historic Tivoli Theatre!Are you ready to c
+ elebrate the season with the Bloomington Symphony Orchestra?Popcorn?Check.
+ Comfy chair?Check.Lights turned down low?Check.That special feeling of qui
+ et anticipation you get when you hear music from your favorite holiday fil
+ ms?Check!Music from the Moviesis the theme of this year’s festive holida
+ y celebration.Order tickets onlineHERE\,throughTivoli Theatre box office.$
+ 1
+LOCATION:Tivoli Theatre\, 24 N Washington St\, Spencer
+URL:https://www.bloomingtonsymphony.com/event/tivoli2026/
+X-SOURCE:Bloomington Symphony Orchestra
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Noteworthy – A FREE Chamber Concert
+DTSTART;TZID=America/Indiana/Indianapolis:20270112T190000
+DTEND;TZID=America/Indiana/Indianapolis:20270112T200000
+UID:tribe-6143@bloomingtonsymphony.com
+DESCRIPTION:Join us for an NOTEWORTHY chamber concert featuring musicians 
+ of the Bloomington Symphony Orchestra\, and music by Grazyna Bacewicz\, W.
+ H. Bach\, William Bolcom\, Daniel Cueto\, Morton Gould\, Kazutaka Kawai\, 
+ Florence Price\, Tatiana Stankovych\, and more.Tuesday\, January 12\, 2026
+ 7:00pm at First United churchFree admission –donations greatly appreciat
+ ed!
+LOCATION:First United Church\, 2420 E 3rd St\, Bloomington\, IN
+URL:https://www.bloomingtonsymphony.com/event/noteworthy/
+X-SOURCE:Bloomington Symphony Orchestra
+END:VEVENT
+END:VCALENDAR
